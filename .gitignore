@@ -1,0 +1,9 @@
+# 機微情報(実名・連絡先など)はコミットしない
+# 友人の連絡先マップ等はこの名前で置けばGit管理外になる
+profiles/contacts*.md
+profiles/*.local.md
+*.local.md
+
+# 秘密情報
+.env
+*.token

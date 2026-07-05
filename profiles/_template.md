@@ -16,7 +16,8 @@ weekday_ok: false             # 平日もおでかけ可能か
 budget: mixed                 # free_first | mixed | premium_ok
 frequency: 1x_week            # 2x_week | 1x_week
 delivery: manual              # line | email | manual
-contact: ""                   # LINE表示名 / メール等(手動配信の宛先メモ)
+# contact(実名・連絡先)はここに書かない。宛先はオーナーがフォーム回答シート等で別管理する。
+# どうしても紐付けメモが要るなら profiles/contacts.local.md 等(.gitignoreでGit管理外)に置く。
 active: true
 ---
 
