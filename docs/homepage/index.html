@@ -1,0 +1,325 @@
+<title>ぼんぼやーじゅ通信｜花小金井エリアの週末おでかけ便</title>
+<style>
+  :root {
+    --ground: #FBFAF5;
+    --surface: #FFFFFF;
+    --surface-2: #F5F2EA;
+    --ink: #34434C;
+    --ink-soft: #63727B;
+    --ink-faint: #97A2AA;
+    --sky: #4FA3C4;
+    --sky-deep: #2C7C9E;
+    --sky-wash: #E9F4F7;
+    --marigold: #EBA24A;
+    --marigold-wash: #FBEEDA;
+    --blush: #EB8E86;
+    --blush-wash: #FBEBE7;
+    --leaf: #74AE71;
+    --line: #ECE7DB;
+    --line-strong: #DCD5C6;
+    --line-green: #06C755;
+    --shadow: 0 2px 6px rgba(52,67,76,.04), 0 14px 40px rgba(52,67,76,.06);
+    --shadow-soft: 0 2px 20px rgba(52,67,76,.05);
+    --radius: 22px;
+    --radius-sm: 16px;
+    --maru: "Hiragino Maru Gothic ProN", "ヒラギノ丸ゴ ProN W4", "Yu Gothic", "游ゴシック", "Noto Sans JP", "Segoe UI", sans-serif;
+    --body: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "游ゴシック", "Noto Sans JP", "Segoe UI", Meiryo, sans-serif;
+    --script: Georgia, "Times New Roman", "Hiragino Mincho ProN", serif;
+    --measure: 40rem;
+    --hero-photo: url("assets/hero-park.jpg");
+    --hero-scrim-1: rgba(251,250,245,.93);
+    --hero-scrim-2: rgba(251,250,245,.55);
+    --hero-scrim-3: rgba(251,250,245,.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #131F28; --surface: #1A2831; --surface-2: #21333D;
+      --ink: #ECF2F4; --ink-soft: #AAB9C1; --ink-faint: #7B8C95;
+      --sky: #6FBAD9; --sky-deep: #9AD4EA; --sky-wash: #1D3944;
+      --marigold: #F0AE5E; --marigold-wash: #362F1F;
+      --blush: #EC9C94; --blush-wash: #362725; --leaf: #8FC489;
+      --line: #293B45; --line-strong: #38505C;
+      --shadow: 0 2px 6px rgba(0,0,0,.2), 0 16px 44px rgba(0,0,0,.26);
+      --shadow-soft: 0 2px 22px rgba(0,0,0,.22);
+      --hero-scrim-1: rgba(17,28,37,.90); --hero-scrim-2: rgba(17,28,37,.55); --hero-scrim-3: rgba(17,28,37,.14);
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #FBFAF5; --surface: #FFFFFF; --surface-2: #F5F2EA;
+    --ink: #34434C; --ink-soft: #63727B; --ink-faint: #97A2AA;
+    --sky: #4FA3C4; --sky-deep: #2C7C9E; --sky-wash: #E9F4F7;
+    --marigold: #EBA24A; --marigold-wash: #FBEEDA; --blush: #EB8E86; --blush-wash: #FBEBE7;
+    --leaf: #74AE71; --line: #ECE7DB; --line-strong: #DCD5C6;
+    --shadow: 0 2px 6px rgba(52,67,76,.04), 0 14px 40px rgba(52,67,76,.06);
+    --shadow-soft: 0 2px 20px rgba(52,67,76,.05);
+    --hero-scrim-1: rgba(251,250,245,.93); --hero-scrim-2: rgba(251,250,245,.55); --hero-scrim-3: rgba(251,250,245,.10);
+  }
+  :root[data-theme="dark"] {
+    --ground:#131F28; --surface:#1A2831; --surface-2:#21333D;
+    --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95;
+    --sky:#6FBAD9; --sky-deep:#9AD4EA; --sky-wash:#1D3944;
+    --marigold:#F0AE5E; --marigold-wash:#362F1F; --blush:#EC9C94; --blush-wash:#362725;
+    --leaf:#8FC489; --line:#293B45; --line-strong:#38505C;
+    --shadow:0 2px 6px rgba(0,0,0,.2),0 16px 44px rgba(0,0,0,.26); --shadow-soft:0 2px 22px rgba(0,0,0,.22);
+    --hero-scrim-1: rgba(17,28,37,.90); --hero-scrim-2: rgba(17,28,37,.55); --hero-scrim-3: rgba(17,28,37,.14);
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--body); line-height: 1.85; -webkit-font-smoothing: antialiased; font-feature-settings: "palt" 1; }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.35rem; }
+  p { margin: 0; }
+  a { color: var(--sky-deep); }
+  svg { display: block; }
+
+  /* ---- hero (photo) ---- */
+  .hero { position: relative; overflow: hidden; background: var(--sky-wash); min-height: clamp(30rem, 66vh, 42rem); display: flex; }
+  .hero::before { content: ""; position: absolute; inset: 0; z-index: 0; background-image: var(--hero-photo); background-size: cover; background-position: center 42%; }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, var(--hero-scrim-1) 0%, var(--hero-scrim-2) 40%, var(--hero-scrim-3) 100%); }
+  .hero-inner { position: relative; z-index: 2; padding: 3.8rem 1.35rem 8.5rem; max-width: 46rem; margin: 0 auto; width: 100%; align-self: flex-start; }
+  .eyebrow { font-family: var(--script); font-style: italic; font-size: 1.2rem; letter-spacing: .02em; color: var(--marigold); margin-bottom: .3rem; text-shadow: 0 1px 10px var(--hero-scrim-1); }
+  .eyebrow::after { content: ""; display: inline-block; width: 2.2rem; height: 1px; background: var(--marigold); vertical-align: middle; margin-left: .6rem; opacity: .7; }
+  .wordmark { font-family: var(--maru); font-weight: 800; font-size: clamp(2.4rem, 7.2vw, 3.5rem); letter-spacing: .045em; line-height: 1.14; margin: 0 0 1rem; text-wrap: balance; }
+  .wordmark .dot { color: var(--sky-deep); }
+  .lede { font-size: 1.18rem; color: var(--ink); max-width: 32rem; text-wrap: pretty; font-weight: 500; }
+  .lede-sub { margin-top: .7rem; color: var(--ink-soft); max-width: 32rem; font-size: 1rem; }
+  .badges { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
+  .badge { font-family: var(--maru); font-weight: 700; font-size: .82rem; padding: .35rem .85rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink-soft); box-shadow: var(--shadow-soft); }
+  .cta-row { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: 1.9rem; }
+  .btn { display: inline-flex; align-items: center; gap: .55rem; font-family: var(--maru); font-weight: 800; font-size: 1.02rem; padding: .9rem 1.6rem; border-radius: 999px; border: 1px solid transparent; text-decoration: none; cursor: pointer; transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease; }
+  .btn:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+  .btn-line { background: var(--line-green); color: #fff; box-shadow: var(--shadow); }
+  .btn-line:hover { transform: translateY(-1px); }
+  .btn-ghost { background: var(--surface); color: var(--sky-deep); border-color: var(--line-strong); }
+  .btn-ghost:hover { border-color: var(--sky); }
+  .btn .ic { width: 1.15em; height: 1.15em; }
+  .hero-note { margin-top: .9rem; font-size: .86rem; color: var(--ink-soft); }
+
+  /* ---- sections ---- */
+  section { padding: 3.4rem 0; }
+  .stop { display: flex; align-items: center; gap: .6rem; margin-bottom: 1.3rem; }
+  .stop .pin { width: .62rem; height: .62rem; border-radius: 999px; background: var(--marigold); box-shadow: 0 0 0 5px var(--marigold-wash); flex: none; }
+  .stop .label { font-family: var(--maru); font-weight: 800; letter-spacing: .09em; font-size: .8rem; text-transform: uppercase; color: var(--ink-faint); }
+  h2 { font-family: var(--maru); font-weight: 800; font-size: clamp(1.55rem, 4.2vw, 2rem); letter-spacing: .02em; margin: 0 0 .55rem; text-wrap: balance; }
+  .section-lede { color: var(--ink-soft); max-width: var(--measure); margin-bottom: 1.9rem; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.1rem; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem 1.4rem; box-shadow: var(--shadow-soft); display: flex; flex-direction: column; gap: .55rem; }
+  .card .kicker { font-family: var(--maru); font-weight: 800; font-size: 1.08rem; display: flex; align-items: center; gap: .55rem; }
+  .card .kicker .em { font-size: 1.35rem; }
+  .card p { color: var(--ink-soft); font-size: .96rem; }
+  .agekey { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .35rem; }
+  .agechip { font-family: var(--maru); font-weight: 700; font-size: .8rem; background: var(--blush-wash); color: var(--ink-soft); padding: .24rem .65rem; border-radius: 999px; }
+
+  .issue { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+  .issue-top { background: linear-gradient(120deg, var(--sky) 0%, var(--sky-deep) 100%); color: #fff; padding: 1.2rem 1.5rem; display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .issue-top .t { font-family: var(--maru); font-weight: 800; font-size: 1.14rem; letter-spacing: .02em; }
+  .issue-top .d { font-size: .82rem; opacity: .92; font-variant-numeric: tabular-nums; }
+  .issue-body { padding: 1.5rem 1.5rem 1.7rem; }
+  .issue-legend { font-size: .82rem; color: var(--ink-faint); border-bottom: 1px dashed var(--line-strong); padding-bottom: .9rem; margin-bottom: 1.2rem; }
+  .blk { margin-bottom: 1.3rem; }
+  .blk:last-child { margin-bottom: 0; }
+  .blk h4 { font-family: var(--maru); font-weight: 800; font-size: .99rem; margin: 0 0 .55rem; color: var(--sky-deep); display: flex; align-items: center; gap: .45rem; }
+  .blk h4::before { content: ""; width: .5rem; height: .5rem; background: var(--marigold); border-radius: 2px; flex: none; }
+  .item { margin-bottom: .9rem; }
+  .item:last-child { margin-bottom: 0; }
+  .item .h { font-weight: 700; font-size: .98rem; }
+  .item .h .em { margin-right: .35rem; }
+  .item .m { font-size: .9rem; color: var(--ink-soft); margin-top: .14rem; }
+  .ages { display: inline-flex; gap: .55rem; margin-top: .32rem; font-size: .82rem; color: var(--ink-faint); font-family: var(--maru); font-weight: 700; }
+  .ages b { color: var(--leaf); }
+  ul.takeaway { list-style: none; margin: .5rem 0 0; padding: 0; display: flex; flex-direction: column; gap: .55rem; }
+  ul.takeaway li { position: relative; padding-left: 1.35rem; font-size: .92rem; color: var(--ink-soft); }
+  ul.takeaway li::before { content: "▸"; position: absolute; left: 0; color: var(--marigold); }
+
+  .paid { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 2rem 1.7rem; display: grid; gap: 1.4rem; }
+  @media (min-width: 40rem) { .paid { grid-template-columns: 1.1fr 1fr; align-items: center; } }
+  .paid h3 { font-family: var(--maru); font-weight: 800; font-size: 1.3rem; margin: 0 0 .5rem; }
+  .paid p { color: var(--ink-soft); font-size: .98rem; }
+  .price { display: flex; align-items: baseline; gap: .35rem; margin-top: 1rem; }
+  .price .n { font-family: var(--maru); font-weight: 800; font-size: 2.2rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .price .u { color: var(--ink-soft); font-size: .95rem; }
+  .paid-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .75rem; }
+  .paid-list li { display: flex; gap: .6rem; font-size: .96rem; }
+  .paid-list .ck { color: var(--leaf); font-weight: 800; flex: none; }
+  .paid-cta { margin-top: 1.3rem; display: flex; gap: .7rem; flex-wrap: wrap; }
+  .btn-warm { background: var(--marigold); color: #3a2408; }
+  .btn-warm:hover { transform: translateY(-1px); }
+  .reassure { margin-top: 1rem; font-size: .88rem; color: var(--ink-faint); }
+
+  .trust { display: grid; gap: .95rem; }
+  .trust .row { display: flex; gap: .7rem; align-items: flex-start; font-size: .94rem; color: var(--ink-soft); }
+  .trust .row .k { color: var(--sky); font-weight: 800; flex: none; }
+
+  .closing { position: relative; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: var(--surface-2); }
+  .closing::before { content: ""; position: absolute; inset: 0; z-index: 0; background-image: var(--hero-photo); background-size: cover; background-position: center 55%; opacity: .55; }
+  .closing::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, var(--hero-scrim-1), var(--hero-scrim-2)); }
+  .closing-body { position: relative; z-index: 2; text-align: center; padding: 2.8rem 1.5rem; }
+
+  footer { border-top: 1px solid var(--line); padding: 2.2rem 0 3rem; color: var(--ink-faint); }
+  footer .fmark { font-family: var(--maru); font-weight: 800; color: var(--ink-soft); letter-spacing: .04em; }
+  footer .fsmall { font-size: .82rem; margin-top: .4rem; line-height: 1.7; }
+
+  .fade { opacity: 0; transform: translateY(10px); animation: rise .75s cubic-bezier(.2,.7,.3,1) forwards; }
+  .fade.d1 { animation-delay: .06s; } .fade.d2 { animation-delay: .14s; } .fade.d3 { animation-delay: .22s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .fade { animation: none; opacity: 1; transform: none; } }
+</style>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow fade">Bon Voyage,</div>
+    <h1 class="wordmark fade d1">ぼんぼやーじゅ通信<span class="dot">.</span></h1>
+    <p class="lede fade d1">花小金井まわりの週末おでかけ情報を、未就学児・小学生のいるご家庭へ。</p>
+    <p class="lede-sub fade d2">お祭り・花火・水あそび・科学館・映画…「今週どこ行こう？」を、地元目線でやさしくお届けします。天気に合わせた提案や、連休の予約先取り情報も。</p>
+    <div class="badges fade d2">
+      <span class="badge">無料</span>
+      <span class="badge">週1でお届け</span>
+      <span class="badge">花小金井エリア</span>
+      <span class="badge">👶🧒🎒 年齢の目安つき</span>
+    </div>
+    <div class="cta-row fade d3">
+      <a class="btn btn-line" href="#tomodachi">
+        <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.9 3 2.75 6.36 2.75 10.5c0 3.7 3.3 6.8 7.78 7.4.3.06.71.2.81.46.09.24.06.6.03.85l-.13.79c-.04.24-.19.93.82.51 1.01-.42 5.45-3.21 7.44-5.5 1.37-1.5 2.02-3.03 2.02-4.51C21.25 6.36 17.1 3 12 3Z"/></svg>
+        LINEで友だち追加（無料）
+      </a>
+      <a class="btn btn-ghost" href="#issue">最新号を読む</a>
+    </div>
+    <p class="hero-note fade d3">友だち追加だけで届きます。個人情報の入力は不要です。</p>
+  </div>
+</header>
+
+<main>
+  <section id="about" class="wrap">
+    <div class="stop"><span class="pin"></span><span class="label">Weekly letter</span></div>
+    <h2>こんな通信です</h2>
+    <p class="section-lede">むずかしい情報集めはこちらで。毎週ひとつ「これ行っとこ」が決まる、そんなおたよりを目指しています。</p>
+    <div class="cards">
+      <div class="card">
+        <div class="kicker"><span class="em">🎈</span>今週の一推し</div>
+        <p>週末の天気とあわせて「今週はこれ」を、地元目線でひとつ。子連れで行きやすいかのメモつき。</p>
+      </div>
+      <div class="card">
+        <div class="kicker"><span class="em">🗓️</span>イベント先取り情報</div>
+        <p>連休の予約解禁日や前売りの発売など、早めに知っておくと動きやすいことを、淡々とお伝えします。</p>
+      </div>
+      <div class="card">
+        <div class="kicker"><span class="em">🌤️</span>天気に合わせた提案</div>
+        <p>崩れそうな週末は、涼しい室内やその日の館内イベントまで。無理なく過ごせる候補を添えます。</p>
+        <div class="agekey">
+          <span class="agechip">👶 あかちゃん</span>
+          <span class="agechip">🧒 未就学</span>
+          <span class="agechip">🎒 小学生</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="issue" class="wrap">
+    <div class="stop"><span class="pin"></span><span class="label">Latest issue</span></div>
+    <h2>最新号のプレビュー</h2>
+    <p class="section-lede">実際にお届けしている通信の一例です。読みやすいプレーンな文章で、そのままスマホで開けます。</p>
+
+    <article class="issue">
+      <div class="issue-top">
+        <span class="t">ぼんぼやーじゅ通信</span>
+        <span class="d">2026 / 7 / 11（土）号</span>
+      </div>
+      <div class="issue-body">
+        <p class="issue-legend">〔目安〕👶あかちゃん(0-2) ／ 🧒未就学(3-6) ／ 🎒小学生　◎ぴったり ○だいじょうぶ △ひと工夫</p>
+
+        <div class="blk">
+          <h4>この週末の天気とすごし方</h4>
+          <p class="item m">土日とも猛暑の予報で、熱中症は厳重警戒。午後は急な雨（雷雨）の可能性も。外あそびは朝のうちに短時間で、日中は涼しい室内が安心そうです。</p>
+        </div>
+
+        <div class="blk">
+          <h4>天気が心配な日の室内おすすめ</h4>
+          <div class="item">
+            <div class="h"><span class="em">🔬</span>多摩六都科学館（西東京）</div>
+            <div class="m">いま「わくわく実験TIME」を開催中。生解説プラネタリウム「じっくり北斗七星」（約45分）も。当日館内で観覧券（先着）なので、着いたらまず券を確保するのがコツ。</div>
+            <div class="ages">👶 ○　🧒 <b>◎</b>　🎒 <b>◎</b></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <h4>今週末のおすすめ</h4>
+          <div class="item">
+            <div class="h"><span class="em">🏮</span>八坂神社 天王祭（東村山）7/11-12</div>
+            <div class="m">昔ながらの縁日の雰囲気。屋台の出る境内でゆっくりが過ごしやすいです。</div>
+            <div class="ages">👶 ○　🧒 <b>◎</b>　🎒 <b>◎</b></div>
+          </div>
+          <div class="item">
+            <div class="h"><span class="em">💧</span>たけのこ公園じゃぶじゃぶ池（花小金井駅南・無料）</div>
+            <div class="m">木陰があり、朝の涼しい時間の水あそびに。水あそび用オムツでも入れます。</div>
+            <div class="ages">👶 <b>◎</b>　🧒 <b>◎</b>　🎒 ○</div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <h4>イベント先取り情報</h4>
+          <ul class="takeaway">
+            <li>今度の3連休は 7/18(土)-20(月・海の日)。花小金井夏まつり・サンバフェス（駅前）も18-19日に。</li>
+            <li>つぎの大型連休は 9/19(土)〜23(水) の5連休。人気の「キャンプ・アンド・キャビンズ山中湖」は9月分の予約が今月末(7/31頃)0時に解禁。涼しく、9月の土曜は夏より取りやすいので、家族旅行の候補に。</li>
+            <li>7/25(土) 昭和記念公園の花火は、2026年から有料観覧席制（1,500円）に。行くなら席の確認を。</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section id="more" class="wrap">
+    <div class="stop"><span class="pin"></span><span class="label">Your family plan</span></div>
+    <h2>もっと活用したい方へ</h2>
+    <p class="section-lede">無料通信はどなたでもお読みいただけます。「うちの地域・うちの子に合わせて」もっと詳しく、という方には、有料プランもご用意しています。</p>
+
+    <div class="paid">
+      <div>
+        <h3>ご家庭に合わせた、ぼんぼやーじゅ通信</h3>
+        <p>お住まいや興味に合わせて情報を選び、気になったイベントはそのままカレンダーへ。忙しいご家庭の「予定づくり」までお手伝いします。</p>
+        <div class="price"><span class="n">300</span><span class="u">円 / 月（税込）</span></div>
+        <div class="paid-cta">
+          <a class="btn btn-warm" href="#form">プランの詳細・お申し込み</a>
+          <a class="btn btn-ghost" href="#form">まずは相談する</a>
+        </div>
+        <p class="reassure">無料通信だけでも十分お使いいただけます。まずは気軽に友だち追加からどうぞ。</p>
+      </div>
+      <ul class="paid-list">
+        <li><span class="ck">✓</span><span>お住まい・興味に合わせた<b>出し分け</b>（多摩〜都心、花火だけ・プールだけ 等）</span></li>
+        <li><span class="ck">✓</span><span><b>週2</b>でお届け（水・土）＋おでかけ直前の中止・天気チェック</span></li>
+        <li><span class="ck">✓</span><span>気になったイベントを <b>Googleカレンダーに登録代行</b>（前日リマインダー付き）</span></li>
+        <li><span class="ck">✓</span><span>キャンプの<b>空き枠・予約タイミング</b>の先読み</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="trust" class="wrap">
+    <div class="stop"><span class="pin"></span><span class="label">Good to know</span></div>
+    <h2>安心して使っていただくために</h2>
+    <div class="trust">
+      <div class="row"><span class="k">・</span><span>掲載している日程・料金は変わることがあります。おでかけ前に各公式サイトで最終確認をお願いします。</span></div>
+      <div class="row"><span class="k">・</span><span>いただいた個人情報は配信の宛先にのみ使い、第三者には共有しません。おためし運用のため、予告なく内容を変更する場合があります。</span></div>
+      <div class="row"><span class="k">・</span><span>有料プランのご案内には、特定商取引法に基づく表記（販売者・支払方法・解約条件）をご用意します。<a href="#form">こちら</a>からご確認いただけます。</span></div>
+    </div>
+  </section>
+
+  <section id="tomodachi" class="wrap" style="padding-top:1rem;">
+    <div class="closing">
+      <div class="closing-body">
+        <div class="stop" style="justify-content:center;"><span class="pin"></span><span class="label">Join</span></div>
+        <h2 style="margin-bottom:.6rem;">まずは、無料で受け取ってみませんか</h2>
+        <p class="section-lede" style="margin:0 auto 1.5rem;">友だち追加だけで、次の水曜からお届けします。合わなければ、いつでも止められます。</p>
+        <a class="btn btn-line" href="#" style="margin:0 auto;">
+          <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.9 3 2.75 6.36 2.75 10.5c0 3.7 3.3 6.8 7.78 7.4.3.06.71.2.81.46.09.24.06.6.03.85l-.13.79c-.04.24-.19.93.82.51 1.01-.42 5.45-3.21 7.44-5.5 1.37-1.5 2.02-3.03 2.02-4.51C21.25 6.36 17.1 3 12 3Z"/></svg>
+          LINEで友だち追加（無料）
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fmark">ぼんぼやーじゅ通信</div>
+    <div class="fsmall">花小金井エリアの子育て家庭のための、週末おでかけ便。<br>© 2026 ぼんぼやーじゅ通信</div>
+  </div>
+</footer>
