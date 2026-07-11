@@ -27,9 +27,9 @@
     --script: Georgia, "Times New Roman", "Hiragino Mincho ProN", serif;
     --measure: 40rem;
     --hero-photo: url("assets/hero-park.jpg");
-    --hero-scrim-1: rgba(251,250,245,.93);
-    --hero-scrim-2: rgba(251,250,245,.55);
-    --hero-scrim-3: rgba(251,250,245,.10);
+    --hero-scrim-1: rgba(251,250,245,.96);
+    --hero-scrim-2: rgba(251,250,245,.82);
+    --hero-scrim-3: rgba(251,250,245,.20);
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -41,7 +41,7 @@
       --line: #293B45; --line-strong: #38505C;
       --shadow: 0 2px 6px rgba(0,0,0,.2), 0 16px 44px rgba(0,0,0,.26);
       --shadow-soft: 0 2px 22px rgba(0,0,0,.22);
-      --hero-scrim-1: rgba(17,28,37,.90); --hero-scrim-2: rgba(17,28,37,.55); --hero-scrim-3: rgba(17,28,37,.14);
+      --hero-scrim-1: rgba(17,28,37,.95); --hero-scrim-2: rgba(17,28,37,.80); --hero-scrim-3: rgba(17,28,37,.22);
     }
   }
   :root[data-theme="light"] {
@@ -52,7 +52,7 @@
     --leaf: #74AE71; --line: #ECE7DB; --line-strong: #DCD5C6;
     --shadow: 0 2px 6px rgba(52,67,76,.04), 0 14px 40px rgba(52,67,76,.06);
     --shadow-soft: 0 2px 20px rgba(52,67,76,.05);
-    --hero-scrim-1: rgba(251,250,245,.93); --hero-scrim-2: rgba(251,250,245,.55); --hero-scrim-3: rgba(251,250,245,.10);
+    --hero-scrim-1: rgba(251,250,245,.96); --hero-scrim-2: rgba(251,250,245,.82); --hero-scrim-3: rgba(251,250,245,.20);
   }
   :root[data-theme="dark"] {
     --ground:#131F28; --surface:#1A2831; --surface-2:#21333D;
@@ -61,7 +61,7 @@
     --marigold:#F0AE5E; --marigold-wash:#362F1F; --blush:#EC9C94; --blush-wash:#362725;
     --leaf:#8FC489; --line:#293B45; --line-strong:#38505C;
     --shadow:0 2px 6px rgba(0,0,0,.2),0 16px 44px rgba(0,0,0,.26); --shadow-soft:0 2px 22px rgba(0,0,0,.22);
-    --hero-scrim-1: rgba(17,28,37,.90); --hero-scrim-2: rgba(17,28,37,.55); --hero-scrim-3: rgba(17,28,37,.14);
+    --hero-scrim-1: rgba(17,28,37,.95); --hero-scrim-2: rgba(17,28,37,.80); --hero-scrim-3: rgba(17,28,37,.22);
   }
 
   * { box-sizing: border-box; }
@@ -74,14 +74,14 @@
   /* ---- hero (photo) ---- */
   .hero { position: relative; overflow: hidden; background: var(--sky-wash); min-height: clamp(30rem, 66vh, 42rem); display: flex; }
   .hero::before { content: ""; position: absolute; inset: 0; z-index: 0; background-image: var(--hero-photo); background-size: cover; background-position: center 52%; }
-  .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, var(--hero-scrim-1) 0%, var(--hero-scrim-2) 40%, var(--hero-scrim-3) 100%); }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, var(--hero-scrim-1) 0%, var(--hero-scrim-1) 34%, var(--hero-scrim-2) 66%, var(--hero-scrim-3) 100%); }
   .hero-inner { position: relative; z-index: 2; padding: 3.8rem 1.35rem 8.5rem; max-width: 46rem; margin: 0 auto; width: 100%; align-self: flex-start; }
   .eyebrow { font-family: var(--script); font-style: italic; font-size: 1.2rem; letter-spacing: .02em; color: var(--marigold); margin-bottom: .3rem; text-shadow: 0 1px 10px var(--hero-scrim-1); }
   .eyebrow::after { content: ""; display: inline-block; width: 2.2rem; height: 1px; background: var(--marigold); vertical-align: middle; margin-left: .6rem; opacity: .7; }
   .wordmark { font-family: var(--maru); font-weight: 800; font-size: clamp(2.4rem, 7.2vw, 3.5rem); letter-spacing: .045em; line-height: 1.14; margin: 0 0 1rem; text-wrap: balance; }
   .wordmark .dot { color: var(--sky-deep); }
-  .lede { font-size: 1.18rem; color: var(--ink); max-width: 32rem; text-wrap: pretty; font-weight: 500; }
-  .lede-sub { margin-top: .7rem; color: var(--ink-soft); max-width: 32rem; font-size: 1rem; }
+  .lede { font-size: 1.18rem; color: var(--ink); max-width: 32rem; text-wrap: pretty; font-weight: 600; text-shadow: 0 1px 14px var(--hero-scrim-1), 0 0 4px var(--hero-scrim-1); }
+  .lede-sub { margin-top: .7rem; color: var(--ink); max-width: 32rem; font-size: 1rem; font-weight: 500; text-shadow: 0 1px 14px var(--hero-scrim-1), 0 0 4px var(--hero-scrim-1); }
   .badges { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
   .badge { font-family: var(--maru); font-weight: 700; font-size: .82rem; padding: .35rem .85rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink-soft); box-shadow: var(--shadow-soft); }
   .cta-row { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: 1.9rem; }
