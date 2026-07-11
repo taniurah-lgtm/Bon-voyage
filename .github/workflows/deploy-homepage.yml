@@ -1,0 +1,38 @@
+name: Deploy homepage to GitHub Pages
+
+# 公開するのは docs/homepage/ だけ（他の docs や台帳・プロフィールは公開されない）。
+on:
+  push:
+    branches: [claude/line-message-resend-yefv9l]
+    paths:
+      - "docs/homepage/**"
+      - ".github/workflows/deploy-homepage.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload only the homepage folder
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/homepage
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
