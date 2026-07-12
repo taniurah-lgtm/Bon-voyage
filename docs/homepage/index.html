@@ -145,9 +145,11 @@
   .price { display: flex; align-items: baseline; gap: .35rem; margin-top: 1rem; }
   .price .n { font-family: var(--maru); font-weight: 800; font-size: 2.2rem; color: var(--ink); font-variant-numeric: tabular-nums; }
   .price .u { color: var(--ink-soft); font-size: .95rem; }
-  .paid-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .75rem; }
-  .paid-list li { display: flex; gap: .6rem; font-size: .96rem; }
-  .paid-list .ck { color: var(--leaf); font-weight: 800; flex: none; }
+  .perks { background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); padding: 1.4rem 1.4rem 1.25rem; box-shadow: var(--shadow-soft); }
+  .perks-title { font-family: var(--maru); font-weight: 800; font-size: 1.02rem; color: var(--marigold); margin-bottom: 1rem; display: flex; align-items: center; gap: .45rem; }
+  .paid-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .9rem; }
+  .paid-list li { display: flex; gap: .65rem; font-size: 1.02rem; align-items: flex-start; line-height: 1.6; }
+  .paid-list .ck { flex: none; width: 1.4rem; height: 1.4rem; border-radius: 999px; background: var(--leaf); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: .82rem; font-weight: 800; margin-top: .12rem; }
   .paid-cta { margin-top: 1.3rem; display: flex; gap: .7rem; flex-wrap: wrap; }
   .btn-warm { background: var(--marigold); color: #3a2408; }
   .btn-warm:hover { transform: translateY(-1px); }
@@ -236,16 +238,11 @@
       </div>
       <div class="card">
         <div class="kicker"><span class="em">🗓️</span>イベント先取り情報</div>
-        <p>連休の予約解禁日や前売りの発売など、早めに知っておくと動きやすいことを、淡々とお伝えします。</p>
+        <p>連休の予約解禁日や前売りの発売など、早めに知っておくと動きやすい情報を、先回りしてお伝えします。</p>
       </div>
       <div class="card">
         <div class="kicker"><span class="em">🌤️</span>天気に合わせた提案</div>
         <p>崩れそうな週末は、涼しい室内やその日の館内イベントまで。無理なく過ごせる候補を添えます。</p>
-        <div class="agekey">
-          <span class="agechip">👶 あかちゃん</span>
-          <span class="agechip">🧒 未就学</span>
-          <span class="agechip">🎒 小学生</span>
-        </div>
       </div>
     </div>
   </section>
@@ -310,7 +307,7 @@
 
     <div class="paid">
       <div>
-        <h3>月々300円で、応援サポーターに</h3>
+        <h3>よかったら、応援してください。</h3>
         <p>「役に立ってるよ」「応援したいな」と思っていただけたら、月々300円で支えていただけたら嬉しいです。お礼として、下のような特典をご用意しています。</p>
         <div class="price"><span class="n">300</span><span class="u">円 / 月（税込）</span></div>
         <div class="paid-cta">
@@ -319,7 +316,8 @@
         </div>
         <p class="reassure">無料通信だけでも、これからもずっと無料でお使いいただけます。</p>
       </div>
-      <div>
+      <div class="perks">
+        <div class="perks-title">🎁 応援のお礼（特典）</div>
         <ul class="paid-list">
           <li><span class="ck">✓</span><span><b>週2</b>でお届け（水・土）＋おでかけ直前の中止・天気チェック</span></li>
           <li><span class="ck">✓</span><span>気になったイベントを <b>Googleカレンダーに登録代行</b>（前日リマインダー付き）</span></li>
