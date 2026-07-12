@@ -66,7 +66,7 @@
 
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--body); line-height: 1.85; -webkit-font-smoothing: antialiased; font-feature-settings: "palt" 1; }
-  .wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.35rem; }
+  .wrap { max-width: 60rem; margin: 0 auto; padding: 0 1.6rem; }
   p { margin: 0; }
   a { color: var(--sky-deep); }
   svg { display: block; }
@@ -75,7 +75,7 @@
   .hero { position: relative; overflow: hidden; background: var(--sky-wash); min-height: clamp(30rem, 66vh, 42rem); display: flex; }
   .hero::before { content: ""; position: absolute; inset: 0; z-index: 0; background-image: var(--hero-photo); background-size: cover; background-position: center 52%; }
   .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, var(--hero-scrim-1) 0%, var(--hero-scrim-1) 34%, var(--hero-scrim-2) 66%, var(--hero-scrim-3) 100%); }
-  .hero-inner { position: relative; z-index: 2; padding: 3.8rem 1.35rem 8.5rem; max-width: 46rem; margin: 0 auto; width: 100%; align-self: flex-start; }
+  .hero-inner { position: relative; z-index: 2; padding: 3.8rem 1.6rem 8.5rem; max-width: 60rem; margin: 0 auto; width: 100%; align-self: flex-start; }
   .eyebrow { font-family: var(--script); font-style: italic; font-size: 1.2rem; letter-spacing: .02em; color: var(--marigold); margin-bottom: .3rem; text-shadow: 0 1px 10px var(--hero-scrim-1); }
   .eyebrow::after { content: ""; display: inline-block; width: 2.2rem; height: 1px; background: var(--marigold); vertical-align: middle; margin-left: .6rem; opacity: .7; }
   .wordmark { font-family: var(--maru); font-weight: 800; font-size: clamp(2.4rem, 7.2vw, 3.5rem); letter-spacing: .045em; line-height: 1.14; margin: 0 0 1rem; text-wrap: balance; }
@@ -110,7 +110,7 @@
   .agekey { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .35rem; }
   .agechip { font-family: var(--maru); font-weight: 700; font-size: .8rem; background: var(--blush-wash); color: var(--ink-soft); padding: .24rem .65rem; border-radius: 999px; }
 
-  .issue { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+  .issue { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; max-width: 46rem; }
   .issue-top { background: linear-gradient(120deg, var(--sky) 0%, var(--sky-deep) 100%); color: #fff; padding: 1.2rem 1.5rem; display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
   .issue-top .t { font-family: var(--maru); font-weight: 800; font-size: 1.14rem; letter-spacing: .02em; }
   .issue-top .d { font-size: .82rem; opacity: .92; font-variant-numeric: tabular-nums; }
@@ -146,7 +146,7 @@
   .btn-warm:hover { transform: translateY(-1px); }
   .reassure { margin-top: 1rem; font-size: .88rem; color: var(--ink-faint); }
 
-  .trust { display: grid; gap: .95rem; }
+  .trust { display: grid; gap: .95rem; max-width: 48rem; }
   .trust .row { display: flex; gap: .7rem; align-items: flex-start; font-size: .94rem; color: var(--ink-soft); }
   .trust .row .k { color: var(--sky); font-weight: 800; flex: none; }
 
@@ -162,6 +162,23 @@
   .fade { opacity: 0; transform: translateY(10px); animation: rise .75s cubic-bezier(.2,.7,.3,1) forwards; }
   .fade.d1 { animation-delay: .06s; } .fade.d2 { animation-delay: .14s; } .fade.d3 { animation-delay: .22s; }
   @keyframes rise { to { opacity: 1; transform: none; } }
+  /* ---- mobile: 文字を大きく読みやすく ---- */
+  @media (max-width: 40rem) {
+    body { line-height: 1.8; }
+    .wrap { padding: 0 1.15rem; }
+    .hero-inner { padding-left: 1.15rem; padding-right: 1.15rem; padding-bottom: 7rem; }
+    .lede { font-size: 1.2rem; }
+    .lede-sub { font-size: 1.06rem; }
+    .section-lede, .card p, .paid p, .trust .row, ul.takeaway li, .item .m { font-size: 1.05rem; }
+    .item .h { font-size: 1.08rem; }
+    .blk h4 { font-size: 1.1rem; }
+    .card .kicker { font-size: 1.14rem; }
+    .issue-legend { font-size: .98rem; }
+    .ages { font-size: .96rem; }
+    .badge, .agechip { font-size: .88rem; }
+    .paid-list li { font-size: 1.04rem; }
+  }
+
   @media (prefers-reduced-motion: reduce) { .fade { animation: none; opacity: 1; transform: none; } }
 </style>
 
