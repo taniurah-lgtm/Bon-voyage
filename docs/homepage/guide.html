@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>花小金井エリア 子連れおでかけ 完全ガイド（保存版）｜ぼんぼやーじゅ通信</title>
+<style>
+  :root {
+    --ground: #FBFAF5; --surface: #FFFFFF; --surface-2: #F5F2EA;
+    --ink: #34434C; --ink-soft: #63727B; --ink-faint: #97A2AA;
+    --sky: #4FA3C4; --sky-deep: #2C7C9E; --sky-wash: #E9F4F7;
+    --marigold: #EBA24A; --marigold-wash: #FBEEDA; --blush-wash: #FBEBE7;
+    --leaf: #74AE71; --line: #ECE7DB; --line-strong: #DCD5C6; --line-green: #06C755;
+    --shadow-soft: 0 2px 20px rgba(52,67,76,.05);
+    --radius: 20px; --radius-sm: 14px;
+    --maru: "Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN W4","Yu Gothic","游ゴシック","Noto Sans JP","Segoe UI",sans-serif;
+    --body: "Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","游ゴシック","Noto Sans JP","Segoe UI",Meiryo,sans-serif;
+    --script: Georgia,"Times New Roman","Hiragino Mincho ProN",serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground:#131F28; --surface:#1A2831; --surface-2:#21333D;
+      --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95;
+      --sky:#6FBAD9; --sky-deep:#9AD4EA; --sky-wash:#1D3944;
+      --marigold:#F0AE5E; --marigold-wash:#362F1F; --blush-wash:#362725;
+      --leaf:#8FC489; --line:#293B45; --line-strong:#38505C;
+      --shadow-soft:0 2px 22px rgba(0,0,0,.22);
+    }
+  }
+  :root[data-theme="light"]{--ground:#FBFAF5;--surface:#FFFFFF;--surface-2:#F5F2EA;--ink:#34434C;--ink-soft:#63727B;--ink-faint:#97A2AA;--sky:#4FA3C4;--sky-deep:#2C7C9E;--sky-wash:#E9F4F7;--marigold:#EBA24A;--marigold-wash:#FBEEDA;--blush-wash:#FBEBE7;--leaf:#74AE71;--line:#ECE7DB;--line-strong:#DCD5C6;--shadow-soft:0 2px 20px rgba(52,67,76,.05);}
+  :root[data-theme="dark"]{--ground:#131F28;--surface:#1A2831;--surface-2:#21333D;--ink:#ECF2F4;--ink-soft:#AAB9C1;--ink-faint:#7B8C95;--sky:#6FBAD9;--sky-deep:#9AD4EA;--sky-wash:#1D3944;--marigold:#F0AE5E;--marigold-wash:#362F1F;--blush-wash:#362725;--leaf:#8FC489;--line:#293B45;--line-strong:#38505C;--shadow-soft:0 2px 22px rgba(0,0,0,.22);}
+
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink); font-family:var(--body); line-height:1.85; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.35rem; }
+  p { margin: 0; }
+  a { color: var(--sky-deep); }
+
+  .ghead { background: linear-gradient(160deg, var(--sky-wash), var(--marigold-wash)); border-bottom: 1px solid var(--line); }
+  .ghead-in { max-width: 46rem; margin: 0 auto; padding: 3.2rem 1.35rem 2.4rem; }
+  .eyebrow { font-family: var(--script); font-style: italic; font-size: 1.1rem; color: var(--marigold); margin-bottom: .3rem; }
+  h1 { font-family: var(--maru); font-weight: 800; font-size: clamp(1.8rem, 6vw, 2.5rem); letter-spacing: .02em; line-height: 1.2; margin: 0 0 .7rem; text-wrap: balance; }
+  .ghead .sub { color: var(--ink); font-size: 1.05rem; max-width: 32rem; }
+  .legend { margin-top: 1.2rem; font-size: .9rem; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .5rem .9rem; display: inline-block; }
+
+  main { padding: 2.4rem 0 1rem; }
+  .cat { margin-bottom: 2.2rem; }
+  .cat > h2 { font-family: var(--maru); font-weight: 800; font-size: 1.35rem; letter-spacing: .01em; margin: 0 0 1rem; display: flex; align-items: center; gap: .5rem; }
+  .cat > h2 .em { font-size: 1.5rem; }
+  .cat-note { color: var(--ink-soft); font-size: .95rem; margin: -.4rem 0 1rem; }
+
+  .spots { display: flex; flex-direction: column; gap: .8rem; }
+  .spot { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 1.05rem 1.15rem; box-shadow: var(--shadow-soft); }
+  .spot .name { font-family: var(--maru); font-weight: 800; font-size: 1.06rem; }
+  .spot .access { font-size: .85rem; color: var(--sky-deep); margin-top: .1rem; }
+  .spot .desc { font-size: .96rem; color: var(--ink-soft); margin-top: .35rem; }
+  .spot .ages { margin-top: .5rem; font-family: var(--maru); font-weight: 700; font-size: .86rem; color: var(--ink-faint); display: inline-flex; gap: .6rem; }
+  .spot .ages b { color: var(--leaf); }
+
+  .seasons { display: grid; gap: .7rem; }
+  .season { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .9rem 1.1rem; box-shadow: var(--shadow-soft); }
+  .season .s { font-family: var(--maru); font-weight: 800; color: var(--sky-deep); margin-right: .5rem; }
+
+  .tips { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem 1.5rem; }
+  .tips ul { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: .55rem; }
+  .tips li { font-size: .98rem; color: var(--ink); }
+
+  .gfoot { margin-top: 2.4rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-soft); padding: 1.8rem 1.5rem; text-align: center; }
+  .gfoot p { color: var(--ink-soft); max-width: 30rem; margin: 0 auto 1.2rem; }
+  .btns { display: flex; flex-wrap: wrap; gap: .7rem; justify-content: center; }
+  .btn { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--maru); font-weight: 800; font-size: 1rem; padding: .8rem 1.4rem; border-radius: 999px; text-decoration: none; border: 1px solid transparent; }
+  .btn-line { background: var(--line-green); color: #fff; }
+  .btn-ghost { background: var(--surface); color: var(--sky-deep); border-color: var(--line-strong); }
+  .btn:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+
+  footer { color: var(--ink-faint); font-size: .82rem; text-align: center; padding: 2rem 1.35rem 3rem; line-height: 1.7; }
+  footer .fmark { font-family: var(--maru); font-weight: 800; color: var(--ink-soft); }
+
+  @media (max-width: 40rem) {
+    html { font-size: 112.5%; }
+    .wrap, .ghead-in { padding-left: 1.15rem; padding-right: 1.15rem; }
+    .spot .desc, .tips li, .gfoot p { font-size: 1.02rem; }
+  }
+</style>
+</head>
+<body>
+<header class="ghead">
+  <div class="ghead-in">
+    <div class="eyebrow">Bon Voyage,</div>
+    <h1>花小金井エリア<br>子連れおでかけ 完全ガイド<span style="font-size:.6em;">（保存版）</span></h1>
+    <p class="sub">未就学児・小学生のいるご家庭へ。花小金井まわりの“間違いない”おでかけ先を、ぎゅっとまとめました。スマホに保存して使ってください。</p>
+    <div class="legend">目安 👶あかちゃん(0-2) / 🧒未就学(3-6) / 🎒小学生　◎ぴったり ○OK △ひと工夫</div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="cat">
+    <h2><span class="em">💧</span>無料で水あそび（夏）</h2>
+    <div class="spots">
+      <div class="spot">
+        <div class="name">たけのこ公園 じゃぶじゃぶ池</div>
+        <div class="access">花小金井駅 南口・徒歩約10分／無料</div>
+        <div class="desc">木陰があって浅く、はじめての水あそびに安心。朝の涼しい時間がおすすめ。水あそび用オムツでも入れます。</div>
+        <div class="ages">👶 <b>◎</b>　🧒 <b>◎</b>　🎒 ○</div>
+      </div>
+      <div class="spot">
+        <div class="name">小金井公園 わき水広場</div>
+        <div class="access">花小金井駅 徒歩15〜20分／無料</div>
+        <div class="desc">ごく浅い湧き水で乳幼児向き。ふわふわドームや大型遊具とセットで1日たっぷり遊べます。</div>
+        <div class="ages">👶 <b>◎</b>　🧒 <b>◎</b>　🎒 ○</div>
+      </div>
+      <div class="spot">
+        <div class="name">西東京いこいの森公園 噴水広場</div>
+        <div class="access">車・自転車で約10分／無料</div>
+        <div class="desc">噴水型でオムツの子も遊べます。夏の日中の“ちょい遊び”に便利。</div>
+        <div class="ages">👶 <b>◎</b>　🧒 <b>◎</b>　🎒 ○</div>
+      </div>
+      <div class="spot">
+        <div class="name">小平市の公園じゃぶじゃぶ池（市内 各所）</div>
+        <div class="access">お住まいの近くで／無料（例年 夏に開設）</div>
+        <div class="desc">市内の公園に点在。近所で探せるのが強み。開設期間は年によって変わるので、その年の情報は通信で。</div>
+        <div class="ages">👶 <b>◎</b>　🧒 <b>◎</b>　🎒 ○</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cat">
+    <h2><span class="em">☔</span>雨・猛暑の日の屋内（毎週使える）</h2>
+    <div class="spots">
+      <div class="spot">
+        <div class="name">多摩六都科学館（西東京）</div>
+        <div class="access">花小金井から近い／プラネタリウム・実験イベント</div>
+        <div class="desc">世界最大級のプラネタリウム。0歳から入れる回もあり、下の子連れでも安心。涼しくて雨の日の鉄板です。</div>
+        <div class="ages">👶 ○　🧒 <b>◎</b>　🎒 <b>◎</b></div>
+      </div>
+      <div class="spot">
+        <div class="name">イオンモール東久留米</div>
+        <div class="access">車で近い</div>
+        <div class="desc">室内あそび場・授乳室・おむつ替えが揃い、全部涼しい。雨の日・猛暑の日の避難先に。</div>
+        <div class="ages">👶 <b>◎</b>　🧒 <b>◎</b>　🎒 ○</div>
+      </div>
+      <div class="spot">
+        <div class="name">図書館のおはなし会（小平市立・中央図書館 ほか）</div>
+        <div class="access">各図書館／無料</div>
+        <div class="desc">絵本の読み聞かせや手あそび。絵本デビューにぴったり。回によって対象年齢が分かれています。</div>
+        <div class="ages">👶 <b>◎</b>　🧒 <b>◎</b>　🎒 ○</div>
+      </div>
+      <div class="spot">
+        <div class="name">児童館・子育てひろば（各市）</div>
+        <div class="access">お住まいの市で／無料</div>
+        <div class="desc">無料で遊べて、親子プログラムも。雨の日の“いつもの居場所”として頼れます。</div>
+        <div class="ages">👶 <b>◎</b>　🧒 <b>◎</b>　🎒 ○</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cat">
+    <h2><span class="em">🌳</span>大きな公園で1日（無料〜）</h2>
+    <div class="spots">
+      <div class="spot">
+        <div class="name">都立 小金井公園</div>
+        <div class="access">花小金井エリアの大定番／無料（一部施設は有料）</div>
+        <div class="desc">広い芝生・大型遊具・ふわふわドーム、江戸東京たてもの園も併設。春は桜の名所で、お花見にも。</div>
+        <div class="ages">👶 ○　🧒 <b>◎</b>　🎒 <b>◎</b></div>
+      </div>
+      <div class="spot">
+        <div class="name">国営 昭和記念公園（立川）</div>
+        <div class="access">電車・車で／多摩最大級</div>
+        <div class="desc">原っぱ・水遊び・サイクリング・季節の花。1日じゃ足りないくらい広いので、目的を絞って。</div>
+        <div class="ages">👶 ○　🧒 <b>◎</b>　🎒 <b>◎</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cat">
+    <h2><span class="em">🦒</span>動物とふれあう</h2>
+    <div class="spots">
+      <div class="spot">
+        <div class="name">多摩動物公園（日野）</div>
+        <div class="access">電車・車で</div>
+        <div class="desc">広くて坂は多めですがベビーカーOK。ライオンバスや昆虫館が人気。歩く距離が長いので休憩こまめに。</div>
+        <div class="ages">👶 ○　🧒 <b>◎</b>　🎒 <b>◎</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cat">
+    <h2><span class="em">🏊</span>夏のプール</h2>
+    <div class="spots">
+      <div class="spot">
+        <div class="name">西武園ゆうえんちプール</div>
+        <div class="access">電車で20〜25分ほど</div>
+        <div class="desc">こどもプール・波のプール・流れるプール。水あそび用オムツ＋水着で2歳もOK（小さい子は同伴入水のルールあり）。</div>
+        <div class="ages">👶 ○　🧒 <b>◎</b>　🎒 <b>◎</b></div>
+      </div>
+      <div class="spot">
+        <div class="name">東京サマーランド（あきる野）</div>
+        <div class="access">車で40〜50分ほど</div>
+        <div class="desc">屋内ドームは全天候型＝猛暑・雨の日の切り札。ベビールームが充実していて小さい子連れも安心。</div>
+        <div class="ages">👶 <b>◎</b>　🧒 <b>◎</b>　🎒 <b>◎</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cat">
+    <h2><span class="em">🎪</span>季節の定番</h2>
+    <p class="cat-note">※ 具体的な開催日・料金は年によって変わります。その年の“今週これ”は、毎週の無料通信でお届けします。</p>
+    <div class="seasons">
+      <div class="season"><span class="s">🌸 春</span>お花見（小金井公園の桜）／いちご狩り（多摩・近郊）／ゴールデンウィークのおでかけ</div>
+      <div class="season"><span class="s">🎆 夏</span>夏祭り・盆踊り／花火大会／プール・じゃぶじゃぶ池</div>
+      <div class="season"><span class="s">🍁 秋</span>紅葉・どんぐり拾い／味覚狩り（ぶどう・芋 ほか）</div>
+      <div class="season"><span class="s">✨ 冬</span>イルミネーション／屋内あそび場・科学館でぬくぬく</div>
+    </div>
+  </section>
+
+  <section class="cat">
+    <h2><span class="em">👜</span>子連れおでかけの“地雷回避”メモ</h2>
+    <div class="tips">
+      <ul>
+        <li><b>出発前チェック</b>：ベビーカー可否／授乳室・オムツ替え台の有無／混雑する時間帯（人気施設は午前の早い時間が狙い目）。</li>
+        <li><b>水あそび</b>：屋外のじゃぶじゃぶ池は「水あそび用オムツ」でOKなことが多い一方、公営の屋内プールはオムツの子NGが通例。事前に規定の確認を。</li>
+        <li><b>暑さ・雨</b>：真夏は朝いちに短時間＋日中は涼しい室内へ。天気が崩れそうな日は最初から屋内スポットに切り替え。</li>
+        <li><b>迷ったら</b>：最新の開催日や、その週末の天気に合わせた“今週これ”は、無料通信でお届けします。</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="gfoot">
+    <p>このガイドは「ぼんぼやーじゅ通信」の保存版です。<br>最新の週末おでかけ情報は、毎週の無料通信でお届けしています。</p>
+    <div class="btns">
+      <a class="btn btn-line" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINEで受け取る（無料）</a>
+      <a class="btn btn-ghost" href="https://taniurah-lgtm.github.io/Bon-voyage/">ホームページを見る</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="fmark">ぼんぼやーじゅ通信</div>
+  花小金井エリアの子育て家庭のための、週末おでかけ便。<br>
+  ※掲載スポットの内容・営業は変わることがあります。おでかけ前に各公式サイトでご確認ください。<br>
+  © 2026 ぼんぼやーじゅ通信
+</footer>
+
+</body>
+</html>
