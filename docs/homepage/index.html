@@ -163,6 +163,9 @@
   .closing::before { content: ""; position: absolute; inset: 0; z-index: 0; background-image: var(--hero-photo); background-size: cover; background-position: center 55%; opacity: .55; }
   .closing::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, var(--hero-scrim-1), var(--hero-scrim-2)); }
   .closing-body { position: relative; z-index: 2; text-align: center; padding: 2.8rem 1.5rem; }
+  .qr-wrap { margin-top: 1.7rem; display: flex; flex-direction: column; align-items: center; gap: .55rem; }
+  .qr { width: 150px; height: 150px; background: #fff; padding: 10px; border-radius: 12px; box-shadow: var(--shadow-soft); }
+  .qr-cap { font-size: .85rem; color: var(--ink-soft); }
 
   footer { border-top: 1px solid var(--line); padding: 2.2rem 0 3rem; color: var(--ink-faint); }
   footer .fmark { font-family: var(--maru); font-weight: 800; color: var(--ink-soft); letter-spacing: .04em; }
@@ -204,7 +207,7 @@
       <span class="badge">👶🧒🎒 年齢の目安つき</span>
     </div>
     <div class="cta-row fade d3">
-      <a class="btn btn-line" href="#tomodachi">
+      <a class="btn btn-line" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">
         <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.9 3 2.75 6.36 2.75 10.5c0 3.7 3.3 6.8 7.78 7.4.3.06.71.2.81.46.09.24.06.6.03.85l-.13.79c-.04.24-.19.93.82.51 1.01-.42 5.45-3.21 7.44-5.5 1.37-1.5 2.02-3.03 2.02-4.51C21.25 6.36 17.1 3 12 3Z"/></svg>
         LINEで友だち追加（無料）
       </a>
@@ -344,10 +347,14 @@
         <div class="stop" style="justify-content:center;"><span class="pin"></span><span class="label">Join</span></div>
         <h2 style="margin-bottom:.6rem;">まずは、無料で受け取ってみませんか</h2>
         <p class="section-lede" style="margin:0 auto 1.5rem;">友だち追加だけで、次の水曜からお届けします。合わなければ、いつでも止められます。</p>
-        <a class="btn btn-line" href="#" style="margin:0 auto;">
+        <a class="btn btn-line" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener" style="margin:0 auto;">
           <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.9 3 2.75 6.36 2.75 10.5c0 3.7 3.3 6.8 7.78 7.4.3.06.71.2.81.46.09.24.06.6.03.85l-.13.79c-.04.24-.19.93.82.51 1.01-.42 5.45-3.21 7.44-5.5 1.37-1.5 2.02-3.03 2.02-4.51C21.25 6.36 17.1 3 12 3Z"/></svg>
           LINEで友だち追加（無料）
         </a>
+        <div class="qr-wrap">
+          <img class="qr" src="assets/line-qr.png" alt="ぼんぼやーじゅ通信 友だち追加QRコード" width="150" height="150">
+          <p class="qr-cap">スマホ以外の方は、QRコードから追加できます</p>
+        </div>
       </div>
     </div>
   </section>
