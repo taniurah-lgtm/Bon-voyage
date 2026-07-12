@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ぼんぼやーじゅ通信｜花小金井エリアの週末おでかけ便</title>
 <style>
   :root {
@@ -176,6 +181,7 @@
   @keyframes rise { to { opacity: 1; transform: none; } }
   /* ---- mobile: 文字を大きく読みやすく ---- */
   @media (max-width: 40rem) {
+    html { font-size: 112.5%; }
     body { line-height: 1.8; }
     .wrap { padding: 0 1.15rem; }
     .hero-inner { padding-left: 1.15rem; padding-right: 1.15rem; padding-bottom: 7rem; }
@@ -193,7 +199,8 @@
 
   @media (prefers-reduced-motion: reduce) { .fade { animation: none; opacity: 1; transform: none; } }
 </style>
-
+</head>
+<body>
 <header class="hero">
   <div class="hero-inner">
     <div class="eyebrow fade">Bon Voyage,</div>
@@ -366,3 +373,6 @@
     <div class="fsmall">花小金井エリアの子育て家庭のための、週末おでかけ便。<br>© 2026 ぼんぼやーじゅ通信</div>
   </div>
 </footer>
+
+</body>
+</html>
