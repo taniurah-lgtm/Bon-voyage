@@ -56,6 +56,11 @@
   .spot .desc { font-size: .96rem; color: var(--ink-soft); margin-top: .35rem; }
   .spot .ages { margin-top: .5rem; font-family: var(--maru); font-weight: 700; font-size: .86rem; color: var(--ink-faint); display: inline-flex; gap: .6rem; }
   .spot .ages b { color: var(--leaf); }
+  .localtip { margin-top: .75rem; background: var(--marigold-wash); border: 1px solid var(--line-strong); border-radius: 12px; padding: .7rem .85rem; }
+  .lt-h { font-family: var(--maru); font-weight: 800; font-size: .74rem; letter-spacing: .08em; color: var(--marigold); margin-bottom: .45rem; }
+  .localtip ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .4rem; }
+  .localtip li { font-size: .9rem; color: var(--ink-soft); line-height: 1.6; }
+  .localtip li b { color: var(--ink); font-weight: 700; }
 
   .seasons { display: grid; gap: .7rem; }
   .season { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .9rem 1.1rem; box-shadow: var(--shadow-soft); }
@@ -104,6 +109,15 @@
         <div class="access">西武新宿線・東伏見駅すぐ</div>
         <div class="desc">通年で滑れるスケートリンク。夏は涼しく冬は室内で快適。ファミリー向けの時間帯もあり、はじめてのスケートに。</div>
         <div class="ages">👶 △　🧒 ○　🎒 <b>◎</b></div>
+        <div class="localtip">
+          <div class="lt-h">地元メモ</div>
+          <ul>
+            <li>🧤 <b>持ち物</b>：手袋は必須（転倒時のケガ防止）。厚手の靴下・長袖長ズボンで。</li>
+            <li>🕒 <b>滑走時間</b>：貸切・教室で滑れない時間帯あり。一般滑走の時間を事前確認。</li>
+            <li>🧒 <b>はじめて</b>：手すり沿いから。ヘルメットがあると安心。</li>
+            <li>❄ <b>ねらい</b>：夏でも涼しい避暑スポットに。</li>
+          </ul>
+        </div>
       </div>
       <div class="spot">
         <div class="name">田無エリア（田無神社ほか）</div>
@@ -144,8 +158,17 @@
       <div class="spot">
         <div class="name">たけのこ公園 じゃぶじゃぶ池</div>
         <div class="access">花小金井駅 南口・徒歩約10分／無料</div>
-        <div class="desc">木陰があって浅く、はじめての水あそびに安心。朝の涼しい時間がおすすめ。水あそび用オムツでも入れます。</div>
+        <div class="desc">浅くて木陰もあり、はじめての水あそびにいちばん安心。</div>
         <div class="ages">👶 <b>◎</b>　🧒 <b>◎</b>　🎒 ○</div>
+        <div class="localtip">
+          <div class="lt-h">地元メモ</div>
+          <ul>
+            <li>🕒 <b>空いてる時間</b>：夏の午後は混みがち。午前の早い時間が狙い目。</li>
+            <li>🌳 <b>日陰</b>：木陰はあるが場所取りは早い者勝ち。テント・タープがあると安心。</li>
+            <li>🎒 <b>持ち物</b>：水あそび用オムツ・着替え・サンダル・大きめタオル。</li>
+            <li>📅 <b>開設</b>：例年 夏のみ。その年の期間は毎週の通信でお知らせします。</li>
+          </ul>
+        </div>
       </div>
       <div class="spot">
         <div class="name">小金井公園 わき水広場</div>
@@ -176,6 +199,15 @@
         <div class="access">花小金井から近い／プラネタリウム・実験イベント</div>
         <div class="desc">世界最大級のプラネタリウム。0歳から入れる回もあり、下の子連れでも安心。涼しくて雨の日の鉄板です。</div>
         <div class="ages">👶 ○　🧒 <b>◎</b>　🎒 <b>◎</b></div>
+        <div class="localtip">
+          <div class="lt-h">地元メモ</div>
+          <ul>
+            <li>🎟 <b>プラネタリウム</b>：個人は当日館内で観覧券（先着）。着いたらまず券を確保。</li>
+            <li>🕒 <b>混雑</b>：雨の日・長期休みは混む。開館直後が動きやすい。</li>
+            <li>👶 <b>下の子</b>：0歳から入れる回もあり（開催日は要確認）。</li>
+            <li>🧥 <b>メモ</b>：館内は涼しめ。上着が一枚あると安心。</li>
+          </ul>
+        </div>
       </div>
       <div class="spot">
         <div class="name">イオンモール東久留米</div>
@@ -224,12 +256,30 @@
         <div class="access">花小金井エリアの大定番／無料（一部施設は有料）</div>
         <div class="desc">広い芝生・大型遊具・ふわふわドーム、江戸東京たてもの園も併設。春は桜の名所で、お花見にも。</div>
         <div class="ages">👶 ○　🧒 <b>◎</b>　🎒 <b>◎</b></div>
+        <div class="localtip">
+          <div class="lt-h">地元メモ</div>
+          <ul>
+            <li>🕒 <b>混雑</b>：桜の季節と連休はかなり混む。開園直後か夕方がゆったり。</li>
+            <li>🅿️ <b>駐車場</b>：ピーク日は満車になりやすい。電車＋バスか朝早めが安心。</li>
+            <li>🎡 <b>ねらい目</b>：ふわふわドーム・大型遊具が幼児〜小学生に人気。</li>
+            <li>🎒 <b>持ち物</b>：レジャーシート・帽子・水分。広いのでベビーカー推奨。</li>
+          </ul>
+        </div>
       </div>
       <div class="spot">
         <div class="name">国営 昭和記念公園（立川）</div>
         <div class="access">電車・車で／多摩最大級</div>
         <div class="desc">原っぱ・水遊び・サイクリング・季節の花。1日じゃ足りないくらい広いので、目的を絞って。</div>
         <div class="ages">👶 ○　🧒 <b>◎</b>　🎒 <b>◎</b></div>
+        <div class="localtip">
+          <div class="lt-h">地元メモ</div>
+          <ul>
+            <li>🎫 <b>入園</b>：有料（子ども無料あり）。広いのでゲートと目的を先に決める。</li>
+            <li>🚲 <b>移動</b>：園内は広大。レンタサイクルやベビーカーがあると楽。</li>
+            <li>💧 <b>夏</b>：水遊び広場が人気。着替え持参で。</li>
+            <li>🕒 <b>混雑</b>：花火など大イベント日は激混み。普段の日はのびのび。</li>
+          </ul>
+        </div>
       </div>
       <div class="spot">
         <div class="name">井の頭恩賜公園（武蔵野・吉祥寺）</div>
@@ -248,6 +298,15 @@
         <div class="access">電車・車で</div>
         <div class="desc">広くて坂は多めですがベビーカーOK。ライオンバスや昆虫館が人気。歩く距離が長いので休憩こまめに。</div>
         <div class="ages">👶 ○　🧒 <b>◎</b>　🎒 <b>◎</b></div>
+        <div class="localtip">
+          <div class="lt-h">地元メモ</div>
+          <ul>
+            <li>⛰ <b>坂道</b>：歩く距離が長い。抱っこ紐＋ベビーカー両方あると安心。</li>
+            <li>🕒 <b>時間</b>：動物が活発なのは午前中。開園直後がおすすめ。</li>
+            <li>🚌 <b>ライオンバス</b>：人気で待つことも。早めに乗るのがコツ。</li>
+            <li>🎒 <b>持ち物</b>：日陰の少ない道も。帽子・水分をしっかり。</li>
+          </ul>
+        </div>
       </div>
       <div class="spot">
         <div class="name">井の頭自然文化園（武蔵野・吉祥寺）</div>
@@ -272,6 +331,15 @@
         <div class="access">車で40〜50分ほど</div>
         <div class="desc">屋内ドームは全天候型＝猛暑・雨の日の切り札。ベビールームが充実していて小さい子連れも安心。</div>
         <div class="ages">👶 <b>◎</b>　🧒 <b>◎</b>　🎒 <b>◎</b></div>
+        <div class="localtip">
+          <div class="lt-h">地元メモ</div>
+          <ul>
+            <li>🌧 <b>屋内ドーム</b>：全天候で猛暑・雨の日の切り札。</li>
+            <li>🎟 <b>チケット</b>：日付指定の変動制で当日券なしのことが多い。事前に確認・購入を。</li>
+            <li>👶 <b>設備</b>：ベビールーム完備。水あそび用オムツ＋水着でOK。</li>
+            <li>🕒 <b>混雑</b>：夏の土日は激混み。開場前着か平日が狙い目。</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
