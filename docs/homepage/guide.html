@@ -57,6 +57,13 @@
   .maplink:hover { text-decoration: underline; }
   .official { margin-left: .9rem; color: var(--marigold); }
   .official::before { content: ""; }
+  .places { margin: .55rem 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .45rem; }
+  .places li { font-size: .9rem; color: var(--ink-soft); line-height: 1.55; }
+  .places .pn { font-weight: 700; color: var(--ink); }
+  .places a { font-size: .8rem; font-weight: 700; text-decoration: none; margin-left: .5rem; white-space: nowrap; }
+  .places a.m { color: var(--sky-deep); }
+  .places a.o { color: var(--marigold); }
+  .places a:hover { text-decoration: underline; }
   .spot .desc { font-size: .96rem; color: var(--ink-soft); margin-top: .35rem; }
   .spot .ages { margin-top: .5rem; font-family: var(--maru); font-weight: 700; font-size: .86rem; color: var(--ink-faint); display: inline-flex; gap: .6rem; }
   .spot .ages b { color: var(--leaf); }
@@ -224,15 +231,35 @@
         <div class="ages">👶 <b>◎</b>　🧒 <b>◎</b>　🎒 ○</div>
       </div>
       <div class="spot">
-        <div class="name">図書館のおはなし会（小平市立・中央図書館 ほか）</div>
-        <div class="access">各図書館／無料</div>
-        <div class="desc">絵本の読み聞かせや手あそび。絵本デビューにぴったり。回によって対象年齢が分かれています。</div>
+        <div class="name">図書館のおはなし会（小平市立）</div>
+        <div class="access">各図書館／無料・申込不要のことが多い</div>
+        <div class="desc">絵本の読み聞かせや手あそび。絵本デビューにぴったり。回ごとに対象年齢が分かれています。開催日は「おはなし会」ページで確認できます。</div>
+        <a class="maplink official" href="https://library.kodaira.ed.jp/viewer/info.html?id=74" target="_blank" rel="noopener">🔗 おはなし会の日程（公式）</a>
+        <ul class="places">
+          <li><span class="pn">花小金井図書館</span>（花小金井1-8-1・駅近く）
+            <a class="m" href="https://www.google.com/maps/search/?api=1&query=小平市立花小金井図書館" target="_blank" rel="noopener">📍地図</a>
+            <a class="o" href="https://library.kodaira.ed.jp/viewer/info.html?id=34" target="_blank" rel="noopener">🔗公式</a></li>
+          <li><span class="pn">仲町図書館（なかまちテラス）</span>（小平市仲町）
+            <a class="m" href="https://www.google.com/maps/search/?api=1&query=なかまちテラス 仲町図書館" target="_blank" rel="noopener">📍地図</a>
+            <a class="o" href="https://library.kodaira.ed.jp/viewer/info.html?id=33" target="_blank" rel="noopener">🔗公式</a></li>
+          <li><span class="pn">中央図書館</span>（小平市小川町）
+            <a class="m" href="https://www.google.com/maps/search/?api=1&query=小平市立中央図書館" target="_blank" rel="noopener">📍地図</a>
+            <a class="o" href="https://library.kodaira.ed.jp/" target="_blank" rel="noopener">🔗公式</a></li>
+        </ul>
         <div class="ages">👶 <b>◎</b>　🧒 <b>◎</b>　🎒 ○</div>
       </div>
       <div class="spot">
-        <div class="name">児童館・子育てひろば（各市）</div>
-        <div class="access">お住まいの市で／無料</div>
-        <div class="desc">無料で遊べて、親子プログラムも。雨の日の“いつもの居場所”として頼れます。</div>
+        <div class="name">児童館・子育てひろば</div>
+        <div class="access">無料／未就学〜小学生</div>
+        <div class="desc">無料で遊べて、親子プログラムも。雨の日の“いつもの居場所”に。花小金井エリアなら花小金井南児童館が近くて頼れます。</div>
+        <ul class="places">
+          <li><span class="pn">花小金井南児童館</span>（花小金井南町3-3-17・花小金井駅南口 徒歩約10分／ひょうたん池公園すぐ）
+            <a class="m" href="https://www.google.com/maps/search/?api=1&query=花小金井南児童館" target="_blank" rel="noopener">📍地図</a>
+            <a class="o" href="https://www.city.kodaira.tokyo.jp/kurashi/000/000180.html" target="_blank" rel="noopener">🔗公式</a></li>
+          <li><span class="pn">小平市の児童館 一覧</span>（市内ぜんぶ）
+            <a class="o" href="https://www.city.kodaira.tokyo.jp/kurashi/003/003829.html" target="_blank" rel="noopener">🔗公式</a></li>
+          <li><span class="pn">近隣市</span>（西東京・東久留米・東村山・小金井）は各市公式で「児童館／子育てひろば」を検索</li>
+        </ul>
         <div class="ages">👶 <b>◎</b>　🧒 <b>◎</b>　🎒 ○</div>
       </div>
       <div class="spot">
