@@ -4,6 +4,7 @@ nickname: 谷裏ファミリー
 home_station: 花小金井(西武新宿線)
 home_city: 東京都小平市
 transport: [walk, bike, train, car]
+plan: paid
 coverage: tama_plus_tokyo
 camp_ok: true
 camp_drive_hours: 2.5
@@ -17,14 +18,15 @@ diaper_care: true
 weekday_ok: true
 budget: mixed
 frequency: 2x_week
-delivery: line
-contact: "LINE公式アカウント(ぼんぼやーじゅ通信)にブロードキャスト"
+delivery: manual
+contact: "オーナー本人。手動で確認(ドッグフーディング)。カレンダーは共有「ぼんぼやーじゅ・おすすめ」を購読"
 active: true
 ---
 
 ## 自由メモ
-- オーナー(本人)のプロフィール。詳細背景は `profile/family.md` を参照。
+- オーナー(本人)のプロフィール。**有料版のドッグフーディング用**(最初の `plan: paid`)。詳細背景は `profile/family.md` を参照。
 - 花小金井駅南側在住。近場は徒歩・自転車、遠出・キャンプは車。
 - 2歳連れのため、ベビーカー可否・混雑・オムツ/水遊びパンツ規定を重視。
 - 帰宅が遅くなりすぎない近場・短時間の花火が好み。
-- 配信は LINE(週2: 水・土)。
+- 配信: `delivery: manual`(週2: 水・土)。有料版レポートは `reports/taniura-hanakoganei/YYYY-MM-DD.md` に生成し、まず自分で通しチェックする(`docs/paid-delivery.md`)。
+- ※無料通信(ぼんぼやーじゅ通信)は別途 LINE で購読中。paid はその上の「自分向けに動く」層。
