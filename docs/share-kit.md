@@ -74,7 +74,7 @@ https://bonvoya.nicomaru.tokyo/
 ## 3. Instagram(妻アカウント)
 
 ### 画像素材
-- ストーリーズ画像(縦1080×1920): `docs/homepage/assets/ig-story.png`(公園写真＋QR＋ガイドプレゼント)。フィード投稿にもそのまま使える。
+- ストーリーズ画像(縦1080×1920): `docs/homepage/assets/ig-story.png`(公園写真＋ガイドプレゼント告知／リンク誘導・QRなし)。フィード投稿にもそのまま使える。
 
 ### ストーリーズの貼り方
 1. `ig-story.png` をストーリーズにアップ。
