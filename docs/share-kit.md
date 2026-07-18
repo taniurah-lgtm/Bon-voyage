@@ -4,7 +4,7 @@
 
 ## 主要リンク
 - 友だち追加(LINE): https://lin.ee/YtcfjnX
-- おでかけ帖(登録フック): https://bonvoya.nicomaru.tokyo/guide.html
+- おでかけガイド(登録フック): https://bonvoya.nicomaru.tokyo/guide.html
 - ホームページ: https://bonvoya.nicomaru.tokyo/
 - 応援(note): https://note.com/bon_voyage_mail/membership
 - 友だち追加カード(印刷用A6): https://bonvoya.nicomaru.tokyo/card.html
@@ -25,7 +25,7 @@ https://bonvoya.nicomaru.tokyo/
 
 ▼受け取るならLINEで友だち追加（無料）
 https://lin.ee/YtcfjnX
-※いま追加で「花小金井 子連れおでかけ帖」(地元メモ＆地図つき)ももらえるよ
+※いま追加で「花小金井 子連れおでかけガイド」(地元メモ＆地図つき)ももらえるよ
 
 合わなかったらブロックでOK。気軽にどうぞ🙌
 ```
@@ -37,7 +37,7 @@ https://lin.ee/YtcfjnX
 
 ▼どんな内容か見てみて（ホームページ）
 https://bonvoya.nicomaru.tokyo/
-▼LINEで友だち追加（無料・「おでかけ帖」プレゼント付き）
+▼LINEで友だち追加（無料・「おでかけガイド」プレゼント付き）
 https://lin.ee/YtcfjnX
 ```
 
@@ -48,9 +48,9 @@ https://lin.ee/YtcfjnX
 はじめまして、「ぼんぼやーじゅ通信」です🎈
 友だち追加ありがとうございます！
 
-さっそく、お約束の【花小金井 子連れおでかけ帖】をどうぞ👇
+さっそく、お約束の【花小金井 子連れおでかけガイド】をどうぞ👇
 地元メモ＆地図つきで、“間違いない”おでかけ先をまとめました。スマホに保存して使ってくださいね。
-▼花小金井 子連れおでかけ帖
+▼花小金井 子連れおでかけガイド
 https://bonvoya.nicomaru.tokyo/guide.html
 
 これから毎週水曜に、花小金井まわりの週末おでかけ情報（天気に合わせた“今週これ”や、連休の予約先取りも）をお届けします。
