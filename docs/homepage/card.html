@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>友だち追加カード｜ぼんぼやーじゅ通信</title>
+<style>
+  :root {
+    --ink: #34434C; --ink-soft: #63727B;
+    --sky: #4FA3C4; --sky-deep: #2C7C9E;
+    --marigold: #EBA24A;
+    --line-green: #06C755;
+    --maru: "Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN W4","Yu Gothic","游ゴシック","Noto Sans JP","Segoe UI",sans-serif;
+    --body: "Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","游ゴシック","Noto Sans JP","Segoe UI",Meiryo,sans-serif;
+    --script: Georgia,"Times New Roman",serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #E7F0F3; font-family: var(--body); color: var(--ink); display: flex; justify-content: center; padding: 24px 16px; -webkit-font-smoothing: antialiased; font-feature-settings: "palt" 1; }
+
+  .card { width: 105mm; min-height: 148mm; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(52,67,76,.18); display: flex; flex-direction: column; }
+
+  .top { background: linear-gradient(150deg, var(--sky) 0%, var(--sky-deep) 100%); color: #fff; padding: 7mm 8mm 6mm; text-align: center; }
+  .eyebrow { font-family: var(--script); font-style: italic; font-size: 3.4mm; opacity: .92; }
+  .brand { font-family: var(--maru); font-weight: 800; font-size: 6mm; letter-spacing: .04em; margin-top: .5mm; }
+  .brand-sub { font-size: 3mm; opacity: .95; margin-top: 1mm; }
+
+  .body { padding: 6mm 8mm 4mm; text-align: center; flex: 1; display: flex; flex-direction: column; }
+  .head { font-family: var(--maru); font-weight: 800; font-size: 5.2mm; line-height: 1.45; color: var(--ink); }
+  .head .hl { color: var(--marigold); }
+  .gift { display: inline-block; margin: 2.5mm auto 0; font-family: var(--maru); font-weight: 800; font-size: 3.4mm; color: var(--sky-deep); background: #E9F4F7; border: 1px solid #cfe6ee; border-radius: 999px; padding: 1.6mm 4mm; }
+
+  .qr-wrap { margin: 4mm auto 2mm; }
+  .qr-box { width: 42mm; height: 42mm; margin: 0 auto; background: #fff; border: 1px solid #e6e0d4; border-radius: 8px; padding: 2.5mm; box-shadow: 0 2px 10px rgba(52,67,76,.08); }
+  .qr-box img { width: 100%; height: 100%; display: block; }
+  .qr-cta { margin-top: 2.5mm; display: inline-flex; align-items: center; gap: 1.5mm; font-family: var(--maru); font-weight: 800; font-size: 3.6mm; color: #fff; background: var(--line-green); border-radius: 999px; padding: 2mm 5mm; }
+  .qr-cta svg { width: 4mm; height: 4mm; }
+
+  .bullets { margin: 4mm 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 1.6mm; text-align: left; }
+  .bullets li { font-size: 3.3mm; color: var(--ink-soft); display: flex; gap: 2mm; }
+  .bullets li b { color: var(--ink); font-weight: 700; }
+  .bullets .ic { color: var(--marigold); flex: none; }
+
+  .foot { margin-top: auto; padding-top: 4mm; }
+  .hills { display: block; width: 100%; height: 12mm; }
+  .url { text-align: center; font-family: var(--maru); font-weight: 700; font-size: 3mm; color: var(--sky-deep); padding: 2mm 0 4mm; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .card { box-shadow: none; border: 1px solid #ddd; border-radius: 0; }
+    @page { margin: 10mm; }
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="top">
+    <div class="eyebrow">Bon Voyage,</div>
+    <div class="brand">ぼんぼやーじゅ通信</div>
+    <div class="brand-sub">花小金井まわりの 週末おでかけ便</div>
+  </div>
+
+  <div class="body">
+    <div class="head">
+      未就学児・小学生のいるご家庭へ🎈<br>
+      <span class="hl">友だち追加</span>で、週末のおでかけ情報を無料でお届け
+    </div>
+    <div class="gift">🎁 いま追加で「花小金井 子連れおでかけ帖」プレゼント</div>
+
+    <div class="qr-wrap">
+      <div class="qr-box"><img src="assets/line-qr.png" alt="LINE友だち追加QRコード"></div>
+      <div class="qr-cta">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.9 3 2.75 6.36 2.75 10.5c0 3.7 3.3 6.8 7.78 7.4.3.06.71.2.81.46.09.24.06.6.03.85l-.13.79c-.04.24-.19.93.82.51 1.01-.42 5.45-3.21 7.44-5.5 1.37-1.5 2.02-3.03 2.02-4.51C21.25 6.36 17.1 3 12 3Z"/></svg>
+        LINEで友だち追加（無料）
+      </div>
+    </div>
+
+    <ul class="bullets">
+      <li><span class="ic">✔</span><span>毎週水曜に <b>週末のおでかけ情報</b>をお届け</span></li>
+      <li><span class="ic">✔</span><span>天気に合わせた“<b>今週これ</b>”＆連休の予約先取り</span></li>
+      <li><span class="ic">✔</span><span>お祭り・花火・水あそび・科学館・電車おでかけ など</span></li>
+    </ul>
+  </div>
+
+  <div class="foot">
+    <svg class="hills" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,34 Q90,14 200,28 T400,26 L400,60 L0,60 Z" fill="#CFE7D0"/>
+      <path d="M0,44 Q120,28 250,40 T400,40 L400,60 L0,60 Z" fill="#A6CE8B"/>
+    </svg>
+    <div class="url">ホームページ → bonvoya.nicomaru.tokyo</div>
+  </div>
+</div>
+
+</body>
+</html>
