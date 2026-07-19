@@ -62,11 +62,23 @@ const cards = E.map(([disp, dates, name, emoji, mapq, off, note]) => {
   return `      <div class="ev"><div class="when">${esc(disp)}</div><div class="nm">${emoji} ${esc(name)}</div><div class="desc">${esc(note)}</div><div class="links">${links}</div></div>`;
 }).join('\n');
 
-// 暗号化する中身（カレンダー＋バックナンバー＋投稿マップ）
+// 連休さきどり（キャンプ偏重にしない・テーマ別）
+const renkyu = `
+  <h2 class="sec">🍁 連休さきどり（9/19〜23 シルバーウィーク）</h2>
+  <p class="sec-note">キャンプ以外も。花小金井から日帰り〜1泊で行ける秋の連休を、テーマ別に。人気の宿・体験は早めに。</p>
+  <div class="ev"><div class="nm">🍇 秋の味覚狩り（9月はぶどう最盛期）</div><div class="desc">小松沢レジャー農園（秩父・横瀬／西武線一本）＝ぶどう狩り＋さつま芋掘り（芋は9月下旬〜）＋マスつかみ・体験。屋根つき体験多めで2歳連れも◎。勝沼のぶどう狩り（山梨・車orバスツアー）＝シャインマスカット最盛期。</div><div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&query=小松沢レジャー農園" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.enjoytokyo.jp/feature/budougari/" target="_blank" rel="noopener">🔗 ぶどう狩り特集</a></div></div>
+  <div class="ev"><div class="nm">🏞 高原で涼む・自然（1泊向き）</div><div class="desc">清里/八ヶ岳・富士五湖ほか。標高が高く涼しく、牧場で動物ふれあいも。人気宿は連休ぶんが早く埋まるので早めに。</div></div>
+  <div class="ev"><div class="nm">♨ 子連れ温泉（1泊・のんびり）</div><div class="desc">秩父/奥多摩/箱根の子連れ歓迎の宿。部屋食・貸切風呂だと2歳連れも安心。連休は満室が早いので今のうちに候補押さえを。</div></div>
+  <div class="ev"><div class="nm">🎠 雨でも安心のテーマパーク・室内</div><div class="desc">サンリオピューロランド（多摩・全天候の室内）は天気に左右されない。西武園ゆうえんち（近い）は大火祭りの花火が9/19〜23も開催。</div><div class="links"><a class="lk off" href="https://www.puroland.jp/" target="_blank" rel="noopener">🔗 ピューロランド</a><a class="lk off" href="https://www.seibuen-amusement-park.jp/2026summer/" target="_blank" rel="noopener">🔗 西武園</a></div></div>
+  <div class="ev"><div class="nm">🏕 キャンプ（受付中）</div><div class="desc">C&C山中湖ほか。9月分は受付中（6/30〜）。土曜は人気なので早めに、日曜泊やキャンセル拾いも。</div><div class="links"><a class="lk off" href="https://www.camp-cabins.com/yamanakako/" target="_blank" rel="noopener">🔗 公式</a></div></div>
+  <p class="note">※営業日・料金・味覚狩りの解禁時期は変わります。おでかけ前に各公式でご確認を。</p>`;
+
+// 暗号化する中身（カレンダー＋連休さきどり＋バックナンバー＋投稿マップ）
 const CONTENT = `
   <h2 class="sec">📅 おでかけカレンダー</h2>
   <p class="sec-note">花小金井まわりの先の予定を日付順に。行きたいものを「カレンダーに追加」で保存できます。</p>
 ${cards}
+${renkyu}
 
   <h2 class="sec">📮 通信バックナンバー</h2>
   <div class="card"><ul><li>最新号は毎週水曜に配信（LINE）</li><li>過去号もこのページで順次公開していきます</li></ul></div>
