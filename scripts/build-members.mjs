@@ -66,7 +66,7 @@ const cards = E.map(([disp, dates, name, emoji, mapq, off, note]) => {
 // 暗号化する中身（カレンダー＋バックナンバー＋投稿マップ）
 const CONTENT = `
   <h2 class="sec">📅 おでかけカレンダー</h2>
-  <p class="sec-note">花小金井まわりの先の予定を日付順に。行きたいものを「カレンダーに追加」で保存（保存されるのはあなたのカレンダーだけ・他の人には見えません）。</p>
+  <p class="sec-note">花小金井まわりの先の予定を日付順に。行きたいものを「カレンダーに追加」で保存できます。</p>
 ${cards}
 
   <h2 class="sec">📮 通信バックナンバー</h2>
@@ -130,14 +130,14 @@ const page = `<!doctype html>
 <header class="h"><div class="h-in">
   <div class="eyebrow">Members</div>
   <h1>ぼんぼやーじゅ通信・会員ページ</h1>
-  <p class="sub">応援サポーター（と身内）向けのページです。合言葉を入れてご覧ください。</p>
+  <p class="sub">応援サポーター向けのページです。合言葉を入れてご覧ください。</p>
 </div></header>
 
 <main class="wrap">
   <div id="gate" class="gate">
     <h2>🔑 合言葉を入力</h2>
-    <p>会員の方・身内の方にお伝えした合言葉を入れてください。</p>
-    <input id="pw" type="text" inputmode="text" autocomplete="off" autocapitalize="none" autocorrect="off" placeholder="合言葉（ひらがな）" autofocus>
+    <p>会員の方にお伝えした合言葉を入れてください。</p>
+    <input id="pw" type="text" inputmode="text" autocomplete="off" autocapitalize="none" autocorrect="off" placeholder="合言葉" autofocus>
     <button id="go">ひらく</button>
     <div id="err" class="err"></div>
     <div class="hint">合言葉が分からない方は、LINEでお問い合わせください。</div>
