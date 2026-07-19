@@ -6,48 +6,38 @@
 <meta name="robots" content="noindex, nofollow">
 <title>会員ページ｜ぼんぼやーじゅ通信</title>
 <style>
-  :root {
-    --ground:#FBFAF5;--surface:#FFFFFF;--surface-2:#F5F2EA;--ink:#34434C;--ink-soft:#63727B;--ink-faint:#97A2AA;
-    --sky:#4FA3C4;--sky-deep:#2C7C9E;--sky-wash:#E9F4F7;--marigold:#EBA24A;--marigold-wash:#FBEEDA;
-    --leaf:#74AE71;--line:#ECE7DB;--line-strong:#DCD5C6;--radius:18px;
+  :root {--ground:#FBFAF5;--surface:#FFFFFF;--surface-2:#F5F2EA;--ink:#34434C;--ink-soft:#63727B;--ink-faint:#97A2AA;
+    --sky:#4FA3C4;--sky-deep:#2C7C9E;--sky-wash:#E9F4F7;--marigold:#EBA24A;--marigold-wash:#FBEEDA;--leaf:#74AE71;
+    --line:#ECE7DB;--line-strong:#DCD5C6;--radius:18px;
     --maru:"Hiragino Maru Gothic ProN","Yu Gothic","Noto Sans JP","Segoe UI",sans-serif;
     --body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP","Segoe UI",Meiryo,sans-serif;
-    --script:Georgia,"Times New Roman",serif;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {--ground:#131F28;--surface:#1A2831;--surface-2:#21333D;--ink:#ECF2F4;--ink-soft:#AAB9C1;--ink-faint:#7B8C95;
-      --sky:#6FBAD9;--sky-deep:#9AD4EA;--sky-wash:#1D3944;--marigold:#F0AE5E;--marigold-wash:#362F1F;--leaf:#8FC489;--line:#293B45;--line-strong:#38505C;}
-  }
+    --script:Georgia,"Times New Roman",serif;}
+  @media (prefers-color-scheme: dark){:root{--ground:#131F28;--surface:#1A2831;--surface-2:#21333D;--ink:#ECF2F4;--ink-soft:#AAB9C1;--ink-faint:#7B8C95;--sky:#6FBAD9;--sky-deep:#9AD4EA;--sky-wash:#1D3944;--marigold:#F0AE5E;--marigold-wash:#362F1F;--leaf:#8FC489;--line:#293B45;--line-strong:#38505C;}}
   *{box-sizing:border-box;}
   body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);line-height:1.8;-webkit-font-smoothing:antialiased;font-feature-settings:"palt" 1;}
   .wrap{max-width:44rem;margin:0 auto;padding:0 1.25rem;}
   a{color:var(--sky-deep);}
   header.h{background:linear-gradient(160deg,var(--sky-wash),var(--marigold-wash));border-bottom:1px solid var(--line);}
-  .h-in{max-width:44rem;margin:0 auto;padding:2.4rem 1.25rem 1.8rem;}
+  .h-in{max-width:44rem;margin:0 auto;padding:2.2rem 1.25rem 1.6rem;}
   .eyebrow{font-family:var(--script);font-style:italic;color:var(--marigold);font-size:1rem;}
-  h1{font-family:var(--maru);font-weight:800;font-size:1.7rem;margin:.2rem 0 .4rem;letter-spacing:.02em;}
-  .h-in .sub{color:var(--ink-soft);font-size:.95rem;margin:0;}
-  main{padding:1.8rem 0 1rem;}
-  .issue-head{display:flex;align-items:baseline;gap:.6rem;margin:0 0 .3rem;}
-  .issue-head h2{font-family:var(--maru);font-weight:800;font-size:1.3rem;margin:0;}
-  .badge{font-size:.72rem;font-weight:800;color:#fff;background:var(--marigold);border-radius:999px;padding:.15rem .6rem;}
-  .weather{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:.9rem 1.05rem;margin:.7rem 0 1.4rem;font-size:.95rem;color:var(--ink-soft);}
-  .ev{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.05rem 1.15rem;margin-bottom:.9rem;box-shadow:0 2px 16px rgba(52,67,76,.05);}
-  .ev .nm{font-family:var(--maru);font-weight:800;font-size:1.08rem;}
-  .ev .when{color:var(--sky-deep);font-size:.88rem;font-weight:700;margin-top:.15rem;}
-  .ev .desc{font-size:.95rem;color:var(--ink-soft);margin-top:.4rem;}
-  .ev .baby{font-size:.86rem;color:var(--ink-faint);margin-top:.35rem;}
-  .links{margin-top:.7rem;display:flex;flex-wrap:wrap;gap:.5rem;}
-  .lk{display:inline-flex;align-items:center;gap:.3rem;font-size:.82rem;font-weight:700;text-decoration:none;border-radius:999px;padding:.4rem .8rem;border:1px solid var(--line-strong);}
+  h1{font-family:var(--maru);font-weight:800;font-size:1.6rem;margin:.2rem 0 .4rem;letter-spacing:.02em;}
+  .h-in .sub{color:var(--ink-soft);font-size:.93rem;margin:0;}
+  main{padding:1.6rem 0 1rem;}
+  h2.sec{font-family:var(--maru);font-weight:800;font-size:1.2rem;margin:1.8rem 0 .3rem;display:flex;align-items:center;gap:.4rem;}
+  .sec-note{color:var(--ink-soft);font-size:.9rem;margin:0 0 1rem;}
+  .ev{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:.95rem 1.1rem;margin-bottom:.8rem;box-shadow:0 2px 14px rgba(52,67,76,.05);}
+  .ev .when{color:var(--sky-deep);font-size:.82rem;font-weight:800;}
+  .ev .nm{font-family:var(--maru);font-weight:800;font-size:1.04rem;margin-top:.1rem;}
+  .ev .desc{font-size:.92rem;color:var(--ink-soft);margin-top:.3rem;}
+  .links{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.45rem;}
+  .lk{display:inline-flex;align-items:center;gap:.25rem;font-size:.8rem;font-weight:700;text-decoration:none;border-radius:999px;padding:.35rem .75rem;border:1px solid var(--line-strong);}
   .lk.cal{background:var(--sky-deep);color:#fff;border-color:var(--sky-deep);}
   .lk.map{color:var(--sky-deep);background:var(--surface);}
   .lk.off{color:var(--marigold);background:var(--surface);}
-  .facility{border-style:dashed;}
-  h3.sec{font-family:var(--maru);font-weight:800;font-size:1.05rem;margin:1.8rem 0 .7rem;color:var(--ink);}
-  .back{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.15rem;}
-  .back ul{margin:.2rem 0 0;padding-left:1.1rem;}
-  .back li{font-size:.95rem;margin:.2rem 0;}
-  .note{font-size:.82rem;color:var(--ink-faint);margin-top:.5rem;}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.15rem;}
+  .card ul{margin:.2rem 0 0;padding-left:1.1rem;} .card li{font-size:.94rem;margin:.2rem 0;}
+  .soon{background:var(--surface-2);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:1.1rem 1.2rem;color:var(--ink-soft);}
+  .note{font-size:.82rem;color:var(--ink-faint);}
   footer{color:var(--ink-faint);font-size:.8rem;text-align:center;padding:2rem 1.25rem 3rem;line-height:1.7;}
   .fmark{font-family:var(--maru);font-weight:800;color:var(--ink-soft);}
 </style>
@@ -56,75 +46,124 @@
 <header class="h"><div class="h-in">
   <div class="eyebrow">Members</div>
   <h1>ぼんぼやーじゅ通信・会員ページ</h1>
-  <p class="sub">応援サポーター向け。今週のおすすめを📅ワンタップでご自分のカレンダーに保存できます（バックナンバーも下に）。</p>
+  <p class="sub">気になった予定は「📅 カレンダーに追加」でご自分のカレンダーへ。あなた向けの“今週これ”は毎週のLINEでお届けします。</p>
 </div></header>
 
 <main class="wrap">
-  <div class="issue-head"><h2>7/22(水)号</h2><span class="badge">今週号</span></div>
-  <div class="weather">■今週末の天気：7/25(土)晴のち雨・33℃(降水50%)／7/26(日)曇一時雨・33℃(降水60%)。両日蒸し暑いので雨具＋水分・休憩を。土曜夜の花火は雨次第。</div>
 
-  <div class="ev">
-    <div class="nm">🎆 西武園ゆうえんち 大火祭り（花火ショー）</div>
-    <div class="when">7/25(土) 19:30〜（約6分）</div>
-    <div class="desc">近くて短時間、ぐずってもすぐ撤収の“短い花火”。至近距離の迫力なのに約6分。萩山乗換20〜25分。要入園料。土曜夜は雨50%なので当日夕方に運行状況チェックを。</div>
-    <div class="baby">👶 ベビーカー可・オムツ替え/授乳室あり。音大きめは抱っこで。</div>
-    <div class="links">
-      <a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1+%E5%A4%A7%E7%81%AB%E7%A5%AD%E3%82%8A%EF%BC%88%E8%8A%B1%E7%81%AB%E3%82%B7%E3%83%A7%E3%83%BC%EF%BC%89&amp;dates=20260725T193000%2F20260725T200000&amp;ctz=Asia%2FTokyo&amp;location=%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1%EF%BC%88%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1%E9%A7%85%EF%BC%89&amp;details=%E8%8A%B1%E7%81%AB%E3%82%B7%E3%83%A7%E3%83%BC+19%3A30%E3%80%9C%E7%B4%846%E5%88%86%E3%80%82%E8%A6%81%E5%85%A5%E5%9C%92%E6%96%99%E3%80%82%E8%90%A9%E5%B1%B1%E4%B9%97%E6%8F%9B%E3%81%A7%E7%B4%8420%E3%80%9C25%E5%88%86%E3%80%82%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1%0A%F0%9F%94%97+https%3A%2F%2Fwww.seibuen-amusement-park.jp%2F2026summer%2F%0A%F0%9F%91%B6%E3%83%99%E3%83%93%E3%83%BC%E3%82%AB%E3%83%BC%E5%8F%AF%E3%83%BB%E3%82%AA%E3%83%A0%E3%83%84%E6%9B%BF%E3%81%88%2F%E6%8E%88%E4%B9%B3%E5%AE%A4%E3%81%82%E3%82%8A%E3%80%82%E9%9F%B3%E5%A4%A7%E3%81%8D%E3%82%81%E3%81%AF%E6%8A%B1%E3%81%A3%E3%81%93%E3%81%A7%E3%80%82%0A%E2%9A%A07%2F25%E3%81%AF%E9%9B%A850%25%E3%80%82%E5%BD%93%E6%97%A5%E5%A4%95%E6%96%B9%E3%81%AB%E9%81%8B%E8%A1%8C%E7%8A%B6%E6%B3%81%E3%82%92%E7%A2%BA%E8%AA%8D%E3%80%82" target="_blank" rel="noopener">📅 カレンダーに追加</a>
-      <a class="lk map" href="https://www.google.com/maps/search/?api=1&query=西武園ゆうえんち" target="_blank" rel="noopener">📍 地図</a>
-      <a class="lk off" href="https://www.seibuen-amusement-park.jp/2026summer/" target="_blank" rel="noopener">🔗 公式</a>
-    </div>
-  </div>
+  <h2 class="sec">📅 おでかけカレンダー</h2>
+  <p class="sec-note">花小金井まわりの先の予定を日付順に。行きたいものを「カレンダーに追加」で保存（保存されるのはあなたのカレンダーだけ・他の人には見えません）。</p>
+      <div class="ev">
+        <div class="when">7/22(水)・23(木) 17:00〜</div>
+        <div class="nm">🏮 神楽坂まつり ほおずき市</div>
+        <div class="desc">ほおずき市と屋台。夕方の17時台が狙い目。🧒○ 🎒○</div>
+        <div class="links"><a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E7%A5%9E%E6%A5%BD%E5%9D%82%E3%81%BE%E3%81%A4%E3%82%8A+%E3%81%BB%E3%81%8A%E3%81%9A%E3%81%8D%E5%B8%82&amp;dates=20260722T170000%2F20260722T210000&amp;ctz=Asia%2FTokyo&amp;location=%E7%A5%9E%E6%A5%BD%E5%9D%82&amp;details=%E3%81%BB%E3%81%8A%E3%81%9A%E3%81%8D%E5%B8%82%E3%81%A8%E5%B1%8B%E5%8F%B0%E3%80%82%E5%A4%95%E6%96%B9%E3%81%AE17%E6%99%82%E5%8F%B0%E3%81%8C%E7%8B%99%E3%81%84%E7%9B%AE%E3%80%82%F0%9F%A7%92%E2%97%8B+%F0%9F%8E%92%E2%97%8B%0A%F0%9F%94%97+https%3A%2F%2Fsummer.walkerplus.com%2Fodekake%2Fdetail_e%2Far0313e71549%2F%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E7%A5%9E%E6%A5%BD%E5%9D%82" target="_blank" rel="noopener">📅 カレンダーに追加</a><a class="lk map" href="https://www.google.com/maps/search/?api=1&query=%E7%A5%9E%E6%A5%BD%E5%9D%82" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://summer.walkerplus.com/odekake/detail_e/ar0313e71549/" target="_blank" rel="noopener">🔗 公式</a></div>
+      </div>
+      <div class="ev">
+        <div class="when">7/25(土) 15:00〜</div>
+        <div class="nm">🚒 陸上自衛隊 小平駐屯地 納涼祭</div>
+        <div class="desc">働く車展示＋盆踊り。地元・無料・明るいうちに。👶○ 🧒◎ 🎒◎</div>
+        <div class="links"><a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E9%99%B8%E4%B8%8A%E8%87%AA%E8%A1%9B%E9%9A%8A+%E5%B0%8F%E5%B9%B3%E9%A7%90%E5%B1%AF%E5%9C%B0+%E7%B4%8D%E6%B6%BC%E7%A5%AD&amp;dates=20260725T150000%2F20260725T190000&amp;ctz=Asia%2FTokyo&amp;location=%E9%99%B8%E4%B8%8A%E8%87%AA%E8%A1%9B%E9%9A%8A%E5%B0%8F%E5%B9%B3%E9%A7%90%E5%B1%AF%E5%9C%B0&amp;details=%E5%83%8D%E3%81%8F%E8%BB%8A%E5%B1%95%E7%A4%BA%EF%BC%8B%E7%9B%86%E8%B8%8A%E3%82%8A%E3%80%82%E5%9C%B0%E5%85%83%E3%83%BB%E7%84%A1%E6%96%99%E3%83%BB%E6%98%8E%E3%82%8B%E3%81%84%E3%81%86%E3%81%A1%E3%81%AB%E3%80%82%F0%9F%91%B6%E2%97%8B+%F0%9F%A7%92%E2%97%8E+%F0%9F%8E%92%E2%97%8E%0A%F0%9F%94%97+https%3A%2F%2Fkodaira-tourism.com%2Fevent%2F3369%2F%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E9%99%B8%E4%B8%8A%E8%87%AA%E8%A1%9B%E9%9A%8A%E5%B0%8F%E5%B9%B3%E9%A7%90%E5%B1%AF%E5%9C%B0" target="_blank" rel="noopener">📅 カレンダーに追加</a><a class="lk map" href="https://www.google.com/maps/search/?api=1&query=%E9%99%B8%E4%B8%8A%E8%87%AA%E8%A1%9B%E9%9A%8A%E5%B0%8F%E5%B9%B3%E9%A7%90%E5%B1%AF%E5%9C%B0" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://kodaira-tourism.com/event/3369/" target="_blank" rel="noopener">🔗 公式</a></div>
+      </div>
+      <div class="ev">
+        <div class="when">7/25(土) 19:30〜</div>
+        <div class="nm">🎆 西武園ゆうえんち 大火祭り(花火)</div>
+        <div class="desc">至近距離の花火が約6分。近くて短時間・撤収ラク。要入園料。👶○ 🧒◎</div>
+        <div class="links"><a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1+%E5%A4%A7%E7%81%AB%E7%A5%AD%E3%82%8A%28%E8%8A%B1%E7%81%AB%29&amp;dates=20260725T193000%2F20260725T200000&amp;ctz=Asia%2FTokyo&amp;location=%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1&amp;details=%E8%87%B3%E8%BF%91%E8%B7%9D%E9%9B%A2%E3%81%AE%E8%8A%B1%E7%81%AB%E3%81%8C%E7%B4%846%E5%88%86%E3%80%82%E8%BF%91%E3%81%8F%E3%81%A6%E7%9F%AD%E6%99%82%E9%96%93%E3%83%BB%E6%92%A4%E5%8F%8E%E3%83%A9%E3%82%AF%E3%80%82%E8%A6%81%E5%85%A5%E5%9C%92%E6%96%99%E3%80%82%F0%9F%91%B6%E2%97%8B+%F0%9F%A7%92%E2%97%8E%0A%F0%9F%94%97+https%3A%2F%2Fwww.seibuen-amusement-park.jp%2F2026summer%2F%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1" target="_blank" rel="noopener">📅 カレンダーに追加</a><a class="lk map" href="https://www.google.com/maps/search/?api=1&query=%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.seibuen-amusement-park.jp/2026summer/" target="_blank" rel="noopener">🔗 公式</a></div>
+      </div>
+      <div class="ev">
+        <div class="when">7/25(土) 19:15〜</div>
+        <div class="nm">🎇 立川まつり 昭和記念公園花火</div>
+        <div class="desc">多摩最大級5,000発。2026は有料観覧席制(1,500円)。芝生で観覧。🧒◎ 🎒◎</div>
+        <div class="links"><a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E7%AB%8B%E5%B7%9D%E3%81%BE%E3%81%A4%E3%82%8A+%E6%98%AD%E5%92%8C%E8%A8%98%E5%BF%B5%E5%85%AC%E5%9C%92%E8%8A%B1%E7%81%AB&amp;dates=20260725T191500%2F20260725T201500&amp;ctz=Asia%2FTokyo&amp;location=%E5%9B%BD%E5%96%B6%E6%98%AD%E5%92%8C%E8%A8%98%E5%BF%B5%E5%85%AC%E5%9C%92&amp;details=%E5%A4%9A%E6%91%A9%E6%9C%80%E5%A4%A7%E7%B4%9A5%2C000%E7%99%BA%E3%80%822026%E3%81%AF%E6%9C%89%E6%96%99%E8%A6%B3%E8%A6%A7%E5%B8%AD%E5%88%B6%281%2C500%E5%86%86%29%E3%80%82%E8%8A%9D%E7%94%9F%E3%81%A7%E8%A6%B3%E8%A6%A7%E3%80%82%F0%9F%A7%92%E2%97%8E+%F0%9F%8E%92%E2%97%8E%0A%F0%9F%94%97+https%3A%2F%2Fhanabi.tokyo-tachikawa.org%2F%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E5%9B%BD%E5%96%B6%E6%98%AD%E5%92%8C%E8%A8%98%E5%BF%B5%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">📅 カレンダーに追加</a><a class="lk map" href="https://www.google.com/maps/search/?api=1&query=%E5%9B%BD%E5%96%B6%E6%98%AD%E5%92%8C%E8%A8%98%E5%BF%B5%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://hanabi.tokyo-tachikawa.org/" target="_blank" rel="noopener">🔗 公式</a></div>
+      </div>
+      <div class="ev">
+        <div class="when">7/25(土)・26(日) 18:00〜</div>
+        <div class="nm">💃 小金井阿波おどり</div>
+        <div class="desc">駅前は大混雑。18時台の沿道端で。🧒△ 🎒○</div>
+        <div class="links"><a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%B0%8F%E9%87%91%E4%BA%95%E9%98%BF%E6%B3%A2%E3%81%8A%E3%81%A9%E3%82%8A&amp;dates=20260725T180000%2F20260725T210000&amp;ctz=Asia%2FTokyo&amp;location=%E6%AD%A6%E8%94%B5%E5%B0%8F%E9%87%91%E4%BA%95%E9%A7%85&amp;details=%E9%A7%85%E5%89%8D%E3%81%AF%E5%A4%A7%E6%B7%B7%E9%9B%91%E3%80%8218%E6%99%82%E5%8F%B0%E3%81%AE%E6%B2%BF%E9%81%93%E7%AB%AF%E3%81%A7%E3%80%82%F0%9F%A7%92%E2%96%B3+%F0%9F%8E%92%E2%97%8B%0A%F0%9F%94%97+https%3A%2F%2Fkoganeiawaodori.jp%2F%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E6%AD%A6%E8%94%B5%E5%B0%8F%E9%87%91%E4%BA%95%E9%A7%85" target="_blank" rel="noopener">📅 カレンダーに追加</a><a class="lk map" href="https://www.google.com/maps/search/?api=1&query=%E6%AD%A6%E8%94%B5%E5%B0%8F%E9%87%91%E4%BA%95%E9%A7%85" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://koganeiawaodori.jp/" target="_blank" rel="noopener">🔗 公式</a></div>
+      </div>
+      <div class="ev">
+        <div class="when">7/27(月)・28(火) 17:00〜</div>
+        <div class="nm">🏮 秋津神社 例大祭</div>
+        <div class="desc">新秋津駅すぐ・屋台30店超。平日で空きやすい。🧒◎ 🎒◎</div>
+        <div class="links"><a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E7%A7%8B%E6%B4%A5%E7%A5%9E%E7%A4%BE+%E4%BE%8B%E5%A4%A7%E7%A5%AD&amp;dates=20260727T170000%2F20260727T210000&amp;ctz=Asia%2FTokyo&amp;location=%E7%A7%8B%E6%B4%A5%E7%A5%9E%E7%A4%BE&amp;details=%E6%96%B0%E7%A7%8B%E6%B4%A5%E9%A7%85%E3%81%99%E3%81%90%E3%83%BB%E5%B1%8B%E5%8F%B030%E5%BA%97%E8%B6%85%E3%80%82%E5%B9%B3%E6%97%A5%E3%81%A7%E7%A9%BA%E3%81%8D%E3%82%84%E3%81%99%E3%81%84%E3%80%82%F0%9F%A7%92%E2%97%8E+%F0%9F%8E%92%E2%97%8E%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E7%A7%8B%E6%B4%A5%E7%A5%9E%E7%A4%BE" target="_blank" rel="noopener">📅 カレンダーに追加</a><a class="lk map" href="https://www.google.com/maps/search/?api=1&query=%E7%A7%8B%E6%B4%A5%E7%A5%9E%E7%A4%BE" target="_blank" rel="noopener">📍 地図</a></div>
+      </div>
+      <div class="ev">
+        <div class="when">7/30(木)・31(金) 18:00〜</div>
+        <div class="nm">🥁 田無納涼盆踊り大会</div>
+        <div class="desc">田無駅北口・屋台多数。西武新宿線。🧒◎ 🎒◎</div>
+        <div class="links"><a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E7%94%B0%E7%84%A1%E7%B4%8D%E6%B6%BC%E7%9B%86%E8%B8%8A%E3%82%8A%E5%A4%A7%E4%BC%9A&amp;dates=20260730T180000%2F20260730T210000&amp;ctz=Asia%2FTokyo&amp;location=%E7%94%B0%E7%84%A1%E5%B1%B1%E7%B8%BD%E6%8C%81%E5%AF%BA&amp;details=%E7%94%B0%E7%84%A1%E9%A7%85%E5%8C%97%E5%8F%A3%E3%83%BB%E5%B1%8B%E5%8F%B0%E5%A4%9A%E6%95%B0%E3%80%82%E8%A5%BF%E6%AD%A6%E6%96%B0%E5%AE%BF%E7%B7%9A%E3%80%82%F0%9F%A7%92%E2%97%8E+%F0%9F%8E%92%E2%97%8E%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E7%94%B0%E7%84%A1%E5%B1%B1%E7%B8%BD%E6%8C%81%E5%AF%BA" target="_blank" rel="noopener">📅 カレンダーに追加</a><a class="lk map" href="https://www.google.com/maps/search/?api=1&query=%E7%94%B0%E7%84%A1%E5%B1%B1%E7%B8%BD%E6%8C%81%E5%AF%BA" target="_blank" rel="noopener">📍 地図</a></div>
+      </div>
+      <div class="ev">
+        <div class="when">7/31(金)ごろ 0:00</div>
+        <div class="nm">🏕 【予約解禁】C&amp;C山中湖 9月分</div>
+        <div class="desc">9月連休の高原キャンプ。土曜は瞬殺、0時張り付き＋日曜泊も。</div>
+        <div class="links"><a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E3%80%90%E4%BA%88%E7%B4%84%E8%A7%A3%E7%A6%81%E3%80%91C%26C%E5%B1%B1%E4%B8%AD%E6%B9%96+9%E6%9C%88%E5%88%86&amp;dates=20260731T000000%2F20260731T001500&amp;ctz=Asia%2FTokyo&amp;location=%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E4%BA%88%E7%B4%84%280%E6%99%82%E6%89%93%E3%81%A1%29&amp;details=9%E6%9C%88%E9%80%A3%E4%BC%91%E3%81%AE%E9%AB%98%E5%8E%9F%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%97%E3%80%82%E5%9C%9F%E6%9B%9C%E3%81%AF%E7%9E%AC%E6%AE%BA%E3%80%810%E6%99%82%E5%BC%B5%E3%82%8A%E4%BB%98%E3%81%8D%EF%BC%8B%E6%97%A5%E6%9B%9C%E6%B3%8A%E3%82%82%E3%80%82%0A%F0%9F%94%97+https%3A%2F%2Fwww.camp-cabins.com%2Fyamanakako%2F%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E4%BA%88%E7%B4%84%280%E6%99%82%E6%89%93%E3%81%A1%29" target="_blank" rel="noopener">📅 カレンダーに追加</a><a class="lk map" href="https://www.google.com/maps/search/?api=1&query=%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E4%BA%88%E7%B4%84%280%E6%99%82%E6%89%93%E3%81%A1%29" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.camp-cabins.com/yamanakako/" target="_blank" rel="noopener">🔗 公式</a></div>
+      </div>
+      <div class="ev">
+        <div class="when">8/1(土) 18:30〜</div>
+        <div class="nm">🏮 小平グリーンロード灯りまつり ★地元</div>
+        <div class="desc">手作り灯ろう約4,000基。徒歩圏・夜も早めに終わる。👶◎ 🧒◎ 🎒◎</div>
+        <div class="links"><a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%B0%8F%E5%B9%B3%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E7%81%AF%E3%82%8A%E3%81%BE%E3%81%A4%E3%82%8A+%E2%98%85%E5%9C%B0%E5%85%83&amp;dates=20260801T183000%2F20260801T203000&amp;ctz=Asia%2FTokyo&amp;location=%E5%B0%8F%E5%B9%B3%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89&amp;details=%E6%89%8B%E4%BD%9C%E3%82%8A%E7%81%AF%E3%82%8D%E3%81%86%E7%B4%844%2C000%E5%9F%BA%E3%80%82%E5%BE%92%E6%AD%A9%E5%9C%8F%E3%83%BB%E5%A4%9C%E3%82%82%E6%97%A9%E3%82%81%E3%81%AB%E7%B5%82%E3%82%8F%E3%82%8B%E3%80%82%F0%9F%91%B6%E2%97%8E+%F0%9F%A7%92%E2%97%8E+%F0%9F%8E%92%E2%97%8E%0A%F0%9F%94%97+https%3A%2F%2Fwww.city.kodaira.tokyo.jp%2Fevent%2F127%2F127980.html%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E5%B0%8F%E5%B9%B3%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89" target="_blank" rel="noopener">📅 カレンダーに追加</a><a class="lk map" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.city.kodaira.tokyo.jp/event/127/127980.html" target="_blank" rel="noopener">🔗 公式</a></div>
+      </div>
+      <div class="ev">
+        <div class="when">8/1(土)・2(日) 18:00〜</div>
+        <div class="nm">🏮 江戸東京たてもの園 下町夕涼み</div>
+        <div class="desc">提灯の下町・ちびっ子縁日。小学生以下は例年無料。👶◎ 🧒◎</div>
+        <div class="links"><a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%B1%9F%E6%88%B8%E6%9D%B1%E4%BA%AC%E3%81%9F%E3%81%A6%E3%82%82%E3%81%AE%E5%9C%92+%E4%B8%8B%E7%94%BA%E5%A4%95%E6%B6%BC%E3%81%BF&amp;dates=20260801T180000%2F20260801T213000&amp;ctz=Asia%2FTokyo&amp;location=%E6%B1%9F%E6%88%B8%E6%9D%B1%E4%BA%AC%E3%81%9F%E3%81%A6%E3%82%82%E3%81%AE%E5%9C%92&amp;details=%E6%8F%90%E7%81%AF%E3%81%AE%E4%B8%8B%E7%94%BA%E3%83%BB%E3%81%A1%E3%81%B3%E3%81%A3%E5%AD%90%E7%B8%81%E6%97%A5%E3%80%82%E5%B0%8F%E5%AD%A6%E7%94%9F%E4%BB%A5%E4%B8%8B%E3%81%AF%E4%BE%8B%E5%B9%B4%E7%84%A1%E6%96%99%E3%80%82%F0%9F%91%B6%E2%97%8E+%F0%9F%A7%92%E2%97%8E%0A%F0%9F%94%97+https%3A%2F%2Fwww.tatemonoen.jp%2Fevent%2Fpage%2F2026_yusuzumi.php%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E6%B1%9F%E6%88%B8%E6%9D%B1%E4%BA%AC%E3%81%9F%E3%81%A6%E3%82%82%E3%81%AE%E5%9C%92" target="_blank" rel="noopener">📅 カレンダーに追加</a><a class="lk map" href="https://www.google.com/maps/search/?api=1&query=%E6%B1%9F%E6%88%B8%E6%9D%B1%E4%BA%AC%E3%81%9F%E3%81%A6%E3%82%82%E3%81%AE%E5%9C%92" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.tatemonoen.jp/event/page/2026_yusuzumi.php" target="_blank" rel="noopener">🔗 公式</a></div>
+      </div>
+      <div class="ev">
+        <div class="when">8/1(土) 19:30〜</div>
+        <div class="nm">🎆 狭山入間川七夕まつり 花火 ★西武新宿線</div>
+        <div class="desc">約2,000発・30分完結で幼児向き。急行約35分。👶○ 🧒◎</div>
+        <div class="links"><a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E7%8B%AD%E5%B1%B1%E5%85%A5%E9%96%93%E5%B7%9D%E4%B8%83%E5%A4%95%E3%81%BE%E3%81%A4%E3%82%8A+%E8%8A%B1%E7%81%AB+%E2%98%85%E8%A5%BF%E6%AD%A6%E6%96%B0%E5%AE%BF%E7%B7%9A&amp;dates=20260801T193000%2F20260801T200000&amp;ctz=Asia%2FTokyo&amp;location=%E7%8B%AD%E5%B1%B1%E5%B8%82%E9%A7%85&amp;details=%E7%B4%842%2C000%E7%99%BA%E3%83%BB30%E5%88%86%E5%AE%8C%E7%B5%90%E3%81%A7%E5%B9%BC%E5%85%90%E5%90%91%E3%81%8D%E3%80%82%E6%80%A5%E8%A1%8C%E7%B4%8435%E5%88%86%E3%80%82%F0%9F%91%B6%E2%97%8B+%F0%9F%A7%92%E2%97%8E%0A%F0%9F%94%97+https%3A%2F%2Fwww.city.sayama.saitama.jp%2Fkankou%2Fkanko%2Ftanabata%2Findex.html%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E7%8B%AD%E5%B1%B1%E5%B8%82%E9%A7%85" target="_blank" rel="noopener">📅 カレンダーに追加</a><a class="lk map" href="https://www.google.com/maps/search/?api=1&query=%E7%8B%AD%E5%B1%B1%E5%B8%82%E9%A7%85" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.city.sayama.saitama.jp/kankou/kanko/tanabata/index.html" target="_blank" rel="noopener">🔗 公式</a></div>
+      </div>
+      <div class="ev">
+        <div class="when">8/8(土)〜15 19:30〜</div>
+        <div class="nm">🎆 西武園 大火祭り(お盆は毎日)</div>
+        <div class="desc">お盆期間は毎日。平日に行けるのが強み。👶○ 🧒◎</div>
+        <div class="links"><a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E8%A5%BF%E6%AD%A6%E5%9C%92+%E5%A4%A7%E7%81%AB%E7%A5%AD%E3%82%8A%28%E3%81%8A%E7%9B%86%E3%81%AF%E6%AF%8E%E6%97%A5%29&amp;dates=20260808T193000%2F20260808T194500&amp;ctz=Asia%2FTokyo&amp;location=%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1&amp;details=%E3%81%8A%E7%9B%86%E6%9C%9F%E9%96%93%E3%81%AF%E6%AF%8E%E6%97%A5%E3%80%82%E5%B9%B3%E6%97%A5%E3%81%AB%E8%A1%8C%E3%81%91%E3%82%8B%E3%81%AE%E3%81%8C%E5%BC%B7%E3%81%BF%E3%80%82%F0%9F%91%B6%E2%97%8B+%F0%9F%A7%92%E2%97%8E%0A%F0%9F%94%97+https%3A%2F%2Fwww.seibuen-amusement-park.jp%2F2026summer%2F%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1" target="_blank" rel="noopener">📅 カレンダーに追加</a><a class="lk map" href="https://www.google.com/maps/search/?api=1&query=%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.seibuen-amusement-park.jp/2026summer/" target="_blank" rel="noopener">🔗 公式</a></div>
+      </div>
+      <div class="ev">
+        <div class="when">8/22(土)・23(日) 17:00〜</div>
+        <div class="nm">💃 三鷹阿波おどり</div>
+        <div class="desc">コンパクトで20時終了。花小金井からバス直行あり。🧒○ 🎒○</div>
+        <div class="links"><a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E4%B8%89%E9%B7%B9%E9%98%BF%E6%B3%A2%E3%81%8A%E3%81%A9%E3%82%8A&amp;dates=20260822T170000%2F20260822T200000&amp;ctz=Asia%2FTokyo&amp;location=%E4%B8%89%E9%B7%B9%E9%A7%85%E5%8D%97%E5%8F%A3&amp;details=%E3%82%B3%E3%83%B3%E3%83%91%E3%82%AF%E3%83%88%E3%81%A720%E6%99%82%E7%B5%82%E4%BA%86%E3%80%82%E8%8A%B1%E5%B0%8F%E9%87%91%E4%BA%95%E3%81%8B%E3%82%89%E3%83%90%E3%82%B9%E7%9B%B4%E8%A1%8C%E3%81%82%E3%82%8A%E3%80%82%F0%9F%A7%92%E2%97%8B+%F0%9F%8E%92%E2%97%8B%0A%F0%9F%94%97+https%3A%2F%2Fmitaka-awaodori.com%2F%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E4%B8%89%E9%B7%B9%E9%A7%85%E5%8D%97%E5%8F%A3" target="_blank" rel="noopener">📅 カレンダーに追加</a><a class="lk map" href="https://www.google.com/maps/search/?api=1&query=%E4%B8%89%E9%B7%B9%E9%A7%85%E5%8D%97%E5%8F%A3" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://mitaka-awaodori.com/" target="_blank" rel="noopener">🔗 公式</a></div>
+      </div>
+      <div class="ev">
+        <div class="when">8/29(土) 20:00〜</div>
+        <div class="nm">🐳 昭島市民くじら祭+夢花火 ★穴場</div>
+        <div class="desc">混雑ゆるめ・駅近で撤収楽。花火20時開始。👶◎ 🧒◎ 🎒◎</div>
+        <div class="links"><a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%98%AD%E5%B3%B6%E5%B8%82%E6%B0%91%E3%81%8F%E3%81%98%E3%82%89%E7%A5%AD%2B%E5%A4%A2%E8%8A%B1%E7%81%AB+%E2%98%85%E7%A9%B4%E5%A0%B4&amp;dates=20260829T200000%2F20260829T203000&amp;ctz=Asia%2FTokyo&amp;location=%E6%98%AD%E5%92%8C%E5%85%AC%E5%9C%92+%E6%9D%B1%E4%B8%AD%E7%A5%9E&amp;details=%E6%B7%B7%E9%9B%91%E3%82%86%E3%82%8B%E3%82%81%E3%83%BB%E9%A7%85%E8%BF%91%E3%81%A7%E6%92%A4%E5%8F%8E%E6%A5%BD%E3%80%82%E8%8A%B1%E7%81%AB20%E6%99%82%E9%96%8B%E5%A7%8B%E3%80%82%F0%9F%91%B6%E2%97%8E+%F0%9F%A7%92%E2%97%8E+%F0%9F%8E%92%E2%97%8E%0A%F0%9F%94%97+https%3A%2F%2Fakishima-kujiramatsuri.jp%2F%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E6%98%AD%E5%92%8C%E5%85%AC%E5%9C%92+%E6%9D%B1%E4%B8%AD%E7%A5%9E" target="_blank" rel="noopener">📅 カレンダーに追加</a><a class="lk map" href="https://www.google.com/maps/search/?api=1&query=%E6%98%AD%E5%92%8C%E5%85%AC%E5%9C%92%20%E6%9D%B1%E4%B8%AD%E7%A5%9E" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://akishima-kujiramatsuri.jp/" target="_blank" rel="noopener">🔗 公式</a></div>
+      </div>
+      <div class="ev">
+        <div class="when">9/19(土)〜23(水・祝)</div>
+        <div class="nm">🗓 シルバーウィーク5連休</div>
+        <div class="desc">秋分＋敬老＋国民の休日で5連休。キャンプ・遠出は今のうちに予約を。</div>
+        <div class="links"><a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E3%82%B7%E3%83%AB%E3%83%90%E3%83%BC%E3%82%A6%E3%82%A3%E3%83%BC%E3%82%AF5%E9%80%A3%E4%BC%91&amp;dates=20260919%2F20260924&amp;ctz=Asia%2FTokyo&amp;location=&amp;details=%E7%A7%8B%E5%88%86%EF%BC%8B%E6%95%AC%E8%80%81%EF%BC%8B%E5%9B%BD%E6%B0%91%E3%81%AE%E4%BC%91%E6%97%A5%E3%81%A75%E9%80%A3%E4%BC%91%E3%80%82%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%97%E3%83%BB%E9%81%A0%E5%87%BA%E3%81%AF%E4%BB%8A%E3%81%AE%E3%81%86%E3%81%A1%E3%81%AB%E4%BA%88%E7%B4%84%E3%82%92%E3%80%82" target="_blank" rel="noopener">📅 カレンダーに追加</a></div>
+      </div>
 
-  <div class="ev">
-    <div class="nm">🚒 陸上自衛隊 小平駐屯地 納涼祭</div>
-    <div class="when">7/25(土) 15:00〜（一橋学園駅 徒歩15分・無料）</div>
-    <div class="desc">働く車展示＋盆踊り。地元で明るい15時から、上の子たちに◎。雨なら翌日順延なので当日昼に確認を。</div>
-    <div class="baby">👶 広い敷地でベビーカー可・日陰少なめ。帽子と水分を。</div>
-    <div class="links">
-      <a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E9%99%B8%E4%B8%8A%E8%87%AA%E8%A1%9B%E9%9A%8A+%E5%B0%8F%E5%B9%B3%E9%A7%90%E5%B1%AF%E5%9C%B0+%E7%B4%8D%E6%B6%BC%E7%A5%AD&amp;dates=20260725T150000%2F20260725T190000&amp;ctz=Asia%2FTokyo&amp;location=%E9%99%B8%E4%B8%8A%E8%87%AA%E8%A1%9B%E9%9A%8A+%E5%B0%8F%E5%B9%B3%E9%A7%90%E5%B1%AF%E5%9C%B0%EF%BC%88%E4%B8%80%E6%A9%8B%E5%AD%A6%E5%9C%92%E9%A7%85+%E5%BE%92%E6%AD%A915%E5%88%86%EF%BC%89&amp;details=%E5%83%8D%E3%81%8F%E8%BB%8A%E5%B1%95%E7%A4%BA%EF%BC%8B%E7%9B%86%E8%B8%8A%E3%82%8A%E3%80%8215%E6%99%82%E3%80%9C%E6%98%8E%E3%82%8B%E3%81%84%E3%81%86%E3%81%A1%E3%81%AB%E3%80%82%E5%85%A5%E5%A0%B4%E7%84%A1%E6%96%99%E3%80%82%E9%9B%A8%E5%A4%A9%E7%BF%8C%E6%97%A5%E9%A0%86%E5%BB%B6%E3%80%82%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E9%99%B8%E4%B8%8A%E8%87%AA%E8%A1%9B%E9%9A%8A%E5%B0%8F%E5%B9%B3%E9%A7%90%E5%B1%AF%E5%9C%B0%0A%F0%9F%94%97+https%3A%2F%2Fkodaira-tourism.com%2Fevent%2F3369%2F%0A%F0%9F%91%B6%E5%BA%83%E3%81%84%E6%95%B7%E5%9C%B0%E3%81%A7%E3%83%99%E3%83%93%E3%83%BC%E3%82%AB%E3%83%BC%E5%8F%AF%E3%83%BB%E6%97%A5%E9%99%B0%E5%B0%91%E3%81%AA%E3%82%81%E3%80%82%E5%B8%BD%E5%AD%90%E3%81%A8%E6%B0%B4%E5%88%86%E3%82%92%E3%80%82" target="_blank" rel="noopener">📅 カレンダーに追加</a>
-      <a class="lk map" href="https://www.google.com/maps/search/?api=1&query=陸上自衛隊小平駐屯地" target="_blank" rel="noopener">📍 地図</a>
-      <a class="lk off" href="https://kodaira-tourism.com/event/3369/" target="_blank" rel="noopener">🔗 公式</a>
-    </div>
-  </div>
-
-  <div class="ev facility">
-    <div class="nm">♨ スパジャポ（東久留米）— 雨の日の本命</div>
-    <div class="when">天然温泉＆岩盤浴・田無/東久留米駅から無料シャトル</div>
-    <div class="desc">授乳室・おむつ替え・粉ミルク用のお湯・子連れフードコートありで、雨でも一日ゆっくり。2歳連れの“逃げ場”に。※好きな日に行ける施設なのでカレンダー追加は任意。</div>
-    <div class="baby">👶 子連れ設備充実。入館 平日750/土日祝850円ほど（岩盤浴別）。</div>
-    <div class="links">
-      <a class="lk map" href="https://www.google.com/maps/search/?api=1&query=スパジアムジャポン" target="_blank" rel="noopener">📍 地図</a>
-      <a class="lk off" href="https://www.spajapo.com/" target="_blank" rel="noopener">🔗 公式</a>
-    </div>
-  </div>
-
-  <h3 class="sec">🏕 キャンプ・予約先取り（9月連休 9/19〜23）</h3>
-  <div class="ev">
-    <div class="nm">キャンプ・アンド・キャビンズ山中湖</div>
-    <div class="when">9月分の予約解禁：7/31頃 0時</div>
-    <div class="desc">標高980m・じゃぶじゃぶ池/宝石探しで2歳も大満足。土曜は瞬殺なので0時張り付き＋日曜泊も視野に。予約解禁のリマインダーをカレンダーに入れておくと安心です。</div>
-    <div class="links">
-      <a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E3%80%90%E4%BA%88%E7%B4%84%E8%A7%A3%E7%A6%81%E3%80%91%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%97%E3%83%BB%E3%82%A2%E3%83%B3%E3%83%89%E3%83%BB%E3%82%AD%E3%83%A3%E3%83%93%E3%83%B3%E3%82%BA%E5%B1%B1%E4%B8%AD%E6%B9%96+9%E6%9C%88%E5%88%86&amp;dates=20260731T000000%2F20260731T001500&amp;ctz=Asia%2FTokyo&amp;location=%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E4%BA%88%E7%B4%84%EF%BC%880%E6%99%82%E6%89%93%E3%81%A1%EF%BC%89&amp;details=9%E6%9C%88%E5%88%86%E3%81%AE%E4%BA%88%E7%B4%84%E3%81%8C7%2F31%E9%A0%830%E6%99%82%E3%81%AB%E8%A7%A3%E7%A6%81%E3%80%82%E5%9C%9F%E6%9B%9C%E3%81%AF%E7%9E%AC%E6%AE%BA%E3%81%AA%E3%81%AE%E3%81%A70%E6%99%82%E5%BC%B5%E3%82%8A%E4%BB%98%E3%81%8D%EF%BC%8B%E6%97%A5%E6%9B%9C%E6%B3%8A%E3%82%82%E8%A6%96%E9%87%8E%E3%81%AB%E3%80%82%0A%F0%9F%94%97+https%3A%2F%2Fwww.camp-cabins.com%2Fyamanakako%2F" target="_blank" rel="noopener">📅 予約解禁をカレンダーに</a>
-      <a class="lk off" href="https://www.camp-cabins.com/yamanakako/" target="_blank" rel="noopener">🔗 公式</a>
-    </div>
-  </div>
-  <p class="note">ほかの涼しい高原：北軽井沢スウィートグラス（毎月1日解禁）／休暇村嬬恋鹿沢（温泉付き・6ヶ月前で堅い）。詳しくは通信本文で。</p>
-
-  <h3 class="sec">📚 バックナンバー</h3>
-  <div class="back">
+  <h2 class="sec">📮 通信バックナンバー</h2>
+  <div class="card">
     <ul>
-      <li>7/22(水)号（このページ・最新）</li>
+      <li>最新号は毎週水曜に配信（LINE）</li>
+      <li>過去号もこのページで順次公開していきます</li>
     </ul>
-    <p class="note">今後の号はここに追加していきます。</p>
+    <p class="note">※ 通信のアーカイブは無料でどなたでもご覧いただけます。</p>
   </div>
 
-  <p class="note" style="margin-top:1.6rem">📅 ボタンはご自分のGoogleカレンダーに保存する形です（保存されるのはあなたのカレンダーだけ・他の人には見えません）。リマインダーはカレンダー側でお好みに設定できます。</p>
+  <h2 class="sec">🗺 みんなの投稿マップ <span class="note" style="font-weight:400">（準備中）</span></h2>
+  <div class="soon">
+    会員のみなさんで「よかったおでかけ先」を地図に書き込んで育てる、参加型マップを準備しています。公開までもう少しお待ちください。
+  </div>
+
+  <p class="note" style="margin-top:1.6rem">📅 ボタンはご自分のGoogleカレンダーに保存する形です。リマインダーはカレンダー側でお好みに設定できます。日程・料金は変わることがあるので、おでかけ前に各公式でご確認ください。</p>
 </main>
 
 <footer>
   <div class="fmark">ぼんぼやーじゅ通信</div>
-  応援サポーター向け会員ページ｜※内容・営業は変わることがあります。おでかけ前に各公式でご確認ください。<br>
-  © 2026 ぼんぼやーじゅ通信
+  応援サポーター向け会員ページ｜© 2026 ぼんぼやーじゅ通信
 </footer>
 </body>
 </html>
