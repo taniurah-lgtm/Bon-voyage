@@ -115,7 +115,7 @@ footer{color:var(--ink-faint);font-size:.8rem;text-align:center;padding:2rem 1.2
 .gate .hint{font-size:.8rem;color:var(--ink-faint);margin-top:.9rem;}`;
 
 const BLOBS = [];
-for (const p of PASSES) BLOBS.push(await encryptFor(p, CONTENT));
+for (const p of PASSES) BLOBS.push(await encryptFor(p.normalize('NFC'), CONTENT));
 
 const page = `<!doctype html>
 <html lang="ja">
@@ -137,7 +137,7 @@ const page = `<!doctype html>
   <div id="gate" class="gate">
     <h2>🔑 合言葉を入力</h2>
     <p>会員の方・身内の方にお伝えした合言葉を入れてください。</p>
-    <input id="pw" type="password" autocomplete="off" placeholder="合言葉" autofocus>
+    <input id="pw" type="text" inputmode="text" autocomplete="off" autocapitalize="none" autocorrect="off" placeholder="合言葉（ひらがな）" autofocus>
     <button id="go">ひらく</button>
     <div id="err" class="err"></div>
     <div class="hint">合言葉が分からない方は、LINEでお問い合わせください。</div>
@@ -174,6 +174,7 @@ function reveal(htmlStr){
   document.getElementById('gate').style.display = 'none';
 }
 async function attempt(pass, remember){
+  pass = (pass || '').normalize('NFC');
   const html = await tryUnlock(pass);
   if (html){ if(remember) sessionStorage.setItem('bv_pw', pass); reveal(html); return true; }
   return false;
