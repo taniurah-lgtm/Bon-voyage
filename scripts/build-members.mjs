@@ -6,12 +6,11 @@ import { webcrypto as crypto } from 'node:crypto';
 import { writeFileSync } from 'node:fs';
 
 const OUT = 'docs/homepage/m/s7f2ka/index.html';
-// 実際の合言葉はリポジトリに保存しない。ビルド時に環境変数で渡す:
-//   MEMBER_PASS=xxx INSIDER_PASS=yyy node scripts/build-members.mjs
+// 実際の合言葉はリポジトリに保存しない。ビルド時に環境変数で渡す(1つ以上):
+//   MEMBER_PASS=xxx [INSIDER_PASS=yyy] node scripts/build-members.mjs
 // 出力(index.html)は暗号文のみで、合言葉は含まれない(PBKDF2+AES-GCM)。
-const MEMBER_PASS = process.env.MEMBER_PASS || 'CHANGEME-member';
-const INSIDER_PASS = process.env.INSIDER_PASS || 'CHANGEME-insider';
-const PASSES = [MEMBER_PASS, INSIDER_PASS];
+const PASSES = [process.env.MEMBER_PASS, process.env.INSIDER_PASS].filter(Boolean);
+if (PASSES.length === 0) PASSES.push('CHANGEME');
 const ITER = 150000;
 const enc = new TextEncoder();
 const b64 = (u8) => Buffer.from(u8).toString('base64');
