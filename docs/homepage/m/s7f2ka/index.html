@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>会員ページ｜ぼんぼやーじゅ通信</title>
+<style>
+  :root {
+    --ground:#FBFAF5;--surface:#FFFFFF;--surface-2:#F5F2EA;--ink:#34434C;--ink-soft:#63727B;--ink-faint:#97A2AA;
+    --sky:#4FA3C4;--sky-deep:#2C7C9E;--sky-wash:#E9F4F7;--marigold:#EBA24A;--marigold-wash:#FBEEDA;
+    --leaf:#74AE71;--line:#ECE7DB;--line-strong:#DCD5C6;--radius:18px;
+    --maru:"Hiragino Maru Gothic ProN","Yu Gothic","Noto Sans JP","Segoe UI",sans-serif;
+    --body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP","Segoe UI",Meiryo,sans-serif;
+    --script:Georgia,"Times New Roman",serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {--ground:#131F28;--surface:#1A2831;--surface-2:#21333D;--ink:#ECF2F4;--ink-soft:#AAB9C1;--ink-faint:#7B8C95;
+      --sky:#6FBAD9;--sky-deep:#9AD4EA;--sky-wash:#1D3944;--marigold:#F0AE5E;--marigold-wash:#362F1F;--leaf:#8FC489;--line:#293B45;--line-strong:#38505C;}
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);line-height:1.8;-webkit-font-smoothing:antialiased;font-feature-settings:"palt" 1;}
+  .wrap{max-width:44rem;margin:0 auto;padding:0 1.25rem;}
+  a{color:var(--sky-deep);}
+  header.h{background:linear-gradient(160deg,var(--sky-wash),var(--marigold-wash));border-bottom:1px solid var(--line);}
+  .h-in{max-width:44rem;margin:0 auto;padding:2.4rem 1.25rem 1.8rem;}
+  .eyebrow{font-family:var(--script);font-style:italic;color:var(--marigold);font-size:1rem;}
+  h1{font-family:var(--maru);font-weight:800;font-size:1.7rem;margin:.2rem 0 .4rem;letter-spacing:.02em;}
+  .h-in .sub{color:var(--ink-soft);font-size:.95rem;margin:0;}
+  main{padding:1.8rem 0 1rem;}
+  .issue-head{display:flex;align-items:baseline;gap:.6rem;margin:0 0 .3rem;}
+  .issue-head h2{font-family:var(--maru);font-weight:800;font-size:1.3rem;margin:0;}
+  .badge{font-size:.72rem;font-weight:800;color:#fff;background:var(--marigold);border-radius:999px;padding:.15rem .6rem;}
+  .weather{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:.9rem 1.05rem;margin:.7rem 0 1.4rem;font-size:.95rem;color:var(--ink-soft);}
+  .ev{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.05rem 1.15rem;margin-bottom:.9rem;box-shadow:0 2px 16px rgba(52,67,76,.05);}
+  .ev .nm{font-family:var(--maru);font-weight:800;font-size:1.08rem;}
+  .ev .when{color:var(--sky-deep);font-size:.88rem;font-weight:700;margin-top:.15rem;}
+  .ev .desc{font-size:.95rem;color:var(--ink-soft);margin-top:.4rem;}
+  .ev .baby{font-size:.86rem;color:var(--ink-faint);margin-top:.35rem;}
+  .links{margin-top:.7rem;display:flex;flex-wrap:wrap;gap:.5rem;}
+  .lk{display:inline-flex;align-items:center;gap:.3rem;font-size:.82rem;font-weight:700;text-decoration:none;border-radius:999px;padding:.4rem .8rem;border:1px solid var(--line-strong);}
+  .lk.cal{background:var(--sky-deep);color:#fff;border-color:var(--sky-deep);}
+  .lk.map{color:var(--sky-deep);background:var(--surface);}
+  .lk.off{color:var(--marigold);background:var(--surface);}
+  .facility{border-style:dashed;}
+  h3.sec{font-family:var(--maru);font-weight:800;font-size:1.05rem;margin:1.8rem 0 .7rem;color:var(--ink);}
+  .back{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.15rem;}
+  .back ul{margin:.2rem 0 0;padding-left:1.1rem;}
+  .back li{font-size:.95rem;margin:.2rem 0;}
+  .note{font-size:.82rem;color:var(--ink-faint);margin-top:.5rem;}
+  footer{color:var(--ink-faint);font-size:.8rem;text-align:center;padding:2rem 1.25rem 3rem;line-height:1.7;}
+  .fmark{font-family:var(--maru);font-weight:800;color:var(--ink-soft);}
+</style>
+</head>
+<body>
+<header class="h"><div class="h-in">
+  <div class="eyebrow">Members</div>
+  <h1>ぼんぼやーじゅ通信・会員ページ</h1>
+  <p class="sub">応援サポーター向け。今週のおすすめを📅ワンタップでご自分のカレンダーに保存できます（バックナンバーも下に）。</p>
+</div></header>
+
+<main class="wrap">
+  <div class="issue-head"><h2>7/22(水)号</h2><span class="badge">今週号</span></div>
+  <div class="weather">■今週末の天気：7/25(土)晴のち雨・33℃(降水50%)／7/26(日)曇一時雨・33℃(降水60%)。両日蒸し暑いので雨具＋水分・休憩を。土曜夜の花火は雨次第。</div>
+
+  <div class="ev">
+    <div class="nm">🎆 西武園ゆうえんち 大火祭り（花火ショー）</div>
+    <div class="when">7/25(土) 19:30〜（約6分）</div>
+    <div class="desc">近くて短時間、ぐずってもすぐ撤収の“短い花火”。至近距離の迫力なのに約6分。萩山乗換20〜25分。要入園料。土曜夜は雨50%なので当日夕方に運行状況チェックを。</div>
+    <div class="baby">👶 ベビーカー可・オムツ替え/授乳室あり。音大きめは抱っこで。</div>
+    <div class="links">
+      <a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1+%E5%A4%A7%E7%81%AB%E7%A5%AD%E3%82%8A%EF%BC%88%E8%8A%B1%E7%81%AB%E3%82%B7%E3%83%A7%E3%83%BC%EF%BC%89&amp;dates=20260725T193000%2F20260725T200000&amp;ctz=Asia%2FTokyo&amp;location=%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1%EF%BC%88%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1%E9%A7%85%EF%BC%89&amp;details=%E8%8A%B1%E7%81%AB%E3%82%B7%E3%83%A7%E3%83%BC+19%3A30%E3%80%9C%E7%B4%846%E5%88%86%E3%80%82%E8%A6%81%E5%85%A5%E5%9C%92%E6%96%99%E3%80%82%E8%90%A9%E5%B1%B1%E4%B9%97%E6%8F%9B%E3%81%A7%E7%B4%8420%E3%80%9C25%E5%88%86%E3%80%82%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1%0A%F0%9F%94%97+https%3A%2F%2Fwww.seibuen-amusement-park.jp%2F2026summer%2F%0A%F0%9F%91%B6%E3%83%99%E3%83%93%E3%83%BC%E3%82%AB%E3%83%BC%E5%8F%AF%E3%83%BB%E3%82%AA%E3%83%A0%E3%83%84%E6%9B%BF%E3%81%88%2F%E6%8E%88%E4%B9%B3%E5%AE%A4%E3%81%82%E3%82%8A%E3%80%82%E9%9F%B3%E5%A4%A7%E3%81%8D%E3%82%81%E3%81%AF%E6%8A%B1%E3%81%A3%E3%81%93%E3%81%A7%E3%80%82%0A%E2%9A%A07%2F25%E3%81%AF%E9%9B%A850%25%E3%80%82%E5%BD%93%E6%97%A5%E5%A4%95%E6%96%B9%E3%81%AB%E9%81%8B%E8%A1%8C%E7%8A%B6%E6%B3%81%E3%82%92%E7%A2%BA%E8%AA%8D%E3%80%82" target="_blank" rel="noopener">📅 カレンダーに追加</a>
+      <a class="lk map" href="https://www.google.com/maps/search/?api=1&query=西武園ゆうえんち" target="_blank" rel="noopener">📍 地図</a>
+      <a class="lk off" href="https://www.seibuen-amusement-park.jp/2026summer/" target="_blank" rel="noopener">🔗 公式</a>
+    </div>
+  </div>
+
+  <div class="ev">
+    <div class="nm">🚒 陸上自衛隊 小平駐屯地 納涼祭</div>
+    <div class="when">7/25(土) 15:00〜（一橋学園駅 徒歩15分・無料）</div>
+    <div class="desc">働く車展示＋盆踊り。地元で明るい15時から、上の子たちに◎。雨なら翌日順延なので当日昼に確認を。</div>
+    <div class="baby">👶 広い敷地でベビーカー可・日陰少なめ。帽子と水分を。</div>
+    <div class="links">
+      <a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E9%99%B8%E4%B8%8A%E8%87%AA%E8%A1%9B%E9%9A%8A+%E5%B0%8F%E5%B9%B3%E9%A7%90%E5%B1%AF%E5%9C%B0+%E7%B4%8D%E6%B6%BC%E7%A5%AD&amp;dates=20260725T150000%2F20260725T190000&amp;ctz=Asia%2FTokyo&amp;location=%E9%99%B8%E4%B8%8A%E8%87%AA%E8%A1%9B%E9%9A%8A+%E5%B0%8F%E5%B9%B3%E9%A7%90%E5%B1%AF%E5%9C%B0%EF%BC%88%E4%B8%80%E6%A9%8B%E5%AD%A6%E5%9C%92%E9%A7%85+%E5%BE%92%E6%AD%A915%E5%88%86%EF%BC%89&amp;details=%E5%83%8D%E3%81%8F%E8%BB%8A%E5%B1%95%E7%A4%BA%EF%BC%8B%E7%9B%86%E8%B8%8A%E3%82%8A%E3%80%8215%E6%99%82%E3%80%9C%E6%98%8E%E3%82%8B%E3%81%84%E3%81%86%E3%81%A1%E3%81%AB%E3%80%82%E5%85%A5%E5%A0%B4%E7%84%A1%E6%96%99%E3%80%82%E9%9B%A8%E5%A4%A9%E7%BF%8C%E6%97%A5%E9%A0%86%E5%BB%B6%E3%80%82%0A%F0%9F%93%8D+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3D%E9%99%B8%E4%B8%8A%E8%87%AA%E8%A1%9B%E9%9A%8A%E5%B0%8F%E5%B9%B3%E9%A7%90%E5%B1%AF%E5%9C%B0%0A%F0%9F%94%97+https%3A%2F%2Fkodaira-tourism.com%2Fevent%2F3369%2F%0A%F0%9F%91%B6%E5%BA%83%E3%81%84%E6%95%B7%E5%9C%B0%E3%81%A7%E3%83%99%E3%83%93%E3%83%BC%E3%82%AB%E3%83%BC%E5%8F%AF%E3%83%BB%E6%97%A5%E9%99%B0%E5%B0%91%E3%81%AA%E3%82%81%E3%80%82%E5%B8%BD%E5%AD%90%E3%81%A8%E6%B0%B4%E5%88%86%E3%82%92%E3%80%82" target="_blank" rel="noopener">📅 カレンダーに追加</a>
+      <a class="lk map" href="https://www.google.com/maps/search/?api=1&query=陸上自衛隊小平駐屯地" target="_blank" rel="noopener">📍 地図</a>
+      <a class="lk off" href="https://kodaira-tourism.com/event/3369/" target="_blank" rel="noopener">🔗 公式</a>
+    </div>
+  </div>
+
+  <div class="ev facility">
+    <div class="nm">♨ スパジャポ（東久留米）— 雨の日の本命</div>
+    <div class="when">天然温泉＆岩盤浴・田無/東久留米駅から無料シャトル</div>
+    <div class="desc">授乳室・おむつ替え・粉ミルク用のお湯・子連れフードコートありで、雨でも一日ゆっくり。2歳連れの“逃げ場”に。※好きな日に行ける施設なのでカレンダー追加は任意。</div>
+    <div class="baby">👶 子連れ設備充実。入館 平日750/土日祝850円ほど（岩盤浴別）。</div>
+    <div class="links">
+      <a class="lk map" href="https://www.google.com/maps/search/?api=1&query=スパジアムジャポン" target="_blank" rel="noopener">📍 地図</a>
+      <a class="lk off" href="https://www.spajapo.com/" target="_blank" rel="noopener">🔗 公式</a>
+    </div>
+  </div>
+
+  <h3 class="sec">🏕 キャンプ・予約先取り（9月連休 9/19〜23）</h3>
+  <div class="ev">
+    <div class="nm">キャンプ・アンド・キャビンズ山中湖</div>
+    <div class="when">9月分の予約解禁：7/31頃 0時</div>
+    <div class="desc">標高980m・じゃぶじゃぶ池/宝石探しで2歳も大満足。土曜は瞬殺なので0時張り付き＋日曜泊も視野に。予約解禁のリマインダーをカレンダーに入れておくと安心です。</div>
+    <div class="links">
+      <a class="lk cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E3%80%90%E4%BA%88%E7%B4%84%E8%A7%A3%E7%A6%81%E3%80%91%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%97%E3%83%BB%E3%82%A2%E3%83%B3%E3%83%89%E3%83%BB%E3%82%AD%E3%83%A3%E3%83%93%E3%83%B3%E3%82%BA%E5%B1%B1%E4%B8%AD%E6%B9%96+9%E6%9C%88%E5%88%86&amp;dates=20260731T000000%2F20260731T001500&amp;ctz=Asia%2FTokyo&amp;location=%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E4%BA%88%E7%B4%84%EF%BC%880%E6%99%82%E6%89%93%E3%81%A1%EF%BC%89&amp;details=9%E6%9C%88%E5%88%86%E3%81%AE%E4%BA%88%E7%B4%84%E3%81%8C7%2F31%E9%A0%830%E6%99%82%E3%81%AB%E8%A7%A3%E7%A6%81%E3%80%82%E5%9C%9F%E6%9B%9C%E3%81%AF%E7%9E%AC%E6%AE%BA%E3%81%AA%E3%81%AE%E3%81%A70%E6%99%82%E5%BC%B5%E3%82%8A%E4%BB%98%E3%81%8D%EF%BC%8B%E6%97%A5%E6%9B%9C%E6%B3%8A%E3%82%82%E8%A6%96%E9%87%8E%E3%81%AB%E3%80%82%0A%F0%9F%94%97+https%3A%2F%2Fwww.camp-cabins.com%2Fyamanakako%2F" target="_blank" rel="noopener">📅 予約解禁をカレンダーに</a>
+      <a class="lk off" href="https://www.camp-cabins.com/yamanakako/" target="_blank" rel="noopener">🔗 公式</a>
+    </div>
+  </div>
+  <p class="note">ほかの涼しい高原：北軽井沢スウィートグラス（毎月1日解禁）／休暇村嬬恋鹿沢（温泉付き・6ヶ月前で堅い）。詳しくは通信本文で。</p>
+
+  <h3 class="sec">📚 バックナンバー</h3>
+  <div class="back">
+    <ul>
+      <li>7/22(水)号（このページ・最新）</li>
+    </ul>
+    <p class="note">今後の号はここに追加していきます。</p>
+  </div>
+
+  <p class="note" style="margin-top:1.6rem">📅 ボタンはご自分のGoogleカレンダーに保存する形です（保存されるのはあなたのカレンダーだけ・他の人には見えません）。リマインダーはカレンダー側でお好みに設定できます。</p>
+</main>
+
+<footer>
+  <div class="fmark">ぼんぼやーじゅ通信</div>
+  応援サポーター向け会員ページ｜※内容・営業は変わることがあります。おでかけ前に各公式でご確認ください。<br>
+  © 2026 ぼんぼやーじゅ通信
+</footer>
+</body>
+</html>
