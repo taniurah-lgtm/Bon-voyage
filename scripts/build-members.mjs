@@ -64,7 +64,7 @@ const cards = E.map(([disp, dates, name, emoji, mapq, off, note]) => {
 
 // 連休さきどり（キャンプ偏重にしない・テーマ別）
 const renkyu = `
-  <h2 class="sec">🍁 連休さきどり（9/19〜23 シルバーウィーク）</h2>
+  <h2 class="sec" id="renkyu">🍁 連休さきどり（9/19〜23 シルバーウィーク）</h2>
   <p class="sec-note">キャンプ以外も。花小金井から日帰り〜1泊で行ける秋の連休を、テーマ別に。人気の宿・体験は早めに。</p>
   <div class="ev"><div class="nm">🍇 秋の味覚狩り（ぶどう＆芋）</div><div class="desc">小松沢レジャー農園（秩父・横瀬／西武秩父線・横瀬駅から無料送迎バス）＝ぶどう狩り（例年8月中旬〜11月上旬）＋さつま芋掘り（例年9月下旬〜）＋マスつかみ。屋根つき体験多めで2歳連れも◎。ぶどうは山梨・勝沼も名産。※開催時期・料金は公式で確認を。</div><div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&query=小松沢レジャー農園" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.komatsuzawa.co.jp/" target="_blank" rel="noopener">🔗 公式</a></div></div>
   <div class="ev"><div class="nm">🏞 高原で涼む・自然（1泊向き）</div><div class="desc">清里/八ヶ岳・富士五湖ほか。標高が高く涼しく、牧場で動物ふれあいも。人気宿は連休ぶんが早く埋まるので早めに。</div></div>
@@ -75,15 +75,21 @@ const renkyu = `
 
 // 暗号化する中身（カレンダー＋連休さきどり＋バックナンバー＋投稿マップ）
 const CONTENT = `
-  <h2 class="sec">📅 おでかけカレンダー</h2>
+  <nav class="toc">
+    <a href="#cal">📅 カレンダー</a>
+    <a href="#renkyu">🍁 連休さきどり</a>
+    <a href="#back">📮 バックナンバー</a>
+    <a href="#map">🗺 投稿マップ</a>
+  </nav>
+  <h2 class="sec" id="cal">📅 おでかけカレンダー</h2>
   <p class="sec-note">花小金井まわりの先の予定を日付順に。行きたいものを「カレンダーに追加」で保存できます。</p>
 ${cards}
 ${renkyu}
 
-  <h2 class="sec">📮 通信バックナンバー</h2>
+  <h2 class="sec" id="back">📮 通信バックナンバー</h2>
   <div class="card"><ul><li>最新号は毎週水曜に配信（LINE）</li><li>過去号もこのページで順次公開していきます</li></ul></div>
 
-  <h2 class="sec">🗺 みんなの投稿マップ <span class="note" style="font-weight:400">（準備中）</span></h2>
+  <h2 class="sec" id="map">🗺 みんなの投稿マップ <span class="note" style="font-weight:400">（準備中）</span></h2>
   <div class="soon">会員のみなさんで「よかったおでかけ先」を地図に書き込んで育てる、参加型マップを準備しています。公開までもう少しお待ちください。</div>
 
   <p class="note" style="margin-top:1.6rem">📅 ボタンはご自分のGoogleカレンダーに保存する形です。リマインダーはカレンダー側でお好みに設定できます。日程・料金は変わることがあるので、おでかけ前に各公式でご確認ください。</p>`;
@@ -91,7 +97,15 @@ ${renkyu}
 const CSS = `:root{--ground:#FBFAF5;--surface:#FFFFFF;--surface-2:#F5F2EA;--ink:#34434C;--ink-soft:#63727B;--ink-faint:#97A2AA;--sky:#4FA3C4;--sky-deep:#2C7C9E;--sky-wash:#E9F4F7;--marigold:#EBA24A;--marigold-wash:#FBEEDA;--leaf:#74AE71;--line:#ECE7DB;--line-strong:#DCD5C6;--radius:18px;--maru:"Hiragino Maru Gothic ProN","Yu Gothic","Noto Sans JP","Segoe UI",sans-serif;--body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP","Segoe UI",Meiryo,sans-serif;--script:Georgia,"Times New Roman",serif;}
 @media (prefers-color-scheme:dark){:root{--ground:#131F28;--surface:#1A2831;--surface-2:#21333D;--ink:#ECF2F4;--ink-soft:#AAB9C1;--ink-faint:#7B8C95;--sky:#6FBAD9;--sky-deep:#9AD4EA;--sky-wash:#1D3944;--marigold:#F0AE5E;--marigold-wash:#362F1F;--leaf:#8FC489;--line:#293B45;--line-strong:#38505C;}}
 *{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
 body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);line-height:1.8;-webkit-font-smoothing:antialiased;font-feature-settings:"palt" 1;}
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:0 3px 14px rgba(52,67,76,.10);transform:translateY(-100%);transition:transform .25s ease;}
+.nav.show{transform:translateY(0);}
+.nav-in{max-width:44rem;margin:0 auto;display:flex;justify-content:center;gap:.3rem;padding:.5rem .5rem;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.nav-in::-webkit-scrollbar{display:none;}
+.nav-in a{flex:none;font-size:.8rem;font-weight:700;color:var(--ink-soft);text-decoration:none;padding:.4rem .62rem;border-radius:999px;background:var(--surface-2);white-space:nowrap;}
+.toc{display:flex;flex-wrap:wrap;gap:.5rem;margin:.3rem 0 1.5rem;padding:0;}
+.toc a{font-size:.85rem;font-weight:700;color:var(--sky-deep);text-decoration:none;background:var(--sky-wash);border:1px solid var(--line);border-radius:999px;padding:.4rem .85rem;}
 .wrap{max-width:44rem;margin:0 auto;padding:0 1.25rem;}
 a{color:var(--sky-deep);}
 header.h{background:linear-gradient(160deg,var(--sky-wash),var(--marigold-wash));border-bottom:1px solid var(--line);}
@@ -100,7 +114,7 @@ header.h{background:linear-gradient(160deg,var(--sky-wash),var(--marigold-wash))
 h1{font-family:var(--maru);font-weight:800;font-size:1.6rem;margin:.2rem 0 .4rem;letter-spacing:.02em;}
 .h-in .sub{color:var(--ink-soft);font-size:.93rem;margin:0;}
 main{padding:1.6rem 0 1rem;}
-h2.sec{font-family:var(--maru);font-weight:800;font-size:1.2rem;margin:1.8rem 0 .3rem;display:flex;align-items:center;gap:.4rem;}
+h2.sec{font-family:var(--maru);font-weight:800;font-size:1.2rem;margin:1.8rem 0 .3rem;display:flex;align-items:center;gap:.4rem;scroll-margin-top:3.6rem;}
 .sec-note{color:var(--ink-soft);font-size:.9rem;margin:0 0 1rem;}
 .ev{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:.95rem 1.1rem;margin-bottom:.8rem;box-shadow:0 2px 14px rgba(52,67,76,.05);}
 .ev .when{color:var(--sky-deep);font-size:.82rem;font-weight:800;}
@@ -142,11 +156,17 @@ const page = `<!doctype html>
 <style>${CSS}</style>
 </head>
 <body>
-<header class="h"><div class="h-in">
+<header class="h" id="top"><div class="h-in">
   <div class="eyebrow">Members</div>
   <h1>ぼんぼやーじゅ通信・会員ページ</h1>
-  <p class="sub">応援サポーター向けのページです。合言葉を入れてご覧ください。</p>
+  <p class="sub">応援サポーター向けのページです。</p>
 </div></header>
+<nav id="nav" class="nav" style="display:none"><div class="nav-in">
+  <a href="#top">ホーム</a>
+  <a href="#cal">カレンダー</a>
+  <a href="#back">バックナンバー</a>
+  <a href="#map">投稿マップ</a>
+</div></nav>
 
 <main class="wrap">
   <div id="gate" class="gate">
@@ -155,7 +175,7 @@ const page = `<!doctype html>
     <input id="pw" type="text" inputmode="text" autocomplete="off" autocapitalize="none" autocorrect="off" placeholder="合言葉" autofocus>
     <button id="go">ひらく</button>
     <div id="err" class="err"></div>
-    <div class="hint">合言葉が分からない方は、LINEでお問い合わせください。</div>
+    <div class="hint">合言葉が分からない方は、ご登録いただいたnoteの掲示板をご確認ください。</div>
     <div class="cta">
       <p class="lead">まだサポーターでない方へ。<br>月300円で通信を応援いただくと、この会員ページ（花小金井まわりのおでかけカレンダーなど）もご利用いただけます。</p>
       <a class="join" href="https://note.com/bon_voyage_mail/membership" target="_blank" rel="noopener">サポーターになる（月300円）</a>
@@ -192,6 +212,20 @@ function reveal(htmlStr){
   document.getElementById('content').innerHTML = htmlStr;
   document.getElementById('content').hidden = false;
   document.getElementById('gate').style.display = 'none';
+  enableNav();
+}
+function enableNav(){
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+  nav.style.display = 'block';
+  let last = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y < 140) nav.classList.remove('show');        // 最上部付近: ヘッダーが見えるので隠す
+    else if (y < last - 2) nav.classList.add('show'); // 上にスクロール(戻る)で表示
+    else if (y > last + 2) nav.classList.remove('show'); // 下にスクロールで隠す
+    last = y;
+  }, { passive: true });
 }
 async function attempt(pass, remember){
   pass = (pass || '').normalize('NFC');
