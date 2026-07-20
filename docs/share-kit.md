@@ -74,13 +74,14 @@ https://bonvoya.nicomaru.tokyo/
 ## 3. Instagram(妻アカウント)
 
 ### 画像素材
-- ストーリーズ画像(縦1080×1920): `docs/homepage/assets/ig-story.png`(公園写真＋ガイドプレゼント告知／リンク誘導・QRなし)。フィード投稿にもそのまま使える。
+- ストーリーズ画像(縦1080×1920): `docs/homepage/assets/ig-story.png`(公園写真＋ガイドプレゼント告知／**ホームページ誘導**・QRなし)。元データは `docs/homepage/ig-story.html`。フィード投稿にもそのまま使える。
 
 ### ストーリーズの貼り方
 1. `ig-story.png` をストーリーズにアップ。
-2. スタンプ →「リンク」→ URLに **https://bonvoya.nicomaru.tokyo/**(ホームページ)を貼り、表示名を「LINEで受け取る」等に。※直接追加させたいなら https://lin.ee/YtcfjnX でもOK。
+2. スタンプ →「リンク」→ URLに **https://bonvoya.nicomaru.tokyo/f**(=チラシ/SNS共通のホームページ入口。まずコンセプトを見てもらってからLINE追加へ)を貼り、表示名を「くわしく見る」等に。**直リンLINEにはしない**(紙・SNSともHP経由に統一)。
 3. (任意)位置情報スタンプで「小平市」「花小金井」等を付けると地元に届きやすい。メンションで本人アカウントも。
 4. ストーリーは24hで消えるので、**ハイライト「おでかけ」**を作って残す。
+5. **プロフィール(bio)のリンク**も https://bonvoya.nicomaru.tokyo/ に(統一)。
 
 ### ストーリーズ添え文(短い一言)
 ```

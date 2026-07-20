@@ -84,7 +84,9 @@
 | `docs/homepage/assets/flyer-a5-print.pdf` | **A5チラシ 入稿用PDF**（仕上がり148×210mm＋**塗り足し3mm**＝154×216mm、トンボなし、フチなしデザイン対応）。ネット印刷／ラクスルにそのままアップできる。 |
 | `docs/homepage/flyer-print.html` | 入稿PDFの元データ（作り直し・文言修正用）。修正後に下記コマンドで再出力。 |
 | `docs/homepage/f/index.html` | **チラシ流入計測用ランディング**。印字URL `bonvoya.nicomaru.tokyo/f` → **ホームページ先頭へ**自動転送（`?from=flyer`）。流入元を記録。 |
-| `docs/homepage/assets/site-qr.png` | チラシQR（**ホームページ `/f/` 宛**。直LINEではなく「紙→HPでコンセプト→LINE追加」の動線）。 |
+| `docs/homepage/assets/site-qr.png` | チラシ/ポスターQR（**ホームページ `/f/` 宛**。直LINEではなく「紙→HPでコンセプト→LINE追加」の動線）。 |
+| `docs/homepage/assets/poster-a4-print.pdf` | **A4掲示ポスター 入稿用PDF**（仕上がり210×297mm＋**塗り足し3mm**＝216×303mm）。児童館・図書館などの掲示用。元データ `poster-print.html`。 |
+| `docs/homepage/assets/ig-story.png` | Instagramストーリーズ画像（1080×1920）。**HP動線に統一**（CTA「くわしくはこちら」・リンクは `/f`）。元データ `ig-story.html`。 |
 
 **入稿PDFの作り直しコマンド**（文言を直したら再実行）:
 ```
@@ -92,6 +94,7 @@ cd docs/homepage
 /opt/pw-browsers/chromium-1194/chrome-linux/chrome --headless=new --no-sandbox \
   --force-color-profile=srgb --disable-gpu --no-pdf-header-footer \
   --print-to-pdf=assets/flyer-a5-print.pdf "file://$PWD/flyer-print.html"
+# A4ポスターは poster-print.html → assets/poster-a4-print.pdf（同じ手順）
 ```
 ※ネット印刷はRGB入稿でも自動変換されるが、色にこだわるなら発注先のCMYKプロファイルに合わせる。ラクスルは「データチェック（無料）」で不備を指摘してくれる。
 
