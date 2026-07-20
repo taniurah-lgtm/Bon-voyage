@@ -87,6 +87,7 @@
 | `docs/homepage/assets/site-qr.png` | チラシ/ポスターQR（**ホームページ `/f/` 宛**。直LINEではなく「紙→HPでコンセプト→LINE追加」の動線）。 |
 | `docs/homepage/assets/poster-a4-print.pdf` | **A4掲示ポスター 入稿用PDF**（仕上がり210×297mm＋**塗り足し3mm**＝216×303mm）。児童館・図書館などの掲示用。元データ `poster-print.html`。 |
 | `docs/homepage/assets/ig-story.png` | Instagramストーリーズ画像（1080×1920）。**HP動線に統一**（CTA「くわしくはこちら」・リンクは `/f`）。元データ `ig-story.html`。 |
+| `docs/homepage/assets/poster-request.pdf` | **施設向け「掲示・設置のお願い」A4**。児童館・図書館・支援センター等に、ポスター/チラシと一緒に渡す依頼文（非営利・無料の説明＋連絡先欄）。元データ `poster-request.html`。 |
 
 **入稿PDFの作り直しコマンド**（文言を直したら再実行）:
 ```
