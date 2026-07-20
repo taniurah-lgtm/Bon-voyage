@@ -83,7 +83,8 @@
 |---|---|
 | `docs/homepage/assets/flyer-a5-print.pdf` | **A5チラシ 入稿用PDF**（仕上がり148×210mm＋**塗り足し3mm**＝154×216mm、トンボなし、フチなしデザイン対応）。ネット印刷／ラクスルにそのままアップできる。 |
 | `docs/homepage/flyer-print.html` | 入稿PDFの元データ（作り直し・文言修正用）。修正後に下記コマンドで再出力。 |
-| `docs/homepage/f/index.html` | **チラシ流入計測用ランディング**。印字URL `bonvoya.nicomaru.tokyo/f` → LINE友だち追加へ自動転送。流入元(flyer)を記録。 |
+| `docs/homepage/f/index.html` | **チラシ流入計測用ランディング**。印字URL `bonvoya.nicomaru.tokyo/f` → **ホームページ先頭へ**自動転送（`?from=flyer`）。流入元を記録。 |
+| `docs/homepage/assets/site-qr.png` | チラシQR（**ホームページ `/f/` 宛**。直LINEではなく「紙→HPでコンセプト→LINE追加」の動線）。 |
 
 **入稿PDFの作り直しコマンド**（文言を直したら再実行）:
 ```
@@ -122,7 +123,7 @@ cd docs/homepage
 
 静的サイト（GitHub Pages）は単体ではアクセスを記録できないため、**複数の軽い方法を併用**して「チラシがどれだけ効いたか」を測る。
 
-1. **専用URL `bonvoya.nicomaru.tokyo/f`**（実装済み）… チラシにだけこのURLを印字。`/f/` は流入元を記録しLINEへ転送。**将来アクセス解析（GA4/Plausible等）を入れたら、このページのPVがそのままチラシ流入数**になる。
+1. **専用URL `bonvoya.nicomaru.tokyo/f`**（実装済み）… チラシにだけこのURLを印字。`/f/` は流入元を記録して**ホームページ先頭へ**転送（`?from=flyer`）。**動線は「紙 → HPでコンセプトを知る → LINE友だち追加 → …（応援サポーターへ）」**。**将来アクセス解析（GA4/Plausible等）を入れたら、このページ／`?from=flyer` のPVがそのままチラシ流入数**になる。
 2. **LINE友だち数の増え方**… 配布日の前後で友だち追加のペースを比較（LINE公式アカウント管理画面で確認）。いちばん手軽な指標。
 3. **アンケートAの「どこで知りましたか」設問**（`docs/surveys.md` / `scripts/create-forms.gs` に追加済み）… 回答者の流入元をチェックボックスで把握。
 4. （任意）**チラシ合言葉**… 「LINEで『おでかけ』と送ると、今週のおすすめが届きます」等、紙にだけ書いた言葉で来訪者を識別。
