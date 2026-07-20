@@ -19,6 +19,8 @@ function createBonvoyaSurveys() {
   var a = FormApp.create('ぼんぼやーじゅ通信 アンケート（A・みなさま向け）');
   a.setDescription('よりお役に立つための、かんたんなアンケートです（5分・任意・匿名でOK）。今後の内容づくりに生かします。');
   a.setCollectEmail(false);
+  a.addMultipleChoiceItem().setTitle('この通信を最初にどこで知りましたか')
+    .setChoiceValues(['チラシ・ポスティング', '児童館・図書館などの掲示', '友人・知人の紹介', 'インスタグラム', 'ネット検索']).showOtherOption(true);
   a.addCheckboxItem().setTitle('お子さんの年齢層（あてはまるものすべて）')
     .setChoiceValues(['0〜2歳', '3〜6歳（未就学）', '小学生', 'その他']);
   a.addMultipleChoiceItem().setTitle('お住まいエリア')

@@ -1,8 +1,15 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>A5チラシ｜ぼんぼやーじゅ通信</title><style>@page{size:A5;margin:0;}@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}</style><style>
+<html lang="ja"><head><meta charset="utf-8"><title>A5チラシ 入稿用（塗り足し3mm）｜ぼんぼやーじゅ通信</title>
+<style>
+/* 入稿用: A5(148×210mm) + 塗り足し3mm = 154×216mm、トンボなし。仕上がりは中央148×210で断裁される想定。 */
+@page{size:154mm 216mm;margin:0;}
+@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:"IPAPGothic","IPAGothic","Noto Color Emoji",sans-serif;-webkit-font-smoothing:antialiased;}
-.flyer{width:1240px;height:1754px;position:relative;overflow:hidden;background:#FBFAF5;color:#34434C;}
+html,body{width:154mm;height:216mm;}
+body{font-family:"IPAPGothic","IPAGothic","Noto Color Emoji",sans-serif;-webkit-font-smoothing:antialiased;background:#FBFAF5;}
+.page{position:relative;width:154mm;height:216mm;overflow:hidden;background:#FBFAF5;}
+/* 1240×1754pxのアートを塗り足し面いっぱいにカバー配置（周囲がフチまで届く） */
+.flyer{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.4710);transform-origin:center center;width:1240px;height:1754px;background:#FBFAF5;color:#34434C;}
 .flyer .hero{position:absolute;top:0;left:0;width:1240px;height:480px;background-image:linear-gradient(180deg,rgba(44,124,158,.28),rgba(44,124,158,.60)),url('assets/hero-park.jpg');background-size:cover;background-position:center 56%;}
 .flyer .hero-in{position:absolute;left:0;right:0;top:112px;text-align:center;color:#fff;padding:0 70px;}
 .flyer .eyebrow{font-size:44px;font-style:italic;letter-spacing:2px;text-shadow:0 2px 10px rgba(0,0,0,.4);}
@@ -27,12 +34,7 @@ body{font-family:"IPAPGothic","IPAGothic","Noto Color Emoji",sans-serif;-webkit-
 .flyer .bul b{color:#34434C;}
 .flyer .url{margin-top:20px;font-size:42px;font-weight:800;color:#2C7C9E;letter-spacing:1px;}
 .flyer .hills{position:absolute;left:0;bottom:0;width:1240px;height:110px;}
-/* 2up A4横 */
-.sheet{width:1754px;height:1240px;display:flex;background:#fff;}
-.slot{width:877px;height:1240px;overflow:hidden;position:relative;}
-.slot+.slot{border-left:1px dashed #cbb;}
-.scaled{position:absolute;top:0;left:0;transform:scale(0.7073);transform-origin:top left;}
-</style></head><body><div class="flyer">
+</style></head><body><div class="page"><div class="flyer">
   <div class="hero"><div class="hero-in">
     <div class="eyebrow">Bon Voyage,</div>
     <div class="brand">ぼんぼやーじゅ通信</div>
@@ -49,4 +51,4 @@ body{font-family:"IPAPGothic","IPAGothic","Noto Color Emoji",sans-serif;-webkit-
     <div class="url">くわしくは → bonvoya.nicomaru.tokyo/f</div>
   </div>
   <svg class="hills" viewBox="0 0 400 36" preserveAspectRatio="none"><path d="M0,20 Q110,6 220,14 T400,12 L400,36 L0,36 Z" fill="#CFE7D0"/><path d="M0,27 Q130,15 260,22 T400,22 L400,36 L0,36 Z" fill="#A6CE8B"/></svg>
-</div></body></html>
+</div></div></body></html>
