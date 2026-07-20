@@ -123,7 +123,11 @@ footer{color:var(--ink-faint);font-size:.8rem;text-align:center;padding:2rem 1.2
 .gate input{width:100%;font-size:1.05rem;padding:.7rem .8rem;border:1px solid var(--line-strong);border-radius:12px;background:var(--ground);color:var(--ink);}
 .gate button{margin-top:.8rem;width:100%;font-family:var(--maru);font-weight:800;font-size:1.05rem;color:#fff;background:var(--sky-deep);border:none;border-radius:999px;padding:.75rem;cursor:pointer;}
 .gate .err{color:#C0554E;font-size:.86rem;margin-top:.7rem;min-height:1.1em;}
-.gate .hint{font-size:.8rem;color:var(--ink-faint);margin-top:.9rem;}`;
+.gate .hint{font-size:.8rem;color:var(--ink-faint);margin-top:.9rem;}
+.gate .cta{margin-top:1.3rem;padding-top:1.15rem;border-top:1px solid var(--line);}
+.gate .cta .lead{font-size:.85rem;color:var(--ink-soft);margin:0 0 .8rem;line-height:1.7;}
+.gate .join{display:block;font-family:var(--maru);font-weight:800;font-size:1rem;color:#fff;background:var(--marigold);border:none;border-radius:999px;padding:.72rem;text-decoration:none;}
+.gate .more{display:inline-block;margin-top:.75rem;font-size:.82rem;color:var(--sky-deep);text-decoration:none;}`;
 
 const BLOBS = [];
 for (const p of PASSES) BLOBS.push(await encryptFor(p.normalize('NFC'), CONTENT));
@@ -152,6 +156,11 @@ const page = `<!doctype html>
     <button id="go">ひらく</button>
     <div id="err" class="err"></div>
     <div class="hint">合言葉が分からない方は、LINEでお問い合わせください。</div>
+    <div class="cta">
+      <p class="lead">まだサポーターでない方へ。<br>月300円で通信を応援いただくと、この会員ページ（花小金井まわりのおでかけカレンダーなど）もご利用いただけます。</p>
+      <a class="join" href="https://note.com/bon_voyage_mail/membership" target="_blank" rel="noopener">サポーターになる（月300円）</a>
+      <a class="more" href="/">まずは通信について知る →</a>
+    </div>
   </div>
   <div id="content" hidden></div>
 </main>
