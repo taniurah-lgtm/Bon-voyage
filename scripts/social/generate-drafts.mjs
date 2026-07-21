@@ -45,12 +45,14 @@ const PROMPT = (ledger, recent) => `あなたは、花小金井まわり（東�
 - 事実ベース（イベント名・日付・場所）。日付は本日以降のものだけ（過去日は選ばない）。台帳に日付の裏取りメモがあれば尊重。
 - 「こんなの見つけたよ🎈」くらいの、地元のおすそわけの空気。
 
-# 出力フォーマット（この2つを必ず）
+# 出力フォーマット（この2ブロックだけを、この見出しで出力）
 【Threads】（450字以内）
 - 1〜2文の紹介＋イベント名/日付/場所＋子連れ視点の一言。公式リンクが台帳にあれば1つ添える。
 - 末尾に「くわしくは → ${HP}」と、ハッシュタグを2〜3個（例 #花小金井 #小平 #子連れおでかけ）。
 【X】（130字以内）
 - 上を短く。末尾に ${HP} とハッシュタグ1〜2個。
+
+※重要: 出力は上記【Threads】【X】の2ブロックのみ。前置き・後書き・文字数の計算・推敲メモ・思考過程・囲みの引用符（「」で全体を囲む等）は一切書かない。本文だけをそのまま出す。
 
 # 重複回避
 次の【最近の投稿】と同じイベントは選ばない：
@@ -75,7 +77,7 @@ async function gen() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.7, maxOutputTokens: 2048 },
+          generationConfig: { temperature: 0.7, maxOutputTokens: 2048, thinkingConfig: { thinkingBudget: 0 } },
         }),
       });
     } catch (e) { errs.push(`${model}: ${e.message}`); continue; }
