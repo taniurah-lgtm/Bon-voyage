@@ -17,7 +17,7 @@ const TODAY = new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Tokyo' })
 // GEMINI_MODEL が指定されればそれだけを、無ければ複数モデルを順に試す（無料枠/可用性の違いを吸収）。
 const MODELS = process.env.GEMINI_MODEL
   ? [process.env.GEMINI_MODEL]
-  : ['gemini-1.5-flash', 'gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-flash-latest'];
+  : ['gemini-flash-latest', 'gemini-2.0-flash', 'gemini-flash-lite-latest', 'gemini-2.5-flash-lite'];
 const KEY = process.env.GEMINI_API_KEY || '';
 const HP = 'https://bonvoya.nicomaru.tokyo/f';
 
@@ -71,27 +71,35 @@ ${recent || '(なし)'}
 ${ledger}
 `;
 
+async function callGemini(model, prompt, useThinking) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${KEY}`;
+  const generationConfig = { temperature: 0.7, maxOutputTokens: 4096 };
+  if (useThinking) generationConfig.thinkingConfig = { thinkingBudget: 0 }; // 2.5系: 思考OFFで無駄トークン削減
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig }),
+  });
+  const raw = await res.text();
+  if (!res.ok) { const err = new Error(`${res.status} ${raw.slice(0, 200)}`); err.status = res.status; throw err; }
+  const text = JSON.parse(raw)?.candidates?.[0]?.content?.parts?.map(p => p.text).join('') || '';
+  if (!text) throw new Error('空応答');
+  return text;
+}
+
 async function gen() {
   const prompt = PROMPT(loadLedger(), loadRecentDrafts());
   const errs = [];
   for (const model of MODELS) {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${KEY}`;
-    let res;
-    try {
-      res = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.7, maxOutputTokens: 2048, thinkingConfig: { thinkingBudget: 0 } },
-        }),
-      });
-    } catch (e) { errs.push(`${model}: ${e.message}`); continue; }
-    if (!res.ok) { errs.push(`${model}: ${res.status} ${(await res.text()).slice(0, 220)}`); continue; }
-    const j = await res.json();
-    const text = j?.candidates?.[0]?.content?.parts?.map(p => p.text).join('') || '';
-    if (text) return { text, model };
-    errs.push(`${model}: 空応答`);
+    // まず thinkingBudget:0 で試し、400（thinkingConfig非対応など）なら同じモデルを思考指定なしで再試行
+    for (const useThinking of [true, false]) {
+      try {
+        return { text: await callGemini(model, prompt, useThinking), model };
+      } catch (e) {
+        errs.push(`${model}${useThinking ? '' : '(思考なし)'}: ${e.message}`);
+        if (e.status !== 400) break; // 404/429など: 思考なし再試行は無駄→次モデルへ
+      }
+    }
   }
   throw new Error('全モデル失敗:\n' + errs.join('\n'));
 }
