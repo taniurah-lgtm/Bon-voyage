@@ -111,4 +111,6 @@ if (!KEY) {
   }
 }
 writeFileSync(out, body);
-console.log('wrote', out);
+// 手動運用用: いつも同じURLで最新の草案を見られるように latest.md も更新する
+writeFileSync('social/drafts/latest.md', body);
+console.log('wrote', out, '(+ social/drafts/latest.md)');
