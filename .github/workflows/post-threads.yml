@@ -1,0 +1,53 @@
+name: Post to Threads (manual approval)
+
+# ドラフト(social/drafts/DATE.md)を人が見てOKなら、これを手動実行して Threads に投稿する。
+# ＝承認ゲート。自動投稿はしない（後で schedule を足せば全自動化も可能）。
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "投稿する草案の日付 (YYYY-MM-DD、空なら今日JST)"
+        required: false
+        default: ""
+      dry_run:
+        description: "1 なら投稿せず本文だけ確認"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: post-threads
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Post to Threads
+        env:
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          POST_DATE: ${{ github.event.inputs.date }}
+          THREADS_DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: node scripts/social/post-threads.mjs
+      - name: Commit post log
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add social/state/ 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "ログの変更なし"
+          else
+            git commit -m "social: threads post log ($(TZ=Asia/Tokyo date +%F))"
+            git push
+          fi
