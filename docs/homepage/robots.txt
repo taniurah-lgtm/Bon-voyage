@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /f/
+Disallow: /m/
+
+Sitemap: https://bonvoya.nicomaru.tokyo/sitemap.xml
