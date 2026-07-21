@@ -99,6 +99,30 @@
 
 ---
 
+## 4.5 決定事項（2026-07-21）＋実装計画
+
+- **土台: C（GitHub Actions・cron）**に決定。
+- **優先順位: Threads → X → Instagram(feed)**（推奨どおり）。
+- **X は無料枠**（テキスト中心・書き込み上限に注意）。
+- **承認ゲート: 最初は挟む**（誤爆防止。ドラフトを確認→投稿）。安定したら全自動へ。
+- **設置ブランチ: `claude/family-event-planning-rfwmo8`（デフォルト＝cronが動く唯一の場所）**。LINE巡回と同居。
+
+### フェーズ分け（認証情報の準備順）
+| Phase | 内容 | 必要な認証（GitHub Secrets） |
+|---|---|---|
+| **0 骨組み** | 収集→生成→**ドラフトをリポジトリに出力（投稿しない dry-run）**。cronワークフロー。 | なし（テンプレ生成）or `GEMINI_API_KEY` |
+| **1 文章生成** | Geminiで「こんなの上がってたよ🎈」文をトーン適用・出典付きで生成 | `GEMINI_API_KEY` |
+| **2 Threads投稿** | 承認後 or 自動で Threads へ投稿 | `THREADS_USER_ID`, `THREADS_ACCESS_TOKEN` |
+| **3 X投稿(無料)** | X へテキスト投稿（無料枠） | `X_API_KEY`, `X_API_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_SECRET` |
+| **4 IGフィード** | IGフィードへ画像投稿（プロアカ＋FBページ連携） | `IG_USER_ID`, `IG_ACCESS_TOKEN` |
+
+### 認証情報の取り方（オーナー作業・Search Consoleと同じノリ）
+- **Gemini**: [Google AI Studio](https://aistudio.google.com/) → APIキー発行（無料枠）。tokyo.papa.home でOK。
+- **Threads**: Meta for Developers でアプリ作成 → Threads APIを有効化 → **Threadsユーザーアクセストークン＋ユーザーID**（長期トークンは約60日で更新要）。
+- **X（無料）**: [X Developer](https://developer.x.com/) でProject/App作成 → 投稿には **OAuth1.0a** の API Key/Secret＋Access Token/Secret（Read and Write権限）。
+- **Instagram**: プロアカウント＋Facebookページ連携 → Metaアプリで `instagram_content_publish` 権限 → IGユーザーID＋アクセストークン。
+- 取得した値は **GitHubリポジトリ → Settings → Secrets and variables → Actions** に登録（コードには絶対に書かない）。
+
 ## 5. 未確定・要判断
 - どの土台（B/C/D/E）で始めるか。
 - 対象SNSの優先順位（推奨: Threads→X→IG feed）。
