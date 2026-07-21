@@ -1,0 +1,44 @@
+name: SNS drafts (Phase 0 - generate only, no posting)
+
+# 毎日、投稿ドラフトを生成して social/drafts/ にコミットするだけ（まだ投稿はしない＝承認ゲート）。
+# スケジュール(cron)はデフォルトブランチ(claude/family-event-planning-rfwmo8)でのみ発火する。
+on:
+  schedule:
+    - cron: "0 22 * * *"   # 07:00 JST（22:00 UTC）daily。GitHub都合で数分ずれることあり
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: social-drafts
+  cancel-in-progress: false
+
+jobs:
+  drafts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Generate drafts
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+        run: node scripts/social/generate-drafts.mjs
+      - name: Commit drafts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add social/
+          if git diff --cached --quiet; then
+            echo "変更なし（ドラフトの更新なし）"
+          else
+            git commit -m "social: daily SNS drafts ($(TZ=Asia/Tokyo date +%F))"
+            git push
+          fi
