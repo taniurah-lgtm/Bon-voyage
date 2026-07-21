@@ -1,28 +1,22 @@
-# 2026-07-22 SNSドラフト（生成エラー）
+# 2026-07-22 SNSドラフト（承認待ち・まだ投稿していません）
 
-```
-全モデル失敗:
-gemini-1.5-flash: 404 {
-  "error": {
-    "code": 404,
-    "message": "models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and t
-gemini-2.5-flash: 404 {
-  "error": {
-    "code": 404,
-    "message": "This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.",
-    "status
-gemini-2.0-flash: 429 {
-  "error": {
-    "code": 429,
-    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
-gemini-flash-latest: 400 {
-  "error": {
-    "code": 400,
-    "message": "Request contains an invalid argument.",
-    "status": "INVALID_ARGUMENT"
-  }
-}
+【Threads】
+小平駐屯地で夏の納涼祭が開催されます。盆踊りや音楽隊の演奏、野外売店のほか、自衛隊や消防、警察の「働く車」の展示もあり、乗り物が好きなお子さんにもおすすめです🎈
 
-```
+陸上自衛隊 小平駐屯地 納涼祭
+日時：7/25(土) 15:00〜（雨天時は翌日順延）
+場所：陸上自衛隊 小平駐屯地（一橋学園駅 徒歩約15分）
+公式：https://kodaira-tourism.com/event/3369/
 
-モデル名が原因なら Actions Variables に GEMINI_MODEL を設定してください（例: gemini-1.5-flash）。
+敷地が広く子連れでも過ごしやすいイベントです。駐輪場が少ないため公共交通機関での来場が推奨されています。ペットの同伴はできませんのでご注意ください。
+
+くわしくは → https://bonvoya.nicomaru.tokyo/f
+#小平 #子連れおでかけ #夏祭り
+
+【X】
+7/25(土)に小平駐屯地で納涼祭が開催されます。盆踊りや売店のほか、自衛隊や警察などの働く車展示も。敷地が広く子連れで楽しみやすいイベントです。駐輪場が少ないため徒歩や電車がおすすめです🎈
+https://bonvoya.nicomaru.tokyo/f
+#小平 #子連れおでかけ
+
+---
+※自動生成（model: gemini-flash-latest）。投稿前に日付・事実・トーンを目視確認してください。飛び先は https://bonvoya.nicomaru.tokyo/f に統一。
