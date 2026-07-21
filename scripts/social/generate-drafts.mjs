@@ -8,12 +8,16 @@
  *
  * 必要な環境変数:
  *   GEMINI_API_KEY  … Google AI Studio (aistudio.google.com) で発行。GitHub Secretsに登録。
- *   GEMINI_MODEL    … 任意。既定 gemini-2.0-flash。404等なら別モデル名を Actions Variables で指定。
+ *   GEMINI_MODEL    … 任意。指定するとそのモデルだけ使う。未指定なら複数モデルを順に試す
+ *                     （gemini-1.5-flash → 2.5-flash → 2.0-flash → flash-latest）。
  */
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 
 const TODAY = new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Tokyo' }); // YYYY-MM-DD (JST)
-const MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+// GEMINI_MODEL が指定されればそれだけを、無ければ複数モデルを順に試す（無料枠/可用性の違いを吸収）。
+const MODELS = process.env.GEMINI_MODEL
+  ? [process.env.GEMINI_MODEL]
+  : ['gemini-1.5-flash', 'gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-flash-latest'];
 const KEY = process.env.GEMINI_API_KEY || '';
 const HP = 'https://bonvoya.nicomaru.tokyo/f';
 
@@ -60,20 +64,28 @@ ${ledger}
 `;
 
 async function gen() {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${KEY}`;
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: PROMPT(loadLedger(), loadRecentDrafts()) }] }],
-      generationConfig: { temperature: 0.7, maxOutputTokens: 800 },
-    }),
-  });
-  if (!res.ok) throw new Error(`Gemini API ${res.status}: ${(await res.text()).slice(0, 500)}`);
-  const j = await res.json();
-  const text = j?.candidates?.[0]?.content?.parts?.map(p => p.text).join('') || '';
-  if (!text) throw new Error('Gemini から本文が返りませんでした: ' + JSON.stringify(j).slice(0, 500));
-  return text;
+  const prompt = PROMPT(loadLedger(), loadRecentDrafts());
+  const errs = [];
+  for (const model of MODELS) {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${KEY}`;
+    let res;
+    try {
+      res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { temperature: 0.7, maxOutputTokens: 800 },
+        }),
+      });
+    } catch (e) { errs.push(`${model}: ${e.message}`); continue; }
+    if (!res.ok) { errs.push(`${model}: ${res.status} ${(await res.text()).slice(0, 220)}`); continue; }
+    const j = await res.json();
+    const text = j?.candidates?.[0]?.content?.parts?.map(p => p.text).join('') || '';
+    if (text) return { text, model };
+    errs.push(`${model}: 空応答`);
+  }
+  throw new Error('全モデル失敗:\n' + errs.join('\n'));
 }
 
 const out = `social/drafts/${TODAY}.md`;
@@ -85,11 +97,11 @@ if (!KEY) {
   console.log('GEMINI_API_KEY 未設定: プレースホルダを出力');
 } else {
   try {
-    const text = await gen();
+    const { text, model } = await gen();
     body = `# ${TODAY} SNSドラフト（承認待ち・まだ投稿していません）\n\n` +
       `${text}\n\n---\n` +
-      `※自動生成。投稿前に日付・事実・トーンを目視確認してください。飛び先は ${HP} に統一。\n`;
-    console.log('生成OK:', out);
+      `※自動生成（model: ${model}）。投稿前に日付・事実・トーンを目視確認してください。飛び先は ${HP} に統一。\n`;
+    console.log('生成OK:', out, 'model:', model);
   } catch (e) {
     body = `# ${TODAY} SNSドラフト（生成エラー）\n\n\`\`\`\n${e.message}\n\`\`\`\n\n` +
       `モデル名が原因なら Actions Variables に GEMINI_MODEL を設定してください（例: gemini-1.5-flash）。\n`;
