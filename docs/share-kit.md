@@ -9,6 +9,14 @@
 - 応援(note): https://note.com/bon_voyage_mail/membership
 - 友だち追加カード(印刷用A6): https://bonvoya.nicomaru.tokyo/card.html
 
+### SNSアカウント（ブランド公式・すべて @bonvoya_tokyo）
+- Instagram: https://www.instagram.com/bonvoya_tokyo/
+- Threads: https://www.threads.net/@bonvoya_tokyo
+- X: https://x.com/bonvoya_tokyo
+- 共通プロフィール: 名前「ぼんぼやーじゅ通信」/ アイコン `assets/line-icon.png` / リンク `/f` /
+  自己紹介「花小金井まわり(小平・西東京)の週末おでかけ情報を無料でお届け🎈 お祭り/花火/水あそび/雨の日の室内あそび/電車でおでかけ…未就学〜小学生のご家庭へ📮」
+- Xヘッダー画像: `assets/x-header.png`（1500×500）
+
 ---
 
 ## 1. ママ友へのLINE転送
@@ -67,11 +75,11 @@ https://bonvoya.nicomaru.tokyo/
 - **カード(card.html)**: 児童館・園・お店に置く/配る（対面）。
 - **転送LINE(1)**: ママ友・グループLINE（オンラインの口コミ）。
 - **あいさつ(2)**: 追加した人へ自動で「ガイド」を届ける。
-- **Instagram(3)**: 妻アカウントのストーリーズ/フィードで拡散(下記)。
+- **Instagram(3)**: ブランド公式 @bonvoya_tokyo のストーリーズ/フィードで拡散(下記)。
 
 ---
 
-## 3. Instagram(妻アカウント)
+## 3. Instagram / Threads / X（ブランド公式 @bonvoya_tokyo）
 
 ### 画像素材
 - ストーリーズ画像(縦1080×1920): `docs/homepage/assets/ig-story.png`(公園写真＋ガイドプレゼント告知／**ホームページ誘導**・QRなし)。元データは `docs/homepage/ig-story.html`。フィード投稿にもそのまま使える。
