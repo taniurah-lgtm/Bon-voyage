@@ -19,7 +19,8 @@
    - 対象範囲: 小平市を中心に多摩地域全体+都心。近隣市の距離2段(コア/スポット)は `docs/sources.md` 参照。キャンプは関東近郊(車2.5時間圏)。
 3. **台帳を更新**: 新規イベントを追加、終了・中止を反映。ステータスは `候補` / `承認済` / `登録済` / `終了` / `見送り`。
 4. **レポート作成**: `reports/YYYY-MM-DD.md` に番号付きレポートを作成(フォーマットは下記)。番号は台帳のID(例: E12)をそのまま使う。
-5. **コミット&プッシュ**: ブランチ `claude/family-event-planning-rfwmo8` に push(`git push -u origin claude/family-event-planning-rfwmo8`)。
+5. **コミット&プッシュ(先に必ず・検証つき)**: **LINE送信より前に**、生成したレポート＋台帳更新を commit し、`git push -u origin claude/family-event-planning-rfwmo8` する。**pushの成否を必ず確認**する(例: `git push … && echo PUSH_OK || echo PUSH_FAILED`)。
+   - **push が失敗した場合(重要・号を絶対に失わない)**: そのセッションは一時的な実行環境で、コミットは消える。よって **失敗を検知したら、最終メッセージ(=オーナーへのプッシュ通知)にレポート全文＋「push失敗: <エラー要約>」を必ず出力**する。こうすればオーナーが本文を保存・再投入できる。原因(git認証・権限)も1行添える。
 6. **LINE送信**: `scripts/line_report.sh reports/YYYY-MM-DD.md` で送信。`LINE_CHANNEL_ACCESS_TOKEN` 未設定で失敗した場合は、チャットにレポート全文を出し、可能ならプッシュ通知も送る(フォールバック)。
 7. レポート末尾に「Claudeに『E3とE5を登録』のように返信するとGoogleカレンダーに登録します」と案内する。
 
