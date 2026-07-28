@@ -21,7 +21,9 @@ Threads APIのトークン取得は保留中のため、当面は**手で貼る*
    （GitHubにログインした状態で。前日ぶんは `social/drafts/YYYY-MM-DD.md`）
 2. 【Threads】ブロックをコピー → Threadsアプリに貼って投稿。
 3. 【X】ブロックをコピー → Xに貼って投稿。
-4. 飛び先リンク `bonvoya.nicomaru.tokyo/f` はそのまま入っている。
+4. **Instagram**: 同じ日付の画像 `social/drafts/ig/YYYY-MM-DD.png`(1080×1350・フィード用)を保存して投稿し、
+   【Instagram】ブロックをキャプションに貼る（インスタは本文のリンクが押せないため、URLは入れずプロフィールのリンクへ誘導）。
+5. 飛び先リンク `bonvoya.nicomaru.tokyo/f` はそのまま入っている（Threads/X）。
 
 ## この先（トークンが揃ったら自動化）
 - Phase 2: Threads 投稿（`post-threads.mjs` / `post-threads.yml` は実装済み・手動実行）。
