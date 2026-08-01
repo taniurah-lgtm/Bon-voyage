@@ -1,0 +1,67 @@
+name: Update homepage preview from the latest issue
+
+# 水曜巡回が reports/free/YYYY-MM-DD.md を push したら、
+# ホームページの「最新号のプレビュー」を自動で書き換えて公開する。
+on:
+  push:
+    branches: [claude/family-event-planning-rfwmo8]
+    paths:
+      - "reports/free/**"
+      - "scripts/update-homepage-preview.mjs"
+      - ".github/workflows/update-homepage-preview.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  update:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (reports + script)
+        uses: actions/checkout@v4
+        with:
+          ref: claude/family-event-planning-rfwmo8
+      - name: Checkout homepage branch
+        uses: actions/checkout@v4
+        with:
+          ref: claude/line-message-resend-yefv9l
+          path: site
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Rewrite the preview block
+        id: rewrite
+        run: node scripts/update-homepage-preview.mjs site/docs/homepage/index.html
+      - name: Commit homepage change
+        working-directory: site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/homepage/index.html
+          if git diff --cached --quiet; then
+            echo "変更なし（プレビューは最新）"
+          else
+            git commit -m "homepage: refresh latest-issue preview (auto)"
+            git push origin claude/line-message-resend-yefv9l
+          fi
+      # GITHUB_TOKEN による push は他ワークフローを起動しないため、ここで直接公開する
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload homepage
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/docs/homepage
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
