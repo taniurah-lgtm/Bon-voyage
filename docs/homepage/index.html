@@ -169,6 +169,13 @@
   .btn-warm { background: var(--marigold); color: #3a2408; }
   .btn-warm:hover { transform: translateY(-1px); }
   .reassure { margin-top: 1rem; font-size: .88rem; color: var(--ink-faint); }
+  /* 入会の流れ（何をすればいいか・何が起きるかを先に見せる） */
+  .steps { margin-top: 1.4rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 1.1rem 1.2rem; }
+  .steps-title { font-family: var(--maru); font-weight: 800; font-size: .95rem; margin-bottom: .7rem; }
+  .steps ol { margin: 0; padding-left: 0; list-style: none; counter-reset: st; }
+  .steps li { position: relative; padding-left: 2.1rem; margin: .55rem 0; font-size: .93rem; line-height: 1.7; counter-increment: st; }
+  .steps li::before { content: counter(st); position: absolute; left: 0; top: .15rem; width: 1.5rem; height: 1.5rem; border-radius: 999px; background: var(--sky-wash); color: var(--sky-deep); font-family: var(--maru); font-weight: 800; font-size: .8rem; display: flex; align-items: center; justify-content: center; }
+  .steps .tiny { display: block; font-size: .82rem; color: var(--ink-faint); margin-top: .1rem; }
 
   .trust { display: grid; gap: .95rem; max-width: 48rem; }
   .trust .row { display: flex; gap: .7rem; align-items: flex-start; font-size: .94rem; color: var(--ink-soft); }
@@ -322,11 +329,21 @@
       <div>
         <p>「役に立ってるよ」「応援したいな」と思っていただけたら、月々300円で支えていただけたら嬉しいです。お礼として、こんな特典をご用意しています。</p>
         <div class="price"><span class="n">300</span><span class="u">円 / 月（税込）</span></div>
-        <div class="paid-cta">
-          <a class="btn btn-warm" href="https://note.com/bon_voyage_mail/membership" target="_blank" rel="noopener">応援する（サポーター登録）</a>
-          <a class="btn btn-ghost" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">まずは相談する</a>
+
+        <div class="steps">
+          <div class="steps-title">はじめ方（3ステップ・5分ほど）</div>
+          <ol>
+            <li>下のボタンから <b>note のメンバーシップに参加</b><span class="tiny">note のアカウントが必要です（お持ちでなければ登録に1〜2分）。お支払いも note を通じて行われます。</span></li>
+            <li><b>会員ページのURLと合言葉</b>をお届けします<span class="tiny">note のメンバー限定投稿、またはLINEでお送りします。</span></li>
+            <li>次の水曜から、<b>ご家庭に合わせた通信</b>が届きます<span class="tiny">お住まい・お子さんの年齢・興味をうかがって、内容を合わせていきます。</span></li>
+          </ol>
         </div>
-        <p class="reassure">無料通信だけでも、これからもずっと無料でお使いいただけます。</p>
+
+        <div class="paid-cta">
+          <a class="btn btn-warm" href="https://note.com/bon_voyage_mail/membership" target="_blank" rel="noopener">note でサポーターになる（月300円）</a>
+          <a class="btn btn-ghost" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">先にLINEで質問する</a>
+        </div>
+        <p class="reassure">解約はいつでも note のメンバーシップから手続きできます。<br>無料通信だけでも、これからもずっと無料でお使いいただけます。</p>
       </div>
       <div class="perks">
         <div class="perks-title">🎁 応援のお礼（特典）</div>
