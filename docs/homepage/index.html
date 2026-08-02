@@ -161,6 +161,22 @@
   .price .n { font-family: var(--maru); font-weight: 800; font-size: 2.2rem; color: var(--ink); font-variant-numeric: tabular-nums; }
   .price .u { color: var(--ink-soft); font-size: .95rem; }
   .price-sub { margin-top: .35rem; font-size: .92rem; color: var(--ink-soft); }
+  /* 無料 / サポーターの役割のちがい */
+  .cmp { margin-top: 2rem; }
+  .cmp-title { font-family: var(--maru); font-weight: 800; font-size: 1.1rem; margin-bottom: .9rem; }
+  .cmp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .cmp-col { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 1.1rem 1.2rem; }
+  .cmp-col.paid-col { border-color: var(--marigold); box-shadow: var(--shadow-soft); }
+  .cmp-head { font-family: var(--maru); font-weight: 800; font-size: .82rem; letter-spacing: .06em; display: inline-block; padding: .25rem .7rem; border-radius: 999px; }
+  .cmp-head.free { background: var(--sky-wash); color: var(--sky-deep); }
+  .cmp-head.sup { background: var(--marigold); color: #fff; }
+  .cmp-role { font-family: var(--maru); font-weight: 800; font-size: 1.04rem; margin: .7rem 0 .6rem; line-height: 1.5; }
+  .cmp-col ul { list-style: none; margin: 0; padding: 0; }
+  .cmp-col li { position: relative; padding-left: 1rem; margin: .45rem 0; font-size: .93rem; line-height: 1.65; color: var(--ink-soft); }
+  .cmp-col li::before { content: ""; position: absolute; left: 0; top: .62em; width: .38rem; height: .38rem; border-radius: 999px; background: var(--line-strong); }
+  .cmp-col.paid-col li { color: var(--ink); }
+  .cmp-col.paid-col li::before { background: var(--marigold); }
+  @media (max-width: 40rem) { .cmp-grid { grid-template-columns: 1fr; } }
   .perks { background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); padding: 1.4rem 1.4rem 1.25rem; box-shadow: var(--shadow-soft); }
   .perks-title { font-family: var(--maru); font-weight: 800; font-size: 1.02rem; color: var(--marigold); margin-bottom: 1rem; display: flex; align-items: center; gap: .45rem; }
   .paid-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .9rem; }
@@ -357,6 +373,33 @@
         </ul>
         <p class="reassure" style="margin-top:1rem;">一部の機能はこれから順次ととのえていきます。</p>
       </div>
+    </div>
+
+    <div class="cmp">
+      <div class="cmp-title">無料の通信と、どう違う？</div>
+      <div class="cmp-grid">
+        <div class="cmp-col">
+          <div class="cmp-head free">無料の通信</div>
+          <div class="cmp-role">今週のおでかけを <b>知る</b></div>
+          <ul>
+            <li>毎週水曜、その週のおすすめを1つ</li>
+            <li>花小金井まわりの近場が中心</li>
+            <li>👶🧒🎒 の年齢の目安つき</li>
+            <li>天気に合わせたひとこと</li>
+          </ul>
+        </div>
+        <div class="cmp-col paid-col">
+          <div class="cmp-head sup">サポーター</div>
+          <div class="cmp-role">わが家の予定を <b>決める・動く</b></div>
+          <ul>
+            <li><b>お子さんの年齢・お住まい・興味</b>に合わせて選びます</li>
+            <li>気になった予定を <b>ワンタップでカレンダーへ</b></li>
+            <li>会員ページで<b>先の予定をまとめて</b>見られる</li>
+            <li>おでかけ直前の<b>中止・天気の確認</b></li>
+          </ul>
+        </div>
+      </div>
+      <p class="reassure" style="margin-top:1rem;">無料の通信は、これからもずっと無料です。サポーターは「読む」から「動く」まで、ご家庭に合わせてお手伝いする役割です。</p>
     </div>
   </section>
 
