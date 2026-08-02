@@ -88,9 +88,14 @@ ${recent || '(なし)'}
 ${ledger}
 `;
 
-async function callGemini(model, prompt, useThinking) {
+// 4ブロック全部そろって初めて「使える草案」。思考モデルは思考でトークンを消費し、
+// 途中で切れる日がある（2026-08-02 に発生）ので、必ず検査して足りなければ作り直す。
+const BLOCKS = ['【Threads】', '【X】', '【Instagram】', '【画像】'];
+const isComplete = (t) => BLOCKS.every(b => t.includes(b));
+
+async function callGemini(model, prompt, useThinking, maxTokens) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${KEY}`;
-  const generationConfig = { temperature: 0.7, maxOutputTokens: 4096 };
+  const generationConfig = { temperature: 0.7, maxOutputTokens: maxTokens };
   if (useThinking) generationConfig.thinkingConfig = { thinkingBudget: 0 }; // 2.5系: 思考OFFで無駄トークン削減
   const res = await fetch(url, {
     method: 'POST',
@@ -99,25 +104,38 @@ async function callGemini(model, prompt, useThinking) {
   });
   const raw = await res.text();
   if (!res.ok) { const err = new Error(`${res.status} ${raw.slice(0, 200)}`); err.status = res.status; throw err; }
-  const text = JSON.parse(raw)?.candidates?.[0]?.content?.parts?.map(p => p.text).join('') || '';
+  const cand = JSON.parse(raw)?.candidates?.[0];
+  const text = cand?.content?.parts?.map(p => p.text).join('') || '';
   if (!text) throw new Error('空応答');
-  return text;
+  return { text, finishReason: cand?.finishReason || '' };
 }
 
 async function gen() {
   const prompt = PROMPT(loadLedger(), loadRecentDrafts());
   const errs = [];
+  let partial = null; // 途中で切れた草案（最後の保険。何も無いよりはマシ）
   for (const model of MODELS) {
-    // まず thinkingBudget:0 で試し、400（thinkingConfig非対応など）なら同じモデルを思考指定なしで再試行
-    for (const useThinking of [true, false]) {
-      try {
-        return { text: await callGemini(model, prompt, useThinking), model };
-      } catch (e) {
-        errs.push(`${model}${useThinking ? '' : '(思考なし)'}: ${e.message}`);
-        if (e.status !== 400) break; // 404/429など: 思考なし再試行は無駄→次モデルへ
+    // 8192 で1回、足りなければ 16384 でもう1回（思考ぶんの余裕をとる）
+    for (const maxTokens of [8192, 16384]) {
+      // まず thinkingBudget:0 で試し、400（thinkingConfig非対応など）なら同じモデルを思考指定なしで再試行
+      for (const useThinking of [true, false]) {
+        let r;
+        try {
+          r = await callGemini(model, prompt, useThinking, maxTokens);
+        } catch (e) {
+          errs.push(`${model}/${maxTokens}${useThinking ? '' : '(思考なし)'}: ${e.message}`);
+          if (e.status !== 400) break; // 404/429など: 思考なし再試行は無駄→次へ
+          continue;
+        }
+        if (isComplete(r.text)) return { text: r.text, model };
+        const miss = BLOCKS.filter(b => !r.text.includes(b)).join('');
+        errs.push(`${model}/${maxTokens}${useThinking ? '' : '(思考なし)'}: 不完全(${miss}が欠落, finishReason=${r.finishReason})`);
+        if (!partial || r.text.length > partial.text.length) partial = { text: r.text, model };
+        break; // 同じ条件で思考ありなしを変えても改善しないので次のトークン量へ
       }
     }
   }
+  if (partial) { partial.incomplete = true; return partial; }
   throw new Error('全モデル失敗:\n' + errs.join('\n'));
 }
 
@@ -130,11 +148,15 @@ if (!KEY) {
   console.log('GEMINI_API_KEY 未設定: プレースホルダを出力');
 } else {
   try {
-    const { text, model } = await gen();
-    body = `# ${TODAY} SNSドラフト（承認待ち・まだ投稿していません）\n\n` +
+    const { text, model, incomplete } = await gen();
+    const head = incomplete
+      ? `# ${TODAY} SNSドラフト（⚠️途中で切れています・投稿前に補ってください）`
+      : `# ${TODAY} SNSドラフト（承認待ち・まだ投稿していません）`;
+    body = `${head}\n\n` +
+      (incomplete ? `> 生成が途中で終わり、ブロックが足りていません。Threads/X/Instagram のうち欠けている分は手で書き足すか、Actions から「SNS drafts」を再実行してください。\n\n` : '') +
       `${text}\n\n---\n` +
       `※自動生成（model: ${model}）。投稿前に日付・事実・トーンを目視確認してください。飛び先は ${HP} に統一。\n`;
-    console.log('生成OK:', out, 'model:', model);
+    console.log(incomplete ? '生成(不完全):' : '生成OK:', out, 'model:', model);
   } catch (e) {
     body = `# ${TODAY} SNSドラフト（生成エラー）\n\n\`\`\`\n${e.message}\n\`\`\`\n\n` +
       `モデル名が原因なら Actions Variables に GEMINI_MODEL を設定してください（例: gemini-1.5-flash）。\n`;
