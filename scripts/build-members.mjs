@@ -74,30 +74,13 @@ const renkyu = `
   <div class="ev"><div class="nm">🏕 キャンプ（早めに予約）</div><div class="desc">C&C山中湖ほか高原キャンプ。予約は例年2ヶ月前の月末20時ごろ開始（9月分は7月末ごろ）。人気なので、最新の受付日を公式で確認して早めに。日曜泊やキャンセル拾いも。</div><div class="links"><a class="lk off" href="https://www.camp-cabins.com/yamanakako/" target="_blank" rel="noopener">🔗 公式</a></div></div>
   <p class="note">※営業日・料金・味覚狩りの解禁時期は変わります。おでかけ前に各公式でご確認を。</p>`;
 
-// 創刊サポーター（はじめの20名）。掲載は希望者のみ。
-// 形式: [番号, 表示名, ひとこと(任意)]。掲載を希望されない方はここに載せない（人数だけ FOUNDING_TOTAL で数える）。
-const FOUNDING = [
-  // 例: [1, 'たにうら', '花小金井・3きょうだい'],
-];
-// 掲載を希望されない方も含めた実人数。0 のあいだはセクションごと出さない。
-const FOUNDING_TOTAL = 0;
-
-const founding = FOUNDING_TOTAL === 0 ? '' : `
-  <h2 class="sec" id="founding">🎖 創刊サポーター</h2>
-  <p class="sec-note">この通信を、いちばん最初に支えてくださっている方々です（掲載はご希望の方のみ）。ありがとうございます。</p>
-  <div class="card"><ul>${
-    FOUNDING.map(([no, nm, memo]) => `<li><b>No.${no}</b> ${esc(nm)}${memo ? ` <span class="note">— ${esc(memo)}</span>` : ''}</li>`).join('')
-  }${
-    FOUNDING_TOTAL > FOUNDING.length ? `<li class="note">ほか ${FOUNDING_TOTAL - FOUNDING.length} 名の方に支えていただいています。</li>` : ''
-  }</ul></div>`;
-
-// 暗号化する中身（創刊サポーター＋カレンダー＋連休さきどり＋バックナンバー＋投稿マップ）
+// 暗号化する中身（カレンダー＋連休さきどり＋バックナンバー＋投稿マップ）
 const CONTENT = `
   <nav class="toc">
     <a href="#cal">📅 カレンダー</a>
     <a href="#renkyu">🍁 連休さきどり</a>
     <a href="#back">📮 バックナンバー</a>
-    <a href="#map">🗺 投稿マップ</a>${FOUNDING_TOTAL === 0 ? '' : '\n    <a href="#founding">🎖 創刊サポーター</a>'}
+    <a href="#map">🗺 投稿マップ</a>
   </nav>
   <h2 class="sec" id="cal">📅 おでかけカレンダー</h2>
   <p class="sec-note">花小金井まわりの先の予定を日付順に。行きたいものを「カレンダーに追加」で保存できます。</p>
@@ -109,7 +92,6 @@ ${renkyu}
 
   <h2 class="sec" id="map">🗺 みんなの投稿マップ <span class="note" style="font-weight:400">（準備中）</span></h2>
   <div class="soon">会員のみなさんで「よかったおでかけ先」を地図に書き込んで育てる、参加型マップを準備しています。公開までもう少しお待ちください。</div>
-${founding}
 
   <p class="note" style="margin-top:1.6rem">📅 ボタンはご自分のGoogleカレンダーに保存する形です。リマインダーはカレンダー側でお好みに設定できます。日程・料金は変わることがあるので、おでかけ前に各公式でご確認ください。</p>`;
 
