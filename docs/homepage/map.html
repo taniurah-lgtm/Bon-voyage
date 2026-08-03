@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>みんなのおでかけマップ｜ぼんぼやーじゅ通信</title>
+<meta name="description" content="花小金井まわり（小平・西東京・東久留米・立川・吉祥寺）の、子連れで行ってよかったおでかけ先を地図にまとめています。地元の家庭の声つき。">
+<link rel="canonical" href="https://bonvoya.nicomaru.tokyo/map.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bonvoya.nicomaru.tokyo/map.html">
+<meta property="og:title" content="みんなのおでかけマップ｜ぼんぼやーじゅ通信">
+<meta property="og:description" content="花小金井まわりの子連れおでかけ先を、地元の家庭の声とあわせて地図に。">
+<meta property="og:locale" content="ja_JP">
+<style>
+  :root {
+    --ground:#FBFAF5; --surface:#FFFFFF; --surface-2:#F5F2EA;
+    --ink:#34434C; --ink-soft:#63727B; --ink-faint:#97A2AA;
+    --sky:#4FA3C4; --sky-deep:#2C7C9E; --sky-wash:#E9F4F7;
+    --marigold:#EBA24A; --marigold-wash:#FBEEDA; --leaf:#74AE71;
+    --line:#ECE7DB; --line-strong:#DCD5C6;
+    --shadow-soft:0 2px 20px rgba(52,67,76,.05);
+    --radius:20px; --radius-sm:14px;
+    --maru:"Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN W4","Yu Gothic","游ゴシック","Noto Sans JP","Segoe UI",sans-serif;
+    --body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","游ゴシック","Noto Sans JP","Segoe UI",Meiryo,sans-serif;
+    --script:Georgia,"Times New Roman","Hiragino Mincho ProN",serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --ground:#131F28; --surface:#1A2831; --surface-2:#21333D;
+      --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95;
+      --sky:#6FBAD9; --sky-deep:#9AD4EA; --sky-wash:#1D3944;
+      --marigold:#F0AE5E; --marigold-wash:#362F1F; --leaf:#8FC489;
+      --line:#293B45; --line-strong:#38505C; --shadow-soft:0 2px 22px rgba(0,0,0,.22); }
+  }
+  :root[data-theme="light"]{--ground:#FBFAF5;--surface:#FFFFFF;--surface-2:#F5F2EA;--ink:#34434C;--ink-soft:#63727B;--ink-faint:#97A2AA;--sky:#4FA3C4;--sky-deep:#2C7C9E;--sky-wash:#E9F4F7;--marigold:#EBA24A;--marigold-wash:#FBEEDA;--leaf:#74AE71;--line:#ECE7DB;--line-strong:#DCD5C6;--shadow-soft:0 2px 20px rgba(52,67,76,.05);}
+  :root[data-theme="dark"]{--ground:#131F28;--surface:#1A2831;--surface-2:#21333D;--ink:#ECF2F4;--ink-soft:#AAB9C1;--ink-faint:#7B8C95;--sky:#6FBAD9;--sky-deep:#9AD4EA;--sky-wash:#1D3944;--marigold:#F0AE5E;--marigold-wash:#362F1F;--leaf:#8FC489;--line:#293B45;--line-strong:#38505C;--shadow-soft:0 2px 22px rgba(0,0,0,.22);}
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink); font-family:var(--body); line-height:1.85; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+  .wrap { max-width:46rem; margin:0 auto; padding:0 1.35rem; }
+  p { margin:0; }
+  a { color:var(--sky-deep); }
+
+  .ghead { background:linear-gradient(160deg, var(--sky-wash), var(--marigold-wash)); border-bottom:1px solid var(--line); }
+  .ghead-in { max-width:46rem; margin:0 auto; padding:3rem 1.35rem 2.2rem; }
+  .eyebrow { font-family:var(--script); font-style:italic; font-size:1.1rem; color:var(--marigold); margin-bottom:.3rem; }
+  h1 { font-family:var(--maru); font-weight:800; font-size:clamp(1.7rem,5.6vw,2.4rem); letter-spacing:.02em; line-height:1.25; margin:0 0 .6rem; }
+  .ghead .sub { color:var(--ink); font-size:1.02rem; max-width:32rem; }
+  .count { margin-top:1rem; font-size:.88rem; color:var(--ink-soft); background:var(--surface); border:1px solid var(--line-strong); border-radius:999px; padding:.45rem .95rem; display:inline-block; }
+
+  main { padding:2.2rem 0 1rem; }
+  .cat { margin-bottom:2.2rem; }
+  .cat > h2 { font-family:var(--maru); font-weight:800; font-size:1.3rem; margin:0 0 1rem; }
+  .spots { display:flex; flex-direction:column; gap:.8rem; }
+  .spot { background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-sm); padding:1.05rem 1.15rem; box-shadow:var(--shadow-soft); }
+  .spot .nm { font-family:var(--maru); font-weight:800; font-size:1.06rem; }
+  .spot .acc { font-size:.85rem; color:var(--sky-deep); margin-top:.1rem; }
+  .spot .desc { font-size:.95rem; color:var(--ink-soft); margin-top:.35rem; }
+  .spot .ages { margin-top:.45rem; font-family:var(--maru); font-weight:700; font-size:.86rem; color:var(--ink-faint); }
+  .links { margin-top:.5rem; display:flex; flex-wrap:wrap; gap:.8rem; }
+  .lk { font-size:.82rem; font-weight:700; text-decoration:none; }
+  .lk.map { color:var(--sky-deep); }
+  .lk.off { color:var(--marigold); }
+  .lk:hover { text-decoration:underline; }
+
+  .voices { margin-top:.8rem; border-top:1px dashed var(--line-strong); padding-top:.7rem; display:flex; flex-direction:column; gap:.6rem; }
+  .voice { background:var(--surface-2); border-radius:12px; padding:.6rem .8rem; }
+  .vtxt { font-size:.93rem; line-height:1.7; }
+  .vwho { font-size:.8rem; color:var(--ink-faint); margin-top:.2rem; }
+  .vph { color:var(--marigold); font-weight:700; }
+  .more { font-size:.84rem; color:var(--ink-soft); }
+
+  .join { background:var(--surface); border:1px solid var(--line-strong); border-radius:var(--radius); padding:1.6rem 1.5rem; margin:2.4rem 0 0; box-shadow:var(--shadow-soft); }
+  .join h2 { font-family:var(--maru); font-weight:800; font-size:1.2rem; margin:0 0 .6rem; }
+  .join p { color:var(--ink-soft); font-size:.96rem; }
+  .btns { display:flex; flex-wrap:wrap; gap:.7rem; margin:1.1rem 0 .9rem; }
+  .btn { display:inline-flex; align-items:center; gap:.5rem; font-family:var(--maru); font-weight:800; font-size:1rem; padding:.8rem 1.4rem; border-radius:999px; text-decoration:none; border:1px solid transparent; }
+  .btn-warm { background:var(--marigold); color:#3a2408; }
+  .btn:focus-visible { outline:3px solid var(--sky); outline-offset:2px; }
+  .fine { font-size:.85rem; color:var(--ink-faint); line-height:1.75; }
+  .fine b { color:var(--ink-soft); }
+
+  .back { display:inline-block; margin-top:2rem; font-family:var(--maru); font-weight:800; font-size:.95rem; text-decoration:none; }
+  footer { color:var(--ink-faint); font-size:.82rem; text-align:center; padding:2.4rem 1.35rem 3rem; line-height:1.7; }
+  footer .fmark { font-family:var(--maru); font-weight:800; color:var(--ink-soft); }
+
+  @media (max-width:40rem) { html { font-size:112.5%; } .wrap,.ghead-in { padding-left:1.15rem; padding-right:1.15rem; } }
+</style>
+</head>
+<body>
+<header class="ghead">
+  <div class="ghead-in">
+    <div class="eyebrow">Bon Voyage,</div>
+    <h1>みんなの<br>おでかけマップ</h1>
+    <p class="sub">花小金井まわりで「行ってよかった」場所を、地元の家庭の声とあわせて集めています。地図リンクからそのまま案内を出せます。</p>
+    <div class="count">掲載スポット 23件</div>
+  </div>
+</header>
+
+<main class="wrap">
+
+    <section class="cat">
+      <h2>🌳大きな公園で1日（無料〜）</h2>
+      <div class="spots">
+      <div class="spot" id="s-e983bde7ab8b">
+        <div class="nm">都立 小金井公園</div>
+        <div class="acc">花小金井エリアの大定番／無料（一部施設は有料）</div>
+        <div class="desc">広い芝生・大型遊具・ふわふわドーム、江戸東京たてもの園も併設。春は桜の名所で、お花見にも。</div>
+        <div class="ages">👶 ○ 🧒 ◎ 🎒 ◎</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%B0%8F%E9%87%91%E4%BA%95%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.tokyo-park.or.jp/park/koganei/index.html" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      <div class="spot" id="s-e59bbde596b6">
+        <div class="nm">国営 昭和記念公園（立川）</div>
+        <div class="acc">電車・車で／多摩最大級</div>
+        <div class="desc">原っぱ・水遊び・サイクリング・季節の花。1日じゃ足りないくらい広いので、目的を絞って。</div>
+        <div class="ages">👶 ○ 🧒 ◎ 🎒 ◎</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%9B%BD%E5%96%B6%E6%98%AD%E5%92%8C%E8%A8%98%E5%BF%B5%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.showakinen-koen.jp/" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      <div class="spot" id="s-e4ba95e381ae">
+        <div class="nm">井の頭恩賜公園（武蔵野・吉祥寺）</div>
+        <div class="acc">電車・バスで／吉祥寺</div>
+        <div class="desc">大きな池でスワンボート、広い園内、井の頭自然文化園も隣接。吉祥寺の街歩きとセットで一日楽しめます。</div>
+        <div class="ages">👶 ○ 🧒 ◎ 🎒 ◎</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BA%95%E3%81%AE%E9%A0%AD%E6%81%A9%E8%B3%9C%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.tokyo-park.or.jp/park/inokashira/index.html" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      </div>
+    </section>
+
+    <section class="cat">
+      <h2>💧無料で水あそび（夏）</h2>
+      <div class="spots">
+      <div class="spot" id="s-e88ab1e5b08f">
+        <div class="nm">花小金井ひょうたん池公園</div>
+        <div class="acc">花小金井駅 南口・徒歩約9分／無料</div>
+        <div class="desc">大きなじゃぶじゃぶ池が広がる、地元で人気の水あそびスポット。浅めで、はじめての水あそびデビューにも安心です。</div>
+        <div class="ages">👶 ◎ 🧒 ◎ 🎒 ○</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=花小金井ひょうたん池公園" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.city.kodaira.tokyo.jp/kurashi/113/113055.html" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      <div class="spot" id="s-e8a5bfe69db1">
+        <div class="nm">西東京いこいの森公園 噴水広場</div>
+        <div class="acc">車・自転車で約10分／無料</div>
+        <div class="desc">噴水型でオムツの子も遊べます。夏の日中の“ちょい遊び”に便利。</div>
+        <div class="ages">👶 ◎ 🧒 ◎ 🎒 ○</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%A5%BF%E6%9D%B1%E4%BA%AC%E3%81%84%E3%81%93%E3%81%84%E3%81%AE%E6%A3%AE%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.city.nishitokyo.lg.jp/kurasi/koen/kouenmizuasobi.html" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      </div>
+    </section>
+
+    <section class="cat">
+      <h2>☔雨・猛暑の日の屋内（毎週使える）</h2>
+      <div class="spots">
+      <div class="spot" id="s-e5a49ae691a9">
+        <div class="nm">多摩六都科学館（西東京）</div>
+        <div class="acc">花小金井から近い／プラネタリウム・実験イベント</div>
+        <div class="desc">世界最大級のプラネタリウム。0歳から入れる回もあり、下の子連れでも安心。涼しくて雨の日の鉄板です。</div>
+        <div class="ages">👶 ○ 🧒 ◎ 🎒 ◎</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%9A%E6%91%A9%E5%85%AD%E9%83%BD%E7%A7%91%E5%AD%A6%E9%A4%A8" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.tamarokuto.or.jp/" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      <div class="spot" id="s-e382a4e382aa">
+        <div class="nm">イオンモール東久留米</div>
+        <div class="acc">車で近い</div>
+        <div class="desc">室内あそび場・授乳室・おむつ替えが揃い、全部涼しい。雨の日・猛暑の日の避難先に。</div>
+        <div class="ages">👶 ◎ 🧒 ◎ 🎒 ○</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%A4%E3%82%AA%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%AB%E6%9D%B1%E4%B9%85%E7%95%99%E7%B1%B3" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.aeon.jp/sc/higashikurume/" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      <div class="spot" id="s-e794b0e784a1">
+        <div class="nm">田無アスタ（田無駅前）</div>
+        <div class="acc">西武新宿線・田無駅 北口すぐ</div>
+        <div class="desc">駅前の専門店街。2階センターコートで季節のイベント（縁日・ワークショップ等）も開催。雨の日のお買い物＆ちょい遊びに便利です。</div>
+        <div class="ages">👶 ◎ 🧒 ◎ 🎒 ○</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=田無アスタ" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.asta.co.jp/" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      <div class="spot" id="s-e382b9e38391">
+        <div class="nm">スパジャポ（スパジアムジャポン・東久留米）</div>
+        <div class="acc">田無駅・東久留米駅から無料シャトルバス／車で近い</div>
+        <div class="desc">天然温泉・岩盤浴の大型スパ。授乳室・おむつ替え・粉ミルク用のお湯・子連れに人気のフードコート完備。雨・猛暑の日に一日ゆっくりできます。</div>
+        <div class="ages">👶 ○ 🧒 ◎ 🎒 ◎</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=スパジアムジャポン" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.spajapo.com/" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      <div class="spot" id="s-e59bb3e69bb8">
+        <div class="nm">図書館のおはなし会（小平市立）</div>
+        <div class="acc">各図書館／無料・申込不要のことが多い</div>
+        <div class="desc">絵本の読み聞かせや手あそび。絵本デビューにぴったり。回ごとに対象年齢が分かれています。開催日は「おはなし会」ページで確認できます。</div>
+        <div class="ages">👶 ◎ 🧒 ◎ 🎒 ○</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=小平市立花小金井図書館" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://library.kodaira.ed.jp/viewer/info.html?id=74" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      <div class="spot" id="s-e58590e7aba5">
+        <div class="nm">児童館・子育てひろば</div>
+        <div class="acc">無料／未就学〜小学生</div>
+        <div class="desc">無料で遊べて、親子プログラムも。雨の日の“いつもの居場所”に。花小金井エリアなら花小金井南児童館が近くて頼れます。</div>
+        <div class="ages">👶 ◎ 🧒 ◎ 🎒 ○</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=花小金井南児童館" target="_blank" rel="noopener">📍 地図</a></div>
+        
+      </div>
+      <div class="spot" id="s-e382b3e38394">
+        <div class="nm">コピス吉祥寺（武蔵野・吉祥寺）</div>
+        <div class="acc">電車で／吉祥寺</div>
+        <div class="desc">駅近の商業施設。授乳室・エレベーター完備で、子ども向けイベント（縁日など）も。雨の日でも涼しく回れます。</div>
+        <div class="ages">👶 ◎ 🧒 ◎ 🎒 ○</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B3%E3%83%94%E3%82%B9%E5%90%89%E7%A5%A5%E5%AF%BA" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.copiskichijoji.jp/" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      <div class="spot" id="s-475245454e20">
+        <div class="nm">GREEN SPRINGS「PLAY! PARK」（立川）</div>
+        <div class="acc">電車で／立川</div>
+        <div class="desc">立川駅近くの大型室内あそび場。大きな紙や造形あそびで、体を使ってのびのび。少し足を伸ばした雨の日の遠出先に。</div>
+        <div class="ages">👶 ○ 🧒 ◎ 🎒 ○</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=GREEN%20SPRINGS%20%E7%AB%8B%E5%B7%9D" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://greensprings.jp/shop/play_park/" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      <div class="spot" id="s-e7ab8be5b79d">
+        <div class="nm">立川まんがぱーく（立川）</div>
+        <div class="acc">電車で／立川</div>
+        <div class="desc">マンガ約2万冊、靴を脱いでごろごろ読める子ども未来センター内の施設。小学生に人気で、雨の日にぴったり。</div>
+        <div class="ages">👶 △ 🧒 ○ 🎒 ◎</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%AB%8B%E5%B7%9D%E3%81%BE%E3%82%93%E3%81%8C%E3%81%B1%E3%83%BC%E3%81%8F" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://mangapark.jp/" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      </div>
+    </section>
+
+    <section class="cat">
+      <h2>🚃電車でおでかけ（西武新宿線ぞい）</h2>
+      <div class="spots">
+      <div class="spot" id="s-e69db1e4bc8f">
+        <div class="nm">東伏見アイスアリーナ（東伏見）</div>
+        <div class="acc">西武新宿線・東伏見駅すぐ</div>
+        <div class="desc">通年で滑れるスケートリンク。夏は涼しく冬は室内で快適。ファミリー向けの時間帯もあり、はじめてのスケートに。</div>
+        <div class="ages">👶 △ 🧒 ○ 🎒 ◎</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%B1%E4%BC%8F%E8%A6%8B%E3%82%A2%E3%82%A4%E3%82%B9%E3%82%A2%E3%83%AA%E3%83%BC%E3%83%8A" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.seibu-leisure.co.jp/icearena/index.html" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      <div class="spot" id="s-e585abe59bbd">
+        <div class="nm">八国山緑地・北山公園（東村山）</div>
+        <div class="acc">西武新宿線・東村山駅ほか</div>
+        <div class="desc">トトロに出てくるような雑木林をおさんぽ。となりの北山公園は初夏（6月ごろ）の菖蒲が有名で、季節を感じられます。</div>
+        <div class="ages">👶 ○ 🧒 ◎ 🎒 ◎</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%85%AB%E5%9B%BD%E5%B1%B1%E7%B7%91%E5%9C%B0" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.tokyo-park.or.jp/park/format/index084.html" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      <div class="spot" id="s-e8a5bfe6ada6">
+        <div class="nm">西武園ゆうえんち（東村山・所沢）</div>
+        <div class="acc">西武新宿線から乗り換え</div>
+        <div class="desc">電車で行ける遊園地。小さい子向けエリアや、夏の花火・プールも。乗り物デビューにちょうどいい規模感です。</div>
+        <div class="ages">👶 ○ 🧒 ◎ 🎒 ◎</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.seibuen-amusement-park.jp/" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      <div class="spot" id="s-e68980e6b2a2">
+        <div class="nm">所沢エリア（サクラタウン・航空記念公園）</div>
+        <div class="acc">西武新宿線・所沢方面</div>
+        <div class="desc">角川武蔵野ミュージアムのある「ところざわサクラタウン」や、広々とした所沢航空記念公園。1日たっぷり遊べます。</div>
+        <div class="ages">👶 ○ 🧒 ◎ 🎒 ◎</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%A8%E3%81%93%E3%82%8D%E3%81%96%E3%82%8F%E3%82%B5%E3%82%AF%E3%83%A9%E3%82%BF%E3%82%A6%E3%83%B3" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://tokorozawa-sakuratown.com/" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      <div class="spot" id="s-e696b0e5aebf">
+        <div class="nm">新宿・都心方面へ一本</div>
+        <div class="acc">西武新宿線で高田馬場・西武新宿へ</div>
+        <div class="desc">乗り換えなしで都心へ。天気が崩れた日は、都心の屋内施設にサッと切り替えるのも手です。</div>
+        <div class="ages">👶 ○ 🧒 ○ 🎒 ○</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%96%B0%E5%AE%BF%E3%83%BB%E9%83%BD%E5%BF%83%E6%96%B9%E9%9D%A2%E3%81%B8%E4%B8%80%E6%9C%AC" target="_blank" rel="noopener">📍 地図</a></div>
+        
+      </div>
+      </div>
+    </section>
+
+    <section class="cat">
+      <h2>🦒動物とふれあう</h2>
+      <div class="spots">
+      <div class="spot" id="s-e5a49ae691a9">
+        <div class="nm">多摩動物公園（日野）</div>
+        <div class="acc">電車・車で</div>
+        <div class="desc">広くて坂は多めですがベビーカーOK。ライオンバスや昆虫館が人気。歩く距離が長いので休憩こまめに。</div>
+        <div class="ages">👶 ○ 🧒 ◎ 🎒 ◎</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%9A%E6%91%A9%E5%8B%95%E7%89%A9%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.tokyo-zoo.net/zoo/tama/" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      <div class="spot" id="s-e4ba95e381ae">
+        <div class="nm">井の頭自然文化園（武蔵野・吉祥寺）</div>
+        <div class="acc">電車・バスで／吉祥寺</div>
+        <div class="desc">モルモットのふれあいや小動物が中心で、小さな子でも回りやすいコンパクトさ。井の頭公園やボートとセットで一日楽しめます。</div>
+        <div class="ages">👶 ◎ 🧒 ◎ 🎒 ○</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BA%95%E3%81%AE%E9%A0%AD%E8%87%AA%E7%84%B6%E6%96%87%E5%8C%96%E5%9C%92" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.tokyo-zoo.net/zoo/ino/" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      </div>
+    </section>
+
+    <section class="cat">
+      <h2>🏊夏のプール</h2>
+      <div class="spots">
+      <div class="spot" id="s-e8a5bfe6ada6">
+        <div class="nm">西武園ゆうえんちプール</div>
+        <div class="acc">電車で20〜25分ほど</div>
+        <div class="desc">こどもプール・波のプール・流れるプール。水あそび用オムツ＋水着で2歳もOK（小さい子は同伴入水のルールあり）。</div>
+        <div class="ages">👶 ○ 🧒 ◎ 🎒 ◎</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1%20%E3%83%97%E3%83%BC%E3%83%AB" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.seibuen-amusement-park.jp/seibuenpool/index.html" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      <div class="spot" id="s-e69db1e4baac">
+        <div class="nm">東京サマーランド（あきる野）</div>
+        <div class="acc">車で40〜50分ほど</div>
+        <div class="desc">屋内ドームは全天候型＝猛暑・雨の日の切り札。ベビールームが充実していて小さい子連れも安心。</div>
+        <div class="ages">👶 ◎ 🧒 ◎ 🎒 ◎</div>
+        <div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%B1%E4%BA%AC%E3%82%B5%E3%83%9E%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.summerland.co.jp/" target="_blank" rel="noopener">🔗 公式</a></div>
+        
+      </div>
+      </div>
+    </section>
+
+  <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>
+</main>
+
+<footer>
+  <div class="fmark">ぼんぼやーじゅ通信</div>
+  ※営業時間・料金・設備は変わることがあります。おでかけ前に各公式サイトでご確認ください。<br>
+  <a href="tokushoho.html">特定商取引法に基づく表記・免責事項</a><br>
+  © 2026 ぼんぼやーじゅ通信
+</footer>
+
+</body>
+</html>

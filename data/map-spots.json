@@ -1,0 +1,209 @@
+[
+ {
+  "cat": "🌳大きな公園で1日（無料〜）",
+  "name": "都立 小金井公園",
+  "access": "花小金井エリアの大定番／無料（一部施設は有料）",
+  "desc": "広い芝生・大型遊具・ふわふわドーム、江戸東京たてもの園も併設。春は桜の名所で、お花見にも。",
+  "ages": "👶 ○ 🧒 ◎ 🎒 ◎",
+  "map": "https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E9%87%91%E4%BA%95%E5%85%AC%E5%9C%92",
+  "official": "https://www.tokyo-park.or.jp/park/koganei/index.html"
+ },
+ {
+  "cat": "🌳大きな公園で1日（無料〜）",
+  "name": "国営 昭和記念公園（立川）",
+  "access": "電車・車で／多摩最大級",
+  "desc": "原っぱ・水遊び・サイクリング・季節の花。1日じゃ足りないくらい広いので、目的を絞って。",
+  "ages": "👶 ○ 🧒 ◎ 🎒 ◎",
+  "map": "https://www.google.com/maps/search/?api=1&query=%E5%9B%BD%E5%96%B6%E6%98%AD%E5%92%8C%E8%A8%98%E5%BF%B5%E5%85%AC%E5%9C%92",
+  "official": "https://www.showakinen-koen.jp/"
+ },
+ {
+  "cat": "🌳大きな公園で1日（無料〜）",
+  "name": "井の頭恩賜公園（武蔵野・吉祥寺）",
+  "access": "電車・バスで／吉祥寺",
+  "desc": "大きな池でスワンボート、広い園内、井の頭自然文化園も隣接。吉祥寺の街歩きとセットで一日楽しめます。",
+  "ages": "👶 ○ 🧒 ◎ 🎒 ◎",
+  "map": "https://www.google.com/maps/search/?api=1&query=%E4%BA%95%E3%81%AE%E9%A0%AD%E6%81%A9%E8%B3%9C%E5%85%AC%E5%9C%92",
+  "official": "https://www.tokyo-park.or.jp/park/inokashira/index.html"
+ },
+ {
+  "cat": "💧無料で水あそび（夏）",
+  "name": "花小金井ひょうたん池公園",
+  "access": "花小金井駅 南口・徒歩約9分／無料",
+  "desc": "大きなじゃぶじゃぶ池が広がる、地元で人気の水あそびスポット。浅めで、はじめての水あそびデビューにも安心です。",
+  "ages": "👶 ◎ 🧒 ◎ 🎒 ○",
+  "map": "https://www.google.com/maps/search/?api=1&query=花小金井ひょうたん池公園",
+  "official": "https://www.city.kodaira.tokyo.jp/kurashi/113/113055.html"
+ },
+ {
+  "cat": "💧無料で水あそび（夏）",
+  "name": "西東京いこいの森公園 噴水広場",
+  "access": "車・自転車で約10分／無料",
+  "desc": "噴水型でオムツの子も遊べます。夏の日中の“ちょい遊び”に便利。",
+  "ages": "👶 ◎ 🧒 ◎ 🎒 ○",
+  "map": "https://www.google.com/maps/search/?api=1&query=%E8%A5%BF%E6%9D%B1%E4%BA%AC%E3%81%84%E3%81%93%E3%81%84%E3%81%AE%E6%A3%AE%E5%85%AC%E5%9C%92",
+  "official": "https://www.city.nishitokyo.lg.jp/kurasi/koen/kouenmizuasobi.html"
+ },
+ {
+  "cat": "☔雨・猛暑の日の屋内（毎週使える）",
+  "name": "多摩六都科学館（西東京）",
+  "access": "花小金井から近い／プラネタリウム・実験イベント",
+  "desc": "世界最大級のプラネタリウム。0歳から入れる回もあり、下の子連れでも安心。涼しくて雨の日の鉄板です。",
+  "ages": "👶 ○ 🧒 ◎ 🎒 ◎",
+  "map": "https://www.google.com/maps/search/?api=1&query=%E5%A4%9A%E6%91%A9%E5%85%AD%E9%83%BD%E7%A7%91%E5%AD%A6%E9%A4%A8",
+  "official": "https://www.tamarokuto.or.jp/"
+ },
+ {
+  "cat": "☔雨・猛暑の日の屋内（毎週使える）",
+  "name": "イオンモール東久留米",
+  "access": "車で近い",
+  "desc": "室内あそび場・授乳室・おむつ替えが揃い、全部涼しい。雨の日・猛暑の日の避難先に。",
+  "ages": "👶 ◎ 🧒 ◎ 🎒 ○",
+  "map": "https://www.google.com/maps/search/?api=1&query=%E3%82%A4%E3%82%AA%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%AB%E6%9D%B1%E4%B9%85%E7%95%99%E7%B1%B3",
+  "official": "https://www.aeon.jp/sc/higashikurume/"
+ },
+ {
+  "cat": "☔雨・猛暑の日の屋内（毎週使える）",
+  "name": "田無アスタ（田無駅前）",
+  "access": "西武新宿線・田無駅 北口すぐ",
+  "desc": "駅前の専門店街。2階センターコートで季節のイベント（縁日・ワークショップ等）も開催。雨の日のお買い物＆ちょい遊びに便利です。",
+  "ages": "👶 ◎ 🧒 ◎ 🎒 ○",
+  "map": "https://www.google.com/maps/search/?api=1&query=田無アスタ",
+  "official": "https://www.asta.co.jp/"
+ },
+ {
+  "cat": "☔雨・猛暑の日の屋内（毎週使える）",
+  "name": "スパジャポ（スパジアムジャポン・東久留米）",
+  "access": "田無駅・東久留米駅から無料シャトルバス／車で近い",
+  "desc": "天然温泉・岩盤浴の大型スパ。授乳室・おむつ替え・粉ミルク用のお湯・子連れに人気のフードコート完備。雨・猛暑の日に一日ゆっくりできます。",
+  "ages": "👶 ○ 🧒 ◎ 🎒 ◎",
+  "map": "https://www.google.com/maps/search/?api=1&query=スパジアムジャポン",
+  "official": "https://www.spajapo.com/"
+ },
+ {
+  "cat": "☔雨・猛暑の日の屋内（毎週使える）",
+  "name": "図書館のおはなし会（小平市立）",
+  "access": "各図書館／無料・申込不要のことが多い",
+  "desc": "絵本の読み聞かせや手あそび。絵本デビューにぴったり。回ごとに対象年齢が分かれています。開催日は「おはなし会」ページで確認できます。",
+  "ages": "👶 ◎ 🧒 ◎ 🎒 ○",
+  "map": "https://www.google.com/maps/search/?api=1&query=小平市立花小金井図書館",
+  "official": "https://library.kodaira.ed.jp/viewer/info.html?id=74"
+ },
+ {
+  "cat": "☔雨・猛暑の日の屋内（毎週使える）",
+  "name": "児童館・子育てひろば",
+  "access": "無料／未就学〜小学生",
+  "desc": "無料で遊べて、親子プログラムも。雨の日の“いつもの居場所”に。花小金井エリアなら花小金井南児童館が近くて頼れます。",
+  "ages": "👶 ◎ 🧒 ◎ 🎒 ○",
+  "map": "https://www.google.com/maps/search/?api=1&query=花小金井南児童館",
+  "official": ""
+ },
+ {
+  "cat": "☔雨・猛暑の日の屋内（毎週使える）",
+  "name": "コピス吉祥寺（武蔵野・吉祥寺）",
+  "access": "電車で／吉祥寺",
+  "desc": "駅近の商業施設。授乳室・エレベーター完備で、子ども向けイベント（縁日など）も。雨の日でも涼しく回れます。",
+  "ages": "👶 ◎ 🧒 ◎ 🎒 ○",
+  "map": "https://www.google.com/maps/search/?api=1&query=%E3%82%B3%E3%83%94%E3%82%B9%E5%90%89%E7%A5%A5%E5%AF%BA",
+  "official": "https://www.copiskichijoji.jp/"
+ },
+ {
+  "cat": "☔雨・猛暑の日の屋内（毎週使える）",
+  "name": "GREEN SPRINGS「PLAY! PARK」（立川）",
+  "access": "電車で／立川",
+  "desc": "立川駅近くの大型室内あそび場。大きな紙や造形あそびで、体を使ってのびのび。少し足を伸ばした雨の日の遠出先に。",
+  "ages": "👶 ○ 🧒 ◎ 🎒 ○",
+  "map": "https://www.google.com/maps/search/?api=1&query=GREEN%20SPRINGS%20%E7%AB%8B%E5%B7%9D",
+  "official": "https://greensprings.jp/shop/play_park/"
+ },
+ {
+  "cat": "☔雨・猛暑の日の屋内（毎週使える）",
+  "name": "立川まんがぱーく（立川）",
+  "access": "電車で／立川",
+  "desc": "マンガ約2万冊、靴を脱いでごろごろ読める子ども未来センター内の施設。小学生に人気で、雨の日にぴったり。",
+  "ages": "👶 △ 🧒 ○ 🎒 ◎",
+  "map": "https://www.google.com/maps/search/?api=1&query=%E7%AB%8B%E5%B7%9D%E3%81%BE%E3%82%93%E3%81%8C%E3%81%B1%E3%83%BC%E3%81%8F",
+  "official": "https://mangapark.jp/"
+ },
+ {
+  "cat": "🚃電車でおでかけ（西武新宿線ぞい）",
+  "name": "東伏見アイスアリーナ（東伏見）",
+  "access": "西武新宿線・東伏見駅すぐ",
+  "desc": "通年で滑れるスケートリンク。夏は涼しく冬は室内で快適。ファミリー向けの時間帯もあり、はじめてのスケートに。",
+  "ages": "👶 △ 🧒 ○ 🎒 ◎",
+  "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BC%8F%E8%A6%8B%E3%82%A2%E3%82%A4%E3%82%B9%E3%82%A2%E3%83%AA%E3%83%BC%E3%83%8A",
+  "official": "https://www.seibu-leisure.co.jp/icearena/index.html"
+ },
+ {
+  "cat": "🚃電車でおでかけ（西武新宿線ぞい）",
+  "name": "八国山緑地・北山公園（東村山）",
+  "access": "西武新宿線・東村山駅ほか",
+  "desc": "トトロに出てくるような雑木林をおさんぽ。となりの北山公園は初夏（6月ごろ）の菖蒲が有名で、季節を感じられます。",
+  "ages": "👶 ○ 🧒 ◎ 🎒 ◎",
+  "map": "https://www.google.com/maps/search/?api=1&query=%E5%85%AB%E5%9B%BD%E5%B1%B1%E7%B7%91%E5%9C%B0",
+  "official": "https://www.tokyo-park.or.jp/park/format/index084.html"
+ },
+ {
+  "cat": "🚃電車でおでかけ（西武新宿線ぞい）",
+  "name": "西武園ゆうえんち（東村山・所沢）",
+  "access": "西武新宿線から乗り換え",
+  "desc": "電車で行ける遊園地。小さい子向けエリアや、夏の花火・プールも。乗り物デビューにちょうどいい規模感です。",
+  "ages": "👶 ○ 🧒 ◎ 🎒 ◎",
+  "map": "https://www.google.com/maps/search/?api=1&query=%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1",
+  "official": "https://www.seibuen-amusement-park.jp/"
+ },
+ {
+  "cat": "🚃電車でおでかけ（西武新宿線ぞい）",
+  "name": "所沢エリア（サクラタウン・航空記念公園）",
+  "access": "西武新宿線・所沢方面",
+  "desc": "角川武蔵野ミュージアムのある「ところざわサクラタウン」や、広々とした所沢航空記念公園。1日たっぷり遊べます。",
+  "ages": "👶 ○ 🧒 ◎ 🎒 ◎",
+  "map": "https://www.google.com/maps/search/?api=1&query=%E3%81%A8%E3%81%93%E3%82%8D%E3%81%96%E3%82%8F%E3%82%B5%E3%82%AF%E3%83%A9%E3%82%BF%E3%82%A6%E3%83%B3",
+  "official": "https://tokorozawa-sakuratown.com/"
+ },
+ {
+  "cat": "🚃電車でおでかけ（西武新宿線ぞい）",
+  "name": "新宿・都心方面へ一本",
+  "access": "西武新宿線で高田馬場・西武新宿へ",
+  "desc": "乗り換えなしで都心へ。天気が崩れた日は、都心の屋内施設にサッと切り替えるのも手です。",
+  "ages": "👶 ○ 🧒 ○ 🎒 ○",
+  "map": "",
+  "official": ""
+ },
+ {
+  "cat": "🦒動物とふれあう",
+  "name": "多摩動物公園（日野）",
+  "access": "電車・車で",
+  "desc": "広くて坂は多めですがベビーカーOK。ライオンバスや昆虫館が人気。歩く距離が長いので休憩こまめに。",
+  "ages": "👶 ○ 🧒 ◎ 🎒 ◎",
+  "map": "https://www.google.com/maps/search/?api=1&query=%E5%A4%9A%E6%91%A9%E5%8B%95%E7%89%A9%E5%85%AC%E5%9C%92",
+  "official": "https://www.tokyo-zoo.net/zoo/tama/"
+ },
+ {
+  "cat": "🦒動物とふれあう",
+  "name": "井の頭自然文化園（武蔵野・吉祥寺）",
+  "access": "電車・バスで／吉祥寺",
+  "desc": "モルモットのふれあいや小動物が中心で、小さな子でも回りやすいコンパクトさ。井の頭公園やボートとセットで一日楽しめます。",
+  "ages": "👶 ◎ 🧒 ◎ 🎒 ○",
+  "map": "https://www.google.com/maps/search/?api=1&query=%E4%BA%95%E3%81%AE%E9%A0%AD%E8%87%AA%E7%84%B6%E6%96%87%E5%8C%96%E5%9C%92",
+  "official": "https://www.tokyo-zoo.net/zoo/ino/"
+ },
+ {
+  "cat": "🏊夏のプール",
+  "name": "西武園ゆうえんちプール",
+  "access": "電車で20〜25分ほど",
+  "desc": "こどもプール・波のプール・流れるプール。水あそび用オムツ＋水着で2歳もOK（小さい子は同伴入水のルールあり）。",
+  "ages": "👶 ○ 🧒 ◎ 🎒 ◎",
+  "map": "https://www.google.com/maps/search/?api=1&query=%E8%A5%BF%E6%AD%A6%E5%9C%92%E3%82%86%E3%81%86%E3%81%88%E3%82%93%E3%81%A1%20%E3%83%97%E3%83%BC%E3%83%AB",
+  "official": "https://www.seibuen-amusement-park.jp/seibuenpool/index.html"
+ },
+ {
+  "cat": "🏊夏のプール",
+  "name": "東京サマーランド（あきる野）",
+  "access": "車で40〜50分ほど",
+  "desc": "屋内ドームは全天候型＝猛暑・雨の日の切り札。ベビールームが充実していて小さい子連れも安心。",
+  "ages": "👶 ◎ 🧒 ◎ 🎒 ◎",
+  "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E3%82%B5%E3%83%9E%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89",
+  "official": "https://www.summerland.co.jp/"
+ }
+]
