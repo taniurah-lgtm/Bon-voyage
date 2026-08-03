@@ -188,7 +188,8 @@ const page = `<!doctype html>
 
 <footer>
   <div class="fmark">ぼんぼやーじゅ通信</div>
-  応援サポーター向け会員ページ｜© 2026 ぼんぼやーじゅ通信
+  応援サポーター向け会員ページ<br>
+  <a href="/tokushoho.html">特定商取引法に基づく表記・免責事項</a>｜© 2026 ぼんぼやーじゅ通信
 </footer>
 
 <script>
