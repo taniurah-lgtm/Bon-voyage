@@ -8,6 +8,10 @@
  *   4. 関数 createMapForm を選んで「実行」。初回は Google の認可画面が出るので許可する
  *   5. 実行ログに出る URL を控える（フォームURL / スプレッドシートURL）
  *
+ * 何度実行しても同じ状態になる（設問は毎回作り直し、公開用シートは作り直し）。
+ * ただし回答スプレッドシートは実行のたびに新しく作られるので、投稿が入り始めたあとは
+ * 再実行しないこと。
+ *
  * 作られるもの:
  *   - 投稿フォーム（設問・説明文・確認事項つき）
  *   - 回答スプレッドシート（フォームに紐づけ済み）
@@ -19,6 +23,9 @@
 // ★ここに会員ページの合言葉を入れる。リポジトリにはコミットしないこと。
 const MEMBER_PASS = '';
 
+// Drive 側で先に作ってある空フォームのID。空文字にすると新しいフォームを作る。
+const FORM_ID = '1wXADrv36UQoeUepeDrpVxYZ_LAUlUxY5HSdvGEc60DY';
+
 const FORM_TITLE = 'みんなのおでかけマップに書き込む';
 const SS_TITLE = 'ぼんぼやーじゅ通信 — おでかけマップ投稿';
 
@@ -28,7 +35,11 @@ function createMapForm() {
   }
 
   // ---- フォーム本体 ----
-  const form = FormApp.create(FORM_TITLE);
+  const form = FORM_ID ? FormApp.openById(FORM_ID) : FormApp.create(FORM_TITLE);
+  form.setTitle(FORM_TITLE);
+  // 何度実行しても設問が増えないように、既存の設問を消してから作り直す
+  const olds = form.getItems();
+  for (let i = olds.length - 1; i >= 0; i--) form.deleteItem(olds[i]);
   form.setDescription(
     '花小金井まわりで「行ってよかった」場所を教えてください。ひとことで構いません。\n' +
     'いただいた内容は、こちらで目を通してから地図に掲載します（数日いただきます）。\n\n' +
@@ -121,6 +132,8 @@ function createMapForm() {
       q + col(okCol) + '2:' + col(okCol) +            // 承認
     '},"select Col1,Col2,Col3,Col4,Col5,Col6 where Col7 = TRUE",0))';
 
+  const old = ss2.getSheetByName('公開用');
+  if (old) ss2.deleteSheet(old);
   const pub = ss2.insertSheet('公開用');
   pub.getRange('A1:F1')
     .setValues([['タイムスタンプ', '場所', 'ひとこと', 'ニックネーム', 'エリア・年齢', '区分']])
