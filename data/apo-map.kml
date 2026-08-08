@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>ぼんぼやーじゅ通信 アポリスト</name>
+  <description>設置済=青 / 交渉中=黄 / 断られた=赤 / 候補=白</description>
+  <Style id="設置済">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/paddle/blu-blank.png</href></Icon>
+    </IconStyle>
+  </Style>
+  <Style id="交渉中">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/paddle/ylw-blank.png</href></Icon>
+    </IconStyle>
+  </Style>
+  <Style id="断られた">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/paddle/red-blank.png</href></Icon>
+    </IconStyle>
+  </Style>
+  <Style id="候補">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href></Icon>
+    </IconStyle>
+  </Style>
+  <Placemark>
+    <name>しゅしゅ</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>しゅしゅ 小平市花小金井 パン</address>
+    <description>種別: 個人店
+住所: 未確認（名称で検索して配置）
+パン屋。行きつけで通った。★住所を入れると位置が正確になります</description>
+  </Placemark>
+  <Placemark>
+    <name>珈琲豆焙煎所 ロースターズクラブ</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>珈琲豆焙煎所 ロースターズクラブ 小平市花小金井</address>
+    <description>種別: 個人店
+住所: 未確認（名称で検索して配置）
+自家焙煎珈琲。行きつけで通った。★住所を入れると位置が正確になります</description>
+  </Placemark>
+  <Placemark>
+    <name>花小金井南公民館</name>
+    <styleUrl>#交渉中</styleUrl>
+    <address>東京都小平市花小金井南町2-12-6</address>
+    <description>種別: 公共
+住所: 東京都小平市花小金井南町2-12-6
+電話: 042-461-0861
+副館長が口頭で承諾「中身を見てから置いてみますね」。設置は未確認。1〜2週間後に補充の申し出の形で確認する</description>
+  </Placemark>
+  <Placemark>
+    <name>花小金井南児童館</name>
+    <styleUrl>#候補</styleUrl>
+    <address>東京都小平市花小金井南町3-3-17</address>
+    <description>種別: 公共
+住所: 東京都小平市花小金井南町3-3-17
+電話: 042-461-9988
+読者層が丸ごといる。設置2件の実績を持って行く</description>
+  </Placemark>
+  <Placemark>
+    <name>東部市民センター（花小金井図書館・東部出張所）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>東京都小平市花小金井1-8-1</address>
+    <description>種別: 公共
+住所: 東京都小平市花小金井1-8-1
+電話: 042-467-1211
+駅近の1棟に複数窓口。図書館は042-467-1215</description>
+  </Placemark>
+  <Placemark>
+    <name>花小金井北公民館（花小金井北分室）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>東京都小平市花小金井5-41-3</address>
+    <description>種別: 公共
+住所: 東京都小平市花小金井5-41-3
+電話: 042-462-5790
+図書館分室が同居＝親子の動線が濃い</description>
+  </Placemark>
+  <Placemark>
+    <name>子ども家庭支援センター</name>
+    <styleUrl>#候補</styleUrl>
+    <address>東京都小平市小川東町4-2-1</address>
+    <description>種別: 公共
+住所: 東京都小平市小川東町4-2-1
+電話: 042-348-2100
+行政の子育て支援の本丸。小平元気村おがわ東2F。あすぴあと同じ建物</description>
+  </Placemark>
+  <Placemark>
+    <name>小平市民活動支援センター あすぴあ</name>
+    <styleUrl>#候補</styleUrl>
+    <address>東京都小平市小川東町4-2-1</address>
+    <description>種別: 公共
+住所: 東京都小平市小川東町4-2-1
+電話: 042-348-2104
+廊下壁面掲示板・チラシラックあり。まず電話で団体登録の要否を確認</description>
+  </Placemark>
+  <Placemark>
+    <name>小平市役所 市民協働・男女参画推進課</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市役所</address>
+    <description>種別: 公共
+住所: 未確認（名称で検索して配置）
+電話: 042-346-9809
+市役所1階。申請ルートの相談先</description>
+  </Placemark>
+  <Placemark>
+    <name>中央公民館</name>
+    <styleUrl>#候補</styleUrl>
+    <address>東京都小平市小川町2-1325</address>
+    <description>種別: 公共
+住所: 東京都小平市小川町2-1325
+電話: 042-341-0861
+市内最大館</description>
+  </Placemark>
+  <Placemark>
+    <name>小川公民館（小川分室）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>東京都小平市小川町1-1012</address>
+    <description>種別: 公共
+住所: 東京都小平市小川町1-1012
+電話: 042-343-3620
+図書館分室併設</description>
+  </Placemark>
+  <Placemark>
+    <name>上宿公民館</name>
+    <styleUrl>#候補</styleUrl>
+    <address>東京都小平市小川町1-308</address>
+    <description>種別: 公共
+住所: 東京都小平市小川町1-308
+電話: 042-345-1164</description>
+  </Placemark>
+  <Placemark>
+    <name>上水南公民館（上水南分室）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>東京都小平市上水南町1-27-1</address>
+    <description>種別: 公共
+住所: 東京都小平市上水南町1-27-1
+電話: 042-325-4133
+図書館分室併設</description>
+  </Placemark>
+  <Placemark>
+    <name>小川西町公民館（小川西町図書館）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>東京都小平市小川西町4-10-13</address>
+    <description>種別: 公共
+住所: 東京都小平市小川西町4-10-13
+電話: 042-343-1415
+図書館併設</description>
+  </Placemark>
+  <Placemark>
+    <name>仲町公民館（仲町図書館）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>東京都小平市仲町145</address>
+    <description>種別: 公共
+住所: 東京都小平市仲町145
+電話: 042-341-0862
+図書館併設</description>
+  </Placemark>
+  <Placemark>
+    <name>津田公民館（津田図書館）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>東京都小平市津田町3-11-1</address>
+    <description>種別: 公共
+住所: 東京都小平市津田町3-11-1
+電話: 042-342-0863
+図書館併設</description>
+  </Placemark>
+  <Placemark>
+    <name>大沼公民館（大沼図書館）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>東京都小平市大沼町7-1-17</address>
+    <description>種別: 公共
+住所: 東京都小平市大沼町7-1-17
+電話: 042-342-1888
+図書館併設</description>
+  </Placemark>
+  <Placemark>
+    <name>鈴木公民館</name>
+    <styleUrl>#候補</styleUrl>
+    <address>東京都小平市鈴木町2-772</address>
+    <description>種別: 公共
+住所: 東京都小平市鈴木町2-772
+電話: 042-388-0050</description>
+  </Placemark>
+  <Placemark>
+    <name>花小金井駅前こどもクリニック</name>
+    <styleUrl>#候補</styleUrl>
+    <address>花小金井駅前こどもクリニック 小平市</address>
+    <description>種別: 子育て民間
+住所: 未確認（名称で検索して配置）
+電話: 042-465-2255
+駅徒歩1分。待合の滞在が長い。火・祝休診。★住所要確認</description>
+  </Placemark>
+  <Placemark>
+    <name>がんぼクリニック</name>
+    <styleUrl>#候補</styleUrl>
+    <address>がんぼクリニック 小平市花小金井</address>
+    <description>種別: 子育て民間
+住所: 未確認（名称で検索して配置）
+電話: 042-465-8774
+内科・小児科。日祝休。★住所要確認</description>
+  </Placemark>
+  <Placemark>
+    <name>多摩六都科学館</name>
+    <styleUrl>#候補</styleUrl>
+    <address>多摩六都科学館</address>
+    <description>種別: おでかけ先
+住所: 未確認（名称で検索して配置）
+読者層と完全一致。自社ガイドで紹介済み＝訪問の口実になる</description>
+  </Placemark>
+  <Placemark>
+    <name>都立小金井公園 サービスセンター</name>
+    <styleUrl>#候補</styleUrl>
+    <address>都立小金井公園 サービスセンター</address>
+    <description>種別: おでかけ先
+住所: 未確認（名称で検索して配置）
+近隣最大の遊び場。都立のため規定は厳しめ</description>
+  </Placemark>
+  <Placemark>
+    <name>江戸東京たてもの園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>江戸東京たてもの園</address>
+    <description>種別: おでかけ先
+住所: 未確認（名称で検索して配置）
+小金井公園内。ガイド掲載済み</description>
+  </Placemark>
+  <Placemark>
+    <name>小平ふるさと村</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平ふるさと村</address>
+    <description>種別: おでかけ先
+住所: 未確認（名称で検索して配置）
+週末の子連れが多い市の施設</description>
+  </Placemark>
+  <Placemark>
+    <name>ガスミュージアム</name>
+    <styleUrl>#候補</styleUrl>
+    <address>ガスミュージアム 小平市</address>
+    <description>種別: おでかけ先
+住所: 未確認（名称で検索して配置）
+入場無料。企業運営で掲示基準あり</description>
+  </Placemark>
+  <Placemark>
+    <name>田無神社</name>
+    <styleUrl>#候補</styleUrl>
+    <address>田無神社</address>
+    <description>種別: その他
+住所: 未確認（名称で検索して配置）
+七五三・お宮参りの動線。社務所で宮司へ。カード置きを狙う</description>
+  </Placemark>
+  <Placemark>
+    <name>熊野宮</name>
+    <styleUrl>#候補</styleUrl>
+    <address>熊野宮 小平市</address>
+    <description>種別: その他
+住所: 未確認（名称で検索して配置）
+七五三の動線</description>
+  </Placemark>
+  <Placemark>
+    <name>花小金井商栄会</name>
+    <styleUrl>#候補</styleUrl>
+    <address>花小金井駅 北口 商店街</address>
+    <description>種別: その他
+住所: 未確認（名称で検索して配置）
+通れば加盟店にまとめて展開できる。事務局連絡先は要確認</description>
+  </Placemark>
+  <Placemark>
+    <name>コープ花小金井店</name>
+    <styleUrl>#候補</styleUrl>
+    <address>コープ 花小金井</address>
+    <description>種別: 生活動線
+住所: 未確認（名称で検索して配置）
+生協は地域活動に寛容。組合員向け掲示板があることが多い</description>
+  </Placemark>
+</Document>
+</kml>
