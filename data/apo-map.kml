@@ -89,13 +89,13 @@
 行政の子育て支援の本丸。小平元気村おがわ東2F。あすぴあと同じ建物</description>
   </Placemark>
   <Placemark>
-    <name>小平市民活動支援センター あすぴあ</name>
+    <name>小平市民活動支援センター あすぴあ ※10/31まで現施設</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市小川東町4-2-1</address>
     <description>種別: 公共
 住所: 東京都小平市小川東町4-2-1
 電話: 042-348-2104
-廊下壁面掲示板・チラシラックあり。まず電話で団体登録の要否を確認</description>
+廊下壁面掲示板・チラシラックあり。まず電話で団体登録の要否を確認。★市報8/5号: 10/31で現施設終了、11/1から小川パレット(小川西町4-16-1)へ移転</description>
   </Placemark>
   <Placemark>
     <name>小平市役所 市民協働・男女参画推進課</name>
@@ -142,13 +142,13 @@
 図書館分室併設</description>
   </Placemark>
   <Placemark>
-    <name>小川西町公民館（小川西町図書館）</name>
+    <name>小川西町公民館 ※9/30で終了</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市小川西町4-10-13</address>
     <description>種別: 公共
 住所: 東京都小平市小川西町4-10-13
 電話: 042-343-1415
-図書館併設</description>
+★市報8/5号: 小川西町図書館は7/30終了済、公民館も9/30まで。11/1から小川パレットへ移転。回るなら9月中、でなければ小川パレットへ</description>
   </Placemark>
   <Placemark>
     <name>仲町公民館（仲町図書館）</name>
@@ -274,6 +274,15 @@
     <description>種別: 生活動線
 住所: 未確認（名称で検索して配置）
 生協は地域活動に寛容。組合員向け掲示板があることが多い</description>
+  </Placemark>
+  <Placemark>
+    <name>小川パレット（11/1オープン）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>東京都小平市小川西町4-16-1</address>
+    <description>種別: 公共
+住所: 東京都小平市小川西町4-16-1
+電話: 070-4510-8196
+★市報8/5号。小川駅西口再開発ビル4・5階。公民館・図書館・あすぴあ・男女共同参画センター・西部出張所が1棟に集約。キッズスペース新設。オープン前後は掲示ルールが固まる時期＝早めに話を通す好機。市の窓口は市民協働・男女参画推進課 042-346-9532</description>
   </Placemark>
 </Document>
 </kml>
