@@ -5,7 +5,13 @@
  *   node scripts/fetch-via-gemini.mjs <URL> ["聞きたいこと"]
  *   node scripts/fetch-via-gemini.mjs --search "小平市 公民館 チラシ 掲示 申請"
  *
- * なぜ要るか:
+ * ★注意: 403で弾かれたホストの回避には使わないこと。403は環境のegressポリシー拒否で、
+ *       環境側のREADMEが「迂回せず報告せよ」としている。正しい対処は許可リストを広げること。
+ *
+ * 用途: URLが分からない調べもの(--search)、および許可されているのにサイト側の事情で
+ *       読めない場合の代替。詳細は docs/sources.md「サイトが 403 で弾かれたとき」。
+ *
+ * もともとの動機:
  *   この実行環境は外向き通信がプロキシ経由で、行政サイトや施設サイトが 403 で弾かれることがある
  *   (city.kodaira.tokyo.jp / asta.co.jp / docs.google.com など)。
  *   Gemini は Google 側からページを取得するので、こちらのプロキシの影響を受けない。

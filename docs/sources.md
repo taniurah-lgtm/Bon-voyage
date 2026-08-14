@@ -3,42 +3,57 @@
 無料通信の2本柱 **「今週の一推し」×「知らないと損カレンダー」** を支える情報源の台帳。
 各ソースは実在確認済み(2026-07時点)。巡回時はここを起点に回す。
 
-## プロキシに弾かれたときの逃げ道: Gemini に読ませる
+## サイトが 403 で弾かれたとき
 
-この実行環境は外向き通信がプロキシ経由で、**行政サイト・施設サイトが 403 で弾かれることがある**
-(実績: `city.kodaira.tokyo.jp` / `asta.co.jp` / `docs.google.com` / `no-trouble.caa.go.jp` / 自サイトまで)。
+### まず: これは技術的な不具合ではなく「設定」
 
-**Gemini は Google 側からページを取りに行くので、こちらのプロキシの影響を受けない。**
-`generativelanguage.googleapis.com` は**この環境から到達できる**ことを確認済み(2026-08)。
+実行環境の外向き通信はポリシー付きのプロキシを通る。403/407 は
+**そのホストが環境の許可リストに入っていない**という意味で、環境側のドキュメント
+(`/root/.ccr/README.md`)には次のように書かれている。
 
-```bash
-# ページを読ませる
-GEMINI_API_KEY=xxx node scripts/fetch-via-gemini.mjs "https://例.jp/event/" "8月と9月の子ども向けイベントを日付順に"
+> 403 / 407 from the proxy — The destination host is not allowed by your organization's
+> egress policy for this session. **Do not retry or route around it — report the blocked host.**
 
-# 検索させる(URLが分からないとき)
-GEMINI_API_KEY=xxx node scripts/fetch-via-gemini.mjs --search "小平市 公民館 チラシ 掲示 申請"
+**正しい対処は、環境のネットワークポリシー(許可リスト)を広げること。**
+Claude Code on the web の環境設定で変更できる → https://code.claude.com/docs/en/claude-code-on-the-web
+
+これまで弾かれた実績のあるホスト(許可したい候補):
+
+```
+www.city.kodaira.tokyo.jp   小平市公式(台帳の裏取りの正)
+library.kodaira.ed.jp       小平市立図書館
+www.asta.co.jp              田無アスタ
+kodaira-shiminkatsudo-ctr.jp  あすぴあ
+www.no-trouble.caa.go.jp    消費者庁(特商法の確認)
+docs.google.com             フォーム・スプレッドシート
+bonvoya.nicomaru.tokyo      自社サイト(公開後の確認)
 ```
 
-### 使う順番(直取り → 検索 → Gemini)
+**直取りできるようになれば、要約ではなく原文を読める。**精度でも速度でもそのほうが良い。
 
-1. `WebFetch` で直取り
-2. だめなら `WebSearch`(要約に公式ページが引用されることが多い)
-3. **それでもだめなら `scripts/fetch-via-gemini.mjs`**
+### 迂回はしない
 
-### ★ハルシネーション対策(必ず守る)
+`scripts/fetch-via-gemini.mjs` は用意してあるが、**403 で弾かれたホストの回避には使わない**
+(環境のポリシーに反するため)。使ってよいのは次の場合に限る。
 
-Gemini は**取得に失敗しても記憶から答えてしまう**。スクリプトは末尾に取得ステータスを必ず出す。
+- URLが分からず**調べもの**をしたいとき(`--search`。WebSearch の代わり)
+- 許可されているのに**サイト側の事情**で読めないとき(JSレンダリング必須など)
 
-- `取得: <URL> → URL_RETRIEVAL_STATUS_SUCCESS` … 実際に読めている。**採用してよい**
-- それ以外、または `⚠️` 付きの出力 … **記憶由来の可能性。台帳に入れる前に裏を取る**
-- **住所・電話番号・日付は、出典URLが示せないものは台帳に入れない**
-  (2026-08、Gemini にアポリストを作らせたところ全件が「要確認」で、
-  　施設の所在まで取り違えていた。生成物をそのまま信じない)
+いずれの場合も、末尾に出る取得ステータスが `URL_RETRIEVAL_STATUS_SUCCESS` でなければ
+**内容は記憶由来の可能性がある**。住所・電話・日付は、出典URLを示せないものを台帳に入れない。
+(2026-08、Gemini にアポリストを作らせたら全件「要確認」で、施設の所在まで取り違えた。)
+
+### Gemini Pro の契約は、この仕組みとは別物
+
+`gemini.google.com` の Gemini Pro / Google AI Pro 契約は**アプリ向け**で、
+API(`generativelanguage.googleapis.com`)の利用枠にはならない。
+スクリプトが使うのは Google AI Studio で発行する **API キー**(GitHub Secrets の `GEMINI_API_KEY`)。
+Pro契約が効くのは、**人がブラウザで Gemini に調べさせる使い方**(例: `docs/prompts/gemini-apo-list.md`)。
 
 ### これで解決しないこと
 
-**画像でしか出ていない情報は、これでは取れない。**
-田無アスタの月次スケジュールや市報の紙面がこれに当たる(下記「月次スケジュールが画像で出る施設」)。
+**画像でしか出ていない情報は、許可リストを広げても取れない。**
+田無アスタの月次スケジュールや市報の紙面がこれに当たる。
 プロキシの問題ではなく**そもそもWebに文字が無い**ので、オーナーのスクリーンショットに頼る。
 
 ## 取得方式の前提(重要)
