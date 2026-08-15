@@ -14,6 +14,14 @@
 | `www.asta.co.jp` / `asta.co.jp` | ✅ | ページは取れるが、**月次スケジュールは画像**で本文テキストが無い |
 | `mykoho.jp`(マイ広報紙) | ❌ **使わない** | Cloudflare のボット遮断。WebFetch=403、curl=404。UA を変えても同じ |
 | `bonvoya.nicomaru.tokyo` | ✅ | 自社サイト。公開後の確認に使える |
+| `www.aeon.jp`(イオン東久留米) | ⚠️ **curlのみ** | Akamai。**WebFetch=403**。curlは7/8成功、たまに `Access Denied`(再試行で通る) |
+| `kosodate.seiburailway.jp` | ❌ **使わない** | Cloudflare「you have been blocked」。curl・WebFetch とも403。本体 `www.seiburailway.jp` は✅ |
+| `www.city.higashimurayama.tokyo.jp` | ❌ **使わない** | CloudFront「Request blocked」。**全パス・http でも403** |
+| `www.seibubus.co.jp` | ⚠️ 不安定 | 接続reset・503が頻発。**再試行前提**(3回目で通ることが多い) |
+| `tamadairanomori.aeonmall.jp` | ✅ | 多摩平の森。**`tamadaira.aeonmall.jp` はDNS不在**(旧記載は誤り) |
+
+> 上記の判定根拠と再検証手順は、下記「**「直取りは403」の再検証**」を参照。
+> **ステータスコードだけで判定しないこと**(200を返しながら本文が遮断ページの例がある)。
 
 ### 市報こだいらの正は「小平市公式のPDF」
 
@@ -119,20 +127,65 @@ pdftotext -bbox   doc.pdf -    # 縦組み。座標から組み直す。市報�
 
 **`-raw` 単独は使わない。** 記事ごと消えることがある(市報4面の防災救急フェアが消えた)。
 
-### ⚠️ 表中の「直取りは403」は再検証が必要
+### ✅ 「直取りは403」の再検証(2026-08-15 実施・完了)
 
-表に残っている 403 の注記は、**環境のネットワークアクセスが `Trusted` だった頃の記録**。
-2026-08 に **`Full` へ変更**したので、**環境起因の403は解消している見込み**。
-ただし `mykoho.jp` のように**サイト側のボット遮断**は残る。**両者を区別すること。**
+環境のネットワークアクセスを `Full` にしたあと、チェックリストの6項目を1件ずつ直取りした。
+結果、**403の大半は環境起因で、解消していた**。残った遮断は2件だけ。
 
-次の巡回で、以下を1件ずつ直取りして表の注記を更新する:
+**チェックリスト(全件実施済み)**:
 
-- [ ] イオンモール東久留米 `https://www.aeon.jp/sc/higashikurume/event/`
-- [ ] イオンモールむさし村山 / 多摩平の森
-- [ ] 東京都・都立公園系(`tokyo-park.or.jp` ほか)
-- [ ] 西武鉄道・西武バスの沿線発信
-- [ ] 近隣映画館の子連れ上映ページ
-- [ ] 近隣5市(西東京・東久留米・東村山・清瀬・小金井)の子育て/イベント新着
+- [x] イオンモール東久留米 → **サイト側遮断(Akamai)。WebFetch不可・curlなら可**
+- [x] イオンモールむさし村山 / 多摩平の森 → **両方OK**(多摩平の森は**ホスト名が誤っていた**・下記)
+- [x] 東京都・都立公園系 → **全部OK**(tokyo-park / 昭和記念公園 / こどもスマイル / 広報東京都)
+- [x] 西武鉄道・西武バス → **本体はOK。`kosodate.` サブドメインだけ遮断**。西武バスは不安定
+- [x] 近隣映画館 → **T・ジョイ2館OK**。イオンシネマ `genkids/` は**URLが消滅(404)**
+- [x] 近隣5市 → **4市OK。東村山市だけ全パス遮断**
+
+#### ⚠️ 判定は「ステータスコード」でなく「本文」で行う
+
+**この再検証で実際に踏んだ罠**: `www.aeon.jp` は `curl -w '%{http_code}'` が **200 を返すのに、
+本文はAkamaiの `Access Denied` ページ**だった。コードだけ見て「解消した」と誤判定しかけた。
+
+```bash
+# ❌ これだけでは判定できない
+curl -sS -o /dev/null -w '%{http_code}\n' "$URL"
+
+# ✅ 本文に遮断ページの署名が無いかまで見る
+body=$(curl -sS -m 25 -L "$URL")
+printf '%s' "$body" | grep -qiE 'Access Denied|Request blocked|you have been blocked|Attention Required|errors\.edgesuite' \
+  && echo BLOCKED || echo OK
+```
+
+遮断ページは**本文が極端に小さい**(数百バイト〜5KB程度)のも目印になる。
+
+#### ⚠️ curl と WebFetch は結果が違う。巡回で使う方で確かめる
+
+同じURLでもツールで判定が割れる。**巡回はWebFetchを使うので、WebFetchでの可否が実運用の答え**。
+
+| ホスト | curl | WebFetch | 実運用の扱い |
+|---|---|---|---|
+| `www.aeon.jp` | ✅ 7/8成功 | ❌ 403(再現) | **curlで取る**。WebFetchでは読めない |
+| `mykoho.jp` | ❌ 404 | ❌ 403 | 使わない |
+| `www.seibubus.co.jp` | △ 接続reset頻発 | △ 503 | **不安定。再試行前提** |
+
+#### 本物の遮断(2件・回避不可)
+
+- **`kosodate.seiburailway.jp`**(西武 子育て応援サイト) … Cloudflare の
+  「Sorry, you have been blocked」。curl・WebFetch とも403。
+  **`www.seiburailway.jp` 本体は読める**ので、そちらとWebSearchで代替する。
+- **`www.city.higashimurayama.tokyo.jp`**(東村山市) … CloudFront の「Request blocked」。
+  `/kosodate/` など**全パス・httpでも403**。WebSearch とアグリゲータで代替する。
+
+#### URLの誤り(遮断ではなかったもの)
+
+- **イオンモール多摩平の森**: `tamadaira.aeonmall.jp` は**DNSが存在しない**(私の記載誤り)。
+  正しくは **`tamadairanomori.aeonmall.jp`**。`/event` で200・WebFetchも通る。
+- **イオンシネマ げんきッズシアター**: `https://www.aeoncinema.com/genkids/` は**404で消滅**。
+  検索インデックスには残っているので「生きている」と誤認しやすい。
+  むさし村山の劇場スラッグは **`musashino`**(`musashimurayama` ではない)。
+  `https://www.aeoncinema.com/cinema/musashino/` は200だが、
+  **2026-08時点でサイト内に「げんきッズシアター」の記載が1件も無い**。
+  制度自体が終了した可能性があるので、**掲載前に必ず現況を確認する**。
 
 **直取りできるものは、検索の要約ではなく原文を読む。**精度が上がる。
 
@@ -148,24 +201,24 @@ pdftotext -bbox   doc.pdf -    # 縦組み。座標から組み直す。市報�
 
 | ソース | URL | 取得 | 頻度 | 柱 |
 |---|---|---|---|---|
-| 多摩六都科学館(プラネタリウム・実験・0歳から) | https://www.tamarokuto.or.jp/calendar/ | 🔍 | 毎回 | 推 |
-| 小平市 子育て・イベント/児童館/地域子育てカレンダー | https://www.city.kodaira.tokyo.jp/kurashi/003/003829.html ・ https://www.city.kodaira.tokyo.jp/event/ | 🔍 | 毎回 | 推・損 |
+| 多摩六都科学館(プラネタリウム・実験・0歳から) | https://www.tamarokuto.or.jp/calendar/ | 📄🔍 | 毎回 | 推 |
+| 小平市 子育て・イベント/児童館/地域子育てカレンダー | https://www.city.kodaira.tokyo.jp/kurashi/003/003829.html ・ https://www.city.kodaira.tokyo.jp/event/ | 📄🔍 | 毎回 | 推・損 |
 | 小平市 子ども広場 | https://kodaira-kodomohiroba.com/ | 🔍 | 毎回 | 推 |
-| 都立小金井公園・江戸東京たてもの園 | 公式サイト(検索) | 🔍 | 毎回 | 推 |
-| 昭和記念公園(花火・イベント) | 公式サイト(検索) | 🔍 | 季節 | 推・損 |
+| 都立小金井公園・江戸東京たてもの園 | https://www.tokyo-park.or.jp/park/koganei/ | 📄🔍 | 毎回 | 推 |
+| 昭和記念公園(花火・イベント) | https://www.showakinen-koen.jp/ | 📄🔍 | 季節 | 推・損 |
 | 図書館おはなし会(小平市立・中央図書館) | 公式サイト(検索) | 🔍 | 毎回 | 推 |
-| 東京都こどもスマイルムーブメント(イベント一覧) | https://kodomo-smile.metro.tokyo.lg.jp/events | 🔍 | 毎回 | 推・損 |
-| 広報東京都「親子・子供向け 夏休みイベント情報」 | https://www.koho.metro.tokyo.lg.jp/ | 🔍 | 季節 | 推・損 |
+| 東京都こどもスマイルムーブメント(イベント一覧) | https://kodomo-smile.metro.tokyo.lg.jp/events | 📄🔍 | 毎回 | 推・損 |
+| 広報東京都「親子・子供向け 夏休みイベント情報」 | https://www.koho.metro.tokyo.lg.jp/ | 📄🔍 | 季節 | 推・損 |
 
 ## Tier 1b:商業施設(イオン系列・田無アスタ等＝雨・猛暑の逃げ場・一推しの常設装置)
 
 | ソース | URL | 取得 | 頻度 | 柱 |
 |---|---|---|---|---|
-| イオンモール東久留米(キッズ施設・イベント)★近い | https://www.aeon.jp/sc/higashikurume/event/ | 🔍(直取りは403) | 毎回 | 推 |
+| イオンモール東久留米(キッズ施設・イベント)★近い | https://www.aeon.jp/sc/higashikurume/event/ | 🔍📄**curlのみ**(WebFetchは403・Akamai) | 毎回 | 推 |
 | 田無アスタ専門店街(西武新宿線 田無駅前・2Fセンターコートで月次イベント)★西武新宿線 | https://www.asta.co.jp/event_schedule/ ・ https://www.asta.co.jp/event/ | 🔍📄(直取り可) | 毎回 | 推 |
 | スパジャポ(スパジアムジャポン・東久留米/天然温泉・岩盤浴・子連れ設備充実・田無駅からシャトル)★近い | https://www.spajapo.com/f/event ・ https://www.spajapo.com/news/ | 🔍📄(直取り可) | 毎回 | 推 |
-| イオンモールむさし村山(イオンシネマ併設) | https://musashimurayama.aeonmall.jp/event | 🔍 | 毎回 | 推 |
-| イオンモール多摩平の森(日野) | 公式(検索) | 🔍 | 補助 | 推 |
+| イオンモールむさし村山(イオンシネマ併設) | https://musashimurayama.aeonmall.jp/event | 📄🔍 | 毎回 | 推 |
+| イオンモール多摩平の森(日野) | https://tamadairanomori.aeonmall.jp/event | 📄🔍 | 補助 | 推 |
 | フォールバック: tokubai / いこーよの当該施設ページ | https://iko-yo.net/ | 📄 | 補助 | 推 |
 
 ### 田無アスタ: `/event/` の本文テキストを見る(スクショ不要)
@@ -217,14 +270,18 @@ pdftotext -bbox   doc.pdf -    # 縦組み。座標から組み直す。市報�
 「照明明るめ・音量控えめの赤ちゃん/子ども連れ向け上映」はママ層の鉄板・シェアされやすい。**季節枠**(春休み・GW・夏・冬)で厚く。
 
 ### 子連れ向け上映の実態(2026-07 調査)
-- **イオンシネマ「げんきッズシアター」(むさし村山)**: 遊具(スライダー等)付きキッズシアター、対象3〜12歳。子連れ巡回先として採用。上映中の子ども向け作品に連動。
+- **イオンシネマ「げんきッズシアター」(むさし村山)**: 遊具(スライダー等)付きキッズシアター、対象3〜12歳。上映中の子ども向け作品に連動。
+  ⚠️ **2026-08-15 再検証: 公式URL `aeoncinema.com/genkids/` が404で消滅**し、劇場ページ
+  (`/cinema/musashino/`・施設案内)にも**「げんきッズシアター」の記載が1件も無い**。
+  検索エンジンには旧ページが残っているため生きているように見えるので注意。
+  **通信に載せる前に、劇場へ現況を確認すること**(終了している可能性がある)。
 - **TOHO「ママズクラブシアター」**: 赤ちゃん連れ限定・照明明るめ・音量控えめ。毎月1〜2回・木曜あたり。**開催館は流動的**(2026-07時点で立川立飛は非開催 → 立川は子連れ上映の巡回先から除外)。実施館・日程は各劇場の月次ニュースにのみ掲載。
 - **T・ジョイSEIBU大泉**: 「音量小さめ・場内明るめ」上映の記載あり(都度確認)。
 - 立川(立飛TOHO・シネマシティ)は子連れ配慮上映が確認できないため**子連れ上映の巡回先からは外す**(新作・前売りは下記アグリゲータで足りる)。
 
 | 映画館(子連れ上映) | アクセス(花小金井から) | URL |
 |---|---|---|
-| イオンシネマむさし村山(げんきッズシアター) | ○ 車 | https://www.aeoncinema.com/genkids/ |
+| イオンシネマむさし村山 ※げんきッズシアターは**現況不明**(下記) | ○ 車 | https://www.aeoncinema.com/cinema/musashino/ |
 | T・ジョイ エミテラス所沢 ★西武新宿線一本 | ◎ 所沢駅徒歩4分・約20分台 | https://tjoy.jp/t-joy_emiterrace_tokorozawa |
 | T・ジョイSEIBU大泉(大泉学園) | ○ 乗換/車 | https://tjoy.jp/t-joy_seibu_oizumi |
 
@@ -232,7 +289,9 @@ pdftotext -bbox   doc.pdf -    # 縦組み。座標から組み直す。市報�
 - 目安: 春=ドラえもん、GW=コナン、夏=ポケモン/しまじろう、冬=プリキュア系。ムビチケ発売日は先取り情報へ。
 
 ### 子連れ上映の日程を自動取得する設計(月次ニュース対策)
-公式ページは直取り403だが、**検索エンジンは月次ニュースをインデックスする**。これを使う:
+劇場の月次ニュースはページ構成が変わりやすい(2026-08に `genkids/` が消滅)。
+**T・ジョイ系は直取り可**(所沢・大泉とも200・WebFetch可。実際に所沢で
+「音量小さめ/場内明るめ」上映の記載を確認済み)。イオンシネマ系は検索で補う:
 
 1. **タイミング**: 各劇場は翌月分を**毎月中旬**に更新。→ 月中旬の巡回(第2水曜など)で「映画・子連れ上映チェック」を1回走らせる。
 2. **取得(WebSearch主)**: 対象館×プログラムで検索を叩く。
@@ -245,15 +304,17 @@ pdftotext -bbox   doc.pdf -    # 縦組み。座標から組み直す。市報�
 
 ## Tier 1d:鉄道事業者の沿線発信(西武鉄道・西武バス ＝花小金井の生命線)
 
-花小金井=西武新宿線。**西武鉄道の公式発信**は、沿線の子ども向けスタンプラリー・電車フェスタ・車両基地公開・季節キャンペーン・企画乗車券など「電車でおでかけ」の一次ソース。車なし家庭に刺さり拡散されやすい。**西武バス**は「行き方・お得なきっぷ・臨時運行」を補強する。取得はWebSearch主(公式は直取り403のことあり)、鉄道コムがフォールバック。
+花小金井=西武新宿線。**西武鉄道の公式発信**は、沿線の子ども向けスタンプラリー・電車フェスタ・車両基地公開・季節キャンペーン・企画乗車券など「電車でおでかけ」の一次ソース。車なし家庭に刺さり拡散されやすい。**西武バス**は「行き方・お得なきっぷ・臨時運行」を補強する。取得は**本体(`www.seiburailway.jp`)が直取り可**。
+ただし**子育て応援サイト `kosodate.seiburailway.jp` はCloudflareで遮断されており直取りできない**
+(2026-08-15検証)ので、そこだけWebSearch＋鉄道コムで代替する。
 
 | ソース | URL | 取得 | 頻度 | 柱 |
 |---|---|---|---|---|
-| 西武鉄道 子育て応援サイト「おでかけTOPIC」★子連れ特化 | https://kosodate.seiburailway.jp/topic/ | 🔍 | 毎回 | 推 |
-| 西武鉄道 イベント・キャンペーン一覧(スタンプラリー/電車フェスタ/沿線企画) | https://www.seiburailway.jp/sightseeing/eventcampaigninfo/ | 🔍 | 毎回 | 推・損 |
-| 西武鉄道 おでかけTOP(沿線スポット) | https://www.seiburailway.jp/sightseeing/ | 🔍 | 補助 | 推 |
-| SEIBU GROUP こども応援プロジェクト(小児運賃均一・優待) | https://www.seibuholdings.co.jp/kodomo-support/ | 🔍 | 補助 | 損 |
-| 西武バス お知らせ・イベント・臨時運行(花火/イベントのシャトル) | https://www.seibubus.co.jp/news/ | 🔍 | 補助 | 推・損 |
+| 西武鉄道 子育て応援サイト「おでかけTOPIC」★子連れ特化 | https://kosodate.seiburailway.jp/topic/ | 🔍のみ(**直取り不可・Cloudflare遮断**) | 毎回 | 推 |
+| 西武鉄道 イベント・キャンペーン一覧(スタンプラリー/電車フェスタ/沿線企画) | https://www.seiburailway.jp/sightseeing/eventcampaigninfo/ | 📄🔍 | 毎回 | 推・損 |
+| 西武鉄道 おでかけTOP(沿線スポット) | https://www.seiburailway.jp/sightseeing/ | 📄🔍 | 補助 | 推 |
+| SEIBU GROUP こども応援プロジェクト(小児運賃均一・優待) | https://www.seibuholdings.co.jp/kodomo-support/ | 📄🔍 | 補助 | 損 |
+| 西武バス お知らせ・イベント・臨時運行(花火/イベントのシャトル) | https://www.seibubus.co.jp/news/ | 📄🔍(**不安定・再試行前提**) | 補助 | 推・損 |
 | 西武バス 1DayPass(全線700円乗り放題) / 西武鉄道×西武バス おトクにおでかけきっぷ(施設クーポン付) | https://www.seibubus.co.jp/rosen/teiki/oneday/ ・ https://www.seiburailway.jp/railway/ticket/specialticket/ | 🔍📄 | 補助 | 損 |
 | フォールバック: 鉄道コム 西武イベント / X @seibu_event | https://www.tetsudo.com/event/category/10009/ ・ https://x.com/seibu_event | 📄🔍 | 補助 | 推 |
 
@@ -328,6 +389,14 @@ pdftotext -bbox   doc.pdf -    # 縦組み。座標から組み直す。市報�
 
 ### コア近隣市(毎回・子育て新着を必ず巡回)
 小平市(地元)・東久留米市・西東京市・東村山市・小金井市
+
+| 市 | URL | 取得(2026-08-15検証) |
+|---|---|---|
+| 小平市(地元) | https://www.city.kodaira.tokyo.jp/event/ | 📄 ※**www必須** |
+| 東久留米市 | https://www.city.higashikurume.lg.jp/ | 📄 |
+| 西東京市 | https://www.city.nishitokyo.lg.jp/ | 📄 ※初回接続が落ちることがある(再試行で通る) |
+| 東村山市 | https://www.city.higashimurayama.tokyo.jp/ | ❌ **直取り不可**(CloudFront遮断・全パス403) → 🔍 で代替 |
+| 小金井市 | https://www.city.koganei.lg.jp/ | 📄 |
 
 ### スポット近隣市(大箱・目玉があるときだけ)
 - 武蔵村山市 → イオンモールむさし村山(イオンシネマ)
