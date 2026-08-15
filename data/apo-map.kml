@@ -31,6 +31,13 @@
     <name>しゅしゅ</name>
     <styleUrl>#設置済</styleUrl>
     <address>しゅしゅ 小平市花小金井 パン</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>設置済</value></Data>
+      <Data name="種別"><value>個人店</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>パン屋。行きつけで通った。★住所を入れると位置が正確になります</value></Data>
+    </ExtendedData>
     <description>種別: 個人店
 住所: 未確認（名称で検索して配置）
 パン屋。行きつけで通った。★住所を入れると位置が正確になります</description>
@@ -39,6 +46,13 @@
     <name>珈琲豆焙煎所 ロースターズクラブ</name>
     <styleUrl>#設置済</styleUrl>
     <address>珈琲豆焙煎所 ロースターズクラブ 小平市花小金井</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>設置済</value></Data>
+      <Data name="種別"><value>個人店</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>自家焙煎珈琲。行きつけで通った。★住所を入れると位置が正確になります</value></Data>
+    </ExtendedData>
     <description>種別: 個人店
 住所: 未確認（名称で検索して配置）
 自家焙煎珈琲。行きつけで通った。★住所を入れると位置が正確になります</description>
@@ -47,6 +61,13 @@
     <name>花小金井南公民館</name>
     <styleUrl>#交渉中</styleUrl>
     <address>東京都小平市花小金井南町2-12-6</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>交渉中</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-461-0861</value></Data>
+      <Data name="住所"><value>東京都小平市花小金井南町2-12-6</value></Data>
+      <Data name="メモ"><value>副館長が口頭で承諾「中身を見てから置いてみますね」。設置は未確認。1〜2週間後に補充の申し出の形で確認する</value></Data>
+    </ExtendedData>
     <description>種別: 公共
 住所: 東京都小平市花小金井南町2-12-6
 電話: 042-461-0861
@@ -56,6 +77,13 @@
     <name>花小金井南児童館</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市花小金井南町3-3-17</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-461-9988</value></Data>
+      <Data name="住所"><value>東京都小平市花小金井南町3-3-17</value></Data>
+      <Data name="メモ"><value>読者層が丸ごといる。設置2件の実績を持って行く</value></Data>
+    </ExtendedData>
     <description>種別: 公共
 住所: 東京都小平市花小金井南町3-3-17
 電話: 042-461-9988
@@ -65,6 +93,13 @@
     <name>東部市民センター（花小金井図書館・東部出張所）</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市花小金井1-8-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-467-1211</value></Data>
+      <Data name="住所"><value>東京都小平市花小金井1-8-1</value></Data>
+      <Data name="メモ"><value>駅近の1棟に複数窓口。図書館は042-467-1215</value></Data>
+    </ExtendedData>
     <description>種別: 公共
 住所: 東京都小平市花小金井1-8-1
 電話: 042-467-1211
@@ -74,6 +109,13 @@
     <name>花小金井北公民館（花小金井北分室）</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市花小金井5-41-3</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-462-5790</value></Data>
+      <Data name="住所"><value>東京都小平市花小金井5-41-3</value></Data>
+      <Data name="メモ"><value>図書館分室が同居＝親子の動線が濃い</value></Data>
+    </ExtendedData>
     <description>種別: 公共
 住所: 東京都小平市花小金井5-41-3
 電話: 042-462-5790
@@ -83,6 +125,13 @@
     <name>子ども家庭支援センター</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市小川東町4-2-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-348-2100</value></Data>
+      <Data name="住所"><value>東京都小平市小川東町4-2-1</value></Data>
+      <Data name="メモ"><value>行政の子育て支援の本丸。小平元気村おがわ東2F。あすぴあと同じ建物</value></Data>
+    </ExtendedData>
     <description>種別: 公共
 住所: 東京都小平市小川東町4-2-1
 電話: 042-348-2100
@@ -92,6 +141,13 @@
     <name>小平市民活動支援センター あすぴあ ※10/31まで現施設</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市小川東町4-2-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-348-2104</value></Data>
+      <Data name="住所"><value>東京都小平市小川東町4-2-1</value></Data>
+      <Data name="メモ"><value>廊下壁面掲示板・チラシラックあり。まず電話で団体登録の要否を確認。★市報8/5号: 10/31で現施設終了、11/1から小川パレット(小川西町4-16-1)へ移転</value></Data>
+    </ExtendedData>
     <description>種別: 公共
 住所: 東京都小平市小川東町4-2-1
 電話: 042-348-2104
@@ -101,6 +157,13 @@
     <name>小平市役所 市民協働・男女参画推進課</name>
     <styleUrl>#候補</styleUrl>
     <address>小平市役所</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-346-9809</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>市役所1階。申請ルートの相談先</value></Data>
+    </ExtendedData>
     <description>種別: 公共
 住所: 未確認（名称で検索して配置）
 電話: 042-346-9809
@@ -110,6 +173,13 @@
     <name>中央公民館</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市小川町2-1325</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-341-0861</value></Data>
+      <Data name="住所"><value>東京都小平市小川町2-1325</value></Data>
+      <Data name="メモ"><value>市内最大館</value></Data>
+    </ExtendedData>
     <description>種別: 公共
 住所: 東京都小平市小川町2-1325
 電話: 042-341-0861
@@ -119,6 +189,13 @@
     <name>小川公民館（小川分室）</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市小川町1-1012</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-343-3620</value></Data>
+      <Data name="住所"><value>東京都小平市小川町1-1012</value></Data>
+      <Data name="メモ"><value>図書館分室併設</value></Data>
+    </ExtendedData>
     <description>種別: 公共
 住所: 東京都小平市小川町1-1012
 電話: 042-343-3620
@@ -128,6 +205,13 @@
     <name>上宿公民館</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市小川町1-308</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-345-1164</value></Data>
+      <Data name="住所"><value>東京都小平市小川町1-308</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
     <description>種別: 公共
 住所: 東京都小平市小川町1-308
 電話: 042-345-1164</description>
@@ -136,6 +220,13 @@
     <name>上水南公民館（上水南分室）</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市上水南町1-27-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-325-4133</value></Data>
+      <Data name="住所"><value>東京都小平市上水南町1-27-1</value></Data>
+      <Data name="メモ"><value>図書館分室併設</value></Data>
+    </ExtendedData>
     <description>種別: 公共
 住所: 東京都小平市上水南町1-27-1
 電話: 042-325-4133
@@ -145,6 +236,13 @@
     <name>小川西町公民館 ※9/30で終了</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市小川西町4-10-13</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-343-1415</value></Data>
+      <Data name="住所"><value>東京都小平市小川西町4-10-13</value></Data>
+      <Data name="メモ"><value>★市報8/5号: 小川西町図書館は7/30終了済、公民館も9/30まで。11/1から小川パレットへ移転。回るなら9月中、でなければ小川パレットへ</value></Data>
+    </ExtendedData>
     <description>種別: 公共
 住所: 東京都小平市小川西町4-10-13
 電話: 042-343-1415
@@ -154,6 +252,13 @@
     <name>仲町公民館（仲町図書館）</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市仲町145</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-341-0862</value></Data>
+      <Data name="住所"><value>東京都小平市仲町145</value></Data>
+      <Data name="メモ"><value>図書館併設</value></Data>
+    </ExtendedData>
     <description>種別: 公共
 住所: 東京都小平市仲町145
 電話: 042-341-0862
@@ -163,6 +268,13 @@
     <name>津田公民館（津田図書館）</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市津田町3-11-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-342-0863</value></Data>
+      <Data name="住所"><value>東京都小平市津田町3-11-1</value></Data>
+      <Data name="メモ"><value>図書館併設</value></Data>
+    </ExtendedData>
     <description>種別: 公共
 住所: 東京都小平市津田町3-11-1
 電話: 042-342-0863
@@ -172,6 +284,13 @@
     <name>大沼公民館（大沼図書館）</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市大沼町7-1-17</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-342-1888</value></Data>
+      <Data name="住所"><value>東京都小平市大沼町7-1-17</value></Data>
+      <Data name="メモ"><value>図書館併設</value></Data>
+    </ExtendedData>
     <description>種別: 公共
 住所: 東京都小平市大沼町7-1-17
 電話: 042-342-1888
@@ -181,6 +300,13 @@
     <name>鈴木公民館</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市鈴木町2-772</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-388-0050</value></Data>
+      <Data name="住所"><value>東京都小平市鈴木町2-772</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
     <description>種別: 公共
 住所: 東京都小平市鈴木町2-772
 電話: 042-388-0050</description>
@@ -189,6 +315,13 @@
     <name>花小金井駅前こどもクリニック</name>
     <styleUrl>#候補</styleUrl>
     <address>花小金井駅前こどもクリニック 小平市</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>子育て民間</value></Data>
+      <Data name="電話"><value>042-465-2255</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>駅徒歩1分。待合の滞在が長い。火・祝休診。★住所要確認</value></Data>
+    </ExtendedData>
     <description>種別: 子育て民間
 住所: 未確認（名称で検索して配置）
 電話: 042-465-2255
@@ -198,6 +331,13 @@
     <name>がんぼクリニック</name>
     <styleUrl>#候補</styleUrl>
     <address>がんぼクリニック 小平市花小金井</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>子育て民間</value></Data>
+      <Data name="電話"><value>042-465-8774</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>内科・小児科。日祝休。★住所要確認</value></Data>
+    </ExtendedData>
     <description>種別: 子育て民間
 住所: 未確認（名称で検索して配置）
 電話: 042-465-8774
@@ -207,6 +347,13 @@
     <name>多摩六都科学館</name>
     <styleUrl>#候補</styleUrl>
     <address>多摩六都科学館</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>おでかけ先</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>読者層と完全一致。自社ガイドで紹介済み＝訪問の口実になる</value></Data>
+    </ExtendedData>
     <description>種別: おでかけ先
 住所: 未確認（名称で検索して配置）
 読者層と完全一致。自社ガイドで紹介済み＝訪問の口実になる</description>
@@ -215,6 +362,13 @@
     <name>都立小金井公園 サービスセンター</name>
     <styleUrl>#候補</styleUrl>
     <address>都立小金井公園 サービスセンター</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>おでかけ先</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>近隣最大の遊び場。都立のため規定は厳しめ</value></Data>
+    </ExtendedData>
     <description>種別: おでかけ先
 住所: 未確認（名称で検索して配置）
 近隣最大の遊び場。都立のため規定は厳しめ</description>
@@ -223,6 +377,13 @@
     <name>江戸東京たてもの園</name>
     <styleUrl>#候補</styleUrl>
     <address>江戸東京たてもの園</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>おでかけ先</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>小金井公園内。ガイド掲載済み</value></Data>
+    </ExtendedData>
     <description>種別: おでかけ先
 住所: 未確認（名称で検索して配置）
 小金井公園内。ガイド掲載済み</description>
@@ -231,6 +392,13 @@
     <name>小平ふるさと村</name>
     <styleUrl>#候補</styleUrl>
     <address>小平ふるさと村</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>おでかけ先</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>週末の子連れが多い市の施設</value></Data>
+    </ExtendedData>
     <description>種別: おでかけ先
 住所: 未確認（名称で検索して配置）
 週末の子連れが多い市の施設</description>
@@ -239,6 +407,13 @@
     <name>ガスミュージアム</name>
     <styleUrl>#候補</styleUrl>
     <address>ガスミュージアム 小平市</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>おでかけ先</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>入場無料。企業運営で掲示基準あり</value></Data>
+    </ExtendedData>
     <description>種別: おでかけ先
 住所: 未確認（名称で検索して配置）
 入場無料。企業運営で掲示基準あり</description>
@@ -247,6 +422,13 @@
     <name>田無神社</name>
     <styleUrl>#候補</styleUrl>
     <address>田無神社</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>その他</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>七五三・お宮参りの動線。社務所で宮司へ。カード置きを狙う</value></Data>
+    </ExtendedData>
     <description>種別: その他
 住所: 未確認（名称で検索して配置）
 七五三・お宮参りの動線。社務所で宮司へ。カード置きを狙う</description>
@@ -255,6 +437,13 @@
     <name>熊野宮</name>
     <styleUrl>#候補</styleUrl>
     <address>熊野宮 小平市</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>その他</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>七五三の動線</value></Data>
+    </ExtendedData>
     <description>種別: その他
 住所: 未確認（名称で検索して配置）
 七五三の動線</description>
@@ -263,6 +452,13 @@
     <name>花小金井商栄会</name>
     <styleUrl>#候補</styleUrl>
     <address>花小金井駅 北口 商店街</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>その他</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>通れば加盟店にまとめて展開できる。事務局連絡先は要確認</value></Data>
+    </ExtendedData>
     <description>種別: その他
 住所: 未確認（名称で検索して配置）
 通れば加盟店にまとめて展開できる。事務局連絡先は要確認</description>
@@ -271,6 +467,13 @@
     <name>コープ花小金井店</name>
     <styleUrl>#候補</styleUrl>
     <address>コープ 花小金井</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>生活動線</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>生協は地域活動に寛容。組合員向け掲示板があることが多い</value></Data>
+    </ExtendedData>
     <description>種別: 生活動線
 住所: 未確認（名称で検索して配置）
 生協は地域活動に寛容。組合員向け掲示板があることが多い</description>
@@ -279,6 +482,13 @@
     <name>小川パレット（11/1オープン）</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市小川西町4-16-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>070-4510-8196</value></Data>
+      <Data name="住所"><value>東京都小平市小川西町4-16-1</value></Data>
+      <Data name="メモ"><value>★市報8/5号。小川駅西口再開発ビル4・5階。公民館・図書館・あすぴあ・男女共同参画センター・西部出張所が1棟に集約。キッズスペース新設。オープン前後は掲示ルールが固まる時期＝早めに話を通す好機。市の窓口は市民協働・男女参画推進課 042-346-9532</value></Data>
+    </ExtendedData>
     <description>種別: 公共
 住所: 東京都小平市小川西町4-16-1
 電話: 070-4510-8196

@@ -48,10 +48,20 @@ const placemarks = ORDER.flatMap(st =>
       s.tel ? `電話: ${s.tel}` : '',
       s.note || '',
     ].filter(Boolean).join('\n');
+      // ★ExtendedData がないと、マイマップ側で「ステータスで色分け」ができない。
+    //   マイマップは KML のアイコン色(IconStyle)を読み捨てるので、色は向こうで1回設定する。
+    //   そのために、グループ化できる列としてステータス等を持たせる。
     return `  <Placemark>
     <name>${esc(s.name)}</name>
     <styleUrl>#${esc(s.status)}</styleUrl>
     <address>${esc(where(s))}</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>${esc(s.status)}</value></Data>
+      <Data name="種別"><value>${esc(s.cat)}</value></Data>
+      <Data name="電話"><value>${esc(s.tel || '')}</value></Data>
+      <Data name="住所"><value>${esc(s.addr || '未確認')}</value></Data>
+      <Data name="メモ"><value>${esc(s.note || '')}</value></Data>
+    </ExtendedData>
     <description>${esc(desc)}</description>
   </Placemark>`;
   })
