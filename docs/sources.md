@@ -3,58 +3,48 @@
 無料通信の2本柱 **「今週の一推し」×「知らないと損カレンダー」** を支える情報源の台帳。
 各ソースは実在確認済み(2026-07時点)。巡回時はここを起点に回す。
 
-## サイトが 403 で弾かれたとき
+## 疎通のクセ(2026-08-09 実測・ネットワークアクセス=Full)
 
-### まず: これは技術的な不具合ではなく「設定」
+環境のネットワークアクセスを **Full** にしたので、原則どのサイトも直取りできる。
+ただし**サイト側の事情**で読めないものがあるので、以下は憶えておく。
 
-実行環境の外向き通信はポリシー付きのプロキシを通る。403/407 は
-**そのホストが環境の許可リストに入っていない**という意味で、環境側のドキュメント
-(`/root/.ccr/README.md`)には次のように書かれている。
+| ホスト | 判定 | 注意 |
+|---|---|---|
+| `www.city.kodaira.tokyo.jp` | ✅ | **www 必須。** apex(`city.kodaira.tokyo.jp`)は接続を切られる |
+| `www.asta.co.jp` / `asta.co.jp` | ✅ | ページは取れるが、**月次スケジュールは画像**で本文テキストが無い |
+| `mykoho.jp`(マイ広報紙) | ❌ **使わない** | Cloudflare のボット遮断。WebFetch=403、curl=404。UA を変えても同じ |
+| `bonvoya.nicomaru.tokyo` | ✅ | 自社サイト。公開後の確認に使える |
 
-> 403 / 407 from the proxy — The destination host is not allowed by your organization's
-> egress policy for this session. **Do not retry or route around it — report the blocked host.**
+### 市報こだいらの正は「小平市公式のPDF」
 
-**正しい対処は、環境のネットワークポリシー(許可リスト)を広げること。**
-Claude Code on the web の環境設定で変更できる → https://code.claude.com/docs/en/claude-code-on-the-web
+マイ広報紙に記事のテキスト転載はあるが、**機械からは安定して取れない**。
+市報を裏取りするときは必ず公式へ。
 
-これまで弾かれた実績のあるホスト(許可したい候補):
+- 一覧: https://www.city.kodaira.tokyo.jp/shihou/
+- 各号の目次ページから**PDF**がリンクされている
+- **毎月5日・20日発行**
 
+```bash
+# PDFにテキスト層があれば、紙面のスクショに頼らず起票できる
+curl -sL "<各号のPDF URL>" -o shihou.pdf && pdftotext -layout shihou.pdf - | head -50
 ```
-www.city.kodaira.tokyo.jp   小平市公式(台帳の裏取りの正)
-library.kodaira.ed.jp       小平市立図書館
-www.asta.co.jp              田無アスタ
-kodaira-shiminkatsudo-ctr.jp  あすぴあ
-www.no-trouble.caa.go.jp    消費者庁(特商法の確認)
-docs.google.com             フォーム・スプレッドシート
-bonvoya.nicomaru.tokyo      自社サイト(公開後の確認)
-```
 
-**直取りできるようになれば、要約ではなく原文を読める。**精度でも速度でもそのほうが良い。
+> **未確認**: PDFにテキスト層があるかは、まだ試していない。
+> テキストが抜けるなら**月2回のスクリーンショット作業が不要になる**ので、最初に確かめる。
+> 画像PDFだった場合は、従来どおりオーナーのスクショに頼る。
 
-### 迂回はしない
+### 許可リストを広げても解決しないこと(実証済み)
 
-`scripts/fetch-via-gemini.mjs` は用意してあるが、**403 で弾かれたホストの回避には使わない**
-(環境のポリシーに反するため)。使ってよいのは次の場合に限る。
+`asta.co.jp` は読めるようになったが、**月次イベント表は画像のまま**で日付もイベント名も取れない。
+**ネットワークの問題と、Webに文字が無い問題は別**という想定どおりの結果。
+田無アスタは引き続き**オーナーの紙面スクショ**で起票する。
 
-- URLが分からず**調べもの**をしたいとき(`--search`。WebSearch の代わり)
-- 許可されているのに**サイト側の事情**で読めないとき(JSレンダリング必須など)
+### Gemini に読ませるスクリプトの位置づけ
 
-いずれの場合も、末尾に出る取得ステータスが `URL_RETRIEVAL_STATUS_SUCCESS` でなければ
-**内容は記憶由来の可能性がある**。住所・電話・日付は、出典URLを示せないものを台帳に入れない。
-(2026-08、Gemini にアポリストを作らせたら全件「要確認」で、施設の所在まで取り違えた。)
-
-### Gemini Pro の契約は、この仕組みとは別物
-
-`gemini.google.com` の Gemini Pro / Google AI Pro 契約は**アプリ向け**で、
-API(`generativelanguage.googleapis.com`)の利用枠にはならない。
-スクリプトが使うのは Google AI Studio で発行する **API キー**(GitHub Secrets の `GEMINI_API_KEY`)。
-Pro契約が効くのは、**人がブラウザで Gemini に調べさせる使い方**(例: `docs/prompts/gemini-apo-list.md`)。
-
-### これで解決しないこと
-
-**画像でしか出ていない情報は、許可リストを広げても取れない。**
-田無アスタの月次スケジュールや市報の紙面がこれに当たる。
-プロキシの問題ではなく**そもそもWebに文字が無い**ので、オーナーのスクリーンショットに頼る。
+`scripts/fetch-via-gemini.mjs` は残すが、Full にしたことで出番はほぼ無い。
+使うのは「URLが分からない調べもの」(`--search`)くらい。
+なお Gemini の出力は**取得ステータスが SUCCESS でなければ記憶由来**の可能性があるので、
+住所・電話・日付は出典を示せないものを台帳に入れない。
 
 ## 取得方式の前提(重要)
 
