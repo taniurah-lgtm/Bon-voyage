@@ -58,6 +58,22 @@
 自家焙煎珈琲。行きつけで通った。★住所を入れると位置が正確になります</description>
   </Placemark>
   <Placemark>
+    <name>小平市民活動支援センター あすぴあ ※10/31まで現施設</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>東京都小平市小川東町4-2-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>設置済</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-348-2104</value></Data>
+      <Data name="住所"><value>東京都小平市小川東町4-2-1</value></Data>
+      <Data name="メモ"><value>★2026-08-16 利用団体登録(第254号・有効期限2029/3/31)＋チラシ設置 完了。10/31で現施設終了、11/1から小川パレットへ。移転後に置き直す</value></Data>
+    </ExtendedData>
+    <description>種別: 公共
+住所: 東京都小平市小川東町4-2-1
+電話: 042-348-2104
+★2026-08-16 利用団体登録(第254号・有効期限2029/3/31)＋チラシ設置 完了。10/31で現施設終了、11/1から小川パレットへ。移転後に置き直す</description>
+  </Placemark>
+  <Placemark>
     <name>花小金井南公民館</name>
     <styleUrl>#交渉中</styleUrl>
     <address>東京都小平市花小金井南町2-12-6</address>
@@ -72,22 +88,6 @@
 住所: 東京都小平市花小金井南町2-12-6
 電話: 042-461-0861
 副館長が口頭で承諾「中身を見てから置いてみますね」。設置は未確認。1〜2週間後に補充の申し出の形で確認する</description>
-  </Placemark>
-  <Placemark>
-    <name>小平市民活動支援センター あすぴあ ※10/31まで現施設</name>
-    <styleUrl>#交渉中</styleUrl>
-    <address>東京都小平市小川東町4-2-1</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>交渉中</value></Data>
-      <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>042-348-2104</value></Data>
-      <Data name="住所"><value>東京都小平市小川東町4-2-1</value></Data>
-      <Data name="メモ"><value>★2026-08-16 利用団体登録 完了(第254号・有効期限2029/3/31)。チラシラック・掲示板が使える。次はカードを置きに行く。10/31で現施設終了、11/1から小川パレットへ</value></Data>
-    </ExtendedData>
-    <description>種別: 公共
-住所: 東京都小平市小川東町4-2-1
-電話: 042-348-2104
-★2026-08-16 利用団体登録 完了(第254号・有効期限2029/3/31)。チラシラック・掲示板が使える。次はカードを置きに行く。10/31で現施設終了、11/1から小川パレットへ</description>
   </Placemark>
   <Placemark>
     <name>小川パレット（11/1オープン）</name>
