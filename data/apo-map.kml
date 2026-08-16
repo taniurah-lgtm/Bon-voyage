@@ -74,6 +74,38 @@
 副館長が口頭で承諾「中身を見てから置いてみますね」。設置は未確認。1〜2週間後に補充の申し出の形で確認する</description>
   </Placemark>
   <Placemark>
+    <name>小平市民活動支援センター あすぴあ ※10/31まで現施設</name>
+    <styleUrl>#交渉中</styleUrl>
+    <address>東京都小平市小川東町4-2-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>交渉中</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-348-2104</value></Data>
+      <Data name="住所"><value>東京都小平市小川東町4-2-1</value></Data>
+      <Data name="メモ"><value>★2026-08-16 利用団体登録 完了(第254号・有効期限2029/3/31)。チラシラック・掲示板が使える。次はカードを置きに行く。10/31で現施設終了、11/1から小川パレットへ</value></Data>
+    </ExtendedData>
+    <description>種別: 公共
+住所: 東京都小平市小川東町4-2-1
+電話: 042-348-2104
+★2026-08-16 利用団体登録 完了(第254号・有効期限2029/3/31)。チラシラック・掲示板が使える。次はカードを置きに行く。10/31で現施設終了、11/1から小川パレットへ</description>
+  </Placemark>
+  <Placemark>
+    <name>小川パレット（11/1オープン）</name>
+    <styleUrl>#交渉中</styleUrl>
+    <address>東京都小平市小川西町4-16-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>交渉中</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>070-4510-8196</value></Data>
+      <Data name="住所"><value>東京都小平市小川西町4-16-1</value></Data>
+      <Data name="メモ"><value>★2026-08-16 施設利用登録 完了(利用者ID 10129393)。11/1オープン。公民館・図書館・あすぴあ・男女共同参画センター・西部出張所が集約。キッズスペース新設。掲示ルールが固まる前に話を通す。窓口 市民協働・男女参画推進課 042-346-9532 / 指定管理者 070-4510-8196</value></Data>
+    </ExtendedData>
+    <description>種別: 公共
+住所: 東京都小平市小川西町4-16-1
+電話: 070-4510-8196
+★2026-08-16 施設利用登録 完了(利用者ID 10129393)。11/1オープン。公民館・図書館・あすぴあ・男女共同参画センター・西部出張所が集約。キッズスペース新設。掲示ルールが固まる前に話を通す。窓口 市民協働・男女参画推進課 042-346-9532 / 指定管理者 070-4510-8196</description>
+  </Placemark>
+  <Placemark>
     <name>花小金井南児童館</name>
     <styleUrl>#候補</styleUrl>
     <address>東京都小平市花小金井南町3-3-17</address>
@@ -136,22 +168,6 @@
 住所: 東京都小平市小川東町4-2-1
 電話: 042-348-2100
 行政の子育て支援の本丸。小平元気村おがわ東2F。あすぴあと同じ建物</description>
-  </Placemark>
-  <Placemark>
-    <name>小平市民活動支援センター あすぴあ ※10/31まで現施設</name>
-    <styleUrl>#候補</styleUrl>
-    <address>東京都小平市小川東町4-2-1</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>042-348-2104</value></Data>
-      <Data name="住所"><value>東京都小平市小川東町4-2-1</value></Data>
-      <Data name="メモ"><value>廊下壁面掲示板・チラシラックあり。まず電話で団体登録の要否を確認。★市報8/5号: 10/31で現施設終了、11/1から小川パレット(小川西町4-16-1)へ移転</value></Data>
-    </ExtendedData>
-    <description>種別: 公共
-住所: 東京都小平市小川東町4-2-1
-電話: 042-348-2104
-廊下壁面掲示板・チラシラックあり。まず電話で団体登録の要否を確認。★市報8/5号: 10/31で現施設終了、11/1から小川パレット(小川西町4-16-1)へ移転</description>
   </Placemark>
   <Placemark>
     <name>小平市役所 市民協働・男女参画推進課</name>
@@ -477,22 +493,6 @@
     <description>種別: 生活動線
 住所: 未確認（名称で検索して配置）
 生協は地域活動に寛容。組合員向け掲示板があることが多い</description>
-  </Placemark>
-  <Placemark>
-    <name>小川パレット（11/1オープン）</name>
-    <styleUrl>#候補</styleUrl>
-    <address>東京都小平市小川西町4-16-1</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>070-4510-8196</value></Data>
-      <Data name="住所"><value>東京都小平市小川西町4-16-1</value></Data>
-      <Data name="メモ"><value>★市報8/5号。小川駅西口再開発ビル4・5階。公民館・図書館・あすぴあ・男女共同参画センター・西部出張所が1棟に集約。キッズスペース新設。オープン前後は掲示ルールが固まる時期＝早めに話を通す好機。市の窓口は市民協働・男女参画推進課 042-346-9532</value></Data>
-    </ExtendedData>
-    <description>種別: 公共
-住所: 東京都小平市小川西町4-16-1
-電話: 070-4510-8196
-★市報8/5号。小川駅西口再開発ビル4・5階。公民館・図書館・あすぴあ・男女共同参画センター・西部出張所が1棟に集約。キッズスペース新設。オープン前後は掲示ルールが固まる時期＝早めに話を通す好機。市の窓口は市民協働・男女参画推進課 042-346-9532</description>
   </Placemark>
 </Document>
 </kml>
