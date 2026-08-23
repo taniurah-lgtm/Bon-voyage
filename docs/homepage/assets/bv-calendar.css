@@ -290,3 +290,6 @@
   content: ''; position: absolute; left: 0; right: 0;
   top: 50%; height: 44px; transform: translateY(-50%);
 }
+
+/* 雨天順延日。開催日ではないのでマス目には置かないが、読む人には伝える */
+.bvc-rain { font-size: .82rem; color: var(--sky-deep); margin-top: .3rem; font-weight: 700; }

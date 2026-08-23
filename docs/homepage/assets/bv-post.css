@@ -14,7 +14,7 @@
   margin: 1rem 0 .3rem; color: var(--ink);
 }
 .bvp-req {
-  font-size: .68rem; font-weight: 700; color: #fff; background: var(--sky-deep);
+  font-size: .68rem; font-weight: 700; color: var(--on-sky); background: var(--sky-deep);
   border-radius: 999px; padding: .05rem .45rem; margin-left: .3rem; vertical-align: .1em;
 }
 .bvp-in {

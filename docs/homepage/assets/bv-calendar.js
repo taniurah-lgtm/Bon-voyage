@@ -75,7 +75,7 @@
       text: ev.name + (slot && slot.label ? '（' + slot.label + '）' : ''),
       dates: dates,
       ctz: 'Asia/Tokyo',
-      location: ev.place || '',
+      location: ev.place || ev.mapq || '',
       details: detailsText(ev, date, slot),
     });
     return 'https://calendar.google.com/calendar/render?' + q.toString();
@@ -99,7 +99,12 @@
     if (ev.caution) out.push('⚠️ ' + ev.caution);
     if (slot && slot.label) out.push('枠: ' + slot.label + '（' + slot.start + '〜' + slot.end + '）');
     if (t.exception) out.push('この日は ' + (t.start || ev.start || '') + '〜' + (t.end || '') + ' です');
-    if (ev.kidsNote) out.push(ev.kidsNote);
+    // ★開催日が多い催しの子連れメモは催し全体の話。その日の説明として読むと矛盾する
+    //   （8/29 の説明欄に「お盆期間の平日に行けるのが強み」と入っていた）。
+    //   カード側は「この催しについて」と付けて回避しているので、説明欄も揃える。
+    if (ev.kidsNote) {
+      out.push(((ev.totalDates || (ev.dates || []).length) > 3 ? 'この催しについて: ' : '') + ev.kidsNote);
+    }
     else if (ev.summary) out.push(ev.summary);
     if (ev.cost) out.push('料金: ' + ev.cost);
     if (ev.target) out.push('対象: ' + ev.target);
@@ -142,7 +147,7 @@
       //   2件目を取り込むと1件目が消える（兄弟で別の部に申し込む家庭で困る）。
       'UID:' + ev.id + '-' + stamp + (slot ? '-' + slot.start.replace(':', '') : '') + '@bonvoya.nicomaru.tokyo',
       'SUMMARY:' + icsEsc(ev.name + (slot && slot.label ? '（' + slot.label + '）' : '')),
-      ev.place ? 'LOCATION:' + icsEsc(ev.place) : '',
+      (ev.place || ev.mapq) ? 'LOCATION:' + icsEsc(ev.place || ev.mapq) : '',
       'DESCRIPTION:' + icsEsc(detailsText(ev, date, slot)),
     ].filter(Boolean).concat(when, ['END:VEVENT']);
   }
@@ -369,6 +374,11 @@
       (ev.target ? '<p class="bvc-target">👥 ' + esc(ev.target) + '</p>' : '') +
       (ev.hours ? '<p class="bvc-hours">🕘 ' + esc(ev.hours) + '</p>' : '') +
       (ev.caution ? '<p class="bvc-caution">⚠️ ' + esc(ev.caution) + '</p>' : '') +
+      // 雨天順延日は開催日ではないのでマス目には置かないが、黙って捨てもしない
+      (ev.rainDates && ev.rainDates.length
+        ? '<p class="bvc-rain">☔ 雨天のときは ' +
+          ev.rainDates.map(function (d) { return esc(fmtDay(d)); }).join('・') + ' に順延</p>'
+        : '') +
       dl +
       '<div class="bvc-btns">' + links + '</div>' +
       '</article>'

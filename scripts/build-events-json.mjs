@@ -59,6 +59,28 @@ const daysBetween = (a, b) =>
 // 長い会期（LONG_SPAN 日超）は日ごとに展開せず span にする（カレンダーが埋まって読めなくなる）。
 const LONG_SPAN = 14;
 
+// 雨天順延日・予備日を「開催日」として拾ってはいけない。
+// 「8/8(土) 19:30〜20:30(雨天決行・荒天8/9順延)」を素で読むと 8/8 と 8/9 の2日に
+// なり、開催していない日にカードが立つ（＝読者のカレンダーに無い予定が入る）。
+// 落とすのではなく別に持って「※雨天順延日」として1行で出す。
+const RAIN_RE = /[（(]?[^（()）]*?(?:雨天|荒天|悪天)[^（()）]*?(?:順延|延期|予備日)[^（()）]*?[）)]?/g;
+function splitRainDates(raw) {
+  const s = normalize(raw);
+  const rainParts = s.match(RAIN_RE) || [];
+  if (!rainParts.length) return { when: raw, rain: [] };
+  // 順延の節に日付があるものだけを切り出す（「雨天中止」「雨天決行」だけなら触らない）
+  const withDate = rainParts.filter((t) => /\d{1,2}\s*\/\s*\d{1,2}|\d{1,2}\s*[（(](?:月|火|水|木|金|土|日)/.test(t));
+  if (!withDate.length) return { when: raw, rain: [] };
+  let stripped = raw;
+  const rain = [];
+  for (const part of withDate) {
+    const { dates } = extractDates(part);
+    rain.push(...dates);
+    stripped = stripped.split(part).join(' ');
+  }
+  return { when: stripped.replace(/\s{2,}/g, ' ').trim(), rain: [...new Set(rain)] };
+}
+
 function extractDates(raw) {
   const s = normalize(raw);
   const hits = [];                  // {iso, at, sep} sep = 直前の区切り文字
@@ -423,6 +445,9 @@ function facilityQuery(name) {
 // これがそのまま公開ページに出ていた（.ics の説明欄にも入って読者のカレンダーに残る）。
 // 記号は読者向けの言い方に寄せ、運営メモは削る。
 const STRIP = [
+  // 台帳の書きかけ記法。読者には壊れたプレースホルダに見える
+  //（「開設園の一覧は小平市公式(URL)を参照」がそのまま出ていた）
+  [/\s*[（(]\s*URL\s*[）)]/g, ''],
   [/E\d+\s*参照。?\s*/g, ''],                        // 「E7参照。」
   [/[、。]?\s*E\d+と同日[^。]*。?/g, ''],              // 「E22と同日なのでどちらか選択」
   [/[（(]\s*E\d+[^）)]*[）)]/g, ''],                   // 「(E12参照)」
@@ -539,7 +564,7 @@ for (const file of files) {
         id: b.id,
         name: b.name.replace(/^〔常設〕\s*/, ''),
         span: spanField || when || '通年',
-        place: standingPlace,
+        place: readerText(standingPlace),
         mapq: mapQuery(standingPlace, b.name),
         summary: readerText(field(b.lines, ['内容'])),   // ★子連れ欄で埋めない（kidsNoteと二重になる）
         kidsNote: kidsBody(field(b.lines, ['子連れ'])),
@@ -569,7 +594,10 @@ for (const file of files) {
       continue;
     }
 
-    const { dates, span } = extractDates(when);  // span = 長い会期（マス目に置かない）
+    // 雨天順延日を開催日から切り離す（開催していない日にカードを立てない）
+    const rainSplit = splitRainDates(when);
+    const { dates, span } = extractDates(rainSplit.when);  // span = 長い会期（マス目に置かない）
+    const rainDates = rainSplit.rain.filter((d) => !dates.includes(d));
     if (!dates.length && !span) {
       unresolved.push({ id: b.id, name: b.name, reason: '日時から確定日が取れない', when, confidence });
       continue;
@@ -596,6 +624,7 @@ for (const file of files) {
       dates,
       span,
       when,
+      rainDates,                  // 雨天順延日（開催日ではないので別に持つ）
       exceptions: extractExceptions(when, dates),
       programs,
       totalDates: dates.length,   // 窓で絞る前の開催日数（「この催しについて」の判定に使う）
@@ -603,7 +632,7 @@ for (const file of files) {
       end,
       allDay: !start,
       timeUncertain: !!timeUncertain,
-      place,
+      place: readerText(place),
       mapq: mapQuery(place, b.name),
       summary: readerText(field(b.lines, ['内容'])),   // ★子連れ欄で埋めない（kidsNoteと二重になる）
       kidsNote: kidsBody(field(b.lines, ['子連れ'])),

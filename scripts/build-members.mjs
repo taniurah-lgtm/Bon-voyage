@@ -41,6 +41,7 @@ const calData = {
     caution: e.caution, hours: e.hours, contact: e.contact, exceptions: e.exceptions,
     lastEntry: e.lastEntry, totalDates: e.totalDates, programs: e.programs,
     tentative: e.tentative, timeUncertain: e.timeUncertain, deadline: e.deadline,
+    rainDates: e.rainDates,
   })),
   standing: EVENTS.standing,
 };
@@ -88,6 +89,19 @@ const renkyu = !renkyuLive ? '' : `
   <div class="ev"><div class="nm">🏕 キャンプ（早めに予約）</div><div class="desc">高原キャンプは連休ぶんが早く埋まります。施設ごとの予約開始ルールは下の<a href="#camp">キャンプの節</a>にまとめています（取りにくいときは日曜泊とキャンセル待ち通知が有効）。</div></div>
   <p class="note">※営業日・料金・味覚狩りの解禁時期は変わります。おでかけ前に各公式でご確認を。</p>`;
 
+// 号の本文に残る内部用語を、読者向けの言い方に直す。
+// 「巡回」は運営側の作業名、「★駅前・地元」は台帳の絞り込みマーカーで、
+// どちらも読む人には意味が通らない（原文をそのまま貼っているので残っていた）。
+const WORDS = [
+  [/毎月中旬の巡回で/g, '毎月中旬の調べもので'],
+  [/来月中旬の巡回で/g, '来月中旬に'],
+  [/次回の巡回で/g, '次回の調べもので'],
+  [/巡回で/g, '調べもので'],
+  [/巡回時に/g, '調べもののときに'],
+  [/\s*★[^\s、。]*(?=\s|$)/g, ''],
+];
+const fixWords = (t) => WORDS.reduce((acc, [re, to]) => acc.replace(re, to), t);
+
 // ---- キャンプ（events/camp.md を読む）----------------------------------------
 // 特典に「キャンプ・連休の解禁日と締切を、先のぶんまで」と書いているのに、
 // events/camp.md はビルドで一度も読まれておらず、会員ページのキャンプ欄は
@@ -101,28 +115,74 @@ const campSection = (() => {
   // 「予約の基本(重要)」の中身
   const basics = [];
   let inBasics = false;
+  // 過ぎた日付を例に出さない。台帳の「9月分は7月末ごろ」は、今日(8月下旬)には
+  // もう過ぎていて助言にならない。ルールだけ残して、例示の括弧は落とす。
+  const today = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
+  const thisMonth = Number(today.slice(5, 7));
+  // 例示の中に「もう過ぎた月」が1つでもあれば、その例ごと落とす。
+  //「9月分は7月末ごろ」は、7月末という受付開始日がすでに過ぎていて助言にならない
+  //（ルール本体は括弧の外にあるので、落としても情報は減らない）。
+  // 年をまたぐ月（12月に見る1〜3月など）を誤って落とさないよう、直近6ヶ月ぶんだけ見る。
+  const isPastMonth = (n) => {
+    const back = thisMonth - n;
+    return back >= 1 && back <= 6;
+  };
+  // 括弧に入っていない「9月分は7月末ごろ」形も同じ理由で落とす
+  const dropStalePhrase = (t) => t.replace(/[＝=]?\s*\d{1,2}月分は\d{1,2}月[^。、）)]*/g, (mm) => {
+    const months = [...mm.matchAll(/(\d{1,2})月/g)].map((x) => Number(x[1]));
+    return months.some(isPastMonth) ? '' : mm;
+  });
+  const dropStaleExample = (t) => t.replace(/\s*[（(]例[:：][^）)]*[）)]/g, (mm) => {
+    const months = [...mm.matchAll(/(\d{1,2})月/g)].map((x) => Number(x[1]));
+    return months.some(isPastMonth) ? '' : mm;
+  });
   for (const l of lines) {
     if (/^##\s*予約の基本/.test(l)) { inBasics = true; continue; }
     if (inBasics && /^##\s/.test(l)) break;
-    if (inBasics && /^\s*-\s/.test(l)) basics.push(l.replace(/^\s*-\s*/, ''));
+    if (inBasics && /^\s*[-*+]\s/.test(l)) {
+      basics.push(fixWords(dropStalePhrase(dropStaleExample(l.replace(/^\s*[-*+]\s*/, '')))));
+    }
   }
   // 施設（### C<n>. 名前）
+  // ★台帳の内部欄は公開しない。台帳は「わが家の作業メモ」なので、
+  //   確度・ステータス・運営の判断・家族固有の記述がそのまま入っている。
+  //   イベント側には FORBIDDEN の番兵があるのに、camp.md を直読みする経路には
+  //   何も無く、17か所ぜんぶに「確度: 高 / ステータス: 候補」が露出していた。
+  const CAMP_DROP = /^\s*[-*+]\s*(確度|ステータス|出典|備考|メモ)\s*[:：]/;
+  const CAMP_PRIVATE = /5人家族|わが家|うちの子|施主|本命|狙い目/;
+  const stripPrivate = (t) => t
+    // 「/ 確度: 高 / ステータス: 候補」のように行末にぶら下がっている形も落とす
+    .replace(/\s*\/?\s*(確度|ステータス)\s*[:：][^\/]*(?=\/|$)/g, '')
+    .replace(/\s*\/\s*$/, '')
+    .trim();
   const spots = [];
   let cur = null;
   for (const l of lines) {
     const h = l.match(/^###\s*(C\d+)\.\s*(.+)$/);
-    if (h) { cur = { id: h[1], name: h[2].trim(), body: [] }; spots.push(cur); continue; }
+    if (h) {
+      // 見出しの ★内部マーカー は落とす（イベント側の parseHeading と同じ規則）
+      cur = { id: h[1], name: h[2].replace(/\s*★.*$/, '').trim(), body: [], raw: [] };
+      spots.push(cur);
+      continue;
+    }
     if (/^##\s/.test(l)) cur = null;
-    if (cur && /^\s*-\s/.test(l)) cur.body.push(l.replace(/^\s*-\s*/, ''));
+    if (cur && /^\s*[-*+]\s/.test(l)) {
+      const body = l.replace(/^\s*[-*+]\s*/, '');
+      cur.raw.push(body);                       // 見送り判定にはもとの文を使う
+      if (CAMP_DROP.test(l)) continue;
+      const cleaned = stripPrivate(body);
+      if (!cleaned || CAMP_PRIVATE.test(cleaned)) continue;
+      cur.body.push(cleaned);
+    }
   }
   const md = (t) => esc(t)
     .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
     .replace(/(https?:\/\/[^\s、）)]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
-  const live = spots.filter((c) => !/ステータス:\s*見送り/.test(c.body.join(' ')));
+  const live = spots.filter((c) => !/ステータス\s*[:：]\s*\**\s*見送り/.test(c.raw.join(' ')));
   if (!live.length && !basics.length) return '';
   return `
   <h2 class="sec" id="camp">🏕 キャンプ（予約の解禁が早いもの）</h2>
-  <p class="sec-note">人気の施設は夏〜秋の土曜が2〜3ヶ月前に埋まります。台帳にある${live.length}か所と、
+  <p class="sec-note">人気の施設は夏〜秋の土曜が2〜3ヶ月前に埋まります。${live.length}か所と、
     施設ごとの予約開始ルールをそのまま置いています。<b>ルールは年ごとに変わるので、必ず各公式でご確認ください。</b></p>
   ${basics.length ? `<div class="card"><div class="nm">予約の基本</div><ul class="campbasics">${
     basics.map((t) => `<li>${md(t)}</li>`).join('')
@@ -132,7 +192,11 @@ const campSection = (() => {
     <div class="spotlist">${live.map((c) => `
       <div class="spot">
         <div class="nm">${esc(c.name)}</div>
-        <div class="desc">${c.body.map(md).join('<br>')}</div>
+        <div class="desc">${c.body.filter((t) => !/^URL\s*[:：]/.test(t)).map((t) => md(fixWords(dropStalePhrase(dropStaleExample(t))))).join('<br>')}</div>
+        ${(() => {
+          const u = (c.body.join(' ').match(/https?:\/\/[^\s、）)]+/) || [])[0];
+          return u ? `<div class="links"><a class="lk off" href="${esc(u)}" target="_blank" rel="noopener">🔗 公式</a></div>` : '';
+        })()}
       </div>`).join('')}
     </div>
   </details>`;
@@ -157,6 +221,7 @@ const CORRECTIONS = [
   [/有料版希望|フォームからどうぞ/, 'この号にある「フォームからどうぞ」のご案内は、いまは使っていません。応援のお申し込みは**note のメンバーシップに一本化**しています。'],
 ];
 
+
 // 号の本文に混ざっていた作業用の行を落とす（`</content>` が読者に見えていた）
 const stripArtifacts = (body) =>
   body
@@ -171,7 +236,7 @@ const issueHTML = issues
     const [y, m, d] = f.replace('.md', '').split('-').map(Number);
     const wd = '日月火水木金土'[new Date(Date.UTC(y, m - 1, d)).getUTCDay()];
     // 1行目の題名は日付が入っているので、見出しは自分で組む
-    const body = stripArtifacts(raw.split('\n').slice(1).join('\n'));
+    const body = fixWords(stripArtifacts(raw.split('\n').slice(1).join('\n')));
     // 号のなかのURLは、読めるだけでなく押せるようにする（素テキストだと開けない）。
     // ★終端を「空白・和文の記号・引用符」までにする。\w だけだと日本語の直前で切れて
     //   「?api=1&query=」のような空クエリのリンクができる。
@@ -247,7 +312,7 @@ const TOC = `
 
 const CONTENT = `
   <h2 class="sec sec-first" id="cal">📅 おでかけカレンダー</h2>
-  <p class="sec-note">日をタップすると予定が出ます。<span class="stamp">台帳の更新日: ${EVENTS.generated}</span></p>
+  <p class="sec-note">日をタップすると予定が出ます。<span class="stamp">情報の更新日: ${EVENTS.generated}</span></p>
   <script type="application/json" id="bv-cal-data">${jsonInTag(calData)}</script>
   <div id="bv-cal"><p class="note">カレンダーを組み立てています…</p></div>
 
@@ -351,7 +416,7 @@ h2.sec-first{margin-top:.4rem;}
 .campbasics{margin:.4rem 0 0;padding-left:1.1rem;font-size:.86rem;color:var(--ink-soft);line-height:1.9;}
 .campbasics li{margin-top:.3rem;}
 .nopin{font-size:.72rem;font-weight:700;color:var(--marigold-ink);background:var(--marigold-wash);border-radius:999px;padding:.1rem .45rem;}
-.lk.cal{background:var(--sky-deep);color:#fff;border-color:var(--sky-deep);}
+.lk.cal{background:var(--sky-deep);color:var(--on-sky);border-color:var(--sky-deep);}
 .lk.map{color:var(--sky-deep);background:var(--surface);}
 .lk.off{color:var(--marigold-ink);background:var(--surface);}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.15rem;}
@@ -372,7 +437,7 @@ footer{color:var(--ink-soft);font-size:.8rem;text-align:center;padding:2rem 1.25
 .gate h2{font-family:var(--maru);font-weight:800;font-size:1.15rem;margin:0 0 .4rem;}
 .gate p{color:var(--ink-soft);font-size:.9rem;margin:0 0 1rem;}
 .gate input{width:100%;font-size:1.05rem;padding:.7rem .8rem;border:1px solid var(--line-strong);border-radius:12px;background:var(--ground);color:var(--ink);}
-.gate button{margin-top:.8rem;width:100%;font-family:var(--maru);font-weight:800;font-size:1.05rem;color:#fff;background:var(--sky-deep);border:none;border-radius:999px;padding:.75rem;cursor:pointer;}
+.gate button{margin-top:.8rem;width:100%;font-family:var(--maru);font-weight:800;font-size:1.05rem;color:var(--on-sky);background:var(--sky-deep);border:none;border-radius:999px;padding:.75rem;cursor:pointer;}
 .gate .err{color:#C0554E;font-size:.86rem;margin-top:.7rem;min-height:1.1em;}
 .gate .hint{font-size:.8rem;color:var(--ink-soft);margin-top:.9rem;}
 .gate .cta{margin-top:1.3rem;padding-top:1.15rem;border-top:1px solid var(--line);}

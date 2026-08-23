@@ -261,6 +261,15 @@
         }
       });
       layer.addLayer(m);
+      // ★まとめた印にも読み上げ名を付ける。付けないと「6」「3」というボタンになり、
+      //   19本のうち16スポットが名前の無いボタン越しにしか届かなかった。
+      var label = 'この付近に ' + all.length + '件：' + names.join('、');
+      function nameIt() {
+        var el = m.getElement();
+        if (el) { el.setAttribute('aria-label', label); el.setAttribute('role', 'button'); }
+      }
+      m.on('add', nameIt);
+      nameIt();
     }
 
     // ピンを立てられなかったスポットの件数を正直に出す

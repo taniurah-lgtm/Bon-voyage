@@ -66,7 +66,7 @@
 .bvm-pop { display: flex; flex-direction: column; gap: .18rem; }
 .bvm-pop-nm { font-family: var(--maru); font-weight: 800; font-size: .96rem; }
 .bvm-pop-acc { font-size: .78rem; color: #5b6a73; }
-.bvm-pop-ages { font-family: var(--maru); font-weight: 700; font-size: .8rem; color: #7c8a92; }
+.bvm-pop-ages { font-family: var(--maru); font-weight: 700; font-size: .8rem; color: var(--ink-soft); }
 .bvm-pop-approx { font-size: .72rem; color: #A8703C; }
 .bvm-pop-voice {
   font-size: .82rem; color: #34434C; background: #F5F2EA;

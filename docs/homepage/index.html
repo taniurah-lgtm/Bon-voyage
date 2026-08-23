@@ -31,6 +31,9 @@
     --blush: #EB8E86;
     --blush-wash: #FBEBE7;
     --leaf: #74AE71;
+    /* 明るい地（sky-deep・leaf・marigold）に乗せる文字の色。
+       定義を忘れると var(--on-sky) が継承色になり、ダークで 1.78:1 まで落ちる。 */
+    --on-sky: #FFFFFF;
     --line: #ECE7DB;
     --line-strong: #DCD5C6;
     --line-green: #06C755;
@@ -53,7 +56,7 @@
       --ink: #ECF2F4; --ink-soft: #AAB9C1; --ink-faint: #7B8C95;
       --sky: #6FBAD9; --sky-deep: #9AD4EA; --sky-wash: #1D3944;
       --marigold: #F0AE5E; --marigold-wash: #362F1F;
-      --blush: #EC9C94; --blush-wash: #362725; --leaf: #8FC489;
+      --blush: #EC9C94; --blush-wash: #362725; --leaf: #8FC489; --on-sky: #0E1A22;
       --line: #293B45; --line-strong: #38505C;
       --shadow: 0 2px 6px rgba(0,0,0,.2), 0 16px 44px rgba(0,0,0,.26);
       --shadow-soft: 0 2px 22px rgba(0,0,0,.22);
@@ -75,7 +78,7 @@
     --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95;
     --sky:#6FBAD9; --sky-deep:#9AD4EA; --sky-wash:#1D3944;
     --marigold:#F0AE5E; --marigold-wash:#362F1F; --blush:#EC9C94; --blush-wash:#362725;
-    --leaf:#8FC489; --line:#293B45; --line-strong:#38505C;
+    --leaf:#8FC489; --on-sky:#0E1A22; --line:#293B45; --line-strong:#38505C;
     --shadow:0 2px 6px rgba(0,0,0,.2),0 16px 44px rgba(0,0,0,.26); --shadow-soft:0 2px 22px rgba(0,0,0,.22);
     --hero-scrim-1: rgba(17,28,37,.95); --hero-scrim-2: rgba(17,28,37,.80); --hero-scrim-3: rgba(17,28,37,.22);
   }
@@ -134,7 +137,7 @@
   .agechip { font-family: var(--maru); font-weight: 700; font-size: .8rem; background: var(--blush-wash); color: var(--ink-soft); padding: .24rem .65rem; border-radius: 999px; }
 
   .issue { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; max-width: 46rem; }
-  .issue-top { background: linear-gradient(120deg, var(--sky) 0%, var(--sky-deep) 100%); color: #fff; padding: 1.2rem 1.5rem; display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .issue-top { background: linear-gradient(120deg, var(--sky) 0%, var(--sky-deep) 100%); color: var(--on-sky); padding: 1.2rem 1.5rem; display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
   .issue-top .t { font-family: var(--maru); font-weight: 800; font-size: 1.14rem; letter-spacing: .02em; }
   .issue-top .d { font-size: .82rem; font-weight: 700; font-variant-numeric: tabular-nums; }
   .issue-body { padding: 1.5rem 1.5rem 1.7rem; }
@@ -170,7 +173,7 @@
   .cmp-col.paid-col { border-color: var(--marigold); box-shadow: var(--shadow-soft); }
   .cmp-head { font-family: var(--maru); font-weight: 800; font-size: .82rem; letter-spacing: .06em; display: inline-block; padding: .25rem .7rem; border-radius: 999px; }
   .cmp-head.free { background: var(--sky-wash); color: var(--sky-deep); }
-  .cmp-head.sup { background: var(--marigold-wash); color: #6E4708; }
+  .cmp-head.sup { background: var(--marigold-wash); color: var(--marigold-ink); }
   .cmp-role { font-family: var(--maru); font-weight: 800; font-size: 1.04rem; margin: .7rem 0 .6rem; line-height: 1.5; }
   .cmp-col ul { list-style: none; margin: 0; padding: 0; }
   .cmp-col li { position: relative; padding-left: 1rem; margin: .45rem 0; font-size: .93rem; line-height: 1.65; color: var(--ink-soft); }
@@ -179,10 +182,10 @@
   .cmp-col.paid-col li::before { background: var(--marigold); }
   @media (max-width: 40rem) { .cmp-grid { grid-template-columns: 1fr; } }
   .perks { background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); padding: 1.4rem 1.4rem 1.25rem; box-shadow: var(--shadow-soft); }
-  .perks-title { font-family: var(--maru); font-weight: 800; font-size: 1.02rem; color: #6E4708; margin-bottom: 1rem; display: flex; align-items: center; gap: .45rem; }
+  .perks-title { font-family: var(--maru); font-weight: 800; font-size: 1.02rem; color: var(--marigold-ink); margin-bottom: 1rem; display: flex; align-items: center; gap: .45rem; }
   .paid-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .9rem; }
   .paid-list li { display: flex; gap: .65rem; font-size: 1.02rem; align-items: flex-start; line-height: 1.6; }
-  .paid-list .ck { flex: none; width: 1.4rem; height: 1.4rem; border-radius: 999px; background: var(--leaf); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: .82rem; font-weight: 800; margin-top: .12rem; }
+  .paid-list .ck { flex: none; width: 1.4rem; height: 1.4rem; border-radius: 999px; background: var(--leaf); color: var(--on-sky); display: inline-flex; align-items: center; justify-content: center; font-size: .82rem; font-weight: 800; margin-top: .12rem; }
   .paid-cta { margin-top: 1.3rem; display: flex; gap: .7rem; flex-wrap: wrap; }
   .btn-warm { background: var(--marigold); color: #3a2408; }
   .btn-warm:hover { transform: translateY(-1px); }
