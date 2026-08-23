@@ -17,7 +17,7 @@
  * 合言葉を知らない人には先の予定は見えない。
  */
 import { readFileSync, writeFileSync } from 'node:fs';
-import { encryptFor, passphrases, ITER, CLIENT_DECRYPT, jsonInTag, esc } from './lib/gate.mjs';
+import { encryptFor, passphrases, ITER, CLIENT_DECRYPT, jsonInTag, esc, buildStamp } from './lib/gate.mjs';
 
 const OUT = 'docs/homepage/m/s7f2ka/index.html';
 const EVENTS = JSON.parse(readFileSync('data/events.json', 'utf8'));
@@ -156,7 +156,7 @@ footer{color:var(--ink-faint);font-size:.8rem;text-align:center;padding:2rem 1.2
 const BLOBS = [];
 for (const p of PASSES) BLOBS.push(await encryptFor(p, CONTENT));
 
-const page = `<!doctype html>
+const page = `<!doctype html>${buildStamp()}
 <html lang="ja">
 <head>
 <meta charset="utf-8">

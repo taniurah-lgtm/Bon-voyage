@@ -32,3 +32,13 @@ fi
 if [ "${MAP_POST_URL:-}" = "" ]; then
   echo "⚠ MAP_POST_URL が未設定。投稿フォームは出るが、送信するとコピー案内に切り替わる。"
 fi
+
+# 検証用の合言葉で組まれたものが残っていないか（公開前の最後の砦）
+if grep -rl "BV_BUILD: TEST_PASSPHRASE" docs/homepage/ >/dev/null 2>&1; then
+  echo
+  echo "🔴 検証用の合言葉で組まれたページが残っている。このまま公開しないこと:"
+  grep -rl "BV_BUILD: TEST_PASSPHRASE" docs/homepage/ | sed "s/^/     /"
+  echo "     → MEMBER_PASS='本物の合言葉' ./scripts/build-site.sh で組み直す"
+  exit 1
+fi
+echo "✓ 合言葉は本物で組まれている"

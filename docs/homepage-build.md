@@ -185,3 +185,21 @@ cd docs/homepage && (setsid python3 -m http.server 8899 >/tmp/http.log 2>&1 </de
 `events/` の**正は rfwmo8**。このブランチにも同期したコピーをコミットしてあるが、
 これは「ビルドがそのまま通る状態にしておくため」のスナップショットで、時間が経てば古くなる。
 組み立てる前に上の同期コマンドを走らせるのが正しい手順。
+
+---
+
+## 付記2: 検証用の合言葉で組んだものを公開しない仕掛け
+
+`MEMBER_PASS` が未設定、または `testpass` などの検証用の値だと、
+出来上がったHTMLの先頭に `<!-- BV_BUILD: TEST_PASSPHRASE -->` が入る。
+`scripts/build-site.sh` は最後にこれを探して、見つけたら **exit 1 で止まる**。
+
+```
+🔴 検証用の合言葉で組まれたページが残っている。このまま公開しないこと:
+     docs/homepage/m/s7f2ka/index.html
+     docs/homepage/map.html
+```
+
+リポジトリにコミットされている `m/s7f2ka/index.html` と `map.html` は、
+**検証のため `testpass` で組まれていることがある**。公開する前に必ず
+本物の `MEMBER_PASS` で組み直して、この警告が出ないことを確かめる。

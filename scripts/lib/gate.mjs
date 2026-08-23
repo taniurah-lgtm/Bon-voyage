@@ -35,6 +35,17 @@ export function passphrases() {
   return list.length ? list : ['CHANGEME'];
 }
 
+// 検証用の合言葉で組まれたビルドを、あとから機械で見つけられるようにする。
+// 出来上がったHTMLにこのコメントが入っていたら**公開してはいけない**。
+// scripts/build-site.sh が最後にこれを探して警告する。
+const TEST_PASSES = ['CHANGEME', 'testpass', 'test', 'password'];
+export function buildStamp() {
+  const p = passphrases();
+  return TEST_PASSES.includes(p[0])
+    ? '\n<!-- BV_BUILD: TEST_PASSPHRASE — 検証用の合言葉で組まれています。公開前に本物の MEMBER_PASS で組み直すこと -->'
+    : '';
+}
+
 // ブラウザ側の復号コード。<script> にそのまま入れて使う。
 export const CLIENT_DECRYPT = `
 const b2u = (b) => Uint8Array.from(atob(b), c => c.charCodeAt(0));

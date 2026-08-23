@@ -26,7 +26,7 @@
  *   - 応援のお願いは **投稿し終わったあと** にだけ出す（書く前に出さない）
  */
 import { readFileSync, writeFileSync } from 'node:fs';
-import { encryptFor, passphrases, ITER, jsonInTag, esc } from './lib/gate.mjs';
+import { encryptFor, passphrases, ITER, jsonInTag, esc, buildStamp } from './lib/gate.mjs';
 
 const SPOTS = JSON.parse(readFileSync('data/map-spots.json', 'utf8'));
 const POSTS = JSON.parse(readFileSync('data/map-posts.json', 'utf8'));
@@ -100,7 +100,7 @@ for (const p of passphrases()) gateBlobs.push(await encryptFor(p, 'ok'));
 const totalPosts = POSTS.length;
 const pinned = SPOTS.filter((s) => typeof s.lat === 'number').length;
 
-const page = `<!doctype html>
+const page = `<!doctype html>${buildStamp()}
 <html lang="ja">
 <head>
 <meta charset="utf-8">
