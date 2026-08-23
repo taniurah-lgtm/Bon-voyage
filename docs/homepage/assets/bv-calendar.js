@@ -147,7 +147,7 @@
     ].filter(Boolean).concat(when, ['END:VEVENT']);
   }
 
-  // iPhone / Apple カレンダー向けの .ics。Googleに入れたくない人の逃げ道。
+  // カレンダーのファイル(.ics)。iPhone/Apple はもちろん、Google に直接入れたくない人の逃げ道。
   // dates に複数渡すと、その日ぶんをまとめて1つのファイルに入れる
   //（5日間の催しを1日ずつ登録させるのは手間なので）。
   function icsBlobURL(ev, dates, slot) {
@@ -239,6 +239,7 @@
   }
 
   function cardHTML(ev, date, opt) {
+    var hName = (opt && opt.hName) || 'h5';   // 予定名の見出しの深さ（置かれ方で変わる）
     var past = opt && opt.past;
     var multiSlot = hasMultipleSlots(ev);
     var t = timesFor(ev, date);
@@ -258,7 +259,7 @@
             // 枠ごとに .ics も出す。締切のある催しほど保存したい
             '<button class="bvc-btn bvc-btn-ics" type="button" data-ics="' + esc(ev.id) +
             '" data-date="' + esc(date) + '" data-slot="' + i + '"' +
-            ' aria-label="' + esc(ev.name + ' ' + sl.label) + 'を iPhone のカレンダー用に保存">🍎 iPhone</button>' +
+            ' aria-label="' + esc(ev.name + ' ' + sl.label) + 'をカレンダーのファイル(.ics)で保存">📄 .ics</button>' +
             '</span>';
         }).join('')
       // ★読み上げ用の名前を必ず付ける。付けないと、その日の予定が5件あるとき
@@ -268,7 +269,7 @@
         '<button class="bvc-btn bvc-btn-ics" type="button" data-ics="' + esc(ev.id) + '" data-date="' + esc(date) + '"' +
         // 実際の動きは「.ics を保存してから開く」。「追加」と書くと、押しても
         // カレンダーに入らないように見える。
-        ' aria-label="' + esc(ev.name) + 'を iPhone のカレンダー用に保存">🍎 iPhone用に保存</button>';
+        ' aria-label="' + esc(ev.name) + 'をカレンダーのファイル(.ics)で保存">📄 ファイルで保存</button>';
     // 5日間の催しを1日ずつ登録させるのは手間（「利用者に手間がないように」）。
     // 残っている日をまとめて1ファイルにするボタンを、複数日のものだけに出す。
     var nowKey = todayISO();
@@ -276,8 +277,8 @@
     var allBtn = (!multiSlot && restDays.length > 1)
       ? '<button class="bvc-btn bvc-btn-ics bvc-btn-all" type="button" data-ics="' + esc(ev.id) +
         '" data-date="' + esc(date) + '" data-all="1"' +
-        ' aria-label="' + esc(ev.name) + 'の残り' + restDays.length + '日ぶんを iPhone のカレンダー用にまとめて保存">' +
-        '🍎 ' + restDays.length + '日ぶんまとめて</button>'
+        ' aria-label="' + esc(ev.name) + 'の残り' + restDays.length + '日ぶんをカレンダーのファイル(.ics)にまとめて保存">' +
+        '📄 ' + restDays.length + '日ぶんまとめて</button>'
       : '';
     // 終わった予定に登録ボタンを出さない（会員ページは過去も持っている）
     var links = past ? '' :
@@ -295,7 +296,7 @@
       (!multiSlot && t.start && !t.end && !ev.timeUncertain ? '<span class="bvc-exc">終了時刻は未公表</span>' : '') +
       (ev.timeUncertain && !t.program ? '<span class="bvc-tent">時間は要確認（例年の目安）</span>' : '') +
       (ev.tentative ? '<span class="bvc-tent">日程は要確認</span>' : '') + '</p>' +
-      '<h5 class="bvc-name">' + esc(ev.name) + '</h5>' +
+      '<' + hName + ' class="bvc-name">' + esc(ev.name) + '</' + hName + '>' +
       (multiSlot ? '<p class="bvc-slots">🕒 ' + esc(ev.when) + '</p>' : '') +
       (ev.place ? '<p class="bvc-place">' + esc(ev.place) + '</p>' : '') +
       (ev.summary ? '<p class="bvc-desc">' + esc(ev.summary) + '</p>' : '') +
@@ -320,6 +321,12 @@
   // ---- 本体 -----------------------------------------------------------------
   function mount(root, data, opts) {
     opts = opts || {};
+    // 見出しは飛ばさない。月＝hTag、日や節＝その1つ下、予定名＝さらに1つ下。
+    // 公開ページは上に h2 が無いので月を h2 にする（h1→h3 は飛びになる）。
+    var lv = opts.monthLevel === 2 ? 2 : 3;
+    var hTag = 'h' + lv;          // 2026年 8月
+    var hSub = 'h' + (lv + 1);    // 8月29日(土)の予定 ／ ⏳ 申込の締切…
+    var hName = 'h' + (lv + 2);   // 予定の名前
     var events = data.events || [];
     var byId = {};
     events.forEach(function (e) { byId[e.id] = e; });
@@ -362,9 +369,14 @@
     });
 
     var today = todayISO();
-    var allDates = Object.keys(byDate).filter(function (d) { return d >= today; }).sort();
+    // 公開ページは今日からの2週間ぶんしか持っていないので、過去の月を出す意味がない。
+    // 会員ページは台帳の全期間を持っており、「台帳の予定をぜんぶ」と書いている。
+    // ★ここを today で切っていたため、7月の11件（台帳の26%）が暗号の中にあるのに
+    //   月送りボタンが8月で止まり、UIから開けなかった（「ぜんぶ」が嘘になっていた）。
+    function inRange(d) { return opts.teaser ? d >= today : true; }
+    var allDates = Object.keys(byDate).filter(inRange).sort();
     var firstMonth = (allDates[0] || today).slice(0, 7);
-    var months = uniq(Object.keys(byDate).filter(function (d) { return d >= today; }).map(function (d) { return d.slice(0, 7); })).sort();
+    var months = uniq(Object.keys(byDate).filter(inRange).map(function (d) { return d.slice(0, 7); })).sort();
     if (!months.length) months = [today.slice(0, 7)];
     var view = months.indexOf(today.slice(0, 7)) >= 0 ? today.slice(0, 7) : months[0];
     // 「今週末どこ行こう」が主な用なので、平日に開いたら次の土日を選んでおく。
@@ -382,7 +394,8 @@
     }
     var selected = (byDate[today] && byDate[today].length && /[06]/.test(String(parseISO(today).getDay())))
       ? today
-      : (nextWeekendWithEvents() || allDates[0] || null);
+      // allDates には過去の日も入る（会員ページ）。最初に選ぶのは今日以降にする。
+      : (nextWeekendWithEvents() || allDates.filter(function (d) { return d >= today; })[0] || allDates[0] || null);
     if (selected && selected.slice(0, 7) !== view && months.indexOf(selected.slice(0, 7)) >= 0) {
       view = selected.slice(0, 7);
     }
@@ -393,7 +406,9 @@
       // たどり着くまで1.8画面ぶんスクロールが必要だった。
       '<div class="bvc-head">' +
       '<button class="bvc-nav" type="button" data-go="-1" aria-label="前の月">‹</button>' +
-      '<h3 class="bvc-month" aria-live="polite"></h3>' +
+      // 見出しの深さは置かれ方で変わる。会員ページは「📅 おでかけカレンダー」(h2) の
+      // 下にあるので h3、公開ページは上に h2 が無いので h2（h1→h3 は飛びになる）。
+      '<' + hTag + ' class="bvc-month" aria-live="polite"></' + hTag + '>' +
       '<button class="bvc-nav" type="button" data-go="1" aria-label="次の月">›</button>' +
       '</div>' +
       '<div class="bvc-quick"><button class="bvc-jump" type="button" data-jump="weekend">今週末を見る</button>' +
@@ -406,7 +421,10 @@
       '</tr></thead><tbody></tbody></table>' +
       '<p class="bvc-key">👶 あかちゃん(0-2) ／ 🧒 未就学(3-6) ／ 🎒 小学生　' +
       '<b>◎</b> ぴったり ／ <b>○</b> だいじょうぶ ／ <b>△</b> ひと工夫</p>' +
-      '<div class="bvc-legend"><span class="bvc-dot"></span>予定あり　<span class="bvc-today-mark">今日</span>' +
+      '<div class="bvc-legend"><span class="bvc-dot"></span>予定あり　' +
+      // 会員ページは過ぎた日にも中空の点を出す。凡例に無いと、何の印か分からない。
+      (opts.teaser ? '' : '<span class="bvc-dot is-past"></span>終わった予定　') +
+      '<span class="bvc-today-mark">今日</span>' +
       (opts.teaser && data.window
         ? '<span class="bvc-window">公開ぶんは ' + esc(fmtDay(data.window.to)) + ' まで</span>'
         : '') +
@@ -480,8 +498,13 @@
         var url = icsBlobURL(ev, target, sl);
         var a = document.createElement('a');
         a.href = url;
-        a.download = (ev.name + (sl ? '-' + sl.label : '') + (ics.dataset.all ? '-ぜんぶ' : ''))
-          .replace(/[\/\\?%*:|"<>]/g, '') + '.ics';
+        // ★ファイル名は ASCII にする。日本語を入れると、ブラウザが download 属性を
+        //   捨てて拡張子なしの「download」で保存することがあり、そうなると
+        //   カレンダーに取り込めない（Chromium で実測：漢字・カタカナ・é すべて失敗）。
+        a.download = 'bonvoyage-' + String(ev.id || 'ev').replace(/[^A-Za-z0-9]/g, '') +
+          '-' + String(ics.dataset.date).replace(/-/g, '') +
+          (sl ? '-' + sl.start.replace(':', '') : '') +
+          (ics.dataset.all ? '-all' : '') + '.ics';
         document.body.appendChild(a);
         a.click();
         // 保存が始まる前に blob を捨てると空ファイルになるブラウザがあるので、少し待って片づける
@@ -584,7 +607,7 @@
             : 'この日は、公開しているぶん（今日からの2週間）の外です。予定が無いという意味ではありません。' +
               (opts.memberUrl ? ' <a href="' + esc(opts.memberUrl) + '">会員ページ</a>では先の予定まで見られます。' : '');
         $day.innerHTML =
-          '<h4 class="bvc-dayhead">' + esc(fmtDay(selected)) + '</h4>' +
+          '<' + hSub + ' class="bvc-dayhead">' + esc(fmtDay(selected)) + '</' + hSub + '>' +
           '<p class="bvc-empty">' + (w ? outMsg : 'この日に入っている予定はありません。') + '</p>';
         renderTail();
         return;
@@ -593,19 +616,19 @@
         // 何も選ばれていないときは「この先の予定」を出す（空白より役に立つ）
         var up = allDates.slice(0, 4);
         $day.innerHTML =
-          '<h4 class="bvc-dayhead">この先の予定</h4>' +
+          '<' + hSub + ' class="bvc-dayhead">この先の予定' + '</' + hSub + '>' +
           (up.length
             ? up.map(function (d) {
                 return '<p class="bvc-daylabel">' + esc(fmtDay(d)) + '</p>' +
-                  byDate[d].map(function (e) { return cardHTML(e, d); }).join('');
+                  byDate[d].map(function (e) { return cardHTML(e, d, { hName: hName }); }).join('');
               }).join('')
             : '<p class="bvc-empty">いまのところ、確定した予定はありません。</p>');
       } else {
         $day.innerHTML =
-          '<h4 class="bvc-dayhead">' + esc(fmtDay(selected)) +
+          '<' + hSub + ' class="bvc-dayhead">' + esc(fmtDay(selected)) +
           (selected < today ? 'に終わった予定' : 'の予定') +
-          '<span class="bvc-count">' + list.length + '件</span></h4>' +
-          list.map(function (e) { return cardHTML(e, selected, { past: selected < today }); }).join('');
+          '<span class="bvc-count">' + list.length + '件</span>' + '</' + hSub + '>' +
+          list.map(function (e) { return cardHTML(e, selected, { past: selected < today, hName: hName }); }).join('');
       }
       renderTail();
     }
@@ -638,7 +661,7 @@
               '☎ ' + esc((e.contact.who ? e.contact.who + ' ' : '') + e.contact.tel) + '</a>';
           }
           return '<div class="bvc-dlrow' + (compact ? ' is-compact' : '') + '"><span class="bvc-dldate">' + esc(fmtDay(e.deadline.date)) +
-            (days === 0 ? '<b>今日</b>' : days <= 3 ? '<b>あと' + days + '日</b>' : '') + '</span>' +
+            (days === 0 ? '<b>今日</b>' : '<b>あと' + days + '日</b>') + '</span>' +
             '<span class="bvc-dlname">' + esc(e.name) +
             (how.length ? '<span class="bvc-dlhow">' + esc(how.join('／')) + '</span>' : '') +
             (tel ? '<span class="bvc-dlact">' + tel + '</span>' : '') +
@@ -667,7 +690,7 @@
         $dlTop.innerHTML = '';
       }
       $dl.hidden = false;
-      $dl.innerHTML = '<h4 class="bvc-dlhead">⏳ 申込の締切が近いもの</h4>' + rowsFor(soon);
+      $dl.innerHTML = '<' + hSub + ' class="bvc-dlhead">⏳ 申込の締切が近いもの' + '</' + hSub + '>' + rowsFor(soon);
     }
 
     function renderTail() {
@@ -675,11 +698,11 @@
       // 会期もの（「〜10/14まで」のように、日付ではなく期間で開いているもの）
       var spans = events.filter(function (e) { return e.span && (!e.span.to || e.span.to >= today); });
       if (spans.length) {
-        html += '<h4 class="bvc-tailhead">📖 会期中ずっと見られるもの</h4>' +
+        html += '<' + hSub + ' class="bvc-tailhead">📖 会期中ずっと見られるもの' + '</' + hSub + '>' +
           spans.map(function (e) {
             var label = e.span.to ? esc(fmtDay(e.span.to)) + 'まで' : '会期中';
             return '<article class="bvc-card"><p class="bvc-when">' + label + '</p>' +
-              '<h5 class="bvc-name">' + esc(e.name) + '</h5>' +
+              '<' + hName + ' class="bvc-name">' + esc(e.name) + '</' + hName + '>' +
               (e.place ? '<p class="bvc-place">' + esc(e.place) + '</p>' : '') +
               (e.summary ? '<p class="bvc-desc">' + esc(e.summary) + '</p>' : '') +
               (e.kidsNote && e.kidsNote !== e.summary ? '<p class="bvc-kids">' + esc(e.kidsNote) + '</p>' : '') +
@@ -697,7 +720,7 @@
         return e.tentative && (e.dates || []).some(function (d) { return d >= today; });
       });
       if (tent.length) {
-        html += '<h4 class="bvc-tailhead">🔎 日程がまだ確定していないもの</h4>' +
+        html += '<' + hSub + ' class="bvc-tailhead">🔎 日程がまだ確定していないもの' + '</' + hSub + '>' +
           '<p class="bvc-tailnote">例年の時期から拾ったものです。日付はカレンダーのマス目には入れていません。公式で確認してからお出かけください。</p>' +
           tent.map(function (e) {
             return '<div class="bvc-tentrow"><span class="bvc-tentwhen">' + esc(e.when || '') + '</span>' +
@@ -707,10 +730,10 @@
       }
       // いつでも行ける定番（プール・水遊び・常設）
       if ((data.standing || []).length) {
-        html += '<h4 class="bvc-tailhead">🌊 いつでも行ける定番</h4>' +
+        html += '<' + hSub + ' class="bvc-tailhead">🌊 いつでも行ける定番' + '</' + hSub + '>' +
           data.standing.map(function (s) {
             return '<article class="bvc-card"><p class="bvc-when">' + esc(s.span) + '</p>' +
-              '<h5 class="bvc-name">' + esc(s.name) + '</h5>' +
+              '<' + hName + ' class="bvc-name">' + esc(s.name) + '</' + hName + '>' +
               (s.place ? '<p class="bvc-place">' + esc(s.place) + '</p>' : '') +
               (s.summary ? '<p class="bvc-desc">' + esc(s.summary) + '</p>' : '') +
               (s.kidsNote && s.kidsNote !== s.summary ? '<p class="bvc-kids">' + esc(s.kidsNote) + '</p>' : '') +

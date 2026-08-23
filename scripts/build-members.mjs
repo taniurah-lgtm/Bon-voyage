@@ -50,16 +50,26 @@ const calData = {
 //   カレンダー登録時の警告が、月300円を払った会員ページだけで消えていた
 //   （無料の人には出るのに、有料の人の予定表に未確定の時刻が黙って入る）。
 //   同じ事故を二度やらないよう、カレンダー側が読むキーが全部揃っているか毎回確かめる。
+//   ★見張りは ev. だけでなく e. / s. も見る。カレンダー側は場所によって
+//     ev.timeUncertain / e.contact / s.name と書き分けており、ev. しか見ないと
+//     締切の電話（contact）や会期もの（span）を落としても素通りしていた
+//     （再発防止の仕組みが再発を許す形になっていた）。
 {
   const js = readFileSync('docs/homepage/assets/bv-calendar.js', 'utf8');
-  const wanted = [...new Set([...js.matchAll(/\bev\.([a-zA-Z][a-zA-Z0-9]*)/g)].map((m) => m[1]))];
-  const have = new Set(Object.keys(calData.events[0] || {}));
-  const missing = wanted.filter((k) => !have.has(k));
+  // 短い変数名は他の用途とも衝突するので、台帳に無いものは無視する
+  const LEDGER_KEYS = new Set(Object.keys(EVENTS.events[0] || {}));
+  const read = new Set(
+    [...js.matchAll(/\b(?:ev|e|s)\.([a-zA-Z][a-zA-Z0-9]*)/g)].map((m) => m[1]).filter((k) => LEDGER_KEYS.has(k))
+  );
+  // 先頭1件だけ見ると、その件に無いキー（span など）を見落とす。全件の和集合で見る。
+  const have = new Set(calData.events.flatMap((e) => Object.keys(e)));
+  const missing = [...read].filter((k) => !have.has(k));
   if (missing.length) {
     console.error('🔴 bv-calendar.js が読むのに、会員ページへ渡していないキー: ' + missing.join(', '));
     console.error('   → scripts/build-members.mjs の calData.events の写しに足すこと。');
     process.exit(1);
   }
+  console.log(`  写し漏れの見張り: カレンダーが読む ${read.size}キーすべて渡している`);
 }
 
 // ---- 連休さきどり（手で書いている枠。テーマ別・キャンプ偏重にしない）----------
@@ -138,19 +148,22 @@ const voicesSection = POSTS.length
     <p class="note" style="margin-top:.5rem">投稿が入ったら、ここに全件（写真つきのものも）出ます。公開ページは各スポット2件までです。</p></div>`;
 
 // ---- 暗号化する中身 -----------------------------------------------------------
-const CONTENT = `
-  <nav class="toc">
+const TOC = `
+  <nav class="toc" aria-label="このページの中身">
     <a href="#cal">📅 カレンダー</a>
     <a href="#map">🗺 マップ</a>
     <a href="#renkyu">🍁 連休さきどり</a>
     <a href="#voices">💬 みんなの声</a>
     <a href="#back">📮 バックナンバー</a>
-  </nav>
+  </nav>`;
 
-  <h2 class="sec" id="cal">📅 おでかけカレンダー</h2>
-  <p class="sec-note">台帳の予定をぜんぶ。気になる日をタップすると、その日の予定が出ます。</p>
+const CONTENT = `
+  <h2 class="sec sec-first" id="cal">📅 おでかけカレンダー</h2>
+  <p class="sec-note">日をタップすると予定が出ます。</p>
   <script type="application/json" id="bv-cal-data">${jsonInTag(calData)}</script>
   <div id="bv-cal"><p class="note">カレンダーを組み立てています…</p></div>
+
+${TOC}
 
   <h2 class="sec" id="map">🗺 みんなのおでかけマップ</h2>
   <p class="sec-note">ピンをタップすると、その場所を地図で開けます。公開ページと同じ地図ですが、こちらはみんなの声が全件つきます。</p>
@@ -200,12 +213,16 @@ body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);
 .wrap{max-width:44rem;margin:0 auto;padding:0 1.25rem;}
 a{color:var(--sky-deep);}
 header.h{background:linear-gradient(160deg,var(--sky-wash),var(--marigold-wash));border-bottom:1px solid var(--line);}
-.h-in{max-width:44rem;margin:0 auto;padding:1.2rem 1.25rem .9rem;}
+.h-in{max-width:44rem;margin:0 auto;padding:1rem 1.25rem .75rem;}
 .eyebrow{font-family:var(--script);font-style:italic;color:var(--marigold);font-size:1rem;}
 h1{font-family:var(--maru);font-weight:800;font-size:1.35rem;margin:.1rem 0 .25rem;letter-spacing:.02em;}
 .h-in .sub{color:var(--ink-soft);font-size:.93rem;margin:0;}
 main{padding:1.6rem 0 1rem;}
 h2.sec{font-family:var(--maru);font-weight:800;font-size:1.2rem;margin:2.2rem 0 .3rem;display:flex;align-items:center;gap:.4rem;scroll-margin-top:3.6rem;}
+/* 最初の見出しだけ詰める。カレンダーの表が初回スクロールなしで見えるように。 */
+h2.sec-first{margin-top:.4rem;}
+.sec-first + .sec-note{margin-bottom:.2rem;}
+.noscript-note{background:var(--marigold-wash);border:1px solid var(--marigold);border-radius:12px;padding:.9rem 1rem;font-size:.86rem;line-height:1.8;margin:.6rem 0;}
 .sec-note{color:var(--ink-soft);font-size:.9rem;margin:0 0 1rem;line-height:1.8;}
 .ev{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:.95rem 1.1rem;margin-bottom:.8rem;box-shadow:0 2px 14px rgba(52,67,76,.05);}
 .ev .when{color:var(--sky-deep);font-size:.82rem;font-weight:800;}
@@ -292,6 +309,15 @@ const page = `<!doctype html>${buildStamp()}
   <div id="gate" class="gate">
     <h2><label for="pw">🔑 合言葉を入力</label></h2>
     <p id="pw-help">会員の方にお伝えした合言葉を入れてください。</p>
+    <!-- JavaScript を切っていると「ひらく」を押しても無反応のまま黙って終わる。
+         公開ページには全部 noscript があるのに、お金をいただいている頁だけ
+         行き止まりで沈黙するのはおかしい。 -->
+    <noscript>
+      <div class="noscript-note">このページは中身を合言葉で暗号化しているため、表示に JavaScript を使います。
+        オフのままでは開けません。ブラウザの設定でオンにしてから読み込み直してください。
+        うまくいかないときは <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a> か
+        <a href="mailto:nico25akmr@outlook.jp">メール</a>でお知らせいただければ、その週のぶんをお送りします。</div>
+    </noscript>
     <!-- autofocus は付けない。会員でない人がリンクを踏んだときにキーボードが開き、
          下の「サポーターになる」が隠れる（合言葉を持っていないのに入力を促される）。 -->
     <input id="pw" type="text" inputmode="text" autocomplete="off" autocapitalize="none" autocorrect="off" placeholder="合言葉" aria-describedby="pw-help">

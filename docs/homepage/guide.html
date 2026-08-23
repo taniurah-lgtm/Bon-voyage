@@ -108,7 +108,9 @@
   .gfoot p { color: var(--ink-soft); max-width: 30rem; margin: 0 auto 1.2rem; }
   /* 無料でしか触らない人にも、応援という選択肢があることだけ静かに置く（価格は書かない） */
   .support-line { margin: 1.4rem auto 0; max-width: 30rem; font-size: .85rem; line-height: 1.9; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 1rem; }
-  .support-line a { font-weight: 700; }
+  .support-line a { font-weight: 700; position: relative; display: inline-block; }
+  /* 静かな1行のまま、指の当たり判定だけ44pxに広げる */
+  .support-line a::after { content: ''; position: absolute; left: -.2rem; right: -.2rem; top: 50%; height: 44px; transform: translateY(-50%); }
   .btns { display: flex; flex-wrap: wrap; gap: .7rem; justify-content: center; }
   .btn { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--maru); font-weight: 800; font-size: 1rem; padding: .8rem 1.4rem; border-radius: 999px; text-decoration: none; border: 1px solid transparent; }
   .btn-line { background: var(--line-green); color: #fff; }
@@ -479,7 +481,7 @@
       <a class="btn btn-ghost" href="https://bonvoya.nicomaru.tokyo/">ホームページを見る</a>
     </div>
     <p class="support-line">このガイドは、どなたでも無料でお使いいただけます。
-      続けていくための<a href="https://bonvoya.nicomaru.tokyo/#more">応援のしかた</a>もご用意しています。</p>
+      続けていくための<a href="index.html#more">応援のしかた</a>もご用意しています。</p>
   </div>
 </main>
 

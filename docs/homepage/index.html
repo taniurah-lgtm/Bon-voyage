@@ -189,7 +189,9 @@
   .reassure { margin-top: 1rem; font-size: .88rem; color: var(--ink-soft); }
   /* 無料の道具から応援の説明への静かな1行（価格は書かない・急かさない） */
   .support-line { margin-top: 1.6rem; font-size: .85rem; line-height: 1.9; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 1rem; }
-  .support-line a { font-weight: 700; }
+  .support-line a { font-weight: 700; position: relative; display: inline-block; }
+  /* 静かな1行のまま、指の当たり判定だけ44pxに広げる */
+  .support-line a::after { content: ''; position: absolute; left: -.2rem; right: -.2rem; top: 50%; height: 44px; transform: translateY(-50%); }
   /* ページ内の行き先。#more はページの下のほうにあり、9画面スクロールしないと
      応援という選択肢の存在に気づけなかった（あおらない代わりに、道は示す）。 */
   .pagenav { display: flex; flex-wrap: wrap; gap: .5rem; padding-top: 1.1rem; }
@@ -403,7 +405,7 @@
         <span class="tool-ic">📅</span>
         <span class="tool-body">
           <b>おでかけカレンダー</b>
-          <span>日付から探せます。気になった予定は<b>ワンタップでご自分のカレンダーへ</b>。申込の締切も出ます</span>
+          <span><b>今日からの2週間ぶん</b>を日付から探せます。気になった予定は<b>ワンタップでご自分のカレンダーへ</b>。申込の締切も出ます</span>
         </span>
       </a>
       <a class="tool" href="map.html">

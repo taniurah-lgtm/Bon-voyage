@@ -91,6 +91,17 @@ writeFileSync(
 const esc = (s = '') =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+// JS無効のときに出る一覧も、日付の書き方を画面と同じ「8月24日(月)」に揃える。
+// ISO（2026-08-24）のままだと、同じページの中で表記が2種類あることになる。
+// ★UTCのメソッドで曜日を出す（ランナーがUTCなので、ローカル版だと1日ずれる）。
+const jpDay = (iso) => {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso || ''));
+  if (!m) return String(iso || '');
+  const [, yy, mm, dd] = m.map(Number);
+  const wd = '日月火水木金土'[new Date(Date.UTC(yy, mm - 1, dd)).getUTCDay()];
+  return `${mm}月${dd}日(${wd})`;
+};
+
 const page = `<!doctype html>
 <html lang="ja">
 <head>
@@ -182,12 +193,12 @@ ${(() => {
   if (dl.length) {
     extra.push('    <h3>申込の締切が近いもの</h3>\n    <ul>' +
       dl.sort((a, b) => a.deadline.date.localeCompare(b.deadline.date)).map((e) =>
-        `<li>${esc(e.deadline.date)} まで — ${esc(e.name)}${e.when ? `（開催 ${esc(e.when)}）` : ''}</li>`).join('') +
+        `<li>${esc(jpDay(e.deadline.date))} まで — ${esc(e.name)}${e.when ? `（開催 ${esc(e.when)}）` : ''}</li>`).join('') +
       '</ul>');
   }
   if (spans.length) {
     extra.push('    <h3>会期中ずっと見られるもの</h3>\n    <ul>' +
-      spans.map((e) => `<li>${esc(e.name)}${e.span && e.span.to ? `（${esc(e.span.to)} まで）` : ''}</li>`).join('') +
+      spans.map((e) => `<li>${esc(e.name)}${e.span && e.span.to ? `（${esc(jpDay(e.span.to))} まで）` : ''}</li>`).join('') +
       '</ul>');
   }
   const tent = pub.filter((e) => e.tentative);
@@ -199,12 +210,7 @@ ${(() => {
   if (!days.length) return '    <p class="lead">いまのところ、確定した予定はありません。</p>\n' + extra.join('\n');
   return days
     .map((d) => {
-      // ★ローカル時刻のメソッド（getMonth/getDate/getDay）を使ってはいけない。
-      //   GitHub Actions のランナーは UTC なので、JST 0:00 が前日15:00になり、
-      //   日付と曜日が1日ずれる（JS無効時に出るこの一覧だけが嘘になるので気づきにくい）。
-      const [yy, mm, dd] = d.split('-').map(Number);
-      const wd = '日月火水木金土'[new Date(Date.UTC(yy, mm - 1, dd)).getUTCDay()];
-      const label = `${mm}月${dd}日(${wd})`;
+      const label = jpDay(d);
       const items = byDate[d]
         .map(
           (e) =>
@@ -252,6 +258,9 @@ fetch('/data/events-public.json', { cache: 'no-cache' })
     }
     BVCalendar.mount(document.getElementById('cal'), data, {
       teaser: true,
+      // この頁は見出しが h1 だけ（一覧の h2 はJSが動くと隠れる）。月の見出しを h3 に
+      // すると h1→h3 の飛びになるので h2 で出す。
+      monthLevel: 2,
       memberUrl: ${JSON.stringify(MEMBER_URL)},
     });
   })
