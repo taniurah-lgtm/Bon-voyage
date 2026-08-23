@@ -108,9 +108,16 @@ const page = `<!doctype html>
 <link rel="stylesheet" href="/assets/bv-tokens.css">
 <link rel="stylesheet" href="/assets/bv-calendar.css">
 <style>
-  main { padding: 2rem 0 1rem; }
-  .lead { color: var(--ink-soft); font-size: .95rem; margin-bottom: 1.4rem; line-height: 1.85; }
-  .nav-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 0; }
+  main { padding: .9rem 0 1rem; }
+  .lead { color: var(--ink-soft); font-size: .85rem; margin-bottom: .6rem; line-height: 1.7; }
+  /* 主機能（日をタップする）が初回スクロールなしで見えるように、この頁だけ見出しを詰める。
+     以前は見出し＋リード＋ピルで約790px使い、カレンダーの表が画面の外にあった。 */
+  .ghead-in { padding-top: 1.1rem; padding-bottom: .95rem; }
+  .ghead h1 { font-size: clamp(1.4rem, 4.4vw, 1.9rem); margin-bottom: .25rem; }
+  .ghead .eyebrow { font-size: .95rem; margin-bottom: .1rem; }
+  .ghead .sub { font-size: .9rem; line-height: 1.7; }
+  /* ページ内のほかの行き先は、カレンダーの下に置く（上に置くと表が押し下がる） */
+  .nav-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.6rem 0 0; }
   .nav-pills a {
     font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none;
     color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong);
@@ -130,19 +137,13 @@ const page = `<!doctype html>
 <header class="ghead">
   <div class="ghead-in">
     <div class="eyebrow">Bon Voyage,</div>
-    <h1>おでかけ<br>カレンダー</h1>
-    <p class="sub">花小金井・小平まわりで子連れで行けるイベントを、日付から探せるようにしました。気になる日をタップすると、そのままご自分のカレンダーに保存できます。</p>
-    <div class="nav-pills">
-      <a href="/">通信について</a>
-      <a href="/map.html">おでかけマップ</a>
-      <a href="/guide.html">おでかけガイド</a>
-    </div>
+    <h1>おでかけカレンダー</h1>
+    <p class="sub">花小金井・小平まわりの子連れイベントを、日付から。</p>
   </div>
 </header>
 
 <main class="wrap">
-  <p class="lead">日付の下に点が付いている日に予定があります。タップすると、その日の予定とお子さんの年齢の目安が出ます。<br>
-  ここに出しているのは<b>今日からの2週間ぶん</b>です。</p>
+  <p class="lead">点の日に予定あり。タップでその日の予定が出ます（<b>今日からの2週間ぶん</b>）。</p>
 
   <noscript>
     <div class="noscript">このカレンダーは表示にJavaScriptを使っています。切っている場合は、下の一覧をご覧ください。</div>
@@ -223,6 +224,12 @@ ${(() => {
   </div>
 
   <p class="stamp">台帳の更新日: ${esc(src.generated)}　※日程・料金は変わることがあります。おでかけ前に各公式でご確認ください。</p>
+  <div class="nav-pills">
+    <a href="/">通信について</a>
+    <a href="/map.html">おでかけマップ</a>
+    <a href="/guide.html">おでかけガイド</a>
+  </div>
+
   <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>
 </main>
 

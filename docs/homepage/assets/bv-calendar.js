@@ -118,41 +118,50 @@
     return typeof u === 'string' && /^https?:\/\//i.test(u.trim()) ? u.trim() : '';
   }
 
-  // iPhone / Apple カレンダー向けの .ics。Googleに入れたくない人の逃げ道。
-  function icsBlobURL(ev, date, slot) {
+  // 1日ぶんの VEVENT。まとめ保存でも同じ形を使い回す。
+  function icsEvent(ev, date, slot) {
     var stamp = date.replace(/-/g, '');
     var t = slot ? { start: slot.start, end: slot.end, exception: false } : timesFor(ev, date);
-    var body;
+    var when;
     if (t.start) {
       var endT = t.end || addHours(t.start, GUESS_HOURS);
-      body =
-        'DTSTART;TZID=Asia/Tokyo:' + stamp + 'T' + t.start.replace(':', '') + '00\r\n' +
-        'DTEND;TZID=Asia/Tokyo:' + stamp + 'T' + endT.replace(':', '') + '00\r\n';
+      when = [
+        'DTSTART;TZID=Asia/Tokyo:' + stamp + 'T' + t.start.replace(':', '') + '00',
+        'DTEND;TZID=Asia/Tokyo:' + stamp + 'T' + endT.replace(':', '') + '00',
+      ];
     } else {
       var next = iso(new Date(parseISO(date).getTime() + MS_DAY)).replace(/-/g, '');
-      body = 'DTSTART;VALUE=DATE:' + stamp + '\r\nDTEND;VALUE=DATE:' + next + '\r\n';
+      when = ['DTSTART;VALUE=DATE:' + stamp, 'DTEND;VALUE=DATE:' + next];
     }
     // DTSTAMP は RFC 5545 の必須項目。無いと取り込みを拒むカレンダーがある。
     var now = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+    return [
+      'BEGIN:VEVENT',
+      'DTSTAMP:' + now,
+      // ★日・枠ごとに UID を分ける。同じ UID は「同じ予定の更新」なので、
+      //   2件目を取り込むと1件目が消える（兄弟で別の部に申し込む家庭で困る）。
+      'UID:' + ev.id + '-' + stamp + (slot ? '-' + slot.start.replace(':', '') : '') + '@bonvoya.nicomaru.tokyo',
+      'SUMMARY:' + icsEsc(ev.name + (slot && slot.label ? '（' + slot.label + '）' : '')),
+      ev.place ? 'LOCATION:' + icsEsc(ev.place) : '',
+      'DESCRIPTION:' + icsEsc(detailsText(ev, date, slot)),
+    ].filter(Boolean).concat(when, ['END:VEVENT']);
+  }
+
+  // iPhone / Apple カレンダー向けの .ics。Googleに入れたくない人の逃げ道。
+  // dates に複数渡すと、その日ぶんをまとめて1つのファイルに入れる
+  //（5日間の催しを1日ずつ登録させるのは手間なので）。
+  function icsBlobURL(ev, dates, slot) {
+    var list = Array.isArray(dates) ? dates : [dates];
     var lines = [
       'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//bonvoyage-tsushin//JP', 'CALSCALE:GREGORIAN',
       // TZID を使うなら VTIMEZONE の定義が必要（厳格なパーサが弾く）。日本は夏時間なし。
       'BEGIN:VTIMEZONE', 'TZID:Asia/Tokyo',
       'BEGIN:STANDARD', 'DTSTART:19700101T000000', 'TZOFFSETFROM:+0900', 'TZOFFSETTO:+0900',
       'TZNAME:JST', 'END:STANDARD', 'END:VTIMEZONE',
-      'BEGIN:VEVENT',
-      'DTSTAMP:' + now,
-      // ★枠ごとに UID を分ける。同じ UID は「同じ予定の更新」なので、
-      //   2件目を取り込むと1件目が消える（兄弟で別の部に申し込む家庭で困る）。
-      'UID:' + ev.id + '-' + stamp + (slot ? '-' + slot.start.replace(':', '') : '') + '@bonvoya.nicomaru.tokyo',
-      'SUMMARY:' + icsEsc(ev.name + (slot && slot.label ? '（' + slot.label + '）' : '')),
-      ev.place ? 'LOCATION:' + icsEsc(ev.place) : '',
-      'DESCRIPTION:' + icsEsc(detailsText(ev, date, slot)),
-      'END:VEVENT', 'END:VCALENDAR',
-    ].filter(Boolean);
-    var head = lines.indexOf('BEGIN:VEVENT') + 1;   // BEGIN:VEVENT までがヘッダ
-    var text = lines.slice(0, head).join('\r\n') + '\r\n' + body + lines.slice(head).join('\r\n') + '\r\n';
-    return URL.createObjectURL(new Blob([foldICS(text)], { type: 'text/calendar;charset=utf-8' }));
+    ];
+    list.forEach(function (d) { lines = lines.concat(icsEvent(ev, d, slot)); });
+    lines.push('END:VCALENDAR');
+    return URL.createObjectURL(new Blob([foldICS(lines.join('\r\n') + '\r\n')], { type: 'text/calendar;charset=utf-8' }));
   }
   // RFC 5545 は1行75オクテットまで。超える行は CRLF + 空白1つで折り返す。
   // マルチバイト文字の途中で切らないよう、UTF-8のバイト数で数える。
@@ -244,18 +253,35 @@
       ? slots.map(function (sl, i) {
           return '<span class="bvc-slotpair">' +
             '<a class="bvc-btn bvc-btn-add" href="' + esc(gcalURL(ev, date, sl)) +
-            '" target="_blank" rel="noopener">📅 ' + esc(sl.label) + '</a>' +
+            '" target="_blank" rel="noopener"' +
+            ' aria-label="' + esc(ev.name + ' ' + sl.label) + 'を Google カレンダーに追加">📅 ' + esc(sl.label) + '</a>' +
             // 枠ごとに .ics も出す。締切のある催しほど保存したい
             '<button class="bvc-btn bvc-btn-ics" type="button" data-ics="' + esc(ev.id) +
             '" data-date="' + esc(date) + '" data-slot="' + i + '"' +
-            ' aria-label="' + esc(sl.label) + 'を iPhone のカレンダーに追加">🍎 iPhone</button>' +
+            ' aria-label="' + esc(ev.name + ' ' + sl.label) + 'を iPhone のカレンダー用に保存">🍎 iPhone</button>' +
             '</span>';
         }).join('')
-      : '<a class="bvc-btn bvc-btn-add" href="' + esc(gcalURL(ev, date)) + '" target="_blank" rel="noopener">📅 カレンダーに追加</a>' +
-        '<button class="bvc-btn bvc-btn-ics" type="button" data-ics="' + esc(ev.id) + '" data-date="' + esc(date) + '">🍎 iPhoneに追加</button>';
+      // ★読み上げ用の名前を必ず付ける。付けないと、その日の予定が5件あるとき
+      //   「カレンダーに追加」だけが5個並び、どれがどの予定か分からない。
+      : '<a class="bvc-btn bvc-btn-add" href="' + esc(gcalURL(ev, date)) + '" target="_blank" rel="noopener"' +
+        ' aria-label="' + esc(ev.name) + 'を Google カレンダーに追加">📅 カレンダーに追加</a>' +
+        '<button class="bvc-btn bvc-btn-ics" type="button" data-ics="' + esc(ev.id) + '" data-date="' + esc(date) + '"' +
+        // 実際の動きは「.ics を保存してから開く」。「追加」と書くと、押しても
+        // カレンダーに入らないように見える。
+        ' aria-label="' + esc(ev.name) + 'を iPhone のカレンダー用に保存">🍎 iPhone用に保存</button>';
+    // 5日間の催しを1日ずつ登録させるのは手間（「利用者に手間がないように」）。
+    // 残っている日をまとめて1ファイルにするボタンを、複数日のものだけに出す。
+    var nowKey = todayISO();
+    var restDays = (ev.dates || []).filter(function (d) { return d >= nowKey; });
+    var allBtn = (!multiSlot && restDays.length > 1)
+      ? '<button class="bvc-btn bvc-btn-ics bvc-btn-all" type="button" data-ics="' + esc(ev.id) +
+        '" data-date="' + esc(date) + '" data-all="1"' +
+        ' aria-label="' + esc(ev.name) + 'の残り' + restDays.length + '日ぶんを iPhone のカレンダー用にまとめて保存">' +
+        '🍎 ' + restDays.length + '日ぶんまとめて</button>'
+      : '';
     // 終わった予定に登録ボタンを出さない（会員ページは過去も持っている）
     var links = past ? '' :
-      addBtns +
+      addBtns + allBtn +
       (ev.mapq ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(mapURL(ev.mapq)) + '" target="_blank" rel="noopener">📍 地図</a>' : '') +
       (safeURL(ev.url) ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(safeURL(ev.url)) + '" target="_blank" rel="noopener">🔗 公式</a>' : '');
     var dl = ev.deadline
@@ -269,7 +295,7 @@
       (!multiSlot && t.start && !t.end && !ev.timeUncertain ? '<span class="bvc-exc">終了時刻は未公表</span>' : '') +
       (ev.timeUncertain && !t.program ? '<span class="bvc-tent">時間は要確認（例年の目安）</span>' : '') +
       (ev.tentative ? '<span class="bvc-tent">日程は要確認</span>' : '') + '</p>' +
-      '<h4 class="bvc-name">' + esc(ev.name) + '</h4>' +
+      '<h5 class="bvc-name">' + esc(ev.name) + '</h5>' +
       (multiSlot ? '<p class="bvc-slots">🕒 ' + esc(ev.when) + '</p>' : '') +
       (ev.place ? '<p class="bvc-place">' + esc(ev.place) + '</p>' : '') +
       (ev.summary ? '<p class="bvc-desc">' + esc(ev.summary) + '</p>' : '') +
@@ -372,6 +398,9 @@
       '</div>' +
       '<div class="bvc-quick"><button class="bvc-jump" type="button" data-jump="weekend">今週末を見る</button>' +
       '<button class="bvc-jump" type="button" data-jump="today">今日</button></div>' +
+      // 今日・3日以内の締切だけは上に出す。下の枠は4画面ぶん下にあって、
+      // 当日締切に気づけなかった。
+      '<div class="bvc-deadlines bvc-dl-urgent" hidden></div>' +
       '<table class="bvc-grid"><thead><tr>' +
       WD.map(function (w, i) { return '<th class="' + (i === 0 ? 'sun' : i === 6 ? 'sat' : '') + '">' + w + '</th>'; }).join('') +
       '</tr></thead><tbody></tbody></table>' +
@@ -390,7 +419,8 @@
     var $month = root.querySelector('.bvc-month');
     var $body = root.querySelector('.bvc-grid tbody');
     var $day = root.querySelector('.bvc-day');
-    var $dl = root.querySelector('.bvc-deadlines');
+    var $dlTop = root.querySelector('.bvc-dl-urgent');
+    var $dl = root.querySelector('.bvc-deadlines:not(.bvc-dl-urgent)');
     var $tail = root.querySelector('.bvc-tail');
 
     renderDeadlines();
@@ -422,6 +452,11 @@
         }
         return;
       }
+      var alert = e.target.closest('.bvc-dlalert');
+      if (alert) {
+        $dl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
       var cell = e.target.closest('.bvc-cell:not(.out)');
       if (cell) {
         selected = cell.dataset.date;
@@ -438,17 +473,31 @@
           var ss = parseSlots(ev.when);
           sl = ss[Number(ics.dataset.slot)] || null;
         }
-        var url = icsBlobURL(ev, ics.dataset.date, sl);
+        // data-all があれば、その催しの残っている日ぶんをまとめて1ファイルにする
+        var target = ics.dataset.all
+          ? (ev.dates || []).filter(function (d) { return d >= today; })
+          : ics.dataset.date;
+        var url = icsBlobURL(ev, target, sl);
         var a = document.createElement('a');
         a.href = url;
-        a.download = (ev.name + (sl ? '-' + sl.label : '')).replace(/[\/\\?%*:|"<>]/g, '') + '.ics';
+        a.download = (ev.name + (sl ? '-' + sl.label : '') + (ics.dataset.all ? '-ぜんぶ' : ''))
+          .replace(/[\/\\?%*:|"<>]/g, '') + '.ics';
         document.body.appendChild(a);
         a.click();
-        a.remove();
-        setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+        // 保存が始まる前に blob を捨てると空ファイルになるブラウザがあるので、少し待って片づける
+        setTimeout(function () { a.remove(); URL.revokeObjectURL(url); }, 4000);
       }
     });
 
+
+    // 公開ページは今日から2週間ぶんしか持っていない。その外の日を「予定なし」と
+    // 言うと嘘になる（手前＝終わったぶん、先＝まだ出していないぶん）。
+    function outWindow(key) {
+      if (!opts.teaser || !data.window) return '';
+      if (key < data.window.from) return 'past';
+      if (key > data.window.to) return 'ahead';
+      return '';
+    }
     function render() {
       var y = Number(view.slice(0, 4));
       var m = Number(view.slice(5, 7));
@@ -459,8 +508,11 @@
       });
 
       // 窓の外の日は「予定なし」と言ってはいけない（本当は予定があるのに読み上げが嘘になる）
+      // ★先だけでなく手前も見る。前は to 側だけを見ていたので、8/22 のように
+      //   トップページには載っている日が、カレンダーでは「予定なし」になっていた。
       function dayLabel(key, list) {
-        if (opts.teaser && data.window && key > data.window.to) return ' 公開ぶんの外';
+        var w = outWindow(key);
+        if (w) return w === 'past' ? ' 公開ぶんより前' : ' 公開ぶんの外';
         return list.length ? ' 予定' + list.length + '件' : ' 予定なし';
       }
 
@@ -487,8 +539,14 @@
           if (d === 0) cls.push('sun');
           if (d === 6) cls.push('sat');
           // 隣月・過去日は点を出さない（押せないのに「予定あり」に見える／今週末を探す邪魔になる）
-          var showDots = inMonth && key >= today;
-          var dots = showDots ? list.slice(0, 3).map(function () { return '<i class="bvc-dot"></i>'; }).join('') : '';
+          // 会員ページは過ぎた日も持っている（それが有料の値打ち）。点を出さないと、
+          // 読み上げだけが「予定6件」と言い、目で見ている人には空の日と同じに見える。
+          // 公開ページは今日より前を持っていないので、これまでどおり出さない。
+          var showDots = inMonth && (key >= today || !opts.teaser);
+          var pastDot = key < today ? ' is-past' : '';
+          var dots = showDots
+            ? list.slice(0, 3).map(function () { return '<i class="bvc-dot' + pastDot + '"></i>'; }).join('')
+            : '';
           tds.push(
             '<td class="' + cls.join(' ') + '" data-date="' + key + '"' +
             (inMonth
@@ -496,7 +554,7 @@
                 fmtDay(key) + dayLabel(key, list) + '"'
               : '') + '>' +
             '<span class="bvc-num">' + cur.getDate() + '</span>' +
-            (showDots && list.length ? '<span class="bvc-dots">' + dots + (list.length > 3 ? '<i class="bvc-more">+</i>' : '') + '</span>' : '') +
+            (showDots && list.length ? '<span class="bvc-dots">' + dots + (list.length > 3 ? '<i class="bvc-more' + pastDot + '">+</i>' : '') + '</span>' : '') +
             '</td>'
           );
         }
@@ -517,15 +575,17 @@
       var list = selected ? byDate[selected] || [] : [];
       // 日を選んでいるのに予定が無いとき（押して無反応に見えないよう、はっきり言う）
       if (selected && !list.length) {
-        var outOfWindow = opts.teaser && data.window && selected > data.window.to;
+        var w = outWindow(selected);
+        var outMsg =
+          w === 'past'
+            ? 'この日は、公開しているぶん（今日からの2週間）より前です。終わった予定は公開ぶんに載せていないので、' +
+              '予定が無かったという意味ではありません。' +
+              (opts.memberUrl ? ' <a href="' + esc(opts.memberUrl) + '">会員ページ</a>では過ぎた日も残しています。' : '')
+            : 'この日は、公開しているぶん（今日からの2週間）の外です。予定が無いという意味ではありません。' +
+              (opts.memberUrl ? ' <a href="' + esc(opts.memberUrl) + '">会員ページ</a>では先の予定まで見られます。' : '');
         $day.innerHTML =
           '<h4 class="bvc-dayhead">' + esc(fmtDay(selected)) + '</h4>' +
-          '<p class="bvc-empty">' +
-          (outOfWindow
-            ? 'この日は、公開しているぶん（今日からの2週間）の外です。予定が無いという意味ではありません。' +
-              (opts.memberUrl ? ' <a href="' + esc(opts.memberUrl) + '">会員ページ</a>では先の予定まで見られます。' : '')
-            : 'この日に入っている予定はありません。') +
-          '</p>';
+          '<p class="bvc-empty">' + (w ? outMsg : 'この日に入っている予定はありません。') + '</p>';
         renderTail();
         return;
       }
@@ -552,30 +612,62 @@
 
     function renderDeadlines() {
       // 締切が今日以降・3週間以内のものだけ。無ければ何も出さない。
+      // 会員ページは先の予定まで持っているので、締切も先まで出す（特典に
+      // 「先のぶんまで残り日数つき」と書いてある。21日で切ると書いてあることと合わない）。
+      var horizon = opts.teaser ? 21 : Infinity;
       var soon = events
         .filter(function (e) { return e.deadline && e.deadline.date >= today; })
-        .filter(function (e) { return (parseISO(e.deadline.date) - parseISO(today)) / MS_DAY <= 21; })
+        .filter(function (e) { return (parseISO(e.deadline.date) - parseISO(today)) / MS_DAY <= horizon; })
         .sort(function (a, b) { return a.deadline.date.localeCompare(b.deadline.date); });
-      if (!soon.length) return;
-      $dl.hidden = false;
-      $dl.innerHTML =
-        '<h4 class="bvc-dlhead">⏳ 申込の締切が近いもの</h4>' +
-        soon.map(function (e) {
+      if (!soon.length) { $dlTop.hidden = true; $dl.hidden = true; return; }
+      function rowsFor(list, compact) {
+        return list.map(function (e) { return rowHtml(e, compact); }).join('');
+      }
+      function rowHtml(e, compact) {
           var days = Math.round((parseISO(e.deadline.date) - parseISO(today)) / MS_DAY);
           var how = [];
           if (e.when) how.push('開催 ' + e.when);
-          if (e.deadline.raw) how.push('申込 ' + e.deadline.raw);
-          // 申込の文面に同じ番号が入っていれば足さない（二重に出ていた）
-          if (e.contact && e.contact.tel && !(e.deadline.raw || '').includes(e.contact.tel)) {
-            how.push('☎ ' + (e.contact.who ? e.contact.who + ' ' : '') + e.contact.tel);
+          // 上の「今日・まもなく」枠では、締切の日付は左のバッジに出ているので繰り返さない
+          // （繰り返すと枠が3画面ぶんに膨らみ、肝心のカレンダーが画面外に出る）。
+          if (e.deadline.raw && !compact) how.push('申込 ' + e.deadline.raw);
+          // 電話番号は、押してかけられる形にする。素のテキストだと、締切当日に
+          // 長押しでコピーしてから電話帳に貼るしかない（申込むための唯一の手段なのに）。
+          var tel = '';
+          if (e.contact && e.contact.tel) {
+            tel = '<a class="bvc-dltel" href="tel:' + esc(e.contact.tel.replace(/[^0-9+]/g, '')) + '">' +
+              '☎ ' + esc((e.contact.who ? e.contact.who + ' ' : '') + e.contact.tel) + '</a>';
           }
-          return '<div class="bvc-dlrow"><span class="bvc-dldate">' + esc(fmtDay(e.deadline.date)) +
+          return '<div class="bvc-dlrow' + (compact ? ' is-compact' : '') + '"><span class="bvc-dldate">' + esc(fmtDay(e.deadline.date)) +
             (days === 0 ? '<b>今日</b>' : days <= 3 ? '<b>あと' + days + '日</b>' : '') + '</span>' +
             '<span class="bvc-dlname">' + esc(e.name) +
             (how.length ? '<span class="bvc-dlhow">' + esc(how.join('／')) + '</span>' : '') +
-            (safeURL(e.url) ? ' <a href="' + esc(safeURL(e.url)) + '" target="_blank" rel="noopener">くわしく</a>' : '') +
+            (tel ? '<span class="bvc-dlact">' + tel + '</span>' : '') +
+            (safeURL(e.url)
+              ? ' <a class="bvc-dllink" href="' + esc(safeURL(e.url)) + '" target="_blank" rel="noopener">くわしく</a>'
+              : '') +
             '</span></div>';
-        }).join('');
+      }
+      // 締切の枠は4画面ぶん下にあり、当日締切に気づけなかった。上には「1行の知らせ」だけを
+      // 置いて、押すと詳しい枠へ飛ばす。枠そのものを上に持ってくると、こんどはカレンダーの
+      // 表が画面外に出た（248px 使っていた）ので、知らせと中身を分ける。
+      var urgent = soon.filter(function (e) {
+        return (parseISO(e.deadline.date) - parseISO(today)) / MS_DAY <= 3;
+      });
+      if (urgent.length) {
+        var names = urgent.map(function (e) { return e.name; }).join('・');
+        var todayOnly = urgent.filter(function (e) { return e.deadline.date === today; }).length;
+        $dlTop.hidden = false;
+        $dlTop.innerHTML =
+          '<button class="bvc-dlalert" type="button" data-jump="deadlines">' +
+          '<span class="bvc-dlalert-t">⏳ ' + (todayOnly ? '今日が申込の締切' : '数日で申込の締切') +
+          '：' + esc(names) + '</span>' +
+          '<span class="bvc-dlalert-go">申込先を見る →</span></button>';
+      } else {
+        $dlTop.hidden = true;
+        $dlTop.innerHTML = '';
+      }
+      $dl.hidden = false;
+      $dl.innerHTML = '<h4 class="bvc-dlhead">⏳ 申込の締切が近いもの</h4>' + rowsFor(soon);
     }
 
     function renderTail() {
@@ -587,7 +679,7 @@
           spans.map(function (e) {
             var label = e.span.to ? esc(fmtDay(e.span.to)) + 'まで' : '会期中';
             return '<article class="bvc-card"><p class="bvc-when">' + label + '</p>' +
-              '<h4 class="bvc-name">' + esc(e.name) + '</h4>' +
+              '<h5 class="bvc-name">' + esc(e.name) + '</h5>' +
               (e.place ? '<p class="bvc-place">' + esc(e.place) + '</p>' : '') +
               (e.summary ? '<p class="bvc-desc">' + esc(e.summary) + '</p>' : '') +
               (e.kidsNote && e.kidsNote !== e.summary ? '<p class="bvc-kids">' + esc(e.kidsNote) + '</p>' : '') +
@@ -618,7 +710,7 @@
         html += '<h4 class="bvc-tailhead">🌊 いつでも行ける定番</h4>' +
           data.standing.map(function (s) {
             return '<article class="bvc-card"><p class="bvc-when">' + esc(s.span) + '</p>' +
-              '<h4 class="bvc-name">' + esc(s.name) + '</h4>' +
+              '<h5 class="bvc-name">' + esc(s.name) + '</h5>' +
               (s.place ? '<p class="bvc-place">' + esc(s.place) + '</p>' : '') +
               (s.summary ? '<p class="bvc-desc">' + esc(s.summary) + '</p>' : '') +
               (s.kidsNote && s.kidsNote !== s.summary ? '<p class="bvc-kids">' + esc(s.kidsNote) + '</p>' : '') +

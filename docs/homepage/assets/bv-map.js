@@ -69,9 +69,9 @@
     el.innerHTML =
       '<div class="bvm">' +
       '<div class="bvm-chips" role="group" aria-label="種類でしぼる">' +
-      '<button class="bvm-chip is-on" type="button" data-cat="">ぜんぶ</button>' +
+      '<button class="bvm-chip is-on" type="button" aria-pressed="true" data-cat="">ぜんぶ</button>' +
       cats.map(function (c) {
-        return '<button class="bvm-chip" type="button" data-cat="' + esc(c) + '" ' +
+        return '<button class="bvm-chip" type="button" aria-pressed="false" data-cat="' + esc(c) + '" ' +
           'style="--chip:' + colorFor(c) + '">' + esc(c) + '</button>';
       }).join('') +
       '</div>' +
@@ -82,8 +82,17 @@
 
     var canvas = el.querySelector('.bvm-canvas');
     // ズームボタンは右下に置く。左上だと北西のピン（八国山緑地）が真下に入って押せない。
-    var map = L.map(canvas, { scrollWheelZoom: false, zoomControl: false });
-    L.control.zoom({ position: 'bottomright' }).addTo(map);
+    var map = L.map(canvas, {
+      scrollWheelZoom: false, zoomControl: false,
+      closePopupOnClick: true,
+    });
+    // 地図そのものに名前を付ける（無いと読み上げでただの領域になる）
+    canvas.setAttribute('role', 'application');
+    canvas.setAttribute('aria-label', 'おでかけスポットの地図');
+    L.control.zoom({
+      position: 'bottomright',
+      zoomInTitle: '拡大', zoomOutTitle: '縮小',
+    }).addTo(map);
     var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
@@ -102,6 +111,12 @@
     tiles.addTo(map);
     // 指1本のスクロールでページが動かなくなるのを防ぐ
     map.once('focus', function () { map.scrollWheelZoom.enable(); });
+
+    // 「くわしく ↓」の飛び先（スポット一覧）が、このページにあるか。
+    // opts.hasList で明示できるが、既定はページ内に該当 id があるかで判断する。
+    var hasList = typeof opts.hasList === 'boolean'
+      ? opts.hasList
+      : pinned.some(function (s) { return !!document.getElementById(slug(s.name)); });
 
     var byName = {};
     posts.forEach(function (p) { (byName[p.spot] = byName[p.spot] || []).push(p); });
@@ -136,7 +151,9 @@
         '<span class="bvm-pop-links">' +
         '<a href="' + esc(sp.map || mapURL(sp.name)) + '" target="_blank" rel="noopener">📍 地図で見る</a>' +
         (sp.official ? '<a href="' + esc(sp.official) + '" target="_blank" rel="noopener">🔗 公式</a>' : '') +
-        '<a href="#' + esc(slug(sp.name)) + '" class="bvm-pop-jump">くわしく ↓</a>' +
+        // 飛び先の一覧が無いページ（会員ページ）でこれを出すと、押しても何も起きず、
+        // 履歴に # だけが積まれる。一覧があるページだけ出す。
+        (hasList ? '<a href="#' + esc(slug(sp.name)) + '" class="bvm-pop-jump">くわしく ↓</a>' : '') +
         '</span>' +
         (mine.length ? '<span class="bvm-pop-voice">「' + esc(mine[0].text) + '」</span>' : '') +
         '</div>';
@@ -197,7 +214,7 @@
       });
       m.bindPopup(
         '<div class="bvm-pop">' + pl.spots.map(spotBlock).join('<hr class="bvm-pop-sep">') + '</div>',
-        { maxWidth: 268, autoPanPadding: [24, 24] }
+        { maxWidth: 268, autoPanPadding: [16, 16], closeButton: true }
       );
       layer.addLayer(m);
     }
@@ -311,6 +328,12 @@
       $off.hidden = false;
       $off.textContent = 'いま画面の外に ' + n + '件あります（地図左下の「全体」で出ます）';
     }
+    // Leaflet 1.9.4 は閉じるボタンのラベルを差し替える設定を持っていない。
+    // 日本語のページで「Close popup」と読み上げられるので、開いたときに書き換える。
+    map.on('popupopen', function (e) {
+      var btn = e.popup && e.popup._container && e.popup._container.querySelector('.leaflet-popup-close-button');
+      if (btn) { btn.setAttribute('aria-label', 'ふきだしを閉じる'); btn.setAttribute('title', 'ふきだしを閉じる'); }
+    });
     map.on('moveend zoomend', tellOffscreen);
     tellOffscreen();
     // ★ moveend では組み直さない。ピン同士の画面上の距離は縮尺だけで決まり、
@@ -323,7 +346,10 @@
     el.querySelector('.bvm-chips').addEventListener('click', function (e) {
       var chip = e.target.closest('.bvm-chip');
       if (!chip) return;
-      el.querySelectorAll('.bvm-chip').forEach(function (c) { c.classList.toggle('is-on', c === chip); });
+      el.querySelectorAll('.bvm-chip').forEach(function (c) {
+        c.classList.toggle('is-on', c === chip);
+        c.setAttribute('aria-pressed', c === chip ? 'true' : 'false');
+      });
       filterCat = chip.dataset.cat;
       var list = visiblePlaces();
       // しぼった側も「ぜんぶ」も、その時に出るピンが全部入るところに合わせる。

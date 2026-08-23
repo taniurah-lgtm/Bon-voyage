@@ -188,6 +188,9 @@ ${sections}
       <a href="mailto:nico25akmr@outlook.jp">メール</a>でお知らせいただければ、こちらで載せます。</p></noscript>
   </section>
 
+  <p class="support-line">この地図は、どなたでも無料でお使いいただけます。
+    続けていくための<a href="/#more">応援のしかた</a>もご用意しています。</p>
+
   <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>
 </main>
 

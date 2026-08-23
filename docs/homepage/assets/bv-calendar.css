@@ -51,7 +51,12 @@
   font-variant-numeric: tabular-nums; line-height: 1.15;
 }
 .bvc-cell.out { color: var(--ink-faint); opacity: .35; }
-.bvc-cell.past { color: var(--ink-faint); }
+/* 過ぎた日。--ink-faint は白地で 2.6:1 しかなく、16px の数字には足りない（要4.5:1）。
+   「終わった」と分かる程度に落として、読める色は保つ。 */
+.bvc-cell.past { color: var(--ink-soft); }
+/* 終わった予定の点は、これからの予定と見分けがつくように白抜きにする */
+.bvc-dot.is-past { background: transparent; box-shadow: inset 0 0 0 1px var(--ink-soft); }
+.bvc-more.is-past { color: var(--ink-soft); }
 .bvc-cell.sun:not(.out) { color: #C0736B; }
 .bvc-cell.sat:not(.out) { color: var(--sky-deep); }
 .bvc-cell.has { cursor: pointer; background: var(--sky-wash); font-weight: 800; }
@@ -246,3 +251,27 @@
 .bvc-cell.has.sat:not(.out) { color: #1F6280; }
 .bvc-cell.has.sun:not(.out) { color: #9E4C43; }
 .stamp { color: var(--ink-soft) !important; }
+
+/* 締切の申込先。電話は押してかけられる大きさにする（指で押せる44px） */
+.bvc-dlact { display: block; margin-top: .3rem; }
+.bvc-dltel, .bvc-dllink {
+  display: inline-flex; align-items: center; min-height: 44px;
+  padding: 0 .8rem; border-radius: 999px;
+  border: 1px solid var(--line-strong); background: var(--surface);
+  font-size: .82rem; font-weight: 700; color: var(--ink); text-decoration: none;
+}
+.bvc-dltel:active, .bvc-dllink:active { background: var(--surface-2); }
+
+/* 上に出す「今日・まもなく締切」は1行の知らせだけ。押すと下の申込先へ飛ぶ。
+   枠ごと上に持ってくると 248px 使い、カレンダーの表が画面外に出た。 */
+.bvc-dl-urgent { margin: 0 0 .8rem; }
+.bvc-dlalert {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .1rem .6rem;
+  width: 100%; min-height: 44px; text-align: left; cursor: pointer;
+  background: var(--marigold-wash); border: 1px solid var(--marigold);
+  border-radius: 12px; padding: .5rem .8rem;
+  font-family: var(--body); font-size: .84rem; color: var(--ink);
+}
+.bvc-dlalert-t { font-weight: 700; }
+.bvc-dlalert-go { font-weight: 700; color: var(--sky-deep); white-space: nowrap; }
+.bvc-dlalert:active { background: var(--surface-2); }

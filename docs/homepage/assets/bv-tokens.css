@@ -58,3 +58,12 @@ footer .fmark { font-family: var(--maru); font-weight: 800; color: var(--ink-sof
 
 /* 二次リンクも指で押せる大きさにする（実測 16〜32px だった） */
 .back, footer a, .bvc-teaser-link { min-height: 44px; display: inline-flex; align-items: center; }
+
+/* 無料の道具（地図・ガイド）から応援の説明への静かな1行。
+   価格は書かない・急かさない（トーン規約）。置かないと、無料でしか触らない人には
+   応援という選択肢が存在しないことになる。 */
+.support-line {
+  margin-top: 1.6rem; font-size: .85rem; line-height: 1.9; color: var(--ink-soft);
+  border-top: 1px solid var(--line); padding-top: 1rem;
+}
+.support-line a { font-weight: 700; }

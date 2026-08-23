@@ -40,10 +40,27 @@ const calData = {
     cost: e.cost, target: e.target, url: e.url,
     caution: e.caution, hours: e.hours, contact: e.contact, exceptions: e.exceptions,
     lastEntry: e.lastEntry, totalDates: e.totalDates, programs: e.programs,
-    tentative: e.tentative, deadline: e.deadline,
+    tentative: e.tentative, timeUncertain: e.timeUncertain, deadline: e.deadline,
   })),
   standing: EVENTS.standing,
 };
+
+// ★写し忘れの見張り。
+//   timeUncertain を写し忘れていたせいで、「時間は要確認（例年の目安）」のバッジと
+//   カレンダー登録時の警告が、月300円を払った会員ページだけで消えていた
+//   （無料の人には出るのに、有料の人の予定表に未確定の時刻が黙って入る）。
+//   同じ事故を二度やらないよう、カレンダー側が読むキーが全部揃っているか毎回確かめる。
+{
+  const js = readFileSync('docs/homepage/assets/bv-calendar.js', 'utf8');
+  const wanted = [...new Set([...js.matchAll(/\bev\.([a-zA-Z][a-zA-Z0-9]*)/g)].map((m) => m[1]))];
+  const have = new Set(Object.keys(calData.events[0] || {}));
+  const missing = wanted.filter((k) => !have.has(k));
+  if (missing.length) {
+    console.error('🔴 bv-calendar.js が読むのに、会員ページへ渡していないキー: ' + missing.join(', '));
+    console.error('   → scripts/build-members.mjs の calData.events の写しに足すこと。');
+    process.exit(1);
+  }
+}
 
 // ---- 連休さきどり（手で書いている枠。テーマ別・キャンプ偏重にしない）----------
 const renkyu = `
@@ -131,7 +148,7 @@ const CONTENT = `
   </nav>
 
   <h2 class="sec" id="cal">📅 おでかけカレンダー</h2>
-  <p class="sec-note">台帳にある予定をぜんぶ、日付から探せるようにしました。気になる日をタップすると、その日の予定が出ます。「カレンダーに追加」でご自分のカレンダーに保存できます。</p>
+  <p class="sec-note">台帳の予定をぜんぶ。気になる日をタップすると、その日の予定が出ます。</p>
   <script type="application/json" id="bv-cal-data">${jsonInTag(calData)}</script>
   <div id="bv-cal"><p class="note">カレンダーを組み立てています…</p></div>
 
@@ -143,7 +160,11 @@ const CONTENT = `
   <p class="note" style="margin-top:.6rem">${
     CAN_POST
       ? '投稿は <a href="/map.html#post">公開ページのフォーム</a> から。ひとことの長さはどなたも同じで、<b>合言葉を入れると写真も添えられます</b>（このページを開いていれば、合言葉は入力済みです）。'
-      : '投稿は、いまは <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a> でお預かりしています。場所とひとことを送っていただければ、こちらで地図に載せます。<b>写真もいっしょに送っていただけます。</b>'
+      // 文中の「LINE」だけがリンク（33x16px）で、公開ページ側のボタン（143x60px）より
+      // 押しにくかった。有料のページのほうが押しにくいのはおかしい。
+      : '投稿は、いまは LINE でお預かりしています。場所とひとことを送っていただければ、こちらで地図に載せます。写真もいっしょに送っていただけます。' +
+        '<span class="note-btns"><a class="note-btn" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINEで送る</a>' +
+        '<a class="note-btn" href="mailto:nico25akmr@outlook.jp?subject=' + encodeURIComponent('おでかけマップへの投稿') + '">メールで送る</a></span>'
   }</p>
 
 ${renkyu}
@@ -172,14 +193,16 @@ body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);
 .nav-in{max-width:44rem;margin:0 auto;display:flex;justify-content:center;gap:.3rem;padding:.5rem .5rem;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
 .nav-in::-webkit-scrollbar{display:none;}
 .nav-in a{flex:none;font-size:.8rem;font-weight:700;color:var(--ink-soft);text-decoration:none;padding:.4rem .62rem;border-radius:999px;background:var(--surface-2);white-space:nowrap;}
-.toc{display:flex;flex-wrap:wrap;gap:.5rem;margin:.3rem 0 1.5rem;padding:0;}
+.toc{display:flex;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;gap:.45rem;margin:.3rem 0 1rem;padding:0 0 .2rem;scrollbar-width:none;}
+.toc::-webkit-scrollbar{display:none;}
+.toc a{flex:0 0 auto;white-space:nowrap;}
 .toc a{font-size:.85rem;font-weight:700;color:var(--sky-deep);text-decoration:none;background:var(--sky-wash);border:1px solid var(--line);border-radius:999px;padding:.4rem .85rem;}
 .wrap{max-width:44rem;margin:0 auto;padding:0 1.25rem;}
 a{color:var(--sky-deep);}
 header.h{background:linear-gradient(160deg,var(--sky-wash),var(--marigold-wash));border-bottom:1px solid var(--line);}
-.h-in{max-width:44rem;margin:0 auto;padding:2.2rem 1.25rem 1.6rem;}
+.h-in{max-width:44rem;margin:0 auto;padding:1.2rem 1.25rem .9rem;}
 .eyebrow{font-family:var(--script);font-style:italic;color:var(--marigold);font-size:1rem;}
-h1{font-family:var(--maru);font-weight:800;font-size:1.6rem;margin:.2rem 0 .4rem;letter-spacing:.02em;}
+h1{font-family:var(--maru);font-weight:800;font-size:1.35rem;margin:.1rem 0 .25rem;letter-spacing:.02em;}
 .h-in .sub{color:var(--ink-soft);font-size:.93rem;margin:0;}
 main{padding:1.6rem 0 1rem;}
 h2.sec{font-family:var(--maru);font-weight:800;font-size:1.2rem;margin:2.2rem 0 .3rem;display:flex;align-items:center;gap:.4rem;scroll-margin-top:3.6rem;}
@@ -201,7 +224,10 @@ h2.sec{font-family:var(--maru);font-weight:800;font-size:1.2rem;margin:2.2rem 0 
 .vtxt{font-size:.94rem;line-height:1.75;}
 .vimg{display:block;max-width:100%;border-radius:12px;margin:.5rem 0 .2rem;}
 .vwho{font-size:.8rem;color:var(--ink-faint);margin-top:.25rem;}
-.note{font-size:.82rem;color:var(--ink-faint);line-height:1.75;}
+.note{font-size:.82rem;color:var(--ink-soft);line-height:1.75;}
+.note-btns{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.7rem;}
+.note-btn{display:inline-flex;align-items:center;min-height:44px;padding:0 1rem;border-radius:999px;
+  border:1px solid var(--line-strong);background:var(--surface);font-weight:700;font-size:.86rem;text-decoration:none;}
 footer{color:var(--ink-faint);font-size:.8rem;text-align:center;padding:2rem 1.25rem 3rem;line-height:1.7;}
 .fmark{font-family:var(--maru);font-weight:800;color:var(--ink-soft);}
 .gate{max-width:24rem;margin:3rem auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.6rem 1.4rem;text-align:center;box-shadow:0 2px 16px rgba(52,67,76,.06);}
@@ -250,9 +276,9 @@ const page = `<!doctype html>${buildStamp()}
 </head>
 <body>
 <header class="h" id="top"><div class="h-in">
-  <div class="eyebrow">Members</div>
-  <h1>ぼんぼやーじゅ通信・会員ページ</h1>
-  <p class="sub">応援サポーター向けのページです。</p>
+  <div class="eyebrow">ぼんぼやーじゅ通信</div>
+  <h1>会員ページ</h1>
+  <p class="sub">応援サポーターの方へ。</p>
 </div></header>
 <nav id="nav" class="nav" style="display:none"><div class="nav-in">
   <a href="#top">ホーム</a>
@@ -266,10 +292,12 @@ const page = `<!doctype html>${buildStamp()}
   <div id="gate" class="gate">
     <h2><label for="pw">🔑 合言葉を入力</label></h2>
     <p id="pw-help">会員の方にお伝えした合言葉を入れてください。</p>
-    <input id="pw" type="text" inputmode="text" autocomplete="off" autocapitalize="none" autocorrect="off" placeholder="合言葉" aria-describedby="pw-help" autofocus>
+    <!-- autofocus は付けない。会員でない人がリンクを踏んだときにキーボードが開き、
+         下の「サポーターになる」が隠れる（合言葉を持っていないのに入力を促される）。 -->
+    <input id="pw" type="text" inputmode="text" autocomplete="off" autocapitalize="none" autocorrect="off" placeholder="合言葉" aria-describedby="pw-help">
     <button id="go">ひらく</button>
     <div id="err" class="err"></div>
-    <div class="hint">合言葉が分からない方は、ご登録いただいたnoteの掲示板をご確認ください。</div>
+    <div class="hint">合言葉は、note のメンバー限定投稿でお知らせしています（LINEでお送りすることもできます）。分からないときはお気軽にお尋ねください。</div>
     <div class="cta">
       <p class="lead">まだサポーターでない方へ。<br>月300円で通信を応援いただくと、この会員ページ（花小金井まわりのおでかけカレンダーなど）もご利用いただけます。</p>
       <a class="join" href="https://note.com/bon_voyage_mail/membership" target="_blank" rel="noopener">サポーターになる（月300円）</a>
@@ -326,7 +354,9 @@ function buildMap(){
   const spots = readJSON('bv-spots');
   const posts = readJSON('bv-posts') || [];
   if (!spots || !window.BVMap || !window.L){ host.innerHTML = '<p class="note">地図を読み込めませんでした。<a href="/map.html">公開ページのマップ</a>からご覧いただけます。</p>'; return; }
-  BVMap.mount(host, { spots: spots, posts: posts });
+  // 会員ページにはスポット一覧の節が無いので、ふきだしの「くわしく ↓」は出さない
+  // （出すと押しても何も起きず、履歴に # だけが積まれていた）。
+  BVMap.mount(host, { spots: spots, posts: posts, hasList: false });
 }
 
 function enableNav(){

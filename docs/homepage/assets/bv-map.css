@@ -97,7 +97,7 @@
   padding: .3rem .7rem; min-height: 34px; cursor: pointer;
 }
 /* ふきだしの中のリンクも指で押せる大きさに（24pxだった） */
-.bvm-pop-links a { min-height: 36px; display: inline-flex; align-items: center; }
+.bvm-pop-links a { min-height: 44px; display: inline-flex; align-items: center; }
 
 /* 重なったピンを「まとめて件数で」出す印。
    どこか1つの場所を主張しないので、位置について嘘をつかない。 */
@@ -117,7 +117,7 @@
   font-family: var(--body); font-size: .75rem; font-weight: 700;
   color: var(--ink-soft); background: var(--surface);
   border: 1px solid var(--line-strong); border-radius: 999px;
-  min-height: 34px; padding: .1rem .7rem; cursor: pointer;
+  min-height: 44px; padding: .1rem .8rem; cursor: pointer;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .18);
 }
 .bvm-view-btn:active { background: var(--surface-2); }
@@ -125,3 +125,10 @@
   font-size: .78rem; color: var(--ink-soft); margin-top: .35rem; line-height: 1.7;
   background: var(--surface-2); border-radius: 10px; padding: .35rem .6rem;
 }
+
+/* 指で押せる大きさに（Leaflet の既定は 24px、ふきだしのリンクは 36px だった） */
+.leaflet-popup-close-button {
+  width: 44px !important; height: 44px !important;
+  font-size: 22px !important; line-height: 40px !important;
+}
+.bvm-pop-jump { min-height: 44px; display: inline-flex; align-items: center; }
