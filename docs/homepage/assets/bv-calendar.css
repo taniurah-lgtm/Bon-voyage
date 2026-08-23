@@ -210,3 +210,17 @@
 
 /* 開館時間・休館日（雨の日の逃げ場として案内するとき、金曜が使えない等） */
 .bvc-hours { margin: .35rem 0 0; font-size: .84rem; color: var(--ink-soft); line-height: 1.7; }
+
+/* 対象・定員（申込が要るものに効く） */
+.bvc-target { margin: .35rem 0 0; font-size: .85rem; color: var(--ink); line-height: 1.7; }
+/* 枠ごとの「登録」と「iPhone」を1組にまとめる */
+.bvc-slotpair { display: inline-flex; gap: 2px; }
+.bvc-slotpair .bvc-btn-add { border-top-right-radius: 4px; border-bottom-right-radius: 4px; }
+.bvc-slotpair .bvc-btn-ics { border-top-left-radius: 4px; border-bottom-left-radius: 4px; padding-left: .6rem; padding-right: .6rem; }
+
+/* ダークモードで主ボタンと警告文が読めなかった（1.62:1 / 2.44:1） */
+.bvc-btn-add { color: var(--on-sky); }
+.bvc-caution { color: var(--danger-ink); }
+.bvc-dldate b { color: var(--danger-ink); }
+.bvc-deadline { color: var(--danger-ink); }
+.bvc-key, .bvc-dlhow { color: var(--ink-soft); }

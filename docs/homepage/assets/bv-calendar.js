@@ -102,9 +102,9 @@
   }
 
   // iPhone / Apple カレンダー向けの .ics。Googleに入れたくない人の逃げ道。
-  function icsBlobURL(ev, date) {
+  function icsBlobURL(ev, date, slot) {
     var stamp = date.replace(/-/g, '');
-    var t = timesFor(ev, date);
+    var t = slot ? { start: slot.start, end: slot.end, exception: false } : timesFor(ev, date);
     var body;
     if (t.start) {
       var endT = t.end || addHours(t.start, 2);
@@ -126,9 +126,9 @@
       'BEGIN:VEVENT',
       'DTSTAMP:' + now,
       'UID:' + ev.id + '-' + stamp + '@bonvoya.nicomaru.tokyo',
-      'SUMMARY:' + icsEsc(ev.name),
+      'SUMMARY:' + icsEsc(ev.name + (slot && slot.label ? '（' + slot.label + '）' : '')),
       ev.place ? 'LOCATION:' + icsEsc(ev.place) : '',
-      'DESCRIPTION:' + icsEsc(detailsText(ev, date)),
+      'DESCRIPTION:' + icsEsc(detailsText(ev, date, slot)),
       'END:VEVENT', 'END:VCALENDAR',
     ].filter(Boolean);
     var head = lines.indexOf('BEGIN:VEVENT') + 1;   // BEGIN:VEVENT までがヘッダ
@@ -212,15 +212,19 @@
     // 枠ごとにボタンを分ける（「1・2年の部」「3・4年の部」など）。
     var slots = multiSlot ? parseSlots(ev.when) : [];
     var addBtns = slots.length > 1
-      ? slots.map(function (sl) {
-          return '<a class="bvc-btn bvc-btn-add" href="' +
-            esc(gcalURL(ev, date, sl)) + '" target="_blank" rel="noopener">📅 ' + esc(sl.label) + '</a>';
+      ? slots.map(function (sl, i) {
+          return '<span class="bvc-slotpair">' +
+            '<a class="bvc-btn bvc-btn-add" href="' + esc(gcalURL(ev, date, sl)) +
+            '" target="_blank" rel="noopener">📅 ' + esc(sl.label) + '</a>' +
+            // 枠ごとに .ics も出す。締切のある催しほど保存したい
+            '<button class="bvc-btn bvc-btn-ics" type="button" data-ics="' + esc(ev.id) +
+            '" data-date="' + esc(date) + '" data-slot="' + i + '">🍎</button>' +
+            '</span>';
         }).join('')
-      : '<a class="bvc-btn bvc-btn-add" href="' + esc(gcalURL(ev, date)) + '" target="_blank" rel="noopener">📅 カレンダーに追加</a>';
+      : '<a class="bvc-btn bvc-btn-add" href="' + esc(gcalURL(ev, date)) + '" target="_blank" rel="noopener">📅 カレンダーに追加</a>' +
+        '<button class="bvc-btn bvc-btn-ics" type="button" data-ics="' + esc(ev.id) + '" data-date="' + esc(date) + '">🍎 iPhoneに追加</button>';
     var links =
       addBtns +
-      (slots.length > 1 ? '' :
-      '<button class="bvc-btn bvc-btn-ics" type="button" data-ics="' + esc(ev.id) + '" data-date="' + esc(date) + '">🍎 iPhoneに追加</button>') +
       (ev.mapq ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(mapURL(ev.mapq)) + '" target="_blank" rel="noopener">📍 地図</a>' : '') +
       (safeURL(ev.url) ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(safeURL(ev.url)) + '" target="_blank" rel="noopener">🔗 公式</a>' : '');
     var dl = ev.deadline
@@ -240,9 +244,10 @@
       //（8/29に「お盆期間の平日に行けるのが強み」と出て矛盾していた）
       (ev.kidsNote && ev.kidsNote !== ev.summary
         ? '<p class="bvc-kids">' +
-          ((ev.dates || []).length > 3 ? '<span class="bvc-kidslabel">この催しについて</span>' : '') +
+          ((ev.totalDates || (ev.dates || []).length) > 3 ? '<span class="bvc-kidslabel">この催しについて</span>' : '') +
           esc(ev.kidsNote) + '</p>' : '') +
       '<p class="bvc-meta">' + agesHTML(ev.ages) + (ev.cost ? '<span class="bvc-cost">' + esc(ev.cost) + '</span>' : '') + '</p>' +
+      (ev.target ? '<p class="bvc-target">👥 ' + esc(ev.target) + '</p>' : '') +
       (ev.hours ? '<p class="bvc-hours">🕘 ' + esc(ev.hours) + '</p>' : '') +
       (ev.caution ? '<p class="bvc-caution">⚠️ ' + esc(ev.caution) + '</p>' : '') +
       dl +
@@ -263,6 +268,24 @@
     events.forEach(function (e) {
       if (e.tentative) return;
       (e.dates || []).forEach(function (d) { (byDate[d] = byDate[d] || []).push(e); });
+    });
+    // 同じ日の中は「子連れで行きやすい順」に並べる。台帳の順（IDや日付）だと
+    // その日いちばんの一推しが最後に出てしまう。
+    function kidScore(e) {
+      var a = e.ages || {};
+      var pt = { '◎': 3, '○': 2, '△': 1, '✕': 0, x: 0 };
+      return (pt[a.baby] || 0) + (pt[a.pre] || 0) + (pt[a.elem] || 0);
+    }
+    Object.keys(byDate).forEach(function (d) {
+      byDate[d].sort(function (a, b) {
+        var diff = kidScore(b) - kidScore(a);
+        if (diff) return diff;
+        // 同点なら無料を先に、次に開始が早いものを先に
+        var freeA = /無料/.test(a.cost || '') ? 1 : 0;
+        var freeB = /無料/.test(b.cost || '') ? 1 : 0;
+        if (freeA !== freeB) return freeB - freeA;
+        return String(a.start || '99:99').localeCompare(String(b.start || '99:99'));
+      });
     });
 
     var today = todayISO();
@@ -332,10 +355,15 @@
       if (ics) {
         var ev = byId[ics.dataset.ics];
         if (!ev) return;
-        var url = icsBlobURL(ev, ics.dataset.date);
+        var sl = null;
+        if (ics.dataset.slot != null) {
+          var ss = parseSlots(ev.when);
+          sl = ss[Number(ics.dataset.slot)] || null;
+        }
+        var url = icsBlobURL(ev, ics.dataset.date, sl);
         var a = document.createElement('a');
         a.href = url;
-        a.download = ev.name.replace(/[\/\\?%*:|"<>]/g, '') + '.ics';
+        a.download = (ev.name + (sl ? '-' + sl.label : '')).replace(/[\/\\?%*:|"<>]/g, '') + '.ics';
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -390,7 +418,14 @@
         }
         if (any) rows.push('<tr>' + tds.join('') + '</tr>');
       }
+      var hadFocus = document.activeElement && document.activeElement.classList &&
+        document.activeElement.classList.contains('bvc-cell');
       $body.innerHTML = rows.join('');
+      // 再描画でフォーカスが body に飛ぶと、矢印キーで続けて日を動かせない
+      if (hadFocus && selected) {
+        var cell = $body.querySelector('.bvc-cell[data-date="' + selected + '"]');
+        if (cell) cell.focus();
+      }
       renderDay();
     }
 
@@ -444,7 +479,8 @@
           var how = [];
           if (e.when) how.push('開催 ' + e.when);
           if (e.deadline.raw) how.push('申込 ' + e.deadline.raw);
-          if (e.contact && e.contact.tel) {
+          // 申込の文面に同じ番号が入っていれば足さない（二重に出ていた）
+          if (e.contact && e.contact.tel && !(e.deadline.raw || '').includes(e.contact.tel)) {
             how.push('☎ ' + (e.contact.who ? e.contact.who + ' ' : '') + e.contact.tel);
           }
           return '<div class="bvc-dlrow"><span class="bvc-dldate">' + esc(fmtDay(e.deadline.date)) +
@@ -497,6 +533,7 @@
           data.standing.map(function (s) {
             return '<article class="bvc-card"><p class="bvc-when">' + esc(s.span) + '</p>' +
               '<h4 class="bvc-name">' + esc(s.name) + '</h4>' +
+              (s.place ? '<p class="bvc-place">' + esc(s.place) + '</p>' : '') +
               (s.summary ? '<p class="bvc-desc">' + esc(s.summary) + '</p>' : '') +
               (s.kidsNote && s.kidsNote !== s.summary ? '<p class="bvc-kids">' + esc(s.kidsNote) + '</p>' : '') +
               '<p class="bvc-meta">' + agesHTML(s.ages) + (s.cost ? '<span class="bvc-cost">' + esc(s.cost) + '</span>' : '') + '</p>' +

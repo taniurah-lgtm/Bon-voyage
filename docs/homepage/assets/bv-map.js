@@ -91,14 +91,16 @@
     var markers = [];
     pinned.forEach(function (s) {
       var color = colorFor(s.cat);
+      // ★アイコン自体を44pxにする。見た目のピンは中に描く。
+      //   22pxだと近接したピンが重なって、狙ったピンを押せない（指ではさらに外す）。
       var icon = L.divIcon({
         className: 'bvm-pin-wrap',
         html: '<span class="bvm-pin" style="--pin:' + color + '"></span>',
-        iconSize: [22, 22],
-        iconAnchor: [11, 22],
-        popupAnchor: [0, -20],
+        iconSize: [44, 44],
+        iconAnchor: [22, 36],
+        popupAnchor: [0, -34],
       });
-      var m = L.marker([s.lat, s.lng], { icon: icon, title: s.name, alt: s.name, keyboard: true });
+      var m = L.marker([s.lat, s.lng], { icon: icon, title: s.name, alt: s.name, keyboard: true, riseOnHover: true, riseOffset: 400 });
       var mine = byName[s.name] || [];
       m.bindPopup(
         '<div class="bvm-pop">' +
@@ -157,7 +159,7 @@
     function fit(list) {
       if (!list.length) return;
       map.fitBounds(L.latLngBounds(list.map(function (m) { return m.getLatLng(); })).pad(0.18), {
-        maxZoom: list.length === 1 ? 15 : 13,
+        maxZoom: list.length === 1 ? 15 : 14,
       });
     }
 

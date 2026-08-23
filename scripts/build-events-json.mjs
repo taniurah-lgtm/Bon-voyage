@@ -109,6 +109,16 @@ function extractDates(raw) {
   return { dates: [...new Set(dates)].sort(), span };
 }
 
+// 日付そのものが未確定かを判定する。時刻についての注記は取り除いてから見る。
+function isDateVague(when) {
+  if (!when) return true;
+  const w = normalize(when)
+    // 時刻の話をしている括弧・※注記を落とす
+    .replace(/[（(][^）)]*(?:\d{1,2}:\d{2}|時間|時刻|開場|開演|開始|終了)[^）)]*[）)]/g, '')
+    .replace(/※[^※]*(?:時間|時刻|開場|開演|開始|終了)[^※]*/g, '');
+  return /例年|見込み|未定|可能性/.test(w) || /(?:日程|開催日|日にち)[^。]{0,8}要確認/.test(w) || /^\s*要確認/.test(w);
+}
+
 // 日時欄の ※注記を拾う。「※荒天時は中止の場合あり(中止は小平消防署HPで告知)」
 // のような、当日の判断にいちばん効く情報が本文に出ていなかった。
 function extractCaution(raw) {
@@ -120,6 +130,10 @@ function extractCaution(raw) {
     const t = m[1].trim();
     // 日別の例外時刻は別に扱うので、ここでは拾わない
     if (/^\d{1,2}日は\s*\d{1,2}:\d{2}/.test(t)) continue;
+    // 運営の記録（「2026-07 に確定」「2026-08-15検証」）は読者には意味がなく、
+    // ⚠️ の記号を無駄に消費する
+    if (/^\d{4}-\d{2}(-\d{2})?\s*(に)?(確定|検証|訂正|確認)/.test(t)) continue;
+    if (/^台帳|^起票|^スクショ/.test(t)) continue;
     if (t) notes.push(t);
   }
   return notes.join(' / ');
@@ -247,9 +261,19 @@ function parseHeading(line) {
 // 1行の「- キー: 値」を取る
 function field(lines, keys) {
   for (const key of keys) {
-    for (const l of lines) {
-      const m = l.match(new RegExp('^\\s*-\\s*(?:\\*\\*)?' + key + '(?:\\*\\*)?\\s*:\\s*(.+)$'));
-      if (m) return m[1].replace(/\*\*/g, '').trim();
+    for (let i = 0; i < lines.length; i++) {
+      const m = lines[i].match(new RegExp('^\\s*-\\s*(?:\\*\\*)?' + key + '(?:\\*\\*)?\\s*:\\s*(.+)$'));
+      if (!m) continue;
+      // 台帳の箇条書きは折り返して次の行に続く。続きを読まないと、
+      // 「スーパーボールすくいは2歳でも親の膝上でいける」のような
+      // 2歳連れにいちばん効く一文が落ちる。
+      let buf = m[1];
+      for (let j = i + 1; j < lines.length; j++) {
+        if (/^\s*-\s/.test(lines[j]) || /^\s*$/.test(lines[j]) || /^#{1,3}\s/.test(lines[j])) break;
+        if (/^\s*>/.test(lines[j])) break;
+        buf += ' ' + lines[j].trim();
+      }
+      return buf.replace(/\*\*/g, '').trim();
     }
   }
   return '';
@@ -273,8 +297,9 @@ function findURL(lines) {
 //   「西東京市緑町/車・自転車約10分」「ルネこだいら 中ホール / 費用: 無料」
 //   「東村山乗換 西武園駅すぐ/電車約20〜25分」
 // そのまま地図に投げると場所ではなく行き方を検索してしまう。地名だけを残す。
-function mapQuery(place) {
-  if (!place) return '';
+function mapQuery(place, name) {
+  if (!place && !name) return '';
+  if (!place) return facilityQuery(name);
   let q = place
     // 「ビル4・5階」の階表記は、下の「・」分割より先に落とす（「ビル4」が残ってしまう）
     .replace(/\s*\d+(?:\s*[・･]\s*\d+)*\s*(?:階|F)(?![a-zA-Z])/g, '')
@@ -310,7 +335,28 @@ function mapQuery(place) {
   if (!/[市区]/.test(q) && !looksLikeRoute && looksLikeAddr && KODAIRA.test(paren)) {
     q = '小平市' + q;
   }
+  // 場所欄が町名だけのとき（「西東京市緑町/車・自転車約10分」）は、
+  // 施設名（見出し）のほうが地図に効く。町名で開くと目的地が出ない。
+  // 見出しに施設名が入っていて、場所欄にその施設名が無いなら、見出しを使う。
+  //   E10「西武園ゆうえんちプール」 場所欄→「西武園駅」  … 駅ではなくプールを開きたい
+  //   E9 「西東京いこいの森公園 噴水広場」 場所欄→「西東京市緑町」 … 町名では出ない
+  const FACILITY = /公園|公民館|図書館|美術館|科学館|博物館|動物園|プール|センター|ホール|アリーナ|神社|寺|モール|ランド|ゆうえんち|会館|農園|アスタ/;
+  const inName = name && String(name).match(FACILITY);
+  if (inName && !new RegExp(inName[0]).test(q)) {
+    const fq = facilityQuery(name);
+    if (fq) return fq;
+  }
   return q;
+}
+
+// 見出しから地図の検索語を作る（「西東京いこいの森公園 噴水広場」→「西東京いこいの森公園」）
+function facilityQuery(name) {
+  return String(name || '')
+    .replace(/[（(][^）)]*[）)]/g, '')
+    .replace(/〔[^〕]*〕/g, '')
+    .split(/[・、,]/)[0]
+    .replace(/\s*(?:噴水広場|センターコート|ギャラリー|視聴覚室|中ホール|大ホール|展示ギャラリー)\s*$/, '')
+    .trim();
 }
 
 
@@ -327,10 +373,11 @@ const STRIP = [
   [/[✕x]\s*[~〜]\s*(?=[◎○△])/g, ''],   // 「✕〜△」→「△」（内部の幅つき評価）
   [/(?<![\w])[✕x](?=\s*[^\S\r\n]*[◎○△])/g, ''],
   [/[，、]?\s*(?:無料版|有料版)の?「[^」]*」枠に(?:使える|できる)。?/g, ''],
+  // ★「常設なので…再利用可」を先に丸ごと落とす。あとに回すと「常設なので」だけが残る
+  [/。?\s*(?:常設|通年)なので[^。]*(?:再利用|使える)[^。]*。?/g, '。'],
   [/「[^」]*」ネタとして再利用可。?/g, ''],
   [/\s*[（(]\d{4}-\d{2}\s*訂正[）)]/g, ''],       // 運営の校正メモ
   [/\s*[（(]\d{4}-\d{2}-\d{2}\s*(?:訂正|検証|確認)[^）)]*[）)]/g, ''],
-  [/。?\s*(?:常設|通年)なので[^。]*再利用[^。]*。?/g, ''],
 ];
 // 落としきれなかったときに気づくための番兵。読者向けの文にこれが残っていたら公開しない。
 // 「損」は方針で禁じている煽り表現。台帳IDと内部記号も読者には意味がない。
@@ -350,12 +397,14 @@ function readerText(s) {
 // 記号は ages 側で出すので、本文にも残ると1枚のカードに年齢目安が2回出る。
 function kidsBody(s) {
   if (!s) return '';
-  return readerText(
-    String(s)
-      .replace(/^(?:\s*(?:👶|🧒|🎒)\s*[◎○△✕x]\s*)+/u, '')
-      .replace(/^\s*[◎○△✕x](?:\s*[〜~]\s*[◎○△✕x])?\s*/u, '')
-      .replace(/^\s*[◎○△✕x]{1,2}\s*/u, '')
-  );
+  // ★順番が大事。先に readerText で「✕に近い△」→「△」に寄せてから記号を落とす。
+  //   逆にすると先頭の ✕ だけが消えて「に近い△ 観客100万人規模…」という
+  //   壊れた日本語が残り、読者のカレンダーの説明欄にまで入る。
+  return readerText(String(s))
+    .replace(/^(?:\s*(?:👶|🧒|🎒)\s*[◎○△✕x]\s*)+/u, '')
+    .replace(/^\s*[◎○△✕x]\s*[〜~]\s*[◎○△✕x]\s*/u, '')
+    .replace(/^\s*[◎○△✕x]{1,2}\s*/u, '')
+    .trim();
 }
 
 // ---- 台帳を1件ずつ読む ------------------------------------------------------
@@ -404,8 +453,8 @@ for (const file of files) {
         name: b.name.replace(/^〔常設〕\s*/, ''),
         span: spanField || when || '通年',
         place: field(b.lines, ['場所', '会場']),
-        mapq: mapQuery(field(b.lines, ['場所', '会場'])),
-        summary: readerText(field(b.lines, ['内容']) || field(b.lines, ['子連れ'])),
+        mapq: mapQuery(field(b.lines, ['場所', '会場']), b.name),
+        summary: readerText(field(b.lines, ['内容'])),   // ★子連れ欄で埋めない（kidsNoteと二重になる）
         kidsNote: kidsBody(field(b.lines, ['子連れ'])),
         ages: parseAges(field(b.lines, ['子連れ'])),
         cost: field(b.lines, ['料金', '費用', '参加費']),
@@ -427,11 +476,12 @@ for (const file of files) {
       continue;
     }
 
-    // 暫定＝「日付そのものが未確定」なもの。判定は日時欄だけを見る。
-    // ★確度欄は見ない。確度の「要確認」は細部（日割り・料金）の未確認を指すことがあり、
-    //   日付は公式で確定していることがある。混ぜると、日付が確かなものまで
-    //   カレンダーから消える（E40 昭島くじら祭・子連れ◎ が実際に消えていた）。
-    const tentative = /例年|要確認|見込み|未定|可能性/.test(when);
+    // 暫定＝「日付そのものが未確定」なもの。
+    // ★時刻の未確認で日付を暫定にしてはいけない。
+    //   「8/22(土)・23(日)(例年15:00〜21:00、時間要確認)」は日付は公式確定で、
+    //   括弧の中は時刻の話。ここを混ぜると、毎日開いている催しの週が
+    //   まるごと「予定なし」になる（E39 麻布十番・E60 西東京みんなの展覧会）。
+    const tentative = isDateVague(when);
     const place = field(b.lines, ['場所', '会場']);
     const { start, end } = extractTime(when);
 
@@ -442,12 +492,13 @@ for (const file of files) {
       span,
       when,
       exceptions: extractExceptions(when, dates),
+      totalDates: dates.length,   // 窓で絞る前の開催日数（「この催しについて」の判定に使う）
       start,
       end,
       allDay: !start,
       place,
-      mapq: mapQuery(place),
-      summary: readerText(field(b.lines, ['内容']) || field(b.lines, ['子連れ'])),
+      mapq: mapQuery(place, b.name),
+      summary: readerText(field(b.lines, ['内容'])),   // ★子連れ欄で埋めない（kidsNoteと二重になる）
       kidsNote: kidsBody(field(b.lines, ['子連れ'])),
       caution: extractCaution(when),
       contact: extractContact(b.lines),

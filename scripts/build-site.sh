@@ -22,6 +22,10 @@ echo "── 公開マップ（地図＋投稿フォーム）"
 node scripts/build-map.mjs
 
 echo
+echo "── トップページの「投稿できます」を実装に合わせる"
+node scripts/apply-post-mode.mjs docs/homepage/index.html
+
+echo
 echo "── 会員ページ（全件のカレンダー＋地図）"
 node scripts/build-members.mjs
 
@@ -30,7 +34,7 @@ if [ "${MEMBER_PASS:-}" = "" ]; then
   echo "⚠ MEMBER_PASS が未設定。合言葉は 'CHANGEME' で組まれているので、このまま公開しないこと。"
 fi
 if [ "${MAP_POST_URL:-}" = "" ]; then
-  echo "⚠ MAP_POST_URL が未設定。投稿フォームは出るが、送信するとコピー案内に切り替わる。"
+  echo "⚠ MAP_POST_URL が未設定。投稿はサイト内フォームではなく「LINEでお預かり」の案内になる。"
 fi
 
 # 検証用の合言葉で組まれたものが残っていないか（公開前の最後の砦）

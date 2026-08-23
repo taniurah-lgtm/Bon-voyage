@@ -31,17 +31,16 @@
 }
 
 /* ---- ピン（画像を使わずCSSで描く） ---- */
-.bvm-pin-wrap { background: none; border: none; }
+.bvm-pin-wrap {
+  background: none; border: none;
+  /* アイコン枠は44px。見た目のピンはその中央下に描く（当たり判定を実体で持つ） */
+  display: flex; align-items: flex-end; justify-content: center;
+}
 .bvm-pin {
   --pin: #2C7C9E;
-  display: block; width: 20px; height: 20px; border-radius: 50% 50% 50% 0;
+  display: block; width: 20px; height: 20px; margin-bottom: 4px; border-radius: 50% 50% 50% 0;
   background: var(--pin); transform: rotate(-45deg);
   border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.35);
-}
-/* 見た目は20pxのまま、指の当たり判定だけ44pxに広げる（片手操作の主要ターゲット） */
-.bvm-pin-wrap::after {
-  content: ""; position: absolute; left: 50%; top: 50%;
-  width: 44px; height: 44px; transform: translate(-50%, -50%);
 }
 /* Leaflet のズームボタンも指で押せる大きさに */
 .leaflet-touch .leaflet-bar a, .leaflet-bar a { width: 44px; height: 44px; line-height: 44px; }
@@ -68,3 +67,6 @@
 
 /* 一覧側で「いまここ」を光らせる */
 .spot.is-hit, .bvm-hit { box-shadow: 0 0 0 3px var(--marigold); transition: box-shadow .3s ease; }
+
+/* 二次リンクのタップ領域（44px未満だった） */
+.back, footer a { min-height: 44px; display: inline-flex; align-items: center; }

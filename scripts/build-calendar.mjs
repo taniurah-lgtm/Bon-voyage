@@ -158,7 +158,28 @@ ${(() => {
   const byDate = {};
   for (const e of pub) { if (e.tentative) continue; for (const d of e.dates) (byDate[d] ||= []).push(e); }
   const days = Object.keys(byDate).sort();
-  if (!days.length) return '    <p class="lead">いまのところ、確定した予定はありません。</p>';
+  // JS が動かないときに出る一覧。カレンダー側にあるものは全部入れる
+  //（締切・会期・日程未確定を落としていて、本体と食い違っていた）
+  const extra = [];
+  const dl = pub.concat(deadlineOnly).filter((e) => e.deadline && e.deadline.date >= today);
+  if (dl.length) {
+    extra.push('    <h3>申込の締切が近いもの</h3>\n    <ul>' +
+      dl.sort((a, b) => a.deadline.date.localeCompare(b.deadline.date)).map((e) =>
+        `<li>${esc(e.deadline.date)} まで — ${esc(e.name)}${e.when ? `（開催 ${esc(e.when)}）` : ''}</li>`).join('') +
+      '</ul>');
+  }
+  if (spans.length) {
+    extra.push('    <h3>会期中ずっと見られるもの</h3>\n    <ul>' +
+      spans.map((e) => `<li>${esc(e.name)}${e.span && e.span.to ? `（${esc(e.span.to)} まで）` : ''}</li>`).join('') +
+      '</ul>');
+  }
+  const tent = pub.filter((e) => e.tentative);
+  if (tent.length) {
+    extra.push('    <h3>日程がまだ確定していないもの</h3>\n    <p class="lead">例年の時期から拾ったものです。公式で確認してからお出かけください。</p>\n    <ul>' +
+      tent.map((e) => `<li>${esc(e.name)}（${esc(e.when || '')}）</li>`).join('') +
+      '</ul>');
+  }
+  if (!days.length) return '    <p class="lead">いまのところ、確定した予定はありません。</p>\n' + extra.join('\n');
   return days
     .map((d) => {
       // ★ローカル時刻のメソッド（getMonth/getDate/getDay）を使ってはいけない。
@@ -177,7 +198,7 @@ ${(() => {
         .join('\n');
       return `    <h3>${label}</h3>\n    <ul>\n${items}\n    </ul>`;
     })
-    .join('\n');
+    .join('\n') + (extra.length ? '\n' + extra.join('\n') : '');
 })()}
   </div>
 

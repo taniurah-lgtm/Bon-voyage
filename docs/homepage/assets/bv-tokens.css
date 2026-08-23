@@ -10,6 +10,8 @@
   --marigold-ink:#8A5A12;
   /* --sky-deep の上に乗せる文字色。ダークでは --sky-deep が明色になるので反転させる */
   --on-sky:#FFFFFF;
+  /* 警告の文字色。ダークでは濃赤が背景に沈むので明るくする */
+  --danger-ink:#B4453C;
   --line:#ECE7DB; --line-strong:#DCD5C6;
   --shadow-soft:0 2px 20px rgba(52,67,76,.05);
   --radius:20px; --radius-sm:14px;
@@ -23,7 +25,7 @@
     --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95;
     --sky:#6FBAD9; --sky-deep:#9AD4EA; --sky-wash:#1D3944;
     --marigold:#F0AE5E; --marigold-wash:#362F1F; --leaf:#8FC489;
-    --marigold-ink:#F0AE5E; --on-sky:#0E1A22;
+    --marigold-ink:#F0AE5E; --on-sky:#0E1A22; --danger-ink:#F2938A;
     --line:#293B45; --line-strong:#38505C; --shadow-soft:0 2px 22px rgba(0,0,0,.22);
   }
 }
@@ -31,7 +33,7 @@
   --ground:#131F28; --surface:#1A2831; --surface-2:#21333D;
   --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95;
   --sky:#6FBAD9; --sky-deep:#9AD4EA; --sky-wash:#1D3944;
-  --marigold:#F0AE5E; --marigold-wash:#362F1F; --marigold-ink:#F0AE5E; --on-sky:#0E1A22; --leaf:#8FC489;
+  --marigold:#F0AE5E; --marigold-wash:#362F1F; --marigold-ink:#F0AE5E; --on-sky:#0E1A22; --danger-ink:#F2938A; --leaf:#8FC489;
   --line:#293B45; --line-strong:#38505C; --shadow-soft:0 2px 22px rgba(0,0,0,.22);
 }
 
@@ -53,3 +55,6 @@ footer { color: var(--ink-faint); font-size: .82rem; text-align: center; padding
 footer .fmark { font-family: var(--maru); font-weight: 800; color: var(--ink-soft); }
 .back { display: inline-block; margin-top: 2rem; font-family: var(--maru); font-weight: 800; font-size: .95rem; text-decoration: none; }
 @media (max-width: 40rem) { html { font-size: 112.5%; } .wrap, .ghead-in { padding-left: 1.15rem; padding-right: 1.15rem; } }
+
+/* 二次リンクも指で押せる大きさにする（実測 16〜32px だった） */
+.back, footer a, .bvc-teaser-link { min-height: 44px; display: inline-flex; align-items: center; }
