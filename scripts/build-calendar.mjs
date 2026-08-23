@@ -47,6 +47,21 @@ const beyond = src.events.filter(
 // 会期もの（「〜10/14まで」）は期間が窓に重なっていれば公開してよい
 const spans = src.events.filter((e) => e.span && (!e.span.to || e.span.to >= today));
 
+// 締切が窓の中にあるものは、イベント本体が窓の外でも「名前と締切日だけ」を公開する。
+// 無料の役割は「知る」なので、明日締切のものを知らせないのは筋が通らない。
+// 日程・場所・料金といった中身は出さない（そこは「決める・動く」＝サポーターの領分）。
+const pubIds = new Set(pub.map((e) => e.id));
+const deadlineOnly = src.events
+  .filter((e) => !e.tentative && e.deadline && e.deadline.date >= today && e.deadline.date <= horizon)
+  .filter((e) => !pubIds.has(e.id))
+  .map((e) => ({
+    id: e.id,
+    name: e.name,
+    dates: [],                      // マス目には置かない
+    deadline: { date: e.deadline.date, raw: e.deadline.raw },
+    deadlineOnly: true,
+  }));
+
 mkdirSync('docs/homepage/data', { recursive: true });
 writeFileSync(
   OUT_JSON,
@@ -54,7 +69,7 @@ writeFileSync(
     {
       generated: src.generated,
       window: { from: today, to: horizon },
-      events: pub.concat(spans.map((e) => ({ ...e, source: undefined }))),
+      events: pub.concat(spans.map((e) => ({ ...e, source: undefined })), deadlineOnly),
       standing: src.standing,
       beyond,
     },
@@ -135,8 +150,12 @@ ${(() => {
   if (!days.length) return '    <p class="lead">いまのところ、確定した予定はありません。</p>';
   return days
     .map((d) => {
-      const dt = new Date(d + 'T00:00:00+09:00');
-      const label = `${dt.getMonth() + 1}月${dt.getDate()}日(${'日月火水木金土'[dt.getDay()]})`;
+      // ★ローカル時刻のメソッド（getMonth/getDate/getDay）を使ってはいけない。
+      //   GitHub Actions のランナーは UTC なので、JST 0:00 が前日15:00になり、
+      //   日付と曜日が1日ずれる（JS無効時に出るこの一覧だけが嘘になるので気づきにくい）。
+      const [yy, mm, dd] = d.split('-').map(Number);
+      const wd = '日月火水木金土'[new Date(Date.UTC(yy, mm - 1, dd)).getUTCDay()];
+      const label = `${mm}月${dd}日(${wd})`;
       const items = byDate[d]
         .map(
           (e) =>
@@ -166,7 +185,11 @@ ${(() => {
 fetch('/data/events-public.json', { cache: 'no-cache' })
   .then(function (r) { return r.json(); })
   .then(function (data) {
-    document.querySelector('.fallback').hidden = true;   // カレンダーが出たら一覧は畳む
+    // 中身があるときだけ一覧を畳む。空の {} を返されたときに
+    // 空のカレンダーだけが残って行き止まりになるのを防ぐ。
+    if (data && data.events && data.events.length) {
+      document.querySelector('.fallback').hidden = true;
+    }
     BVCalendar.mount(document.getElementById('cal'), data, {
       teaser: true,
       memberUrl: ${JSON.stringify(MEMBER_URL)},
@@ -184,5 +207,5 @@ fetch('/data/events-public.json', { cache: 'no-cache' })
 
 writeFileSync(OUT, page);
 console.log(`wrote ${OUT}`);
-console.log(`  公開: ${pub.length}件（${today}〜${horizon}）/ 会期もの ${spans.length}件 / この先さらに ${beyond}件`);
+console.log(`  公開: ${pub.length}件（${today}〜${horizon}）/ 会期もの ${spans.length}件 / 締切だけ ${deadlineOnly.length}件 / この先さらに ${beyond}件`);
 console.log(`wrote ${OUT_JSON}（★公開される。2週間ぶんだけ入っていることを必ず確認する）`);

@@ -142,6 +142,7 @@
     var photoData = null;
 
     restoreDraft();
+    autoVerify();
 
     $text.addEventListener('input', function () {
       var n = $text.value.length;
@@ -164,6 +165,22 @@
       el.querySelector('#' + id).addEventListener('input', saveDraft);
     });
 
+    // 会員ページを開いた人は sessionStorage に合言葉が入っている（同じオリジン）。
+    // それで通るなら、ここで打ち直させる必要はない。
+    async function autoVerify() {
+      var saved;
+      try { saved = sessionStorage.getItem('bv_pw'); } catch (e) { return; }
+      if (!saved) return;
+      if (!(await verifyPass(saved, opts.gate))) return;
+      isSupporter = true;
+      var gate = el.querySelector('.bvp-gate');
+      if (gate) gate.open = true;
+      $gateMsg.textContent = '応援ありがとうございます。長めの文章と写真も送れます。';
+      $gateMsg.className = 'bvp-gate-msg is-ok';
+      $photoBox.hidden = false;
+      $text.dispatchEvent(new Event('input'));
+    }
+
     el.addEventListener('click', async function (e) {
       var v = e.target.closest('[data-act="verify"]');
       if (!v) return;
@@ -171,6 +188,7 @@
       $gateMsg.textContent = '確認しています…';
       isSupporter = await verifyPass(pass, opts.gate);
       if (isSupporter) {
+        try { sessionStorage.setItem('bv_pw', pass.normalize('NFC')); } catch (e) { /* 覚えられなくても動く */ }
         $gateMsg.textContent = 'ありがとうございます。長めの文章と写真も送れます。';
         $gateMsg.className = 'bvp-gate-msg is-ok';
         $photoBox.hidden = false;
@@ -234,7 +252,9 @@
         var res = await fetch(opts.endpoint, { method: 'POST', body: JSON.stringify(payload) });
         var body = await res.json().catch(function () { return null; });
         if (!res.ok || !body || body.ok !== true) throw new Error((body && body.error) || ('HTTP ' + res.status));
-        localStorage.removeItem(DRAFT_KEY);
+        // ★下書きの掃除で失敗しても、送信は成功している。ここで throw させて
+        //   「送れませんでした」に落とすと、利用者が二重に送ってしまう。
+        try { localStorage.removeItem(DRAFT_KEY); } catch (e) { /* 消せなくても害はない */ }
         done(payload);
       } catch (err) {
         btn.disabled = false;
@@ -255,7 +275,10 @@
         (payload.area ? '\nエリア・年齢: ' + payload.area : '');
       $msg.className = 'bvp-msg is-ng';
       $msg.innerHTML =
-        esc(why) + '<br>書いていただいた内容はこの端末に残してあります。' +
+        esc(why) + '<br>' +
+        (draftWorks
+          ? '書いていただいた内容はこの端末に残してあります。'
+          : '<b>この画面を離れると消えてしまいます。先にコピーをお願いします。</b>') +
         'お手数ですが、下のボタンでコピーして、LINEでそのまま送っていただけると確実です。' +
         '<span class="bvp-offline">' +
         '<button class="bvp-btn bvp-btn-sub" type="button" data-copy>コピーする</button>' +
@@ -292,6 +315,7 @@
       d.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
+    var draftWorks = true;   // 下書きが本当に端末に残るか（プライベートブラウズでは残らない）
     function saveDraft() {
       try {
         localStorage.setItem(DRAFT_KEY, JSON.stringify({
@@ -300,7 +324,10 @@
           who: el.querySelector('#bvp-who').value,
           area: el.querySelector('#bvp-area').value,
         }));
-      } catch (e) { /* プライベートブラウズなど。下書きが残らないだけ */ }
+        draftWorks = true;
+      } catch (e) {
+        draftWorks = false;   // プライベートブラウズなど。残らないので、そう言う
+      }
     }
     function restoreDraft() {
       try {

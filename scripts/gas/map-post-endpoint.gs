@@ -165,7 +165,13 @@ function savePhoto(dataUrl, spot, folderId) {
 }
 
 function trim(v, n) {
-  return String(v == null ? '' : v).trim().slice(0, n);
+  var s = String(v == null ? '' : v).trim().slice(0, n);
+  // ★数式として評価されないようにする。
+  // Google Sheets はセルの中身が = + - @ タブ 改行 で始まると数式として実行するので、
+  // 投稿に =IMPORTXML(...) と書かれるとオーナーのシートから外部へ通信してしまう。
+  // 先頭にアポストロフィを付けると、文字列として扱われる（表示上は見えない）。
+  if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
+  return s;
 }
 
 function json(obj) {

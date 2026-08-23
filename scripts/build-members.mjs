@@ -97,8 +97,8 @@ ${renkyu}
   <p class="note" style="margin-top:1.6rem">📅 ボタンはご自分のカレンダーに保存する形です（Googleカレンダー、またはiPhoneのカレンダー）。リマインダーはカレンダー側でお好みに設定できます。日程・料金は変わることがあるので、おでかけ前に各公式でご確認ください。</p>`;
 
 // ---- ページ本体のCSS（カレンダー・地図の見た目は外部ファイル）------------------
-const CSS = `:root{--ground:#FBFAF5;--surface:#FFFFFF;--surface-2:#F5F2EA;--ink:#34434C;--ink-soft:#63727B;--ink-faint:#97A2AA;--sky:#4FA3C4;--sky-deep:#2C7C9E;--sky-wash:#E9F4F7;--marigold:#EBA24A;--marigold-wash:#FBEEDA;--leaf:#74AE71;--line:#ECE7DB;--line-strong:#DCD5C6;--radius:18px;--radius-sm:14px;--shadow-soft:0 2px 20px rgba(52,67,76,.05);--maru:"Hiragino Maru Gothic ProN","Yu Gothic","Noto Sans JP","Segoe UI",sans-serif;--body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP","Segoe UI",Meiryo,sans-serif;--script:Georgia,"Times New Roman",serif;}
-@media (prefers-color-scheme:dark){:root{--ground:#131F28;--surface:#1A2831;--surface-2:#21333D;--ink:#ECF2F4;--ink-soft:#AAB9C1;--ink-faint:#7B8C95;--sky:#6FBAD9;--sky-deep:#9AD4EA;--sky-wash:#1D3944;--marigold:#F0AE5E;--marigold-wash:#362F1F;--leaf:#8FC489;--line:#293B45;--line-strong:#38505C;--shadow-soft:0 2px 22px rgba(0,0,0,.22);}}
+const CSS = `:root{--ground:#FBFAF5;--surface:#FFFFFF;--surface-2:#F5F2EA;--ink:#34434C;--ink-soft:#63727B;--ink-faint:#97A2AA;--sky:#4FA3C4;--sky-deep:#2C7C9E;--sky-wash:#E9F4F7;--marigold:#EBA24A;--marigold-wash:#FBEEDA;--marigold-ink:#8A5A12;--leaf:#74AE71;--line:#ECE7DB;--line-strong:#DCD5C6;--radius:18px;--radius-sm:14px;--shadow-soft:0 2px 20px rgba(52,67,76,.05);--maru:"Hiragino Maru Gothic ProN","Yu Gothic","Noto Sans JP","Segoe UI",sans-serif;--body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP","Segoe UI",Meiryo,sans-serif;--script:Georgia,"Times New Roman",serif;}
+@media (prefers-color-scheme:dark){:root{--ground:#131F28;--surface:#1A2831;--surface-2:#21333D;--ink:#ECF2F4;--ink-soft:#AAB9C1;--ink-faint:#7B8C95;--sky:#6FBAD9;--sky-deep:#9AD4EA;--sky-wash:#1D3944;--marigold:#F0AE5E;--marigold-wash:#362F1F;--marigold-ink:#F0AE5E;--leaf:#8FC489;--line:#293B45;--line-strong:#38505C;--shadow-soft:0 2px 22px rgba(0,0,0,.22);}}
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);line-height:1.8;-webkit-font-smoothing:antialiased;font-feature-settings:"palt" 1;}
@@ -127,7 +127,7 @@ h2.sec{font-family:var(--maru);font-weight:800;font-size:1.2rem;margin:2.2rem 0 
 .lk{display:inline-flex;align-items:center;gap:.25rem;font-size:.8rem;font-weight:700;text-decoration:none;border-radius:999px;padding:.35rem .75rem;border:1px solid var(--line-strong);}
 .lk.cal{background:var(--sky-deep);color:#fff;border-color:var(--sky-deep);}
 .lk.map{color:var(--sky-deep);background:var(--surface);}
-.lk.off{color:var(--marigold);background:var(--surface);}
+.lk.off{color:var(--marigold-ink);background:var(--surface);}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.15rem;}
 .card ul{margin:.2rem 0 0;padding-left:1.1rem;} .card li{font-size:.94rem;margin:.2rem 0;}
 .card p{margin:0;font-size:.94rem;}
@@ -151,7 +151,13 @@ footer{color:var(--ink-faint);font-size:.8rem;text-align:center;padding:2rem 1.2
 .gate .join{display:block;font-family:var(--maru);font-weight:800;font-size:1rem;color:#fff;background:var(--marigold);border:none;border-radius:999px;padding:.72rem;text-decoration:none;}
 .gate .more{display:inline-block;margin-top:.75rem;font-size:.82rem;color:var(--sky-deep);text-decoration:none;}
 .gate .peek{margin-top:1rem;font-size:.82rem;color:var(--ink-faint);}
-.gate .peek a{font-weight:700;}`;
+.gate .peek a{font-weight:700;}
+/* 公開3ページ（bv-tokens.css）と同じ拡大率にそろえる。ここが無いと会員ページだけ
+   文字とタップ領域が小さくなる（root 16px / ボタン38px → 18px / 44px）。 */
+@media (max-width:40rem){ html{font-size:112.5%;} .wrap,.h-in{padding-left:1.15rem;padding-right:1.15rem;} }
+/* タップ領域の床。rem計算だけだと狭い画面で44pxを割る。 */
+.lk,.toc a,.nav-in a{min-height:44px;display:inline-flex;align-items:center;}
+.gate button{min-height:48px;}`;
 
 const BLOBS = [];
 for (const p of PASSES) BLOBS.push(await encryptFor(p, CONTENT));
@@ -185,9 +191,9 @@ const page = `<!doctype html>${buildStamp()}
 
 <main class="wrap">
   <div id="gate" class="gate">
-    <h2>🔑 合言葉を入力</h2>
-    <p>会員の方にお伝えした合言葉を入れてください。</p>
-    <input id="pw" type="text" inputmode="text" autocomplete="off" autocapitalize="none" autocorrect="off" placeholder="合言葉" autofocus>
+    <h2><label for="pw">🔑 合言葉を入力</label></h2>
+    <p id="pw-help">会員の方にお伝えした合言葉を入れてください。</p>
+    <input id="pw" type="text" inputmode="text" autocomplete="off" autocapitalize="none" autocorrect="off" placeholder="合言葉" aria-describedby="pw-help" autofocus>
     <button id="go">ひらく</button>
     <div id="err" class="err"></div>
     <div class="hint">合言葉が分からない方は、ご登録いただいたnoteの掲示板をご確認ください。</div>
@@ -265,8 +271,15 @@ function enableNav(){
 }
 async function attempt(pass, remember){
   const html = await bvTryUnlock(pass, BLOBS, ITER);
-  if (html){ if(remember) sessionStorage.setItem('bv_pw', (pass||'').normalize('NFC')); reveal(html); return true; }
-  return false;
+  if (!html) return false;
+  // ★合言葉の記憶は「できたら嬉しい」だけのもの。プライベートブラウズでは
+  //   sessionStorage が例外を投げるので、ここで止まると正しい合言葉でも
+  //   ページが永久に開かなくなる。失敗しても必ず reveal に進む。
+  if (remember){
+    try { sessionStorage.setItem('bv_pw', (pass||'').normalize('NFC')); } catch(e) {}
+  }
+  reveal(html);
+  return true;
 }
 document.getElementById('go').addEventListener('click', async () => {
   const btn = document.getElementById('go');
@@ -281,7 +294,11 @@ document.getElementById('go').addEventListener('click', async () => {
   }
 });
 document.getElementById('pw').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('go').click(); });
-(async () => { const s = sessionStorage.getItem('bv_pw'); if (s) await attempt(s, false); })();
+(async () => {
+  let s = null;
+  try { s = sessionStorage.getItem('bv_pw'); } catch(e) {}   // 読めない環境では素通り
+  if (s) await attempt(s, false);
+})();
 </script>
 </body>
 </html>`;

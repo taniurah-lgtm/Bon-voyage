@@ -135,17 +135,18 @@ const page = `<!doctype html>${buildStamp()}
   .spot .acc { font-size: .85rem; color: var(--sky-deep); margin-top: .1rem; }
   .spot .desc { font-size: .95rem; color: var(--ink-soft); margin-top: .35rem; }
   .spot .ages { margin-top: .45rem; font-family: var(--maru); font-weight: 700; font-size: .86rem; color: var(--ink-faint); }
-  .links { margin-top: .5rem; display: flex; flex-wrap: wrap; gap: .8rem; }
-  .lk { font-size: .82rem; font-weight: 700; text-decoration: none; }
+  .links { margin-top: .35rem; display: flex; flex-wrap: wrap; gap: .6rem; }
+  /* ピンなしスポットの唯一の出口なので、指で押せる大きさを確保する */
+  .lk { font-size: .82rem; font-weight: 700; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
   .lk.map { color: var(--sky-deep); }
-  .lk.off { color: var(--marigold); }
+  .lk.off { color: var(--marigold-ink); }
   .lk:hover { text-decoration: underline; }
 
   .voices { margin-top: .8rem; border-top: 1px dashed var(--line-strong); padding-top: .7rem; display: flex; flex-direction: column; gap: .6rem; }
   .voice { background: var(--surface-2); border-radius: 12px; padding: .6rem .8rem; }
   .vtxt { font-size: .93rem; line-height: 1.7; }
-  .vwho { font-size: .8rem; color: var(--ink-faint); margin-top: .2rem; }
-  .vph { color: var(--marigold); font-weight: 700; }
+  .vwho { font-size: .8rem; color: var(--ink-soft); margin-top: .2rem; }
+  .vph { color: var(--marigold-ink); font-weight: 700; }
   .more { font-size: .84rem; color: var(--ink-soft); }
 
   #post { margin: 2.6rem 0 0; scroll-margin-top: 1.5rem; }

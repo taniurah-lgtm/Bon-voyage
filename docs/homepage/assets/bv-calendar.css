@@ -68,7 +68,7 @@
 
 .bvc-legend {
   display: flex; align-items: center; gap: .3rem; flex-wrap: wrap;
-  font-size: .76rem; color: var(--ink-faint); margin: .5rem 0 1.2rem;
+  font-size: .76rem; color: var(--ink-soft); margin: .5rem 0 1.2rem;
 }
 .bvc-legend .bvc-dot { margin-right: .15rem; }
 .bvc-today-mark {
@@ -88,7 +88,7 @@
   font-family: var(--maru); font-weight: 800; font-size: .88rem;
   color: var(--sky-deep); margin: 1rem 0 .4rem;
 }
-.bvc-tailnote { font-size: .82rem; color: var(--ink-faint); margin: -.35rem 0 .7rem; line-height: 1.7; }
+.bvc-tailnote { font-size: .82rem; color: var(--ink-soft); margin: -.35rem 0 .7rem; line-height: 1.7; }
 .bvc-empty { font-size: .92rem; color: var(--ink-soft); }
 
 /* ---- イベントのカード ---- */
@@ -105,20 +105,21 @@
   font-weight: 700; font-size: .7rem; border-radius: 999px; padding: .05rem .5rem;
   background: var(--surface-2); color: var(--ink-soft);
 }
-.bvc-tent { background: var(--marigold-wash); color: var(--marigold); }
+.bvc-tent { background: var(--marigold-wash); color: var(--marigold-ink); }
 .bvc-name { font-family: var(--maru); font-weight: 800; font-size: 1.03rem; margin: .15rem 0 0; line-height: 1.45; }
 .bvc-place { font-size: .85rem; color: var(--ink-soft); margin: .25rem 0 0; }
 .bvc-desc { font-size: .89rem; color: var(--ink-soft); margin: .35rem 0 0; line-height: 1.75; }
 .bvc-meta { margin: .4rem 0 0; display: flex; flex-wrap: wrap; gap: .5rem; }
-.bvc-ages { font-family: var(--maru); font-weight: 700; font-size: .82rem; color: var(--ink-faint); }
-.bvc-cost { font-size: .8rem; color: var(--marigold); font-weight: 700; }
+.bvc-ages { font-family: var(--maru); font-weight: 700; font-size: .82rem; color: var(--ink); }
+.bvc-cost { font-size: .8rem; color: var(--marigold-ink); font-weight: 700; }
 .bvc-deadline {
   margin: .45rem 0 0; font-size: .82rem; font-weight: 700; color: #B4453C;
 }
 
 .bvc-btns { margin-top: .7rem; display: flex; flex-wrap: wrap; gap: .4rem; }
 .bvc-btn {
-  display: inline-flex; align-items: center; gap: .2rem;
+  display: inline-flex; align-items: center; justify-content: center; gap: .2rem;
+  min-height: 44px;                     /* 指で押せる大きさの床。rem計算だけでは狭い画面で割る */
   font-family: var(--body); font-size: .8rem; font-weight: 700; text-decoration: none;
   border-radius: 999px; padding: .42rem .8rem; border: 1px solid var(--line-strong);
   background: var(--surface); color: var(--sky-deep); cursor: pointer; white-space: nowrap;
@@ -132,7 +133,7 @@
   display: flex; gap: .6rem; align-items: baseline; font-size: .87rem;
   padding: .4rem 0; border-bottom: 1px dashed var(--line);
 }
-.bvc-tentwhen { flex: none; max-width: 11rem; color: var(--ink-faint); font-size: .8rem; }
+.bvc-tentwhen { flex: none; max-width: 11rem; color: var(--ink-soft); font-size: .8rem; }
 .bvc-tentname { color: var(--ink); }
 
 /* ---- 公開ページの案内（会員ページへ） ---- */
@@ -152,4 +153,12 @@
   .bvc { --bvc-cell: 2.6rem; }
   .bvc-num { font-size: .86rem; }
   .bvc-btn { font-size: .76rem; padding: .4rem .68rem; }
+}
+
+/* 枠が複数あるイベント（「①体験会 10:00〜12:00 ②交流大会 13:00〜16:00」など）は
+   最初の枠だけ出すと別の枠に申し込む人に嘘になるので、日時欄の全文を併記する。 */
+.bvc-slots {
+  font-size: .84rem; font-weight: 700; color: var(--sky-deep);
+  background: var(--sky-wash); border-radius: 10px;
+  padding: .35rem .6rem; margin: .35rem 0 0; line-height: 1.7;
 }

@@ -8,6 +8,7 @@
   border: 1px solid var(--line-strong); border-radius: 999px;
   padding: .4rem .8rem; cursor: pointer; white-space: nowrap;
   display: inline-flex; align-items: center; gap: .3rem;
+  min-height: 44px;                     /* 指で押せる大きさの床 */
 }
 .bvm-chip::before {
   content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--chip);
@@ -23,7 +24,7 @@
 }
 @media (min-width: 40rem) { .bvm-canvas { height: 25rem; } }
 
-.bvm-note { font-size: .78rem; color: var(--ink-faint); margin-top: .5rem; line-height: 1.7; }
+.bvm-note { font-size: .78rem; color: var(--ink-soft); margin-top: .5rem; line-height: 1.7; }
 .bvm-fail {
   background: var(--surface-2); border: 1px dashed var(--line-strong); border-radius: 14px;
   padding: 1rem 1.15rem; font-size: .9rem; color: var(--ink-soft);

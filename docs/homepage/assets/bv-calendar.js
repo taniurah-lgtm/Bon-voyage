@@ -76,13 +76,18 @@
     if (ev.cost) out.push('料金: ' + ev.cost);
     if (ev.target) out.push('対象: ' + ev.target);
     if (ev.deadline) out.push('申込: ' + ev.deadline.raw.replace(/^\s*-\s*/, ''));
-    if (ev.url) out.push('🔗 ' + ev.url);
+    if (safeURL(ev.url)) out.push('🔗 ' + safeURL(ev.url));
     if (ev.mapq) out.push('📍 ' + mapURL(ev.mapq));
     out.push('— ぼんぼやーじゅ通信');
     return out.join('\n');
   }
   function mapURL(q) {
     return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
+  }
+  // href に入れてよいURLだけを通す。javascript: や data: は落とす。
+  // 台帳側でも http(s) に限っているが、描画側でも止める（二重にする）。
+  function safeURL(u) {
+    return typeof u === 'string' && /^https?:\/\//i.test(u.trim()) ? u.trim() : '';
   }
 
   // iPhone / Apple カレンダー向けの .ics。Googleに入れたくない人の逃げ道。
@@ -118,21 +123,32 @@
   function agesHTML(a) {
     if (!a) return '';
     var parts = [];
-    if (a.baby) parts.push('👶' + a.baby);
-    if (a.pre) parts.push('🧒' + a.pre);
-    if (a.elem) parts.push('🎒' + a.elem);
+    if (a.baby) parts.push('👶' + esc(a.baby));
+    if (a.pre) parts.push('🧒' + esc(a.pre));
+    if (a.elem) parts.push('🎒' + esc(a.elem));
     return parts.length ? '<span class="bvc-ages">' + parts.join(' ') + '</span>' : '';
   }
 
   // ---- イベント1件のカード --------------------------------------------------
+  // 台帳の日時欄に枠が2つ以上ある（「①…10:00〜12:00 ②…13:00〜16:00」「小学1・2年の部…／3・4年の部…」）
+  // ときは、最初の枠だけを見出しに出すと別の枠に申し込む人には誤りになる。全文を併記する。
+  function hasMultipleSlots(ev) {
+    if (!ev.when) return false;
+    var w = String(ev.when).replace(/[〜～]/g, '~');
+    var ranges = w.match(/\d{1,2}:\d{2}\s*~\s*\d{1,2}:\d{2}/g) || [];
+    return ranges.length > 1 || /[①②③]|の部/.test(w);
+  }
+
   function cardHTML(ev, date) {
+    var multiSlot = hasMultipleSlots(ev);
     var when = ev.start ? ev.start + (ev.end ? '〜' + ev.end : '〜') : '時間は公式で確認';
+    if (multiSlot) when = '枠が複数あります';
     var multi = ev.dates && ev.dates.length > 1 ? '<span class="bvc-multi">' + ev.dates.length + '日間のうち1日</span>' : '';
     var links =
       '<a class="bvc-btn bvc-btn-add" href="' + esc(gcalURL(ev, date)) + '" target="_blank" rel="noopener">📅 カレンダーに追加</a>' +
       '<button class="bvc-btn bvc-btn-ics" type="button" data-ics="' + esc(ev.id) + '" data-date="' + esc(date) + '">🍎 iPhoneに追加</button>' +
       (ev.mapq ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(mapURL(ev.mapq)) + '" target="_blank" rel="noopener">📍 地図</a>' : '') +
-      (ev.url ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(ev.url) + '" target="_blank" rel="noopener">🔗 公式</a>' : '');
+      (safeURL(ev.url) ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(safeURL(ev.url)) + '" target="_blank" rel="noopener">🔗 公式</a>' : '');
     var dl = ev.deadline
       ? '<p class="bvc-deadline">⏳ 申込 ' + esc(fmtDay(ev.deadline.date)) + ' まで</p>'
       : '';
@@ -140,6 +156,7 @@
       '<article class="bvc-card' + (ev.tentative ? ' is-tentative' : '') + '">' +
       '<p class="bvc-when">' + esc(when) + ' ' + multi + (ev.tentative ? '<span class="bvc-tent">日程は要確認</span>' : '') + '</p>' +
       '<h4 class="bvc-name">' + esc(ev.name) + '</h4>' +
+      (multiSlot ? '<p class="bvc-slots">🕒 ' + esc(ev.when) + '</p>' : '') +
       (ev.place ? '<p class="bvc-place">' + esc(ev.place) + '</p>' : '') +
       (ev.summary ? '<p class="bvc-desc">' + esc(ev.summary) + '</p>' : '') +
       '<p class="bvc-meta">' + agesHTML(ev.ages) + (ev.cost ? '<span class="bvc-cost">' + esc(ev.cost) + '</span>' : '') + '</p>' +
@@ -324,7 +341,7 @@
               '<p class="bvc-meta">' + agesHTML(e.ages) + (e.cost ? '<span class="bvc-cost">' + esc(e.cost) + '</span>' : '') + '</p>' +
               '<div class="bvc-btns">' +
               (e.mapq ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(mapURL(e.mapq)) + '" target="_blank" rel="noopener">📍 地図</a>' : '') +
-              (e.url ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(e.url) + '" target="_blank" rel="noopener">🔗 公式</a>' : '') +
+              (safeURL(e.url) ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(safeURL(e.url)) + '" target="_blank" rel="noopener">🔗 公式</a>' : '') +
               '</div></article>';
           }).join('');
       }
@@ -338,7 +355,7 @@
           tent.map(function (e) {
             return '<div class="bvc-tentrow"><span class="bvc-tentwhen">' + esc(e.when || '') + '</span>' +
               '<span class="bvc-tentname">' + esc(e.name) + '</span>' +
-              (e.url ? ' <a href="' + esc(e.url) + '" target="_blank" rel="noopener">公式</a>' : '') + '</div>';
+              (safeURL(e.url) ? ' <a href="' + esc(safeURL(e.url)) + '" target="_blank" rel="noopener">公式</a>' : '') + '</div>';
           }).join('');
       }
       // いつでも行ける定番（プール・水遊び・常設）
@@ -351,7 +368,7 @@
               '<p class="bvc-meta">' + agesHTML(s.ages) + (s.cost ? '<span class="bvc-cost">' + esc(s.cost) + '</span>' : '') + '</p>' +
               '<div class="bvc-btns">' +
               (s.mapq ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(mapURL(s.mapq)) + '" target="_blank" rel="noopener">📍 地図</a>' : '') +
-              (s.url ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(s.url) + '" target="_blank" rel="noopener">🔗 公式</a>' : '') +
+              (safeURL(s.url) ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(safeURL(s.url)) + '" target="_blank" rel="noopener">🔗 公式</a>' : '') +
               '</div></article>';
           }).join('');
       }
@@ -371,10 +388,24 @@
 
     function uniq(a) { return a.filter(function (v, i) { return a.indexOf(v) === i; }); }
 
-    // キーボードでも日を選べるように
+    // キーボードでも日を選べるように。Enter/Space で決定、矢印キーで隣のマスへ。
+    // 予定のある日だけが tabindex を持つので、矢印が無いと Tab を何十回も押すことになる。
     root.addEventListener('keydown', function (e) {
-      var cell = e.target.closest && e.target.closest('.bvc-cell.has');
-      if (cell && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); cell.click(); }
+      var cell = e.target.closest && e.target.closest('.bvc-cell');
+      if (!cell) return;
+      if (e.key === 'Enter' || e.key === ' ') {
+        if (cell.classList.contains('has')) { e.preventDefault(); cell.click(); }
+        return;
+      }
+      var step = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: 7, ArrowUp: -7 }[e.key];
+      if (!step) return;
+      e.preventDefault();
+      var cells = [].slice.call(root.querySelectorAll('.bvc-cell'));
+      var i = cells.indexOf(cell);
+      // 予定のある（=フォーカスできる）マスまで進む
+      for (var j = i + step; j >= 0 && j < cells.length; j += step > 0 ? 1 : -1) {
+        if (cells[j].classList.contains('has')) { cells[j].focus(); return; }
+      }
     });
   }
 

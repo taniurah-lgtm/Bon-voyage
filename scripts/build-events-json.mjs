@@ -185,15 +185,58 @@ function findURL(lines) {
   return '';
 }
 
-// 場所から地図検索に使う語を作る（「(小川町2-1325)」等の括弧・注記を落とす）
+// 場所から地図検索に使う語を作る。
+// 台帳の「場所」欄は所在地と行き方・費用・講師名が同居している:
+//   「西東京市緑町/車・自転車約10分」「ルネこだいら 中ホール / 費用: 無料」
+//   「東村山乗換 西武園駅すぐ/電車約20〜25分」
+// そのまま地図に投げると場所ではなく行き方を検索してしまう。地名だけを残す。
 function mapQuery(place) {
   if (!place) return '';
-  return place
+  let q = place
     .split(/[、,]/)[0]
+    .split(/\s*[／/]\s*/)[0]          // 「◯◯ / 費用: 無料」「◯◯/車で10分」の右側を捨てる
+    .split(/\s*[—–―]\s*/)[0]         // 「◯◯ — 花小金井から徒歩」
+    .split(/・/)[0]                    // 「中央公民館…・中央図書館…」は先頭の1つに絞る
     .replace(/\(.*?\)/g, '')
-    .replace(/[※（].*$/, '')
+    .replace(/[（(].*$/, '')           // 閉じ括弧が無いまま続くもの（台帳に実在する）
+    .replace(/[※].*$/, '')
+    .replace(/\s*(?:費用|料金|講師|問合せ|定員|対象)\s*[:：].*$/, '')
+    .replace(/^\S+?乗換\s*/, '')       // 「東村山乗換 西武園駅すぐ」→「西武園駅すぐ」
+    .replace(/\s*(?:徒歩|車|バス|自転車)\s*(?:約)?\d+[〜~]?\d*分.*$/, '')  // 「狭山市駅 徒歩10分」
+    .replace(/(駅)\s*(?:すぐ|前|直結|徒歩圏).*$/, '$1')                      // 「西武園駅すぐ」→「西武園駅」
     .replace(/\s*(ほか|など|周辺|一帯|沿い\d*会場)\s*$/, '')
     .trim();
+  // 行き方だけが残ってしまった場合は、地図に投げない（誤った場所を出すより出さない）
+  if (!q || /^(?:電車|車|バス|自転車|徒歩)/.test(q) || /約\d+[〜~]?\d*分$/.test(q)) return '';
+  return q;
+}
+
+
+// ---- 読者に見せる文から、台帳の内部メモを落とす ------------------------------
+// 台帳の「子連れ」「内容」欄には、運営用の記号やメモが混ざっている。
+//   「◎◎ E7参照。」「✕に近い△」「無料版の『知らないと損』枠に使える」
+// これがそのまま公開ページに出ていた（.ics の説明欄にも入って読者のカレンダーに残る）。
+// 記号は読者向けの言い方に寄せ、運営メモは削る。
+const STRIP = [
+  [/E\d+\s*参照。?\s*/g, ''],           // 台帳ID同士の相互参照
+  [/◎◎/g, '◎'],                          // 内部の強調（読者には◎で十分）
+  [/✕に近い△/g, '△'],
+  [/[✕x]\s*に近い/g, ''],
+  [/[✕x]\s*[~〜]\s*(?=[◎○△])/g, ''],   // 「✕〜△」→「△」（内部の幅つき評価）
+  [/(?<![\w])[✕x](?=\s*[^\S\r\n]*[◎○△])/g, ''],
+  [/[，、]?\s*(?:無料版|有料版)の?「[^」]*」枠に(?:使える|できる)。?/g, ''],
+  [/「[^」]*」ネタとして再利用可。?/g, ''],
+  [/。?\s*(?:常設|通年)なので[^。]*再利用[^。]*。?/g, ''],
+];
+// 落としきれなかったときに気づくための番兵。読者向けの文にこれが残っていたら公開しない。
+// 「損」は方針で禁じている煽り表現。台帳IDと内部記号も読者には意味がない。
+const FORBIDDEN = /損|E\d+\s*参照|◎◎|✕/;
+
+function readerText(s) {
+  if (!s) return '';
+  let out = String(s);
+  for (const [re, to] of STRIP) out = out.replace(re, to);
+  return out.replace(/\s{2,}/g, ' ').trim();
 }
 
 // ---- 台帳を1件ずつ読む ------------------------------------------------------
@@ -243,8 +286,8 @@ for (const file of files) {
         span: spanField || when || '通年',
         place: field(b.lines, ['場所', '会場']),
         mapq: mapQuery(field(b.lines, ['場所', '会場'])),
-        summary: field(b.lines, ['内容']) || field(b.lines, ['子連れ']),
-        kidsNote: field(b.lines, ['子連れ']),
+        summary: readerText(field(b.lines, ['内容']) || field(b.lines, ['子連れ'])),
+        kidsNote: readerText(field(b.lines, ['子連れ'])),
         ages: parseAges(field(b.lines, ['子連れ'])),
         cost: field(b.lines, ['料金', '費用', '参加費']),
         url: findURL(b.lines),
@@ -281,8 +324,8 @@ for (const file of files) {
       allDay: !start,
       place,
       mapq: mapQuery(place),
-      summary: field(b.lines, ['内容']) || field(b.lines, ['子連れ']),
-      kidsNote: field(b.lines, ['子連れ']),
+      summary: readerText(field(b.lines, ['内容']) || field(b.lines, ['子連れ'])),
+      kidsNote: readerText(field(b.lines, ['子連れ'])),
       ages: parseAges(field(b.lines, ['子連れ'])),
       cost: field(b.lines, ['料金', '費用', '参加費']),
       target: field(b.lines, ['対象']),
@@ -293,6 +336,34 @@ for (const file of files) {
       deadline: extractDeadline(b.lines),
       source: b.file,
     });
+  }
+}
+
+// ---- 番兵: 読者向けの文に内部メモが残っていたら、公開対象から外す ----------
+// 「システムが自力で検出したものは1件もない」（事故の記録）ので、ここで機械に見張らせる。
+// 消すのではなく外して理由を出す。台帳を直せば次回から載る。
+function screen(list, label) {
+  const keep = [];
+  for (const e of list) {
+    const hit = ['name', 'summary', 'kidsNote'].find((k) => e[k] && FORBIDDEN.test(e[k]));
+    if (hit) {
+      unresolved.push({
+        id: e.id, name: e.name,
+        reason: `読者向けの ${hit} に内部メモが残っている（公開しない）: 「${String(e[hit]).slice(0, 40)}」`,
+        when: e.when || '',
+      });
+    } else keep.push(e);
+  }
+  return keep;
+}
+{
+  const beforeE = events.length, beforeS = standing.length;
+  const okE = screen(events, 'events');
+  events.length = 0; events.push(...okE);
+  const okS = screen(standing, 'standing');
+  standing.length = 0; standing.push(...okS);
+  if (beforeE !== events.length || beforeS !== standing.length) {
+    console.log(`  ⚠ 内部メモが残っていたため ${beforeE - events.length + beforeS - standing.length}件を公開対象から外した`);
   }
 }
 
