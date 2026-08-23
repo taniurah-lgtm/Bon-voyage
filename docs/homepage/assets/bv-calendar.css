@@ -190,3 +190,23 @@
 .bvc-dlname { display: block; }
 .bvc-dlhow { display: block; font-size: .8rem; color: var(--ink-soft); line-height: 1.65; }
 .bvc-deadlines { margin: 1.4rem 0 0; }
+
+/* 記号の凡例（意味がどこにも書かれていなかった） */
+.bvc-key {
+  font-size: .76rem; color: var(--ink-soft); line-height: 1.75;
+  background: var(--surface-2); border-radius: 10px; padding: .5rem .7rem; margin: 0 0 .6rem;
+}
+.bvc-key b { color: var(--ink); }
+/* 当日の判断に効く注意（荒天中止など） */
+.bvc-caution {
+  margin: .4rem 0 0; font-size: .85rem; font-weight: 700; color: #B4453C;
+  background: var(--marigold-wash); border-radius: 10px; padding: .4rem .6rem; line-height: 1.7;
+}
+/* 開催日が多いものの子連れメモは、その日の話ではなく催し全体の話 */
+.bvc-kidslabel {
+  display: block; font-size: .72rem; font-weight: 700; color: var(--ink-faint);
+  letter-spacing: .04em;
+}
+
+/* 開館時間・休館日（雨の日の逃げ場として案内するとき、金曜が使えない等） */
+.bvc-hours { margin: .35rem 0 0; font-size: .84rem; color: var(--ink-soft); line-height: 1.7; }

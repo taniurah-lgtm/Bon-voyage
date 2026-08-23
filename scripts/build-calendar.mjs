@@ -29,15 +29,18 @@ const today = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
 const horizon = new Date(Date.parse(today + 'T00:00:00Z') + PUBLIC_DAYS * 86400000)
   .toISOString().slice(0, 10);
 
-// 公開に出すもの: 確定していて、今日〜2週間のうちに1日でもかかるもの
+// 公開に出すもの: 今日〜2週間のうちに1日でもかかるもの。
+// 暫定（日程が未確定）も出す。マス目には置かず「🔎 日程がまだ確定していないもの」に
+// 並ぶだけなので、確定情報と混ざらない。
+// ★以前は暫定を全部落としていたため、8/29の子連れ◎の花火（昭島くじら祭・武蔵村山）が
+//   公開カレンダーから丸ごと消えていた。「載せないより、存在を知らせる」が方針。
 const inWindow = (d) => d >= today && d <= horizon;
 const pub = src.events
-  .filter((e) => !e.tentative && (e.dates || []).some(inWindow))
+  .filter((e) => (e.dates || []).some(inWindow))
   .map((e) => ({
     ...e,
     dates: e.dates.filter(inWindow),   // 窓の外の日付は公開データに載せない
     source: undefined,
-    confidence: undefined,
   }));
 
 // 「このあと何件あるか」だけは公開してよい（中身は出さない）。
@@ -60,6 +63,11 @@ const deadlineOnly = src.events
     id: e.id,
     name: e.name,
     dates: [],                      // マス目には置かない
+    // 締切だけ知らせて申し込めないと行き止まりになる。申込先と開催日は通す。
+    // 中身（場所・料金・子連れの詳細）は出さない＝そこは「決める・動く」の領分。
+    when: e.when,
+    url: e.url,
+    contact: e.contact,
     deadline: { date: e.deadline.date, raw: e.deadline.raw },
     deadlineOnly: true,
   }));
@@ -140,14 +148,15 @@ const page = `<!doctype html>
     <div class="noscript">このカレンダーは表示にJavaScriptを使っています。切っている場合は、下の一覧をご覧ください。</div>
   </noscript>
 
-  <div id="cal"><p class="lead" id="loading">読み込んでいます…</p></div>
+  <!-- 「読み込んでいます」は JS 側で入れる。noscript のときに残ると案内が二重になる -->
+  <div id="cal"></div>
 
   <!-- JavaScript が動かない環境と、検索エンジン向けの一覧。中身は上のカレンダーと同じ。 -->
   <div class="fallback">
     <h2 class="bvc-tailhead">この2週間の予定（一覧）</h2>
 ${(() => {
   const byDate = {};
-  for (const e of pub) for (const d of e.dates) (byDate[d] ||= []).push(e);
+  for (const e of pub) { if (e.tentative) continue; for (const d of e.dates) (byDate[d] ||= []).push(e); }
   const days = Object.keys(byDate).sort();
   if (!days.length) return '    <p class="lead">いまのところ、確定した予定はありません。</p>';
   return days
@@ -184,6 +193,7 @@ ${(() => {
 
 <script src="/assets/bv-calendar.js"></script>
 <script>
+document.getElementById('cal').innerHTML = '<p class="lead" id="loading">読み込んでいます…</p>';
 fetch('/data/events-public.json', { cache: 'no-cache' })
   .then(function (r) { return r.json(); })
   .then(function (data) {
@@ -209,5 +219,5 @@ fetch('/data/events-public.json', { cache: 'no-cache' })
 
 writeFileSync(OUT, page);
 console.log(`wrote ${OUT}`);
-console.log(`  公開: ${pub.length}件（${today}〜${horizon}）/ 会期もの ${spans.length}件 / 締切だけ ${deadlineOnly.length}件 / この先さらに ${beyond}件`);
+console.log(`  公開: ${pub.length}件（うち暫定 ${pub.filter((e) => e.tentative).length}件・${today}〜${horizon}）/ 会期もの ${spans.length}件 / 締切だけ ${deadlineOnly.length}件 / この先さらに ${beyond}件`);
 console.log(`wrote ${OUT_JSON}（★公開される。2週間ぶんだけ入っていることを必ず確認する）`);

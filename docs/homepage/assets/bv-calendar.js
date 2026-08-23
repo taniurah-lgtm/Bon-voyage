@@ -47,8 +47,8 @@
 
   // ---- カレンダー登録リンク --------------------------------------------------
   // Googleカレンダーのテンプレートリンク。ログイン済みならワンタップで保存できる。
-  function gcalURL(ev, date) {
-    var t = timesFor(ev, date);
+  function gcalURL(ev, date, slot) {
+    var t = slot ? { start: slot.start, end: slot.end, exception: false } : timesFor(ev, date);
     var dates;
     if (t.start) {
       var s = date.replace(/-/g, '') + 'T' + t.start.replace(':', '') + '00';
@@ -64,11 +64,11 @@
     }
     var q = new URLSearchParams({
       action: 'TEMPLATE',
-      text: ev.name,
+      text: ev.name + (slot && slot.label ? '（' + slot.label + '）' : ''),
       dates: dates,
       ctz: 'Asia/Tokyo',
       location: ev.place || '',
-      details: detailsText(ev, date),
+      details: detailsText(ev, date, slot),
     });
     return 'https://calendar.google.com/calendar/render?' + q.toString();
   }
@@ -77,9 +77,10 @@
     var t = (Number(p[0]) + h) % 24;
     return pad(t) + ':' + p[1];
   }
-  function detailsText(ev, date) {
+  function detailsText(ev, date, slot) {
     var out = [];
     var t = date ? timesFor(ev, date) : { exception: false };
+    if (slot && slot.label) out.push('枠: ' + slot.label + '（' + slot.start + '〜' + slot.end + '）');
     if (t.exception) out.push('この日は ' + (t.start || ev.start || '') + '〜' + (t.end || '') + ' です');
     if (ev.kidsNote) out.push(ev.kidsNote);
     else if (ev.summary) out.push(ev.summary);
@@ -132,8 +133,25 @@
     ].filter(Boolean);
     var head = lines.indexOf('BEGIN:VEVENT') + 1;   // BEGIN:VEVENT までがヘッダ
     var text = lines.slice(0, head).join('\r\n') + '\r\n' + body + lines.slice(head).join('\r\n') + '\r\n';
-    return URL.createObjectURL(new Blob([text], { type: 'text/calendar;charset=utf-8' }));
+    return URL.createObjectURL(new Blob([foldICS(text)], { type: 'text/calendar;charset=utf-8' }));
   }
+  // RFC 5545 は1行75オクテットまで。超える行は CRLF + 空白1つで折り返す。
+  // マルチバイト文字の途中で切らないよう、UTF-8のバイト数で数える。
+  function foldICS(text) {
+    return text.split('\r\n').map(function (line) {
+      var bytes = new TextEncoder().encode(line);
+      if (bytes.length <= 75) return line;
+      var out = [], cur = '', curLen = 0, limit = 75;
+      for (var ch of line) {
+        var n = new TextEncoder().encode(ch).length;
+        if (curLen + n > limit) { out.push(cur); cur = ''; curLen = 0; limit = 74; }
+        cur += ch; curLen += n;
+      }
+      if (cur) out.push(cur);
+      return out.join('\r\n ');
+    }).join('\r\n');
+  }
+
   function icsEsc(s) {
     return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
   }
@@ -158,15 +176,51 @@
     return ranges.length > 1 || /[①②③]|の部/.test(w);
   }
 
+  // 「①体験会 10:00~12:00 ②交流大会 13:00~16:00」「小学1・2年の部 9:30~11:30 / 3・4年の部 13:00~15:00」
+  // を、名前つきの枠に割る。
+  function padTime(t) {
+    var p = String(t).split(':');
+    return pad(p[0]) + ':' + p[1];
+  }
+
+  function parseSlots(when) {
+    if (!when) return [];
+    var w = String(when).replace(/[〜～]/g, '~');
+    var out = [];
+    var re = /([^\/／、,]*?)\s*(\d{1,2}:\d{2})\s*~\s*(\d{1,2}:\d{2})/g;
+    var m;
+    while ((m = re.exec(w)) !== null) {
+      var label = (m[1] || '')
+        .replace(/^\d{1,2}\/?\d{0,2}\s*\([^)]*\)\s*/, '')   // 「9/6(日) 」「6(日) 」の残り
+        .replace(/^[①②③④]\s*/, '')
+        .replace(/^[\s・･]+|[\s・･]+$/g, '')
+        .trim();
+      // ★時刻はゼロ埋めする。'9:30' のままだと gcal が T93000 になり、
+      //   さらに文字列比較で '11:30' < '9:30' が真になって終了が翌日にずれる。
+      out.push({ label: label || m[2] + 'の回', start: padTime(m[2]), end: padTime(m[3]) });
+    }
+    return out;
+  }
+
   function cardHTML(ev, date) {
     var multiSlot = hasMultipleSlots(ev);
     var t = timesFor(ev, date);
     var when = t.start ? t.start + (t.end ? '〜' + t.end : '〜') : '時間は公式で確認';
     if (multiSlot) when = '枠が複数あります';
     var multi = ev.dates && ev.dates.length > 1 ? '<span class="bvc-multi">' + ev.dates.length + '日間のうち1日</span>' : '';
+    // 枠が複数あるとき、1つのボタンで先頭の枠だけを入れると別の枠の人には誤りになる。
+    // 枠ごとにボタンを分ける（「1・2年の部」「3・4年の部」など）。
+    var slots = multiSlot ? parseSlots(ev.when) : [];
+    var addBtns = slots.length > 1
+      ? slots.map(function (sl) {
+          return '<a class="bvc-btn bvc-btn-add" href="' +
+            esc(gcalURL(ev, date, sl)) + '" target="_blank" rel="noopener">📅 ' + esc(sl.label) + '</a>';
+        }).join('')
+      : '<a class="bvc-btn bvc-btn-add" href="' + esc(gcalURL(ev, date)) + '" target="_blank" rel="noopener">📅 カレンダーに追加</a>';
     var links =
-      '<a class="bvc-btn bvc-btn-add" href="' + esc(gcalURL(ev, date)) + '" target="_blank" rel="noopener">📅 カレンダーに追加</a>' +
-      '<button class="bvc-btn bvc-btn-ics" type="button" data-ics="' + esc(ev.id) + '" data-date="' + esc(date) + '">🍎 iPhoneに追加</button>' +
+      addBtns +
+      (slots.length > 1 ? '' :
+      '<button class="bvc-btn bvc-btn-ics" type="button" data-ics="' + esc(ev.id) + '" data-date="' + esc(date) + '">🍎 iPhoneに追加</button>') +
       (ev.mapq ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(mapURL(ev.mapq)) + '" target="_blank" rel="noopener">📍 地図</a>' : '') +
       (safeURL(ev.url) ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(safeURL(ev.url)) + '" target="_blank" rel="noopener">🔗 公式</a>' : '');
     var dl = ev.deadline
@@ -182,9 +236,15 @@
       (ev.place ? '<p class="bvc-place">' + esc(ev.place) + '</p>' : '') +
       (ev.summary ? '<p class="bvc-desc">' + esc(ev.summary) + '</p>' : '') +
       // 子連れの注意は行く前に読めないと意味がない（登録の説明欄だけでは遅い）
+      // 開催日が多いものの子連れメモは催し全体の話なので、その日の説明と読み違えないようにする
+      //（8/29に「お盆期間の平日に行けるのが強み」と出て矛盾していた）
       (ev.kidsNote && ev.kidsNote !== ev.summary
-        ? '<p class="bvc-kids">' + esc(ev.kidsNote) + '</p>' : '') +
+        ? '<p class="bvc-kids">' +
+          ((ev.dates || []).length > 3 ? '<span class="bvc-kidslabel">この催しについて</span>' : '') +
+          esc(ev.kidsNote) + '</p>' : '') +
       '<p class="bvc-meta">' + agesHTML(ev.ages) + (ev.cost ? '<span class="bvc-cost">' + esc(ev.cost) + '</span>' : '') + '</p>' +
+      (ev.hours ? '<p class="bvc-hours">🕘 ' + esc(ev.hours) + '</p>' : '') +
+      (ev.caution ? '<p class="bvc-caution">⚠️ ' + esc(ev.caution) + '</p>' : '') +
       dl +
       '<div class="bvc-btns">' + links + '</div>' +
       '</article>'
@@ -225,6 +285,8 @@
       '<table class="bvc-grid"><thead><tr>' +
       WD.map(function (w, i) { return '<th class="' + (i === 0 ? 'sun' : i === 6 ? 'sat' : '') + '">' + w + '</th>'; }).join('') +
       '</tr></thead><tbody></tbody></table>' +
+      '<p class="bvc-key">👶 あかちゃん(0-2) ／ 🧒 未就学(3-6) ／ 🎒 小学生　' +
+      '<b>◎</b> ぴったり ／ <b>○</b> だいじょうぶ ／ <b>△</b> ひと工夫</p>' +
       '<div class="bvc-legend"><span class="bvc-dot"></span>予定あり　<span class="bvc-today-mark">今日</span>' +
       (opts.teaser && data.window
         ? '<span class="bvc-window">公開ぶんは ' + esc(fmtDay(data.window.to)) + ' まで</span>'
@@ -318,7 +380,7 @@
           tds.push(
             '<td class="' + cls.join(' ') + '" data-date="' + key + '"' +
             (inMonth
-              ? ' tabindex="0" role="button" aria-label="' +
+              ? ' tabindex="' + (key === selected ? '0' : '-1') + '" role="button" aria-label="' +
                 fmtDay(key) + (list.length ? ' 予定' + list.length + '件' : ' 予定なし') + '"'
               : '') + '>' +
             '<span class="bvc-num">' + cur.getDate() + '</span>' +
@@ -379,10 +441,16 @@
         '<h4 class="bvc-dlhead">⏳ 申込の締切が近いもの</h4>' +
         soon.map(function (e) {
           var days = Math.round((parseISO(e.deadline.date) - parseISO(today)) / MS_DAY);
+          var how = [];
+          if (e.when) how.push('開催 ' + e.when);
+          if (e.deadline.raw) how.push('申込 ' + e.deadline.raw);
+          if (e.contact && e.contact.tel) {
+            how.push('☎ ' + (e.contact.who ? e.contact.who + ' ' : '') + e.contact.tel);
+          }
           return '<div class="bvc-dlrow"><span class="bvc-dldate">' + esc(fmtDay(e.deadline.date)) +
             (days === 0 ? '<b>今日</b>' : days <= 3 ? '<b>あと' + days + '日</b>' : '') + '</span>' +
             '<span class="bvc-dlname">' + esc(e.name) +
-            (e.deadline.raw ? '<span class="bvc-dlhow">' + esc(e.deadline.raw) + '</span>' : '') +
+            (how.length ? '<span class="bvc-dlhow">' + esc(how.join('／')) + '</span>' : '') +
             (safeURL(e.url) ? ' <a href="' + esc(safeURL(e.url)) + '" target="_blank" rel="noopener">くわしく</a>' : '') +
             '</span></div>';
         }).join('');
@@ -400,6 +468,9 @@
               '<h4 class="bvc-name">' + esc(e.name) + '</h4>' +
               (e.place ? '<p class="bvc-place">' + esc(e.place) + '</p>' : '') +
               (e.summary ? '<p class="bvc-desc">' + esc(e.summary) + '</p>' : '') +
+              (e.kidsNote && e.kidsNote !== e.summary ? '<p class="bvc-kids">' + esc(e.kidsNote) + '</p>' : '') +
+              (e.hours ? '<p class="bvc-hours">🕘 ' + esc(e.hours) + '</p>' : '') +
+              (e.caution ? '<p class="bvc-caution">⚠️ ' + esc(e.caution) + '</p>' : '') +
               '<p class="bvc-meta">' + agesHTML(e.ages) + (e.cost ? '<span class="bvc-cost">' + esc(e.cost) + '</span>' : '') + '</p>' +
               '<div class="bvc-btns">' +
               (e.mapq ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(mapURL(e.mapq)) + '" target="_blank" rel="noopener">📍 地図</a>' : '') +
@@ -427,6 +498,7 @@
             return '<article class="bvc-card"><p class="bvc-when">' + esc(s.span) + '</p>' +
               '<h4 class="bvc-name">' + esc(s.name) + '</h4>' +
               (s.summary ? '<p class="bvc-desc">' + esc(s.summary) + '</p>' : '') +
+              (s.kidsNote && s.kidsNote !== s.summary ? '<p class="bvc-kids">' + esc(s.kidsNote) + '</p>' : '') +
               '<p class="bvc-meta">' + agesHTML(s.ages) + (s.cost ? '<span class="bvc-cost">' + esc(s.cost) + '</span>' : '') + '</p>' +
               '<div class="bvc-btns">' +
               (s.mapq ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(mapURL(s.mapq)) + '" target="_blank" rel="noopener">📍 地図</a>' : '') +

@@ -72,6 +72,26 @@
     var textLimit = opts.textLimit || opts.paidLimit || 300;
     var spots = opts.spots || [];
     var isSupporter = false;
+    // 送り先が無いのに「載せています」と書いて送信させると、押すまで送れないと分からない。
+    // 押す前に、どこへ送ればよいかを言う。
+    var canSend = !!opts.endpoint;
+    var lineUrl = opts.lineUrl || 'https://lin.ee/YtcfjnX';
+    if (!canSend) {
+      el.innerHTML =
+        '<div class="bvp">' +
+        '<h2 class="bvp-h">あなたの「よかった」も置いていきませんか</h2>' +
+        '<p class="bvp-lead">行ってよかった場所、こうすると楽だったこと。ひとことで構いません。' +
+        '<b>いまはLINEでお預かりしています。</b>いただいた内容は、こちらで目を通してから地図に載せています（数日いただきます）。</p>' +
+        '<p class="bvp-lead">場所の名前と、ひとことを送っていただければ十分です。' +
+        'お子さんのお名前や顔がわかる写真、通っている園・学校がわかる内容は、掲載を控えさせていただきます。</p>' +
+        '<div class="bvp-actions">' +
+        '<a class="bvp-btn bvp-btn-go" href="' + esc(lineUrl) + '" target="_blank" rel="noopener">LINEで送る</a>' +
+        '<a class="bvp-btn bvp-btn-sub" href="mailto:nico25akmr@outlook.jp?subject=' +
+        encodeURIComponent('おでかけマップへの投稿') + '">メールで送る</a>' +
+        '</div>' +
+        '</div>';
+      return;
+    }
 
     el.innerHTML =
       '<form class="bvp" novalidate>' +
@@ -247,7 +267,9 @@
         done(payload);
       } catch (err) {
         btn.disabled = false;
-        offline(payload, '送信がうまくいきませんでした（' + err.message + '）。');
+        // err.message（Failed to fetch / HTTP 502 など）は読者には意味がないので出さない
+        if (window.console) console.warn('[bv-post]', err);
+        offline(payload, '送信がうまくいきませんでした。');
       }
     });
 

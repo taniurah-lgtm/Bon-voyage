@@ -109,6 +109,22 @@ function extractDates(raw) {
   return { dates: [...new Set(dates)].sort(), span };
 }
 
+// 日時欄の ※注記を拾う。「※荒天時は中止の場合あり(中止は小平消防署HPで告知)」
+// のような、当日の判断にいちばん効く情報が本文に出ていなかった。
+function extractCaution(raw) {
+  if (!raw) return '';
+  const notes = [];
+  const re = /※\s*([^※]+)/g;
+  let m;
+  while ((m = re.exec(raw)) !== null) {
+    const t = m[1].trim();
+    // 日別の例外時刻は別に扱うので、ここでは拾わない
+    if (/^\d{1,2}日は\s*\d{1,2}:\d{2}/.test(t)) continue;
+    if (t) notes.push(t);
+  }
+  return notes.join(' / ');
+}
+
 // 日別の例外時刻を拾う。
 //   「8/18(火)~23(日) 10:00~17:00 ※23日は16:00まで」
 //     → 23日だけ終わりが16:00。これを見落とすと、読者のカレンダーに
@@ -159,6 +175,47 @@ function extractDeadline(lines) {
         .replace(/^(?:申込|応募)\s*[:：]\s*/, '')
         .trim();
       return { date: cands.reduce((a, b) => (a > b ? a : b)), raw };
+    }
+  }
+  return null;
+}
+
+// 開館時間・休館日を拾う。台帳が「⚠️ 雨の日の逃げ場として案内するとき、金曜だけは
+// 使えない」とわざわざ警告しているのに、ページに「金曜」「休館」が1文字も出ていなかった。
+// 雨の金曜に向かうと閉まっている、という事故につながる。
+function extractHours(lines) {
+  for (let i = 0; i < lines.length; i++) {
+    if (!/開館時間|休館/.test(lines[i])) continue;
+    // 台帳の箇条書きは折り返して次の行に続くことがある。
+    // 「休館日は『金曜日』」は続きの行に書かれていて、1行だけ見ると拾えない。
+    let buf = lines[i];
+    for (let j = i + 1; j < lines.length; j++) {
+      if (/^\s*-\s/.test(lines[j]) || /^\s*$/.test(lines[j]) || /^###?\s/.test(lines[j])) break;
+      buf += ' ' + lines[j].trim();
+    }
+    const v = buf
+      .replace(/^\s*-\s*/, '')
+      .replace(/\*\*/g, '')
+      .replace(/^[^:：]*[:：]\s*/, '')
+      .replace(/\s*[（(]\d{4}-\d{2}-\d{2}[^）)]*[）)]/g, '')
+      .replace(/\s*→[\s\S]*$/, '')             // 「→ ⚠️ …曜日を必ず確認する」は運営向けの注意
+      .replace(/出典\s*[:：]\s*\S+/g, '')
+      .replace(/\s{2,}/g, ' ')
+      .trim();
+    if (v) return v;
+  }
+  return '';
+}
+
+// 問合せ先の電話を拾う。締切を知らせるとき、申込フォームのURLが無い催しでも
+// 電話が分かれば申し込める（台帳には「問合せ: 文化スポーツ課 042-346-9612」がある）。
+function extractContact(lines) {
+  for (const l of lines) {
+    if (!/問合せ|問い合わせ|申込|連絡/.test(l)) continue;
+    const m = l.match(/0\d{1,4}-\d{2,4}-\d{3,4}/);
+    if (m) {
+      const who = (l.match(/(?:問合せ|問い合わせ)\s*[:：]\s*([^0-9]{1,24})/) || [])[1] || '';
+      return { tel: m[0], who: who.replace(/\*\*/g, '').trim() };
     }
   }
   return null;
@@ -219,6 +276,8 @@ function findURL(lines) {
 function mapQuery(place) {
   if (!place) return '';
   let q = place
+    // 「ビル4・5階」の階表記は、下の「・」分割より先に落とす（「ビル4」が残ってしまう）
+    .replace(/\s*\d+(?:\s*[・･]\s*\d+)*\s*(?:階|F)(?![a-zA-Z])/g, '')
     .split(/[、,]/)[0]
     .split(/\s*[／/]\s*/)[0]          // 「◯◯ / 費用: 無料」「◯◯/車で10分」の右側を捨てる
     .split(/\s*[—–―]\s*/)[0]         // 「◯◯ — 花小金井から徒歩」
@@ -236,9 +295,21 @@ function mapQuery(place) {
   q = q.replace(/\s*\d+\s*(?:階|F)\s*\S*$/, '').replace(/\s*(?:ギャラリー|視聴覚室|展示ギャラリー|中ホール|大ホール|センターコート)\s*$/, '').trim();
   // 行き方だけが残ってしまった場合は、地図に投げない（誤った場所を出すより出さない）
   if (!q || /^(?:電車|車|バス|自転車|徒歩)/.test(q) || /約\d+[〜~]?\d*分$/.test(q)) return '';
-  // 「中央公民館」だけでは全国にあるので、住所の町名から市名を足す
-  const KODAIRA = /小川町|花小金井|鈴木町|小川西町|美園町|仲町|学園|上水|喜平町|回田町|栄町|天神町|御幸町|たかの台/;
-  if (!/[市区]/.test(q) && KODAIRA.test(place)) q = '小平市' + q;
+  // 「中央公民館」だけでは全国にあるので、住所の町名から市名を足す。
+  // ★判定は place の全文ではなく「括弧の中の住所」だけを見る。全文で見ると
+  //   行き方メモの「花小金井からバス」に反応して「小平市三鷹駅南口商店街」のような
+  //   実在しない地名を作ってしまう。
+  const paren = (place.match(/[（(]([^）)]*)[）)]/) || [])[1] || '';
+  // 括弧の中は「住所」のことも「行き方」のこともある。
+  //   住所  : 「小川町2-1325」          → 市名を足してよい
+  //   行き方: 「花小金井からバス 約30分」→ 足すと「小平市三鷹駅南口商店街」のような
+  //                                        実在しない地名になる
+  const looksLikeRoute = /から|約|分|乗換|徒歩|バス|電車|直行|下車/.test(paren);
+  const looksLikeAddr = /(?:町|丁目)\s*\d|(?:\d+-\d+)|町$|丁目$/.test(paren);
+  const KODAIRA = /小川町|花小金井|鈴木町|小川西町|美園町|仲町|学園東町|学園西町|上水本町|上水南町|喜平町|回田町|栄町|天神町|御幸町|たかの台|小平市/;
+  if (!/[市区]/.test(q) && !looksLikeRoute && looksLikeAddr && KODAIRA.test(paren)) {
+    q = '小平市' + q;
+  }
   return q;
 }
 
@@ -257,6 +328,8 @@ const STRIP = [
   [/(?<![\w])[✕x](?=\s*[^\S\r\n]*[◎○△])/g, ''],
   [/[，、]?\s*(?:無料版|有料版)の?「[^」]*」枠に(?:使える|できる)。?/g, ''],
   [/「[^」]*」ネタとして再利用可。?/g, ''],
+  [/\s*[（(]\d{4}-\d{2}\s*訂正[）)]/g, ''],       // 運営の校正メモ
+  [/\s*[（(]\d{4}-\d{2}-\d{2}\s*(?:訂正|検証|確認)[^）)]*[）)]/g, ''],
   [/。?\s*(?:常設|通年)なので[^。]*再利用[^。]*。?/g, ''],
 ];
 // 落としきれなかったときに気づくための番兵。読者向けの文にこれが残っていたら公開しない。
@@ -271,6 +344,18 @@ function readerText(s) {
   let out = String(s);
   for (const [re, to] of STRIP) out = out.replace(re, to);
   return out.replace(/\s{2,}/g, ' ').trim();
+}
+
+// 子連れ欄から、先頭に並ぶ年齢の記号（👶○ 🧒◎ 🎒◎ や 裸の ◎/△〜○）を落として本文だけにする。
+// 記号は ages 側で出すので、本文にも残ると1枚のカードに年齢目安が2回出る。
+function kidsBody(s) {
+  if (!s) return '';
+  return readerText(
+    String(s)
+      .replace(/^(?:\s*(?:👶|🧒|🎒)\s*[◎○△✕x]\s*)+/u, '')
+      .replace(/^\s*[◎○△✕x](?:\s*[〜~]\s*[◎○△✕x])?\s*/u, '')
+      .replace(/^\s*[◎○△✕x]{1,2}\s*/u, '')
+  );
 }
 
 // ---- 台帳を1件ずつ読む ------------------------------------------------------
@@ -321,7 +406,7 @@ for (const file of files) {
         place: field(b.lines, ['場所', '会場']),
         mapq: mapQuery(field(b.lines, ['場所', '会場'])),
         summary: readerText(field(b.lines, ['内容']) || field(b.lines, ['子連れ'])),
-        kidsNote: readerText(field(b.lines, ['子連れ'])),
+        kidsNote: kidsBody(field(b.lines, ['子連れ'])),
         ages: parseAges(field(b.lines, ['子連れ'])),
         cost: field(b.lines, ['料金', '費用', '参加費']),
         url: findURL(b.lines),
@@ -342,8 +427,11 @@ for (const file of files) {
       continue;
     }
 
-    // 「例年」「要確認」を含むものは日付が取れても暫定扱い
-    const tentative = /例年|要確認|見込み|未定|可能性/.test(when) || /要確認|中|低/.test(confidence);
+    // 暫定＝「日付そのものが未確定」なもの。判定は日時欄だけを見る。
+    // ★確度欄は見ない。確度の「要確認」は細部（日割り・料金）の未確認を指すことがあり、
+    //   日付は公式で確定していることがある。混ぜると、日付が確かなものまで
+    //   カレンダーから消える（E40 昭島くじら祭・子連れ◎ が実際に消えていた）。
+    const tentative = /例年|要確認|見込み|未定|可能性/.test(when);
     const place = field(b.lines, ['場所', '会場']);
     const { start, end } = extractTime(when);
 
@@ -360,7 +448,10 @@ for (const file of files) {
       place,
       mapq: mapQuery(place),
       summary: readerText(field(b.lines, ['内容']) || field(b.lines, ['子連れ'])),
-      kidsNote: readerText(field(b.lines, ['子連れ'])),
+      kidsNote: kidsBody(field(b.lines, ['子連れ'])),
+      caution: extractCaution(when),
+      contact: extractContact(b.lines),
+      hours: extractHours(b.lines),
       ages: parseAges(field(b.lines, ['子連れ'])),
       cost: field(b.lines, ['料金', '費用', '参加費']),
       target: field(b.lines, ['対象']),

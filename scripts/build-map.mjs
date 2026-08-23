@@ -226,7 +226,8 @@ ${sections}
     spots: spots,
     gate: gate,
     joinUrl: ${JSON.stringify(JOIN_URL)},
-    textLimit: ${TEXT_LIMIT}
+    textLimit: ${TEXT_LIMIT},
+    lineUrl: 'https://lin.ee/YtcfjnX'
   });
 })();
 </script>

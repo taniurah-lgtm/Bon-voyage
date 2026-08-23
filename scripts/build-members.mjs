@@ -34,6 +34,7 @@ const calData = {
     start: e.start, end: e.end, place: e.place, mapq: e.mapq,
     summary: e.summary, kidsNote: e.kidsNote, ages: e.ages,
     cost: e.cost, target: e.target, url: e.url,
+    caution: e.caution, hours: e.hours, contact: e.contact, exceptions: e.exceptions,
     tentative: e.tentative, deadline: e.deadline,
   })),
   standing: EVENTS.standing,
@@ -60,21 +61,42 @@ const issues = existsSync('reports/free')
       .reverse()
   : [];
 
+// 過去号は原文のまま置くが、あとで取り下げた記載には訂正を添える。
+// ★事故#7「実装していない『カレンダー登録代行』を特典に書いていた」は撤回済みだが、
+//   当時の号にはそのまま残っている。有料会員が読む生きたページなので、訂正なしで置けない。
+const CORRECTIONS = [
+  [/登録代行|登録を代行/, 'この号にある「カレンダー登録の代行」は、その後**ワンタップでご自分のカレンダーに保存いただく形**に変わりました。運営が代わりに登録することはしていません。'],
+  [/わき水広場/, 'この号でご紹介した小金井公園「わき水広場」は、その後の確認で**実在が確かめられなかった**ため、掲載を取り下げました。'],
+];
+
+// 号の本文に混ざっていた作業用の行を落とす（`</content>` が読者に見えていた）
+const stripArtifacts = (body) =>
+  body
+    .split('\n')
+    .filter((l) => !/^\s*<\/?[a-zA-Z][^>]*>\s*$/.test(l))
+    .join('\n')
+    .trim();
+
 const issueHTML = issues
   .map((f) => {
     const raw = readFileSync(`reports/free/${f}`, 'utf8');
     const [y, m, d] = f.replace('.md', '').split('-').map(Number);
     const wd = '日月火水木金土'[new Date(Date.UTC(y, m - 1, d)).getUTCDay()];
     // 1行目の題名は日付が入っているので、見出しは自分で組む
-    const body = raw.split('\n').slice(1).join('\n').trim();
-    // 号のなかのURLは、読めるだけでなく押せるようにする（素テキストだと開けない）
+    const body = stripArtifacts(raw.split('\n').slice(1).join('\n'));
+    // 号のなかのURLは、読めるだけでなく押せるようにする（素テキストだと開けない）。
+    // ★終端を「空白・和文の記号・引用符」までにする。\w だけだと日本語の直前で切れて
+    //   「?api=1&query=」のような空クエリのリンクができる。
     const linked = esc(body).replace(
-      /https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=%]+/g,
+      /https?:\/\/[^\s<>"'）」』、。]+/g,
       (u) => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`
     );
+    const fixes = CORRECTIONS.filter(([re]) => re.test(body)).map(([, note]) =>
+      `<p class="issue-fix">📝 ${note.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')}</p>`
+    );
     return `  <details class="issue">
-    <summary>${m}月${d}日(${wd})号</summary>
-    <div class="issue-body">${linked}</div>
+    <summary>${m}月${d}日(${wd})号${fixes.length ? '<span class="issue-hasfix">訂正あり</span>' : ''}</summary>
+    <div class="issue-body">${fixes.join('')}${linked}</div>
   </details>`;
   })
   .join('\n');
@@ -191,6 +213,8 @@ footer{color:var(--ink-faint);font-size:.8rem;text-align:center;padding:2rem 1.2
 .issue>summary::marker,.issue>summary::-webkit-details-marker{display:none;}
 .issue>summary::before{content:"＋ ";}
 .issue[open]>summary::before{content:"− ";}
+.issue-fix{background:var(--marigold-wash);border:1px solid var(--marigold);border-radius:10px;padding:.6rem .8rem;margin:0 0 .8rem;font-family:var(--body);font-size:.85rem;line-height:1.8;white-space:normal;}
+.issue-hasfix{margin-left:.5rem;font-family:var(--body);font-weight:700;font-size:.7rem;color:var(--marigold-ink);background:var(--marigold-wash);border-radius:999px;padding:.05rem .5rem;}
 .issue-body{margin:0;padding:0 1.05rem 1.05rem;overflow-wrap:anywhere;font-family:var(--body);font-size:.9rem;line-height:1.85;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink-soft);}
 /* 公開3ページ（bv-tokens.css）と同じ拡大率にそろえる。ここが無いと会員ページだけ
    文字とタップ領域が小さくなる（root 16px / ボタン38px → 18px / 44px）。 */
