@@ -106,19 +106,19 @@ function buildHtml({ dateLabel, sections }) {
   const blocks = [];
   if (weather) {
     blocks.push(`        <div class="blk">
-          <h4>${tidy(weather.title)}</h4>
+          <h3>${tidy(weather.title)}</h3>
           <p class="item m">${tidy(weather.body.join(' '))}</p>
         </div>`);
   }
   if (indoor) {
     blocks.push(`        <div class="blk">
-          <h4>${tidy(indoor.title)}</h4>
+          <h3>${tidy(indoor.title)}</h3>
 ${splitItems(indoor.body).map(itemHtml).join('\n')}
         </div>`);
   }
   if (pick) {
     blocks.push(`        <div class="blk">
-          <h4>${tidy(pick.title)}</h4>
+          <h3>${tidy(pick.title)}</h3>
 ${splitItems(pick.body).map(itemHtml).join('\n')}
         </div>`);
   }
@@ -126,7 +126,7 @@ ${splitItems(pick.body).map(itemHtml).join('\n')}
     const items = ahead.body.filter(l => /^[・･]/.test(l)).map(l => `            <li>${tidy(l.replace(/^[・･]\s*/, ''))}</li>`);
     if (items.length) {
       blocks.push(`        <div class="blk">
-          <h4>${tidy(ahead.title)}</h4>
+          <h3>${tidy(ahead.title)}</h3>
           <ul class="takeaway">
 ${items.join('\n')}
           </ul>

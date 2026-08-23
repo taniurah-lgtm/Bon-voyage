@@ -65,6 +65,10 @@
 .bvc-cell.today { box-shadow: inset 0 0 0 2px var(--marigold); }
 .bvc-cell.sel { background: var(--sky-deep) !important; color: var(--on-sky) !important; }
 .bvc-cell.sel .bvc-dot { background: var(--on-sky); }
+/* 「+」も選択中の地の色に合わせる。忘れていたので、選ばれている日（＝開いた瞬間に
+   選ばれる今週末）では「+」が地と同色になり、5件の日が3件の日に見えていた。 */
+.bvc-cell.sel .bvc-more { color: var(--on-sky); }
+.bvc-cell.sel .bvc-dot.is-past { box-shadow: inset 0 0 0 1px var(--on-sky); }
 
 .bvc-num { display: block; font-size: .92rem; }
 .bvc-dots { display: flex; justify-content: center; gap: 2px; height: 5px; margin-top: 1px; align-items: center; }

@@ -192,6 +192,10 @@ function extractTime(raw) {
   if (range) {
     return { start: `${pad(range[1])}:${range[2]}`, end: `${pad(range[3])}:${range[4]}`, uncertain };
   }
+  // 台帳には「10:00〜正午」という書き方がある。終了時刻として読めないと
+  // 「終了時刻は未公表」扱いになり、2時間の仮置きが入る（正午と書いてあるのに）。
+  const noon = s.match(/(\d{1,2}):(\d{2})\s*~\s*正午/);
+  if (noon) return { start: `${pad(noon[1])}:${noon[2]}`, end: '12:00', uncertain };
   const one = s.match(/(\d{1,2}):(\d{2})/);
   if (one) return { start: `${pad(one[1])}:${one[2]}`, end: null, uncertain };
   return { start: null, end: null, uncertain: false };
@@ -303,7 +307,12 @@ function parseHeading(line) {
 function field(lines, keys) {
   for (const key of keys) {
     for (let i = 0; i < lines.length; i++) {
-      const m = lines[i].match(new RegExp('^\\s*-\\s*(?:\\*\\*)?' + key + '(?:\\*\\*)?\\s*:\\s*(.+)$'));
+      // ★ラベルの後ろの丸括弧注記を許す。台帳には「日時(2026確定):」「会期(暫定):」
+      //   のような書き方が実際にあり、これを弾いていたため E7（西武園の花火・
+      //   公式で確認済み・9/19〜23も開催）が丸ごと落ちていた。全角コロンも許す。
+      const m = lines[i].match(new RegExp(
+        '^\\s*-\\s*(?:\\*\\*)?' + key + '(?:\\s*[（(][^）)]*[）)])?(?:\\*\\*)?\\s*[:：]\\s*(.+)$'
+      ));
       if (!m) continue;
       // 台帳の箇条書きは折り返して次の行に続く。続きを読まないと、
       // 「スーパーボールすくいは2歳でも親の膝上でいける」のような
@@ -544,13 +553,23 @@ for (const file of files) {
     }
 
     if (!when) {
-      unresolved.push({ id: b.id, name: b.name, reason: '日時・期間の行が無い', when: '' });
+      // 「行が無い」と「行はあるが書式が合わない」を区別して出す。前は両方まとめて
+      // 「行が無い」と言っていたため、E7（日時(2026確定): と書いてあった）の原因を
+      // ログから追えなかった。台帳を疑わせる嘘のログは、無いより悪い。
+      const looksLike = b.lines.find((l) => /^\s*-\s*(?:\*\*)?\s*(日時|日程|会期|期間|開催)/.test(l));
+      unresolved.push({
+        id: b.id, name: b.name, confidence,
+        reason: looksLike
+          ? `日時の行はあるが書式が合わない: 「${looksLike.trim().slice(0, 40)}」`
+          : '日時・期間の行が無い',
+        when: '',
+      });
       continue;
     }
 
     const { dates, span } = extractDates(when);  // span = 長い会期（マス目に置かない）
     if (!dates.length && !span) {
-      unresolved.push({ id: b.id, name: b.name, reason: '日時から確定日が取れない', when });
+      unresolved.push({ id: b.id, name: b.name, reason: '日時から確定日が取れない', when, confidence });
       continue;
     }
 
@@ -639,6 +658,46 @@ function screen(list, label) {
   }
 }
 
+// ---- 同じ催しが当月・翌月の両方の台帳にある場合の重なりを取る -----------------
+// 例: 西武園の大火祭りは 7月台帳の E7（7〜9月ぶん）と 8月台帳の E36（8月ぶんの詳報）に
+//     両方書かれている。放っておくと 8/29 に同じ花火が2枚並ぶ。
+//     日付を持っている側の詳しさで決めるのではなく「その月をより細かく書いている側」を
+//     残す（E36 は 8/8〜15 の毎日を持っている）。
+{
+  const norm = (n) => String(n).replace(/[（(].*?[）)]/g, '').replace(/\s+/g, '');
+  const overlaps = [];
+  for (let i = 0; i < events.length; i++) {
+    for (let j = i + 1; j < events.length; j++) {
+      const a = events[i], b = events[j];
+      if (norm(a.name) !== norm(b.name)) continue;
+      const shared = a.dates.filter((d) => b.dates.includes(d));
+      if (!shared.length) continue;
+      // その月をより多く書いている側に日付を寄せる
+      const month = shared[0].slice(0, 7);
+      const cntA = a.dates.filter((d) => d.startsWith(month)).length;
+      const cntB = b.dates.filter((d) => d.startsWith(month)).length;
+      const loser = cntA >= cntB ? b : a;
+      loser.dates = loser.dates.filter((d) => !shared.includes(d) || !d.startsWith(month));
+      loser.totalDates = loser.dates.length;
+      overlaps.push(`${a.id}/${b.id} ${month} の ${shared.length}日ぶん → ${(cntA >= cntB ? a : b).id} に寄せた`);
+    }
+  }
+  // 日付が全部なくなったものは出さない（同じ催しの重複なので落としても情報は減らない）
+  const emptied = events.filter((e) => !e.dates.length && !e.span);
+  for (const e of emptied) {
+    unresolved.push({ id: e.id, name: e.name, reason: '同じ催しの別記載に日付を寄せたため（重複）', when: e.when || '' });
+  }
+  if (emptied.length) {
+    const ids = new Set(emptied.map((e) => e.id));
+    const rest = events.filter((e) => !ids.has(e.id));
+    events.length = 0; events.push(...rest);
+  }
+  if (overlaps.length) {
+    console.log('  ⚠ 同じ催しの重なりを整理した:');
+    for (const o of overlaps) console.log(`     ${o}`);
+  }
+}
+
 // 同じ日に複数日ぶら下がるイベントは、日付ごとの索引も作っておく（カレンダー描画用）
 events.sort((a, b) => (a.dates[0] || '').localeCompare(b.dates[0] || '') || a.id.localeCompare(b.id));
 
@@ -657,3 +716,27 @@ const firm = events.filter((e) => !e.tentative).length;
 console.log(`wrote ${OUT}`);
 console.log(`  確定 ${firm}件 / 暫定 ${events.length - firm}件 / 常設・季節 ${standing.length}件 / 載せられなかったもの ${unresolved.length}件`);
 for (const u of unresolved) console.log(`  - ${u.id} ${u.name}: ${u.reason}${u.when ? ` 「${u.when}」` : ''}`);
+
+// ---- 「公式で確認済み」なのに落ちたものは、書式の取りこぼしを疑う ---------------
+// 会員ページへの写し漏れは見張っていたが、その1段上（台帳→JSON）の取りこぼしは
+// 無検査だった。「日時(2026確定):」という書き方1つで、公式確認済みの E7（9月連休の
+// 花火）が丸ごと消え、有料ページが自分の別の節と矛盾していた。二度目は無しにする。
+{
+  // (1) 書式違いは必ず読み取り側の不具合。台帳に日時が書いてあるのに拾えていない
+  //     ＝黙って消える形なので、ビルドを止める。
+  const badFormat = unresolved.filter((u) => /書式が合わない/.test(u.reason));
+  if (badFormat.length) {
+    console.error('🔴 日時の行はあるのに読み取れませんでした（読み取り側の不具合です）:');
+    for (const m of badFormat) console.error(`     ${m.id} ${m.name}: ${m.reason}`);
+    console.error('   → scripts/build-events-json.mjs の field() を直すこと（台帳は直さない）。');
+    process.exit(1);
+  }
+  // (2) 台帳が「確認済み」と書いているのに日付が取れないものは、止めはしないが目立たせる。
+  //     日付が本当に未定のもの（公民館講座など）もここに入るため。
+  const watch = unresolved.filter((u) => /確認済/.test(u.confidence || ''));
+  if (watch.length) {
+    console.log('  ※ 台帳で「確認済み」と書かれているが、日付が取れないので載せていないもの:');
+    for (const m of watch) console.log(`     ${m.id} ${m.name}（${m.reason}）`);
+    console.log('     日付が決まっているのにここに出ていたら、台帳の書き方を見直すこと。');
+  }
+}

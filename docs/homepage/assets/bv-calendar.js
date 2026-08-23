@@ -219,23 +219,63 @@
     return pad(p[0]) + ':' + p[1];
   }
 
-  function parseSlots(when) {
+  // 「9/22(火)23(水)ほおずき市17:00~21:00、9/24(木)25(金)阿波踊り19:00~21:00」のような
+  // 書き方から、枠（時間帯）とその枠がどの日のものかを取り出す。
+  // ★日付を落としてはいけない。前は時刻だけを持っていたため、会期4日ぜんぶに
+  //   両方のボタンが出て、「25(金)阿波踊り」を押すと 9/22 が登録された
+  //   （ボタンの文字と、実際にカレンダーに入る日が食い違っていた）。
+  function parseSlots(when, dates) {
     if (!when) return [];
     var w = String(when).replace(/[〜～]/g, '~');
     var out = [];
     var re = /([^\/／、,]*?)\s*(\d{1,2}:\d{2})\s*~\s*(\d{1,2}:\d{2})/g;
     var m;
+    var lastEnd = 0;
     while ((m = re.exec(w)) !== null) {
-      var label = (m[1] || '')
-        .replace(/^\d{1,2}\/?\d{0,2}\s*\([^)]*\)\s*/, '')   // 「9/6(日) 」「6(日) 」の残り
-        .replace(/^[①②③④]\s*/, '')
-        .replace(/^[\s・･]+|[\s・･]+$/g, '')
-        .trim();
-      // ★時刻はゼロ埋めする。'9:30' のままだと gcal が T93000 になり、
-      //   さらに文字列比較で '11:30' < '9:30' が真になって終了が翌日にずれる。
-      out.push({ label: label || m[2] + 'の回', start: padTime(m[2]), end: padTime(m[3]) });
+      var head = m[1] || '';
+      // その枠の直前の文（前の枠の終わりから、この枠の時刻まで）に出てくる日付を集める
+      var seg = w.slice(lastEnd, m.index + head.length);
+      lastEnd = re.lastIndex;
+      // 先頭の日付や丸数字は、何個あっても落とす。1回だけだと
+      // 「9/22(火)23(水)ほおずき市」→「23(水)ほおずき市」と、選んだ日と違う日付が
+      // ボタンの文字に残る（登録される日は正しくても、読む人が混乱する）。
+      var label = head;
+      for (var g = 0; g < 6; g++) {
+        var before = label;
+        label = label
+          .replace(/^[\s・･、,①②③④⑤⑥]+/, '')
+          .replace(/^\d{1,2}\s*\/\s*\d{1,2}\s*(?:\([^)]*\))?\s*/, '')   // 「9/6(日) 」
+          .replace(/^\d{1,2}\s*\([^)]*\)\s*/, '');                     // 「6(日) 」
+        if (label === before) break;
+      }
+      label = label.replace(/[\s・･]+$/, '').trim();
+      out.push({
+        label: label || m[2] + 'の回',
+        start: padTime(m[2]),
+        end: padTime(m[3]),
+        dates: slotDates(seg, dates),
+      });
     }
     return out;
+  }
+
+  // 文の中の「9/22」「22(火)」を、その催しが持っている日付に突き合わせる。
+  // 突き合わない（日付の手がかりが無い）ときは空にして、全日に出す扱いにする。
+  function slotDates(seg, dates) {
+    if (!dates || !dates.length) return [];
+    var hits = [];
+    var re = /(\d{1,2})\s*\/\s*(\d{1,2})|(\d{1,2})\s*\(/g;
+    var m, lastMonth = null;
+    while ((m = re.exec(seg)) !== null) {
+      var mo, da;
+      if (m[1]) { mo = Number(m[1]); da = Number(m[2]); lastMonth = mo; }
+      else { mo = lastMonth; da = Number(m[3]); }
+      dates.forEach(function (d) {
+        var pm = Number(d.slice(5, 7)), pd = Number(d.slice(8, 10));
+        if (pd === da && (mo == null || pm === mo) && hits.indexOf(d) < 0) hits.push(d);
+      });
+    }
+    return hits;
   }
 
   function cardHTML(ev, date, opt) {
@@ -243,13 +283,27 @@
     var past = opt && opt.past;
     var multiSlot = hasMultipleSlots(ev);
     var t = timesFor(ev, date);
-    var when = t.start ? t.start + (t.end ? '〜' + t.end : '〜') : '時間は公式で確認';
-    if (t.program) when = t.program + ' ' + t.start + (t.end ? '〜' + t.end : '〜');
-    if (multiSlot) when = '枠が複数あります';
-    var multi = ev.dates && ev.dates.length > 1 ? '<span class="bvc-multi">' + ev.dates.length + '日間のうち1日</span>' : '';
+    var when = '';
     // 枠が複数あるとき、1つのボタンで先頭の枠だけを入れると別の枠の人には誤りになる。
     // 枠ごとにボタンを分ける（「1・2年の部」「3・4年の部」など）。
-    var slots = multiSlot ? parseSlots(ev.when) : [];
+    // ★その日に当たる枠だけに絞る。日付の手がかりが無い枠（「①体験会 10:00〜」など）は
+    //   どの日にも出す。絞った結果が1つ以下なら、ふつうの1本のボタンに戻す。
+    var allSlots = multiSlot ? parseSlots(ev.when, ev.dates) : [];
+    var slots = allSlots.filter(function (sl) {
+      return !sl.dates.length || sl.dates.indexOf(date) >= 0;
+    });
+    // ★「枠が複数あります」は、実際に枠が2つ以上取れたときだけ言う。
+    //   前は 丸数字や「の部」があるだけで真になり、枠が1つも取れないのに
+    //   時刻が見出しから消えていた（E53「①9/29(火) ②10/13(火) 10:00〜正午」）。
+    // その日に当たる枠がちょうど1つなら、その枠の時刻をその日の時刻として使う
+    // （「9/22 はほおずき市 17:00〜21:00」のように、日ごとに時間が違う催し）。
+    var only = slots.length === 1 && allSlots.length > 1 && slots[0].dates.length ? slots[0] : null;
+    if (only) { t = { start: only.start, end: only.end, exception: false, program: only.label }; }
+    if (slots.length > 1) when = '枠が複数あります';
+    else if (only) when = only.label + ' ' + only.start + '〜' + only.end;
+    else if (t.program) when = t.program + ' ' + t.start + (t.end ? '〜' + t.end : '〜');
+    else when = t.start ? t.start + (t.end ? '〜' + t.end : '〜') : '時間は公式で確認';
+    var multi = ev.dates && ev.dates.length > 1 ? '<span class="bvc-multi">' + ev.dates.length + '日間のうち1日</span>' : '';
     var addBtns = slots.length > 1
       ? slots.map(function (sl, i) {
           return '<span class="bvc-slotpair">' +
@@ -264,9 +318,10 @@
         }).join('')
       // ★読み上げ用の名前を必ず付ける。付けないと、その日の予定が5件あるとき
       //   「カレンダーに追加」だけが5個並び、どれがどの予定か分からない。
-      : '<a class="bvc-btn bvc-btn-add" href="' + esc(gcalURL(ev, date)) + '" target="_blank" rel="noopener"' +
+      : '<a class="bvc-btn bvc-btn-add" href="' + esc(gcalURL(ev, date, only)) + '" target="_blank" rel="noopener"' +
         ' aria-label="' + esc(ev.name) + 'を Google カレンダーに追加">📅 カレンダーに追加</a>' +
         '<button class="bvc-btn bvc-btn-ics" type="button" data-ics="' + esc(ev.id) + '" data-date="' + esc(date) + '"' +
+        (only ? ' data-slot="0"' : '') +
         // 実際の動きは「.ics を保存してから開く」。「追加」と書くと、押しても
         // カレンダーに入らないように見える。
         ' aria-label="' + esc(ev.name) + 'をカレンダーのファイル(.ics)で保存">📄 ファイルで保存</button>';
@@ -274,17 +329,19 @@
     // 残っている日をまとめて1ファイルにするボタンを、複数日のものだけに出す。
     var nowKey = todayISO();
     var restDays = (ev.dates || []).filter(function (d) { return d >= nowKey; });
-    var allBtn = (!multiSlot && restDays.length > 1)
+    var allBtn = (slots.length <= 1 && restDays.length > 1)
       ? '<button class="bvc-btn bvc-btn-ics bvc-btn-all" type="button" data-ics="' + esc(ev.id) +
         '" data-date="' + esc(date) + '" data-all="1"' +
         ' aria-label="' + esc(ev.name) + 'の残り' + restDays.length + '日ぶんをカレンダーのファイル(.ics)にまとめて保存">' +
         '📄 ' + restDays.length + '日ぶんまとめて</button>'
       : '';
-    // 終わった予定に登録ボタンを出さない（会員ページは過去も持っている）
-    var links = past ? '' :
-      addBtns + allBtn +
+    // 終わった予定にカレンダー登録は出さない。ただし地図と公式は残す。
+    // 「過ぎた日も残しているのが有料の値打ち」と言っているのに、来年の下見に
+    // 使いたい人が公式ページにも地図にも行けないのはおかしい。
+    var subLinks =
       (ev.mapq ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(mapURL(ev.mapq)) + '" target="_blank" rel="noopener">📍 地図</a>' : '') +
       (safeURL(ev.url) ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(safeURL(ev.url)) + '" target="_blank" rel="noopener">🔗 公式</a>' : '');
+    var links = past ? subLinks : addBtns + allBtn + subLinks;
     var dl = ev.deadline
       ? '<p class="bvc-deadline">⏳ 申込 ' + esc(fmtDay(ev.deadline.date)) + ' まで</p>'
       : '';
@@ -293,11 +350,11 @@
       (past ? '<p class="bvc-past-label">この日は終わりました</p>' : '') +
       '<p class="bvc-when">' + esc(when) + ' ' + multi +
       (t.exception ? '<span class="bvc-exc">この日だけ時間がちがいます</span>' : '') +
-      (!multiSlot && t.start && !t.end && !ev.timeUncertain ? '<span class="bvc-exc">終了時刻は未公表</span>' : '') +
+      (slots.length <= 1 && t.start && !t.end && !ev.timeUncertain ? '<span class="bvc-exc">終了時刻は未公表</span>' : '') +
       (ev.timeUncertain && !t.program ? '<span class="bvc-tent">時間は要確認（例年の目安）</span>' : '') +
       (ev.tentative ? '<span class="bvc-tent">日程は要確認</span>' : '') + '</p>' +
       '<' + hName + ' class="bvc-name">' + esc(ev.name) + '</' + hName + '>' +
-      (multiSlot ? '<p class="bvc-slots">🕒 ' + esc(ev.when) + '</p>' : '') +
+      (slots.length > 1 ? '<p class="bvc-slots">🕒 ' + esc(ev.when) + '</p>' : '') +
       (ev.place ? '<p class="bvc-place">' + esc(ev.place) + '</p>' : '') +
       (ev.summary ? '<p class="bvc-desc">' + esc(ev.summary) + '</p>' : '') +
       // 子連れの注意は行く前に読めないと意味がない（登録の説明欄だけでは遅い）
@@ -488,7 +545,10 @@
         if (!ev) return;
         var sl = null;
         if (ics.dataset.slot != null) {
-          var ss = parseSlots(ev.when);
+          // ★カード側と同じ絞り込みをする。絞る前の番号で引くと、別の枠が保存される。
+          var ss = parseSlots(ev.when, ev.dates).filter(function (x) {
+            return !x.dates.length || x.dates.indexOf(ics.dataset.date) >= 0;
+          });
           sl = ss[Number(ics.dataset.slot)] || null;
         }
         // data-all があれば、その催しの残っている日ぶんをまとめて1ファイルにする
@@ -725,7 +785,12 @@
           tent.map(function (e) {
             return '<div class="bvc-tentrow"><span class="bvc-tentwhen">' + esc(e.when || '') + '</span>' +
               '<span class="bvc-tentname">' + esc(e.name) + '</span>' +
-              (safeURL(e.url) ? ' <a href="' + esc(safeURL(e.url)) + '" target="_blank" rel="noopener">公式</a>' : '') + '</div>';
+              // ★素の <a> だと 17x56px で、同じページのほかの公式リンク（44px以上）より
+              //   ずっと押しにくかった。同じボタンの形に揃える。
+              (safeURL(e.url)
+                ? ' <a class="bvc-btn bvc-btn-sub" href="' + esc(safeURL(e.url)) +
+                  '" target="_blank" rel="noopener">🔗 公式</a>'
+                : '') + '</div>';
           }).join('');
       }
       // いつでも行ける定番（プール・水遊び・常設）

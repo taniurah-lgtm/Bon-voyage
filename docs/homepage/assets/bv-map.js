@@ -366,6 +366,10 @@
       var target = document.querySelector(j.getAttribute('href'));
       if (!target) return;
       e.preventDefault();
+      // 飛び先が閉じた <details> の中にあると、スクロールしても何も見えない。
+      // 先に開けてから飛ぶ（会員ページの一覧は畳んで置いてある）。
+      var box = target.closest('details');
+      while (box) { box.open = true; box = box.parentElement && box.parentElement.closest('details'); }
       target.scrollIntoView({ behavior: 'smooth', block: 'center' });
       target.classList.add('is-hit');
       setTimeout(function () { target.classList.remove('is-hit'); }, 1600);

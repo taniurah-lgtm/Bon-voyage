@@ -73,7 +73,12 @@ const calData = {
 }
 
 // ---- 連休さきどり（手で書いている枠。テーマ別・キャンプ偏重にしない）----------
-const renkyu = `
+// ★終わった連休を「さきどり」として出し続けないよう、期限を持たせる。
+//   9/24 になっても「9/19〜23をさきどり」と言い続けるのは、有料ページとして雑。
+const RENKYU_TO = '2026-09-23';
+const TODAY_JST = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
+const renkyuLive = RENKYU_TO >= TODAY_JST;
+const renkyu = !renkyuLive ? '' : `
   <h2 class="sec" id="renkyu">🍁 連休さきどり（9/19〜23 シルバーウィーク）</h2>
   <p class="sec-note">花小金井から日帰り〜1泊で行ける秋の連休を、テーマ別に。人気の宿・体験は早めに。</p>
   <div class="ev"><div class="nm">🍇 秋の味覚狩り（ぶどう＆芋）</div><div class="desc">小松沢レジャー農園（秩父・横瀬／西武秩父線・横瀬駅から無料送迎バス）＝ぶどう狩り（例年8月中旬〜11月上旬）＋さつま芋掘り（例年9月下旬〜）＋マスつかみ。屋根つき体験多めで2歳連れも◎。ぶどうは山梨・勝沼も名産。※開催時期・料金は公式で確認を。</div><div class="links"><a class="lk map" href="https://www.google.com/maps/search/?api=1&amp;query=小松沢レジャー農園" target="_blank" rel="noopener">📍 地図</a><a class="lk off" href="https://www.komatsuzawa.co.jp/" target="_blank" rel="noopener">🔗 公式</a></div></div>
@@ -99,6 +104,7 @@ const issues = existsSync('reports/free')
 const CORRECTIONS = [
   [/登録代行|登録を代行/, 'この号にある「カレンダー登録の代行」は、その後**ワンタップでご自分のカレンダーに保存いただく形**に変わりました。運営が代わりに登録することはしていません。'],
   [/わき水広場/, 'この号でご紹介した小金井公園「わき水広場」は、その後の確認で**実在が確かめられなかった**ため、掲載を取り下げました。'],
+  [/有料版希望|フォームからどうぞ/, 'この号にある「フォームからどうぞ」のご案内は、いまは使っていません。応援のお申し込みは**note のメンバーシップに一本化**しています。'],
 ];
 
 // 号の本文に混ざっていた作業用の行を落とす（`</content>` が読者に見えていた）
@@ -141,6 +147,36 @@ const voiceHTML = (p) =>
     p.spot ? `・${esc(p.spot)}` : ''
   }</div></div>`;
 
+// ---- スポット一覧（会員は全件・各スポットのみんなの声も全件）------------------
+// 公開ページは23枚のスポットカード（説明文つき）を持っているのに、会員ページは
+// 地図だけで説明文がどこにも出ず、公開ページへ戻る導線も無かった。
+// 有料のページが無料の下位互換になっていたので、同じ一覧をこちらにも置く。
+// id は bv-map.js の slug() と同じ規則にする（ふきだしの「くわしく ↓」の飛び先）。
+const slug = (name) => 's-' + Buffer.from(name).toString('hex').slice(0, 12);
+const spotsBySpot = new Map();
+for (const p of POSTS) {
+  if (!spotsBySpot.has(p.spot)) spotsBySpot.set(p.spot, []);
+  spotsBySpot.get(p.spot).push(p);
+}
+const spotCard = (s) => {
+  const mine = spotsBySpot.get(s.name) || [];
+  let links = `<a class="lk map" href="${esc(s.map || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name)}`)}" target="_blank" rel="noopener">📍 地図</a>`;
+  if (s.official) links += `<a class="lk off" href="${esc(s.official)}" target="_blank" rel="noopener">🔗 公式</a>`;
+  return `  <div class="spot" id="${esc(slug(s.name))}" data-cat="${esc(s.cat)}">
+    <div class="nm">${esc(s.name)}${s.lat ? '' : ' <span class="nopin">ピンなし</span>'}</div>
+    ${s.access ? `<div class="acc">${esc(s.access)}</div>` : ''}
+    <div class="desc">${esc(s.desc || '')}</div>
+    ${s.ages ? `<div class="ages">${esc(s.ages)}</div>` : ''}
+    <div class="links">${links}</div>
+    ${mine.length ? `<div class="voices">${mine.map(voiceHTML).join('')}</div>` : ''}
+  </div>`;
+};
+const spotCats = [...new Set(SPOTS.map((s) => s.cat))];
+const spotList = spotCats
+  .map((cat) => `  <h4 class="spot-cat">${esc(cat)}</h4>
+${SPOTS.filter((s) => s.cat === cat).map(spotCard).join('\n')}`)
+  .join('\n');
+
 const voicesSection = POSTS.length
   ? `<p class="sec-note">公開ページは各スポット2件までですが、ここでは全${POSTS.length}件を写真つきでご覧いただけます。</p>
   <div class="voices">${POSTS.map(voiceHTML).join('')}</div>`
@@ -152,9 +188,10 @@ const TOC = `
   <nav class="toc" aria-label="このページの中身">
     <a href="#cal">📅 カレンダー</a>
     <a href="#map">🗺 マップ</a>
-    <a href="#renkyu">🍁 連休さきどり</a>
+    ${renkyuLive ? '<a href="#renkyu">🍁 連休さきどり</a>' : ''}
     <a href="#voices">💬 みんなの声</a>
     <a href="#back">📮 バックナンバー</a>
+    <a href="#other">🔗 ほかのページ</a>
   </nav>`;
 
 const CONTENT = `
@@ -166,10 +203,16 @@ const CONTENT = `
 ${TOC}
 
   <h2 class="sec" id="map">🗺 みんなのおでかけマップ</h2>
-  <p class="sec-note">ピンをタップすると、その場所を地図で開けます。公開ページと同じ地図ですが、こちらはみんなの声が全件つきます。</p>
+  <p class="sec-note">ピンをタップすると、その場所を地図で開けます。公開ページの地図に、みんなの声を全件つけたものです（公開ページは各スポット2件まで）。</p>
   <script type="application/json" id="bv-spots">${jsonInTag(SPOTS)}</script>
   <script type="application/json" id="bv-posts">${jsonInTag(POSTS)}</script>
   <div id="bv-map"><p class="note">地図を読み込んでいます…</p></div>
+  <details class="spotwrap">
+    <summary>スポットの説明を読む（全${SPOTS.length}件）</summary>
+    <div class="spotlist">
+${spotList}
+    </div>
+  </details>
   <p class="note" style="margin-top:.6rem">${
     CAN_POST
       ? '投稿は <a href="/map.html#post">公開ページのフォーム</a> から。ひとことの長さはどなたも同じで、<b>合言葉を入れると写真も添えられます</b>（このページを開いていれば、合言葉は入力済みです）。'
@@ -185,13 +228,22 @@ ${renkyu}
   <h2 class="sec" id="voices">💬 みんなの声（全件）</h2>
   ${voicesSection}
 
-  <h2 class="sec" id="back">📮 通信バックナンバー</h2>
+  <h2 class="sec" id="back">📮 無料通信のバックナンバー</h2>
   <p class="sec-note">${
     issues.length
-      ? `これまでにお届けした${issues.length}号を、新しい順に置いています。題名をタップすると本文が開きます。`
+      ? `無料通信（水曜）の${issues.length}号を、新しい順に置いています。題名をタップすると本文が開きます。`
       : 'まだ置いてある号がありません。最新号は毎週水曜にLINEでお届けしています。'
   }</p>
 ${issueHTML}
+
+  <h2 class="sec" id="other">🔗 ほかのページ</h2>
+  <p class="sec-note">解錠したあと、ここから出られる先が特商法の表記だけでした。無料でお使いいただけるページにも戻れるようにしています。</p>
+  <p class="note-btns" style="margin-top:.2rem">
+    <a class="note-btn" href="/">通信について</a>
+    <a class="note-btn" href="/calendar.html">公開カレンダー</a>
+    <a class="note-btn" href="/map.html">公開マップ</a>
+    <a class="note-btn" href="/guide.html">おでかけガイド</a>
+  </p>
 
   <p class="note" style="margin-top:1.6rem">📅 ボタンはご自分のカレンダーに保存する形です（Googleカレンダー、またはiPhoneのカレンダー）。リマインダーはカレンダー側でお好みに設定できます。日程・料金は変わることがあるので、おでかけ前に各公式でご確認ください。</p>`;
 
@@ -230,6 +282,19 @@ h2.sec-first{margin-top:.4rem;}
 .ev .desc{font-size:.92rem;color:var(--ink-soft);margin-top:.3rem;}
 .links{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.45rem;}
 .lk{display:inline-flex;align-items:center;gap:.25rem;font-size:.8rem;font-weight:700;text-decoration:none;border-radius:999px;padding:.35rem .75rem;border:1px solid var(--line-strong);}
+/* スポットの説明の一覧（公開ページと同じ内容＋みんなの声を全件） */
+.spotwrap{margin-top:.9rem;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);}
+.spotwrap>summary{min-height:44px;display:flex;align-items:center;padding:0 1rem;font-family:var(--maru);font-weight:800;font-size:.92rem;cursor:pointer;}
+.spotlist{padding:0 1rem 1rem;}
+.spot-cat{font-family:var(--maru);font-weight:800;font-size:.88rem;color:var(--ink-soft);margin:1.1rem 0 .4rem;}
+.spot{border-top:1px solid var(--line);padding:.8rem 0;}
+.spot.is-hit{background:var(--sky-wash);border-radius:var(--radius-sm);padding-left:.6rem;padding-right:.6rem;}
+.spot .nm{font-family:var(--maru);font-weight:800;font-size:.98rem;}
+.spot .acc{font-size:.8rem;color:var(--ink-soft);margin-top:.15rem;}
+.spot .desc{font-size:.88rem;color:var(--ink-soft);margin-top:.3rem;line-height:1.8;}
+.spot .ages{font-size:.82rem;font-family:var(--maru);font-weight:700;margin-top:.3rem;}
+.spot .links{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem;}
+.nopin{font-size:.72rem;font-weight:700;color:var(--marigold-ink);background:var(--marigold-wash);border-radius:999px;padding:.1rem .45rem;}
 .lk.cal{background:var(--sky-deep);color:#fff;border-color:var(--sky-deep);}
 .lk.map{color:var(--sky-deep);background:var(--surface);}
 .lk.off{color:var(--marigold-ink);background:var(--surface);}
@@ -322,7 +387,7 @@ const page = `<!doctype html>${buildStamp()}
          下の「サポーターになる」が隠れる（合言葉を持っていないのに入力を促される）。 -->
     <input id="pw" type="text" inputmode="text" autocomplete="off" autocapitalize="none" autocorrect="off" placeholder="合言葉" aria-describedby="pw-help">
     <button id="go">ひらく</button>
-    <div id="err" class="err"></div>
+    <div id="err" class="err" role="alert" aria-live="assertive"></div>
     <div class="hint">合言葉は、note のメンバー限定投稿でお知らせしています（LINEでお送りすることもできます）。分からないときはお気軽にお尋ねください。</div>
     <div class="cta">
       <p class="lead">まだサポーターでない方へ。<br>月300円で通信を応援いただくと、この会員ページ（花小金井まわりのおでかけカレンダーなど）もご利用いただけます。</p>
@@ -353,6 +418,10 @@ function reveal(htmlStr){
   box.innerHTML = htmlStr;
   box.hidden = false;
   document.getElementById('gate').style.display = 'none';
+  // 解錠しても読み上げは何も言わず、フォーカスは body のままだった。
+  // 中身の先頭に focus を移して「開いた」ことが分かるようにする。
+  box.setAttribute('tabindex', '-1');
+  try { box.focus({ preventScroll: true }); } catch (e) { box.focus(); }
   enableNav();
   // 中身は innerHTML で入れているので <script> は動かない。
   // 予定・スポットのデータは <script type="application/json"> から読み、描画はここで呼ぶ。
@@ -382,7 +451,9 @@ function buildMap(){
   if (!spots || !window.BVMap || !window.L){ host.innerHTML = '<p class="note">地図を読み込めませんでした。<a href="/map.html">公開ページのマップ</a>からご覧いただけます。</p>'; return; }
   // 会員ページにはスポット一覧の節が無いので、ふきだしの「くわしく ↓」は出さない
   // （出すと押しても何も起きず、履歴に # だけが積まれていた）。
-  BVMap.mount(host, { spots: spots, posts: posts, hasList: false });
+  // スポットの説明の一覧をこのページにも置いたので、ふきだしの「くわしく ↓」を出す。
+  // 飛び先は閉じている <details> の中にあるので、開いてから飛ぶ（下の onJump）。
+  BVMap.mount(host, { spots: spots, posts: posts, hasList: true });
 }
 
 function enableNav(){
@@ -420,6 +491,9 @@ document.getElementById('go').addEventListener('click', async () => {
   if (!ok){
     btn.disabled = false; btn.textContent = 'ひらく';
     document.getElementById('err').textContent = '合言葉が違うようです。もう一度お試しください。';
+    // btn.disabled でフォーカスが飛んだままだと、次の入力にたどり着けない
+    document.getElementById('pw').focus();
+    document.getElementById('pw').select();
   }
 });
 document.getElementById('pw').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('go').click(); });
