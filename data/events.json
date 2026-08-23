@@ -24,6 +24,7 @@
     "tel": "042-345-1246",
     "who": "中央図書館"
    },
+   "lastEntry": "",
    "hours": "平日10:00〜19:00 / 土日祝10:00〜17:00。 休館日は「金曜日」(祝日でも休館)。ほかに毎月第3木曜=資料整理日、年末年始、特別整理期間。",
    "ages": {
     "baby": "○",
@@ -59,8 +60,11 @@
    "kidsNote": "屋台と縁日の雰囲気が濃く子ども向き。渡御通過時は道路沿い混雑注意",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "○"
+   },
    "cost": "",
    "target": "",
    "url": "https://www.higasimurayama-yasakajinja.jp/cont5/main.html",
@@ -92,8 +96,11 @@
    "kidsNote": "境内が広くベビーカー可。平日開催で比較的動きやすい",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "○"
+   },
    "cost": "",
    "target": "",
    "url": "https://www.yasukuni.or.jp/news_detail.html?id=701",
@@ -123,8 +130,11 @@
    "kidsNote": "サンバ時間帯は駅前混雑。ベビーカーは通行止め区間の端なら可。日中は暑さ対策必須",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "△〜○"
+   },
    "cost": "",
    "target": "",
    "url": "https://festival.hanakoganei.net/",
@@ -155,8 +165,11 @@
    "kidsNote": "商業施設内でトイレ・授乳室・エレベーター完備。ベビーカー最適",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "◎"
+   },
    "cost": "",
    "target": "",
    "url": "https://www.atpress.ne.jp/news/610885",
@@ -185,8 +198,11 @@
    "kidsNote": "午前早めが空いていて狙い目。境内砂利でベビーカーやや押しにくい",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "○"
+   },
    "cost": "",
    "target": "",
    "url": "https://www.ookunitamajinja.or.jp/matsuri/7-sumomo.php",
@@ -218,8 +234,11 @@
    "kidsNote": "阿波踊り時間帯は激混みで抱っこ紐推奨。狙い目は7/22・23の17時台か7/25の子ども阿波踊り",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "△〜○"
+   },
    "cost": "",
    "target": "",
    "url": "https://summer.walkerplus.com/odekake/detail_e/ar0313e71549/",
@@ -249,8 +268,11 @@
    "kidsNote": "平日夜で花火が遅め。2歳には厳しい時間帯",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "△"
+   },
    "cost": "",
    "target": "",
    "url": "https://www.mod.go.jp/asdf/iruma/kouhou/public_FW/index2025.html",
@@ -282,8 +304,11 @@
     "tel": "042-322-0661",
     "who": ""
    },
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "○"
+   },
    "cost": "",
    "target": "",
    "url": "https://kodaira-tourism.com/event/3369/",
@@ -313,8 +338,11 @@
    "kidsNote": "駅前大混雑。夕方早め(18時台)沿道端での観覧推奨",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "△"
+   },
    "cost": "",
    "target": "",
    "url": "https://koganeiawaodori.jp/",
@@ -343,8 +371,11 @@
    "kidsNote": "芝生でシート観覧。ただし2026年はみんなの原っぱ有料化・無料区域大幅変更 → 有料席事前購入+早め入園を推奨。帰りは閉園まで園内待機が定石",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "◎"
+   },
    "cost": "",
    "target": "",
    "url": "https://hanabi.tokyo-tachikawa.org/",
@@ -373,8 +404,11 @@
    "kidsNote": "約90万人。有料席確保時のみ検討",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "✕〜△"
+   },
    "cost": "",
    "target": "",
    "url": "https://www.sumidagawa-hanabi.com/",
@@ -403,8 +437,11 @@
    "kidsNote": "徒歩で行けて夜も早めに終わる。緑道一部未舗装だがベビーカー可",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "◎"
+   },
    "cost": "",
    "target": "",
    "url": "https://www.city.kodaira.tokyo.jp/event/127/127980.html",
@@ -431,11 +468,14 @@
    "place": "小金井公園内(花小金井から徒歩・自転車圏)",
    "mapq": "小金井公園内",
    "summary": "提灯の下町風情、ちびっ子縁日、阿波おどり披露など。要入園料(小学生以下は例年無料)",
-   "kidsNote": "広くて安全、雰囲気抜群。E22と同日なのでどちらか選択",
+   "kidsNote": "広くて安全、雰囲気抜群",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "◎"
+   },
    "cost": "",
    "target": "",
    "url": "https://www.tatemonoen.jp/event/page/2026_yusuzumi.php",
@@ -464,8 +504,11 @@
    "kidsNote": "コンパクトで幼児向き。河川敷は砂利あり",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "○"
+   },
    "cost": "",
    "target": "",
    "url": "https://www.city.sayama.saitama.jp/kankou/kanko/tanabata/index.html",
@@ -494,8 +537,11 @@
    "kidsNote": "キッズエリアあり。歩行者天国は混むので早めの時間に",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "○"
+   },
    "cost": "",
    "target": "",
    "url": "https://higashikurume.net/event.html",
@@ -525,8 +571,11 @@
    "kidsNote": "ベビーカーは午前〜昼推奨",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "○"
+   },
    "cost": "",
    "target": "",
    "url": "https://musashino-kanko.com/topics/musashino_natsumaturi-bonodori/",
@@ -565,8 +614,11 @@
    "kidsNote": "お盆期間の平日に行けるのが強み",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "◎"
+   },
    "cost": "",
    "target": "",
    "url": "",
@@ -599,8 +651,11 @@
    "kidsNote": "都心大型祭より穏やか。真夏日中の暑さ対策必須",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "○"
+   },
    "cost": "",
    "target": "",
    "url": "https://www.sumiyoshijinja.or.jp/information.html",
@@ -630,8 +685,11 @@
    "kidsNote": "座席確保は利点だが音が大きく2歳には負担の可能性",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "△"
+   },
    "cost": "",
    "target": "",
    "url": "https://www.jinguhanabi.com/",
@@ -661,6 +719,7 @@
    "kidsNote": "お盆の屋内候補。スタンプラリー目当てなら11時台に入るのが安全",
    "caution": "初の二日間開催",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
    "ages": {
     "baby": null,
@@ -694,9 +753,10 @@
    "place": "アスタ専門店街 2Fセンターコート(受付) ※宝さがしの範囲は館内B1F〜3F",
    "mapq": "アスタ専門店街",
    "summary": "センターコートで宝の地図をもらい、館内に隠された7つの宝を謎を解きながら探す。 宝(ポスター)に書いてあるものを紙に書き、7つ集めてセンターコートへ持参すると記念品。 クリアでアスター海賊団員バッジをプレゼント。駄菓子・駄玩具の販売も",
-   "kidsNote": "(親の補助が要る) 平日開催で空きやすい。 B1〜3Fを歩き回るので2歳連れはベビーカー＋抱っこ前提。年長・年中には手応えのある内容",
+   "kidsNote": "親の補助が要る。平日開催で空きやすい。 B1〜3Fを歩き回るので2歳連れはベビーカー＋抱っこ前提。年長・年中には手応えのある内容",
    "caution": "",
    "contact": null,
+   "lastEntry": "最終受付16:00",
    "hours": "",
    "ages": {
     "baby": null,
@@ -743,6 +803,7 @@
     "tel": "042-346-9834",
     "who": "地域学習支援課"
    },
+   "lastEntry": "",
    "hours": "",
    "ages": {
     "baby": null,
@@ -778,6 +839,7 @@
    "kidsNote": "保護者向けの色合いが強い",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
    "ages": {
     "baby": null,
@@ -815,6 +877,7 @@
     "tel": "042-341-0861",
     "who": "中央公民館"
    },
+   "lastEntry": "",
    "hours": "",
    "ages": {
     "baby": null,
@@ -850,8 +913,11 @@
    "kidsNote": "コンパクトで20時終了。沿道後方にベビーカー",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "△〜○"
+   },
    "cost": "",
    "target": "",
    "url": "https://mitaka-awaodori.com/",
@@ -881,8 +947,11 @@
    "kidsNote": "都内屈指の激混み。行くなら15時台短時間+抱っこ紐",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "✕に近い△"
+   },
    "cost": "",
    "target": "",
    "url": "https://www.azabujuban.or.jp/topics/topics_event/23867/",
@@ -912,6 +981,7 @@
    "kidsNote": "屋内の縁日。暑い日に助かる。 スーパーボールすくいは2歳でも親の膝上でいける。射的は年長向き",
    "caution": "混雑時は受付を早めに終了する場合あり",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
    "ages": {
     "baby": "○",
@@ -946,6 +1016,7 @@
    "kidsNote": "抽選自体は短時間。アスターくん登場の14時台が子ども向けの山",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
    "ages": {
     "baby": null,
@@ -977,9 +1048,10 @@
    "place": "市内雑木林(詳細は要確認)",
    "mapq": "市内雑木林",
    "summary": "",
-   "kidsNote": "(夜間・虫) 🎒◎ 夜の森という体験の希少性が高い",
+   "kidsNote": "夜間・虫。夜の森という体験の希少性が高い",
    "caution": "開始時刻は要確認(夜間の観察会)",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
    "ages": {
     "baby": null,
@@ -1017,6 +1089,7 @@
     "tel": "042-341-0119",
     "who": "小平消防署警防課"
    },
+   "lastEntry": "",
    "hours": "",
    "ages": {
     "baby": null,
@@ -1055,6 +1128,7 @@
    "kidsNote": "無料でグッズがもらえるので費用ゼロで満足度が出せる。 平日開催なので空いている。7/21〜24にも同内容を実施済みで定期開催の見込み",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
    "ages": {
     "baby": null,
@@ -1090,8 +1164,11 @@
    "kidsNote": "沿道観覧しやすいが人出多め",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "○"
+   },
    "cost": "",
    "target": "",
    "url": "http://takiyama.in.coocan.jp/",
@@ -1121,8 +1198,11 @@
    "kidsNote": "大規模大会より混雑緩やか・駅近で撤収楽。花火20時開始なので前半だけ見て撤収も手",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "◎"
+   },
    "cost": "",
    "target": "",
    "url": "https://akishima-kujiramatsuri.jp/",
@@ -1151,8 +1231,11 @@
    "kidsNote": "多摩屈指の混雑控えめローカル大会。トイレは仮設中心",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "◎"
+   },
    "cost": "",
    "target": "",
    "url": "https://www.city.musashimurayama.lg.jp/kankou/1004434/1001617.html",
@@ -1182,8 +1265,11 @@
    "kidsNote": "観客100万人規模。有料桟敷席が取れた場合のみ",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "overall": "✕に近い△"
+   },
    "cost": "",
    "target": "",
    "url": "https://www.koenji-awaodori.com/about/about01.html",
@@ -1213,6 +1299,7 @@
    "kidsNote": "工作系。夏休みの自由研究の締めにも。先着なので午前入りが安全",
    "caution": "",
    "contact": null,
+   "lastEntry": "最終受付16:30",
    "hours": "",
    "ages": {
     "baby": null,
@@ -1256,6 +1343,7 @@
     "tel": "080-5533-5571",
     "who": ""
    },
+   "lastEntry": "",
    "hours": "",
    "ages": {
     "baby": "○",
@@ -1293,6 +1381,7 @@
     "tel": "042-349-1350",
     "who": "小平市スポーツ協会"
    },
+   "lastEntry": "",
    "hours": "",
    "ages": {
     "baby": null,
@@ -1333,6 +1422,7 @@
     "tel": "042-346-9612",
     "who": "文化スポーツ課"
    },
+   "lastEntry": "",
    "hours": "",
    "ages": {
     "baby": null,
@@ -1373,6 +1463,7 @@
     "tel": "090-9247-5083",
     "who": "西田"
    },
+   "lastEntry": "",
    "hours": "",
    "ages": {
     "baby": null,
@@ -1410,6 +1501,7 @@
    "kidsNote": "無料のクラシック入門。詳細は公民館のチラシ",
    "caution": "",
    "contact": null,
+   "lastEntry": "",
    "hours": "",
    "ages": {
     "baby": null,
@@ -1448,6 +1540,7 @@
     "tel": "042-388-0050",
     "who": ""
    },
+   "lastEntry": "",
    "hours": "",
    "ages": null,
    "cost": "700円 / 定員 各8人(抽選) / 対象: 市内在住・在勤・在学の方",
@@ -1484,6 +1577,7 @@
     "tel": "042-346-9532",
     "who": "市民協働・男女参画推進課"
    },
+   "lastEntry": "",
    "hours": "",
    "ages": {
     "baby": "◎",
@@ -1509,7 +1603,9 @@
    "mapq": "花小金井ひょうたん池公園",
    "summary": "",
    "kidsNote": "2歳児の水遊びデビューに最適。無料・徒歩圏。※たけのこ公園は水遊び施設なし",
-   "ages": null,
+   "ages": {
+    "overall": "◎"
+   },
    "cost": "",
    "url": "https://www.city.kodaira.tokyo.jp/kurashi/113/113055.html",
    "confidence": "中(2026期間要確認)",
@@ -1523,7 +1619,9 @@
    "mapq": "西東京いこいの森公園",
    "summary": "",
    "kidsNote": "オムツ児も遊べる噴水型",
-   "ages": null,
+   "ages": {
+    "overall": "◎"
+   },
    "cost": "",
    "url": "https://www.city.nishitokyo.lg.jp/kurasi/koen/kouenmizuasobi.html",
    "confidence": "公式確認済み",
@@ -1537,7 +1635,9 @@
    "mapq": "西武園ゆうえんちプール",
    "summary": "",
    "kidsNote": "こどもプール・波のプール・流れるプール。水遊び用オムツ+水着でOK(2歳児可)。小3以下は16歳以上の同伴入水必須",
-   "ages": null,
+   "ages": {
+    "overall": "◎"
+   },
    "cost": "大人3,400円/未就学児(3歳〜)1,500円(2歳以下は要確認・無料見込み)",
    "url": "https://www.seibuen-amusement-park.jp/seibuenpool/index.html",
    "confidence": "公式確認済み",

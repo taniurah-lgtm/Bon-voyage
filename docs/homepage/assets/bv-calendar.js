@@ -163,7 +163,15 @@
     if (a.baby) parts.push('👶' + esc(a.baby));
     if (a.pre) parts.push('🧒' + esc(a.pre));
     if (a.elem) parts.push('🎒' + esc(a.elem));
-    return parts.length ? '<span class="bvc-ages">' + parts.join(' ') + '</span>' : '';
+    if (parts.length) return '<span class="bvc-ages">' + parts.join(' ') + '</span>';
+    // 古い書式は年齢ごとに分かれておらず、総合評価だけ。
+    // ★否定的な評価（✕に近い△）を落とすと、混雑が激しい催しが中立に見える。
+    if (a.overall) {
+      var hard = /✕|x/.test(a.overall);
+      return '<span class="bvc-ages' + (hard ? ' is-hard' : '') + '">子連れ ' + esc(a.overall) +
+        (hard ? '（混雑が激しく、小さい子には負担）' : '') + '</span>';
+    }
+    return '';
   }
 
   // ---- イベント1件のカード --------------------------------------------------
@@ -218,7 +226,8 @@
             '" target="_blank" rel="noopener">📅 ' + esc(sl.label) + '</a>' +
             // 枠ごとに .ics も出す。締切のある催しほど保存したい
             '<button class="bvc-btn bvc-btn-ics" type="button" data-ics="' + esc(ev.id) +
-            '" data-date="' + esc(date) + '" data-slot="' + i + '">🍎</button>' +
+            '" data-date="' + esc(date) + '" data-slot="' + i + '"' +
+            ' aria-label="' + esc(sl.label) + 'を iPhone のカレンダーに追加">🍎 iPhone</button>' +
             '</span>';
         }).join('')
       : '<a class="bvc-btn bvc-btn-add" href="' + esc(gcalURL(ev, date)) + '" target="_blank" rel="noopener">📅 カレンダーに追加</a>' +
@@ -247,6 +256,7 @@
           ((ev.totalDates || (ev.dates || []).length) > 3 ? '<span class="bvc-kidslabel">この催しについて</span>' : '') +
           esc(ev.kidsNote) + '</p>' : '') +
       '<p class="bvc-meta">' + agesHTML(ev.ages) + (ev.cost ? '<span class="bvc-cost">' + esc(ev.cost) + '</span>' : '') + '</p>' +
+      (ev.lastEntry ? '<p class="bvc-caution">🚪 ' + esc(ev.lastEntry) + '</p>' : '') +
       (ev.target ? '<p class="bvc-target">👥 ' + esc(ev.target) + '</p>' : '') +
       (ev.hours ? '<p class="bvc-hours">🕘 ' + esc(ev.hours) + '</p>' : '') +
       (ev.caution ? '<p class="bvc-caution">⚠️ ' + esc(ev.caution) + '</p>' : '') +
@@ -274,7 +284,19 @@
     function kidScore(e) {
       var a = e.ages || {};
       var pt = { '◎': 3, '○': 2, '△': 1, '✕': 0, x: 0 };
-      return (pt[a.baby] || 0) + (pt[a.pre] || 0) + (pt[a.elem] || 0);
+      if (a.baby || a.pre || a.elem) {
+        return (pt[a.baby] || 0) + (pt[a.pre] || 0) + (pt[a.elem] || 0);
+      }
+      // 古い書式（総合評価だけ）。3カテゴリぶんに換算して同じ尺度に乗せる。
+      // ここを見ないと ages=null の同点になり、混雑の激しい催しが上に来る。
+      if (a.overall) {
+        if (/✕|x/.test(a.overall)) return 0;
+        if (/^◎/.test(a.overall)) return 9;
+        if (/△\s*[〜~]\s*○|○\s*[〜~]\s*△/.test(a.overall)) return 4;
+        if (/^○/.test(a.overall)) return 6;
+        if (/^△/.test(a.overall)) return 3;
+      }
+      return 1;   // 目安が無いものは、目安があるものより後ろに
     }
     Object.keys(byDate).forEach(function (d) {
       byDate[d].sort(function (a, b) {
@@ -438,7 +460,7 @@
           '<h4 class="bvc-dayhead">' + esc(fmtDay(selected)) + '</h4>' +
           '<p class="bvc-empty">' +
           (outOfWindow
-            ? 'この日は、公開しているぶん（今日からの2週間）より先です。' +
+            ? 'この日は、公開しているぶん（今日からの2週間）の外です。予定が無いという意味ではありません。' +
               (opts.memberUrl ? ' <a href="' + esc(opts.memberUrl) + '">会員ページ</a>では先の予定まで見られます。' : '')
             : 'この日に入っている予定はありません。') +
           '</p>';

@@ -29,6 +29,12 @@ html = html.replace(/(<[^>]*\bdata-bv-post="(on|off)"[^>]*>)/g, (tag, _all, mode
   return out;
 });
 
+// CI が「書いてあることと、できること」を照合するための印。
+// ★可視テキストで grep すると、hidden にした側の文字列も引っかかって必ず落ちる
+//   （実際にそうなっていた）。モードそのものを書き込んで、それを見てもらう。
+html = html.replace(/\n?<!-- BV_POST_MODE: \w+ -->/g, '');
+html = html.replace(/<\/body>/, `<!-- BV_POST_MODE: ${on ? 'on' : 'off'} -->\n</body>`);
+
 writeFileSync(PATH, html);
 console.log(`${PATH}: 投稿の記述を ${on ? '「サイト内で書ける」' : '「LINEでお預かり」'} に揃えた（${n}箇所）`);
 if (!on) console.log('  ※ MAP_POST_URL を設定すると、サイト内フォームの記述に戻る');

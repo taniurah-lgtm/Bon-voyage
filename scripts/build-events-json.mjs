@@ -221,6 +221,12 @@ function extractHours(lines) {
   return '';
 }
 
+// 「(最終入場16:40)」「(最終受付16:30)」を拾う。先着・定員ものでは行動に直結する。
+function extractLastEntry(raw) {
+  const m = normalize(raw || '').match(/[（(]?\s*(最終(?:入場|受付|入館|受け付け)\s*\d{1,2}:\d{2})\s*[）)]?/);
+  return m ? m[1] : '';
+}
+
 // 問合せ先の電話を拾う。締切を知らせるとき、申込フォームのURLが無い催しでも
 // 電話が分かれば申し込める（台帳には「問合せ: 文化スポーツ課 042-346-9612」がある）。
 function extractContact(lines) {
@@ -243,7 +249,14 @@ function parseAges(raw) {
     return m ? m[1] : null;
   };
   const a = { baby: grab('👶'), pre: grab('🧒'), elem: grab('🎒') };
-  return a.baby || a.pre || a.elem ? a : null;
+  if (a.baby || a.pre || a.elem) return a;
+  // ★古い書式（E22〜E43）は絵文字を使わず「◎」「△〜○」「✕に近い△」だけを書く。
+  //   ここを読まないと、次の週末のカードの大半で年齢の目安が丸ごと消える。
+  //   「タップすると年齢の目安が出ます」と書いてあるのに出ない状態だった。
+  const m = String(raw).trim().match(/^(✕に近い△|[◎○△✕x]\s*[〜~]\s*[◎○△✕x]|◎◎|[◎○△✕x])/u);
+  if (!m) return null;
+  const overall = m[1].replace(/\s/g, '').replace(/^◎◎$/, '◎');
+  return { overall };
 }
 
 // 見出し「### E47. こだいら防災救急フェア ★穴場」→ id と名前（★以降の内部メモは落とす）
@@ -366,7 +379,9 @@ function facilityQuery(name) {
 // これがそのまま公開ページに出ていた（.ics の説明欄にも入って読者のカレンダーに残る）。
 // 記号は読者向けの言い方に寄せ、運営メモは削る。
 const STRIP = [
-  [/E\d+\s*参照。?\s*/g, ''],           // 台帳ID同士の相互参照
+  [/E\d+\s*参照。?\s*/g, ''],                        // 「E7参照。」
+  [/[、。]?\s*E\d+と同日[^。]*。?/g, ''],              // 「E22と同日なのでどちらか選択」
+  [/[（(]\s*E\d+[^）)]*[）)]/g, ''],                   // 「(E12参照)」
   [/◎◎/g, '◎'],                          // 内部の強調（読者には◎で十分）
   [/✕に近い△/g, '△'],
   [/[✕x]\s*に近い/g, ''],
@@ -381,7 +396,7 @@ const STRIP = [
 ];
 // 落としきれなかったときに気づくための番兵。読者向けの文にこれが残っていたら公開しない。
 // 「損」は方針で禁じている煽り表現。台帳IDと内部記号も読者には意味がない。
-const FORBIDDEN = /損|E\d+\s*参照|◎◎|✕/;
+const FORBIDDEN = /損|\bE\d{1,3}\b|◎◎/;   // 台帳IDが1つでも残っていたら公開しない
 // 見出し自体が台帳の内部ラベルになっているもの（イベントではなく「枠」）。
 // 中身は箇条書きで書かれていて `内容:` 欄が無いため、公開すると空カードになる。
 const INTERNAL_LABEL = /「?(?:知っていると得|知らないと損)」?枠|^枠[:：]/;
@@ -400,11 +415,22 @@ function kidsBody(s) {
   // ★順番が大事。先に readerText で「✕に近い△」→「△」に寄せてから記号を落とす。
   //   逆にすると先頭の ✕ だけが消えて「に近い△ 観客100万人規模…」という
   //   壊れた日本語が残り、読者のカレンダーの説明欄にまで入る。
-  return readerText(String(s))
+  // 記号のあとに括弧の注記が付くことがある（「🧒○(親の補助が要る)」）。
+  // 記号だけ落とすと括弧が孤立して「(親の補助が要る) 平日開催で…」になる。
+  // 注記は本文の頭に言い直して残す。
+  var notes = [];
+  var out = readerText(String(s));
+  out = out.replace(/(?:\s*(?:👶|🧒|🎒)?\s*(?:[◎○△✕x](?:\s*[〜~]\s*[◎○△✕x])?|✕に近い△)\s*[（(]([^）)]*)[）)])/gu,
+    function (_m, note) { if (note) notes.push(note.trim()); return ' '; });
+  out = out
     .replace(/^(?:\s*(?:👶|🧒|🎒)\s*[◎○△✕x]\s*)+/u, '')
+    .replace(/^\s*✕に近い△\s*/u, '')
     .replace(/^\s*[◎○△✕x]\s*[〜~]\s*[◎○△✕x]\s*/u, '')
     .replace(/^\s*[◎○△✕x]{1,2}\s*/u, '')
+    .replace(/^\s*[（(]([^）)]*)[）)]\s*/u, function (_m, note) { notes.push(note.trim()); return ''; })
     .trim();
+  if (notes.length) out = (notes.join('・') + '。' + out).replace(/。。/g, '。');
+  return out.trim();
 }
 
 // ---- 台帳を1件ずつ読む ------------------------------------------------------
@@ -502,6 +528,7 @@ for (const file of files) {
       kidsNote: kidsBody(field(b.lines, ['子連れ'])),
       caution: extractCaution(when),
       contact: extractContact(b.lines),
+      lastEntry: extractLastEntry(when),
       hours: extractHours(b.lines),
       ages: parseAges(field(b.lines, ['子連れ'])),
       cost: field(b.lines, ['料金', '費用', '参加費']),

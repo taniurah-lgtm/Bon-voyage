@@ -70,3 +70,33 @@
 
 /* 二次リンクのタップ領域（44px未満だった） */
 .back, footer a { min-height: 44px; display: inline-flex; align-items: center; }
+
+/* 同じ地点に複数のスポットがあるとき */
+.bvm-pop-one { display: flex; flex-direction: column; gap: .18rem; }
+.bvm-pop-sep { border: 0; border-top: 1px dashed #DCD5C6; margin: .55rem 0; }
+
+/* 画面上で重なっているピンへの導線（ピンは動かさない） */
+.bvm-pop-near {
+  margin-top: .55rem; padding-top: .5rem; border-top: 1px solid #ECE7DB;
+  display: flex; flex-wrap: wrap; gap: .3rem; align-items: center;
+}
+.bvm-pop-near > span { font-size: .74rem; color: #7c8a92; width: 100%; }
+.bvm-pop-goto {
+  font-family: inherit; font-size: .78rem; font-weight: 700; color: #2C7C9E;
+  background: #F5F2EA; border: 1px solid #DCD5C6; border-radius: 999px;
+  padding: .3rem .7rem; min-height: 34px; cursor: pointer;
+}
+/* ふきだしの中のリンクも指で押せる大きさに（24pxだった） */
+.bvm-pop-links a { min-height: 36px; display: inline-flex; align-items: center; }
+
+/* 重なったピンを「まとめて件数で」出す印。
+   どこか1つの場所を主張しないので、位置について嘘をつかない。 */
+.bvm-cluster-wrap { background: none; border: none; }
+.bvm-cluster {
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; margin: 2px; border-radius: 999px;
+  background: #2C7C9E; color: #fff; border: 3px solid #fff;
+  font-family: var(--maru); font-weight: 800; font-size: .95rem;
+  box-shadow: 0 1px 6px rgba(0,0,0,.35);
+}
+.bvm-cluster-wrap:hover .bvm-cluster, .bvm-cluster-wrap:focus-visible .bvm-cluster { background: #1F6280; }

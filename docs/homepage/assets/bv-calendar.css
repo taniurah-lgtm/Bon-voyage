@@ -224,3 +224,6 @@
 .bvc-dldate b { color: var(--danger-ink); }
 .bvc-deadline { color: var(--danger-ink); }
 .bvc-key, .bvc-dlhow { color: var(--ink-soft); }
+
+/* 総合評価だけの古い書式。否定的な評価は目立たせる */
+.bvc-ages.is-hard { color: var(--danger-ink); }

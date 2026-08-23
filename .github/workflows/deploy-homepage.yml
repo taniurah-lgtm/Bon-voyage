@@ -77,13 +77,23 @@ jobs:
       # 書いてあることと動くことがずれたら公開前に気づけるようにする。
       - name: 書いてあることが実際にできるか確かめる
         run: |
-          claims=$(grep -l "書き込めます\|ひとこと投稿\|投稿に写真" docs/homepage/index.html || true)
+          # apply-post-mode.mjs が書き込んだモードと、実際の送り先が一致しているかを見る。
+          # ★可視テキストを grep してはいけない。hidden にした側の文字列も残っているので
+          #   必ず不一致になる（一度そうしてしまい、デプロイが常に止まる状態にした）。
+          mode=$(grep -o "BV_POST_MODE: [a-z]*" docs/homepage/index.html | head -1 | awk '{print $2}')
           endpoint=$(grep -o "endpoint: \"[^\"]*\"" docs/homepage/map.html | head -1 || true)
-          echo "投稿の送り先: ${endpoint:-（見つからない）}"
-          if [ -n "$claims" ] && echo "$endpoint" | grep -q 'endpoint: ""'; then
-            echo "::error::トップページに「マップに投稿できます」と書いてありますが、投稿の送り先が設定されていません。"
-            echo "::error::Settings → Secrets and variables → Actions → Variables に MAP_POST_URL を登録するか、"
-            echo "::error::index.html から投稿できるという記載を外してください（できないことを特典に書かない）。"
+          echo "トップページの記述: ${mode:-（印が無い）} / 投稿の送り先: ${endpoint:-（見つからない）}"
+          if [ -z "$mode" ]; then
+            echo "::warning::index.html に BV_POST_MODE の印がありません。scripts/apply-post-mode.mjs を通していない可能性があります。"
+            exit 0
+          fi
+          if [ "$mode" = "on" ] && echo "$endpoint" | grep -q 'endpoint: ""'; then
+            echo "::error::トップページは「サイト内で書き込める」と書いていますが、投稿の送り先が空です。"
+            echo "::error::Variables に MAP_POST_URL を登録するか、build-site.sh を通し直してください。"
+            exit 1
+          fi
+          if [ "$mode" = "off" ] && ! echo "$endpoint" | grep -q 'endpoint: ""'; then
+            echo "::error::送り先はあるのに、トップページは「LINEでお預かり」と書いています。build-site.sh を通し直してください。"
             exit 1
           fi
           echo "OK: 書いてあることと、実際にできることが一致しています"

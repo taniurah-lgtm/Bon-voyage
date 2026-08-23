@@ -35,6 +35,7 @@ const calData = {
     summary: e.summary, kidsNote: e.kidsNote, ages: e.ages,
     cost: e.cost, target: e.target, url: e.url,
     caution: e.caution, hours: e.hours, contact: e.contact, exceptions: e.exceptions,
+    lastEntry: e.lastEntry, totalDates: e.totalDates,
     tentative: e.tentative, deadline: e.deadline,
   })),
   standing: EVENTS.standing,
