@@ -29,10 +29,6 @@
 
 .bvp-count { font-size: .8rem; color: var(--ink-soft); margin: .3rem 0 0; text-align: right; font-variant-numeric: tabular-nums; }
 .bvp-count.is-over { color: var(--marigold-ink); font-weight: 700; }
-.bvp-over {
-  font-size: .84rem; line-height: 1.8; color: var(--ink-soft);
-  background: var(--sky-wash); border-radius: 12px; padding: .6rem .8rem; margin: .5rem 0 0;
-}
 
 /* ---- 合言葉 ---- */
 .bvp-gate {

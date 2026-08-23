@@ -162,3 +162,14 @@
   background: var(--sky-wash); border-radius: 10px;
   padding: .35rem .6rem; margin: .35rem 0 0; line-height: 1.7;
 }
+
+/* 予定のない日も押せる（押して無反応に見えないように） */
+.bvc-cell.tap { cursor: pointer; }
+.bvc-cell.tap:not(.has):hover { background: var(--surface-2); }
+.bvc-cell.tap:focus-visible { outline: 3px solid var(--sky); outline-offset: 1px; }
+
+/* 公開ぶんの終わり（公開ページのみ） */
+.bvc-window {
+  margin-left: auto; font-weight: 700; color: var(--sky-deep);
+  background: var(--sky-wash); border-radius: 999px; padding: .1rem .6rem;
+}

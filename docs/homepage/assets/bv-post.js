@@ -68,8 +68,8 @@
 
   function mount(el, opts) {
     opts = opts || {};
-    var freeLimit = opts.freeLimit || 40;
-    var paidLimit = opts.paidLimit || 300;
+    // 字数は誰でも同じ。サポーターとの差は写真だけ（2026-08-23 オーナー判断）
+    var textLimit = opts.textLimit || opts.paidLimit || 300;
     var spots = opts.spots || [];
     var isSupporter = false;
 
@@ -81,17 +81,16 @@
 
       '<label class="bvp-lb" for="bvp-spot">場所の名前 <span class="bvp-req">必須</span></label>' +
       '<input class="bvp-in" id="bvp-spot" name="spot" list="bvp-spots" autocomplete="off" ' +
-      'placeholder="例: 小金井公園 / 多摩六都科学館" required>' +
+      'placeholder="例: 小金井公園" required>' +
       '<datalist id="bvp-spots">' +
       spots.map(function (s) { return '<option value="' + esc(s.name) + '"></option>'; }).join('') +
       '</datalist>' +
       '<p class="bvp-hint">地図にない場所でも大丈夫です。そのまま書いてください。</p>' +
 
       '<label class="bvp-lb" for="bvp-text">ひとこと <span class="bvp-req">必須</span></label>' +
-      '<textarea class="bvp-in bvp-ta" id="bvp-text" name="text" rows="3" maxlength="' + paidLimit + '" ' +
+      '<textarea class="bvp-in bvp-ta" id="bvp-text" name="text" rows="3" maxlength="' + textLimit + '" ' +
       'placeholder="日かげが多くて、2歳でも1時間あそべました" required></textarea>' +
-      '<p class="bvp-count"><span class="bvp-n">0</span> / <span class="bvp-max">' + freeLimit + '</span>字</p>' +
-      '<p class="bvp-over" hidden></p>' +
+      '<p class="bvp-count"><span class="bvp-n">0</span> / ' + textLimit + '字</p>' +
 
       '<label class="bvp-lb" for="bvp-who">お名前・ニックネーム</label>' +
       '<input class="bvp-in" id="bvp-who" name="who" autocomplete="off" placeholder="空欄なら「ご近所の方」と出ます">' +
@@ -101,7 +100,7 @@
       '<p class="bvp-hint">市や町までで十分です。番地や園・学校の名前は書かないでください。</p>' +
 
       '<details class="bvp-gate">' +
-      '<summary>応援サポーターの方（合言葉をお持ちの方）</summary>' +
+      '<summary>写真も添えたい方（応援サポーターの合言葉）</summary>' +
       '<label class="bvp-lb" for="bvp-pass">合言葉</label>' +
       '<div class="bvp-passrow">' +
       '<input class="bvp-in" id="bvp-pass" type="text" autocomplete="off" autocapitalize="none" autocorrect="off" placeholder="合言葉">' +
@@ -132,8 +131,6 @@
     var form = el.querySelector('.bvp');
     var $text = el.querySelector('#bvp-text');
     var $n = el.querySelector('.bvp-n');
-    var $max = el.querySelector('.bvp-max');
-    var $over = el.querySelector('.bvp-over');
     var $msg = el.querySelector('.bvp-msg');
     var $gateMsg = el.querySelector('.bvp-gate-msg');
     var $photoBox = el.querySelector('.bvp-photo');
@@ -147,18 +144,8 @@
     $text.addEventListener('input', function () {
       var n = $text.value.length;
       $n.textContent = n;
-      var limit = isSupporter ? paidLimit : freeLimit;
-      $max.textContent = limit;
-      el.querySelector('.bvp-count').classList.toggle('is-over', n > limit);
-      if (!isSupporter && n > freeLimit) {
-        $over.hidden = false;
-        $over.innerHTML =
-          'ここから先は、応援サポーターの方が書ける長さです（' + paidLimit + '字まで）。' +
-          '<br>いまのままでも、はじめの' + freeLimit + '字までを載せます。' +
-          (opts.joinUrl ? ' <a href="' + esc(opts.joinUrl) + '">サポーターについて</a>' : '');
-      } else {
-        $over.hidden = true;
-      }
+      // 残りが少なくなったときだけ色を変える。字数で応援のお願いはしない。
+      el.querySelector('.bvp-count').classList.toggle('is-over', n > textLimit - 30);
       saveDraft();
     });
     ['bvp-spot', 'bvp-who', 'bvp-area'].forEach(function (id) {
@@ -175,7 +162,7 @@
       isSupporter = true;
       var gate = el.querySelector('.bvp-gate');
       if (gate) gate.open = true;
-      $gateMsg.textContent = '応援ありがとうございます。長めの文章と写真も送れます。';
+      $gateMsg.textContent = '応援ありがとうございます。写真も添えられます。';
       $gateMsg.className = 'bvp-gate-msg is-ok';
       $photoBox.hidden = false;
       $text.dispatchEvent(new Event('input'));
@@ -189,12 +176,12 @@
       isSupporter = await verifyPass(pass, opts.gate);
       if (isSupporter) {
         try { sessionStorage.setItem('bv_pw', pass.normalize('NFC')); } catch (e) { /* 覚えられなくても動く */ }
-        $gateMsg.textContent = 'ありがとうございます。長めの文章と写真も送れます。';
+        $gateMsg.textContent = 'ありがとうございます。写真も添えられます。';
         $gateMsg.className = 'bvp-gate-msg is-ok';
         $photoBox.hidden = false;
       } else {
         $gateMsg.textContent = pass
-          ? '合言葉が違うようです。空欄のままでも、ひとことは送れます。'
+          ? '合言葉が違うようです。空欄のままでも、ひとことは同じ長さで送れます（写真だけが添えられません）。'
           : '合言葉を入れてから「確認」を押してください。';
         $gateMsg.className = 'bvp-gate-msg is-ng';
         $photoBox.hidden = true;
@@ -305,8 +292,8 @@
         (payload.tier === 'サポーター'
           ? '<p class="bvp-lead">写真もいっしょにお預かりしました。ありがとうございます。</p>'
           : '<div class="bvp-nudge">' +
-            '<p>もっと書きたくなったときは。</p>' +
-            '<p class="bvp-nudge-body">応援サポーター（月300円）の方は、<b>長めの文章と写真</b>もいっしょに載せられます。' +
+            '<p>写真もいっしょに載せたいときは。</p>' +
+            '<p class="bvp-nudge-body">応援サポーター（月300円）の方は、<b>その場の写真</b>も添えられます。' +
             'この通信を続けるのに、LINEの配信費が月5,000円かかっています。' +
             '20人の方に支えていただけると、そこが自前で回ります。</p>' +
             (opts.joinUrl ? '<a class="bvp-nudge-link" href="' + esc(opts.joinUrl) + '">サポーターについて見てみる →</a>' : '') +

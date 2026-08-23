@@ -103,16 +103,20 @@
       var next = iso(new Date(parseISO(date).getTime() + MS_DAY)).replace(/-/g, '');
       body = 'DTSTART;VALUE=DATE:' + stamp + '\r\nDTEND;VALUE=DATE:' + next + '\r\n';
     }
+    // DTSTAMP は RFC 5545 の必須項目。無いと取り込みを拒むカレンダーがある。
+    var now = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
     var lines = [
       'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//bonvoyage-tsushin//JP', 'CALSCALE:GREGORIAN',
       'BEGIN:VEVENT',
+      'DTSTAMP:' + now,
       'UID:' + ev.id + '-' + stamp + '@bonvoya.nicomaru.tokyo',
       'SUMMARY:' + icsEsc(ev.name),
       ev.place ? 'LOCATION:' + icsEsc(ev.place) : '',
       'DESCRIPTION:' + icsEsc(detailsText(ev)),
       'END:VEVENT', 'END:VCALENDAR',
     ].filter(Boolean);
-    var text = lines.slice(0, 5).join('\r\n') + '\r\n' + body + lines.slice(5).join('\r\n') + '\r\n';
+    var head = lines.indexOf('BEGIN:VEVENT') + 1;   // BEGIN:VEVENT までがヘッダ
+    var text = lines.slice(0, head).join('\r\n') + '\r\n' + body + lines.slice(head).join('\r\n') + '\r\n';
     return URL.createObjectURL(new Blob([text], { type: 'text/calendar;charset=utf-8' }));
   }
   function icsEsc(s) {
@@ -199,7 +203,11 @@
       '<table class="bvc-grid"><thead><tr>' +
       WD.map(function (w, i) { return '<th class="' + (i === 0 ? 'sun' : i === 6 ? 'sat' : '') + '">' + w + '</th>'; }).join('') +
       '</tr></thead><tbody></tbody></table>' +
-      '<div class="bvc-legend"><span class="bvc-dot"></span>予定あり　<span class="bvc-today-mark">今日</span></div>' +
+      '<div class="bvc-legend"><span class="bvc-dot"></span>予定あり　<span class="bvc-today-mark">今日</span>' +
+      (opts.teaser && data.window
+        ? '<span class="bvc-window">公開ぶんは ' + esc(fmtDay(data.window.to)) + ' まで</span>'
+        : '') +
+      '</div>' +
       '<div class="bvc-day"></div>' +
       '<div class="bvc-tail"></div>' +
       '</div>';
@@ -217,10 +225,18 @@
       var nav = e.target.closest('.bvc-nav');
       if (nav) {
         var i = months.indexOf(view) + Number(nav.dataset.go);
-        if (i >= 0 && i < months.length) { view = months[i]; render(); }
+        if (i >= 0 && i < months.length) {
+          view = months[i];
+          // 下の予定リストが前の月のまま残らないように、その月の最初の予定へ移す
+          if (!selected || selected.slice(0, 7) !== view) {
+            var first = allDates.filter(function (d) { return d.slice(0, 7) === view; })[0];
+            selected = first || null;
+          }
+          render();
+        }
         return;
       }
-      var cell = e.target.closest('.bvc-cell.has');
+      var cell = e.target.closest('.bvc-cell:not(.out)');
       if (cell) {
         selected = cell.dataset.date;
         render();
@@ -266,6 +282,7 @@
           var list = byDate[key] || [];
           var cls = ['bvc-cell'];
           if (!inMonth) cls.push('out');
+          else cls.push('tap');            // 月内はどの日も押せる（押して無反応をなくす）
           if (list.length) cls.push('has');
           if (key === today) cls.push('today');
           if (key === selected) cls.push('sel');
@@ -275,7 +292,10 @@
           var dots = list.slice(0, 3).map(function () { return '<i class="bvc-dot"></i>'; }).join('');
           tds.push(
             '<td class="' + cls.join(' ') + '" data-date="' + key + '"' +
-            (list.length ? ' tabindex="0" role="button" aria-label="' + fmtDay(key) + ' 予定' + list.length + '件"' : '') + '>' +
+            (inMonth
+              ? ' tabindex="' + (list.length ? '0' : '-1') + '" role="button" aria-label="' +
+                fmtDay(key) + (list.length ? ' 予定' + list.length + '件' : ' 予定なし') + '"'
+              : '') + '>' +
             '<span class="bvc-num">' + cur.getDate() + '</span>' +
             (list.length ? '<span class="bvc-dots">' + dots + (list.length > 3 ? '<i class="bvc-more">+</i>' : '') + '</span>' : '') +
             '</td>'
@@ -289,6 +309,20 @@
 
     function renderDay() {
       var list = selected ? byDate[selected] || [] : [];
+      // 日を選んでいるのに予定が無いとき（押して無反応に見えないよう、はっきり言う）
+      if (selected && !list.length) {
+        var outOfWindow = opts.teaser && data.window && selected > data.window.to;
+        $day.innerHTML =
+          '<h4 class="bvc-dayhead">' + esc(fmtDay(selected)) + '</h4>' +
+          '<p class="bvc-empty">' +
+          (outOfWindow
+            ? 'この日は、公開しているぶん（今日からの2週間）より先です。' +
+              (opts.memberUrl ? ' <a href="' + esc(opts.memberUrl) + '">会員ページ</a>では先の予定まで見られます。' : '')
+            : 'この日に入っている予定はありません。') +
+          '</p>';
+        renderTail();
+        return;
+      }
       if (!list.length) {
         // 何も選ばれていないときは「この先の予定」を出す（空白より役に立つ）
         var up = allDates.slice(0, 4);

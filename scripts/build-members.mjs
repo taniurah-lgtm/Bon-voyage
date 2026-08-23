@@ -16,7 +16,7 @@
  * 描画のコード（/assets/bv-calendar.js）は公開されるが、予定の中身は入っていないので、
  * 合言葉を知らない人には先の予定は見えない。
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { encryptFor, passphrases, ITER, CLIENT_DECRYPT, jsonInTag, esc, buildStamp } from './lib/gate.mjs';
 
 const OUT = 'docs/homepage/m/s7f2ka/index.html';
@@ -49,6 +49,30 @@ const renkyu = `
   <div class="ev"><div class="nm">🎠 雨でも安心のテーマパーク・室内</div><div class="desc">サンリオピューロランド（多摩・全天候の室内）は天気に左右されない。西武園ゆうえんち（近い）は大火祭りの花火が9/19〜23も開催。</div><div class="links"><a class="lk off" href="https://www.puroland.jp/" target="_blank" rel="noopener">🔗 ピューロランド</a><a class="lk off" href="https://www.seibuen-amusement-park.jp/2026summer/" target="_blank" rel="noopener">🔗 西武園</a></div></div>
   <div class="ev"><div class="nm">🏕 キャンプ（早めに予約）</div><div class="desc">C&amp;C山中湖ほか高原キャンプ。予約は例年2ヶ月前の月末20時ごろ開始（9月分は7月末ごろ）。人気なので、最新の受付日を公式で確認して早めに。日曜泊やキャンセル拾いも。</div><div class="links"><a class="lk off" href="https://www.camp-cabins.com/yamanakako/" target="_blank" rel="noopener">🔗 公式</a></div></div>
   <p class="note">※営業日・料金・味覚狩りの解禁時期は変わります。おでかけ前に各公式でご確認を。</p>`;
+
+// ---- バックナンバー（過去号を実際に載せる）------------------------------------
+// これまで「順次公開していきます」と書いてあるだけで中身が無かった。
+// reports/free/ に実物があるので、そのまま読める形で入れる（できていないことを書かない）。
+const issues = existsSync('reports/free')
+  ? readdirSync('reports/free')
+      .filter((f) => /^\d{4}-\d{2}-\d{2}\.md$/.test(f))   // _draft- は除く
+      .sort()
+      .reverse()
+  : [];
+
+const issueHTML = issues
+  .map((f) => {
+    const raw = readFileSync(`reports/free/${f}`, 'utf8');
+    const [y, m, d] = f.replace('.md', '').split('-').map(Number);
+    const wd = '日月火水木金土'[new Date(Date.UTC(y, m - 1, d)).getUTCDay()];
+    // 1行目の題名は日付が入っているので、見出しは自分で組む
+    const body = raw.split('\n').slice(1).join('\n').trim();
+    return `  <details class="issue">
+    <summary>${m}月${d}日(${wd})号</summary>
+    <pre class="issue-body">${esc(body)}</pre>
+  </details>`;
+  })
+  .join('\n');
 
 // ---- みんなの声（会員ページは全件・写真つきも出す）----------------------------
 const voiceHTML = (p) =>
@@ -92,7 +116,12 @@ ${renkyu}
   ${voicesSection}
 
   <h2 class="sec" id="back">📮 通信バックナンバー</h2>
-  <div class="card"><ul><li>最新号は毎週水曜に配信（LINE）</li><li>過去号もこのページで順次公開していきます</li></ul></div>
+  <p class="sec-note">${
+    issues.length
+      ? `これまでにお届けした${issues.length}号を、新しい順に置いています。題名をタップすると本文が開きます。`
+      : 'まだ置いてある号がありません。最新号は毎週水曜にLINEでお届けしています。'
+  }</p>
+${issueHTML}
 
   <p class="note" style="margin-top:1.6rem">📅 ボタンはご自分のカレンダーに保存する形です（Googleカレンダー、またはiPhoneのカレンダー）。リマインダーはカレンダー側でお好みに設定できます。日程・料金は変わることがあるので、おでかけ前に各公式でご確認ください。</p>`;
 
@@ -152,6 +181,12 @@ footer{color:var(--ink-faint);font-size:.8rem;text-align:center;padding:2rem 1.2
 .gate .more{display:inline-block;margin-top:.75rem;font-size:.82rem;color:var(--sky-deep);text-decoration:none;}
 .gate .peek{margin-top:1rem;font-size:.82rem;color:var(--ink-faint);}
 .gate .peek a{font-weight:700;}
+.issue{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:.5rem;}
+.issue>summary{font-family:var(--maru);font-weight:800;font-size:.96rem;color:var(--sky-deep);cursor:pointer;padding:.85rem 1.05rem;list-style:none;min-height:44px;display:flex;align-items:center;}
+.issue>summary::marker,.issue>summary::-webkit-details-marker{display:none;}
+.issue>summary::before{content:"＋ ";}
+.issue[open]>summary::before{content:"− ";}
+.issue-body{margin:0;padding:0 1.05rem 1.05rem;font-family:var(--body);font-size:.9rem;line-height:1.85;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink-soft);}
 /* 公開3ページ（bv-tokens.css）と同じ拡大率にそろえる。ここが無いと会員ページだけ
    文字とタップ領域が小さくなる（root 16px / ボタン38px → 18px / 44px）。 */
 @media (max-width:40rem){ html{font-size:112.5%;} .wrap,.h-in{padding-left:1.15rem;padding-right:1.15rem;} }

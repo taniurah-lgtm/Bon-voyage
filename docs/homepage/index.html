@@ -233,6 +233,31 @@
   }
 
   @media (prefers-reduced-motion: reduce) { .fade { animation: none; opacity: 1; transform: none; } }
+
+  /* 無料で使える3つの道具。以前はここが20pxのテキストリンクで、
+     すぐ下の有料セクションより目立たなかった。 */
+  .tools { display: grid; gap: .8rem; margin-top: 1.8rem; }
+  @media (min-width: 42rem) { .tools { grid-template-columns: 1fr 1fr 1fr; } }
+  .tool {
+    display: flex; gap: .8rem; align-items: flex-start; text-decoration: none;
+    background: var(--surface); border: 1px solid var(--line-strong);
+    border-radius: 16px; padding: 1rem 1.1rem; min-height: 44px;
+    box-shadow: var(--shadow-soft); color: var(--ink);
+  }
+  .tool:hover { border-color: var(--sky); }
+  .tool:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+  .tool-ic { font-size: 1.5rem; line-height: 1.2; flex: none; }
+  .tool-body { display: flex; flex-direction: column; gap: .2rem; }
+  .tool-body b { font-family: var(--maru); font-weight: 800; font-size: 1rem; color: var(--sky-deep); }
+  .tool-body > span { font-size: .88rem; color: var(--ink-soft); line-height: 1.7; }
+  .tool-body b b { color: var(--ink); font-weight: 800; }
+
+  /* #12 ヒーローの注記が芝生の写真の上で読めなかったので、下地を敷く */
+  .hero-note {
+    background: rgba(255,255,255,.86); border-radius: 999px;
+    padding: .35rem .9rem; display: inline-block; color: var(--ink) !important;
+  }
+  @media (prefers-color-scheme: dark) { .hero-note { background: rgba(19,31,40,.8); } }
 </style>
 </head>
 <body>
@@ -342,18 +367,29 @@
       </div>
     </article>
     <!-- ISSUE:END -->
-    <p class="guide-link" style="text-align:center;margin-top:1.6rem;font-weight:700;">
-      <a href="guide.html">🌳 保存版：花小金井 子連れおでかけガイド</a><br>
-      <span style="font-weight:500;font-size:.92rem;color:var(--ink-soft);">じゃぶじゃぶ池・大きな公園・雨の日の室内あそび・電車でおでかけ…花小金井まわりのおでかけ先まとめ</span>
-    </p>
-    <p class="guide-link" style="text-align:center;margin-top:1rem;font-weight:700;">
-      <a href="map.html">🗺 みんなのおでかけマップ</a><br>
-      <span style="font-weight:500;font-size:.92rem;color:var(--ink-soft);">「行ってよかった」を地元の家庭で持ち寄っている地図。このページから直接ひとこと書き込めます</span>
-    </p>
-    <p class="guide-link" style="text-align:center;margin-top:1rem;font-weight:700;">
-      <a href="calendar.html">📅 おでかけカレンダー</a><br>
-      <span style="font-weight:500;font-size:.92rem;color:var(--ink-soft);">今日からの2週間ぶんを日付から探せます。気になった予定はそのままご自分のカレンダーへ</span>
-    </p>
+    <div class="tools">
+      <a class="tool" href="calendar.html">
+        <span class="tool-ic">📅</span>
+        <span class="tool-body">
+          <b>おでかけカレンダー</b>
+          <span>日付から探せます。気になった予定は<b>ワンタップでご自分のカレンダーへ</b>。申込の締切も出ます</span>
+        </span>
+      </a>
+      <a class="tool" href="map.html">
+        <span class="tool-ic">🗺</span>
+        <span class="tool-body">
+          <b>みんなのおでかけマップ</b>
+          <span>「行ってよかった」を地元の家庭で持ち寄っている地図。<b>このページから直接書き込めます</b></span>
+        </span>
+      </a>
+      <a class="tool" href="guide.html">
+        <span class="tool-ic">🌳</span>
+        <span class="tool-body">
+          <b>保存版：子連れおでかけガイド</b>
+          <span>じゃぶじゃぶ池・大きな公園・雨の日の室内あそび・電車でおでかけ</span>
+        </span>
+      </a>
+    </div>
   </section>
 
   <section id="more" class="wrap">
@@ -387,9 +423,9 @@
         <ul class="paid-list">
           <li><span class="ck">✓</span><span><b>週2</b>でお届け（水・土）＋おでかけ直前の中止・天気チェック</span></li>
           <li><span class="ck">✓</span><span><b>会員ページ</b>の「おでかけカレンダー」で <b>先の予定までまとめて</b>見られます。気になった予定は <b>ワンタップでご自分のカレンダーに追加</b>（Googleカレンダー / iPhoneのカレンダー）</span></li>
-          <li><span class="ck">✓</span><span><b>申込の締切が近いもの</b>を、カレンダーの先頭にまとめて表示</span></li>
+          <li><span class="ck">✓</span><span><b>申込の締切</b>を、先のぶんまで残り日数つきでまとめて表示（公開カレンダーは直近2週間ぶんのみ）</span></li>
           <li><span class="ck">✓</span><span>お住まい・興味に合わせた <b>カスタマイズ</b>（多摩〜都心、花火だけ・プールだけ 等）</span></li>
-          <li><span class="ck">✓</span><span>「<b>おでかけマップ</b>」に <b>長めの感想と写真つき</b>で投稿できます（どなたでもひとことは書けます）。みんなの声も会員ページで全件</span></li>
+          <li><span class="ck">✓</span><span>「<b>おでかけマップ</b>」への投稿に <b>写真を添えられます</b>（ひとことは、どなたでも同じ長さで書けます）。みんなの声も会員ページで全件</span></li>
         </ul>
         <p class="reassure" style="margin-top:1rem;">一部の機能はこれから順次ととのえていきます。</p>
       </div>
@@ -406,8 +442,8 @@
             <li>花小金井まわりの近場が中心</li>
             <li>👶🧒🎒 の年齢の目安つき</li>
             <li>天気に合わせたひとこと</li>
-            <li>おでかけカレンダー（<b>今日からの2週間ぶん</b>）</li>
-            <li>おでかけマップに<b>ひとこと投稿</b>できます</li>
+            <li>おでかけカレンダー（<b>今日からの2週間ぶん</b>）<br><span class="tiny">気になった予定は<b>ワンタップでご自分のカレンダーへ</b>。直近の申込締切も出ます</span></li>
+            <li>おでかけマップに<b>ひとこと投稿</b>できます（字数は有料と同じ）</li>
           </ul>
         </div>
         <div class="cmp-col paid-col">
@@ -415,9 +451,9 @@
           <div class="cmp-role">わが家の予定を <b>決める・動く</b></div>
           <ul>
             <li><b>お子さんの年齢・お住まい・興味</b>に合わせて選びます</li>
-            <li>気になった予定を <b>ワンタップでカレンダーへ</b></li>
-            <li>おでかけカレンダーを<b>先の予定まで通して</b>見られる</li>
-            <li>マップに<b>長めの感想と写真</b>を添えられる</li>
+            <li>おでかけカレンダーを<b>先の予定まで通して</b>見られる（公開ぶんは2週間まで）</li>
+            <li>申込の締切を<b>先のぶんまで</b>残り日数つきで</li>
+            <li>マップの投稿に<b>写真</b>を添えられる／みんなの声を<b>全件</b></li>
             <li>おでかけ直前の<b>中止・天気の確認</b></li>
           </ul>
         </div>

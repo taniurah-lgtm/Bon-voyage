@@ -22,7 +22,9 @@
  *   - 掲載スポットは全部、誰でも見られる（無料を薄くしない）
  *   - みんなの投稿は、公開側は各スポット PUBLIC_PER_SPOT 件まで。
  *     全件と写真つきは会員ページで見られる。
- *   - 投稿の制限は「書く側」に置く: 一般=短いひとこと・写真なし / サポーター=長文・写真OK
+ *   - 投稿の字数は誰でも同じ（TEXT_LIMIT）。サポーターとの差は **写真を添えられるか** だけ。
+ *     ★字数で分けない（2026-08-23 オーナー判断）。自分の言葉を課金で区切るのは
+ *     「線引きは量でなく役割」に反し、書き手に「金で切られた」と感じさせる。
  *   - 応援のお願いは **投稿し終わったあと** にだけ出す（書く前に出さない）
  */
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -32,8 +34,7 @@ const SPOTS = JSON.parse(readFileSync('data/map-spots.json', 'utf8'));
 const POSTS = JSON.parse(readFileSync('data/map-posts.json', 'utf8'));
 const OUT = 'docs/homepage/map.html';
 const PUBLIC_PER_SPOT = 2;
-const FREE_LIMIT = 40;
-const PAID_LIMIT = 300;
+const TEXT_LIMIT = 300;   // ひとことの字数。誰でも同じ
 const POST_URL = process.env.MAP_POST_URL || '';
 const JOIN_URL = '/#more';   // トップページの「応援してくださる方へ」
 
@@ -218,8 +219,7 @@ ${sections}
     spots: spots,
     gate: gate,
     joinUrl: ${JSON.stringify(JOIN_URL)},
-    freeLimit: ${FREE_LIMIT},
-    paidLimit: ${PAID_LIMIT}
+    textLimit: ${TEXT_LIMIT}
   });
 })();
 </script>

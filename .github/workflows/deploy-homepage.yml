@@ -72,6 +72,22 @@ jobs:
           fi
           echo "OK: 本物の合言葉で組まれています"
 
+      # 「マップに投稿できます」と書いてあるのに投稿先が未設定、という乖離を止める。
+      # 事故#7（実装していない「カレンダー登録代行」を特典に書いていた）と同じ形なので、
+      # 書いてあることと動くことがずれたら公開前に気づけるようにする。
+      - name: 書いてあることが実際にできるか確かめる
+        run: |
+          claims=$(grep -l "書き込めます\|ひとこと投稿\|投稿に写真" docs/homepage/index.html || true)
+          endpoint=$(grep -o "endpoint: \"[^\"]*\"" docs/homepage/map.html | head -1 || true)
+          echo "投稿の送り先: ${endpoint:-（見つからない）}"
+          if [ -n "$claims" ] && echo "$endpoint" | grep -q 'endpoint: ""'; then
+            echo "::error::トップページに「マップに投稿できます」と書いてありますが、投稿の送り先が設定されていません。"
+            echo "::error::Settings → Secrets and variables → Actions → Variables に MAP_POST_URL を登録するか、"
+            echo "::error::index.html から投稿できるという記載を外してください（できないことを特典に書かない）。"
+            exit 1
+          fi
+          echo "OK: 書いてあることと、実際にできることが一致しています"
+
       # 公開側のカレンダーに、先の予定まで入っていないことを確かめる（無料/有料の境目）。
       - name: 公開データが2週間ぶんに収まっているか確かめる
         run: |
