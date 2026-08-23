@@ -227,3 +227,22 @@
 
 /* 総合評価だけの古い書式。否定的な評価は目立たせる */
 .bvc-ages.is-hard { color: var(--danger-ink); }
+
+/* 「今週末を見る」「今日」への近道（平日に開くと週末が見えなかった） */
+.bvc-quick { display: flex; gap: .4rem; margin: 0 0 .6rem; }
+.bvc-jump {
+  font-family: var(--maru); font-weight: 800; font-size: .82rem;
+  color: var(--on-sky); background: var(--sky-deep); border: 1px solid var(--sky-deep);
+  border-radius: 999px; padding: .45rem 1rem; min-height: 44px; cursor: pointer;
+}
+.bvc-jump[data-jump="today"] { color: var(--sky-deep); background: var(--surface); }
+.bvc-jump:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+
+/* 終わった予定（会員ページは過去も持っている） */
+.bvc-card.is-past { opacity: .72; border-style: dotted; }
+.bvc-past-label { margin: 0 0 .3rem; font-size: .76rem; font-weight: 700; color: var(--ink-faint); }
+
+/* 予定のある土日のマスが読みにくかった（4.18:1 / 3.17:1） */
+.bvc-cell.has.sat:not(.out) { color: #1F6280; }
+.bvc-cell.has.sun:not(.out) { color: #9E4C43; }
+.stamp { color: var(--ink-soft) !important; }

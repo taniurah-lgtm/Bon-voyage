@@ -207,7 +207,11 @@ ${(() => {
       const items = byDate[d]
         .map(
           (e) =>
-            `      <li>${esc(e.name)}${e.start ? `（${esc(e.start)}〜）` : ''}${
+            `      <li>${esc(e.name)}${
+              (e.programs && e.programs[d])
+                ? `（${esc(e.programs[d].label)} ${esc(e.programs[d].start)}〜${esc(e.programs[d].end || '')}）`
+                : e.start ? `（${esc(e.start)}〜${e.timeUncertain ? '・時間は要確認' : ''}）` : ''
+            }${
               e.place ? ` — ${esc(e.place.split(/[、(]/)[0])}` : ''
             }${e.url ? ` <a href="${esc(e.url)}" target="_blank" rel="noopener">公式</a>` : ''}</li>`
         )

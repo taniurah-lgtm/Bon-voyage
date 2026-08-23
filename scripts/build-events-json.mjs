@@ -182,11 +182,19 @@ function extractExceptions(raw, dates) {
 // 「10:00~13:00」「18:30~」「14:00開演」から時刻を拾う
 function extractTime(raw) {
   const s = normalize(raw);
+  // ★その時刻が「確かなもの」かを見る。
+  //   「(例年15:00~21:00、時間要確認)」は例年の目安で、今年の確定時刻ではない。
+  //   確定として出すと、読者のカレンダーに未確認の時刻がそのまま入る。
+  const uncertain = /(?:時間|時刻|開場|開演)\s*(?:が)?\s*要確認/.test(s) ||
+    /[（(][^）)]*例年[^）)]*\d{1,2}:\d{2}[^）)]*[）)]/.test(s) ||
+    /[（(][^）)]*\d{1,2}:\d{2}[^）)]*要確認[^）)]*[）)]/.test(s);
   const range = s.match(/(\d{1,2}):(\d{2})\s*~\s*(\d{1,2}):(\d{2})/);
-  if (range) return { start: `${pad(range[1])}:${range[2]}`, end: `${pad(range[3])}:${range[4]}` };
+  if (range) {
+    return { start: `${pad(range[1])}:${range[2]}`, end: `${pad(range[3])}:${range[4]}`, uncertain };
+  }
   const one = s.match(/(\d{1,2}):(\d{2})/);
-  if (one) return { start: `${pad(one[1])}:${one[2]}`, end: null };
-  return { start: null, end: null };
+  if (one) return { start: `${pad(one[1])}:${one[2]}`, end: null, uncertain };
+  return { start: null, end: null, uncertain: false };
 }
 const pad = (n) => String(n).padStart(2, '0');
 
@@ -553,7 +561,7 @@ for (const file of files) {
     //   まるごと「予定なし」になる（E39 麻布十番・E60 西東京みんなの展覧会）。
     const tentative = isDateVague(when);
     const place = field(b.lines, ['場所', '会場']);
-    let { start, end } = extractTime(when);
+    let { start, end, uncertain: timeUncertain } = extractTime(when);
     const programs = extractPrograms(when, dates);
     // その日だけのプログラムから拾った時刻を、全日の既定にしてはいけない
     if (programs) {
@@ -573,6 +581,7 @@ for (const file of files) {
       start,
       end,
       allDay: !start,
+      timeUncertain: !!timeUncertain,
       place,
       mapq: mapQuery(place, b.name),
       summary: readerText(field(b.lines, ['内容'])),   // ★子連れ欄で埋めない（kidsNoteと二重になる）

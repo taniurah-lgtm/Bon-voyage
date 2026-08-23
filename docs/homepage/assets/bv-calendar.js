@@ -90,6 +90,8 @@
     var t = date ? timesFor(ev, date) : { exception: false };
     // 未確認・推定はいちばん先に書く。読者のカレンダーに黙って入れない。
     if (ev.tentative) out.push('⚠️ 日程が未確定です。公式で確認してください');
+    if (ev.timeUncertain) out.push('⚠️ 時間は例年の目安で、今年の確定時刻ではありません。公式で確認してください');
+    if (ev.lastEntry) out.push(ev.lastEntry);
     if (t.program) out.push('この日は「' + t.program + '」の時間です（' + t.start + (t.end ? '〜' + t.end : '') + '）');
     if (!slot && t.start && !t.end) {
       out.push('⚠️ 終了時刻は公表されていません。カレンダーには' + GUESS_HOURS + '時間で仮置きしています');
@@ -140,7 +142,9 @@
       'TZNAME:JST', 'END:STANDARD', 'END:VTIMEZONE',
       'BEGIN:VEVENT',
       'DTSTAMP:' + now,
-      'UID:' + ev.id + '-' + stamp + '@bonvoya.nicomaru.tokyo',
+      // ★枠ごとに UID を分ける。同じ UID は「同じ予定の更新」なので、
+      //   2件目を取り込むと1件目が消える（兄弟で別の部に申し込む家庭で困る）。
+      'UID:' + ev.id + '-' + stamp + (slot ? '-' + slot.start.replace(':', '') : '') + '@bonvoya.nicomaru.tokyo',
       'SUMMARY:' + icsEsc(ev.name + (slot && slot.label ? '（' + slot.label + '）' : '')),
       ev.place ? 'LOCATION:' + icsEsc(ev.place) : '',
       'DESCRIPTION:' + icsEsc(detailsText(ev, date, slot)),
@@ -225,7 +229,8 @@
     return out;
   }
 
-  function cardHTML(ev, date) {
+  function cardHTML(ev, date, opt) {
+    var past = opt && opt.past;
     var multiSlot = hasMultipleSlots(ev);
     var t = timesFor(ev, date);
     var when = t.start ? t.start + (t.end ? '〜' + t.end : '〜') : '時間は公式で確認';
@@ -248,7 +253,8 @@
         }).join('')
       : '<a class="bvc-btn bvc-btn-add" href="' + esc(gcalURL(ev, date)) + '" target="_blank" rel="noopener">📅 カレンダーに追加</a>' +
         '<button class="bvc-btn bvc-btn-ics" type="button" data-ics="' + esc(ev.id) + '" data-date="' + esc(date) + '">🍎 iPhoneに追加</button>';
-    var links =
+    // 終わった予定に登録ボタンを出さない（会員ページは過去も持っている）
+    var links = past ? '' :
       addBtns +
       (ev.mapq ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(mapURL(ev.mapq)) + '" target="_blank" rel="noopener">📍 地図</a>' : '') +
       (safeURL(ev.url) ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(safeURL(ev.url)) + '" target="_blank" rel="noopener">🔗 公式</a>' : '');
@@ -256,10 +262,12 @@
       ? '<p class="bvc-deadline">⏳ 申込 ' + esc(fmtDay(ev.deadline.date)) + ' まで</p>'
       : '';
     return (
-      '<article class="bvc-card' + (ev.tentative ? ' is-tentative' : '') + '">' +
+      '<article class="bvc-card' + (ev.tentative ? ' is-tentative' : '') + (past ? ' is-past' : '') + '">' +
+      (past ? '<p class="bvc-past-label">この日は終わりました</p>' : '') +
       '<p class="bvc-when">' + esc(when) + ' ' + multi +
       (t.exception ? '<span class="bvc-exc">この日だけ時間がちがいます</span>' : '') +
-      (!multiSlot && t.start && !t.end ? '<span class="bvc-exc">終了時刻は未公表</span>' : '') +
+      (!multiSlot && t.start && !t.end && !ev.timeUncertain ? '<span class="bvc-exc">終了時刻は未公表</span>' : '') +
+      (ev.timeUncertain && !t.program ? '<span class="bvc-tent">時間は要確認（例年の目安）</span>' : '') +
       (ev.tentative ? '<span class="bvc-tent">日程は要確認</span>' : '') + '</p>' +
       '<h4 class="bvc-name">' + esc(ev.name) + '</h4>' +
       (multiSlot ? '<p class="bvc-slots">🕒 ' + esc(ev.when) + '</p>' : '') +
@@ -333,7 +341,25 @@
     var months = uniq(Object.keys(byDate).filter(function (d) { return d >= today; }).map(function (d) { return d.slice(0, 7); })).sort();
     if (!months.length) months = [today.slice(0, 7)];
     var view = months.indexOf(today.slice(0, 7)) >= 0 ? today.slice(0, 7) : months[0];
-    var selected = allDates[0] || null;
+    // 「今週末どこ行こう」が主な用なので、平日に開いたら次の土日を選んでおく。
+    // 土日に開いたときはその日のまま。
+    function nextWeekendWithEvents() {
+      var d0 = parseISO(today);
+      for (var i = 0; i <= 13; i++) {
+        var d = new Date(d0.getTime() + i * MS_DAY);
+        var wd = d.getDay();
+        if (wd !== 0 && wd !== 6) continue;
+        var key = iso(d);
+        if (byDate[key] && byDate[key].length) return key;
+      }
+      return null;
+    }
+    var selected = (byDate[today] && byDate[today].length && /[06]/.test(String(parseISO(today).getDay())))
+      ? today
+      : (nextWeekendWithEvents() || allDates[0] || null);
+    if (selected && selected.slice(0, 7) !== view && months.indexOf(selected.slice(0, 7)) >= 0) {
+      view = selected.slice(0, 7);
+    }
 
     root.innerHTML =
       '<div class="bvc">' +
@@ -344,6 +370,8 @@
       '<h3 class="bvc-month" aria-live="polite"></h3>' +
       '<button class="bvc-nav" type="button" data-go="1" aria-label="次の月">›</button>' +
       '</div>' +
+      '<div class="bvc-quick"><button class="bvc-jump" type="button" data-jump="weekend">今週末を見る</button>' +
+      '<button class="bvc-jump" type="button" data-jump="today">今日</button></div>' +
       '<table class="bvc-grid"><thead><tr>' +
       WD.map(function (w, i) { return '<th class="' + (i === 0 ? 'sun' : i === 6 ? 'sat' : '') + '">' + w + '</th>'; }).join('') +
       '</tr></thead><tbody></tbody></table>' +
@@ -383,6 +411,17 @@
         }
         return;
       }
+      var jump = e.target.closest('.bvc-jump');
+      if (jump) {
+        var to = jump.dataset.jump === 'today' ? today : nextWeekendWithEvents();
+        if (to) {
+          selected = to;
+          if (months.indexOf(to.slice(0, 7)) >= 0) view = to.slice(0, 7);
+          render();
+          $day.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        return;
+      }
       var cell = e.target.closest('.bvc-cell:not(.out)');
       if (cell) {
         selected = cell.dataset.date;
@@ -419,6 +458,12 @@
         b.disabled = !(i >= 0 && i < months.length);
       });
 
+      // 窓の外の日は「予定なし」と言ってはいけない（本当は予定があるのに読み上げが嘘になる）
+      function dayLabel(key, list) {
+        if (opts.teaser && data.window && key > data.window.to) return ' 公開ぶんの外';
+        return list.length ? ' 予定' + list.length + '件' : ' 予定なし';
+      }
+
       var first = new Date(y, m - 1, 1);
       var start = new Date(first);
       start.setDate(1 - first.getDay());          // その週の日曜まで戻す
@@ -448,7 +493,7 @@
             '<td class="' + cls.join(' ') + '" data-date="' + key + '"' +
             (inMonth
               ? ' tabindex="' + (key === selected ? '0' : '-1') + '" role="button" aria-label="' +
-                fmtDay(key) + (list.length ? ' 予定' + list.length + '件' : ' 予定なし') + '"'
+                fmtDay(key) + dayLabel(key, list) + '"'
               : '') + '>' +
             '<span class="bvc-num">' + cur.getDate() + '</span>' +
             (showDots && list.length ? '<span class="bvc-dots">' + dots + (list.length > 3 ? '<i class="bvc-more">+</i>' : '') + '</span>' : '') +
@@ -497,8 +542,10 @@
             : '<p class="bvc-empty">いまのところ、確定した予定はありません。</p>');
       } else {
         $day.innerHTML =
-          '<h4 class="bvc-dayhead">' + esc(fmtDay(selected)) + 'の予定<span class="bvc-count">' + list.length + '件</span></h4>' +
-          list.map(function (e) { return cardHTML(e, selected); }).join('');
+          '<h4 class="bvc-dayhead">' + esc(fmtDay(selected)) +
+          (selected < today ? 'に終わった予定' : 'の予定') +
+          '<span class="bvc-count">' + list.length + '件</span></h4>' +
+          list.map(function (e) { return cardHTML(e, selected, { past: selected < today }); }).join('');
       }
       renderTail();
     }

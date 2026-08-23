@@ -25,6 +25,10 @@ const POSTS = JSON.parse(readFileSync('data/map-posts.json', 'utf8'));
 const SPOTS = JSON.parse(readFileSync('data/map-spots.json', 'utf8'));
 
 const PASSES = passphrases();
+// 投稿の送り先があるかどうかで案内を変える。
+// ★ここを切り替えていなかったため、月300円を払った人だけが見るページで
+//   「公開ページのフォームから」と、無いフォームを案内していた（事故#7と同型）。
+const CAN_POST = !!process.env.MAP_POST_URL;
 
 // ---- カレンダーに渡すデータ（台帳の内部メモは落として渡す）--------------------
 const calData = {
@@ -136,7 +140,11 @@ const CONTENT = `
   <script type="application/json" id="bv-spots">${jsonInTag(SPOTS)}</script>
   <script type="application/json" id="bv-posts">${jsonInTag(POSTS)}</script>
   <div id="bv-map"><p class="note">地図を読み込んでいます…</p></div>
-  <p class="note" style="margin-top:.6rem">投稿は <a href="/map.html#post">公開ページのフォーム</a> から。ひとことの長さはどなたも同じで、<b>合言葉を入れると写真も添えられます</b>（このページを開いていれば、合言葉は入力済みです）。</p>
+  <p class="note" style="margin-top:.6rem">${
+    CAN_POST
+      ? '投稿は <a href="/map.html#post">公開ページのフォーム</a> から。ひとことの長さはどなたも同じで、<b>合言葉を入れると写真も添えられます</b>（このページを開いていれば、合言葉は入力済みです）。'
+      : '投稿は、いまは <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a> でお預かりしています。場所とひとことを送っていただければ、こちらで地図に載せます。<b>写真もいっしょに送っていただけます。</b>'
+  }</p>
 
 ${renkyu}
 
@@ -373,6 +381,7 @@ const firm = EVENTS.events.filter((e) => !e.tentative).length;
 console.log(`wrote ${OUT} ${page.length} chars`);
 console.log(`  カレンダー: 確定 ${firm}件 / 暫定 ${EVENTS.events.length - firm}件 / 常設 ${EVENTS.standing.length}件`);
 console.log(`  マップ: スポット ${SPOTS.length}件（ピン ${SPOTS.filter((s) => s.lat).length}件）/ みんなの声 ${POSTS.length}件`);
+console.log(`  投稿の案内: ${CAN_POST ? 'サイト内フォーム' : 'LINEでお預かり'}`);
 console.log(`  合言葉 ${PASSES.length}件（暗号文のみ出力・合言葉は非保存）${
   PASSES[0] === 'CHANGEME' ? '  ⚠ MEMBER_PASS 未設定' : ''
 }`);

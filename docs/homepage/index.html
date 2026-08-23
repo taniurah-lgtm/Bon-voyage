@@ -263,6 +263,10 @@
      役割のちがいを見せる表なので、どちらも同じ濃さで書く。 */
   .cmp-col ul li { color: var(--ink); }
   .cmp-col .tiny { display: block; color: var(--ink-soft); margin-top: .15rem; }
+
+  /* [hidden] は UA の display:none だが、.ck の display:inline-flex に負けて
+     ✓ が2つ並んでいた。属性を優先させる。 */
+  [hidden] { display: none !important; }
 </style>
 </head>
 <body>

@@ -1,6 +1,14 @@
 /* ぼんぼやーじゅ通信 — 地図とその周りの見た目。色はページ側の変数に乗る。 */
 
-.bvm-chips { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .7rem; }
+/* 折り返すと249pxを占めて、地図が2画面ぶん下に押し出されていた。
+   横スクロールの1行に畳む。 */
+.bvm-chips {
+  display: flex; flex-wrap: nowrap; gap: .4rem; margin-bottom: .7rem;
+  overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  padding-bottom: .2rem;
+}
+.bvm-chips::-webkit-scrollbar { display: none; }
+.bvm-chip { flex: 0 0 auto; }
 .bvm-chip {
   --chip: var(--sky-deep);
   font-family: var(--body); font-size: .8rem; font-weight: 700;
@@ -19,7 +27,7 @@
 .bvm-chip:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
 
 .bvm-canvas {
-  height: 21rem; border-radius: 16px; border: 1px solid var(--line);
+  height: 24rem; border-radius: 16px; border: 1px solid var(--line);
   background: var(--surface-2); overflow: hidden; z-index: 0;
 }
 @media (min-width: 40rem) { .bvm-canvas { height: 25rem; } }
@@ -33,7 +41,9 @@
 /* ---- ピン（画像を使わずCSSで描く） ---- */
 .bvm-pin-wrap {
   background: none; border: none;
-  /* アイコン枠は44px。見た目のピンはその中央下に描く（当たり判定を実体で持つ） */
+  /* アイコン枠は 30x38（JS の iconSize と揃える）。見た目のピン(20px)より広く取って押しやすくする。
+     44px にすると隣のピンが重なって「押したのに別の場所が開く」が出るので、これ以上広げない
+     （まとめ表示のしきい値 OVERLAP_PX=34 とセット）。 */
   display: flex; align-items: flex-end; justify-content: center;
 }
 .bvm-pin {
@@ -100,3 +110,18 @@
   box-shadow: 0 1px 6px rgba(0,0,0,.35);
 }
 .bvm-cluster-wrap:hover .bvm-cluster, .bvm-cluster-wrap:focus-visible .bvm-cluster { background: #1F6280; }
+
+/* ---- 「近く／全体」の切り替え（地図の左下） ---- */
+.bvm-view { display: flex; gap: .25rem; margin: 0 0 .4rem .4rem; }
+.bvm-view-btn {
+  font-family: var(--body); font-size: .75rem; font-weight: 700;
+  color: var(--ink-soft); background: var(--surface);
+  border: 1px solid var(--line-strong); border-radius: 999px;
+  min-height: 34px; padding: .1rem .7rem; cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .18);
+}
+.bvm-view-btn:active { background: var(--surface-2); }
+.bvm-off {
+  font-size: .78rem; color: var(--ink-soft); margin-top: .35rem; line-height: 1.7;
+  background: var(--surface-2); border-radius: 10px; padding: .35rem .6rem;
+}

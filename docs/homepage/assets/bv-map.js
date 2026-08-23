@@ -77,14 +77,29 @@
       '</div>' +
       '<div class="bvm-canvas"></div>' +
       '<p class="bvm-note"></p>' +
+      '<p class="bvm-off" hidden></p>' +
       '</div>';
 
     var canvas = el.querySelector('.bvm-canvas');
-    var map = L.map(canvas, { scrollWheelZoom: false, zoomControl: true });
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // ズームボタンは右下に置く。左上だと北西のピン（八国山緑地）が真下に入って押せない。
+    var map = L.map(canvas, { scrollWheelZoom: false, zoomControl: false });
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+    var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
-    }).addTo(map);
+    });
+    var tileFails = 0;
+    tiles.on('tileerror', function () {
+      tileFails++;
+      // 数枚の失敗はよくあるが、まとまって落ちたら地図が真っ白に見える。黙らない。
+      if (tileFails === 6) {
+        var n = el.querySelector('.bvm-note');
+        if (n && n.textContent.indexOf('地図の下地') < 0) {
+          n.textContent = '地図の下地が読み込めていません（ピンと一覧はそのまま使えます）／' + n.textContent;
+        }
+      }
+    });
+    tiles.addTo(map);
     // 指1本のスクロールでページが動かなくなるのを防ぐ
     map.once('focus', function () { map.scrollWheelZoom.enable(); });
 
@@ -240,9 +255,64 @@
     }
 
     // ---- 初期表示 -----------------------------------------------------------
-    // 全域に合わせると多摩全体が入って重なりが増える。花小金井まわりを軸に置き、
-    // 遠方は寄る／引くと出てくる（下の一覧にも全件ある）。
-    map.setView(HOME, 12);
+    // 花小金井を軸に固定していたが、それだと 14本のうち 6本（西武園・所沢・多摩動物公園・
+    // サマーランド・立川・吉祥寺）が最初から画面の外に出ていて、開いた人には「無い」に見えた。
+    // 「重なるから全域に合わせない」は、まとめ表示（クラスタ）を入れる前の判断。
+    // いまは近いピンはまとめて出るので、全件が入るところに合わせるほうが安全。
+    function fitAll(list) {
+      var pts = (list && list.length ? list : places).map(function (pl) { return [pl.lat, pl.lng]; });
+      if (!pts.length) { map.setView(HOME, 12); return; }
+      if (pts.length === 1) { map.setView(pts[0], 14); return; }
+      // 右下は帰属表示とズームボタン、左下は「近く／全体」が乗っている。
+      // そこにピンが入ると、見えているのに押せない（実際に1本そうなっていた）。
+      map.fitBounds(L.latLngBounds(pts).pad(0.05), {
+        maxZoom: 13, paddingTopLeft: [10, 10], paddingBottomRight: [48, 52],
+      });
+    }
+    fitAll(places);
+
+    // 全件が入る縮尺だと、近所（小金井公園・多摩六都・田無など）が1つにまとまってしまう。
+    // 読む人の家は花小金井なので、近所だけ見たい／全体を見たいを2つのボタンで行き来できるようにする。
+    // 「近く」は縮尺を決め打ちにしない（決め打ちだと近所のピンまで枠の外に出た）。
+    // 花小金井から 6km ほどの範囲にあるピンが、ちょうど入るところに合わせる。
+    function nearHome(list) {
+      var home = L.latLng(HOME[0], HOME[1]);
+      var near = (list || []).filter(function (pl) { return home.distanceTo([pl.lat, pl.lng]) <= 6000; });
+      return near.length ? near : list;
+    }
+
+    var homeCtl = L.control({ position: 'bottomleft' });
+    homeCtl.onAdd = function () {
+      var d = L.DomUtil.create('div', 'bvm-view');
+      d.innerHTML =
+        '<button type="button" class="bvm-view-btn" data-view="home">近く</button>' +
+        '<button type="button" class="bvm-view-btn" data-view="all">全体</button>';
+      L.DomEvent.disableClickPropagation(d);
+      d.addEventListener('click', function (e) {
+        var b = e.target.closest('.bvm-view-btn');
+        if (!b) return;
+        if (b.dataset.view === 'home') fitAll(nearHome(filterCat ? visiblePlaces() : places));
+        else fitAll(filterCat ? visiblePlaces() : places);
+      });
+      return d;
+    };
+    homeCtl.addTo(map);
+
+    // 画面の外に出ているピンは、その人には「無い」ものになる。黙って隠さず、何件あるか言う。
+    // ★ここでピンを組み直してはいけない（ふきだしの autoPan が moveend を呼ぶので消えてしまう）。
+    //   触るのはこの1行だけ。
+    function tellOffscreen() {
+      var b = map.getBounds();
+      var list = visiblePlaces();
+      var out = list.filter(function (pl) { return !b.contains([pl.lat, pl.lng]); });
+      var n = out.reduce(function (a, pl) { return a + pl.spots.length; }, 0);
+      var $off = el.querySelector('.bvm-off');
+      if (!n) { $off.hidden = true; $off.textContent = ''; return; }
+      $off.hidden = false;
+      $off.textContent = 'いま画面の外に ' + n + '件あります（地図左下の「全体」で出ます）';
+    }
+    map.on('moveend zoomend', tellOffscreen);
+    tellOffscreen();
     // ★ moveend では組み直さない。ピン同士の画面上の距離は縮尺だけで決まり、
     //   平行移動では変わらない。moveend で組み直すと、ふきだしを開いたときの
     //   autoPan が再描画を呼び、開いたふきだしがすぐ消える（実際にそうなっていた）。
@@ -256,15 +326,9 @@
       el.querySelectorAll('.bvm-chip').forEach(function (c) { c.classList.toggle('is-on', c === chip); });
       filterCat = chip.dataset.cat;
       var list = visiblePlaces();
-      if (!filterCat) {
-        // 「ぜんぶ」は全域に合わせない。多摩全体が入ると重なりが増えて読みにくい。
-        map.setView(HOME, 12);
-      } else if (list.length) {
-        map.fitBounds(L.latLngBounds(list.map(function (pl) { return [pl.lat, pl.lng]; })).pad(0.25),
-          { maxZoom: list.length === 1 ? 15 : 13 });
-      } else {
-        map.setView(HOME, 12);
-      }
+      // しぼった側も「ぜんぶ」も、その時に出るピンが全部入るところに合わせる。
+      // 画面の外にピンが残ると、その場所は無いものとして扱われてしまう。
+      fitAll(filterCat ? list : places);
       render();
       if (typeof opts.onSelect === 'function') opts.onSelect(filterCat);
     });
