@@ -399,6 +399,7 @@ docs/tokushoho-template.md     特商法のひな型と判断の記録
 docs/map-form.md               投稿マップ（保留）
 docs/pr-plan.md                ポスティング外注（保留）
 docs/notion/                   Notion取り込み用（tasks.csv / context.md / README.md）
+docs/backport-to-rfwmo8.md     rfwmo8 に戻す必要がある修正（未反映・要対応）
 scripts/build-map.mjs build-apo-map.mjs build-members.mjs
 data/apo-spots.json            アポ先30件（マイマップの元）
 data/map-spots.json            おでかけマップの種23件
