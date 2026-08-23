@@ -85,8 +85,58 @@ const renkyu = !renkyuLive ? '' : `
   <div class="ev"><div class="nm">🏞 高原で涼む・自然（1泊向き）</div><div class="desc">清里/八ヶ岳・富士五湖ほか。標高が高く涼しく、牧場で動物ふれあいも。人気宿は連休ぶんが早く埋まるので早めに。</div></div>
   <div class="ev"><div class="nm">♨ 子連れ温泉（1泊・のんびり）</div><div class="desc">秩父/奥多摩/箱根の子連れ歓迎の宿。部屋食・貸切風呂だと2歳連れも安心。連休は満室が早いので今のうちに候補押さえを。</div></div>
   <div class="ev"><div class="nm">🎠 雨でも安心のテーマパーク・室内</div><div class="desc">サンリオピューロランド（多摩・全天候の室内）は天気に左右されない。西武園ゆうえんち（近い）は大火祭りの花火が9/19〜23も開催。</div><div class="links"><a class="lk off" href="https://www.puroland.jp/" target="_blank" rel="noopener">🔗 ピューロランド</a><a class="lk off" href="https://www.seibuen-amusement-park.jp/2026summer/" target="_blank" rel="noopener">🔗 西武園</a></div></div>
-  <div class="ev"><div class="nm">🏕 キャンプ（早めに予約）</div><div class="desc">C&amp;C山中湖ほか高原キャンプ。予約は例年2ヶ月前の月末20時ごろ開始（9月分は7月末ごろ）。人気なので、最新の受付日を公式で確認して早めに。日曜泊やキャンセル拾いも。</div><div class="links"><a class="lk off" href="https://www.camp-cabins.com/yamanakako/" target="_blank" rel="noopener">🔗 公式</a></div></div>
+  <div class="ev"><div class="nm">🏕 キャンプ（早めに予約）</div><div class="desc">高原キャンプは連休ぶんが早く埋まります。施設ごとの予約開始ルールは下の<a href="#camp">キャンプの節</a>にまとめています（取りにくいときは日曜泊とキャンセル待ち通知が有効）。</div></div>
   <p class="note">※営業日・料金・味覚狩りの解禁時期は変わります。おでかけ前に各公式でご確認を。</p>`;
+
+// ---- キャンプ（events/camp.md を読む）----------------------------------------
+// 特典に「キャンプ・連休の解禁日と締切を、先のぶんまで」と書いているのに、
+// events/camp.md はビルドで一度も読まれておらず、会員ページのキャンプ欄は
+// 手書きの1段落だけだった（しかも「9月分は7月末ごろ」＝今日にはもう過ぎている助言）。
+// 台帳の中身をそのまま載せる。日付を勝手に計算はしない（台帳自身が
+// 「ルールは変わるので各公式で再確認」と書いているため）。
+const campSection = (() => {
+  if (!existsSync('events/camp.md')) return '';
+  const text = readFileSync('events/camp.md', 'utf8');
+  const lines = text.split('\n');
+  // 「予約の基本(重要)」の中身
+  const basics = [];
+  let inBasics = false;
+  for (const l of lines) {
+    if (/^##\s*予約の基本/.test(l)) { inBasics = true; continue; }
+    if (inBasics && /^##\s/.test(l)) break;
+    if (inBasics && /^\s*-\s/.test(l)) basics.push(l.replace(/^\s*-\s*/, ''));
+  }
+  // 施設（### C<n>. 名前）
+  const spots = [];
+  let cur = null;
+  for (const l of lines) {
+    const h = l.match(/^###\s*(C\d+)\.\s*(.+)$/);
+    if (h) { cur = { id: h[1], name: h[2].trim(), body: [] }; spots.push(cur); continue; }
+    if (/^##\s/.test(l)) cur = null;
+    if (cur && /^\s*-\s/.test(l)) cur.body.push(l.replace(/^\s*-\s*/, ''));
+  }
+  const md = (t) => esc(t)
+    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+    .replace(/(https?:\/\/[^\s、）)]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+  const live = spots.filter((c) => !/ステータス:\s*見送り/.test(c.body.join(' ')));
+  if (!live.length && !basics.length) return '';
+  return `
+  <h2 class="sec" id="camp">🏕 キャンプ（予約の解禁が早いもの）</h2>
+  <p class="sec-note">人気の施設は夏〜秋の土曜が2〜3ヶ月前に埋まります。台帳にある${live.length}か所と、
+    施設ごとの予約開始ルールをそのまま置いています。<b>ルールは年ごとに変わるので、必ず各公式でご確認ください。</b></p>
+  ${basics.length ? `<div class="card"><div class="nm">予約の基本</div><ul class="campbasics">${
+    basics.map((t) => `<li>${md(t)}</li>`).join('')
+  }</ul></div>` : ''}
+  <details class="spotwrap">
+    <summary>キャンプ場の一覧を読む（全${live.length}か所）</summary>
+    <div class="spotlist">${live.map((c) => `
+      <div class="spot">
+        <div class="nm">${esc(c.name)}</div>
+        <div class="desc">${c.body.map(md).join('<br>')}</div>
+      </div>`).join('')}
+    </div>
+  </details>`;
+})();
 
 // ---- バックナンバー（過去号を実際に載せる）------------------------------------
 // これまで「順次公開していきます」と書いてあるだけで中身が無かった。
@@ -189,6 +239,7 @@ const TOC = `
     <a href="#cal">📅 カレンダー</a>
     <a href="#map">🗺 マップ</a>
     ${renkyuLive ? '<a href="#renkyu">🍁 連休さきどり</a>' : ''}
+    ${campSection ? '<a href="#camp">🏕 キャンプ</a>' : ''}
     <a href="#voices">💬 みんなの声</a>
     <a href="#back">📮 バックナンバー</a>
     <a href="#other">🔗 ほかのページ</a>
@@ -196,7 +247,7 @@ const TOC = `
 
 const CONTENT = `
   <h2 class="sec sec-first" id="cal">📅 おでかけカレンダー</h2>
-  <p class="sec-note">日をタップすると予定が出ます。</p>
+  <p class="sec-note">日をタップすると予定が出ます。<span class="stamp">台帳の更新日: ${EVENTS.generated}</span></p>
   <script type="application/json" id="bv-cal-data">${jsonInTag(calData)}</script>
   <div id="bv-cal"><p class="note">カレンダーを組み立てています…</p></div>
 
@@ -209,7 +260,7 @@ ${TOC}
   <div id="bv-map"><p class="note">地図を読み込んでいます…</p></div>
   <details class="spotwrap">
     <summary>スポットの説明を読む（全${SPOTS.length}件）</summary>
-    <div class="spotlist">
+    <div class="spotlist" id="map-spotlist">
 ${spotList}
     </div>
   </details>
@@ -225,6 +276,8 @@ ${spotList}
 
 ${renkyu}
 
+${campSection}
+
   <h2 class="sec" id="voices">💬 みんなの声（全件）</h2>
   ${voicesSection}
 
@@ -237,7 +290,7 @@ ${renkyu}
 ${issueHTML}
 
   <h2 class="sec" id="other">🔗 ほかのページ</h2>
-  <p class="sec-note">解錠したあと、ここから出られる先が特商法の表記だけでした。無料でお使いいただけるページにも戻れるようにしています。</p>
+  <p class="sec-note">無料でお使いいただけるページにも、ここから戻れます。</p>
   <p class="note-btns" style="margin-top:.2rem">
     <a class="note-btn" href="/">通信について</a>
     <a class="note-btn" href="/calendar.html">公開カレンダー</a>
@@ -245,7 +298,7 @@ ${issueHTML}
     <a class="note-btn" href="/guide.html">おでかけガイド</a>
   </p>
 
-  <p class="note" style="margin-top:1.6rem">📅 ボタンはご自分のカレンダーに保存する形です（Googleカレンダー、またはiPhoneのカレンダー）。リマインダーはカレンダー側でお好みに設定できます。日程・料金は変わることがあるので、おでかけ前に各公式でご確認ください。</p>`;
+  <p class="note" style="margin-top:1.6rem"><b>📅</b> は Google カレンダーに直接ひらく形、<b>📄</b> はカレンダーのファイル(.ics)を保存する形です（iPhone・Apple カレンダーの方は 📄、Android の方もどちらでも使えます）。リマインダーはカレンダー側でお好みに設定できます。日程・料金は変わることがあるので、おでかけ前に各公式でご確認ください。</p>`;
 
 // ---- ページ本体のCSS（カレンダー・地図の見た目は外部ファイル）------------------
 const CSS = `:root{--ground:#FBFAF5;--surface:#FFFFFF;--surface-2:#F5F2EA;--ink:#34434C;--ink-soft:#63727B;--ink-faint:#97A2AA;--sky:#4FA3C4;--sky-deep:#2C7C9E;--sky-wash:#E9F4F7;--marigold:#EBA24A;--marigold-wash:#FBEEDA;--marigold-ink:#8A5A12;--on-sky:#FFFFFF;--danger-ink:#B4453C;--leaf:#74AE71;--line:#ECE7DB;--line-strong:#DCD5C6;--radius:18px;--radius-sm:14px;--shadow-soft:0 2px 20px rgba(52,67,76,.05);--maru:"Hiragino Maru Gothic ProN","Yu Gothic","Noto Sans JP","Segoe UI",sans-serif;--body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP","Segoe UI",Meiryo,sans-serif;--script:Georgia,"Times New Roman",serif;}
@@ -276,6 +329,7 @@ h2.sec-first{margin-top:.4rem;}
 .sec-first + .sec-note{margin-bottom:.2rem;}
 .noscript-note{background:var(--marigold-wash);border:1px solid var(--marigold);border-radius:12px;padding:.9rem 1rem;font-size:.86rem;line-height:1.8;margin:.6rem 0;}
 .sec-note{color:var(--ink-soft);font-size:.9rem;margin:0 0 1rem;line-height:1.8;}
+.stamp{display:inline-block;margin-left:.5rem;font-size:.8rem;color:var(--ink-soft);}
 .ev{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:.95rem 1.1rem;margin-bottom:.8rem;box-shadow:0 2px 14px rgba(52,67,76,.05);}
 .ev .when{color:var(--sky-deep);font-size:.82rem;font-weight:800;}
 .ev .nm{font-family:var(--maru);font-weight:800;font-size:1.04rem;margin-top:.1rem;}
@@ -294,6 +348,8 @@ h2.sec-first{margin-top:.4rem;}
 .spot .desc{font-size:.88rem;color:var(--ink-soft);margin-top:.3rem;line-height:1.8;}
 .spot .ages{font-size:.82rem;font-family:var(--maru);font-weight:700;margin-top:.3rem;}
 .spot .links{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem;}
+.campbasics{margin:.4rem 0 0;padding-left:1.1rem;font-size:.86rem;color:var(--ink-soft);line-height:1.9;}
+.campbasics li{margin-top:.3rem;}
 .nopin{font-size:.72rem;font-weight:700;color:var(--marigold-ink);background:var(--marigold-wash);border-radius:999px;padding:.1rem .45rem;}
 .lk.cal{background:var(--sky-deep);color:#fff;border-color:var(--sky-deep);}
 .lk.map{color:var(--sky-deep);background:var(--surface);}
@@ -310,7 +366,7 @@ h2.sec-first{margin-top:.4rem;}
 .note-btns{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.7rem;}
 .note-btn{display:inline-flex;align-items:center;min-height:44px;padding:0 1rem;border-radius:999px;
   border:1px solid var(--line-strong);background:var(--surface);font-weight:700;font-size:.86rem;text-decoration:none;}
-footer{color:var(--ink-faint);font-size:.8rem;text-align:center;padding:2rem 1.25rem 3rem;line-height:1.7;}
+footer{color:var(--ink-soft);font-size:.8rem;text-align:center;padding:2rem 1.25rem 3rem;line-height:1.7;}
 .fmark{font-family:var(--maru);font-weight:800;color:var(--ink-soft);}
 .gate{max-width:24rem;margin:3rem auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.6rem 1.4rem;text-align:center;box-shadow:0 2px 16px rgba(52,67,76,.06);}
 .gate h2{font-family:var(--maru);font-weight:800;font-size:1.15rem;margin:0 0 .4rem;}
@@ -318,12 +374,12 @@ footer{color:var(--ink-faint);font-size:.8rem;text-align:center;padding:2rem 1.2
 .gate input{width:100%;font-size:1.05rem;padding:.7rem .8rem;border:1px solid var(--line-strong);border-radius:12px;background:var(--ground);color:var(--ink);}
 .gate button{margin-top:.8rem;width:100%;font-family:var(--maru);font-weight:800;font-size:1.05rem;color:#fff;background:var(--sky-deep);border:none;border-radius:999px;padding:.75rem;cursor:pointer;}
 .gate .err{color:#C0554E;font-size:.86rem;margin-top:.7rem;min-height:1.1em;}
-.gate .hint{font-size:.8rem;color:var(--ink-faint);margin-top:.9rem;}
+.gate .hint{font-size:.8rem;color:var(--ink-soft);margin-top:.9rem;}
 .gate .cta{margin-top:1.3rem;padding-top:1.15rem;border-top:1px solid var(--line);}
 .gate .cta .lead{font-size:.85rem;color:var(--ink-soft);margin:0 0 .8rem;line-height:1.7;}
-.gate .join{display:block;font-family:var(--maru);font-weight:800;font-size:1rem;color:#fff;background:var(--marigold);border:none;border-radius:999px;padding:.72rem;text-decoration:none;}
+.gate .join{display:block;font-family:var(--maru);font-weight:800;font-size:1rem;color:#3a2408;background:var(--marigold);border:none;border-radius:999px;padding:.72rem;text-decoration:none;}
 .gate .more{display:inline-block;margin-top:.75rem;font-size:.82rem;color:var(--sky-deep);text-decoration:none;}
-.gate .peek{margin-top:1rem;font-size:.82rem;color:var(--ink-faint);}
+.gate .peek{margin-top:1rem;font-size:.82rem;color:var(--ink-soft);}
 .gate .peek a{font-weight:700;}
 .issue{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:.5rem;}
 .issue>summary{font-family:var(--maru);font-weight:800;font-size:.96rem;color:var(--sky-deep);cursor:pointer;padding:.85rem 1.05rem;list-style:none;min-height:44px;display:flex;align-items:center;}
@@ -453,7 +509,22 @@ function buildMap(){
   // （出すと押しても何も起きず、履歴に # だけが積まれていた）。
   // スポットの説明の一覧をこのページにも置いたので、ふきだしの「くわしく ↓」を出す。
   // 飛び先は閉じている <details> の中にあるので、開いてから飛ぶ（下の onJump）。
-  BVMap.mount(host, { spots: spots, posts: posts, hasList: true });
+  BVMap.mount(host, {
+    spots: spots, posts: posts, hasList: true,
+    // 公開ページは絞り込みが下の一覧にも効くのに、会員ページは23件出たままだった。
+    onSelect: function (cat) {
+      // ★地図の一覧だけを絞る。#map-spotlist で範囲を切らないと、
+      //   同じ class を使っているキャンプの一覧まで消える。
+      var list = document.getElementById('map-spotlist');
+      if (!list) return;
+      list.querySelectorAll('.spot').forEach(function (s) {
+        s.hidden = !!cat && s.dataset.cat !== cat;
+      });
+      list.querySelectorAll('.spot-cat').forEach(function (h) {
+        h.hidden = !!cat && h.textContent.trim() !== cat;
+      });
+    },
+  });
 }
 
 function enableNav(){

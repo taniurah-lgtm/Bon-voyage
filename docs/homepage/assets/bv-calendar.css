@@ -216,7 +216,7 @@
 }
 /* 開催日が多いものの子連れメモは、その日の話ではなく催し全体の話 */
 .bvc-kidslabel {
-  display: block; font-size: .72rem; font-weight: 700; color: var(--ink-faint);
+  display: block; font-size: .72rem; font-weight: 700; color: var(--ink-soft);
   letter-spacing: .04em;
 }
 

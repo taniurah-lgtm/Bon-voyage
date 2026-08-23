@@ -66,9 +66,4 @@ footer .fmark { font-family: var(--maru); font-weight: 800; color: var(--ink-sof
   margin-top: 1.6rem; font-size: .85rem; line-height: 1.9; color: var(--ink-soft);
   border-top: 1px solid var(--line); padding-top: 1rem;
 }
-.support-line a { font-weight: 700; position: relative; display: inline-block; }
-/* 静かな1行のままで、指の当たり判定だけ44pxに広げる */
-.support-line a::after {
-  content: ''; position: absolute; left: -.2rem; right: -.2rem;
-  top: 50%; height: 44px; transform: translateY(-50%);
-}
+.support-line a { font-weight: 700; display: inline-flex; align-items: center; min-height: 44px; }

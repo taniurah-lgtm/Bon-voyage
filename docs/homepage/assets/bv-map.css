@@ -22,8 +22,10 @@
   content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--chip);
 }
 .bvm-chip[data-cat=""]::before { display: none; }
-.bvm-chip.is-on { color: #fff; background: var(--sky-deep); border-color: var(--sky-deep); }
-.bvm-chip.is-on::before { background: #fff; }
+/* ダークでは --sky-deep が明るい色になるので #fff だと 1.62:1 で読めない。
+   地の明暗に追従する --on-sky を使う（bv-calendar.css はすでにそうしている）。 */
+.bvm-chip.is-on { color: var(--on-sky); background: var(--sky-deep); border-color: var(--sky-deep); }
+.bvm-chip.is-on::before { background: var(--on-sky); }
 .bvm-chip:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
 
 .bvm-canvas {

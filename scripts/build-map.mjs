@@ -135,7 +135,8 @@ const page = `<!doctype html>${buildStamp()}
   .nopin { font-family: var(--body); font-weight: 700; font-size: .68rem; color: var(--ink-faint); background: var(--surface-2); border-radius: 999px; padding: .05rem .45rem; vertical-align: .12em; }
   .spot .acc { font-size: .85rem; color: var(--sky-deep); margin-top: .1rem; }
   .spot .desc { font-size: .95rem; color: var(--ink-soft); margin-top: .35rem; }
-  .spot .ages { margin-top: .45rem; font-family: var(--maru); font-weight: 700; font-size: .86rem; color: var(--ink-faint); }
+  /* 親がいちばん見る行。--ink-faint は白地 2.6:1 で本文には足りない（会員ページ側は --ink） */
+  .spot .ages { margin-top: .45rem; font-family: var(--maru); font-weight: 700; font-size: .86rem; color: var(--ink); }
   .links { margin-top: .35rem; display: flex; flex-wrap: wrap; gap: .6rem; }
   /* ピンなしスポットの唯一の出口なので、指で押せる大きさを確保する */
   .lk { font-size: .82rem; font-weight: 700; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }

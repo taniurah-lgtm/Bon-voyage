@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-23",
+ "generated": "2026-08-24",
  "window": {
   "from": "2026-08-24",
   "to": "2026-09-07"
@@ -20,9 +20,9 @@
    "end": null,
    "allDay": false,
    "timeUncertain": false,
-   "place": "",
+   "place": "西武園ゆうえんち レッツゴー!レオランド特設ステージ(西武園ゆうえんち駅)/萩山乗換 約20〜25分",
    "mapq": "西武園ゆうえんち 大火祭り",
-   "summary": "",
+   "summary": "ダンサー・特殊効果連動の至近距離花火。要入園料。「大夏祭り」期間中の演出",
    "kidsNote": "お盆期間の平日に行けるのが強み",
    "caution": "",
    "contact": null,
@@ -33,9 +33,7 @@
    },
    "cost": "",
    "target": "",
-   "url": "",
-   "status": "候補",
-   "confidence": "",
+   "url": "https://www.seibuen-amusement-park.jp/2026summer/",
    "tentative": false,
    "deadline": null
   },
@@ -74,8 +72,6 @@
    "cost": "",
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260824.pdf",
-   "status": "候補",
-   "confidence": "公式確認済み(公式イベントページ＋チラシPDF)",
    "tentative": false,
    "deadline": null
   },
@@ -109,8 +105,6 @@
    "cost": "",
    "target": "",
    "url": "http://takiyama.in.coocan.jp/",
-   "status": "候補",
-   "confidence": "日程確定",
    "tentative": false,
    "deadline": null
   },
@@ -150,8 +144,6 @@
    "cost": "",
    "target": "",
    "url": "https://akishima-kujiramatsuri.jp/",
-   "status": "候補",
-   "confidence": "確認済み(日割り詳細は要確認)",
    "tentative": false,
    "deadline": null
   },
@@ -184,8 +176,6 @@
    "cost": "",
    "target": "",
    "url": "https://www.city.musashimurayama.lg.jp/kankou/1004434/1001617.html",
-   "status": "候補",
-   "confidence": "要確認",
    "tentative": true,
    "deadline": null
   },
@@ -219,8 +209,6 @@
    "cost": "",
    "target": "",
    "url": "https://www.koenji-awaodori.com/about/about01.html",
-   "status": "候補",
-   "confidence": "公式確認済み",
    "tentative": false,
    "deadline": null
   },
@@ -256,8 +244,6 @@
    "cost": "1人1回500円 / 各日先着200名 ※なくなり次第終了",
    "target": "",
    "url": "https://www.asta.co.jp/event/",
-   "status": "候補",
-   "confidence": "公式確認済み(公式イベントページ)",
    "tentative": false,
    "deadline": null
   },
@@ -301,8 +287,6 @@
    "cost": "",
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260831.pdf",
-   "status": "候補",
-   "confidence": "公式確認済み(チラシPDF。開場時間のみ要確認)",
    "tentative": false,
    "deadline": null
   },
@@ -340,8 +324,6 @@
    "cost": "",
    "target": "市内在住・在学の小学1〜4年生 / 各70人",
    "url": "",
-   "status": "候補",
-   "confidence": "市報PDFで検証済・一致(2026-08-15)",
    "tentative": false,
    "deadline": {
     "date": "2026-08-28",
@@ -383,8 +365,6 @@
    "cost": "",
    "target": "",
    "url": "https://www.city.kodaira.tokyo.jp/kurashi/002/002590.html",
-   "status": "候補",
-   "confidence": "市報PDFで確定(2026-08-15検証)",
    "tentative": false,
    "deadline": null
   },
@@ -434,9 +414,7 @@
     "overall": "◎"
    },
    "cost": "",
-   "url": "https://www.city.kodaira.tokyo.jp/kurashi/113/113055.html",
-   "confidence": "中(2026期間要確認)",
-   "source": "events/2026-07.md"
+   "url": "https://www.city.kodaira.tokyo.jp/kurashi/113/113055.html"
   },
   {
    "id": "E9",
@@ -450,9 +428,7 @@
     "overall": "◎"
    },
    "cost": "",
-   "url": "https://www.city.nishitokyo.lg.jp/kurasi/koen/kouenmizuasobi.html",
-   "confidence": "公式確認済み",
-   "source": "events/2026-07.md"
+   "url": "https://www.city.nishitokyo.lg.jp/kurasi/koen/kouenmizuasobi.html"
   },
   {
    "id": "E10",
@@ -466,9 +442,7 @@
     "overall": "◎"
    },
    "cost": "大人3,400円/未就学児(3歳〜)1,500円(2歳以下は要確認・無料見込み)",
-   "url": "https://www.seibuen-amusement-park.jp/seibuenpool/index.html",
-   "confidence": "公式確認済み",
-   "source": "events/2026-07.md"
+   "url": "https://www.seibuen-amusement-park.jp/seibuenpool/index.html"
   },
   {
    "id": "E63",
@@ -484,9 +458,7 @@
     "elem": "◎"
    },
    "cost": "",
-   "url": "https://www.asta.co.jp/update/kids_stamp_2025.pdf",
-   "confidence": "公式確認済み(公式PDF・2026-03-31更新)",
-   "source": "events/2026-08.md"
+   "url": "https://www.asta.co.jp/update/kids_stamp_2025.pdf"
   }
  ],
  "beyond": 6

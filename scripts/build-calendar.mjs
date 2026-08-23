@@ -35,12 +35,21 @@ const horizon = new Date(Date.parse(today + 'T00:00:00Z') + PUBLIC_DAYS * 864000
 // ★以前は暫定を全部落としていたため、8/29の子連れ◎の花火（昭島くじら祭・武蔵村山）が
 //   公開カレンダーから丸ごと消えていた。「載せないより、存在を知らせる」が方針。
 const inWindow = (d) => d >= today && d <= horizon;
+// 台帳の内部メモは公開データに入れない。表示していなくても、公開している
+// JSON なのでそのまま読める（会員ページ側は意図的に落としているのに、
+// 公開側のほうが緩いという逆転になっていた）。
+const INTERNAL = ['source', 'confidence', 'status'];
+const stripInternal = (e) => {
+  const out = { ...e };
+  for (const k of INTERNAL) delete out[k];
+  return out;
+};
+
 const pub = src.events
   .filter((e) => (e.dates || []).some(inWindow))
   .map((e) => ({
-    ...e,
+    ...stripInternal(e),
     dates: e.dates.filter(inWindow),   // 窓の外の日付は公開データに載せない
-    source: undefined,
   }));
 
 // 「このあと何件あるか」だけは公開してよい（中身は出さない）。
@@ -79,8 +88,8 @@ writeFileSync(
     {
       generated: src.generated,
       window: { from: today, to: horizon },
-      events: pub.concat(spans.map((e) => ({ ...e, source: undefined })), deadlineOnly),
-      standing: src.standing,
+      events: pub.concat(spans.map(stripInternal), deadlineOnly.map(stripInternal)),
+      standing: (src.standing || []).map(stripInternal),
       beyond,
     },
     null,

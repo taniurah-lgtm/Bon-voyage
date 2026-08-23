@@ -236,7 +236,7 @@ function extractHours(lines) {
     // 「休館日は『金曜日』」は続きの行に書かれていて、1行だけ見ると拾えない。
     let buf = lines[i];
     for (let j = i + 1; j < lines.length; j++) {
-      if (/^\s*-\s/.test(lines[j]) || /^\s*$/.test(lines[j]) || /^###?\s/.test(lines[j])) break;
+      if (/^\s*[-*+]\s/.test(lines[j]) || /^\s*$/.test(lines[j]) || /^###?\s/.test(lines[j])) break;
       buf += ' ' + lines[j].trim();
     }
     const v = buf
@@ -311,7 +311,7 @@ function field(lines, keys) {
       //   のような書き方が実際にあり、これを弾いていたため E7（西武園の花火・
       //   公式で確認済み・9/19〜23も開催）が丸ごと落ちていた。全角コロンも許す。
       const m = lines[i].match(new RegExp(
-        '^\\s*-\\s*(?:\\*\\*)?' + key + '(?:\\s*[（(][^）)]*[）)])?(?:\\*\\*)?\\s*[:：]\\s*(.+)$'
+        '^\\s*[-*+]\\s*(?:\\*\\*)?' + key + '(?:\\s*[（(][^）)]*[）)])?(?:\\*\\*)?\\s*[:：]\\s*(.+)$'
       ));
       if (!m) continue;
       // 台帳の箇条書きは折り返して次の行に続く。続きを読まないと、
@@ -319,7 +319,7 @@ function field(lines, keys) {
       // 2歳連れにいちばん効く一文が落ちる。
       let buf = m[1];
       for (let j = i + 1; j < lines.length; j++) {
-        if (/^\s*-\s/.test(lines[j]) || /^\s*$/.test(lines[j]) || /^#{1,3}\s/.test(lines[j])) break;
+        if (/^\s*[-*+]\s/.test(lines[j]) || /^\s*$/.test(lines[j]) || /^#{1,3}\s/.test(lines[j])) break;
         if (/^\s*>/.test(lines[j])) break;
         buf += ' ' + lines[j].trim();
       }
@@ -335,7 +335,7 @@ function findURL(lines) {
   const m1 = u.match(/https?:\/\/\S+/);
   if (m1) return m1[0].replace(/[)、。]+$/, '');
   for (const l of lines) {
-    if (/^\s*-\s*(確度|ステータス)/.test(l)) continue;
+    if (/^\s*[-*+]\s*(確度|ステータス)/.test(l)) continue;
     const m = l.match(/https?:\/\/\S+/);
     if (m) return m[0].replace(/[)、。]+$/, '');
   }
@@ -556,7 +556,9 @@ for (const file of files) {
       // 「行が無い」と「行はあるが書式が合わない」を区別して出す。前は両方まとめて
       // 「行が無い」と言っていたため、E7（日時(2026確定): と書いてあった）の原因を
       // ログから追えなかった。台帳を疑わせる嘘のログは、無いより悪い。
-      const looksLike = b.lines.find((l) => /^\s*-\s*(?:\*\*)?\s*(日時|日程|会期|期間|開催)/.test(l));
+      // ★記号は - だけでなく * + も見る。台帳は人が手で書く Markdown なので
+      //   「* 日時:」と書かれた瞬間に、公式確認済みの予定が黙って消えていた。
+      const looksLike = b.lines.find((l) => /^\s*[-*+]\s*(?:\*\*)?\s*(日時|日程|会期|期間|開催)/.test(l));
       unresolved.push({
         id: b.id, name: b.name, confidence,
         reason: looksLike
@@ -676,10 +678,21 @@ function screen(list, label) {
       const month = shared[0].slice(0, 7);
       const cntA = a.dates.filter((d) => d.startsWith(month)).length;
       const cntB = b.dates.filter((d) => d.startsWith(month)).length;
+      const winner = cntA >= cntB ? a : b;
       const loser = cntA >= cntB ? b : a;
+      // ★勝敗は「日付をどちらに寄せるか」だけに使う。欄の中身は空いている側を埋める。
+      //   これをしていなかったため、8月の花火（E36側が勝ち）から場所と公式URLが消え、
+      //   同じ花火が「9月に押せば場所が入り、8月に押せば入らない」状態になっていた。
+      for (const k of ['place', 'mapq', 'url', 'summary', 'kidsNote', 'confidence', 'contact', 'cost', 'target', 'hours', 'lastEntry', 'caution']) {
+        if (!winner[k] && loser[k]) winner[k] = loser[k];
+      }
+      if (!winner.ages && loser.ages) winner.ages = loser.ages;
+      if (winner.start == null && loser.start != null) {
+        winner.start = loser.start; winner.end = loser.end;
+      }
       loser.dates = loser.dates.filter((d) => !shared.includes(d) || !d.startsWith(month));
       loser.totalDates = loser.dates.length;
-      overlaps.push(`${a.id}/${b.id} ${month} の ${shared.length}日ぶん → ${(cntA >= cntB ? a : b).id} に寄せた`);
+      overlaps.push(`${a.id}/${b.id} ${month} の ${shared.length}日ぶん → ${winner.id} に寄せた（空いていた欄は相手から補った）`);
     }
   }
   // 日付が全部なくなったものは出さない（同じ催しの重複なので落としても情報は減らない）
@@ -708,7 +721,10 @@ for (const e of events) {
 }
 
 mkdirSync('data', { recursive: true });
-const payload = { generated: new Date().toISOString().slice(0, 10), events, standing, byDate, unresolved };
+// ★JST で日付を作る。GitHub Actions のランナーは UTC なので、そのままだと
+//   「台帳の更新日」が1日古く出る（公開カレンダーの窓は JST で切っているので食い違う）。
+const generated = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
+const payload = { generated, events, standing, byDate, unresolved };
 writeFileSync(OUT, JSON.stringify(payload, null, 1));
 
 // ---- 落ちたものを必ず表示する（黙って0件にしない）--------------------------

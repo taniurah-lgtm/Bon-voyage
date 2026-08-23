@@ -750,7 +750,10 @@
         $dlTop.innerHTML = '';
       }
       $dl.hidden = false;
-      $dl.innerHTML = '<' + hSub + ' class="bvc-dlhead">⏳ 申込の締切が近いもの' + '</' + hSub + '>' + rowsFor(soon);
+      // 会員ページは先の締切まで全部出す（horizon = Infinity）。「近いもの」だと
+      // 書いてあることと出しているものが食い違う。
+      $dl.innerHTML = '<' + hSub + ' class="bvc-dlhead">⏳ 申込の締切' +
+        (opts.teaser ? 'が近いもの' : '（先のぶんまで）') + '</' + hSub + '>' + rowsFor(soon);
     }
 
     function renderTail() {
@@ -787,6 +790,8 @@
               '<span class="bvc-tentname">' + esc(e.name) + '</span>' +
               // ★素の <a> だと 17x56px で、同じページのほかの公式リンク（44px以上）より
               //   ずっと押しにくかった。同じボタンの形に揃える。
+              (e.mapq ? ' <a class="bvc-btn bvc-btn-sub" href="' + esc(mapURL(e.mapq)) +
+                '" target="_blank" rel="noopener">📍 地図</a>' : '') +
               (safeURL(e.url)
                 ? ' <a class="bvc-btn bvc-btn-sub" href="' + esc(safeURL(e.url)) +
                   '" target="_blank" rel="noopener">🔗 公式</a>'

@@ -198,15 +198,18 @@
 
     function addPin(pl) {
       var s = pl.spots[0];
+      var names = pl.spots.map(function (x) { return x.name; }).join(' / ');
       var m = L.marker([pl.lat, pl.lng], {
         icon: L.divIcon({
           className: 'bvm-pin-wrap',
-          html: '<span class="bvm-pin" style="--pin:' + colorFor(s.cat) + '"></span>',
+          // divIcon は alt: を属性にしないので、読み上げの名前は自分で付ける
+          // （付けないと、ただの押せる四角として読まれる）。
+          html: '<span class="bvm-pin" style="--pin:' + colorFor(s.cat) + '" aria-hidden="true"></span>',
           iconSize: [30, 38],
           iconAnchor: [15, 34],
           popupAnchor: [0, -32],
         }),
-        title: pl.spots.map(function (x) { return x.name; }).join(' / '),
+        title: names,
         alt: s.name,
         keyboard: true,
         riseOnHover: true,
@@ -217,6 +220,12 @@
         { maxWidth: 268, autoPanPadding: [16, 16], closeButton: true }
       );
       layer.addLayer(m);
+      m.on('add', function () {
+        var el = m.getElement();
+        if (el) { el.setAttribute('aria-label', names); el.setAttribute('role', 'button'); }
+      });
+      var el0 = m.getElement();
+      if (el0) { el0.setAttribute('aria-label', names); el0.setAttribute('role', 'button'); }
     }
 
     // まとめた印。件数だけを出す＝どこか1つの場所を主張しないので、位置の嘘にならない。
