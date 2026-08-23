@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>おでかけカレンダー｜ぼんぼやーじゅ通信</title>
+<meta name="description" content="花小金井・小平まわりの子連れで行けるイベントを、日付が見えるカレンダーで。気になる日をタップして、そのままご自分のカレンダーに保存できます。">
+<link rel="canonical" href="https://bonvoya.nicomaru.tokyo/calendar.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bonvoya.nicomaru.tokyo/calendar.html">
+<meta property="og:title" content="おでかけカレンダー｜ぼんぼやーじゅ通信">
+<meta property="og:description" content="花小金井まわりの子連れイベントを、日付から探せるカレンダーに。">
+<meta property="og:locale" content="ja_JP">
+<link rel="stylesheet" href="/assets/bv-tokens.css">
+<link rel="stylesheet" href="/assets/bv-calendar.css">
+<style>
+  main { padding: 2rem 0 1rem; }
+  .lead { color: var(--ink-soft); font-size: .95rem; margin-bottom: 1.4rem; line-height: 1.85; }
+  .nav-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 0; }
+  .nav-pills a {
+    font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none;
+    color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong);
+    border-radius: 999px; padding: .4rem .9rem;
+  }
+  .noscript {
+    background: var(--marigold-wash); border: 1px solid var(--marigold);
+    border-radius: 14px; padding: 1rem 1.15rem; font-size: .9rem; margin-bottom: 1.2rem;
+  }
+  .fallback { margin-top: 1rem; }
+  .fallback h3 { font-family: var(--maru); font-weight: 800; font-size: .95rem; margin: 1.1rem 0 .4rem; }
+  .fallback li { font-size: .9rem; }
+  .stamp { font-size: .8rem; color: var(--ink-faint); margin-top: 2rem; }
+</style>
+</head>
+<body>
+<header class="ghead">
+  <div class="ghead-in">
+    <div class="eyebrow">Bon Voyage,</div>
+    <h1>おでかけ<br>カレンダー</h1>
+    <p class="sub">花小金井・小平まわりで子連れで行けるイベントを、日付から探せるようにしました。気になる日をタップすると、そのままご自分のカレンダーに保存できます。</p>
+    <div class="nav-pills">
+      <a href="/">通信について</a>
+      <a href="/map.html">おでかけマップ</a>
+      <a href="/guide.html">おでかけガイド</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="lead">日付の下に点が付いている日に予定があります。タップすると、その日の予定とお子さんの年齢の目安が出ます。<br>
+  ここに出しているのは<b>今日からの2週間ぶん</b>です。</p>
+
+  <noscript>
+    <div class="noscript">このカレンダーは表示にJavaScriptを使っています。切っている場合は、下の一覧をご覧ください。</div>
+  </noscript>
+
+  <div id="cal"><p class="lead" id="loading">読み込んでいます…</p></div>
+
+  <!-- JavaScript が動かない環境と、検索エンジン向けの一覧。中身は上のカレンダーと同じ。 -->
+  <div class="fallback">
+    <h2 class="bvc-tailhead">この2週間の予定（一覧）</h2>
+    <h3>8月22日(土)</h3>
+    <ul>
+      <li>非核平和学習事業 被爆写真パネル展示（10:00〜） — 中央公民館1階ギャラリー</li>
+      <li>三鷹阿波おどり（17:00〜） — 三鷹駅南口商店街 <a href="https://mitaka-awaodori.com/" target="_blank" rel="noopener">公式</a></li>
+      <li>こだわり縁日(田無アスタ)（11:00〜） — アスタ専門店街 2Fセンターコート <a href="https://www.asta.co.jp/update/event_260822_2.pdf" target="_blank" rel="noopener">公式</a></li>
+      <li>こだいら防災救急フェア（10:00〜） — 中央公民館1階視聴覚室・中央図書館北側駐車場</li>
+    </ul>
+    <h3>8月23日(日)</h3>
+    <ul>
+      <li>ポケモングッズが貰える!イベント開催!!(田無アスタ)（10:00〜） — 田無アスタ2階センターコート <a href="https://www.asta.co.jp/update/event_260824.pdf" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>8月24日(月)</h3>
+    <ul>
+      <li>ポケモングッズが貰える!イベント開催!!(田無アスタ)（10:00〜） — 田無アスタ2階センターコート <a href="https://www.asta.co.jp/update/event_260824.pdf" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>8月25日(火)</h3>
+    <ul>
+      <li>ポケモングッズが貰える!イベント開催!!(田無アスタ)（10:00〜） — 田無アスタ2階センターコート <a href="https://www.asta.co.jp/update/event_260824.pdf" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>8月26日(水)</h3>
+    <ul>
+      <li>ポケモングッズが貰える!イベント開催!!(田無アスタ)（10:00〜） — 田無アスタ2階センターコート <a href="https://www.asta.co.jp/update/event_260824.pdf" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>8月27日(木)</h3>
+    <ul>
+      <li>ポケモングッズが貰える!イベント開催!!(田無アスタ)（10:00〜） — 田無アスタ2階センターコート <a href="https://www.asta.co.jp/update/event_260824.pdf" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>8月28日(金)</h3>
+    <ul>
+      <li>西武園ゆうえんち 大火祭り(8月毎日開催期間あり)（19:30〜）</li>
+      <li>滝山・前沢みんなの夏祭り — 滝山中央通り <a href="http://takiyama.in.coocan.jp/" target="_blank" rel="noopener">公式</a></li>
+      <li>東京高円寺阿波おどり（17:00〜） <a href="https://www.koenji-awaodori.com/about/about01.html" target="_blank" rel="noopener">公式</a></li>
+      <li>スライムをつくろう!(田無アスタ)（10:00〜） — アスタ専門店街 2Fセンターコート <a href="https://www.asta.co.jp/event/" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>8月29日(土)</h3>
+    <ul>
+      <li>滝山・前沢みんなの夏祭り — 滝山中央通り <a href="http://takiyama.in.coocan.jp/" target="_blank" rel="noopener">公式</a></li>
+      <li>東京高円寺阿波おどり（17:00〜） <a href="https://www.koenji-awaodori.com/about/about01.html" target="_blank" rel="noopener">公式</a></li>
+      <li>スライムをつくろう!(田無アスタ)（10:00〜） — アスタ専門店街 2Fセンターコート <a href="https://www.asta.co.jp/event/" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>9月5日(土)</h3>
+    <ul>
+      <li>トップアスリートによるランニング教室（09:30〜） — 小平元気村おがわ東 屋外広場 ※雨天時は屋内広場</li>
+    </ul>
+  </div>
+
+  <p class="stamp">台帳の更新日: 2026-08-23　※日程・料金は変わることがあります。おでかけ前に各公式でご確認ください。</p>
+  <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>
+</main>
+
+<footer>
+  <div class="fmark">ぼんぼやーじゅ通信</div>
+  <a href="/tokushoho.html">特定商取引法に基づく表記・免責事項</a><br>
+  © 2026 ぼんぼやーじゅ通信
+</footer>
+
+<script src="/assets/bv-calendar.js"></script>
+<script>
+fetch('/data/events-public.json', { cache: 'no-cache' })
+  .then(function (r) { return r.json(); })
+  .then(function (data) {
+    document.querySelector('.fallback').hidden = true;   // カレンダーが出たら一覧は畳む
+    BVCalendar.mount(document.getElementById('cal'), data, {
+      teaser: true,
+      memberUrl: "/m/s7f2ka/",
+    });
+  })
+  .catch(function () {
+    // 読み込みに失敗しても一覧が残るので、行き止まりにはならない
+    var l = document.getElementById('loading');
+    if (l) l.textContent = 'カレンダーを読み込めませんでした。下の一覧をご覧ください。';
+  });
+</script>
+</body>
+</html>

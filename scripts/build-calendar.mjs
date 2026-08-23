@@ -1,0 +1,188 @@
+#!/usr/bin/env node
+/*
+ * 公開用のおでかけカレンダーを作る。
+ *   node scripts/build-calendar.mjs
+ *
+ * 入力: data/events.json（全件・非公開）
+ * 出力: docs/homepage/calendar.html
+ *       docs/homepage/data/events-public.json … ★公開されるので「今日から2週間ぶん」だけ入れる
+ *
+ * 無料 / サポーターの線引き（docs/freemium-plan.md）:
+ *   無料 = 「知る」  … 今日から2週間ぶんのカレンダー。誰でも見られる
+ *   有料 = 「決める・動く」… 先の予定まで通して見られる（会員ページ）
+ *
+ * ここで「無料を薄くする」ことはしない。いままで公開側にカレンダーは1つも無かったので、
+ * この2週間ぶんは**無料に足された分**であって、削ったものではない。
+ */
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+
+const IN = 'data/events.json';
+const OUT = 'docs/homepage/calendar.html';
+const OUT_JSON = 'docs/homepage/data/events-public.json';
+const PUBLIC_DAYS = 14;
+const MEMBER_URL = '/m/s7f2ka/';
+
+const src = JSON.parse(readFileSync(IN, 'utf8'));
+const today = new Date().toISOString().slice(0, 10);
+const horizon = new Date(Date.parse(today + 'T00:00:00Z') + PUBLIC_DAYS * 86400000)
+  .toISOString().slice(0, 10);
+
+// 公開に出すもの: 確定していて、今日〜2週間のうちに1日でもかかるもの
+const inWindow = (d) => d >= today && d <= horizon;
+const pub = src.events
+  .filter((e) => !e.tentative && (e.dates || []).some(inWindow))
+  .map((e) => ({
+    ...e,
+    dates: e.dates.filter(inWindow),   // 窓の外の日付は公開データに載せない
+    source: undefined,
+    confidence: undefined,
+  }));
+
+// 「このあと何件あるか」だけは公開してよい（中身は出さない）。
+// 数字だけなので無料版から情報を取り上げることにはならず、先があることは伝わる。
+const beyond = src.events.filter(
+  (e) => !e.tentative && (e.dates || []).some((d) => d > horizon)
+).length;
+
+// 会期もの（「〜10/14まで」）は期間が窓に重なっていれば公開してよい
+const spans = src.events.filter((e) => e.span && (!e.span.to || e.span.to >= today));
+
+mkdirSync('docs/homepage/data', { recursive: true });
+writeFileSync(
+  OUT_JSON,
+  JSON.stringify(
+    {
+      generated: src.generated,
+      window: { from: today, to: horizon },
+      events: pub.concat(spans.map((e) => ({ ...e, source: undefined }))),
+      standing: src.standing,
+      beyond,
+    },
+    null,
+    1
+  )
+);
+
+const esc = (s = '') =>
+  String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+const page = `<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>おでかけカレンダー｜ぼんぼやーじゅ通信</title>
+<meta name="description" content="花小金井・小平まわりの子連れで行けるイベントを、日付が見えるカレンダーで。気になる日をタップして、そのままご自分のカレンダーに保存できます。">
+<link rel="canonical" href="https://bonvoya.nicomaru.tokyo/calendar.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bonvoya.nicomaru.tokyo/calendar.html">
+<meta property="og:title" content="おでかけカレンダー｜ぼんぼやーじゅ通信">
+<meta property="og:description" content="花小金井まわりの子連れイベントを、日付から探せるカレンダーに。">
+<meta property="og:locale" content="ja_JP">
+<link rel="stylesheet" href="/assets/bv-tokens.css">
+<link rel="stylesheet" href="/assets/bv-calendar.css">
+<style>
+  main { padding: 2rem 0 1rem; }
+  .lead { color: var(--ink-soft); font-size: .95rem; margin-bottom: 1.4rem; line-height: 1.85; }
+  .nav-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 0; }
+  .nav-pills a {
+    font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none;
+    color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong);
+    border-radius: 999px; padding: .4rem .9rem;
+  }
+  .noscript {
+    background: var(--marigold-wash); border: 1px solid var(--marigold);
+    border-radius: 14px; padding: 1rem 1.15rem; font-size: .9rem; margin-bottom: 1.2rem;
+  }
+  .fallback { margin-top: 1rem; }
+  .fallback h3 { font-family: var(--maru); font-weight: 800; font-size: .95rem; margin: 1.1rem 0 .4rem; }
+  .fallback li { font-size: .9rem; }
+  .stamp { font-size: .8rem; color: var(--ink-faint); margin-top: 2rem; }
+</style>
+</head>
+<body>
+<header class="ghead">
+  <div class="ghead-in">
+    <div class="eyebrow">Bon Voyage,</div>
+    <h1>おでかけ<br>カレンダー</h1>
+    <p class="sub">花小金井・小平まわりで子連れで行けるイベントを、日付から探せるようにしました。気になる日をタップすると、そのままご自分のカレンダーに保存できます。</p>
+    <div class="nav-pills">
+      <a href="/">通信について</a>
+      <a href="/map.html">おでかけマップ</a>
+      <a href="/guide.html">おでかけガイド</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="lead">日付の下に点が付いている日に予定があります。タップすると、その日の予定とお子さんの年齢の目安が出ます。<br>
+  ここに出しているのは<b>今日からの2週間ぶん</b>です。</p>
+
+  <noscript>
+    <div class="noscript">このカレンダーは表示にJavaScriptを使っています。切っている場合は、下の一覧をご覧ください。</div>
+  </noscript>
+
+  <div id="cal"><p class="lead" id="loading">読み込んでいます…</p></div>
+
+  <!-- JavaScript が動かない環境と、検索エンジン向けの一覧。中身は上のカレンダーと同じ。 -->
+  <div class="fallback">
+    <h2 class="bvc-tailhead">この2週間の予定（一覧）</h2>
+${(() => {
+  const byDate = {};
+  for (const e of pub) for (const d of e.dates) (byDate[d] ||= []).push(e);
+  const days = Object.keys(byDate).sort();
+  if (!days.length) return '    <p class="lead">いまのところ、確定した予定はありません。</p>';
+  return days
+    .map((d) => {
+      const dt = new Date(d + 'T00:00:00+09:00');
+      const label = `${dt.getMonth() + 1}月${dt.getDate()}日(${'日月火水木金土'[dt.getDay()]})`;
+      const items = byDate[d]
+        .map(
+          (e) =>
+            `      <li>${esc(e.name)}${e.start ? `（${esc(e.start)}〜）` : ''}${
+              e.place ? ` — ${esc(e.place.split(/[、(]/)[0])}` : ''
+            }${e.url ? ` <a href="${esc(e.url)}" target="_blank" rel="noopener">公式</a>` : ''}</li>`
+        )
+        .join('\n');
+      return `    <h3>${label}</h3>\n    <ul>\n${items}\n    </ul>`;
+    })
+    .join('\n');
+})()}
+  </div>
+
+  <p class="stamp">台帳の更新日: ${esc(src.generated)}　※日程・料金は変わることがあります。おでかけ前に各公式でご確認ください。</p>
+  <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>
+</main>
+
+<footer>
+  <div class="fmark">ぼんぼやーじゅ通信</div>
+  <a href="/tokushoho.html">特定商取引法に基づく表記・免責事項</a><br>
+  © 2026 ぼんぼやーじゅ通信
+</footer>
+
+<script src="/assets/bv-calendar.js"></script>
+<script>
+fetch('/data/events-public.json', { cache: 'no-cache' })
+  .then(function (r) { return r.json(); })
+  .then(function (data) {
+    document.querySelector('.fallback').hidden = true;   // カレンダーが出たら一覧は畳む
+    BVCalendar.mount(document.getElementById('cal'), data, {
+      teaser: true,
+      memberUrl: ${JSON.stringify(MEMBER_URL)},
+    });
+  })
+  .catch(function () {
+    // 読み込みに失敗しても一覧が残るので、行き止まりにはならない
+    var l = document.getElementById('loading');
+    if (l) l.textContent = 'カレンダーを読み込めませんでした。下の一覧をご覧ください。';
+  });
+</script>
+</body>
+</html>
+`;
+
+writeFileSync(OUT, page);
+console.log(`wrote ${OUT}`);
+console.log(`  公開: ${pub.length}件（${today}〜${horizon}）/ 会期もの ${spans.length}件 / この先さらに ${beyond}件`);
+console.log(`wrote ${OUT_JSON}（★公開される。2週間ぶんだけ入っていることを必ず確認する）`);

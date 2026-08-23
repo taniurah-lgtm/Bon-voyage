@@ -1,0 +1,50 @@
+/* ぼんぼやーじゅ通信 — 共通の色・書体
+ * 既存ページ（index / guide / map / 会員ページ）が各自インラインで持っているものと同じ値。
+ * 新しいページはこのファイルを読み込む。 */
+:root {
+  --ground:#FBFAF5; --surface:#FFFFFF; --surface-2:#F5F2EA;
+  --ink:#34434C; --ink-soft:#63727B; --ink-faint:#97A2AA;
+  --sky:#4FA3C4; --sky-deep:#2C7C9E; --sky-wash:#E9F4F7;
+  --marigold:#EBA24A; --marigold-wash:#FBEEDA; --leaf:#74AE71;
+  --line:#ECE7DB; --line-strong:#DCD5C6;
+  --shadow-soft:0 2px 20px rgba(52,67,76,.05);
+  --radius:20px; --radius-sm:14px;
+  --maru:"Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN W4","Yu Gothic","游ゴシック","Noto Sans JP","Segoe UI",sans-serif;
+  --body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","游ゴシック","Noto Sans JP","Segoe UI",Meiryo,sans-serif;
+  --script:Georgia,"Times New Roman","Hiragino Mincho ProN",serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:#131F28; --surface:#1A2831; --surface-2:#21333D;
+    --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95;
+    --sky:#6FBAD9; --sky-deep:#9AD4EA; --sky-wash:#1D3944;
+    --marigold:#F0AE5E; --marigold-wash:#362F1F; --leaf:#8FC489;
+    --line:#293B45; --line-strong:#38505C; --shadow-soft:0 2px 22px rgba(0,0,0,.22);
+  }
+}
+:root[data-theme="dark"] {
+  --ground:#131F28; --surface:#1A2831; --surface-2:#21333D;
+  --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95;
+  --sky:#6FBAD9; --sky-deep:#9AD4EA; --sky-wash:#1D3944;
+  --marigold:#F0AE5E; --marigold-wash:#362F1F; --leaf:#8FC489;
+  --line:#293B45; --line-strong:#38505C; --shadow-soft:0 2px 22px rgba(0,0,0,.22);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--ground); color: var(--ink);
+  font-family: var(--body); line-height: 1.85;
+  -webkit-font-smoothing: antialiased; font-feature-settings: "palt" 1;
+}
+a { color: var(--sky-deep); }
+p { margin: 0; }
+.wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.35rem; }
+.ghead { background: linear-gradient(160deg, var(--sky-wash), var(--marigold-wash)); border-bottom: 1px solid var(--line); }
+.ghead-in { max-width: 46rem; margin: 0 auto; padding: 2.6rem 1.35rem 2rem; }
+.eyebrow { font-family: var(--script); font-style: italic; font-size: 1.1rem; color: var(--marigold); margin-bottom: .3rem; }
+h1 { font-family: var(--maru); font-weight: 800; font-size: clamp(1.7rem,5.6vw,2.4rem); letter-spacing: .02em; line-height: 1.25; margin: 0 0 .6rem; }
+.ghead .sub { color: var(--ink); font-size: 1.02rem; max-width: 32rem; }
+footer { color: var(--ink-faint); font-size: .82rem; text-align: center; padding: 2.4rem 1.35rem 3rem; line-height: 1.7; }
+footer .fmark { font-family: var(--maru); font-weight: 800; color: var(--ink-soft); }
+.back { display: inline-block; margin-top: 2rem; font-family: var(--maru); font-weight: 800; font-size: .95rem; text-decoration: none; }
+@media (max-width: 40rem) { html { font-size: 112.5%; } .wrap, .ghead-in { padding-left: 1.15rem; padding-right: 1.15rem; } }

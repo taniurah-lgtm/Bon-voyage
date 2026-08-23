@@ -1,0 +1,56 @@
+/* ぼんぼやーじゅ通信 — 地図とその周りの見た目。色はページ側の変数に乗る。 */
+
+.bvm-chips { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .7rem; }
+.bvm-chip {
+  --chip: var(--sky-deep);
+  font-family: var(--body); font-size: .8rem; font-weight: 700;
+  color: var(--ink-soft); background: var(--surface);
+  border: 1px solid var(--line-strong); border-radius: 999px;
+  padding: .4rem .8rem; cursor: pointer; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: .3rem;
+}
+.bvm-chip::before {
+  content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--chip);
+}
+.bvm-chip[data-cat=""]::before { display: none; }
+.bvm-chip.is-on { color: #fff; background: var(--sky-deep); border-color: var(--sky-deep); }
+.bvm-chip.is-on::before { background: #fff; }
+.bvm-chip:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+
+.bvm-canvas {
+  height: 21rem; border-radius: 16px; border: 1px solid var(--line);
+  background: var(--surface-2); overflow: hidden; z-index: 0;
+}
+@media (min-width: 40rem) { .bvm-canvas { height: 25rem; } }
+
+.bvm-note { font-size: .78rem; color: var(--ink-faint); margin-top: .5rem; line-height: 1.7; }
+.bvm-fail {
+  background: var(--surface-2); border: 1px dashed var(--line-strong); border-radius: 14px;
+  padding: 1rem 1.15rem; font-size: .9rem; color: var(--ink-soft);
+}
+
+/* ---- ピン（画像を使わずCSSで描く） ---- */
+.bvm-pin-wrap { background: none; border: none; }
+.bvm-pin {
+  --pin: #2C7C9E;
+  display: block; width: 20px; height: 20px; border-radius: 50% 50% 50% 0;
+  background: var(--pin); transform: rotate(-45deg);
+  border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.35);
+}
+.bvm-pin::after {
+  content: ""; position: absolute; inset: 5px; border-radius: 999px; background: rgba(255,255,255,.85);
+}
+
+/* ---- ふきだし ---- */
+.leaflet-popup-content-wrapper { border-radius: 14px; }
+.leaflet-popup-content { margin: .7rem .85rem; line-height: 1.7; }
+.bvm-pop { display: flex; flex-direction: column; gap: .18rem; }
+.bvm-pop-nm { font-family: var(--maru); font-weight: 800; font-size: .96rem; }
+.bvm-pop-acc { font-size: .78rem; color: #5b6a73; }
+.bvm-pop-ages { font-family: var(--maru); font-weight: 700; font-size: .8rem; color: #7c8a92; }
+.bvm-pop-approx { font-size: .72rem; color: #A8703C; }
+.bvm-pop-voice { font-size: .82rem; color: #34434C; background: #F5F2EA; border-radius: 8px; padding: .3rem .45rem; margin-top: .2rem; }
+.bvm-pop-links { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .35rem; font-size: .8rem; font-weight: 700; }
+
+/* 一覧側で「いまここ」を光らせる */
+.spot.is-hit, .bvm-hit { box-shadow: 0 0 0 3px var(--marigold); transition: box-shadow .3s ease; }

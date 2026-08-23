@@ -1,0 +1,1569 @@
+{
+ "generated": "2026-08-23",
+ "events": [
+  {
+   "id": "E51",
+   "name": "中央図書館ギャラリー展示「クラシックポップアップ絵本展」",
+   "dates": [],
+   "span": {
+    "from": null,
+    "to": "2026-10-14"
+   },
+   "when": "〜10/14(水)まで(会期確定)",
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "place": "中央図書館2階展示ギャラリー(小川町2-1325)",
+   "mapq": "中央図書館2階展示ギャラリー",
+   "summary": "立体的な仕掛けが飛び出すポップアップ絵本を展示。外国のポップアップも",
+   "kidsNote": "👶○ 🧒◎ 🎒◎ 雨の日・猛暑日の屋内候補。無料",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "",
+   "url": "https://www.city.kodaira.tokyo.jp/kurashi/002/002590.html",
+   "status": "候補",
+   "confidence": "市報PDFで確定(2026-08-15検証)",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E16",
+   "name": "八坂神社(東村山)例大祭・天王祭",
+   "dates": [
+    "2026-07-11",
+    "2026-07-12"
+   ],
+   "span": null,
+   "when": "7/11(土)宵宮・12(日)本祭(毎年7月第2土日)",
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "place": "八坂神社(東村山駅/久米川駅 徒歩圏)",
+   "mapq": "八坂神社",
+   "summary": "神輿・山車・大太鼓の渡御、境内に屋台多数",
+   "kidsNote": "○ 屋台と縁日の雰囲気が濃く子ども向き。渡御通過時は道路沿い混雑注意",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://www.higasimurayama-yasakajinja.jp/cont5/main.html",
+   "status": "候補",
+   "confidence": "公式確認済み(7/11-12で確定・2026/7/8時点)。祈願は7/11-13は不可",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-07.md"
+  },
+  {
+   "id": "E1",
+   "name": "みたままつり(靖国神社・第79回)",
+   "dates": [
+    "2026-07-13",
+    "2026-07-14",
+    "2026-07-15",
+    "2026-07-16"
+   ],
+   "span": null,
+   "when": "7/13(月)〜16(木) 日没〜21:30(献灯点灯)",
+   "start": "21:30",
+   "end": null,
+   "allDay": false,
+   "place": "靖国神社(九段下駅 徒歩5分)/花小金井から東西線直通 約45〜55分",
+   "mapq": "靖国神社/花小金井から東西線直通 約45〜55分",
+   "summary": "約3万の献灯、青森ねぶた、盆踊り。露店は縮小しキッチンカー中心",
+   "kidsNote": "○ 境内が広くベビーカー可。平日開催で比較的動きやすい",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://www.yasukuni.or.jp/news_detail.html?id=701",
+   "status": "候補",
+   "confidence": "公式確認済み",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-07.md"
+  },
+  {
+   "id": "E13",
+   "name": "花小金井夏祭り・サンバフェスティバル",
+   "dates": [
+    "2026-07-18",
+    "2026-07-19"
+   ],
+   "span": null,
+   "when": "7/18(土)神輿渡御・19(日)サンバパレード(時間は要確認、例年午後〜夜)",
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "place": "花小金井駅北口周辺(車道通行止め)— 徒歩圏!",
+   "mapq": "花小金井駅北口周辺— 徒歩圏!",
+   "summary": "神輿、サンバパレード、露店・商店街出店",
+   "kidsNote": "△〜○ サンバ時間帯は駅前混雑。ベビーカーは通行止め区間の端なら可。日中は暑さ対策必須",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://festival.hanakoganei.net/",
+   "status": "登録済",
+   "confidence": "公式確認済み(日付)、時間要確認",
+   "tentative": true,
+   "deadline": null,
+   "source": "events/2026-07.md"
+  },
+  {
+   "id": "E18",
+   "name": "キチジョージえんにち2026(コピス吉祥寺)",
+   "dates": [
+    "2026-07-18",
+    "2026-07-19",
+    "2026-07-20"
+   ],
+   "span": null,
+   "when": "7/18(土)〜20(月・祝) 15:00〜21:00(最終日〜19:00)入場無料",
+   "start": "15:00",
+   "end": "21:00",
+   "allDay": false,
+   "place": "コピス吉祥寺A館3階(吉祥寺駅北口 徒歩3分)",
+   "mapq": "コピス吉祥寺A館3階",
+   "summary": "テーマ「もののけきぶん」。屋台、ワークショップ、館内もののけ探し",
+   "kidsNote": "◎ 商業施設内でトイレ・授乳室・エレベーター完備。ベビーカー最適",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://www.atpress.ne.jp/news/610885",
+   "status": "候補",
+   "confidence": "公式確認済み",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-07.md"
+  },
+  {
+   "id": "E2",
+   "name": "大國魂神社 すもも祭(府中)",
+   "dates": [
+    "2026-07-20"
+   ],
+   "span": null,
+   "when": "7/20(月・祝 海の日) 露店7:00頃〜21:00頃",
+   "start": "07:00",
+   "end": null,
+   "allDay": false,
+   "place": "大國魂神社(府中駅 徒歩5分)/国分寺経由 約40分",
+   "mapq": "大國魂神社/国分寺経由 約40分",
+   "summary": "からす団扇頒布、露店約120店",
+   "kidsNote": "○ 午前早めが空いていて狙い目。境内砂利でベビーカーやや押しにくい",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://www.ookunitamajinja.or.jp/matsuri/7-sumomo.php",
+   "status": "候補",
+   "confidence": "公式確認済み(毎年7/20固定)",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-07.md"
+  },
+  {
+   "id": "E3",
+   "name": "神楽坂まつり",
+   "dates": [
+    "2026-07-22",
+    "2026-07-23",
+    "2026-07-24",
+    "2026-07-25"
+   ],
+   "span": null,
+   "when": "7/22(水)23(木)ほおずき市17:00〜21:00、7/24(金)25(土)阿波踊り19:00〜21:00(25日は18時頃から子ども阿波踊り)",
+   "start": "17:00",
+   "end": "21:00",
+   "allDay": false,
+   "place": "神楽坂通り(飯田橋駅・神楽坂駅)/東西線 約40〜50分",
+   "mapq": "神楽坂通り/東西線 約40〜50分",
+   "summary": "ほおずき市、名店屋台、坂を踊り上る阿波踊り",
+   "kidsNote": "△〜○ 阿波踊り時間帯は激混みで抱っこ紐推奨。狙い目は7/22・23の17時台か7/25の子ども阿波踊り",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://summer.walkerplus.com/odekake/detail_e/ar0313e71549/",
+   "status": "候補",
+   "confidence": "高(複数ソース一致、時刻は直前再確認)",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-07.md"
+  },
+  {
+   "id": "E4",
+   "name": "入間基地納涼祭(盆踊りと花火の夕べ)",
+   "dates": [
+    "2026-07-22",
+    "2026-07-23"
+   ],
+   "span": null,
+   "when": "7/22(水) 17:00〜21:00、花火20:20〜20:50(雨天時7/23順延)",
+   "start": "17:00",
+   "end": "21:00",
+   "allDay": false,
+   "place": "航空自衛隊入間基地(稲荷山公園駅すぐ)/所沢乗換 約40〜45分",
+   "mapq": "航空自衛隊入間基地/所沢乗換 約40〜45分",
+   "summary": "盆踊り+至近距離の花火。入場無料・手荷物検査あり",
+   "kidsNote": "△ 平日夜で花火が遅め。2歳には厳しい時間帯",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://www.mod.go.jp/asdf/iruma/kouhou/public_FW/index2025.html",
+   "status": "候補",
+   "confidence": "要確認(7/22有力)",
+   "tentative": true,
+   "deadline": null,
+   "source": "events/2026-07.md"
+  },
+  {
+   "id": "E14",
+   "name": "陸上自衛隊 小平駐屯地 納涼祭",
+   "dates": [
+    "2026-07-25"
+   ],
+   "span": null,
+   "when": "7/25(土) 15:00〜(例年20:00頃まで・雨天翌日順延)",
+   "start": "15:00",
+   "end": null,
+   "allDay": false,
+   "place": "小平駐屯地(一橋学園駅 徒歩約15分)",
+   "mapq": "小平駐屯地",
+   "summary": "盆踊り、働く車展示(自衛隊・消防・警察)、音楽隊演奏、野外売店。入場無料・申込不要",
+   "kidsNote": "○ 広い敷地で働く車展示は幼児に人気。駐輪場少・ペット不可",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://kodaira-tourism.com/event/3369/",
+   "status": "候補",
+   "confidence": "公式確認済み(令和8年度7/25(土)15時〜・2026/7/8時点)",
+   "tentative": true,
+   "deadline": null,
+   "source": "events/2026-07.md"
+  },
+  {
+   "id": "E17",
+   "name": "小金井阿波おどり",
+   "dates": [
+    "2026-07-25",
+    "2026-07-26"
+   ],
+   "span": null,
+   "when": "7/25(土)・26(日)(時間要確認、例年18:00〜21:00頃)",
+   "start": "18:00",
+   "end": "21:00",
+   "allDay": false,
+   "place": "武蔵小金井駅南口・北口駅前ほか(JR中央線 武蔵小金井駅すぐ)",
+   "mapq": "武蔵小金井駅南口・北口駅前",
+   "summary": "30連超・約2.5万人規模の流し踊り、屋台",
+   "kidsNote": "△ 駅前大混雑。夕方早め(18時台)沿道端での観覧推奨",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://koganeiawaodori.jp/",
+   "status": "候補",
+   "confidence": "高(公式発表確認)",
+   "tentative": true,
+   "deadline": null,
+   "source": "events/2026-07.md"
+  },
+  {
+   "id": "E5",
+   "name": "立川まつり 国営昭和記念公園花火大会",
+   "dates": [
+    "2026-07-25"
+   ],
+   "span": null,
+   "when": "7/25(土) 19:15〜20:15(荒天中止・順延なし)",
+   "start": "19:15",
+   "end": "20:15",
+   "allDay": false,
+   "place": "昭和記念公園みんなの原っぱ(西立川駅ほか)/電車約40〜50分・バス約35分",
+   "mapq": "昭和記念公園みんなの原っぱ/電車約40〜50分・バス約35分",
+   "summary": "約5,000発。多摩最大級",
+   "kidsNote": "◎ 芝生でシート観覧。ただし2026年はみんなの原っぱ有料化・無料区域大幅変更 → 有料席事前購入+早め入園を推奨。帰りは閉園まで園内待機が定石",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://hanabi.tokyo-tachikawa.org/",
+   "status": "候補",
+   "confidence": "公式確認済み(2026/7/8時点)",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-07.md"
+  },
+  {
+   "id": "E6",
+   "name": "隅田川花火大会",
+   "dates": [
+    "2026-07-25"
+   ],
+   "span": null,
+   "when": "7/25(土) 19:00〜20:30",
+   "start": "19:00",
+   "end": "20:30",
+   "allDay": false,
+   "place": "浅草・押上一帯/約1時間10分",
+   "mapq": "浅草・押上一帯/約1時間10分",
+   "summary": "✕〜△ 約90万人。有料席確保時のみ検討",
+   "kidsNote": "✕〜△ 約90万人。有料席確保時のみ検討",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://www.sumidagawa-hanabi.com/",
+   "status": "候補",
+   "confidence": "公式確認済み",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-07.md"
+  },
+  {
+   "id": "E22",
+   "name": "小平グリーンロード灯りまつり",
+   "dates": [
+    "2026-08-01"
+   ],
+   "span": null,
+   "when": "8/1(土) 18:30〜20:30(雨天中止)",
+   "start": "18:30",
+   "end": "20:30",
+   "allDay": false,
+   "place": "小平グリーンロード沿い14会場 — 花小金井駅・小平駅周辺の徒歩圏!",
+   "mapq": "小平グリーンロード沿い14会場 — 花小金井駅・小平駅周辺の徒歩圏!",
+   "summary": "手作り灯ろう約4,000基。模擬店会場あり",
+   "kidsNote": "◎◎ 徒歩で行けて夜も早めに終わる。緑道一部未舗装だがベビーカー可",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://www.city.kodaira.tokyo.jp/event/127/127980.html",
+   "status": "登録済",
+   "confidence": "公式確認済み",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E23",
+   "name": "江戸東京たてもの園 夜間特別開園「下町夕涼み」",
+   "dates": [
+    "2026-08-01",
+    "2026-08-02"
+   ],
+   "span": null,
+   "when": "8/1(土)・2(日) 18:00〜21:30(荒天中止)",
+   "start": "18:00",
+   "end": "21:30",
+   "allDay": false,
+   "place": "小金井公園内(花小金井から徒歩・自転車圏)",
+   "mapq": "小金井公園内",
+   "summary": "提灯の下町風情、ちびっ子縁日、阿波おどり披露など。要入園料(小学生以下は例年無料)",
+   "kidsNote": "◎ 広くて安全、雰囲気抜群。E22と同日なのでどちらか選択",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://www.tatemonoen.jp/event/page/2026_yusuzumi.php",
+   "status": "候補",
+   "confidence": "公式確認済み",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E24",
+   "name": "狭山市入間川七夕まつり 納涼花火大会",
+   "dates": [
+    "2026-08-01"
+   ],
+   "span": null,
+   "when": "8/1(土) 花火19:30〜20:00(まつりは8/1〜2)",
+   "start": "19:30",
+   "end": "20:00",
+   "allDay": false,
+   "place": "狭山市駅 徒歩10分 — 西武新宿線1本・急行約35〜40分",
+   "mapq": "狭山市駅 徒歩10分 — 西武新宿線1本・急行約35〜40分",
+   "summary": "約2,000発・30分完結+七夕飾り・屋台",
+   "kidsNote": "○ コンパクトで幼児向き。河川敷は砂利あり",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://www.city.sayama.saitama.jp/kankou/kanko/tanabata/index.html",
+   "status": "候補",
+   "confidence": "公式確認済み",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E25",
+   "name": "東久留米駅前夏祭り+門前祭り",
+   "dates": [
+    "2026-08-01"
+   ],
+   "span": null,
+   "when": "8/1(土)夕方の可能性大(例年8月第1土曜、2026年日程要確認)",
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "place": "東久留米駅北口周辺(花小金井から2駅+バス圏)",
+   "mapq": "東久留米駅北口",
+   "summary": "屋台・ステージ・キッズエリアあり",
+   "kidsNote": "○ キッズエリアあり。歩行者天国は混むので早めの時間に",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://higashikurume.net/event.html",
+   "status": "候補",
+   "confidence": "要確認",
+   "tentative": true,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E26",
+   "name": "サンロード月窓寺門前市夏まつり(吉祥寺・第44回)",
+   "dates": [
+    "2026-08-01",
+    "2026-08-02"
+   ],
+   "span": null,
+   "when": "8/1(土)・2(日)(時間要確認)",
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "place": "吉祥寺サンロード商店街(アーケード内で雨・日差しに強い)",
+   "mapq": "吉祥寺サンロード商店街",
+   "summary": "○ ベビーカーは午前〜昼推奨",
+   "kidsNote": "○ ベビーカーは午前〜昼推奨",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://musashino-kanko.com/topics/musashino_natsumaturi-bonodori/",
+   "status": "候補",
+   "confidence": "中",
+   "tentative": true,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E36",
+   "name": "西武園ゆうえんち 大火祭り(8月毎日開催期間あり)",
+   "dates": [
+    "2026-08-01",
+    "2026-08-08",
+    "2026-08-09",
+    "2026-08-10",
+    "2026-08-11",
+    "2026-08-12",
+    "2026-08-13",
+    "2026-08-14",
+    "2026-08-15",
+    "2026-08-22",
+    "2026-08-29"
+   ],
+   "span": null,
+   "when": "8/8(土)〜15(土)は毎日、ほか8/1・8/22・8/29 19:30〜",
+   "start": "19:30",
+   "end": null,
+   "allDay": false,
+   "place": "",
+   "mapq": "",
+   "summary": "◎◎ E7参照。お盆期間の平日に行けるのが強み",
+   "kidsNote": "◎◎ E7参照。お盆期間の平日に行けるのが強み",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "",
+   "status": "候補",
+   "confidence": "",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E31",
+   "name": "佃 住吉神社例祭(3年に1度の本祭り年!)",
+   "dates": [
+    "2026-08-06",
+    "2026-08-07",
+    "2026-08-08",
+    "2026-08-09",
+    "2026-08-10"
+   ],
+   "span": null,
+   "when": "8/6(木)〜10(月)。ハイライトは8/9(日)船渡御・8/8(土)獅子頭巡行",
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "place": "佃・月島一帯(中井乗換・大江戸線月島 約60分)",
+   "mapq": "佃・月島",
+   "summary": "大幟6本、八角神輿、船渡御。下町情緒+もんじゃストリート",
+   "kidsNote": "○ 都心大型祭より穏やか。真夏日中の暑さ対策必須",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://www.sumiyoshijinja.or.jp/information.html",
+   "status": "候補",
+   "confidence": "高(細部要確認)",
+   "tentative": true,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E35",
+   "name": "神宮外苑花火大会",
+   "dates": [
+    "2026-08-08",
+    "2026-08-09"
+   ],
+   "span": null,
+   "when": "8/8(土) 19:30〜20:30(雨天決行・荒天8/9順延)",
+   "start": "19:30",
+   "end": "20:30",
+   "allDay": false,
+   "place": "",
+   "mapq": "",
+   "summary": "約10,000発・全席有料チケット制(11,000円〜)",
+   "kidsNote": "△ 座席確保は利点だが音が大きく2歳には負担の可能性",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://www.jinguhanabi.com/",
+   "status": "候補",
+   "confidence": "公式確認済み",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E56",
+   "name": "わくわく夏色子どもフェス(田無アスタ 2Fセンターコート)",
+   "dates": [
+    "2026-08-15",
+    "2026-08-16"
+   ],
+   "span": null,
+   "when": "8/15(土)・16(日) 11:00〜17:00 ※初の二日間開催",
+   "start": "11:00",
+   "end": "17:00",
+   "allDay": false,
+   "place": "田無アスタ2階センターコート(西武新宿線 田無駅 徒歩1分)",
+   "mapq": "田無アスタ2階センターコート",
+   "summary": "ハンドメイド物販・ワークショップ・食品販売・美容の4カテゴリが出店。子ども店長も出店",
+   "kidsNote": "🧒◎ 🎒◎ お盆の屋内候補。スタンプラリー目当てなら11時台に入るのが安全",
+   "ages": {
+    "baby": null,
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "",
+   "url": "https://www.asta.co.jp/event/",
+   "status": "候補",
+   "confidence": "公式確認済み(公式イベントページ＋チラシPDF)",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E57",
+   "name": "アスター海賊団〜アスター船長と7つの宝〜(田無アスタ)",
+   "dates": [
+    "2026-08-17",
+    "2026-08-18",
+    "2026-08-19"
+   ],
+   "span": null,
+   "when": "8/17(月)〜19(水) 11:00〜17:00(最終受付16:00)",
+   "start": "11:00",
+   "end": "17:00",
+   "allDay": false,
+   "place": "アスタ専門店街 2Fセンターコート(受付) ※宝さがしの範囲は館内B1F〜3F",
+   "mapq": "アスタ専門店街 2Fセンターコート",
+   "summary": "センターコートで宝の地図をもらい、館内に隠された7つの宝を謎を解きながら探す。",
+   "kidsNote": "🎒◎ 🧒○(親の補助が要る) 平日開催で空きやすい。",
+   "ages": {
+    "baby": null,
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "300円",
+   "target": "",
+   "url": "https://www.asta.co.jp/update/event_260817.pdf",
+   "status": "候補",
+   "confidence": "公式確認済み(公式イベントページ＋チラシPDF)",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E44",
+   "name": "非核平和学習事業 被爆写真パネル展示",
+   "dates": [
+    "2026-08-18",
+    "2026-08-19",
+    "2026-08-20",
+    "2026-08-21",
+    "2026-08-22",
+    "2026-08-23"
+   ],
+   "span": null,
+   "when": "8/18(火)〜23(日) 10:00〜17:00 ※23日は16:00まで",
+   "start": "10:00",
+   "end": "17:00",
+   "allDay": false,
+   "place": "中央公民館1階ギャラリー(小川町2-1325)",
+   "mapq": "中央公民館1階ギャラリー",
+   "summary": "広島・長崎の被害と現在の核兵器の状況をパネルで。記録映画・アニメの上映も",
+   "kidsNote": "🎒○ 小学生の夏の学びに。未就学児には内容が重い場合あり",
+   "ages": {
+    "baby": null,
+    "pre": null,
+    "elem": "○"
+   },
+   "cost": "",
+   "target": "",
+   "url": "",
+   "status": "候補",
+   "confidence": "市報PDFで検証済・一致(2026-08-15)",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E62",
+   "name": "田無ハンドメイドマルシェ vol.15(田無アスタ)",
+   "dates": [
+    "2026-08-20",
+    "2026-08-21"
+   ],
+   "span": null,
+   "when": "8/20(木)・21(金) 11:00〜18:00 / 場所: 2Fセンターコート / 主催: momo",
+   "start": "11:00",
+   "end": "18:00",
+   "allDay": false,
+   "place": "",
+   "mapq": "",
+   "summary": "🧒○ 🎒○ 保護者向けの色合いが強い",
+   "kidsNote": "🧒○ 🎒○ 保護者向けの色合いが強い",
+   "ages": {
+    "baby": null,
+    "pre": "○",
+    "elem": "○"
+   },
+   "cost": "",
+   "target": "",
+   "url": "",
+   "status": "候補",
+   "confidence": "公式確認済み(公式イベントページ・日時とも一致)",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E45",
+   "name": "金曜市民劇場「ともだち」",
+   "dates": [
+    "2026-08-21"
+   ],
+   "span": null,
+   "when": "8/21(金) 14:00〜",
+   "start": "14:00",
+   "end": null,
+   "allDay": false,
+   "place": "中央公民館(小川町2-1325)",
+   "mapq": "中央公民館",
+   "summary": "サッカーの名選手を目指す少年が、岩手から転校してきた子を励まし本当の「ともだち」になろうとする話",
+   "kidsNote": "🧒○ 🎒◎ 当日直接。無料の見込み(市報に費用の記載なし・要確認)",
+   "ages": {
+    "baby": null,
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "",
+   "url": "",
+   "status": "候補",
+   "confidence": "市報PDFで検証済・一致(2026-08-15)",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E37",
+   "name": "三鷹阿波おどり",
+   "dates": [
+    "2026-08-22",
+    "2026-08-23"
+   ],
+   "span": null,
+   "when": "8/22(土)・23(日) 17:00〜20:00",
+   "start": "17:00",
+   "end": "20:00",
+   "allDay": false,
+   "place": "三鷹駅南口商店街(花小金井からバス直行あり 約30〜40分)",
+   "mapq": "三鷹駅南口商店街",
+   "summary": "△〜○ コンパクトで20時終了。沿道後方にベビーカー",
+   "kidsNote": "△〜○ コンパクトで20時終了。沿道後方にベビーカー",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://mitaka-awaodori.com/",
+   "status": "候補",
+   "confidence": "公式確認済み",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E39",
+   "name": "麻布十番納涼まつり",
+   "dates": [
+    "2026-08-22",
+    "2026-08-23"
+   ],
+   "span": null,
+   "when": "8/22(土)・23(日)(例年15:00〜21:00、時間要確認)",
+   "start": "15:00",
+   "end": "21:00",
+   "allDay": false,
+   "place": "",
+   "mapq": "",
+   "summary": "✕に近い△ 都内屈指の激混み。行くなら15時台短時間+抱っこ紐",
+   "kidsNote": "✕に近い△ 都内屈指の激混み。行くなら15時台短時間+抱っこ紐",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://www.azabujuban.or.jp/topics/topics_event/23867/",
+   "status": "候補",
+   "confidence": "日程公式確認済み",
+   "tentative": true,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E58",
+   "name": "こだわり縁日(田無アスタ)",
+   "dates": [
+    "2026-08-22",
+    "2026-08-23"
+   ],
+   "span": null,
+   "when": "8/22(土)・23(日) 11:00〜16:00 ※混雑時は受付を早めに終了する場合あり",
+   "start": "11:00",
+   "end": "16:00",
+   "allDay": false,
+   "place": "アスタ専門店街 2Fセンターコート",
+   "mapq": "アスタ専門店街 2Fセンターコート",
+   "summary": "射的・輪投げ・スーパーボールすくい / 各1回300円",
+   "kidsNote": "👶○ 🧒◎ 🎒◎ 屋内の縁日。暑い日に助かる。",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "",
+   "url": "https://www.asta.co.jp/update/event_260822_2.pdf",
+   "status": "候補",
+   "confidence": "公式確認済み(公式イベントページ＋チラシPDF)",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E64",
+   "name": "武蔵野茶房 サマージャンボリー 夏の大抽選会(田無アスタ)",
+   "dates": [
+    "2026-08-22"
+   ],
+   "span": null,
+   "when": "8/22(土)のみ 11:00〜16:00 / 場所: アスタ専門店街 2Fセンターコート",
+   "start": "11:00",
+   "end": "16:00",
+   "allDay": false,
+   "place": "",
+   "mapq": "",
+   "summary": "7/22〜8/22の期間中に対象店舗で対象商品を注文・購入するともらえるくじ引き券で抽選。",
+   "kidsNote": "🧒○ 🎒○ 抽選自体は短時間。アスターくん登場の14時台が子ども向けの山",
+   "ages": {
+    "baby": null,
+    "pre": "○",
+    "elem": "○"
+   },
+   "cost": "",
+   "target": "",
+   "url": "https://www.asta.co.jp/update/event_260822.pdf",
+   "status": "候補",
+   "confidence": "公式確認済み",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E66",
+   "name": "森のカルテ調査プロジェクト「夜の森を調査する夏の観察会」",
+   "dates": [
+    "2026-08-22"
+   ],
+   "span": null,
+   "when": "8/22(土) ※開始時刻は要確認(夜間の観察会)",
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "place": "市内雑木林(詳細は要確認)",
+   "mapq": "市内雑木林",
+   "summary": "🧒△(夜間・虫) 🎒◎ 夜の森という体験の希少性が高い",
+   "kidsNote": "🧒△(夜間・虫) 🎒◎ 夜の森という体験の希少性が高い",
+   "ages": {
+    "baby": null,
+    "pre": "△",
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "小中学生・家族連れ",
+   "url": "https://www.city.kodaira.tokyo.jp/kurashi/087/087422.html",
+   "status": "候補",
+   "confidence": "要確認(市公式のイベント一覧に掲載あり。詳細ページが未公開で時刻・会場・申込が確認できない)",
+   "tentative": true,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E47",
+   "name": "こだいら防災救急フェア",
+   "dates": [
+    "2026-08-23"
+   ],
+   "span": null,
+   "when": "8/23(日) 10:00〜13:00 ※荒天時は中止の場合あり(中止は小平消防署HPで告知)",
+   "start": "10:00",
+   "end": "13:00",
+   "allDay": false,
+   "place": "中央公民館1階視聴覚室・中央図書館北側駐車場(小川町2-1325)",
+   "mapq": "中央公民館1階視聴覚室・中央図書館北側駐車場",
+   "summary": "AR(拡張現実)体験・VR(仮想現実)体験・AED体験・放水体験・はしご車搭乗体験(20組)",
+   "kidsNote": "🧒◎ 🎒◎ 体験ものが多く、働く車好きに刺さる",
+   "ages": {
+    "baby": null,
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "",
+   "url": "",
+   "status": "候補",
+   "confidence": "市報PDFで確定(2026-08-15検証)",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E61",
+   "name": "ポケモングッズが貰える!イベント開催!!(田無アスタ)",
+   "dates": [
+    "2026-08-24",
+    "2026-08-25",
+    "2026-08-26",
+    "2026-08-27",
+    "2026-08-28"
+   ],
+   "span": null,
+   "when": "8/24(月)〜28(金) 10:00〜19:00",
+   "start": "10:00",
+   "end": "19:00",
+   "allDay": false,
+   "place": "田無アスタ2階センターコート",
+   "mapq": "田無アスタ2階センターコート",
+   "summary": "ポケモングッズが無料で貰えるイベント。チラシに「だれでも参加OK!!」と明記",
+   "kidsNote": "🧒◎ 🎒◎ 無料でグッズがもらえるので費用ゼロで満足度が出せる。",
+   "ages": {
+    "baby": null,
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "",
+   "url": "https://www.asta.co.jp/update/event_260824.pdf",
+   "status": "候補",
+   "confidence": "公式確認済み(公式イベントページ＋チラシPDF)",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E38",
+   "name": "滝山・前沢みんなの夏祭り",
+   "dates": [
+    "2026-08-29",
+    "2026-08-30"
+   ],
+   "span": null,
+   "when": "8/29(土)・30(日) ※2026-07 に確定",
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "place": "滝山中央通り(花小金井からバス「滝山センター」)",
+   "mapq": "滝山中央通り",
+   "summary": "三世代舞まつり・阿波踊り・屋台。市内最大級",
+   "kidsNote": "○ 沿道観覧しやすいが人出多め",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "http://takiyama.in.coocan.jp/",
+   "status": "候補",
+   "confidence": "日程確定",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E40",
+   "name": "昭島市民くじら祭+夢花火",
+   "dates": [
+    "2026-08-29",
+    "2026-08-30"
+   ],
+   "span": null,
+   "when": "8/29(土)・30(日)、花火は8/29(土)20:00〜20:30 約2,000発",
+   "start": "20:00",
+   "end": "20:30",
+   "allDay": false,
+   "place": "昭和公園(東中神駅すぐ、電車約50分・車約30分)",
+   "mapq": "昭和公園(東中神駅すぐ",
+   "summary": "くじら型山車パレード・ステージ・花火",
+   "kidsNote": "◎ 大規模大会より混雑緩やか・駅近で撤収楽。花火20時開始なので前半だけ見て撤収も手",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://akishima-kujiramatsuri.jp/",
+   "status": "候補",
+   "confidence": "確認済み(日割り詳細は要確認)",
+   "tentative": true,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E41",
+   "name": "武蔵村山市観光納涼花火大会",
+   "dates": [
+    "2026-08-29"
+   ],
+   "span": null,
+   "when": "8/29(土)の見込み 19:50〜20:30 約2,000発(要確認)",
+   "start": "19:50",
+   "end": "20:30",
+   "allDay": false,
+   "place": "野山北公園運動場(車約20〜25分)",
+   "mapq": "野山北公園運動場",
+   "summary": "◎ 多摩屈指の混雑控えめローカル大会。トイレは仮設中心",
+   "kidsNote": "◎ 多摩屈指の混雑控えめローカル大会。トイレは仮設中心",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://www.city.musashimurayama.lg.jp/kankou/1004434/1001617.html",
+   "status": "候補",
+   "confidence": "要確認",
+   "tentative": true,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E42",
+   "name": "東京高円寺阿波おどり",
+   "dates": [
+    "2026-08-29",
+    "2026-08-30"
+   ],
+   "span": null,
+   "when": "8/29(土)・30(日) 17:00〜20:00",
+   "start": "17:00",
+   "end": "20:00",
+   "allDay": false,
+   "place": "",
+   "mapq": "",
+   "summary": "✕に近い△ 観客100万人規模。有料桟敷席が取れた場合のみ",
+   "kidsNote": "✕に近い△ 観客100万人規模。有料桟敷席が取れた場合のみ",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://www.koenji-awaodori.com/about/about01.html",
+   "status": "候補",
+   "confidence": "公式確認済み",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E59",
+   "name": "スライムをつくろう!(田無アスタ)",
+   "dates": [
+    "2026-08-29",
+    "2026-08-30"
+   ],
+   "span": null,
+   "when": "8/29(土)・30(日) 10:00〜17:00(最終受付16:30)",
+   "start": "10:00",
+   "end": "17:00",
+   "allDay": false,
+   "place": "アスタ専門店街 2Fセンターコート",
+   "mapq": "アスタ専門店街 2Fセンターコート",
+   "summary": "🧒◎ 🎒◎ 工作系。夏休みの自由研究の締めにも。先着なので午前入りが安全",
+   "kidsNote": "🧒◎ 🎒◎ 工作系。夏休みの自由研究の締めにも。先着なので午前入りが安全",
+   "ages": {
+    "baby": null,
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "1人1回500円 / 各日先着200名 ※なくなり次第終了",
+   "target": "",
+   "url": "https://www.asta.co.jp/event/",
+   "status": "候補",
+   "confidence": "公式確認済み(公式イベントページ)",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E60",
+   "name": "西東京 みんなの展覧会&イベント(田無アスタ)",
+   "dates": [
+    "2026-08-31",
+    "2026-09-01",
+    "2026-09-02",
+    "2026-09-03",
+    "2026-09-04",
+    "2026-09-05",
+    "2026-09-06"
+   ],
+   "span": null,
+   "when": "8/31(月)〜9/6(日) ※展示の開場時間は公式に記載なし(館の営業10:00〜20:00に準ずる見込み・要確認)",
+   "start": "10:00",
+   "end": "20:00",
+   "allDay": false,
+   "place": "アスタ専門店街 2Fセンターコート",
+   "mapq": "アスタ専門店街 2Fセンターコート",
+   "summary": "ジュニア・一般の作品展示。来場者投票あり。全部無料",
+   "kidsNote": "👶○ 🧒◎ 🎒◎ 8/31の「ねんどチャーム」「デッカくお絵描き」は未就学でもいける。",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "",
+   "url": "https://www.asta.co.jp/update/event_260831.pdf",
+   "status": "候補",
+   "confidence": "公式確認済み(チラシPDF。開場時間のみ要確認)",
+   "tentative": true,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E48",
+   "name": "トップアスリートによるランニング教室",
+   "dates": [
+    "2026-09-06"
+   ],
+   "span": null,
+   "when": "9/6(日) 小学1・2年の部 9:30〜11:30 / 小学3・4年の部 13:00〜15:00",
+   "start": "09:30",
+   "end": "11:30",
+   "allDay": false,
+   "place": "小平元気村おがわ東 屋外広場 ※雨天時は屋内広場",
+   "mapq": "小平元気村おがわ東 屋外広場",
+   "summary": "箱根駅伝などに出場経験のある東京経済大学陸上競技部の吉村匠監督から正しいフォームを学ぶ",
+   "kidsNote": "🎒◎ 保護者の承諾が必要。運動できる服装・タオル・飲み物・着替え",
+   "ages": {
+    "baby": null,
+    "pre": null,
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "市内在住・在学の小学1〜4年生 / 各70人",
+   "url": "",
+   "status": "候補",
+   "confidence": "市報PDFで検証済・一致(2026-08-15)",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-08-28",
+    "raw": "- **申込: 8/5(水)〜28(金) 申込フォーム(先着順)**"
+   },
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E50",
+   "name": "ピックルボール体験会・交流大会",
+   "dates": [
+    "2026-09-12"
+   ],
+   "span": null,
+   "when": "9/12(土) ①体験会 10:00〜12:00 ②交流大会 13:00〜16:00",
+   "start": "10:00",
+   "end": "12:00",
+   "allDay": false,
+   "place": "小平第六小学校 体育館",
+   "mapq": "小平第六小学校 体育館",
+   "summary": "テニス・バドミントン・卓球の要素を持つニュースポーツ。パドルの貸出あり",
+   "kidsNote": "🎒◎ 屋内・雨でも実施",
+   "ages": {
+    "baby": null,
+    "pre": null,
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "市内在住・在勤・在学の小学生以上 ①初心者 ②経験者 / 定員 ①16人 ②30人",
+   "url": "",
+   "status": "候補",
+   "confidence": "市報PDFで検証済・一致(2026-08-15)",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-08-24",
+    "raw": "- **申込: 8/24(月)まで** 申込フォーム(電話・電子メール可)"
+   },
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E49",
+   "name": "初心者ラグビー教室(小平市ラグビーフットボール協会)",
+   "dates": [
+    "2026-09-13"
+   ],
+   "span": null,
+   "when": "9/13(日) 9:00〜",
+   "start": "09:00",
+   "end": null,
+   "allDay": false,
+   "place": "小平第十三小学校 校庭",
+   "mapq": "小平第十三小学校 校庭",
+   "summary": "ラグビーの基礎練習。幼児・低学年=タグラグビー / 中学年=7人制 / 高学年=9人制",
+   "kidsNote": "🧒◎ 🎒◎ 未就学から参加できるのが貴重",
+   "ages": {
+    "baby": null,
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "幼稚園年中〜小学生(幼児・低学年=タグラグビー)",
+   "url": "",
+   "status": "候補",
+   "confidence": "市報PDFで確定(2026-08-15検証)",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-09-12",
+    "raw": "- 申込: 8/5(水)〜**9/12(土)**までに電子メールで件名に参加者の氏名・学年を明記"
+   },
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E52",
+   "name": "弦楽アンサンブル・ルナーレ演奏会",
+   "dates": [
+    "2026-09-13"
+   ],
+   "span": null,
+   "when": "9/13(日) 14:00開演(13:30開場)",
+   "start": "14:00",
+   "end": null,
+   "allDay": false,
+   "place": "ルネこだいら 中ホール / 費用: 無料",
+   "mapq": "ルネこだいら 中ホール / 費用: 無料",
+   "summary": "🧒○ 🎒◎ 無料のクラシック入門。詳細は公民館のチラシ",
+   "kidsNote": "🧒○ 🎒◎ 無料のクラシック入門。詳細は公民館のチラシ",
+   "ages": {
+    "baby": null,
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "",
+   "url": "",
+   "status": "候補",
+   "confidence": "市報PDFで検証済・一致(2026-08-15)",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E53",
+   "name": "子育て支援講座「素材の味を活かしたカラフル弁当を作ろう」",
+   "dates": [
+    "2026-09-29",
+    "2026-10-13"
+   ],
+   "span": null,
+   "when": "①9/29(火) ②10/13(火) 10:00〜正午 ※①②どちらかを選ぶ選択制(全2回ではない)",
+   "start": "10:00",
+   "end": null,
+   "allDay": false,
+   "place": "鈴木公民館(鈴木町2-772) / 講師: 川村あやみさん(自然食品レストラン店長)",
+   "mapq": "鈴木公民館 / 講師: 川村あやみさん",
+   "summary": "保護者向け(調理実習)",
+   "kidsNote": "保護者向け(調理実習)",
+   "ages": null,
+   "cost": "700円 / 定員 各8人(抽選) / 対象: 市内在住・在勤・在学の方",
+   "target": "",
+   "url": "",
+   "status": "候補",
+   "confidence": "市報PDFで確定(2026-08-15検証)",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-09-05",
+    "raw": "- 申込: **9/5(土)まで**に希望日(①・②)を申込フォームまたは電話 042-388-0050"
+   },
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E54",
+   "name": "小川パレット オープン",
+   "dates": [
+    "2026-11-01"
+   ],
+   "span": null,
+   "when": "11/1(日)オープン",
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "place": "小川駅西口再開発ビル4・5階(小川西町4-16-1)",
+   "mapq": "小川駅西口再開発ビル4・5階",
+   "summary": "キッズスペース・マガジンカフェ・防音スタジオ・個人向け貸出しスペースが新設。",
+   "kidsNote": "👶◎ 🧒◎ 🎒◎ 雨の日の新しい行き先になる見込み。オープン直後は混雑",
+   "ages": {
+    "baby": "◎",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "",
+   "url": "",
+   "status": "候補",
+   "confidence": "市報PDFで検証済・一致(2026-08-15)",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-08.md"
+  }
+ ],
+ "standing": [
+  {
+   "id": "E8",
+   "name": "小平市の公園水遊び施設(花小金井ひょうたん池公園ほか市内各所)",
+   "span": "例年7月上旬〜9月上旬 10:00〜17:00 無料(2026年正式期間は要確認)",
+   "place": "花小金井ひょうたん池公園(花小金井駅南口 徒歩約9分・花小金井南町3-3-13・大きなじゃぶじゃぶ池/遊具・トイレなし)、天神じゃぶじゃぶ公園、中央公園(鷹の台)ほか。開設園の一覧は小平市公式(URL)を参照",
+   "mapq": "花小金井ひょうたん池公園",
+   "summary": "◎ 2歳児の水遊びデビューに最適。無料・徒歩圏。※たけのこ公園は水遊び施設なし(2026-07訂正)",
+   "kidsNote": "◎ 2歳児の水遊びデビューに最適。無料・徒歩圏。※たけのこ公園は水遊び施設なし(2026-07訂正)",
+   "ages": null,
+   "cost": "",
+   "url": "https://www.city.kodaira.tokyo.jp/kurashi/113/113055.html",
+   "confidence": "中(2026期間要確認)",
+   "source": "events/2026-07.md"
+  },
+  {
+   "id": "E9",
+   "name": "西東京いこいの森公園 噴水広場",
+   "span": "7/1(水)〜10/12(月) 10:30〜15:15(45分稼働+15分休止、気温25度未満・悪天候中止、毎月第2火曜点検)無料",
+   "place": "西東京市緑町/車・自転車約10分",
+   "mapq": "西東京市緑町/車・自転車約10分",
+   "summary": "◎ オムツ児も遊べる噴水型",
+   "kidsNote": "◎ オムツ児も遊べる噴水型",
+   "ages": null,
+   "cost": "",
+   "url": "https://www.city.nishitokyo.lg.jp/kurasi/koen/kouenmizuasobi.html",
+   "confidence": "公式確認済み",
+   "source": "events/2026-07.md"
+  },
+  {
+   "id": "E10",
+   "name": "西武園ゆうえんちプール",
+   "span": "6/27(土)〜9/23(水祝)(6/27〜7/17と9月は土日祝のみ)〜17:00",
+   "place": "東村山乗換 西武園駅すぐ/電車約20〜25分",
+   "mapq": "東村山乗換 西武園駅すぐ/電車約20〜25分",
+   "summary": "◎ こどもプール・波のプール・流れるプール。水遊び用オムツ+水着でOK(2歳児可)。小3以下は16歳以上の同伴入水必須",
+   "kidsNote": "◎ こどもプール・波のプール・流れるプール。水遊び用オムツ+水着でOK(2歳児可)。小3以下は16歳以上の同伴入水必須",
+   "ages": null,
+   "cost": "大人3,400円/未就学児(3歳〜)1,500円(2歳以下は要確認・無料見込み)",
+   "url": "https://www.seibuen-amusement-park.jp/seibuenpool/index.html",
+   "confidence": "公式確認済み",
+   "source": "events/2026-07.md"
+  },
+  {
+   "id": "E63",
+   "name": "アスタキッズスタンプカード(田無アスタ)",
+   "span": "通年",
+   "place": "",
+   "mapq": "",
+   "summary": "参加店舗で500円(税込)以上の買物ごとにスタンプ1個。10個でお買物券100円。押印は1日1回",
+   "kidsNote": "🎒◎ 通う家庭にはお得。常設なので「知っていると得」ネタとして再利用可",
+   "ages": {
+    "baby": null,
+    "pre": null,
+    "elem": "◎"
+   },
+   "cost": "",
+   "url": "https://www.asta.co.jp/update/kids_stamp_2025.pdf",
+   "confidence": "公式確認済み(公式PDF・2026-03-31更新)",
+   "source": "events/2026-08.md"
+  },
+  {
+   "id": "E65",
+   "name": "田無アスタ 8月の「知っていると得」枠",
+   "span": "通年",
+   "place": "",
+   "mapq": "",
+   "summary": "夕方以降に寄る家庭向け。無料版の「知らないと損」枠に使える",
+   "kidsNote": "夕方以降に寄る家庭向け。無料版の「知らないと損」枠に使える",
+   "ages": null,
+   "cost": "",
+   "url": "https://www.asta.co.jp/update/summer_events_2607.pdf",
+   "confidence": "公式確認済み",
+   "source": "events/2026-08.md"
+  }
+ ],
+ "byDate": {
+  "2026-07-11": [
+   "E16"
+  ],
+  "2026-07-12": [
+   "E16"
+  ],
+  "2026-07-13": [
+   "E1"
+  ],
+  "2026-07-14": [
+   "E1"
+  ],
+  "2026-07-15": [
+   "E1"
+  ],
+  "2026-07-16": [
+   "E1"
+  ],
+  "2026-07-18": [
+   "E18"
+  ],
+  "2026-07-19": [
+   "E18"
+  ],
+  "2026-07-20": [
+   "E18",
+   "E2"
+  ],
+  "2026-07-22": [
+   "E3"
+  ],
+  "2026-07-23": [
+   "E3"
+  ],
+  "2026-07-24": [
+   "E3"
+  ],
+  "2026-07-25": [
+   "E3",
+   "E5",
+   "E6"
+  ],
+  "2026-08-01": [
+   "E22",
+   "E23",
+   "E24",
+   "E36"
+  ],
+  "2026-08-02": [
+   "E23"
+  ],
+  "2026-08-08": [
+   "E36",
+   "E35"
+  ],
+  "2026-08-09": [
+   "E36",
+   "E35"
+  ],
+  "2026-08-10": [
+   "E36"
+  ],
+  "2026-08-11": [
+   "E36"
+  ],
+  "2026-08-12": [
+   "E36"
+  ],
+  "2026-08-13": [
+   "E36"
+  ],
+  "2026-08-14": [
+   "E36"
+  ],
+  "2026-08-15": [
+   "E36",
+   "E56"
+  ],
+  "2026-08-22": [
+   "E36",
+   "E44",
+   "E37",
+   "E58",
+   "E64"
+  ],
+  "2026-08-29": [
+   "E36",
+   "E38",
+   "E42",
+   "E59"
+  ],
+  "2026-08-16": [
+   "E56"
+  ],
+  "2026-08-17": [
+   "E57"
+  ],
+  "2026-08-18": [
+   "E57",
+   "E44"
+  ],
+  "2026-08-19": [
+   "E57",
+   "E44"
+  ],
+  "2026-08-20": [
+   "E44",
+   "E62"
+  ],
+  "2026-08-21": [
+   "E44",
+   "E62",
+   "E45"
+  ],
+  "2026-08-23": [
+   "E44",
+   "E37",
+   "E58",
+   "E47"
+  ],
+  "2026-08-24": [
+   "E61"
+  ],
+  "2026-08-25": [
+   "E61"
+  ],
+  "2026-08-26": [
+   "E61"
+  ],
+  "2026-08-27": [
+   "E61"
+  ],
+  "2026-08-28": [
+   "E61"
+  ],
+  "2026-08-30": [
+   "E38",
+   "E42",
+   "E59"
+  ],
+  "2026-09-06": [
+   "E48"
+  ],
+  "2026-09-12": [
+   "E50"
+  ],
+  "2026-09-13": [
+   "E49",
+   "E52"
+  ],
+  "2026-09-29": [
+   "E53"
+  ],
+  "2026-10-13": [
+   "E53"
+  ],
+  "2026-11-01": [
+   "E54"
+  ]
+ },
+ "unresolved": [
+  {
+   "id": "E15",
+   "name": "小平の商店街・地域盆踊り群(花南地区・小平駅サマーフェス・一橋学園)",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E19",
+   "name": "武蔵野の盆踊り・夏まつり群",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E20",
+   "name": "西東京の盆踊り群(田無・東伏見・谷戸ほか)",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E21",
+   "name": "秋津神社例大祭・国分寺の町会盆踊り群",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E7",
+   "name": "西武園ゆうえんち 大火祭り(花火ショー)",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E11",
+   "name": "東京サマーランド(屋外プール7/4〜9/27・屋内全日)",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E12",
+   "name": "(欠番) 小金井公園「わき水広場」— 実在確認できず削除",
+   "reason": "ステータス「見送り」のため除外",
+   "when": ""
+  },
+  {
+   "id": "E32",
+   "name": "ヒガコ・サマーフェスティバル(東小金井)",
+   "reason": "日時から確定日が取れない",
+   "when": "例年8月上旬の2日間(2026年日程要確認)"
+  },
+  {
+   "id": "E33",
+   "name": "本多八幡神社 盆踊り(国分寺)ほか町会盆踊り群",
+   "reason": "日時から確定日が取れない",
+   "when": "例年8月上旬の土曜 17:00〜20:00(2026年一覧は7月中旬に市サイト公開見込み)"
+  },
+  {
+   "id": "E34",
+   "name": "下里氷川神社 納涼盆踊り大会(東久留米)",
+   "reason": "日時から確定日が取れない",
+   "when": "例年8月上旬の土日 18:00〜21:30(2026年要確認)"
+  },
+  {
+   "id": "E43",
+   "name": "保谷なかよし公園 納涼盆踊り/ゆめまつり(四小)ほか地域盆踊り",
+   "reason": "日時から確定日が取れない",
+   "when": "例年8月下旬の土曜(2026年要確認)"
+  },
+  {
+   "id": "E46",
+   "name": "土曜こども広場 友・遊こどもまつり「みんなでちょうせん!コマ回し&たいけん会」",
+   "reason": "ステータス「**見送り(申込締切終了)**」のため除外",
+   "when": "8/29(土) 10:30〜11:30"
+  },
+  {
+   "id": "E55",
+   "name": "あそべ〜る水族館(田無アスタ 2Fセンターコート)",
+   "reason": "ステータス「**終了**」のため除外",
+   "when": "8/8(土)〜11(火・祝) 10:00〜17:00(最終入場16:40)"
+  },
+  {
+   "id": "E67",
+   "name": "親子木工講座「引き出し式の小物入れ」(花小金井北公民館)",
+   "reason": "日時から確定日が取れない",
+   "when": "要確認(9月開催の見込み)"
+  }
+ ]
+}

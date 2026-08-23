@@ -1,0 +1,155 @@
+/* ぼんぼやーじゅ通信 — カレンダーの見た目
+ * 色は各ページが定義している変数（--surface / --ink / --sky-deep …）を使う。
+ * このファイルは変数を定義しない（ページ側のライト/ダーク切替にそのまま乗る）。 */
+
+.bvc { --bvc-cell: 2.9rem; }
+
+/* ---- 締切が近いもの ---- */
+.bvc-deadlines {
+  background: var(--marigold-wash);
+  border: 1px solid var(--marigold);
+  border-radius: 14px;
+  padding: .85rem 1rem;
+  margin-bottom: 1.1rem;
+}
+.bvc-dlhead {
+  font-family: var(--maru); font-weight: 800; font-size: .95rem;
+  margin: 0 0 .5rem; color: var(--ink);
+}
+.bvc-dlrow { display: flex; gap: .6rem; align-items: baseline; font-size: .9rem; padding: .16rem 0; }
+.bvc-dldate { flex: none; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.bvc-dldate b { color: #B4453C; margin-left: .3rem; }
+.bvc-dlname { color: var(--ink); }
+
+/* ---- 月の見出しと送り ---- */
+.bvc-head { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-bottom: .5rem; }
+.bvc-month { font-family: var(--maru); font-weight: 800; font-size: 1.12rem; margin: 0; text-align: center; flex: 1; }
+.bvc-nav {
+  flex: none; width: 2.6rem; height: 2.6rem; border-radius: 999px;
+  border: 1px solid var(--line-strong); background: var(--surface); color: var(--sky-deep);
+  font-size: 1.3rem; line-height: 1; cursor: pointer;
+}
+.bvc-nav:disabled { opacity: .3; cursor: default; }
+.bvc-nav:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+
+/* ---- 月グリッド ---- */
+.bvc-grid {
+  width: 100%; border-collapse: separate; border-spacing: 2px;
+  table-layout: fixed; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 16px; padding: .35rem;
+}
+.bvc-grid th {
+  font-family: var(--maru); font-weight: 700; font-size: .74rem;
+  color: var(--ink-faint); padding: .3rem 0; font-feature-settings: normal;
+}
+.bvc-grid th.sun { color: #C0736B; }
+.bvc-grid th.sat { color: var(--sky-deep); }
+
+.bvc-cell {
+  height: var(--bvc-cell); vertical-align: middle; text-align: center;
+  border-radius: 10px; position: relative; color: var(--ink);
+  font-variant-numeric: tabular-nums; line-height: 1.15;
+}
+.bvc-cell.out { color: var(--ink-faint); opacity: .35; }
+.bvc-cell.past { color: var(--ink-faint); }
+.bvc-cell.sun:not(.out) { color: #C0736B; }
+.bvc-cell.sat:not(.out) { color: var(--sky-deep); }
+.bvc-cell.has { cursor: pointer; background: var(--sky-wash); font-weight: 800; }
+.bvc-cell.has:hover { background: var(--surface-2); }
+.bvc-cell.has:focus-visible { outline: 3px solid var(--sky); outline-offset: 1px; }
+.bvc-cell.today { box-shadow: inset 0 0 0 2px var(--marigold); }
+.bvc-cell.sel { background: var(--sky-deep) !important; color: #fff !important; }
+.bvc-cell.sel .bvc-dot { background: #fff; }
+
+.bvc-num { display: block; font-size: .92rem; }
+.bvc-dots { display: flex; justify-content: center; gap: 2px; height: 5px; margin-top: 1px; align-items: center; }
+.bvc-dot { display: inline-block; width: 4px; height: 4px; border-radius: 999px; background: var(--sky-deep); }
+.bvc-more { font-size: .55rem; color: var(--sky-deep); font-style: normal; line-height: 1; }
+
+.bvc-legend {
+  display: flex; align-items: center; gap: .3rem; flex-wrap: wrap;
+  font-size: .76rem; color: var(--ink-faint); margin: .5rem 0 1.2rem;
+}
+.bvc-legend .bvc-dot { margin-right: .15rem; }
+.bvc-today-mark {
+  border: 2px solid var(--marigold); border-radius: 6px; padding: 0 .3rem; margin-left: .5rem;
+}
+
+/* ---- 選んだ日の予定 ---- */
+.bvc-dayhead, .bvc-tailhead {
+  font-family: var(--maru); font-weight: 800; font-size: 1.02rem;
+  margin: 1.4rem 0 .7rem; display: flex; align-items: center; gap: .5rem;
+}
+.bvc-count {
+  font-size: .74rem; font-weight: 700; color: var(--sky-deep);
+  background: var(--sky-wash); border-radius: 999px; padding: .1rem .55rem;
+}
+.bvc-daylabel {
+  font-family: var(--maru); font-weight: 800; font-size: .88rem;
+  color: var(--sky-deep); margin: 1rem 0 .4rem;
+}
+.bvc-tailnote { font-size: .82rem; color: var(--ink-faint); margin: -.35rem 0 .7rem; line-height: 1.7; }
+.bvc-empty { font-size: .92rem; color: var(--ink-soft); }
+
+/* ---- イベントのカード ---- */
+.bvc-card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+  padding: .9rem 1.05rem; margin-bottom: .7rem;
+}
+.bvc-card.is-tentative { border-style: dashed; }
+.bvc-when {
+  font-size: .8rem; font-weight: 800; color: var(--sky-deep);
+  margin: 0; display: flex; flex-wrap: wrap; gap: .4rem; align-items: center;
+}
+.bvc-multi, .bvc-tent {
+  font-weight: 700; font-size: .7rem; border-radius: 999px; padding: .05rem .5rem;
+  background: var(--surface-2); color: var(--ink-soft);
+}
+.bvc-tent { background: var(--marigold-wash); color: var(--marigold); }
+.bvc-name { font-family: var(--maru); font-weight: 800; font-size: 1.03rem; margin: .15rem 0 0; line-height: 1.45; }
+.bvc-place { font-size: .85rem; color: var(--ink-soft); margin: .25rem 0 0; }
+.bvc-desc { font-size: .89rem; color: var(--ink-soft); margin: .35rem 0 0; line-height: 1.75; }
+.bvc-meta { margin: .4rem 0 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+.bvc-ages { font-family: var(--maru); font-weight: 700; font-size: .82rem; color: var(--ink-faint); }
+.bvc-cost { font-size: .8rem; color: var(--marigold); font-weight: 700; }
+.bvc-deadline {
+  margin: .45rem 0 0; font-size: .82rem; font-weight: 700; color: #B4453C;
+}
+
+.bvc-btns { margin-top: .7rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+.bvc-btn {
+  display: inline-flex; align-items: center; gap: .2rem;
+  font-family: var(--body); font-size: .8rem; font-weight: 700; text-decoration: none;
+  border-radius: 999px; padding: .42rem .8rem; border: 1px solid var(--line-strong);
+  background: var(--surface); color: var(--sky-deep); cursor: pointer; white-space: nowrap;
+}
+.bvc-btn-add { background: var(--sky-deep); color: #fff; border-color: var(--sky-deep); }
+.bvc-btn-ics { color: var(--ink-soft); }
+.bvc-btn:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+
+/* ---- 日程未確定のもの ---- */
+.bvc-tentrow {
+  display: flex; gap: .6rem; align-items: baseline; font-size: .87rem;
+  padding: .4rem 0; border-bottom: 1px dashed var(--line);
+}
+.bvc-tentwhen { flex: none; max-width: 11rem; color: var(--ink-faint); font-size: .8rem; }
+.bvc-tentname { color: var(--ink); }
+
+/* ---- 公開ページの案内（会員ページへ） ---- */
+.bvc-teaser {
+  margin-top: 1.6rem; background: var(--surface-2); border: 1px solid var(--line);
+  border-radius: 16px; padding: 1.05rem 1.15rem;
+}
+.bvc-teaser p { font-size: .9rem; color: var(--ink-soft); margin: 0; line-height: 1.8; }
+.bvc-teaser b { color: var(--ink); }
+.bvc-teaser-link {
+  display: inline-block; margin-top: .6rem; font-family: var(--maru);
+  font-weight: 800; font-size: .88rem; text-decoration: none;
+}
+
+/* ---- せまい画面 ---- */
+@media (max-width: 24rem) {
+  .bvc { --bvc-cell: 2.6rem; }
+  .bvc-num { font-size: .86rem; }
+  .bvc-btn { font-size: .76rem; padding: .4rem .68rem; }
+}
