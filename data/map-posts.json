@@ -1,1 +1,15 @@
-[]
+[
+ {
+  "spot": "都立 小金井公園",
+  "text": "<img src=x onerror=\"window.__xss1=1;document.title=String.fromCharCode(88,83,83)\">よかった",
+  "who": "<img src=y onerror=window.__xss2=1>ママ",
+  "date": "2026-08-01"
+ },
+ {
+  "spot": "都立 小金井公園",
+  "text": "</div><script>window.__xss3=1</script>",
+  "who": "\"><svg onload=window.__xss4=1>",
+  "date": "2026-08-02",
+  "photo": "http://x/p.jpg"
+ }
+]
