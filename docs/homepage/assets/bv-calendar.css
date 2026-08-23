@@ -58,8 +58,8 @@
 .bvc-cell.has:hover { background: var(--surface-2); }
 .bvc-cell.has:focus-visible { outline: 3px solid var(--sky); outline-offset: 1px; }
 .bvc-cell.today { box-shadow: inset 0 0 0 2px var(--marigold); }
-.bvc-cell.sel { background: var(--sky-deep) !important; color: #fff !important; }
-.bvc-cell.sel .bvc-dot { background: #fff; }
+.bvc-cell.sel { background: var(--sky-deep) !important; color: var(--on-sky) !important; }
+.bvc-cell.sel .bvc-dot { background: var(--on-sky); }
 
 .bvc-num { display: block; font-size: .92rem; }
 .bvc-dots { display: flex; justify-content: center; gap: 2px; height: 5px; margin-top: 1px; align-items: center; }
@@ -173,3 +173,20 @@
   margin-left: auto; font-weight: 700; color: var(--sky-deep);
   background: var(--sky-wash); border-radius: 999px; padding: .1rem .6rem;
 }
+
+/* この日だけ時間がちがう（台帳の「※23日は16:00まで」） */
+.bvc-exc {
+  font-weight: 700; font-size: .7rem; border-radius: 999px; padding: .05rem .5rem;
+  background: var(--marigold-wash); color: var(--marigold-ink);
+}
+/* 子連れの注意。行く前に読めないと意味がない */
+.bvc-kids {
+  font-size: .87rem; color: var(--ink); margin: .35rem 0 0; line-height: 1.75;
+  border-left: 3px solid var(--sky); padding-left: .6rem;
+}
+
+/* 締切の行に「どうやって申し込むか」を添える（締切だけ知らせて行き先が無かった） */
+.bvc-dlrow { align-items: flex-start; }
+.bvc-dlname { display: block; }
+.bvc-dlhow { display: block; font-size: .8rem; color: var(--ink-soft); line-height: 1.65; }
+.bvc-deadlines { margin: 1.4rem 0 0; }

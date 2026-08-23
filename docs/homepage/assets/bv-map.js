@@ -106,14 +106,17 @@
           ? '<span class="bvm-pop-approx">※ピンはおよその位置です' +
             (s.geoNote ? '（' + esc(s.geoNote) + '）' : '') + '</span>'
           : '') +
+        // ★リンクは声より前に置く。声が長いとふきだしが伸びて、
+        //   ボタンが地図の外に押し出されて押せなくなる（300字の投稿で実際に起きた）。
+        '<span class="bvm-pop-links">' +
+        '<a href="' + esc(s.map || mapURL(s.name)) + '" target="_blank" rel="noopener">📍 地図で見る</a>' +
+        (s.official ? '<a href="' + esc(s.official) + '" target="_blank" rel="noopener">🔗 公式</a>' : '') +
+        '<a href="#' + esc(slug(s.name)) + '" class="bvm-pop-jump">くわしく ↓</a>' +
+        '</span>' +
         (mine.length
           ? '<span class="bvm-pop-voice">「' + esc(mine[0].text) + '」</span>'
           : '') +
-        '<span class="bvm-pop-links">' +
-        '<a href="' + esc(s.map || mapURL(s.name)) + '" target="_blank" rel="noopener">📍 経路を出す</a>' +
-        (s.official ? '<a href="' + esc(s.official) + '" target="_blank" rel="noopener">🔗 公式</a>' : '') +
-        '<a href="#' + esc(slug(s.name)) + '" class="bvm-pop-jump">くわしく ↓</a>' +
-        '</span></div>',
+        '</div>',
         { maxWidth: 260 }
       );
       m.bvCat = s.cat;
@@ -166,7 +169,7 @@
       if (missing.length) {
         parts.push(
           missing.length + '件は地図上の位置が確認できていないため、ピンを立てていません（' +
-          missing.map(function (s) { return s.name.replace(/[（(].*$/, ''); }).join('・') + '）'
+          missing.map(function (s) { return '「' + s.name.replace(/[（(].*$/, '') + '」'; }).join(' ') + '）'
         );
       }
       el.querySelector('.bvm-note').textContent = parts.join(' ／ ');

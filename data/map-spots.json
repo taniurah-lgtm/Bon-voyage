@@ -243,8 +243,8 @@
   "access": "西武新宿線で高田馬場・西武新宿へ",
   "desc": "乗り換えなしで都心へ。天気が崩れた日は、都心の屋内施設にサッと切り替えるのも手です。",
   "ages": "👶 ○ 🧒 ○ 🎒 ○",
-  "map": "",
-  "official": "",
+  "map": "https://www.google.com/maps/search/?api=1&query=%E8%A5%BF%E6%AD%A6%E6%96%B0%E5%AE%BF%E9%A7%85",
+  "official": "https://www.seiburailway.jp/railways/",
   "geoSkip": true
  },
  {

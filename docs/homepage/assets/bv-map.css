@@ -38,19 +38,32 @@
   background: var(--pin); transform: rotate(-45deg);
   border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.35);
 }
+/* 見た目は20pxのまま、指の当たり判定だけ44pxに広げる（片手操作の主要ターゲット） */
+.bvm-pin-wrap::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: 44px; height: 44px; transform: translate(-50%, -50%);
+}
+/* Leaflet のズームボタンも指で押せる大きさに */
+.leaflet-touch .leaflet-bar a, .leaflet-bar a { width: 44px; height: 44px; line-height: 44px; }
 .bvm-pin::after {
   content: ""; position: absolute; inset: 5px; border-radius: 999px; background: rgba(255,255,255,.85);
 }
 
 /* ---- ふきだし ---- */
 .leaflet-popup-content-wrapper { border-radius: 14px; }
-.leaflet-popup-content { margin: .7rem .85rem; line-height: 1.7; }
+.leaflet-popup-content { margin: .7rem .85rem; line-height: 1.7; max-height: 15rem; overflow-y: auto; }
 .bvm-pop { display: flex; flex-direction: column; gap: .18rem; }
 .bvm-pop-nm { font-family: var(--maru); font-weight: 800; font-size: .96rem; }
 .bvm-pop-acc { font-size: .78rem; color: #5b6a73; }
 .bvm-pop-ages { font-family: var(--maru); font-weight: 700; font-size: .8rem; color: #7c8a92; }
 .bvm-pop-approx { font-size: .72rem; color: #A8703C; }
-.bvm-pop-voice { font-size: .82rem; color: #34434C; background: #F5F2EA; border-radius: 8px; padding: .3rem .45rem; margin-top: .2rem; }
+.bvm-pop-voice {
+  font-size: .82rem; color: #34434C; background: #F5F2EA;
+  border-radius: 8px; padding: .3rem .45rem; margin-top: .35rem;
+  /* 300字の声でふきだしが地図の高さを超え、ボタンが押せなくなっていた。
+     ふきだしの中でスクロールさせて、地図の中に収める。 */
+  max-height: 7.5rem; overflow-y: auto; -webkit-overflow-scrolling: touch;
+}
 .bvm-pop-links { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .35rem; font-size: .8rem; font-weight: 700; }
 
 /* 一覧側で「いまここ」を光らせる */

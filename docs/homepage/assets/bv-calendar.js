@@ -38,16 +38,24 @@
   }
   function todayISO() { return iso(new Date()); }
 
+  // その日の実際の開始・終了。台帳の「※23日は16:00まで」を反映する。
+  // これを見ないと、読者のカレンダーに1時間ずれた終了時刻が入る。
+  function timesFor(ev, date) {
+    var ex = (ev.exceptions || {})[date] || {};
+    return { start: ex.start || ev.start, end: ex.end || ev.end, exception: !!(ex.start || ex.end) };
+  }
+
   // ---- カレンダー登録リンク --------------------------------------------------
   // Googleカレンダーのテンプレートリンク。ログイン済みならワンタップで保存できる。
   function gcalURL(ev, date) {
+    var t = timesFor(ev, date);
     var dates;
-    if (ev.start) {
-      var s = date.replace(/-/g, '') + 'T' + ev.start.replace(':', '') + '00';
-      var endT = ev.end || addHours(ev.start, 2);
+    if (t.start) {
+      var s = date.replace(/-/g, '') + 'T' + t.start.replace(':', '') + '00';
+      var endT = t.end || addHours(t.start, 2);
       var endDate = date;
       // 終了が開始より前なら日付をまたいだと見なす
-      if (endT < ev.start) endDate = iso(new Date(parseISO(date).getTime() + MS_DAY));
+      if (endT < t.start) endDate = iso(new Date(parseISO(date).getTime() + MS_DAY));
       dates = s + '/' + endDate.replace(/-/g, '') + 'T' + endT.replace(':', '') + '00';
     } else {
       // 終日。Googleの終日指定は終了日を翌日にする
@@ -60,7 +68,7 @@
       dates: dates,
       ctz: 'Asia/Tokyo',
       location: ev.place || '',
-      details: detailsText(ev),
+      details: detailsText(ev, date),
     });
     return 'https://calendar.google.com/calendar/render?' + q.toString();
   }
@@ -69,13 +77,15 @@
     var t = (Number(p[0]) + h) % 24;
     return pad(t) + ':' + p[1];
   }
-  function detailsText(ev) {
+  function detailsText(ev, date) {
     var out = [];
+    var t = date ? timesFor(ev, date) : { exception: false };
+    if (t.exception) out.push('この日は ' + (t.start || ev.start || '') + '〜' + (t.end || '') + ' です');
     if (ev.kidsNote) out.push(ev.kidsNote);
     else if (ev.summary) out.push(ev.summary);
     if (ev.cost) out.push('料金: ' + ev.cost);
     if (ev.target) out.push('対象: ' + ev.target);
-    if (ev.deadline) out.push('申込: ' + ev.deadline.raw.replace(/^\s*-\s*/, ''));
+    if (ev.deadline) out.push('申込: ' + ev.deadline.raw);
     if (safeURL(ev.url)) out.push('🔗 ' + safeURL(ev.url));
     if (ev.mapq) out.push('📍 ' + mapURL(ev.mapq));
     out.push('— ぼんぼやーじゅ通信');
@@ -93,11 +103,12 @@
   // iPhone / Apple カレンダー向けの .ics。Googleに入れたくない人の逃げ道。
   function icsBlobURL(ev, date) {
     var stamp = date.replace(/-/g, '');
+    var t = timesFor(ev, date);
     var body;
-    if (ev.start) {
-      var endT = ev.end || addHours(ev.start, 2);
+    if (t.start) {
+      var endT = t.end || addHours(t.start, 2);
       body =
-        'DTSTART;TZID=Asia/Tokyo:' + stamp + 'T' + ev.start.replace(':', '') + '00\r\n' +
+        'DTSTART;TZID=Asia/Tokyo:' + stamp + 'T' + t.start.replace(':', '') + '00\r\n' +
         'DTEND;TZID=Asia/Tokyo:' + stamp + 'T' + endT.replace(':', '') + '00\r\n';
     } else {
       var next = iso(new Date(parseISO(date).getTime() + MS_DAY)).replace(/-/g, '');
@@ -107,12 +118,16 @@
     var now = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
     var lines = [
       'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//bonvoyage-tsushin//JP', 'CALSCALE:GREGORIAN',
+      // TZID を使うなら VTIMEZONE の定義が必要（厳格なパーサが弾く）。日本は夏時間なし。
+      'BEGIN:VTIMEZONE', 'TZID:Asia/Tokyo',
+      'BEGIN:STANDARD', 'DTSTART:19700101T000000', 'TZOFFSETFROM:+0900', 'TZOFFSETTO:+0900',
+      'TZNAME:JST', 'END:STANDARD', 'END:VTIMEZONE',
       'BEGIN:VEVENT',
       'DTSTAMP:' + now,
       'UID:' + ev.id + '-' + stamp + '@bonvoya.nicomaru.tokyo',
       'SUMMARY:' + icsEsc(ev.name),
       ev.place ? 'LOCATION:' + icsEsc(ev.place) : '',
-      'DESCRIPTION:' + icsEsc(detailsText(ev)),
+      'DESCRIPTION:' + icsEsc(detailsText(ev, date)),
       'END:VEVENT', 'END:VCALENDAR',
     ].filter(Boolean);
     var head = lines.indexOf('BEGIN:VEVENT') + 1;   // BEGIN:VEVENT までがヘッダ
@@ -145,7 +160,8 @@
 
   function cardHTML(ev, date) {
     var multiSlot = hasMultipleSlots(ev);
-    var when = ev.start ? ev.start + (ev.end ? '〜' + ev.end : '〜') : '時間は公式で確認';
+    var t = timesFor(ev, date);
+    var when = t.start ? t.start + (t.end ? '〜' + t.end : '〜') : '時間は公式で確認';
     if (multiSlot) when = '枠が複数あります';
     var multi = ev.dates && ev.dates.length > 1 ? '<span class="bvc-multi">' + ev.dates.length + '日間のうち1日</span>' : '';
     var links =
@@ -158,11 +174,16 @@
       : '';
     return (
       '<article class="bvc-card' + (ev.tentative ? ' is-tentative' : '') + '">' +
-      '<p class="bvc-when">' + esc(when) + ' ' + multi + (ev.tentative ? '<span class="bvc-tent">日程は要確認</span>' : '') + '</p>' +
+      '<p class="bvc-when">' + esc(when) + ' ' + multi +
+      (t.exception ? '<span class="bvc-exc">この日だけ時間がちがいます</span>' : '') +
+      (ev.tentative ? '<span class="bvc-tent">日程は要確認</span>' : '') + '</p>' +
       '<h4 class="bvc-name">' + esc(ev.name) + '</h4>' +
       (multiSlot ? '<p class="bvc-slots">🕒 ' + esc(ev.when) + '</p>' : '') +
       (ev.place ? '<p class="bvc-place">' + esc(ev.place) + '</p>' : '') +
       (ev.summary ? '<p class="bvc-desc">' + esc(ev.summary) + '</p>' : '') +
+      // 子連れの注意は行く前に読めないと意味がない（登録の説明欄だけでは遅い）
+      (ev.kidsNote && ev.kidsNote !== ev.summary
+        ? '<p class="bvc-kids">' + esc(ev.kidsNote) + '</p>' : '') +
       '<p class="bvc-meta">' + agesHTML(ev.ages) + (ev.cost ? '<span class="bvc-cost">' + esc(ev.cost) + '</span>' : '') + '</p>' +
       dl +
       '<div class="bvc-btns">' + links + '</div>' +
@@ -194,7 +215,8 @@
 
     root.innerHTML =
       '<div class="bvc">' +
-      '<div class="bvc-deadlines" hidden></div>' +
+      // 締切の枠はグリッドの下に置く。上に置くと「今週末どこ行こう」に
+      // たどり着くまで1.8画面ぶんスクロールが必要だった。
       '<div class="bvc-head">' +
       '<button class="bvc-nav" type="button" data-go="-1" aria-label="前の月">‹</button>' +
       '<h3 class="bvc-month" aria-live="polite"></h3>' +
@@ -209,6 +231,7 @@
         : '') +
       '</div>' +
       '<div class="bvc-day"></div>' +
+      '<div class="bvc-deadlines" hidden></div>' +
       '<div class="bvc-tail"></div>' +
       '</div>';
 
@@ -283,21 +306,23 @@
           var cls = ['bvc-cell'];
           if (!inMonth) cls.push('out');
           else cls.push('tap');            // 月内はどの日も押せる（押して無反応をなくす）
-          if (list.length) cls.push('has');
+          if (list.length && inMonth && key >= today) cls.push('has');
           if (key === today) cls.push('today');
           if (key === selected) cls.push('sel');
           if (key < today) cls.push('past');
           if (d === 0) cls.push('sun');
           if (d === 6) cls.push('sat');
-          var dots = list.slice(0, 3).map(function () { return '<i class="bvc-dot"></i>'; }).join('');
+          // 隣月・過去日は点を出さない（押せないのに「予定あり」に見える／今週末を探す邪魔になる）
+          var showDots = inMonth && key >= today;
+          var dots = showDots ? list.slice(0, 3).map(function () { return '<i class="bvc-dot"></i>'; }).join('') : '';
           tds.push(
             '<td class="' + cls.join(' ') + '" data-date="' + key + '"' +
             (inMonth
-              ? ' tabindex="' + (list.length ? '0' : '-1') + '" role="button" aria-label="' +
+              ? ' tabindex="0" role="button" aria-label="' +
                 fmtDay(key) + (list.length ? ' 予定' + list.length + '件' : ' 予定なし') + '"'
               : '') + '>' +
             '<span class="bvc-num">' + cur.getDate() + '</span>' +
-            (list.length ? '<span class="bvc-dots">' + dots + (list.length > 3 ? '<i class="bvc-more">+</i>' : '') + '</span>' : '') +
+            (showDots && list.length ? '<span class="bvc-dots">' + dots + (list.length > 3 ? '<i class="bvc-more">+</i>' : '') + '</span>' : '') +
             '</td>'
           );
         }
@@ -356,7 +381,10 @@
           var days = Math.round((parseISO(e.deadline.date) - parseISO(today)) / MS_DAY);
           return '<div class="bvc-dlrow"><span class="bvc-dldate">' + esc(fmtDay(e.deadline.date)) +
             (days === 0 ? '<b>今日</b>' : days <= 3 ? '<b>あと' + days + '日</b>' : '') + '</span>' +
-            '<span class="bvc-dlname">' + esc(e.name) + '</span></div>';
+            '<span class="bvc-dlname">' + esc(e.name) +
+            (e.deadline.raw ? '<span class="bvc-dlhow">' + esc(e.deadline.raw) + '</span>' : '') +
+            (safeURL(e.url) ? ' <a href="' + esc(safeURL(e.url)) + '" target="_blank" rel="noopener">くわしく</a>' : '') +
+            '</span></div>';
         }).join('');
     }
 
@@ -428,7 +456,7 @@
       var cell = e.target.closest && e.target.closest('.bvc-cell');
       if (!cell) return;
       if (e.key === 'Enter' || e.key === ' ') {
-        if (cell.classList.contains('has')) { e.preventDefault(); cell.click(); }
+        if (cell.classList.contains('tap')) { e.preventDefault(); cell.click(); }
         return;
       }
       var step = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: 7, ArrowUp: -7 }[e.key];
@@ -438,7 +466,7 @@
       var i = cells.indexOf(cell);
       // 予定のある（=フォーカスできる）マスまで進む
       for (var j = i + step; j >= 0 && j < cells.length; j += step > 0 ? 1 : -1) {
-        if (cells[j].classList.contains('has')) { cells[j].focus(); return; }
+        if (cells[j].classList.contains('tap')) { cells[j].focus(); return; }
       }
     });
   }

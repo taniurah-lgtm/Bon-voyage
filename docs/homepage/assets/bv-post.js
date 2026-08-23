@@ -228,7 +228,9 @@
         page: location.pathname,
       };
 
-      if (!opts.endpoint) return offline(payload, '送信先がまだ設定されていません。');
+      // 送り先が未設定のときは、読者に運用の事情を説明しない。
+      // 「いまはLINEでお預かりしています」という事実だけ伝える。
+      if (!opts.endpoint) return offline(payload, 'いまこのフォームからは送れません。');
 
       var btn = el.querySelector('.bvp-btn-go');
       btn.disabled = true;
@@ -269,6 +271,7 @@
         'お手数ですが、下のボタンでコピーして、LINEでそのまま送っていただけると確実です。' +
         '<span class="bvp-offline">' +
         '<button class="bvp-btn bvp-btn-sub" type="button" data-copy>コピーする</button>' +
+        '<a class="bvp-btn bvp-btn-sub" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINEを開く</a>' +
         '</span>';
       var b = $msg.querySelector('[data-copy]');
       if (b) b.addEventListener('click', function () {

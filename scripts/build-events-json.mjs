@@ -109,6 +109,26 @@ function extractDates(raw) {
   return { dates: [...new Set(dates)].sort(), span };
 }
 
+// 日別の例外時刻を拾う。
+//   「8/18(火)~23(日) 10:00~17:00 ※23日は16:00まで」
+//     → 23日だけ終わりが16:00。これを見落とすと、読者のカレンダーに
+//       1時間ずれた終了時刻が入る（E44で実際にそうなっていた）。
+function extractExceptions(raw, dates) {
+  const s = normalize(raw);
+  const out = {};
+  const re = /※\s*(\d{1,2})日は\s*(\d{1,2}):(\d{2})\s*(まで|から)/g;
+  let m;
+  while ((m = re.exec(s)) !== null) {
+    const day = Number(m[1]);
+    const time = `${pad(m[2])}:${m[3]}`;
+    // 展開済みの日付の中から、その「日」に当たるものを探す
+    const hit = (dates || []).find((d) => Number(d.slice(8, 10)) === day);
+    if (!hit) continue;
+    out[hit] = m[4] === 'まで' ? { end: time } : { start: time };
+  }
+  return Object.keys(out).length ? out : null;
+}
+
 // 「10:00~13:00」「18:30~」「14:00開演」から時刻を拾う
 function extractTime(raw) {
   const s = normalize(raw);
@@ -132,7 +152,13 @@ function extractDeadline(lines) {
     const cands = dates.concat(span && span.to ? [span.to] : []);
     if (!cands.length) continue;
     if (/締切|まで|先着|抽選/.test(s)) {
-      return { date: cands.reduce((a, b) => (a > b ? a : b)), raw: l.trim() };
+      // 読者のカレンダーの説明欄にそのまま入るので、台帳の記法を落とす
+      const raw = l
+        .replace(/^\s*-\s*/, '')
+        .replace(/\*\*/g, '')
+        .replace(/^(?:申込|応募)\s*[:：]\s*/, '')
+        .trim();
+      return { date: cands.reduce((a, b) => (a > b ? a : b)), raw };
     }
   }
   return null;
@@ -206,8 +232,13 @@ function mapQuery(place) {
     .replace(/(駅)\s*(?:すぐ|前|直結|徒歩圏).*$/, '$1')                      // 「西武園駅すぐ」→「西武園駅」
     .replace(/\s*(ほか|など|周辺|一帯|沿い\d*会場)\s*$/, '')
     .trim();
+  // 「中央公民館1階ギャラリー」→「中央公民館」。階・室名は地図の検索を外す
+  q = q.replace(/\s*\d+\s*(?:階|F)\s*\S*$/, '').replace(/\s*(?:ギャラリー|視聴覚室|展示ギャラリー|中ホール|大ホール|センターコート)\s*$/, '').trim();
   // 行き方だけが残ってしまった場合は、地図に投げない（誤った場所を出すより出さない）
   if (!q || /^(?:電車|車|バス|自転車|徒歩)/.test(q) || /約\d+[〜~]?\d*分$/.test(q)) return '';
+  // 「中央公民館」だけでは全国にあるので、住所の町名から市名を足す
+  const KODAIRA = /小川町|花小金井|鈴木町|小川西町|美園町|仲町|学園|上水|喜平町|回田町|栄町|天神町|御幸町|たかの台/;
+  if (!/[市区]/.test(q) && KODAIRA.test(place)) q = '小平市' + q;
   return q;
 }
 
@@ -231,6 +262,9 @@ const STRIP = [
 // 落としきれなかったときに気づくための番兵。読者向けの文にこれが残っていたら公開しない。
 // 「損」は方針で禁じている煽り表現。台帳IDと内部記号も読者には意味がない。
 const FORBIDDEN = /損|E\d+\s*参照|◎◎|✕/;
+// 見出し自体が台帳の内部ラベルになっているもの（イベントではなく「枠」）。
+// 中身は箇条書きで書かれていて `内容:` 欄が無いため、公開すると空カードになる。
+const INTERNAL_LABEL = /「?(?:知っていると得|知らないと損)」?枠|^枠[:：]/;
 
 function readerText(s) {
   if (!s) return '';
@@ -319,6 +353,7 @@ for (const file of files) {
       dates,
       span,
       when,
+      exceptions: extractExceptions(when, dates),
       start,
       end,
       allDay: !start,
@@ -345,6 +380,14 @@ for (const file of files) {
 function screen(list, label) {
   const keep = [];
   for (const e of list) {
+    if (INTERNAL_LABEL.test(e.name)) {
+      unresolved.push({
+        id: e.id, name: e.name,
+        reason: '見出しが台帳の内部ラベル（イベントではない枠）なので公開しない',
+        when: e.when || '',
+      });
+      continue;
+    }
     const hit = ['name', 'summary', 'kidsNote'].find((k) => e[k] && FORBIDDEN.test(e[k]));
     if (hit) {
       unresolved.push({

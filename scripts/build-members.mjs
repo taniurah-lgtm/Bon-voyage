@@ -67,9 +67,14 @@ const issueHTML = issues
     const wd = '日月火水木金土'[new Date(Date.UTC(y, m - 1, d)).getUTCDay()];
     // 1行目の題名は日付が入っているので、見出しは自分で組む
     const body = raw.split('\n').slice(1).join('\n').trim();
+    // 号のなかのURLは、読めるだけでなく押せるようにする（素テキストだと開けない）
+    const linked = esc(body).replace(
+      /https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=%]+/g,
+      (u) => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`
+    );
     return `  <details class="issue">
     <summary>${m}月${d}日(${wd})号</summary>
-    <pre class="issue-body">${esc(body)}</pre>
+    <div class="issue-body">${linked}</div>
   </details>`;
   })
   .join('\n');
@@ -108,7 +113,7 @@ const CONTENT = `
   <script type="application/json" id="bv-spots">${jsonInTag(SPOTS)}</script>
   <script type="application/json" id="bv-posts">${jsonInTag(POSTS)}</script>
   <div id="bv-map"><p class="note">地図を読み込んでいます…</p></div>
-  <p class="note" style="margin-top:.6rem">投稿は <a href="/map.html#post">公開ページのフォーム</a> から。合言葉を入れると、長めの文章と写真もいっしょに送れます。</p>
+  <p class="note" style="margin-top:.6rem">投稿は <a href="/map.html#post">公開ページのフォーム</a> から。ひとことの長さはどなたも同じで、<b>合言葉を入れると写真も添えられます</b>（このページを開いていれば、合言葉は入力済みです）。</p>
 
 ${renkyu}
 
@@ -126,8 +131,8 @@ ${issueHTML}
   <p class="note" style="margin-top:1.6rem">📅 ボタンはご自分のカレンダーに保存する形です（Googleカレンダー、またはiPhoneのカレンダー）。リマインダーはカレンダー側でお好みに設定できます。日程・料金は変わることがあるので、おでかけ前に各公式でご確認ください。</p>`;
 
 // ---- ページ本体のCSS（カレンダー・地図の見た目は外部ファイル）------------------
-const CSS = `:root{--ground:#FBFAF5;--surface:#FFFFFF;--surface-2:#F5F2EA;--ink:#34434C;--ink-soft:#63727B;--ink-faint:#97A2AA;--sky:#4FA3C4;--sky-deep:#2C7C9E;--sky-wash:#E9F4F7;--marigold:#EBA24A;--marigold-wash:#FBEEDA;--marigold-ink:#8A5A12;--leaf:#74AE71;--line:#ECE7DB;--line-strong:#DCD5C6;--radius:18px;--radius-sm:14px;--shadow-soft:0 2px 20px rgba(52,67,76,.05);--maru:"Hiragino Maru Gothic ProN","Yu Gothic","Noto Sans JP","Segoe UI",sans-serif;--body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP","Segoe UI",Meiryo,sans-serif;--script:Georgia,"Times New Roman",serif;}
-@media (prefers-color-scheme:dark){:root{--ground:#131F28;--surface:#1A2831;--surface-2:#21333D;--ink:#ECF2F4;--ink-soft:#AAB9C1;--ink-faint:#7B8C95;--sky:#6FBAD9;--sky-deep:#9AD4EA;--sky-wash:#1D3944;--marigold:#F0AE5E;--marigold-wash:#362F1F;--marigold-ink:#F0AE5E;--leaf:#8FC489;--line:#293B45;--line-strong:#38505C;--shadow-soft:0 2px 22px rgba(0,0,0,.22);}}
+const CSS = `:root{--ground:#FBFAF5;--surface:#FFFFFF;--surface-2:#F5F2EA;--ink:#34434C;--ink-soft:#63727B;--ink-faint:#97A2AA;--sky:#4FA3C4;--sky-deep:#2C7C9E;--sky-wash:#E9F4F7;--marigold:#EBA24A;--marigold-wash:#FBEEDA;--marigold-ink:#8A5A12;--on-sky:#FFFFFF;--leaf:#74AE71;--line:#ECE7DB;--line-strong:#DCD5C6;--radius:18px;--radius-sm:14px;--shadow-soft:0 2px 20px rgba(52,67,76,.05);--maru:"Hiragino Maru Gothic ProN","Yu Gothic","Noto Sans JP","Segoe UI",sans-serif;--body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP","Segoe UI",Meiryo,sans-serif;--script:Georgia,"Times New Roman",serif;}
+@media (prefers-color-scheme:dark){:root{--ground:#131F28;--surface:#1A2831;--surface-2:#21333D;--ink:#ECF2F4;--ink-soft:#AAB9C1;--ink-faint:#7B8C95;--sky:#6FBAD9;--sky-deep:#9AD4EA;--sky-wash:#1D3944;--marigold:#F0AE5E;--marigold-wash:#362F1F;--marigold-ink:#F0AE5E;--on-sky:#0E1A22;--leaf:#8FC489;--line:#293B45;--line-strong:#38505C;--shadow-soft:0 2px 22px rgba(0,0,0,.22);}}
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);line-height:1.8;-webkit-font-smoothing:antialiased;font-feature-settings:"palt" 1;}
@@ -186,7 +191,7 @@ footer{color:var(--ink-faint);font-size:.8rem;text-align:center;padding:2rem 1.2
 .issue>summary::marker,.issue>summary::-webkit-details-marker{display:none;}
 .issue>summary::before{content:"＋ ";}
 .issue[open]>summary::before{content:"− ";}
-.issue-body{margin:0;padding:0 1.05rem 1.05rem;font-family:var(--body);font-size:.9rem;line-height:1.85;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink-soft);}
+.issue-body{margin:0;padding:0 1.05rem 1.05rem;overflow-wrap:anywhere;font-family:var(--body);font-size:.9rem;line-height:1.85;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink-soft);}
 /* 公開3ページ（bv-tokens.css）と同じ拡大率にそろえる。ここが無いと会員ページだけ
    文字とタップ領域が小さくなる（root 16px / ボタン38px → 18px / 44px）。 */
 @media (max-width:40rem){ html{font-size:112.5%;} .wrap,.h-in{padding-left:1.15rem;padding-right:1.15rem;} }

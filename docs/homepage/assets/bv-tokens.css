@@ -8,6 +8,8 @@
   --marigold:#EBA24A; --marigold-wash:#FBEEDA; --leaf:#74AE71;
   /* --marigold は面に塗る色。文字に使うと白地で2.1:1しかないので、文字用は濃いほうを使う */
   --marigold-ink:#8A5A12;
+  /* --sky-deep の上に乗せる文字色。ダークでは --sky-deep が明色になるので反転させる */
+  --on-sky:#FFFFFF;
   --line:#ECE7DB; --line-strong:#DCD5C6;
   --shadow-soft:0 2px 20px rgba(52,67,76,.05);
   --radius:20px; --radius-sm:14px;
@@ -21,7 +23,7 @@
     --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95;
     --sky:#6FBAD9; --sky-deep:#9AD4EA; --sky-wash:#1D3944;
     --marigold:#F0AE5E; --marigold-wash:#362F1F; --leaf:#8FC489;
-    --marigold-ink:#F0AE5E;
+    --marigold-ink:#F0AE5E; --on-sky:#0E1A22;
     --line:#293B45; --line-strong:#38505C; --shadow-soft:0 2px 22px rgba(0,0,0,.22);
   }
 }
@@ -29,7 +31,7 @@
   --ground:#131F28; --surface:#1A2831; --surface-2:#21333D;
   --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95;
   --sky:#6FBAD9; --sky-deep:#9AD4EA; --sky-wash:#1D3944;
-  --marigold:#F0AE5E; --marigold-wash:#362F1F; --marigold-ink:#F0AE5E; --leaf:#8FC489;
+  --marigold:#F0AE5E; --marigold-wash:#362F1F; --marigold-ink:#F0AE5E; --on-sky:#0E1A22; --leaf:#8FC489;
   --line:#293B45; --line-strong:#38505C; --shadow-soft:0 2px 22px rgba(0,0,0,.22);
 }
 

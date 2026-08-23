@@ -23,7 +23,9 @@ const PUBLIC_DAYS = 14;
 const MEMBER_URL = '/m/s7f2ka/';
 
 const src = JSON.parse(readFileSync(IN, 'utf8'));
-const today = new Date().toISOString().slice(0, 10);
+// ★「今日」は日本時間で決める。toISOString() は UTC なので、JST の 0〜9時に走ると
+//   前日になり、窓が1日前から始まってしまう（Actions のランナーは UTC）。
+const today = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
 const horizon = new Date(Date.parse(today + 'T00:00:00Z') + PUBLIC_DAYS * 86400000)
   .toISOString().slice(0, 10);
 

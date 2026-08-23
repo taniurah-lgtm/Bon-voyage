@@ -158,7 +158,7 @@ const page = `<!doctype html>${buildStamp()}
   <div class="ghead-in">
     <div class="eyebrow">Bon Voyage,</div>
     <h1>みんなの<br>おでかけマップ</h1>
-    <p class="sub">花小金井まわりで「行ってよかった」場所を、地元の家庭の声とあわせて集めています。地図のピンをタップすると、そのまま経路を出せます。</p>
+    <p class="sub">花小金井まわりで「行ってよかった」場所を、地元の家庭の声とあわせて集めています。地図のピンをタップすると、その場所を地図で開けます。</p>
     <div class="count">掲載スポット ${SPOTS.length}件（地図のピン ${pinned}件）${
       totalPosts ? ` ／ みんなの声 ${totalPosts}件` : ''
     }</div>
@@ -174,12 +174,19 @@ const page = `<!doctype html>${buildStamp()}
 <main class="wrap">
 
   <div class="mapbox" id="mapbox">
-    <noscript><p class="bvm-fail">地図の表示にはJavaScriptを使っています。切っている場合は、下の一覧からお探しください。各スポットの「📍 地図」から経路を出せます。</p></noscript>
+    <noscript><p class="bvm-fail">地図の表示にはJavaScriptを使っています。切っている場合は、下の一覧からお探しください。各スポットの「📍 地図」から場所を開けます。<br>
+      投稿フォームもJavaScriptを使っています。切っている方は、お手数ですが
+      <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a> か
+      <a href="mailto:nico25akmr@outlook.jp">メール</a>でお知らせください。</p></noscript>
   </div>
 
 ${sections}
 
-  <section id="post"></section>
+  <section id="post">
+    <noscript><p class="bvm-fail">投稿フォームの表示にJavaScriptを使っています。切っている方は
+      <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a> か
+      <a href="mailto:nico25akmr@outlook.jp">メール</a>でお知らせいただければ、こちらで載せます。</p></noscript>
+  </section>
 
   <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>
 </main>
