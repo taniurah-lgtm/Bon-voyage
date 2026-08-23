@@ -1,0 +1,476 @@
+<title>2色刷りA4チラシ 版下</title>
+<style>
+:root{
+  --paper:#F2F2EE; --ground:#E4E4DF;
+  --ink:#1A1A18; --ink-2:#55554E; --ink-3:#8A8A80;
+  --rule:#C9C9C1; --card:#FBFBF8;
+  --teal:#00838A; --red:#FF665E; --blue:#0078BF; --green:#00A95C;
+  --chip-bg:#FFFFFF; --chip-bd:#C9C9C1; --chip-fg:#55554E;
+  --shadow:0 1px 2px rgba(26,26,24,.10), 0 8px 28px rgba(26,26,24,.09);
+  --h1:#1A1A18; --dim:#55554E; --faint:#8A8A80; --accent:#00838A;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#16171A; --rule:#2C2E33; --card:#1D1F23;
+  --chip-bg:#22252A; --chip-bd:#33373E; --chip-fg:#B4B4AC;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 34px rgba(0,0,0,.45);
+  --h1:#EDEDE8; --dim:#9C9C94; --faint:#7C7C74; --accent:#4FB6BC;
+}}
+:root[data-theme="dark"]{
+  --ground:#16171A; --rule:#2C2E33; --card:#1D1F23;
+  --chip-bg:#22252A; --chip-bd:#33373E; --chip-fg:#B4B4AC;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 34px rgba(0,0,0,.45);
+  --h1:#EDEDE8; --dim:#9C9C94; --faint:#7C7C74; --accent:#4FB6BC;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--ground);color:var(--dim);
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP","Meiryo",system-ui,sans-serif;}
+.wrap{max-width:1180px;margin:0 auto;padding:44px 24px 96px;}
+.masthead{border-bottom:1.5px solid var(--rule);padding-bottom:22px;margin-bottom:30px;}
+.kicker{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent);margin:0 0 10px;}
+h1{font-size:clamp(26px,3.6vw,38px);line-height:1.2;margin:0;letter-spacing:-.01em;
+  color:var(--h1);text-wrap:balance;}
+.dek{margin:12px 0 0;max-width:64ch;line-height:1.75;font-size:15px;color:var(--dim);}
+h2{font-size:13px;letter-spacing:.1em;margin:0 0 14px;font-weight:700;text-transform:uppercase;
+  font-family:ui-monospace,Menlo,monospace;color:var(--faint);}
+
+/* ---- variant tabs ---- */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;}
+.tab{font:inherit;font-size:13.5px;font-weight:700;cursor:pointer;
+  background:var(--chip-bg);color:var(--chip-fg);border:1px solid var(--chip-bd);
+  border-radius:999px;padding:9px 17px;transition:background .12s,color .12s,border-color .12s;}
+.tab:hover{border-color:var(--accent);}
+.tab[aria-selected="true"]{background:var(--teal);border-color:var(--teal);color:#fff;}
+.tab:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.tabnote{font-size:13px;line-height:1.7;margin:0 0 16px;color:var(--dim);}
+.tabnote b{color:var(--h1);}
+
+.grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:36px;align-items:start;}
+@media (max-width:900px){.grid{grid-template-columns:1fr;}}
+
+.plate{position:relative;padding:16px;}
+.plate::before,.plate::after{content:"";position:absolute;width:13px;height:13px;pointer-events:none;
+  background:linear-gradient(var(--faint),var(--faint)) center/1px 100% no-repeat,
+             linear-gradient(var(--faint),var(--faint)) center/100% 1px no-repeat;}
+.plate::before{top:0;left:0;} .plate::after{bottom:0;right:0;}
+
+/* =====================  THE A4 SHEET  ===================== */
+.sheet{
+  container-type:inline-size; aspect-ratio:210/297; width:100%;
+  background:var(--paper); box-shadow:var(--shadow);
+  position:relative; overflow:hidden;
+  --fit:1; --mm:calc(100cqw / 188 * var(--fit));  /* 100cqw = 紙幅210mm − 左右余白22mm */
+  padding:5.238%;   /* = 11mm / 210mm。cqwは自コンテナに効かないので%で指定する */
+  display:flex; flex-direction:column; color:var(--ink);
+}
+.sheet.mini{box-shadow:0 1px 2px rgba(26,26,24,.12),0 4px 14px rgba(26,26,24,.10);}
+.k{color:var(--ink);} .c{color:var(--teal);} .c-fill{background:var(--teal);}
+
+.f-top{display:flex;align-items:center;justify-content:space-between;gap:calc(var(--mm)*4.1);}
+.f-brand{font-size:calc(var(--mm)*11.29);font-weight:900;letter-spacing:-.02em;line-height:1;}
+.f-sub{font-size:calc(var(--mm)*3.49);margin-top:calc(var(--mm)*2.26);letter-spacing:.02em;}
+.f-badge{flex:none;text-align:center;border:calc(var(--mm)*1.03) solid var(--teal);border-radius:50%;
+  width:calc(var(--mm)*36.94);height:calc(var(--mm)*36.94);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;color:var(--teal);line-height:1.12;}
+.f-badge b{font-size:calc(var(--mm)*10.78);font-weight:900;display:block;letter-spacing:-.03em;}
+.f-badge span{font-size:calc(var(--mm)*3.39);letter-spacing:.04em;margin-top:calc(var(--mm)*0.52);}
+
+.f-hr{height:calc(var(--mm)*0.82);background:var(--teal);margin:calc(var(--mm)*4.62) 0 calc(var(--mm)*4.1);}
+
+.f-head{font-size:calc(var(--mm)*8.62);font-weight:900;line-height:1.3;letter-spacing:-.01em;}
+.f-head em{font-style:normal;color:var(--teal);}
+.f-lede{margin-top:calc(var(--mm)*2.67);font-size:calc(var(--mm)*3.39);line-height:1.65;}
+
+/* covered cities — one line per row */
+.f-area{margin-top:calc(var(--mm)*3.69);
+  border-top:calc(var(--mm)*0.52) solid var(--teal);border-bottom:calc(var(--mm)*0.52) solid var(--teal);
+  padding:calc(var(--mm)*2.46) 0;display:flex;flex-direction:column;gap:calc(var(--mm)*1.54);}
+.area-row{display:flex;align-items:baseline;gap:calc(var(--mm)*2.46);}
+.area-lb{flex:none;width:calc(var(--mm)*17.44);font-size:calc(var(--mm)*2.87);font-weight:900;}
+.area-v{font-size:calc(var(--mm)*3.59);font-weight:900;line-height:1.3;}
+.area-row.sub .area-lb{font-size:calc(var(--mm)*2.67);}
+.area-row.sub .area-v{font-size:calc(var(--mm)*2.98);font-weight:400;}
+
+/* age chips — single compact line */
+.f-chips{display:flex;gap:calc(var(--mm)*2.05);margin-top:calc(var(--mm)*3.08);}
+.chip{flex:1;text-align:center;padding:calc(var(--mm)*1.54) 0;
+  font-size:calc(var(--mm)*3.08);font-weight:700;border:calc(var(--mm)*0.52) solid var(--teal);}
+.chip small{font-size:calc(var(--mm)*2.57);font-weight:400;margin-left:calc(var(--mm)*1.03);}
+
+/* LINE preview */
+.f-pw{margin-top:calc(var(--mm)*4.1);display:flex;flex-direction:column;gap:calc(var(--mm)*2.26);}
+.f-plabel{display:flex;align-items:center;gap:calc(var(--mm)*2.26);
+  font-size:calc(var(--mm)*3.9);font-weight:900;letter-spacing:.05em;color:var(--teal);}
+.f-plabel::after{content:"";flex:1;height:calc(var(--mm)*0.52);background:var(--teal);}
+.phone{border:calc(var(--mm)*0.93) solid var(--ink);border-radius:calc(var(--mm)*4.1);
+  padding:calc(var(--mm)*2.46);display:flex;flex-direction:column;min-width:0;}
+.phone-bar{display:flex;align-items:center;gap:calc(var(--mm)*1.54);
+  padding-bottom:calc(var(--mm)*1.85);border-bottom:calc(var(--mm)*0.41) solid var(--ink);
+  margin-bottom:calc(var(--mm)*2.46);}
+.avatar{width:calc(var(--mm)*6.36);height:calc(var(--mm)*6.36);border-radius:50%;flex:none;
+  display:flex;align-items:center;justify-content:center;color:#fff;
+  font-size:calc(var(--mm)*3.08);font-weight:900;}
+.phone-name{font-size:calc(var(--mm)*3.08);font-weight:700;}
+.phone-time{margin-left:auto;font-size:calc(var(--mm)*2.46);font-family:ui-monospace,Menlo,monospace;}
+.bubble{background:var(--paper);border:calc(var(--mm)*0.36) solid var(--ink);
+  border-left:calc(var(--mm)*1.85) solid var(--teal);
+  border-radius:calc(var(--mm)*2.67);border-top-left-radius:calc(var(--mm)*0.82);
+  padding:calc(var(--mm)*2.87);font-size:calc(var(--mm)*3.18);line-height:1.72;}
+.b-title{font-weight:900;font-size:calc(var(--mm)*3.49);display:block;margin-bottom:calc(var(--mm)*1.85);}
+.bubble h4{margin:calc(var(--mm)*2.46) 0 calc(var(--mm)*0.93);font-size:calc(var(--mm)*3.28);
+  font-weight:900;color:var(--teal);}
+.bubble h4:first-of-type{margin-top:0;}
+.bubble .ev{font-weight:900;font-size:calc(var(--mm)*3.49);display:block;}
+.bubble .when{display:block;margin-bottom:calc(var(--mm)*1.03);}
+.bubble p{margin:0 0 calc(var(--mm)*1.23);}
+.bubble p:last-child{margin-bottom:0;}
+.bubble strong{font-weight:900;}
+.tail{font-size:calc(var(--mm)*2.77);margin-top:calc(var(--mm)*1.85);}
+
+.f-cta{display:flex;align-items:center;gap:calc(var(--mm)*4.62);margin-top:auto;
+  padding-top:calc(var(--mm)*4.1);border-top:calc(var(--mm)*0.82) solid var(--ink);}
+.qr{width:calc(var(--mm)*32.83);height:calc(var(--mm)*32.83);flex:none;background:#fff;
+  border:calc(var(--mm)*0.36) solid var(--ink);position:relative;padding:calc(var(--mm)*2.26);}
+.qr i{position:absolute;border:calc(var(--mm)*1.54) solid var(--ink);
+  width:calc(var(--mm)*8.21);height:calc(var(--mm)*8.21);}
+.qr i:nth-child(1){top:calc(var(--mm)*2.26);left:calc(var(--mm)*2.26);}
+.qr i:nth-child(2){top:calc(var(--mm)*2.26);right:calc(var(--mm)*2.26);}
+.qr i:nth-child(3){bottom:calc(var(--mm)*2.26);left:calc(var(--mm)*2.26);}
+.qr b{position:absolute;inset:calc(var(--mm)*12.31) calc(var(--mm)*2.26) calc(var(--mm)*2.26) calc(var(--mm)*12.31);
+  background:repeating-linear-gradient(90deg,var(--ink) 0 calc(var(--mm)*0.67),transparent 0 calc(var(--mm)*1.34)),
+             repeating-linear-gradient(0deg,var(--ink) 0 calc(var(--mm)*0.67),transparent 0 calc(var(--mm)*1.34));}
+.cta-lead{font-size:calc(var(--mm)*5.54);font-weight:900;line-height:1.32;}
+.cta-note{font-size:calc(var(--mm)*3.08);margin-top:calc(var(--mm)*1.44);line-height:1.55;}
+.cta-url{font-size:calc(var(--mm)*4.1);font-weight:900;color:var(--teal);margin-top:calc(var(--mm)*1.85);
+  font-family:ui-monospace,Menlo,monospace;letter-spacing:-.01em;}
+.f-foot{margin-top:calc(var(--mm)*3.08);font-size:calc(var(--mm)*2.57);line-height:1.55;}
+
+/* plate separation */
+.sheet.kplate .c,.sheet.kplate .f-badge,.sheet.kplate .bubble h4,.sheet.kplate .cta-url,
+.sheet.kplate .f-head em,.sheet.kplate .f-plabel,.sheet.kplate .area-lb{color:transparent;}
+.sheet.kplate .f-badge,.sheet.kplate .chip,.sheet.kplate .f-area{border-color:transparent;}
+.sheet.kplate .f-hr,.sheet.kplate .avatar,.sheet.kplate .f-plabel::after{background:transparent!important;}
+.sheet.kplate .bubble{border-left-width:calc(var(--mm)*0.36);border-left-color:var(--ink);}
+.sheet.cplate{color:transparent;}
+.sheet.cplate .k,.sheet.cplate .f-brand,.sheet.cplate .f-sub,.sheet.cplate .f-head,.sheet.cplate .f-lede,
+.sheet.cplate .bubble,.sheet.cplate .phone-name,.sheet.cplate .phone-time,.sheet.cplate .cta-lead,
+.sheet.cplate .cta-note,.sheet.cplate .f-foot,.sheet.cplate .tail,.sheet.cplate .chip,
+.sheet.cplate .area-v{color:transparent;}
+.sheet.cplate .c,.sheet.cplate .f-plabel,.sheet.cplate .bubble h4,.sheet.cplate .cta-url,
+.sheet.cplate .f-badge,.sheet.cplate .f-head em,.sheet.cplate .area-lb{color:var(--teal);}
+.sheet.cplate .phone,.sheet.cplate .phone-bar,.sheet.cplate .f-cta,.sheet.cplate .qr{border-color:transparent;}
+.sheet.cplate .bubble{border-color:transparent;border-left-color:var(--teal);}
+.sheet.cplate .qr i{border-color:transparent;}
+.sheet.cplate .qr b{background:none;}
+
+/* ---- spec rail ---- */
+.rail{display:flex;flex-direction:column;gap:24px;}
+.card{background:var(--card);border:1px solid var(--rule);padding:20px 22px;}
+.card h3{margin:0 0 13px;font-size:15px;color:var(--h1);}
+.card p{margin:0 0 10px;font-size:13.5px;line-height:1.8;color:var(--dim);}
+.card p:last-child{margin-bottom:0;}
+.card b{color:var(--h1);}
+.inks{display:flex;gap:10px;margin-bottom:15px;}
+.ink{flex:1;text-align:center;}
+.sw{height:42px;border:1px solid rgba(0,0,0,.14);}
+.ink small{display:block;margin-top:7px;font-size:10.5px;line-height:1.45;color:var(--faint);
+  font-family:ui-monospace,Menlo,monospace;}
+.pick{outline:2px solid var(--teal);outline-offset:2px;}
+.tblwrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--rule);}
+th{font-size:11px;letter-spacing:.06em;color:var(--faint);font-weight:700;
+  font-family:ui-monospace,Menlo,monospace;text-transform:uppercase;}
+td{color:var(--dim);} td.n{text-align:right;font-family:ui-monospace,Menlo,monospace;}
+tr.tot td{border-bottom:none;font-weight:900;color:var(--h1);padding-top:11px;}
+ul.chk{margin:0;padding:0;list-style:none;}
+ul.chk li{position:relative;padding-left:22px;font-size:13.5px;line-height:1.75;
+  margin-bottom:10px;color:var(--dim);}
+ul.chk li:last-child{margin-bottom:0;}
+ul.chk li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:9px;
+  border:1.5px solid var(--teal);}
+ul.chk li b{color:var(--h1);}
+.warn{border-left:3px solid var(--red);padding-left:14px;}
+.warn b{color:var(--red);}
+.seps{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:14px;}
+@media (max-width:620px){.seps{grid-template-columns:1fr;}}
+.sepcap{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.08em;
+  color:var(--faint);margin:12px 0 0;display:flex;justify-content:space-between;gap:12px;}
+.foot{margin-top:52px;border-top:1.5px solid var(--rule);padding-top:20px;
+  font-size:12.5px;color:var(--faint);line-height:1.8;}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;}
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <p class="kicker">Risograph · 2-colour · A4</p>
+    <h1>2色刷りA4チラシ 版下</h1>
+    <p class="dek">あすぴあの簡易印刷機（リソグラフ）で刷る前提。写真とグラデーションは使わず、<strong>黒＋ティールグリーンの2版</strong>で組みました。主役は「登録してね」ではなく<strong>実際に届く通信そのもの</strong>です。置く場所に合わせて、プレビューの中身を差し替えた版を用意しました。</p>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="チラシの版"></div>
+  <p class="tabnote"></p>
+
+  <div class="grid">
+    <section>
+      <h2>刷り上がりイメージ（2色合成）</h2>
+      <div class="plate"><div class="sheet" id="composite"></div></div>
+      <p class="sepcap"><span>A4 210 × 297 mm</span><span>周囲10mm 余白（リソは縁なし不可）</span></p>
+    </section>
+
+    <aside class="rail">
+      <div class="card">
+        <h3>置く場所ごとに、見せる中身を変える</h3>
+        <p>チラシを手に取るのは<b>その場所にいる人</b>です。多摩六都科学館で受け取った人にプラネタリウムの回が見えていれば、「自分に関係がある」と分かるのが一瞬で済みます。</p>
+        <p>版によって変わるのは<b>プレビューの中身だけ</b>。ほかは全部共通なので、版下の作り方も費用も変わりません。<b>製版だけ版ごとに必要</b>（50円×2色×版数）です。</p>
+        <p class="warn"><b>刷る前に日付をもう一度確認してください。</b>プレビューは見本ですが、紙は数か月残ります。会期が終わる催しより、<b>長く続くもの・毎月あるもの</b>を選ぶほうが長持ちします。</p>
+      </div>
+
+      <div class="card">
+        <h3>インクは2色。ティールグリーンを推します</h3>
+        <div class="inks">
+          <div class="ink"><div class="sw" style="background:#1A1A18"></div><small>黒<br>BLACK</small></div>
+          <div class="ink"><div class="sw pick" style="background:#00838A"></div><small>ティール<br>TEAL</small></div>
+          <div class="ink"><div class="sw" style="background:#0078BF"></div><small>ブルー<br>BLUE</small></div>
+          <div class="ink"><div class="sw" style="background:#FF665E"></div><small>赤<br>RED</small></div>
+        </div>
+        <p>あすぴあにあるのは黒・赤・ブルー・ティールグリーン。<b>ティールがホームページの色（#2C7C9E）にいちばん近い</b>ので、紙とWebで印象が揃います。</p>
+      </div>
+
+      <div class="card">
+        <h3>費用（1,000枚・2色）</h3>
+        <div class="tblwrap"><table>
+          <thead><tr><th>内訳</th><th>計算</th><th style="text-align:right">金額</th></tr></thead>
+          <tbody>
+            <tr><td>製版</td><td>50円 × 2版</td><td class="n">100円</td></tr>
+            <tr><td>印刷</td><td>20円 × 10 × 2色</td><td class="n">400円</td></tr>
+            <tr><td>用紙（持参）</td><td>A4上質紙 1,000枚</td><td class="n">約1,500円</td></tr>
+            <tr class="tot"><td>合計</td><td>1枚あたり約2円</td><td class="n">約2,000円</td></tr>
+          </tbody>
+        </table></div>
+        <p style="margin-top:12px">ネット印刷のフルカラー1,000枚が5,000〜7,000円なので<b>3分の1以下</b>。版を4種類に分けても、増えるのは製版代の300円だけです。</p>
+        <p class="warn"><b>受付で1つ確認を。</b>「印刷100枚ごとに20円」が<b>色ごとに2回数えるのか、紙の枚数か</b>。後者なら半額です。</p>
+      </div>
+
+      <div class="card">
+        <h3>載せた市は、実績から決めました</h3>
+        <p>「小平・花小金井まわり」では隣の市の人が自分ごとにできません。かといって<b>回っていない市を並べると嘘</b>になります。配信済み4号＋8/19号に実際に出てきた地名を数えて、2段に分けました。</p>
+        <div class="tblwrap"><table>
+          <thead><tr><th>市</th><th style="text-align:right">登場</th><th>扱い</th></tr></thead>
+          <tbody>
+            <tr><td>小平市（花小金井）</td><td class="n">5 / 5</td><td>毎週</td></tr>
+            <tr><td>西東京市（田無・多摩六都）</td><td class="n">5 / 5</td><td>毎週</td></tr>
+            <tr><td>東村山市</td><td class="n">3 / 5</td><td>毎週</td></tr>
+            <tr><td>東久留米市</td><td class="n">2 / 5</td><td>毎週</td></tr>
+            <tr><td>小金井市</td><td class="n">1 / 5</td><td>毎週</td></tr>
+            <tr><td>所沢・立川・武蔵野・国分寺</td><td class="n">各 1 / 5</td><td>ときどき</td></tr>
+          </tbody>
+        </table></div>
+        <p style="margin-top:12px">小金井市は登場1回ですが、小金井公園と江戸東京たてもの園が<b>毎回の巡回対象</b>なので「毎週」に含めました。</p>
+      </div>
+
+      <div class="card">
+        <h3>「あすぴあ登録団体」は書けます</h3>
+        <p>事実の記載なので問題ありません。公民館・児童館の掲示では、<b>どこの誰かが分かることが信頼につながります</b>。フッターに1行入れました。</p>
+        <p class="warn"><b>「後援」「協力」とは書かないこと。</b>承認を得ていない関係を名乗ることになります。<b>登録している事実だけ</b>に留めます。念のため受付で表記の可否を一言確認してください。</p>
+      </div>
+
+      <div class="card">
+        <h3>この設計で捨てたもの</h3>
+        <ul class="chk">
+          <li><b>写真</b>——網点が粗く、人物や風景は潰れます。</li>
+          <li><b>グラデーションと網（アミ）</b>——ムラとローラー跡。<b>文字の下に網は一切敷いていません</b>。</li>
+          <li><b>絵文字</b>——カラー画像なので2色に分解できません。</li>
+          <li><b>グレーの文字</b>——リソに中間調はなく、黒の網点になって小さい字が潰れます。<b>黒かティールの100%だけ</b>です。</li>
+          <li><b>フチなし</b>——端まで刷れないので周囲10mmを空けました。</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>見当ずれを前提に組んであります</h3>
+        <p>2回通すあいだに紙が1mmほどずれます。<b>黒の文字を色の線で囲む</b>ような、合わないと破綻する作りは避けました。見出しの「毎週水曜の朝に」はティール版だけなので、色がずれても<b>黒版だけで「『今週末、どこ行く？』を おとどけ。」と読めます</b>。</p>
+        <p>2枚の版に<b>同じ要素を重ねて入れていません</b>。両方に入れると2度刷りで線が太り、濁ります。</p>
+        <p class="warn"><b>QRは黒版だけ・32mm角。</b>色を重ねると読み取り率が落ちます。周囲の余白も詰めないでください。</p>
+      </div>
+
+      <div class="card">
+        <h3>刷る前に</h3>
+        <ul class="chk">
+          <li><b>用紙は持参。</b>クリームや水色の紙にすると、2色で3色分の見た目になります。</li>
+          <li><b>失敗した枚数も課金対象</b>です。まず10枚だけ試し刷りを。</li>
+          <li>申込みは受付で。<b>印刷機は20:30締切</b>、休館日は使えません。</li>
+          <li>紙折り機と裁断機は<b>無料</b>です。</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <section style="margin-top:52px">
+    <h2>版下（この2枚を持っていきます）</h2>
+    <div class="seps">
+      <div><div class="plate"><div class="sheet mini kplate" id="plateK"></div></div>
+        <p class="sepcap"><span>1版 — 黒（K）</span><span>本文・QR・枠</span></p></div>
+      <div><div class="plate"><div class="sheet mini cplate" id="plateC"></div></div>
+        <p class="sepcap"><span>2版 — ティールグリーン</span><span>見出し・罫・丸バッジ</span></p></div>
+    </div>
+  </section>
+
+  <p class="foot">版下は <code>docs/homepage/flyer-a4-riso.html</code> としてリポジトリに置きます（ブランチ <code>claude/line-message-resend-yefv9l</code>）。ブラウザの印刷からA4・余白なし・背景グラフィックありでPDF化し、白黒2枚を出力してください。QRは既存の <code>assets/site-qr.png</code>（<code>/f</code> 宛て）を同じ位置・サイズに差し替えます。</p>
+</div>
+
+<script>
+const VARIANTS = [
+  { id:'std', tab:'標準版', where:'どこにでも置ける基本形。最初に刷るのはこれ。',
+    label:'こんなふうに届きます', date:'8/19 9:05', issue:'8/19（水）号',
+    blocks:[
+      {h:'■ 今週の一推し', ev:'こだいら防災救急フェア',
+       when:'8/23（日）10:00〜13:00／中央公民館',
+       p:['はしご車の搭乗体験（20組）、放水体験、AEDの練習。<strong>申込は不要、参加費もかかりません。</strong>']},
+      {h:'■ 同じ場所で、もう一つ', ev:'クラシックポップアップ絵本展',
+       when:'中央図書館2階／〜10/14（水）・無料',
+       p:['同じ建物の2階です。13時にフェアが終わったあと、涼みがてらそのまま寄れます。']},
+      {h:'■ イベント先取り情報', ev:'', when:'',
+       p:['・ランニング教室（9/6）の申込は<strong>8/28（金）まで</strong>。']}
+    ] },
+
+  { id:'kominkan', tab:'北公民館版', where:'花小金井北公民館に置く版。公民館の講座を先頭に出します。',
+    label:'こんなふうに届きます', date:'8/19 9:05', issue:'8/19（水）号',
+    blocks:[
+      {h:'■ 今週の一推し', ev:'親子木工講座「引き出し式の小物入れ」',
+       when:'花小金井北公民館／小学生と保護者',
+       p:['日程と費用はまだ公表されていません。公民館（042-462-5790）に直接おたずねください。']},
+      {h:'■ 少し足をのばして', ev:'こだいら防災救急フェア',
+       when:'8/23（日）10:00〜13:00／中央公民館',
+       p:['はしご車の搭乗体験（20組）と放水体験。申込は不要で、参加費もかかりません。']},
+      {h:'■ イベント先取り情報', ev:'', when:'',
+       p:['・初心者ラグビー教室（9/13）は<strong>幼稚園の年中から</strong>参加できます。']}
+    ] },
+
+  { id:'rokuto', tab:'多摩六都科学館版', where:'多摩六都科学館に置く版。館内の番組をそのまま見せます。',
+    label:'こんなふうに届きます', date:'8/19 9:05', issue:'8/19（水）号',
+    blocks:[
+      {h:'■ 今週の一推し', ev:'キッズプラネタリウム「とびだせ星空調査隊」',
+       when:'多摩六都科学館／〜8/31・10:30と14:20',
+       p:['暗いのが苦手なお子さんは、後ろの席のほうが安心して見られます。']},
+      {h:'■ 雨の日・猛暑の日に', ev:'みんなで実験！しくみラボ',
+       when:'多摩六都科学館／入館券だけで参加できます',
+       p:['鏡をテーマにした体験コーナー。天気が崩れた週末の逃げ場になります。']},
+      {h:'■ イベント先取り情報', ev:'', when:'',
+       p:['・大型映像「恐竜新世界」は11:40と15:30の2回。']}
+    ] },
+
+  { id:'koganei', tab:'小金井公園版', where:'小金井公園・江戸東京たてもの園に置く版。公園を中心に。',
+    label:'こんなふうに届きます', date:'8/19 9:05', issue:'8/19（水）号',
+    blocks:[
+      {h:'■ 今週の一推し', ev:'江戸東京たてもの園',
+       when:'小金井公園内／花小金井から自転車圏',
+       p:['昔の街並みがまるごと移築されています。木陰が多く、ベビーカーのまま回れます。']},
+      {h:'■ 同じ公園でもう一つ', ev:'広場とじゃぶじゃぶ池',
+       when:'小金井公園／入園無料',
+       p:['日陰のベンチが多め。着替えを持っていくと夕方まで過ごせます。']},
+      {h:'■ イベント先取り情報', ev:'', when:'',
+       p:['・こだいら防災救急フェアは8/23（日）。はしご車の搭乗体験があります。']}
+    ] }
+];
+
+const esc = s => s;
+function sheetHTML(v){
+  const blocks = v.blocks.map(b =>
+    `<h4>${b.h}</h4>` +
+    (b.ev ? `<span class="ev">${b.ev}</span>` : '') +
+    (b.when ? `<span class="when">${b.when}</span>` : '') +
+    b.p.map(t=>`<p>${t}</p>`).join('')
+  ).join('');
+  return `
+  <div class="f-top">
+    <div>
+      <div class="f-brand k">ぼんぼやーじゅ通信</div>
+      <div class="f-sub k">花小金井発・週末おでかけ便</div>
+    </div>
+    <div class="f-badge"><b>無料</b><span>週1回・水曜</span></div>
+  </div>
+  <div class="f-hr"></div>
+  <div class="f-head k">「今週末、どこ行く？」を<br><em>毎週水曜の朝に</em>おとどけ。</div>
+  <div class="f-lede k">お祭り・水あそび・科学館・図書館・電車でおでかけ。天気に合わせた「今週これ」と、申込みの締切がある催しを、ひとまとめにして。</div>
+  <div class="f-area">
+    <div class="area-row"><span class="area-lb c">毎週みる街</span><span class="area-v k">小平市・西東京市・東久留米市・東村山市・小金井市</span></div>
+    <div class="area-row sub"><span class="area-lb c">ときどき</span><span class="area-v k">武蔵野市・国分寺市・立川市・所沢市 ほか</span></div>
+  </div>
+  <div class="f-chips">
+    <div class="chip">あかちゃん<small>0〜2歳</small></div>
+    <div class="chip">未就学<small>3〜6歳</small></div>
+    <div class="chip">小学生<small>6〜12歳</small></div>
+  </div>
+  <div class="f-pw">
+    <div class="f-plabel">${v.label}</div>
+    <div class="phone">
+      <div class="phone-bar">
+        <div class="avatar c-fill">ぼ</div>
+        <div class="phone-name k">ぼんぼやーじゅ通信</div>
+        <div class="phone-time k">${v.date}</div>
+      </div>
+      <div class="bubble k">
+        <span class="b-title">【ぼんぼやーじゅ通信 ${v.issue}】</span>
+        ${blocks}
+      </div>
+    </div>
+  </div>
+  <div class="f-cta">
+    <div class="qr"><i></i><i></i><i></i><b></b></div>
+    <div>
+      <div class="cta-lead k">スマホのカメラで<br>読み取ってください</div>
+      <div class="cta-note k">ホームページから「LINEで受け取る」を選ぶだけ。いつでも解除できます。</div>
+      <div class="cta-url">bonvoya.nicomaru.tokyo/f</div>
+    </div>
+  </div>
+  <div class="f-foot k">発行：ぼんぼやーじゅ通信（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体</div>`;
+}
+
+const tabsEl = document.querySelector('.tabs');
+const noteEl = document.querySelector('.tabnote');
+let active = 0;
+
+VARIANTS.forEach((v,i)=>{
+  const b=document.createElement('button');
+  b.className='tab'; b.type='button'; b.role='tab'; b.textContent=v.tab;
+  b.setAttribute('aria-selected', i===0?'true':'false');
+  b.addEventListener('click',()=>select(i));
+  tabsEl.appendChild(b);
+});
+
+function select(i){
+  active=i;
+  [...tabsEl.children].forEach((b,j)=>b.setAttribute('aria-selected', j===i?'true':'false'));
+  const v=VARIANTS[i];
+  noteEl.innerHTML='<b>'+v.tab+'</b> — '+v.where;
+  const html=sheetHTML(v);
+  ['composite','plateK','plateC'].forEach(id=>{document.getElementById(id).innerHTML=html;});
+  fitAll();
+}
+
+/* --- fit the A4 box no matter what the local font metrics are --- */
+const MIN=0.55;
+function fitOne(s){
+  let f=1; s.style.setProperty('--fit',f);
+  for(let n=0;n<16;n++){
+    // .f-cta が margin-top:auto なので、収まっている間 scrollHeight は clientHeight と一致する。
+    // 余裕率を掛けて比べると条件が常に成立して延々縮むので、素の高さ同士で比べる。
+    const avail=s.clientHeight, need=s.scrollHeight;
+    if(need<=avail+0.5) break;
+    f=Math.max(MIN, f*(avail/need)*0.995);
+    s.style.setProperty('--fit',f);
+    if(f<=MIN) break;
+  }
+}
+function fitAll(){document.querySelectorAll('.sheet').forEach(fitOne);}
+
+select(0);
+addEventListener('load',fitAll);
+[100,350,900,2000].forEach(d=>setTimeout(fitAll,d));
+addEventListener('resize',()=>{clearTimeout(window.__t);window.__t=setTimeout(fitAll,120);});
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fitAll);
+if(window.ResizeObserver){
+  const ro=new ResizeObserver(()=>{clearTimeout(window.__r);window.__r=setTimeout(fitAll,80);});
+  document.querySelectorAll('.sheet').forEach(s=>ro.observe(s));
+}
+</script>
