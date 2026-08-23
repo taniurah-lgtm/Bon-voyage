@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<title>ぼんぼやーじゅ通信 A4チラシ 版下（リソグラフ2色刷り用）</title>
+<style>
+/* ============================================================
+   リソグラフ用 版下。1版につきA4 1ページ、すべて黒1色で出力する。
+   色は印刷機のドラム側が乗せるので、色版の原稿も「黒」で刷る。
+   ページ順: 各版とも [1] 黒版 → [2] 色版(ティールグリーン)
+   ============================================================ */
+@page{size:210mm 297mm;margin:0;}
+@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{background:#fff;}
+body{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP","Meiryo",sans-serif;
+  -webkit-font-smoothing:antialiased;}
+
+.page{width:210mm;height:297mm;padding:11mm;background:#fff;color:#000;
+  display:flex;flex-direction:column;overflow:hidden;position:relative;
+  page-break-after:always;break-after:page;}
+.page:last-child{page-break-after:auto;break-after:auto;}
+
+/* ---------- 版面(実寸mm) ---------- */
+.f-top{display:flex;align-items:center;justify-content:space-between;gap:4.1mm;}
+.f-brand{font-size:11.3mm;font-weight:900;letter-spacing:-.02em;line-height:1;}
+.f-sub{font-size:3.5mm;margin-top:2.3mm;letter-spacing:.02em;}
+.f-badge{flex:none;text-align:center;border:1mm solid #000;border-radius:50%;
+  width:37mm;height:37mm;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;line-height:1.12;}
+.f-badge b{font-size:10.8mm;font-weight:900;display:block;letter-spacing:-.03em;}
+.f-badge span{font-size:3.4mm;letter-spacing:.04em;margin-top:.5mm;}
+.f-hr{height:.8mm;background:#000;margin:4.6mm 0 4.1mm;}
+.f-head{font-size:8.6mm;font-weight:900;line-height:1.3;letter-spacing:-.01em;}
+.f-head em{font-style:normal;}
+.f-lede{margin-top:2.7mm;font-size:3.4mm;line-height:1.65;}
+.f-area{margin-top:3.7mm;border-top:.5mm solid #000;border-bottom:.5mm solid #000;
+  padding:2.5mm 0;display:flex;flex-direction:column;gap:1.5mm;}
+.area-row{display:flex;align-items:baseline;gap:2.5mm;}
+.area-lb{flex:none;width:17.4mm;font-size:2.9mm;font-weight:900;}
+.area-v{font-size:3.6mm;font-weight:900;line-height:1.3;}
+.area-row.sub .area-lb{font-size:2.7mm;}
+.area-row.sub .area-v{font-size:3mm;font-weight:400;}
+.f-chips{display:flex;gap:2mm;margin-top:3.1mm;}
+.chip{flex:1;text-align:center;padding:1.5mm 0;font-size:3.1mm;font-weight:700;border:.5mm solid #000;}
+.chip small{font-size:2.6mm;font-weight:400;margin-left:1mm;}
+.f-pw{margin-top:4.1mm;display:flex;flex-direction:column;gap:2.3mm;}
+.f-plabel{display:flex;align-items:center;gap:2.3mm;font-size:3.9mm;font-weight:900;letter-spacing:.05em;}
+.f-plabel::after{content:"";flex:1;height:.5mm;background:#000;}
+.phone{border:.9mm solid #000;border-radius:4.1mm;padding:2.5mm;display:flex;flex-direction:column;min-width:0;}
+.phone-bar{display:flex;align-items:center;gap:1.5mm;padding-bottom:1.9mm;
+  border-bottom:.4mm solid #000;margin-bottom:2.5mm;}
+.avatar{width:6.4mm;height:6.4mm;border-radius:50%;flex:none;background:#000;color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:3.1mm;font-weight:900;}
+.phone-name{font-size:3.1mm;font-weight:700;}
+.phone-time{margin-left:auto;font-size:2.5mm;}
+.bubble{border:.35mm solid #000;border-left:1.85mm solid #000;
+  border-radius:2.7mm;border-top-left-radius:.8mm;padding:2.9mm;font-size:3.2mm;line-height:1.72;}
+.b-title{font-weight:900;font-size:3.5mm;display:block;margin-bottom:1.9mm;}
+.bubble h4{margin:2.5mm 0 .9mm;font-size:3.3mm;font-weight:900;}
+.bubble h4:first-of-type{margin-top:0;}
+.bubble .ev{font-weight:900;font-size:3.5mm;display:block;}
+.bubble .when{display:block;margin-bottom:1mm;}
+.bubble p{margin:0 0 1.2mm;}
+.bubble p:last-child{margin-bottom:0;}
+.bubble strong{font-weight:900;}
+.tail{font-size:2.8mm;margin-top:1.9mm;}
+.f-cta{display:flex;align-items:center;gap:4.5mm;margin-top:auto;padding-top:4.1mm;border-top:.8mm solid #000;}
+.qr{width:34mm;height:34mm;flex:none;}
+.qr img{width:100%;height:100%;display:block;image-rendering:pixelated;}
+.cta-lead{font-size:5.4mm;font-weight:900;line-height:1.32;}
+.cta-note{font-size:3.1mm;margin-top:1.4mm;line-height:1.55;}
+.cta-url{font-size:4mm;font-weight:900;margin-top:1.8mm;letter-spacing:-.01em;}
+.f-foot{margin-top:3mm;font-size:2.6mm;line-height:1.55;}
+
+/* ---------- 版の出し分け ----------
+   .p-k = 黒版: 黒で刷る要素だけ。色の要素は出さない。
+   .p-c = 色版: 色で刷る要素だけを「黒」で出す。黒の要素は出さない。
+   両方に同じ要素を出すと2度刷りになって濁るので、必ず排他にする。 */
+.p-k .ci{visibility:hidden;}
+.p-k .f-badge{border-color:transparent;}
+.p-k .chip{border-color:transparent;}
+.p-k .f-area{border-color:transparent;}
+.p-k .f-hr,.p-k .avatar,.p-k .f-plabel::after{background:transparent;}
+.p-k .avatar{color:transparent;}
+.p-k .bubble{border-left-width:.35mm;}
+
+.p-c .ki{visibility:hidden;}
+.p-c .phone,.p-c .phone-bar,.p-c .f-cta,.p-c .bubble{border-color:transparent;}
+.p-c .bubble{border-left-color:#000;}
+.p-c .qr{visibility:hidden;}
+</style></head><body>
+<script>
+const QR="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAzQAAAM0AQAAAABFCVraAAADN0lEQVR42u3dQXLbMAwFUE4voPvfkjdwN05FAqCaRZIZMk8Lj63aeoss9AuCUHv9yNEbh8PhcDgcDofD4XA4HA6Hw+FwOBwOh8PhcDic3+C0eFzvc/++294f73f3z676Ah+//dN+5uBwOBwOh/MFx5gPrjE6vG/5U0h4f2WZFPIF5AMOh8PhcPbPB2M14CMLhEDwfnk9hInxAvIBh8PhcDiH5YOxTHDHhVwreAgY8gGHw+FwOAfng1Z0IqgfcDgcDofTfmH/QUvR4C4n3FlA/wGHw+FwOKfmg3Bcc13gEy/5AvIBh8PhcDhb54PlkToVQ/fioh1h2kfp78PhcDgczs75oLrl93ovY7pK2PiofsDhcDgczu75INzoq3MhM6S4ME1HkA84HA6HwzmhfvDUd3ife/jKNV9FPuBwOBwO55D6wTTrYDwXftHncUm9+Af9BxwOh8PhHFI/CGWCUCt47kSwv5HD4XA4nOPyQdWJsGxC6Kn1oHqRDzgcDofD2Tof1AMT+1xOaHPpoI3rC6nOYH2Bw+FwOJz980EbU0G1iSFEiHrwsnzA4XA4HM45+aDev9DTnsc0LKGvNjlaX+BwOBwOZ/988EqBIG1tbKu1hL7qWJAPOBwOh8PZPx+EZYT8cMYQHOpKQlM/4HA4HA7njHzQ68wQzlVJIS0oeP4Ch8PhcDhH5IPwn/6xfnB/ebG08L9mBfmAw+FwOJyN6wfVJMVqNNInsoX1BQ6Hw+FwDqkfpCGK07vUszhVEqq2BfmAw+FwOJz96wdpOGKoC1xFY0JOFNYXOBwOh8M5pn6QlwfC3b6ajxTWHMxH4nA4HA7nrPrBYqdjqi680hMW6rZG6wscDofD4exfP2gPhYDn0crpqUzqBxwOh8PhHJIPFo9nrh/tnMsJy3fyAYfD4XA4W+eDu3Qw7ktoxZiDxYMd6yFJ8gGHw+FwOOfkg+fSwf2xnsMsH3A4HA6Hc2b9IDxcYTFGeQwOTX8ih8PhcDhn5YPn7Y5pMEJLH60vcDgcDodzVj4Ix6J+sHzYY5Uj5AMOh8PhcLbOB995dA6Hw+FwOBwOh8PhcDgcDofD4XA4HA6Hw+FwOOc6fwHj5efLyN4IqAAAAABJRU5ErkJggg==";
+const V=[
+ {id:'std',blocks:[
+  {h:'■ 今週の一推し',ev:'こだいら防災救急フェア',when:'8/23（日）10:00〜13:00／中央公民館',
+   p:['はしご車の搭乗体験（20組）、放水体験、AEDの練習。<strong>申込は不要、参加費もかかりません。</strong>']},
+  {h:'■ 同じ場所で、もう一つ',ev:'クラシックポップアップ絵本展',when:'中央図書館2階／〜10/14（水）・無料',
+   p:['同じ建物の2階です。13時にフェアが終わったあと、涼みがてらそのまま寄れます。']},
+  {h:'■ イベント先取り情報',ev:'',when:'',p:['・ランニング教室（9/6）の申込は<strong>8/28（金）まで</strong>。']}]},
+ {id:'kominkan',blocks:[
+  {h:'■ 今週の一推し',ev:'親子木工講座「引き出し式の小物入れ」',when:'花小金井北公民館／小学生と保護者',
+   p:['日程と費用はまだ公表されていません。公民館（042-462-5790）に直接おたずねください。']},
+  {h:'■ 少し足をのばして',ev:'こだいら防災救急フェア',when:'8/23（日）10:00〜13:00／中央公民館',
+   p:['はしご車の搭乗体験（20組）と放水体験。申込は不要で、参加費もかかりません。']},
+  {h:'■ イベント先取り情報',ev:'',when:'',p:['・初心者ラグビー教室（9/13）は<strong>幼稚園の年中から</strong>参加できます。']}]},
+ {id:'rokuto',blocks:[
+  {h:'■ 今週の一推し',ev:'キッズプラネタリウム「とびだせ星空調査隊」',when:'多摩六都科学館／〜8/31・10:30と14:20',
+   p:['暗いのが苦手なお子さんは、後ろの席のほうが安心して見られます。']},
+  {h:'■ 雨の日・猛暑の日に',ev:'みんなで実験！しくみラボ',when:'多摩六都科学館／入館券だけで参加できます',
+   p:['鏡をテーマにした体験コーナー。天気が崩れた週末の逃げ場になります。']},
+  {h:'■ イベント先取り情報',ev:'',when:'',p:['・大型映像「恐竜新世界」は11:40と15:30の2回。']}]},
+ {id:'koganei',blocks:[
+  {h:'■ 今週の一推し',ev:'江戸東京たてもの園',when:'小金井公園内／花小金井から自転車圏',
+   p:['昔の街並みがまるごと移築されています。木陰が多く、ベビーカーのまま回れます。']},
+  {h:'■ 同じ公園でもう一つ',ev:'広場とじゃぶじゃぶ池',when:'小金井公園／入園無料',
+   p:['日陰のベンチが多め。着替えを持っていくと夕方まで過ごせます。']},
+  {h:'■ イベント先取り情報',ev:'',when:'',p:['・こだいら防災救急フェアは8/23（日）。はしご車の搭乗体験があります。']}]}
+];
+function sheet(v){
+ const bl=v.blocks.map(b=>`<h4 class="ci">${b.h}</h4>`+
+   (b.ev?`<span class="ev ki">${b.ev}</span>`:'')+
+   (b.when?`<span class="when ki">${b.when}</span>`:'')+
+   b.p.map(t=>`<p class="ki">${t}</p>`).join('')).join('');
+ return `
+ <div class="f-top">
+   <div><div class="f-brand ki">ぼんぼやーじゅ通信</div><div class="f-sub ki">花小金井発・週末おでかけ便</div></div>
+   <div class="f-badge ci"><b>無料</b><span>週1回・水曜</span></div>
+ </div>
+ <div class="f-hr"></div>
+ <div class="f-head"><span class="ki">「今週末、どこ行く？」を</span><br><em class="ci">毎週水曜の朝に</em><span class="ki">おとどけ。</span></div>
+ <div class="f-lede ki">お祭り・水あそび・科学館・図書館・電車でおでかけ。天気に合わせた「今週これ」と、申込みの締切がある催しを、ひとまとめにして。</div>
+ <div class="f-area">
+   <div class="area-row"><span class="area-lb ci">毎週みる街</span><span class="area-v ki">小平市・西東京市・東久留米市・東村山市・小金井市</span></div>
+   <div class="area-row sub"><span class="area-lb ci">ときどき</span><span class="area-v ki">武蔵野市・国分寺市・立川市・所沢市 ほか</span></div>
+ </div>
+ <div class="f-chips">
+   <div class="chip"><span class="ki">あかちゃん<small>0〜2歳</small></span></div>
+   <div class="chip"><span class="ki">未就学<small>3〜6歳</small></span></div>
+   <div class="chip"><span class="ki">小学生<small>6〜12歳</small></span></div>
+ </div>
+ <div class="f-pw">
+   <div class="f-plabel"><span class="ci">こんなふうに届きます</span></div>
+   <div class="phone">
+     <div class="phone-bar"><div class="avatar">ぼ</div><div class="phone-name ki">ぼんぼやーじゅ通信</div><div class="phone-time ki">8/19 9:05</div></div>
+     <div class="bubble"><span class="b-title ki">【ぼんぼやーじゅ通信 8/19（水）号】</span>${bl}</div>
+   </div>
+ </div>
+ <div class="f-cta">
+   <div class="qr"><img src="${QR}" alt=""></div>
+   <div>
+     <div class="cta-lead ki">スマホのカメラで<br>読み取ってください</div>
+     <div class="cta-note ki">ホームページから「LINEで受け取る」を選ぶだけ。いつでも解除できます。</div>
+     <div class="cta-url ci">bonvoya.nicomaru.tokyo/f</div>
+   </div>
+ </div>
+ <div class="f-foot ki">発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）</div>`;
+}
+document.write(V.map(v=>
+  `<div class="page p-k">${sheet(v)}</div><div class="page p-c">${sheet(v)}</div>`).join(''));
+</script>
+</body></html>
