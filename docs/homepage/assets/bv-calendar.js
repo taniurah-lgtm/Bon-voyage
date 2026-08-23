@@ -42,8 +42,16 @@
   // これを見ないと、読者のカレンダーに1時間ずれた終了時刻が入る。
   function timesFor(ev, date) {
     var ex = (ev.exceptions || {})[date] || {};
+    var pg = (ev.programs || {})[date];
+    if (pg) {
+      // その日だけのプログラム。ほかの日には時刻を出さない
+      return { start: pg.start, end: pg.end, program: pg.label, exception: false };
+    }
     return { start: ex.start || ev.start, end: ex.end || ev.end, exception: !!(ex.start || ex.end) };
   }
+  // 終了時刻が台帳に無いとき、カレンダーには何か入れないといけない。
+  // 勝手に2時間で置くのは構わないが、置いたことを黙っていてはいけない。
+  var GUESS_HOURS = 2;
 
   // ---- カレンダー登録リンク --------------------------------------------------
   // Googleカレンダーのテンプレートリンク。ログイン済みならワンタップで保存できる。
@@ -52,7 +60,7 @@
     var dates;
     if (t.start) {
       var s = date.replace(/-/g, '') + 'T' + t.start.replace(':', '') + '00';
-      var endT = t.end || addHours(t.start, 2);
+      var endT = t.end || addHours(t.start, GUESS_HOURS);
       var endDate = date;
       // 終了が開始より前なら日付をまたいだと見なす
       if (endT < t.start) endDate = iso(new Date(parseISO(date).getTime() + MS_DAY));
@@ -80,6 +88,13 @@
   function detailsText(ev, date, slot) {
     var out = [];
     var t = date ? timesFor(ev, date) : { exception: false };
+    // 未確認・推定はいちばん先に書く。読者のカレンダーに黙って入れない。
+    if (ev.tentative) out.push('⚠️ 日程が未確定です。公式で確認してください');
+    if (t.program) out.push('この日は「' + t.program + '」の時間です（' + t.start + (t.end ? '〜' + t.end : '') + '）');
+    if (!slot && t.start && !t.end) {
+      out.push('⚠️ 終了時刻は公表されていません。カレンダーには' + GUESS_HOURS + '時間で仮置きしています');
+    }
+    if (ev.caution) out.push('⚠️ ' + ev.caution);
     if (slot && slot.label) out.push('枠: ' + slot.label + '（' + slot.start + '〜' + slot.end + '）');
     if (t.exception) out.push('この日は ' + (t.start || ev.start || '') + '〜' + (t.end || '') + ' です');
     if (ev.kidsNote) out.push(ev.kidsNote);
@@ -107,7 +122,7 @@
     var t = slot ? { start: slot.start, end: slot.end, exception: false } : timesFor(ev, date);
     var body;
     if (t.start) {
-      var endT = t.end || addHours(t.start, 2);
+      var endT = t.end || addHours(t.start, GUESS_HOURS);
       body =
         'DTSTART;TZID=Asia/Tokyo:' + stamp + 'T' + t.start.replace(':', '') + '00\r\n' +
         'DTEND;TZID=Asia/Tokyo:' + stamp + 'T' + endT.replace(':', '') + '00\r\n';
@@ -214,6 +229,7 @@
     var multiSlot = hasMultipleSlots(ev);
     var t = timesFor(ev, date);
     var when = t.start ? t.start + (t.end ? '〜' + t.end : '〜') : '時間は公式で確認';
+    if (t.program) when = t.program + ' ' + t.start + (t.end ? '〜' + t.end : '〜');
     if (multiSlot) when = '枠が複数あります';
     var multi = ev.dates && ev.dates.length > 1 ? '<span class="bvc-multi">' + ev.dates.length + '日間のうち1日</span>' : '';
     // 枠が複数あるとき、1つのボタンで先頭の枠だけを入れると別の枠の人には誤りになる。
@@ -243,6 +259,7 @@
       '<article class="bvc-card' + (ev.tentative ? ' is-tentative' : '') + '">' +
       '<p class="bvc-when">' + esc(when) + ' ' + multi +
       (t.exception ? '<span class="bvc-exc">この日だけ時間がちがいます</span>' : '') +
+      (!multiSlot && t.start && !t.end ? '<span class="bvc-exc">終了時刻は未公表</span>' : '') +
       (ev.tentative ? '<span class="bvc-tent">日程は要確認</span>' : '') + '</p>' +
       '<h4 class="bvc-name">' + esc(ev.name) + '</h4>' +
       (multiSlot ? '<p class="bvc-slots">🕒 ' + esc(ev.when) + '</p>' : '') +

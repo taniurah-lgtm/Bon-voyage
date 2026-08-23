@@ -157,6 +157,22 @@ const page = `<!doctype html>
 ${(() => {
   const byDate = {};
   for (const e of pub) { if (e.tentative) continue; for (const d of e.dates) (byDate[d] ||= []).push(e); }
+  // 本体（カレンダー）と同じ「子連れで行きやすい順」に揃える。
+  // 順序が違うと、JSの有無で並びが変わって混乱する。
+  const pt = { '◎': 3, '○': 2, '△': 1, '✕': 0, x: 0 };
+  const score = (e) => {
+    const a = e.ages || {};
+    if (a.baby || a.pre || a.elem) return (pt[a.baby] || 0) + (pt[a.pre] || 0) + (pt[a.elem] || 0);
+    if (a.overall) {
+      if (/✕|x/.test(a.overall)) return 0;
+      if (/^◎/.test(a.overall)) return 9;
+      if (/△\s*[〜~]\s*○|○\s*[〜~]\s*△/.test(a.overall)) return 4;
+      if (/^○/.test(a.overall)) return 6;
+      if (/^△/.test(a.overall)) return 3;
+    }
+    return 1;
+  };
+  for (const d of Object.keys(byDate)) byDate[d].sort((a, b) => score(b) - score(a));
   const days = Object.keys(byDate).sort();
   // JS が動かないときに出る一覧。カレンダー側にあるものは全部入れる
   //（締切・会期・日程未確定を落としていて、本体と食い違っていた）

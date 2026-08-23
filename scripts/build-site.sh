@@ -22,6 +22,10 @@ echo "── 公開マップ（地図＋投稿フォーム）"
 node scripts/build-map.mjs
 
 echo
+echo "── sitemap.xml"
+node scripts/build-sitemap.mjs
+
+echo
 echo "── トップページの「投稿できます」を実装に合わせる"
 node scripts/apply-post-mode.mjs docs/homepage/index.html
 

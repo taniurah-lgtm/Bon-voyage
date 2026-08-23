@@ -139,6 +139,26 @@ function extractCaution(raw) {
   return notes.join(' / ');
 }
 
+// 「花火は8/29(土)20:00〜20:30」のように、特定の日だけのプログラムを拾う。
+// ★これを一般の開催時刻として扱うと、8/30 のカードにも「20:00〜20:30」が出て、
+//   読者のカレンダーに「8/30 20:00 花火」という無い予定が入る。
+function extractPrograms(raw, dates) {
+  const s = normalize(raw || '');
+  const out = {};
+  const re = /([^、。\s]{1,14})は\s*(\d{1,2})\/(\d{1,2})\s*\([^)]*\)\s*(\d{1,2}):(\d{2})\s*(?:~\s*(\d{1,2}):(\d{2}))?/g;
+  let m;
+  while ((m = re.exec(s)) !== null) {
+    const iso = toISO(Number(m[2]), Number(m[3]));
+    if (dates && dates.length && !dates.includes(iso)) continue;
+    out[iso] = {
+      label: m[1].replace(/^[、。]/, '').trim(),
+      start: `${pad(m[4])}:${m[5]}`,
+      end: m[6] ? `${pad(m[6])}:${m[7]}` : null,
+    };
+  }
+  return Object.keys(out).length ? out : null;
+}
+
 // 日別の例外時刻を拾う。
 //   「8/18(火)~23(日) 10:00~17:00 ※23日は16:00まで」
 //     → 23日だけ終わりが16:00。これを見落とすと、読者のカレンダーに
@@ -353,7 +373,6 @@ function mapQuery(place, name) {
   // 見出しに施設名が入っていて、場所欄にその施設名が無いなら、見出しを使う。
   //   E10「西武園ゆうえんちプール」 場所欄→「西武園駅」  … 駅ではなくプールを開きたい
   //   E9 「西東京いこいの森公園 噴水広場」 場所欄→「西東京市緑町」 … 町名では出ない
-  const FACILITY = /公園|公民館|図書館|美術館|科学館|博物館|動物園|プール|センター|ホール|アリーナ|神社|寺|モール|ランド|ゆうえんち|会館|農園|アスタ/;
   const inName = name && String(name).match(FACILITY);
   if (inName && !new RegExp(inName[0]).test(q)) {
     const fq = facilityQuery(name);
@@ -362,8 +381,16 @@ function mapQuery(place, name) {
   return q;
 }
 
+// 施設名らしい語。地図の検索語を選ぶときの目印。
+const FACILITY = /公園|公民館|図書館|美術館|科学館|博物館|動物園|プール|センター|ホール|アリーナ|神社|寺|モール|ランド|ゆうえんち|会館|農園|アスタ|駐屯地|基地/;
+
 // 見出しから地図の検索語を作る（「西東京いこいの森公園 噴水広場」→「西東京いこいの森公園」）
 function facilityQuery(name) {
+  // 見出し自体が施設名でなく、括弧の中が施設名のことがある
+  //（「アスタキッズスタンプカード(田無アスタ)」→ 検索すべきは「田無アスタ」）
+  const paren = (String(name || '').match(/[（(]([^）)]+)[）)]/) || [])[1] || '';
+  const bare = String(name || '').replace(/[（(][^）)]*[）)]/g, '').replace(/〔[^〕]*〕/g, '').trim();
+  if (paren && FACILITY.test(paren) && !FACILITY.test(bare)) return paren.split(/[・、,]/)[0].trim();
   return String(name || '')
     .replace(/[（(][^）)]*[）)]/g, '')
     .replace(/〔[^〕]*〕/g, '')
@@ -465,6 +492,17 @@ for (const file of files) {
     const confidence = (field(b.lines, ['確度']) || '').split(/\s*\/\s*ステータス/)[0].trim();
     const isStanding = /〔常設〕|^\s*常設/.test(b.name) || /常設/.test(status) || (!when && !!spanField);
 
+    // 台帳が明示的に「載せない」と書いているものは尊重する
+    const holdBack = b.lines.some((l) => /通信に載せない|掲載しない|載せないこと/.test(l));
+    if (holdBack) {
+      unresolved.push({
+        id: b.id, name: b.name,
+        reason: '台帳に「未確定のまま通信に載せない」と書かれている',
+        when: field(b.lines, ['日時']) || '',
+      });
+      continue;
+    }
+
     // 終了・見送りは載せない
     if (/終了|見送り/.test(status)) {
       unresolved.push({ id: b.id, name: b.name, reason: `ステータス「${status.split(/\s/)[0]}」のため除外`, when });
@@ -474,12 +512,18 @@ for (const file of files) {
     // 常設・季節もの（プール・水遊び・スタンプカード等）は日付を持たない。
     // カレンダーのマス目には置かず「いつでも行ける定番」として別枠に出す。
     if (isStanding) {
+      // 常設ものは「場所」欄が無いことがある。見出しの括弧と「受取」から組む。
+      // ★place を先に決めてから地図クエリを作る。見出しから作ると
+      //   「アスタキッズスタンプカード」を検索してしまう（商品名で、場所ではない）。
+      const standingPlace = field(b.lines, ['場所', '会場']) ||
+        [(b.name.match(/[（(]([^）)]+)[）)]/) || [])[1], field(b.lines, ['受取', '受け取り'])]
+          .filter(Boolean).join(' / ');
       standing.push({
         id: b.id,
         name: b.name.replace(/^〔常設〕\s*/, ''),
         span: spanField || when || '通年',
-        place: field(b.lines, ['場所', '会場']),
-        mapq: mapQuery(field(b.lines, ['場所', '会場']), b.name),
+        place: standingPlace,
+        mapq: mapQuery(standingPlace, b.name),
         summary: readerText(field(b.lines, ['内容'])),   // ★子連れ欄で埋めない（kidsNoteと二重になる）
         kidsNote: kidsBody(field(b.lines, ['子連れ'])),
         ages: parseAges(field(b.lines, ['子連れ'])),
@@ -509,7 +553,13 @@ for (const file of files) {
     //   まるごと「予定なし」になる（E39 麻布十番・E60 西東京みんなの展覧会）。
     const tentative = isDateVague(when);
     const place = field(b.lines, ['場所', '会場']);
-    const { start, end } = extractTime(when);
+    let { start, end } = extractTime(when);
+    const programs = extractPrograms(when, dates);
+    // その日だけのプログラムから拾った時刻を、全日の既定にしてはいけない
+    if (programs) {
+      const only = Object.values(programs)[0];
+      if (only && only.start === start) { start = null; end = null; }
+    }
 
     events.push({
       id: b.id,
@@ -518,6 +568,7 @@ for (const file of files) {
       span,
       when,
       exceptions: extractExceptions(when, dates),
+      programs,
       totalDates: dates.length,   // 窓で絞る前の開催日数（「この催しについて」の判定に使う）
       start,
       end,
