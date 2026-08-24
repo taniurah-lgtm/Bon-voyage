@@ -66,7 +66,10 @@
 .bvm-pop { display: flex; flex-direction: column; gap: .18rem; }
 .bvm-pop-nm { font-family: var(--maru); font-weight: 800; font-size: .96rem; }
 .bvm-pop-acc { font-size: .78rem; color: #5b6a73; }
-.bvm-pop-ages { font-family: var(--maru); font-weight: 700; font-size: .8rem; color: var(--ink-soft); }
+/* ★ふきだしの地は Leaflet 既定の白のまま（テーマ化していない）。ここに var(--ink-soft) を
+   置くと、ダークで薄灰(#AAB9C1) on 白 = 2.02:1 になる（前は #7c8a92 で 3.55:1 だった＝直して
+   悪化させた）。この節だけ生値にする。ほかの .bvm-pop-* も同じ理由で生値。 */
+.bvm-pop-ages { font-family: var(--maru); font-weight: 700; font-size: .8rem; color: #4A5A63; }
 .bvm-pop-approx { font-size: .72rem; color: #A8703C; }
 .bvm-pop-voice {
   font-size: .82rem; color: #34434C; background: #F5F2EA;

@@ -34,6 +34,16 @@
     /* 明るい地（sky-deep・leaf・marigold）に乗せる文字の色。
        定義を忘れると var(--on-sky) が継承色になり、ダークで 1.78:1 まで落ちる。 */
     --on-sky: #FFFFFF;
+    /* マリーゴールドの上／マリーゴールド色の文字に使う濃い側。
+       定義せずに var(--marigold-ink) と書いていたため、宣言ごと無効になっていた。 */
+    --marigold-ink: #8A5A12;
+    /* leaf/marigold のような明るい地に乗せる文字。両モードで濃いままにする
+       （--on-sky はライトで白になるので、明るい地には使えない） */
+    --on-bright: #123018;
+    /* ◎の強調。地の明暗で反転させる（生値だとどちらかが必ず落ちる） */
+    --leaf-ink: #2F6B34;
+    /* 生地（--ground）の上のリンク。--sky-deep だと 4.48 で 4.5 に届かない */
+    --link-ink: #226881;
     --line: #ECE7DB;
     --line-strong: #DCD5C6;
     --line-green: #06C755;
@@ -56,7 +66,7 @@
       --ink: #ECF2F4; --ink-soft: #AAB9C1; --ink-faint: #7B8C95;
       --sky: #6FBAD9; --sky-deep: #9AD4EA; --sky-wash: #1D3944;
       --marigold: #F0AE5E; --marigold-wash: #362F1F;
-      --blush: #EC9C94; --blush-wash: #362725; --leaf: #8FC489; --on-sky: #0E1A22;
+      --blush: #EC9C94; --blush-wash: #362725; --leaf: #8FC489; --on-sky: #0E1A22; --marigold-ink: #F0AE5E; --on-bright: #123018; --leaf-ink: #8FC489; --link-ink: #9AD4EA;
       --line: #293B45; --line-strong: #38505C;
       --shadow: 0 2px 6px rgba(0,0,0,.2), 0 16px 44px rgba(0,0,0,.26);
       --shadow-soft: 0 2px 22px rgba(0,0,0,.22);
@@ -78,7 +88,7 @@
     --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95;
     --sky:#6FBAD9; --sky-deep:#9AD4EA; --sky-wash:#1D3944;
     --marigold:#F0AE5E; --marigold-wash:#362F1F; --blush:#EC9C94; --blush-wash:#362725;
-    --leaf:#8FC489; --on-sky:#0E1A22; --line:#293B45; --line-strong:#38505C;
+    --leaf:#8FC489; --on-sky:#0E1A22; --marigold-ink:#F0AE5E; --on-bright:#123018; --leaf-ink:#8FC489; --link-ink:#9AD4EA; --line:#293B45; --line-strong:#38505C;
     --shadow:0 2px 6px rgba(0,0,0,.2),0 16px 44px rgba(0,0,0,.26); --shadow-soft:0 2px 22px rgba(0,0,0,.22);
     --hero-scrim-1: rgba(17,28,37,.95); --hero-scrim-2: rgba(17,28,37,.80); --hero-scrim-3: rgba(17,28,37,.22);
   }
@@ -137,11 +147,17 @@
   .agechip { font-family: var(--maru); font-weight: 700; font-size: .8rem; background: var(--blush-wash); color: var(--ink-soft); padding: .24rem .65rem; border-radius: 999px; }
 
   .issue { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; max-width: 46rem; }
-  .issue-top { background: linear-gradient(120deg, var(--sky) 0%, var(--sky-deep) 100%); color: var(--on-sky); padding: 1.2rem 1.5rem; display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .issue-top { background: linear-gradient(120deg, var(--sky-deep) 0%, var(--sky) 100%); color: var(--on-sky); padding: 1.2rem 1.5rem; display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
   .issue-top .t { font-family: var(--maru); font-weight: 800; font-size: 1.14rem; letter-spacing: .02em; }
-  .issue-top .d { font-size: .82rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  /* グラデの明るい側に白文字が乗ると 2.85:1。地に依存しないチップにする
+     （帯の色は変えたくないので、文字側の地を用意する） */
+  .issue-top .d { font-size: .82rem; font-weight: 700; font-variant-numeric: tabular-nums;
+    background: var(--surface); color: var(--sky-deep); border-radius: 999px; padding: .12rem .6rem; }
   .issue-body { padding: 1.5rem 1.5rem 1.7rem; }
   .issue-legend { font-size: .82rem; color: var(--ink-soft); border-bottom: 1px dashed var(--line-strong); padding-bottom: .9rem; margin-bottom: 1.2rem; }
+  /* 号の中の「今週末」「本日」は配信日時点の話。日付だけでは打ち消せないので明示する
+     （月曜に読むと、先週末の天気を今週として語っているように見えていた） */
+  .issue-asof { font-size: .82rem; color: var(--ink-soft); background: var(--surface-2); border-radius: 10px; padding: .5rem .7rem; margin-bottom: .8rem; line-height: 1.8; }
   .blk { margin-bottom: 1.3rem; }
   .blk:last-child { margin-bottom: 0; }
   .blk h3 { font-family: var(--maru); font-weight: 800; font-size: .99rem; margin: 0 0 .55rem; color: var(--sky-deep); display: flex; align-items: center; gap: .45rem; }
@@ -152,7 +168,7 @@
   .item .h .em { margin-right: .35rem; }
   .item .m { font-size: .9rem; color: var(--ink-soft); margin-top: .14rem; }
   .ages { display: inline-flex; gap: .55rem; margin-top: .32rem; font-size: .82rem; color: var(--ink); font-family: var(--maru); font-weight: 700; }
-  .ages b { color: var(--leaf); }
+  .ages b { color: var(--leaf-ink); }
   ul.takeaway { list-style: none; margin: .5rem 0 0; padding: 0; display: flex; flex-direction: column; gap: .55rem; }
   ul.takeaway li { position: relative; padding-left: 1.35rem; font-size: .92rem; color: var(--ink-soft); }
   ul.takeaway li::before { content: "▸"; position: absolute; left: 0; color: var(--marigold); }
@@ -185,14 +201,15 @@
   .perks-title { font-family: var(--maru); font-weight: 800; font-size: 1.02rem; color: var(--marigold-ink); margin-bottom: 1rem; display: flex; align-items: center; gap: .45rem; }
   .paid-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .9rem; }
   .paid-list li { display: flex; gap: .65rem; font-size: 1.02rem; align-items: flex-start; line-height: 1.6; }
-  .paid-list .ck { flex: none; width: 1.4rem; height: 1.4rem; border-radius: 999px; background: var(--leaf); color: var(--on-sky); display: inline-flex; align-items: center; justify-content: center; font-size: .82rem; font-weight: 800; margin-top: .12rem; }
+  .paid-list .ck { flex: none; width: 1.4rem; height: 1.4rem; border-radius: 999px; background: var(--leaf); color: var(--on-bright); display: inline-flex; align-items: center; justify-content: center; font-size: .82rem; font-weight: 800; margin-top: .12rem; }
   .paid-cta { margin-top: 1.3rem; display: flex; gap: .7rem; flex-wrap: wrap; }
   .btn-warm { background: var(--marigold); color: #3a2408; }
   .btn-warm:hover { transform: translateY(-1px); }
   .reassure { margin-top: 1rem; font-size: .88rem; color: var(--ink-soft); }
   /* 無料の道具から応援の説明への静かな1行（価格は書かない・急かさない） */
   .support-line { margin-top: 1.6rem; font-size: .85rem; line-height: 1.9; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 1rem; }
-  .support-line a { font-weight: 700; display: inline-flex; align-items: center; min-height: 44px; }
+  /* 地が --ground(#FBFAF5) なので --sky-deep では 4.48 とわずかに足りない。専用の濃い側を使う */
+  .support-line a { font-weight: 700; display: inline-flex; align-items: center; min-height: 44px; color: var(--link-ink); }
   /* ページ内の行き先。#more はページの下のほうにあり、9画面スクロールしないと
      応援という選択肢の存在に気づけなかった（あおらない代わりに、道は示す）。 */
   .pagenav { display: flex; flex-wrap: wrap; gap: .5rem; padding-top: 1.1rem; }
@@ -360,6 +377,7 @@
         <span class="d">2026 / 8 / 19（水）号</span>
       </div>
       <div class="issue-body">
+        <p class="issue-asof">この号は <b>2026 / 8 / 19（水）</b> にお届けした内容です。「今週末」「本日」はその時点のことなので、いまの予定は<a href="/calendar.html">おでかけカレンダー</a>でご確認ください。</p>
         <p class="issue-legend">〔目安〕👶あかちゃん(0-2) ／ 🧒未就学(3-6) ／ 🎒小学生　◎ぴったり ○だいじょうぶ △ひと工夫</p>
 
         <div class="blk">

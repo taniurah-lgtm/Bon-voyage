@@ -254,9 +254,10 @@
 .bvc-card.is-past { opacity: .72; border-style: dotted; }
 .bvc-past-label { margin: 0 0 .3rem; font-size: .76rem; font-weight: 700; color: var(--ink-faint); }
 
-/* 予定のある土日のマスが読みにくかった（4.18:1 / 3.17:1） */
-.bvc-cell.has.sat:not(.out) { color: #1F6280; }
-.bvc-cell.has.sun:not(.out) { color: #9E4C43; }
+/* 予定のある土日のマス。★生値で書くとダークで沈む（1.81:1 / 2.07:1 になっていた）。
+   トークンにして、地の明暗で反転させる。コントラストを直すときは必ず両方のモードを測る。 */
+.bvc-cell.has.sat:not(.out) { color: var(--sat-ink); }
+.bvc-cell.has.sun:not(.out) { color: var(--sun-ink); }
 .stamp { color: var(--ink-soft) !important; }
 
 /* 締切の申込先。電話は押してかけられる大きさにする（指で押せる44px） */
@@ -293,3 +294,6 @@
 
 /* 雨天順延日。開催日ではないのでマス目には置かないが、読む人には伝える */
 .bvc-rain { font-size: .82rem; color: var(--sky-deep); margin-top: .3rem; font-weight: 700; }
+
+/* 申込先（電話・メール）。カード側にも出す。押せる大きさは締切ブロックと同じ */
+.bvc-apply { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .4rem; }

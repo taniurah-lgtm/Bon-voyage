@@ -102,6 +102,12 @@
     // ★開催日が多い催しの子連れメモは催し全体の話。その日の説明として読むと矛盾する
     //   （8/29 の説明欄に「お盆期間の平日に行けるのが強み」と入っていた）。
     //   カード側は「この催しについて」と付けて回避しているので、説明欄も揃える。
+    if (ev.rainDates && ev.rainDates.length) {
+      out.push('☔ 雨天のときは ' + ev.rainDates.map(fmtDay).join('・') + ' に順延');
+    }
+    if (ev.contact && (ev.contact.tel || ev.contact.mail)) {
+      out.push('申込・問合せ: ' + [ev.contact.who, ev.contact.tel, ev.contact.mail].filter(Boolean).join(' '));
+    }
     if (ev.kidsNote) {
       out.push(((ev.totalDates || (ev.dates || []).length) > 3 ? 'この催しについて: ' : '') + ev.kidsNote);
     }
@@ -350,6 +356,20 @@
     var dl = ev.deadline
       ? '<p class="bvc-deadline">⏳ 申込 ' + esc(fmtDay(ev.deadline.date)) + ' まで</p>'
       : '';
+    // 申込先。日から探した人にも、締切ブロックと同じものが届くようにする。
+    var applyTo = '';
+    if (ev.contact && (ev.contact.tel || ev.contact.mail)) {
+      applyTo = '<p class="bvc-apply">' +
+        (ev.contact.tel
+          ? '<a class="bvc-dltel" href="tel:' + esc(ev.contact.tel.replace(/[^0-9+]/g, '')) + '">☎ ' +
+            esc((ev.contact.who ? ev.contact.who + ' ' : '') + ev.contact.tel) + '</a>'
+          : '') +
+        (ev.contact.mail
+          ? '<a class="bvc-dltel" href="mailto:' + esc(ev.contact.mail) + '?subject=' +
+            encodeURIComponent(ev.name + ' 参加申込') + '">✉ ' + esc(ev.contact.mail) + '</a>'
+          : '') +
+        '</p>';
+    }
     return (
       '<article class="bvc-card' + (ev.tentative ? ' is-tentative' : '') + (past ? ' is-past' : '') + '">' +
       (past ? '<p class="bvc-past-label">この日は終わりました</p>' : '') +
@@ -379,7 +399,7 @@
         ? '<p class="bvc-rain">☔ 雨天のときは ' +
           ev.rainDates.map(function (d) { return esc(fmtDay(d)); }).join('・') + ' に順延</p>'
         : '') +
-      dl +
+      dl + (past ? '' : applyTo) +
       '<div class="bvc-btns">' + links + '</div>' +
       '</article>'
     );
@@ -729,6 +749,12 @@
           if (e.contact && e.contact.tel) {
             tel = '<a class="bvc-dltel" href="tel:' + esc(e.contact.tel.replace(/[^0-9+]/g, '')) + '">' +
               '☎ ' + esc((e.contact.who ? e.contact.who + ' ' : '') + e.contact.tel) + '</a>';
+          }
+          // ★メールで申し込む回は、宛先が無いと締切を知らせる意味がない
+          //   （「電子メールで申し込め」と書いてあるのに宛先がどこにも無かった）
+          if (e.contact && e.contact.mail) {
+            tel += '<a class="bvc-dltel" href="mailto:' + esc(e.contact.mail) +
+              '?subject=' + encodeURIComponent(e.name + ' 参加申込') + '">✉ ' + esc(e.contact.mail) + '</a>';
           }
           return '<div class="bvc-dlrow' + (compact ? ' is-compact' : '') + '"><span class="bvc-dldate">' + esc(fmtDay(e.deadline.date)) +
             (days === 0 ? '<b>今日</b>' : '<b>あと' + days + '日</b>') + '</span>' +

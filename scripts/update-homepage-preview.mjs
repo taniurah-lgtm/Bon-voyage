@@ -140,6 +140,7 @@ ${items.join('\n')}
         <span class="d">${esc(dateLabel)}</span>
       </div>
       <div class="issue-body">
+        <p class="issue-asof">この号は <b>${esc(dateLabel.replace(/号$/, ''))}</b> にお届けした内容です。「今週末」「本日」はその時点のことなので、いまの予定は<a href="/calendar.html">おでかけカレンダー</a>でご確認ください。</p>
         <p class="issue-legend">〔目安〕👶あかちゃん(0-2) ／ 🧒未就学(3-6) ／ 🎒小学生　◎ぴったり ○だいじょうぶ △ひと工夫</p>
 
 ${blocks.join('\n\n')}

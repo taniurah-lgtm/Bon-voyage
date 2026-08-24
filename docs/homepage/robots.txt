@@ -2,5 +2,12 @@ User-agent: *
 Allow: /
 Disallow: /f/
 Disallow: /m/
+# 印刷用の版下・内部用ページ（サイトの一部ではない。各ファイルにも noindex を入れてある）
+Disallow: /flyer
+Disallow: /poster
+Disallow: /pop-
+Disallow: /meishi-
+Disallow: /ig-story.html
+Disallow: /x-header.html
 
 Sitemap: https://bonvoya.nicomaru.tokyo/sitemap.xml

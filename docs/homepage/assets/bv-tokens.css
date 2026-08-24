@@ -4,6 +4,11 @@
 :root {
   --ground:#FBFAF5; --surface:#FFFFFF; --surface-2:#F5F2EA;
   --ink:#34434C; --ink-soft:#63727B; --ink-faint:#97A2AA;
+  /* 予定のある土日のマスの文字色。地の明暗で反転させる必要があるのでトークンにする。
+     生値で書いていたため、ライトだけ測って直した結果、ダークで 1.81:1 / 2.07:1 になっていた。 */
+  --sat-ink:#1F6280; --sun-ink:#9E4C43;
+  /* 生地（--ground）の上のリンク。--sky-deep だと 4.48 で 4.5 に届かない */
+  --link-ink:#226881;
   --sky:#4FA3C4; --sky-deep:#2C7C9E; --sky-wash:#E9F4F7;
   --marigold:#EBA24A; --marigold-wash:#FBEEDA; --leaf:#74AE71;
   /* --marigold は面に塗る色。文字に使うと白地で2.1:1しかないので、文字用は濃いほうを使う */
@@ -22,7 +27,7 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --ground:#131F28; --surface:#1A2831; --surface-2:#21333D;
-    --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95;
+    --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95; --sat-ink:#8CC3DE; --sun-ink:#E8A39B; --link-ink:#9AD4EA; --sat-ink:#8CC3DE; --sun-ink:#E8A39B; --link-ink:#9AD4EA;
     --sky:#6FBAD9; --sky-deep:#9AD4EA; --sky-wash:#1D3944;
     --marigold:#F0AE5E; --marigold-wash:#362F1F; --leaf:#8FC489;
     --marigold-ink:#F0AE5E; --on-sky:#0E1A22; --danger-ink:#F2938A;
@@ -31,7 +36,7 @@
 }
 :root[data-theme="dark"] {
   --ground:#131F28; --surface:#1A2831; --surface-2:#21333D;
-  --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95;
+  --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95; --sat-ink:#8CC3DE; --sun-ink:#E8A39B; --link-ink:#9AD4EA;
   --sky:#6FBAD9; --sky-deep:#9AD4EA; --sky-wash:#1D3944;
   --marigold:#F0AE5E; --marigold-wash:#362F1F; --marigold-ink:#F0AE5E; --on-sky:#0E1A22; --danger-ink:#F2938A; --leaf:#8FC489;
   --line:#293B45; --line-strong:#38505C; --shadow-soft:0 2px 22px rgba(0,0,0,.22);
@@ -66,4 +71,4 @@ footer .fmark { font-family: var(--maru); font-weight: 800; color: var(--ink-sof
   margin-top: 1.6rem; font-size: .85rem; line-height: 1.9; color: var(--ink-soft);
   border-top: 1px solid var(--line); padding-top: 1rem;
 }
-.support-line a { font-weight: 700; display: inline-flex; align-items: center; min-height: 44px; }
+.support-line a { font-weight: 700; display: inline-flex; align-items: center; min-height: 44px; color: var(--link-ink); }

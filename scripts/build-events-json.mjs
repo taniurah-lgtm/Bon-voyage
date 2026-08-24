@@ -283,16 +283,27 @@ function extractLastEntry(raw) {
 
 // 問合せ先の電話を拾う。締切を知らせるとき、申込フォームのURLが無い催しでも
 // 電話が分かれば申し込める（台帳には「問合せ: 文化スポーツ課 042-346-9612」がある）。
+// ★電話番号だけでなくメールも拾う。
+//   「電子メールで申し込め」と書いてある回（E49 初心者ラグビー教室）で、
+//   台帳にはメールアドレスがあるのにページのどこにも出ていなかった。
+//   「締切に間に合わせる」が有料の柱なので、申込先が出ないのは致命的。
 function extractContact(lines) {
+  let out = null;
   for (const l of lines) {
     if (!/問合せ|問い合わせ|申込|連絡/.test(l)) continue;
-    const m = l.match(/0\d{1,4}-\d{2,4}-\d{3,4}/);
-    if (m) {
-      const who = (l.match(/(?:問合せ|問い合わせ)\s*[:：]\s*([^0-9]{1,24})/) || [])[1] || '';
-      return { tel: m[0], who: who.replace(/\*\*/g, '').trim() };
-    }
+    const tel = (l.match(/0\d{1,4}-\d{2,4}-\d{3,4}/) || [])[0] || '';
+    const mail = (l.match(/[\w.+-]+@[\w-]+\.[\w.-]+/) || [])[0] || '';
+    if (!tel && !mail) continue;
+    // 「問合せ: wakuwakumamafes@gmail.com」のように担当名が無い回があるので、
+    // メールのローカル部を担当名として拾わないようにする。
+    let who = (l.match(/(?:問合せ|問い合わせ)\s*[:：]\s*([^0-9@]{1,24})/) || [])[1] || '';
+    if (mail && who && mail.startsWith(who.trim())) who = '';
+    out = out || { tel: '', mail: '', who: who.replace(/\*\*/g, '').replace(/[\s/]+$/, '').trim() };
+    if (tel && !out.tel) out.tel = tel;
+    if (mail && !out.mail) out.mail = mail;
+    if (out.tel && out.mail) break;
   }
-  return null;
+  return out;
 }
 
 // 子連れ欄「👶○ 🧒◎ 🎒◎」を3カテゴリに割る
@@ -761,6 +772,18 @@ const firm = events.filter((e) => !e.tentative).length;
 console.log(`wrote ${OUT}`);
 console.log(`  確定 ${firm}件 / 暫定 ${events.length - firm}件 / 常設・季節 ${standing.length}件 / 載せられなかったもの ${unresolved.length}件`);
 for (const u of unresolved) console.log(`  - ${u.id} ${u.name}: ${u.reason}${u.when ? ` 「${u.when}」` : ''}`);
+
+// ---- 場所の行が無いものを出す（黙って空欄にしない）-----------------------------
+// 場所が無いと、カードに会場が出ず、カレンダー登録の場所欄にも催し名が入るだけになる
+// （スマホのナビが使えない）。台帳に足せば直るので、毎回名指しで出す。
+{
+  const noPlace = events.filter((e) => !e.place);
+  if (noPlace.length) {
+    console.log(`  ※ 場所の行が無いもの ${noPlace.length}件（登録した予定の場所欄に会場が入りません）:`);
+    for (const e of noPlace) console.log(`     ${e.id} ${e.name}`);
+    console.log('     → 台帳に「- 場所: 〜」を足すと直る。');
+  }
+}
 
 // ---- 「公式で確認済み」なのに落ちたものは、書式の取りこぼしを疑う ---------------
 // 会員ページへの写し漏れは見張っていたが、その1段上（台帳→JSON）の取りこぼしは

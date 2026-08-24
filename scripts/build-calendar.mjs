@@ -238,7 +238,7 @@ ${(() => {
 })()}
   </div>
 
-  <p class="stamp">台帳の更新日: ${esc(src.generated)}　※日程・料金は変わることがあります。おでかけ前に各公式でご確認ください。</p>
+  <p class="stamp">情報の更新日: ${esc(src.generated)}　※日程・料金は変わることがあります。おでかけ前に各公式でご確認ください。</p>
   <div class="nav-pills">
     <a href="/">通信について</a>
     <a href="/map.html">おでかけマップ</a>

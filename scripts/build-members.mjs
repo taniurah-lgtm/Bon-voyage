@@ -92,12 +92,13 @@ const renkyu = !renkyuLive ? '' : `
 // 号の本文に残る内部用語を、読者向けの言い方に直す。
 // 「巡回」は運営側の作業名、「★駅前・地元」は台帳の絞り込みマーカーで、
 // どちらも読む人には意味が通らない（原文をそのまま貼っているので残っていた）。
+// 読者は「巡回」も「調べもの」もしない。運営側の作業名が残らないようにする。
 const WORDS = [
-  [/毎月中旬の巡回で/g, '毎月中旬の調べもので'],
+  [/毎月中旬の巡回で/g, '毎月中旬に'],
   [/来月中旬の巡回で/g, '来月中旬に'],
-  [/次回の巡回で/g, '次回の調べもので'],
-  [/巡回で/g, '調べもので'],
-  [/巡回時に/g, '調べもののときに'],
+  [/次回の巡回で/g, '次回のお便りで'],
+  [/巡回で/g, 'こちらで'],
+  [/巡回時に/g, 'おでかけ前に'],
   [/\s*★[^\s、。]*(?=\s|$)/g, ''],
 ];
 const fixWords = (t) => WORDS.reduce((acc, [re, to]) => acc.replace(re, to), t);
@@ -149,11 +150,18 @@ const campSection = (() => {
   //   イベント側には FORBIDDEN の番兵があるのに、camp.md を直読みする経路には
   //   何も無く、17か所ぜんぶに「確度: 高 / ステータス: 候補」が露出していた。
   const CAMP_DROP = /^\s*[-*+]\s*(確度|ステータス|出典|備考|メモ)\s*[:：]/;
-  const CAMP_PRIVATE = /5人家族|わが家|うちの子|施主|本命|狙い目/;
+  // ★行ごと落としてはいけない。落とすべきは「わが家は5人だからちょうど上限」という
+  //   家庭固有の解釈だけで、「1組最大5名(未就学児含む)」という施設の規約や
+  //   「荒川は浅瀬でライフジャケット」という安全注意は読者に必要な情報。
+  //   行ごと消していたため、C8 から予約上限と川遊びの注意が両方消えていた。
+  const CAMP_PRIVATE_PHRASE = /[=＝][^。、]*?(?:5人家族|わが家|うちの子)[^。、]*/g;
+  const CAMP_PRIVATE_LINE = /施主/;
   const stripPrivate = (t) => t
     // 「/ 確度: 高 / ステータス: 候補」のように行末にぶら下がっている形も落とす
     .replace(/\s*\/?\s*(確度|ステータス)\s*[:：][^\/]*(?=\/|$)/g, '')
-    .replace(/\s*\/\s*$/, '')
+    .replace(CAMP_PRIVATE_PHRASE, '')
+    // ★URL末尾の「/」を食わないよう、区切りとしての「 / 」だけを狙う
+    .replace(/\s+\/\s*$/, '')
     .trim();
   const spots = [];
   let cur = null;
@@ -171,7 +179,7 @@ const campSection = (() => {
       cur.raw.push(body);                       // 見送り判定にはもとの文を使う
       if (CAMP_DROP.test(l)) continue;
       const cleaned = stripPrivate(body);
-      if (!cleaned || CAMP_PRIVATE.test(cleaned)) continue;
+      if (!cleaned || CAMP_PRIVATE_LINE.test(cleaned)) continue;
       cur.body.push(cleaned);
     }
   }

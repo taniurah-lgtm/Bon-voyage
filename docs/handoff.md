@@ -391,6 +391,8 @@ docs/line-setup.md docs/share-kit.md
 docs/handoff.md                ← このファイル
 docs/homepage/                 サイト一式＋印刷物のHTML/PDF/PNG
 docs/homepage/flyer-a4-riso.html  リソ2色刷りA4チラシの版下（設計・検版用）
+docs/print/                    名刺の版下（個人の携帯番号が入るので公開フォルダに置かない）
+scripts/check-contrast.mjs     文字色のコントラストをライト/ダーク両方で測る（片側だけ直す事故を3回やった）
 docs/apo-list.md               アポリスト30件・実績・回る順番
 docs/asupia-registration.md    あすぴあ登録（完了・第254号）
 docs/paid-conversion.md        課金転換10案 ← 別会話で使う
