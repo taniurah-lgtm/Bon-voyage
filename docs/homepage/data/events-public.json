@@ -216,6 +216,41 @@
    "deadline": null
   },
   {
+   "id": "E68",
+   "name": "中央公民館 令和8年度「友・遊こどもまつり」",
+   "dates": [
+    "2026-08-29"
+   ],
+   "span": null,
+   "when": "8/29(土) 10:00〜14:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "14:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "中央公民館(小川町2-1325) — 館内まるごと使う。1階〜地下〜2階に分散",
+   "mapq": "小平市中央公民館",
+   "summary": "",
+   "kidsNote": "プラレール・おはなし会・室内アソビバ。屋内・無料・出入り自由・4時間半の会期。下の子が飽きたら抜けられるので2歳連れでも成立する",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "無料",
+   "target": "市内在住の小・中学生。保護者同伴なら未就学児も可",
+   "url": "https://www.city.kodaira.tokyo.jp/event/129/129131.html",
+   "tentative": false,
+   "deadline": null
+  },
+  {
    "id": "E60",
    "name": "西東京 みんなの展覧会&イベント(田無アスタ)",
    "dates": [
@@ -257,6 +292,79 @@
    "cost": "",
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260831.pdf",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E81",
+   "name": "上宿公民館 子育て支援講座「親子の絆を深めるタッチケア」",
+   "dates": [
+    "2026-09-02"
+   ],
+   "span": null,
+   "when": "未公表(詳細ページは9/2公開予定)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "上宿公民館",
+   "mapq": "上宿公民館",
+   "summary": "",
+   "kidsNote": "乳児connect系。保護者向け",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": null,
+    "elem": null
+   },
+   "cost": "",
+   "target": "",
+   "url": "https://www.city.kodaira.tokyo.jp/kurashi/043/043741.html",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-09-30",
+    "raw": "申込締切: 9/30(水)"
+   }
+  },
+  {
+   "id": "E71",
+   "name": "児童館「あつまれふたご」(小川町二丁目児童館・おがにん)",
+   "dates": [
+    "2026-09-05"
+   ],
+   "span": null,
+   "when": "9/5(土)・9/19(土) ※時間は館の予定表・おたよりで要確認",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "小川町二丁目児童館",
+   "mapq": "小川町二丁目児童館",
+   "summary": "",
+   "kidsNote": "該当家庭には代替の効かない場",
+   "caution": "時間は館の予定表・おたよりで要確認",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": null,
+    "elem": null
+   },
+   "cost": "無料(児童館行事) / 対象: 双子・多胎児の親子",
+   "target": "",
+   "url": "https://kodaji.ashita-ba.co.jp/",
    "tentative": false,
    "deadline": null
   },
@@ -303,6 +411,41 @@
    }
   },
   {
+   "id": "E72",
+   "name": "児童館「みんなでドッヂビー(1・2・3年)」(花小金井南児童館・はなみん)",
+   "dates": [
+    "2026-09-09"
+   ],
+   "span": null,
+   "when": "9/9(水) ※時間は要確認",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "花小金井南児童館(花小金井南町3-3-17 コミュニティセンター2階) ☎042-461-9988",
+   "mapq": "小平市花小金井南児童館 ☎042-461-9988",
+   "summary": "",
+   "kidsNote": "無料・徒歩圏・屋内。雨の日の行き先として最強クラス",
+   "caution": "時間は要確認",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "9:00〜18:00 / 休館: 第1・第3火曜",
+   "ages": {
+    "baby": null,
+    "pre": null,
+    "elem": "◎"
+   },
+   "cost": "無料 / 対象: 小学1〜3年生",
+   "target": "",
+   "url": "https://kodaji.ashita-ba.co.jp/",
+   "tentative": false,
+   "deadline": null
+  },
+  {
    "id": "E50",
    "name": "ピックルボール体験会・交流大会",
    "dates": [
@@ -345,6 +488,153 @@
    }
   },
   {
+   "id": "E69",
+   "name": "交通安全講習会(中央公民館)",
+   "dates": [
+    "2026-09-12"
+   ],
+   "span": null,
+   "when": "9/12(土) 14:00〜(受付13:30〜)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "14:00",
+   "end": null,
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "中央公民館 2階ホール(小川町2-1325)",
+   "mapq": "小平市中央公民館ホール",
+   "summary": "交通安全DVDの上映、交通ルール・事故傾向の講話。参加者に交通安全グッズを配布",
+   "kidsNote": "30分以上の座学。自転車デビュー前後の家庭に実用的。グッズ配布が子どもに効く",
+   "caution": "",
+   "contact": {
+    "tel": "042-343-0110",
+    "mail": "",
+    "who": "小平警察署 交通総務係"
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "無料 / 事前申込: 不要",
+   "target": "市公式の対象欄に 「小学生以下・小学生・中高生・大人・高齢者・親子」 と明記",
+   "url": "https://www.city.kodaira.tokyo.jp/event/129/129344.html",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E73",
+   "name": "児童館「ボルダリング」(小川町二丁目児童館・おがにん)",
+   "dates": [
+    "2026-09-12"
+   ],
+   "span": null,
+   "when": "9/12(土) ※時間・対象学年は要確認",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "小川町二丁目児童館 / 費用: 無料",
+   "mapq": "小川町二丁目児童館",
+   "summary": "",
+   "kidsNote": "体を使う屋内行事。雨天でも実施できる",
+   "caution": "時間・対象学年は要確認",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": null,
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "",
+   "url": "https://kodaji.ashita-ba.co.jp/",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E74",
+   "name": "国営昭和記念公園「コスモスまつり2026」",
+   "dates": [
+    "2026-09-12"
+   ],
+   "span": {
+    "from": "2026-09-12",
+    "to": "2026-10-25"
+   },
+   "when": "9/12(土)〜10/25(日) — 連休中はまさに見頃の入り",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "国営昭和記念公園(立川市緑町3173)",
+   "mapq": "国営昭和記念公園",
+   "summary": "花の丘のキバナコスモス'レモンブライト'約400万本 / 原っぱ南花畑 秋のブーケガーデン約20品種20万本 / 原っぱ東花畑 コスモス'センセーション'＋赤ソバ / ハーブの丘 コキア1,800株",
+   "kidsNote": "広い・トイレ多い・ベビーカーOK。ただし花畑まで距離があるので園内バス/レンタサイクル前提で案内する",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "まつり自体の参加は無料。入園料・駐車料は別途 ← 配信前に入園料を公式で再確認する",
+   "target": "",
+   "url": "https://www.showakinen-koen.jp/event/56303/",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E76",
+   "name": "江戸東京たてもの園 伝統工芸の実演(東京手描友禅・江戸筆)",
+   "dates": [
+    "2026-09-12"
+   ],
+   "span": null,
+   "when": "9/12(土)・13(日) 10:30〜16:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "10:30",
+   "end": "16:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "江戸東京たてもの園 / 費用: 要入園料(小学生以下無料)",
+   "mapq": "江戸東京たてもの園",
+   "summary": "",
+   "kidsNote": "職人の手元を間近で見られる。滞在時間の調整が効く",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": null,
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "",
+   "url": "https://www.tatemonoen.jp/event/schedule/2026/schedule789.php",
+   "tentative": false,
+   "deadline": null
+  },
+  {
    "id": "E51",
    "name": "中央図書館ギャラリー展示「クラシックポップアップ絵本展」",
    "dates": [],
@@ -385,6 +675,42 @@
    "deadline": null
   },
   {
+   "id": "E75",
+   "name": "多摩六都科学館「第13回全国KAPLA®大会に応募しよう!」",
+   "dates": [],
+   "span": {
+    "from": null,
+    "to": "2026-09-23"
+   },
+   "when": "〜9/23(水)。9月の実施日は 9/4〜6・9/8〜13・9/15〜23、各日 10:00〜16:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 0,
+   "start": "10:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "多摩六都科学館(西東京市芝久保町5-10-64) — 花小金井から自転車・バス圏",
+   "mapq": "多摩六都科学館",
+   "summary": "木製ブロック KAPLA® を自由に積んで造形。作品を全国大会に応募できる",
+   "kidsNote": "見てるだけでも。屋内・冷暖房あり・時間制限がゆるい。連休の雨予報の日に強い",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "要入館料(展示室観覧料。プラネタリウムは別料金)",
+   "target": "",
+   "url": "https://www.tamarokuto.or.jp/calendar/",
+   "tentative": false,
+   "deadline": null
+  },
+  {
    "id": "E49",
    "name": "初心者ラグビー教室(小平市ラグビーフットボール協会)",
    "dates": [],
@@ -415,6 +741,19 @@
    "deadline": {
     "date": "2026-09-05",
     "raw": "9/5(土)までに希望日(①・②)を申込フォームまたは電話 042-388-0050"
+   },
+   "deadlineOnly": true
+  },
+  {
+   "id": "E70",
+   "name": "小川公民館 子育て支援講座「子育ては私のキャリア」【保育付き】",
+   "dates": [],
+   "when": "9/30(水)〜12/2(水) 毎週水曜 10:00〜12:00 全10回",
+   "url": "https://www.city.kodaira.tokyo.jp/event/128/128376.html",
+   "contact": null,
+   "deadline": {
+    "date": "2026-09-04",
+    "raw": "申込締切: 9/4(金) 申込フォームまたは電話(月曜・日曜・祝日を除く)"
    },
    "deadlineOnly": true
   }
@@ -479,5 +818,5 @@
    "url": "https://www.asta.co.jp/update/kids_stamp_2025.pdf"
   }
  ],
- "beyond": 5
+ "beyond": 9
 }

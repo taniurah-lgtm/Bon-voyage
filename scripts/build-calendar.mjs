@@ -58,8 +58,21 @@ const beyond = src.events.filter(
   (e) => !e.tentative && (e.dates || []).some((d) => d > horizon)
 ).length;
 
-// 会期もの（「〜10/14まで」）は期間が窓に重なっていれば公開してよい
-const spans = src.events.filter((e) => e.span && (!e.span.to || e.span.to >= today));
+// 会期もの（「〜10/14まで」のように期間で開いているもの）。
+// ★まだ始まっていない会期は公開しない。窓は「今日から2週間」なので、
+//   9/30 開始のものを 8/29 に出すのは窓の外の予定を渡すのと同じ（無料/有料の境目）。
+// ★公開する会期ものの dates は窓の中だけに絞る。絞らないと会期を展開した
+//   日付がそのまま公開データに入り、先の日程が漏れる（実際に 9/30 が漏れて
+//   workflow の窓の検査で止まった）。
+// ★窓の中に日付があるものは pub にもう入っている。両方に入れると公開データに
+//   同じIDが2件並び、カレンダーのマス目に同じカードが2枚出る（E74で発生していた）。
+//   pub 側の写しにも span は残っているので、会期ものの節にはそちらから出る。
+const spanPubIds = new Set(pub.map((e) => e.id));
+const spans = src.events
+  .filter((e) => e.span && (!e.span.to || e.span.to >= today))
+  .filter((e) => !e.span.from || e.span.from <= horizon)
+  .filter((e) => !spanPubIds.has(e.id))
+  .map((e) => ({ ...e, dates: (e.dates || []).filter(inWindow) }));
 
 // 締切が窓の中にあるものは、イベント本体が窓の外でも「名前と締切日だけ」を公開する。
 // 無料の役割は「知る」なので、明日締切のものを知らせないのは筋が通らない。
