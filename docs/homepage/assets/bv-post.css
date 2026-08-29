@@ -1,0 +1,88 @@
+/* ぼんぼやーじゅ通信 — 投稿フォームの見た目。色はページ側の変数に乗る。 */
+
+.bvp, .bvp-done {
+  background: var(--surface); border: 1px solid var(--line-strong);
+  border-radius: var(--radius, 20px); padding: 1.5rem 1.4rem;
+  box-shadow: var(--shadow-soft);
+}
+.bvp-h { font-family: var(--maru); font-weight: 800; font-size: 1.18rem; margin: 0 0 .6rem; }
+.bvp-lead { color: var(--ink-soft); font-size: .94rem; line-height: 1.8; margin: 0 0 1.2rem; }
+.bvp-lead b { color: var(--ink); }
+
+.bvp-lb {
+  display: block; font-family: var(--maru); font-weight: 800; font-size: .88rem;
+  margin: 1rem 0 .3rem; color: var(--ink);
+}
+.bvp-req {
+  font-size: .68rem; font-weight: 700; color: var(--on-sky); background: var(--sky-deep);
+  border-radius: 999px; padding: .05rem .45rem; margin-left: .3rem; vertical-align: .1em;
+}
+.bvp-in {
+  width: 100%; font-family: var(--body); font-size: 1rem; line-height: 1.7;
+  padding: .7rem .8rem; border: 1px solid var(--line-strong); border-radius: 12px;
+  background: var(--ground); color: var(--ink);
+}
+.bvp-in:focus-visible { outline: 3px solid var(--sky); outline-offset: 1px; border-color: var(--sky); }
+.bvp-ta { resize: vertical; min-height: 5.2rem; }
+.bvp-file { padding: .55rem .6rem; font-size: .88rem; }
+.bvp-hint { font-size: .8rem; color: var(--ink-soft); margin: .3rem 0 0; line-height: 1.7; }
+
+.bvp-count { font-size: .8rem; color: var(--ink-soft); margin: .3rem 0 0; text-align: right; font-variant-numeric: tabular-nums; }
+.bvp-count.is-over { color: var(--marigold-ink); font-weight: 700; }
+
+/* ---- 合言葉 ---- */
+.bvp-gate {
+  margin: 1.4rem 0 0; border: 1px solid var(--line); border-radius: 14px;
+  padding: .2rem .9rem; background: var(--surface-2);
+}
+.bvp-gate > summary {
+  font-family: var(--maru); font-weight: 700; font-size: .88rem; color: var(--sky-deep);
+  cursor: pointer; padding: .7rem 0; list-style: none;
+}
+.bvp-gate > summary::marker, .bvp-gate > summary::-webkit-details-marker { display: none; }
+.bvp-gate > summary::before { content: "＋ "; }
+.bvp-gate[open] > summary::before { content: "− "; }
+.bvp-gate[open] { padding-bottom: 1rem; }
+.bvp-passrow { display: flex; gap: .5rem; align-items: stretch; }
+.bvp-passrow .bvp-in { flex: 1 1 auto; }
+.bvp-gate-msg { font-size: .84rem; margin: .5rem 0 0; min-height: 1.2em; }
+.bvp-gate-msg.is-ok { color: #3F7F52; font-weight: 700; }
+.bvp-gate-msg.is-ng { color: #B4453C; }
+.bvp-preview { margin-top: .6rem; font-size: .8rem; color: var(--ink-soft); }
+.bvp-preview img { display: block; max-width: 100%; border-radius: 12px; margin-bottom: .3rem; }
+
+/* ---- 同意と送信 ---- */
+.bvp-check {
+  display: flex; gap: .55rem; align-items: flex-start;
+  margin: 1.4rem 0 0; font-size: .88rem; color: var(--ink-soft); line-height: 1.75;
+}
+.bvp-check input { margin-top: .42rem; width: 1.15rem; height: 1.15rem; flex: none; accent-color: var(--sky-deep); }
+.bvp-actions { margin: 1.2rem 0 0; display: flex; flex-wrap: wrap; gap: .6rem; }
+.bvp-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .3rem;
+  font-family: var(--maru); font-weight: 800; font-size: .95rem;
+  border-radius: 999px; padding: .72rem 1.4rem; cursor: pointer; min-height: 48px;
+  border: 1px solid var(--line-strong); background: var(--surface); color: var(--sky-deep);
+}
+.bvp-btn-go { background: var(--marigold); color: #3a2408; border-color: var(--marigold); }
+.bvp-btn-go:disabled { opacity: .55; cursor: default; }
+.bvp-btn-sub { font-size: .85rem; padding: .6rem 1rem; }
+.bvp-btn:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+
+.bvp-msg { font-size: .88rem; margin: .9rem 0 0; line-height: 1.8; min-height: 1.2em; }
+.bvp-msg.is-ng { color: #B4453C; }
+.bvp-offline { display: block; margin-top: .6rem; }
+.bvp-fine { font-size: .8rem; color: var(--ink-soft); line-height: 1.8; margin: 1.3rem 0 0; }
+
+/* ---- 送れたあとの応援のお願い（書く前には出さない） ---- */
+.bvp-nudge {
+  margin: 1.3rem 0 0; background: var(--sky-wash); border: 1px solid var(--line);
+  border-radius: 16px; padding: 1.1rem 1.2rem;
+}
+.bvp-nudge > p:first-child { font-family: var(--maru); font-weight: 800; font-size: .96rem; margin: 0 0 .4rem; }
+.bvp-nudge-body { font-size: .9rem; color: var(--ink-soft); line-height: 1.85; margin: 0; }
+.bvp-nudge-body b { color: var(--ink); }
+.bvp-nudge-link {
+  display: inline-block; margin-top: .8rem; font-family: var(--maru);
+  font-weight: 800; font-size: .9rem; text-decoration: none;
+}

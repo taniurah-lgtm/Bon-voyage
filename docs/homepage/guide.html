@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>花小金井 子連れおでかけガイド｜ぼんぼやーじゅ通信</title>
 <meta name="description" content="花小金井・小平・西東京の子連れおでかけスポットまとめ。じゃぶじゃぶ池・大きな公園・図書館・児童館・電車でおでかけ・雨の日の室内あそびなど、地元の家族向けガイド。">
@@ -87,7 +88,7 @@
   .places a.o { color: var(--marigold); }
   .places a:hover { text-decoration: underline; }
   .spot .desc { font-size: .96rem; color: var(--ink-soft); margin-top: .35rem; }
-  .spot .ages { margin-top: .5rem; font-family: var(--maru); font-weight: 700; font-size: .86rem; color: var(--ink-faint); display: inline-flex; gap: .6rem; }
+  .spot .ages { margin-top: .5rem; font-family: var(--maru); font-weight: 700; font-size: .86rem; color: var(--ink); display: inline-flex; gap: .6rem; }
   .spot .ages b { color: var(--leaf); }
   .localtip { margin-top: .75rem; background: var(--marigold-wash); border: 1px solid var(--line-strong); border-radius: 12px; padding: .7rem .85rem; }
   .lt-h { font-family: var(--maru); font-weight: 800; font-size: .74rem; letter-spacing: .08em; color: var(--marigold); margin-bottom: .45rem; }
@@ -105,6 +106,9 @@
 
   .gfoot { margin-top: 2.4rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-soft); padding: 1.8rem 1.5rem; text-align: center; }
   .gfoot p { color: var(--ink-soft); max-width: 30rem; margin: 0 auto 1.2rem; }
+  /* 無料でしか触らない人にも、応援という選択肢があることだけ静かに置く（価格は書かない） */
+  .support-line { margin: 1.4rem auto 0; max-width: 30rem; font-size: .85rem; line-height: 1.9; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 1rem; }
+  .support-line a { font-weight: 700; display: inline-flex; align-items: center; min-height: 44px; color: #226881; }
   .btns { display: flex; flex-wrap: wrap; gap: .7rem; justify-content: center; }
   .btn { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--maru); font-weight: 800; font-size: 1rem; padding: .8rem 1.4rem; border-radius: 999px; text-decoration: none; border: 1px solid transparent; }
   .btn-line { background: var(--line-green); color: #fff; }
@@ -119,6 +123,9 @@
     .wrap, .ghead-in { padding-left: 1.15rem; padding-right: 1.15rem; }
     .spot .desc, .tips li, .gfoot p { font-size: 1.02rem; }
   }
+
+  /* 📍地図・🔗公式のリンクが27pxで、指で押しづらかった */
+  .bv-tapfix, .lk, .links a, .spot a { min-height: 44px; display: inline-flex; align-items: center; }
 </style>
 </head>
 <body>
@@ -471,6 +478,8 @@
       <a class="btn btn-line" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINEで受け取る（無料）</a>
       <a class="btn btn-ghost" href="https://bonvoya.nicomaru.tokyo/">ホームページを見る</a>
     </div>
+    <p class="support-line">このガイドは、どなたでも無料でお使いいただけます。
+      続けていくための<a href="/#more">応援のしかた</a>もご用意しています。</p>
   </div>
 </main>
 
@@ -478,8 +487,8 @@
   <div class="fmark">ぼんぼやーじゅ通信</div>
   花小金井エリアの子育て家庭のための、週末おでかけ便。<br>
   ※掲載スポットの内容・営業は変わることがあります。おでかけ前に各公式サイトでご確認ください。<br>
-  <a href="map.html">🗺 みんなのおでかけマップ</a>（このガイドに、地元の家庭の声を足していく地図です）<br>
-  <a href="tokushoho.html">特定商取引法に基づく表記・免責事項</a><br>
+  <a href="/map.html">🗺 みんなのおでかけマップ</a>（このガイドに、地元の家庭の声を足していく地図です）<br>
+  <a href="/tokushoho.html">特定商取引法に基づく表記・免責事項</a><br>
   © 2026 ぼんぼやーじゅ通信
 </footer>
 </body>

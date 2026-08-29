@@ -1,0 +1,74 @@
+/* ぼんぼやーじゅ通信 — 共通の色・書体
+ * 既存ページ（index / guide / map / 会員ページ）が各自インラインで持っているものと同じ値。
+ * 新しいページはこのファイルを読み込む。 */
+:root {
+  --ground:#FBFAF5; --surface:#FFFFFF; --surface-2:#F5F2EA;
+  --ink:#34434C; --ink-soft:#63727B; --ink-faint:#97A2AA;
+  /* 予定のある土日のマスの文字色。地の明暗で反転させる必要があるのでトークンにする。
+     生値で書いていたため、ライトだけ測って直した結果、ダークで 1.81:1 / 2.07:1 になっていた。 */
+  --sat-ink:#1F6280; --sun-ink:#9E4C43;
+  /* 生地（--ground）の上のリンク。--sky-deep だと 4.48 で 4.5 に届かない */
+  --link-ink:#226881;
+  --sky:#4FA3C4; --sky-deep:#2C7C9E; --sky-wash:#E9F4F7;
+  --marigold:#EBA24A; --marigold-wash:#FBEEDA; --leaf:#74AE71;
+  /* --marigold は面に塗る色。文字に使うと白地で2.1:1しかないので、文字用は濃いほうを使う */
+  --marigold-ink:#8A5A12;
+  /* --sky-deep の上に乗せる文字色。ダークでは --sky-deep が明色になるので反転させる */
+  --on-sky:#FFFFFF;
+  /* 警告の文字色。ダークでは濃赤が背景に沈むので明るくする */
+  --danger-ink:#B4453C;
+  --line:#ECE7DB; --line-strong:#DCD5C6;
+  --shadow-soft:0 2px 20px rgba(52,67,76,.05);
+  --radius:20px; --radius-sm:14px;
+  --maru:"Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN W4","Yu Gothic","游ゴシック","Noto Sans JP","Segoe UI",sans-serif;
+  --body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","游ゴシック","Noto Sans JP","Segoe UI",Meiryo,sans-serif;
+  --script:Georgia,"Times New Roman","Hiragino Mincho ProN",serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:#131F28; --surface:#1A2831; --surface-2:#21333D;
+    --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95; --sat-ink:#8CC3DE; --sun-ink:#E8A39B; --link-ink:#9AD4EA; --sat-ink:#8CC3DE; --sun-ink:#E8A39B; --link-ink:#9AD4EA;
+    --sky:#6FBAD9; --sky-deep:#9AD4EA; --sky-wash:#1D3944;
+    --marigold:#F0AE5E; --marigold-wash:#362F1F; --leaf:#8FC489;
+    --marigold-ink:#F0AE5E; --on-sky:#0E1A22; --danger-ink:#F2938A;
+    --line:#293B45; --line-strong:#38505C; --shadow-soft:0 2px 22px rgba(0,0,0,.22);
+  }
+}
+:root[data-theme="dark"] {
+  --ground:#131F28; --surface:#1A2831; --surface-2:#21333D;
+  --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95; --sat-ink:#8CC3DE; --sun-ink:#E8A39B; --link-ink:#9AD4EA;
+  --sky:#6FBAD9; --sky-deep:#9AD4EA; --sky-wash:#1D3944;
+  --marigold:#F0AE5E; --marigold-wash:#362F1F; --marigold-ink:#F0AE5E; --on-sky:#0E1A22; --danger-ink:#F2938A; --leaf:#8FC489;
+  --line:#293B45; --line-strong:#38505C; --shadow-soft:0 2px 22px rgba(0,0,0,.22);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--ground); color: var(--ink);
+  font-family: var(--body); line-height: 1.85;
+  -webkit-font-smoothing: antialiased; font-feature-settings: "palt" 1;
+}
+a { color: var(--sky-deep); }
+p { margin: 0; }
+.wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.35rem; }
+.ghead { background: linear-gradient(160deg, var(--sky-wash), var(--marigold-wash)); border-bottom: 1px solid var(--line); }
+.ghead-in { max-width: 46rem; margin: 0 auto; padding: 2.6rem 1.35rem 2rem; }
+.eyebrow { font-family: var(--script); font-style: italic; font-size: 1.1rem; color: var(--marigold); margin-bottom: .3rem; }
+h1 { font-family: var(--maru); font-weight: 800; font-size: clamp(1.7rem,5.6vw,2.4rem); letter-spacing: .02em; line-height: 1.25; margin: 0 0 .6rem; }
+.ghead .sub { color: var(--ink); font-size: 1.02rem; max-width: 32rem; }
+footer { color: var(--ink-faint); font-size: .82rem; text-align: center; padding: 2.4rem 1.35rem 3rem; line-height: 1.7; }
+footer .fmark { font-family: var(--maru); font-weight: 800; color: var(--ink-soft); }
+.back { display: inline-block; margin-top: 2rem; font-family: var(--maru); font-weight: 800; font-size: .95rem; text-decoration: none; }
+@media (max-width: 40rem) { html { font-size: 112.5%; } .wrap, .ghead-in { padding-left: 1.15rem; padding-right: 1.15rem; } }
+
+/* 二次リンクも指で押せる大きさにする（実測 16〜32px だった） */
+.back, footer a, .bvc-teaser-link { min-height: 44px; display: inline-flex; align-items: center; }
+
+/* 無料の道具（地図・ガイド）から応援の説明への静かな1行。
+   価格は書かない・急かさない（トーン規約）。置かないと、無料でしか触らない人には
+   応援という選択肢が存在しないことになる。 */
+.support-line {
+  margin-top: 1.6rem; font-size: .85rem; line-height: 1.9; color: var(--ink-soft);
+  border-top: 1px solid var(--line); padding-top: 1rem;
+}
+.support-line a { font-weight: 700; display: inline-flex; align-items: center; min-height: 44px; color: var(--link-ink); }

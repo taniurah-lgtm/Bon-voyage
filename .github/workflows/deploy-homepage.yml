@@ -6,6 +6,11 @@ on:
     branches: [claude/line-message-resend-yefv9l]
     paths:
       - "docs/homepage/**"
+      - "data/**"
+      - "events/**"
+      - "scripts/build-*.mjs"
+      - "scripts/build-site.sh"
+      - "scripts/lib/**"
       - ".github/workflows/deploy-homepage.yml"
   workflow_dispatch: {}
 
@@ -27,6 +32,90 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0        # 台帳を rfwmo8 から取るため履歴が必要
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # 台帳の正は rfwmo8。yefv9l 側のコピーは古いことがあるので、必ず取り直す。
+      - name: 台帳を rfwmo8 から取り直す
+        run: |
+          git fetch --no-tags origin claude/family-event-planning-rfwmo8
+          git checkout FETCH_HEAD -- events/
+          echo "台帳の行数:"; wc -l events/*.md
+
+      # 合言葉が Secrets にあれば、それで組み直す。
+      # 無ければコミットされているものをそのまま使う（従来どおり）。
+      - name: ページを組み直す
+        env:
+          MEMBER_PASS: ${{ secrets.MEMBER_PASS }}
+          INSIDER_PASS: ${{ secrets.INSIDER_PASS }}
+          MAP_POST_URL: ${{ vars.MAP_POST_URL }}
+        run: |
+          if [ -n "$MEMBER_PASS" ]; then
+            echo "MEMBER_PASS があるので組み直す"
+            ./scripts/build-site.sh
+          else
+            echo "::warning::MEMBER_PASS が Secrets に無いため、コミットされているページをそのまま公開する"
+          fi
+
+      # 検証用の合言葉で組まれたページを絶対に公開しない（最後の砦）。
+      # ここで止まったら、Secrets に MEMBER_PASS を入れてから再実行する。
+      - name: 検証用の合言葉で組まれていないか確かめる
+        run: |
+          if grep -rl "BV_BUILD: TEST_PASSPHRASE" docs/homepage/ ; then
+            echo "::error::検証用の合言葉で組まれたページが含まれています。公開を中止しました。"
+            echo "::error::リポジトリの Settings → Secrets and variables → Actions に MEMBER_PASS を登録してから、この workflow を再実行してください。"
+            exit 1
+          fi
+          echo "OK: 本物の合言葉で組まれています"
+
+      # 「マップに投稿できます」と書いてあるのに投稿先が未設定、という乖離を止める。
+      # 事故#7（実装していない「カレンダー登録代行」を特典に書いていた）と同じ形なので、
+      # 書いてあることと動くことがずれたら公開前に気づけるようにする。
+      - name: 書いてあることが実際にできるか確かめる
+        run: |
+          # apply-post-mode.mjs が書き込んだモードと、実際の送り先が一致しているかを見る。
+          # ★可視テキストを grep してはいけない。hidden にした側の文字列も残っているので
+          #   必ず不一致になる（一度そうしてしまい、デプロイが常に止まる状態にした）。
+          mode=$(grep -o "BV_POST_MODE: [a-z]*" docs/homepage/index.html | head -1 | awk '{print $2}')
+          endpoint=$(grep -o "endpoint: \"[^\"]*\"" docs/homepage/map.html | head -1 || true)
+          echo "トップページの記述: ${mode:-（印が無い）} / 投稿の送り先: ${endpoint:-（見つからない）}"
+          if [ -z "$mode" ]; then
+            echo "::warning::index.html に BV_POST_MODE の印がありません。scripts/apply-post-mode.mjs を通していない可能性があります。"
+            exit 0
+          fi
+          if [ "$mode" = "on" ] && echo "$endpoint" | grep -q 'endpoint: ""'; then
+            echo "::error::トップページは「サイト内で書き込める」と書いていますが、投稿の送り先が空です。"
+            echo "::error::Variables に MAP_POST_URL を登録するか、build-site.sh を通し直してください。"
+            exit 1
+          fi
+          if [ "$mode" = "off" ] && ! echo "$endpoint" | grep -q 'endpoint: ""'; then
+            echo "::error::送り先はあるのに、トップページは「LINEでお預かり」と書いています。build-site.sh を通し直してください。"
+            exit 1
+          fi
+          echo "OK: 書いてあることと、実際にできることが一致しています"
+
+      # 公開側のカレンダーに、先の予定まで入っていないことを確かめる（無料/有料の境目）。
+      - name: 公開データが2週間ぶんに収まっているか確かめる
+        run: |
+          node -e '
+            const fs = require("fs");
+            const f = "docs/homepage/data/events-public.json";
+            if (!fs.existsSync(f)) { console.log("events-public.json が無い（カレンダー未生成）"); process.exit(0); }
+            const d = JSON.parse(fs.readFileSync(f, "utf8"));
+            const days = d.events.flatMap(e => e.dates || []).filter(Boolean).sort();
+            const last = days.at(-1);
+            console.log("窓:", JSON.stringify(d.window), "いちばん先の日付:", last);
+            if (last && d.window && last > d.window.to) {
+              console.log("::error::公開データに窓の外（" + last + "）の予定が入っています。");
+              process.exit(1);
+            }
+            console.log("OK: 公開データは窓の中に収まっています");
+          '
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload only the homepage folder

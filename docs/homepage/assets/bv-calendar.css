@@ -1,0 +1,299 @@
+/* ぼんぼやーじゅ通信 — カレンダーの見た目
+ * 色は各ページが定義している変数（--surface / --ink / --sky-deep …）を使う。
+ * このファイルは変数を定義しない（ページ側のライト/ダーク切替にそのまま乗る）。 */
+
+.bvc { --bvc-cell: 2.9rem; }
+
+/* ---- 締切が近いもの ---- */
+.bvc-deadlines {
+  background: var(--marigold-wash);
+  border: 1px solid var(--marigold);
+  border-radius: 14px;
+  padding: .85rem 1rem;
+  margin-bottom: 1.1rem;
+}
+.bvc-dlhead {
+  font-family: var(--maru); font-weight: 800; font-size: .95rem;
+  margin: 0 0 .5rem; color: var(--ink);
+}
+.bvc-dlrow { display: flex; gap: .6rem; align-items: baseline; font-size: .9rem; padding: .16rem 0; }
+.bvc-dldate { flex: none; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.bvc-dldate b { color: #B4453C; margin-left: .3rem; }
+.bvc-dlname { color: var(--ink); }
+
+/* ---- 月の見出しと送り ---- */
+.bvc-head { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-bottom: .5rem; }
+.bvc-month { font-family: var(--maru); font-weight: 800; font-size: 1.12rem; margin: 0; text-align: center; flex: 1; }
+.bvc-nav {
+  flex: none; width: 2.6rem; height: 2.6rem; border-radius: 999px;
+  border: 1px solid var(--line-strong); background: var(--surface); color: var(--sky-deep);
+  font-size: 1.3rem; line-height: 1; cursor: pointer;
+}
+.bvc-nav:disabled { opacity: .3; cursor: default; }
+.bvc-nav:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+
+/* ---- 月グリッド ---- */
+.bvc-grid {
+  width: 100%; border-collapse: separate; border-spacing: 2px;
+  table-layout: fixed; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 16px; padding: .35rem;
+}
+.bvc-grid th {
+  font-family: var(--maru); font-weight: 700; font-size: .74rem;
+  color: var(--ink-faint); padding: .3rem 0; font-feature-settings: normal;
+}
+.bvc-grid th.sun { color: #C0736B; }
+.bvc-grid th.sat { color: var(--sky-deep); }
+
+.bvc-cell {
+  height: var(--bvc-cell); vertical-align: middle; text-align: center;
+  border-radius: 10px; position: relative; color: var(--ink);
+  font-variant-numeric: tabular-nums; line-height: 1.15;
+}
+.bvc-cell.out { color: var(--ink-faint); opacity: .35; }
+/* 過ぎた日。--ink-faint は白地で 2.6:1 しかなく、16px の数字には足りない（要4.5:1）。
+   「終わった」と分かる程度に落として、読める色は保つ。 */
+.bvc-cell.past { color: var(--ink-soft); }
+/* 終わった予定の点は、これからの予定と見分けがつくように白抜きにする */
+.bvc-dot.is-past { background: transparent; box-shadow: inset 0 0 0 1px var(--ink-soft); }
+.bvc-more.is-past { color: var(--ink-soft); }
+.bvc-cell.sun:not(.out) { color: #C0736B; }
+.bvc-cell.sat:not(.out) { color: var(--sky-deep); }
+.bvc-cell.has { cursor: pointer; background: var(--sky-wash); font-weight: 800; }
+.bvc-cell.has:hover { background: var(--surface-2); }
+.bvc-cell.has:focus-visible { outline: 3px solid var(--sky); outline-offset: 1px; }
+.bvc-cell.today { box-shadow: inset 0 0 0 2px var(--marigold); }
+.bvc-cell.sel { background: var(--sky-deep) !important; color: var(--on-sky) !important; }
+.bvc-cell.sel .bvc-dot { background: var(--on-sky); }
+/* 「+」も選択中の地の色に合わせる。忘れていたので、選ばれている日（＝開いた瞬間に
+   選ばれる今週末）では「+」が地と同色になり、5件の日が3件の日に見えていた。 */
+.bvc-cell.sel .bvc-more { color: var(--on-sky); }
+.bvc-cell.sel .bvc-dot.is-past { box-shadow: inset 0 0 0 1px var(--on-sky); }
+
+.bvc-num { display: block; font-size: .92rem; }
+.bvc-dots { display: flex; justify-content: center; gap: 2px; height: 5px; margin-top: 1px; align-items: center; }
+.bvc-dot { display: inline-block; width: 4px; height: 4px; border-radius: 999px; background: var(--sky-deep); }
+.bvc-more { font-size: .55rem; color: var(--sky-deep); font-style: normal; line-height: 1; }
+
+.bvc-legend {
+  display: flex; align-items: center; gap: .3rem; flex-wrap: wrap;
+  font-size: .76rem; color: var(--ink-soft); margin: .5rem 0 1.2rem;
+}
+.bvc-legend .bvc-dot { margin-right: .15rem; }
+.bvc-today-mark {
+  border: 2px solid var(--marigold); border-radius: 6px; padding: 0 .3rem; margin-left: .5rem;
+}
+
+/* ---- 選んだ日の予定 ---- */
+.bvc-dayhead, .bvc-tailhead {
+  font-family: var(--maru); font-weight: 800; font-size: 1.02rem;
+  margin: 1.4rem 0 .7rem; display: flex; align-items: center; gap: .5rem;
+}
+.bvc-count {
+  font-size: .74rem; font-weight: 700; color: var(--sky-deep);
+  background: var(--sky-wash); border-radius: 999px; padding: .1rem .55rem;
+}
+.bvc-daylabel {
+  font-family: var(--maru); font-weight: 800; font-size: .88rem;
+  color: var(--sky-deep); margin: 1rem 0 .4rem;
+}
+.bvc-tailnote { font-size: .82rem; color: var(--ink-soft); margin: -.35rem 0 .7rem; line-height: 1.7; }
+.bvc-empty { font-size: .92rem; color: var(--ink-soft); }
+
+/* ---- イベントのカード ---- */
+.bvc-card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+  padding: .9rem 1.05rem; margin-bottom: .7rem;
+}
+.bvc-card.is-tentative { border-style: dashed; }
+.bvc-when {
+  font-size: .8rem; font-weight: 800; color: var(--sky-deep);
+  margin: 0; display: flex; flex-wrap: wrap; gap: .4rem; align-items: center;
+}
+.bvc-multi, .bvc-tent {
+  font-weight: 700; font-size: .7rem; border-radius: 999px; padding: .05rem .5rem;
+  background: var(--surface-2); color: var(--ink-soft);
+}
+.bvc-tent { background: var(--marigold-wash); color: var(--marigold-ink); }
+.bvc-name { font-family: var(--maru); font-weight: 800; font-size: 1.03rem; margin: .15rem 0 0; line-height: 1.45; }
+.bvc-place { font-size: .85rem; color: var(--ink-soft); margin: .25rem 0 0; }
+.bvc-desc { font-size: .89rem; color: var(--ink-soft); margin: .35rem 0 0; line-height: 1.75; }
+.bvc-meta { margin: .4rem 0 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+.bvc-ages { font-family: var(--maru); font-weight: 700; font-size: .82rem; color: var(--ink); }
+.bvc-cost { font-size: .8rem; color: var(--marigold-ink); font-weight: 700; }
+.bvc-deadline {
+  margin: .45rem 0 0; font-size: .82rem; font-weight: 700; color: #B4453C;
+}
+
+.bvc-btns { margin-top: .7rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+.bvc-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .2rem;
+  min-height: 44px;                     /* 指で押せる大きさの床。rem計算だけでは狭い画面で割る */
+  font-family: var(--body); font-size: .8rem; font-weight: 700; text-decoration: none;
+  border-radius: 999px; padding: .42rem .8rem; border: 1px solid var(--line-strong);
+  background: var(--surface); color: var(--sky-deep); cursor: pointer; white-space: nowrap;
+}
+.bvc-btn-add { background: var(--sky-deep); color: #fff; border-color: var(--sky-deep); }
+.bvc-btn-ics { color: var(--ink-soft); }
+.bvc-btn:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+
+/* ---- 日程未確定のもの ---- */
+.bvc-tentrow {
+  display: flex; gap: .6rem; align-items: baseline; font-size: .87rem;
+  padding: .4rem 0; border-bottom: 1px dashed var(--line);
+}
+.bvc-tentwhen { flex: none; max-width: 11rem; color: var(--ink-soft); font-size: .8rem; }
+.bvc-tentname { color: var(--ink); }
+
+/* ---- 公開ページの案内（会員ページへ） ---- */
+.bvc-teaser {
+  margin-top: 1.6rem; background: var(--surface-2); border: 1px solid var(--line);
+  border-radius: 16px; padding: 1.05rem 1.15rem;
+}
+.bvc-teaser p { font-size: .9rem; color: var(--ink-soft); margin: 0; line-height: 1.8; }
+.bvc-teaser b { color: var(--ink); }
+.bvc-teaser-link {
+  display: inline-block; margin-top: .6rem; font-family: var(--maru);
+  font-weight: 800; font-size: .88rem; text-decoration: none;
+}
+
+/* ---- せまい画面 ---- */
+@media (max-width: 24rem) {
+  .bvc { --bvc-cell: 2.6rem; }
+  .bvc-num { font-size: .86rem; }
+  .bvc-btn { font-size: .76rem; padding: .4rem .68rem; }
+}
+
+/* 枠が複数あるイベント（「①体験会 10:00〜12:00 ②交流大会 13:00〜16:00」など）は
+   最初の枠だけ出すと別の枠に申し込む人に嘘になるので、日時欄の全文を併記する。 */
+.bvc-slots {
+  font-size: .84rem; font-weight: 700; color: var(--sky-deep);
+  background: var(--sky-wash); border-radius: 10px;
+  padding: .35rem .6rem; margin: .35rem 0 0; line-height: 1.7;
+}
+
+/* 予定のない日も押せる（押して無反応に見えないように） */
+.bvc-cell.tap { cursor: pointer; }
+.bvc-cell.tap:not(.has):hover { background: var(--surface-2); }
+.bvc-cell.tap:focus-visible { outline: 3px solid var(--sky); outline-offset: 1px; }
+
+/* 公開ぶんの終わり（公開ページのみ） */
+.bvc-window {
+  /* sky-deep on sky-wash は 4.18:1 で、13.7px の文字には足りない（要4.5:1）。
+     地の色を白にして 4.68:1 にする。 */
+  margin-left: auto; font-weight: 700; color: var(--sky-deep);
+  background: var(--surface); border: 1px solid var(--line-strong);
+  border-radius: 999px; padding: .1rem .6rem;
+}
+
+/* この日だけ時間がちがう（台帳の「※23日は16:00まで」） */
+.bvc-exc {
+  font-weight: 700; font-size: .7rem; border-radius: 999px; padding: .05rem .5rem;
+  background: var(--marigold-wash); color: var(--marigold-ink);
+}
+/* 子連れの注意。行く前に読めないと意味がない */
+.bvc-kids {
+  font-size: .87rem; color: var(--ink); margin: .35rem 0 0; line-height: 1.75;
+  border-left: 3px solid var(--sky); padding-left: .6rem;
+}
+
+/* 締切の行に「どうやって申し込むか」を添える（締切だけ知らせて行き先が無かった） */
+.bvc-dlrow { align-items: flex-start; }
+.bvc-dlname { display: block; }
+.bvc-dlhow { display: block; font-size: .8rem; color: var(--ink-soft); line-height: 1.65; }
+.bvc-deadlines { margin: 1.4rem 0 0; }
+
+/* 記号の凡例（意味がどこにも書かれていなかった） */
+.bvc-key {
+  font-size: .76rem; color: var(--ink-soft); line-height: 1.75;
+  background: var(--surface-2); border-radius: 10px; padding: .5rem .7rem; margin: 0 0 .6rem;
+}
+.bvc-key b { color: var(--ink); }
+/* 当日の判断に効く注意（荒天中止など） */
+.bvc-caution {
+  margin: .4rem 0 0; font-size: .85rem; font-weight: 700; color: #B4453C;
+  background: var(--marigold-wash); border-radius: 10px; padding: .4rem .6rem; line-height: 1.7;
+}
+/* 開催日が多いものの子連れメモは、その日の話ではなく催し全体の話 */
+.bvc-kidslabel {
+  display: block; font-size: .72rem; font-weight: 700; color: var(--ink-soft);
+  letter-spacing: .04em;
+}
+
+/* 開館時間・休館日（雨の日の逃げ場として案内するとき、金曜が使えない等） */
+.bvc-hours { margin: .35rem 0 0; font-size: .84rem; color: var(--ink-soft); line-height: 1.7; }
+
+/* 対象・定員（申込が要るものに効く） */
+.bvc-target { margin: .35rem 0 0; font-size: .85rem; color: var(--ink); line-height: 1.7; }
+/* 枠ごとの「登録」と「iPhone」を1組にまとめる */
+.bvc-slotpair { display: inline-flex; gap: 2px; }
+.bvc-slotpair .bvc-btn-add { border-top-right-radius: 4px; border-bottom-right-radius: 4px; }
+.bvc-slotpair .bvc-btn-ics { border-top-left-radius: 4px; border-bottom-left-radius: 4px; padding-left: .6rem; padding-right: .6rem; }
+
+/* ダークモードで主ボタンと警告文が読めなかった（1.62:1 / 2.44:1） */
+.bvc-btn-add { color: var(--on-sky); }
+.bvc-caution { color: var(--danger-ink); }
+.bvc-dldate b { color: var(--danger-ink); }
+.bvc-deadline { color: var(--danger-ink); }
+.bvc-key, .bvc-dlhow { color: var(--ink-soft); }
+
+/* 総合評価だけの古い書式。否定的な評価は目立たせる */
+.bvc-ages.is-hard { color: var(--danger-ink); }
+
+/* 「今週末を見る」「今日」への近道（平日に開くと週末が見えなかった） */
+.bvc-quick { display: flex; gap: .4rem; margin: 0 0 .6rem; }
+.bvc-jump {
+  font-family: var(--maru); font-weight: 800; font-size: .82rem;
+  color: var(--on-sky); background: var(--sky-deep); border: 1px solid var(--sky-deep);
+  border-radius: 999px; padding: .45rem 1rem; min-height: 44px; cursor: pointer;
+}
+.bvc-jump[data-jump="today"] { color: var(--sky-deep); background: var(--surface); }
+.bvc-jump:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+
+/* 終わった予定（会員ページは過去も持っている） */
+.bvc-card.is-past { opacity: .72; border-style: dotted; }
+.bvc-past-label { margin: 0 0 .3rem; font-size: .76rem; font-weight: 700; color: var(--ink-faint); }
+
+/* 予定のある土日のマス。★生値で書くとダークで沈む（1.81:1 / 2.07:1 になっていた）。
+   トークンにして、地の明暗で反転させる。コントラストを直すときは必ず両方のモードを測る。 */
+.bvc-cell.has.sat:not(.out) { color: var(--sat-ink); }
+.bvc-cell.has.sun:not(.out) { color: var(--sun-ink); }
+.stamp { color: var(--ink-soft) !important; }
+
+/* 締切の申込先。電話は押してかけられる大きさにする（指で押せる44px） */
+.bvc-dlact { display: block; margin-top: .3rem; }
+.bvc-dltel, .bvc-dllink {
+  display: inline-flex; align-items: center; min-height: 44px;
+  padding: 0 .8rem; border-radius: 999px;
+  border: 1px solid var(--line-strong); background: var(--surface);
+  font-size: .82rem; font-weight: 700; color: var(--ink); text-decoration: none;
+}
+.bvc-dltel:active, .bvc-dllink:active { background: var(--surface-2); }
+
+/* 上に出す「今日・まもなく締切」は1行の知らせだけ。押すと下の申込先へ飛ぶ。
+   枠ごと上に持ってくると 248px 使い、カレンダーの表が画面外に出た。 */
+.bvc-dl-urgent { margin: 0 0 .8rem; }
+.bvc-dlalert {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .1rem .6rem;
+  width: 100%; min-height: 44px; text-align: left; cursor: pointer;
+  background: var(--marigold-wash); border: 1px solid var(--marigold);
+  border-radius: 12px; padding: .5rem .8rem;
+  font-family: var(--body); font-size: .84rem; color: var(--ink);
+}
+.bvc-dlalert-t { font-weight: 700; }
+.bvc-dlalert-go { font-weight: 700; color: var(--sky-deep); white-space: nowrap; }
+.bvc-dlalert:active { background: var(--surface-2); }
+
+/* 文中のリンク（窓の外の案内など）は、行の見た目を壊さずに指の当たり判定だけ広げる。
+   min-height を当てると行間が崩れるので、上下の余白を透明に伸ばす。 */
+.bvc-empty a, .bvc-teaser-link { position: relative; display: inline-block; }
+.bvc-empty a::after, .bvc-teaser-link::after {
+  content: ''; position: absolute; left: 0; right: 0;
+  top: 50%; height: 44px; transform: translateY(-50%);
+}
+
+/* 雨天順延日。開催日ではないのでマス目には置かないが、読む人には伝える */
+.bvc-rain { font-size: .82rem; color: var(--sky-deep); margin-top: .3rem; font-weight: 700; }
+
+/* 申込先（電話・メール）。カード側にも出す。押せる大きさは締切ブロックと同じ */
+.bvc-apply { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .4rem; }
