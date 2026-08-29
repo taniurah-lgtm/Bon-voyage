@@ -84,6 +84,8 @@ body{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto S
 .p-k .bubble{border-left-width:.35mm;}
 
 .p-c .ki{visibility:hidden;}
+/* .p-1 = 1色版(黒のみ): 色紙に刷るとき用。ki/ci をどちらも隠さず、全部を黒1版にまとめる */
+
 .p-c .phone,.p-c .phone-bar,.p-c .f-cta,.p-c .bubble{border-color:transparent;}
 .p-c .bubble{border-left-color:#000;}
 .p-c .qr{visibility:hidden;}
@@ -155,7 +157,9 @@ function sheet(v){
  </div>
  <div class="f-foot ki">発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）</div>`;
 }
-document.write(V.map(v=>
-  `<div class="page p-k">${sheet(v)}</div><div class="page p-c">${sheet(v)}</div>`).join(''));
+const ONE = new URLSearchParams(location.search).get('mode') === '1';
+document.write(V.map(v => ONE
+  ? `<div class="page p-1">${sheet(v)}</div>`
+  : `<div class="page p-k">${sheet(v)}</div><div class="page p-c">${sheet(v)}</div>`).join(''));
 </script>
 </body></html>
