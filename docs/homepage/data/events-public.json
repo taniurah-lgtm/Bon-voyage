@@ -1,8 +1,8 @@
 {
- "generated": "2026-08-24",
+ "generated": "2026-08-29",
  "window": {
-  "from": "2026-08-24",
-  "to": "2026-09-07"
+  "from": "2026-08-29",
+  "to": "2026-09-12"
  },
  "events": [
   {
@@ -35,45 +35,6 @@
    "cost": "",
    "target": "",
    "url": "https://www.seibuen-amusement-park.jp/2026summer/",
-   "tentative": false,
-   "deadline": null
-  },
-  {
-   "id": "E61",
-   "name": "ポケモングッズが貰える!イベント開催!!(田無アスタ)",
-   "dates": [
-    "2026-08-24",
-    "2026-08-25",
-    "2026-08-26",
-    "2026-08-27",
-    "2026-08-28"
-   ],
-   "span": null,
-   "when": "8/24(月)〜28(金) 10:00〜19:00",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 5,
-   "start": "10:00",
-   "end": "19:00",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "田無アスタ2階センターコート",
-   "mapq": "田無アスタ",
-   "summary": "ポケモングッズが無料で貰えるイベント。チラシに「だれでも参加OK!!」と明記",
-   "kidsNote": "無料でグッズがもらえるので費用ゼロで満足度が出せる。 平日開催なので空いている。7/21〜24にも同内容を実施済みで定期開催の見込み",
-   "caution": "",
-   "contact": null,
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": null,
-    "pre": "◎",
-    "elem": "◎"
-   },
-   "cost": "",
-   "target": "",
-   "url": "https://www.asta.co.jp/update/event_260824.pdf",
    "tentative": false,
    "deadline": null
   },
@@ -342,6 +303,48 @@
    }
   },
   {
+   "id": "E50",
+   "name": "ピックルボール体験会・交流大会",
+   "dates": [
+    "2026-09-12"
+   ],
+   "span": null,
+   "when": "9/12(土) ①体験会 10:00〜12:00 ②交流大会 13:00〜16:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "12:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平第六小学校 体育館",
+   "mapq": "小平第六小学校 体育館",
+   "summary": "テニス・バドミントン・卓球の要素を持つニュースポーツ。パドルの貸出あり",
+   "kidsNote": "屋内・雨でも実施",
+   "caution": "",
+   "contact": {
+    "tel": "042-346-9612",
+    "mail": "",
+    "who": "文化スポーツ課"
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": null,
+    "pre": null,
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "市内在住・在勤・在学の小学生以上 ①初心者 ②経験者 / 定員 ①16人 ②30人",
+   "url": "",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-08-24",
+    "raw": "8/24(月)まで 申込フォーム(電話・電子メール可)"
+   }
+  },
+  {
    "id": "E51",
    "name": "中央図書館ギャラリー展示「クラシックポップアップ絵本展」",
    "dates": [],
@@ -382,19 +385,19 @@
    "deadline": null
   },
   {
-   "id": "E50",
-   "name": "ピックルボール体験会・交流大会",
+   "id": "E49",
+   "name": "初心者ラグビー教室(小平市ラグビーフットボール協会)",
    "dates": [],
-   "when": "9/12(土) ①体験会 10:00〜12:00 ②交流大会 13:00〜16:00",
+   "when": "9/13(日) 9:00〜",
    "url": "",
    "contact": {
-    "tel": "042-346-9612",
-    "mail": "",
-    "who": "文化スポーツ課"
+    "tel": "090-9247-5083",
+    "mail": "ab410427@gmail.com",
+    "who": "西田"
    },
    "deadline": {
-    "date": "2026-08-24",
-    "raw": "8/24(月)まで 申込フォーム(電話・電子メール可)"
+    "date": "2026-09-12",
+    "raw": "8/5(水)〜9/12(土)までに電子メールで件名に参加者の氏名・学年を明記"
    },
    "deadlineOnly": true
   },
@@ -476,5 +479,5 @@
    "url": "https://www.asta.co.jp/update/kids_stamp_2025.pdf"
   }
  ],
- "beyond": 6
+ "beyond": 5
 }
