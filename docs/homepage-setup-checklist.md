@@ -7,20 +7,23 @@ Apps Script はオーナーの Google アカウントで動かす必要がある
 
 ---
 
-## ⓪ いまの改修は、まだ公開ブランチに乗っていない（最初に決めること）
+## ⓪ 公開ブランチへの取り込み（2026-08-29 に実施済み）
 
 デプロイの workflow（`.github/workflows/deploy-homepage.yml`）は
 **`claude/line-message-resend-yefv9l` に push されたときだけ**動き、
 公開するのは `docs/homepage/` だけ。
 
-いまカレンダー・地図・投稿・会員ページの改修が入っているのは
-**`claude/handoff-docs-review-wn6glj`**。つまり:
+カレンダー・地図・投稿・会員ページの改修は `claude/handoff-docs-review-wn6glj` で作り、
+**2026-08-29 に yefv9l へ取り込んで公開済み**（run #77 / `a34c819`）。
+以降この3つを直したら、同じように yefv9l へ取り込むこと。
 
-- ①②を済ませても、**このブランチのままでは何も公開されない**。
-- 公開するには、wn6glj の内容を yefv9l に取り込んで push する必要がある。
+### このとき止まった検査（同じことが起きたら参考に）
 
-> Claude はこの会話で `wn6glj` にしか push していない（指示された push 先がそこだけのため）。
-> yefv9l へ入れてよいと決めたら、その旨を指示すること。
+1回目のデプロイは「公開データに窓の外（2026-09-30）の予定が入っています」で
+止まった。原因は**手元の台帳が古かったこと**。ランナーは台帳を rfwmo8 から
+取り直すので、手元に無い月の台帳（2026-09.md）の会期ものが公開データに漏れた。
+→ 公開前に必ず `git checkout origin/claude/family-event-planning-rfwmo8 -- events/`
+   で台帳を取り直してからビルドし、検査を通すこと。
 
 公開前に必ず: `MEMBER_PASS=本物の合言葉 ./scripts/build-site.sh` を通し、
 `🔴 検証用の合言葉で組まれたページが残っている` が出ないことを確認する
