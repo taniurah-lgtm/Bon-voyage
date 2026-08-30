@@ -301,6 +301,74 @@
      ✓ が2つ並んでいた。属性を優先させる。 */
   [hidden] { display: none !important; }
 </style>
+<!-- 検索エンジンに「ぼんぼやーじゅ通信」という名前の実体を伝えるための構造化データ。
+     ブランド名での検索に出るかどうかは、まずここで名前を認識してもらえるかによる。 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://bonvoya.nicomaru.tokyo/#website",
+      "url": "https://bonvoya.nicomaru.tokyo/",
+      "name": "ぼんぼやーじゅ通信",
+      "alternateName": [
+        "ぼんぼやーじゅ通信の会",
+        "Bon Voyage 通信",
+        "bonvoya"
+      ],
+      "description": "花小金井まわり（小平・西東京）の未就学児〜小学生のいるご家庭へ、週末のおでかけ情報を毎週水曜に無料でお届けするLINE通信。",
+      "inLanguage": "ja",
+      "publisher": {
+        "@id": "https://bonvoya.nicomaru.tokyo/#org"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://bonvoya.nicomaru.tokyo/#org",
+      "name": "ぼんぼやーじゅ通信の会",
+      "alternateName": "ぼんぼやーじゅ通信",
+      "url": "https://bonvoya.nicomaru.tokyo/",
+      "logo": "https://bonvoya.nicomaru.tokyo/assets/hero-park.jpg",
+      "description": "小平市・花小金井を拠点に、子育て世帯へ週末のおでかけ情報を無料で配信している市民活動団体。小平市民活動支援センターあすぴあ 登録団体（第254号）。",
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "小平市"
+        },
+        {
+          "@type": "City",
+          "name": "西東京市"
+        },
+        {
+          "@type": "City",
+          "name": "東久留米市"
+        },
+        {
+          "@type": "City",
+          "name": "東村山市"
+        },
+        {
+          "@type": "City",
+          "name": "小金井市"
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://bonvoya.nicomaru.tokyo/#webpage",
+      "url": "https://bonvoya.nicomaru.tokyo/",
+      "name": "ぼんぼやーじゅ通信｜花小金井エリアの週末おでかけ便",
+      "isPartOf": {
+        "@id": "https://bonvoya.nicomaru.tokyo/#website"
+      },
+      "about": {
+        "@id": "https://bonvoya.nicomaru.tokyo/#org"
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <header class="hero">
