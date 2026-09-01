@@ -39,8 +39,21 @@
   .fallback li { font-size: .9rem; }
   .stamp { font-size: .8rem; color: var(--ink-faint); margin-top: 2rem; }
 </style>
+<link rel="stylesheet" href="/assets/bv-nav.css">
 </head>
 <body>
+<nav class="bvnav" aria-label="サイト内">
+  <div class="bvnav-in">
+    <a class="bvnav-brand" href="/">ぼんぼやーじゅ通信</a>
+    <div class="bvnav-links">
+      <a href="/" class="bv-hide-sm">通信について</a>
+      <a href="/calendar.html" aria-current="page"><span class="bv-lg">おでかけ</span>カレンダー</a>
+      <a href="/map.html"><span class="bv-lg">おでかけ</span>マップ</a>
+      <a class="bvnav-cta" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE<span class="bv-lg">で受け取る</span></a>
+    </div>
+  </div>
+</nav>
+
 <header class="ghead">
   <div class="ghead-in">
     <div class="eyebrow">Bon Voyage,</div>
@@ -132,9 +145,8 @@
 
   <p class="stamp">情報の更新日: 2026-08-29　※日程・料金は変わることがあります。おでかけ前に各公式でご確認ください。</p>
   <div class="nav-pills">
-    <a href="/">通信について</a>
-    <a href="/map.html">おでかけマップ</a>
-    <a href="/guide.html">おでかけガイド</a>
+    <a href="/" class="bv-hide-sm">通信について</a>
+    <a href="/map.html"><span class="bv-lg">おでかけ</span>マップ</a>
   </div>
 
   <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>
