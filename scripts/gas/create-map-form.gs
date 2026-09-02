@@ -86,7 +86,7 @@ function createMapForm() {
   } catch (e) {
     form.addSectionHeaderItem()
       .setTitle('写真を送りたい方へ')
-      .setHelpText('このフォームでは写真を受け取れないため、nico25akmr@outlook.jp までお送りください。');
+      .setHelpText('このフォームでは写真を受け取れないため、tokyo.papa.home@gmail.com までお送りください。');
     Logger.log('ファイルアップロード設問は作成できませんでした（' + e.message + '）。メール案内に切り替えました。');
   }
 
