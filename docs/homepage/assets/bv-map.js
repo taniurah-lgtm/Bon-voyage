@@ -32,7 +32,10 @@
   };
   var DEFAULT_COLOR = '#2C7C9E';
   var OVERLAP_PX = 34;     // これより近いピンは「まとめて」出す
-  var HOME = [35.7255, 139.5085];  // 花小金井駅あたり
+  // 花小金井駅。★以前は [35.7255, 139.5085] を「駅あたり」として置いていたが、
+  //   実際の駅（OpenStreetMap）から 433m 東西にずれていた。「近く」の中心と
+  //   6km の判定に使うので、ずれたままだと近所の範囲が偏る。
+  var HOME = [35.7261822, 139.5132235];
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -280,9 +283,15 @@
       var parts = ['ピン ' + (target.length - missing.length) + '件'];
       if (approx) parts.push('うち ' + approx + '件はおよその位置');
       if (missing.length) {
+        // ★理由を決め打ちしない。「位置が確認できていない」ものと
+        //   「そもそも地図に置く場所ではない（＝西武新宿線の方向）」ものがある。
+        //   一律に前者と書くと、後者について嘘になる。
         parts.push(
-          missing.length + '件は地図上の位置が確認できていないため、ピンを立てていません（' +
-          missing.map(function (s) { return '「' + s.name.replace(/[（(].*$/, '') + '」'; }).join(' ') + '）'
+          missing.length + '件はピンを立てていません（' +
+          missing.map(function (s) {
+            var nm = '「' + s.name.replace(/[（(].*$/, '') + '」';
+            return nm + (s.geoNote ? '＝' + s.geoNote.replace(/。$/, '') : '＝地図上の位置が確認できていません');
+          }).join(' ／ ') + '）'
         );
       }
       parts.push('近くのピンは、まとめて件数で出しています（タップで寄ります）');

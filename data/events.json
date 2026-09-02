@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-29",
+ "generated": "2026-09-02",
  "events": [
   {
    "id": "E51",
@@ -1694,6 +1694,45 @@
    "source": "events/2026-09.md"
   },
   {
+   "id": "E95",
+   "name": "第52回 せいぶ通り秋まつり",
+   "dates": [
+    "2026-09-05",
+    "2026-09-06"
+   ],
+   "span": null,
+   "when": "9/5(土)・9/6(日) 17:00〜21:00　※雨天決行",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "17:00",
+   "end": "21:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "せいぶ通り商店街(花小金井駅南口〜小金井公園方面)",
+   "mapq": "せいぶ通り商店街",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "雨天決行",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "無料(出店での飲食は実費)",
+   "target": "",
+   "url": "https://festival.hanakoganei.net/",
+   "status": "候補",
+   "confidence": "公式確認済み(2026-08-30・現地掲示のポスターを実見)",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-09.md"
+  },
+  {
    "id": "E48",
    "name": "トップアスリートによるランニング教室",
    "dates": [
@@ -2111,6 +2150,124 @@
    "source": "events/2026-09.md"
   },
   {
+   "id": "E97",
+   "name": "東京クラフトFESTA2026 feat.多摩",
+   "dates": [
+    "2026-09-20",
+    "2026-09-21"
+   ],
+   "span": null,
+   "when": "9/20(日)・9/21(月・祝) / 場所: 都庁前 都民広場",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "",
+   "mapq": "東京クラフトFESTA2026 feat.多摩",
+   "summary": "多摩地域のクラフトビール・食。連休中の都心おでかけ枠",
+   "kidsNote": "酒類主体なので日中・短時間向き",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": null,
+    "pre": "○",
+    "elem": "○"
+   },
+   "cost": "",
+   "target": "",
+   "url": "https://kodaira-tourism.com/event/22870/",
+   "status": "候補",
+   "confidence": "",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-09.md"
+  },
+  {
+   "id": "E99",
+   "name": "まち巡りガイドツアー",
+   "dates": [
+    "2026-09-24"
+   ],
+   "span": {
+    "from": "2026-09-24",
+    "to": "2026-10-31"
+   },
+   "when": "9/24(木)〜10/31(土) 9:30〜13:00 / 内容: 津田塾大・武蔵野美大、小川地区、玉川上水を歩く",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "09:30",
+   "end": "13:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "",
+   "mapq": "まち巡りガイドツアー",
+   "summary": "",
+   "kidsNote": "歩行距離が長い。/ 出典: https://kodaira-tourism.com/event/20621/ / ステータス: 候補",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": null,
+    "pre": null,
+    "elem": "△"
+   },
+   "cost": "",
+   "target": "",
+   "url": "https://kodaira-tourism.com/event/20621/",
+   "status": "候補",
+   "confidence": "",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-09.md"
+  },
+  {
+   "id": "E96",
+   "name": "たけのこ公園ビアガーデン！2026",
+   "dates": [
+    "2026-09-26"
+   ],
+   "span": null,
+   "when": "9/26(土) 10:00〜20:00 / 場所: たけのこ公園(小平市)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "20:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "",
+   "mapq": "たけのこ公園ビアガーデン！2026",
+   "summary": "キッチンカー10台以上、こども縁日。9月は夜まで開催",
+   "kidsNote": "昼に行けば子ども向け。夜はビアガーデン寄り",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "",
+   "url": "https://kodaira-tourism.com/event/22825/",
+   "status": "候補",
+   "confidence": "",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-09.md"
+  },
+  {
    "id": "E53",
    "name": "子育て支援講座「素材の味を活かしたカラフル弁当を作ろう」",
    "dates": [
@@ -2190,6 +2347,80 @@
     "date": "2026-09-04",
     "raw": "申込締切: 9/4(金) 申込フォームまたは電話(月曜・日曜・祝日を除く)"
    },
+   "source": "events/2026-09.md"
+  },
+  {
+   "id": "E93",
+   "name": "「はじめの一歩」第一子の赤ちゃんとお母さんへ",
+   "dates": [
+    "2026-10-06",
+    "2026-10-27",
+    "2026-11-03"
+   ],
+   "span": {
+    "from": "2026-10-06",
+    "to": "2026-11-10"
+   },
+   "when": "10/6〜11/10の毎週火曜 14:00〜15:30 全4回(10/27・11/3を除く)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 3,
+   "start": "14:00",
+   "end": "15:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "",
+   "mapq": "「はじめの一歩」第一子の赤ちゃんとお母さんへ",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": null,
+   "cost": "",
+   "target": "市内在住で、10/6時点で生後2〜5か月の第一子とお母さん(全4回参加できる方)",
+   "url": "",
+   "status": "候補",
+   "confidence": "",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-09.md"
+  },
+  {
+   "id": "E98",
+   "name": "こだいらクラフトFESTA2026 feat.ブリヂストン",
+   "dates": [
+    "2026-10-10",
+    "2026-10-11"
+   ],
+   "span": null,
+   "when": "10/10(土)・10/11(日) / 場所: 小平市(ブリヂストン関連会場)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "",
+   "mapq": "こだいらクラフトFESTA2026 feat.ブリヂストン",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": null,
+   "cost": "",
+   "target": "",
+   "url": "https://kodaira-tourism.com/event/22841/",
+   "status": "候補",
+   "confidence": "",
+   "tentative": false,
+   "deadline": null,
    "source": "events/2026-09.md"
   },
   {
@@ -2350,11 +2581,13 @@
   ],
   "2026-09-20": [
    "E7",
-   "E77"
+   "E77",
+   "E97"
   ],
   "2026-09-21": [
    "E7",
-   "E77"
+   "E77",
+   "E97"
   ],
   "2026-09-22": [
    "E7",
@@ -2509,10 +2742,12 @@
   ],
   "2026-09-05": [
    "E60",
-   "E71"
+   "E71",
+   "E95"
   ],
   "2026-09-06": [
    "E60",
+   "E95",
    "E48"
   ],
   "2026-09-09": [
@@ -2531,13 +2766,15 @@
    "E52"
   ],
   "2026-09-24": [
-   "E77"
+   "E77",
+   "E99"
   ],
   "2026-09-25": [
    "E77"
   ],
   "2026-09-26": [
-   "E77"
+   "E77",
+   "E96"
   ],
   "2026-09-27": [
    "E77"
@@ -2550,6 +2787,21 @@
   ],
   "2026-09-30": [
    "E70"
+  ],
+  "2026-10-06": [
+   "E93"
+  ],
+  "2026-10-27": [
+   "E93"
+  ],
+  "2026-11-03": [
+   "E93"
+  ],
+  "2026-10-10": [
+   "E98"
+  ],
+  "2026-10-11": [
+   "E98"
   ],
   "2026-11-01": [
    "E54"
@@ -2659,6 +2911,83 @@
    "id": "E78",
    "name": "西武園ゆうえんち「大夏祭り2026」",
    "reason": "台帳に「未確定のまま通信に載せない」と書かれている",
+   "when": ""
+  },
+  {
+   "id": "E83",
+   "name": "すくすくの会(心理士さんとお話をする会)",
+   "confidence": "",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E84",
+   "name": "のんきみちさんの絵本タイム",
+   "confidence": "",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E85",
+   "name": "0歳さんあつまれ",
+   "confidence": "",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E86",
+   "name": "ふたごちゃんみつごちゃんあつまれ",
+   "confidence": "",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E87",
+   "name": "みつごちゃんの会",
+   "confidence": "",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E88",
+   "name": "おもちゃの専門家と遊ぼう",
+   "confidence": "",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E89",
+   "name": "おとうさんの会",
+   "confidence": "",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E90",
+   "name": "りぼんの会(助産師さんによる相談会)",
+   "confidence": "",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E91",
+   "name": "出張ひろば「りぼんの会」@東部市民センター 和室",
+   "confidence": "",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E92",
+   "name": "出張ひろば「0歳さんあつまれ」@鈴木公民館 和室",
+   "confidence": "",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E94",
+   "name": "「からだってたいせつ」絵本とおはなしの会",
+   "confidence": "",
+   "reason": "日時・期間の行が無い",
    "when": ""
   },
   {

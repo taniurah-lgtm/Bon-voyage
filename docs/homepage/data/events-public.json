@@ -1,261 +1,14 @@
 {
- "generated": "2026-08-29",
+ "generated": "2026-09-02",
  "window": {
-  "from": "2026-08-29",
-  "to": "2026-09-12"
+  "from": "2026-09-02",
+  "to": "2026-09-16"
  },
  "events": [
-  {
-   "id": "E36",
-   "name": "西武園ゆうえんち 大火祭り(8月毎日開催期間あり)",
-   "dates": [
-    "2026-08-29"
-   ],
-   "span": null,
-   "when": "8/8(土)〜15(土)は毎日、ほか8/1・8/22・8/29 19:30〜",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 11,
-   "start": "19:30",
-   "end": null,
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "西武園ゆうえんち レッツゴー!レオランド特設ステージ(西武園ゆうえんち駅)/萩山乗換 約20〜25分",
-   "mapq": "西武園ゆうえんち 大火祭り",
-   "summary": "ダンサー・特殊効果連動の至近距離花火。要入園料。「大夏祭り」期間中の演出",
-   "kidsNote": "お盆期間の平日に行けるのが強み",
-   "caution": "",
-   "contact": null,
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "overall": "◎"
-   },
-   "cost": "",
-   "target": "",
-   "url": "https://www.seibuen-amusement-park.jp/2026summer/",
-   "tentative": false,
-   "deadline": null
-  },
-  {
-   "id": "E38",
-   "name": "滝山・前沢みんなの夏祭り",
-   "dates": [
-    "2026-08-29",
-    "2026-08-30"
-   ],
-   "span": null,
-   "when": "8/29(土)・30(日) ※2026-07 に確定",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 2,
-   "start": null,
-   "end": null,
-   "allDay": true,
-   "timeUncertain": false,
-   "place": "滝山中央通り(花小金井からバス「滝山センター」)",
-   "mapq": "滝山中央通り",
-   "summary": "三世代舞まつり・阿波踊り・屋台。市内最大級",
-   "kidsNote": "沿道観覧しやすいが人出多め",
-   "caution": "",
-   "contact": null,
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "overall": "○"
-   },
-   "cost": "",
-   "target": "",
-   "url": "http://takiyama.in.coocan.jp/",
-   "tentative": false,
-   "deadline": null
-  },
-  {
-   "id": "E40",
-   "name": "昭島市民くじら祭+夢花火",
-   "dates": [
-    "2026-08-29",
-    "2026-08-30"
-   ],
-   "span": null,
-   "when": "8/29(土)・30(日)、花火は8/29(土)20:00〜20:30 約2,000発",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": {
-    "2026-08-29": {
-     "label": "花火",
-     "start": "20:00",
-     "end": "20:30"
-    }
-   },
-   "totalDates": 2,
-   "start": null,
-   "end": null,
-   "allDay": true,
-   "timeUncertain": false,
-   "place": "昭和公園(東中神駅すぐ、電車約50分・車約30分)",
-   "mapq": "昭和公園",
-   "summary": "くじら型山車パレード・ステージ・花火",
-   "kidsNote": "大規模大会より混雑緩やか・駅近で撤収楽。花火20時開始なので前半だけ見て撤収も手",
-   "caution": "",
-   "contact": null,
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "overall": "◎"
-   },
-   "cost": "",
-   "target": "",
-   "url": "https://akishima-kujiramatsuri.jp/",
-   "tentative": false,
-   "deadline": null
-  },
-  {
-   "id": "E41",
-   "name": "武蔵村山市観光納涼花火大会",
-   "dates": [
-    "2026-08-29"
-   ],
-   "span": null,
-   "when": "8/29(土)の見込み 19:50〜20:30 約2,000発(要確認)",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": "19:50",
-   "end": "20:30",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "野山北公園運動場(車約20〜25分)",
-   "mapq": "野山北公園運動場",
-   "summary": "",
-   "kidsNote": "多摩屈指の混雑控えめローカル大会。トイレは仮設中心",
-   "caution": "",
-   "contact": null,
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "overall": "◎"
-   },
-   "cost": "",
-   "target": "",
-   "url": "https://www.city.musashimurayama.lg.jp/kankou/1004434/1001617.html",
-   "tentative": true,
-   "deadline": null
-  },
-  {
-   "id": "E42",
-   "name": "東京高円寺阿波おどり",
-   "dates": [
-    "2026-08-29",
-    "2026-08-30"
-   ],
-   "span": null,
-   "when": "8/29(土)・30(日) 17:00〜20:00",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 2,
-   "start": "17:00",
-   "end": "20:00",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "",
-   "mapq": "東京高円寺阿波おどり",
-   "summary": "",
-   "kidsNote": "観客100万人規模。有料桟敷席が取れた場合のみ",
-   "caution": "",
-   "contact": null,
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "overall": "✕に近い△"
-   },
-   "cost": "",
-   "target": "",
-   "url": "https://www.koenji-awaodori.com/about/about01.html",
-   "tentative": false,
-   "deadline": null
-  },
-  {
-   "id": "E59",
-   "name": "スライムをつくろう!(田無アスタ)",
-   "dates": [
-    "2026-08-29",
-    "2026-08-30"
-   ],
-   "span": null,
-   "when": "8/29(土)・30(日) 10:00〜17:00(最終受付16:30)",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 2,
-   "start": "10:00",
-   "end": "17:00",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "アスタ専門店街 2Fセンターコート",
-   "mapq": "アスタ専門店街",
-   "summary": "",
-   "kidsNote": "工作系。夏休みの自由研究の締めにも。先着なので午前入りが安全",
-   "caution": "",
-   "contact": null,
-   "lastEntry": "最終受付16:30",
-   "hours": "",
-   "ages": {
-    "baby": null,
-    "pre": "◎",
-    "elem": "◎"
-   },
-   "cost": "1人1回500円 / 各日先着200名 ※なくなり次第終了",
-   "target": "",
-   "url": "https://www.asta.co.jp/event/",
-   "tentative": false,
-   "deadline": null
-  },
-  {
-   "id": "E68",
-   "name": "中央公民館 令和8年度「友・遊こどもまつり」",
-   "dates": [
-    "2026-08-29"
-   ],
-   "span": null,
-   "when": "8/29(土) 10:00〜14:30",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": "10:00",
-   "end": "14:30",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "中央公民館(小川町2-1325) — 館内まるごと使う。1階〜地下〜2階に分散",
-   "mapq": "小平市中央公民館",
-   "summary": "",
-   "kidsNote": "プラレール・おはなし会・室内アソビバ。屋内・無料・出入り自由・4時間半の会期。下の子が飽きたら抜けられるので2歳連れでも成立する",
-   "caution": "",
-   "contact": null,
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "○",
-    "pre": "◎",
-    "elem": "◎"
-   },
-   "cost": "無料",
-   "target": "市内在住の小・中学生。保護者同伴なら未就学児も可",
-   "url": "https://www.city.kodaira.tokyo.jp/event/129/129131.html",
-   "tentative": false,
-   "deadline": null
-  },
   {
    "id": "E60",
    "name": "西東京 みんなの展覧会&イベント(田無アスタ)",
    "dates": [
-    "2026-08-31",
-    "2026-09-01",
     "2026-09-02",
     "2026-09-03",
     "2026-09-04",
@@ -365,6 +118,42 @@
    "cost": "無料(児童館行事) / 対象: 双子・多胎児の親子",
    "target": "",
    "url": "https://kodaji.ashita-ba.co.jp/",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E95",
+   "name": "第52回 せいぶ通り秋まつり",
+   "dates": [
+    "2026-09-05",
+    "2026-09-06"
+   ],
+   "span": null,
+   "when": "9/5(土)・9/6(日) 17:00〜21:00　※雨天決行",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "17:00",
+   "end": "21:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "せいぶ通り商店街(花小金井駅南口〜小金井公園方面)",
+   "mapq": "せいぶ通り商店街",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "雨天決行",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "無料(出店での飲食は実費)",
+   "target": "",
+   "url": "https://festival.hanakoganei.net/",
    "tentative": false,
    "deadline": null
   },
@@ -603,7 +392,8 @@
    "id": "E76",
    "name": "江戸東京たてもの園 伝統工芸の実演(東京手描友禅・江戸筆)",
    "dates": [
-    "2026-09-12"
+    "2026-09-12",
+    "2026-09-13"
    ],
    "span": null,
    "when": "9/12(土)・13(日) 10:30〜16:30",
@@ -631,6 +421,83 @@
    "cost": "",
    "target": "",
    "url": "https://www.tatemonoen.jp/event/schedule/2026/schedule789.php",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E49",
+   "name": "初心者ラグビー教室(小平市ラグビーフットボール協会)",
+   "dates": [
+    "2026-09-13"
+   ],
+   "span": null,
+   "when": "9/13(日) 9:00〜",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "09:00",
+   "end": null,
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平第十三小学校 校庭",
+   "mapq": "小平第十三小学校 校庭",
+   "summary": "ラグビーの基礎練習。幼児・低学年=タグラグビー / 中学年=7人制 / 高学年=9人制",
+   "kidsNote": "未就学から参加できるのが貴重",
+   "caution": "",
+   "contact": {
+    "tel": "090-9247-5083",
+    "mail": "ab410427@gmail.com",
+    "who": "西田"
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": null,
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "幼稚園年中〜小学生(幼児・低学年=タグラグビー)",
+   "url": "",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-09-12",
+    "raw": "8/5(水)〜9/12(土)までに電子メールで件名に参加者の氏名・学年を明記"
+   }
+  },
+  {
+   "id": "E52",
+   "name": "弦楽アンサンブル・ルナーレ演奏会",
+   "dates": [
+    "2026-09-13"
+   ],
+   "span": null,
+   "when": "9/13(日) 14:00開演(13:30開場)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "14:00",
+   "end": null,
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "ルネこだいら 中ホール / 費用: 無料",
+   "mapq": "ルネこだいら",
+   "summary": "",
+   "kidsNote": "無料のクラシック入門。詳細は公民館のチラシ",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": null,
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "",
+   "target": "",
+   "url": "",
    "tentative": false,
    "deadline": null
   },
@@ -709,23 +576,6 @@
    "url": "https://www.tamarokuto.or.jp/calendar/",
    "tentative": false,
    "deadline": null
-  },
-  {
-   "id": "E49",
-   "name": "初心者ラグビー教室(小平市ラグビーフットボール協会)",
-   "dates": [],
-   "when": "9/13(日) 9:00〜",
-   "url": "",
-   "contact": {
-    "tel": "090-9247-5083",
-    "mail": "ab410427@gmail.com",
-    "who": "西田"
-   },
-   "deadline": {
-    "date": "2026-09-12",
-    "raw": "8/5(水)〜9/12(土)までに電子メールで件名に参加者の氏名・学年を明記"
-   },
-   "deadlineOnly": true
   },
   {
    "id": "E53",
@@ -818,5 +668,5 @@
    "url": "https://www.asta.co.jp/update/kids_stamp_2025.pdf"
   }
  ],
- "beyond": 9
+ "beyond": 11
 }

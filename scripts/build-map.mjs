@@ -65,7 +65,9 @@ const spotHTML = (s) => {
   let links = `<a class="lk map" href="${esc(s.map || mapQ(s.name))}" target="_blank" rel="noopener">📍 地図</a>`;
   if (s.official) links += `<a class="lk off" href="${esc(s.official)}" target="_blank" rel="noopener">🔗 公式</a>`;
   return `      <div class="spot" id="${esc(slug(s.name))}" data-cat="${esc(s.cat)}">
-        <div class="nm">${esc(s.name)}${s.lat ? '' : ' <span class="nopin" title="地図上の位置が確認できていません">ピンなし</span>'}</div>
+        <div class="nm">${esc(s.name)}${
+          s.lat ? '' : ` <span class="nopin" title="${esc(s.geoNote || '地図上の位置が確認できていません')}">ピンなし</span>`
+        }</div>
         ${s.access ? `<div class="acc">${esc(s.access)}</div>` : ''}
         <div class="desc">${esc(s.desc)}</div>
         ${s.ages ? `<div class="ages">${esc(s.ages)}</div>` : ''}

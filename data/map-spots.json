@@ -46,7 +46,10 @@
   "ages": "👶 ◎ 🧒 ◎ 🎒 ○",
   "map": "https://www.google.com/maps/search/?api=1&query=花小金井ひょうたん池公園",
   "official": "https://www.city.kodaira.tokyo.jp/kurashi/113/113055.html",
-  "geoQuery": "ひょうたん池公園 小平市"
+  "lat": 35.722404,
+  "lng": 139.518143,
+  "geoApprox": true,
+  "geoNote": "公園の住所（花小金井南町3-3-13）から引いた点。国土地理院の住所検索"
  },
  {
   "cat": "💧無料で水あそび（夏）",
@@ -119,22 +122,28 @@
  {
   "cat": "☔雨・猛暑の日の屋内（毎週使える）",
   "name": "図書館のおはなし会（小平市立）",
-  "access": "各図書館／無料・申込不要のことが多い",
+  "access": "花小金井図書館ほか市内の各図書館／無料・申込不要のことが多い",
   "desc": "絵本の読み聞かせや手あそび。絵本デビューにぴったり。回ごとに対象年齢が分かれています。開催日は「おはなし会」ページで確認できます。",
   "ages": "👶 ◎ 🧒 ◎ 🎒 ○",
   "map": "https://www.google.com/maps/search/?api=1&query=小平市立花小金井図書館",
   "official": "https://library.kodaira.ed.jp/viewer/info.html?id=74",
-  "geoSkip": true
+  "lat": 35.7278467,
+  "lng": 139.5140614,
+  "geoApprox": true,
+  "geoNote": "ピンは花小金井図書館。おはなし会は市内の各図書館で開かれる"
  },
  {
   "cat": "☔雨・猛暑の日の屋内（毎週使える）",
   "name": "児童館・子育てひろば",
-  "access": "無料／未就学〜小学生",
+  "access": "花小金井南児童館ほか市内の各館／無料・未就学〜小学生",
   "desc": "無料で遊べて、親子プログラムも。雨の日の“いつもの居場所”に。花小金井エリアなら花小金井南児童館が近くて頼れます。",
   "ages": "👶 ◎ 🧒 ◎ 🎒 ○",
   "map": "https://www.google.com/maps/search/?api=1&query=花小金井南児童館",
   "official": "",
-  "geoSkip": true
+  "lat": 35.72231,
+  "lng": 139.518647,
+  "geoApprox": true,
+  "geoNote": "ピンは花小金井南児童館。児童館・子育てひろばは市内に複数ある"
  },
  {
   "cat": "☔雨・猛暑の日の屋内（毎週使える）",
@@ -245,7 +254,8 @@
   "ages": "👶 ○ 🧒 ○ 🎒 ○",
   "map": "https://www.google.com/maps/search/?api=1&query=%E8%A5%BF%E6%AD%A6%E6%96%B0%E5%AE%BF%E9%A7%85",
   "official": "https://www.seiburailway.jp/railways/",
-  "geoSkip": true
+  "geoSkip": true,
+  "geoNote": "行き先ではなく西武新宿線の方向なので、地図にはピンを立てない"
  },
  {
   "cat": "🦒動物とふれあう",
