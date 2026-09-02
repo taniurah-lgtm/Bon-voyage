@@ -140,6 +140,7 @@ const page = `<!doctype html>
 <meta property="og:locale" content="ja_JP">
 <link rel="stylesheet" href="/assets/bv-tokens.css">
 <link rel="stylesheet" href="/assets/bv-calendar.css">
+<link rel="stylesheet" href="/assets/bv-nav.css">
 <style>
   main { padding: .9rem 0 1rem; }
   .lead { color: var(--ink-soft); font-size: .85rem; margin-bottom: .6rem; line-height: 1.7; }
@@ -167,6 +168,17 @@ const page = `<!doctype html>
 </style>
 </head>
 <body>
+<nav class="bvnav" aria-label="サイト内">
+  <div class="bvnav-in">
+    <a class="bvnav-brand" href="/">ぼんぼやーじゅ通信</a>
+    <div class="bvnav-links">
+      <a href="/" class="bv-hide-sm">通信について</a>
+      <a href="/calendar.html" aria-current="page"><span class="bv-lg">おでかけ</span>カレンダー</a>
+      <a href="/map.html"><span class="bv-lg">おでかけ</span>マップ</a>
+      <a class="bvnav-cta" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE<span class="bv-lg">で受け取る</span></a>
+    </div>
+  </div>
+</nav>
 <header class="ghead">
   <div class="ghead-in">
     <div class="eyebrow">Bon Voyage,</div>
@@ -255,7 +267,6 @@ ${(() => {
   <div class="nav-pills">
     <a href="/">通信について</a>
     <a href="/map.html">おでかけマップ</a>
-    <a href="/guide.html">おでかけガイド</a>
   </div>
 
   <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>

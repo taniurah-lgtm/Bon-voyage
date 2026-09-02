@@ -1,0 +1,199 @@
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<title>A4カラーポスター 入稿用｜ぼんぼやーじゅ通信</title>
+<!--
+  A4カラーポスター。カラー印刷用（リソグラフ版とは別物）。
+  既定は 210×297mm（塗り足しなし＝コンビニ・家庭用プリンタ向け）。
+  ?bleed=1 で 216×303mm（塗り足し3mm＝印刷所入稿向け）。
+  必須要素: ①情報をどうやって集めているか ②どんな通信が届くか（LINEプレビュー）
+-->
+<style>
+:root{
+  --ground:#FBFAF5; --ink:#22323B; --ink-soft:#55666F; --ink-faint:#8B99A1;
+  --sky:#4FA3C4; --sky-deep:#2C7C9E; --sky-wash:#EAF4F8;
+  --gold:#EBA24A; --gold-wash:#FDF2E0; --gold-ink:#8A5A12;
+  --line:#E6E0D4; --paper:#FFFFFF;
+  --sans:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+@page{size:210mm 297mm;margin:0;}
+html,body{background:#fff;}
+body{font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+.page{width:210mm;height:297mm;position:relative;overflow:hidden;background:var(--ground);color:var(--ink);}
+body.bleed .page{width:216mm;height:303mm;padding:3mm;}
+.trim{position:relative;width:210mm;height:297mm;overflow:hidden;background:var(--ground);display:flex;flex-direction:column;}
+
+/* 1. ヒーロー */
+.hero{position:relative;height:38mm;flex:none;
+  background-image:linear-gradient(180deg,rgba(18,40,52,.30) 0%,rgba(18,40,52,.10) 42%,rgba(18,40,52,.62) 100%),url('assets/hero-park.jpg');
+  background-size:cover;background-position:center 62%;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#fff;padding:0 12mm;}
+.eyebrow{font-size:4mm;font-style:italic;font-weight:700;letter-spacing:.06em;opacity:.95;text-shadow:0 1px 6px rgba(0,0,0,.45);}
+.brand{font-size:10.6mm;font-weight:900;letter-spacing:.01em;line-height:1.08;margin-top:1mm;text-shadow:0 2px 12px rgba(0,0,0,.5);}
+.brandsub{font-size:4.3mm;font-weight:700;margin-top:1.8mm;letter-spacing:.04em;text-shadow:0 1px 8px rgba(0,0,0,.5);}
+.freetag{position:absolute;top:5mm;right:7mm;width:20mm;height:20mm;border-radius:50%;background:var(--gold);color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28);}
+.freetag b{font-size:6.4mm;font-weight:900;line-height:1;}
+.freetag span{font-size:2.7mm;font-weight:700;margin-top:1mm;letter-spacing:.02em;}
+
+/* 2. リード */
+.lead{flex:none;padding:3.6mm 13mm 0;text-align:center;}
+.lead h1{font-size:5mm;font-weight:900;line-height:1.4;letter-spacing:-.01em;}
+.lead h1 em{font-style:normal;color:var(--sky-deep);}
+.chips{display:flex;gap:2.4mm;margin-top:2.4mm;}
+.chip{flex:1;text-align:center;background:var(--paper);border:.35mm solid var(--line);border-radius:2.4mm;padding:1.5mm 0;font-size:3.2mm;font-weight:800;}
+.chip small{display:block;font-size:2.8mm;font-weight:400;color:var(--ink-faint);margin-top:.6mm;}
+
+/* 見出し */
+.sec{flex:none;padding:0 13mm;margin-top:3.6mm;}
+.sec-h{display:flex;align-items:center;gap:3mm;font-size:4.1mm;font-weight:900;color:var(--sky-deep);}
+.sec-h::after{content:"";flex:1;height:.4mm;background:var(--line);}
+
+/* 3. どうやって集めているか */
+.steps{margin-top:2mm;display:flex;flex-direction:column;gap:1.3mm;}
+.step{display:flex;gap:3.2mm;align-items:flex-start;}
+.num{flex:none;width:6.2mm;height:6.2mm;border-radius:50%;background:var(--sky-deep);color:#fff;font-size:3.6mm;font-weight:900;
+  display:flex;align-items:center;justify-content:center;margin-top:.3mm;}
+.step-b{flex:1;}
+.step-t{font-size:3.6mm;font-weight:800;line-height:1.3;}
+.step-d{font-size:2.72mm;line-height:1.4;color:var(--ink-soft);margin-top:.8mm;}
+.srcs{margin-top:1.6mm;background:var(--sky-wash);border-radius:2.4mm;padding:2.1mm 2.8mm;
+  font-size:2.75mm;line-height:1.62;color:#2A4E5F;}
+.srcs b{font-weight:800;}
+
+/* 4. こんな通信が届きます */
+.secnote{margin-top:1.6mm;font-size:2.85mm;line-height:1.5;color:var(--ink-soft);}
+.secnote b{color:var(--ink);font-weight:800;}
+.phone{margin-top:2.2mm;background:var(--paper);border:.35mm solid var(--line);border-radius:3mm;padding:2.8mm;box-shadow:0 1mm 4mm rgba(34,50,59,.06);}
+.pbar{display:flex;align-items:center;gap:2.4mm;padding-bottom:2.4mm;border-bottom:.3mm solid var(--line);}
+.av{width:6.4mm;height:6.4mm;border-radius:50%;background:var(--sky-deep);color:#fff;display:flex;align-items:center;justify-content:center;font-size:3.2mm;font-weight:900;flex:none;}
+.pname{font-size:3.2mm;font-weight:800;}
+.ptime{margin-left:auto;font-size:2.6mm;color:var(--ink-faint);}
+.bub{margin-top:2.2mm;background:var(--sky-wash);border-radius:2.4mm;border-top-left-radius:.8mm;padding:2.3mm 2.6mm;font-size:2.8mm;line-height:1.56;}
+.bub .bt{display:block;font-weight:900;font-size:3.3mm;margin-bottom:1.8mm;}
+.bub h4{font-size:2.9mm;font-weight:900;color:var(--sky-deep);margin:1.6mm 0 .5mm;}
+.bub h4:first-of-type{margin-top:0;}
+.bub .ev{font-weight:800;}
+.bub .wh{color:var(--ink-soft);font-size:2.75mm;}
+.bub p{margin-top:.4mm;}
+
+/* 5. CTA */
+.cta{flex:none;margin-top:auto;padding:2.8mm 13mm 0;display:flex;align-items:center;gap:4.2mm;}
+.qr{width:26mm;height:26mm;flex:none;background:#fff;border:.35mm solid var(--line);border-radius:2.4mm;padding:1.6mm;}
+.qr img{width:100%;height:100%;display:block;image-rendering:pixelated;}
+.cta-b{flex:1;}
+.cta-t{font-size:4mm;font-weight:900;line-height:1.32;}
+.cta-d{font-size:2.9mm;line-height:1.5;color:var(--ink-soft);margin-top:1mm;}
+.cta-u{margin-top:1.4mm;font-size:3.6mm;font-weight:900;color:var(--sky-deep);letter-spacing:.01em;}
+.gift{margin-top:1.6mm;display:inline-block;background:var(--gold-wash);border:.3mm solid var(--gold);border-radius:2mm;
+  padding:1.4mm 2.6mm;font-size:2.9mm;font-weight:800;color:var(--gold-ink);}
+
+/* 5b. 機能紹介 */
+.feats{flex:none;margin-top:1.8mm;padding:0 13mm;display:flex;gap:3.4mm;}
+.feat{flex:1;min-width:0;display:flex;gap:2.4mm;align-items:flex-start;background:var(--paper);border:.35mm solid var(--line);border-radius:2.6mm;padding:2.4mm 2.8mm;}
+.feat>div:last-child{flex:1;min-width:0;}
+.fi{font-size:5mm;line-height:1;flex:none;}
+.ft{font-size:3.2mm;font-weight:900;}
+.fd{font-size:2.7mm;line-height:1.5;color:var(--ink-soft);margin-top:.7mm;}
+
+/* 6. フッター */
+.foot{flex:none;margin-top:2.2mm;background:var(--ink);color:#fff;padding:2.6mm 13mm;}
+.foot .a{font-size:2.8mm;font-weight:800;line-height:1.5;}
+.foot .a span{color:#9FC8D8;font-weight:400;}
+.foot .b{font-size:2.5mm;color:#A9B7BE;margin-top:1mm;}
+</style>
+<div class="page"><div class="trim">
+
+  <div class="hero">
+    <div class="freetag"><b>無料</b><span>週1回・水曜</span></div>
+    <div class="eyebrow">Bon Voyage,</div>
+    <div class="brand">ぼんぼやーじゅ通信</div>
+    <div class="brandsub">花小金井まわりの 週末おでかけ便</div>
+  </div>
+
+  <div class="lead">
+    <h1>未就学児・小学生のいるご家庭へ<br><em>週末のおでかけ情報</em>を、毎週水曜の朝に。</h1>
+    <div class="chips">
+      <div class="chip">あかちゃん<small>0〜2歳</small></div>
+      <div class="chip">未就学<small>3〜6歳</small></div>
+      <div class="chip">小学生<small>6〜12歳</small></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h">情報は、どうやって集めているの？</div>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div class="step-b">
+        <div class="step-t">毎週水曜の朝、公式サイトを一件ずつ見ています</div>
+        <div class="step-d">市や施設が出している一次情報だけを回ります。まとめサイトからの転載はしません。</div>
+      </div></div>
+      <div class="step"><div class="num">2</div><div class="step-b">
+        <div class="step-t">日付・料金・対象を、公式で確かめてから載せます</div>
+        <div class="step-d">確認が取れないことは「要確認」と正直に書き、問い合わせ先を添えます。</div>
+      </div></div>
+      <div class="step"><div class="num">3</div><div class="step-b">
+        <div class="step-t">申込の締切に、間に合ううちにお知らせします</div>
+        <div class="step-d">気づいたときには締切が過ぎていた——それをなくすのが、この通信の役目です。</div>
+      </div></div>
+    </div>
+    <div class="srcs"><b>毎週見ているところ</b>　小平市／市報こだいら／公民館／児童館／子ども家庭支援センター／多摩六都科学館／小金井公園・江戸東京たてもの園／田無アスタ／西武鉄道／昭和記念公園 ほか</div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h">こんな通信が届きます</div>
+    <div class="secnote"><b>毎週水曜の朝、その週の最新の情報をお届けしています。</b>下はその一例です。</div>
+    <div class="phone">
+      <div class="pbar"><div class="av">ぼ</div><div class="pname">ぼんぼやーじゅ通信</div><div class="ptime">水曜 9:05</div></div>
+      <div class="bub">
+        <span class="bt">【ぼんぼやーじゅ通信】</span>
+        <h4>■ 今週の一推し</h4>
+        <span class="ev">クラシックポップアップ絵本展</span><br>
+        <span class="wh">中央図書館2階／〜10/14（水）・無料</span>
+        <p>しかけで飛び出す絵本の展示です。会期が長いので、雨の日の行き先として覚えておけます。金曜は休館です。</p>
+        <h4>■ 雨の日・暑い日に</h4>
+        <span class="ev">多摩六都科学館</span><br>
+        <span class="wh">西東京市芝久保町／9:30〜17:00・月曜休館</span>
+        <p>プラネタリウムは毎日5回。全編生解説の「宇宙クルーズ2026」が13:10と15:50、大型映像「恐竜新世界」が11:50と14:30から。ぜんぶ屋内です。</p>
+        <h4>■ イベント先取り情報</h4>
+        <p>・<b>9/19(土)〜23(水)は5連休。</b>江戸東京たてもの園では9/19〜27に綱島家の「十五夜飾り」。小学生以下は入園無料です。<br>
+        ・11/7(土)・8(日)は横須賀の家族フェス「nobinobi 2026」。中学生以下は無料。<b>早割は10/2まで</b>で、過ぎると1枚500円ほど上がります。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <div class="qr"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAzQAAAM0AQAAAABFCVraAAADN0lEQVR42u3dQXLbMAwFUE4voPvfkjdwN05FAqCaRZIZMk8Lj63aeoss9AuCUHv9yNEbh8PhcDgcDofD4XA4HA6Hw+FwOBwOh8PhcDic3+C0eFzvc/++294f73f3z676Ah+//dN+5uBwOBwOh/MFx5gPrjE6vG/5U0h4f2WZFPIF5AMOh8PhcPbPB2M14CMLhEDwfnk9hInxAvIBh8PhcDiH5YOxTHDHhVwreAgY8gGHw+FwOAfng1Z0IqgfcDgcDofTfmH/QUvR4C4n3FlA/wGHw+FwOKfmg3Bcc13gEy/5AvIBh8PhcDhb54PlkToVQ/fioh1h2kfp78PhcDgczs75oLrl93ovY7pK2PiofsDhcDgczu75INzoq3MhM6S4ME1HkA84HA6HwzmhfvDUd3ife/jKNV9FPuBwOBwO55D6wTTrYDwXftHncUm9+Af9BxwOh8PhHFI/CGWCUCt47kSwv5HD4XA4nOPyQdWJsGxC6Kn1oHqRDzgcDofD2Tof1AMT+1xOaHPpoI3rC6nOYH2Bw+FwOJz980EbU0G1iSFEiHrwsnzA4XA4HM45+aDev9DTnsc0LKGvNjlaX+BwOBwOZ/988EqBIG1tbKu1hL7qWJAPOBwOh8PZPx+EZYT8cMYQHOpKQlM/4HA4HA7njHzQ68wQzlVJIS0oeP4Ch8PhcDhH5IPwn/6xfnB/ebG08L9mBfmAw+FwOJyN6wfVJMVqNNInsoX1BQ6Hw+FwDqkfpCGK07vUszhVEqq2BfmAw+FwOJz96wdpOGKoC1xFY0JOFNYXOBwOh8M5pn6QlwfC3b6ajxTWHMxH4nA4HA7nrPrBYqdjqi680hMW6rZG6wscDofD4exfP2gPhYDn0crpqUzqBxwOh8PhHJIPFo9nrh/tnMsJy3fyAYfD4XA4W+eDu3Qw7ktoxZiDxYMd6yFJ8gGHw+FwOOfkg+fSwf2xnsMsH3A4HA6Hc2b9IDxcYTFGeQwOTX8ih8PhcDhn5YPn7Y5pMEJLH60vcDgcDodzVj4Ix6J+sHzYY5Uj5AMOh8PhcLbOB995dA6Hw+FwOBwOh8PhcDgcDofD4XA4HA6Hw+FwOOc6fwHj5efLyN4IqAAAAABJRU5ErkJggg==" alt=""></div>
+    <div class="cta-b">
+      <div class="cta-t">スマホのカメラで読み取ってください</div>
+      <div class="cta-d">ホームページから「LINEで受け取る」を選ぶだけ。いつでも解除できます。</div>
+      <div class="cta-u">bonvoya.nicomaru.tokyo/f</div>
+    </div>
+  </div>
+
+  <div class="feats">
+    <div class="feat">
+      <div class="fi">🗺</div>
+      <div><div class="ft">みんなのおでかけマップ</div>
+      <div class="fd">実際に行ってよかった場所を集めています。年齢別の目安つきで、地図もすぐ開けます。</div></div>
+    </div>
+    <div class="feat">
+      <div class="fi">📅</div>
+      <div><div class="ft">おでかけカレンダー</div>
+      <div class="fd">気になった催しは、<b>お使いのカレンダーにそのまま登録</b>できます。iPhoneでもAndroidでも。</div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="a">毎週みる街　<span>小平市・西東京市・東久留米市・東村山市・小金井市</span>　／　ときどき　<span>武蔵野市・国分寺市・立川市・所沢市 ほか</span></div>
+    <div class="b">発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）</div>
+  </div>
+
+</div></div>
+<script>
+if (new URLSearchParams(location.search).get('bleed') === '1') {
+  document.body.classList.add('bleed');
+  const s = document.createElement('style');
+  s.textContent = '@page{size:216mm 303mm;margin:0;}';
+  document.head.appendChild(s);
+}
+</script>

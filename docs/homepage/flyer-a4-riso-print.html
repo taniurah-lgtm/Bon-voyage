@@ -84,6 +84,8 @@ body{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto S
 .p-k .bubble{border-left-width:.35mm;}
 
 .p-c .ki{visibility:hidden;}
+/* .p-1 = 1色版(黒のみ): 色紙に刷るとき用。ki/ci をどちらも隠さず、全部を黒1版にまとめる */
+
 .p-c .phone,.p-c .phone-bar,.p-c .f-cta,.p-c .bubble{border-color:transparent;}
 .p-c .bubble{border-left-color:#000;}
 .p-c .qr{visibility:hidden;}
@@ -92,29 +94,29 @@ body{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto S
 const QR="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAzQAAAM0AQAAAABFCVraAAADN0lEQVR42u3dQXLbMAwFUE4voPvfkjdwN05FAqCaRZIZMk8Lj63aeoss9AuCUHv9yNEbh8PhcDgcDofD4XA4HA6Hw+FwOBwOh8PhcDic3+C0eFzvc/++294f73f3z676Ah+//dN+5uBwOBwOh/MFx5gPrjE6vG/5U0h4f2WZFPIF5AMOh8PhcPbPB2M14CMLhEDwfnk9hInxAvIBh8PhcDiH5YOxTHDHhVwreAgY8gGHw+FwOAfng1Z0IqgfcDgcDofTfmH/QUvR4C4n3FlA/wGHw+FwOKfmg3Bcc13gEy/5AvIBh8PhcDhb54PlkToVQ/fioh1h2kfp78PhcDgczs75oLrl93ovY7pK2PiofsDhcDgczu75INzoq3MhM6S4ME1HkA84HA6HwzmhfvDUd3ife/jKNV9FPuBwOBwO55D6wTTrYDwXftHncUm9+Af9BxwOh8PhHFI/CGWCUCt47kSwv5HD4XA4nOPyQdWJsGxC6Kn1oHqRDzgcDofD2Tof1AMT+1xOaHPpoI3rC6nOYH2Bw+FwOJz980EbU0G1iSFEiHrwsnzA4XA4HM45+aDev9DTnsc0LKGvNjlaX+BwOBwOZ/988EqBIG1tbKu1hL7qWJAPOBwOh8PZPx+EZYT8cMYQHOpKQlM/4HA4HA7njHzQ68wQzlVJIS0oeP4Ch8PhcDhH5IPwn/6xfnB/ebG08L9mBfmAw+FwOJyN6wfVJMVqNNInsoX1BQ6Hw+FwDqkfpCGK07vUszhVEqq2BfmAw+FwOJz96wdpOGKoC1xFY0JOFNYXOBwOh8M5pn6QlwfC3b6ajxTWHMxH4nA4HA7nrPrBYqdjqi680hMW6rZG6wscDofD4exfP2gPhYDn0crpqUzqBxwOh8PhHJIPFo9nrh/tnMsJy3fyAYfD4XA4W+eDu3Qw7ktoxZiDxYMd6yFJ8gGHw+FwOOfkg+fSwf2xnsMsH3A4HA6Hc2b9IDxcYTFGeQwOTX8ih8PhcDhn5YPn7Y5pMEJLH60vcDgcDodzVj4Ix6J+sHzYY5Uj5AMOh8PhcLbOB995dA6Hw+FwOBwOh8PhcDgcDofD4XA4HA6Hw+FwOOc6fwHj5efLyN4IqAAAAABJRU5ErkJggg==";
 const V=[
  {id:'std',blocks:[
-  {h:'■ 今週の一推し',ev:'こだいら防災救急フェア',when:'8/23（日）10:00〜13:00／中央公民館',
-   p:['はしご車の搭乗体験（20組）、放水体験、AEDの練習。<strong>申込は不要、参加費もかかりません。</strong>']},
-  {h:'■ 同じ場所で、もう一つ',ev:'クラシックポップアップ絵本展',when:'中央図書館2階／〜10/14（水）・無料',
-   p:['同じ建物の2階です。13時にフェアが終わったあと、涼みがてらそのまま寄れます。']},
-  {h:'■ イベント先取り情報',ev:'',when:'',p:['・ランニング教室（9/6）の申込は<strong>8/28（金）まで</strong>。']}]},
+  {h:'■ 今週の一推し',ev:'クラシックポップアップ絵本展',when:'中央図書館2階／〜10/14（水）・無料',
+   p:['しかけで飛び出す絵本の展示です。<strong>会期が長いので、雨の日の行き先として覚えておけます。</strong>金曜は休館です。']},
+  {h:'■ 雨の日・暑い日に',ev:'市内の児童館',when:'9:00〜18:00／無料',
+   p:['花小金井南児童館は駅から歩けます。休館は第1・第3火曜です。']},
+  {h:'■ イベント先取り情報',ev:'',when:'',p:['・交通安全講習会（9/12）は<strong>無料・申込不要</strong>。親子で参加できます。']}]},
  {id:'kominkan',blocks:[
-  {h:'■ 今週の一推し',ev:'親子木工講座「引き出し式の小物入れ」',when:'花小金井北公民館／小学生と保護者',
-   p:['日程と費用はまだ公表されていません。公民館（042-462-5790）に直接おたずねください。']},
-  {h:'■ 少し足をのばして',ev:'こだいら防災救急フェア',when:'8/23（日）10:00〜13:00／中央公民館',
-   p:['はしご車の搭乗体験（20組）と放水体験。申込は不要で、参加費もかかりません。']},
-  {h:'■ イベント先取り情報',ev:'',when:'',p:['・初心者ラグビー教室（9/13）は<strong>幼稚園の年中から</strong>参加できます。']}]},
+  {h:'■ 今週の一推し',ev:'花小金井南児童館',when:'花小金井南町3-3-17／9:00〜18:00・無料',
+   p:['<strong>駅から歩いて行けて、料金はかかりません。</strong>休館は第1・第3火曜です。']},
+  {h:'■ 少し足をのばして',ev:'クラシックポップアップ絵本展',when:'中央図書館2階／〜10/14（水）・無料',
+   p:['しかけで飛び出す絵本の展示。金曜は休館なのでご注意を。']},
+  {h:'■ イベント先取り情報',ev:'',when:'',p:['・<strong>9/19（土）〜23（水）は5連休</strong>。11年ぶりの大型連休です。']}]},
  {id:'rokuto',blocks:[
-  {h:'■ 今週の一推し',ev:'キッズプラネタリウム「とびだせ星空調査隊」',when:'多摩六都科学館／〜8/31・10:30と14:20',
-   p:['暗いのが苦手なお子さんは、後ろの席のほうが安心して見られます。']},
-  {h:'■ 雨の日・猛暑の日に',ev:'みんなで実験！しくみラボ',when:'多摩六都科学館／入館券だけで参加できます',
-   p:['鏡をテーマにした体験コーナー。天気が崩れた週末の逃げ場になります。']},
-  {h:'■ イベント先取り情報',ev:'',when:'',p:['・大型映像「恐竜新世界」は11:40と15:30の2回。']}]},
+  {h:'■ 今週の一推し',ev:'天体観望会【9月】',when:'9/26（土）18:30〜20:00／1人100円',
+   p:['屋上で月やアルビレオを見ます。<strong>圏域5市にお住まいの方だけが申し込めます。</strong>抽選で、締切は9/14（月）必着です。']},
+  {h:'■ 雨の日・暑い日に',ev:'第13回 全国KAPLA®大会に応募しよう！',when:'〜9/23（水）10:00〜16:00／入館料だけ',
+   p:['木のブロックを好きなだけ積めます。申込は要らず、開催時間中に行けば参加できます。']},
+  {h:'■ イベント先取り情報',ev:'',when:'',p:['・<strong>9/19（土）〜23（水）の5連休は、KAPLAが毎日あります。</strong>']}]},
  {id:'koganei',blocks:[
-  {h:'■ 今週の一推し',ev:'江戸東京たてもの園',when:'小金井公園内／花小金井から自転車圏',
+  {h:'■ 今週の一推し',ev:'江戸東京たてもの園',when:'小金井公園内／小学生以下は無料',
    p:['昔の街並みがまるごと移築されています。木陰が多く、ベビーカーのまま回れます。']},
-  {h:'■ 同じ公園でもう一つ',ev:'広場とじゃぶじゃぶ池',when:'小金井公園／入園無料',
-   p:['日陰のベンチが多め。着替えを持っていくと夕方まで過ごせます。']},
-  {h:'■ イベント先取り情報',ev:'',when:'',p:['・こだいら防災救急フェアは8/23（日）。はしご車の搭乗体験があります。']}]}
+  {h:'■ 連休におすすめ',ev:'綱島家「十五夜飾り」',when:'9/19（土）〜27（日）／たてもの園内',
+   p:['復元された民家に、十五夜の飾りつけがされます。今年の中秋の名月は9/25です。']},
+  {h:'■ イベント先取り情報',ev:'',when:'',p:['・伝統工芸の実演は<strong>9/12（土）・13（日）</strong>の10:30〜16:30。']}]}
 ];
 function sheet(v){
  const bl=v.blocks.map(b=>`<h4 class="ci">${b.h}</h4>`+
@@ -141,8 +143,8 @@ function sheet(v){
  <div class="f-pw">
    <div class="f-plabel"><span class="ci">こんなふうに届きます</span></div>
    <div class="phone">
-     <div class="phone-bar"><div class="avatar">ぼ</div><div class="phone-name ki">ぼんぼやーじゅ通信</div><div class="phone-time ki">8/19 9:05</div></div>
-     <div class="bubble"><span class="b-title ki">【ぼんぼやーじゅ通信 8/19（水）号】</span>${bl}</div>
+     <div class="phone-bar"><div class="avatar">ぼ</div><div class="phone-name ki">ぼんぼやーじゅ通信</div><div class="phone-time ki">水曜 9:05</div></div>
+     <div class="bubble"><span class="b-title ki">【ぼんぼやーじゅ通信】</span>${bl}</div>
    </div>
  </div>
  <div class="f-cta">
@@ -155,7 +157,9 @@ function sheet(v){
  </div>
  <div class="f-foot ki">発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）</div>`;
 }
-document.write(V.map(v=>
-  `<div class="page p-k">${sheet(v)}</div><div class="page p-c">${sheet(v)}</div>`).join(''));
+const ONE = new URLSearchParams(location.search).get('mode') === '1';
+document.write(V.map(v => ONE
+  ? `<div class="page p-1">${sheet(v)}</div>`
+  : `<div class="page p-k">${sheet(v)}</div><div class="page p-c">${sheet(v)}</div>`).join(''));
 </script>
 </body></html>

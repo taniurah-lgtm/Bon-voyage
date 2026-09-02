@@ -121,6 +121,7 @@ const page = `<!doctype html>${buildStamp()}
 <link rel="stylesheet" href="/assets/leaflet/leaflet.css">
 <link rel="stylesheet" href="/assets/bv-map.css">
 <link rel="stylesheet" href="/assets/bv-post.css">
+<link rel="stylesheet" href="/assets/bv-nav.css">
 <style>
   main { padding: 2rem 0 1rem; }
   .count { margin-top: 1rem; font-size: .88rem; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .45rem .95rem; display: inline-block; }
@@ -157,6 +158,17 @@ const page = `<!doctype html>${buildStamp()}
 </style>
 </head>
 <body>
+<nav class="bvnav" aria-label="サイト内">
+  <div class="bvnav-in">
+    <a class="bvnav-brand" href="/">ぼんぼやーじゅ通信</a>
+    <div class="bvnav-links">
+      <a href="/" class="bv-hide-sm">通信について</a>
+      <a href="/calendar.html"><span class="bv-lg">おでかけ</span>カレンダー</a>
+      <a href="/map.html" aria-current="page"><span class="bv-lg">おでかけ</span>マップ</a>
+      <a class="bvnav-cta" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE<span class="bv-lg">で受け取る</span></a>
+    </div>
+  </div>
+</nav>
 <header class="ghead">
   <div class="ghead-in">
     <div class="eyebrow">Bon Voyage,</div>
@@ -168,7 +180,6 @@ const page = `<!doctype html>${buildStamp()}
     <div class="nav-pills">
       <a href="/">通信について</a>
       <a href="/calendar.html">おでかけカレンダー</a>
-      <a href="/guide.html">おでかけガイド</a>
       <a href="#post">${POST_URL ? 'この地図に書き込む' : 'この地図にひとことを寄せる'}</a>
     </div>
   </div>

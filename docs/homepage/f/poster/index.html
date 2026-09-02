@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>ぼんぼやーじゅ通信｜LINEで友だち追加</title>
-<!-- チラシ流入計測用ランディング。印字URL: bonvoya.nicomaru.tokyo/f
-     ホームページ先頭へ転送しつつ、流入元(flyer)を記録する。将来アクセス解析を入れたら from=flyer で計測可能。
-     （動線: 紙 → ここ → ホームページでコンセプトを知る → LINE友だち追加 → …） -->
+<!-- 自動生成: scripts/build-flyer-landings.mjs
+     配布先「ポスター掲示（場所を問わない共通枠）」の流入計測用。印字URL: bonvoya.nicomaru.tokyo/f/poster
+     読者から見える中身は /f と同じ。違うのはURLだけ（＝解析でパスごとに数えるため）。 -->
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;background:#FBFAF5;color:#34434C;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;}
@@ -17,21 +17,19 @@ body{font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif
 .lead{font-size:17px;line-height:1.6;margin:22px 0 20px;}
 .btn{display:inline-block;background:#2C7C9E;color:#fff;font-size:19px;font-weight:800;text-decoration:none;border-radius:999px;padding:16px 40px;box-shadow:0 8px 22px rgba(44,124,158,.28);}
 .hint{font-size:13px;color:#8a97a0;margin-top:16px;line-height:1.6;}
-a.home{color:#2C7C9E;font-size:13px;}
 </style>
 </head><body>
 <div class="card">
   <div class="brand">ぼんぼやーじゅ通信</div>
   <div class="sub">花小金井まわりの 週末おでかけ便</div>
   <div class="lead">未就学児・小学生のいるご家庭へ🎈<br>週末のおでかけ情報を、毎週おとどけしています。<br>まずはどんな通信か、ホームページでのぞいてみてください。</div>
-  <a class="btn" id="go" href="/?from=flyer">ホームページを見る →</a>
+  <a class="btn" id="go" href="/?from=poster">ホームページを見る →</a>
   <div class="hint">自動でうつらない場合は、上のボタンを押してください。</div>
 </div>
 <script src="/assets/analytics.js"></script>
 <script>
-  // 流入元を記録（将来アクセス解析を入れたら from=flyer で計測できる）
-  try { localStorage.setItem('bv_from', 'flyer'); localStorage.setItem('bv_from_at', new Date().toISOString()); } catch (e) {}
-  // ホームページ先頭へ自動転送（少し待ってから。手動ボタンもある）
-  setTimeout(function(){ location.href = '/?from=flyer'; }, 900);
+  try { localStorage.setItem('bv_from', 'poster'); localStorage.setItem('bv_from_at', new Date().toISOString()); } catch (e) {}
+  // 解析が拾えるよう少し待ってから転送する
+  setTimeout(function(){ location.href = '/?from=poster'; }, 1200);
 </script>
 </body></html>
