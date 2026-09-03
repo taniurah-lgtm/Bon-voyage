@@ -70,6 +70,16 @@ const spotHTML = (s) => {
         }</div>
         ${s.access ? `<div class="acc">${esc(s.access)}</div>` : ''}
         <div class="desc">${esc(s.desc)}</div>
+        ${
+          // 読者が寄せてくださった体験。公式で裏を取った事実（desc）とは分けて見せる。
+          // ★名前・イニシャルは出さない。狭い地域では特定されうるうえ、
+          //   本人の同意は「内容の掲載」までで、「名乗ること」は別の同意だから。
+          //   ラベルを非特定にしておけば、次に送る人がためらわない。
+          s.fromReader
+            ? `<div class="reader"><div class="reader-h">💬 読者の方から</div>` +
+              `<p>${esc(s.fromReader)}</p></div>`
+            : ''
+        }
         ${s.ages ? `<div class="ages">${esc(s.ages)}</div>` : ''}
         <div class="links">${links}</div>
         ${
@@ -129,6 +139,10 @@ const page = `<!doctype html>${buildStamp()}
   .nav-pills a { font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none; color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .4rem .9rem; }
 
   .mapbox { margin-bottom: 2rem; }
+  .reader { margin: .7rem 0 0; padding: .7rem .85rem; background: var(--sky-wash);
+    border-left: 3px solid var(--sky-deep); border-radius: 0 10px 10px 0; }
+  .reader-h { font-size: .78rem; font-weight: 800; color: var(--sky-deep); margin-bottom: .3rem; }
+  .reader p { margin: 0; font-size: .9rem; line-height: 1.7; }
   .cat { margin-bottom: 2.2rem; }
   .cat[hidden] { display: none; }
   .cat > h2 { font-family: var(--maru); font-weight: 800; font-size: 1.3rem; margin: 0 0 1rem; }
@@ -190,16 +204,14 @@ const page = `<!doctype html>${buildStamp()}
   <div class="mapbox" id="mapbox">
     <noscript><p class="bvm-fail">地図の表示にはJavaScriptを使っています。切っている場合は、下の一覧からお探しください。各スポットの「📍 地図」から場所を開けます。<br>
       投稿フォームもJavaScriptを使っています。切っている方は、お手数ですが
-      <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a> か
-      <a href="mailto:nico25akmr@outlook.jp">メール</a>でお知らせください。</p></noscript>
+      <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a>でお知らせください。</p></noscript>
   </div>
 
 ${sections}
 
   <section id="post">
     <noscript><p class="bvm-fail">投稿フォームの表示にJavaScriptを使っています。切っている方は
-      <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a> か
-      <a href="mailto:nico25akmr@outlook.jp">メール</a>でお知らせいただければ、こちらで載せます。</p></noscript>
+      <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a>でお知らせいただければ、こちらで載せます。</p></noscript>
   </section>
 
   <p class="support-line">この地図は、どなたでも無料でお使いいただけます。

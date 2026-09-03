@@ -343,8 +343,7 @@ ${spotList}
       // 文中の「LINE」だけがリンク（33x16px）で、公開ページ側のボタン（143x60px）より
       // 押しにくかった。有料のページのほうが押しにくいのはおかしい。
       : '投稿は、いまは LINE でお預かりしています。場所とひとことを送っていただければ、こちらで地図に載せます。写真もいっしょに送っていただけます。' +
-        '<span class="note-btns"><a class="note-btn" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINEで送る</a>' +
-        '<a class="note-btn" href="mailto:nico25akmr@outlook.jp?subject=' + encodeURIComponent('おでかけマップへの投稿') + '">メールで送る</a></span>'
+        '<span class="note-btns"><a class="note-btn" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINEで送る</a></span>'
   }</p>
 
 ${renkyu}
@@ -368,7 +367,6 @@ ${issueHTML}
     <a class="note-btn" href="/">通信について</a>
     <a class="note-btn" href="/calendar.html">公開カレンダー</a>
     <a class="note-btn" href="/map.html">公開マップ</a>
-    <a class="note-btn" href="/guide.html">おでかけガイド</a>
   </p>
 
   <p class="note" style="margin-top:1.6rem"><b>📅</b> は Google カレンダーに直接ひらく形、<b>📄</b> はカレンダーのファイル(.ics)を保存する形です（iPhone・Apple カレンダーの方は 📄、Android の方もどちらでも使えます）。リマインダーはカレンダー側でお好みに設定できます。日程・料金は変わることがあるので、おでかけ前に各公式でご確認ください。</p>`;
@@ -509,8 +507,7 @@ const page = `<!doctype html>${buildStamp()}
     <noscript>
       <div class="noscript-note">このページは中身を合言葉で暗号化しているため、表示に JavaScript を使います。
         オフのままでは開けません。ブラウザの設定でオンにしてから読み込み直してください。
-        うまくいかないときは <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a> か
-        <a href="mailto:nico25akmr@outlook.jp">メール</a>でお知らせいただければ、その週のぶんをお送りします。</div>
+        うまくいかないときは <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a>でお知らせいただければ、その週のぶんをお送りします。</div>
     </noscript>
     <!-- autofocus は付けない。会員でない人がリンクを踏んだときにキーボードが開き、
          下の「サポーターになる」が隠れる（合言葉を持っていないのに入力を促される）。 -->
