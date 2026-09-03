@@ -47,9 +47,7 @@
   "map": "https://www.google.com/maps/search/?api=1&query=花小金井ひょうたん池公園",
   "official": "https://www.city.kodaira.tokyo.jp/kurashi/113/113055.html",
   "lat": 35.722404,
-  "lng": 139.518143,
-  "geoApprox": true,
-  "geoNote": "公園の住所（花小金井南町3-3-13）から引いた点。国土地理院の住所検索"
+  "lng": 139.518143
  },
  {
   "cat": "💧無料で水あそび（夏）",
@@ -128,9 +126,7 @@
   "map": "https://www.google.com/maps/search/?api=1&query=小平市立花小金井図書館",
   "official": "https://library.kodaira.ed.jp/viewer/info.html?id=74",
   "lat": 35.7278467,
-  "lng": 139.5140614,
-  "geoApprox": true,
-  "geoNote": "ピンは花小金井図書館。おはなし会は市内の各図書館で開かれる"
+  "lng": 139.5140614
  },
  {
   "cat": "☔雨・猛暑の日の屋内（毎週使える）",
@@ -141,9 +137,7 @@
   "map": "https://www.google.com/maps/search/?api=1&query=花小金井南児童館",
   "official": "",
   "lat": 35.72231,
-  "lng": 139.518647,
-  "geoApprox": true,
-  "geoNote": "ピンは花小金井南児童館。児童館・子育てひろばは市内に複数ある"
+  "lng": 139.518647
  },
  {
   "cat": "☔雨・猛暑の日の屋内（毎週使える）",
@@ -193,18 +187,15 @@
   "ages": "👶 △ 🧒 ○ 🎒 ◎",
   "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BC%8F%E8%A6%8B%E3%82%A2%E3%82%A4%E3%82%B9%E3%82%A2%E3%83%AA%E3%83%BC%E3%83%8A",
   "official": "https://www.seibu-leisure.co.jp/icearena/index.html",
-  "geoQuery": "東伏見駅 西東京市",
-  "lat": 35.728702,
-  "lng": 139.564236,
-  "geoSource": "nominatim",
-  "geoMatched": "東伏見, 東伏見稲荷参道, 東伏見二丁目, 東伏見, 西東京市, 東京都, 188-8666, 日本",
-  "geoApprox": true,
-  "geoNote": "ピンは東伏見駅。アリーナは駅から約600m"
+  "lat": 35.727901,
+  "lng": 139.565216,
+  "geoSource": "gsi-address",
+  "geoMatched": "東京都西東京市東伏見三丁目１番２５号（公式サイトの所在地）"
  },
  {
   "cat": "🚃電車でおでかけ（西武新宿線ぞい）",
   "name": "八国山緑地・北山公園（東村山）",
-  "access": "西武新宿線・東村山駅ほか",
+  "access": "西武新宿線から乗り換え／東村山駅・西武園駅から徒歩（八国山緑地と北山公園は隣どうし・約400m）",
   "desc": "トトロに出てくるような雑木林をおさんぽ。となりの北山公園は初夏（6月ごろ）の菖蒲が有名で、季節を感じられます。",
   "ages": "👶 ○ 🧒 ◎ 🎒 ◎",
   "map": "https://www.google.com/maps/search/?api=1&query=%E5%85%AB%E5%9B%BD%E5%B1%B1%E7%B7%91%E5%9C%B0",
@@ -213,9 +204,7 @@
   "lat": 35.767033,
   "lng": 139.459213,
   "geoSource": "nominatim",
-  "geoMatched": "北山公園, 野口町, 東村山市, 東京都, 189-0022, 日本",
-  "geoApprox": true,
-  "geoNote": "ピンは北山公園。八国山緑地は隣接する別の区域"
+  "geoMatched": "北山公園, 野口町, 東村山市, 東京都, 189-0022, 日本"
  },
  {
   "cat": "🚃電車でおでかけ（西武新宿線ぞい）",
@@ -232,19 +221,29 @@
  },
  {
   "cat": "🚃電車でおでかけ（西武新宿線ぞい）",
-  "name": "所沢エリア（サクラタウン・航空記念公園）",
-  "access": "西武新宿線・所沢方面",
-  "desc": "角川武蔵野ミュージアムのある「ところざわサクラタウン」や、広々とした所沢航空記念公園。1日たっぷり遊べます。",
+  "name": "所沢航空記念公園（所沢）",
+  "access": "西武新宿線・所沢方面／所沢航空記念公園駅すぐ",
+  "desc": "広々とした芝生と大型遊具。航空発祥記念館も併設。1日たっぷり遊べます。",
   "ages": "👶 ○ 🧒 ◎ 🎒 ◎",
-  "map": "https://www.google.com/maps/search/?api=1&query=%E3%81%A8%E3%81%93%E3%82%8D%E3%81%96%E3%82%8F%E3%82%B5%E3%82%AF%E3%83%A9%E3%82%BF%E3%82%A6%E3%83%B3",
-  "official": "https://tokorozawa-sakuratown.com/",
-  "geoQuery": "所沢航空記念公園",
+  "map": "https://www.google.com/maps/search/?api=1&query=所沢航空記念公園",
+  "official": "https://www.parks.or.jp/tokorozawa/",
   "lat": 35.798006,
   "lng": 139.474296,
   "geoSource": "nominatim",
-  "geoMatched": "所沢航空記念公園, 所沢市, 埼玉県, 日本",
-  "geoApprox": true,
-  "geoNote": "ピンは航空記念公園。サクラタウンは別の場所"
+  "geoMatched": "所沢航空記念公園, 所沢市, 埼玉県, 日本"
+ },
+ {
+  "cat": "🚃電車でおでかけ（西武新宿線ぞい）",
+  "name": "ところざわサクラタウン（角川武蔵野ミュージアム）",
+  "access": "西武新宿線・東所沢方面／東所沢駅から徒歩",
+  "desc": "角川武蔵野ミュージアムのある複合施設。屋内なので雨の日にも。",
+  "ages": "👶 ○ 🧒 ◎ 🎒 ◎",
+  "map": "https://www.google.com/maps/search/?api=1&query=ところざわサクラタウン",
+  "official": "https://tokorozawa-sakuratown.com/",
+  "lat": 35.797689,
+  "lng": 139.5078666,
+  "geoSource": "nominatim",
+  "geoMatched": "角川武蔵野ミュージアム, ところざわサクラタウン, 所沢市, 埼玉県, 日本"
  },
  {
   "cat": "🚃電車でおでかけ（西武新宿線ぞい）",

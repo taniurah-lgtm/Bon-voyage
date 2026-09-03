@@ -1,15 +1,14 @@
 {
- "generated": "2026-09-02",
+ "generated": "2026-09-03",
  "window": {
-  "from": "2026-09-02",
-  "to": "2026-09-16"
+  "from": "2026-09-03",
+  "to": "2026-09-17"
  },
  "events": [
   {
    "id": "E60",
    "name": "西東京 みんなの展覧会&イベント(田無アスタ)",
    "dates": [
-    "2026-09-02",
     "2026-09-03",
     "2026-09-04",
     "2026-09-05",
@@ -47,44 +46,6 @@
    "url": "https://www.asta.co.jp/update/event_260831.pdf",
    "tentative": false,
    "deadline": null
-  },
-  {
-   "id": "E81",
-   "name": "上宿公民館 子育て支援講座「親子の絆を深めるタッチケア」",
-   "dates": [
-    "2026-09-02"
-   ],
-   "span": null,
-   "when": "未公表(詳細ページは9/2公開予定)",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": null,
-   "end": null,
-   "allDay": true,
-   "timeUncertain": false,
-   "place": "上宿公民館",
-   "mapq": "上宿公民館",
-   "summary": "",
-   "kidsNote": "乳児connect系。保護者向け",
-   "caution": "",
-   "contact": null,
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "◎",
-    "pre": null,
-    "elem": null
-   },
-   "cost": "",
-   "target": "",
-   "url": "https://www.city.kodaira.tokyo.jp/kurashi/043/043741.html",
-   "tentative": false,
-   "deadline": {
-    "date": "2026-09-30",
-    "raw": "申込締切: 9/30(水)"
-   }
   },
   {
    "id": "E71",

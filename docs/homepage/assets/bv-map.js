@@ -282,18 +282,10 @@
       var approx = target.filter(function (s) { return s.geoApprox; }).length;
       var parts = ['ピン ' + (target.length - missing.length) + '件'];
       if (approx) parts.push('うち ' + approx + '件はおよその位置');
-      if (missing.length) {
-        // ★理由を決め打ちしない。「位置が確認できていない」ものと
-        //   「そもそも地図に置く場所ではない（＝西武新宿線の方向）」ものがある。
-        //   一律に前者と書くと、後者について嘘になる。
-        parts.push(
-          missing.length + '件はピンを立てていません（' +
-          missing.map(function (s) {
-            var nm = '「' + s.name.replace(/[（(].*$/, '') + '」';
-            return nm + (s.geoNote ? '＝' + s.geoNote.replace(/。$/, '') : '＝地図上の位置が確認できていません');
-          }).join(' ／ ') + '）'
-        );
-      }
+      // ★ピンを立てていないものの件数は、ここには出さない。
+      //   読む人にとっては数えても意味がなく（いまは「新宿・都心方面」＝
+      //   行き先ではなく方向、の1件だけ）、地図の注記が長くなるだけだった。
+      //   隠すわけではなく、下の一覧に「ピンなし」の印と理由が出る。
       parts.push('近くのピンは、まとめて件数で出しています（タップで寄ります）');
       el.querySelector('.bvm-note').textContent = parts.join(' ／ ');
     }
