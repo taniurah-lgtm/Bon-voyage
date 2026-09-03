@@ -86,8 +86,6 @@
         'お子さんのお名前や顔がわかる写真、通っている園・学校がわかる内容は、掲載を控えさせていただきます。</p>' +
         '<div class="bvp-actions">' +
         '<a class="bvp-btn bvp-btn-go" href="' + esc(lineUrl) + '" target="_blank" rel="noopener">LINEで送る</a>' +
-        '<a class="bvp-btn bvp-btn-sub" href="mailto:tokyo.papa.home@gmail.com?subject=' +
-        encodeURIComponent('おでかけマップへの投稿') + '">メールで送る</a>' +
         '</div>' +
         '</div>';
       return;

@@ -204,16 +204,14 @@ const page = `<!doctype html>${buildStamp()}
   <div class="mapbox" id="mapbox">
     <noscript><p class="bvm-fail">地図の表示にはJavaScriptを使っています。切っている場合は、下の一覧からお探しください。各スポットの「📍 地図」から場所を開けます。<br>
       投稿フォームもJavaScriptを使っています。切っている方は、お手数ですが
-      <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a> か
-      <a href="mailto:tokyo.papa.home@gmail.com">メール</a>でお知らせください。</p></noscript>
+      <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a>でお知らせください。</p></noscript>
   </div>
 
 ${sections}
 
   <section id="post">
     <noscript><p class="bvm-fail">投稿フォームの表示にJavaScriptを使っています。切っている方は
-      <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a> か
-      <a href="mailto:tokyo.papa.home@gmail.com">メール</a>でお知らせいただければ、こちらで載せます。</p></noscript>
+      <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a>でお知らせいただければ、こちらで載せます。</p></noscript>
   </section>
 
   <p class="support-line">この地図は、どなたでも無料でお使いいただけます。
