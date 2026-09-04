@@ -3,7 +3,6 @@
  *   BVPost.mount(el, {
  *     endpoint,      // Google Apps Script のウェブアプリURL。空なら「送れない」案内に切り替わる
  *     spots,         // 場所の候補（入力補助）
- *     gate,          // { blobs, iter } 合言葉が正しいかの判定用（合言葉そのものは入っていない）
  *     freeLimit,     // 無料の方の字数（既定 40）
  *   })
  *
@@ -23,27 +22,6 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
-  function b2u(b) { return Uint8Array.from(atob(b), function (c) { return c.charCodeAt(0); }); }
-
-  async function verifyPass(pass, gate) {
-    if (!gate || !gate.blobs || !gate.blobs.length) return false;
-    pass = (pass || '').normalize('NFC');
-    if (!pass) return false;
-    for (var i = 0; i < gate.blobs.length; i++) {
-      var blob = gate.blobs[i];
-      try {
-        var base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
-        var key = await crypto.subtle.deriveKey(
-          { name: 'PBKDF2', salt: b2u(blob.salt), iterations: gate.iter, hash: 'SHA-256' },
-          base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']
-        );
-        var pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b2u(blob.iv) }, key, b2u(blob.ct));
-        if (new TextDecoder().decode(pt) === 'ok') return true;
-      } catch (e) { /* 合言葉が違うだけ。次のブロブを試す */ }
-    }
-    return false;
-  }
-
   // 写真は端末側で縮めてから送る（回線と受け側の負担を減らす）
   function shrink(file, maxPx, quality) {
     return new Promise(function (resolve, reject) {
@@ -69,7 +47,6 @@
     // 字数は誰でも同じ。合言葉の有無で変わるのは写真だけ
     var textLimit = opts.textLimit || opts.paidLimit || 300;
     var spots = opts.spots || [];
-    var isSupporter = false;
     // 送り先が無いのに「載せています」と書いて送信させると、押すまで送れないと分からない。
     // 押す前に、どこへ送ればよいかを言う。
     var canSend = !!opts.endpoint;
@@ -116,14 +93,8 @@
       '<p class="bvp-hint">市や町までで十分です。番地や園・学校の名前は書かないでください。</p>' +
 
       '<details class="bvp-gate">' +
-      '<summary>写真も添えたい方（合言葉をお持ちの方）</summary>' +
-      '<label class="bvp-lb" for="bvp-pass">合言葉</label>' +
-      '<div class="bvp-passrow">' +
-      '<input class="bvp-in" id="bvp-pass" type="text" autocomplete="off" autocapitalize="none" autocorrect="off" placeholder="合言葉">' +
-      '<button class="bvp-btn bvp-btn-sub" type="button" data-act="verify">確認</button>' +
-      '</div>' +
-      '<p class="bvp-gate-msg" aria-live="polite"></p>' +
-      '<div class="bvp-photo" hidden>' +
+      '<summary>写真も添える（任意）</summary>' +
+      '<div class="bvp-photo">' +
       '<label class="bvp-lb" for="bvp-file">写真（1枚）</label>' +
       '<input class="bvp-in bvp-file" id="bvp-file" type="file" accept="image/*">' +
       '<p class="bvp-hint">お顔がうつっていないものをお願いします。送る前に小さく縮めてお送りします。</p>' +
@@ -148,14 +119,11 @@
     var $text = el.querySelector('#bvp-text');
     var $n = el.querySelector('.bvp-n');
     var $msg = el.querySelector('.bvp-msg');
-    var $gateMsg = el.querySelector('.bvp-gate-msg');
-    var $photoBox = el.querySelector('.bvp-photo');
     var $file = el.querySelector('#bvp-file');
     var $preview = el.querySelector('.bvp-preview');
     var photoData = null;
 
     restoreDraft();
-    autoVerify();
 
     $text.addEventListener('input', function () {
       var n = $text.value.length;
@@ -166,45 +134,6 @@
     });
     ['bvp-spot', 'bvp-who', 'bvp-area'].forEach(function (id) {
       el.querySelector('#' + id).addEventListener('input', saveDraft);
-    });
-
-    // 会員ページを開いた人は sessionStorage に合言葉が入っている（同じオリジン）。
-    // それで通るなら、ここで打ち直させる必要はない。
-    async function autoVerify() {
-      var saved;
-      try { saved = sessionStorage.getItem('bv_pw'); } catch (e) { return; }
-      if (!saved) return;
-      if (!(await verifyPass(saved, opts.gate))) return;
-      isSupporter = true;
-      var gate = el.querySelector('.bvp-gate');
-      if (gate) gate.open = true;
-      $gateMsg.textContent = '確認できました。写真も添えられます。';
-      $gateMsg.className = 'bvp-gate-msg is-ok';
-      $photoBox.hidden = false;
-      $text.dispatchEvent(new Event('input'));
-    }
-
-    el.addEventListener('click', async function (e) {
-      var v = e.target.closest('[data-act="verify"]');
-      if (!v) return;
-      var pass = el.querySelector('#bvp-pass').value.trim();
-      $gateMsg.textContent = '確認しています…';
-      isSupporter = await verifyPass(pass, opts.gate);
-      if (isSupporter) {
-        try { sessionStorage.setItem('bv_pw', pass.normalize('NFC')); } catch (e) { /* 覚えられなくても動く */ }
-        $gateMsg.textContent = 'ありがとうございます。写真も添えられます。';
-        $gateMsg.className = 'bvp-gate-msg is-ok';
-        $photoBox.hidden = false;
-      } else {
-        $gateMsg.textContent = pass
-          ? '合言葉が違うようです。空欄のままでも、ひとことは同じ長さで送れます（写真だけが添えられません）。'
-          : '合言葉を入れてから「確認」を押してください。';
-        $gateMsg.className = 'bvp-gate-msg is-ng';
-        $photoBox.hidden = true;
-        photoData = null;
-        $preview.innerHTML = '';
-      }
-      $text.dispatchEvent(new Event('input'));
     });
 
     if ($file) {
@@ -239,8 +168,7 @@
         text: text,
         who: el.querySelector('#bvp-who').value.trim(),
         area: el.querySelector('#bvp-area').value.trim(),
-        tier: isSupporter ? '合言葉あり' : '一般',
-        photo: isSupporter ? photoData : null,
+        photo: photoData,
         page: location.pathname,
       };
 

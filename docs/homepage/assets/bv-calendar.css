@@ -145,18 +145,6 @@
 .bvc-tentwhen { flex: none; max-width: 11rem; color: var(--ink-soft); font-size: .8rem; }
 .bvc-tentname { color: var(--ink); }
 
-/* ---- 公開ページの案内（会員ページへ） ---- */
-.bvc-teaser {
-  margin-top: 1.6rem; background: var(--surface-2); border: 1px solid var(--line);
-  border-radius: 16px; padding: 1.05rem 1.15rem;
-}
-.bvc-teaser p { font-size: .9rem; color: var(--ink-soft); margin: 0; line-height: 1.8; }
-.bvc-teaser b { color: var(--ink); }
-.bvc-teaser-link {
-  display: inline-block; margin-top: .6rem; font-family: var(--maru);
-  font-weight: 800; font-size: .88rem; text-decoration: none;
-}
-
 /* ---- せまい画面 ---- */
 @media (max-width: 24rem) {
   .bvc { --bvc-cell: 2.6rem; }
@@ -176,15 +164,6 @@
 .bvc-cell.tap { cursor: pointer; }
 .bvc-cell.tap:not(.has):hover { background: var(--surface-2); }
 .bvc-cell.tap:focus-visible { outline: 3px solid var(--sky); outline-offset: 1px; }
-
-/* 公開ぶんの終わり（公開ページのみ） */
-.bvc-window {
-  /* sky-deep on sky-wash は 4.18:1 で、13.7px の文字には足りない（要4.5:1）。
-     地の色を白にして 4.68:1 にする。 */
-  margin-left: auto; font-weight: 700; color: var(--sky-deep);
-  background: var(--surface); border: 1px solid var(--line-strong);
-  border-radius: 999px; padding: .1rem .6rem;
-}
 
 /* この日だけ時間がちがう（台帳の「※23日は16:00まで」） */
 .bvc-exc {
@@ -284,10 +263,10 @@
 .bvc-dlalert-go { font-weight: 700; color: var(--sky-deep); white-space: nowrap; }
 .bvc-dlalert:active { background: var(--surface-2); }
 
-/* 文中のリンク（窓の外の案内など）は、行の見た目を壊さずに指の当たり判定だけ広げる。
+/* 文中のリンクは、行の見た目を壊さずに指の当たり判定だけ広げる。
    min-height を当てると行間が崩れるので、上下の余白を透明に伸ばす。 */
-.bvc-empty a, .bvc-teaser-link { position: relative; display: inline-block; }
-.bvc-empty a::after, .bvc-teaser-link::after {
+.bvc-empty a { position: relative; display: inline-block; }
+.bvc-empty a::after {
   content: ''; position: absolute; left: 0; right: 0;
   top: 50%; height: 44px; transform: translateY(-50%);
 }

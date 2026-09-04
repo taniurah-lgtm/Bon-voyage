@@ -62,7 +62,7 @@ footer .fmark { font-family: var(--maru); font-weight: 800; color: var(--ink-sof
 @media (max-width: 40rem) { html { font-size: 112.5%; } .wrap, .ghead-in { padding-left: 1.15rem; padding-right: 1.15rem; } }
 
 /* 二次リンクも指で押せる大きさにする（実測 16〜32px だった） */
-.back, footer a, .bvc-teaser-link { min-height: 44px; display: inline-flex; align-items: center; }
+.back, footer a { min-height: 44px; display: inline-flex; align-items: center; }
 
 /* 無料の道具（地図・ガイド）の下に置く、静かな1行。 */
 .support-line {

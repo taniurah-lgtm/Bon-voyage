@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 /*
  * みんなのおでかけマップを生成する。
- *   MAP_POST_URL=https://script.google.com/macros/s/.../exec \
- *   MEMBER_PASS=xxx node scripts/build-map.mjs
+ *   MAP_POST_URL=https://script.google.com/macros/s/.../exec node scripts/build-map.mjs
  *
  * 入力:
  *   data/map-spots.json … ぼんぼやーじゅが選んだスポット（種）。lat/lng は
@@ -15,28 +14,19 @@
  *   MAP_POST_URL … 投稿の送り先（Apps Script のウェブアプリURL）。
  *                  未設定でもフォームは出る。送信時に「まだ設定されていません」と出て、
  *                  書いた文章はコピーできる状態で残る（書いたものを捨てない）。
- *   MEMBER_PASS / INSIDER_PASS … 合言葉。フォームで「サポーターかどうか」を判定する
- *                  暗号ブロブを作るのに使う。★合言葉そのものは出力に入らない。
  *
- * 無料 / サポーターの線引き（docs/freemium-plan.md と揃える）:
- *   - 掲載スポットは全部、誰でも見られる（無料を薄くしない）
- *   - みんなの投稿は、公開側は各スポット PUBLIC_PER_SPOT 件まで。
- *     全件と写真つきは会員ページで見られる。
- *   - 投稿の字数は誰でも同じ（TEXT_LIMIT）。サポーターとの差は **写真を添えられるか** だけ。
- *     ★字数で分けない（2026-08-23 オーナー判断）。自分の言葉を課金で区切るのは
- *     「線引きは量でなく役割」に反し、書き手に「金で切られた」と感じさせる。
- *   - 応援のお願いは **投稿し終わったあと** にだけ出す（書く前に出さない）
+ * ★2026-09-04: 月額制度の廃止にともない、公開側の出し惜しみをやめた
+ *   （`docs/strategy-2026-09.md`）。スポットも、みんなの投稿も、写真つきも、
+ *   会員ページに置いていたものを全部こちらへ移し、誰でも全件見られる。
  */
 import { readFileSync, writeFileSync } from 'node:fs';
-import { encryptFor, passphrases, ITER, jsonInTag, esc, buildStamp } from './lib/gate.mjs';
+import { jsonInTag, esc } from './lib/gate.mjs';
 
 const SPOTS = JSON.parse(readFileSync('data/map-spots.json', 'utf8'));
 const POSTS = JSON.parse(readFileSync('data/map-posts.json', 'utf8'));
 const OUT = 'docs/homepage/map.html';
-const PUBLIC_PER_SPOT = 2;
 const TEXT_LIMIT = 300;   // ひとことの字数。誰でも同じ
 const POST_URL = process.env.MAP_POST_URL || '';
-const JOIN_URL = '/#more';   // トップページの「応援してくださる方へ」
 
 const mapQ = (name) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name)}`;
 
@@ -51,7 +41,7 @@ for (const list of bySpot.values()) list.sort((a, b) => (b.date || '').localeCom
 const postHTML = (p) =>
   `<div class="voice"><div class="vtxt">${esc(p.text)}</div>` +
   `<div class="vwho">— ${esc(p.who || 'ご近所の方')}${p.date ? `・${esc(p.date)}` : ''}${
-    p.photo ? ' <span class="vph">📷 写真つき（会員ページ）</span>' : ''
+    p.photo ? ' <span class="vph">📷 写真つき</span>' : ''
   }</div></div>`;
 
 function slug(name) {
@@ -59,9 +49,7 @@ function slug(name) {
 }
 
 const spotHTML = (s) => {
-  const all = bySpot.get(s.name) || [];
-  const shown = all.slice(0, PUBLIC_PER_SPOT);
-  const hidden = all.length - shown.length;
+  const shown = bySpot.get(s.name) || [];   // 全件出す（2026-09-04 以降、件数の制限なし）
   let links = `<a class="lk map" href="${esc(s.map || mapQ(s.name))}" target="_blank" rel="noopener">📍 地図</a>`;
   if (s.official) links += `<a class="lk off" href="${esc(s.official)}" target="_blank" rel="noopener">🔗 公式</a>`;
   return `      <div class="spot" id="${esc(slug(s.name))}" data-cat="${esc(s.cat)}">
@@ -84,9 +72,7 @@ const spotHTML = (s) => {
         <div class="links">${links}</div>
         ${
           shown.length
-            ? `<div class="voices">${shown.map(postHTML).join('')}${
-                hidden > 0 ? `<div class="more">ほか ${hidden} 件のみんなの声は会員ページで読めます</div>` : ''
-              }</div>`
+            ? `<div class="voices">${shown.map(postHTML).join('')}</div>`
             : ''
         }
       </div>`;
@@ -105,15 +91,10 @@ ${SPOTS.filter((s) => s.cat === cat).map(spotHTML).join('\n')}
   )
   .join('\n');
 
-// 合言葉が正しいかを判定するためのブロブ。中身は "ok" だけ。
-// これがあっても合言葉は割り出せない（PBKDF2 15万回 + AES-GCM）。
-const gateBlobs = [];
-for (const p of passphrases()) gateBlobs.push(await encryptFor(p, 'ok'));
-
 const totalPosts = POSTS.length;
 const pinned = SPOTS.filter((s) => typeof s.lat === 'number').length;
 
-const page = `<!doctype html>${buildStamp()}
+const page = `<!doctype html>
 <html lang="ja">
 <head>
 <meta charset="utf-8">
@@ -152,7 +133,7 @@ const page = `<!doctype html>${buildStamp()}
   .nopin { font-family: var(--body); font-weight: 700; font-size: .68rem; color: var(--ink-faint); background: var(--surface-2); border-radius: 999px; padding: .05rem .45rem; vertical-align: .12em; }
   .spot .acc { font-size: .85rem; color: var(--sky-deep); margin-top: .1rem; }
   .spot .desc { font-size: .95rem; color: var(--ink-soft); margin-top: .35rem; }
-  /* 親がいちばん見る行。--ink-faint は白地 2.6:1 で本文には足りない（会員ページ側は --ink） */
+  /* 親がいちばん見る行。--ink-faint は白地 2.6:1 で本文には足りない */
   .spot .ages { margin-top: .45rem; font-family: var(--maru); font-weight: 700; font-size: .86rem; color: var(--ink); }
   .links { margin-top: .35rem; display: flex; flex-wrap: wrap; gap: .6rem; }
   /* ピンなしスポットの唯一の出口なので、指で押せる大きさを確保する */
@@ -214,8 +195,7 @@ ${sections}
       <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a>でお知らせいただければ、こちらで載せます。</p></noscript>
   </section>
 
-  <p class="support-line">この地図は、どなたでも無料でお使いいただけます。
-    続けていくための<a href="/#more">応援のしかた</a>もご用意しています。</p>
+  <p class="support-line">この地図は、どなたでも無料でお使いいただけます。</p>
 
   <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>
 </main>
@@ -223,7 +203,7 @@ ${sections}
 <footer>
   <div class="fmark">ぼんぼやーじゅ通信</div>
   ※営業時間・料金・設備は変わることがあります。おでかけ前に各公式サイトでご確認ください。<br>
-  <a href="tokushoho.html">特定商取引法に基づく表記・免責事項</a><br>
+  <a href="tokushoho.html">免責事項・個人情報の取り扱い</a><br>
   © 2026 ぼんぼやーじゅ通信
 </footer>
 
@@ -232,12 +212,10 @@ ${sections}
 <script src="/assets/bv-post.js"></script>
 <script type="application/json" id="bv-spots">${jsonInTag(SPOTS)}</script>
 <script type="application/json" id="bv-posts">${jsonInTag(POSTS)}</script>
-<script type="application/json" id="bv-gate">${jsonInTag({ blobs: gateBlobs, iter: ITER })}</script>
 <script>
 (function(){
   var spots = JSON.parse(document.getElementById('bv-spots').textContent);
   var posts = JSON.parse(document.getElementById('bv-posts').textContent);
-  var gate  = JSON.parse(document.getElementById('bv-gate').textContent);
 
   BVMap.mount(document.getElementById('mapbox'), {
     spots: spots,
@@ -253,8 +231,6 @@ ${sections}
   BVPost.mount(document.getElementById('post'), {
     endpoint: ${JSON.stringify(POST_URL)},
     spots: spots,
-    gate: gate,
-    joinUrl: ${JSON.stringify(JOIN_URL)},
     textLimit: ${TEXT_LIMIT},
     lineUrl: 'https://lin.ee/YtcfjnX'
   });
@@ -268,6 +244,3 @@ writeFileSync(OUT, page);
 console.log(`wrote ${OUT}`);
 console.log(`  スポット ${SPOTS.length}件（ピン ${pinned}件 / ピンなし ${SPOTS.length - pinned}件）/ 投稿 ${totalPosts}件`);
 console.log(`  投稿の送り先: ${POST_URL || '未設定（フォームは出るが、送信時にコピー案内に切り替わる）'}`);
-console.log(`  合言葉ブロブ: ${gateBlobs.length}件${
-  passphrases()[0] === 'CHANGEME' ? '  ⚠ MEMBER_PASS 未設定のため判定は使えない' : ''
-}`);

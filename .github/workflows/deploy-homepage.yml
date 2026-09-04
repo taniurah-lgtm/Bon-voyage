@@ -98,22 +98,32 @@ jobs:
           fi
           echo "OK: 書いてあることと、実際にできることが一致しています"
 
-      # 公開側のカレンダーに、先の予定まで入っていないことを確かめる（無料/有料の境目）。
-      - name: 公開データが2週間ぶんに収まっているか確かめる
+      # 公開データに台帳の内部メモが混ざっていないことを確かめる。
+      # ★2026-09-04 まではここで「2週間の窓」を検査していた。月額制度の廃止にともない
+      #   窓そのものを撤廃し（`docs/strategy-2026-09.md`）、検査の対象を内部メモに変えた。
+      - name: 公開データに内部メモが入っていないか確かめる
         run: |
           node -e '
             const fs = require("fs");
             const f = "docs/homepage/data/events-public.json";
             if (!fs.existsSync(f)) { console.log("events-public.json が無い（カレンダー未生成）"); process.exit(0); }
             const d = JSON.parse(fs.readFileSync(f, "utf8"));
+            const FORBIDDEN = ["source", "confidence", "status"];
+            const bad = [];
+            for (const e of d.events.concat(d.standing || [])) {
+              for (const k of FORBIDDEN) if (k in e) bad.push(e.id + "." + k);
+            }
             const days = d.events.flatMap(e => e.dates || []).filter(Boolean).sort();
-            const last = days.at(-1);
-            console.log("窓:", JSON.stringify(d.window), "いちばん先の日付:", last);
-            if (last && d.window && last > d.window.to) {
-              console.log("::error::公開データに窓の外（" + last + "）の予定が入っています。");
+            console.log("公開:", d.events.length, "件 /", days[0], "〜", days.at(-1));
+            if (bad.length) {
+              console.log("::error::公開データに台帳の内部メモが入っています: " + bad.join(", "));
               process.exit(1);
             }
-            console.log("OK: 公開データは窓の中に収まっています");
+            if (!d.events.length) {
+              console.log("::error::公開データが空です（カレンダーが行き止まりになります）。");
+              process.exit(1);
+            }
+            console.log("OK: 内部メモは入っていません");
           '
 
       - name: Setup Pages

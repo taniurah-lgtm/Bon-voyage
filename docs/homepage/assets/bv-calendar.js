@@ -1,16 +1,13 @@
 /* ぼんぼやーじゅ通信 — おでかけカレンダー（描画のみ）
  *
  * 使い方:
- *   BVCalendar.mount(el, data, { memberUrl, teaser })
+ *   BVCalendar.mount(el, data, { monthLevel })
  *     el    … 描画先の要素
  *     data  … { generated, events[], standing[], byDate{}, upcomingCount? }
- *     opts.teaser     … true なら「これは先14日ぶんです」の案内を出す（公開ページ用）
- *     opts.memberUrl  … 先の予定へのリンク先（公開ページ用）
  *
  * このファイルには予定の中身を持たない。データは
  *   - 公開ページ: data/events-public.json を fetch
- *   - 会員ページ: 合言葉で復号した中身の中の <script type="application/json"> から読む
- * ので、ここが公開されても会員限定の予定は出ない。
+ *   - 合言葉つきのページ: 復号した中身の中の <script type="application/json"> から読む
  */
 (function (global) {
   'use strict';
@@ -347,7 +344,7 @@
         '📄 ' + restDays.length + '日ぶんまとめて</button>'
       : '';
     // 終わった予定にカレンダー登録は出さない。ただし地図と公式は残す。
-    // 「過ぎた日も残している」のが会員ページの値打ちなのに、来年の下見に
+    // 過ぎた日も残しているので、来年の下見に
     // 使いたい人が公式ページにも地図にも行けないのはおかしい。
     var subLinks =
       (ev.mapq ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(mapURL(ev.mapq)) + '" target="_blank" rel="noopener">📍 地図</a>' : '') +
@@ -456,12 +453,10 @@
     });
 
     var today = todayISO();
-    // 公開ページは今日からの2週間ぶんしか持っていないので、過去の月を出す意味がない。
-    // 会員ページは台帳の全期間を持っており、「台帳の予定をぜんぶ」と書いている。
-    // ★ここを today で切っていたため、7月の11件（台帳の26%）が暗号の中にあるのに
-    //   月送りボタンが8月で止まり、UIから開けなかった（「ぜんぶ」が嘘になっていた）。
-    function inRange(d) { return opts.teaser ? d >= today : true; }
-    var allDates = Object.keys(byDate).filter(inRange).sort();
+    // 台帳の全期間を持っており、「台帳の予定をぜんぶ」と書いている。
+    // ★ここを today で切っていた頃は、月送りボタンが当月で止まり、
+    //   過去の月がUIから開けなかった（「ぜんぶ」が嘘になっていた）。
+    var allDates = Object.keys(byDate).sort();
     var firstMonth = (allDates[0] || today).slice(0, 7);
     var months = uniq(Object.keys(byDate).filter(inRange).map(function (d) { return d.slice(0, 7); })).sort();
     if (!months.length) months = [today.slice(0, 7)];
@@ -481,7 +476,7 @@
     }
     var selected = (byDate[today] && byDate[today].length && /[06]/.test(String(parseISO(today).getDay())))
       ? today
-      // allDates には過去の日も入る（会員ページ）。最初に選ぶのは今日以降にする。
+      // allDates には過去の日も入る。最初に選ぶのは今日以降にする。
       : (nextWeekendWithEvents() || allDates.filter(function (d) { return d >= today; })[0] || allDates[0] || null);
     if (selected && selected.slice(0, 7) !== view && months.indexOf(selected.slice(0, 7)) >= 0) {
       view = selected.slice(0, 7);
@@ -493,7 +488,7 @@
       // たどり着くまで1.8画面ぶんスクロールが必要だった。
       '<div class="bvc-head">' +
       '<button class="bvc-nav" type="button" data-go="-1" aria-label="前の月">‹</button>' +
-      // 見出しの深さは置かれ方で変わる。会員ページは「📅 おでかけカレンダー」(h2) の
+      // 見出しの深さは置かれ方で変わる。「📅 おでかけカレンダー」(h2) の
       // 下にあるので h3、公開ページは上に h2 が無いので h2（h1→h3 は飛びになる）。
       '<' + hTag + ' class="bvc-month" aria-live="polite"></' + hTag + '>' +
       '<button class="bvc-nav" type="button" data-go="1" aria-label="次の月">›</button>' +
@@ -509,12 +504,9 @@
       '<p class="bvc-key">👶 あかちゃん(0-2) ／ 🧒 未就学(3-6) ／ 🎒 小学生　' +
       '<b>◎</b> ぴったり ／ <b>○</b> だいじょうぶ ／ <b>△</b> ひと工夫</p>' +
       '<div class="bvc-legend"><span class="bvc-dot"></span>予定あり　' +
-      // 会員ページは過ぎた日にも中空の点を出す。凡例に無いと、何の印か分からない。
-      (opts.teaser ? '' : '<span class="bvc-dot is-past"></span>終わった予定　') +
+      // 過ぎた日にも中空の点を出す。凡例に無いと、何の印か分からない。
+      '<span class="bvc-dot is-past"></span>終わった予定　' +
       '<span class="bvc-today-mark">今日</span>' +
-      (opts.teaser && data.window
-        ? '<span class="bvc-window">公開ぶんは ' + esc(fmtDay(data.window.to)) + ' まで</span>'
-        : '') +
       '</div>' +
       '<div class="bvc-day"></div>' +
       '<div class="bvc-deadlines" hidden></div>' +
@@ -603,14 +595,6 @@
     });
 
 
-    // 公開ページは今日から2週間ぶんしか持っていない。その外の日を「予定なし」と
-    // 言うと嘘になる（手前＝終わったぶん、先＝まだ出していないぶん）。
-    function outWindow(key) {
-      if (!opts.teaser || !data.window) return '';
-      if (key < data.window.from) return 'past';
-      if (key > data.window.to) return 'ahead';
-      return '';
-    }
     function render() {
       var y = Number(view.slice(0, 4));
       var m = Number(view.slice(5, 7));
@@ -620,12 +604,7 @@
         b.disabled = !(i >= 0 && i < months.length);
       });
 
-      // 窓の外の日は「予定なし」と言ってはいけない（本当は予定があるのに読み上げが嘘になる）
-      // ★先だけでなく手前も見る。前は to 側だけを見ていたので、8/22 のように
-      //   トップページには載っている日が、カレンダーでは「予定なし」になっていた。
       function dayLabel(key, list) {
-        var w = outWindow(key);
-        if (w) return w === 'past' ? ' 公開ぶんより前' : ' 公開ぶんの外';
         return list.length ? ' 予定' + list.length + '件' : ' 予定なし';
       }
 
@@ -651,11 +630,10 @@
           if (key < today) cls.push('past');
           if (d === 0) cls.push('sun');
           if (d === 6) cls.push('sat');
-          // 隣月・過去日は点を出さない（押せないのに「予定あり」に見える／今週末を探す邪魔になる）
-          // 会員ページは過ぎた日も持っている。点を出さないと、
-          // 読み上げだけが「予定6件」と言い、目で見ている人には空の日と同じに見える。
-          // 公開ページは今日より前を持っていないので、これまでどおり出さない。
-          var showDots = inMonth && (key >= today || !opts.teaser);
+          // 隣月は点を出さない（押せないのに「予定あり」に見える）。
+          // 過ぎた日は中空の点で出す。出さないと、読み上げだけが「予定6件」と言い、
+          // 目で見ている人には空の日と同じに見える。
+          var showDots = inMonth;
           var pastDot = key < today ? ' is-past' : '';
           var dots = showDots
             ? list.slice(0, 3).map(function () { return '<i class="bvc-dot' + pastDot + '"></i>'; }).join('')
@@ -688,17 +666,9 @@
       var list = selected ? byDate[selected] || [] : [];
       // 日を選んでいるのに予定が無いとき（押して無反応に見えないよう、はっきり言う）
       if (selected && !list.length) {
-        var w = outWindow(selected);
-        var outMsg =
-          w === 'past'
-            ? 'この日は、公開しているぶん（今日からの2週間）より前です。終わった予定は公開ぶんに載せていないので、' +
-              '予定が無かったという意味ではありません。' +
-              (opts.memberUrl ? ' <a href="' + esc(opts.memberUrl) + '">会員ページ</a>では過ぎた日も残しています。' : '')
-            : 'この日は、公開しているぶん（今日からの2週間）の外です。予定が無いという意味ではありません。' +
-              (opts.memberUrl ? ' <a href="' + esc(opts.memberUrl) + '">会員ページ</a>では先の予定まで見られます。' : '');
         $day.innerHTML =
           '<' + hSub + ' class="bvc-dayhead">' + esc(fmtDay(selected)) + '</' + hSub + '>' +
-          '<p class="bvc-empty">' + (w ? outMsg : 'この日に入っている予定はありません。') + '</p>';
+          '<p class="bvc-empty">この日に入っている予定はありません。</p>';
         renderTail();
         return;
       }
@@ -725,12 +695,9 @@
 
     function renderDeadlines() {
       // 締切が今日以降・3週間以内のものだけ。無ければ何も出さない。
-      // 会員ページは先の予定まで持っているので、締切も先まで出す（特典に
-      // 「先のぶんまで残り日数つき」と書いてある。21日で切ると書いてあることと合わない）。
-      var horizon = opts.teaser ? 21 : Infinity;
+      // 先の予定まで持っているので、締切も先のぶんまで全部出す。
       var soon = events
         .filter(function (e) { return e.deadline && e.deadline.date >= today; })
-        .filter(function (e) { return (parseISO(e.deadline.date) - parseISO(today)) / MS_DAY <= horizon; })
         .sort(function (a, b) { return a.deadline.date.localeCompare(b.deadline.date); });
       if (!soon.length) { $dlTop.hidden = true; $dl.hidden = true; return; }
       function rowsFor(list, compact) {
@@ -786,10 +753,9 @@
         $dlTop.innerHTML = '';
       }
       $dl.hidden = false;
-      // 会員ページは先の締切まで全部出す（horizon = Infinity）。「近いもの」だと
-      // 書いてあることと出しているものが食い違う。
-      $dl.innerHTML = '<' + hSub + ' class="bvc-dlhead">⏳ 申込の締切' +
-        (opts.teaser ? 'が近いもの' : '（先のぶんまで）') + '</' + hSub + '>' + rowsFor(soon);
+      // 先の締切まで全部出す。「近いもの」だと書いてあることと食い違う。
+      $dl.innerHTML = '<' + hSub + ' class="bvc-dlhead">⏳ 申込の締切（先のぶんまで）</' +
+        hSub + '>' + rowsFor(soon);
     }
 
     function renderTail() {
@@ -849,17 +815,6 @@
               (safeURL(s.url) ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(safeURL(s.url)) + '" target="_blank" rel="noopener">🔗 公式</a>' : '') +
               '</div></article>';
           }).join('');
-      }
-      if (opts.teaser) {
-        html +=
-          '<div class="bvc-teaser">' +
-          '<p>ここに出しているのは、<b>今日からの2週間ぶん</b>です。' +
-          (typeof data.beyond === 'number' && data.beyond > 0
-            ? 'このあと確定している予定が<b>' + data.beyond + '件</b>あります。'
-            : '') +
-          '先の予定は、確定しだいこのカレンダーに足していきます。</p>' +
-          (opts.memberUrl ? '<a class="bvc-teaser-link" href="' + esc(opts.memberUrl) + '">くわしく →</a>' : '') +
-          '</div>';
       }
       $tail.innerHTML = html;
     }

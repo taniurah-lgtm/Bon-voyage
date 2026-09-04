@@ -376,7 +376,8 @@ LINEの送信記録を見たら**46通ずつ実際に配信されていた**。�
 - PDF読み: **`poppler-data` 必須**。`-layout`（横組み）/ `-bbox`（縦組み）。**`-raw` 単独は禁止**
 - ブラウザ検証: Chromium は `/opt/pw-browsers/chromium`。`playwright install` は不要
   （`chromium.launch({executablePath:'/opt/pw-browsers/chromium'})`）
-- LINEリッチメニュー: 3ボタン。3つ目は「会員ページ」
+- LINEリッチメニュー: 3ボタン（カレンダー / おでかけマップ / ホームページ）。
+  画像は `node scripts/build-richmenu.mjs` で生成できる（2026-09-04〜）
 - **公式アカウントの認証申請は提出済み**（審査中・約10営業日）
 
 ---

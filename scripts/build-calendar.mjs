@@ -5,36 +5,25 @@
  *
  * 入力: data/events.json（全件・非公開）
  * 出力: docs/homepage/calendar.html
- *       docs/homepage/data/events-public.json … ★公開されるので「今日から2週間ぶん」だけ入れる
+ *       docs/homepage/data/events-public.json … 台帳の予定を**全部**入れる
  *
- * 無料 / サポーターの線引き（docs/freemium-plan.md）:
- *   無料 = 「知る」  … 今日から2週間ぶんのカレンダー。誰でも見られる
- *   有料 = 「決める・動く」… 先の予定まで通して見られる（会員ページ）
- *
- * ここで「無料を薄くする」ことはしない。いままで公開側にカレンダーは1つも無かったので、
- * この2週間ぶんは**無料に足された分**であって、削ったものではない。
+ * ★2026-09-04: 月額制度の廃止にともない、「今日から2週間ぶんだけ公開」という
+ *   窓をやめた（`docs/strategy-2026-09.md`）。先の予定・過ぎた予定・締切を
+ *   先のぶんまで、会員ページに置いていたものを全部こちらへ移した。
+ *   出さないのは台帳の内部メモ（source / confidence / status）だけ。
  */
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 const IN = 'data/events.json';
 const OUT = 'docs/homepage/calendar.html';
 const OUT_JSON = 'docs/homepage/data/events-public.json';
-const PUBLIC_DAYS = 14;
-const MEMBER_URL = '/m/s7f2ka/';
 
 const src = JSON.parse(readFileSync(IN, 'utf8'));
 // ★「今日」は日本時間で決める。toISOString() は UTC なので、JST の 0〜9時に走ると
 //   前日になり、窓が1日前から始まってしまう（Actions のランナーは UTC）。
 const today = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
-const horizon = new Date(Date.parse(today + 'T00:00:00Z') + PUBLIC_DAYS * 86400000)
-  .toISOString().slice(0, 10);
-
-// 公開に出すもの: 今日〜2週間のうちに1日でもかかるもの。
-// 暫定（日程が未確定）も出す。マス目には置かず「🔎 日程がまだ確定していないもの」に
-// 並ぶだけなので、確定情報と混ざらない。
-// ★以前は暫定を全部落としていたため、8/29の子連れ◎の花火（昭島くじら祭・武蔵村山）が
-//   公開カレンダーから丸ごと消えていた。「載せないより、存在を知らせる」が方針。
-const inWindow = (d) => d >= today && d <= horizon;
+// 公開に出すもの: 台帳にあるもの全部。暫定（日程が未確定）も出す。
+// マス目には置かず「🔎 日程がまだ確定していないもの」に並ぶだけなので、確定情報と混ざらない。
 // 台帳の内部メモは公開データに入れない。表示していなくても、公開している
 // JSON なのでそのまま読める（会員ページ側は意図的に落としているのに、
 // 公開側のほうが緩いという逆転になっていた）。
@@ -46,53 +35,24 @@ const stripInternal = (e) => {
 };
 
 const pub = src.events
-  .filter((e) => (e.dates || []).some(inWindow))
-  .map((e) => ({
-    ...stripInternal(e),
-    dates: e.dates.filter(inWindow),   // 窓の外の日付は公開データに載せない
-  }));
-
-// 「このあと何件あるか」だけは公開してよい（中身は出さない）。
-// 数字だけなので無料版から情報を取り上げることにはならず、先があることは伝わる。
-const beyond = src.events.filter(
-  (e) => !e.tentative && (e.dates || []).some((d) => d > horizon)
-).length;
+  .filter((e) => (e.dates || []).length)
+  .map((e) => stripInternal(e));
 
 // 会期もの（「〜10/14まで」のように期間で開いているもの）。
-// ★まだ始まっていない会期は公開しない。窓は「今日から2週間」なので、
-//   9/30 開始のものを 8/29 に出すのは窓の外の予定を渡すのと同じ（無料/有料の境目）。
-// ★公開する会期ものの dates は窓の中だけに絞る。絞らないと会期を展開した
-//   日付がそのまま公開データに入り、先の日程が漏れる（実際に 9/30 が漏れて
-//   workflow の窓の検査で止まった）。
-// ★窓の中に日付があるものは pub にもう入っている。両方に入れると公開データに
-//   同じIDが2件並び、カレンダーのマス目に同じカードが2枚出る（E74で発生していた）。
-//   pub 側の写しにも span は残っているので、会期ものの節にはそちらから出る。
+// ★日付を持つものは pub にもう入っている。両方に入れると公開データに同じIDが
+//   2件並び、カレンダーのマス目に同じカードが2枚出る（E74で発生していた）。
 const spanPubIds = new Set(pub.map((e) => e.id));
 const spans = src.events
   .filter((e) => e.span && (!e.span.to || e.span.to >= today))
-  .filter((e) => !e.span.from || e.span.from <= horizon)
   .filter((e) => !spanPubIds.has(e.id))
-  .map((e) => ({ ...e, dates: (e.dates || []).filter(inWindow) }));
+  .map((e) => stripInternal(e));
 
-// 締切が窓の中にあるものは、イベント本体が窓の外でも「名前と締切日だけ」を公開する。
-// 無料の役割は「知る」なので、明日締切のものを知らせないのは筋が通らない。
-// 日程・場所・料金といった中身は出さない（そこは「決める・動く」＝サポーターの領分）。
-const pubIds = new Set(pub.map((e) => e.id));
+// 日付を持たず、締切だけがあるもの（申込を受け付けている段階のもの）。
+const pubIds = new Set(pub.concat(spans).map((e) => e.id));
 const deadlineOnly = src.events
-  .filter((e) => !e.tentative && e.deadline && e.deadline.date >= today && e.deadline.date <= horizon)
+  .filter((e) => e.deadline && e.deadline.date >= today)
   .filter((e) => !pubIds.has(e.id))
-  .map((e) => ({
-    id: e.id,
-    name: e.name,
-    dates: [],                      // マス目には置かない
-    // 締切だけ知らせて申し込めないと行き止まりになる。申込先と開催日は通す。
-    // 中身（場所・料金・子連れの詳細）は出さない＝そこは「決める・動く」の領分。
-    when: e.when,
-    url: e.url,
-    contact: e.contact,
-    deadline: { date: e.deadline.date, raw: e.deadline.raw },
-    deadlineOnly: true,
-  }));
+  .map((e) => ({ ...stripInternal(e), dates: [] }));
 
 mkdirSync('docs/homepage/data', { recursive: true });
 writeFileSync(
@@ -100,10 +60,8 @@ writeFileSync(
   JSON.stringify(
     {
       generated: src.generated,
-      window: { from: today, to: horizon },
-      events: pub.concat(spans.map(stripInternal), deadlineOnly.map(stripInternal)),
+      events: pub.concat(spans, deadlineOnly),
       standing: (src.standing || []).map(stripInternal),
-      beyond,
     },
     null,
     1
@@ -131,7 +89,7 @@ const page = `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <title>おでかけカレンダー｜ぼんぼやーじゅ通信</title>
-<meta name="description" content="花小金井・小平まわりの子連れで行けるイベントを、日付が見えるカレンダーで。気になる日をタップして、そのままご自分のカレンダーに保存できます。">
+<meta name="description" content="花小金井・小平まわりの子連れで行けるイベントを、日付が見えるカレンダーで。先の予定も申込の締切もまとめて。気になる日をタップして、そのままご自分のカレンダーに保存できます。">
 <link rel="canonical" href="https://bonvoya.nicomaru.tokyo/calendar.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bonvoya.nicomaru.tokyo/calendar.html">
@@ -188,7 +146,7 @@ const page = `<!doctype html>
 </header>
 
 <main class="wrap">
-  <p class="lead">点の日に予定あり。タップでその日の予定が出ます（<b>今日からの2週間ぶん</b>）。</p>
+  <p class="lead">点の日に予定あり。タップでその日の予定が出ます。<b>台帳にある予定を、先のぶんまで全部</b>のせています。</p>
 
   <noscript>
     <div class="noscript">このカレンダーは表示にJavaScriptを使っています。切っている場合は、下の一覧をご覧ください。</div>
@@ -199,10 +157,17 @@ const page = `<!doctype html>
 
   <!-- JavaScript が動かない環境と、検索エンジン向けの一覧。中身は上のカレンダーと同じ。 -->
   <div class="fallback">
-    <h2 class="bvc-tailhead">この2週間の予定（一覧）</h2>
+    <h2 class="bvc-tailhead">これからの予定（一覧）</h2>
 ${(() => {
+  // JS無しの一覧は「これから8週間ぶん」に絞る（全期間を出すと数百行になり読めない）。
+  // カレンダー本体（JSが動く側）は台帳の全期間を持っている。
+  const FALLBACK_TO = new Date(Date.parse(today + 'T00:00:00Z') + 56 * 86400000)
+    .toISOString().slice(0, 10);
   const byDate = {};
-  for (const e of pub) { if (e.tentative) continue; for (const d of e.dates) (byDate[d] ||= []).push(e); }
+  for (const e of pub) {
+    if (e.tentative) continue;
+    for (const d of e.dates) if (d >= today && d <= FALLBACK_TO) (byDate[d] ||= []).push(e);
+  }
   // 本体（カレンダー）と同じ「子連れで行きやすい順」に揃える。
   // 順序が違うと、JSの有無で並びが変わって混乱する。
   const pt = { '◎': 3, '○': 2, '△': 1, '✕': 0, x: 0 };
@@ -225,7 +190,7 @@ ${(() => {
   const extra = [];
   const dl = pub.concat(deadlineOnly).filter((e) => e.deadline && e.deadline.date >= today);
   if (dl.length) {
-    extra.push('    <h3>申込の締切が近いもの</h3>\n    <ul>' +
+    extra.push('    <h3>申込の締切</h3>\n    <ul>' +
       dl.sort((a, b) => a.deadline.date.localeCompare(b.deadline.date)).map((e) =>
         `<li>${esc(jpDay(e.deadline.date))} まで — ${esc(e.name)}${e.when ? `（開催 ${esc(e.when)}）` : ''}</li>`).join('') +
       '</ul>');
@@ -274,7 +239,7 @@ ${(() => {
 
 <footer>
   <div class="fmark">ぼんぼやーじゅ通信</div>
-  <a href="/tokushoho.html">特定商取引法に基づく表記・免責事項</a><br>
+  <a href="/tokushoho.html">免責事項・個人情報の取り扱い</a><br>
   © 2026 ぼんぼやーじゅ通信
 </footer>
 
@@ -290,11 +255,9 @@ fetch('/data/events-public.json', { cache: 'no-cache' })
       document.querySelector('.fallback').hidden = true;
     }
     BVCalendar.mount(document.getElementById('cal'), data, {
-      teaser: true,
       // この頁は見出しが h1 だけ（一覧の h2 はJSが動くと隠れる）。月の見出しを h3 に
       // すると h1→h3 の飛びになるので h2 で出す。
       monthLevel: 2,
-      memberUrl: ${JSON.stringify(MEMBER_URL)},
     });
   })
   .catch(function () {
@@ -309,5 +272,5 @@ fetch('/data/events-public.json', { cache: 'no-cache' })
 
 writeFileSync(OUT, page);
 console.log(`wrote ${OUT}`);
-console.log(`  公開: ${pub.length}件（うち暫定 ${pub.filter((e) => e.tentative).length}件・${today}〜${horizon}）/ 会期もの ${spans.length}件 / 締切だけ ${deadlineOnly.length}件 / この先さらに ${beyond}件`);
-console.log(`wrote ${OUT_JSON}（★公開される。2週間ぶんだけ入っていることを必ず確認する）`);
+console.log(`  公開: ${pub.length}件（うち暫定 ${pub.filter((e) => e.tentative).length}件）/ 会期もの ${spans.length}件 / 締切だけ ${deadlineOnly.length}件`);
+console.log(`wrote ${OUT_JSON}（★公開される。台帳の内部メモが入っていないことを必ず確認する）`);
