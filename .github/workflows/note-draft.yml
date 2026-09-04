@@ -1,0 +1,71 @@
+name: note の下書きを毎朝つくる
+
+# 台帳から「事実の骨組み」を1本つくって note/ に置く。
+# 文章にするのは人（またはClaude）。ここでは作り話をしない。
+on:
+  schedule:
+    - cron: '0 21 * * *'      # 毎日 06:00 JST
+  workflow_dispatch:
+    inputs:
+      type:
+        description: '型を指定する（空なら曜日で決まる）'
+        required: false
+        type: choice
+        options: ['', 'spot', 'week', 'round']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: note-draft
+  cancel-in-progress: false
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: claude/line-message-resend-yefv9l
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # 台帳の正は rfwmo8。古いコピーで書くと、終わったイベントを紹介してしまう。
+      - name: 台帳を rfwmo8 から取り直す
+        run: |
+          git fetch --no-tags origin claude/family-event-planning-rfwmo8
+          git checkout FETCH_HEAD -- events/
+          node scripts/build-events-json.mjs
+
+      - name: 下書きをつくる
+        run: |
+          if [ -n "${{ inputs.type }}" ]; then
+            node scripts/build-note-draft.mjs --type "${{ inputs.type }}" --force
+          else
+            node scripts/build-note-draft.mjs --force
+          fi
+
+      - name: コミットして push
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # 台帳の取り直しぶんは持ち帰らない（正は rfwmo8）
+          git checkout -- events/ || true
+          git add note/ data/events.json
+          if git diff --cached --quiet; then
+            echo "変わったものが無いので何もしない"
+            exit 0
+          fi
+          git commit -m "note: $(date -u -d '+9 hours' +%Y-%m-%d) の下書き
+
+台帳から事実の骨組みを起こしたもの。文章にするのはこれから。"
+          for i in 1 2 3 4; do
+            git push origin HEAD:claude/line-message-resend-yefv9l && exit 0
+            sleep $((2**i))
+            git pull --rebase origin claude/line-message-resend-yefv9l
+          done
+          exit 1
