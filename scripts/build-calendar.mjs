@@ -233,6 +233,7 @@ ${(() => {
     <a href="/">通信について</a>
     <a href="/map.html">おでかけマップ</a>
     <a href="/issues.html">バックナンバー</a>
+    <a href="/#contact">お問い合わせ</a>
   </div>
 
   <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>

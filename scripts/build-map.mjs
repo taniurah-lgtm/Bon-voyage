@@ -176,6 +176,7 @@ const page = `<!doctype html>
       <a href="/">通信について</a>
       <a href="/calendar.html">おでかけカレンダー</a>
       <a href="/issues.html">バックナンバー</a>
+      <a href="/#contact">お問い合わせ</a>
       <a href="#post">${POST_URL ? 'この地図に書き込む' : 'この地図にひとことを寄せる'}</a>
     </div>
   </div>

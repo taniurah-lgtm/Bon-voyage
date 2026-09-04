@@ -196,9 +196,21 @@
   .closing::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, var(--hero-scrim-1), var(--hero-scrim-2)); }
   .closing-body { position: relative; z-index: 2; text-align: center; padding: 2.8rem 1.5rem; }
   .qr-wrap { margin-top: 1.7rem; display: flex; flex-direction: column; align-items: center; gap: .55rem; }
-  .mailopt { margin-top: 2.2rem; padding-top: 1.7rem; border-top: 1px solid var(--line-strong); }
-  .mailopt-h { font-family: var(--maru); font-weight: 800; margin: 0 0 .35rem; }
-  .mailopt-p { color: var(--ink-soft); font-size: .95rem; max-width: 30rem; margin: 0 auto 1.1rem; }
+  /* LINEを使わない相手（施設・お店・事業者）が連絡できる先。
+     フッターのメールアドレスは小さすぎて見つけてもらえなかった。 */
+  .contact { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.7rem 1.5rem; }
+  .contact-list { list-style: none; margin: 0 0 1.5rem; padding: 0; display: flex; flex-direction: column; gap: .85rem; }
+  .contact-list li { position: relative; padding-left: 1.35rem; font-size: .98rem; line-height: 1.7; }
+  .contact-list li::before { content: "▸"; position: absolute; left: 0; color: var(--marigold); }
+  .contact-list .tiny { display: block; font-size: .86rem; color: var(--ink-soft); margin-top: .15rem; }
+  /* 地は --ground。--surface-2(#F5F2EA) の上だと --ink-soft が 4.44:1 で、
+     この中の小さい文字（連絡先の但し書き）に必要な 4.5:1 に届かない。 */
+  .contact-mail { background: var(--ground); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); padding: 1.2rem 1.3rem; }
+  .contact-lb { font-family: var(--maru); font-weight: 800; font-size: .9rem; color: var(--ink-soft); margin: 0 0 .3rem; }
+  .contact-addr { margin: 0 0 .7rem; }
+  .contact-addr a { font-family: var(--maru); font-weight: 800; font-size: 1.12rem; color: var(--link-ink); text-decoration: none; overflow-wrap: anywhere; display: inline-flex; align-items: center; min-height: 44px; }
+  .contact-mail .tiny { font-size: .84rem; color: var(--ink-soft); line-height: 1.8; }
+  .contact-line { margin-top: 1.2rem; font-size: .9rem; color: var(--ink-soft); }
   .qr { width: 150px; height: 150px; background: #fff; padding: 10px; border-radius: 12px; box-shadow: var(--shadow-soft); }
   .qr-cap { font-size: .85rem; color: var(--ink-soft); }
 
@@ -366,6 +378,7 @@
 <nav class="pagenav wrap" aria-label="このページの中身">
   <a href="#issue">最新号を読む</a>
   <a href="#tools">3つの道具</a>
+  <a href="#contact">お問い合わせ</a>
 </nav>
 
 <main>
@@ -494,27 +507,32 @@
           <p class="qr-cap">スマホ以外の方は、QRコードから追加できます</p>
         </div>
 
-        <!-- ▼ メール版の受け皿。下の BV_MAIL_FORM_URL にフォームのURLを入れると表示される。
-             空のあいだはブロックごと出ないので、このまま公開して問題ない。手順は docs/mail-plan.md -->
-        <div id="mailopt" class="mailopt" hidden>
-          <p class="mailopt-h">LINEを使っていない方へ</p>
-          <p class="mailopt-p">メールでもお届けできるよう、準備を進めています。<br>
-            ご登録いただいた方には、始まったときにお送りします。</p>
-          <a class="btn btn-ghost" id="mailopt-btn" href="#" target="_blank" rel="noopener">メールでの配信を予約する</a>
-        </div>
-        <script>
-          /* ここにフォームのURLを貼ると、上のブロックが表示されます。空のあいだは何も出ません。 */
-          var BV_MAIL_FORM_URL = '';
-          (function () {
-            if (!BV_MAIL_FORM_URL) return;
-            var btn = document.getElementById('mailopt-btn');
-            var box = document.getElementById('mailopt');
-            if (!btn || !box) return;
-            btn.href = BV_MAIL_FORM_URL;
-            box.hidden = false;
-          })();
-        </script>
       </div>
+    </div>
+  </section>
+
+  <section id="contact" class="wrap">
+    <div class="stop"><span class="pin"></span><span class="label">Contact</span></div>
+    <h2>お問い合わせ</h2>
+    <p class="section-lede">LINEをお使いでない方も、こちらからご連絡いただけます。
+      施設・お店・団体の方からのご連絡も歓迎しています。</p>
+
+    <div class="contact">
+      <ul class="contact-list">
+        <li><b>イベントや講座の情報をお寄せいただく</b><span class="tiny">チラシのPDFやページのURLをお送りください。日程を確認のうえ、通信とカレンダーに載せます。掲載は無料です。</span></li>
+        <li><b>チラシ・ポスターを置いていただける</b><span class="tiny">施設・お店に置いていただける場合、こちらからお届けにあがります。</span></li>
+        <li><b>掲載内容のご指摘・訂正のお願い</b><span class="tiny">間違いはすぐ直して、次の号でお知らせします。</span></li>
+        <li><b>取材・協賛・そのほかのご相談</b><span class="tiny">地域の子育て家庭に届く場をお探しの事業者の方も、お気軽にどうぞ。</span></li>
+      </ul>
+
+      <div class="contact-mail">
+        <p class="contact-lb">メールでご連絡ください</p>
+        <p class="contact-addr"><a href="mailto:tokyo.papa.home@gmail.com">tokyo.papa.home@gmail.com</a></p>
+        <p class="tiny">運営: ニコマル（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）<br>
+          平日は別の仕事をしているため、お返事に数日いただくことがあります。</p>
+      </div>
+
+      <p class="contact-line">すでにLINEで受け取っている方は、<b>そのままトークに送っていただくのがいちばん早い</b>です。</p>
     </div>
   </section>
 </main>
