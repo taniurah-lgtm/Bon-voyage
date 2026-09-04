@@ -232,6 +232,7 @@ ${(() => {
   <div class="nav-pills">
     <a href="/">通信について</a>
     <a href="/map.html">おでかけマップ</a>
+    <a href="/issues.html">バックナンバー</a>
   </div>
 
   <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>

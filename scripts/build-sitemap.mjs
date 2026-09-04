@@ -20,6 +20,7 @@ const PAGES = {
   'calendar.html': { freq: 'weekly', pri: '0.9' },
   'map.html': { freq: 'weekly', pri: '0.9' },
   'guide.html': { freq: 'monthly', pri: '0.8' },
+  'issues.html': { freq: 'weekly', pri: '0.8' },
   'tokushoho.html': { freq: 'yearly', pri: '0.3' },
   'card.html': { freq: 'yearly', pri: '0.3' },
 };

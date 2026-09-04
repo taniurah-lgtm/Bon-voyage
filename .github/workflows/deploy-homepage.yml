@@ -8,6 +8,7 @@ on:
       - "docs/homepage/**"
       - "data/**"
       - "events/**"
+      - "reports/free/**"
       - "scripts/build-*.mjs"
       - "scripts/build-site.sh"
       - "scripts/lib/**"
@@ -39,12 +40,13 @@ jobs:
         with:
           node-version: '22'
 
-      # 台帳の正は rfwmo8。yefv9l 側のコピーは古いことがあるので、必ず取り直す。
-      - name: 台帳を rfwmo8 から取り直す
+      # 台帳と過去号の正は rfwmo8。yefv9l 側のコピーは古いことがあるので、必ず取り直す。
+      - name: 台帳と過去号を rfwmo8 から取り直す
         run: |
           git fetch --no-tags origin claude/family-event-planning-rfwmo8
-          git checkout FETCH_HEAD -- events/
+          git checkout FETCH_HEAD -- events/ reports/free/
           echo "台帳の行数:"; wc -l events/*.md
+          echo "過去号:"; ls reports/free/
 
       # 合言葉が Secrets にあれば、それで組み直す。
       # 無ければコミットされているものをそのまま使う（従来どおり）。

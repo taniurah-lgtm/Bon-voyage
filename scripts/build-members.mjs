@@ -18,6 +18,7 @@
  */
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { encryptFor, passphrases, ITER, CLIENT_DECRYPT, jsonInTag, esc, buildStamp } from './lib/gate.mjs';
+import { fixWords, readIssues, issuesHTML } from './lib/issues.mjs';
 
 const OUT = 'docs/homepage/m/s7f2ka/index.html';
 const EVENTS = JSON.parse(readFileSync('data/events.json', 'utf8'));
@@ -88,20 +89,6 @@ const renkyu = !renkyuLive ? '' : `
   <div class="ev"><div class="nm">🎠 雨でも安心のテーマパーク・室内</div><div class="desc">サンリオピューロランド（多摩・全天候の室内）は天気に左右されない。西武園ゆうえんち（近い）は大火祭りの花火が9/19〜23も開催。</div><div class="links"><a class="lk off" href="https://www.puroland.jp/" target="_blank" rel="noopener">🔗 ピューロランド</a><a class="lk off" href="https://www.seibuen-amusement-park.jp/2026summer/" target="_blank" rel="noopener">🔗 西武園</a></div></div>
   <div class="ev"><div class="nm">🏕 キャンプ（早めに予約）</div><div class="desc">高原キャンプは連休ぶんが早く埋まります。施設ごとの予約開始ルールは下の<a href="#camp">キャンプの節</a>にまとめています（取りにくいときは日曜泊とキャンセル待ち通知が有効）。</div></div>
   <p class="note">※営業日・料金・味覚狩りの解禁時期は変わります。おでかけ前に各公式でご確認を。</p>`;
-
-// 号の本文に残る内部用語を、読者向けの言い方に直す。
-// 「巡回」は運営側の作業名、「★駅前・地元」は台帳の絞り込みマーカーで、
-// どちらも読む人には意味が通らない（原文をそのまま貼っているので残っていた）。
-// 読者は「巡回」も「調べもの」もしない。運営側の作業名が残らないようにする。
-const WORDS = [
-  [/毎月中旬の巡回で/g, '毎月中旬に'],
-  [/来月中旬の巡回で/g, '来月中旬に'],
-  [/次回の巡回で/g, '次回のお便りで'],
-  [/巡回で/g, 'こちらで'],
-  [/巡回時に/g, 'おでかけ前に'],
-  [/\s*★[^\s、。]*(?=\s|$)/g, ''],
-];
-const fixWords = (t) => WORDS.reduce((acc, [re, to]) => acc.replace(re, to), t);
 
 // ---- キャンプ（events/camp.md を読む）----------------------------------------
 // 特典に「キャンプ・連休の解禁日と締切を、先のぶんまで」と書いているのに、
@@ -210,57 +197,8 @@ const campSection = (() => {
   </details>`;
 })();
 
-// ---- バックナンバー（過去号を実際に載せる）------------------------------------
-// これまで「順次公開していきます」と書いてあるだけで中身が無かった。
-// reports/free/ に実物があるので、そのまま読める形で入れる（できていないことを書かない）。
-const issues = existsSync('reports/free')
-  ? readdirSync('reports/free')
-      .filter((f) => /^\d{4}-\d{2}-\d{2}\.md$/.test(f))   // _draft- は除く
-      .sort()
-      .reverse()
-  : [];
-
-// 過去号は原文のまま置くが、あとで取り下げた記載には訂正を添える。
-// ★事故#7「実装していない『カレンダー登録代行』を特典に書いていた」は撤回済みだが、
-//   当時の号にはそのまま残っている。有料会員が読む生きたページなので、訂正なしで置けない。
-const CORRECTIONS = [
-  [/登録代行|登録を代行/, 'この号にある「カレンダー登録の代行」は、その後**ワンタップでご自分のカレンダーに保存いただく形**に変わりました。運営が代わりに登録することはしていません。'],
-  [/わき水広場/, 'この号でご紹介した小金井公園「わき水広場」は、その後の確認で**実在が確かめられなかった**ため、掲載を取り下げました。'],
-  [/有料版希望|フォームからどうぞ/, 'この号にある「フォームからどうぞ」のご案内は、いまは使っていません。応援のお申し込みは**note のメンバーシップに一本化**しています。'],
-];
-
-
-// 号の本文に混ざっていた作業用の行を落とす（`</content>` が読者に見えていた）
-const stripArtifacts = (body) =>
-  body
-    .split('\n')
-    .filter((l) => !/^\s*<\/?[a-zA-Z][^>]*>\s*$/.test(l))
-    .join('\n')
-    .trim();
-
-const issueHTML = issues
-  .map((f) => {
-    const raw = readFileSync(`reports/free/${f}`, 'utf8');
-    const [y, m, d] = f.replace('.md', '').split('-').map(Number);
-    const wd = '日月火水木金土'[new Date(Date.UTC(y, m - 1, d)).getUTCDay()];
-    // 1行目の題名は日付が入っているので、見出しは自分で組む
-    const body = fixWords(stripArtifacts(raw.split('\n').slice(1).join('\n')));
-    // 号のなかのURLは、読めるだけでなく押せるようにする（素テキストだと開けない）。
-    // ★終端を「空白・和文の記号・引用符」までにする。\w だけだと日本語の直前で切れて
-    //   「?api=1&query=」のような空クエリのリンクができる。
-    const linked = esc(body).replace(
-      /https?:\/\/[^\s<>"'）」』、。]+/g,
-      (u) => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`
-    );
-    const fixes = CORRECTIONS.filter(([re]) => re.test(body)).map(([, note]) =>
-      `<p class="issue-fix">📝 ${note.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')}</p>`
-    );
-    return `  <details class="issue">
-    <summary>${m}月${d}日(${wd})号${fixes.length ? '<span class="issue-hasfix">訂正あり</span>' : ''}</summary>
-    <div class="issue-body">${fixes.join('')}${linked}</div>
-  </details>`;
-  })
-  .join('\n');
+// ---- バックナンバー（過去号）。組み立ては scripts/lib/issues.mjs（公開ページと共通）
+const issueHTML = issuesHTML(readIssues());
 
 // ---- みんなの声（会員ページは全件・写真つきも出す）----------------------------
 const voiceHTML = (p) =>

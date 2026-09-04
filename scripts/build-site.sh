@@ -3,10 +3,11 @@
 #   MEMBER_PASS=xxx [MAP_POST_URL=...] ./scripts/build-site.sh
 #
 # 台帳(events/*.md) → data/events.json → 公開カレンダー / 会員ページ
+# 過去号(reports/free/*.md) → 公開バックナンバー
 # スポット(data/map-spots.json) → 公開マップ / 会員ページの地図
 #
 # ★台帳は rfwmo8 ブランチが正。中身が古いと感じたら先に:
-#     git checkout origin/claude/family-event-planning-rfwmo8 -- events/
+#     git checkout origin/claude/family-event-planning-rfwmo8 -- events/ reports/free/
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -14,12 +15,16 @@ echo "── 台帳を読む"
 node scripts/build-events-json.mjs
 
 echo
-echo "── 公開カレンダー（誰でも・先2週間）"
+echo "── 公開カレンダー（誰でも・台帳の全期間）"
 node scripts/build-calendar.mjs
 
 echo
 echo "── 公開マップ（地図＋投稿フォーム）"
 node scripts/build-map.mjs
+
+echo
+echo "── バックナンバー（過去号の公開ページ）"
+node scripts/build-issues.mjs
 
 echo
 echo "── sitemap.xml"
