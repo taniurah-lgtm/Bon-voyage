@@ -198,7 +198,8 @@ const campSection = (() => {
 })();
 
 // ---- バックナンバー（過去号）。組み立ては scripts/lib/issues.mjs（公開ページと共通）
-const issueHTML = issuesHTML(readIssues());
+const issues = readIssues();
+const issueHTML = issuesHTML(issues);
 
 // ---- みんなの声（会員ページは全件・写真つきも出す）----------------------------
 const voiceHTML = (p) =>
