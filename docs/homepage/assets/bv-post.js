@@ -4,9 +4,7 @@
  *     endpoint,      // Google Apps Script のウェブアプリURL。空なら「送れない」案内に切り替わる
  *     spots,         // 場所の候補（入力補助）
  *     gate,          // { blobs, iter } 合言葉が正しいかの判定用（合言葉そのものは入っていない）
- *     joinUrl,       // 応援サポーターの案内先
  *     freeLimit,     // 無料の方の字数（既定 40）
- *     paidLimit      // サポーターの方の字数（既定 300）
  *   })
  *
  * Googleフォームには飛ばさない。このページの中で書いて、そのまま送る。
@@ -68,7 +66,7 @@
 
   function mount(el, opts) {
     opts = opts || {};
-    // 字数は誰でも同じ。サポーターとの差は写真だけ（2026-08-23 オーナー判断）
+    // 字数は誰でも同じ。合言葉の有無で変わるのは写真だけ
     var textLimit = opts.textLimit || opts.paidLimit || 300;
     var spots = opts.spots || [];
     var isSupporter = false;
@@ -118,7 +116,7 @@
       '<p class="bvp-hint">市や町までで十分です。番地や園・学校の名前は書かないでください。</p>' +
 
       '<details class="bvp-gate">' +
-      '<summary>写真も添えたい方（応援サポーターの合言葉）</summary>' +
+      '<summary>写真も添えたい方（合言葉をお持ちの方）</summary>' +
       '<label class="bvp-lb" for="bvp-pass">合言葉</label>' +
       '<div class="bvp-passrow">' +
       '<input class="bvp-in" id="bvp-pass" type="text" autocomplete="off" autocapitalize="none" autocorrect="off" placeholder="合言葉">' +
@@ -180,7 +178,7 @@
       isSupporter = true;
       var gate = el.querySelector('.bvp-gate');
       if (gate) gate.open = true;
-      $gateMsg.textContent = '応援ありがとうございます。写真も添えられます。';
+      $gateMsg.textContent = '確認できました。写真も添えられます。';
       $gateMsg.className = 'bvp-gate-msg is-ok';
       $photoBox.hidden = false;
       $text.dispatchEvent(new Event('input'));
@@ -241,7 +239,7 @@
         text: text,
         who: el.querySelector('#bvp-who').value.trim(),
         area: el.querySelector('#bvp-area').value.trim(),
-        tier: isSupporter ? 'サポーター' : '一般',
+        tier: isSupporter ? '合言葉あり' : '一般',
         photo: isSupporter ? photoData : null,
         page: location.pathname,
       };
@@ -302,7 +300,6 @@
       });
     }
 
-    // 送れたあとに、はじめて応援のお願いを出す（書く前には出さない）
     function done(payload) {
       form.hidden = true;
       var d = el.querySelector('.bvp-done');
@@ -312,15 +309,9 @@
         '<p class="bvp-lead">「' + esc(payload.spot) + '」への<b>' + esc(payload.text.slice(0, 24)) +
         (payload.text.length > 24 ? '…' : '') + '</b>をお預かりしました。' +
         '内容を確認したうえで、数日のうちに地図へ載せます。</p>' +
-        (payload.tier === 'サポーター'
+        (payload.photo
           ? '<p class="bvp-lead">写真もいっしょにお預かりしました。ありがとうございます。</p>'
-          : '<div class="bvp-nudge">' +
-            '<p>写真もいっしょに載せたいときは。</p>' +
-            '<p class="bvp-nudge-body">応援サポーター（月300円）の方は、<b>その場の写真</b>も添えられます。' +
-            'この通信を続けるのに、LINEの配信費が月5,000円かかっています。' +
-            '20人の方に支えていただけると、そこが自前で回ります。</p>' +
-            (opts.joinUrl ? '<a class="bvp-nudge-link" href="' + esc(opts.joinUrl) + '">サポーターについて見てみる →</a>' : '') +
-            '</div>') +
+          : '') +
         '<p class="bvp-actions"><button class="bvp-btn bvp-btn-sub" type="button" onclick="location.reload()">もう1件書く</button></p>';
       d.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }

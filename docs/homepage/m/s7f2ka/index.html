@@ -109,7 +109,7 @@ footer{color:var(--ink-soft);font-size:.8rem;text-align:center;padding:2rem 1.25
 <header class="h" id="top"><div class="h-in">
   <div class="eyebrow">ぼんぼやーじゅ通信</div>
   <h1>会員ページ</h1>
-  <p class="sub">応援サポーターの方へ。</p>
+  <p class="sub">合言葉をお持ちの方へ。</p>
 </div></header>
 <nav id="nav" class="nav" style="display:none"><div class="nav-in">
   <a href="#top">ホーム</a>
@@ -124,23 +124,21 @@ footer{color:var(--ink-soft);font-size:.8rem;text-align:center;padding:2rem 1.25
     <h2><label for="pw">🔑 合言葉を入力</label></h2>
     <p id="pw-help">会員の方にお伝えした合言葉を入れてください。</p>
     <!-- JavaScript を切っていると「ひらく」を押しても無反応のまま黙って終わる。
-         公開ページには全部 noscript があるのに、お金をいただいている頁だけ
-         行き止まりで沈黙するのはおかしい。 -->
+         公開ページには全部 noscript があるので、この頁にも置く。 -->
     <noscript>
       <div class="noscript-note">このページは中身を合言葉で暗号化しているため、表示に JavaScript を使います。
         オフのままでは開けません。ブラウザの設定でオンにしてから読み込み直してください。
         うまくいかないときは <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a>でお知らせいただければ、その週のぶんをお送りします。</div>
     </noscript>
-    <!-- autofocus は付けない。会員でない人がリンクを踏んだときにキーボードが開き、
-         下の「サポーターになる」が隠れる（合言葉を持っていないのに入力を促される）。 -->
+    <!-- autofocus は付けない。合言葉を持っていない人がリンクを踏んだときに
+         キーボードだけが開き、下の案内が隠れる。 -->
     <input id="pw" type="text" inputmode="text" autocomplete="off" autocapitalize="none" autocorrect="off" placeholder="合言葉" aria-describedby="pw-help">
     <button id="go">ひらく</button>
     <div id="err" class="err" role="alert" aria-live="assertive"></div>
-    <div class="hint">合言葉は、note のメンバー限定投稿でお知らせしています（LINEでお送りすることもできます）。分からないときはお気軽にお尋ねください。</div>
+    <div class="hint">合言葉は、こちらからお伝えした方にのみお送りしています。分からないときはお気軽にお尋ねください。</div>
     <div class="cta">
-      <p class="lead">まだサポーターでない方へ。<br>月300円で通信を応援いただくと、この会員ページ（花小金井まわりのおでかけカレンダーなど）もご利用いただけます。</p>
-      <a class="join" href="https://note.com/bon_voyage_mail/membership" target="_blank" rel="noopener">サポーターになる（月300円）</a>
-      <a class="more" href="/">まずは通信について知る →</a>
+      <p class="lead">合言葉をお持ちでない方へ。<br>通信は、どなたでも無料でお読みいただけます。</p>
+      <a class="more" href="/">ぼんぼやーじゅ通信について →</a>
     </div>
     <p class="peek">カレンダーの雰囲気は、<a href="/calendar.html">公開版のおでかけカレンダー</a>（今日からの2週間ぶん）でご覧いただけます。</p>
   </div>
@@ -149,8 +147,8 @@ footer{color:var(--ink-soft);font-size:.8rem;text-align:center;padding:2rem 1.25
 
 <footer>
   <div class="fmark">ぼんぼやーじゅ通信</div>
-  応援サポーター向け会員ページ<br>
-  <a href="/tokushoho.html">特定商取引法に基づく表記・免責事項</a>｜© 2026 ぼんぼやーじゅ通信
+  会員ページ<br>
+  <a href="/tokushoho.html">免責事項・個人情報の取り扱い</a>｜© 2026 ぼんぼやーじゅ通信
 </footer>
 
 <script src="/assets/leaflet/leaflet.js"></script>

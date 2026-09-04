@@ -173,60 +173,17 @@
   ul.takeaway li { position: relative; padding-left: 1.35rem; font-size: .92rem; color: var(--ink-soft); }
   ul.takeaway li::before { content: "▸"; position: absolute; left: 0; color: var(--marigold); }
 
-  .paid { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 2rem 1.7rem; display: grid; gap: 1.4rem; }
-  @media (min-width: 40rem) { .paid { grid-template-columns: 1.1fr 1fr; align-items: center; } }
-  .paid h3 { font-family: var(--maru); font-weight: 800; font-size: 1.3rem; margin: 0 0 .5rem; }
-  .paid p { color: var(--ink-soft); font-size: .98rem; }
-  .price { display: flex; align-items: baseline; gap: .35rem; margin-top: 1rem; }
-  .price .n { font-family: var(--maru); font-weight: 800; font-size: 2.2rem; color: var(--ink); font-variant-numeric: tabular-nums; }
-  .price .u { color: var(--ink-soft); font-size: .95rem; }
-  .price-sub { margin-top: .35rem; font-size: .92rem; color: var(--ink-soft); }
-  /* 無料 / サポーターの役割のちがい */
-  .cmp { margin-top: 2rem; }
-  .cmp-title { font-family: var(--maru); font-weight: 800; font-size: 1.1rem; margin-bottom: .9rem; }
-  .cmp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .cmp-col { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 1.1rem 1.2rem; }
-  .cmp-col.paid-col { border-color: var(--marigold); box-shadow: var(--shadow-soft); }
-  .cmp-head { font-family: var(--maru); font-weight: 800; font-size: .82rem; letter-spacing: .06em; display: inline-block; padding: .25rem .7rem; border-radius: 999px; }
-  .cmp-head.free { background: var(--sky-wash); color: var(--sky-deep); }
-  .cmp-head.sup { background: var(--marigold-wash); color: var(--marigold-ink); }
-  .cmp-role { font-family: var(--maru); font-weight: 800; font-size: 1.04rem; margin: .7rem 0 .6rem; line-height: 1.5; }
-  .cmp-col ul { list-style: none; margin: 0; padding: 0; }
-  .cmp-col li { position: relative; padding-left: 1rem; margin: .45rem 0; font-size: .93rem; line-height: 1.65; color: var(--ink-soft); }
-  .cmp-col li::before { content: ""; position: absolute; left: 0; top: .62em; width: .38rem; height: .38rem; border-radius: 999px; background: var(--line-strong); }
-  .cmp-col.paid-col li { color: var(--ink); }
-  .cmp-col.paid-col li::before { background: var(--marigold); }
-  @media (max-width: 40rem) { .cmp-grid { grid-template-columns: 1fr; } }
-  .perks { background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); padding: 1.4rem 1.4rem 1.25rem; box-shadow: var(--shadow-soft); }
-  .perks-title { font-family: var(--maru); font-weight: 800; font-size: 1.02rem; color: var(--marigold-ink); margin-bottom: 1rem; display: flex; align-items: center; gap: .45rem; }
-  .paid-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .9rem; }
-  .paid-list li { display: flex; gap: .65rem; font-size: 1.02rem; align-items: flex-start; line-height: 1.6; }
-  .paid-list .ck { flex: none; width: 1.4rem; height: 1.4rem; border-radius: 999px; background: var(--leaf); color: var(--on-bright); display: inline-flex; align-items: center; justify-content: center; font-size: .82rem; font-weight: 800; margin-top: .12rem; }
-  .paid-cta { margin-top: 1.3rem; display: flex; gap: .7rem; flex-wrap: wrap; }
-  .btn-warm { background: var(--marigold); color: #3a2408; }
-  .btn-warm:hover { transform: translateY(-1px); }
-  .reassure { margin-top: 1rem; font-size: .88rem; color: var(--ink-soft); }
-  /* 無料の道具から応援の説明への静かな1行（価格は書かない・急かさない） */
+  /* 無料で使えることを、道具の下に静かに置く1行 */
   .support-line { margin-top: 1.6rem; font-size: .85rem; line-height: 1.9; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 1rem; }
   /* 地が --ground(#FBFAF5) なので --sky-deep では 4.48 とわずかに足りない。専用の濃い側を使う */
   .support-line a { font-weight: 700; display: inline-flex; align-items: center; min-height: 44px; color: var(--link-ink); }
-  /* ページ内の行き先。#more はページの下のほうにあり、9画面スクロールしないと
-     応援という選択肢の存在に気づけなかった（あおらない代わりに、道は示す）。 */
+  /* ページ内の行き先。長いページなので、上に見出しの目次を置く。 */
   .pagenav { display: flex; flex-wrap: wrap; gap: .5rem; padding-top: 1.1rem; }
   .pagenav a {
     font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none;
     color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong);
     border-radius: 999px; padding: 0 .9rem; min-height: 44px; display: inline-flex; align-items: center;
   }
-  /* 入会の流れ（何をすればいいか・何が起きるかを先に見せる） */
-  .steps { margin-top: 1.4rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 1.1rem 1.2rem; }
-  .steps-title { font-family: var(--maru); font-weight: 800; font-size: .95rem; margin-bottom: .7rem; }
-  .steps ol { margin: 0; padding-left: 0; list-style: none; counter-reset: st; }
-  .steps li { position: relative; padding-left: 2.1rem; margin: .55rem 0; font-size: .93rem; line-height: 1.7; counter-increment: st; }
-  .steps li::before { content: counter(st); position: absolute; left: 0; top: .15rem; width: 1.5rem; height: 1.5rem; border-radius: 999px; background: var(--sky-wash); color: var(--sky-deep); font-family: var(--maru); font-weight: 800; font-size: .8rem; display: flex; align-items: center; justify-content: center; }
-  .steps .tiny { display: block; font-size: .82rem; color: var(--ink-soft); margin-top: .1rem; }
-  .steps-back { margin-top: .9rem; font-size: .86rem; }
-  .steps-back a { font-weight: 700; display: inline-flex; align-items: center; min-height: 44px; }
 
   .trust { display: grid; gap: .95rem; max-width: 48rem; }
   .trust .row { display: flex; gap: .7rem; align-items: flex-start; font-size: .94rem; color: var(--ink-soft); }
@@ -258,20 +215,19 @@
     .hero-inner { padding-left: 1.15rem; padding-right: 1.15rem; padding-bottom: 7rem; }
     .lede { font-size: 1.2rem; }
     .lede-sub { font-size: 1.06rem; }
-    .section-lede, .card p, .paid p, .trust .row, ul.takeaway li, .item .m { font-size: 1.05rem; }
+    .section-lede, .card p, .trust .row, ul.takeaway li, .item .m { font-size: 1.05rem; }
     .item .h { font-size: 1.08rem; }
     .blk h3 { font-size: 1.1rem; }
     .card .kicker { font-size: 1.14rem; }
     .issue-legend { font-size: .98rem; }
     .ages { font-size: .96rem; }
     .badge, .agechip { font-size: .88rem; }
-    .paid-list li { font-size: 1.04rem; }
   }
 
   @media (prefers-reduced-motion: reduce) { .fade { animation: none; opacity: 1; transform: none; } }
 
   /* 無料で使える3つの道具。以前はここが20pxのテキストリンクで、
-     すぐ下の有料セクションより目立たなかった。 */
+     ページの中で見つけてもらえなかった。 */
   .tools { display: grid; gap: .8rem; margin-top: 1.8rem; }
   @media (min-width: 42rem) { .tools { grid-template-columns: 1fr 1fr 1fr; } }
   .tool {
@@ -294,11 +250,6 @@
     padding: .35rem .9rem; display: inline-block; color: var(--ink) !important;
   }
   @media (prefers-color-scheme: dark) { .hero-note { background: rgba(19,31,40,.8); } }
-
-  /* 比較表の無料欄が --ink-soft で、サポーター欄より視覚的に弱かった。
-     役割のちがいを見せる表なので、どちらも同じ濃さで書く。 */
-  .cmp-col ul li { color: var(--ink); }
-  .cmp-col .tiny { display: block; color: var(--ink-soft); margin-top: .15rem; }
 
   /* [hidden] は UA の display:none だが、.ck の display:inline-flex に負けて
      ✓ が2つ並んでいた。属性を優先させる。 */
@@ -413,7 +364,6 @@
 <nav class="pagenav wrap" aria-label="このページの中身">
   <a href="#issue">最新号を読む</a>
   <a href="#tools">3つの道具</a>
-  <a href="#more">応援について</a>
 </nav>
 
 <main>
@@ -513,80 +463,7 @@
         </span>
       </a>
     </div>
-    <p class="support-line">通信も、この2つの道具も、どなたでも無料でお使いいただけます。
-      続けていくための<a href="#more">応援のしかた</a>もご用意しています。</p>
-  </section>
-
-  <section id="more" class="wrap">
-    <div class="stop"><span class="pin"></span><span class="label">Support</span></div>
-    <h2>この通信を応援してくださる方へ</h2>
-    <p class="section-lede">この通信は、地域を調べてまとめ、毎週お届けしています。ずっと続けていくために、少しだけ運営の費用がかかっています。無料の通信は、これからもずっと無料のままお届けします。</p>
-
-    <div class="paid">
-      <div>
-        <p>毎週の「今週どこ行こう？」を調べる時間を、こちらで引き受けます。日程の裏取り、雨の日の逃げ場、混み具合や行き方まで調べると、だいたい<b>毎週2〜3時間</b>。「役に立ってるよ」「応援したいな」と思っていただけたら嬉しいです。</p>
-        <div class="price"><span class="n">300</span><span class="u">円 / 月（税込）</span></div>
-        <p class="price-sub">1週あたり <b>およそ75円</b>。続けていくための費用を、いっしょに持っていただく形です。</p>
-
-        <div class="steps">
-          <div class="steps-title">はじめ方（3ステップ・5分ほど）</div>
-          <ol>
-            <li>下のボタンから <b>note のメンバーシップに参加</b><span class="tiny">note のアカウントが必要です（お持ちでなければ登録に1〜2分）。お支払いも note を通じて行われます。</span></li>
-            <li><b>会員ページのURLと合言葉</b>をお届けします<span class="tiny">note のメンバー限定投稿、またはLINEでお送りします。</span></li>
-            <li>次の水曜から、<b>地図と公式リンクつきの通信</b>が届きます<span class="tiny">会員ページは、お手続きのあとすぐにお使いいただけます。</span></li>
-          </ol>
-          <!-- すでに払っている人が会員ページのURLを探せなかった（リンクは公開カレンダーの
-               中にしか無かった）。合言葉を持っている人向けの入口をここに置く。 -->
-          <p class="steps-back"><a href="/m/s7f2ka/">合言葉をお持ちの方は、会員ページへ →</a></p>
-        </div>
-
-        <div class="paid-cta">
-          <a class="btn btn-warm" href="https://note.com/bon_voyage_mail/membership" target="_blank" rel="noopener">note でサポーターになる（月300円）</a>
-          <a class="btn btn-ghost" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">先にLINEで質問する</a>
-        </div>
-        <p class="reassure"><b>合わないと感じたら、遠慮なく解約してください。</b>いつでも note のメンバーシップから手続きでき、次回のご請求は止まります。<br>解約されても、<b>無料の通信はこれまでどおり</b>お届けします。これからもずっと無料です。<br><span class="tiny"><a href="tokushoho.html">特定商取引法に基づく表記・免責事項</a></span></p>
-      </div>
-      <div class="perks">
-        <div class="perks-title">🎁 応援のお礼（特典）</div>
-        <ul class="paid-list">
-          <li><span class="ck">✓</span><span>毎週の通信に、各おすすめの <b>📍地図と公式サイトのリンク</b> がつきます</span></li>
-          <li><span class="ck">✓</span><span><b>会員ページ</b>の「おでかけカレンダー」で <b>先の予定までまとめて</b>見られます。気になった予定は <b>ワンタップでご自分のカレンダーに追加</b>（Googleカレンダー / iPhoneのカレンダー）</span></li>
-          <li><span class="ck">✓</span><span><b>申込の締切</b>を、先のぶんまで残り日数つきでまとめて表示（公開カレンダーは直近2週間ぶんのみ）</span></li>
-          <li><span class="ck">✓</span><span>「◯◯を登録して」とご返信いただければ、<b>Googleカレンダーにお入れします</b></span></li>
-          <li><span class="ck">✓</span><span>ご要望をうかがって、できるところから内容に反映していきます</span></li>
-          <li data-bv-post="on" hidden><span class="ck">✓</span><span>「<b>おでかけマップ</b>」への投稿に <b>写真を添えられます</b>（ひとことは、どなたでも同じ長さで書けます）</span></li>
-        </ul>
-        <p class="reassure" style="margin-top:1rem;"><b>お届けの回数は、無料の通信と同じ毎週水曜です。</b>ひとりで調べて書いているので、守れる約束だけにしています。</p>
-      </div>
-    </div>
-
-    <div class="cmp">
-      <div class="cmp-title">無料の通信と、どう違う？</div>
-      <div class="cmp-grid">
-        <div class="cmp-col">
-          <div class="cmp-head free">無料の通信</div>
-          <div class="cmp-role">今週のおでかけを <b>知る</b></div>
-          <ul>
-            <li><b>今週末の1つ</b>を決めてお届けします<span class="tiny">迷わないように、あえて絞ります</span></li>
-            <li>天気に合わせて<b>屋内か屋外か</b>を先に示します</li>
-            <li>👶🧒🎒 の年齢の目安つき</li>
-            <li>おでかけカレンダーで<b>日付から探せます</b><span class="tiny">気になった予定は<b>ワンタップでご自分のカレンダーへ</b>。直近の申込締切も出ます</span></li>
-            <li><span data-bv-post="on" hidden>おでかけマップに<b>ひとことを書けます</b><span class="tiny">字数の制限はサポーターと同じです</span></span><span data-bv-post="off">おでかけマップに<b>ひとこと・写真をお寄せいただけます</b><span class="tiny">いまはLINEでお預かりしています（写真も同じように送れます）</span></span></li>
-          </ul>
-        </div>
-        <div class="cmp-col paid-col">
-          <div class="cmp-head sup">サポーター</div>
-          <div class="cmp-role">この通信を <b>続ける</b></div>
-          <ul>
-            <li><b>📍地図と公式リンク</b>がつきます<span class="tiny">行き方と一次情報に、その場で飛べます</span></li>
-            <li><b>申込の締切を、先のぶんまで</b><span class="tiny">連休・キャンプ・抽選ものの解禁日を、残り日数つきで</span></li>
-            <li><b>カレンダー登録をお任せいただけます</b><span class="tiny">イベント名をご返信いただくだけで、こちらでお入れします</span></li>
-            <li><span data-bv-post="on" hidden>マップの投稿に<b>写真</b>を添えられます</span><span data-bv-post="off"><b>おでかけマップも会員ページの中に</b><span class="tiny">合言葉ひとつで、カレンダーと地図を同じ場所で。投稿への写真添付は準備中で、いまは無料の方と同じくLINEでお預かりしています</span></span></li>
-          </ul>
-        </div>
-      </div>
-      <p class="reassure" style="margin-top:1rem;">無料の通信は、これからもずっと無料です。<b>お届けする回数も内容も、無料のまま減らしません。</b>サポーターは「この通信を続けるための応援」が主で、上にあるのはそのお礼です。<b>できないことを約束しないために、あえて控えめにしています。</b></p>
-    </div>
+    <p class="support-line">通信も、この2つの道具も、どなたでも無料でお使いいただけます。</p>
   </section>
 
   <section id="trust" class="wrap">
@@ -595,7 +472,7 @@
     <div class="trust">
       <div class="row"><span class="k">・</span><span>掲載している日程・料金は変わることがあります。おでかけ前に各公式サイトで最終確認をお願いします。</span></div>
       <div class="row"><span class="k">・</span><span>いただいた個人情報は配信の宛先にのみ使い、第三者には共有しません。おためし運用のため、予告なく内容を変更する場合があります。</span></div>
-      <div class="row"><span class="k">・</span><span>応援（月額プラン）のお支払い・解約は、note のメンバーシップを通じて行われます。<a href="tokushoho.html">特定商取引法に基づく表記・免責事項</a>もあわせてご確認ください。</span></div>
+      <div class="row"><span class="k">・</span><span>この通信は無料です。<b>料金をいただくことはありません。</b><a href="tokushoho.html">免責事項・個人情報の取り扱い</a>もあわせてご確認ください。</span></div>
     </div>
   </section>
 
@@ -644,7 +521,7 @@
     <div class="fmark">ぼんぼやーじゅ通信</div>
     <div class="fsmall">花小金井エリアの子育て家庭のための、週末おでかけ便。<br>
       運営: ニコマル　お問い合わせ: <a href="mailto:tokyo.papa.home@gmail.com">tokyo.papa.home@gmail.com</a><br>
-      <a href="tokushoho.html">特定商取引法に基づく表記・免責事項</a><br>
+      <a href="tokushoho.html">免責事項・個人情報の取り扱い</a><br>
       © 2026 ぼんぼやーじゅ通信</div>
   </div>
 </footer>

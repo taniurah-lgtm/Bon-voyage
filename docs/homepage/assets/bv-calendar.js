@@ -347,7 +347,7 @@
         '📄 ' + restDays.length + '日ぶんまとめて</button>'
       : '';
     // 終わった予定にカレンダー登録は出さない。ただし地図と公式は残す。
-    // 「過ぎた日も残しているのが有料の値打ち」と言っているのに、来年の下見に
+    // 「過ぎた日も残している」のが会員ページの値打ちなのに、来年の下見に
     // 使いたい人が公式ページにも地図にも行けないのはおかしい。
     var subLinks =
       (ev.mapq ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(mapURL(ev.mapq)) + '" target="_blank" rel="noopener">📍 地図</a>' : '') +
@@ -652,7 +652,7 @@
           if (d === 0) cls.push('sun');
           if (d === 6) cls.push('sat');
           // 隣月・過去日は点を出さない（押せないのに「予定あり」に見える／今週末を探す邪魔になる）
-          // 会員ページは過ぎた日も持っている（それが有料の値打ち）。点を出さないと、
+          // 会員ページは過ぎた日も持っている。点を出さないと、
           // 読み上げだけが「予定6件」と言い、目で見ている人には空の日と同じに見える。
           // 公開ページは今日より前を持っていないので、これまでどおり出さない。
           var showDots = inMonth && (key >= today || !opts.teaser);
@@ -857,8 +857,8 @@
           (typeof data.beyond === 'number' && data.beyond > 0
             ? 'このあと確定している予定が<b>' + data.beyond + '件</b>あります。'
             : '') +
-          '先の予定まで通してご覧いただけるカレンダーは、応援サポーターの会員ページにあります。</p>' +
-          (opts.memberUrl ? '<a class="bvc-teaser-link" href="' + esc(opts.memberUrl) + '">会員ページについて →</a>' : '') +
+          '先の予定は、確定しだいこのカレンダーに足していきます。</p>' +
+          (opts.memberUrl ? '<a class="bvc-teaser-link" href="' + esc(opts.memberUrl) + '">くわしく →</a>' : '') +
           '</div>';
       }
       $tail.innerHTML = html;

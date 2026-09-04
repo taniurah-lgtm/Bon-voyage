@@ -74,15 +74,3 @@
 .bvp-offline { display: block; margin-top: .6rem; }
 .bvp-fine { font-size: .8rem; color: var(--ink-soft); line-height: 1.8; margin: 1.3rem 0 0; }
 
-/* ---- 送れたあとの応援のお願い（書く前には出さない） ---- */
-.bvp-nudge {
-  margin: 1.3rem 0 0; background: var(--sky-wash); border: 1px solid var(--line);
-  border-radius: 16px; padding: 1.1rem 1.2rem;
-}
-.bvp-nudge > p:first-child { font-family: var(--maru); font-weight: 800; font-size: .96rem; margin: 0 0 .4rem; }
-.bvp-nudge-body { font-size: .9rem; color: var(--ink-soft); line-height: 1.85; margin: 0; }
-.bvp-nudge-body b { color: var(--ink); }
-.bvp-nudge-link {
-  display: inline-block; margin-top: .8rem; font-family: var(--maru);
-  font-weight: 800; font-size: .9rem; text-decoration: none;
-}
