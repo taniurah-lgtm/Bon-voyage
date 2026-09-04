@@ -29,6 +29,7 @@
     '🚃': '#D08A3C', // 電車でおでかけ
     '🦒': '#C4703E', // 動物とふれあう
     '🏊': '#C75B8A', // 夏のプール
+    '🏠': '#7A9E4F', // 児童館・こども広場（無料・小平市）
   };
   var DEFAULT_COLOR = '#2C7C9E';
   var OVERLAP_PX = 34;     // これより近いピンは「まとめて」出す
@@ -279,9 +280,10 @@
     function note() {
       var target = filterCat ? spots.filter(function (s) { return s.cat === filterCat; }) : spots;
       var missing = target.filter(function (s) { return typeof s.lat !== 'number'; });
-      var approx = target.filter(function (s) { return s.geoApprox; }).length;
       var parts = ['ピン ' + (target.length - missing.length) + '件'];
-      if (approx) parts.push('うち ' + approx + '件はおよその位置');
+      // ★「およその位置」の件数も、ここには出さない。数えても行き先選びの役に立たず、
+      //   注記が長くなるだけ（オーナー判断）。隠すのではなく、そのピンのふきだしに
+      //   「※ピンはおよその位置です（理由）」を出す＝迷いうる人の目の前に置く。
       // ★ピンを立てていないものの件数は、ここには出さない。
       //   読む人にとっては数えても意味がなく（いまは「新宿・都心方面」＝
       //   行き先ではなく方向、の1件だけ）、地図の注記が長くなるだけだった。
