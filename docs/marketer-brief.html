@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="花小金井の地域おでかけ情報サービスの現状と、収益化の相談事項をまとめたマーケター向けブリーフ。">
+<style>
+  :root{color-scheme:light dark}
+  html,body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+<title>ぼんぼやーじゅ通信 事業ブリーフ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+  :root{
+    --paper:#F1F3F1;
+    --surface:#FBFCFB;
+    --surface-2:#E8EDEA;
+    --ink:#182320;
+    --ink-soft:#59655F;
+    --ink-faint:#8A9691;
+    --accent:#0B5D50;
+    --accent-wash:#DCE9E5;
+    --flag:#9C4A1C;
+    --flag-wash:#F3E4DA;
+    --rule:#D5DCD8;
+    --rule-soft:#E4E9E6;
+
+    --serif:"Noto Serif JP",'Hiragino Mincho ProN','Yu Mincho',serif;
+    --sans:"Noto Sans JP",'Hiragino Sans','Yu Gothic',system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+    --measure:44rem;
+    --step:clamp(.6rem,1.4vw,1rem);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#101512;
+      --surface:#171E1B;
+      --surface-2:#1E2723;
+      --ink:#E4EAE6;
+      --ink-soft:#98A59F;
+      --ink-faint:#6C7A74;
+      --accent:#5BC3AD;
+      --accent-wash:#193029;
+      --flag:#E29260;
+      --flag-wash:#33221A;
+      --rule:#293430;
+      --rule-soft:#212B27;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#101512;
+    --surface:#171E1B;
+    --surface-2:#1E2723;
+    --ink:#E4EAE6;
+    --ink-soft:#98A59F;
+    --ink-faint:#6C7A74;
+    --accent:#5BC3AD;
+    --accent-wash:#193029;
+    --flag:#E29260;
+    --flag-wash:#33221A;
+    --rule:#293430;
+    --rule-soft:#212B27;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sheet{max-width:var(--measure);margin:0 auto;padding:0 1.25rem 6rem}
+
+  /* ---------- masthead ---------- */
+  .masthead{
+    padding:3.5rem 0 2rem;
+    border-bottom:2px solid var(--ink);
+    margin-bottom:2.5rem;
+  }
+  .kicker{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:flex;
+    flex-wrap:wrap;
+    gap:.9rem;
+    align-items:baseline;
+    margin-bottom:1.1rem;
+  }
+  .kicker .dot{color:var(--ink-faint)}
+  h1{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:clamp(1.9rem,5.4vw,2.7rem);
+    line-height:1.32;
+    letter-spacing:.01em;
+    margin:0 0 .9rem;
+    text-wrap:balance;
+  }
+  .standfirst{
+    font-size:1.02rem;
+    color:var(--ink-soft);
+    margin:0;
+    max-width:38rem;
+  }
+
+  /* ---------- figures ---------- */
+  .figures{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--rule);
+    border:1px solid var(--rule);
+    margin:0 0 3rem;
+  }
+  .fig{background:var(--surface);padding:1.05rem .95rem 1.15rem}
+  .fig dt{
+    font-family:var(--mono);
+    font-size:.66rem;
+    letter-spacing:.11em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:.35rem;
+  }
+  .fig dd{
+    margin:0;
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:1.7rem;
+    line-height:1.15;
+    font-variant-numeric:tabular-nums;
+  }
+  .fig dd small{
+    display:block;
+    font-family:var(--sans);
+    font-weight:400;
+    font-size:.74rem;
+    line-height:1.5;
+    color:var(--ink-soft);
+    margin-top:.3rem;
+  }
+  .fig.is-flag dd{color:var(--flag)}
+  @media (max-width:640px){
+    .figures{grid-template-columns:repeat(2,1fr)}
+  }
+
+  /* ---------- sections ---------- */
+  section{margin:0 0 3.25rem}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.7rem;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 .4rem;
+  }
+  h2{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:1.42rem;
+    line-height:1.45;
+    margin:0 0 1.1rem;
+    padding-bottom:.55rem;
+    border-bottom:1px solid var(--rule);
+    text-wrap:balance;
+  }
+  h3{
+    font-family:var(--sans);
+    font-weight:700;
+    font-size:1rem;
+    margin:2rem 0 .55rem;
+    color:var(--ink);
+  }
+  p{margin:0 0 1.05rem}
+  a{color:var(--accent);text-underline-offset:.18em}
+  strong{font-weight:700}
+  .lede{font-size:1.03rem}
+
+  ul,ol{margin:0 0 1.15rem;padding-left:1.25rem}
+  li{margin-bottom:.42rem}
+  li::marker{color:var(--ink-faint)}
+
+  /* ---------- tables ---------- */
+  .scroll{overflow-x:auto;margin:0 0 1.3rem;border:1px solid var(--rule);background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:26rem}
+  th,td{
+    text-align:left;
+    padding:.62rem .8rem;
+    border-bottom:1px solid var(--rule-soft);
+    vertical-align:top;
+    line-height:1.65;
+  }
+  thead th{
+    font-family:var(--mono);
+    font-size:.68rem;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    background:var(--surface-2);
+    border-bottom:1px solid var(--rule);
+    white-space:nowrap;
+  }
+  tbody tr:last-child td{border-bottom:none}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .ok{color:var(--accent);font-weight:700}
+  .no{color:var(--flag);font-weight:700}
+
+  /* ---------- callouts ---------- */
+  .note{
+    background:var(--surface);
+    border-left:3px solid var(--accent);
+    padding:1rem 1.15rem;
+    margin:0 0 1.3rem;
+    font-size:.94rem;
+  }
+  .note.is-flag{border-left-color:var(--flag);background:var(--flag-wash)}
+  .note p:last-child{margin-bottom:0}
+  .note .tag{
+    display:block;
+    font-family:var(--mono);
+    font-size:.66rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:.4rem;
+  }
+  .note.is-flag .tag{color:var(--flag)}
+
+  /* ---------- questions ---------- */
+  .asks{
+    background:var(--surface);
+    border:1px solid var(--rule);
+    border-top:3px solid var(--accent);
+    padding:1.9rem 1.5rem 1.4rem;
+  }
+  .ask{
+    padding:1.1rem 0;
+    border-bottom:1px solid var(--rule-soft);
+  }
+  .ask:last-child{border-bottom:none;padding-bottom:.3rem}
+  .ask h3{
+    margin:0 0 .45rem;
+    font-size:1.02rem;
+    display:flex;
+    gap:.7rem;
+    align-items:baseline;
+  }
+  .ask h3 .q{
+    font-family:var(--mono);
+    font-size:.78rem;
+    color:var(--accent);
+    flex:none;
+  }
+  .ask p{margin:0 0 .5rem;font-size:.93rem;color:var(--ink-soft)}
+  .ask p:last-child{margin-bottom:0}
+
+  /* ---------- misc ---------- */
+  .defs{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:.45rem 1.1rem;
+    font-size:.93rem;
+    margin:0 0 1.3rem;
+  }
+  .defs dt{font-family:var(--mono);font-size:.75rem;color:var(--ink-faint);padding-top:.28rem;white-space:nowrap}
+  .defs dd{margin:0}
+  @media (max-width:520px){
+    .defs{grid-template-columns:1fr;gap:.1rem 0}
+    .defs dd{margin-bottom:.7rem}
+  }
+
+  .quote{
+    font-family:var(--serif);
+    font-size:1.05rem;
+    line-height:1.75;
+    border-left:2px solid var(--rule);
+    padding-left:1.1rem;
+    color:var(--ink);
+    margin:0 0 1.3rem;
+  }
+
+  footer{
+    margin-top:3rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--rule);
+    font-size:.82rem;
+    color:var(--ink-faint);
+  }
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+
+</head>
+<body>
+<div class="sheet">
+
+<header class="masthead">
+  <div class="kicker">
+    <span>事業ブリーフ</span><span class="dot">/</span>
+    <span>2026.09.04 現在</span><span class="dot">/</span>
+    <span>マーケター向け</span>
+  </div>
+  <h1>ぼんぼやーじゅ通信</h1>
+  <p class="standfirst">東京都小平市・花小金井を中心とした、子育て家庭むけの週次おでかけ情報。個人1人が運営し、開始から2か月。読者は着実に増えているが、<strong>収益はまだ1円も立っていない。</strong>この資料は、その打ち手を考えていただくための現状報告です。</p>
+</header>
+
+<dl class="figures">
+  <div class="fig">
+    <dt>読者（到達）</dt>
+    <dd>59<small>友だち61・ブロック2</small></dd>
+  </div>
+  <div class="fig is-flag">
+    <dt>有料サポーター</dt>
+    <dd>0<small>募集開始は9/23予定</small></dd>
+  </div>
+  <div class="fig">
+    <dt>運営期間</dt>
+    <dd>2<small>か月（2026年7月〜）</small></dd>
+  </div>
+  <div class="fig is-flag">
+    <dt>月次コスト</dt>
+    <dd>¥5,000<small>今月からLINE有料枠</small></dd>
+  </div>
+</dl>
+
+<section>
+  <p class="eyebrow">Summary</p>
+  <h2>30秒でわかる現状</h2>
+  <p class="lede">週に1回、水曜の朝にLINEで届く無料の地域情報です。「今週末どこへ行こう」を、子どもの年齢別の目安と天気つきで1通にまとめています。読者は2か月で59人。<strong>紙のチラシと口コミだけで、広告費はゼロ。</strong></p>
+  <p>いま直面しているのは、<strong>コストが先に立ち上がった</strong>という一点です。LINEの無料枠は月200通で、週1配信では読者50人が上限。59人に増えた時点でこれを超え、今月から月5,000円がかかりはじめました。一方、収益はまだゼロです。</p>
+  <p>月300円のサポーター制度を用意していますが、業界の転換率から逆算すると、<strong>この5,000円を回収するだけで読者340〜2,700人が必要</strong>になります。いまの59人からは遠い数字です。この構造をどう変えるかが、ご相談したいことの中心です。</p>
+</section>
+
+<section>
+  <p class="eyebrow">Product</p>
+  <h2>何を提供しているか</h2>
+  <p>3つの層でできています。すべて個人が手で運営しており、外注もツールの購入もしていません。</p>
+
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr><th>層</th><th>中身</th><th>状態</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>無料LINE通信</strong></td>
+          <td>毎週水曜の朝にブロードキャスト。今週の一推し1件＋先取り情報。全イベントに年齢3区分の目安（0-2歳／3-6歳／小学生）と、週末の天気を踏まえた提案</td>
+          <td class="ok">稼働中</td>
+        </tr>
+        <tr>
+          <td><strong>ホームページ</strong></td>
+          <td>おでかけマップ（26スポット・授乳室やベビーカー可否つき）／イベントカレンダー（先の予定と申込締切）／過去号</td>
+          <td class="ok">稼働中</td>
+        </tr>
+        <tr>
+          <td><strong>有料（月300円）</strong></td>
+          <td>地図と公式リンクを全件に／会員ページ／締切を先まで／カレンダー登録の代行</td>
+          <td class="no">未開始</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note is-flag">
+    <span class="tag">正直に共有すべきこと</span>
+    <p>有料の4つのうち<strong>「カレンダー登録の代行」は技術的に未実装</strong>です。運営者自身のカレンダーにしか書き込めず、読者のカレンダーに登録する仕組みがありません。約束したまま提供できない状態なので、募集前に整理が必要です。</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Moat</p>
+  <h2>差別化できている一点</h2>
+  <p>この通信の中身は、検索では出てこない情報でできています。毎週、次のような一次情報を人が読んで、日付を公式で裏取りしています。</p>
+  <ul>
+    <li>市報こだいら（PDF）</li>
+    <li>公民館の講座一覧（詳細ページの公開日を追って個別に開く）</li>
+    <li>児童館だより3館分・子ども家庭支援センターだより（月次PDF）</li>
+    <li>観光まちづくり協会のイベント欄</li>
+    <li>商店会・神社の祭り（<strong>市の施設ページには絶対に載らない区画</strong>）</li>
+  </ul>
+
+  <p class="quote">直近の例。今週末の「第52回 せいぶ通り秋まつり」は商店会の主催で、市の公式サイトにも大手のイベントサイトにも出ていませんでした。現地の掲示ポスターと商店会の情報で回次と日程を確定させ、<strong>雨天決行であることまで含めて</strong>配信しています。</p>
+
+  <p>この「足で取る」部分が、大手のおでかけメディアと重ならない領域です。ただし<strong>再現コストが高く、いまは運営者1人の手作業に依存しています。</strong></p>
+</section>
+
+<section>
+  <p class="eyebrow">Audience</p>
+  <h2>読者の数と属性</h2>
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr><th>項目</th><th class="num">値</th><th>備考</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>友だち登録</td><td class="num">61</td><td>1週間で +13</td></tr>
+        <tr><td>到達可能（配信が届く数）</td><td class="num">59</td><td>1週間で +13</td></tr>
+        <tr><td>ブロック</td><td class="num">2</td><td>13人増えても増えていない</td></tr>
+        <tr><td>女性比率</td><td class="num">87.2%</td><td>残りは「不明」。男性の判定はゼロ</td></tr>
+        <tr><td>東京都在住</td><td class="num">78.7%</td><td>残りは「不明」。他県はゼロ</td></tr>
+        <tr><td>配信頻度</td><td class="num">週1</td><td>水曜の朝</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>母数は小さいものの、<strong>狙った層にだけ届いている</strong>状態です。13人増えてブロックが1人も増えていないのは、無関係な人が混ざっていないことを示しています。</p>
+</section>
+
+<section>
+  <p class="eyebrow">Acquisition</p>
+  <h2>どうやって読者を集めてきたか</h2>
+  <p>広告は一切使っていません。すべて足で開拓した無償の枠です。</p>
+
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr><th>チャネル</th><th>内容</th><th>結果</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>LINEオープンチャット</td>
+          <td>地域の雑談ルームで告知</td>
+          <td class="ok">1時間で約30人</td>
+        </tr>
+        <tr>
+          <td>市の2課経由の配布</td>
+          <td>こども若者みらい課 → 児童館3館／市民協働・男女参画推進課 → <strong>地域センター20館＋元気村</strong></td>
+          <td class="ok">400枚が流通</td>
+        </tr>
+        <tr>
+          <td>多摩六都科学館</td>
+          <td>チラシ50部＋A5ポスター掲示。広報とメールで関係構築済み、プレスリリース配信先に登録</td>
+          <td class="ok">設置済み</td>
+        </tr>
+        <tr>
+          <td>市民活動支援センター</td>
+          <td>登録団体（第254号）としてラック・掲示板を利用</td>
+          <td class="ok">設置済み</td>
+        </tr>
+        <tr>
+          <td>商業施設・その他</td>
+          <td>スーパー、子ども家庭支援センター、公民館</td>
+          <td class="ok">一部設置</td>
+        </tr>
+        <tr>
+          <td>都立公園</td>
+          <td>民間団体のチラシは受け付けていない</td>
+          <td class="no">断られた</td>
+        </tr>
+        <tr>
+          <td>不動産2社</td>
+          <td>転入世帯への配布を打診</td>
+          <td>返答待ち</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="tag">この2か月でいちばん効いた発見</span>
+    <p>施設を一館ずつ回るより、<strong>市の所管課に持ち込むと職員が20館へ配ってくれる。</strong>1回の訪問で200枚が流通します。以後は毎月下旬に市へ渡し、翌月アタマの便で各館に並ぶサイクルで回します。</p>
+  </div>
+
+  <div class="note is-flag">
+    <span class="tag">測定ができていない</span>
+    <p>チラシの効果測定が<strong>まったくありません。</strong>配布先ごとのQRコードとアクセス解析は用意してあるものの、まだ有効化しておらず、「どの館の何枚が何人を連れてきたか」が不明です。次の増刷（10月中旬）までに解消予定。</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Unit economics</p>
+  <h2>コストと、収益化の壁</h2>
+
+  <h3>かかっているもの</h3>
+  <dl class="defs">
+    <dt>LINE</dt><dd>無料枠は月200通。週1配信だと<strong>読者50人が上限</strong>。59人になった時点で超過し、今月からライトプラン<strong>月5,000円</strong>（5,000通）</dd>
+    <dt>印刷</dt><dd>500枚で<strong>250円</strong>。市民活動支援センターのリソグラフを利用（登録団体の特典）</dd>
+    <dt>Web</dt><dd>ほぼゼロ。静的サイトを無料ホスティング</dd>
+    <dt>人件費</dt><dd>未計上。<strong>運営者の可処分時間そのもの</strong></dd>
+  </dl>
+
+  <h3>回収するのに必要な読者数</h3>
+  <p>月5,000円を月300円のサポーターで賄うには<strong>17人</strong>が必要です。そこから逆算します（転換率は2026年のニュースレター業界ベンチマーク）。</p>
+
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr><th>無料→有料の転換率</th><th class="num">17人に必要な読者数</th><th>位置づけ</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0.62%</td><td class="num">2,742</td><td>全体の中央値</td></tr>
+        <tr><td>1〜2%</td><td class="num">850〜1,700</td><td>収支計画に使うべき水準</td></tr>
+        <tr><td>2〜5%</td><td class="num">340〜850</td><td>上位25%の帯</td></tr>
+        <tr><td>10%</td><td class="num">170</td><td>ごく一部の成功例</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>いま59人。</strong>もっとも楽観的に見ても6倍、堅く見れば14〜46倍が必要です。しかも決済手数料で手取りは目減りします（noteのメンバーシップなら300円→約257円、Stripe直なら約287円）。</p>
+
+  <div class="note is-flag">
+    <span class="tag">構造の問題</span>
+    <p>読者が増えるほどLINEの費用も上がる一方、収益は転換率という薄い係数の先にしかありません。<strong>現在の設計のままでは、収益が費用に追いつくのは数年単位。</strong>ここが最大の相談事項です。</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Constraints</p>
+  <h2>施策を考えるうえでの制約</h2>
+  <p>ここは動かせない前提として共有します。</p>
+
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr><th>制約</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>トーン</strong></td>
+          <td>読者に知人・友人が多い。「急いで」「今だけ」「損」といった煽りは使えない。お金の話を前面に出さない方針で運用している</td>
+        </tr>
+        <tr>
+          <td><strong>個人情報</strong></td>
+          <td>運営者は個人。自宅住所を公開したくない。特定商取引法は「請求があれば遅滞なく開示」で対応する方針。メール配信に移る場合は特定電子メール法の表示義務が別途かかる</td>
+        </tr>
+        <tr>
+          <td><strong>稼働</strong></td>
+          <td>平日は別の仕事。未就学の子ども3人を育てながらの運営。作業は夜と週末のみ</td>
+        </tr>
+        <tr>
+          <td><strong>信頼が資産</strong></td>
+          <td>市の窓口・科学館・市民活動センターに置いてもらえているのは「信用できる地元の運営者」だから。これを損なう施策は取れない</td>
+        </tr>
+        <tr>
+          <td><strong>掲載条件</strong></td>
+          <td>提携先によっては指定文言の添付が条件になっている（例：多摩六都科学館）</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Assets</p>
+  <h2>すでに手元にあるもの</h2>
+  <p>施策をすぐ載せられる土台です。追加の制作費なしで動かせます。</p>
+  <ul>
+    <li><strong>イベント台帳</strong>：出典URL・確度・子連れ適性つきで蓄積。月ごとにファイル化</li>
+    <li><strong>巡回の自動化</strong>：毎週決まった時刻に情報収集と配信が走る。失敗を検知して復旧する監視も別途稼働</li>
+    <li><strong>ホームページ一式</strong>：マップ、カレンダー、会員ページ、特商法ページ</li>
+    <li><strong>印刷物の版下</strong>：A4チラシ（2色リソグラフ用／カラー用）、A5・A4ポスター、名刺、A6カード、店頭POP</li>
+    <li><strong>配布先別のQRとアクセス解析</strong>：10種類の計測用URLを生成済み（<strong>未有効化</strong>）</li>
+    <li><strong>読者からの投稿導線</strong>：マップに読者の体験を掲載する仕組み（1件目が到着済み）</li>
+  </ul>
+</section>
+
+<section>
+  <p class="eyebrow">The ask</p>
+  <h2>お聞きしたいこと</h2>
+  <p>調べていただいたうえで、方針を出していただきたい論点です。優先順位も含めてご意見ください。</p>
+
+  <div class="asks">
+
+    <div class="ask">
+      <h3><span class="q">Q1</span>月300円のサブスクは、この商材で正しいか</h3>
+      <p>読者59人・転換率1〜5%という前提だと、損益分岐の17人までに年単位かかります。単価を上げる、年額にする、そもそもサブスク以外にする——どの方向が現実的でしょうか。</p>
+    </div>
+
+    <div class="ask">
+      <h3><span class="q">Q2</span>サブスク以外の収益源はないか</h3>
+      <p>地元事業者からの掲載料、施設・自治体との連携、法人スポンサー、イベント開催、アフィリエイト、記事広告。<strong>ハイパーローカル媒体が実際に黒字化した事例</strong>を知りたいです。読者59人でも成立するモデルはありますか。</p>
+    </div>
+
+    <div class="ask">
+      <h3><span class="q">Q3</span>「全部無料で出している」問題をどう解くか</h3>
+      <p>情報そのものは無料通信で出し切っており、有料との差は「地図と公式リンク」「会員ページ」「締切を先まで」「カレンダー代行」の4つだけです。この差で対価をいただけるとは思えていません。何を有料側に置くべきでしょうか。</p>
+    </div>
+
+    <div class="ask">
+      <h3><span class="q">Q4</span>チャネルの主軸をどこに置くか</h3>
+      <p>現在はLINE一本。開封率は高いが読者が増えるほど課金が上がります。メール（費用は増えないが登録の手間が3段階になる）、Instagram、Threadsのどれに軸足を移すべきか。<strong>紙のチラシからの導線はQR1タップのLINEが最も強い</strong>という実感があります。</p>
+    </div>
+
+    <div class="ask">
+      <h3><span class="q">Q5</span>読者を1,000人規模にする現実的な経路は</h3>
+      <p>いまの獲得は「市の窓口に紙を預ける」が最も効率的です（1回の訪問で20館・200枚）。ただし小平市の子育て世帯という母集団には上限があります。エリアを広げるべきか、密度を上げるべきか、別の増やし方があるか。</p>
+    </div>
+
+    <div class="ask">
+      <h3><span class="q">Q6</span>撤退・縮小の判断基準をどこに置くか</h3>
+      <p>「いつまでに、何がどうなっていなければ、事業として見切るか」を数字で決めておきたいです。個人の可処分時間と月5,000円をどこまで投じる価値があるか、外からの目で線を引いてください。</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Timeline</p>
+  <h2>直近で決まっていること</h2>
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr><th>時期</th><th>予定</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>9月中</td><td>LINEライトプランへ切替（月5,000円）</td></tr>
+        <tr><td>9/23号</td><td>サポーター募集の案内（1回限り・煽らない文面で承認済み）</td></tr>
+        <tr><td>10月中旬</td><td>チラシ増刷。配布先別QRとアクセス解析を有効化</td></tr>
+        <tr><td>10月下旬</td><td>市の2課へ次回分を持ち込み（11月の便で20館へ）</td></tr>
+        <tr><td>10月末</td><td>サポーターが集まらなければ、11月から隔週配信に変更してLINEを無料枠へ戻す</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>この筋書きは<strong>「増やす月に、減らす判断をする」</strong>という矛盾を含んでいます。11月は20館に紙が並ぶ月であり、同時に配信を減らす月になります。ここも含めてご助言をいただきたいところです。</p>
+</section>
+
+<footer>
+  数字はすべて2026年9月4日時点の実測値です（LINE公式アカウントのAPIおよび管理画面）。転換率のベンチマークは2026年のニュースレター業界データによります。
+</footer>
+
+</div>
+
+</body>
+</html>
