@@ -152,6 +152,7 @@ const page = `<!doctype html>
   #post { margin: 2.6rem 0 0; scroll-margin-top: 1.5rem; }
 </style>
 </head>
+<script src="/assets/analytics.js" defer></script>
 <body>
 <nav class="bvnav" aria-label="サイト内">
   <div class="bvnav-in">

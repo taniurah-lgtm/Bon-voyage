@@ -34,6 +34,7 @@ const page = `<!doctype html>
 <meta property="og:locale" content="ja_JP">
 <link rel="stylesheet" href="/assets/bv-tokens.css">
 <link rel="stylesheet" href="/assets/bv-nav.css">
+<script src="/assets/analytics.js" defer></script>
 <style>
   main { padding: 1.4rem 0 1rem; }
   .lead { color: var(--ink-soft); font-size: .9rem; line-height: 1.8; margin-bottom: 1.3rem; }
