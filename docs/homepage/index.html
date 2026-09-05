@@ -173,8 +173,6 @@
   ul.takeaway li { position: relative; padding-left: 1.35rem; font-size: .92rem; color: var(--ink-soft); }
   ul.takeaway li::before { content: "▸"; position: absolute; left: 0; color: var(--marigold); }
 
-  .issue-more { margin-top: 1rem; font-size: .9rem; }
-  .issue-more a { font-family: var(--maru); font-weight: 800; text-decoration: none; color: var(--link-ink); display: inline-flex; align-items: center; min-height: 44px; }
   /* 無料で使えることを、道具の下に静かに置く1行 */
   .support-line { margin-top: 1.6rem; font-size: .85rem; line-height: 1.9; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 1rem; }
   /* 地が --ground(#FBFAF5) なので --sky-deep では 4.48 とわずかに足りない。専用の濃い側を使う */
@@ -240,10 +238,10 @@
 
   @media (prefers-reduced-motion: reduce) { .fade { animation: none; opacity: 1; transform: none; } }
 
-  /* 無料で使える2つの道具（カレンダー・マップ）。以前はここが20pxのテキストリンクで、
-     ページの中で見つけてもらえなかった。★3列にすると2枚が左に寄って1列空くので2列。 */
+  /* 無料で使える3つの道具（カレンダー・マップ・バックナンバー）。
+     以前はここが20pxのテキストリンクで、ページの中で見つけてもらえなかった。 */
   .tools { display: grid; gap: .8rem; margin-top: 1.8rem; }
-  @media (min-width: 42rem) { .tools { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 42rem) { .tools { grid-template-columns: 1fr 1fr 1fr; } }
   .tool {
     display: flex; gap: .8rem; align-items: flex-start; text-decoration: none;
     background: var(--surface); border: 1px solid var(--line-strong);
@@ -377,7 +375,7 @@
 
 <nav class="pagenav wrap" aria-label="このページの中身">
   <a href="#issue">最新号を読む</a>
-  <a href="#tools">2つの道具</a>
+  <a href="#tools">3つの道具</a>
   <a href="#contact">お問い合わせ</a>
 </nav>
 
@@ -462,7 +460,6 @@
       </div>
     </article>
     <!-- ISSUE:END -->
-    <p class="issue-more"><a href="issues.html">これまでの号をぜんぶ読む →</a></p>
     <div class="tools" id="tools">
       <a class="tool" href="calendar.html">
         <span class="tool-ic">📅</span>
@@ -478,8 +475,15 @@
           <span><span data-bv-post="on" hidden>「行ってよかった」を地元の家庭で持ち寄っている地図。<b>このページから直接書き込めます</b></span><span data-bv-post="off">「行ってよかった」を地元の家庭で持ち寄っている地図。<b>LINEでひとことお寄せいただけます</b></span></span>
         </span>
       </a>
+      <a class="tool" href="issues.html">
+        <span class="tool-ic">📮</span>
+        <span class="tool-body">
+          <b>バックナンバー</b>
+          <span>これまでにお届けした号を<b>そのまま読めます</b>。あとから取り下げた記載には、訂正を添えています</span>
+        </span>
+      </a>
     </div>
-    <p class="support-line">通信も、この2つの道具も、どなたでも無料でお使いいただけます。</p>
+    <p class="support-line">通信も、この3つの道具も、どなたでも無料でお使いいただけます。</p>
   </section>
 
   <section id="trust" class="wrap">
