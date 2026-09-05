@@ -458,7 +458,7 @@
     //   過去の月がUIから開けなかった（「ぜんぶ」が嘘になっていた）。
     var allDates = Object.keys(byDate).sort();
     var firstMonth = (allDates[0] || today).slice(0, 7);
-    var months = uniq(Object.keys(byDate).filter(inRange).map(function (d) { return d.slice(0, 7); })).sort();
+    var months = uniq(allDates.map(function (d) { return d.slice(0, 7); })).sort();
     if (!months.length) months = [today.slice(0, 7)];
     var view = months.indexOf(today.slice(0, 7)) >= 0 ? today.slice(0, 7) : months[0];
     // 「今週末どこ行こう」が主な用なので、平日に開いたら次の土日を選んでおく。

@@ -251,21 +251,25 @@ document.getElementById('cal').innerHTML = '<p class="lead" id="loading">読み�
 fetch('/data/events-public.json', { cache: 'no-cache' })
   .then(function (r) { return r.json(); })
   .then(function (data) {
-    // 中身があるときだけ一覧を畳む。空の {} を返されたときに
-    // 空のカレンダーだけが残って行き止まりになるのを防ぐ。
-    if (data && data.events && data.events.length) {
-      document.querySelector('.fallback').hidden = true;
-    }
+    // ★先に描く。描けてから一覧を畳む。
+    //   逆にすると、mount が落ちたときに「読み込めませんでした」とだけ出て
+    //   下の一覧まで消え、ページが完全な行き止まりになる（2026-09-05 に発生）。
     BVCalendar.mount(document.getElementById('cal'), data, {
       // この頁は見出しが h1 だけ（一覧の h2 はJSが動くと隠れる）。月の見出しを h3 に
       // すると h1→h3 の飛びになるので h2 で出す。
       monthLevel: 2,
     });
+    if (data && data.events && data.events.length) {
+      document.querySelector('.fallback').hidden = true;
+    }
   })
-  .catch(function () {
-    // 読み込みに失敗しても一覧が残るので、行き止まりにはならない
+  .catch(function (e) {
+    // 読み込みに失敗しても一覧は残っている（上で畳んでいないため）
+    if (window.console) console.error('カレンダーを描けませんでした:', e);
     var l = document.getElementById('loading');
     if (l) l.textContent = 'カレンダーを読み込めませんでした。下の一覧をご覧ください。';
+    var f = document.querySelector('.fallback');
+    if (f) f.hidden = false;
   });
 </script>
 </body>

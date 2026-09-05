@@ -128,6 +128,16 @@ jobs:
             console.log("OK: 内部メモは入っていません");
           '
 
+      # ブラウザで実際に開いて、描けているかを見る。
+      # ★HTMLの構文検査も node --check も、JSの参照ミスは見つけられない。
+      #   2026-09-05、bv-calendar.js の消し忘れでカレンダーが描けず、
+      #   しかも一覧まで畳まれて行き止まりになった状態を公開してしまった。
+      - name: ページがブラウザで描けるか確かめる
+        run: |
+          npm i -D playwright@1.56.1 --no-audit --no-fund
+          npx playwright install --with-deps chromium
+          node scripts/check-pages.mjs
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload only the homepage folder
