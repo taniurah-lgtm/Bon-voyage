@@ -179,6 +179,23 @@ node scripts/build-poster.mjs
 ```
 → `poster-a4-color.pdf`（210×297）/ `poster-a4-color-bleed.pdf`（216×303）/ `poster-a4-color.png`（見本）
 
+🚫 **いちばん下の「発行：…」の行より下には、何も置かない。**
+
+家庭用プリンタもコンビニも紙のフチまで刷れず、「用紙に合わせる」で少し縮む。
+297mm ぴったりに置いた文字は**実際に消える**（2026-09-05 オーナー報告。
+問い合わせの行が、何度刷っても出なかった）。
+**下端 8mm は安全帯として空けてある**（`.foot` の `padding-bottom:8mm`）。
+情報を足すときは**発行の行より上**に入れること。現在の並びは
+**「毎週みる街 → 問い合わせ → 発行」**。
+
+最下段の文字から紙の下端までの距離は、これで測れる（**7mm以上を保つ**）:
+
+```js
+const t = document.querySelector('.trim').getBoundingClientRect();
+const b = document.querySelector('.foot .b').getBoundingClientRect();
+(t.bottom - b.bottom) / 794 * 210   // mm
+```
+
 ⚠️ **版面は 297mm ぴったりで、余白がほとんど無い。**文言を足すと下が切れる
 （2026-09-05 に実際に切れた）。足したら必ず刷る前に確認すること。はみ出しの測り方:
 
