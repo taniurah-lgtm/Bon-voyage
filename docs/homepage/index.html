@@ -240,10 +240,10 @@
 
   @media (prefers-reduced-motion: reduce) { .fade { animation: none; opacity: 1; transform: none; } }
 
-  /* 無料で使える3つの道具。以前はここが20pxのテキストリンクで、
-     ページの中で見つけてもらえなかった。 */
+  /* 無料で使える2つの道具（カレンダー・マップ）。以前はここが20pxのテキストリンクで、
+     ページの中で見つけてもらえなかった。★3列にすると2枚が左に寄って1列空くので2列。 */
   .tools { display: grid; gap: .8rem; margin-top: 1.8rem; }
-  @media (min-width: 42rem) { .tools { grid-template-columns: 1fr 1fr 1fr; } }
+  @media (min-width: 42rem) { .tools { grid-template-columns: 1fr 1fr; } }
   .tool {
     display: flex; gap: .8rem; align-items: flex-start; text-decoration: none;
     background: var(--surface); border: 1px solid var(--line-strong);
@@ -377,7 +377,7 @@
 
 <nav class="pagenav wrap" aria-label="このページの中身">
   <a href="#issue">最新号を読む</a>
-  <a href="#tools">3つの道具</a>
+  <a href="#tools">2つの道具</a>
   <a href="#contact">お問い合わせ</a>
 </nav>
 
@@ -528,7 +528,7 @@
       <div class="contact-mail">
         <p class="contact-lb">メールでご連絡ください</p>
         <p class="contact-addr"><a href="mailto:tokyo.papa.home@gmail.com">tokyo.papa.home@gmail.com</a></p>
-        <p class="tiny">運営: ニコマル（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）<br>
+        <p class="tiny">発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）<br>
           平日は別の仕事をしているため、お返事に数日いただくことがあります。</p>
       </div>
 
@@ -541,7 +541,7 @@
   <div class="wrap">
     <div class="fmark">ぼんぼやーじゅ通信</div>
     <div class="fsmall">花小金井エリアの子育て家庭のための、週末おでかけ便。<br>
-      運営: ニコマル　お問い合わせ: <a href="mailto:tokyo.papa.home@gmail.com">tokyo.papa.home@gmail.com</a><br>
+      発行：ぼんぼやーじゅ通信の会　お問い合わせ: <a href="mailto:tokyo.papa.home@gmail.com">tokyo.papa.home@gmail.com</a><br>
       <a href="tokushoho.html">免責事項・個人情報の取り扱い</a><br>
       © 2026 ぼんぼやーじゅ通信</div>
   </div>
