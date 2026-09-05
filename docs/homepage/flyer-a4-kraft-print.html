@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<title>クラフト紙A4チラシ 黒1色 版下｜ぼんぼやーじゅ通信</title>
+<!--
+  クラフト紙(A4)に黒1色で刷るための版下。
+
+  ★クラフト紙は設計の前提が変わる:
+   - 地が茶色。**白は刷れない**（白く見えるところは紙の色）
+   - **写真は使えない**（潰れて泥になる）
+   - **絵文字は使えない**（色が無いと灰色の塊になる）
+   - **大きなベタ塗りをしない**（トナーの乗りが悪く、割れる。トナーも食う）
+   - **50%より薄い墨は消える**。濃淡で階層を作らず、**太さと大きさ**で作る
+
+  ?paper=1 を付けると、クラフトの地色を敷いた「見え方の確認用」になる。
+  **印刷に使うのは地色なしのほう**（トナーを地色に使わないため）。
+-->
+<style>
+:root{ --ink:#111111; --kraft:#C6AB84; }
+*{margin:0;padding:0;box-sizing:border-box;}
+@page{size:210mm 297mm;margin:0;}
+html,body{background:#fff;}
+body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  -webkit-font-smoothing:antialiased;color:var(--ink);}
+.page{width:210mm;height:297mm;position:relative;overflow:hidden;display:flex;flex-direction:column;
+  padding:16mm 16mm 8mm;}         /* ★下端8mm は安全帯。ここに何も置かない */
+body.paper .page{background:var(--kraft);}
+
+/* 罫線は「線」で作る。ベタで作らない */
+.rule{height:.6mm;background:var(--ink);}
+.rule.thin{height:.3mm;}
+
+.eyebrow{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:6mm;letter-spacing:.06em;}
+.brand{font-size:16mm;font-weight:900;letter-spacing:.02em;line-height:1.05;margin-top:1mm;}
+.sub{font-size:5.6mm;font-weight:700;margin-top:2.5mm;letter-spacing:.02em;}
+
+.lead{margin-top:9mm;}
+.lead .l1{font-size:6.2mm;font-weight:900;line-height:1.5;}
+.lead .l2{font-size:5mm;font-weight:700;line-height:1.6;margin-top:2mm;}
+.free{display:inline-block;margin-top:3.5mm;border:.8mm solid var(--ink);border-radius:2mm;
+  padding:1.4mm 4mm;font-size:5.4mm;font-weight:900;letter-spacing:.08em;}
+
+.what{margin-top:9mm;padding:6.5mm 0;border-top:.6mm solid var(--ink);border-bottom:.6mm solid var(--ink);}
+.what li{list-style:none;font-size:5mm;line-height:1.85;font-weight:700;padding-left:6mm;position:relative;}
+.what li::before{content:"";position:absolute;left:0;top:2.6mm;width:3mm;height:.7mm;background:var(--ink);}
+
+.ages{margin-top:7mm;display:flex;gap:3mm;}
+.age{flex:1;border:.5mm solid var(--ink);border-radius:2mm;padding:3.4mm 0;text-align:center;}
+.age .t{font-size:4.4mm;font-weight:900;}
+.age .n{font-size:3.6mm;margin-top:.8mm;}
+
+.cta{margin-top:auto;display:flex;gap:6mm;align-items:center;}
+/* ★白は刷れない。QRの下地は紙の色のまま（黒モジュール対クラフト地で約9:1あり読める）。
+   余白(quiet zone)はQR画像自身が4モジュール持っているので、padding で潰さない。 */
+.qr{width:46mm;height:46mm;flex:none;}
+.qr img{width:100%;height:100%;display:block;image-rendering:pixelated;}
+.cta-b{flex:1;}
+.cta-t{font-size:5.4mm;font-weight:900;line-height:1.35;}
+.cta-d{font-size:4mm;line-height:1.7;margin-top:1.6mm;}
+.cta-u{margin-top:2.4mm;font-size:5.4mm;font-weight:900;letter-spacing:.01em;}
+
+.foot{margin-top:7mm;padding-top:3mm;border-top:.3mm solid var(--ink);font-size:3.3mm;line-height:1.7;}
+.foot b{font-weight:900;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="eyebrow">Bon Voyage,</div>
+  <div class="brand">ぼんぼやーじゅ通信</div>
+  <div class="sub">花小金井まわりの 週末おでかけ便</div>
+
+  <div class="lead">
+    <div class="l1">未就学児・小学生のいるご家庭へ<br>週末のおでかけ情報を、毎週水曜の朝に。</div>
+    <div class="l2">市や施設の一次情報を一件ずつ見て、日付を確かめてからお届けしています。</div>
+    <div class="free">ぜんぶ無料</div>
+  </div>
+
+  <div class="what">
+    <ul>
+      <li>お祭り・花火・水あそび・科学館・電車でおでかけ</li>
+      <li>天気に合わせて「今週はここ」を1件</li>
+      <li>申込の締切を、間に合ううちにお知らせします</li>
+      <li>おでかけカレンダーとマップも、どなたでも無料で</li>
+    </ul>
+  </div>
+
+  <div class="ages">
+    <div class="age"><div class="t">あかちゃん</div><div class="n">0〜2歳</div></div>
+    <div class="age"><div class="t">未就学</div><div class="n">3〜6歳</div></div>
+    <div class="age"><div class="t">小学生</div><div class="n">6〜12歳</div></div>
+  </div>
+
+  <div class="cta">
+    <div class="qr"><img src="data:image/png;base64,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" alt=""></div>
+    <div class="cta-b">
+      <div class="cta-t">スマホのカメラで<br>読み取ってください</div>
+      <div class="cta-d">LINEで受け取れます。いつでも解除できます。</div>
+      <div class="cta-u">bonvoya.nicomaru.tokyo/f/kraft</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <b>発行：ぼんぼやーじゅ通信の会（小平市・花小金井）</b><br>
+    小平市民活動支援センター あすぴあ 登録団体（第254号）<br>
+    イベント情報のご提供・チラシ設置・掲載のご相談　tokyo.papa.home@gmail.com　／　掲載は無料です
+  </div>
+
+</div>
+<script>
+  if (new URLSearchParams(location.search).get('paper') === '1') document.body.classList.add('paper');
+</script>
+</body></html>

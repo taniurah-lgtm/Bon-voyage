@@ -25,6 +25,7 @@ const VENUES = [
   { code: 'jidokan',  label: '児童館' },
   { code: 'poster',   label: 'ポスター掲示（場所を問わない共通枠）' },
   { code: 'hand',     label: '手渡し・口コミ' },
+  { code: 'kraft',    label: 'クラフト紙チラシ（黒1色・A4）' },
 ];
 
 const page = (v) => `<!doctype html>
