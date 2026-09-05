@@ -111,11 +111,13 @@ body.bleed .page{width:216mm;height:303mm;padding:3mm;}
 .fd{font-size:2.7mm;line-height:1.5;color:var(--ink-soft);margin-top:.7mm;}
 
 /* 6. フッター */
-.foot{flex:none;margin-top:1.8mm;background:var(--ink);color:#fff;padding:2.3mm 13mm;}
+/* ★下端は「刷れない帯」がある。ここに文字を置くと実際に消える（2026-09-05 オーナー報告）。
+   いちばん下の行（発行）の下に 8mm の余白を必ず残す。飾りでも文字でも、ここには何も置かない。 */
+.foot{flex:none;margin-top:1.8mm;background:var(--ink);color:#fff;padding:2.6mm 13mm 8mm;}
 .foot .a{font-size:2.8mm;font-weight:800;line-height:1.5;}
 .foot .a span{color:#9FC8D8;font-weight:400;}
-.foot .b{font-size:2.5mm;color:#A9B7BE;margin-top:1mm;}
-.foot .c{font-size:2.45mm;color:#CFE0E8;margin-top:.7mm;}
+.foot .b{font-size:2.5mm;color:#A9B7BE;margin-top:1.1mm;}
+.foot .c{font-size:2.5mm;color:#CFE0E8;margin-top:1.1mm;}
 .foot .c b{color:#fff;}
 .bub .note{display:block;font-size:2.3mm;color:#6C7A82;margin-top:.6mm;}
 </style>
@@ -202,8 +204,8 @@ body.bleed .page{width:216mm;height:303mm;padding:3mm;}
 
   <div class="foot">
     <div class="a">毎週みる街　<span>小平市・西東京市・東久留米市・東村山市・小金井市</span>　／　ときどき　<span>武蔵野市・国分寺市・立川市・所沢市 ほか</span></div>
-    <div class="b">発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）</div>
     <div class="c"><b>イベント情報のご提供・チラシ設置・掲載のご相談</b>　tokyo.papa.home@gmail.com　／　掲載は無料です</div>
+    <div class="b">発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）</div>
   </div>
 
 </div></div>
