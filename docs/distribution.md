@@ -520,12 +520,22 @@ QRは300/150/100dpi で読み取り確認済み
 > **逆に、通りやすいのは小平市の施設。**実績: あすぴあ ✅ / 子ども家庭支援センター ✅。
 > **公民館・図書館・児童館を先に回すほうが、歩く距離あたりの成果が高い。**
 
-## 🎨 Canva版（A4カラー・イラスト入り）
+## 🎨 Canva版（A4カラー・イラスト入り）— **2種類ある。置き場所で使い分ける**
 
-`docs/homepage/assets/flyer-a4-canva.pdf` ★これを刷る
-`docs/homepage/assets/flyer-a4-canva.png` 画面確認用
+| 版 | ファイル | 宛先行 | QRの行き先 | どこに置く |
+|---|---|---|---|---|
+| **標準** | `assets/flyer-a4-canva.pdf` | 小平の子育て家庭へ | `/f/hand` | 市の20館・児童館・公民館・図書館・商店会 |
+| **多摩六都版** | `assets/flyer-a4-canva-rokuto.pdf` | **小平・西東京**の子育て家庭へ | **`/f/rokuto`** | **多摩六都科学館のラックだけ** |
 
-- Canvaデザイン: https://www.canva.com/d/hCylgJcJ-mB2yXC （編集用）
+> **なぜ六都だけ別版か**: 多摩六都科学館は**西東京市**にあり、こちらが持っている唯一の
+> 「他市の親が通る置き場所」。ここに「小平の子育て家庭へ」と刷ると、目の前の西東京の親を弾く。
+> **拡大の判断を `/f/rokuto` の数字で決める**と決めた以上、測る前に潰してはいけない。
+> `/f/rokuto` が月10人を超えたら、西東京を宛先に足す（`CLAUDE.md`「宛先と行き先」）。
+
+- Canvaデザイン（標準）: https://www.canva.com/d/hCylgJcJ-mB2yXC
+- Canvaデザイン（多摩六都版）: https://www.canva.com/d/lAf7osLVlvEp8sg
+- 画面確認用: `assets/flyer-a4-canva.png`
+
 - QRの行き先は `bonvoya.nicomaru.tokyo/f/hand`（手渡し・口コミ用）。
   置き場所ごとに数えたいときは、QR画像を `assets/qr/f-<場所>.png` に差し替える
 - 最下段の文字から紙の下端まで **12.0mm**（安全帯8mmを満たす）

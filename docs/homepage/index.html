@@ -5,13 +5,13 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="google-site-verification" content="jOPlocj64z-dohPsZFjtJesskuHvNswYnlnk7DHIYNM" />
-<title>ぼんぼやーじゅ通信｜花小金井エリアの週末おでかけ便</title>
-<meta name="description" content="花小金井まわり（小平・西東京）の、未就学児〜小学生のいるご家庭へ。週末のおでかけ情報（お祭り・花火・水あそび・科学館・電車でおでかけ）を毎週無料でお届けする「ぼんぼやーじゅ通信」。">
+<title>ぼんぼやーじゅ通信｜小平の週末おでかけ便</title>
+<meta name="description" content="小平市の未就学児〜小学生のいるご家庭へ。小金井公園から多摩六都科学館まで、週末のおでかけ情報（お祭り・花火・水あそび・科学館・電車でおでかけ）を毎週水曜に無料でお届けする「ぼんぼやーじゅ通信」。">
 <link rel="canonical" href="https://bonvoya.nicomaru.tokyo/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bonvoya.nicomaru.tokyo/">
-<meta property="og:title" content="ぼんぼやーじゅ通信｜花小金井エリアの週末おでかけ便">
-<meta property="og:description" content="花小金井まわりの週末おでかけ情報を、未就学〜小学生の家庭へ毎週無料でお届け。お祭り・花火・水あそび・科学館・電車でおでかけ…天気に合わせた「今週これ」も。">
+<meta property="og:title" content="ぼんぼやーじゅ通信｜小平の週末おでかけ便">
+<meta property="og:description" content="小平市の未就学〜小学生のいるご家庭へ、週末のおでかけ情報を毎週水曜に無料でお届け。小金井公園から多摩六都科学館まで、天気に合わせた「今週これ」も。">
 <meta property="og:image" content="https://bonvoya.nicomaru.tokyo/assets/hero-park.jpg">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
@@ -266,6 +266,18 @@
   /* [hidden] は UA の display:none だが、.ck の display:inline-flex に負けて
      ✓ が2つ並んでいた。属性を優先させる。 */
   [hidden] { display: none !important; }
+
+/* 行き先の範囲（所要時間順） */
+.range-h{margin:34px 0 6px;font-size:1.05rem;font-weight:800;color:var(--ink);}
+.range-lede{margin:0 0 14px;color:var(--ink-soft);font-size:.94rem;line-height:1.7;}
+.range{list-style:none;margin:0;padding:0;display:grid;gap:10px;}
+.range li{display:grid;grid-template-columns:11.5em 1fr;gap:14px;align-items:baseline;
+  padding:11px 14px;background:var(--surface-2);border-radius:12px;}
+.range .rk{font-weight:800;color:var(--sky-deep,#2C7C9E);font-size:.9rem;letter-spacing:.01em;}
+.range .rv{color:var(--ink);font-size:.94rem;line-height:1.7;}
+@media (max-width:620px){
+  .range li{grid-template-columns:1fr;gap:3px;}
+}
 </style>
 <!-- 検索エンジンに「ぼんぼやーじゅ通信」という名前の実体を伝えるための構造化データ。
      ブランド名での検索に出るかどうかは、まずここで名前を認識してもらえるかによる。 -->
@@ -283,7 +295,7 @@
         "Bon Voyage 通信",
         "bonvoya"
       ],
-      "description": "花小金井まわり（小平・西東京）の未就学児〜小学生のいるご家庭へ、週末のおでかけ情報を毎週水曜に無料でお届けするLINE通信。",
+      "description": "小平市の未就学児〜小学生のいるご家庭へ、週末のおでかけ情報を毎週水曜に無料でお届けするLINE通信。行き先は小金井公園・多摩六都科学館など、花小金井から30分で行ける範囲。",
       "inLanguage": "ja",
       "publisher": {
         "@id": "https://bonvoya.nicomaru.tokyo/#org"
@@ -324,7 +336,7 @@
       "@type": "WebPage",
       "@id": "https://bonvoya.nicomaru.tokyo/#webpage",
       "url": "https://bonvoya.nicomaru.tokyo/",
-      "name": "ぼんぼやーじゅ通信｜花小金井エリアの週末おでかけ便",
+      "name": "ぼんぼやーじゅ通信｜小平の週末おでかけ便",
       "isPartOf": {
         "@id": "https://bonvoya.nicomaru.tokyo/#website"
       },
@@ -355,12 +367,12 @@
   <div class="hero-inner">
     <div class="eyebrow fade">Bon Voyage,</div>
     <h1 class="wordmark fade d1">ぼんぼやーじゅ通信<span class="dot">.</span></h1>
-    <p class="lede fade d1">花小金井まわりの週末おでかけ情報を、未就学児・小学生のいるご家庭へ。</p>
+    <p class="lede fade d1">小平市の未就学児・小学生のいるご家庭へ。小金井公園から多摩六都科学館まで、週末のおでかけ情報を毎週水曜の朝におとどけします。</p>
     <p class="lede-sub fade d2">お祭り・花火・水あそび・科学館・映画…「今週どこ行こう？」を、地元目線でやさしくお届けします。天気に合わせた提案や、連休のおでかけアイデアも。</p>
     <div class="badges fade d2">
       <span class="badge">無料</span>
       <span class="badge">週1でお届け</span>
-      <span class="badge">花小金井エリア</span>
+      <span class="badge">小平市ぜんぶ</span>
       <span class="badge">👶🧒🎒 年齢の目安つき</span>
     </div>
     <div class="cta-row fade d3">
@@ -388,7 +400,7 @@
       <p class="lead">花小金井のまちが好きです。</p>
       <p>公園も、季節のお祭りも、子どもと過ごせる場所がたくさんあるのに、毎日はあっという間で、気づくと「あのイベント、終わってた…」ということ、ありませんか。</p>
       <p>わが家もそうでした。だからこそ、近くの子連れおでかけ情報を定期的にまとめて、家族の予定を少し先まで立てられたら——そんな思いでこの通信を始めました。</p>
-      <p>同じ花小金井まわりで子育てするご家庭に役立ててもらえたら嬉しいです。いい場所を見つけたら、ぜひ教えてくださいね。みんなで少しずつ、いい「おでかけの地図」を育てていけたらと思っています。</p>
+      <p>同じ小平で子育てするご家庭に役立ててもらえたら嬉しいです。いい場所を見つけたら、ぜひ教えてくださいね。みんなで少しずつ、いい「おでかけの地図」を育てていけたらと思っています。</p>
       <p class="origin">名前の「ぼんぼやーじゅ」は、フランス語の Bon Voyage＝「よい旅を」から。大げさな旅でなくても、週末のちょっとしたお出かけが、家族のいい時間になりますように。</p>
     </div>
   </section>
@@ -396,7 +408,7 @@
   <section id="about" class="wrap">
     <div class="stop"><span class="pin"></span><span class="label">Weekly letter</span></div>
     <h2>こんな通信です</h2>
-    <p class="section-lede">むずかしい情報集めはこちらで。毎週ひとつ「これ行っとこ」が決まる、そんなおたよりを目指しています。</p>
+    <p class="section-lede">むずかしい情報集めはこちらで。毎週ひとつ「これ行っとこ」が決まる、そんなおたよりを目指しています。日付や締切は、市や施設のページで一件ずつ確かめています。</p>
     <div class="cards">
       <div class="card">
         <div class="kicker"><span class="em">🎈</span>今週の一推し</div>
@@ -411,6 +423,19 @@
         <p>崩れそうな週末は、涼しい室内やその日の館内イベントまで。無理なく過ごせる候補を添えます。</p>
       </div>
     </div>
+
+    <!-- 行き先の範囲。市名ではなく「何分で行けるか」で並べる。
+         親は市境ではなく所要時間で行き先を決めるため。市名は括弧で添える（検索対策はこれで足りる）。 -->
+    <h3 class="range-h">どのあたりまで載りますか</h3>
+    <p class="range-lede">花小金井から<b>30分で行ける範囲</b>を、近い順に。市境はまたぎます。</p>
+    <ul class="range">
+      <li><span class="rk">歩いて・自転車で</span>
+        <span class="rv">小金井公園（小金井）／小平グリーンロード／中央公民館・図書館／ルネこだいら</span></li>
+      <li><span class="rk">電車・バスで20分まで</span>
+        <span class="rv">多摩六都科学館・田無アスタ（西東京）／イオンモール東久留米・スパジャポ（東久留米）</span></li>
+      <li><span class="rk">月1回のちょっと遠出</span>
+        <span class="rv">江戸東京たてもの園（小金井）／八国山・北山公園（東村山）／所沢・立川・吉祥寺の大きな催し</span></li>
+    </ul>
   </section>
 
   <section id="issue" class="wrap">
@@ -445,7 +470,7 @@
           <h4>今週の一推し</h4>
           <div class="item">
             <div class="h"><span class="em">🏮</span>第52回 せいぶ通り秋まつり 9/5（土）・6（日）17:00〜21:00</div>
-            <div class="m">花小金井駅南口から小金井公園へ向かう「せいぶ通り」の商店街が会場です。入場は無料。 万燈神輿（まんとうみこし）が出て、和太鼓の演奏もあります。出店もたくさん並びます。 よさこい踊りは日替わりで、5日が小平第八小学校、6日が花小金井小学校のみなさん。 在校生のいるご家庭には、特別な2日間になりそうです。 ⚠️ そして今回いちばんお伝えしたいのは、このお祭りが「雨天決行」だということ。 週末の予報は雨ですが、予定を組んで大丈夫です。傘とレインコートのご準備を。 17時開始で21時までなので、小さいお子さん連れなら、まだ明るい17時台がおすすめです。</div>
+            <div class="m">花小金井駅南口から小金井公園へ向かう「せいぶ通り」の商店街が会場です。入場は無料。 万燈神輿（まんとうみこし）が出て、和太鼓の演奏もあります。出店もたくさん並びます。 よさこい踊りは5日（土）18:00〜、小平第八小学校のみなさん。 6日の出演は当日に会場でご確認ください。 ⚠️ そして今回いちばんお伝えしたいのは、このお祭りが「雨天決行」だということ。 週末の予報は雨ですが、予定を組んで大丈夫です。傘とレインコートのご準備を。 17時開始で21時までなので、小さいお子さん連れなら、まだ明るい17時台がおすすめです。</div>
             <div class="ages">👶 △　🧒 <b>◎</b>　🎒 <b>◎</b></div>
           </div>
         </div>
@@ -545,7 +570,7 @@
 <footer>
   <div class="wrap">
     <div class="fmark">ぼんぼやーじゅ通信</div>
-    <div class="fsmall">花小金井エリアの子育て家庭のための、週末おでかけ便。<br>
+    <div class="fsmall">小平の子育て家庭のための、週末おでかけ便。<br>
       発行：ぼんぼやーじゅ通信の会　お問い合わせ: <a href="mailto:tokyo.papa.home@gmail.com">tokyo.papa.home@gmail.com</a><br>
       <a href="tokushoho.html">免責事項・個人情報の取り扱い</a><br>
       © 2026 ぼんぼやーじゅ通信</div>
