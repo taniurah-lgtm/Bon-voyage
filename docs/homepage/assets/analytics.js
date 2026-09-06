@@ -9,6 +9,13 @@
  *   - パスごとに集計するので /f/rokuto と /f/asupia が別の行として出る＝配布先ごとの効果が分かる
  *
  * SITE が空のあいだは <script> を1つも読み込まない。つまり**どこにも通信しない**。
+ *
+ * ★自分のアクセスを数えない方法（オーナー用）
+ *   https://bonvoya.nicomaru.tokyo/#toggle-goatcounter を開く。トグルなので押しすぎ注意。
+ *   ブラウザごとに1回ずつ要る（PC / スマホ / **LINEのアプリ内ブラウザは別扱い**）。
+ *   閲覧データを消すと解除されるので、たまに開いて確認する。
+ *   保険として GoatCounter の Settings → Tracking → Ignore IPs に自宅のIPも入れてある。
+ *   （自宅IPは変わることがあるので、あくまで保険。本命は上のトグル）
  */
 (function () {
   var SITE = 'bonvoya';          // https://bonvoya.goatcounter.com（2026-09-06 有効化）
