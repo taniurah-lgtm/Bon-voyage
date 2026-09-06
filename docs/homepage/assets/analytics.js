@@ -1,7 +1,7 @@
 /* アクセス解析。既定では「何もしない」。
  *
  * 有効にするには、下の SITE を自分の GoatCounter のコードに書き換えるだけ。
- *   例: const SITE = 'bonvoya';   →  https://bonvoya.goatcounter.com
+  *   いまは 'bonvoya' を設定済み → https://bonvoya.goatcounter.com
  *
  * GoatCounter を選んだ理由:
  *   - 無料（個人利用）
@@ -11,7 +11,7 @@
  * SITE が空のあいだは <script> を1つも読み込まない。つまり**どこにも通信しない**。
  */
 (function () {
-  var SITE = '';                 // ← ここを埋めるまで、解析は動かない
+  var SITE = 'bonvoya';          // https://bonvoya.goatcounter.com（2026-09-06 有効化）
   if (!SITE) return;
 
   var s = document.createElement('script');
