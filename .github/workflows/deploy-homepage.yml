@@ -13,6 +13,14 @@ on:
       - "scripts/build-site.sh"
       - "scripts/lib/**"
       - ".github/workflows/deploy-homepage.yml"
+  # ★毎日組み直す。
+  #   台帳を更新するのは水曜巡回で、push 先は rfwmo8。このワークフローは
+  #   yefv9l への push でしか動かないので、schedule が無いと
+  #   /ai/ の一覧やカレンダーが「前回 push した日」のまま古びる。
+  #   （配信当日にリンクを送ったら、中身が2日前のものだった、が起きる）
+  schedule:
+    - cron: "0 21 * * *"   # 06:00 JST  前日ぶんの台帳を反映
+    - cron: "0 1 * * *"    # 10:00 JST  水曜巡回(09:00 JST開始)の更新を拾う
   workflow_dispatch: {}
 
 permissions:
