@@ -50,6 +50,16 @@ function firstDate(e) {
   return ds.sort()[0] || '9999-99-99';     // 日付なしは最後に回す
 }
 
+const standing = (events.standing || []);
+const pending = (events.unresolved || []);
+
+// 連休。**docs/sources.md で裏取り済みのものだけ**を載せる。
+// 未検証の祝日を足さない（公式ソースで裏取りする、という運用ルールに合わせる）。
+const HOLIDAYS = [
+  { from: '2026-09-19', to: '2026-09-23', name: 'シルバーウィーク 5連休（敬老の日・国民の休日・秋分の日）' },
+  { from: '2026-10-10', to: '2026-10-12', name: 'スポーツの日 3連休' },
+];
+
 const upcoming = (events.events || [])
   .filter((e) => !['終了', '見送り'].includes(e.status))
   .filter((e) => { const d = lastDate(e); return d === null || d >= TODAY; })
@@ -71,6 +81,19 @@ const WD = ['日', '月', '火', '水', '木', '金', '土'];
 // getDay() はローカル時刻（＝UTC）で判定してしまうので、UTCで作ってUTCで読む
 const withWd = (d) => `${d}(${WD[new Date(d + 'T00:00:00Z').getUTCDay()]})`;
 
+const mapLink = (q) => (q ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}` : '');
+
+// ★連絡先は「公式の代表番号」だけにする。
+//   台帳には主催者個人の携帯(080/090)や個人のフリーメールが入っていることがあり、
+//   それを機械可読の公開ファイルに載せるのは、掲載許諾の範囲を超える。
+//   読者が問い合わせる先は「出典」のURLで足りる。
+const publicTel = (c) => {
+  const t = (c?.tel || '').trim();
+  if (!t) return '';
+  if (/^0[789]0/.test(t.replace(/-/g, ''))) return '';   // 携帯は出さない
+  return c.who ? `${t}（${c.who}）` : t;
+};
+
 function eventBlock(e) {
   let s = `[${e.id}] ${e.name}\n`;
   s += line('いつ', e.when || (e.dates || []).join('・'));
@@ -83,16 +106,45 @@ function eventBlock(e) {
     s += line('これから残っている期間', `${e.span.from ? withWd(e.span.from) + ' 〜 ' : '〜'}${withWd(e.span.to)}`);
   }
   s += line('どこ', e.place);
+  s += line('地図', mapLink(e.mapq || e.place));
   s += line('時間', e.hours);
+  s += line('最終入場', e.lastEntry);
   s += line('料金', e.cost);
   s += line('対象', e.target);
   s += line('年齢の目安', ageLine(e.ages));
+  s += line('内容', e.summary);
   s += line('子連れメモ', e.kidsNote);
   s += line('注意', e.caution);
   s += line('申込の締切', e.deadline);
-  s += line('雨天', (e.rainDates || []).join('・'));
+  s += line('雨天の予備日', (e.rainDates || []).join('・'));
+  s += line('休み・例外', typeof e.exceptions === 'string' ? e.exceptions : (e.exceptions ? JSON.stringify(e.exceptions) : ''));
+  s += line('プログラム', Array.isArray(e.programs) ? e.programs.join(' / ') : (typeof e.programs === 'string' ? e.programs : ''));
+  s += line('問い合わせ', publicTel(e.contact));
   s += line('確度', e.confidence + (e.tentative ? '（未確定・要確認）' : ''));
-  s += line('出典', e.url);
+  s += line('公式サイト（ここで最新を確認してください）', e.url);
+  return s;
+}
+
+function standingBlock(e) {
+  let s = `[${e.id}] ${e.name}\n`;
+  s += line('期間・時間', typeof e.span === 'string' ? e.span : '');
+  s += line('どこ', e.place);
+  s += line('地図', mapLink(e.mapq || e.place));
+  s += line('料金', e.cost);
+  s += line('年齢の目安', ageLine(e.ages));
+  s += line('内容', e.summary);
+  s += line('子連れメモ', e.kidsNote);
+  s += line('確度', e.confidence);
+  s += line('公式サイト（ここで最新を確認してください）', e.url);
+  return s;
+}
+
+// ★ reason（内部の処理理由）は出さない。読者にも競合にも意味がないうえ、
+//   こちらの作り方が透ける。読者に必要なのは「まだ発表されていない」という事実だけ。
+function pendingBlock(e) {
+  let s = `[${e.id}] ${e.name}\n`;
+  s += line('状況', '2026年の日程はまだ発表されていません');
+  s += line('分かっていること', e.when || e.confidence);
   return s;
 }
 
@@ -102,63 +154,141 @@ function spotBlock(sp) {
   s += line('メモ', sp.desc);
   s += line('アクセス・料金', sp.access);
   s += line('年齢の目安', sp.ages);
-  s += line('公式', sp.official);
+  s += line('地図', sp.map || mapLink(sp.name));
+  s += line('公式サイト（ここで最新を確認してください）', sp.official);
   return s;
 }
 
-const HEAD = `ぼんぼやーじゅ通信 おでかけ一覧（ChatGPT・Gemini などにそのまま読ませるためのファイル）
+const holidaysAhead = HOLIDAYS.filter((h) => h.to >= TODAY);
 
-このファイルの日付は ${TODAY} 時点のものです。
-小平市の未就学児・小学生のいる家庭向けに、花小金井からだいたい30分で行ける範囲の
-イベントとおでかけ先をまとめています。市境はまたぎます（西東京・東久留米・小金井・東村山）。
+// 締切のあるものだけを、締切の早い順に。この通信のいちばんの役目が
+// 「気づいたときには終わっていた、をなくす」ことなので、索引として先に置く。
+const deadlines = upcoming
+  .filter((e) => e.deadline)
+  .sort((a, b) => String(a.deadline).localeCompare(String(b.deadline)));
 
-発行: ぼんぼやーじゅ通信の会（小平市・花小金井）/ 小平市民活動支援センター あすぴあ 登録団体（第254号）
+const HEAD = `ぼんぼやーじゅ通信 おでかけ一覧
+（ChatGPT・Gemini・Claude などにそのまま読ませるためのファイル）
+
+このファイルの内容は ${TODAY} 時点のものです。
+小平市の未就学児・小学生のいる家庭に向けて、花小金井からだいたい30分で行ける範囲の
+イベントとおでかけ先をまとめています。市境はまたぎます（西東京・東久留米・小金井・東村山ほか）。
+
+発行: ぼんぼやーじゅ通信の会（小平市・花小金井）
+　　　小平市民活動支援センター あすぴあ 登録団体（第254号）
 最新版: https://bonvoya.nicomaru.tokyo/ai/
 
 ─────────────────────────────────────────────
-■ AIへのお願い（この下の一覧だけを根拠にしてください）
+■ 収録しているもの
 
-1. **このファイルに書いていないイベントを作らないでください。** 見つからないときは
-   「この一覧にはありません」と答えてください。
-2. 日付・料金・時間は、このファイルの記載をそのまま使ってください。推測で補わないでください。
-3. 「確度」に「未確認」「要確認」とある項目は、答えるときも必ずその旨を添えてください。
-4. 答えの最後に、そのイベントの「出典」のURLを必ず付けてください。
-5. 相手は小さい子どもを連れた保護者です。次のことが分からないときは、先に質問してください。
-   - 子どもの年齢（何歳と何歳か）
-   - 行く日と、だいたいの時間帯
-   - 車があるか、電車・ベビーカーか
-   - 雨でも行きたいか、屋内がいいか
-   - 予算（無料がいいか、有料でもよいか）
-6. 「年齢の目安」は ◎ よく向く / ○ 向く / △ 工夫がいる、の3段階です。
-7. 最後に「実際に行く前に、必ず公式サイトで最新の情報を確かめてください」と添えてください。
+  1. 申込の締切があるもの（締切の早い順）… ${deadlines.length}件
+  2. これから行けるイベント … ${upcoming.length}件
+  3. 季節・通年でやっているもの … ${standing.length}件
+  4. 例年あるが、まだ日程が発表されていないもの … ${pending.length}件
+  5. いつでも行けるおでかけ先 … ${spots.length}件
+  6. これからの連休 … ${holidaysAhead.length}件
 
 ─────────────────────────────────────────────
-■ これから行けるイベント（${upcoming.length}件・${TODAY} 以降）
+■ AIへのお願い（下の一覧だけを根拠にしてください）
+
+ 1. **この一覧に無いイベントを作らないでください。** 見つからないときは
+    「この一覧にはありません」とはっきり答えてください。
+ 2. 日付・料金・時間は、この一覧の記載をそのまま使ってください。推測で補わないでください。
+ 3. 「確度」に「未確認」「要確認」「未発表」とある項目は、答えるときも必ずその旨を添えてください。
+ 4. **すすめた行き先には、必ず「公式サイト」のURLを添えてください。** そのうえで
+    「最終的な確認は、この公式サイトでお願いします」と書き添えてください。
+    日程・料金・雨天時の扱いは直前に変わることがあり、この一覧が古くなっていることがあります。
+ 5. 相手は小さい子どもを連れた保護者です。次のことが分からないときは、答える前に質問してください。
+    ・子どもの年齢（何歳と何歳か）
+    ・行く日と、だいたいの時間帯
+    ・車があるか、電車・ベビーカーか
+    ・雨でも行きたいか、屋内がいいか
+    ・予算（無料がよいか、有料でもよいか）
+ 6. 「年齢の目安」は ◎ よく向く ／ ○ 向く ／ △ 工夫がいる、の3段階です。
+ 7. 「これから残っている日」がある項目は、**そちらを使ってください。**
+    「いつ」の行には、すでに終わった日付が並んでいることがあります。
+ 8. 答えの最後に、次の1行を必ず入れてください。
+    「お出かけ前に、各施設の公式サイトで最新の情報をご確認ください。」
+
+─────────────────────────────────────────────
+■ 1. 申込の締切があるもの（締切の早い順・${deadlines.length}件）
+   「気づいたときには終わっていた」をなくすのが、この通信のいちばんの役目です。
 `;
+
+const secDeadlines = deadlines.length
+  ? deadlines.map((e) => `・${e.deadline}　[${e.id}] ${e.name}\n`).join('')
+  : '（いま締切の分かっているものはありません）\n';
+
+const HEAD2 = `
+─────────────────────────────────────────────
+■ 2. これから行けるイベント（${upcoming.length}件・${TODAY} 以降）
+`;
+
+const secStanding = standing.length ? `
+─────────────────────────────────────────────
+■ 3. 季節・通年でやっているもの（${standing.length}件）
+   決まった日付が無いぶん、思い立った日に行けます。
+
+` + standing.map(standingBlock).join('\n') : '';
+
+const secPending = pending.length ? `
+─────────────────────────────────────────────
+■ 4. 例年あるが、まだ日程が発表されていないもの（${pending.length}件）
+   「あることは分かっているが、今年の日程が出ていない」ものです。
+   すすめるときは必ず「まだ発表されていません」と添えてください。
+
+` + pending.map(pendingBlock).join('\n') : '';
 
 const MID = `
 ─────────────────────────────────────────────
-■ いつでも行けるおでかけ先（${spots.length}件）
-   地元の家庭が「行ってよかった」と持ち寄っている場所です。
+■ 5. いつでも行けるおでかけ先（${spots.length}件）
+   地元の家庭が「実際に行ってよかった」と持ち寄っている場所です。
    イベントが無い週末や、雨のときの行き先としてどうぞ。
 `;
 
+const secHolidays = holidaysAhead.length ? `
+─────────────────────────────────────────────
+■ 6. これからの連休（${holidaysAhead.length}件）
+   連休は宿もキャンプ場も予約が早く埋まります。2〜3か月前から動くと間に合います。
+
+` + holidaysAhead.map((h) =>
+    `・${withWd(h.from)} 〜 ${withWd(h.to)}　${h.name}\n`).join('') : '';
+
 const TAIL = `
 ─────────────────────────────────────────────
-■ 出典について
+■ この一覧について
 
-イベントは、市や施設の公式ページを一件ずつ見て日付を確かめています。
+日付・料金・時間は、市や施設の公式ページで一件ずつ確かめて書いています。
 まとめサイトからの転載はしていません。「おでかけ先」は地元の家庭の持ち寄りです。
 
-ただし、このファイルを読んだAIの答えが正しいことまでは保証できません。
-**行く前に、必ず「出典」のURLで最新の情報を確かめてください。**
-中止・変更・雨天時の扱いは、直前に変わることがあります。
+■ ⚠️ 大事なおねがい
+
+**この一覧を読んだAIの答えが正しいことは、保証できません。**
+AIは、それらしい答えを作ってしまうことがあります。日付を取り違えたり、
+書いていないイベントを足したりします。
+
+**行くと決める前に、必ず各項目の「公式サイト」を開いて確かめてください。**
+中止・変更・雨天時の扱い・料金・予約の要否は、直前に変わります。
+この一覧はあくまで「探すための下じき」で、最終的な情報源は各施設の公式サイトです。
+
+一覧の内容に間違いを見つけられたときは、教えていただけると助かります。
+　tokyo.papa.home@gmail.com
+
+■ 利用について
+
+・ご家庭で、ご自身のおでかけを決めるためにAIに読ませるのは、ご自由にどうぞ。
+・**内容の全部または一部を、転載・再配布・二次利用することはご遠慮ください。**
+　（メディア・アプリ・他のまとめへの掲載を含みます）
+・ご相談は上のメールアドレスへ。掲載のご依頼は無料でお受けしています。
 
 ぼんぼやーじゅ通信（無料・毎週水曜） https://bonvoya.nicomaru.tokyo/
 `;
 
-const txt = HEAD + '\n' + upcoming.map(eventBlock).join('\n') + MID + '\n'
-  + spots.map(spotBlock).join('\n') + TAIL;
+const txt = HEAD + secDeadlines + HEAD2 + '\n'
+  + upcoming.map(eventBlock).join('\n')
+  + secStanding + secPending
+  + MID + '\n' + spots.map(spotBlock).join('\n')
+  + secHolidays + TAIL;
 
 writeFileSync(`${OUT_DIR}/odekake.txt`, txt);
 
@@ -178,7 +308,7 @@ const html = `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <title>AIに聞くためのおでかけ一覧｜ぼんぼやーじゅ通信</title>
-<meta name="description" content="ChatGPTやGeminiに読ませるための、小平まわりのおでかけ一覧。イベント${upcoming.length}件とおでかけ先${spots.length}件を、出典つきでまとめたテキストです。無料。">
+<meta name="description" content="ChatGPTやGeminiに読ませるための、小平まわりのおでかけ一覧。イベント・季節の遊び場・おでかけ先あわせて${upcoming.length + standing.length + pending.length + spots.length}件を、公式サイトのリンクつきでまとめたテキストです。無料。">
 <style>
 :root{
   --ground:#FBFAF5; --surface:#FFFFFF; --surface-2:#F5F2EA;
@@ -212,6 +342,12 @@ ol.steps li{margin:0 0 8px;}
 .note{background:var(--marigold-wash);color:var(--marigold-ink);border-radius:12px;
   padding:14px 16px;font-size:.94rem;}
 .tiny{font-size:.84rem;color:var(--ink-soft);}
+.counts{list-style:none;margin:0 0 22px;padding:0;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;}
+.counts li{background:var(--surface-2);border-radius:10px;padding:9px 12px;
+  display:flex;align-items:baseline;gap:7px;font-size:.9rem;}
+.counts b{font-size:1.15rem;color:var(--sky-deep);}
+.counts span{color:var(--ink-soft);}
 .ok{color:#2F6B34;font-weight:800;font-size:.9rem;}
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
@@ -225,8 +361,18 @@ ol.steps li{margin:0 0 8px;}
 <div class="wrap">
   <p class="back"><a href="/">← ぼんぼやーじゅ通信</a></p>
   <h1>AIに聞くための<br>おでかけ一覧</h1>
-  <p class="lede">ChatGPT や Gemini をお使いの方へ。小平まわりの<b>イベント${upcoming.length}件</b>と<b>おでかけ先${spots.length}件</b>を、
-  出典つきで1つのテキストにまとめました。これを貼りつけて「今週どこ行こう？」と聞いてみてください。無料です。</p>
+  <p class="lede">ChatGPT や Gemini をお使いの方へ。小平まわりのおでかけ情報を、
+  <b>ぜんぶで${upcoming.length + standing.length + pending.length + spots.length}件</b>、公式サイトのリンクつきで1つのテキストにまとめました。
+  これを貼りつけて「今週どこ行こう？」と聞いてみてください。無料です。</p>
+
+  <ul class="counts">
+    <li><b>${deadlines.length}</b>件<span>申込の締切があるもの</span></li>
+    <li><b>${upcoming.length}</b>件<span>これから行けるイベント</span></li>
+    <li><b>${standing.length}</b>件<span>季節・通年でやっているもの</span></li>
+    <li><b>${pending.length}</b>件<span>例年あるが日程未発表</span></li>
+    <li><b>${spots.length}</b>件<span>いつでも行けるおでかけ先</span></li>
+    <li><b>${holidaysAhead.length}</b>件<span>これからの連休</span></li>
+  </ul>
 
   <div class="card">
     <h2 style="margin-top:0">使い方</h2>
@@ -240,7 +386,7 @@ ol.steps li{margin:0 0 8px;}
       <a class="btn sub" href="/ai/odekake.txt" download="bonvoyage-odekake.txt">ファイルで保存</a>
       <span class="ok" id="done" hidden>コピーしました</span>
     </div>
-    <p class="tiny" style="margin:12px 0 0">テキスト約${kb}KB／${TODAY} 時点。ファイルで保存すると、AIアプリに「添付」で渡せます。</p>
+    <p class="tiny" style="margin:12px 0 0">テキスト約${kb}KB・${TODAY} 時点。ファイルで保存すると、AIアプリに「添付」で渡せます。<br>貼りつけたあと「読めましたか？」と一度聞くと、途中で切れていないか確かめられます。</p>
   </div>
 
   <h2>そのまま使える聞き方</h2>
@@ -251,11 +397,21 @@ ${PROMPTS.map((p, i) => `  <div class="q">
 
   <h2>ひとつだけ、お願いです</h2>
   <div class="note">
-    このファイルの日付や料金は、市や施設の公式ページで一件ずつ確かめています。
-    ただ、<b>それを読んだAIの答えが正しいことまでは保証できません。</b>
-    AIは、それらしい答えを作ってしまうことがあります。
-    <b>行く前に、必ず公式サイトで確かめてください。</b>一覧には出典のURLを付けてあります。
+    <p style="margin:0 0 10px"><b>AIの答えを、そのまま信じないでください。</b>
+    AIは、それらしい答えを作ってしまうことがあります。日付を取り違えたり、
+    書いていないイベントを足したりします。</p>
+    <p style="margin:0"><b>行くと決める前に、必ずその施設の公式サイトを開いて確かめてください。</b>
+    一覧の全件に公式サイトのURLを付けてあります。中止・変更・雨天時の扱い・料金・
+    予約の要否は、直前に変わります。この一覧は「探すための下じき」で、
+    最終的な情報源は各施設の公式サイトです。</p>
   </div>
+
+  <h2>使い方について</h2>
+  <p class="tiny" style="margin-top:0">
+    ご家庭で、ご自身のおでかけを決めるためにAIに読ませるのは、ご自由にどうぞ。<br>
+    <b>内容の全部または一部を、転載・再配布・二次利用することはご遠慮ください</b>（メディア・アプリ・他のまとめへの掲載を含みます）。<br>
+    掲載のご依頼・間違いのご指摘は <a href="mailto:tokyo.papa.home@gmail.com">tokyo.papa.home@gmail.com</a> へ。掲載は無料です。
+  </p>
 
   <p class="tiny" style="margin-top:28px">
     毎週水曜の朝に、おでかけ情報をLINEでお届けしています（無料）。<br>
