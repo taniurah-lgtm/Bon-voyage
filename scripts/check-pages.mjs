@@ -51,6 +51,7 @@ const PAGES = [
   ['/calendar.html', ['.bvc-grid, .bvc table, #cal table']],
   ['/map.html', ['.spot']],
   ['/issues.html', ['.issue']],
+  ['/ai/', ['#copy', '.q']],
   ['/guide.html', ['body']],
   ['/tokushoho.html', ['body']],
 ];

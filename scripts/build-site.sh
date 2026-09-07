@@ -35,6 +35,10 @@ echo "── トップページの「投稿できます」を実装に合わせ�
 node scripts/apply-post-mode.mjs docs/homepage/index.html
 
 echo
+echo "── AIに聞くためのおでかけ一覧（ChatGPT/Gemini用）"
+node scripts/build-ai-pack.mjs
+
+echo
 echo "── 会員ページ（全件のカレンダー＋地図）"
 node scripts/build-members.mjs
 
