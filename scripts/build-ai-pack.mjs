@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /*
- * ChatGPT・Gemini に読ませるための「おでかけ一覧」を作る。
+ * チャット型のAI（ChatGPT・Gemini・Copilot・Claude など）に読ませるための
+ * 「おでかけ一覧」を作る。
  *   node scripts/build-ai-pack.mjs
  *
  * 出力:
@@ -168,7 +169,7 @@ const deadlines = upcoming
   .sort((a, b) => String(a.deadline).localeCompare(String(b.deadline)));
 
 const HEAD = `ぼんぼやーじゅ通信 おでかけ一覧
-（ChatGPT・Gemini・Claude などにそのまま読ませるためのファイル）
+（チャット型のAI ── ChatGPT・Gemini・Claude など ── にそのまま読ませるためのファイル）
 
 このファイルの内容は ${TODAY} 時点のものです。
 小平市の未就学児・小学生のいる家庭に向けて、花小金井からだいたい30分で行ける範囲の
@@ -308,7 +309,7 @@ const html = `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <title>AIに聞くためのおでかけ一覧｜ぼんぼやーじゅ通信</title>
-<meta name="description" content="ChatGPTやGeminiに読ませるための、小平まわりのおでかけ一覧。イベント・季節の遊び場・おでかけ先あわせて${upcoming.length + standing.length + pending.length + spots.length}件を、公式サイトのリンクつきでまとめたテキストです。無料。">
+<meta name="description" content="ChatGPTやGeminiなど、チャット型のAIに読ませるための、小平まわりのおでかけ一覧。イベント・季節の遊び場・おでかけ先あわせて${upcoming.length + standing.length + pending.length + spots.length}件を、公式サイトのリンクつきでまとめたテキストです。無料。">
 <style>
 :root{
   --ground:#FBFAF5; --surface:#FFFFFF; --surface-2:#F5F2EA;
@@ -361,7 +362,7 @@ ol.steps li{margin:0 0 8px;}
 <div class="wrap">
   <p class="back"><a href="/">← ぼんぼやーじゅ通信</a></p>
   <h1>AIに聞くための<br>おでかけ一覧</h1>
-  <p class="lede">ChatGPT や Gemini をお使いの方へ。小平まわりのおでかけ情報を、
+  <p class="lede">ChatGPTやGeminiなど、チャット型のAIをお使いの方へ。小平まわりのおでかけ情報を、
   <b>ぜんぶで${upcoming.length + standing.length + pending.length + spots.length}件</b>、公式サイトのリンクつきで1つのテキストにまとめました。
   これを貼りつけて「今週どこ行こう？」と聞いてみてください。無料です。</p>
 
@@ -378,7 +379,7 @@ ol.steps li{margin:0 0 8px;}
     <h2 style="margin-top:0">使い方</h2>
     <ol class="steps">
       <li>下の<b>「一覧をコピー」</b>を押す</li>
-      <li>ChatGPT や Gemini を開いて<b>貼りつける</b></li>
+      <li>お使いのAI（ChatGPT・Gemini・Copilot・Claude など）を開いて<b>貼りつける</b></li>
       <li>そのまま<b>「今週の土曜、5歳と2歳を連れてどこがいい？」</b>のように聞く</li>
     </ol>
     <div class="row" style="margin-top:16px">
