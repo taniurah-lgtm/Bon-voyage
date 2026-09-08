@@ -132,3 +132,55 @@ LINE Manager の**友だち追加数の日別推移**に 8/30・9/4・9/6 あた
 | 2026-08上旬 | 47 | — |
 | 2026-09-04 | 59 | 8/29 3か所設置 |
 | 2026-09-06 | 64 | 9/3 公民館・9/5 ルネこだいら・秋まつり |
+
+---
+
+## 5. ホームページへの入口を読む（GoatCounter）
+
+`https://bonvoya.goatcounter.com` ／ 期間を **2026-09-06〜今日** にする。
+
+### Pages ＝ 入口の内訳
+
+| パス | 何から来た人か | 状態 |
+|---|---|---|
+| **`/f`** | **すでに配った497枚のチラシ・ポスターのQR** | ⭕️ 読める |
+| `/f/<場所>` | 配布先ごとのQR | ❌ **まだ0。この版は未印刷**（10月の刷り直しから） |
+| `/` | 検索・直接・SNS・LINE | ⭕️ |
+| `/calendar.html` `/map.html` `/ai/` | 中の道具 | ⭕️ |
+
+**いちばん見たいのは `/f`。**これが「紙を見てQRを読んだ人」そのもの。
+
+### 🔴 Top referrers だけ見ると誤読する
+
+**QRからの流入は referrer が付かない。**必ず「direct（空欄）」に混ざる。
+LINEアプリ内からのタップも同じ。
+→ **紙の効果はパス（`/f`）で見る。**referrerが空でも紙が効いていないわけではない。
+
+| 出方 | 意味 |
+|---|---|
+| `Google` | 検索から。**SEOが効き始めた合図** |
+| `kodaira-shiminkatsudo-ctr.jp` | あすぴあのサイトから |
+| `note.com` / `threads.net` | SNSのプロフィールから |
+| (空欄・direct) | URL直打ち／ブックマーク／**QR**／アプリ内リンク |
+
+### ⏳ 数字が少ないうちに結論を出さない
+
+計測は **2026-09-06 開始**。最初の2日はオーナー自身のテスト。
+**1〜2週間ためてから読む。**目安として `/f` が週5件出れば「紙は効いている」。
+
+### 紙以外の入口を分ける（Campaigns）
+
+いま note・Threads・メール署名からの流入が区別できない。
+**プロフィールに置くURLを差し替えるだけ**で Campaigns に分かれて出る。
+
+```
+note      https://bonvoya.nicomaru.tokyo/?utm_campaign=note
+Threads   https://bonvoya.nicomaru.tokyo/?utm_campaign=threads
+X         https://bonvoya.nicomaru.tokyo/?utm_campaign=x
+メール署名  https://bonvoya.nicomaru.tokyo/?utm_campaign=mail
+```
+
+- [ ] note のプロフィールを差し替えた
+- [ ] Threads のプロフィールを差し替えた
+- [ ] X のプロフィールを差し替えた
+- [ ] メール署名を差し替えた
