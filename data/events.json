@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-05",
+ "generated": "2026-09-09",
  "events": [
   {
    "id": "E51",
@@ -1998,24 +1998,24 @@
    "end": "16:30",
    "allDay": false,
    "timeUncertain": false,
-   "place": "江戸東京たてもの園 / 費用: 要入園料(小学生以下無料)",
-   "mapq": "江戸東京たてもの園",
-   "summary": "",
-   "kidsNote": "職人の手元を間近で見られる。滞在時間の調整が効く",
+   "place": "江戸東京たてもの園(小金井公園内) 東ゾーンの「植村邸」「川野商店」など",
+   "mapq": "江戸東京たてもの園 東ゾーンの「植村邸」「川野商店」",
+   "summary": "東京手描友禅／江戸筆。実演するのは板橋区の職人さん。毎月演目が変わる",
+   "kidsNote": "職人の手元を間近で見られる。出入り自由で滞在時間の調整が効く",
    "caution": "",
    "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "baby": null,
+    "baby": "△",
     "pre": "○",
     "elem": "◎"
    },
-   "cost": "",
+   "cost": "一般400円 / 中学生以下は無料(2026-09-09 公式で再確認。以前「小学生以下無料」と書いていたのは誤り)",
    "target": "",
    "url": "https://www.tatemonoen.jp/event/schedule/2026/schedule789.php",
    "status": "候補",
-   "confidence": "公式確認済み",
+   "confidence": "公式確認済み(2026-09-09 演目・時間・料金を再取得)",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-09.md"
@@ -2067,7 +2067,7 @@
   },
   {
    "id": "E52",
-   "name": "弦楽アンサンブル・ルナーレ演奏会",
+   "name": "アンサンブル ルナーレ(弦楽合奏団) 第32回定期演奏会",
    "dates": [
     "2026-09-13"
    ],
@@ -2081,24 +2081,24 @@
    "end": null,
    "allDay": false,
    "timeUncertain": false,
-   "place": "ルネこだいら 中ホール / 費用: 無料",
+   "place": "ルネこだいら 中ホール / 費用: 入場無料・全席自由",
    "mapq": "ルネこだいら",
    "summary": "",
-   "kidsNote": "無料のクラシック入門。詳細は公民館のチラシ",
+   "kidsNote": "👶(要確認) 🧒△ 🎒○ 有名曲が多く入門向き。ただし本格的な定期演奏会。 全席自由なので、後ろの通路側なら途中で出やすい",
    "caution": "",
    "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
     "baby": null,
-    "pre": "○",
-    "elem": "◎"
+    "pre": "△",
+    "elem": "○"
    },
    "cost": "",
    "target": "",
-   "url": "",
+   "url": "https://ensenblelunare.jimdofree.com/",
    "status": "候補",
-   "confidence": "市報PDFで検証済・一致(2026-08-15)",
+   "confidence": "市報PDFで検証済・一致(2026-08-15) / 曲目・正式名は団体公式で確認(2026-09-09)",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-08.md"
@@ -2129,7 +2129,7 @@
    "timeUncertain": false,
    "place": "江戸東京たてもの園(小金井公園内) — 花小金井から自転車・バス圏",
    "mapq": "江戸東京たてもの園",
-   "summary": "復元民家の綱島家に十五夜の飾りつけ。2026年の中秋の名月は9月25日(金)",
+   "summary": "復元民家の綱島家に十五夜の飾りつけ。今年の十五夜は9/25(金)(園の公式表記)",
    "kidsNote": "園内が広く、ベビーカーで回れる。連休の「近場だけど遠出感がある」枠",
    "caution": "",
    "contact": null,
@@ -2140,7 +2140,7 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "要入園料(小学生以下は無料、都内在住・在学の中学生も無料)",
+   "cost": "一般400円 / 中学生以下は無料(2026-09-09 公式で再確認。以前「小学生以下無料」と書いていたのは誤り)",
    "target": "",
    "url": "https://www.tatemonoen.jp/event/schedule/2026/schedule789.php",
    "status": "候補",
