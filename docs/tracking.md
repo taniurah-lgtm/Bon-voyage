@@ -168,19 +168,18 @@ LINEアプリ内からのタップも同じ。
 計測は **2026-09-06 開始**。最初の2日はオーナー自身のテスト。
 **1〜2週間ためてから読む。**目安として `/f` が週5件出れば「紙は効いている」。
 
-### 紙以外の入口を分ける（Campaigns）
+### 🚫 note・Threads に追跡パラメータは付けない（2026-09-09 決定）
 
-いま note・Threads・メール署名からの流入が区別できない。
-**プロフィールに置くURLを差し替えるだけ**で Campaigns に分かれて出る。
+`?utm_campaign=note` のようなURLは**広告の言葉**で、「無料で、急かさない、
+売り込まない」というこの通信の身上と合わない。読む人が見て気持ちのいいURLではない。
 
-```
-note      https://bonvoya.nicomaru.tokyo/?utm_campaign=note
-Threads   https://bonvoya.nicomaru.tokyo/?utm_campaign=threads
-X         https://bonvoya.nicomaru.tokyo/?utm_campaign=x
-メール署名  https://bonvoya.nicomaru.tokyo/?utm_campaign=mail
-```
+**無くてもほぼ困らない。**
 
-- [ ] note のプロフィールを差し替えた
-- [ ] Threads のプロフィールを差し替えた
-- [ ] X のプロフィールを差し替えた
-- [ ] メール署名を差し替えた
+- note・Threads は**サイトなので referrer が出る**。Top referrers に `note.com` として並ぶ
+- メール署名からの流入は、企業・公民館向けで人数が知れている
+- **本命の紙は `/f` で測れている**
+
+→ プロフィールに置くURLは **`https://bonvoya.nicomaru.tokyo/` のまま**。
+
+後日どうしても分けたくなったら、`utm_` ではなく **`/f/` と同じ短いパス**
+（`bonvoya.nicomaru.tokyo/n` のような）でやる。追跡パラメータには見えない。
