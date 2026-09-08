@@ -36,10 +36,11 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.city.kodaira.tokyo.jp/kurashi/002/002590.html",
    "status": "候補",
-   "confidence": "市報PDFで確定(2026-08-15検証)",
+   "confidence": "市報PDFで確定",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-08.md"
@@ -75,10 +76,11 @@
     "elem": "◎"
    },
    "cost": "要入館料(展示室観覧料。プラネタリウムは別料金)",
+   "discount": "",
    "target": "",
    "url": "https://www.tamarokuto.or.jp/calendar/",
    "status": "候補",
-   "confidence": "会期・時間は確認済み / 料金は館の通常料金を配信前に再確認",
+   "confidence": "会期・時間は確認済み / 入館料は未確認",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-09.md"
@@ -112,6 +114,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.higasimurayama-yasakajinja.jp/cont5/main.html",
    "status": "候補",
@@ -151,6 +154,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.yasukuni.or.jp/news_detail.html?id=701",
    "status": "候補",
@@ -188,6 +192,7 @@
     "overall": "△〜○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://festival.hanakoganei.net/",
    "status": "登録済",
@@ -226,6 +231,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.atpress.ne.jp/news/610885",
    "status": "候補",
@@ -268,6 +274,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.seibuen-amusement-park.jp/2026summer/",
    "status": "候補",
@@ -304,6 +311,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.ookunitamajinja.or.jp/matsuri/7-sumomo.php",
    "status": "候補",
@@ -343,6 +351,7 @@
     "overall": "△〜○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://summer.walkerplus.com/odekake/detail_e/ar0313e71549/",
    "status": "候補",
@@ -381,6 +390,7 @@
     "overall": "△"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.mod.go.jp/asdf/iruma/kouhou/public_FW/index2025.html",
    "status": "候補",
@@ -421,6 +431,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://kodaira-tourism.com/event/3369/",
    "status": "候補",
@@ -458,6 +469,7 @@
     "overall": "△"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://koganeiawaodori.jp/",
    "status": "候補",
@@ -494,6 +506,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://hanabi.tokyo-tachikawa.org/",
    "status": "候補",
@@ -530,6 +543,7 @@
     "overall": "✕〜△"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.sumidagawa-hanabi.com/",
    "status": "候補",
@@ -566,6 +580,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.city.kodaira.tokyo.jp/event/127/127980.html",
    "status": "登録済",
@@ -603,6 +618,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.tatemonoen.jp/event/page/2026_yusuzumi.php",
    "status": "候補",
@@ -639,6 +655,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.city.sayama.saitama.jp/kankou/kanko/tanabata/index.html",
    "status": "候補",
@@ -675,6 +692,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://higashikurume.net/event.html",
    "status": "候補",
@@ -712,6 +730,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://musashino-kanko.com/topics/musashino_natsumaturi-bonodori/",
    "status": "候補",
@@ -758,6 +777,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.seibuen-amusement-park.jp/2026summer/",
    "status": "候補",
@@ -798,6 +818,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.sumiyoshijinja.or.jp/information.html",
    "status": "候補",
@@ -836,6 +857,7 @@
     "overall": "△"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.jinguhanabi.com/",
    "status": "候補",
@@ -879,6 +901,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.asta.co.jp/event/",
    "status": "候補",
@@ -919,6 +942,7 @@
     "elem": "◎"
    },
    "cost": "300円",
+   "discount": "",
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260817.pdf",
    "status": "候補",
@@ -970,6 +994,7 @@
     "elem": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "",
    "status": "候補",
@@ -1009,6 +1034,7 @@
     "elem": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "",
    "status": "候補",
@@ -1051,6 +1077,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "",
    "status": "候補",
@@ -1088,6 +1115,7 @@
     "overall": "△〜○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://mitaka-awaodori.com/",
    "status": "候補",
@@ -1125,6 +1153,7 @@
     "overall": "✕に近い△"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.azabujuban.or.jp/topics/topics_event/23867/",
    "status": "候補",
@@ -1164,6 +1193,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260822_2.pdf",
    "status": "候補",
@@ -1202,6 +1232,7 @@
     "elem": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260822.pdf",
    "status": "候補",
@@ -1244,10 +1275,11 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "",
    "status": "候補",
-   "confidence": "市報PDFで確定(2026-08-15検証)",
+   "confidence": "市報PDFで確定",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-08.md"
@@ -1286,6 +1318,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260824.pdf",
    "status": "候補",
@@ -1324,6 +1357,7 @@
     "elem": null
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.city.kodaira.tokyo.jp/kurashi/043/043741.html",
    "status": "候補",
@@ -1364,6 +1398,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "http://takiyama.in.coocan.jp/",
    "status": "候補",
@@ -1407,6 +1442,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://akishima-kujiramatsuri.jp/",
    "status": "候補",
@@ -1443,6 +1479,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.city.musashimurayama.lg.jp/kankou/1004434/1001617.html",
    "status": "候補",
@@ -1480,6 +1517,7 @@
     "overall": "✕に近い△"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.koenji-awaodori.com/about/about01.html",
    "status": "候補",
@@ -1519,6 +1557,7 @@
     "elem": "◎"
    },
    "cost": "1人1回500円 / 各日先着200名 ※なくなり次第終了",
+   "discount": "",
    "target": "",
    "url": "https://www.asta.co.jp/event/",
    "status": "候補",
@@ -1557,10 +1596,11 @@
     "elem": "◎"
    },
    "cost": "無料",
+   "discount": "",
    "target": "市内在住の小・中学生。保護者同伴なら未就学児も可",
    "url": "https://www.city.kodaira.tokyo.jp/event/129/129131.html",
    "status": "候補",
-   "confidence": "公式確認済み(2026-08-23取得。※市公式は「各イベント詳細は随時更新」と注記しているので配信直前にもう一度開く)",
+   "confidence": "公式確認済み",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-08.md"
@@ -1605,6 +1645,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260831.pdf",
    "status": "候補",
@@ -1643,6 +1684,7 @@
     "elem": null
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.city.kodaira.tokyo.jp/kurashi/043/043741.html",
    "status": "候補",
@@ -1685,6 +1727,7 @@
     "elem": null
    },
    "cost": "無料(児童館行事) / 対象: 双子・多胎児の親子",
+   "discount": "",
    "target": "",
    "url": "https://kodaji.ashita-ba.co.jp/",
    "status": "候補",
@@ -1724,6 +1767,7 @@
     "elem": "◎"
    },
    "cost": "無料(出店での飲食は実費)",
+   "discount": "",
    "target": "",
    "url": "https://festival.hanakoganei.net/",
    "status": "候補",
@@ -1766,6 +1810,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "市内在住・在学の小学1〜4年生 / 各70人",
    "url": "",
    "status": "候補",
@@ -1807,6 +1852,7 @@
     "elem": "◎"
    },
    "cost": "無料 / 対象: 小学1〜3年生",
+   "discount": "",
    "target": "",
    "url": "https://kodaji.ashita-ba.co.jp/",
    "status": "候補",
@@ -1849,6 +1895,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "市内在住・在勤・在学の小学生以上 ①初心者 ②経験者 / 定員 ①16人 ②30人",
    "url": "",
    "status": "候補",
@@ -1894,10 +1941,11 @@
     "elem": "◎"
    },
    "cost": "無料 / 事前申込: 不要",
+   "discount": "",
    "target": "市公式の対象欄に 「小学生以下・小学生・中高生・大人・高齢者・親子」 と明記",
    "url": "https://www.city.kodaira.tokyo.jp/event/129/129344.html",
    "status": "候補",
-   "confidence": "公式確認済み(2026-08-23取得)",
+   "confidence": "公式確認済み",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-09.md"
@@ -1932,6 +1980,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://kodaji.ashita-ba.co.jp/",
    "status": "候補",
@@ -1972,7 +2021,8 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "まつり自体の参加は無料。入園料・駐車料は別途 ← 配信前に入園料を公式で再確認する",
+   "cost": "まつり自体の参加は無料。入園料・駐車料は別途",
+   "discount": "",
    "target": "",
    "url": "https://www.showakinen-koen.jp/event/56303/",
    "status": "候補",
@@ -2011,11 +2061,12 @@
     "pre": "○",
     "elem": "◎"
    },
-   "cost": "一般400円 / 中学生以下は無料(2026-09-09 公式で再確認。以前「小学生以下無料」と書いていたのは誤り)",
+   "cost": "一般400円 / 中学生以下は無料",
+   "discount": "",
    "target": "",
    "url": "https://www.tatemonoen.jp/event/schedule/2026/schedule789.php",
    "status": "候補",
-   "confidence": "公式確認済み(2026-09-09 演目・時間・料金を再取得)",
+   "confidence": "公式確認済み",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-09.md"
@@ -2054,10 +2105,11 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "幼稚園年中〜小学生(幼児・低学年=タグラグビー)",
    "url": "",
    "status": "候補",
-   "confidence": "市報PDFで確定(2026-08-15検証)",
+   "confidence": "市報PDFで確定",
    "tentative": false,
    "deadline": {
     "date": "2026-09-12",
@@ -2095,6 +2147,7 @@
     "elem": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://ensenblelunare.jimdofree.com/",
    "status": "候補",
@@ -2140,7 +2193,8 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "一般400円 / 中学生以下は無料(2026-09-09 公式で再確認。以前「小学生以下無料」と書いていたのは誤り)",
+   "cost": "一般400円 / 中学生以下は無料",
+   "discount": "毎月第3土曜と翌日曜=「家族ふれあいの日」。都内在住で18歳未満の子を同伴する保護者は観覧料が半額。 → 2026年9月は 9/19(土)・20(日)。連休の初日2日間にあたる",
    "target": "",
    "url": "https://www.tatemonoen.jp/event/schedule/2026/schedule789.php",
    "status": "候補",
@@ -2180,6 +2234,7 @@
     "elem": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://kodaira-tourism.com/event/22870/",
    "status": "候補",
@@ -2221,6 +2276,7 @@
     "elem": "△"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://kodaira-tourism.com/event/20621/",
    "status": "候補",
@@ -2259,6 +2315,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://kodaira-tourism.com/event/22825/",
    "status": "候補",
@@ -2298,10 +2355,11 @@
    "hours": "",
    "ages": null,
    "cost": "700円 / 定員 各8人(抽選) / 対象: 市内在住・在勤・在学の方",
+   "discount": "",
    "target": "",
    "url": "",
    "status": "候補",
-   "confidence": "市報PDFで確定(2026-08-15検証)",
+   "confidence": "市報PDFで確定",
    "tentative": false,
    "deadline": {
     "date": "2026-09-05",
@@ -2338,10 +2396,11 @@
    "hours": "",
    "ages": null,
    "cost": "無料 / 定員: 15人",
+   "discount": "",
    "target": "市内在住・在勤・在学の子育て中の方",
    "url": "https://www.city.kodaira.tokyo.jp/event/128/128376.html",
    "status": "候補",
-   "confidence": "公式確認済み(2026-08-23取得)",
+   "confidence": "公式確認済み",
    "tentative": false,
    "deadline": {
     "date": "2026-09-04",
@@ -2380,6 +2439,7 @@
    "hours": "",
    "ages": null,
    "cost": "",
+   "discount": "",
    "target": "市内在住で、10/6時点で生後2〜5か月の第一子とお母さん(全4回参加できる方)",
    "url": "",
    "status": "候補",
@@ -2415,6 +2475,7 @@
    "hours": "",
    "ages": null,
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://kodaira-tourism.com/event/22841/",
    "status": "候補",
@@ -2457,6 +2518,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "",
    "status": "候補",
@@ -2479,6 +2541,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "url": "https://www.city.kodaira.tokyo.jp/kurashi/113/113055.html",
    "confidence": "中(2026期間要確認)",
    "source": "events/2026-07.md"
@@ -2495,6 +2558,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "url": "https://www.city.nishitokyo.lg.jp/kurasi/koen/kouenmizuasobi.html",
    "confidence": "公式確認済み",
    "source": "events/2026-07.md"
@@ -2511,6 +2575,7 @@
     "overall": "◎"
    },
    "cost": "大人3,400円/未就学児(3歳〜)1,500円(2歳以下は要確認・無料見込み)",
+   "discount": "",
    "url": "https://www.seibuen-amusement-park.jp/seibuenpool/index.html",
    "confidence": "公式確認済み",
    "source": "events/2026-07.md"
@@ -2529,6 +2594,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "url": "https://www.asta.co.jp/update/kids_stamp_2025.pdf",
    "confidence": "公式確認済み(公式PDF・2026-03-31更新)",
    "source": "events/2026-08.md"

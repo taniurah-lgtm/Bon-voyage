@@ -95,6 +95,18 @@ const publicTel = (c) => {
   return c.who ? `${t}（${c.who}）` : t;
 };
 
+// ★掲載の条件として先方と約束している一文。館名を明示して必ず添える。
+//   一件ずつ付ける（末尾にまとめて書くと、AIが1件だけ切り出したときに落ちる）。
+const PARTNER_NOTES = [
+  [/多摩六都科学館/, '※最新の情報は多摩六都科学館ウェブサイトでご確認ください。'],
+  [/小金井公園/,     '※最新の情報は小金井公園の公式サイト・Xでご確認ください。'],
+];
+function partnerNote(...fields) {
+  const hay = fields.filter(Boolean).join(' ');
+  for (const [re, note] of PARTNER_NOTES) if (re.test(hay)) return `  ${note}\n`;
+  return '';
+}
+
 function eventBlock(e) {
   let s = `[${e.id}] ${e.name}\n`;
   s += line('いつ', e.when || (e.dates || []).join('・'));
@@ -111,18 +123,24 @@ function eventBlock(e) {
   s += line('時間', e.hours);
   s += line('最終入場', e.lastEntry);
   s += line('料金', e.cost);
+  // ★割引は料金と同じくらい効く情報（例: 第3土日の「家族ふれあいの日」は保護者半額）。
+  //   台帳には書いてあるのに一覧に出ておらず、通信で書いた割引をAIが知らない状態だった。
+  s += line('割引', e.discount);
   s += line('対象', e.target);
   s += line('年齢の目安', ageLine(e.ages));
   s += line('内容', e.summary);
   s += line('子連れメモ', e.kidsNote);
   s += line('注意', e.caution);
-  s += line('申込の締切', e.deadline);
+  s += line('申込の締切', e.deadline?.date
+    ? `${withWd(e.deadline.date)}${e.deadline.raw ? `（${e.deadline.raw}）` : ''}`
+    : '');
   s += line('雨天の予備日', (e.rainDates || []).join('・'));
   s += line('休み・例外', typeof e.exceptions === 'string' ? e.exceptions : (e.exceptions ? JSON.stringify(e.exceptions) : ''));
   s += line('プログラム', Array.isArray(e.programs) ? e.programs.join(' / ') : (typeof e.programs === 'string' ? e.programs : ''));
   s += line('問い合わせ', publicTel(e.contact));
   s += line('確度', e.confidence + (e.tentative ? '（未確定・要確認）' : ''));
   s += line('公式サイト（ここで最新を確認してください）', e.url);
+  s += partnerNote(e.name, e.place);
   return s;
 }
 
@@ -132,11 +150,13 @@ function standingBlock(e) {
   s += line('どこ', e.place);
   s += line('地図', mapLink(e.mapq || e.place));
   s += line('料金', e.cost);
+  s += line('割引', e.discount);
   s += line('年齢の目安', ageLine(e.ages));
   s += line('内容', e.summary);
   s += line('子連れメモ', e.kidsNote);
   s += line('確度', e.confidence);
   s += line('公式サイト（ここで最新を確認してください）', e.url);
+  s += partnerNote(e.name, e.place);
   return s;
 }
 
@@ -146,6 +166,7 @@ function pendingBlock(e) {
   let s = `[${e.id}] ${e.name}\n`;
   s += line('状況', '2026年の日程はまだ発表されていません');
   s += line('分かっていること', e.when || e.confidence);
+  s += partnerNote(e.name, e.place);
   return s;
 }
 
@@ -157,6 +178,7 @@ function spotBlock(sp) {
   s += line('年齢の目安', sp.ages);
   s += line('地図', sp.map || mapLink(sp.name));
   s += line('公式サイト（ここで最新を確認してください）', sp.official);
+  s += partnerNote(sp.name, sp.desc, sp.access);
   return s;
 }
 
@@ -164,9 +186,12 @@ const holidaysAhead = HOLIDAYS.filter((h) => h.to >= TODAY);
 
 // 締切のあるものだけを、締切の早い順に。この通信のいちばんの役目が
 // 「気づいたときには終わっていた、をなくす」ことなので、索引として先に置く。
+// ★deadline は {date, raw} のオブジェクト。文字列として並べると
+//   全部 "[object Object]" になり、並べ替えも効かない（索引が丸ごと無意味になっていた）。
+// ★過ぎた締切は出さない。「締切の索引」に終わったものが載っていたら、逆に迷わせる。
 const deadlines = upcoming
-  .filter((e) => e.deadline)
-  .sort((a, b) => String(a.deadline).localeCompare(String(b.deadline)));
+  .filter((e) => e.deadline?.date && e.deadline.date >= TODAY)
+  .sort((a, b) => a.deadline.date.localeCompare(b.deadline.date));
 
 const HEAD = `ぼんぼやーじゅ通信 おでかけ一覧
 （チャット型のAI ── ChatGPT・Gemini・Claude など ── にそのまま読ませるためのファイル）
@@ -217,7 +242,8 @@ const HEAD = `ぼんぼやーじゅ通信 おでかけ一覧
 `;
 
 const secDeadlines = deadlines.length
-  ? deadlines.map((e) => `・${e.deadline}　[${e.id}] ${e.name}\n`).join('')
+  ? deadlines.map((e) => `・締切 ${withWd(e.deadline.date)}　[${e.id}] ${e.name}\n`
+      + (e.deadline.raw ? `　　申込: ${e.deadline.raw}\n` : '')).join('')
   : '（いま締切の分かっているものはありません）\n';
 
 const HEAD2 = `

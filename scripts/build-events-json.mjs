@@ -473,10 +473,20 @@ const STRIP = [
   [/「[^」]*」ネタとして再利用可。?/g, ''],
   [/\s*[（(]\d{4}-\d{2}\s*訂正[）)]/g, ''],       // 運営の校正メモ
   [/\s*[（(]\d{4}-\d{2}-\d{2}\s*(?:訂正|検証|確認)[^）)]*[）)]/g, ''],
+  // ★日付ではじまる括弧に「確認/取得/訂正/一致/誤り」が入っていたら、それは
+  //   運営の作業メモ。読者には意味がないうえ、いつ何をどう取り直したかが透ける。
+  //   （料金欄に「(2026-09-09 公式で再確認。以前『小学生以下無料』と書いていたのは誤り)」が
+  //     そのまま出ていた。中身の訂正は台帳の仕事で、読者に見せる履歴ではない。）
+  [/\s*[（(]\d{4}-\d{2}(?:-\d{2})?[^）)]*(?:訂正|検証|確認|取得|一致|誤り)[^）)]*[）)]/g, ''],
+  // ★台帳の「←」は、この先が運営あての注記だという印（「配信前に確認する」
+  //   「8/26号では間に合わない」「児童館と混同しない」）。読者には関係がなく、
+  //   こちらの段取りがそのまま透ける。矢印から行末までを落とす。
+  [/\s*(?:←|<-)\s*.*$/gm, ''],
 ];
 // 落としきれなかったときに気づくための番兵。読者向けの文にこれが残っていたら公開しない。
 // 「損」は方針で禁じている煽り表現。台帳IDと内部記号も読者には意味がない。
-const FORBIDDEN = /損|\bE\d{1,3}\b|◎◎/;   // 台帳IDが1つでも残っていたら公開しない
+// 「←」は落としきったはずの内部注記の印。残っていたら STRIP が効いていない証拠。
+const FORBIDDEN = /損|\bE\d{1,3}\b|◎◎|←/;   // 台帳IDが1つでも残っていたら公開しない
 // 見出し自体が台帳の内部ラベルになっているもの（イベントではなく「枠」）。
 // 中身は箇条書きで書かれていて `内容:` 欄が無いため、公開すると空カードになる。
 const INTERNAL_LABEL = /「?(?:知っていると得|知らないと損)」?枠|^枠[:：]/;
@@ -580,9 +590,10 @@ for (const file of files) {
         summary: readerText(field(b.lines, ['内容'])),   // ★子連れ欄で埋めない（kidsNoteと二重になる）
         kidsNote: kidsBody(field(b.lines, ['子連れ'])),
         ages: parseAges(field(b.lines, ['子連れ'])),
-        cost: field(b.lines, ['料金', '費用', '参加費']),
+        cost: readerText(field(b.lines, ['料金', '費用', '参加費'])),
+        discount: readerText(field(b.lines, ['割引'])),
         url: findURL(b.lines),
-        confidence,
+        confidence: readerText(confidence),
         source: b.file,
       });
       continue;
@@ -652,11 +663,12 @@ for (const file of files) {
       lastEntry: extractLastEntry(when),
       hours: extractHours(b.lines),
       ages: parseAges(field(b.lines, ['子連れ'])),
-      cost: field(b.lines, ['料金', '費用', '参加費']),
-      target: field(b.lines, ['対象']),
+      cost: readerText(field(b.lines, ['料金', '費用', '参加費'])),
+      discount: readerText(field(b.lines, ['割引'])),
+      target: readerText(field(b.lines, ['対象'])),
       url: findURL(b.lines),
       status: status.split(/\s|\(/)[0] || '候補',
-      confidence,
+      confidence: readerText(confidence),
       tentative,
       deadline: extractDeadline(b.lines),
       source: b.file,
@@ -678,7 +690,8 @@ function screen(list, label) {
       });
       continue;
     }
-    const hit = ['name', 'summary', 'kidsNote'].find((k) => e[k] && FORBIDDEN.test(e[k]));
+    const hit = ['name', 'summary', 'kidsNote', 'cost', 'discount', 'target', 'confidence']
+      .find((k) => e[k] && FORBIDDEN.test(e[k]));
     if (hit) {
       unresolved.push({
         id: e.id, name: e.name,
@@ -723,7 +736,7 @@ function screen(list, label) {
       // ★勝敗は「日付をどちらに寄せるか」だけに使う。欄の中身は空いている側を埋める。
       //   これをしていなかったため、8月の花火（E36側が勝ち）から場所と公式URLが消え、
       //   同じ花火が「9月に押せば場所が入り、8月に押せば入らない」状態になっていた。
-      for (const k of ['place', 'mapq', 'url', 'summary', 'kidsNote', 'confidence', 'contact', 'cost', 'target', 'hours', 'lastEntry', 'caution']) {
+      for (const k of ['place', 'mapq', 'url', 'summary', 'kidsNote', 'confidence', 'contact', 'cost', 'discount', 'target', 'hours', 'lastEntry', 'caution']) {
         if (!winner[k] && loser[k]) winner[k] = loser[k];
       }
       if (!winner.ages && loser.ages) winner.ages = loser.ages;
