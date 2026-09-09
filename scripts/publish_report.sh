@@ -108,6 +108,23 @@ sleep 3
 SENT=$(curl -sS -m 20 -H "$AUTH" "https://api.line.me/v2/bot/insight/message/delivery?date=${TODAY}" 2>/dev/null)
 note "LINE側の送信記録(${TODAY}): ${SENT}"
 
+# ★配信の記録(reports/free/sent.log)を push する。
+#   ホームページの「最新号のプレビュー」はこの記録を見て切り替わるので、
+#   ここを push しないとサイトが前の号のまま止まる。
+#   commit は手順3で済んでいるが、sent.log が増えるのは配信のあと＝この時点。
+echo "▶ 6/6 配信の記録を push"
+if ! git diff --quiet -- reports/free/sent.log 2>/dev/null; then
+  git add reports/free/sent.log
+  git commit -q -m "$(basename "$REPORT" .md) 号を配信した記録"
+  for i in 1 2 3 4; do
+    if git push -u origin "$BRANCH" >/dev/null 2>&1; then note "配信の記録を push しました"; break; fi
+    git pull --rebase origin "$BRANCH" >/dev/null 2>&1 || true
+    (( i == 4 )) && echo "WARN: 配信の記録を push できませんでした。ホームページのプレビューは前の号のままです。" >&2
+  done
+else
+  note "配信の記録に変更なし"
+fi
+
 echo
 echo "✅ 完了: push・配信ともに成功しました"
 echo "   レポート : $REPORT"
