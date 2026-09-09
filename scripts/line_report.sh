@@ -44,3 +44,21 @@ while (( offset < total )); do
 done
 
 echo "完了: $1 をLINEにブロードキャストしました"
+
+# ★送信できたときだけ、配信の記録を1行足す。
+#   ホームページの「最新号のプレビュー」はこの記録を見て出すので、
+#   ここに載るまでサイトには出ない＝読者がいちばん先に受け取る、が守られる。
+#   （2026-09-09、下書きを置いた時点でサイトが1時間先行していた。その順番を機械に守らせる）
+sent_log="reports/free/sent.log"
+if [[ -f "$sent_log" ]]; then
+  issue_date=$(basename "$1" .md)
+  if grep -qF "	$1	" "$sent_log"; then
+    echo "（$1 はすでに配信の記録があります。追記しません）"
+  else
+    printf '%s\t%s\t%s\n' "$issue_date" "$1" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$sent_log"
+    echo "配信の記録を $sent_log に追記しました。"
+    echo "→ この1行を rfwmo8 に push すると、ホームページのプレビューが今の号に切り替わります。"
+  fi
+else
+  echo "WARN: $sent_log がありません。ホームページのプレビューは切り替わりません。" >&2
+fi

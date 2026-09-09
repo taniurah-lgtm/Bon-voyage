@@ -24,7 +24,12 @@
 4. **レポート作成**: `reports/YYYY-MM-DD.md` に番号付きレポートを作成(フォーマットは下記)。番号は台帳のID(例: E12)をそのまま使う。
 5. **コミット&プッシュ**: ブランチ `claude/family-event-planning-rfwmo8` に push(`git push -u origin claude/family-event-planning-rfwmo8`)。
 6. **LINE送信**: `scripts/line_report.sh reports/YYYY-MM-DD.md` で送信。`LINE_CHANNEL_ACCESS_TOKEN` 未設定で失敗した場合は、チャットにレポート全文を出し、可能ならプッシュ通知も送る(フォールバック)。
-7. レポート末尾に「Claudeに『E3とE5を登録』のように返信するとGoogleカレンダーに登録します」と案内する。
+7. **配信の記録をpushする**: 送信に成功すると `reports/free/sent.log` に1行足される。
+   **これを rfwmo8 に push して初めて、ホームページの「最新号のプレビュー」が今の号に切り替わる。**
+   🔴 **順番を逆にしない。**下書きを置いた時点でサイトに出すと、LINEの読者より
+   ホームページのほうが先に今週号を読めることになる(2026-09-09に1時間ほど発生した)。
+   **紙面を最初に受け取るのは読者。**`sent.log` は手で書き足さない(送っていない号がサイトに出る)。
+8. レポート末尾に「Claudeに『E3とE5を登録』のように返信するとGoogleカレンダーに登録します」と案内する。
 
 ## 宛先と行き先(2026-09-06 決定)
 

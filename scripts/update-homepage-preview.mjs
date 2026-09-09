@@ -13,18 +13,40 @@
  *    .github/workflows/update-homepage-preview.yml で、**rfwmo8 ブランチ**にある。
  *    ここ（homepage 側のブランチ）を直しても、rfwmo8 に反映しないと本番は変わらない。
  */
-import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
 const HTML_PATH = process.argv[2];
 if (!HTML_PATH) { console.error('使い方: node scripts/update-homepage-preview.mjs <index.html> [report.md]'); process.exit(2); }
 
-function latestReport() {
-  const dir = 'reports/free';
-  const files = readdirSync(dir).filter(f => /^\d{4}-\d{2}-\d{2}\.md$/.test(f)).sort();
-  if (!files.length) throw new Error('reports/free に号がありません');
-  return `${dir}/${files[files.length - 1]}`;
+// ★「いちばん新しいファイル」ではなく「いちばん最後に配信した号」を使う。
+//   下書きを置いた時点でサイトが書き換わっていたため、2026-09-09 は
+//   ホームページが LINE より1時間ほど先に今週号を出していた。
+//   紙面を最初に受け取るのは読者であるべきなので、配信の記録を通す。
+//   記録を書くのは scripts/line_report.sh（送信が200で返ったときだけ）。
+function lastSentReport() {
+  const log = 'reports/free/sent.log';
+  if (!existsSync(log)) {
+    console.log('NO_CHANGE（配信の記録 reports/free/sent.log が無いので、何も書き換えない）');
+    process.exit(0);
+  }
+  const rows = readFileSync(log, 'utf8').split(/\r?\n/)
+    .map((l) => l.trim())
+    .filter((l) => l && !l.startsWith('#'))
+    .map((l) => l.split('\t')[1])
+    .filter((f) => f && /^reports\/free\/\d{4}-\d{2}-\d{2}\.md$/.test(f))
+    .sort();
+  if (!rows.length) {
+    console.log('NO_CHANGE（配信の記録に号がまだ1件もない）');
+    process.exit(0);
+  }
+  const path = rows[rows.length - 1];
+  if (!existsSync(path)) {
+    console.log(`NO_CHANGE（配信の記録にある ${path} が見つからない）`);
+    process.exit(0);
+  }
+  return path;
 }
-const REPORT_PATH = process.argv[3] || latestReport();
+const REPORT_PATH = process.argv[3] || lastSentReport();
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 // 全角括弧に寄せ、通信のプレーンテキストをHTML向けに整える
