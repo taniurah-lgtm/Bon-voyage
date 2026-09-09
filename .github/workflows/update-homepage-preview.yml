@@ -1,12 +1,17 @@
 name: Update homepage preview from the latest issue
 
-# 水曜巡回が reports/free/YYYY-MM-DD.md を push したら、
-# ホームページの「最新号のプレビュー」を自動で書き換えて公開する。
+# 配信ずみの号で、ホームページの「最新号のプレビュー」を書き換えて公開する。
+#
+# ★見るのは reports/free/sent.log（実際にLINEへ送った号の記録）であって、
+#   下書きそのものではない。以前は reports/free/** を見ていたため、
+#   配信案を置いた瞬間にサイトが今週号を出していた。
+#   2026-09-09、下書きが 07:49 に公開され、LINEに届いたのは 09:00。
+#   1時間ほどホームページが読者より先だった。紙面を最初に受け取るのは読者。
 on:
   push:
     branches: [claude/family-event-planning-rfwmo8]
     paths:
-      - "reports/free/**"
+      - "reports/free/sent.log"
       - "scripts/update-homepage-preview.mjs"
       - ".github/workflows/update-homepage-preview.yml"
   workflow_dispatch: {}

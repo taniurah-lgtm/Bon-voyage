@@ -8,19 +8,45 @@
  *
  * index.html 側の <!-- ISSUE:START --> 〜 <!-- ISSUE:END --> の間だけを差し替える。
  * 変更が無ければ何も書かない(終了コード0・"NO_CHANGE" を出力)。
+ *
+ * ⚠️ このファイルを動かしている workflow は
+ *    .github/workflows/update-homepage-preview.yml で、**rfwmo8 ブランチ**にある。
+ *    ここ（homepage 側のブランチ）を直しても、rfwmo8 に反映しないと本番は変わらない。
  */
-import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
 const HTML_PATH = process.argv[2];
 if (!HTML_PATH) { console.error('使い方: node scripts/update-homepage-preview.mjs <index.html> [report.md]'); process.exit(2); }
 
-function latestReport() {
-  const dir = 'reports/free';
-  const files = readdirSync(dir).filter(f => /^\d{4}-\d{2}-\d{2}\.md$/.test(f)).sort();
-  if (!files.length) throw new Error('reports/free に号がありません');
-  return `${dir}/${files[files.length - 1]}`;
+// ★「いちばん新しいファイル」ではなく「いちばん最後に配信した号」を使う。
+//   下書きを置いた時点でサイトが書き換わっていたため、2026-09-09 は
+//   ホームページが LINE より1時間ほど先に今週号を出していた。
+//   紙面を最初に受け取るのは読者であるべきなので、配信の記録を通す。
+//   記録を書くのは scripts/line_report.sh（送信が200で返ったときだけ）。
+function lastSentReport() {
+  const log = 'reports/free/sent.log';
+  if (!existsSync(log)) {
+    console.log('NO_CHANGE（配信の記録 reports/free/sent.log が無いので、何も書き換えない）');
+    process.exit(0);
+  }
+  const rows = readFileSync(log, 'utf8').split(/\r?\n/)
+    .map((l) => l.trim())
+    .filter((l) => l && !l.startsWith('#'))
+    .map((l) => l.split('\t')[1])
+    .filter((f) => f && /^reports\/free\/\d{4}-\d{2}-\d{2}\.md$/.test(f))
+    .sort();
+  if (!rows.length) {
+    console.log('NO_CHANGE（配信の記録に号がまだ1件もない）');
+    process.exit(0);
+  }
+  const path = rows[rows.length - 1];
+  if (!existsSync(path)) {
+    console.log(`NO_CHANGE（配信の記録にある ${path} が見つからない）`);
+    process.exit(0);
+  }
+  return path;
 }
-const REPORT_PATH = process.argv[3] || latestReport();
+const REPORT_PATH = process.argv[3] || lastSentReport();
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 // 全角括弧に寄せ、通信のプレーンテキストをHTML向けに整える
@@ -54,6 +80,24 @@ function parseReport(text) {
   return { dateLabel, sections };
 }
 
+// セクション本文を「項目」に割る。
+// 行頭の絵文字（🎯 📚 🚒 など）が新しい項目の始まり。
+// ★ここが無いと、1つのセクションに2件あるとき本文と年齢目安が融合する。
+//   2026-08-19号で「🎯こだわり縁日」と「📚クラシックポップアップ絵本展」が
+//   1件に混ざり、年齢目安が「👶○🧒◎🎒◎ 👶○🧒◎🎒◎」と二重に出ていた。
+const LEADS_ITEM = (l) =>
+  // 絵文字（記号・その他）で始まり、年齢目安の行ではないもの
+  /^\p{Extended_Pictographic}/u.test(l) && !/^(👶|🧒|🎒|📍|🔗|⚠)/u.test(l);
+
+function splitItems(body) {
+  const groups = [];
+  for (const l of body) {
+    if (LEADS_ITEM(l) || !groups.length) groups.push([l]);
+    else groups[groups.length - 1].push(l);
+  }
+  return groups.filter((g) => g.length);
+}
+
 // 「🎇 西武園ゆうえんち 大夏祭り・花火(7/25土 19:30〜約6分)」＋説明＋年齢行 → item HTML
 function itemHtml(body) {
   if (!body.length) return '';
@@ -84,27 +128,27 @@ function buildHtml({ dateLabel, sections }) {
   const blocks = [];
   if (weather) {
     blocks.push(`        <div class="blk">
-          <h4>${tidy(weather.title)}</h4>
+          <h3>${tidy(weather.title)}</h3>
           <p class="item m">${tidy(weather.body.join(' '))}</p>
         </div>`);
   }
   if (indoor) {
     blocks.push(`        <div class="blk">
-          <h4>${tidy(indoor.title)}</h4>
-${itemHtml(indoor.body)}
+          <h3>${tidy(indoor.title)}</h3>
+${splitItems(indoor.body).map(itemHtml).join('\n')}
         </div>`);
   }
   if (pick) {
     blocks.push(`        <div class="blk">
-          <h4>${tidy(pick.title)}</h4>
-${itemHtml(pick.body)}
+          <h3>${tidy(pick.title)}</h3>
+${splitItems(pick.body).map(itemHtml).join('\n')}
         </div>`);
   }
   if (ahead) {
     const items = ahead.body.filter(l => /^[・･]/.test(l)).map(l => `            <li>${tidy(l.replace(/^[・･]\s*/, ''))}</li>`);
     if (items.length) {
       blocks.push(`        <div class="blk">
-          <h4>${tidy(ahead.title)}</h4>
+          <h3>${tidy(ahead.title)}</h3>
           <ul class="takeaway">
 ${items.join('\n')}
           </ul>
@@ -118,6 +162,7 @@ ${items.join('\n')}
         <span class="d">${esc(dateLabel)}</span>
       </div>
       <div class="issue-body">
+        <p class="issue-asof">この号は <b>${esc(dateLabel.replace(/号$/, ''))}</b> にお届けした内容です。「今週末」「本日」はその時点のことなので、いまの予定は<a href="/calendar.html">おでかけカレンダー</a>でご確認ください。</p>
         <p class="issue-legend">〔目安〕👶あかちゃん(0-2) ／ 🧒未就学(3-6) ／ 🎒小学生　◎ぴったり ○だいじょうぶ △ひと工夫</p>
 
 ${blocks.join('\n\n')}
