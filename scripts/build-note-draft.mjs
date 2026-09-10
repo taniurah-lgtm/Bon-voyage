@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /*
  * note に載せる記事の下書きを1本つくる。
- *   node scripts/build-note-draft.mjs [--date YYYY-MM-DD] [--type spot|week|round]
+ *   node scripts/build-note-draft.mjs [--date YYYY-MM-DD] [--type spot|week|round] [--cat 分類]
  *
  * 出力: note/YYYY-MM-DD.md（公開されない。docs/homepage/ の外）
  *
@@ -35,7 +35,17 @@ const LEDGER = JSON.parse(readFileSync('data/events.json', 'utf8'));
 
 // ---- すでに書いた題材 ---------------------------------------------------------
 mkdirSync(OUT_DIR, { recursive: true });
-const written = readdirSync(OUT_DIR)
+// 公開済みの題材は note/published.txt に1行1件で控える。
+// 下書きファイルだけを見ていると、下書きを残さずに公開したぶんを取りこぼし、
+// 同じ題材をもう一度出してしまう（2026-09-11に発生）。
+const PUBLISHED = `${OUT_DIR}/published.txt`;
+const published = existsSync(PUBLISHED)
+  ? readFileSync(PUBLISHED, 'utf8')
+      .split('\n')
+      .map((l) => l.replace(/#.*$/, '').trim())
+      .filter(Boolean)
+  : [];
+const drafted = readdirSync(OUT_DIR)
   .filter((f) => /^\d{4}-\d{2}-\d{2}\.md$/.test(f))
   .sort()
   .map((f) => {
@@ -43,6 +53,7 @@ const written = readdirSync(OUT_DIR)
     return m ? m[1].trim() : null;
   })
   .filter(Boolean);
+const written = [...new Set([...published, ...drafted])];
 const usedAt = new Map(written.map((t, i) => [t, i]));   // 小さいほど古い
 /** まだ書いていないものを優先。全部書いていたら、いちばん古いものから */
 const pickFresh = (items, key) => {
@@ -175,7 +186,12 @@ ${deadlines.length ? `## 申込の締切が近いもの\n\n${deadlines.map((e) =
 // ---- ③ まとめ・季節もの -------------------------------------------------------
 function roundDraft() {
   const cats = [...new Set(SPOTS.map((s) => s.cat))];
-  const cat = pickFresh(cats, (c) => `round:${c}`);
+  const want = argOf('--cat');
+  if (want && !cats.includes(want)) {
+    console.error(`--cat「${want}」という分類は無い。使えるのは:\n  ${cats.join('\n  ')}`);
+    process.exit(1);
+  }
+  const cat = want || pickFresh(cats, (c) => `round:${c}`);
   const list = SPOTS.filter((s) => s.cat === cat);
   const clean = cat.replace(/^[^ぁ-ゖ゛-ヿ一-龥a-zA-Z0-9]+/, '');
 
