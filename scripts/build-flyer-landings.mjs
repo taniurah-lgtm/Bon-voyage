@@ -71,3 +71,53 @@ for (const v of VENUES) {
   console.log(`  /f/${v.code}  ← ${v.label}`);
 }
 console.log(`\n${VENUES.length}件のランディングを生成しました。`);
+
+// ─────────────────────────────────────────────────────────────
+// SNSのプロフィール欄に置くリンク
+//
+// ★なぜ別に要るか: アプリの中のブラウザは、リンクを踏んでも
+//   リファラを送らないことがある。とくに**プロフィール欄のリンク**は落ちやすく、
+//   落ちると解析では「direct」に混ざって、紙のQRと見分けがつかなくなる。
+//   投稿の中に貼ったURLはリファラが残ることが多いので、
+//   **プロフィール欄のぶんだけ**専用のパスにして、パスの数で数える。
+//
+// ★追跡パラメータ（?utm_...）は使わない（2026-09-09 決定・docs/tracking.md）。
+//   これは query ではなく**ただのパス**なので、読む人に「集計しています」とは見えない。
+//
+// ★/f/ と違って**見せる紙面が無い**（プロフィールから来た人はサイトを見に来ている）。
+//   なので中身は出さず、すぐ転送する。待たせない。
+const SOCIAL = [
+  { code: 'th', label: 'Threads プロフィール欄のリンク' },
+  { code: 'ig', label: 'Instagram プロフィール欄のリンク' },
+];
+
+const jump = (v) => `<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>ぼんぼやーじゅ通信</title>
+<!-- 自動生成: scripts/build-flyer-landings.mjs
+     「${v.label}」の流入計測用。中身は出さず、すぐ / へ転送する。 -->
+<style>
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:#FBFAF5;color:#63727B;
+  font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;font-size:15px;}
+a{color:#2C7C9E;}
+</style>
+</head><body>
+<p>ひらいています… <a href="/">ひらかない場合はこちら</a></p>
+<script src="/assets/analytics.js"></script>
+<script>
+  // 解析が1回ぶん送れるだけ待って、すぐ行く（待たせない）
+  setTimeout(function(){ location.replace('/'); }, 400);
+</script>
+</body></html>
+`;
+
+for (const v of SOCIAL) {
+  mkdirSync(`docs/homepage/${v.code}`, { recursive: true });
+  writeFileSync(`docs/homepage/${v.code}/index.html`, jump(v));
+  console.log(`  /${v.code}  ← ${v.label}`);
+}
