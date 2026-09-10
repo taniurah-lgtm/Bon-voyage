@@ -58,14 +58,17 @@ for (const { v, label } of VARIANTS) {
   await page.pdf({
     path: `${OUT}/flyer-a4-woodcut-${v}.pdf`,
     width: '210mm', height: '297mm',
-    printBackground: true, margin: { top: 0, right: 0, bottom: 0, left: 0 },
+    // ★背景を塗らない。紙がクラフト紙なので、地は紙の色。
+    //   白の塗り（1 1 1）もPDFに入れない。罫線は border なので消えない。
+    printBackground: false, margin: { top: 0, right: 0, bottom: 0, left: 0 },
   });
   await page.close();
 
-  // 見本（クラフトの地色つき）
+  // 見本。版下には色を入れないので、**見るときだけ**後ろにクラフトの色を敷く。
   const prev = await browser.newPage({ viewport: { width: 794, height: 1123 }, deviceScaleFactor: 2 });
-  await prev.goto(`${SRC}?v=${v}&paper=1`, { waitUntil: 'networkidle' });
+  await prev.goto(`${SRC}?v=${v}`, { waitUntil: 'networkidle' });
   await prev.evaluate(() => document.fonts.ready);
+  await prev.evaluate(() => { document.documentElement.style.background = '#D8C7A8'; });
   await prev.screenshot({ path: `${OUT}/flyer-a4-woodcut-${v}-preview.png` });
   await prev.close();
 

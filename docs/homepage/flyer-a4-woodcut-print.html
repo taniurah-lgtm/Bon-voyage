@@ -4,7 +4,7 @@
 <title>ぼんぼやーじゅ通信｜クラフト紙・黒1色 A4</title>
 <!--
   クラフト紙 / リソグラフ用・黒1色のA4チラシ。版下。
-  ?v=kraft|rokuto|clinic|en  で宛先・URL・QRが切り替わる。 ?paper=1 でクラフトの地色見本。
+  ?v=kraft|rokuto|clinic|en  で宛先・URL・QRが切り替わる。 背景は一切塗らない（紙の色がそのまま地になる）。
 
   ★黒しか乗らない。刷るPDFに地色は入れない（茶色をトナーで刷ると紙もトナーも無駄になる）。
   ★版画は docs/homepage/assets/art-woodcut.png（QRの白箱は塗りつぶし済み。上にQRを重ねる）
@@ -21,12 +21,14 @@
 }
 
 html,body{width:210mm;height:297mm;}
+/* ★背景を一切塗らない。紙がクラフト紙なので、地はそのまま紙の色。
+   白を塗ると、刷り機によっては余計な処理が入るうえ、版下として嘘になる。
+   罫線も background ではなく border で描く（printBackground:false で消えるため）。 */
 body{
-  font-family:var(--mc); color:var(--ink); background:#fff;
+  font-family:var(--mc); color:var(--ink);
   -webkit-font-smoothing:antialiased;
   display:flex; flex-direction:column;
 }
-body.paper{ background:#D8C7A8; }   /* 見本のみ。刷るPDFには入らない */
 
 .sheet{ flex:1; min-height:0; display:flex; flex-direction:column; padding:17mm var(--pad) 0; }
 
@@ -35,7 +37,7 @@ body.paper{ background:#D8C7A8; }   /* 見本のみ。刷るPDFには入らな�
   font-size:9.4pt; letter-spacing:.42em; text-indent:.42em;
   text-align:center; font-weight:600;
 }
-.to .rule{ display:block; width:14mm; height:.35mm; background:var(--ink); margin:3.2mm auto 0; }
+.to .rule{ display:block; width:14mm; height:0; border-top:.35mm solid var(--ink); margin:3.2mm auto 0; }
 
 /* ── ワードマーク。字間を締めて、まわりに空気を置く ── */
 .mark{
@@ -51,7 +53,7 @@ body.paper{ background:#D8C7A8; }   /* 見本のみ。刷るPDFには入らな�
 }
 .hook em{ font-style:normal; position:relative; }
 .hook em::after{           /* 圏点のかわりに細い下線。リソで潰れない太さ */
-  content:""; position:absolute; left:0; right:0; bottom:-1.6mm; height:.5mm; background:var(--ink);
+  content:""; position:absolute; left:0; right:0; bottom:-1.6mm; height:0; border-top:.5mm solid var(--ink);
 }
 
 /* ── 補足。3行を1行に畳んで、リズムを整える ── */
@@ -78,7 +80,7 @@ body.paper{ background:#D8C7A8; }   /* 見本のみ。刷るPDFには入らな�
 
 /* ── 足元。細い罫で仕切って、小さく整える ── */
 .foot{ padding:5mm var(--pad) 0; flex:none; }
-.foot .hr{ height:.3mm; background:var(--ink); opacity:.55; }
+.foot .hr{ height:0; border-top:.3mm solid var(--ink); opacity:.55; }
 .foot .rows{
   display:flex; justify-content:space-between; align-items:baseline; gap:6mm;
   padding:3.2mm 0 0; font-size:7.4pt; letter-spacing:.04em; line-height:1.65;
@@ -135,6 +137,5 @@ document.getElementById('to').textContent   = v.to;
 document.getElementById('url').textContent  = 'bonvoya.nicomaru.tokyo/f/' + v.code;
 document.getElementById('qr').src           = 'assets/qr-f-' + v.code + '.png';
 document.getElementById('note').textContent = v.note;
-if (q.get('paper') === '1') document.body.classList.add('paper');
 </script>
 </body></html>
