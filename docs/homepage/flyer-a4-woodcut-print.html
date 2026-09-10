@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8">
+<title>ぼんぼやーじゅ通信｜クラフト紙・黒1色 A4</title>
+<!--
+  クラフト紙 / リソグラフ用・黒1色のA4チラシ。版下。
+  ?v=kraft|rokuto|clinic|en  で宛先・URL・QRが切り替わる。 ?paper=1 でクラフトの地色見本。
+
+  ★黒しか乗らない。刷るPDFに地色は入れない（茶色をトナーで刷ると紙もトナーも無駄になる）。
+  ★版画は docs/homepage/assets/art-woodcut.png（QRの白箱は塗りつぶし済み。上にQRを重ねる）
+-->
+<style>
+@page { size: 210mm 297mm; margin: 0; }
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --gt:"Noto Sans CJK JP","Noto Sans JP",sans-serif;   /* ゴシック */
+  --mc:"Noto Serif CJK JP","Noto Serif JP",serif;      /* 明朝 */
+  --ink:#000;
+  --pad:16mm;                 /* 左右の余白 */
+}
+
+html,body{width:210mm;height:297mm;}
+body{
+  font-family:var(--mc); color:var(--ink); background:#fff;
+  -webkit-font-smoothing:antialiased;
+  display:flex; flex-direction:column;
+}
+body.paper{ background:#D8C7A8; }   /* 見本のみ。刷るPDFには入らない */
+
+.sheet{ flex:1; min-height:0; display:flex; flex-direction:column; padding:17mm var(--pad) 0; }
+
+/* ── 宛先。小さく、字間を広く。ここで「誰の紙か」を最初に言う ── */
+.to{
+  font-size:9.4pt; letter-spacing:.42em; text-indent:.42em;
+  text-align:center; font-weight:600;
+}
+.to .rule{ display:block; width:14mm; height:.35mm; background:var(--ink); margin:3.2mm auto 0; }
+
+/* ── ワードマーク。字間を締めて、まわりに空気を置く ── */
+.mark{
+  font-family:var(--gt); font-weight:900;
+  font-size:40pt; letter-spacing:-.012em; line-height:1;
+  text-align:center; margin:9mm 0 0;
+}
+
+/* ── 主役の一行。明朝の大きめで、ワードマークと質感を変える ── */
+.hook{
+  font-size:23pt; font-weight:700; letter-spacing:.02em; line-height:1.35;
+  text-align:center; margin:11.5mm 0 0;
+}
+.hook em{ font-style:normal; position:relative; }
+.hook em::after{           /* 圏点のかわりに細い下線。リソで潰れない太さ */
+  content:""; position:absolute; left:0; right:0; bottom:-1.6mm; height:.5mm; background:var(--ink);
+}
+
+/* ── 補足。3行を1行に畳んで、リズムを整える ── */
+.when{
+  font-family:var(--gt); font-size:11pt; font-weight:700; letter-spacing:.06em;
+  text-align:center; margin:8.5mm 0 0;
+}
+.what{
+  font-size:9.6pt; letter-spacing:.08em; line-height:1.75;
+  text-align:center; margin:4mm 0 0; color:#000;
+}
+
+/* ── 版画。大きさは決め打ち。余った縦は文字と版画のあいだに逃がす
+      （伸縮させると版画だけ肥って、QRまで一緒に大きくなる） ── */
+.art{
+  position:relative; flex:none; height:150mm; margin:auto 0 0;
+  display:flex; align-items:flex-end; justify-content:center;
+}
+.art .wrap{ position:relative; height:100%; }
+.art img.wood{ height:100%; width:auto; display:block; }
+/* QRは版画の白箱にぴったり重ねる（切り出した版から実測した比率） */
+.art .qr{ position:absolute; left:33.39%; top:58.80%; width:32.32%; }
+.art .qr img{ width:100%; height:auto; display:block; }
+
+/* ── 足元。細い罫で仕切って、小さく整える ── */
+.foot{ padding:5mm var(--pad) 0; flex:none; }
+.foot .hr{ height:.3mm; background:var(--ink); opacity:.55; }
+.foot .rows{
+  display:flex; justify-content:space-between; align-items:baseline; gap:6mm;
+  padding:3.2mm 0 0; font-size:7.4pt; letter-spacing:.04em; line-height:1.65;
+}
+.foot .l{ text-align:left; }
+.foot .r{ text-align:right; white-space:nowrap; }
+.foot .url{ font-family:var(--gt); font-weight:700; font-size:8.4pt; letter-spacing:.02em; }
+.foot .note{
+  font-size:7pt; letter-spacing:.04em; padding:1.6mm 0 0; text-align:left; opacity:.85;
+}
+.foot .pad{ height:8mm; }   /* ★紙の下端 8mm は必ず空ける（断裁と綴じの逃げ） */
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="to"><span id="to"></span><span class="rule"></span></div>
+  <div class="mark">ぼんぼやーじゅ通信</div>
+  <div class="hook">今週末、<em>どこ行こう？</em></div>
+  <div class="when">毎週水曜の朝、LINEにとどきます</div>
+  <div class="what">お祭り・花火・水あそび・雨の日の室内あそび。<br>ぜんぶ無料。年齢の目安つき。</div>
+
+  <div class="art">
+    <div class="wrap">
+      <img class="wood" src="assets/art-woodcut.png" alt="">
+      <div class="qr"><img id="qr" src="" alt=""></div>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  <div class="hr"></div>
+  <div class="rows">
+    <div class="l">発行：ぼんぼやーじゅ通信の会（小平市・花小金井）<br>
+      小平市民活動支援センター あすぴあ 登録団体（第254号）</div>
+    <div class="r"><span class="url" id="url"></span><br>
+      お問い合わせ tokyo.papa.home@gmail.com</div>
+  </div>
+  <div class="note" id="note"></div>
+  <div class="pad"></div>
+</div>
+
+<script>
+// 版ごとに変わるのは「宛先・URL・QR・注記」だけ。版画と組みは共通。
+const V = {
+  kraft:  { to:'小平の子育て家庭へ',        code:'kraft',  note:'' },
+  rokuto: { to:'小平・西東京の子育て家庭へ', code:'rokuto',
+            note:'※最新の情報は多摩六都科学館ウェブサイトでご確認ください。' },
+  clinic: { to:'小平の子育て家庭へ',        code:'clinic', note:'' },
+  en:     { to:'小平の子育て家庭へ',        code:'en',     note:'' },
+};
+const q = new URLSearchParams(location.search);
+const v = V[q.get('v')] || V.kraft;
+document.getElementById('to').textContent   = v.to;
+document.getElementById('url').textContent  = 'bonvoya.nicomaru.tokyo/f/' + v.code;
+document.getElementById('qr').src           = 'assets/qr-f-' + v.code + '.png';
+document.getElementById('note').textContent = v.note;
+if (q.get('paper') === '1') document.body.classList.add('paper');
+</script>
+</body></html>
