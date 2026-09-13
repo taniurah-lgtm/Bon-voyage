@@ -162,21 +162,34 @@ https://drive.google.com/drive/folders/1VIPcJFf_YvI-aCh7DjMjP7mIi9SDfCJL
 
 ### ブランチ
 
-**`claude/line-message-resend-yefv9l` から新しいブランチを切る。**
+**名前は何でもよい。**新しいセッションが勝手に付けた名前をそのまま使ってよい
+（既存の `...-rfwmo8` `...-yefv9l` の末尾6文字も、人が考えたものではなく自動で振られたもの）。
+
+🔴 **大事なのは名前ではなく、この3つ。**
+
+1. **`claude/line-message-resend-yefv9l` から切る**
+2. **yefv9l に直接 push しない**
+3. **`claude/family-event-planning-rfwmo8` は触らない**
 
 ```
 git fetch origin claude/line-message-resend-yefv9l
-git checkout -b claude/instagram-reel-<任意の接尾辞> origin/claude/line-message-resend-yefv9l
+git checkout -b <このセッションのブランチ名> origin/claude/line-message-resend-yefv9l
+git push -u origin <このセッションのブランチ名>
 ```
+
+※ セッションの指示で別のブランチ名が指定されていたら、**その名前でよい。**
+　ただし**必ず yefv9l から切る**こと（`origin/main` や既定のブランチから切ると、
+　`docs/rokuto-reel.md` も `docs/homepage/` も入っていない）。
 
 理由:
 
 - `docs/rokuto-reel.md` も `docs/homepage/` も **yefv9l** にある
-- 🔴 **yefv9l に直接 push しない。**別の会話がそこで動いていて、**ぶつかる**
-- 🔴 **`claude/family-event-planning-rfwmo8` は触らない。**毎週の巡回（台帳・レポート・LINE配信）が
-  そこで自動実行されている。**壊すと通信が止まる**
+- 🔴 **yefv9l には別の会話が push している。**直接触るとぶつかる
+  （2026-09-13 に実際に push が弾かれた）
+- 🔴 **`claude/family-event-planning-rfwmo8` では毎週の巡回**（台帳・レポート・LINE配信）が
+  自動実行されている。**壊すと通信が止まる**
 - ホームページの公開は **yefv9l への push でしか起きない**。
-  新しいブランチで作業しているあいだは**外に出ない＝安全**。まとまったらマージする
+  別ブランチで作業しているあいだは**外に出ない＝安全**。まとまったらマージする
 
 > ⚠️ **`events/` と `reports/` には触らない。**あれは毎週の巡回のもので、この会話の担当ではない。
 
