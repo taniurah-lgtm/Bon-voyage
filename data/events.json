@@ -276,8 +276,8 @@
    "discount": "",
    "target": "",
    "url": "",
-   "status": "候補",
-   "confidence": "公式確認済み（会期・営業時間・料金。料金は2026-09-13に公式の料金ページで取得）/ 3歳未満のみ未記載",
+   "status": "**候補",
+   "confidence": "公式確認済み（会期・営業時間・料金。2026-09-13 公式の料金ページ）。3歳未満の無料はオーナー確認",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-09.md"
