@@ -96,6 +96,9 @@ const agesLine = (a) => {
   return `👶 ${a.baby || '—'} ／ 🧒 ${a.pre || '—'} ／ 🎒 ${a.elem || '—'}`;
 };
 const fact = (label, v) => (v ? `- **${label}**: ${v}\n` : '');
+// 台帳(data/map-spots.json)の facts[] は「公式で確かめた一次情報」。
+// 記事に金額・時間・設備を書けるのはここに載っているぶんだけ。
+const factList = (arr) => (Array.isArray(arr) && arr.length ? arr.map((f) => `- ${f}\n`).join('') : '');
 
 // 2点間のざっくり距離（km）。近くのスポットを出すためだけなので球面近似で足りる
 const distKm = (a, b) => {
@@ -139,7 +142,7 @@ ${fact('年齢の目安', s.ages)}
 
 ${near.map((o) => `- **${o.x.name}**（約${o.d.toFixed(1)}km）… ${o.x.desc}`).join('\n')}
 `,
-    facts: `- 分類: ${s.cat}\n${fact('アクセス', s.access)}${fact('年齢の目安', s.ages)}${fact('公式', s.official)}${fact('地図', s.map)}${fact('出典', s.source)}`,
+    facts: `- 分類: ${s.cat}\n${fact('アクセス', s.access)}${fact('年齢の目安', s.ages)}${fact('公式', s.official)}${fact('地図', s.map)}${fact('出典', s.source)}${factList(s.facts)}`,
   };
 }
 
@@ -212,7 +215,7 @@ ${list
 
 ${s.desc}
 
-${fact('アクセス', s.access)}${fact('年齢の目安', s.ages)}${fact('公式', s.official)}${fact('地図', s.map)}`
+${fact('アクセス', s.access)}${fact('年齢の目安', s.ages)}${fact('公式', s.official)}${fact('地図', s.map)}${factList(s.facts)}`
   )
   .join('\n')}`,
     facts: `- 分類: ${cat}（${list.length}か所）\n- 台帳の更新日: ${LEDGER.generated}`,
