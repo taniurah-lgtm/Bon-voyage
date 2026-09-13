@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-05",
+ "generated": "2026-09-13",
  "events": [
   {
    "id": "E16",
@@ -30,6 +30,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.higasimurayama-yasakajinja.jp/cont5/main.html",
    "tentative": false,
@@ -66,6 +67,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.yasukuni.or.jp/news_detail.html?id=701",
    "tentative": false,
@@ -100,6 +102,7 @@
     "overall": "△〜○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://festival.hanakoganei.net/",
    "tentative": false,
@@ -135,8 +138,48 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.atpress.ne.jp/news/610885",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E78",
+   "name": "西武園ゆうえんち「大夏祭り2026」",
+   "dates": [
+    "2026-07-18"
+   ],
+   "span": {
+    "from": "2026-07-18",
+    "to": "2026-09-23"
+   },
+   "when": "7/18(土)〜9/23(水・祝) ←★2026-09-13 公式サイトで確定（オーナーが画面を確認）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "西武園ゆうえんち — 花小金井→(西武新宿線)小平→萩山→(多摩湖線/西武園線)で電車1本乗継。車なし家庭でも行ける",
+   "mapq": "西武園ゆうえんち",
+   "summary": "商店街の「熱狂ダンス（ケシガ）」ほか納涼イベント。プールでもイベントあり",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "",
    "tentative": false,
    "deadline": null
   },
@@ -174,6 +217,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.seibuen-amusement-park.jp/2026summer/",
    "tentative": false,
@@ -207,6 +251,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.ookunitamajinja.or.jp/matsuri/7-sumomo.php",
    "tentative": false,
@@ -243,6 +288,7 @@
     "overall": "△〜○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://summer.walkerplus.com/odekake/detail_e/ar0313e71549/",
    "tentative": false,
@@ -278,6 +324,7 @@
     "overall": "△"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.mod.go.jp/asdf/iruma/kouhou/public_FW/index2025.html",
    "tentative": false,
@@ -315,6 +362,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://kodaira-tourism.com/event/3369/",
    "tentative": false,
@@ -349,6 +397,7 @@
     "overall": "△"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://koganeiawaodori.jp/",
    "tentative": false,
@@ -382,6 +431,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://hanabi.tokyo-tachikawa.org/",
    "tentative": false,
@@ -415,6 +465,7 @@
     "overall": "✕〜△"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.sumidagawa-hanabi.com/",
    "tentative": false,
@@ -448,6 +499,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.city.kodaira.tokyo.jp/event/127/127980.html",
    "tentative": false,
@@ -482,6 +534,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.tatemonoen.jp/event/page/2026_yusuzumi.php",
    "tentative": false,
@@ -515,6 +568,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.city.sayama.saitama.jp/kankou/kanko/tanabata/index.html",
    "tentative": false,
@@ -548,6 +602,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://higashikurume.net/event.html",
    "tentative": true,
@@ -582,6 +637,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://musashino-kanko.com/topics/musashino_natsumaturi-bonodori/",
    "tentative": false,
@@ -625,6 +681,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.seibuen-amusement-park.jp/2026summer/",
    "tentative": false,
@@ -662,6 +719,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.sumiyoshijinja.or.jp/information.html",
    "tentative": false,
@@ -697,6 +755,7 @@
     "overall": "△"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.jinguhanabi.com/",
    "tentative": false,
@@ -737,6 +796,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.asta.co.jp/event/",
    "tentative": false,
@@ -774,6 +834,7 @@
     "elem": "◎"
    },
    "cost": "300円",
+   "discount": "",
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260817.pdf",
    "tentative": false,
@@ -822,6 +883,7 @@
     "elem": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "",
    "tentative": false,
@@ -858,6 +920,7 @@
     "elem": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "",
    "tentative": false,
@@ -897,6 +960,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "",
    "tentative": false,
@@ -931,6 +995,7 @@
     "overall": "△〜○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://mitaka-awaodori.com/",
    "tentative": false,
@@ -965,6 +1030,7 @@
     "overall": "✕に近い△"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.azabujuban.or.jp/topics/topics_event/23867/",
    "tentative": false,
@@ -1001,6 +1067,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260822_2.pdf",
    "tentative": false,
@@ -1036,6 +1103,7 @@
     "elem": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260822.pdf",
    "tentative": false,
@@ -1075,6 +1143,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "",
    "tentative": false,
@@ -1114,48 +1183,11 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260824.pdf",
    "tentative": false,
    "deadline": null
-  },
-  {
-   "id": "E80",
-   "name": "仲町公民館 子育て支援講座「ゼロから1歳児のための子育てあれこれ」",
-   "dates": [
-    "2026-08-25"
-   ],
-   "span": null,
-   "when": "未公表(市公式の講座一覧に掲載。詳細ページは8/25公開予定)",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": null,
-   "end": null,
-   "allDay": true,
-   "timeUncertain": false,
-   "place": "仲町公民館(なかまちテラス)",
-   "mapq": "仲町公民館",
-   "summary": "",
-   "kidsNote": "0〜1歳の親向け。無料版の読者に該当者が多い",
-   "caution": "",
-   "contact": null,
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "◎",
-    "pre": null,
-    "elem": null
-   },
-   "cost": "",
-   "target": "",
-   "url": "https://www.city.kodaira.tokyo.jp/kurashi/043/043741.html",
-   "tentative": false,
-   "deadline": {
-    "date": "2026-09-25",
-    "raw": "申込締切: 9/25(木)"
-   }
   },
   {
    "id": "E38",
@@ -1186,6 +1218,7 @@
     "overall": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "http://takiyama.in.coocan.jp/",
    "tentative": false,
@@ -1226,6 +1259,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://akishima-kujiramatsuri.jp/",
    "tentative": false,
@@ -1259,6 +1293,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.city.musashimurayama.lg.jp/kankou/1004434/1001617.html",
    "tentative": true,
@@ -1293,6 +1328,7 @@
     "overall": "✕に近い△"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.koenji-awaodori.com/about/about01.html",
    "tentative": false,
@@ -1329,6 +1365,7 @@
     "elem": "◎"
    },
    "cost": "1人1回500円 / 各日先着200名 ※なくなり次第終了",
+   "discount": "",
    "target": "",
    "url": "https://www.asta.co.jp/event/",
    "tentative": false,
@@ -1364,6 +1401,7 @@
     "elem": "◎"
    },
    "cost": "無料",
+   "discount": "",
    "target": "市内在住の小・中学生。保護者同伴なら未就学児も可",
    "url": "https://www.city.kodaira.tokyo.jp/event/129/129131.html",
    "tentative": false,
@@ -1409,48 +1447,11 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260831.pdf",
    "tentative": false,
    "deadline": null
-  },
-  {
-   "id": "E81",
-   "name": "上宿公民館 子育て支援講座「親子の絆を深めるタッチケア」",
-   "dates": [
-    "2026-09-02"
-   ],
-   "span": null,
-   "when": "未公表(詳細ページは9/2公開予定)",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": null,
-   "end": null,
-   "allDay": true,
-   "timeUncertain": false,
-   "place": "上宿公民館",
-   "mapq": "上宿公民館",
-   "summary": "",
-   "kidsNote": "乳児connect系。保護者向け",
-   "caution": "",
-   "contact": null,
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "◎",
-    "pre": null,
-    "elem": null
-   },
-   "cost": "",
-   "target": "",
-   "url": "https://www.city.kodaira.tokyo.jp/kurashi/043/043741.html",
-   "tentative": false,
-   "deadline": {
-    "date": "2026-09-30",
-    "raw": "申込締切: 9/30(水)"
-   }
   },
   {
    "id": "E71",
@@ -1483,6 +1484,7 @@
     "elem": null
    },
    "cost": "無料(児童館行事) / 対象: 双子・多胎児の親子",
+   "discount": "",
    "target": "",
    "url": "https://kodaji.ashita-ba.co.jp/",
    "tentative": false,
@@ -1519,8 +1521,9 @@
     "elem": "◎"
    },
    "cost": "無料(出店での飲食は実費)",
+   "discount": "",
    "target": "",
-   "url": "https://festival.hanakoganei.net/",
+   "url": "",
    "tentative": false,
    "deadline": null
   },
@@ -1558,6 +1561,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "市内在住・在学の小学1〜4年生 / 各70人",
    "url": "",
    "tentative": false,
@@ -1596,6 +1600,7 @@
     "elem": "◎"
    },
    "cost": "無料 / 対象: 小学1〜3年生",
+   "discount": "",
    "target": "",
    "url": "https://kodaji.ashita-ba.co.jp/",
    "tentative": false,
@@ -1635,6 +1640,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "市内在住・在勤・在学の小学生以上 ①初心者 ②経験者 / 定員 ①16人 ②30人",
    "url": "",
    "tentative": false,
@@ -1677,6 +1683,7 @@
     "elem": "◎"
    },
    "cost": "無料 / 事前申込: 不要",
+   "discount": "",
    "target": "市公式の対象欄に 「小学生以下・小学生・中高生・大人・高齢者・親子」 と明記",
    "url": "https://www.city.kodaira.tokyo.jp/event/129/129344.html",
    "tentative": false,
@@ -1712,6 +1719,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://kodaji.ashita-ba.co.jp/",
    "tentative": false,
@@ -1749,7 +1757,8 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "まつり自体の参加は無料。入園料・駐車料は別途 ← 配信前に入園料を公式で再確認する",
+   "cost": "まつり自体の参加は無料。入園料・駐車料は別途",
+   "discount": "",
    "target": "",
    "url": "https://www.showakinen-koen.jp/event/56303/",
    "tentative": false,
@@ -1772,20 +1781,21 @@
    "end": "16:30",
    "allDay": false,
    "timeUncertain": false,
-   "place": "江戸東京たてもの園 / 費用: 要入園料(小学生以下無料)",
-   "mapq": "江戸東京たてもの園",
-   "summary": "",
-   "kidsNote": "職人の手元を間近で見られる。滞在時間の調整が効く",
+   "place": "江戸東京たてもの園(小金井公園内) 東ゾーンの「植村邸」「川野商店」など",
+   "mapq": "江戸東京たてもの園 東ゾーンの「植村邸」「川野商店」",
+   "summary": "東京手描友禅／江戸筆。実演するのは板橋区の職人さん。毎月演目が変わる",
+   "kidsNote": "職人の手元を間近で見られる。出入り自由で滞在時間の調整が効く",
    "caution": "",
    "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "baby": null,
+    "baby": "△",
     "pre": "○",
     "elem": "◎"
    },
-   "cost": "",
+   "cost": "一般400円 / 中学生以下は無料",
+   "discount": "",
    "target": "",
    "url": "https://www.tatemonoen.jp/event/schedule/2026/schedule789.php",
    "tentative": false,
@@ -1825,6 +1835,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "幼稚園年中〜小学生(幼児・低学年=タグラグビー)",
    "url": "",
    "tentative": false,
@@ -1835,7 +1846,7 @@
   },
   {
    "id": "E52",
-   "name": "弦楽アンサンブル・ルナーレ演奏会",
+   "name": "アンサンブル ルナーレ(弦楽合奏団) 第32回定期演奏会",
    "dates": [
     "2026-09-13"
    ],
@@ -1849,22 +1860,59 @@
    "end": null,
    "allDay": false,
    "timeUncertain": false,
-   "place": "ルネこだいら 中ホール / 費用: 無料",
+   "place": "ルネこだいら 中ホール / 費用: 入場無料・全席自由",
    "mapq": "ルネこだいら",
    "summary": "",
-   "kidsNote": "無料のクラシック入門。詳細は公民館のチラシ",
+   "kidsNote": "同伴なら可。有名曲が多く入門向き。ただし本格的な定期演奏会。 全席自由なので、後ろの通路側なら途中で出やすい",
    "caution": "",
    "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "baby": null,
+    "baby": "△",
     "pre": "○",
-    "elem": "◎"
+    "elem": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
-   "url": "",
+   "url": "https://ensenblelunare.jimdofree.com/",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E104",
+   "name": "みんデパ駅前出張所「花小金井夜市」",
+   "dates": [
+    "2026-09-18"
+   ],
+   "span": null,
+   "when": "9/18(金) 15:00〜20:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "15:00",
+   "end": "20:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "花小金井駅 北口 駅前広場（駅を出てすぐ。ベビーカーでも段差が無い）",
+   "mapq": "花小金井駅 北口 駅",
+   "summary": "ハンドメイドの小さな市。良いもの・美味しいもの（過去回はハンドメイド販売・ワークショップ・飲食）",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "入場無料（買い物・飲食は実費）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.kodairahmassoc.com/event-details/hanakoganeiyajishuttenshaboshu",
    "tentative": false,
    "deadline": null
   },
@@ -1894,7 +1942,7 @@
    "timeUncertain": false,
    "place": "江戸東京たてもの園(小金井公園内) — 花小金井から自転車・バス圏",
    "mapq": "江戸東京たてもの園",
-   "summary": "復元民家の綱島家に十五夜の飾りつけ。2026年の中秋の名月は9月25日(金)",
+   "summary": "復元民家の綱島家に十五夜の飾りつけ。今年の十五夜は9/25(金)(園の公式表記)",
    "kidsNote": "園内が広く、ベビーカーで回れる。連休の「近場だけど遠出感がある」枠",
    "caution": "",
    "contact": null,
@@ -1905,7 +1953,8 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "要入園料(小学生以下は無料、都内在住・在学の中学生も無料)",
+   "cost": "一般400円 / 中学生以下は無料",
+   "discount": "毎月第3土曜と翌日曜=「家族ふれあいの日」。都内在住で18歳未満の子を同伴する保護者は観覧料が半額。 → 2026年9月は 9/19(土)・20(日)。連休の初日2日間にあたる",
    "target": "",
    "url": "https://www.tatemonoen.jp/event/schedule/2026/schedule789.php",
    "tentative": false,
@@ -1942,6 +1991,7 @@
     "elem": "○"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://kodaira-tourism.com/event/22870/",
    "tentative": false,
@@ -1980,8 +2030,46 @@
     "elem": "△"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://kodaira-tourism.com/event/20621/",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E106",
+   "name": "熊野宮 神幸祭",
+   "dates": [
+    "2026-09-26",
+    "2026-09-27"
+   ],
+   "span": null,
+   "when": "9/26(土) 宵宮 13:00〜20:00 / 9/27(日) 神幸祭",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "13:00",
+   "end": "20:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "熊野宮（小平市仲町。一橋学園駅圏＝ゾーンB） / 費用: 無料（模擬店は実費）",
+   "mapq": "熊野宮",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "https://kumanogu.com/shinkousai/",
    "tentative": false,
    "deadline": null
   },
@@ -2015,8 +2103,49 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://kodaira-tourism.com/event/22825/",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E107",
+   "name": "太陽福祉センターまつり",
+   "dates": [
+    "2026-09-27"
+   ],
+   "span": null,
+   "when": "9/27(日) 10:00〜15:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市立たいよう福祉センター 館内外（小川町。★自転車は小川駅西駐輪場へ）",
+   "mapq": "小平市立たいよう福祉センター 館内外",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": {
+    "tel": "042-344-1217",
+    "mail": "",
+    "who": ""
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "公式に記載なし（模擬店・作品販売は実費。「無料」と断定しない）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.syakaifukushi.kodaira.tokyo.jp/service/news/taisyo/20260722.html",
    "tentative": false,
    "deadline": null
   },
@@ -2051,6 +2180,7 @@
    "hours": "",
    "ages": null,
    "cost": "700円 / 定員 各8人(抽選) / 対象: 市内在住・在勤・在学の方",
+   "discount": "",
    "target": "",
    "url": "",
    "tentative": false,
@@ -2088,6 +2218,7 @@
    "hours": "",
    "ages": null,
    "cost": "無料 / 定員: 15人",
+   "discount": "",
    "target": "市内在住・在勤・在学の子育て中の方",
    "url": "https://www.city.kodaira.tokyo.jp/event/128/128376.html",
    "tentative": false,
@@ -2127,10 +2258,59 @@
    "hours": "",
    "ages": null,
    "cost": "",
+   "discount": "",
    "target": "市内在住で、10/6時点で生後2〜5か月の第一子とお母さん(全4回参加できる方)",
    "url": "",
    "tentative": false,
    "deadline": null
+  },
+  {
+   "id": "E80",
+   "name": "仲町公民館 子育て支援講座「ゼロから1歳児のための子育てあれこれ」",
+   "dates": [
+    "2026-10-09",
+    "2026-10-16",
+    "2026-10-30",
+    "2026-11-06",
+    "2026-11-13",
+    "2026-11-20",
+    "2026-11-27"
+   ],
+   "span": {
+    "from": "2026-10-09",
+    "to": "2026-11-27"
+   },
+   "when": "10/9(金)・10/30(金)・11/13(金)・11/20(金)・11/27(金) 各10:00〜12:00 全5回 （公式表記は「10/9〜11/27の金曜日、10/16・23・11/6を除く」。曜日は全日程で検証済み）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 7,
+   "start": "10:00",
+   "end": "12:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "仲町公民館（なかまちテラス）2階講座室ほか ☎042-341-0862",
+   "mapq": "仲町公民館",
+   "summary": "",
+   "kidsNote": "0〜1歳の親向け。保育付き＝親が主役の講座。妊婦も対象なのが珍しい",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": null,
+    "elem": null
+   },
+   "cost": "",
+   "discount": "",
+   "target": "市内在住で、出産予定の妊婦の方／現在0〜1歳児のお子さんをお持ちの方",
+   "url": "https://www.city.kodaira.tokyo.jp/event/129/129611.html",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-09-25",
+    "raw": "申込締切: 9/25(金) 電話または申込フォーム"
+   }
   },
   {
    "id": "E98",
@@ -2159,8 +2339,125 @@
    "hours": "",
    "ages": null,
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://kodaira-tourism.com/event/22841/",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E105",
+   "name": "第5回 ミラクルミュージックマーケット（MMM）",
+   "dates": [
+    "2026-10-12"
+   ],
+   "span": null,
+   "when": "10/12(月・祝) ※時間は未発表（10/12 はスポーツの日＝10月第2月曜。連休の中日）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "3会場での同時開催（今年から拡大）",
+   "mapq": "3会場での同時開催",
+   "summary": "出演者数は過去最多。出店もあり。新ステージに市内の学生も参加",
+   "kidsNote": "★暫定。時間もタイムテーブルも未発表なので、確定するまで通信では推さない。",
+   "caution": "時間は未発表（10/12 はスポーツの日＝10月第2月曜。連休の中日）",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "未発表（過去回は商店街の無料イベント。断定しない）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.ksc50.com/info_type/event/",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E81",
+   "name": "上宿公民館 子育て支援講座「親子の絆を深めるタッチケア」",
+   "dates": [
+    "2026-10-15",
+    "2026-10-22",
+    "2026-10-29"
+   ],
+   "span": null,
+   "when": "10/15(木)・10/22(木)・10/29(木) 各10:00〜11:30 全3回（曜日検証済み）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 3,
+   "start": "10:00",
+   "end": "11:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "上宿公民館 和室1 ☎042-345-1164",
+   "mapq": "上宿公民館 和室1 ☎042-345-1164",
+   "summary": "",
+   "kidsNote": "生後2か月から入れる枠は貴重。ハイハイ前までなので該当期間が短い＝逃すと次が無い",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": null,
+    "elem": null
+   },
+   "cost": "",
+   "discount": "",
+   "target": "市内在住の「お母さんと赤ちゃん」（生後2か月〜ハイハイまで）",
+   "url": "https://www.city.kodaira.tokyo.jp/event/129/129642.html",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-09-30",
+    "raw": "申込締切: 9/30(水) 電話またはウェブフォーム"
+   }
+  },
+  {
+   "id": "E100",
+   "name": "はじめての自転車教室（小金井公園 サイクリングセンター）",
+   "dates": [
+    "2026-10-21",
+    "2026-11-11",
+    "2026-12-09",
+    "2026-27-03"
+   ],
+   "span": null,
+   "when": "水曜・不定期開催。今年度の残り＝10/21(水)・11/11(水)・12/9(水)・2027/3/10(水)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 4,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "小金井公園 サイクリングセンター",
+   "mapq": "小金井公園 サイクリングセンター",
+   "summary": "ペダルを外した自転車で、遊びながら「バランス感覚」と危険を避ける「反射神経」を身につける。 障害物で自由にコースを作る",
+   "kidsNote": "対象外・6歳まで。",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "◎",
+    "elem": "△"
+   },
+   "cost": "税込1,000円（自転車・ヘルメットのレンタル込み。参加費の一部は基金へ寄付）",
+   "discount": "",
+   "target": "4〜6歳。ペダル付き自転車が未経験、または練習中の子。対象身長 100〜115cm",
+   "url": "https://event.cyclestart.jp/kids-event-entry/koganei261021",
    "tentative": false,
    "deadline": null
   },
@@ -2198,6 +2495,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "",
    "tentative": false,
@@ -2238,6 +2536,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "target": "",
    "url": "https://www.city.kodaira.tokyo.jp/kurashi/002/002590.html",
    "tentative": false,
@@ -2273,7 +2572,8 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "要入館料(展示室観覧料。プラネタリウムは別料金)",
+   "cost": "展示室の入館券だけでOK — 大人520円 / 小人(4歳〜高校生)210円",
+   "discount": "",
    "target": "",
    "url": "https://www.tamarokuto.or.jp/calendar/",
    "tentative": false,
@@ -2293,6 +2593,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "url": "https://www.city.kodaira.tokyo.jp/kurashi/113/113055.html"
   },
   {
@@ -2307,6 +2608,7 @@
     "overall": "◎"
    },
    "cost": "",
+   "discount": "",
    "url": "https://www.city.nishitokyo.lg.jp/kurasi/koen/kouenmizuasobi.html"
   },
   {
@@ -2321,6 +2623,7 @@
     "overall": "◎"
    },
    "cost": "大人3,400円/未就学児(3歳〜)1,500円(2歳以下は要確認・無料見込み)",
+   "discount": "",
    "url": "https://www.seibuen-amusement-park.jp/seibuenpool/index.html"
   },
   {
@@ -2337,6 +2640,7 @@
     "elem": "◎"
    },
    "cost": "",
+   "discount": "",
    "url": "https://www.asta.co.jp/update/kids_stamp_2025.pdf"
   }
  ]
