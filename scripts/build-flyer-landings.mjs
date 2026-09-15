@@ -27,6 +27,7 @@ const VENUES = [
   { code: 'hand',     label: '手渡し・口コミ' },
   { code: 'kraft',    label: 'クラフト紙チラシ（黒1色・A4）' },
   { code: 'clinic',   label: '小児科・小児歯科の待合' },
+  { code: 'hokenshi', label: '保健師さんの新生児訪問（こども家庭センター経由・手渡し）' },
   { code: 'en',       label: '私立の保育園・幼稚園の玄関' },
 ];
 
