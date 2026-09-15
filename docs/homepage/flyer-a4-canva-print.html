@@ -1,0 +1,97 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<title>Canva版レイアウト A4チラシ 版下｜ぼんぼやーじゅ通信</title>
+<!--
+  Canvaで作った版（2026-09 にこども家庭センターへ送ったもの）を、HTMLに移したもの。
+  ・絵はCanva版のPDFから取り出して docs/homepage/assets/art/canva/ に置いた
+  ・文字はすべてHTML。QRは自前のものを差し替えられる
+  ・宛先とQRを差し替えるだけで版違いが作れる（data-* ではなくこのファイルを複製する）
+  ★下端8mmは安全帯。最下段の文字は必ず8mm上で止める。
+-->
+<style>
+  @page { size: 210mm 297mm; margin: 0; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ width:210mm; height:297mm; }
+  body{
+    font-family:"Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN W4","Noto Sans JP",
+                "Yu Gothic","游ゴシック",sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ position:relative; width:210mm; height:297mm; overflow:hidden; background:#FFFDF7; }
+
+  /* ── 上の帯 ── */
+  .top{ position:absolute; inset:0 0 auto 0; height:37.5%; background:#469197;
+        display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+  .hello{ font-size:7.5mm; color:#fff; letter-spacing:.22em; text-indent:.22em; font-weight:500; }
+  .brand{ font-size:16.4mm; color:#fff; font-weight:800; letter-spacing:.01em; margin:6.5mm 0 0; line-height:1.1; }
+  .sub  { font-size:6.0mm; color:#fff; letter-spacing:.14em; text-indent:.14em; margin:6.0mm 0 0; opacity:.97; }
+
+  /* ── 本文 ── */
+  .mid{ position:absolute; left:0; right:0; top:37.5%; text-align:center; padding:9mm 18mm 0; }
+  .catch { font-size:12.7mm; color:#C88C5C; font-weight:800; letter-spacing:.04em; line-height:1.25; }
+  .deliver{ font-size:7.8mm; color:#2A4B67; font-weight:700; letter-spacing:.03em; margin:11mm 0 0; }
+  .what   { font-size:3.95mm; color:#2A4B67; letter-spacing:.02em; margin:4.2mm 0 0; line-height:1.7; }
+  .freeln { font-size:6.3mm; color:#C88C5C; font-weight:700; letter-spacing:.03em; margin:5.2mm 0 0; }
+
+  /* ── 絵 ── */
+  .art{ position:absolute; }
+  .sun     { left:5.3mm;  top:119.1mm; width:28.6mm; }
+  .balloonA{ left:181.9mm;top:135.0mm; width:14.8mm; }
+  .balloonB{ left:172.4mm;top:165.9mm; width:25.4mm; }
+  .hills   { left:10.8mm; top:243.8mm; width:188.4mm; }
+  .tree    { left:25.2mm; top:220.5mm; width:29.1mm; }
+  .family  { left:54.3mm; top:230.5mm; width:43.7mm; }
+  .petalsA { left:168.8mm;top:201.5mm; width:29.1mm; opacity:.95; }
+  .petalsB { left:58.0mm; top:207.1mm; width:7.4mm;  opacity:.95; }
+  .petalsC { left:105.1mm;top:207.1mm; width:11.1mm; opacity:.95; }
+
+  /* ── QRカード ── */
+  .qrcard{ position:absolute; left:130.3mm; top:213.8mm; width:44.0mm;
+           background:#fff; border-radius:3mm; padding:5.4mm 4mm 4.2mm;
+           text-align:center; box-shadow:0 1px 6px rgba(42,75,103,.10); }
+  .qrcard img{ width:32.8mm; height:32.8mm; display:block; margin:0 auto; }
+  .qrt{ font-size:4.0mm; color:#3B8F94; font-weight:700; margin:2.6mm 0 0; }
+  .qru{ font-size:2.6mm; color:#3B8F94; font-weight:700; margin:1.1mm 0 0; letter-spacing:.01em; }
+
+  /* ── 足もと ── */
+  .foot{ position:absolute; left:18mm; right:18mm; bottom:8mm; text-align:center;
+         font-size:2.65mm; color:#2A4B67; line-height:1.85; letter-spacing:.01em;
+         background:rgba(255,253,247,.82); border-radius:2mm; padding:2.2mm 3mm; }
+</style></head><body>
+<div class="page">
+
+  <div class="top">
+    <div class="hello">小平の子育て家庭へ</div>
+    <div class="brand">ぼんぼやーじゅ通信</div>
+    <div class="sub">小平の 週末おでかけ便</div>
+  </div>
+
+  <div class="mid">
+    <div class="catch">今週末、どこ行こう？</div>
+    <div class="deliver">毎週水曜の朝、LINEにとどきます</div>
+    <div class="what">お祭り・花火・水あそび。小金井公園や多摩六都科学館など</div>
+    <div class="freeln">ぜんぶ無料。年齢の目安つきです。</div>
+  </div>
+
+  <img class="art sun"      src="assets/art/canva/sun.png"       alt="">
+  <img class="art balloonA" src="assets/art/canva/balloon-a.png" alt="">
+  <img class="art balloonB" src="assets/art/canva/balloon-b.png" alt="">
+  <img class="art petalsA"  src="assets/art/canva/petals-a.png"  alt="">
+  <img class="art petalsB"  src="assets/art/canva/petals-b.png"  alt="">
+  <img class="art petalsC"  src="assets/art/canva/petals-c.png"  alt="">
+  <img class="art hills"    src="assets/art/canva/hills.png"     alt="">
+  <img class="art tree"     src="assets/art/canva/tree.png"      alt="">
+  <img class="art family"   src="assets/art/canva/family.png"    alt="">
+
+  <div class="qrcard">
+    <img src="assets/qr/f-hand.png" alt="LINE友だち追加のQRコード">
+    <div class="qrt">LINEで友だち追加</div>
+    <div class="qru">bonvoya.nicomaru.tokyo</div>
+  </div>
+
+  <div class="foot">
+    お名前やご住所の入力はいりません。合わなければ、いつでも解除できます。<br>
+    発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）<br>
+    お問い合わせ tokyo.papa.home@gmail.com ／ イベント情報の掲載は無料です
+  </div>
+
+</div></body></html>
