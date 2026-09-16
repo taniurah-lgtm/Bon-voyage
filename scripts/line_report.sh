@@ -15,19 +15,43 @@ if [[ $# -lt 1 || ! -f "$1" ]]; then
   exit 2
 fi
 
-# LINEのtextメッセージは1通5000文字まで。安全側で4500文字ごとに分割して送る。
-text=$(cat "$1")
-max=4500
-total=${#text}
-offset=0
+# LINEのtextメッセージは1通5000文字まで。安全側で4500「文字」ごとに分割する。
+#
+# 🔴 2026-09-16 の事故: ここを bash の ${text:offset:max} でやっていた。
+#    この箱は LANG が未設定で、bash は文字列をバイトとして扱う。
+#    ・2,034文字（＝1通で収まる）の号が 5,035バイトと数えられ、2通に分割された
+#    ・しかも切れ目がマルチバイトの途中で、「バル�」「�ンなど」と文字が壊れた
+#    → 分割は python3 に任せる。必ず文字単位で数え、行の切れ目で割る。
+mapfile -t CHUNK_FILES < <(python3 - "$1" <<'PYEOF'
+import sys, tempfile
+MAX = 4500                     # LINEの上限は5000文字。安全側で4500
+text = open(sys.argv[1], encoding='utf-8').read().rstrip('\n')
+
+# 行の切れ目で割る。1行がMAXを超えることはまず無いが、超えたらその行だけ文字で割る。
+parts, cur = [], ''
+for line in text.split('\n'):
+    while len(line) > MAX:
+        if cur: parts.append(cur); cur = ''
+        parts.append(line[:MAX]); line = line[MAX:]
+    if len(cur) + len(line) + 1 > MAX:
+        parts.append(cur); cur = line
+    else:
+        cur = line if not cur else cur + '\n' + line
+if cur: parts.append(cur)
+
+for p in parts:
+    f = tempfile.NamedTemporaryFile('w', suffix='.txt', delete=False, encoding='utf-8')
+    f.write(p); f.close()
+    print(f.name)
+PYEOF
+)
+
+echo "（${#CHUNK_FILES[@]}通に分けて送ります）"
 part=0
-
-while (( offset < total )); do
-  chunk="${text:offset:max}"
-  offset=$(( offset + max ))
+for cf in "${CHUNK_FILES[@]}"; do
   part=$(( part + 1 ))
-
-  payload=$(jq -n --arg t "$chunk" '{messages: [{type: "text", text: $t}]}')
+  payload=$(jq -n --rawfile t "$cf" '{messages: [{type: "text", text: $t}]}')
+  rm -f "$cf"
 
   http_code=$(curl -sS -o /tmp/line_resp.json -w '%{http_code}' \
     -X POST https://api.line.me/v2/bot/message/broadcast \
