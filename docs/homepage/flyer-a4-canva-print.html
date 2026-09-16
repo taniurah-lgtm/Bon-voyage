@@ -11,26 +11,26 @@
   @page { size: 210mm 297mm; margin: 0; }
   *{ box-sizing:border-box; margin:0; padding:0; }
   html,body{ width:210mm; height:297mm; }
+  /* ★書体は bash scripts/setup-fonts.sh で入れる。無いと IPAゴシックに落ちて見劣りする */
   body{
-    font-family:"Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN W4","Noto Sans JP",
-                "Yu Gothic","游ゴシック",sans-serif;
-    -webkit-font-smoothing:antialiased;
+    font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Noto Sans JP",sans-serif;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   }
   .page{ position:relative; width:210mm; height:297mm; overflow:hidden; background:#FFFDF7; }
 
   /* ── 上の帯 ── */
   .top{ position:absolute; inset:0 0 auto 0; height:37.5%; background:#469197;
         display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
-  .hello{ font-size:7.5mm; color:#fff; letter-spacing:.22em; text-indent:.22em; font-weight:500; }
-  .brand{ font-size:16.4mm; color:#fff; font-weight:800; letter-spacing:.01em; margin:6.5mm 0 0; line-height:1.1; }
-  .sub  { font-size:6.0mm; color:#fff; letter-spacing:.14em; text-indent:.14em; margin:6.0mm 0 0; opacity:.97; }
+  .hello{ font-size:6.9mm; color:#fff; letter-spacing:.30em; text-indent:.30em; font-weight:500; opacity:.95; }
+  .brand{ font-size:17.2mm; color:#fff; font-weight:900; letter-spacing:.015em; margin:7.0mm 0 0; line-height:1.05; }
+  .sub  { font-size:5.7mm; color:#fff; letter-spacing:.20em; text-indent:.20em; margin:6.4mm 0 0; opacity:.93; font-weight:500; }
 
   /* ── 本文 ── */
   .mid{ position:absolute; left:0; right:0; top:37.5%; text-align:center; padding:9mm 18mm 0; }
-  .catch { font-size:12.7mm; color:#C88C5C; font-weight:800; letter-spacing:.04em; line-height:1.25; }
-  .deliver{ font-size:7.8mm; color:#2A4B67; font-weight:700; letter-spacing:.03em; margin:11mm 0 0; }
-  .what   { font-size:3.95mm; color:#2A4B67; letter-spacing:.02em; margin:4.2mm 0 0; line-height:1.7; }
-  .freeln { font-size:6.3mm; color:#C88C5C; font-weight:700; letter-spacing:.03em; margin:5.2mm 0 0; }
+  .catch { font-size:13.2mm; color:#C88C5C; font-weight:900; letter-spacing:.055em; line-height:1.22; }
+  .deliver{ font-size:7.6mm; color:#2A4B67; font-weight:700; letter-spacing:.055em; margin:11.5mm 0 0; }
+  .what   { font-size:3.9mm;  color:#2A4B67; letter-spacing:.05em; margin:4.6mm 0 0; line-height:1.75; font-weight:500; opacity:.88; }
+  .freeln { font-size:6.1mm; color:#C88C5C; font-weight:700; letter-spacing:.06em; margin:5.6mm 0 0; }
 
   /* ── 絵 ── */
   .art{ position:absolute; }
@@ -49,12 +49,12 @@
            background:#fff; border-radius:3mm; padding:5.4mm 4mm 4.2mm;
            text-align:center; box-shadow:0 1px 6px rgba(42,75,103,.10); }
   .qrcard img{ width:32.8mm; height:32.8mm; display:block; margin:0 auto; }
-  .qrt{ font-size:4.0mm; color:#3B8F94; font-weight:700; margin:2.6mm 0 0; }
-  .qru{ font-size:2.6mm; color:#3B8F94; font-weight:700; margin:1.1mm 0 0; letter-spacing:.01em; }
+  .qrt{ font-size:3.9mm; color:#3B8F94; font-weight:700; margin:2.8mm 0 0; letter-spacing:.04em; }
+  .qru{ font-size:2.55mm; color:#3B8F94; font-weight:500; margin:1.2mm 0 0; letter-spacing:.015em; }
 
   /* ── 足もと ── */
   .foot{ position:absolute; left:18mm; right:18mm; bottom:8mm; text-align:center;
-         font-size:2.65mm; color:#2A4B67; line-height:1.85; letter-spacing:.01em;
+         font-size:2.6mm; color:#2A4B67; line-height:1.95; letter-spacing:.035em; font-weight:500;
          background:rgba(255,253,247,.82); border-radius:2mm; padding:2.2mm 3mm; }
 </style></head><body>
 <div class="page">

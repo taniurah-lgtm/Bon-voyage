@@ -1,0 +1,134 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<title>Canva版レイアウト A4チラシ 裏面 版下｜ぼんぼやーじゅ通信</title>
+<!--
+  表面（flyer-a4-canva-print.html）の裏。情報量を多めに。
+  ★書体は bash scripts/setup-fonts.sh で入れる。無いと IPAゴシックに落ちる。
+  ★下端8mmは安全帯。最下段の文字は必ず8mm上で止める。
+-->
+<style>
+  @page{ size:210mm 297mm; margin:0; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ width:210mm; height:297mm; }
+  body{ font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Noto Sans JP",sans-serif;
+        -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  .page{ position:relative; width:210mm; height:297mm; overflow:hidden;
+         background:#FFFDF7; padding:0 16mm; }
+
+  .hd{ background:#469197; margin:0 -16mm; padding:9.5mm 16mm 8.5mm; text-align:center; }
+  .hd h1{ font-size:7.4mm; color:#fff; font-weight:900; letter-spacing:.06em; line-height:1.35; }
+  .hd p { font-size:3.5mm; color:#fff; opacity:.9; margin:3.2mm 0 0; letter-spacing:.06em; font-weight:500; }
+
+  .ages{ display:flex; justify-content:center; gap:7mm; margin:8mm 0 0; }
+  .age{ width:31mm; text-align:center; }
+  .age .ring{ width:17mm; height:17mm; border-radius:50%; margin:0 auto 2.4mm;
+              display:flex; align-items:center; justify-content:center; font-size:8mm; background:#fff; }
+  .age .t{ font-size:3.6mm; font-weight:700; color:#2A4B67; letter-spacing:.04em; }
+  .age .n{ font-size:2.9mm; color:#2A4B67; opacity:.7; margin:.7mm 0 0; }
+  .a1 .ring{ border:.7mm solid #E88C86; } .a2 .ring{ border:.7mm solid #7FB069; } .a3 .ring{ border:.7mm solid #3B8F94; }
+
+  h2{ font-size:4.9mm; color:#2A4B67; font-weight:900; letter-spacing:.06em; margin:9.5mm 0 4.2mm;
+      padding:0 0 0 3.6mm; border-left:1.5mm solid #C88C5C; line-height:1.3; }
+
+  .rows{ display:flex; flex-direction:column; gap:2.6mm; }
+  .row{ background:#fff; border-radius:2.6mm; padding:3.4mm 4.2mm; }
+  .rt{ font-size:3.85mm; font-weight:700; color:#2A4B67; letter-spacing:.03em; }
+  .rd{ font-size:3.05mm; color:#2A4B67; opacity:.82; line-height:1.72; margin:1.3mm 0 0; letter-spacing:.02em; }
+
+  /* 実際に届く紙面 */
+  .talk{ background:#7FA8C4; border-radius:3mm; padding:4.6mm; }
+  .bub{ background:#fff; border-radius:2.4mm; padding:3.6mm 4mm; }
+  .bub pre{ font-family:inherit; font-size:2.72mm; line-height:1.78; color:#2A4B67;
+            white-space:pre-wrap; letter-spacing:.015em; }
+  .talkcap{ font-size:2.8mm; color:#fff; margin:0 0 2.6mm; letter-spacing:.05em; font-weight:500; }
+
+  .three{ display:flex; gap:3mm; }
+  .card{ flex:1; background:#fff; border-radius:2.6mm; padding:3.4mm; text-align:center; }
+  .ct{ font-size:3.5mm; font-weight:700; color:#3B8F94; letter-spacing:.03em; }
+  .cd{ font-size:2.8mm; color:#2A4B67; opacity:.8; line-height:1.65; margin:1.4mm 0 0; }
+
+  .promise{ background:#FBEEDA; border-radius:2.6mm; padding:3.8mm 4.4mm; margin:5mm 0 0; }
+  .promise b{ color:#8A5A12; font-size:3.5mm; letter-spacing:.04em; }
+  .promise p{ font-size:2.95mm; color:#2A4B67; opacity:.86; line-height:1.72; margin:1.4mm 0 0; }
+
+  .cta{ position:absolute; left:16mm; right:16mm; bottom:20mm;
+        display:flex; align-items:center; gap:5mm;
+        background:#469197; border-radius:3mm; padding:4.4mm 5mm; }
+  .cta img{ width:24mm; height:24mm; background:#fff; border-radius:1.6mm; padding:1.2mm; }
+  .cta .x1{ font-size:4.6mm; color:#fff; font-weight:900; letter-spacing:.04em; line-height:1.4; }
+  .cta .x2{ font-size:2.85mm; color:#fff; opacity:.9; margin:1.6mm 0 0; line-height:1.6; }
+  .cta .x3{ font-size:3.2mm; color:#fff; font-weight:700; margin:1.6mm 0 0; letter-spacing:.02em; }
+
+  .foot{ position:absolute; left:16mm; right:16mm; bottom:8mm; text-align:center;
+         font-size:2.6mm; color:#2A4B67; opacity:.82; line-height:1.9; letter-spacing:.03em; font-weight:500; }
+</style></head><body>
+<div class="page">
+
+  <div class="hd">
+    <h1>毎週水曜の朝、こんなことを書いています</h1>
+    <p>小平を中心に、花小金井からだいたい30分で行ける範囲を、近い順に</p>
+  </div>
+
+  <div class="ages">
+    <div class="age a1"><div class="ring">👶</div><div class="t">あかちゃん</div><div class="n">0〜2歳</div></div>
+    <div class="age a2"><div class="ring">🧒</div><div class="t">未就学</div><div class="n">3〜6歳</div></div>
+    <div class="age a3"><div class="ring">🎒</div><div class="t">小学生</div><div class="n">6〜12歳</div></div>
+  </div>
+
+  <h2>届くのは、この4つです</h2>
+  <div class="rows">
+    <div class="row"><div class="rt">今週の一推しを、1件だけ</div>
+      <div class="rd">天気を見てから選びます。崩れそうな週は、屋内の行き先とその日の館内の催しまで。迷わないように、あえて絞ります。</div></div>
+    <div class="row"><div class="rt">申込の締切を、間に合ううちに</div>
+      <div class="rd">保育つきの講座、定員の小さい教室、抽選のあるもの。「気づいたときには終わっていた」をなくすのが、いちばんの役目です。</div></div>
+    <div class="row"><div class="rt">赤ちゃん連れで行ける場所</div>
+      <div class="rd">0歳から入れる無料の集まり、助産師さんに相談できる日、体重を測れる日。ベビーカーで入れるか、おむつ替えはどこか、まで。</div></div>
+    <div class="row"><div class="rt">お祭り・花火・水あそび・科学館</div>
+      <div class="rd">神社のお祭りや商店会の催しは、市のページには載りません。主催の方のところまで見に行って、日付を確かめています。</div></div>
+  </div>
+
+  <h2>こんなふうに届きます</h2>
+  <div class="talk">
+    <div class="talkcap">▼ 実際の紙面から</div>
+    <div class="bub"><pre>【ぼんぼやーじゅ通信 9/16(水)】
+
+今日と明日は雨。そのあとの5連休(9/19〜23)も、
+ほとんどの日が雨の予報です。
+今回は、雨でも行ける屋内を多めにしています。
+
+■今週の一推し
+🏮 花小金井夜市 9/18(金) 15:00〜20:00
+　 花小金井駅 北口広場
+ハンドメイドの小さな市が駅前の広場に出ます。入場無料。
+金曜は曇りときどき晴れ、降水確率30%。
+今週でいちばん天気が良さそうな日です。
+駅を出てすぐ、段差もありません。
+👶 ○　🧒 ◎　🎒 ◎</pre></div>
+  </div>
+
+  <h2>ホームページも、どなたでも無料で</h2>
+  <div class="three">
+    <div class="card"><div class="ct">おでかけカレンダー</div><div class="cd">日付から探せます。<br>申込の締切も一覧で</div></div>
+    <div class="card"><div class="ct">おでかけマップ</div><div class="cd">地元の家庭で持ち寄る<br>「行ってよかった」場所</div></div>
+    <div class="card"><div class="ct">バックナンバー</div><div class="cd">過去の号を<br>全部そのまま読めます</div></div>
+  </div>
+
+  <div class="promise">
+    <b>まとめサイトからの転載はしません</b>
+    <p>市や施設の公式ページを、一件ずつ見て日付を確かめてから書いています。分からないことは「要確認」と正直に書きます。掲載にお金はいただきません。</p>
+  </div>
+
+  <div class="cta">
+    <img src="assets/qr/f-hand.png" alt="LINE友だち追加のQRコード">
+    <div>
+      <div class="x1">LINEで友だち追加するだけ</div>
+      <div class="x2">お名前やご住所の入力はいりません。読むだけで大丈夫です。合わなければ、いつでも解除できます。</div>
+      <div class="x3">bonvoya.nicomaru.tokyo</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）<br>
+    イベント情報のご提供・チラシ設置のご相談　tokyo.papa.home@gmail.com　／　掲載は無料です
+  </div>
+
+</div></body></html>
