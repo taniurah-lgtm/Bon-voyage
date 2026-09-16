@@ -609,6 +609,55 @@ QRは300/150/100dpi で読み取り確認済み
 5. **書き出しの拡大（width/height指定）は有料機能。**既定サイズなら通る。
 6. 生成物の飾り（風船・太陽）は本文の上に平気で重なる。`position_element` で退かす。
 
+## 📄 Canva版レイアウト（HTML版下・表裏そろい）★2026-09-16 完成
+
+**Canvaで作った版をHTMLに移したもの。Canva Proを買わずに同じ絵が出せる。**
+
+| 面 | 版下 | 出力 |
+|---|---|---|
+| **表** | `docs/homepage/flyer-a4-canva-print.html` | `assets/flyer-a4-canva-html.pdf`（608KB） |
+| **裏** | `docs/homepage/flyer-a4-canva-back.html` | `assets/flyer-a4-canva-back.pdf`（204KB） |
+
+ビルド: `node scripts/build-flyer-canva.mjs` / `node scripts/build-flyer-canva-back.mjs`
+
+### 🔴 刷る前に必ず
+
+```
+bash scripts/setup-fonts.sh
+```
+
+**この箱には IPAゴシックしか入っていない。**書体（Zen Maru Gothic）を入れずに刷ると、
+Canva版と並べたときにはっきり見劣りする。SIL OFL なので商用可・PDF埋め込み可。
+
+### 絵はCanva版のPDFから取り出した
+
+`docs/homepage/assets/art/canva/`（丘・家族・木・太陽・風船2つ・花びら3つ）
+
+⚠️ **1回目は真っ黒になった。**PDFの透明は **SMask という別オブジェクト**なので、
+`extract_image` だけでは alpha が付かない。**smask を L で読んで putalpha で合成し直す。**
+
+### 裏面を組むときにハマったこと（2026-09-16）
+
+1. **最初に組んだら321pxはみ出した。**本文が長すぎた。
+   → **各ブロックの縦の寸法を先に決めてから、文章をそこに当てる。**逆をやると必ず溢れる
+2. **フッターを `position:absolute; bottom:8mm` にしたら、CTAの上に重なった。**
+   ビルドのはみ出し検査は「ページからの溢れ」しか見ないので、**この重なりは検出できない。**
+   → **フッターは流し込みにして、`.page` に `padding-bottom` を持たせる**
+3. **紙面見本の吹き出しが横に間延びした。**`max-width:118mm` で止めると、LINEらしく見える
+
+### 版違いの作り方
+
+**QRとURLの2か所だけ差し替える。**
+
+- 表: `.qrcard img` の `src` と `.qru` の文字
+- 裏: `.cta img` の `src` と `.cta .x3` の文字
+- QRは `docs/homepage/assets/qr/f-<code>.png`。コードは `scripts/build-flyer-landings.mjs` の VENUES と揃える
+
+**刷る前に、版下PDFからQRを実際に読み取って飛び先を確かめること**（過去に読み取れない
+QRを刷りかけた）。
+
+---
+
 ## 🖤 リソグラフ黒1色・木版画調（Canva製・多摩六都版）
 
 `docs/homepage/assets/flyer-a4-riso-canva-rokuto.pdf` ★これを刷る（あすぴあのリソグラフ）
