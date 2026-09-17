@@ -92,6 +92,38 @@
   - ②が**未消化**: `reports/free/2026-07-08.md` と `2026-07-11.md` の末尾に
     `</content>` が残っている。**直してから畳む**
 
+### ✅ 第1段階は完了した（2026-09-17）
+
+宿題を消化してから、2本を消した。
+
+- ✅ `docs/backport-to-rfwmo8.md` ①（`splitItems`）… **すでに反映済みだった**
+- ✅ ②`reports/free/2026-07-08.md` / `2026-07-11.md` の末尾 `</content>` … **両ブランチで削除**
+- ③④は「急ぎではない」注記と運用の助言で、直すコードは無い
+
+**消す前に確かめたこと**: 2本のどちらにも、
+**rfwmo8 にも yefv9l にも無いファイルは1つも無かった。**
+中身が違うファイルはあるが、すべて古い時点のもの（09-02 と 07-07 の写し）。
+
+**消したブランチと、その先頭**（戻すときはこのSHAを使う）:
+
+| ブランチ | 先頭 | 最終 |
+|---|---|---|
+| `claude/handoff-docs-review-wn6glj` | `16d16cb3ec7e09968db6f94defbd5bd5b41c7eed` | 2026-09-02 |
+| `claude/wednesday-routine-github-access-nrhf89` | `4c757b1a82c11837e8848d40549a644cb52fc2c9` | 2026-07-07 |
+
+> 🔴 **この箱からはブランチを消せない。**セッションのgitプロキシが
+> **refの削除とタグのpushを拒む**（`git push --delete` も `push <tag>` も
+> `send-pack: unexpected disconnect` で落ちる。4回ずつ試して同じ）。
+> GitHub MCP にも削除の道具は無い（`create_branch` はあるが `delete_branch` は無い）。
+> **削除だけはオーナーがGitHubの画面でやる:**
+> https://github.com/taniurah-lgtm/Bon-voyage/branches の 🗑 を押す。
+>
+> **これは第2段階以降にも効く。**中身の合流はこちらでできるが、
+> **合流後のブランチ削除は毎回オーナーの手作業になる。**
+>
+> 戻すときは GitHub の「Restore branch」か、
+> `git push origin <SHA>:refs/heads/<名前>`。
+
 ### 第2段階 — SNS返信ブランチを合流（構成が同じなので楽）
 
 `sns-reply-specialist-ebgdh9` は rfwmo8 と**同じファイル構成**。差は台帳だけ。
