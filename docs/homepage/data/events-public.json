@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-13",
+ "generated": "2026-09-18",
  "events": [
   {
    "id": "E16",
@@ -23,7 +23,6 @@
    "summary": "神輿・山車・大太鼓の渡御、境内に屋台多数",
    "kidsNote": "屋台と縁日の雰囲気が濃く子ども向き。渡御通過時は道路沿い混雑注意",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -60,7 +59,6 @@
    "summary": "約3万の献灯、青森ねぶた、盆踊り。露店は縮小しキッチンカー中心",
    "kidsNote": "境内が広くベビーカー可。平日開催で比較的動きやすい",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -95,7 +93,6 @@
    "summary": "神輿、サンバパレード、露店・商店街出店",
    "kidsNote": "サンバ時間帯は駅前混雑。ベビーカーは通行止め区間の端なら可。日中は暑さ対策必須",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -131,7 +128,6 @@
    "summary": "テーマ「もののけきぶん」。屋台、ワークショップ、館内もののけ探し",
    "kidsNote": "商業施設内でトイレ・授乳室・エレベーター完備。ベビーカー最適",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -141,45 +137,6 @@
    "discount": "",
    "target": "",
    "url": "https://www.atpress.ne.jp/news/610885",
-   "tentative": false,
-   "deadline": null
-  },
-  {
-   "id": "E78",
-   "name": "西武園ゆうえんち「大夏祭り2026」",
-   "dates": [
-    "2026-07-18"
-   ],
-   "span": {
-    "from": "2026-07-18",
-    "to": "2026-09-23"
-   },
-   "when": "7/18(土)〜9/23(水・祝) ←★2026-09-13 公式サイトで確定（オーナーが画面を確認）",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": null,
-   "end": null,
-   "allDay": true,
-   "timeUncertain": false,
-   "place": "西武園ゆうえんち — 花小金井→(西武新宿線)小平→萩山→(多摩湖線/西武園線)で電車1本乗継。車なし家庭でも行ける",
-   "mapq": "西武園ゆうえんち",
-   "summary": "商店街の「熱狂ダンス（ケシガ）」ほか納涼イベント。プールでもイベントあり",
-   "kidsNote": "",
-   "caution": "",
-   "contact": null,
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "△",
-    "pre": "◎",
-    "elem": "◎"
-   },
-   "cost": "",
-   "discount": "",
-   "target": "",
-   "url": "",
    "tentative": false,
    "deadline": null
   },
@@ -210,7 +167,6 @@
    "summary": "ダンサー・特殊効果連動の至近距離花火。要入園料。「大夏祭り」期間中の演出",
    "kidsNote": "トイレ・授乳・ベビーカー完備。ぐずったら即撤収可能。プールとセットも可",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -244,7 +200,6 @@
    "summary": "からす団扇頒布、露店約120店",
    "kidsNote": "午前早めが空いていて狙い目。境内砂利でベビーカーやや押しにくい",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -281,7 +236,6 @@
    "summary": "ほおずき市、名店屋台、坂を踊り上る阿波踊り",
    "kidsNote": "阿波踊り時間帯は激混みで抱っこ紐推奨。狙い目は7/22・23の17時台か7/25の子ども阿波踊り",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -317,7 +271,6 @@
    "summary": "盆踊り+至近距離の花火。入場無料・手荷物検査あり",
    "kidsNote": "平日夜で花火が遅め。2歳には厳しい時間帯",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -353,7 +306,6 @@
    "caution": "",
    "contact": {
     "tel": "042-322-0661",
-    "mail": "",
     "who": ""
    },
    "lastEntry": "",
@@ -390,7 +342,6 @@
    "summary": "30連超・約2.5万人規模の流し踊り、屋台",
    "kidsNote": "駅前大混雑。夕方早め(18時台)沿道端での観覧推奨",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -424,7 +375,6 @@
    "summary": "約5,000発。多摩最大級",
    "kidsNote": "芝生でシート観覧。ただし2026年はみんなの原っぱ有料化・無料区域大幅変更 → 有料席事前購入+早め入園を推奨。帰りは閉園まで園内待機が定石",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -458,7 +408,6 @@
    "summary": "",
    "kidsNote": "約90万人。有料席確保時のみ検討",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -492,7 +441,6 @@
    "summary": "手作り灯ろう約4,000基。模擬店会場あり",
    "kidsNote": "徒歩で行けて夜も早めに終わる。緑道一部未舗装だがベビーカー可",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -527,7 +475,6 @@
    "summary": "提灯の下町風情、ちびっ子縁日、阿波おどり披露など。要入園料(小学生以下は例年無料)",
    "kidsNote": "広くて安全、雰囲気抜群",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -561,7 +508,6 @@
    "summary": "約2,000発・30分完結+七夕飾り・屋台",
    "kidsNote": "コンパクトで幼児向き。河川敷は砂利あり",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -595,7 +541,6 @@
    "summary": "屋台・ステージ・キッズエリアあり",
    "kidsNote": "キッズエリアあり。歩行者天国は混むので早めの時間に",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -630,7 +575,6 @@
    "summary": "",
    "kidsNote": "ベビーカーは午前〜昼推奨",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -674,7 +618,6 @@
    "summary": "ダンサー・特殊効果連動の至近距離花火。要入園料。「大夏祭り」期間中の演出",
    "kidsNote": "お盆期間の平日に行けるのが強み",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -712,7 +655,6 @@
    "summary": "大幟6本、八角神輿、船渡御。下町情緒+もんじゃストリート",
    "kidsNote": "都心大型祭より穏やか。真夏日中の暑さ対策必須",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -748,7 +690,6 @@
    "summary": "約10,000発・全席有料チケット制(11,000円〜)",
    "kidsNote": "座席確保は利点だが音が大きく2歳には負担の可能性",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -783,11 +724,6 @@
    "summary": "ハンドメイド物販・ワークショップ・食品販売・美容の4カテゴリが出店。子ども店長も出店 (Bloomキーホルダー=15・16日 / moaショップ=15日 / きゅる☆ぴぃ=16日)",
    "kidsNote": "お盆の屋内候補。スタンプラリー目当てなら11時台に入るのが安全",
    "caution": "初の二日間開催",
-   "contact": {
-    "tel": "",
-    "mail": "wakuwakumamafes@gmail.com",
-    "who": ""
-   },
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -825,7 +761,6 @@
    "summary": "センターコートで宝の地図をもらい、館内に隠された7つの宝を謎を解きながら探す。 宝(ポスター)に書いてあるものを紙に書き、7つ集めてセンターコートへ持参すると記念品。 クリアでアスター海賊団員バッジをプレゼント。駄菓子・駄玩具の販売も",
    "kidsNote": "親の補助が要る。平日開催で空きやすい。 B1〜3Fを歩き回るので2歳連れはベビーカー＋抱っこ前提。年長・年中には手応えのある内容",
    "caution": "",
-   "contact": null,
    "lastEntry": "最終受付16:00",
    "hours": "",
    "ages": {
@@ -872,7 +807,6 @@
    "caution": "",
    "contact": {
     "tel": "042-346-9834",
-    "mail": "",
     "who": "地域学習支援課"
    },
    "lastEntry": "",
@@ -911,7 +845,6 @@
    "summary": "",
    "kidsNote": "保護者向けの色合いが強い",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -949,7 +882,6 @@
    "caution": "",
    "contact": {
     "tel": "042-341-0861",
-    "mail": "",
     "who": "中央公民館"
    },
    "lastEntry": "",
@@ -988,7 +920,6 @@
    "summary": "",
    "kidsNote": "コンパクトで20時終了。沿道後方にベビーカー",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1023,7 +954,6 @@
    "summary": "",
    "kidsNote": "都内屈指の激混み。行くなら15時台短時間+抱っこ紐",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1058,7 +988,6 @@
    "summary": "射的・輪投げ・スーパーボールすくい / 各1回300円",
    "kidsNote": "屋内の縁日。暑い日に助かる。 スーパーボールすくいは2歳でも親の膝上でいける。射的は年長向き",
    "caution": "混雑時は受付を早めに終了する場合あり",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1094,7 +1023,6 @@
    "summary": "7/22〜8/22の期間中に対象店舗で対象商品を注文・購入するともらえるくじ引き券で抽選。 ハズレなし。1等=武蔵野菓子工房 特製焼チーズケーキ(木箱入・4,000円相当/3組)、 墨花居「大海老のチリソース」or 武蔵野食堂「和牛のタリアータ」引換券(3,000円相当/10組)、 4等=墨花居・武蔵野食堂1,000円券(20組)、5等=武蔵野茶房本店500円券(30組)、6等=全店舗共通200円券",
    "kidsNote": "抽選自体は短時間。アスターくん登場の14時台が子ども向けの山",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1132,7 +1060,6 @@
    "caution": "荒天時は中止の場合あり(中止は小平消防署HPで告知)",
    "contact": {
     "tel": "042-341-0119",
-    "mail": "",
     "who": "小平消防署警防課"
    },
    "lastEntry": "",
@@ -1174,7 +1101,6 @@
    "summary": "ポケモングッズが無料で貰えるイベント。チラシに「だれでも参加OK!!」と明記",
    "kidsNote": "無料でグッズがもらえるので費用ゼロで満足度が出せる。 平日開催なので空いている。7/21〜24にも同内容を実施済みで定期開催の見込み",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1211,7 +1137,6 @@
    "summary": "三世代舞まつり・阿波踊り・屋台。市内最大級",
    "kidsNote": "沿道観覧しやすいが人出多め",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1252,7 +1177,6 @@
    "summary": "くじら型山車パレード・ステージ・花火",
    "kidsNote": "大規模大会より混雑緩やか・駅近で撤収楽。花火20時開始なので前半だけ見て撤収も手",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1286,7 +1210,6 @@
    "summary": "",
    "kidsNote": "多摩屈指の混雑控えめローカル大会。トイレは仮設中心",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1321,7 +1244,6 @@
    "summary": "",
    "kidsNote": "観客100万人規模。有料桟敷席が取れた場合のみ",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1356,7 +1278,6 @@
    "summary": "",
    "kidsNote": "工作系。夏休みの自由研究の締めにも。先着なので午前入りが安全",
    "caution": "",
-   "contact": null,
    "lastEntry": "最終受付16:30",
    "hours": "",
    "ages": {
@@ -1392,7 +1313,6 @@
    "summary": "",
    "kidsNote": "プラレール・おはなし会・室内アソビバ。屋内・無料・出入り自由・4時間半の会期。下の子が飽きたら抜けられるので2歳連れでも成立する",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1434,11 +1354,6 @@
    "summary": "ジュニア・一般の作品展示。来場者投票あり。全部無料",
    "kidsNote": "8/31の「ねんどチャーム」「デッカくお絵描き」は未就学でもいける。 9/5(土)の手品30分は2歳でも間が持つ長さ",
    "caution": "展示の開場時間は公式に記載なし(館の営業10:00〜20:00に準ずる見込み・要確認)",
-   "contact": {
-    "tel": "080-5533-5571",
-    "mail": "",
-    "who": ""
-   },
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1450,6 +1365,44 @@
    "discount": "",
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260831.pdf",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E110",
+   "name": "多摩六都科学館 キッズプラネタリウム「ペガロク きまぐれ宇宙旅行！ぐるぐる月旅行編」",
+   "dates": [
+    "2026-09-05"
+   ],
+   "span": {
+    "from": "2026-09-05",
+    "to": "2026-12-27"
+   },
+   "when": "9/5(土)〜12/27(日)（12月まで続く。今週だけの話ではない）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "サイエンスエッグ（多摩六都科学館・西東京市芝久保町5-10-64）",
+   "mapq": "多摩六都科学館 キッズプラネタリウム「ペガロク きまぐれ宇宙旅行！ぐるぐる月旅行編」",
+   "summary": "ペガロクといっしょに宇宙旅行。スタッフによる今夜の星空解説つき",
+   "kidsNote": "35分・暗い。",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "観覧料 大人520円・小人210円 ＋ 別途入館料",
+   "discount": "",
+   "target": "どなたでも",
+   "url": "https://www.tamarokuto.or.jp/",
    "tentative": false,
    "deadline": null
   },
@@ -1475,7 +1428,6 @@
    "summary": "",
    "kidsNote": "該当家庭には代替の効かない場",
    "caution": "時間は館の予定表・おたよりで要確認",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1512,7 +1464,6 @@
    "summary": "",
    "kidsNote": "",
    "caution": "雨天決行",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1550,7 +1501,6 @@
    "caution": "",
    "contact": {
     "tel": "042-349-1350",
-    "mail": "",
     "who": "小平市スポーツ協会"
    },
    "lastEntry": "",
@@ -1591,7 +1541,6 @@
    "summary": "",
    "kidsNote": "無料・徒歩圏・屋内。雨の日の行き先として最強クラス",
    "caution": "時間は要確認",
-   "contact": null,
    "lastEntry": "",
    "hours": "9:00〜18:00 / 休館: 第1・第3火曜",
    "ages": {
@@ -1629,7 +1578,6 @@
    "caution": "",
    "contact": {
     "tel": "042-346-9612",
-    "mail": "",
     "who": "文化スポーツ課"
    },
    "lastEntry": "",
@@ -1672,7 +1620,6 @@
    "caution": "",
    "contact": {
     "tel": "042-343-0110",
-    "mail": "",
     "who": "小平警察署 交通総務係"
    },
    "lastEntry": "",
@@ -1710,7 +1657,6 @@
    "summary": "",
    "kidsNote": "体を使う屋内行事。雨天でも実施できる",
    "caution": "時間・対象学年は要確認",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1749,7 +1695,6 @@
    "summary": "花の丘のキバナコスモス'レモンブライト'約400万本 / 原っぱ南花畑 秋のブーケガーデン約20品種20万本 / 原っぱ東花畑 コスモス'センセーション'＋赤ソバ / ハーブの丘 コキア1,800株",
    "kidsNote": "広い・トイレ多い・ベビーカーOK。ただし花畑まで距離があるので園内バス/レンタサイクル前提で案内する",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1786,7 +1731,6 @@
    "summary": "東京手描友禅／江戸筆。実演するのは板橋区の職人さん。毎月演目が変わる",
    "kidsNote": "職人の手元を間近で見られる。出入り自由で滞在時間の調整が効く",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1822,11 +1766,6 @@
    "summary": "ラグビーの基礎練習。幼児・低学年=タグラグビー / 中学年=7人制 / 高学年=9人制",
    "kidsNote": "未就学から参加できるのが貴重",
    "caution": "",
-   "contact": {
-    "tel": "090-9247-5083",
-    "mail": "ab410427@gmail.com",
-    "who": "西田"
-   },
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1865,7 +1804,6 @@
    "summary": "",
    "kidsNote": "同伴なら可。有名曲が多く入門向き。ただし本格的な定期演奏会。 全席自由なので、後ろの通路側なら途中で出やすい",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1901,7 +1839,6 @@
    "summary": "ハンドメイドの小さな市。良いもの・美味しいもの（過去回はハンドメイド販売・ワークショップ・飲食）",
    "kidsNote": "",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1913,6 +1850,97 @@
    "discount": "",
    "target": "",
    "url": "https://www.kodairahmassoc.com/event-details/hanakoganeiyajishuttenshaboshu",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E112",
+   "name": "小金井公園「うきうき！はらっぱ水あそび！！！」",
+   "dates": [
+    "2026-09-19",
+    "2026-09-26"
+   ],
+   "span": null,
+   "when": "9/19(土) 11:00〜15:00 ※雨天延期 9/26(土)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "11:00",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小金井公園 こどもの広場（花小金井駅南口・徒歩圏）",
+   "mapq": "小金井公園 こどもの広場",
+   "summary": "水あそびコーナー（動物型のミストバルーン・大きなビーチボール・スプリンクラー）/ 水でっぽう体験（協力:株式会社オンダ）/ 楽市楽座（ジェラート・冷やし焼き芋のキッチンカー）",
+   "kidsNote": "",
+   "caution": "雨天延期 9/26(土)",
+   "contact": {
+    "tel": "042-385-5611",
+    "who": "小金井公園サービスセンター"
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "一部有料（水でっぽう体験・キッチンカーなど）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.tokyo-park.or.jp/park/koganei/news/2026/9_19.html",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E113",
+   "name": "東久留米市立中央図書館「図書館フェス2026」",
+   "dates": [
+    "2026-09-19",
+    "2026-09-20",
+    "2026-09-21",
+    "2026-09-22",
+    "2026-09-23",
+    "2026-09-24",
+    "2026-09-25",
+    "2026-09-26",
+    "2026-09-27",
+    "2026-09-28",
+    "2026-09-29",
+    "2026-09-30",
+    "2026-10-01"
+   ],
+   "span": null,
+   "when": "9/19(土)〜10/1(木)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 13,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "東久留米市立中央図書館（東久留米市中央町2-6-23）",
+   "mapq": "東久留米市立中央図書館",
+   "summary": "",
+   "kidsNote": "屋内。連休をまたいでいる",
+   "caution": "",
+   "contact": {
+    "tel": "042-475-4646",
+    "who": ""
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "https://www.city.higashikurume.lg.jp/library/1024999/1029654.html",
    "tentative": false,
    "deadline": null
   },
@@ -1945,7 +1973,6 @@
    "summary": "復元民家の綱島家に十五夜の飾りつけ。今年の十五夜は9/25(金)(園の公式表記)",
    "kidsNote": "園内が広く、ベビーカーで回れる。連休の「近場だけど遠出感がある」枠",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -1982,7 +2009,6 @@
    "summary": "多摩地域のクラフトビール・食。連休中の都心おでかけ枠",
    "kidsNote": "酒類主体なので日中・短時間向き",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -2021,7 +2047,6 @@
    "summary": "",
    "kidsNote": "歩行距離が長い。/ 出典: https://kodaira-tourism.com/event/20621/ / ステータス: 候補",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -2058,7 +2083,6 @@
    "summary": "",
    "kidsNote": "",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -2094,7 +2118,6 @@
    "summary": "キッチンカー10台以上、こども縁日。9月は夜まで開催",
    "kidsNote": "昼に行けば子ども向け。夜はビアガーデン寄り",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -2132,7 +2155,6 @@
    "caution": "",
    "contact": {
     "tel": "042-344-1217",
-    "mail": "",
     "who": ""
    },
    "lastEntry": "",
@@ -2173,7 +2195,6 @@
    "caution": "①②どちらかを選ぶ選択制(全2回ではない)",
    "contact": {
     "tel": "042-388-0050",
-    "mail": "",
     "who": ""
    },
    "lastEntry": "",
@@ -2213,7 +2234,6 @@
    "summary": "",
    "kidsNote": "保育付き＝親が主役の講座。下の子がいる家庭でも参加できる数少ない枠",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": null,
@@ -2226,6 +2246,37 @@
     "date": "2026-09-04",
     "raw": "申込締切: 9/4(金) 申込フォームまたは電話(月曜・日曜・祝日を除く)"
    }
+  },
+  {
+   "id": "E116",
+   "name": "新小平マーケット",
+   "dates": [
+    "2026-10-03"
+   ],
+   "span": null,
+   "when": "10/3(土) 10:00〜16:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "新小平駅前広場（JR武蔵野線 新小平駅）",
+   "mapq": "新小平駅",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": null,
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "https://kodaira-tourism.com/event/22948/",
+   "tentative": false,
+   "deadline": null
   },
   {
    "id": "E93",
@@ -2253,7 +2304,6 @@
    "summary": "",
    "kidsNote": "",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": null,
@@ -2294,7 +2344,6 @@
    "summary": "",
    "kidsNote": "0〜1歳の親向け。保育付き＝親が主役の講座。妊婦も対象なのが珍しい",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -2334,7 +2383,6 @@
    "summary": "",
    "kidsNote": "",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": null,
@@ -2366,7 +2414,6 @@
    "summary": "出演者数は過去最多。出店もあり。新ステージに市内の学生も参加",
    "kidsNote": "★暫定。時間もタイムテーブルも未発表なので、確定するまで通信では推さない。",
    "caution": "時間は未発表（10/12 はスポーツの日＝10月第2月曜。連休の中日）",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -2404,7 +2451,6 @@
    "summary": "",
    "kidsNote": "生後2か月から入れる枠は貴重。ハイハイ前までなので該当期間が短い＝逃すと次が無い",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -2420,6 +2466,48 @@
    "deadline": {
     "date": "2026-09-30",
     "raw": "申込締切: 9/30(水) 電話またはウェブフォーム"
+   }
+  },
+  {
+   "id": "E111",
+   "name": "ちびっこ集まれ 親子でヨーイドン",
+   "dates": [
+    "2026-10-17"
+   ],
+   "span": null,
+   "when": "10/17(土) 13:30〜15:00（曜日検証済み）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "13:30",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平第六小学校 体育館（小川町1-700）★駐車場なし",
+   "mapq": "小平市小平第六小学校 体育館",
+   "summary": "レクリエーションと、手作りコースでの障害物競走",
+   "kidsNote": "対象外・未就学児まで。",
+   "caution": "",
+   "contact": {
+    "tel": "042-346-9612",
+    "who": ""
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "◎",
+    "elem": "✕"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "市内在住・在勤の保護者と3歳以上の未就学児（親子のペアで応募）",
+   "url": "https://www.city.kodaira.tokyo.jp/event/130/130344.html",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-10-05",
+    "raw": "🔴 申込締切: 10/5(月) 申込フォームから"
    }
   },
   {
@@ -2446,7 +2534,6 @@
    "summary": "ペダルを外した自転車で、遊びながら「バランス感覚」と危険を避ける「反射神経」を身につける。 障害物で自由にコースを作る",
    "kidsNote": "対象外・6歳まで。",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -2458,6 +2545,37 @@
    "discount": "",
    "target": "4〜6歳。ペダル付き自転車が未経験、または練習中の子。対象身長 100〜115cm",
    "url": "https://event.cyclestart.jp/kids-event-entry/koganei261021",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E117",
+   "name": "親子でうどん作り体験",
+   "dates": [
+    "2026-10-31"
+   ],
+   "span": null,
+   "when": "10/31(土) 10:00〜13:30 / 場所: 中央公民館",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "13:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "",
+   "mapq": "親子でうどん作り体験",
+   "summary": "ドッグラン、犬のしつけ方と防災相談・ペット防災展示、スポーツ体験(ピックルボール・モルック)、 施設整備のオープンハウス",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": null,
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "https://kodaira-tourism.com/event/22851/",
    "tentative": false,
    "deadline": null
   },
@@ -2484,11 +2602,10 @@
    "caution": "",
    "contact": {
     "tel": "042-346-9532",
-    "mail": "",
     "who": "市民協働・男女参画推進課"
    },
    "lastEntry": "",
-   "hours": "",
+   "hours": "9:00〜22:00 / 休館: 毎月第3木曜（祝日なら翌営業日）・12/28〜1/4 ★2026-09-14 に公式サイト（ogawa-palette.jp）と市公式で確認",
    "ages": {
     "baby": "◎",
     "pre": "◎",
@@ -2497,7 +2614,7 @@
    "cost": "",
    "discount": "",
    "target": "",
-   "url": "",
+   "url": "https://ogawa-palette.jp/**（2026-09-14",
    "tentative": false,
    "deadline": null
   },
@@ -2525,7 +2642,6 @@
    "caution": "",
    "contact": {
     "tel": "042-345-1246",
-    "mail": "",
     "who": "中央図書館"
    },
    "lastEntry": "",
@@ -2564,7 +2680,6 @@
    "summary": "木製ブロック KAPLA® を自由に積んで造形。作品を全国大会に応募できる",
    "kidsNote": "見てるだけでも。屋内・冷暖房あり・時間制限がゆるい。連休の雨予報の日に強い",
    "caution": "",
-   "contact": null,
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -2642,6 +2757,23 @@
    "cost": "",
    "discount": "",
    "url": "https://www.asta.co.jp/update/kids_stamp_2025.pdf"
+  },
+  {
+   "id": "E114",
+   "name": "小金井公園 SL製造80周年記念 ヘッドマークデザイン投票",
+   "span": "9/7(月)〜9/30(水)",
+   "place": "小金井公園 SL展示場（花小金井駅南口・徒歩圏）",
+   "mapq": "小金井公園 SL展示場",
+   "summary": "蒸気機関車 C57 186 の製造80周年。デザイン投票。 採用作は11月予定のSLライトアップで発表・掲出（★11月のライトアップは未確定情報）",
+   "kidsNote": "電車好きの子に効く。ただし屋外",
+   "ages": {
+    "baby": null,
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "url": "https://www.tokyo-park.or.jp/park/koganei/news/index.html"
   }
  ]
 }

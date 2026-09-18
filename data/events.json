@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-15",
+ "generated": "2026-09-18",
  "events": [
   {
    "id": "E51",
@@ -239,48 +239,6 @@
    "tentative": false,
    "deadline": null,
    "source": "events/2026-07.md"
-  },
-  {
-   "id": "E78",
-   "name": "西武園ゆうえんち「大夏祭り2026」",
-   "dates": [
-    "2026-07-18"
-   ],
-   "span": {
-    "from": "2026-07-18",
-    "to": "2026-09-23"
-   },
-   "when": "7/18(土)〜9/23(水・祝) ←★2026-09-13 公式サイトで確定（オーナーが画面を確認）",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": null,
-   "end": null,
-   "allDay": true,
-   "timeUncertain": false,
-   "place": "西武園ゆうえんち — 花小金井→(西武新宿線)小平→萩山→(多摩湖線/西武園線)で電車1本乗継。車なし家庭でも行ける",
-   "mapq": "西武園ゆうえんち",
-   "summary": "商店街の「熱狂ダンス（ケシガ）」ほか納涼イベント。プールでもイベントあり",
-   "kidsNote": "",
-   "caution": "",
-   "contact": null,
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "△",
-    "pre": "◎",
-    "elem": "◎"
-   },
-   "cost": "",
-   "discount": "",
-   "target": "",
-   "url": "",
-   "status": "**候補",
-   "confidence": "公式確認済み（会期・営業時間・料金。2026-09-13 公式の料金ページ）。3歳未満の無料はオーナー確認",
-   "tentative": false,
-   "deadline": null,
-   "source": "events/2026-09.md"
   },
   {
    "id": "E7",
@@ -1655,6 +1613,48 @@
    "source": "events/2026-08.md"
   },
   {
+   "id": "E110",
+   "name": "多摩六都科学館 キッズプラネタリウム「ペガロク きまぐれ宇宙旅行！ぐるぐる月旅行編」",
+   "dates": [
+    "2026-09-05"
+   ],
+   "span": {
+    "from": "2026-09-05",
+    "to": "2026-12-27"
+   },
+   "when": "9/5(土)〜12/27(日)（12月まで続く。今週だけの話ではない）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "サイエンスエッグ（多摩六都科学館・西東京市芝久保町5-10-64）",
+   "mapq": "多摩六都科学館 キッズプラネタリウム「ペガロク きまぐれ宇宙旅行！ぐるぐる月旅行編」",
+   "summary": "ペガロクといっしょに宇宙旅行。スタッフによる今夜の星空解説つき",
+   "kidsNote": "35分・暗い。",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "観覧料 大人520円・小人210円 ＋ 別途入館料",
+   "discount": "",
+   "target": "どなたでも",
+   "url": "https://www.tamarokuto.or.jp/",
+   "status": "候補",
+   "confidence": "公式確認済み（2026-09-15・会期/時間/対象/定員/料金/販売方法） / 投影時刻だけ未取得（日別のため）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-09.md"
+  },
+  {
    "id": "E71",
    "name": "児童館「あつまれふたご」(小川町二丁目児童館・おがにん)",
    "dates": [
@@ -2154,6 +2154,105 @@
    "source": "events/2026-09.md"
   },
   {
+   "id": "E112",
+   "name": "小金井公園「うきうき！はらっぱ水あそび！！！」",
+   "dates": [
+    "2026-09-19",
+    "2026-09-26"
+   ],
+   "span": null,
+   "when": "9/19(土) 11:00〜15:00 ※雨天延期 9/26(土)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "11:00",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小金井公園 こどもの広場（花小金井駅南口・徒歩圏）",
+   "mapq": "小金井公園 こどもの広場",
+   "summary": "水あそびコーナー（動物型のミストバルーン・大きなビーチボール・スプリンクラー）/ 水でっぽう体験（協力:株式会社オンダ）/ 楽市楽座（ジェラート・冷やし焼き芋のキッチンカー）",
+   "kidsNote": "",
+   "caution": "雨天延期 9/26(土)",
+   "contact": {
+    "tel": "042-385-5611",
+    "mail": "",
+    "who": "小金井公園サービスセンター"
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "一部有料（水でっぽう体験・キッチンカーなど）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.tokyo-park.or.jp/park/koganei/news/2026/9_19.html",
+   "status": "候補（オーナー判断で出す／出さない）",
+   "confidence": "公式で確認（2026-09-15。URLに2026が入っており今年のもの。詳細ページ本体は未読・検索経由の要約）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-09.md"
+  },
+  {
+   "id": "E113",
+   "name": "東久留米市立中央図書館「図書館フェス2026」",
+   "dates": [
+    "2026-09-19",
+    "2026-09-20",
+    "2026-09-21",
+    "2026-09-22",
+    "2026-09-23",
+    "2026-09-24",
+    "2026-09-25",
+    "2026-09-26",
+    "2026-09-27",
+    "2026-09-28",
+    "2026-09-29",
+    "2026-09-30",
+    "2026-10-01"
+   ],
+   "span": null,
+   "when": "9/19(土)〜10/1(木)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 13,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "東久留米市立中央図書館（東久留米市中央町2-6-23）",
+   "mapq": "東久留米市立中央図書館",
+   "summary": "",
+   "kidsNote": "屋内。連休をまたいでいる",
+   "caution": "",
+   "contact": {
+    "tel": "042-475-4646",
+    "mail": "",
+    "who": ""
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "https://www.city.higashikurume.lg.jp/library/1024999/1029654.html",
+   "status": "候補",
+   "confidence": "会期・会場・電話は公式確認済み（2026-09-15）/ 各企画の日時・対象は未取得",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-09.md"
+  },
+  {
    "id": "E77",
    "name": "江戸東京たてもの園 綱島家 年中行事「十五夜飾り」",
    "dates": [
@@ -2489,6 +2588,41 @@
    "source": "events/2026-09.md"
   },
   {
+   "id": "E116",
+   "name": "新小平マーケット",
+   "dates": [
+    "2026-10-03"
+   ],
+   "span": null,
+   "when": "10/3(土) 10:00〜16:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "新小平駅前広場（JR武蔵野線 新小平駅）",
+   "mapq": "新小平駅",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": null,
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "https://kodaira-tourism.com/event/22948/",
+   "status": "候補",
+   "confidence": "観光協会カレンダー掲載のみ（内容・出店・雨天時は未取得）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E93",
    "name": "「はじめの一歩」第一子の赤ちゃんとお母さんへ",
    "dates": [
@@ -2699,6 +2833,52 @@
    "source": "events/2026-09.md"
   },
   {
+   "id": "E111",
+   "name": "ちびっこ集まれ 親子でヨーイドン",
+   "dates": [
+    "2026-10-17"
+   ],
+   "span": null,
+   "when": "10/17(土) 13:30〜15:00（曜日検証済み）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "13:30",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平第六小学校 体育館（小川町1-700）★駐車場なし",
+   "mapq": "小平市小平第六小学校 体育館",
+   "summary": "レクリエーションと、手作りコースでの障害物競走",
+   "kidsNote": "対象外・未就学児まで。",
+   "caution": "",
+   "contact": {
+    "tel": "042-346-9612",
+    "mail": "",
+    "who": ""
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "◎",
+    "elem": "✕"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "市内在住・在勤の保護者と3歳以上の未就学児（親子のペアで応募）",
+   "url": "https://www.city.kodaira.tokyo.jp/event/130/130344.html",
+   "status": "候補",
+   "confidence": "公式確認済み",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-10-05",
+    "raw": "🔴 申込締切: 10/5(月) 申込フォームから"
+   },
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E100",
    "name": "はじめての自転車教室（小金井公園 サイクリングセンター）",
    "dates": [
@@ -2741,6 +2921,41 @@
    "source": "events/2026-10.md"
   },
   {
+   "id": "E117",
+   "name": "親子でうどん作り体験",
+   "dates": [
+    "2026-10-31"
+   ],
+   "span": null,
+   "when": "10/31(土) 10:00〜13:30 / 場所: 中央公民館",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "13:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "",
+   "mapq": "親子でうどん作り体験",
+   "summary": "ドッグラン、犬のしつけ方と防災相談・ペット防災展示、スポーツ体験(ピックルボール・モルック)、 施設整備のオープンハウス",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": null,
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "https://kodaira-tourism.com/event/22851/",
+   "status": "候補",
+   "confidence": "観光協会カレンダー掲載のみ（対象年齢・費用・定員・締切は未取得）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E54",
    "name": "小川パレット オープン",
    "dates": [
@@ -2767,7 +2982,7 @@
     "who": "市民協働・男女参画推進課"
    },
    "lastEntry": "",
-   "hours": "",
+   "hours": "9:00〜22:00 / 休館: 毎月第3木曜（祝日なら翌営業日）・12/28〜1/4 ★2026-09-14 に公式サイト（ogawa-palette.jp）と市公式で確認",
    "ages": {
     "baby": "◎",
     "pre": "◎",
@@ -2776,9 +2991,9 @@
    "cost": "",
    "discount": "",
    "target": "",
-   "url": "",
+   "url": "https://ogawa-palette.jp/**（2026-09-14",
    "status": "候補",
-   "confidence": "市報PDFで検証済・一致(2026-08-15)",
+   "confidence": "公式確認済み（2026-09-14・開設日/受付時間/休館日/フロア）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-08.md"
@@ -2854,6 +3069,25 @@
    "url": "https://www.asta.co.jp/update/kids_stamp_2025.pdf",
    "confidence": "公式確認済み(公式PDF・2026-03-31更新)",
    "source": "events/2026-08.md"
+  },
+  {
+   "id": "E114",
+   "name": "小金井公園 SL製造80周年記念 ヘッドマークデザイン投票",
+   "span": "9/7(月)〜9/30(水)",
+   "place": "小金井公園 SL展示場（花小金井駅南口・徒歩圏）",
+   "mapq": "小金井公園 SL展示場",
+   "summary": "蒸気機関車 C57 186 の製造80周年。デザイン投票。 採用作は11月予定のSLライトアップで発表・掲出（★11月のライトアップは未確定情報）",
+   "kidsNote": "電車好きの子に効く。ただし屋外",
+   "ages": {
+    "baby": null,
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "url": "https://www.tokyo-park.or.jp/park/koganei/news/index.html",
+   "confidence": "🟡 告知の存在と期間のみ確認。場所の詳細・投票方法・費用は未取得",
+   "source": "events/2026-09.md"
   }
  ],
  "byDate": {
@@ -2877,8 +3111,7 @@
   ],
   "2026-07-18": [
    "E13",
-   "E18",
-   "E78"
+   "E18"
   ],
   "2026-07-19": [
    "E13",
@@ -2900,24 +3133,30 @@
   "2026-09-19": [
    "E7",
    "E71",
+   "E112",
+   "E113",
    "E77"
   ],
   "2026-09-20": [
    "E7",
+   "E113",
    "E77",
    "E97"
   ],
   "2026-09-21": [
    "E7",
+   "E113",
    "E77",
    "E97"
   ],
   "2026-09-22": [
    "E7",
+   "E113",
    "E77"
   ],
   "2026-09-23": [
    "E7",
+   "E113",
    "E77"
   ],
   "2026-07-22": [
@@ -3063,6 +3302,7 @@
   ],
   "2026-09-05": [
    "E60",
+   "E110",
    "E71",
    "E95"
   ],
@@ -3089,31 +3329,47 @@
   "2026-09-18": [
    "E104"
   ],
-  "2026-09-24": [
-   "E77",
-   "E99"
-  ],
-  "2026-09-25": [
-   "E77"
-  ],
   "2026-09-26": [
+   "E112",
+   "E113",
    "E77",
    "E106",
    "E96"
   ],
+  "2026-09-24": [
+   "E113",
+   "E77",
+   "E99"
+  ],
+  "2026-09-25": [
+   "E113",
+   "E77"
+  ],
   "2026-09-27": [
+   "E113",
    "E77",
    "E106",
    "E107"
   ],
+  "2026-09-28": [
+   "E113"
+  ],
   "2026-09-29": [
+   "E113",
    "E53"
+  ],
+  "2026-09-30": [
+   "E113",
+   "E70"
+  ],
+  "2026-10-01": [
+   "E113"
   ],
   "2026-10-13": [
    "E53"
   ],
-  "2026-09-30": [
-   "E70"
+  "2026-10-03": [
+   "E116"
   ],
   "2026-10-06": [
    "E93"
@@ -3163,6 +3419,9 @@
   "2026-10-29": [
    "E81"
   ],
+  "2026-10-17": [
+   "E111"
+  ],
   "2026-10-21": [
    "E100"
   ],
@@ -3174,6 +3433,9 @@
   ],
   "2026-27-03": [
    "E100"
+  ],
+  "2026-10-31": [
+   "E117"
   ],
   "2026-11-01": [
    "E54"
@@ -3280,6 +3542,33 @@
    "when": "10/1・8・22・29 の木曜 10:00〜12:00 全4回 / 場所: 中央公民館 講座室1 ほか"
   },
   {
+   "id": "E78",
+   "name": "西武園ゆうえんち「大夏祭り2026」",
+   "reason": "ステータス「🔴」のため除外",
+   "when": "7/18(土)〜9/23(水・祝) ←★2026-09-13 公式サイトで確定（オーナーが画面を確認）"
+  },
+  {
+   "id": "E108",
+   "name": "児童館3館",
+   "confidence": "公式確認済み（2026-09-15・開館時間と休館日）",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E109",
+   "name": "市立図書館",
+   "confidence": "公式確認済み（2026-09-15）",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E115",
+   "name": "鉄道博物館（さいたま市大宮）",
+   "confidence": "公式確認済み（2026-09-15・開館日カレンダー／料金）",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
    "id": "E83",
    "name": "すくすくの会(心理士さんとお話をする会)",
    "confidence": "",
@@ -3357,11 +3646,73 @@
    "when": ""
   },
   {
+   "id": "E119",
+   "name": "Plants Plan Cafe(プランツプランカフェ)",
+   "confidence": "店主(松田様)からDMで直接回答・2026-09-11",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E124",
+   "name": "親子＆キッズ講座（家庭料理教室「なつやすみ」）",
+   "confidence": "公式サイトで確認（https://72yasumi.net/ 2026-09-14 取得）",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E120",
+   "name": "Hana🌸Hanaひろば（小平花小金井こども園）",
+   "confidence": "園の公式Instagramの日程表画像で全件確認（@k.hanakoganei_kodomoen・2026-09-03投稿 / 画像を2026-09-14に精査）",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
+   "id": "E121",
+   "name": "幼稚園説明会（小平花小金井こども園・令和9年度入園者向け）",
+   "confidence": "園の公式Instagramのチラシ画像で確認（2026-09-14）",
+   "reason": "日時・期間の行が無い",
+   "when": ""
+  },
+  {
    "id": "E103",
    "name": "音楽の絵本 halloween（ルネこだいら 大ホール）",
    "reason": "日時から確定日が取れない",
    "when": "2026年10月25日(日) 14:00開演（13:15開場）",
    "confidence": "公式確認済み（2026-09-05・ルネこだいらで現地のチラシを入手）"
+  },
+  {
+   "id": "E123",
+   "name": "第37回 市民スポーツまつり",
+   "reason": "日時から確定日が取れない",
+   "when": "2026年（令和8年）10月11日(日) 9:30〜15:00",
+   "confidence": "市公式で確認済み（2026-09-14 取得）"
+  },
+  {
+   "id": "E125",
+   "name": "第15回 こそだてフェスタ@西東京",
+   "reason": "ステータス「🔴」のため除外",
+   "when": "2026年（令和8年）10月12日(月・祝) 10:00〜15:00"
+  },
+  {
+   "id": "E118",
+   "name": "玉川上水わくわくクリーンフェスティバル（第2回・WAKU WA CLEAN）",
+   "reason": "日時から確定日が取れない",
+   "when": "2026年11月22日(日) 10:00〜16:15",
+   "confidence": "主催アカウントの告知とチラシ画像で確認（2026-09-11 取得。Threads @wakuwaclean）"
+  },
+  {
+   "id": "E122",
+   "name": "第2回 小平モルックカップ",
+   "reason": "日時から確定日が取れない",
+   "when": "2026年11月1日(日) 10:00〜15:00（受付 9:15〜）",
+   "confidence": "チラシの現物を実見（2026-09-14。市の文化スポーツ課が発行）"
+  },
+  {
+   "id": "E126",
+   "name": "こもれびと水車のマルシェ vol.3（小平ふるさと村）",
+   "reason": "日時から確定日が取れない",
+   "when": "2026年11月1日(日) 10:00〜15:30",
+   "confidence": "主催アカウントの告知で確認（Threads @tocotonto_handmade・2026-09-15）"
   },
   {
    "id": "E65",

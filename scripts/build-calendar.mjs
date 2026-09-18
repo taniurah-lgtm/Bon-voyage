@@ -28,9 +28,30 @@ const today = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
 // JSON なのでそのまま読める（会員ページ側は意図的に落としているのに、
 // 公開側のほうが緩いという逆転になっていた）。
 const INTERNAL = ['source', 'confidence', 'status'];
+
+// 🔴 2026-09-18: 主催者「個人」の連絡先が、この公開JSONにそのまま載っていた。
+//   携帯2件・フリーメール2件（1件は氏名つき）が GitHub Pages で誰でも読める状態で、
+//   HTTP 200 で取得できることを確認した。表示側（HTML）に出していなくても、
+//   公開JSONはスクレイピングできる。
+//   CLAUDE.md「個人の連絡先を機械可読で撒かない」:
+//     公開ファイルに出すのは**公式の代表番号だけ**。メールは出さない。
+//   チラシから拾った個人の連絡先を再配布するのは、掲載を許された範囲を超える。
+//   ★ここが公開の境目。台帳側は今までどおり自由に書いてよい。
+const OFFICIAL_TEL = /^0(?!70|80|90)\d{1,3}-\d{2,4}-\d{3,4}$/;   // 固定電話だけ通す
+const sanitizeContact = (c) => {
+  if (!c || typeof c !== 'object') return undefined;
+  const tel = OFFICIAL_TEL.test((c.tel || '').trim()) ? c.tel.trim() : '';
+  if (!tel) return undefined;                 // 代表番号が無いなら contact ごと出さない
+  // who は「文化スポーツ課」のような部署名のときだけ残す。個人名は出さない
+  const who = (c.who || '').trim();
+  return { tel, who: /(課|係|センター|協会|公民館|図書館|館|市|署|会)$/.test(who) ? who : '' };
+};
+
 const stripInternal = (e) => {
   const out = { ...e };
   for (const k of INTERNAL) delete out[k];
+  const c = sanitizeContact(out.contact);
+  if (c) out.contact = c; else delete out.contact;
   return out;
 };
 
