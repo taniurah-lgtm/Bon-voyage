@@ -41,6 +41,44 @@ cat events/2026-*.md | grep -oE '^### E[0-9]+' | sort | uniq -d   # 重複
 - ❌「自分の足で確かめて」「実際に行って」（マップ以外）
 - **季節で賞味期限が切れる言葉**（「花火」「水あそび」が見出しに来ていないか）
 
+### 3.5 参照切れ（毎回やる・機械で出せる）
+
+`docs/*.md` は互いの節を名指しで参照し合っている。**参照先の節が消えていても誰も気づかない。**
+2026-09-06、`docs/sources.md` から**773行が一度に消え**、
+水曜巡回のRoutineが名指しする節（「取り方の順番」「フラッとNAVI」
+「こだいらはっぴースマイル」「公民館の講座一覧」）が**12日間、空のまま**だった。
+
+```bash
+python3 - <<'PYEOF'
+import io,re,glob,os
+pat=re.compile(r'`(docs/[\w.-]+\.md)`\s*(?:の|に)?\s*[「『]([^」』]{3,40})[」』]')
+bad=0
+for f in sorted(glob.glob('docs/*.md')):
+    for m in pat.finditer(io.open(f,encoding='utf-8').read()):
+        tgt,sec=m.group(1),m.group(2)
+        if not os.path.exists(tgt): print(f'🔴 {f}: 参照先が無い → {tgt}'); bad+=1; continue
+        if sec not in io.open(tgt,encoding='utf-8').read():
+            print(f'🔴 {os.path.basename(f)} → {os.path.basename(tgt)} の「{sec}」が無い'); bad+=1
+print('参照切れ', bad, '件')
+PYEOF
+```
+
+**`CLAUDE.md` と3本のRoutineプロンプトが参照する節も、同じように確かめる。**
+
+### 3.6 公開データに個人の連絡先が混ざっていないか（毎回やる）
+
+2026-09-18、`docs/homepage/data/events-public.json` に主催者個人の
+**携帯2件・フリーメール2件**が入ったまま公開されていた（HTTP 200 で取得できた）。
+HTMLに出していなくても、公開JSONはそのまま読める。
+
+```bash
+grep -rlE '0[789]0-?[0-9]{4}-?[0-9]{4}|[a-zA-Z0-9._+-]+@(gmail|yahoo|outlook|icloud)\.' \
+  docs/homepage/ --include=*.json --include=*.html --include=*.txt --include=*.js
+```
+
+発行者自身の `tokyo.papa.home@gmail.com` は対象外。それ以外が出たら**最優先で報告する。**
+公開中のファイルも見ること（`curl https://bonvoya.nicomaru.tokyo/data/events-public.json`）。
+
 ### 4. 手順書と実機
 - `docs/line-setup.md` の設定が、実際の設定と食い違っていないか
   （2026-09-17、片方のブランチが「あいさつメッセージ: オフ」のままだった。
