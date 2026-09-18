@@ -10,6 +10,14 @@
  * 出力:
  *   docs/homepage/m/s7f2ka/index.html
  *
+ *
+ * 🔴 2026-09-18: 合言葉ゲートの下に「サポーターになる（月300円）」の申込ボタンが残っていた。
+ *   月額制度は 2026-09-04 に廃止（docs/strategy-2026-09.md）で、ホームページからは
+ *   価格も導線も全部消したはずだった。だが**この生成スクリプトだけ直っていなかった**ため、
+ *   再生成するたびに公開ページへ戻り、HTTP 200 で押せる状態だった。
+ *   **廃止したものは、生成元から消す。**出力を手で直しても、次の生成で戻る。
+ *   ★この注意書きは JS コメントに置くこと。HTMLコメントに書くと公開ページに出る
+ *     （内部の判定理由とファイル名は公開物に書かない。CLAUDE.md「公開物に書かないこと」）。
  * 合言葉はリポジトリに保存しない（暗号文だけ出力）。ブラウザのWeb Cryptoで復号する。
  *
  * カレンダーの中身は **暗号化した中身の中の JSON** に入れる。
@@ -426,7 +434,7 @@ const page = `<!doctype html>${buildStamp()}
 <header class="h" id="top"><div class="h-in">
   <div class="eyebrow">ぼんぼやーじゅ通信</div>
   <h1>会員ページ</h1>
-  <p class="sub">応援サポーターの方へ。</p>
+  <p class="sub">合言葉をお持ちの方へ。</p>
 </div></header>
 <nav id="nav" class="nav" style="display:none"><div class="nav-in">
   <a href="#top">ホーム</a>
@@ -448,16 +456,16 @@ const page = `<!doctype html>${buildStamp()}
         オフのままでは開けません。ブラウザの設定でオンにしてから読み込み直してください。
         うまくいかないときは <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a>でお知らせいただければ、その週のぶんをお送りします。</div>
     </noscript>
-    <!-- autofocus は付けない。会員でない人がリンクを踏んだときにキーボードが開き、
-         下の「サポーターになる」が隠れる（合言葉を持っていないのに入力を促される）。 -->
+    <!-- autofocus は付けない。合言葉を持っていない人がリンクを踏んだときにキーボードが開き、
+         下の案内が隠れる（持っていないのに入力を促される）。 -->
     <input id="pw" type="text" inputmode="text" autocomplete="off" autocapitalize="none" autocorrect="off" placeholder="合言葉" aria-describedby="pw-help">
     <button id="go">ひらく</button>
     <div id="err" class="err" role="alert" aria-live="assertive"></div>
-    <div class="hint">合言葉は、note のメンバー限定投稿でお知らせしています（LINEでお送りすることもできます）。分からないときはお気軽にお尋ねください。</div>
+    <div class="hint">合言葉は、お渡しした方にお知らせしています。分からないときはお気軽にお尋ねください。</div>
     <div class="cta">
-      <p class="lead">まだサポーターでない方へ。<br>月300円で通信を応援いただくと、この会員ページ（花小金井まわりのおでかけカレンダーなど）もご利用いただけます。</p>
-      <a class="join" href="https://note.com/bon_voyage_mail/membership" target="_blank" rel="noopener">サポーターになる（月300円）</a>
-      <a class="more" href="/">まずは通信について知る →</a>
+      <p class="lead">合言葉をお持ちでない方へ。<br>おでかけカレンダー・マップ・バックナンバーは、どなたでも無料でご覧いただけます。</p>
+      <a class="join" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINEで受け取る（無料）</a>
+      <a class="more" href="/">ぼんぼやーじゅ通信について →</a>
     </div>
     <p class="peek">カレンダーの雰囲気は、<a href="/calendar.html">公開版のおでかけカレンダー</a>（今日からの2週間ぶん）でご覧いただけます。</p>
   </div>
@@ -466,7 +474,7 @@ const page = `<!doctype html>${buildStamp()}
 
 <footer>
   <div class="fmark">ぼんぼやーじゅ通信</div>
-  応援サポーター向け会員ページ<br>
+  会員ページ<br>
   <a href="/tokushoho.html">特定商取引法に基づく表記・免責事項</a>｜© 2026 ぼんぼやーじゅ通信
 </footer>
 
