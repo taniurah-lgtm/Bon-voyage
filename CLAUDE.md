@@ -169,4 +169,11 @@ C2. ...
 - イベント日付は公式サイト・自治体サイトで裏取りする。未確定は「(要確認)」を付ける。
 - 情報の正はこのリポジトリの台帳。カレンダーは承認済みイベントの写し。
 - 秘密情報(LINEトークン等)は絶対にリポジトリにコミットしない。環境変数から読む。
-- push先は `claude/family-event-planning-rfwmo8` のみ。PRは作らない(指示があった場合を除く)。
+- **push先は `claude/family-event-planning-rfwmo8` だけ。例外は無い**（2026-09-18、ブランチを1本にした）。
+  PRは作らない(指示があった場合を除く)。
+  🔴 **push の前に必ず `git fetch` → `git rebase origin/claude/family-event-planning-rfwmo8`。**
+  複数の会話・Routine・GitHub Actions が同じブランチに書くので、いきなり push しない。
+- 🔴 **新しいイベントIDは、手元のファイルの最大値で振らない。**`git fetch` してから
+  `events/` 全体の最大値+1 で振る（2026-09-17、2本のブランチが E104〜E112 の9個すべてを
+  別のイベントに使っていた）。
+- **各部の分担と、各部に渡さない仕事は `docs/org.md`。**

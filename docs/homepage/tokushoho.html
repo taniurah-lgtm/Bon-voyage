@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>免責事項・個人情報の取り扱い｜ぼんぼやーじゅ通信</title>
+<meta name="description" content="ぼんぼやーじゅ通信の免責事項と、個人情報の取り扱いについて。通信は無料でお届けしています。">
+<link rel="canonical" href="https://bonvoya.nicomaru.tokyo/tokushoho.html">
+<!-- 免責事項は「探せるべきページ」なので noindex にしない（sitemap にも載せている） -->
+<style>
+  :root {
+    --ground: #FBFAF5; --surface: #FFFFFF; --surface-2: #F5F2EA;
+    --ink: #34434C; --ink-soft: #63727B; --ink-faint: #97A2AA;
+    --sky: #4FA3C4; --sky-deep: #2C7C9E; --sky-wash: #E9F4F7;
+    --marigold: #EBA24A; --marigold-wash: #FBEEDA;
+    --line: #ECE7DB; --line-strong: #DCD5C6;
+    --shadow-soft: 0 2px 20px rgba(52,67,76,.05);
+    --radius: 20px; --radius-sm: 14px;
+    --maru: "Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN W4","Yu Gothic","游ゴシック","Noto Sans JP","Segoe UI",sans-serif;
+    --body: "Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","游ゴシック","Noto Sans JP","Segoe UI",Meiryo,sans-serif;
+    --script: Georgia,"Times New Roman","Hiragino Mincho ProN",serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground:#131F28; --surface:#1A2831; --surface-2:#21333D;
+      --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95;
+      --sky:#6FBAD9; --sky-deep:#9AD4EA; --sky-wash:#1D3944;
+      --marigold:#F0AE5E; --marigold-wash:#362F1F;
+      --line:#293B45; --line-strong:#38505C;
+      --shadow-soft:0 2px 22px rgba(0,0,0,.22);
+    }
+  }
+  :root[data-theme="light"]{--ground:#FBFAF5;--surface:#FFFFFF;--surface-2:#F5F2EA;--ink:#34434C;--ink-soft:#63727B;--ink-faint:#97A2AA;--sky:#4FA3C4;--sky-deep:#2C7C9E;--sky-wash:#E9F4F7;--marigold:#EBA24A;--marigold-wash:#FBEEDA;--line:#ECE7DB;--line-strong:#DCD5C6;--shadow-soft:0 2px 20px rgba(52,67,76,.05);}
+  :root[data-theme="dark"]{--ground:#131F28;--surface:#1A2831;--surface-2:#21333D;--ink:#ECF2F4;--ink-soft:#AAB9C1;--ink-faint:#7B8C95;--sky:#6FBAD9;--sky-deep:#9AD4EA;--sky-wash:#1D3944;--marigold:#F0AE5E;--marigold-wash:#362F1F;--line:#293B45;--line-strong:#38505C;--shadow-soft:0 2px 22px rgba(0,0,0,.22);}
+
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink); font-family:var(--body); line-height:1.85; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.35rem; }
+  p { margin: 0; }
+  a { color: var(--sky-deep); }
+
+  .ghead { background: linear-gradient(160deg, var(--sky-wash), var(--marigold-wash)); border-bottom: 1px solid var(--line); }
+  .ghead-in { max-width: 44rem; margin: 0 auto; padding: 2.8rem 1.35rem 2rem; }
+  .eyebrow { font-family: var(--script); font-style: italic; font-size: 1.05rem; color: var(--marigold); margin-bottom: .3rem; }
+  h1 { font-family: var(--maru); font-weight: 800; font-size: clamp(1.5rem, 5.4vw, 2.1rem); letter-spacing: .02em; line-height: 1.3; margin: 0 0 .5rem; }
+  .ghead .sub { color: var(--ink-soft); font-size: .95rem; }
+
+  main { padding: 2.2rem 0 1rem; }
+  h2 { font-family: var(--maru); font-weight: 800; font-size: 1.15rem; margin: 2.2rem 0 .9rem; }
+  h2:first-of-type { margin-top: 0; }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-soft); overflow: hidden; }
+  dl { margin: 0; }
+  .row { display: grid; grid-template-columns: 11rem 1fr; gap: 0; border-bottom: 1px solid var(--line); }
+  .row:last-child { border-bottom: 0; }
+  dt { font-family: var(--maru); font-weight: 800; font-size: .9rem; color: var(--ink-soft); background: var(--surface-2); padding: .85rem 1.1rem; }
+  dd { margin: 0; padding: .85rem 1.1rem; font-size: .95rem; }
+  dd .note { display: block; font-size: .85rem; color: var(--ink-soft); margin-top: .3rem; }
+
+  .plain { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 1.1rem 1.25rem; }
+  .plain ul { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: .5rem; }
+  .plain li { font-size: .95rem; color: var(--ink-soft); }
+  .plain li b { color: var(--ink); }
+
+  .back { display: inline-block; margin-top: 2.4rem; font-family: var(--maru); font-weight: 800; font-size: .95rem; text-decoration: none; }
+  .back:hover { text-decoration: underline; }
+
+  footer { color: var(--ink-faint); font-size: .82rem; text-align: center; padding: 2.4rem 1.35rem 3rem; line-height: 1.7; }
+  footer .fmark { font-family: var(--maru); font-weight: 800; color: var(--ink-soft); }
+
+  @media (max-width: 34rem) {
+    .row { grid-template-columns: 1fr; }
+    dt { padding-bottom: .3rem; background: var(--surface-2); }
+    dd { padding-top: .55rem; }
+  }
+</style>
+<script src="/assets/analytics.js" defer></script>
+</head>
+<body>
+<header class="ghead">
+  <div class="ghead-in">
+    <div class="eyebrow">Bon Voyage,</div>
+    <h1>免責事項・個人情報の取り扱い</h1>
+    <p class="sub">ぼんぼやーじゅ通信は、どなたでも無料でお読みいただけます。<b>料金をいただくことはありません。</b></p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <h2>免責事項</h2>
+  <div class="plain">
+    <ul>
+      <li>掲載しているイベントの日程・料金・開催可否などの情報は、<b>変更・中止となる場合があります</b>。おでかけの前に、必ず主催者・施設の公式情報で最終確認をお願いします。</li>
+      <li>情報は公式サイト・自治体の発表をもとに調べていますが、<b>正確性・完全性を保証するものではありません</b>。当方の情報にもとづいて生じた損害について、責任を負いかねます。</li>
+      <li>おでかけ先での事故・けが・トラブルについて、当方は責任を負いかねます。<b>お子さまの安全は保護者の方の責任のもとで</b>お願いいたします。</li>
+      <li>本サービスは、天災・通信障害・LINE のサービス変更など、<b>やむを得ない事情により配信を休止・終了する場合があります</b>。</li>
+    </ul>
+  </div>
+
+  <h2>個人情報の取り扱い</h2>
+  <div class="plain">
+    <ul>
+      <li><b>お申し込みのときに、お名前やご住所をうかがうことはありません。</b>LINEの友だち追加だけでお読みいただけます。</li>
+      <li><b>LINEでの配信について</b>：配信はLINE社のしくみを通じて行っています。こちらで見られるのは、LINEが集計した人数や地域・年代のおおよその割合で、<b>どなたが読んでいるかは分かりません</b>。ただし、1対1でメッセージをいただいた場合は、LINEの表示名とアイコンが表示されます。</li>
+      <li><b>おでかけマップにひとことをお寄せいただく場合</b>：お名前（ニックネーム）・お住まいのエリア・お子さまの年齢を任意でうかがっています。地図に載せるのは<b>ひとことの本文とニックネームだけ</b>で（空欄のときは「ご近所の方」と表示します）、エリアと年齢は掲載しません。番地や園・学校の名前は書かないようお願いしています。</li>
+      <li><b>メールでお問い合わせをいただく場合</b>：いただいたメールアドレスと本文は、<b>お返事のためだけに</b>使います。</li>
+      <li>ご本人の同意なく、<b>第三者に提供することはありません</b>。</li>
+      <li>不要となった時点で速やかに削除します。掲載の取り下げや削除のご希望は、下記のメールアドレスまでお知らせください。</li>
+    </ul>
+  </div>
+
+  <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>
+</main>
+
+<footer>
+  <div class="fmark">ぼんぼやーじゅ通信</div>
+  発行：ぼんぼやーじゅ通信の会　お問い合わせ: <a href="mailto:tokyo.papa.home@gmail.com">tokyo.papa.home@gmail.com</a><br>
+  © 2026 ぼんぼやーじゅ通信
+</footer>
+
+</body>
+</html>

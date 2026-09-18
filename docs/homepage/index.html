@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="jOPlocj64z-dohPsZFjtJesskuHvNswYnlnk7DHIYNM" />
+<title>ぼんぼやーじゅ通信｜小平の週末おでかけ便</title>
+<meta name="description" content="小平市の未就学児〜小学生のいるご家庭へ。小金井公園や多摩六都科学館など、週末のおでかけ情報（公園・児童館・図書館・科学館・季節のお祭り・申込のいる講座）を毎週水曜に無料でお届けする「ぼんぼやーじゅ通信」。">
+<link rel="canonical" href="https://bonvoya.nicomaru.tokyo/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bonvoya.nicomaru.tokyo/">
+<meta property="og:title" content="ぼんぼやーじゅ通信｜小平の週末おでかけ便">
+<meta property="og:description" content="小平市の未就学〜小学生のいるご家庭へ、週末のおでかけ情報を毎週水曜に無料でお届け。小金井公園や多摩六都科学館など、天気に合わせた「今週これ」も。">
+<meta property="og:image" content="https://bonvoya.nicomaru.tokyo/assets/hero-park.jpg">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root {
+    --ground: #FBFAF5;
+    --surface: #FFFFFF;
+    --surface-2: #F5F2EA;
+    --ink: #34434C;
+    --ink-soft: #63727B;
+    --ink-faint: #97A2AA;
+    --sky: #4FA3C4;
+    --sky-deep: #2C7C9E;
+    --sky-wash: #E9F4F7;
+    --marigold: #EBA24A;
+    --marigold-wash: #FBEEDA;
+    --blush: #EB8E86;
+    --blush-wash: #FBEBE7;
+    --leaf: #74AE71;
+    /* 明るい地（sky-deep・leaf・marigold）に乗せる文字の色。
+       定義を忘れると var(--on-sky) が継承色になり、ダークで 1.78:1 まで落ちる。 */
+    --on-sky: #FFFFFF;
+    /* マリーゴールドの上／マリーゴールド色の文字に使う濃い側。
+       定義せずに var(--marigold-ink) と書いていたため、宣言ごと無効になっていた。 */
+    --marigold-ink: #8A5A12;
+    /* leaf/marigold のような明るい地に乗せる文字。両モードで濃いままにする
+       （--on-sky はライトで白になるので、明るい地には使えない） */
+    --on-bright: #123018;
+    /* ◎の強調。地の明暗で反転させる（生値だとどちらかが必ず落ちる） */
+    --leaf-ink: #2F6B34;
+    /* 生地（--ground）の上のリンク。--sky-deep だと 4.48 で 4.5 に届かない */
+    --link-ink: #226881;
+    --line: #ECE7DB;
+    --line-strong: #DCD5C6;
+    --line-green: #06C755;
+    --shadow: 0 2px 6px rgba(52,67,76,.04), 0 14px 40px rgba(52,67,76,.06);
+    --shadow-soft: 0 2px 20px rgba(52,67,76,.05);
+    --radius: 22px;
+    --radius-sm: 16px;
+    --maru: "Hiragino Maru Gothic ProN", "ヒラギノ丸ゴ ProN W4", "Yu Gothic", "游ゴシック", "Noto Sans JP", "Segoe UI", sans-serif;
+    --body: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "游ゴシック", "Noto Sans JP", "Segoe UI", Meiryo, sans-serif;
+    --script: Georgia, "Times New Roman", "Hiragino Mincho ProN", serif;
+    --measure: 40rem;
+    --hero-photo: url("assets/hero-park.jpg");
+    --hero-scrim-1: rgba(251,250,245,.96);
+    --hero-scrim-2: rgba(251,250,245,.82);
+    --hero-scrim-3: rgba(251,250,245,.20);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #131F28; --surface: #1A2831; --surface-2: #21333D;
+      --ink: #ECF2F4; --ink-soft: #AAB9C1; --ink-faint: #7B8C95;
+      --sky: #6FBAD9; --sky-deep: #9AD4EA; --sky-wash: #1D3944;
+      --marigold: #F0AE5E; --marigold-wash: #362F1F;
+      --blush: #EC9C94; --blush-wash: #362725; --leaf: #8FC489; --on-sky: #0E1A22; --marigold-ink: #F0AE5E; --on-bright: #123018; --leaf-ink: #8FC489; --link-ink: #9AD4EA;
+      --line: #293B45; --line-strong: #38505C;
+      --shadow: 0 2px 6px rgba(0,0,0,.2), 0 16px 44px rgba(0,0,0,.26);
+      --shadow-soft: 0 2px 22px rgba(0,0,0,.22);
+      --hero-scrim-1: rgba(17,28,37,.95); --hero-scrim-2: rgba(17,28,37,.80); --hero-scrim-3: rgba(17,28,37,.22);
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #FBFAF5; --surface: #FFFFFF; --surface-2: #F5F2EA;
+    --ink: #34434C; --ink-soft: #63727B; --ink-faint: #97A2AA;
+    --sky: #4FA3C4; --sky-deep: #2C7C9E; --sky-wash: #E9F4F7;
+    --marigold: #EBA24A; --marigold-wash: #FBEEDA; --blush: #EB8E86; --blush-wash: #FBEBE7;
+    --leaf: #74AE71; --line: #ECE7DB; --line-strong: #DCD5C6;
+    --shadow: 0 2px 6px rgba(52,67,76,.04), 0 14px 40px rgba(52,67,76,.06);
+    --shadow-soft: 0 2px 20px rgba(52,67,76,.05);
+    --hero-scrim-1: rgba(251,250,245,.96); --hero-scrim-2: rgba(251,250,245,.82); --hero-scrim-3: rgba(251,250,245,.20);
+  }
+  :root[data-theme="dark"] {
+    --ground:#131F28; --surface:#1A2831; --surface-2:#21333D;
+    --ink:#ECF2F4; --ink-soft:#AAB9C1; --ink-faint:#7B8C95;
+    --sky:#6FBAD9; --sky-deep:#9AD4EA; --sky-wash:#1D3944;
+    --marigold:#F0AE5E; --marigold-wash:#362F1F; --blush:#EC9C94; --blush-wash:#362725;
+    --leaf:#8FC489; --on-sky:#0E1A22; --marigold-ink:#F0AE5E; --on-bright:#123018; --leaf-ink:#8FC489; --link-ink:#9AD4EA; --line:#293B45; --line-strong:#38505C;
+    --shadow:0 2px 6px rgba(0,0,0,.2),0 16px 44px rgba(0,0,0,.26); --shadow-soft:0 2px 22px rgba(0,0,0,.22);
+    --hero-scrim-1: rgba(17,28,37,.95); --hero-scrim-2: rgba(17,28,37,.80); --hero-scrim-3: rgba(17,28,37,.22);
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--body); line-height: 1.85; -webkit-font-smoothing: antialiased; font-feature-settings: "palt" 1; }
+  .wrap { max-width: 60rem; margin: 0 auto; padding: 0 1.6rem; }
+  p { margin: 0; }
+  a { color: var(--sky-deep); }
+  svg { display: block; }
+
+  /* ---- hero (photo) ---- */
+  .hero { position: relative; overflow: hidden; background: var(--sky-wash); min-height: clamp(30rem, 66vh, 42rem); display: flex; }
+  .hero::before { content: ""; position: absolute; inset: 0; z-index: 0; background-image: var(--hero-photo); background-size: cover; background-position: center 52%; }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, var(--hero-scrim-1) 0%, var(--hero-scrim-1) 34%, var(--hero-scrim-2) 66%, var(--hero-scrim-3) 100%); }
+  .hero-inner { position: relative; z-index: 2; padding: 3.8rem 1.6rem 8.5rem; max-width: 60rem; margin: 0 auto; width: 100%; align-self: flex-start; }
+  .eyebrow { font-family: var(--script); font-style: italic; font-size: 1.2rem; letter-spacing: .02em; color: var(--marigold); margin-bottom: .3rem; text-shadow: 0 1px 10px var(--hero-scrim-1); }
+  .eyebrow::after { content: ""; display: inline-block; width: 2.2rem; height: 1px; background: var(--marigold); vertical-align: middle; margin-left: .6rem; opacity: .7; }
+  .wordmark { font-family: var(--maru); font-weight: 800; font-size: min(8.4vw, 3.5rem); letter-spacing: .01em; line-height: 1.14; margin: 0 0 1rem; white-space: nowrap; }
+  .wordmark .dot { color: var(--sky-deep); }
+  .lede { font-size: 1.18rem; color: var(--ink); max-width: 32rem; text-wrap: pretty; font-weight: 600; text-shadow: 0 1px 14px var(--hero-scrim-1), 0 0 4px var(--hero-scrim-1); }
+  .lede-sub { margin-top: .7rem; color: var(--ink); max-width: 32rem; font-size: 1rem; font-weight: 500; text-shadow: 0 1px 14px var(--hero-scrim-1), 0 0 4px var(--hero-scrim-1); }
+  .badges { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
+  .badge { font-family: var(--maru); font-weight: 700; font-size: .82rem; padding: .35rem .85rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink-soft); box-shadow: var(--shadow-soft); }
+  .cta-row { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: 1.9rem; }
+  .btn { display: inline-flex; align-items: center; gap: .55rem; font-family: var(--maru); font-weight: 800; font-size: 1.02rem; padding: .9rem 1.6rem; border-radius: 999px; border: 1px solid transparent; text-decoration: none; cursor: pointer; transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease; }
+  .btn:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+  .btn-line { background: var(--line-green); color: #fff; box-shadow: var(--shadow); }
+  .btn-line:hover { transform: translateY(-1px); }
+  .btn-ghost { background: var(--surface); color: var(--sky-deep); border-color: var(--line-strong); }
+  .btn-ghost:hover { border-color: var(--sky); }
+  .btn .ic { width: 1.15em; height: 1.15em; }
+  .hero-note { margin-top: .9rem; font-size: .86rem; color: var(--ink-soft); }
+
+  /* ---- sections ---- */
+  section { padding: 3.4rem 0; }
+  .stop { display: flex; align-items: center; gap: .6rem; margin-bottom: 1.3rem; }
+  .stop .pin { width: .62rem; height: .62rem; border-radius: 999px; background: var(--marigold); box-shadow: 0 0 0 5px var(--marigold-wash); flex: none; }
+  .stop .label { font-family: var(--maru); font-weight: 800; letter-spacing: .09em; font-size: .8rem; text-transform: uppercase; color: var(--ink-faint); }
+  h2 { font-family: var(--maru); font-weight: 800; font-size: clamp(1.55rem, 4.2vw, 2rem); letter-spacing: .02em; margin: 0 0 .55rem; text-wrap: balance; }
+  .section-lede { color: var(--ink-soft); max-width: var(--measure); margin-bottom: 1.9rem; }
+
+  /* founder's letter */
+  .story { max-width: 44rem; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 2rem 2rem; box-shadow: var(--shadow-soft); display: flex; flex-direction: column; gap: .95rem; }
+  .story p { font-size: 1.05rem; color: var(--ink); line-height: 1.9; text-wrap: pretty; }
+  .story p.lead { font-family: var(--maru); font-weight: 800; font-size: 1.22rem; letter-spacing: .01em; }
+  .story p.origin { font-size: 1rem; color: var(--ink-soft); border-top: 1px dashed var(--line-strong); padding-top: 1.1rem; margin-top: .15rem; }
+  .soon { font-family: var(--maru); font-weight: 700; font-size: .72rem; background: var(--blush-wash); color: var(--blush); padding: .12rem .5rem; border-radius: 999px; margin-right: .45rem; vertical-align: middle; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.1rem; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem 1.4rem; box-shadow: var(--shadow-soft); display: flex; flex-direction: column; gap: .55rem; }
+  .card .kicker { font-family: var(--maru); font-weight: 800; font-size: 1.08rem; display: flex; align-items: center; gap: .55rem; }
+  .card .kicker .em { font-size: 1.35rem; }
+  .card p { color: var(--ink-soft); font-size: .96rem; }
+  .agekey { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .35rem; }
+  .agechip { font-family: var(--maru); font-weight: 700; font-size: .8rem; background: var(--blush-wash); color: var(--ink-soft); padding: .24rem .65rem; border-radius: 999px; }
+
+  .issue { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; max-width: 46rem; }
+  .issue-top { background: linear-gradient(120deg, var(--sky-deep) 0%, var(--sky) 100%); color: var(--on-sky); padding: 1.2rem 1.5rem; display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .issue-top .t { font-family: var(--maru); font-weight: 800; font-size: 1.14rem; letter-spacing: .02em; }
+  /* グラデの明るい側に白文字が乗ると 2.85:1。地に依存しないチップにする
+     （帯の色は変えたくないので、文字側の地を用意する） */
+  .issue-top .d { font-size: .82rem; font-weight: 700; font-variant-numeric: tabular-nums;
+    background: var(--surface); color: var(--sky-deep); border-radius: 999px; padding: .12rem .6rem; }
+  .issue-body { padding: 1.5rem 1.5rem 1.7rem; }
+  .issue-legend { font-size: .82rem; color: var(--ink-soft); border-bottom: 1px dashed var(--line-strong); padding-bottom: .9rem; margin-bottom: 1.2rem; }
+  /* 号の中の「今週末」「本日」は配信日時点の話。日付だけでは打ち消せないので明示する
+     （月曜に読むと、先週末の天気を今週として語っているように見えていた） */
+  .issue-asof { font-size: .82rem; color: var(--ink-soft); background: var(--surface-2); border-radius: 10px; padding: .5rem .7rem; margin-bottom: .8rem; line-height: 1.8; }
+  .blk { margin-bottom: 1.3rem; }
+  .blk:last-child { margin-bottom: 0; }
+  .blk h3 { font-family: var(--maru); font-weight: 800; font-size: .99rem; margin: 0 0 .55rem; color: var(--sky-deep); display: flex; align-items: center; gap: .45rem; }
+  .blk h3::before { content: ""; width: .5rem; height: .5rem; background: var(--marigold); border-radius: 2px; flex: none; }
+  .item { margin-bottom: .9rem; }
+  .item:last-child { margin-bottom: 0; }
+  .item .h { font-weight: 700; font-size: .98rem; }
+  .item .h .em { margin-right: .35rem; }
+  .item .m { font-size: .9rem; color: var(--ink-soft); margin-top: .14rem; }
+  .ages { display: inline-flex; gap: .55rem; margin-top: .32rem; font-size: .82rem; color: var(--ink); font-family: var(--maru); font-weight: 700; }
+  .ages b { color: var(--leaf-ink); }
+  ul.takeaway { list-style: none; margin: .5rem 0 0; padding: 0; display: flex; flex-direction: column; gap: .55rem; }
+  ul.takeaway li { position: relative; padding-left: 1.35rem; font-size: .92rem; color: var(--ink-soft); }
+  ul.takeaway li::before { content: "▸"; position: absolute; left: 0; color: var(--marigold); }
+
+  /* 無料で使えることを、3つのページの下に静かに置く1行 */
+  .support-line { margin-top: 1.6rem; font-size: .85rem; line-height: 1.9; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 1rem; }
+  /* 地が --ground(#FBFAF5) なので --sky-deep では 4.48 とわずかに足りない。専用の濃い側を使う */
+  .support-line a { font-weight: 700; display: inline-flex; align-items: center; min-height: 44px; color: var(--link-ink); }
+  /* ページ内の行き先。長いページなので、上に見出しの目次を置く。 */
+  .pagenav { display: flex; flex-wrap: wrap; gap: .5rem; padding-top: 1.1rem; }
+  .pagenav a {
+    font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none;
+    color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong);
+    border-radius: 999px; padding: 0 .9rem; min-height: 44px; display: inline-flex; align-items: center;
+  }
+
+  .trust { display: grid; gap: .95rem; max-width: 48rem; }
+  .trust .row { display: flex; gap: .7rem; align-items: flex-start; font-size: .94rem; color: var(--ink-soft); }
+  .trust .row .k { color: var(--sky); font-weight: 800; flex: none; }
+
+  .closing { position: relative; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: var(--surface-2); }
+  .closing::before { content: ""; position: absolute; inset: 0; z-index: 0; background-image: var(--hero-photo); background-size: cover; background-position: center 55%; opacity: .55; }
+  .closing::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, var(--hero-scrim-1), var(--hero-scrim-2)); }
+  .closing-body { position: relative; z-index: 2; text-align: center; padding: 2.8rem 1.5rem; }
+  .qr-wrap { margin-top: 1.7rem; display: flex; flex-direction: column; align-items: center; gap: .55rem; }
+  /* LINEを使わない相手（施設・お店・事業者）が連絡できる先。
+     フッターのメールアドレスは小さすぎて見つけてもらえなかった。 */
+  .contact { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.7rem 1.5rem; }
+  .contact-list { list-style: none; margin: 0 0 1.5rem; padding: 0; display: flex; flex-direction: column; gap: .85rem; }
+  .contact-list li { position: relative; padding-left: 1.35rem; font-size: .98rem; line-height: 1.7; }
+  .contact-list li::before { content: "▸"; position: absolute; left: 0; color: var(--marigold); }
+  .contact-list .tiny { display: block; font-size: .86rem; color: var(--ink-soft); margin-top: .15rem; }
+  /* 地は --ground。--surface-2(#F5F2EA) の上だと --ink-soft が 4.44:1 で、
+     この中の小さい文字（連絡先の但し書き）に必要な 4.5:1 に届かない。 */
+  .contact-mail { background: var(--ground); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); padding: 1.2rem 1.3rem; }
+  .contact-lb { font-family: var(--maru); font-weight: 800; font-size: .9rem; color: var(--ink-soft); margin: 0 0 .3rem; }
+  .contact-addr { margin: 0 0 .7rem; }
+  .contact-addr a { font-family: var(--maru); font-weight: 800; font-size: 1.12rem; color: var(--link-ink); text-decoration: none; overflow-wrap: anywhere; display: inline-flex; align-items: center; min-height: 44px; }
+  .contact-mail .tiny { font-size: .84rem; color: var(--ink-soft); line-height: 1.8; }
+  .contact-line { margin-top: 1.2rem; font-size: .9rem; color: var(--ink-soft); }
+  .qr { width: 150px; height: 150px; background: #fff; padding: 10px; border-radius: 12px; box-shadow: var(--shadow-soft); }
+  .qr-cap { font-size: .85rem; color: var(--ink-soft); }
+
+  footer { border-top: 1px solid var(--line); padding: 2.2rem 0 3rem; color: var(--ink-soft); }
+  footer .fmark { font-family: var(--maru); font-weight: 800; color: var(--ink-soft); letter-spacing: .04em; }
+  footer .fsmall { font-size: .82rem; margin-top: .4rem; line-height: 1.7; }
+
+  .fade { opacity: 0; transform: translateY(10px); animation: rise .75s cubic-bezier(.2,.7,.3,1) forwards; }
+  .fade.d1 { animation-delay: .06s; } .fade.d2 { animation-delay: .14s; } .fade.d3 { animation-delay: .22s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  /* ---- mobile: 文字を大きく読みやすく ---- */
+  @media (max-width: 40rem) {
+    html { font-size: 112.5%; }
+    body { line-height: 1.8; }
+    .wrap { padding: 0 1.15rem; }
+    .hero-inner { padding-left: 1.15rem; padding-right: 1.15rem; padding-bottom: 7rem; }
+    .lede { font-size: 1.2rem; }
+    .lede-sub { font-size: 1.06rem; }
+    .section-lede, .card p, .trust .row, ul.takeaway li, .item .m { font-size: 1.05rem; }
+    .item .h { font-size: 1.08rem; }
+    .blk h3 { font-size: 1.1rem; }
+    .card .kicker { font-size: 1.14rem; }
+    .issue-legend { font-size: .98rem; }
+    .ages { font-size: .96rem; }
+    .badge, .agechip { font-size: .88rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) { .fade { animation: none; opacity: 1; transform: none; } }
+
+  /* 無料で使える3つのページ（カレンダー・マップ・バックナンバー）。
+     通信は流れるが、こちらは残って自分のタイミングで開ける。それが3つの共通点。
+     以前はここが20pxのテキストリンクで、ページの中で見つけてもらえなかった。 */
+  .tools { display: grid; gap: .8rem; margin-top: 1.8rem; }
+  @media (min-width: 42rem) { .tools { grid-template-columns: 1fr 1fr 1fr; } }
+  .tool {
+    display: flex; gap: .8rem; align-items: flex-start; text-decoration: none;
+    background: var(--surface); border: 1px solid var(--line-strong);
+    border-radius: 16px; padding: 1rem 1.1rem; min-height: 44px;
+    box-shadow: var(--shadow-soft); color: var(--ink);
+  }
+  .tool:hover { border-color: var(--sky); }
+  .tool:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+  .tool-ic { font-size: 1.5rem; line-height: 1.2; flex: none; }
+  .tool-body { display: flex; flex-direction: column; gap: .2rem; }
+  .tool-body b { font-family: var(--maru); font-weight: 800; font-size: 1rem; color: var(--sky-deep); }
+  .tool-body > span { font-size: .88rem; color: var(--ink-soft); line-height: 1.7; }
+  .tool-body b b { color: var(--ink); font-weight: 800; }
+
+  /* #12 ヒーローの注記が芝生の写真の上で読めなかったので、下地を敷く */
+  .hero-note {
+    background: rgba(255,255,255,.86); border-radius: 999px;
+    padding: .35rem .9rem; display: inline-block; color: var(--ink) !important;
+  }
+  @media (prefers-color-scheme: dark) { .hero-note { background: rgba(19,31,40,.8); } }
+
+  /* [hidden] は UA の display:none だが、.ck の display:inline-flex に負けて
+     ✓ が2つ並んでいた。属性を優先させる。 */
+  [hidden] { display: none !important; }
+
+/* 行き先の範囲（所要時間順） */
+.range-h{margin:34px 0 6px;font-size:1.05rem;font-weight:800;color:var(--ink);}
+.range-lede{margin:0 0 14px;color:var(--ink-soft);font-size:.94rem;line-height:1.7;}
+.range{list-style:none;margin:0;padding:0;display:grid;gap:10px;}
+.range li{display:grid;grid-template-columns:11.5em 1fr;gap:14px;align-items:baseline;
+  padding:11px 14px;background:var(--surface-2);border-radius:12px;}
+.range .rk{font-weight:800;color:var(--sky-deep,#2C7C9E);font-size:.9rem;letter-spacing:.01em;}
+.range .rv{color:var(--ink);font-size:.94rem;line-height:1.7;}
+@media (max-width:620px){
+  .range li{grid-template-columns:1fr;gap:3px;}
+}
+</style>
+<!-- 検索エンジンに「ぼんぼやーじゅ通信」という名前の実体を伝えるための構造化データ。
+     ブランド名での検索に出るかどうかは、まずここで名前を認識してもらえるかによる。 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://bonvoya.nicomaru.tokyo/#website",
+      "url": "https://bonvoya.nicomaru.tokyo/",
+      "name": "ぼんぼやーじゅ通信",
+      "alternateName": [
+        "ぼんぼやーじゅ通信の会",
+        "Bon Voyage 通信",
+        "bonvoya"
+      ],
+      "description": "小平市の未就学児〜小学生のいるご家庭へ、週末のおでかけ情報を毎週水曜に無料でお届けするLINE通信。行き先は小金井公園・多摩六都科学館など、花小金井からだいたい30分で行ける範囲。",
+      "inLanguage": "ja",
+      "publisher": {
+        "@id": "https://bonvoya.nicomaru.tokyo/#org"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://bonvoya.nicomaru.tokyo/#org",
+      "name": "ぼんぼやーじゅ通信の会",
+      "alternateName": "ぼんぼやーじゅ通信",
+      "url": "https://bonvoya.nicomaru.tokyo/",
+      "logo": "https://bonvoya.nicomaru.tokyo/assets/hero-park.jpg",
+      "description": "小平市・花小金井を拠点に、子育て世帯へ週末のおでかけ情報を無料で配信している市民活動団体。小平市民活動支援センターあすぴあ 登録団体（第254号）。",
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "小平市"
+        },
+        {
+          "@type": "City",
+          "name": "西東京市"
+        },
+        {
+          "@type": "City",
+          "name": "東久留米市"
+        },
+        {
+          "@type": "City",
+          "name": "東村山市"
+        },
+        {
+          "@type": "City",
+          "name": "小金井市"
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://bonvoya.nicomaru.tokyo/#webpage",
+      "url": "https://bonvoya.nicomaru.tokyo/",
+      "name": "ぼんぼやーじゅ通信｜小平の週末おでかけ便",
+      "isPartOf": {
+        "@id": "https://bonvoya.nicomaru.tokyo/#website"
+      },
+      "about": {
+        "@id": "https://bonvoya.nicomaru.tokyo/#org"
+      }
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="/assets/bv-nav.css">
+<script src="/assets/analytics.js" defer></script>
+</head>
+<body>
+<nav class="bvnav" aria-label="サイト内">
+  <div class="bvnav-in">
+    <a class="bvnav-brand" href="/">ぼんぼやーじゅ通信</a>
+    <div class="bvnav-links">
+      <a href="/" aria-current="page" class="bv-hide-sm">通信について</a>
+      <a href="/calendar.html"><span class="bv-lg">おでかけ</span>カレンダー</a>
+      <a href="/map.html"><span class="bv-lg">おでかけ</span>マップ</a>
+      <a class="bvnav-cta" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE<span class="bv-lg">で受け取る</span></a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow fade">Bon Voyage,</div>
+    <h1 class="wordmark fade d1">ぼんぼやーじゅ通信<span class="dot">.</span></h1>
+    <p class="lede fade d1">小平市の未就学児・小学生のいるご家庭へ。小金井公園や多摩六都科学館など、週末のおでかけ情報を毎週水曜の朝におとどけします。</p>
+    <p class="lede-sub fade d2">公園・児童館・図書館・科学館、季節のお祭りや映画…「今週どこ行こう？」を、地元目線でやさしくお届けします。天気に合わせた提案や、連休のおでかけアイデアも。</p>
+    <div class="badges fade d2">
+      <span class="badge">無料</span>
+      <span class="badge">週1でお届け</span>
+      <span class="badge">小平市ぜんぶ</span>
+      <span class="badge">👶🧒🎒 年齢の目安つき</span>
+    </div>
+    <div class="cta-row fade d3">
+      <a class="btn btn-line" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">
+        <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.9 3 2.75 6.36 2.75 10.5c0 3.7 3.3 6.8 7.78 7.4.3.06.71.2.81.46.09.24.06.6.03.85l-.13.79c-.04.24-.19.93.82.51 1.01-.42 5.45-3.21 7.44-5.5 1.37-1.5 2.02-3.03 2.02-4.51C21.25 6.36 17.1 3 12 3Z"/></svg>
+        LINEで友だち追加（無料）
+      </a>
+      <a class="btn btn-ghost" href="#issue">最新号を読む</a>
+    </div>
+    <p class="hero-note fade d3">友だち追加だけで届きます。個人情報の入力は不要です。</p>
+  </div>
+</header>
+
+<nav class="pagenav wrap" aria-label="このページの中身">
+  <a href="#issue">最新号を読む</a>
+  <a href="#tools">いつでも見られる3つ</a>
+  <a href="#contact">お問い合わせ</a>
+</nav>
+
+<main>
+  <section id="story" class="wrap">
+    <div class="stop"><span class="pin"></span><span class="label">About</span></div>
+    <h2>わが子との大切な時間を、想い出に。</h2>
+    <div class="story">
+      <p class="lead">花小金井のまちが好きです。</p>
+      <p>公園も、季節のお祭りも、子どもと過ごせる場所がたくさんあるのに、毎日はあっという間で、気づくと「あのイベント、終わってた…」ということ、ありませんか。</p>
+      <p>わが家もそうでした。だからこそ、近くの子連れおでかけ情報を定期的にまとめて、家族の予定を少し先まで立てられたら——そんな思いでこの通信を始めました。</p>
+      <p>同じ小平で子育てするご家庭に役立ててもらえたら嬉しいです。載せる行き先は市境をまたぐので、西東京や小金井、東久留米のイベントも入ります。いい場所を見つけたら、ぜひ教えてくださいね。みんなで少しずつ、いい「おでかけの地図」を育てていけたらと思っています。</p>
+      <p class="origin">名前の「ぼんぼやーじゅ」は、フランス語の Bon Voyage＝「よい旅を」から。大げさな旅でなくても、週末のちょっとしたお出かけが、家族のいい時間になりますように。</p>
+    </div>
+  </section>
+
+  <section id="about" class="wrap">
+    <div class="stop"><span class="pin"></span><span class="label">Weekly letter</span></div>
+    <h2>こんな通信です</h2>
+    <p class="section-lede">むずかしい情報集めはこちらで。毎週ひとつ「これ行っとこ」が決まる、そんなおたよりを目指しています。日付や締切は、市や施設のページで一件ずつ確かめています。</p>
+    <div class="cards">
+      <div class="card">
+        <div class="kicker"><span class="em">🎈</span>今週の一推し</div>
+        <p>週末の天気とあわせて「今週はこれ」を、地元目線でひとつ。子連れで行きやすいかのメモつき。</p>
+      </div>
+      <div class="card">
+        <div class="kicker"><span class="em">🗓️</span>イベント先取り情報</div>
+        <p>連休の予約解禁日や前売りの発売など、早めに知っておくと動きやすい情報を、先回りしてお伝えします。</p>
+      </div>
+      <div class="card">
+        <div class="kicker"><span class="em">🌤️</span>天気に合わせた提案</div>
+        <p>崩れそうな週末は、涼しい室内やその日の館内イベントまで。無理なく過ごせる候補を添えます。</p>
+      </div>
+    </div>
+
+    <!-- 行き先の範囲。市名ではなく「何分で行けるか」で並べる。
+         親は市境ではなく所要時間で行き先を決めるため。市名は括弧で添える（検索対策はこれで足りる）。 -->
+    <h3 class="range-h">どのあたりまで載りますか</h3>
+    <p class="range-lede">花小金井から<b>だいたい30分で行ける範囲</b>のイベントを集めて載せます。連休のおでかけ提案は、もう少し遠出のイベントも集めます。</p>
+    <ul class="range">
+      <li><span class="rk">歩いて・自転車で</span>
+        <span class="rv">小金井公園（小金井）／小平グリーンロード／中央公民館・図書館／ルネこだいら</span></li>
+      <li><span class="rk">電車・バスで20分まで</span>
+        <span class="rv">多摩六都科学館・田無アスタ（西東京）／イオンモール東久留米・スパジャポ（東久留米）</span></li>
+      <li><span class="rk">連休・ちょっと遠出</span>
+        <span class="rv">江戸東京たてもの園（小金井）／八国山・北山公園（東村山）／所沢・立川・吉祥寺の大きな催し</span></li>
+    </ul>
+  </section>
+
+  <section id="issue" class="wrap">
+    <div class="stop"><span class="pin"></span><span class="label">Latest issue</span></div>
+    <h2>最新号のプレビュー</h2>
+    <p class="section-lede">実際にお届けしている通信の一例です。読みやすいプレーンな文章で、そのままスマホで開けます。</p>
+
+    <!-- ISSUE:START 自動更新ブロック。reports/free/ の最新号から scripts/update-homepage-preview.mjs が書き換えます（手で編集しても次回配信で上書きされます） -->
+    <article class="issue">
+      <div class="issue-top">
+        <span class="t">ぼんぼやーじゅ通信</span>
+        <span class="d">2026 / 9 / 16（水）号</span>
+      </div>
+      <div class="issue-body">
+        <p class="issue-asof">この号は <b>2026 / 9 / 16（水）</b> にお届けした内容です。「今週末」「本日」はその時点のことなので、いまの予定は<a href="/calendar.html">おでかけカレンダー</a>でご確認ください。</p>
+        <p class="issue-legend">〔目安〕👶あかちゃん(0-2) ／ 🧒未就学(3-6) ／ 🎒小学生　◎ぴったり ○だいじょうぶ △ひと工夫</p>
+
+        <div class="blk">
+          <h3>今週の一推し</h3>
+          <div class="item">
+            <div class="h"><span class="em">🧱</span>多摩六都科学館「全国KAPLA大会に応募しよう!」〜9/23（水） 10:00〜16:00</div>
+            <div class="m">木のブロックを好きなだけ積めるコーナーが展示室の中にあり、 作った作品はそのまま全国大会に応募できます。連休は5日とも開館。 入館料は おとな520円、4歳〜高校生210円。展示室に入れば追加料金はなし。 4歳未満は無料（窓口で子ども用の券を受け取ります）。 屋内で空調があり、いつ抜けてもいいので、崩れた日の逃げ場になります。 ※最新の情報は多摩六都科学館ウェブサイトでご確認ください。</div>
+            <div class="ages">👶 ○　🧒 <b>◎</b>　🎒 <b>◎</b></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <h3>イベント先取り情報</h3>
+          <ul class="takeaway">
+            <li>熊野宮 神幸祭（一橋学園） 9/26（土）宵宮13:00〜 / 9/27（日）</li>
+            <li>親子でヨーイドン 10/17（土）13:30〜15:00 小平第六小学校体育館</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+    <!-- ISSUE:END -->
+    <div class="tools" id="tools">
+      <a class="tool" href="calendar.html">
+        <span class="tool-ic">📅</span>
+        <span class="tool-body">
+          <b>おでかけカレンダー</b>
+          <span><b>先の予定まで</b>日付から探せます。気になった予定は<b>ワンタップでご自分のカレンダーへ</b>。申込の締切も先のぶんまで出ます</span>
+        </span>
+      </a>
+      <a class="tool" href="map.html">
+        <span class="tool-ic">🗺</span>
+        <span class="tool-body">
+          <b>みんなのおでかけマップ</b>
+          <span><span data-bv-post="on" hidden>「行ってよかった」を地元の家庭で持ち寄っている地図。<b>このページから直接書き込めます</b></span><span data-bv-post="off">「行ってよかった」を地元の家庭で持ち寄っている地図。<b>LINEでひとことお寄せいただけます</b></span></span>
+        </span>
+      </a>
+      <a class="tool" href="issues.html">
+        <span class="tool-ic">📮</span>
+        <span class="tool-body">
+          <b>バックナンバー</b>
+          <span>これまでにお届けした号を<b>そのまま読めます</b>。あとから取り下げた記載には、訂正を添えています</span>
+        </span>
+      </a>
+    </div>
+    <p class="support-line">通信も、いつでも見られるこの3つも、どなたでも無料でお使いいただけます。</p>
+    <p class="support-line">ChatGPTやGeminiなど、チャット型のAIをお使いの方へ　→　<a href="/ai/">AIに聞くためのおでかけ一覧</a></p>
+  </section>
+
+  <section id="trust" class="wrap">
+    <div class="stop"><span class="pin"></span><span class="label">Good to know</span></div>
+    <h2>安心して使っていただくために</h2>
+    <div class="trust">
+      <div class="row"><span class="k">・</span><span>掲載している日程・料金は変わることがあります。おでかけ前に各公式サイトで最終確認をお願いします。</span></div>
+      <div class="row"><span class="k">・</span><span>いただいた個人情報は配信の宛先にのみ使い、第三者には共有しません。おためし運用のため、予告なく内容を変更する場合があります。</span></div>
+      <div class="row"><span class="k">・</span><span>この通信は無料です。<b>料金をいただくことはありません。</b><a href="tokushoho.html">免責事項・個人情報の取り扱い</a>もあわせてご確認ください。</span></div>
+    </div>
+  </section>
+
+  <section id="tomodachi" class="wrap" style="padding-top:1rem;">
+    <div class="closing">
+      <div class="closing-body">
+        <div class="stop" style="justify-content:center;"><span class="pin"></span><span class="label">Join</span></div>
+        <h2 style="margin-bottom:.6rem;">まずは、無料で受け取ってみませんか</h2>
+        <p class="section-lede" style="margin:0 auto 1.5rem;">友だち追加だけで、次の水曜からお届けします。合わなければ、いつでも止められます。</p>
+        <a class="btn btn-line" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener" style="margin:0 auto;">
+          <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.9 3 2.75 6.36 2.75 10.5c0 3.7 3.3 6.8 7.78 7.4.3.06.71.2.81.46.09.24.06.6.03.85l-.13.79c-.04.24-.19.93.82.51 1.01-.42 5.45-3.21 7.44-5.5 1.37-1.5 2.02-3.03 2.02-4.51C21.25 6.36 17.1 3 12 3Z"/></svg>
+          LINEで友だち追加（無料）
+        </a>
+        <div class="qr-wrap">
+          <img class="qr" src="assets/line-qr.png" alt="ぼんぼやーじゅ通信 友だち追加QRコード" width="150" height="150">
+          <p class="qr-cap">スマホ以外の方は、QRコードから追加できます</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="wrap">
+    <div class="stop"><span class="pin"></span><span class="label">Contact</span></div>
+    <h2>お問い合わせ</h2>
+    <p class="section-lede">LINEをお使いでない方も、こちらからご連絡いただけます。
+      施設・お店・団体の方からのご連絡も歓迎しています。</p>
+
+    <div class="contact">
+      <ul class="contact-list">
+        <li><b>イベントや講座の情報をお寄せいただく</b><span class="tiny">チラシのPDFやページのURLをお送りください。日程を確認のうえ、通信とカレンダーに載せます。掲載は無料です。</span></li>
+        <li><b>チラシ・ポスターを置いていただける</b><span class="tiny">施設・お店に置いていただける場合、こちらからお届けにあがります。</span></li>
+        <li><b>掲載内容のご指摘・訂正のお願い</b><span class="tiny">間違いはすぐ直して、次の号でお知らせします。</span></li>
+        <li><b>取材・協賛・そのほかのご相談</b><span class="tiny">地域の子育て家庭に届く場をお探しの事業者の方も、お気軽にどうぞ。</span></li>
+      </ul>
+
+      <div class="contact-mail">
+        <p class="contact-lb">メールでご連絡ください</p>
+        <p class="contact-addr"><a href="mailto:tokyo.papa.home@gmail.com">tokyo.papa.home@gmail.com</a></p>
+        <p class="tiny">発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）<br>
+          平日は別の仕事をしているため、お返事に数日いただくことがあります。</p>
+      </div>
+
+      <p class="contact-line">すでにLINEで受け取っている方は、<b>そのままトークに送っていただくのがいちばん早い</b>です。</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fmark">ぼんぼやーじゅ通信</div>
+    <div class="fsmall">小平の子育て家庭のための、週末おでかけ便。<br>
+      発行：ぼんぼやーじゅ通信の会　お問い合わせ: <a href="mailto:tokyo.papa.home@gmail.com">tokyo.papa.home@gmail.com</a><br>
+      <a href="tokushoho.html">免責事項・個人情報の取り扱い</a><br>
+      © 2026 ぼんぼやーじゅ通信</div>
+  </div>
+</footer>
+
+<!-- BV_POST_MODE: off -->
+</body>
+</html>

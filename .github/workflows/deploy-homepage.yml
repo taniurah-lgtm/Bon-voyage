@@ -1,0 +1,155 @@
+name: Deploy homepage to GitHub Pages
+
+# 公開するのは docs/homepage/ だけ（他の docs や台帳・プロフィールは公開されない）。
+on:
+  push:
+    branches: [claude/family-event-planning-rfwmo8]
+    paths:
+      - "docs/homepage/**"
+      - "data/**"
+      - "events/**"
+      - "reports/free/**"
+      - "scripts/build-*.mjs"
+      - "scripts/build-site.sh"
+      - "scripts/lib/**"
+      - ".github/workflows/deploy-homepage.yml"
+  # ★毎日組み直す。
+  #   台帳を更新するのは水曜巡回。push だけに頼ると、
+  #   /ai/ の一覧やカレンダーが「前回 push した日」のまま古びる。
+  #   （配信当日にリンクを送ったら、中身が2日前のものだった、が起きる）
+  schedule:
+    - cron: "0 21 * * *"   # 06:00 JST  前日ぶんの台帳を反映
+    - cron: "0 1 * * *"    # 10:00 JST  水曜巡回(09:00 JST開始)の更新を拾う
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1        # 台帳は同じブランチにあるので浅くてよい
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 台帳と過去号を rfwmo8 から取り直す
+        run: |
+          git fetch --no-tags origin claude/family-event-planning-rfwmo8
+          git checkout FETCH_HEAD -- events/ reports/free/
+          echo "台帳の行数:"; wc -l events/*.md
+          echo "過去号:"; ls reports/free/
+
+      # 合言葉が Secrets にあれば、それで組み直す。
+      # 無ければコミットされているものをそのまま使う（従来どおり）。
+      - name: ページを組み直す
+        env:
+          MEMBER_PASS: ${{ secrets.MEMBER_PASS }}
+          INSIDER_PASS: ${{ secrets.INSIDER_PASS }}
+          MAP_POST_URL: ${{ vars.MAP_POST_URL }}
+        run: |
+          if [ -n "$MEMBER_PASS" ]; then
+            echo "MEMBER_PASS があるので組み直す"
+            ./scripts/build-site.sh
+          else
+            echo "::warning::MEMBER_PASS が Secrets に無いため、コミットされているページをそのまま公開する"
+          fi
+
+      # 検証用の合言葉で組まれたページを絶対に公開しない（最後の砦）。
+      # ここで止まったら、Secrets に MEMBER_PASS を入れてから再実行する。
+      - name: 検証用の合言葉で組まれていないか確かめる
+        run: |
+          if grep -rl "BV_BUILD: TEST_PASSPHRASE" docs/homepage/ ; then
+            echo "::error::検証用の合言葉で組まれたページが含まれています。公開を中止しました。"
+            echo "::error::リポジトリの Settings → Secrets and variables → Actions に MEMBER_PASS を登録してから、この workflow を再実行してください。"
+            exit 1
+          fi
+          echo "OK: 本物の合言葉で組まれています"
+
+      # 「マップに投稿できます」と書いてあるのに投稿先が未設定、という乖離を止める。
+      # 事故#7（実装していない「カレンダー登録代行」を特典に書いていた）と同じ形なので、
+      # 書いてあることと動くことがずれたら公開前に気づけるようにする。
+      - name: 書いてあることが実際にできるか確かめる
+        run: |
+          # apply-post-mode.mjs が書き込んだモードと、実際の送り先が一致しているかを見る。
+          # ★可視テキストを grep してはいけない。hidden にした側の文字列も残っているので
+          #   必ず不一致になる（一度そうしてしまい、デプロイが常に止まる状態にした）。
+          mode=$(grep -o "BV_POST_MODE: [a-z]*" docs/homepage/index.html | head -1 | awk '{print $2}')
+          endpoint=$(grep -o "endpoint: \"[^\"]*\"" docs/homepage/map.html | head -1 || true)
+          echo "トップページの記述: ${mode:-（印が無い）} / 投稿の送り先: ${endpoint:-（見つからない）}"
+          if [ -z "$mode" ]; then
+            echo "::warning::index.html に BV_POST_MODE の印がありません。scripts/apply-post-mode.mjs を通していない可能性があります。"
+            exit 0
+          fi
+          if [ "$mode" = "on" ] && echo "$endpoint" | grep -q 'endpoint: ""'; then
+            echo "::error::トップページは「サイト内で書き込める」と書いていますが、投稿の送り先が空です。"
+            echo "::error::Variables に MAP_POST_URL を登録するか、build-site.sh を通し直してください。"
+            exit 1
+          fi
+          if [ "$mode" = "off" ] && ! echo "$endpoint" | grep -q 'endpoint: ""'; then
+            echo "::error::送り先はあるのに、トップページは「LINEでお預かり」と書いています。build-site.sh を通し直してください。"
+            exit 1
+          fi
+          echo "OK: 書いてあることと、実際にできることが一致しています"
+
+      # 公開データに台帳の内部メモが混ざっていないことを確かめる。
+      # ★2026-09-04 まではここで「2週間の窓」を検査していた。月額制度の廃止にともない
+      #   窓そのものを撤廃し（`docs/strategy-2026-09.md`）、検査の対象を内部メモに変えた。
+      - name: 公開データに内部メモが入っていないか確かめる
+        run: |
+          node -e '
+            const fs = require("fs");
+            const f = "docs/homepage/data/events-public.json";
+            if (!fs.existsSync(f)) { console.log("events-public.json が無い（カレンダー未生成）"); process.exit(0); }
+            const d = JSON.parse(fs.readFileSync(f, "utf8"));
+            const FORBIDDEN = ["source", "confidence", "status"];
+            const bad = [];
+            for (const e of d.events.concat(d.standing || [])) {
+              for (const k of FORBIDDEN) if (k in e) bad.push(e.id + "." + k);
+            }
+            const days = d.events.flatMap(e => e.dates || []).filter(Boolean).sort();
+            console.log("公開:", d.events.length, "件 /", days[0], "〜", days.at(-1));
+            if (bad.length) {
+              console.log("::error::公開データに台帳の内部メモが入っています: " + bad.join(", "));
+              process.exit(1);
+            }
+            if (!d.events.length) {
+              console.log("::error::公開データが空です（カレンダーが行き止まりになります）。");
+              process.exit(1);
+            }
+            console.log("OK: 内部メモは入っていません");
+          '
+
+      # ブラウザで実際に開いて、描けているかを見る。
+      # ★HTMLの構文検査も node --check も、JSの参照ミスは見つけられない。
+      #   2026-09-05、bv-calendar.js の消し忘れでカレンダーが描けず、
+      #   しかも一覧まで畳まれて行き止まりになった状態を公開してしまった。
+      - name: ページがブラウザで描けるか確かめる
+        run: |
+          npm i -D playwright@1.56.1 --no-audit --no-fund
+          npx playwright install --with-deps chromium
+          node scripts/check-pages.mjs
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload only the homepage folder
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/homepage
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

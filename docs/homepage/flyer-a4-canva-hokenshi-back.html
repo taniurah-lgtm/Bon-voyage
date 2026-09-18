@@ -1,0 +1,175 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<title>Canva版レイアウト A4チラシ 保健師版 裏面 版下（白黒）｜ぼんぼやーじゅ通信</title>
+<!--
+  ★保健師版の裏（flyer-a4-canva-back.html の版違い）。表は flyer-a4-canva-hokenshi.html。
+    QRは /f/hokenshi。4つの約束と紙面見本を、0歳の家庭向けに入れ替えてある。
+    🔴 「外に出られるようになったら」を最後に置く。先に公園の話をしない。
+
+  表面（flyer-a4-canva-hokenshi.html）の裏。情報量を多めに。
+  ★2026-09-16: 白黒に変えた。両面カラーは刷り代が高い。表だけカラー、裏は白黒で刷る。
+    白黒にするときの勘どころ（色を抜くだけでは崩れる）:
+      ・紙を #FFFDF7 のままにしない。白黒機では白に飛ぶので、白いカードが紙と同化して消える。
+        面は必ず灰色（#F2F2F2 等）か罫で起こす。
+      ・絵文字は使わない。NotoColorEmoji はビットマップなので、白黒にすると 2.6mm では
+        ただの灰色の塊になって読めない。文字で書く。
+      ・黒ベタは帯とCTAだけに絞る。全面に散らすと紙が重くなる。
+  ★書体は bash scripts/setup-fonts.sh で入れる。無いと IPAゴシックに落ちる。
+  ★下端8mmは安全帯。最下段の文字は必ず8mm上で止める。
+  ★2026-09-16: 最初に組んだとき321pxはみ出した。原因は本文が長すぎたこと。
+    各ブロックの縦の寸法を先に決めてから文章を当てる形に直した。
+  ★2026-09-16: .foot を position:absolute にしたらCTAの上に重なった。
+    ビルドの検査は「ページからの溢れ」しか見ないので、この重なりは検出できない。
+    .foot は流し込みのままにして、.page 側の padding-bottom で下端を確保する。
+-->
+<style>
+  @page{ size:210mm 297mm; margin:0; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ width:210mm; height:297mm; }
+  /* ★Canva版の中身：ブランド名=07鉄瓶ゴシック／それ以外=Canva_LyraStd-DB。
+       Lyra は Canva の外では使えないので、印象の近い無料書体に置き換えている。 */
+  body{ font-family:"Zen Kurenaido","Zen Maru Gothic","Hiragino Maru Gothic ProN",sans-serif;
+        -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  /* 太さが1段しかない書体なので、太く見せたいところは線を足す（合成ボールドは滲む）。
+     画数の多い漢字は足しすぎると黒い塊になるので、控えめに。 */
+  .thick{ paint-order:stroke fill; -webkit-text-stroke:.030em currentColor; }
+  /* 3mm を下回る文字は手書き系だと潰れる。読みやすさ優先で丸ゴシックに落とす */
+  .rd,.cd,.age .n,.threecap,.promise p,.cta .x0,.cta .x2,.cta .x4,.foot,.talkcap{
+    font-family:"Zen Maru Gothic",sans-serif; }
+
+  .page{ position:relative; width:210mm; height:297mm; overflow:hidden;
+         background:#fff; padding:0 15mm 8mm; color:#1E1E1E; }
+
+  /* 見出し ★2026-09-16: 全幅の黒ベタをやめた。210×24mm のベタはトナーを食う。
+       白地＋太い罫でも、見出しの強さは出る。 */
+  .hd{ margin:0 -15mm; padding:7.2mm 15mm 4.6mm; text-align:center;
+       border-bottom:.7mm solid #232323; }
+  .hd h1{ font-size:6.6mm; color:#1E1E1E; letter-spacing:.05em; line-height:1.3; }
+  .hd p { font-size:3.2mm; color:#5A5A5A; margin:2.2mm 0 0; letter-spacing:.05em;
+          font-family:"Zen Maru Gothic",sans-serif; }
+
+  /* 年齢の目安 — 横一列。★白黒なので絵文字は使わない */
+  .ages{ display:flex; justify-content:center; gap:3.4mm; margin:3.6mm 0 0; }
+  .age{ display:flex; align-items:baseline; gap:1.8mm;
+        border:.26mm solid #7A7A7A; border-radius:99mm; padding:1.6mm 4.6mm; }
+  .age .t{ font-size:3.3mm; color:#1E1E1E; letter-spacing:.02em; }
+  .age .n{ font-size:2.7mm; color:#5A5A5A; }
+
+  h2{ font-size:4.5mm; letter-spacing:.05em; margin:3.6mm 0 2.4mm;
+      padding:0 0 0 3.0mm; border-left:1.3mm solid #232323; line-height:1.25; }
+
+  .rows{ display:flex; flex-direction:column; gap:1.3mm; }
+  .row{ background:#F2F2F2; border-radius:2.4mm; padding:2.0mm 3.8mm; }
+  .rt{ font-size:3.6mm; letter-spacing:.02em; }
+  .rd{ font-size:2.95mm; color:#4A4A4A; line-height:1.6; margin:.9mm 0 0; }
+
+  /* 実際に届く紙面 */
+  /* ★灰色は中身に合わせて縮める。全幅に広げると右半分が空いた灰色の板になり、
+       白黒印刷ではそこがいちばんトナーを食う。 */
+  .talk{ background:#DCDCDC; border-radius:2.8mm; padding:2.4mm 16mm 2.4mm 2.4mm;
+         width:max-content; max-width:100%; }
+  .bub{ background:#fff; border-radius:2.2mm; padding:2.4mm 3.2mm;
+        width:max-content; max-width:118mm; }
+  .bub pre{ font-family:inherit; font-size:2.55mm; line-height:1.56; color:#1E1E1E;
+            white-space:pre-wrap; letter-spacing:.01em; }
+  .talkcap{ font-size:2.45mm; color:#5A5A5A; margin:.9mm 0 0; letter-spacing:.02em; }
+
+  .three{ display:flex; gap:2.4mm; margin:3.6mm 0 0; }
+  .threecap{ text-align:center; font-size:2.7mm; color:#5A5A5A; margin:1.6mm 0 0; letter-spacing:.03em; }
+  .card{ flex:1; background:#F2F2F2; border-radius:2.4mm; padding:2.4mm 2.2mm; text-align:center; }
+  .ct{ font-size:3.25mm; letter-spacing:.02em; }
+  .cd{ font-size:2.65mm; color:#4A4A4A; line-height:1.55; margin:1.0mm 0 0; }
+
+  .promise{ border:.3mm solid #232323; border-radius:2.4mm; padding:2.2mm 3.8mm; margin:2.2mm 0 0; }
+  .promise b{ font-size:3.3mm; letter-spacing:.03em; font-weight:400; }
+  .promise p{ font-size:2.8mm; color:#4A4A4A; line-height:1.6; margin:1.0mm 0 0; }
+
+  /* ── QR ──
+     ★このQRの飛び先は /f/hand（ホームページ）で、LINEの友だち追加画面ではない。
+       「友だち追加」とだけ書くと、読んだ人が押す前に身構える。順番どおりに書く。
+     ★見出しに「まず、読んでから決めてください」と書いたら偉そうだった（2026-09-16）。
+       こちらの指図ではなく、向こうの得（登録しなくても読める）を書く。 */
+  .cta{ display:flex; align-items:center; gap:4.2mm; margin:2.8mm 0 0;
+        background:#232323; border-radius:2.8mm; padding:3.0mm 4.4mm; }
+  .cta img{ width:20mm; height:20mm; background:#fff; border-radius:1.4mm; padding:1mm; flex:none; }
+  .cta .x0{ font-size:2.7mm; color:#fff; opacity:.85; letter-spacing:.04em; }
+  .cta .x1{ -webkit-text-stroke:0; font-size:4.2mm; color:#fff; letter-spacing:.03em; line-height:1.35; margin:.7mm 0 0; }
+  .cta .x2{ font-size:2.7mm; color:#fff; opacity:.88; margin:1.1mm 0 0; line-height:1.55; }
+  .cta .x4{ font-size:2.9mm; color:#fff; margin:1.1mm 0 0; letter-spacing:.01em; }
+
+  .foot{ margin:2.2mm 0 0; text-align:center;
+         font-size:2.5mm; color:#5A5A5A; line-height:1.8; letter-spacing:.02em; }
+</style></head><body>
+<div class="page">
+
+  <div class="hd">
+    <h1 class="thick">毎週水曜の朝、こんなことを書いています</h1>
+    <p>0歳から行ける場所を中心に。小平のなかから、近い順に</p>
+  </div>
+
+  <div class="ages">
+    <div class="age"><span class="t">あかちゃん</span><span class="n">0〜2歳</span></div>
+    <div class="age"><span class="t">未就学</span><span class="n">3〜6歳</span></div>
+    <div class="age"><span class="t">小学生</span><span class="n">6〜12歳</span></div>
+  </div>
+
+  <h2 class="thick">届くのは、この4つです</h2>
+  <div class="rows">
+    <div class="row"><div class="rt thick">0歳から行ける、無料の集まり</div>
+      <div class="rd">手遊び、わらべうた、ふたごの会、お父さんの会。申込がいらないものが多いです。</div></div>
+    <div class="row"><div class="rt thick">助産師さんに相談できる日・体重を測れる日</div>
+      <div class="rd">「今日はこれがある」を日付でお知らせします。ひとりで抱えなくていい日が、月に何度かあります。</div></div>
+    <div class="row"><div class="rt thick">保育つきの講座の、申込の締切</div>
+      <div class="rd">赤ちゃんを預けて参加できる講座があります。定員が小さいので、間に合ううちにお知らせします。</div></div>
+    <div class="row"><div class="rt thick">外に出られるようになったら</div>
+      <div class="rd">小金井公園、多摩六都科学館。ベビーカーで入れるか、おむつ替えはどこか、まで書いています。</div></div>
+  </div>
+
+  <h2 class="thick">こんなふうに届きます</h2>
+  <div class="talk">
+    <div class="bub"><pre>【ぼんぼやーじゅ通信】
+
+今週末は、日曜の午後から雨の予報です。
+
+■0歳から行ける、今週の集まり
+手遊びとわらべうたの会
+　申込不要・無料・ベビーカーのまま入れます
+　おむつ替えと授乳のできる場所があります
+あかちゃん ◎　未就学 ○　小学生 △
+
+■助産師さんに相談できる日
+体重も測れます。今週は2日あります。
+
+■申込の締切
+保育つきの子育て講座（今週末まで）</pre></div>
+  </div>
+  <div class="talkcap">※紙面のイメージです。実際は、その週の天気と行き先が入ります</div>
+
+  <div class="three">
+    <div class="card"><div class="ct thick">おでかけカレンダー</div><div class="cd">日付から探せます</div></div>
+    <div class="card"><div class="ct thick">おでかけマップ</div><div class="cd">「行ってよかった」場所</div></div>
+    <div class="card"><div class="ct thick">バックナンバー</div><div class="cd">過去の号を全部</div></div>
+  </div>
+  <div class="threecap">ホームページも、どなたでも無料でお使いいただけます</div>
+
+  <div class="promise">
+    <b class="thick">まとめサイトからの転載はしません</b>
+    <p>市や施設の公式ページを、一件ずつ見て日付を確かめてから書いています。分からないことは「要確認」と正直に書きます。</p>
+  </div>
+
+  <div class="cta">
+    <img src="assets/qr/f-hokenshi.png" alt="ぼんぼやーじゅ通信のホームページのQRコード">
+    <div>
+      <div class="x0">← このQRは「ホームページ」です　bonvoya.nicomaru.tokyo</div>
+      <div class="x1 thick">登録しなくても、ぜんぶ読めます</div>
+      <div class="x2">最新号もバックナンバーも、おでかけカレンダーとマップも、そのままご覧いただけます。</div>
+      <div class="x4 thick">読んでみて「これなら毎週ほしい」と思われたら、同じページからLINEの友だち追加へ。</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    お名前やご住所の入力はいりません。合わなければ、いつでも解除できます。<br>
+    発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）<br>
+    イベント情報のご提供・チラシ設置のご相談　tokyo.papa.home@gmail.com　／　掲載は無料です
+  </div>
+
+</div></body></html>

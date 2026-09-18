@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<title>保健師さん版 A4チラシ 版下｜ぼんぼやーじゅ通信</title>
+<!--
+  A4カラーチラシ（読者集め用）。ポスター(poster-a4-color-print.html)より
+  **文字を減らして、遠くから3秒で分かる**ことに振っている。
+  生成: node scripts/build-flyer-color.mjs
+  ⚠️ 下端8mmは安全帯。フッターの行より下に何も置かない（印刷で切れる）。
+-->
+<style>
+:root{
+  --navy:#1E3A4C; --navy-2:#2C6B87;
+  --sky:#4FA3C4; --sky-deep:#2C7C9E; --sky-wash:#E9F4F8;
+  --gold:#EBA24A; --gold-wash:#FDF2E0; --gold-ink:#8A5A12;
+  --leaf:#7FB069; --leaf-wash:#EEF5EA;
+  --blush:#E88C86; --blush-wash:#FCEDEB;
+  --ground:#FBFAF5; --ink:#22323B; --ink-soft:#55666F; --line:#E6E0D4; --paper:#fff;
+  --sans:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+@page{size:210mm 297mm;margin:0;}
+html,body{background:#fff;}
+body{font-family:var(--sans);-webkit-font-smoothing:antialiased;color:var(--ink);}
+.page{width:210mm;height:297mm;position:relative;overflow:hidden;background:var(--ground);
+  display:flex;flex-direction:column;}
+
+/* ── 上：濃い帯 ───────────────────────────── */
+.top{position:relative;height:92mm;flex:none;overflow:hidden;
+  background:linear-gradient(160deg,#20465C 0%,#1E3A4C 45%,#24576E 100%);}
+.top svg.deco{position:absolute;inset:0;width:100%;height:100%;}
+.top-in{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;padding:0 14mm 10mm;color:#fff;}
+.hello{font-size:3.5mm;font-weight:800;letter-spacing:.04em;background:rgba(255,255,255,.16);
+  border:.35mm solid rgba(255,255,255,.45);border-radius:999px;padding:1.4mm 5mm;backdrop-filter:blur(2px);}
+.eyebrow{font-family:Georgia,serif;font-style:italic;font-size:4.8mm;color:#FFD9A3;margin-top:3.4mm;letter-spacing:.05em;}
+.brand{font-size:13.4mm;font-weight:900;letter-spacing:.02em;line-height:1.08;margin-top:1mm;
+  text-shadow:0 0 2.2mm rgba(0,0,0,.35), 0 1.2mm 0 rgba(0,0,0,.18);}
+.brand em{font-style:normal;color:#FFC978;}
+.sub{font-size:4.4mm;font-weight:800;margin-top:2.2mm;letter-spacing:.03em;}
+.ribbon{margin-top:3.6mm;display:inline-flex;align-items:center;gap:2.5mm;
+  background:var(--gold);color:#3A2408;border-radius:999px;padding:1.7mm 6mm;
+  font-size:4.1mm;font-weight:900;letter-spacing:.02em;box-shadow:0 1.5mm 4mm rgba(0,0,0,.28);}
+.ribbon .dot{width:1.6mm;height:1.6mm;border-radius:50%;background:#3A2408;opacity:.55;}
+
+/* ── 帯にまたがる3つの丸 ───────────────────── */
+.badges{position:relative;z-index:3;margin-top:-15mm;display:flex;justify-content:center;gap:6mm;flex:none;}
+.badge{width:30mm;height:30mm;border-radius:50%;background:var(--paper);
+  border:.9mm solid var(--sky);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  box-shadow:0 2mm 6mm rgba(30,58,76,.22);}
+.badge:nth-child(1){border-color:var(--blush);}
+.badge:nth-child(2){border-color:var(--leaf);}
+.badge:nth-child(3){border-color:var(--sky);}
+.badge .ic{width:9mm;height:9mm;margin-bottom:.6mm;}
+.badge .t{font-size:3.5mm;font-weight:900;line-height:1.15;}
+.badge .n{font-size:2.8mm;color:var(--ink-soft);margin-top:.5mm;}
+
+/* ── 中：本文 ─────────────────────────────── */
+.body{flex:1;padding:5mm 14mm 0;display:flex;flex-direction:column;position:relative;z-index:2;}
+.lead{text-align:center;font-size:4.7mm;font-weight:900;line-height:1.5;}
+.lead em{font-style:normal;background:linear-gradient(transparent 58%,#FBDFA6 58%,#FBDFA6 96%,transparent 96%);padding:0 .6mm;}
+.leadsub{text-align:center;font-size:3.2mm;color:var(--ink-soft);line-height:1.6;margin-top:1.8mm;}
+
+.rows{margin-top:4.5mm;display:flex;flex-direction:column;gap:2.4mm;}
+.row{display:flex;gap:3.5mm;align-items:flex-start;background:var(--paper);
+  border:.35mm solid var(--line);border-radius:3mm;padding:2.6mm 3.6mm;box-shadow:0 .8mm 3mm rgba(34,50,59,.05);}
+.row .rc{flex:none;width:8mm;height:8mm;border-radius:2.4mm;display:flex;align-items:center;justify-content:center;}
+.row:nth-child(1) .rc{background:var(--gold-wash);}
+.row:nth-child(2) .rc{background:var(--sky-wash);}
+.row:nth-child(3) .rc{background:var(--blush-wash);}
+.row:nth-child(4) .rc{background:var(--leaf-wash);}
+.row .rc svg{width:5mm;height:5mm;}
+.row .rb{flex:1;min-width:0;}
+.row .rt{font-size:3.7mm;font-weight:900;line-height:1.35;}
+.row .rd{font-size:3.05mm;color:var(--ink-soft);line-height:1.55;margin-top:.6mm;}
+
+/* ── 下：丘とCTA ──────────────────────────── */
+.hills{position:absolute;left:0;right:0;bottom:0;height:52mm;z-index:0;}
+.cta{position:relative;z-index:2;margin-top:auto;padding:0 14mm;display:flex;gap:5mm;align-items:center;}
+.qrbox{flex:none;width:35mm;background:var(--paper);border:.5mm solid var(--sky);border-radius:3mm;
+  padding:2.4mm 2.4mm 2mm;text-align:center;box-shadow:0 1.5mm 5mm rgba(30,58,76,.16);}
+.qrbox img{width:100%;display:block;}
+.qrbox .cap{font-size:2.8mm;font-weight:900;color:var(--sky-deep);margin-top:1.2mm;letter-spacing:.02em;}
+.ctb{flex:1;min-width:0;}
+.ctt{font-size:4.8mm;font-weight:900;line-height:1.3;}
+.ctt b{color:var(--sky-deep);}
+.ctd{font-size:3.1mm;color:var(--ink-soft);line-height:1.65;margin-top:1.4mm;}
+.ctu{margin-top:1.6mm;display:inline-block;background:var(--sky-deep);color:#fff;border-radius:999px;
+  padding:1.4mm 4.4mm;font-size:3.6mm;font-weight:900;letter-spacing:.01em;}
+
+.foot{position:relative;z-index:2;margin-top:3.5mm;padding:2.6mm 14mm 8mm;font-size:2.65mm;line-height:1.65;color:var(--ink-soft);}
+.foot b{color:var(--ink);font-weight:800;}
+.foot .line1{border-top:.3mm solid rgba(34,50,59,.18);padding-top:2.4mm;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ================= 上：濃い帯 ================= -->
+  <div class="top">
+    <svg class="deco" viewBox="0 0 210 112" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <g id="burst">
+          <g stroke-linecap="round" fill="none">
+            <path d="M0,-13 L0,-5"/><path d="M0,13 L0,5"/><path d="M-13,0 L-5,0"/><path d="M13,0 L5,0"/>
+            <path d="M-9.2,-9.2 L-3.5,-3.5"/><path d="M9.2,9.2 L3.5,3.5"/>
+            <path d="M9.2,-9.2 L3.5,-3.5"/><path d="M-9.2,9.2 L-3.5,3.5"/>
+          </g>
+          <circle r="1.5"/>
+        </g>
+      </defs>
+      <!-- 花火 -->
+      <use href="#burst" x="26" y="24" stroke="#FFC978" fill="#FFC978" stroke-width="1.1" opacity=".85" transform="translate(26,24) scale(1.15) translate(-26,-24)"/>
+      <use href="#burst" x="182" y="20" stroke="#8FD3E8" fill="#8FD3E8" stroke-width="1" opacity=".8"/>
+      <use href="#burst" x="160" y="66" stroke="#F2A6A0" fill="#F2A6A0" stroke-width=".9" opacity=".7"/>
+      <use href="#burst" x="42" y="76" stroke="#A8DDA0" fill="#A8DDA0" stroke-width=".9" opacity=".65"/>
+      <!-- 紙吹雪 -->
+      <g opacity=".7">
+        <rect x="70" y="10" width="2.6" height="2.6" rx=".5" fill="#FFC978" transform="rotate(22 71 11)"/>
+        <rect x="120" y="16" width="2.2" height="2.2" rx=".5" fill="#8FD3E8" transform="rotate(-18 121 17)"/>
+        <rect x="96" y="94" width="2.4" height="2.4" rx=".5" fill="#F2A6A0" transform="rotate(35 97 95)"/>
+        <rect x="140" y="90" width="2" height="2" rx=".4" fill="#A8DDA0" transform="rotate(-25 141 91)"/>
+        <circle cx="56" cy="46" r="1.1" fill="#8FD3E8" opacity=".8"/>
+        <circle cx="172" cy="44" r="1.3" fill="#FFC978" opacity=".8"/>
+        <circle cx="14" cy="60" r="1" fill="#F2A6A0" opacity=".7"/>
+        <circle cx="196" cy="86" r="1.1" fill="#A8DDA0" opacity=".7"/>
+      </g>
+      <!-- 風船（ブランドの印） -->
+      <g transform="translate(20,88)" opacity=".9">
+        <path d="M0,0 c0,-6 4.4,-10 8,-10 s8,4 8,10 c0,6.6 -5.6,11.6 -8,13.4 C5.6,11.6 0,6.6 0,0 z" fill="#F2A6A0"/>
+        <path d="M8,13.4 c1.4,2.4 -1.4,3.6 0,6" stroke="#fff" stroke-width=".7" fill="none" opacity=".8"/>
+      </g>
+    </svg>
+
+    <div class="top-in">
+      <div class="hello">赤ちゃんが生まれた、小平のご家庭へ</div>
+      <div class="eyebrow">Bon Voyage,</div>
+      <div class="brand">ぼんぼやーじゅ<em>通信</em></div>
+      <div class="sub">小平の 週末おでかけ便</div>
+      <div class="ribbon"><span>毎週水曜の朝にとどく</span><span class="dot"></span><span>ぜんぶ無料</span></div>
+    </div>
+  </div>
+
+  <!-- ================= 3つの丸 ================= -->
+  <div class="badges">
+    <div class="badge">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#E88C86" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="9" r="5.2"/><path d="M9.6 8.6h.01M14.4 8.6h.01"/><path d="M10.2 11.4c1.1.8 2.5.8 3.6 0"/>
+        <path d="M4.5 21c.7-3.6 3.7-5.6 7.5-5.6s6.8 2 7.5 5.6"/>
+      </svg>
+      <div class="t">あかちゃん</div><div class="n">0〜2歳</div>
+    </div>
+    <div class="badge">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#7FB069" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="7.6" r="4.4"/><path d="M12 12v5"/><path d="M6.6 21l2.6-4.6h5.6L17.4 21"/><path d="M7.4 14.4h9.2"/>
+      </svg>
+      <div class="t">未就学</div><div class="n">3〜6歳</div>
+    </div>
+    <div class="badge">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#2C7C9E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6.4 9.4h11.2v9.4H6.4z"/><path d="M9.4 9.4V7.2h5.2v2.2"/><path d="M4.4 12.4h1.9M17.7 12.4h1.9"/><path d="M9.6 13.4h4.8"/>
+      </svg>
+      <div class="t">小学生</div><div class="n">6〜12歳</div>
+    </div>
+  </div>
+
+  <!-- ================= 本文 ================= -->
+  <div class="body">
+    <div class="lead"><em>0歳から行ける場所</em>が、<br>小平にあります。</div>
+    <div class="leadsub">いまは、知っておくだけで大丈夫です。その日付だけ、毎週水曜の朝に。<br>市や施設の一次情報を一件ずつ見て、確かめてから書いています。まとめサイトからの転載はしません。</div>
+
+    <div class="rows">
+      <div class="row">
+        <div class="rc"><svg viewBox="0 0 24 24" fill="none" stroke="#8A5A12" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2c3.4 3.8 5.2 6.4 5.2 8.9a5.2 5.2 0 1 1-10.4 0c0-2.5 1.8-5.1 5.2-8.9z"/></svg></div>
+        <div class="rb"><div class="rt">0歳から行ける、無料の集まり</div>
+        <div class="rd">小平元気村の「おひさまひろば」など。手遊び・わらべうた・ふたごの会・お父さんの会。申込がいらないものが多いです。</div></div>
+      </div>
+      <div class="row">
+        <div class="rc"><svg viewBox="0 0 24 24" fill="none" stroke="#2C7C9E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 15.5c1.7-1.6 3.4-1.6 5.1 0s3.4 1.6 5.1 0 3.4-1.6 5.1 0"/><path d="M3.5 10c1.7-1.6 3.4-1.6 5.1 0s3.4 1.6 5.1 0 3.4-1.6 5.1 0"/></svg></div>
+        <div class="rb"><div class="rt">助産師さんに相談できる日・体重を測れる日</div>
+        <div class="rd">「今日はこれがある」を、日付でお知らせします。ひとりで抱えなくていい日が、月に何度かあります。</div></div>
+      </div>
+      <div class="row">
+        <div class="rc"><svg viewBox="0 0 24 24" fill="none" stroke="#C0554E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.4"/><path d="M12 7.4V12l3 1.8"/></svg></div>
+        <div class="rb"><div class="rt">保育つきの講座の、申込の締切</div>
+        <div class="rd">赤ちゃんを預けて参加できる講座があります。定員が小さいので、<b>間に合ううちに</b>お知らせします。</div></div>
+      </div>
+      <div class="row">
+        <div class="rc"><svg viewBox="0 0 24 24" fill="none" stroke="#4A7A38" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-6.6-4.3-6.6-9a3.9 3.9 0 0 1 6.6-2.8 3.9 3.9 0 0 1 6.6 2.8c0 4.7-6.6 9-6.6 9z"/></svg></div>
+        <div class="rb"><div class="rt">外に出られるようになったら</div>
+        <div class="rd">小金井公園、多摩六都科学館。ベビーカーで入れるか、おむつ替えはどこか、まで書いています。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 丘 ================= -->
+  <svg class="hills" viewBox="0 0 210 52" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,36 Q42,25 84,32 T210,27 L210,52 L0,52 Z" fill="#DCEBD6" opacity=".85"/>
+    <path d="M0,43 Q54,34 108,41 T210,38 L210,52 L0,52 Z" fill="#C2DFBA" opacity=".9"/>
+    <g fill="#8FBF86" opacity=".9">
+      <path d="M22,41 c0,-4 3,-7 6,-7 s6,3 6,7 z"/><rect x="27" y="40" width="2" height="4" rx=".8"/>
+      <path d="M176,39 c0,-3.4 2.6,-6 5,-6 s5,2.6 5,6 z"/><rect x="180" y="38" width="1.8" height="3.6" rx=".7"/>
+    </g>
+  </svg>
+
+  <!-- ================= CTA ================= -->
+  <div class="cta">
+    <div class="qrbox">
+      <img src="data:image/png;base64,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AgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACDtWy8AKu696yX8vPfeegkwn0PvIs7Zz+E5ZpEGc8g5+zkovJMBX2ABAAAAECdgAQAAAJAmYAEAAACQJmABAAAAkCZgAQAAAJAmYAEAAACQJmABAAAAkCZgAQAAAJAmYAEAAACQJmABAAAAkCZgAQAAAJAmYAEAAACQJmABAAAAkCZgAQAAAJAmYAEAAACQJmABAAAAkCZgAQAAAJAmYAEAAACQJmABAAAAkCZgAQAAAJAmYAEAAACQJmABAAAAkCZgAQAAAJAmYAEAAACQJmABAAAAkCZgAQAAAJAmYAEAAACQJmABAAAAkCZgAQAAAJAmYAEAAACQJmABAAAAkCZgAQAAAJD2rRcAAP/03ps+/947ff769xesz6CgsAfrWbQH++c7AyrWs7h+fuEe2AMKfIEFAAAAQJqABQAAAECagAUAAABAmoAFAAAAQJqABQAAAECagAUAAABAmoAFAAAAQJqABQAAAECagAUAAABAmoAFAAAAQJqABQAAAECagAUAAABAmoAFAAAAQJqABQAAAECagAUAAABAmoAFAAAAQJqABQAAAECagAUAAABAmoAFAAAAQJqABQAAAECagAUAAABAmoAFAAAAQJqABQAAAECagAUAAABAmoAFAAAAQJqABQAAAECagAUAAABAmoAFAAAAQJqABQAAAECagAUAAABAmoAFAAAAQNq3XgAA/NO9d72En7c+g/fe9Pnn7PegYL0H5oBznAGc07gHhXcy+AILAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgLRvvQCoeO+tlwAEeBfs9+DeO33+OfbgnP0eFNiDvfVdMAMN6zlYK8zh+gwKe8CeL7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEj71guAc865966XABx3saBwBu+9n37+OftzKOzB2voMztmfw3oP1r+/YH0G5+zPwR409mBtfQZwji+wAAAAAIgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEgTsAAAAABIE7AAAAAASBOwAAAAAEi77723XgQAAAAA/C++wAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACBNwAIAAAAgTcACAAAAIE3AAgAAACDt30HaNISjI1jUAAAAAElFTkSuQmCC" alt="LINE友だち追加のQRコード">
+      <div class="cap">スマホのカメラで</div>
+    </div>
+    <div class="ctb">
+      <div class="ctt">LINEで<b>友だち追加</b>するだけ。<br>次の水曜からとどきます。</div>
+      <div class="ctd">お名前やご住所の入力はいりません。読むだけで大丈夫です。<br>合わなければ、いつでも解除できます。</div>
+      <div class="ctu">bonvoya.nicomaru.tokyo/f/hokenshi</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="line1">
+      <b>発行：ぼんぼやーじゅ通信の会（小平市・花小金井）</b>　小平市民活動支援センター あすぴあ 登録団体（第254号）<br>
+      イベント情報のご提供・チラシ設置・掲載のご相談　tokyo.papa.home@gmail.com　／　掲載は無料です
+    </div>
+  </div>
+
+</div>
+</body></html>

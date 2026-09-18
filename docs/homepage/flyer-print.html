@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<!-- 印刷用の版下・内部用ページ。サイトの一部として読ませるものではない -->
+<meta name="robots" content="noindex,nofollow"><title>A5チラシ 入稿用（塗り足し3mm）｜ぼんぼやーじゅ通信</title>
+<style>
+/* 入稿用: A5(148×210mm) + 塗り足し3mm = 154×216mm、トンボなし。仕上がりは中央148×210で断裁される想定。 */
+@page{size:154mm 216mm;margin:0;}
+@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:154mm;height:216mm;}
+body{font-family:"IPAPGothic","IPAGothic","Noto Color Emoji",sans-serif;-webkit-font-smoothing:antialiased;background:#FBFAF5;}
+.page{position:relative;width:154mm;height:216mm;overflow:hidden;background:#FBFAF5;}
+/* 1240×1754pxのアートを塗り足し面いっぱいにカバー配置（周囲がフチまで届く） */
+.flyer{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.4710);transform-origin:center center;width:1240px;height:1754px;background:#FBFAF5;color:#34434C;}
+.flyer .hero{position:absolute;top:0;left:0;width:1240px;height:480px;background-image:linear-gradient(180deg,rgba(44,124,158,.28),rgba(44,124,158,.60)),url('assets/hero-park.jpg');background-size:cover;background-position:center 56%;}
+.flyer .hero-in{position:absolute;left:0;right:0;top:112px;text-align:center;color:#fff;padding:0 70px;}
+.flyer .eyebrow{font-size:44px;font-style:italic;letter-spacing:2px;text-shadow:0 2px 10px rgba(0,0,0,.4);}
+.flyer .brand{font-size:112px;font-weight:800;letter-spacing:4px;white-space:nowrap;margin-top:6px;text-shadow:0 3px 18px rgba(0,0,0,.45);}
+.flyer .brand-sub{font-size:46px;margin-top:18px;letter-spacing:2px;text-shadow:0 2px 12px rgba(0,0,0,.4);}
+.flyer .fbody{position:absolute;top:520px;left:0;right:0;padding:0 90px;text-align:center;}
+.flyer .lead{font-size:50px;font-weight:800;line-height:1.35;}
+.flyer .lead .hl{color:#2C7C9E;}
+.flyer .free{display:inline-block;margin-top:12px;font-size:33px;font-weight:800;color:#fff;background:#EBA24A;border-radius:999px;padding:8px 34px;}
+.flyer .tags{display:flex;justify-content:center;gap:24px;margin-top:28px;}
+.flyer .tag{background:#fff;border:2px solid #DCD5C6;border-radius:999px;padding:14px 6px;flex:1;font-size:31px;color:#63727B;box-shadow:0 6px 22px rgba(52,67,76,.06);}
+.flyer .tag b{display:block;font-size:48px;line-height:1;margin-bottom:8px;}
+.flyer .gift{margin-top:28px;background:#fff;border:2px solid #EBA24A;border-radius:24px;padding:26px 30px;font-size:38px;font-weight:800;line-height:1.4;color:#9A6412;}
+.flyer .gift b{color:#B5701A;}
+.flyer .qrrow{margin-top:28px;display:flex;align-items:center;gap:40px;justify-content:center;}
+.flyer .qrbox{width:320px;height:320px;background:#fff;border:1px solid #e6e0d4;border-radius:20px;padding:20px;box-shadow:0 8px 26px rgba(52,67,76,.10);flex:none;}
+.flyer .qrbox img{width:100%;height:100%;display:block;}
+.flyer .qrtext{text-align:left;}
+.flyer .qrcta{font-size:44px;font-weight:800;color:#fff;background:#2C7C9E;border-radius:999px;padding:18px 38px;display:inline-block;}
+.flyer .qrhint{font-size:32px;color:#63727B;margin-top:16px;}
+.flyer .bul{margin-top:30px;font-size:34px;color:#63727B;line-height:1.6;}
+.flyer .bul b{color:#34434C;}
+.flyer .url{margin-top:20px;font-size:42px;font-weight:800;color:#2C7C9E;letter-spacing:1px;}
+.flyer .hills{position:absolute;left:0;bottom:0;width:1240px;height:110px;}
+</style></head><body><div class="page"><div class="flyer">
+  <div class="hero"><div class="hero-in">
+    <div class="eyebrow">Bon Voyage,</div>
+    <div class="brand">ぼんぼやーじゅ通信</div>
+    <div class="brand-sub">花小金井まわりの 週末おでかけ便</div>
+  </div></div>
+  <div class="fbody">
+    <div class="lead">未就学児・小学生のいるご家庭へ🎈<br><span class="hl">週末のおでかけ情報</span>、毎週おとどけ</div>
+    <div class="free">ぜんぶ無料</div>
+    <div class="tags"><div class="tag"><b>👶</b>あかちゃん</div><div class="tag"><b>🧒</b>未就学</div><div class="tag"><b>🎒</b>小学生</div></div>
+    <div class="gift">🎁 LINE友だち追加で<br><b>「花小金井 子連れおでかけガイド」</b>プレゼント</div>
+    <div class="qrrow"><div class="qrbox"><img src="assets/site-qr.png" alt="QR"></div>
+      <div class="qrtext"><div class="qrcta">くわしくはこちら</div><div class="qrhint">スマホのカメラで<br>QRを読み取ってね</div></div></div>
+    <div class="bul"><b>公園・児童館・図書館・科学館・季節のお祭り・電車でおでかけ…</b><br>天気に合わせた「今週これ」／連休のおでかけアイデアも</div>
+    <div class="url">くわしくは → bonvoya.nicomaru.tokyo/f</div>
+  </div>
+  <svg class="hills" viewBox="0 0 400 36" preserveAspectRatio="none"><path d="M0,20 Q110,6 220,14 T400,12 L400,36 L0,36 Z" fill="#CFE7D0"/><path d="M0,27 Q130,15 260,22 T400,22 L400,36 L0,36 Z" fill="#A6CE8B"/></svg>
+</div></div></body></html>

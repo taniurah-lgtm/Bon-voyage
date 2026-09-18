@@ -1,0 +1,139 @@
+/* ぼんぼやーじゅ通信 — 地図とその周りの見た目。色はページ側の変数に乗る。 */
+
+/* 折り返すと249pxを占めて、地図が2画面ぶん下に押し出されていた。
+   横スクロールの1行に畳む。 */
+.bvm-chips {
+  display: flex; flex-wrap: nowrap; gap: .4rem; margin-bottom: .7rem;
+  overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  padding-bottom: .2rem;
+}
+.bvm-chips::-webkit-scrollbar { display: none; }
+.bvm-chip { flex: 0 0 auto; }
+.bvm-chip {
+  --chip: var(--sky-deep);
+  font-family: var(--body); font-size: .8rem; font-weight: 700;
+  color: var(--ink-soft); background: var(--surface);
+  border: 1px solid var(--line-strong); border-radius: 999px;
+  padding: .4rem .8rem; cursor: pointer; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: .3rem;
+  min-height: 44px;                     /* 指で押せる大きさの床 */
+}
+.bvm-chip::before {
+  content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--chip);
+}
+.bvm-chip[data-cat=""]::before { display: none; }
+/* ダークでは --sky-deep が明るい色になるので #fff だと 1.62:1 で読めない。
+   地の明暗に追従する --on-sky を使う（bv-calendar.css はすでにそうしている）。 */
+.bvm-chip.is-on { color: var(--on-sky); background: var(--sky-deep); border-color: var(--sky-deep); }
+.bvm-chip.is-on::before { background: var(--on-sky); }
+.bvm-chip:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+
+.bvm-canvas {
+  height: 24rem; border-radius: 16px; border: 1px solid var(--line);
+  background: var(--surface-2); overflow: hidden; z-index: 0;
+}
+@media (min-width: 40rem) { .bvm-canvas { height: 25rem; } }
+
+.bvm-note { font-size: .78rem; color: var(--ink-soft); margin-top: .5rem; line-height: 1.7; }
+.bvm-fail {
+  background: var(--surface-2); border: 1px dashed var(--line-strong); border-radius: 14px;
+  padding: 1rem 1.15rem; font-size: .9rem; color: var(--ink-soft);
+}
+
+/* ---- ピン（画像を使わずCSSで描く） ---- */
+.bvm-pin-wrap {
+  background: none; border: none;
+  /* アイコン枠は 30x38（JS の iconSize と揃える）。見た目のピン(20px)より広く取って押しやすくする。
+     44px にすると隣のピンが重なって「押したのに別の場所が開く」が出るので、これ以上広げない
+     （まとめ表示のしきい値 OVERLAP_PX=34 とセット）。 */
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.bvm-pin {
+  --pin: #2C7C9E;
+  display: block; width: 20px; height: 20px; margin-bottom: 4px; border-radius: 50% 50% 50% 0;
+  background: var(--pin); transform: rotate(-45deg);
+  border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.35);
+}
+/* Leaflet のズームボタンも指で押せる大きさに */
+.leaflet-touch .leaflet-bar a, .leaflet-bar a { width: 44px; height: 44px; line-height: 44px; }
+.bvm-pin::after {
+  content: ""; position: absolute; inset: 5px; border-radius: 999px; background: rgba(255,255,255,.85);
+}
+
+/* ---- ふきだし ---- */
+.leaflet-popup-content-wrapper { border-radius: 14px; }
+.leaflet-popup-content { margin: .7rem .85rem; line-height: 1.7; max-height: 15rem; overflow-y: auto; }
+.bvm-pop { display: flex; flex-direction: column; gap: .18rem; }
+.bvm-pop-nm { font-family: var(--maru); font-weight: 800; font-size: .96rem; }
+.bvm-pop-acc { font-size: .78rem; color: #5b6a73; }
+/* ★ふきだしの地は Leaflet 既定の白のまま（テーマ化していない）。ここに var(--ink-soft) を
+   置くと、ダークで薄灰(#AAB9C1) on 白 = 2.02:1 になる（前は #7c8a92 で 3.55:1 だった＝直して
+   悪化させた）。この節だけ生値にする。ほかの .bvm-pop-* も同じ理由で生値。 */
+.bvm-pop-ages { font-family: var(--maru); font-weight: 700; font-size: .8rem; color: #4A5A63; }
+.bvm-pop-approx { font-size: .72rem; color: #A8703C; }
+.bvm-pop-voice {
+  font-size: .82rem; color: #34434C; background: #F5F2EA;
+  border-radius: 8px; padding: .3rem .45rem; margin-top: .35rem;
+  /* 300字の声でふきだしが地図の高さを超え、ボタンが押せなくなっていた。
+     ふきだしの中でスクロールさせて、地図の中に収める。 */
+  max-height: 7.5rem; overflow-y: auto; -webkit-overflow-scrolling: touch;
+}
+.bvm-pop-links { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .35rem; font-size: .8rem; font-weight: 700; }
+
+/* 一覧側で「いまここ」を光らせる */
+.spot.is-hit, .bvm-hit { box-shadow: 0 0 0 3px var(--marigold); transition: box-shadow .3s ease; }
+
+/* 二次リンクのタップ領域（44px未満だった） */
+.back, footer a { min-height: 44px; display: inline-flex; align-items: center; }
+
+/* 同じ地点に複数のスポットがあるとき */
+.bvm-pop-one { display: flex; flex-direction: column; gap: .18rem; }
+.bvm-pop-sep { border: 0; border-top: 1px dashed #DCD5C6; margin: .55rem 0; }
+
+/* 画面上で重なっているピンへの導線（ピンは動かさない） */
+.bvm-pop-near {
+  margin-top: .55rem; padding-top: .5rem; border-top: 1px solid #ECE7DB;
+  display: flex; flex-wrap: wrap; gap: .3rem; align-items: center;
+}
+.bvm-pop-near > span { font-size: .74rem; color: #7c8a92; width: 100%; }
+.bvm-pop-goto {
+  font-family: inherit; font-size: .78rem; font-weight: 700; color: #2C7C9E;
+  background: #F5F2EA; border: 1px solid #DCD5C6; border-radius: 999px;
+  padding: .3rem .7rem; min-height: 34px; cursor: pointer;
+}
+/* ふきだしの中のリンクも指で押せる大きさに（24pxだった） */
+.bvm-pop-links a { min-height: 44px; display: inline-flex; align-items: center; }
+
+/* 重なったピンを「まとめて件数で」出す印。
+   どこか1つの場所を主張しないので、位置について嘘をつかない。 */
+.bvm-cluster-wrap { background: none; border: none; }
+.bvm-cluster {
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; margin: 2px; border-radius: 999px;
+  background: #2C7C9E; color: #fff; border: 3px solid #fff;
+  font-family: var(--maru); font-weight: 800; font-size: .95rem;
+  box-shadow: 0 1px 6px rgba(0,0,0,.35);
+}
+.bvm-cluster-wrap:hover .bvm-cluster, .bvm-cluster-wrap:focus-visible .bvm-cluster { background: #1F6280; }
+
+/* ---- 「近く／全体」の切り替え（地図の左下） ---- */
+.bvm-view { display: flex; gap: .25rem; margin: 0 0 .4rem .4rem; }
+.bvm-view-btn {
+  font-family: var(--body); font-size: .75rem; font-weight: 700;
+  color: var(--ink-soft); background: var(--surface);
+  border: 1px solid var(--line-strong); border-radius: 999px;
+  min-height: 44px; padding: .1rem .8rem; cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .18);
+}
+.bvm-view-btn:active { background: var(--surface-2); }
+.bvm-off {
+  font-size: .78rem; color: var(--ink-soft); margin-top: .35rem; line-height: 1.7;
+  background: var(--surface-2); border-radius: 10px; padding: .35rem .6rem;
+}
+
+/* 指で押せる大きさに（Leaflet の既定は 24px、ふきだしのリンクは 36px だった） */
+.leaflet-popup-close-button {
+  width: 44px !important; height: 44px !important;
+  font-size: 22px !important; line-height: 40px !important;
+}
+.bvm-pop-jump { min-height: 44px; display: inline-flex; align-items: center; }

@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>おでかけカレンダー｜ぼんぼやーじゅ通信</title>
+<meta name="description" content="花小金井・小平まわりの子連れで行けるイベントを、日付が見えるカレンダーで。先の予定も申込の締切もまとめて。気になる日をタップして、そのままご自分のカレンダーに保存できます。">
+<link rel="canonical" href="https://bonvoya.nicomaru.tokyo/calendar.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bonvoya.nicomaru.tokyo/calendar.html">
+<meta property="og:title" content="おでかけカレンダー｜ぼんぼやーじゅ通信">
+<meta property="og:description" content="花小金井まわりの子連れイベントを、日付から探せるカレンダーに。">
+<meta property="og:locale" content="ja_JP">
+<link rel="stylesheet" href="/assets/bv-tokens.css">
+<link rel="stylesheet" href="/assets/bv-calendar.css">
+<link rel="stylesheet" href="/assets/bv-nav.css">
+<script src="/assets/analytics.js" defer></script>
+<style>
+  main { padding: .9rem 0 1rem; }
+  .lead { color: var(--ink-soft); font-size: .85rem; margin-bottom: .6rem; line-height: 1.7; }
+  /* 主機能（日をタップする）が初回スクロールなしで見えるように、この頁だけ見出しを詰める。
+     以前は見出し＋リード＋ピルで約790px使い、カレンダーの表が画面の外にあった。 */
+  .ghead-in { padding-top: 1.1rem; padding-bottom: .95rem; }
+  .ghead h1 { font-size: clamp(1.4rem, 4.4vw, 1.9rem); margin-bottom: .25rem; }
+  .ghead .eyebrow { font-size: .95rem; margin-bottom: .1rem; }
+  .ghead .sub { font-size: .9rem; line-height: 1.7; }
+  /* ページ内のほかの行き先は、カレンダーの下に置く（上に置くと表が押し下がる） */
+  .nav-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.6rem 0 0; }
+  .nav-pills a {
+    font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none;
+    color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong);
+    border-radius: 999px; padding: .4rem .9rem;
+  }
+  .noscript {
+    background: var(--marigold-wash); border: 1px solid var(--marigold);
+    border-radius: 14px; padding: 1rem 1.15rem; font-size: .9rem; margin-bottom: 1.2rem;
+  }
+  .fallback { margin-top: 1rem; }
+  .fallback h3 { font-family: var(--maru); font-weight: 800; font-size: .95rem; margin: 1.1rem 0 .4rem; }
+  .fallback li { font-size: .9rem; }
+  .stamp { font-size: .8rem; color: var(--ink-faint); margin-top: 2rem; }
+</style>
+</head>
+<body>
+<nav class="bvnav" aria-label="サイト内">
+  <div class="bvnav-in">
+    <a class="bvnav-brand" href="/">ぼんぼやーじゅ通信</a>
+    <div class="bvnav-links">
+      <a href="/" class="bv-hide-sm">通信について</a>
+      <a href="/calendar.html" aria-current="page"><span class="bv-lg">おでかけ</span>カレンダー</a>
+      <a href="/map.html"><span class="bv-lg">おでかけ</span>マップ</a>
+      <a class="bvnav-cta" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE<span class="bv-lg">で受け取る</span></a>
+    </div>
+  </div>
+</nav>
+<header class="ghead">
+  <div class="ghead-in">
+    <div class="eyebrow">Bon Voyage,</div>
+    <h1>おでかけカレンダー</h1>
+    <p class="sub">花小金井・小平まわりの子連れイベントを、日付から。</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="lead">点の日に予定あり。タップでその日の予定が出ます。<b>台帳にある予定を、先のぶんまで全部</b>のせています。</p>
+
+  <noscript>
+    <div class="noscript">このカレンダーは表示にJavaScriptを使っています。切っている場合は、下の一覧をご覧ください。</div>
+  </noscript>
+
+  <!-- 「読み込んでいます」は JS 側で入れる。noscript のときに残ると案内が二重になる -->
+  <div id="cal"></div>
+
+  <!-- JavaScript が動かない環境と、検索エンジン向けの一覧。中身は上のカレンダーと同じ。 -->
+  <div class="fallback">
+    <h2 class="bvc-tailhead">これからの予定（一覧）</h2>
+    <h3>9月13日(日)</h3>
+    <ul>
+      <li>江戸東京たてもの園 伝統工芸の実演(東京手描友禅・江戸筆)（10:30〜） — 江戸東京たてもの園 <a href="https://www.tatemonoen.jp/event/schedule/2026/schedule789.php" target="_blank" rel="noopener">公式</a></li>
+      <li>初心者ラグビー教室(小平市ラグビーフットボール協会)（09:00〜） — 小平第十三小学校 校庭</li>
+      <li>アンサンブル ルナーレ(弦楽合奏団) 第32回定期演奏会（14:00〜） — ルネこだいら 中ホール / 費用: 入場無料・全席自由 <a href="https://ensenblelunare.jimdofree.com/" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>9月18日(金)</h3>
+    <ul>
+      <li>みんデパ駅前出張所「花小金井夜市」（15:00〜） — 花小金井駅 北口 駅前広場（駅を出てすぐ。ベビーカーでも段差が無い） <a href="https://www.kodairahmassoc.com/event-details/hanakoganeiyajishuttenshaboshu" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>9月19日(土)</h3>
+    <ul>
+      <li>西武園ゆうえんち 大火祭り(花火ショー)（19:30〜） — 西武園ゆうえんち レッツゴー!レオランド特設ステージ <a href="https://www.seibuen-amusement-park.jp/2026summer/" target="_blank" rel="noopener">公式</a></li>
+      <li>江戸東京たてもの園 綱島家 年中行事「十五夜飾り」 — 江戸東京たてもの園 <a href="https://www.tatemonoen.jp/event/schedule/2026/schedule789.php" target="_blank" rel="noopener">公式</a></li>
+      <li>児童館「あつまれふたご」(小川町二丁目児童館・おがにん) — 小川町二丁目児童館 <a href="https://kodaji.ashita-ba.co.jp/" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>9月20日(日)</h3>
+    <ul>
+      <li>西武園ゆうえんち 大火祭り(花火ショー)（19:30〜） — 西武園ゆうえんち レッツゴー!レオランド特設ステージ <a href="https://www.seibuen-amusement-park.jp/2026summer/" target="_blank" rel="noopener">公式</a></li>
+      <li>江戸東京たてもの園 綱島家 年中行事「十五夜飾り」 — 江戸東京たてもの園 <a href="https://www.tatemonoen.jp/event/schedule/2026/schedule789.php" target="_blank" rel="noopener">公式</a></li>
+      <li>東京クラフトFESTA2026 feat.多摩 <a href="https://kodaira-tourism.com/event/22870/" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>9月21日(月)</h3>
+    <ul>
+      <li>西武園ゆうえんち 大火祭り(花火ショー)（19:30〜） — 西武園ゆうえんち レッツゴー!レオランド特設ステージ <a href="https://www.seibuen-amusement-park.jp/2026summer/" target="_blank" rel="noopener">公式</a></li>
+      <li>江戸東京たてもの園 綱島家 年中行事「十五夜飾り」 — 江戸東京たてもの園 <a href="https://www.tatemonoen.jp/event/schedule/2026/schedule789.php" target="_blank" rel="noopener">公式</a></li>
+      <li>東京クラフトFESTA2026 feat.多摩 <a href="https://kodaira-tourism.com/event/22870/" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>9月22日(火)</h3>
+    <ul>
+      <li>西武園ゆうえんち 大火祭り(花火ショー)（19:30〜） — 西武園ゆうえんち レッツゴー!レオランド特設ステージ <a href="https://www.seibuen-amusement-park.jp/2026summer/" target="_blank" rel="noopener">公式</a></li>
+      <li>江戸東京たてもの園 綱島家 年中行事「十五夜飾り」 — 江戸東京たてもの園 <a href="https://www.tatemonoen.jp/event/schedule/2026/schedule789.php" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>9月23日(水)</h3>
+    <ul>
+      <li>西武園ゆうえんち 大火祭り(花火ショー)（19:30〜） — 西武園ゆうえんち レッツゴー!レオランド特設ステージ <a href="https://www.seibuen-amusement-park.jp/2026summer/" target="_blank" rel="noopener">公式</a></li>
+      <li>江戸東京たてもの園 綱島家 年中行事「十五夜飾り」 — 江戸東京たてもの園 <a href="https://www.tatemonoen.jp/event/schedule/2026/schedule789.php" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>9月24日(木)</h3>
+    <ul>
+      <li>江戸東京たてもの園 綱島家 年中行事「十五夜飾り」 — 江戸東京たてもの園 <a href="https://www.tatemonoen.jp/event/schedule/2026/schedule789.php" target="_blank" rel="noopener">公式</a></li>
+      <li>まち巡りガイドツアー（09:30〜） <a href="https://kodaira-tourism.com/event/20621/" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>9月25日(金)</h3>
+    <ul>
+      <li>江戸東京たてもの園 綱島家 年中行事「十五夜飾り」 — 江戸東京たてもの園 <a href="https://www.tatemonoen.jp/event/schedule/2026/schedule789.php" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>9月26日(土)</h3>
+    <ul>
+      <li>江戸東京たてもの園 綱島家 年中行事「十五夜飾り」 — 江戸東京たてもの園 <a href="https://www.tatemonoen.jp/event/schedule/2026/schedule789.php" target="_blank" rel="noopener">公式</a></li>
+      <li>熊野宮 神幸祭（13:00〜） — 熊野宮（小平市仲町。一橋学園駅圏＝ゾーンB） / 費用: 無料（模擬店は実費） <a href="https://kumanogu.com/shinkousai/" target="_blank" rel="noopener">公式</a></li>
+      <li>たけのこ公園ビアガーデン！2026（10:00〜） <a href="https://kodaira-tourism.com/event/22825/" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>9月27日(日)</h3>
+    <ul>
+      <li>江戸東京たてもの園 綱島家 年中行事「十五夜飾り」 — 江戸東京たてもの園 <a href="https://www.tatemonoen.jp/event/schedule/2026/schedule789.php" target="_blank" rel="noopener">公式</a></li>
+      <li>熊野宮 神幸祭（13:00〜） — 熊野宮（小平市仲町。一橋学園駅圏＝ゾーンB） / 費用: 無料（模擬店は実費） <a href="https://kumanogu.com/shinkousai/" target="_blank" rel="noopener">公式</a></li>
+      <li>太陽福祉センターまつり（10:00〜） — 小平市立たいよう福祉センター 館内外（小川町。★自転車は小川駅西駐輪場へ） <a href="https://www.syakaifukushi.kodaira.tokyo.jp/service/news/taisyo/20260722.html" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>9月29日(火)</h3>
+    <ul>
+      <li>子育て支援講座「素材の味を活かしたカラフル弁当を作ろう」（10:00〜） — 鈴木公民館</li>
+    </ul>
+    <h3>9月30日(水)</h3>
+    <ul>
+      <li>小川公民館 子育て支援講座「子育ては私のキャリア」【保育付き】（10:00〜） — 小川公民館 <a href="https://www.city.kodaira.tokyo.jp/event/128/128376.html" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>10月6日(火)</h3>
+    <ul>
+      <li>「はじめの一歩」第一子の赤ちゃんとお母さんへ（14:00〜）</li>
+    </ul>
+    <h3>10月9日(金)</h3>
+    <ul>
+      <li>仲町公民館 子育て支援講座「ゼロから1歳児のための子育てあれこれ」（10:00〜） — 仲町公民館（なかまちテラス）2階講座室ほか ☎042-341-0862 <a href="https://www.city.kodaira.tokyo.jp/event/129/129611.html" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>10月10日(土)</h3>
+    <ul>
+      <li>こだいらクラフトFESTA2026 feat.ブリヂストン <a href="https://kodaira-tourism.com/event/22841/" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>10月11日(日)</h3>
+    <ul>
+      <li>こだいらクラフトFESTA2026 feat.ブリヂストン <a href="https://kodaira-tourism.com/event/22841/" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>10月12日(月)</h3>
+    <ul>
+      <li>第5回 ミラクルミュージックマーケット（MMM） — 3会場での同時開催（今年から拡大） <a href="https://www.ksc50.com/info_type/event/" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>10月13日(火)</h3>
+    <ul>
+      <li>子育て支援講座「素材の味を活かしたカラフル弁当を作ろう」（10:00〜） — 鈴木公民館</li>
+    </ul>
+    <h3>10月15日(木)</h3>
+    <ul>
+      <li>上宿公民館 子育て支援講座「親子の絆を深めるタッチケア」（10:00〜） — 上宿公民館 和室1 ☎042-345-1164 <a href="https://www.city.kodaira.tokyo.jp/event/129/129642.html" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>10月16日(金)</h3>
+    <ul>
+      <li>仲町公民館 子育て支援講座「ゼロから1歳児のための子育てあれこれ」（10:00〜） — 仲町公民館（なかまちテラス）2階講座室ほか ☎042-341-0862 <a href="https://www.city.kodaira.tokyo.jp/event/129/129611.html" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>10月21日(水)</h3>
+    <ul>
+      <li>はじめての自転車教室（小金井公園 サイクリングセンター） — 小金井公園 サイクリングセンター <a href="https://event.cyclestart.jp/kids-event-entry/koganei261021" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>10月22日(木)</h3>
+    <ul>
+      <li>上宿公民館 子育て支援講座「親子の絆を深めるタッチケア」（10:00〜） — 上宿公民館 和室1 ☎042-345-1164 <a href="https://www.city.kodaira.tokyo.jp/event/129/129642.html" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>10月27日(火)</h3>
+    <ul>
+      <li>「はじめの一歩」第一子の赤ちゃんとお母さんへ（14:00〜）</li>
+    </ul>
+    <h3>10月29日(木)</h3>
+    <ul>
+      <li>上宿公民館 子育て支援講座「親子の絆を深めるタッチケア」（10:00〜） — 上宿公民館 和室1 ☎042-345-1164 <a href="https://www.city.kodaira.tokyo.jp/event/129/129642.html" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>10月30日(金)</h3>
+    <ul>
+      <li>仲町公民館 子育て支援講座「ゼロから1歳児のための子育てあれこれ」（10:00〜） — 仲町公民館（なかまちテラス）2階講座室ほか ☎042-341-0862 <a href="https://www.city.kodaira.tokyo.jp/event/129/129611.html" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>11月1日(日)</h3>
+    <ul>
+      <li>小川パレット オープン — 小川駅西口再開発ビル4・5階</li>
+    </ul>
+    <h3>11月3日(火)</h3>
+    <ul>
+      <li>「はじめの一歩」第一子の赤ちゃんとお母さんへ（14:00〜）</li>
+    </ul>
+    <h3>11月6日(金)</h3>
+    <ul>
+      <li>仲町公民館 子育て支援講座「ゼロから1歳児のための子育てあれこれ」（10:00〜） — 仲町公民館（なかまちテラス）2階講座室ほか ☎042-341-0862 <a href="https://www.city.kodaira.tokyo.jp/event/129/129611.html" target="_blank" rel="noopener">公式</a></li>
+    </ul>
+    <h3>申込の締切</h3>
+    <ul><li>9月25日(金) まで — 仲町公民館 子育て支援講座「ゼロから1歳児のための子育てあれこれ」（開催 10/9(金)・10/30(金)・11/13(金)・11/20(金)・11/27(金) 各10:00〜12:00 全5回 （公式表記は「10/9〜11/27の金曜日、10/16・23・11/6を除く」。曜日は全日程で検証済み））</li><li>9月30日(水) まで — 上宿公民館 子育て支援講座「親子の絆を深めるタッチケア」（開催 10/15(木)・10/22(木)・10/29(木) 各10:00〜11:30 全3回（曜日検証済み））</li></ul>
+    <h3>会期中ずっと見られるもの</h3>
+    <ul><li>中央図書館ギャラリー展示「クラシックポップアップ絵本展」（10月14日(水) まで）</li><li>多摩六都科学館「第13回全国KAPLA®大会に応募しよう!」（9月23日(水) まで）</li></ul>
+    <h3>日程がまだ確定していないもの</h3>
+    <p class="lead">例年の時期から拾ったものです。公式で確認してからお出かけください。</p>
+    <ul><li>東久留米駅前夏祭り+門前祭り（8/1(土)夕方の可能性大(例年8月第1土曜、2026年日程要確認)）</li><li>武蔵村山市観光納涼花火大会（8/29(土)の見込み 19:50〜20:30 約2,000発(要確認)）</li></ul>
+  </div>
+
+  <p class="stamp">情報の更新日: 2026-09-13　※日程・料金は変わることがあります。おでかけ前に各公式でご確認ください。</p>
+  <div class="nav-pills">
+    <a href="/">通信について</a>
+    <a href="/map.html">おでかけマップ</a>
+    <a href="/issues.html">バックナンバー</a>
+    <a href="/#contact">お問い合わせ</a>
+  </div>
+
+  <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>
+</main>
+
+<footer>
+  <div class="fmark">ぼんぼやーじゅ通信</div>
+  <a href="/tokushoho.html">免責事項・個人情報の取り扱い</a><br>
+  © 2026 ぼんぼやーじゅ通信
+</footer>
+
+<script src="/assets/bv-calendar.js"></script>
+<script>
+document.getElementById('cal').innerHTML = '<p class="lead" id="loading">読み込んでいます…</p>';
+fetch('/data/events-public.json', { cache: 'no-cache' })
+  .then(function (r) { return r.json(); })
+  .then(function (data) {
+    // ★先に描く。描けてから一覧を畳む。
+    //   逆にすると、mount が落ちたときに「読み込めませんでした」とだけ出て
+    //   下の一覧まで消え、ページが完全な行き止まりになる（2026-09-05 に発生）。
+    BVCalendar.mount(document.getElementById('cal'), data, {
+      // この頁は見出しが h1 だけ（一覧の h2 はJSが動くと隠れる）。月の見出しを h3 に
+      // すると h1→h3 の飛びになるので h2 で出す。
+      monthLevel: 2,
+    });
+    if (data && data.events && data.events.length) {
+      document.querySelector('.fallback').hidden = true;
+    }
+  })
+  .catch(function (e) {
+    // 読み込みに失敗しても一覧は残っている（上で畳んでいないため）
+    if (window.console) console.error('カレンダーを描けませんでした:', e);
+    var l = document.getElementById('loading');
+    if (l) l.textContent = 'カレンダーを読み込めませんでした。下の一覧をご覧ください。';
+    var f = document.querySelector('.fallback');
+    if (f) f.hidden = false;
+  });
+</script>
+</body>
+</html>

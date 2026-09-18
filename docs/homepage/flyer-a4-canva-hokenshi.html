@@ -1,0 +1,124 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<title>Canva版レイアウト A4チラシ 保健師版 版下｜ぼんぼやーじゅ通信</title>
+<!--
+  ★保健師版（flyer-a4-canva-print.html の版違い）。
+    こども家庭センターの保健師さんが、新生児訪問で直接お渡しする50部用。
+    QRは /f/hokenshi。宛先行と本文だけ差し替え、絵とレイアウトは表と共通。
+    🔴 渡るのは「新生児訪問」＝生後1か月ごろ。**まだ動けない時期ではない。**
+      近所のひろばくらいなら、もう出られる。だから「急がなくていい」と抑える必要はなく、
+      **「ここ行ってみようかな」と思ってもらうのが、この紙の仕事。**
+      （2026-09-16 に「まだおでかけどころじゃない」「いまは知っておくだけで大丈夫」と
+        書いたが、どちらも相手を動けない人と決めつけていた。オーナーの指摘で直した）
+
+  Canvaで作った版（2026-09 にこども家庭センターへ送ったもの）を、HTMLに移したもの。
+  ・絵はCanva版のPDFから取り出して docs/homepage/assets/art/canva/ に置いた
+  ・文字はすべてHTML。QRは自前のものを差し替えられる
+  ・宛先とQRを差し替えるだけで版違いが作れる（data-* ではなくこのファイルを複製する）
+  ★下端8mmは安全帯。最下段の文字は必ず8mm上で止める。
+-->
+<style>
+  @page { size: 210mm 297mm; margin: 0; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ width:210mm; height:297mm; }
+  /* ★書体は bash scripts/setup-fonts.sh で入れる。無いと IPAゴシックに落ちて見劣りする。
+       Canva版の中身：ブランド名=07鉄瓶ゴシック／それ以外=Canva_LyraStd-DB。
+       Lyra は Canva の外では使えないので、印象の近い無料書体に置き換えている。 */
+  body{
+    font-family:"Zen Kurenaido","Zen Maru Gothic","Hiragino Maru Gothic ProN",sans-serif;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  /* 太さが1段しかない書体なので、太く見せたいところは線を足す（合成ボールドは滲む）。
+     ★太らせる量は字による。「曜」「朝」「齢」のような画数の多い漢字は
+       .05em も足すと中の空きが埋まって黒い塊になる。大きい字だけ強く足す。 */
+  .thick{ paint-order:stroke fill; -webkit-text-stroke:.030em currentColor; }
+  .catch.thick{ -webkit-text-stroke:.048em currentColor; }
+  .page{ position:relative; width:210mm; height:297mm; overflow:hidden; background:#FFFDF7; }
+
+  /* ── 上の帯 ── */
+  .top{ position:absolute; inset:0 0 auto 0; height:37.5%; background:#469197;
+        display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+  .hello{ font-size:7.1mm; color:#fff; letter-spacing:.30em; text-indent:.30em; font-weight:500; opacity:.95; }
+  .brand{ font-family:"Mochiy Pop One","Zen Maru Gothic",sans-serif;  /* ←07鉄瓶ゴシックの代わり */
+         font-size:16.0mm; color:#fff; font-weight:400; letter-spacing:.015em; margin:7.4mm 0 0; line-height:1.05; }
+  .sub  { font-size:5.7mm; color:#fff; letter-spacing:.20em; text-indent:.20em; margin:6.4mm 0 0; opacity:.93; font-weight:500; }
+
+  /* ── 本文 ── */
+  .mid{ position:absolute; left:0; right:0; top:37.5%; text-align:center; padding:7.4mm 18mm 0; }
+  .catch { font-size:11.4mm; color:#C88C5C; font-weight:400; letter-spacing:.05em; line-height:1.30; }
+  .deliver{ font-size:6.9mm; color:#2A4B67; font-weight:400; letter-spacing:.045em; margin:8.6mm 0 0; }
+  .what   { font-size:3.95mm;  color:#2A4B67; letter-spacing:.045em; margin:4.2mm 0 0; line-height:1.75; font-weight:500; opacity:.88; }
+  .freeln { font-size:5.5mm; color:#C88C5C; font-weight:400; letter-spacing:.05em; margin:5.0mm 0 0; }
+
+  /* ── 裏面への案内 ──
+     ★表裏がバラバラに見られる紙なので、「裏がある」ではなく
+       「めくると何があるか」を書く。理由がないと、めくられない。 */
+  .backref{ margin:7.2mm 0 0; font-family:"Zen Maru Gothic",sans-serif;
+            display:inline-block; font-size:3.25mm; color:#3B8F94; font-weight:500;
+            letter-spacing:.04em; border:.3mm solid #9FD0D2; border-radius:99mm;
+            padding:1.7mm 5.2mm; background:rgba(255,255,255,.72); }
+
+  /* ── 絵 ── */
+  .art{ position:absolute; }
+  .sun     { left:5.3mm;  top:119.1mm; width:28.6mm; }
+  .balloonA{ left:181.9mm;top:135.0mm; width:14.8mm; }
+  .balloonB{ left:172.4mm;top:165.9mm; width:25.4mm; }
+  .hills   { left:10.8mm; top:243.8mm; width:188.4mm; }
+  .tree    { left:25.2mm; top:220.5mm; width:29.1mm; }
+  .family  { left:54.3mm; top:230.5mm; width:43.7mm; }
+  .petalsA { left:168.8mm;top:201.5mm; width:29.1mm; opacity:.95; }
+  .petalsB { left:58.0mm; top:207.1mm; width:7.4mm;  opacity:.95; }
+  .petalsC { left:105.1mm;top:207.1mm; width:11.1mm; opacity:.95; }
+
+  /* ── QRカード ── */
+  .qrcard{ position:absolute; left:130.3mm; top:213.8mm; width:44.0mm;
+           background:#fff; border-radius:3mm; padding:5.4mm 4mm 4.2mm;
+           text-align:center; box-shadow:0 1px 6px rgba(42,75,103,.10); }
+  .qrcard img{ width:32.8mm; height:32.8mm; display:block; margin:0 auto; }
+  .qrt{ font-size:4.1mm; color:#3B8F94; font-weight:700; margin:2.8mm 0 0; letter-spacing:.04em; }
+  .qru{ font-family:"Zen Maru Gothic",sans-serif; font-size:2.55mm; color:#3B8F94; font-weight:500; margin:1.2mm 0 0; letter-spacing:.015em; }
+
+  /* ── 足もと ── */
+  .foot{ position:absolute; left:18mm; right:18mm; bottom:8mm; text-align:center;
+         font-family:"Zen Maru Gothic",sans-serif;  /* 2.6mm は手書き系だと潰れる */
+         font-size:2.6mm; color:#2A4B67; line-height:1.95; letter-spacing:.035em; font-weight:500;
+         background:rgba(255,253,247,.82); border-radius:2mm; padding:2.2mm 3mm; }
+</style></head><body>
+<div class="page">
+
+  <div class="top">
+    <div class="hello">赤ちゃんが生まれた 小平のご家庭へ</div>
+    <div class="brand">ぼんぼやーじゅ通信</div>
+    <div class="sub">小平の 週末おでかけ便</div>
+  </div>
+
+  <div class="mid">
+    <div class="catch thick">0歳から行ける場所が、<br>小平にはたくさんあります。</div>
+    <div class="deliver thick">「ここ行ってみようかな」のきっかけに。</div>
+    <div class="what">手遊びやわらべうたの会、助産師さんに相談できる日。小平のなかから</div>
+    <div class="freeln thick">毎週水曜の朝、LINEへ。ぜんぶ無料です。</div>
+    <div class="backref">裏面に、届く紙面の見本があります</div>
+  </div>
+
+  <img class="art sun"      src="assets/art/canva/sun.png"       alt="">
+  <img class="art balloonA" src="assets/art/canva/balloon-a.png" alt="">
+  <img class="art balloonB" src="assets/art/canva/balloon-b.png" alt="">
+  <img class="art petalsA"  src="assets/art/canva/petals-a.png"  alt="">
+  <img class="art petalsB"  src="assets/art/canva/petals-b.png"  alt="">
+  <img class="art petalsC"  src="assets/art/canva/petals-c.png"  alt="">
+  <img class="art hills"    src="assets/art/canva/hills.png"     alt="">
+  <img class="art tree"     src="assets/art/canva/tree.png"      alt="">
+  <img class="art family"   src="assets/art/canva/family.png"    alt="">
+
+  <div class="qrcard">
+    <img src="assets/qr/f-hokenshi.png" alt="ぼんぼやーじゅ通信のホームページのQRコード">
+    <div class="qrt">詳しくはこちら</div>
+    <div class="qru">bonvoya.nicomaru.tokyo</div>
+  </div>
+
+  <div class="foot">
+    お名前やご住所の入力はいりません。合わなければ、いつでも解除できます。<br>
+    発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）<br>
+    お問い合わせ tokyo.papa.home@gmail.com ／ イベント情報の掲載は無料です
+  </div>
+
+</div></body></html>

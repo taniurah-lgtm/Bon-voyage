@@ -177,7 +177,33 @@ E75・E78・E80・E81 は SNS返信側が「未確認」「未公表」の古い
   🔴 **ID衝突が出る前提で見る。**9/16 に E108〜E110 で実際起きた
 - 統合できたら、SNS返信の会話の push 先を **rfwmo8 に変える**
 
-### 第3段階 — ホームページ側を合流（ここが本丸）
+### ✅ 第3段階・第4段階も完了した（2026-09-18）
+
+**中身の衝突はゼロだった。**yefv9l にあって rfwmo8 に無いファイルは **281本**（ほぼ `docs/homepage/`）、
+共通で中身が違うファイルは **`reports/free/2026-09-16.md` と `sent.log` の2本だけ**。
+その2本は「何を送ったか」の記録なので、もともと同期しないと決めていた。
+
+**instagram-reel には固有のファイルが1本も無かった**（yefv9l の部分集合）。
+第4段階は、消すだけで終わり。
+
+**ワークフローからブランチまたぎを全部落とした:**
+
+| | 前 | 後 |
+|---|---|---|
+| `deploy-homepage.yml` | yefv9l への push で発火 → **rfwmo8 から台帳を取り直す** | 幹への push で発火。取り直し不要 |
+| `note-draft.yml` | yefv9l を checkout → **rfwmo8 から台帳を取り直す** → yefv9l へ push | 幹だけ |
+| `update-homepage-preview.yml` | **2ブランチを両方 checkout → 片方からもう片方へ push** | checkout 1回 |
+
+`fetch-depth: 0`（他ブランチの履歴が要るため深く取っていた）も **1** に戻した。
+
+**あわせて直したもの:**
+- `docs/sources.md` に **「市内の地理的な重みづけ」** の節を新設。
+  水曜巡回のプロンプトと `profiles/free-hanakoganei.md` が参照していたのに、**節が存在しなかった。**
+  「西側から最低1件」の根拠が宙に浮いていた
+- `CLAUDE.md` の push ルールを例外なしの1本に。**push 前の rebase** と
+  **IDは全体の最大値+1** を憲法に格上げ
+
+### 第3段階（手順の記録）— ホームページ側を合流
 
 - `yefv9l` の `docs/homepage/` `note/` `scripts/` を rfwmo8 へ
 - `deploy-homepage.yml` と `note-draft.yml` の**向き先を rfwmo8 に変える**

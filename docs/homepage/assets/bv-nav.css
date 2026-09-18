@@ -1,0 +1,32 @@
+/* 全ページ共通のサイトナビ。
+   index / calendar / map のどれからでも行き来できるようにする。
+   index.html は共通トークンを読み込んでいないので、**このファイルだけで完結**させる。 */
+.bvnav{position:sticky;top:0;z-index:900;background:rgba(251,250,245,.92);
+  backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid #E6E0D4;}
+.bvnav-in{max-width:960px;margin:0 auto;padding:9px 16px;display:flex;align-items:center;gap:14px;}
+.bvnav-brand{font-weight:800;font-size:15px;color:#2C7C9E;text-decoration:none;letter-spacing:.02em;flex:none;}
+.bvnav-links{display:flex;gap:4px;margin-left:auto;align-items:center;flex-wrap:wrap;justify-content:flex-end;}
+.bvnav-links a{font-size:13.5px;font-weight:700;color:#44555F;text-decoration:none;
+  padding:7px 11px;border-radius:999px;white-space:nowrap;}
+.bvnav-links a:hover{background:#EAF4F8;color:#2C7C9E;}
+.bvnav-links a[aria-current="page"]{background:#EAF4F8;color:#2C7C9E;}
+.bvnav-cta{background:#06C755 !important;color:#fff !important;padding:7px 14px !important;}
+.bvnav-cta:hover{background:#05b34c !important;color:#fff !important;}
+@media (max-width:520px){
+  .bvnav-in{padding:8px 12px;gap:8px;}
+  .bvnav-brand{font-size:13.5px;}
+  .bvnav-links a{font-size:12.5px;padding:6px 9px;}
+  .bvnav-cta{padding:6px 11px !important;}
+}
+@media (prefers-color-scheme:dark){
+  .bvnav{background:rgba(19,31,40,.92);border-bottom-color:#2A3B45;}
+  .bvnav-links a{color:#C6D4DB;}
+  .bvnav-links a:hover,.bvnav-links a[aria-current="page"]{background:#1D3944;color:#9AD4EA;}
+}
+
+/* 狭い画面では表記を詰めて1行に収める（stickyなので高さが命） */
+@media (max-width:560px){
+  .bv-hide-sm{display:none !important;}
+  .bv-lg{display:none;}
+  .bvnav-links{gap:2px;}
+}

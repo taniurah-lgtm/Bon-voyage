@@ -32,24 +32,20 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout (reports + script)
-        uses: actions/checkout@v4
+      # ★2026-09-18: ブランチを1本にしたので、チェックアウトは1回で済む。
+      #   以前は台帳(rfwmo8)とホームページ(yefv9l)が別ブランチにあり、
+      #   両方チェックアウトして片方からもう片方へ push していた。
+      - uses: actions/checkout@v4
         with:
           ref: claude/family-event-planning-rfwmo8
-      - name: Checkout homepage branch
-        uses: actions/checkout@v4
-        with:
-          ref: claude/line-message-resend-yefv9l
-          path: site
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
       - name: Rewrite the preview block
         id: rewrite
-        run: node scripts/update-homepage-preview.mjs site/docs/homepage/index.html
+        run: node scripts/update-homepage-preview.mjs docs/homepage/index.html
       - name: Commit homepage change
-        working-directory: site
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -58,7 +54,7 @@ jobs:
             echo "変更なし（プレビューは最新）"
           else
             git commit -m "homepage: refresh latest-issue preview (auto)"
-            git push origin claude/line-message-resend-yefv9l
+            git push origin HEAD:claude/family-event-planning-rfwmo8
           fi
       # GITHUB_TOKEN による push は他ワークフローを起動しないため、ここで直接公開する
       - name: Setup Pages
@@ -66,7 +62,7 @@ jobs:
       - name: Upload homepage
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site/docs/homepage
+          path: docs/homepage
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
