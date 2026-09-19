@@ -263,12 +263,14 @@ function extractDeadline(lines) {
 // 雨の金曜に向かうと閉まっている、という事故につながる。
 function extractHours(lines) {
   for (let i = 0; i < lines.length; i++) {
+    // 引用(>)は運営向けの覚書。公開物に出さないので、拾わないし、続きにも含めない。
+    if (/^\s*>/.test(lines[i])) continue;
     if (!/開館時間|休館/.test(lines[i])) continue;
     // 台帳の箇条書きは折り返して次の行に続くことがある。
     // 「休館日は『金曜日』」は続きの行に書かれていて、1行だけ見ると拾えない。
     let buf = lines[i];
     for (let j = i + 1; j < lines.length; j++) {
-      if (/^\s*[-*+]\s/.test(lines[j]) || /^\s*$/.test(lines[j]) || /^###?\s/.test(lines[j])) break;
+      if (/^\s*[-*+]\s/.test(lines[j]) || /^\s*$/.test(lines[j]) || /^###?\s/.test(lines[j]) || /^\s*>/.test(lines[j])) break;
       buf += ' ' + lines[j].trim();
     }
     const v = buf
