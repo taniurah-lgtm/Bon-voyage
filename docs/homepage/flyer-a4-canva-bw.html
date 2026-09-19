@@ -13,8 +13,11 @@
        塗りのまま白黒にすると、丘も家族も木も**灰色の塊**になり、
        A4の下半分がグレーで埋まってトナーを食う。形も分からなくなる。
        線画は `python3 scripts/make-art-outline.py` で作る。
-     ・帯は黒ベタにしない。**濃いグレー**にして白抜きが読めるところで止める。
-       210×111mm を真っ黒にすると、紙の3割以上がベタになる。
+     ・🔴 **帯にベタを敷かない。**この版はクラフト紙に刷る前提。
+       クラフト紙では「白」＝紙の色なので、上に濃い面を置くと**そこだけ沈んで暗く見える。**
+       210×111mm＝紙の37.5%あるので、影響が大きい。
+       帯は**紙の地のまま＋下に罫**にして、ブランド名は黒で置く。
+       （濃さの実測: #333=31.7% / #555=27.0% / #6E6E6E=23.4% / 地のまま=4.5%）
 -->
 <style>
   @page { size: 210mm 297mm; margin: 0; }
@@ -35,12 +38,12 @@
   .page{ position:relative; width:210mm; height:297mm; overflow:hidden; background:#fff; }
 
   /* ── 上の帯 ── */
-  .top{ position:absolute; inset:0 0 auto 0; height:37.5%; background:#333;
+  .top{ position:absolute; inset:0 0 auto 0; height:37.5%; border-bottom:.7mm solid #232323;
         display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
-  .hello{ font-size:7.1mm; color:#fff; letter-spacing:.30em; text-indent:.30em; font-weight:500; opacity:.95; }
+  .hello{ font-size:7.1mm; color:#4A4A4A; letter-spacing:.30em; text-indent:.30em; font-weight:500; opacity:.95; }
   .brand{ font-family:"Mochiy Pop One","Zen Maru Gothic",sans-serif;  /* ←07鉄瓶ゴシックの代わり */
-         font-size:16.0mm; color:#fff; font-weight:400; letter-spacing:.015em; margin:7.4mm 0 0; line-height:1.05; }
-  .sub  { font-size:5.7mm; color:#fff; letter-spacing:.20em; text-indent:.20em; margin:6.4mm 0 0; opacity:.93; font-weight:500; }
+         font-size:16.0mm; color:#1E1E1E; font-weight:400; letter-spacing:.015em; margin:7.4mm 0 0; line-height:1.05; }
+  .sub  { font-size:5.7mm; color:#4A4A4A; letter-spacing:.20em; text-indent:.20em; margin:6.4mm 0 0; opacity:.93; font-weight:500; }
 
   /* ── 本文 ── */
   .mid{ position:absolute; left:0; right:0; top:37.5%; text-align:center; padding:9mm 18mm 0; }
