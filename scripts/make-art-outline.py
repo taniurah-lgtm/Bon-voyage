@@ -37,7 +37,13 @@ LINE = (30, 30, 30)
 # ink  … 描いてある線を明るさで抜く。thr=しきい値 / speck=これより小さい粒は消す（元画素で）
 # edge … 線が無い絵。ならしてから色の境目を取る。blur=ならしの強さ / step=量子化の粗さ
 ART = {
-  'family.png':    ('ink',  {'thr':  70, 'speck': 2}),   # 2 より大きいと顔の目が消える
+  # 🔴 family は左右の小さい2体を落とす（drop_x）。
+  #   元のCanva素材の時点で崩れていて、**線にすると人に見えない。**
+  #   左（x 8〜35）は顔と腕がくっついた塊、右（x163〜185）は体が台形で脚が線1本。
+  #   色がついていたから見えていなかっただけ。中央の3人は x38〜151 で完全に分かれている。
+  #   落としても位置は1mmも動かない（キャンバスの大きさは変えない）。
+  'family.png':    ('ink',  {'thr':  70, 'speck': 2,          # 2 より大きいと顔の目が消える
+                             'drop_x': [(0, 38), (151, 9999)]}),
   'balloon-a.png': ('ink',  {'thr': 120, 'speck': 3, 'one_tail': 0.58}),
   'balloon-b.png': ('ink',  {'thr': 120, 'speck': 3, 'one_tail': 0.62}),
   'tree.png':      ('ink',  {'thr':  95, 'speck': 3}),
@@ -143,6 +149,9 @@ def build(path):
         d[:-1, :] |= (lab[:-1, :] != lab[1:, :]).astype(np.uint8)
         e = (d & cv2.erode(solid, k, iterations=2)) | cv2.morphologyEx(solid, cv2.MORPH_GRADIENT, k)
         e = despeckle(e, 40)   # 水彩の粒を落とす。稜線だけ残ればよい
+
+    for x0, x1 in p.get('drop_x', []):
+        e[:, x0 * UP: x1 * UP] = 0
 
     e = (e > 0).astype(np.uint8) * 255
     e = cv2.GaussianBlur(e, (3, 3), 0)
