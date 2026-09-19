@@ -67,12 +67,20 @@
   .balloonB{ left:172.4mm;top:165.9mm; width:25.4mm; }
   .hills   { left:10.8mm; top:243.8mm; width:188.4mm; }
   .tree    { left:25.2mm; top:220.5mm; width:29.1mm; }
-  .family  { left:54.3mm; top:230.5mm; width:43.7mm; }
-  /* ★子ども（白黒版だけの描き足し）。元素材の小さい2体は崩れていて落としたので、
-       子連れに見えるよう描き起こした。家族の足元261.8mm・右端89.0mm に合わせてある。 */
-  .child   { left:86.6mm;  top:242.8mm; width:11.9mm; }
+  /* ★家族はオーナー提供の棒人間に差し替えた（2026-09-19）。
+       元素材の家族は線画に起こしても人の形にならず、描き足した子どもも
+       その絵に合わせたものだったので、まとめて落とした。
+       置き方は測って決めてある:
+         幅 71.5mm … 左は木の右端 54.3mm から。右端は 125.8mm で、QRカードの左端 130.3mm まで 4.5mm あける
+         大人の背丈 29.4mm … 元の家族とぴったり同じ（絵だけ替えて、大きさの印象は変えない）
+         下端 267.5mm … 足もとの白い帯（.foot の上端 ≒ 269.4mm）に犬と猫が隠れない位置
+       人の足もとは 256.4mm。犬と猫がその手前に立つので、地面はその2匹が作る。 */
+  .family  { left:54.3mm; top:227.0mm; width:71.5mm; }
   .petalsA { left:168.8mm;top:201.5mm; width:29.1mm; opacity:.95; }
-  .petalsB { left:58.0mm; top:207.1mm; width:7.4mm;  opacity:.95; }
+  /* ★この1枚だけ 8.3mm 上げた（207.1mm → 198.8mm・2026-09-19）。
+       家族を差し替えたら、この花びらの尾がちょうどお父さんの頭に着いて、
+       「頭から風船が生えている」ように見えた。横には動かせない（左は木）。 */
+  .petalsB { left:58.0mm; top:198.8mm; width:7.4mm;  opacity:.95; }
   .petalsC { left:105.1mm;top:207.1mm; width:11.1mm; opacity:.95; }
 
   /* ── QRカード ── */
@@ -115,8 +123,7 @@
   <img class="art petalsC"  src="assets/art/canva-bw/petals-c.png"  alt="">
   <img class="art hills"    src="assets/art/canva-bw/hills.png"     alt="">
   <img class="art tree"     src="assets/art/canva-bw/tree.png"      alt="">
-  <img class="art family"   src="assets/art/canva-bw/family.png"    alt="">
-  <img class="art child"    src="assets/art/canva-bw/child.svg"    alt="">
+  <img class="art family"   src="assets/art/canva-bw/family-stick.png" alt="">
 
   <div class="qrcard">
     <img src="assets/qr/f-hand.png" alt="ぼんぼやーじゅ通信のホームページのQRコード">
