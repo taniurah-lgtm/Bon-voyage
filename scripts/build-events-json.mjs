@@ -69,7 +69,7 @@ function splitRainDates(raw) {
   const rainParts = s.match(RAIN_RE) || [];
   if (!rainParts.length) return { when: raw, rain: [] };
   // 順延の節に日付があるものだけを切り出す（「雨天中止」「雨天決行」だけなら触らない）
-  const withDate = rainParts.filter((t) => /\d{1,2}\s*\/\s*\d{1,2}|\d{1,2}\s*[（(](?:月|火|水|木|金|土|日)/.test(t));
+  const withDate = rainParts.filter((t) => /\d{1,2}\s*\/\s*\d{1,2}|\d{1,2}\s*[（(](?:月|火|水|木|金|土|日)/.test(toSlash(normalize(t))));
   if (!withDate.length) return { when: raw, rain: [] };
   let stripped = raw;
   const rain = [];
@@ -81,8 +81,18 @@ function splitRainDates(raw) {
   return { when: stripped.replace(/\s{2,}/g, ' ').trim(), rain: [...new Set(rain)] };
 }
 
+// 🔴 2026-09-19: 台帳には「2026年10月3日(土)・4日(日)」という書き方も混ざる。
+// 読み取り側は M/D しか知らなかったので、**公式確認済みの予定が黙って
+// カレンダーから消えていた**（E103 音楽の絵本 10/25、E123 市民スポーツまつり 10/11）。
+// 日付を読む直前だけ M/D に寄せる。台帳の書き方は変えない。
+const toSlash = (s) =>
+  s
+    .replace(/(?:\d{4}\s*年)?\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日/g, '$1/$2')
+    // 「10/3(土)・4日(日)」の 2件目以降。曜日の括弧が続くときだけ「日」を落とす
+    .replace(/(\d{1,2})\s*日(?=\s*\((?:月|火|水|木|金|土|日)\))/g, '$1');
+
 function extractDates(raw) {
-  const s = normalize(raw);
+  const s = toSlash(normalize(raw));
   const hits = [];                  // {iso, at, sep} sep = 直前の区切り文字
   let lastMonth = null;
   const re = /(\d{1,2})\/(\d{1,2})|(?<![\d\/])(\d{1,2})\((?:月|火|水|木|金|土|日)/g;

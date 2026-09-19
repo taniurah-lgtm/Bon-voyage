@@ -2588,6 +2588,48 @@
    "source": "events/2026-09.md"
   },
   {
+   "id": "E129",
+   "name": "たまろくとしょかん ブックセレクション「鉄道の本」",
+   "dates": [
+    "2026-10-01"
+   ],
+   "span": {
+    "from": "2026-10-01",
+    "to": "2026-11-08"
+   },
+   "when": "2026年10月1日(木)〜11月8日(日)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "多摩六都科学館 2階「図書コーナー」",
+   "mapq": "多摩六都科学館「図書コーナー」",
+   "summary": "テーマ「鉄道の本」。圏域5市（小平・東村山・清瀬・東久留米・西東京）の図書館と 当館のおすすめ本が並ぶ",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "※休館日（10/5〜9・13・19・26、11/2）を除く",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "https://www.tamarokuto.or.jp/blog/press/2026/09/17/event_railway/",
+   "status": "候補（料金が取れるまでは通信の本文に出さない。出すなら「入館料が要るかは公式で」と添える）",
+   "confidence": "会期・場所は公式確認済み（2026-09-19）／料金のみ未確認",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E116",
    "name": "新小平マーケット",
    "dates": [
@@ -2618,6 +2660,86 @@
    "url": "https://kodaira-tourism.com/event/22948/",
    "status": "候補",
    "confidence": "観光協会カレンダー掲載のみ（内容・出店・雨天時は未取得）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
+   "id": "E127",
+   "name": "科学館で学ぶ電車のひみつ（多摩六都科学館）",
+   "dates": [
+    "2026-10-03",
+    "2026-10-04"
+   ],
+   "span": null,
+   "when": "2026年10月3日(土)・4日(日)　10:30〜12:30、13:30〜15:30（2日間・各日2部）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "10:30",
+   "end": "12:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "多摩六都科学館 イベントホールほか（西東京市芝久保町5-10-64） — 花小金井から自転車・バス圏",
+   "mapq": "多摩六都科学館 イベントホール",
+   "summary": "鉄道模型の運転体験、電気の演示実験、モーターの工作、人力発電でNゲージを走らせる、カーブを曲がれる車輪の形、レールのカットモデル、パネル展示、キッズコーナー（多摩六都科学館ボランティア会との共催）",
+   "kidsNote": "ベビーカーで入れる屋内。運転体験は対象外だが見るだけでも持つ。",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "入館料のみ（大人520円 / 小人〈4歳〜高校生〉210円）。イベント自体の追加料金はなし",
+   "discount": "",
+   "target": "",
+   "url": "https://www.tamarokuto.or.jp/blog/press/2026/09/17/event_railway/",
+   "status": "候補",
+   "confidence": "公式確認済み",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
+   "id": "E128",
+   "name": "電気で走る鉄道模型を運転しよう！（多摩六都科学館・同日同会場）",
+   "dates": [
+    "2026-10-03",
+    "2026-10-04"
+   ],
+   "span": null,
+   "when": "2026年10月3日(土)・4日(日)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "多摩六都科学館 イベントホール",
+   "mapq": "多摩六都科学館 イベントホール",
+   "summary": "",
+   "kidsNote": "対象外・対象外。",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "✕",
+    "elem": "◎"
+   },
+   "cost": "入館料のみ",
+   "discount": "",
+   "target": "小学生",
+   "url": "https://www.tamarokuto.or.jp/blog/press/2026/09/17/event_railway/",
+   "status": "候補",
+   "confidence": "公式確認済み",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
@@ -2748,6 +2870,52 @@
    "tentative": false,
    "deadline": null,
    "source": "events/2026-09.md"
+  },
+  {
+   "id": "E123",
+   "name": "第37回 市民スポーツまつり",
+   "dates": [
+    "2026-10-11"
+   ],
+   "span": null,
+   "when": "2026年（令和8年）10月11日(日) 9:30〜15:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "09:30",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "中央公園 / 市民総合体育館",
+   "mapq": "中央公園",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": {
+    "tel": "042-346-9612",
+    "mail": "",
+    "who": "小平市 文化スポーツ課 スポーツ推進担当"
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "市公式に「誰でも楽しめる」",
+   "url": "https://www.city.kodaira.tokyo.jp/kurashi/130/130559.html",
+   "status": "候補",
+   "confidence": "市公式で確認済み",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-10-16",
+    "raw": "> E122 の申込締切は 10/16(金)。"
+   },
+   "source": "events/2026-10.md"
   },
   {
    "id": "E105",
@@ -2921,6 +3089,48 @@
    "source": "events/2026-10.md"
   },
   {
+   "id": "E103",
+   "name": "音楽の絵本 halloween（ルネこだいら 大ホール）",
+   "dates": [
+    "2026-10-25"
+   ],
+   "span": null,
+   "when": "2026年10月25日(日) 14:00開演（13:15開場）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "14:00",
+   "end": null,
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "ルネこだいら 大ホール（西武新宿線 小平駅南口から徒歩3分／小平市美園町1-8-5）",
+   "mapq": "ルネこだいら 大ホール",
+   "summary": "動物たちによるコンサート「音楽の絵本」。ハロウィン版。 プログラムは「ハッピーハロウィン」「世にも奇妙な物語」、映画『ゴースト』より 「アンチェインド・メロディ」、「操り人形の葬送行進曲」「ノロイノオンガク」、 映画『リング』より feels like \"HEAVEN\"、Monster ほか",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "https://www.superkids.co.jp/ticket/`",
+   "status": "候補",
+   "confidence": "公式確認済み（2026-09-05・ルネこだいらで現地のチラシを入手）",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-10-16",
+    "raw": "⏳ 託児サービスあり。締切 10月16日(金)"
+   },
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E117",
    "name": "親子でうどん作り体験",
    "dates": [
@@ -2954,6 +3164,94 @@
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
+  },
+  {
+   "id": "E122",
+   "name": "第2回 小平モルックカップ",
+   "dates": [
+    "2026-11-01"
+   ],
+   "span": null,
+   "when": "2026年11月1日(日) 10:00〜15:00（受付 9:15〜）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "花小金井南市民広場（小平市花小金井南町2-10-22） 花小金井駅 南口から徒歩6分（約450m）",
+   "mapq": "花小金井南市民広場",
+   "summary": "",
+   "kidsNote": "対象外・小学生の部は小学生のみ。",
+   "caution": "",
+   "contact": {
+    "tel": "042-346-9612",
+    "mail": "cdc0020@city.kodaira.lg.jp",
+    "who": "小平市 文化スポーツ課 ☎"
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "△",
+    "elem": "◎"
+   },
+   "cost": "チラシに記載なし。無料の見込みだが、確認するまで書かない",
+   "discount": "",
+   "target": "小平市民・在勤・在学の方",
+   "url": "",
+   "status": "候補",
+   "confidence": "チラシの現物を実見（2026-09-14。市の文化スポーツ課が発行）",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-10-16",
+    "raw": "🔴 申込締切: 10月16日(金) 24:00まで（二次元コードから。電話での受付も可能）"
+   },
+   "source": "events/2026-11.md"
+  },
+  {
+   "id": "E126",
+   "name": "こもれびと水車のマルシェ vol.3（小平ふるさと村）",
+   "dates": [
+    "2026-11-01"
+   ],
+   "span": null,
+   "when": "2026年11月1日(日) 10:00〜15:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "15:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平ふるさと村 柿の木公園（小平市天神町3-9-1）",
+   "mapq": "小平市小平ふるさと村 柿の木公園",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "",
+   "status": "候補",
+   "confidence": "主催アカウントの告知で確認（Threads @tocotonto_handmade・2026-09-15）",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-10-16",
+    "raw": "> | 参加 | 事前申込・抽選（締切10/16） | 入退場自由 |"
+   },
+   "source": "events/2026-11.md"
   },
   {
    "id": "E54",
@@ -2997,6 +3295,45 @@
    "tentative": false,
    "deadline": null,
    "source": "events/2026-08.md"
+  },
+  {
+   "id": "E118",
+   "name": "玉川上水わくわくクリーンフェスティバル（第2回・WAKU WA CLEAN）",
+   "dates": [
+    "2026-11-22"
+   ],
+   "span": null,
+   "when": "2026年11月22日(日) 10:00〜16:15",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "16:15",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市立きつねっぱら公園",
+   "mapq": "小平市立きつねっぱら公園",
+   "summary": "音楽 × マルシェ × ごみ拾いの3本柱。音楽ステージ、マルシェ、ごみ拾い",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "",
+   "status": "候補",
+   "confidence": "主催アカウントの告知とチラシ画像で確認",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
   }
  ],
  "standing": [
@@ -3363,13 +3700,20 @@
    "E70"
   ],
   "2026-10-01": [
-   "E113"
+   "E113",
+   "E129"
   ],
   "2026-10-13": [
    "E53"
   ],
   "2026-10-03": [
-   "E116"
+   "E116",
+   "E127",
+   "E128"
+  ],
+  "2026-10-04": [
+   "E127",
+   "E128"
   ],
   "2026-10-06": [
    "E93"
@@ -3405,7 +3749,8 @@
    "E98"
   ],
   "2026-10-11": [
-   "E98"
+   "E98",
+   "E123"
   ],
   "2026-10-12": [
    "E105"
@@ -3434,11 +3779,19 @@
   "2026-27-03": [
    "E100"
   ],
+  "2026-10-25": [
+   "E103"
+  ],
   "2026-10-31": [
    "E117"
   ],
   "2026-11-01": [
+   "E122",
+   "E126",
    "E54"
+  ],
+  "2026-11-22": [
+   "E118"
   ]
  },
  "unresolved": [
@@ -3674,45 +4027,10 @@
    "when": ""
   },
   {
-   "id": "E103",
-   "name": "音楽の絵本 halloween（ルネこだいら 大ホール）",
-   "reason": "日時から確定日が取れない",
-   "when": "2026年10月25日(日) 14:00開演（13:15開場）",
-   "confidence": "公式確認済み（2026-09-05・ルネこだいらで現地のチラシを入手）"
-  },
-  {
-   "id": "E123",
-   "name": "第37回 市民スポーツまつり",
-   "reason": "日時から確定日が取れない",
-   "when": "2026年（令和8年）10月11日(日) 9:30〜15:00",
-   "confidence": "市公式で確認済み（2026-09-14 取得）"
-  },
-  {
    "id": "E125",
    "name": "第15回 こそだてフェスタ@西東京",
    "reason": "ステータス「🔴」のため除外",
    "when": "2026年（令和8年）10月12日(月・祝) 10:00〜15:00"
-  },
-  {
-   "id": "E118",
-   "name": "玉川上水わくわくクリーンフェスティバル（第2回・WAKU WA CLEAN）",
-   "reason": "日時から確定日が取れない",
-   "when": "2026年11月22日(日) 10:00〜16:15",
-   "confidence": "主催アカウントの告知とチラシ画像で確認（2026-09-11 取得。Threads @wakuwaclean）"
-  },
-  {
-   "id": "E122",
-   "name": "第2回 小平モルックカップ",
-   "reason": "日時から確定日が取れない",
-   "when": "2026年11月1日(日) 10:00〜15:00（受付 9:15〜）",
-   "confidence": "チラシの現物を実見（2026-09-14。市の文化スポーツ課が発行）"
-  },
-  {
-   "id": "E126",
-   "name": "こもれびと水車のマルシェ vol.3（小平ふるさと村）",
-   "reason": "日時から確定日が取れない",
-   "when": "2026年11月1日(日) 10:00〜15:30",
-   "confidence": "主催アカウントの告知で確認（Threads @tocotonto_handmade・2026-09-15）"
   },
   {
    "id": "E65",
