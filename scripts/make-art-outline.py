@@ -37,16 +37,16 @@ LINE = (30, 30, 30)
 # ink  … 描いてある線を明るさで抜く。thr=しきい値 / speck=これより小さい粒は消す（元画素で）
 # edge … 線が無い絵。ならしてから色の境目を取る。blur=ならしの強さ / step=量子化の粗さ
 ART = {
-  'family.png':    ('ink',  {'thr':  96, 'speck': 5}),
-  'balloon-a.png': ('ink',  {'thr': 120, 'speck': 3}),
-  'balloon-b.png': ('ink',  {'thr': 120, 'speck': 3}),
+  'family.png':    ('ink',  {'thr':  70, 'speck': 2}),   # 2 より大きいと顔の目が消える
+  'balloon-a.png': ('ink',  {'thr': 120, 'speck': 3, 'one_tail': 0.58}),
+  'balloon-b.png': ('ink',  {'thr': 120, 'speck': 3, 'one_tail': 0.62}),
   'tree.png':      ('ink',  {'thr':  95, 'speck': 3}),
   'sun.png':       ('ink',  {'thr': 120, 'speck': 2}),
   # 薄い紙吹雪は濃い線を持っていない（明るさ最小208）。輪郭だけ取る
   'petals-a.png':  ('sil',  {}),
   'petals-c.png':  ('sil',  {}),
   'petals-b.png':  ('ink',  {'thr': 150, 'speck': 1}),
-  'hills.png':     ('edge', {'blur': 21, 'step': 96}),
+  'hills.png':     ('edge', {'blur': 31, 'step':128}),   # にじみの粒が残るので強めに
 }
 DEFAULT = ('ink', {'thr': 110, 'speck': 3})
 
@@ -60,6 +60,41 @@ def despeckle(mask, min_px):
         if stats[i, cv2.CC_STAT_AREA] >= min_px * UP * UP:
             keep[lab == i] = 1
     return keep
+
+
+def single_tail(mask, keep_x):
+    """ぶら下がる紐が2本に分かれている絵で、下側の分岐を1本に減らす。
+
+    ★風船の紐は、元の絵ではリボンで**2本**描かれている。
+      色がついていれば束に見えるが、線画にすると「線が二重」に見えてしまう。
+      （2026-09-19 オーナー指摘「風船の紐は1本線に」）
+
+    🔴 行ごとに「keep_x に近いほう」を選ぶだけだと、2本が交差する段で
+      選ぶ先が飛び、**紐が 切れ切れになる**（一度そうなった）。
+      **前の行で選んだ位置から追いかける**こと。
+
+    🔴 紐が**横向き**の絵（balloon-b）では、行で走査すると1行が紐まるごとになり、
+      太い塊になる。**紐の外接矩形が横長なら、転置して列で走査する。**
+    """
+    ys = np.flatnonzero(mask.any(axis=1)); xs = np.flatnonzero(mask.any(axis=0))
+    if ys.size and xs.size and (xs.max() - xs.min()) > (ys.max() - ys.min()):
+        return single_tail(mask.T, float(ys.mean())).T
+
+    out = np.zeros_like(mask)
+    prev = keep_x
+    for y in range(mask.shape[0]):
+        idx = np.flatnonzero(mask[y])
+        if idx.size == 0:
+            continue
+        runs, st = [], idx[0]
+        for a, b in zip(idx, idx[1:]):
+            if b != a + 1:
+                runs.append((st, a)); st = b
+        runs.append((st, idx[-1]))
+        best = min(runs, key=lambda r: abs((r[0] + r[1]) / 2 - prev))
+        out[y, best[0]:best[1] + 1] = 1
+        prev = (best[0] + best[1]) / 2      # ← 次の行はここから探す
+    return out
 
 
 def build(path):
@@ -80,11 +115,22 @@ def build(path):
         e = ((L < p['thr']) & (solid > 0)).astype(np.uint8)
         e |= cv2.morphologyEx(solid, cv2.MORPH_GRADIENT, np.ones((UP, UP), np.uint8))
         e = despeckle(e, p['speck'])
-        # 塗りつぶされた面（濃い服・濃い髪）は、中を抜いて輪郭だけにする。
-        # そうしないと真っ黒な塊が残る。
-        big = cv2.morphologyEx(e, cv2.MORPH_OPEN, np.ones((5 * UP // 2, 5 * UP // 2), np.uint8))
-        e = (e & ~big) | cv2.morphologyEx(big, cv2.MORPH_GRADIENT, np.ones((UP, UP), np.uint8))
-        e = despeckle(e, max(1, p['speck'] // 2))
+        if p.get('one_tail'):
+            # 球の下端から下だけを対象にする（球の輪郭は2本に見えるので触らない）
+            ys = np.flatnonzero(solid.any(axis=1))
+            cut = int(ys.min() + (ys.max() - ys.min()) * p['one_tail'])
+            cx = float(np.flatnonzero(solid[cut:].any(axis=0)).mean()) if solid[cut:].any() else e.shape[1] / 2
+            t = single_tail(e[cut:], cx)
+            # 追いかける途中で飛ぶと紐に隙間ができる。つないでおく
+            # 🔴 つないだあとに元のマスクで AND すると、**橋渡しした画素ごと消える**。
+            #   （一度それで隙間が残った。closing の結果をそのまま使う）
+            t = cv2.morphologyEx(t, cv2.MORPH_CLOSE, np.ones((6 * UP, 6 * UP), np.uint8))
+            e[cut:] = t
+        # 🔴 ここで「塗りつぶされた面を中抜きして輪郭だけにする」ことを一度やったが、
+        #   **腕・脚・風船の紐まで中抜きされて「管」になった**（2026-09-19）。
+        #   子どもが人の形に見えなくなり、紐は二重線になった。
+        #   中抜きはしない。代わりに**しきい値を下げて、塗りを拾わない**ようにする。
+        #   （family は thr=96 だと父のズボンが黒く潰れる。70 なら線だけ残る）
     elif mode == 'sil':
         # 濃い線が無い絵。透明との境目だけを線にする
         e = cv2.morphologyEx(solid, cv2.MORPH_GRADIENT, np.ones((UP, UP), np.uint8))
@@ -96,7 +142,7 @@ def build(path):
         d[:, :-1] |= (lab[:, :-1] != lab[:, 1:]).astype(np.uint8)
         d[:-1, :] |= (lab[:-1, :] != lab[1:, :]).astype(np.uint8)
         e = (d & cv2.erode(solid, k, iterations=2)) | cv2.morphologyEx(solid, cv2.MORPH_GRADIENT, k)
-        e = despeckle(e, 4)
+        e = despeckle(e, 40)   # 水彩の粒を落とす。稜線だけ残ればよい
 
     e = (e > 0).astype(np.uint8) * 255
     e = cv2.GaussianBlur(e, (3, 3), 0)

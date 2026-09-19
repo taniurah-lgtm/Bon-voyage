@@ -81,10 +81,12 @@
   .qru{ font-family:"Zen Maru Gothic",sans-serif; font-size:2.55mm; color:#1E1E1E; font-weight:500; margin:1.2mm 0 0; letter-spacing:.015em; }
 
   /* ── 足もと ── */
+  /* ★背景は不透明にする。半透明だと下の線画が透けて、
+       「線がかすれている」ように見える（2026-09-19 指摘）。 */
   .foot{ position:absolute; left:18mm; right:18mm; bottom:8mm; text-align:center;
          font-family:"Zen Maru Gothic",sans-serif;  /* 2.6mm は手書き系だと潰れる */
          font-size:2.6mm; color:#1E1E1E; line-height:1.95; letter-spacing:.035em; font-weight:500;
-         background:rgba(255,255,255,.88); border-radius:2mm; padding:2.2mm 3mm; }
+         background:#fff; border-radius:2mm; padding:2.2mm 3mm; }
 </style></head><body>
 <div class="page">
 
