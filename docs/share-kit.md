@@ -11,7 +11,8 @@
 
 ### SNSアカウント（ブランド公式・すべて @bonvoya_tokyo）
 - Instagram: https://www.instagram.com/bonvoya_tokyo/
-- Threads: https://www.threads.net/@bonvoya_tokyo
+- Threads: https://www.threads.com/@bonvoya_tokyo
+  ⚠️ **`threads.net` は `threads.com` へ転送される**（2026-09-20 確認）。**転送先を直接書く**
 - X: https://x.com/bonvoya_tokyo
 - 共通プロフィール: 名前「ぼんぼやーじゅ通信」/ アイコン `assets/line-icon.png` / リンク `/f` /
   自己紹介「花小金井まわり(小平・西東京)の週末おでかけ情報を無料でお届け🎈 公園/児童館/図書館/科学館/季節のお祭り/電車でおでかけ…未就学〜小学生のご家庭へ📮」

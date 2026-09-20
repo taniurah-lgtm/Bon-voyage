@@ -215,6 +215,17 @@
   footer { border-top: 1px solid var(--line); padding: 2.2rem 0 3rem; color: var(--ink-soft); }
   footer .fmark { font-family: var(--maru); font-weight: 800; color: var(--ink-soft); letter-spacing: .04em; }
   footer .fsmall { font-size: .82rem; margin-top: .4rem; line-height: 1.7; }
+  /* ── SNS（ホームページ → Instagram / Threads） ──
+     `/ig` `/th` は逆向き（SNSのプロフィール → ここ）の計測用なので、ここでは使わない。 */
+  footer .fsns { margin: 1.1rem 0 1.2rem; }
+  footer .fsns-lead { font-size: .86rem; color: var(--ink-soft); line-height: 1.7; }
+  footer .fsns-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .6rem; }
+  footer .fsns-row a { display: inline-flex; align-items: center; gap: .4rem;
+    padding: .46rem .9rem; border: 1px solid var(--line-strong); border-radius: 99px;
+    font-size: .85rem; color: var(--ink); text-decoration: none; line-height: 1; }
+  footer .fsns-row a:hover { border-color: var(--ink-soft); }
+  footer .fsns-row svg { width: 1.05em; height: 1.05em; flex: none; }
+  footer .fsns-row .at { color: var(--ink-soft); }
 
   .fade { opacity: 0; transform: translateY(10px); animation: rise .75s cubic-bezier(.2,.7,.3,1) forwards; }
   .fade.d1 { animation-delay: .06s; } .fade.d2 { animation-delay: .14s; } .fade.d3 { animation-delay: .22s; }
@@ -558,6 +569,30 @@
 <footer>
   <div class="wrap">
     <div class="fmark">ぼんぼやーじゅ通信</div>
+
+    <div class="fsns">
+      <div class="fsns-lead">InstagramとThreadsでも、おでかけ情報をお届けしています。</div>
+      <div class="fsns-row">
+        <a href="https://www.instagram.com/bonvoya_tokyo/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/>
+          </svg>
+          Instagram <span class="at">@bonvoya_tokyo</span>
+        </a>
+        <a href="https://www.threads.com/@bonvoya_tokyo" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12.2 21C7.2 21 4 17.6 4 12s3.2-9 8.2-9c3.6 0 6.1 1.6 7.2 4.4"/>
+            <path d="M15.6 13.6c0 2-1.7 3.3-3.6 3.3-1.6 0-2.9-.8-2.9-2.2 0-1.5 1.4-2.3 3.3-2.3 2.9 0 5 1.1 5 3.6 0 1.6-.9 2.9-2.2 3.6"/>
+          </svg>
+          Threads <span class="at">@bonvoya_tokyo</span>
+        </a>
+      </div>
+    </div>
+
     <div class="fsmall">小平の子育て家庭のための、週末おでかけ便。<br>
       発行：ぼんぼやーじゅ通信の会　お問い合わせ: <a href="mailto:tokyo.papa.home@gmail.com">tokyo.papa.home@gmail.com</a><br>
       <a href="tokushoho.html">免責事項・個人情報の取り扱い</a><br>
