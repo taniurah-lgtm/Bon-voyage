@@ -14,6 +14,15 @@
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 
 // 配布先。code は短く・読める語に（解析画面でそのまま読むため）
+// 🔴 2026-09-20: VENUES の label を、生成するHTMLのコメントに埋め込んでいた。
+//   /f/hokenshi を開くと、ソースに
+//   「配布先『保健師さんの新生児訪問（こども家庭センター経由・手渡し）』の流入計測用」
+//   と書かれた状態で、誰でも読めた。
+//   CLAUDE.md「🔒 公開物に書かないこと」= 計測の仕組み（配布先コード /f/xxx の一覧、解析の設定）。
+//   **市の課との配布の取り決めが、そのまま外に出ていた。**
+//   build-members.mjs でも同じことをやって直したばかり（HTMLコメントは公開ファイルの一部）。
+//   → label はここ（JS）だけで使う。生成物には code も label も書かない。
+//   読者から見える中身は /f と同じで、違うのはURLだけ（解析でパスごとに数えるため）。
 const VENUES = [
   { code: 'asupia',   label: '小平市民活動支援センター あすぴあ' },
   { code: 'kodomo',   label: '子ども家庭支援センター おひさまひろば' },
@@ -29,6 +38,7 @@ const VENUES = [
   { code: 'clinic',   label: '小児科・小児歯科の待合' },
   { code: 'hokenshi', label: '保健師さんの新生児訪問（こども家庭センター経由・手渡し）' },
   { code: 'en',       label: '私立の保育園・幼稚園の玄関' },
+  { code: 'cook',     label: '家庭料理教室（掲載先から生徒さんへ）' },
 ];
 
 const page = (v) => `<!doctype html>
@@ -38,9 +48,6 @@ const page = (v) => `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>ぼんぼやーじゅ通信｜LINEで友だち追加</title>
-<!-- 自動生成: scripts/build-flyer-landings.mjs
-     配布先「${v.label}」の流入計測用。印字URL: bonvoya.nicomaru.tokyo/f/${v.code}
-     読者から見える中身は /f と同じ。違うのはURLだけ（＝解析でパスごとに数えるため）。 -->
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;background:#FBFAF5;color:#34434C;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;}
@@ -101,8 +108,6 @@ const jump = (v) => `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>ぼんぼやーじゅ通信</title>
-<!-- 自動生成: scripts/build-flyer-landings.mjs
-     「${v.label}」の流入計測用。中身は出さず、すぐ / へ転送する。 -->
 <style>
 body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
   background:#FBFAF5;color:#63727B;
