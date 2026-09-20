@@ -3252,6 +3252,42 @@
    "source": "events/2026-10.md"
   },
   {
+   "id": "E141",
+   "name": "津田塾祭 2026",
+   "dates": [
+    "2026-10-17",
+    "2026-10-18"
+   ],
+   "span": null,
+   "when": "10/17(土)・18(日)（時間は未取得）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "津田塾大学 小平キャンパス（小平市津田町2-1-1）",
+   "mapq": "小平市津田塾大学 小平キャンパス",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": null,
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "https://www.tsuda.ac.jp/aboutus/calendar.html",
+   "status": "候補（要確認が多い）",
+   "confidence": "日付のみ公式確認済み（2026-09-20）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E134",
    "name": "小平市民まつり",
    "dates": [
@@ -3332,6 +3368,47 @@
    "url": "https://event.cyclestart.jp/kids-event-entry/koganei261021",
    "status": "候補",
    "confidence": "10/21 は確定",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
+   "id": "E140",
+   "name": "武蔵野美術大学 芸術祭2026「FIORALUNE」",
+   "dates": [
+    "2026-10-23",
+    "2026-10-24",
+    "2026-10-25"
+   ],
+   "span": null,
+   "when": "10/23(金)・24(土) 10:00〜18:00 ／ 10/25(日) 10:00〜18:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 3,
+   "start": "10:00",
+   "end": "18:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "武蔵野美術大学 鷹の台キャンパス（小平市小川町1-736）",
+   "mapq": "小平市武蔵野美術大学 鷹の台キャンパス",
+   "summary": "",
+   "kidsNote": "暫定。",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "記載なし（要確認）。※美大の芸術祭は入場無料が通例だが、公式に書いていないので断定しない",
+   "discount": "",
+   "target": "",
+   "url": "https://geisai.jp/",
+   "status": "候補（🔴",
+   "confidence": "日程・時間・会場・駐車場は公式確認済み（2026-09-20）／料金と子連れ情報は未取得",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
@@ -4101,7 +4178,11 @@
   ],
   "2026-10-17": [
    "E111",
-   "E135"
+   "E135",
+   "E141"
+  ],
+  "2026-10-18": [
+   "E141"
   ],
   "2026-10-21": [
    "E100"
@@ -4115,10 +4196,15 @@
   "2026-27-03": [
    "E100"
   ],
+  "2026-10-23": [
+   "E140"
+  ],
   "2026-10-24": [
+   "E140",
    "E131"
   ],
   "2026-10-25": [
+   "E140",
    "E103",
    "E139"
   ],
