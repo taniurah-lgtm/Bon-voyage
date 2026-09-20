@@ -3258,22 +3258,22 @@
   },
   {
    "id": "E141",
-   "name": "津田塾祭 2026",
+   "name": "第67回 津田塾祭「bloom」",
    "dates": [
     "2026-10-17",
     "2026-10-18"
    ],
    "span": null,
-   "when": "10/17(土)・18(日)（時間は未取得）",
+   "when": "2026年10月17日(土)・18日(日) 10:00〜18:00（✅ 公式トップの表記）",
    "rainDates": [],
    "exceptions": null,
    "programs": null,
    "totalDates": 2,
-   "start": null,
-   "end": null,
-   "allDay": true,
+   "start": "10:00",
+   "end": "18:00",
+   "allDay": false,
    "timeUncertain": false,
-   "place": "津田塾大学 小平キャンパス（小平市津田町2-1-1）",
+   "place": "津田塾大学 小平キャンパス（小平市津田町2-1-1）／西武国分寺線 鷹の台駅 徒歩10分",
    "mapq": "小平市津田塾大学 小平キャンパス",
    "summary": "",
    "kidsNote": "",
@@ -3281,13 +3281,17 @@
    "contact": null,
    "lastEntry": "",
    "hours": "",
-   "ages": null,
-   "cost": "✅ 入場無料（2026-09-20 決定。学園祭の通例）。模擬店・物販は実費",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "入場無料（学園祭の通例）。模擬店・物販は実費",
    "discount": "",
    "target": "",
-   "url": "https://www.tsuda.ac.jp/aboutus/calendar.html",
-   "status": "候補",
-   "confidence": "日付のみ公式確認済み（2026-09-20）",
+   "url": "https://sites.google.com/view/tsudafes67**（第67回",
+   "status": "承認済",
+   "confidence": "日付・時間・会場・雨天時の扱い・参加団体まで公式確認済み（2026-09-20）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
@@ -3707,6 +3711,45 @@
    "tentative": false,
    "deadline": null,
    "source": "events/2026-08.md"
+  },
+  {
+   "id": "E142",
+   "name": "オーガニックフェスタ in 井の頭公園（第4回）",
+   "dates": [
+    "2026-11-07"
+   ],
+   "span": null,
+   "when": "2026年11月7日(土) 10:00〜16:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "井の頭公園 文化交流広場（西園・ジブリ美術館の裏／三鷹市）",
+   "mapq": "井の頭公園 文化交流広場",
+   "summary": "三鷹・吉祥寺のオーガニックなお店が集まる、衣・食・住のトータルライフイベント。 衣・食・住を体験で学ぶワークショップ",
+   "kidsNote": "暫定。",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "⚠️ 入場料の記載が公式サイトにも告知にも無い（要確認）。 「無料」と書かない（`CLAUDE.md`「『無料』と書く前に、費用を必ず確認する」）",
+   "discount": "",
+   "target": "",
+   "url": "https://organicfesta.morinohito.net/",
+   "status": "候補",
+   "confidence": "日時・会場・順延の扱いは告知画像で確認（2026-09-20）／入場料は未確認",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
   },
   {
    "id": "E118",
@@ -4227,6 +4270,9 @@
    "E122",
    "E126",
    "E54"
+  ],
+  "2026-11-07": [
+   "E142"
   ],
   "2026-11-22": [
    "E118"
