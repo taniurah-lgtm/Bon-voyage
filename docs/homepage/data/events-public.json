@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-19",
+ "generated": "2026-09-21",
  "events": [
   {
    "id": "E16",
@@ -419,6 +419,45 @@
    "url": "https://www.sumidagawa-hanabi.com/",
    "tentative": false,
    "deadline": null
+  },
+  {
+   "id": "E137",
+   "name": "たかのだい 畑のごちそう 第4にちよう市",
+   "dates": [
+    "2026-07-26",
+    "2026-09-27"
+   ],
+   "span": null,
+   "when": "9/27(日) ※月次開催（毎月 第4日曜とみられる。7月は7/26開催）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "小平中央公園(津田町1-1 / 西武国分寺線 鷹の台駅) 駐車場66台",
+   "mapq": "小平中央公園",
+   "summary": "地域の農作物販売、キッチンカー、手作り品の出店",
+   "kidsNote": "広い公園。屋外。駐車場がある",
+   "caution": "月次開催（毎月 第4日曜とみられる。7月は7/26開催）",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "https://kodaira-parks.jp/news/2800",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-10-16",
+    "raw": "託児（ママメイト埼玉支部・締切10/16）・仮装OK・駐車場なし・2階席はエレベーターなしまで入っている）。"
+   }
   },
   {
    "id": "E22",
@@ -2172,6 +2211,41 @@
    "deadline": null
   },
   {
+   "id": "E132",
+   "name": "小平マルシェ vol.25（village green・天神町）",
+   "dates": [
+    "2026-09-27"
+   ],
+   "span": null,
+   "when": "2026年9月27日(日) 10:30〜15:30（✅ 曜日照合済み。チラシの \"sun\" とも一致）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:30",
+   "end": "15:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "village green（小平市天神町3-7-1）",
+   "mapq": "小平市village green",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "",
+   "tentative": false,
+   "deadline": null
+  },
+  {
    "id": "E53",
    "name": "子育て支援講座「素材の味を活かしたカラフル弁当を作ろう」",
    "dates": [
@@ -2389,6 +2463,44 @@
    "deadline": null
   },
   {
+   "id": "E136",
+   "name": "列車のトイレ写真展 〜日本全国編〜",
+   "dates": [
+    "2026-10-06"
+   ],
+   "span": {
+    "from": "2026-10-06",
+    "to": "2026-11-29"
+   },
+   "when": "10/6(火)〜11/29(日)(休館日を除く) / 10:00〜16:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市ふれあい下水道館(上水本町1-25-31)",
+   "mapq": "小平市ふれあい下水道館",
+   "summary": "NPO21世紀水倶楽部・清水洽氏による、さまざまな列車のトイレの写真展",
+   "kidsNote": "無料・屋内・会期8週間。雨の日の逃げ場として使い回せる",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "10/6(火)〜11/29(日)(休館日を除く) / 10:00〜16:00",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "入館無料(館の利用案内で確認済み)",
+   "discount": "",
+   "target": "",
+   "url": "https://kodaira-sewer.jp/events/2600",
+   "tentative": false,
+   "deadline": null
+  },
+  {
    "id": "E93",
    "name": "「はじめの一歩」第一子の赤ちゃんとお母さんへ",
    "dates": [
@@ -2421,6 +2533,41 @@
    "discount": "",
    "target": "市内在住で、10/6時点で生後2〜5か月の第一子とお母さん(全4回参加できる方)",
    "url": "",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E130",
+   "name": "こぐま広場はなこ（鈴木公民館 和室）",
+   "dates": [
+    "2026-10-09"
+   ],
+   "span": null,
+   "when": "2026年10月9日(金) 10:00〜11:30　⚠️ 告知に「（予定）」と書かれている。要確認",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "11:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "鈴木公民館 和室（小平市鈴木町2-772）",
+   "mapq": "小平市鈴木公民館 和室",
+   "summary": "親子で楽しめる広場。ゆったり遊べるスペースとおもちゃが用意されている",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "○",
+    "elem": "✕"
+   },
+   "cost": "無料　/　予約不要",
+   "discount": "",
+   "target": "",
+   "url": "https://www.koguma-waccacca.com/",
    "tentative": false,
    "deadline": null
   },
@@ -2663,6 +2810,83 @@
    }
   },
   {
+   "id": "E135",
+   "name": "学習講座「ハロウィーンリースと竹花瓶をつくろう！」＋「不思議な昆虫の目を観察しよう」",
+   "dates": [
+    "2026-10-17"
+   ],
+   "span": null,
+   "when": "10/17(土) 10:00〜11:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "11:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市ふれあい下水道館 地下1階 講座室(上水本町1-25-31 / 西武国分寺線 鷹の台駅)",
+   "mapq": "小平市ふれあい下水道館 地下 講座室",
+   "summary": "2本立て。【工作】ハロウィーンリースと竹花瓶をつくろう！ ＋【講座】不思議な昆虫の目を観察しよう",
+   "kidsNote": "小学生が対象。年中・年長は入れない。／ ／ 👶—",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "毎週月曜(休・祝日の場合はその直近の平日)。 2026年9月は 9/7・9/14・9/24(木)・9/28 が休館（連休中の振替が9/24(木)に来ている）。",
+   "ages": {
+    "baby": null,
+    "pre": "△",
+    "elem": "◎"
+   },
+   "cost": "🔴 参加費 無料（館のチラシPDFで確認済み。館じたいも入館無料）",
+   "discount": "",
+   "target": "小学生(保護者1名まで同伴可) / 定員 30人",
+   "url": "https://kodaira-sewer.jp/wp-content/uploads/10月学習講座-ハロウィーンリースと竹花瓶-.pdf",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-10-16",
+    "raw": "9/20(日) 10:00 から受付開始。10/16(金)まで。先着順"
+   }
+  },
+  {
+   "id": "E134",
+   "name": "小平市民まつり",
+   "dates": [
+    "2026-10-18"
+   ],
+   "span": null,
+   "when": "例年10月の第3日曜日。2026年は 10/18(日) 見込み — 🔴 日程未確定(要確認)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "あかしあ通り(青梅街道 仲町交差点〜小平団地西交差点の約1.5km)",
+   "mapq": "あかしあ通り",
+   "summary": "子どもみこし、小平よさこい、ダンスパレード、各団体のパフォーマンスパレード、大人みこし",
+   "kidsNote": "市内最大規模。子どもみこしがある",
+   "caution": "",
+   "contact": {
+    "tel": "042-346-9809",
+    "who": ""
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "https://www.city.kodaira.tokyo.jp/kurashi/106/106269.html",
+   "tentative": true,
+   "deadline": null
+  },
+  {
    "id": "E100",
    "name": "はじめての自転車教室（小金井公園 サイクリングセンター）",
    "dates": [
@@ -2697,6 +2921,41 @@
    "discount": "",
    "target": "4〜6歳。ペダル付き自転車が未経験、または練習中の子。対象身長 100〜115cm",
    "url": "https://event.cyclestart.jp/kids-event-entry/koganei261021",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E131",
+   "name": "min'na de part ナイトミュージアムマルシェ（ガスミュージアム）",
+   "dates": [
+    "2026-10-24"
+   ],
+   "span": null,
+   "when": "2026年10月24日(土) 15:00〜20:00（✅ 曜日照合済み）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "15:00",
+   "end": "20:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "ガスミュージアム（小平市大沼町）",
+   "mapq": "小平市ガスミュージアム",
+   "summary": "ハンドメイド／ワークショップ（工作・ヨガ・撮影会など）／ フード（焼き菓子・現地調理・キッチンカー）／パフォーマンス（歌・手品など）",
+   "kidsNote": "暫定。下記のとおり来場者向けの情報が無い。",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "00〜17:00 / 月曜休館",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "",
    "tentative": false,
    "deadline": null
   },
@@ -2737,6 +2996,41 @@
     "date": "2026-10-16",
     "raw": "⏳ 託児サービスあり。締切 10月16日(金)"
    }
+  },
+  {
+   "id": "E139",
+   "name": "第3回 たかの台こども祭り",
+   "dates": [
+    "2026-10-25"
+   ],
+   "span": null,
+   "when": "10/25(日) 10:00〜15:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市立中央公園（じゃぶじゃぶ池周辺）／津田町1-1／西武国分寺線 鷹の台駅",
+   "mapq": "小平市立中央公園",
+   "summary": "",
+   "kidsNote": "屋外・入場無料・出入り自由。2歳連れでも抜けやすい",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "入場無料",
+   "discount": "",
+   "target": "",
+   "url": "https://takanodai-kodomomatsuri.miyachi381.jp/",
+   "tentative": false,
+   "deadline": null
   },
   {
    "id": "E117",
