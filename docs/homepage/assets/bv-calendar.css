@@ -276,3 +276,46 @@
 
 /* 申込先（電話・メール）。カード側にも出す。押せる大きさは締切ブロックと同じ */
 .bvc-apply { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .4rem; }
+
+/* ── 年齢でしぼる（2026-09-20 追加） ───────────────────────────
+   台帳の年齢の目安（👶🧒🎒）をそのまま絞り込みに使う。
+   0〜2歳と小学生では行ける先が違うので、家に合うものだけを見られるようにする。 */
+.bvc-agefilter {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .4rem;
+  margin: .55rem 0 .2rem;
+}
+.bvc-agelabel {
+  font-family: var(--maru); font-weight: 800; font-size: .82rem;
+  color: var(--ink-soft); margin-right: .15rem;
+}
+.bvc-agebtn {
+  font-family: var(--maru); font-weight: 700; font-size: .82rem;
+  color: var(--sky-deep); background: var(--surface);
+  border: 1px solid var(--line-strong); border-radius: 999px;
+  /* 指で押せる高さを確保する。ほかのボタン（44px）と揃える */
+  padding: .42rem .8rem; min-height: 40px; cursor: pointer; line-height: 1;
+}
+.bvc-agebtn:hover { background: var(--surface-2); }
+.bvc-agebtn:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+.bvc-agebtn.is-on {
+  background: var(--sky-deep); color: #fff; border-color: var(--sky-deep);
+}
+.bvc-agenote {
+  flex-basis: 100%; margin: .15rem 0 0;
+  font-size: .78rem; line-height: 1.6; color: var(--ink-soft);
+}
+
+/* ── 期間中ずっと（3日以上つづく催し） ─────────────────────────
+   その日だけの予定の下にまとめる。混ぜると、会期の長いものが毎日いちばん上に
+   出て、その日の予定が沈む（会期13日の催しが1件あると13日ぶん占める）。 */
+.bvc-longhead {
+  display: flex; align-items: baseline; gap: .4rem;
+  font-family: var(--maru); font-weight: 800; font-size: .88rem;
+  color: var(--ink-soft);
+  margin: 1.15rem 0 .45rem; padding-top: .8rem;
+  border-top: 1px dashed var(--line-strong);
+}
+.bvc-longwrap .bvc-card {
+  /* 「その日の予定」と見分けがつくように、こちらは落ち着かせる */
+  background: var(--surface-2);
+}

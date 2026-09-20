@@ -214,3 +214,33 @@ cd docs/homepage && (setsid python3 -m http.server 8899 >/tmp/http.log 2>&1 </de
 リポジトリにコミットされている `m/s7f2ka/index.html` と `map.html` は、
 **検証のため `testpass` で組まれていることがある**。公開する前に必ず
 本物の `MEMBER_PASS` で組み直して、この警告が出ないことを確かめる。
+
+---
+
+## 🧪 カレンダー・マップを実機で確かめる（2026-09-20 追加）
+
+**HTMLを目で読んでも、絞り込みや分岐が効いているかは分からない。**ブラウザで動かして数える。
+
+```bash
+# 1) ローカルで配る
+python3 -m http.server 8777 --directory docs/homepage &
+
+# 2) Chromium を使う（この箱には入っている。playwright install は不要）
+npm i -D playwright --no-audit --no-fund
+# 起動は executablePath を指定する: chromium.launch({ executablePath: '/opt/pw-browsers/chromium' })
+
+# 3) 確かめたら、npm の後片づけをする（package.json は本来このリポジトリに無い）
+rm -rf node_modules package-lock.json package.json
+pkill -f "http.server 8777"
+```
+
+**見るのは画面ではなく数字。**`.bvc-cell.has` の数、`.bvc-day > .bvc-card` の数、
+`.bvc-longwrap .bvc-card` の数を、絞り込みを切り替えながら数える。
+
+> 🔴 **2026-09-20 に実際に助かった例。**年齢で絞っても9月の点の数が11のまま変わらず、
+> 「絞り込みが効いていない」と思いかけた。**10月に送って数えたら 22→15→13→11 と変わっていた。**
+> **9月は残り日数が少なく、たまたま全部が生き残っていただけだった。**
+> **1つの月だけ見て判断しない。**
+
+> ⚠️ `ERR_CERT_AUTHORITY_INVALID` がコンソールに出るのは、この箱のプロキシのせい。
+> **ページの不具合ではない。**

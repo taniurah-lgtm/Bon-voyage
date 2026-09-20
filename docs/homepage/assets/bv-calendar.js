@@ -403,6 +403,39 @@
   }
 
   // ---- 本体 -----------------------------------------------------------------
+  // ─────────────────────────────────────────────────────────────
+  // 年齢の絞り込みと、期間開催の切り分け（2026-09-20 追加）
+  //
+  // 🔴 きっかけ: 3日以上やっている催しが、その期間の毎日のマス目に出るため、
+  //   「その日だけの予定」が押し下げられて見えなくなっていた。
+  //   会期13日の催しが1件あると、13日ぶんのリストの先頭を占める。
+  // 🔴 もうひとつ: 年齢の目安は出しているのに、絞り込めなかった。
+  //   0〜2歳と小学生では行ける先が違うので、家に合うものだけを見たい。
+  var AGE_KEYS = { baby: 'baby', pre: 'pre', elem: 'elem' };
+  var AGE_LABEL = { baby: '👶 あかちゃん', pre: '🧒 未就学', elem: '🎒 小学生' };
+
+  // その年齢の評価を取り出す。古い書式（総合評価だけ）は3つとも同じ扱いにする。
+  function ageMark(ev, key) {
+    var a = ev.ages || {};
+    if (a[key]) return a[key];
+    if (a.overall) {
+      var m = String(a.overall).trim().match(/[◎○△✕x]/);
+      return m ? m[0] : null;
+    }
+    return null;
+  }
+  // 「この子が行ける」＝ ◎ か ○。△（ひと工夫）と ✕ は落とす。
+  function ageOK(ev, key) {
+    var v = ageMark(ev, key);
+    return v === '◎' || v === '○';
+  }
+  // 目安がそもそも無いもの。黙って消さずに、別の枠で見せる。
+  function ageUnknown(ev, key) { return ageMark(ev, key) == null; }
+
+  // 3日以上やっているもの。「その日の予定」ではなく「期間中ずっと」として扱う。
+  var LONG_RUN_DAYS = 3;
+  function isLongRun(ev) { return (ev.dates || []).length >= LONG_RUN_DAYS; }
+
   function mount(root, data, opts) {
     opts = opts || {};
     // 見出しは飛ばさない。月＝hTag、日や節＝その1つ下、予定名＝さらに1つ下。
@@ -452,6 +485,30 @@
       });
     });
 
+    // ── 年齢の絞り込み（1つだけ選べる。null＝ぜんぶ）
+    var ageFilter = null;
+    try {
+      var saved = localStorage.getItem('bvc.age');
+      if (saved && AGE_KEYS[saved]) ageFilter = saved;
+    } catch (err) { /* プライベートウィンドウ等。既定の「ぜんぶ」で動く */ }
+
+    function passAge(ev) { return !ageFilter || ageOK(ev, ageFilter); }
+    // 絞り込み中に「目安が無いので判定できない」もの。消さずに別枠へ回す。
+    function isUnrated(ev) { return !!ageFilter && ageUnknown(ev, ageFilter); }
+
+    // 絞り込みを通した日付→イベント。マス目の点も、この結果で打つ。
+    // （点は出るのに開くと空、という状態を作らないため）
+    var viewByDate = byDate;
+    function applyFilter() {
+      if (!ageFilter) { viewByDate = byDate; return; }
+      viewByDate = {};
+      Object.keys(byDate).forEach(function (d) {
+        var keep = byDate[d].filter(passAge);
+        if (keep.length) viewByDate[d] = keep;
+      });
+    }
+    applyFilter();
+
     var today = todayISO();
     // 台帳の全期間を持っており、「台帳の予定をぜんぶ」と書いている。
     // ★ここを today で切っていた頃は、月送りボタンが当月で止まり、
@@ -470,11 +527,11 @@
         var wd = d.getDay();
         if (wd !== 0 && wd !== 6) continue;
         var key = iso(d);
-        if (byDate[key] && byDate[key].length) return key;
+        if (viewByDate[key] && viewByDate[key].length) return key;
       }
       return null;
     }
-    var selected = (byDate[today] && byDate[today].length && /[06]/.test(String(parseISO(today).getDay())))
+    var selected = (viewByDate[today] && viewByDate[today].length && /[06]/.test(String(parseISO(today).getDay())))
       ? today
       // allDates には過去の日も入る。最初に選ぶのは今日以降にする。
       : (nextWeekendWithEvents() || allDates.filter(function (d) { return d >= today; })[0] || allDates[0] || null);
@@ -495,6 +552,15 @@
       '</div>' +
       '<div class="bvc-quick"><button class="bvc-jump" type="button" data-jump="weekend">今週末を見る</button>' +
       '<button class="bvc-jump" type="button" data-jump="today">今日</button></div>' +
+      // 年齢の絞り込み。台帳の目安（👶🧒🎒）をそのまま使う。
+      '<div class="bvc-agefilter" role="group" aria-label="年齢でしぼる">' +
+      '<span class="bvc-agelabel">だれと行く？</span>' +
+      '<button class="bvc-agebtn" type="button" data-age="" aria-pressed="true">ぜんぶ</button>' +
+      '<button class="bvc-agebtn" type="button" data-age="baby" aria-pressed="false">👶 あかちゃん</button>' +
+      '<button class="bvc-agebtn" type="button" data-age="pre" aria-pressed="false">🧒 未就学</button>' +
+      '<button class="bvc-agebtn" type="button" data-age="elem" aria-pressed="false">🎒 小学生</button>' +
+      '<p class="bvc-agenote" hidden></p>' +
+      '</div>' +
       // 今日・3日以内の締切だけは上に出す。下の枠は4画面ぶん下にあって、
       // 当日締切に気づけなかった。
       '<div class="bvc-deadlines bvc-dl-urgent" hidden></div>' +
@@ -520,6 +586,25 @@
     var $dl = root.querySelector('.bvc-deadlines:not(.bvc-dl-urgent)');
     var $tail = root.querySelector('.bvc-tail');
 
+    function syncAgeUI() {
+      root.querySelectorAll('.bvc-agebtn').forEach(function (b) {
+        var on = (b.dataset.age || null) === ageFilter;
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        b.classList.toggle('is-on', on);
+      });
+      var note = root.querySelector('.bvc-agenote');
+      if (!note) return;
+      if (!ageFilter) { note.hidden = true; note.textContent = ''; return; }
+      // 絞ると何件が外れたかを出す。黙って消えると「予定が減った」と誤解される。
+      var all = events.filter(function (e) { return !e.tentative && (e.dates || []).length; });
+      var kept = all.filter(passAge).length;
+      var unrated = all.filter(isUnrated).length;
+      note.hidden = false;
+      note.textContent = AGE_LABEL[ageFilter] + 'が ◎ か ○ の予定だけにしています（' + kept + '件）。' +
+        (unrated ? '年齢の目安がついていない ' + unrated + '件は出ていません。' : '');
+    }
+
+    syncAgeUI();
     renderDeadlines();
     render();
 
@@ -536,6 +621,26 @@
           }
           render();
         }
+        return;
+      }
+      var ageBtn = e.target.closest('.bvc-agebtn');
+      if (ageBtn) {
+        var next = ageBtn.dataset.age || null;
+        ageFilter = (next && AGE_KEYS[next]) ? next : null;
+        try {
+          if (ageFilter) localStorage.setItem('bvc.age', ageFilter);
+          else localStorage.removeItem('bvc.age');
+        } catch (err) { /* 保存できなくても動く */ }
+        applyFilter();
+        // 絞った結果その日が空になったら、いちばん近い「予定のある日」へ移す。
+        // 選んだ日が空のまま残ると、絞り込みが壊れているように見える。
+        if (!selected || !(viewByDate[selected] || []).length) {
+          var cand = Object.keys(viewByDate).sort().filter(function (d) { return d >= today; });
+          selected = cand[0] || Object.keys(viewByDate).sort().pop() || null;
+          if (selected && months.indexOf(selected.slice(0, 7)) >= 0) view = selected.slice(0, 7);
+        }
+        syncAgeUI();
+        render();
         return;
       }
       var jump = e.target.closest('.bvc-jump');
@@ -620,7 +725,7 @@
           var key = iso(cur);
           var inMonth = cur.getMonth() === m - 1;
           if (inMonth) any = true;
-          var list = byDate[key] || [];
+          var list = viewByDate[key] || [];
           var cls = ['bvc-cell'];
           if (!inMonth) cls.push('out');
           else cls.push('tap');            // 月内はどの日も押せる（押して無反応をなくす）
@@ -663,7 +768,7 @@
     }
 
     function renderDay() {
-      var list = selected ? byDate[selected] || [] : [];
+      var list = selected ? viewByDate[selected] || [] : [];
       // 日を選んでいるのに予定が無いとき（押して無反応に見えないよう、はっきり言う）
       if (selected && !list.length) {
         $day.innerHTML =
@@ -674,21 +779,38 @@
       }
       if (!list.length) {
         // 何も選ばれていないときは「この先の予定」を出す（空白より役に立つ）
-        var up = allDates.slice(0, 4);
+        var up = Object.keys(viewByDate).sort().slice(0, 4);
         $day.innerHTML =
           '<' + hSub + ' class="bvc-dayhead">この先の予定' + '</' + hSub + '>' +
           (up.length
             ? up.map(function (d) {
                 return '<p class="bvc-daylabel">' + esc(fmtDay(d)) + '</p>' +
-                  byDate[d].map(function (e) { return cardHTML(e, d, { hName: hName }); }).join('');
+                  viewByDate[d].map(function (e) { return cardHTML(e, d, { hName: hName }); }).join('');
               }).join('')
             : '<p class="bvc-empty">いまのところ、確定した予定はありません。</p>');
       } else {
-        $day.innerHTML =
-          '<' + hSub + ' class="bvc-dayhead">' + esc(fmtDay(selected)) +
+        // 🔴 「その日だけの予定」と「3日以上やっているもの」を分ける。
+        //    混ぜると、会期の長いものが毎日いちばん上に出て、その日の予定が沈む。
+        var oneOff = list.filter(function (e) { return !isLongRun(e); });
+        var longRun = list.filter(isLongRun);
+        var head = '<' + hSub + ' class="bvc-dayhead">' + esc(fmtDay(selected)) +
           (selected < today ? 'に終わった予定' : 'の予定') +
-          '<span class="bvc-count">' + list.length + '件</span>' + '</' + hSub + '>' +
-          list.map(function (e) { return cardHTML(e, selected, { past: selected < today, hName: hName }); }).join('');
+          '<span class="bvc-count">' + oneOff.length + '件</span>' + '</' + hSub + '>';
+        var body = oneOff.length
+          ? oneOff.map(function (e) { return cardHTML(e, selected, { past: selected < today, hName: hName }); }).join('')
+          : '<p class="bvc-empty">この日だけの予定はありません。' +
+            (longRun.length ? '下の「期間中ずっと」はこの日も開いています。' : '') + '</p>';
+        var tailLong = '';
+        if (longRun.length) {
+          tailLong =
+            '<p class="bvc-longhead">📅 期間中ずっとやっています（この日も開いています）' +
+            '<span class="bvc-count">' + longRun.length + '件</span></p>' +
+            '<div class="bvc-longwrap">' +
+            longRun.map(function (e) {
+              return cardHTML(e, selected, { past: selected < today, hName: hName });
+            }).join('') + '</div>';
+        }
+        $day.innerHTML = head + body + tailLong;
       }
       renderTail();
     }
@@ -698,6 +820,7 @@
       // 先の予定まで持っているので、締切も先のぶんまで全部出す。
       var soon = events
         .filter(function (e) { return e.deadline && e.deadline.date >= today; })
+        .filter(passAge)
         .sort(function (a, b) { return a.deadline.date.localeCompare(b.deadline.date); });
       if (!soon.length) { $dlTop.hidden = true; $dl.hidden = true; return; }
       function rowsFor(list, compact) {
@@ -760,8 +883,37 @@
 
     function renderTail() {
       var html = '';
+      // 3日以上やっているもの。日を選ばなくても一覧で見つかるように、ここにも出す。
+      // （日ごとのパネルでは「期間中ずっと」として下にまとめている）
+      var longs = events.filter(function (e) {
+        return !e.tentative && isLongRun(e) &&
+          (e.dates || []).some(function (d) { return d >= today; });
+      }).filter(passAge);
+      if (longs.length) {
+        html += '<' + hSub + ' class="bvc-tailhead">📅 期間中ずっとやっているもの</' + hSub + '>' +
+          '<p class="bvc-tailnote">3日以上つづく催しです。日ごとの一覧では下にまとめています。</p>' +
+          longs.map(function (e) {
+            var ds = (e.dates || []).filter(function (d) { return d >= today; }).sort();
+            var span = ds.length
+              ? esc(fmtDay(ds[0])) + (ds.length > 1 ? ' 〜 ' + esc(fmtDay(ds[ds.length - 1])) : '') +
+                '（' + ds.length + '日）'
+              : '';
+            return '<article class="bvc-card"><p class="bvc-when">' + span + '</p>' +
+              '<' + hName + ' class="bvc-name">' + esc(e.name) + '</' + hName + '>' +
+              (e.place ? '<p class="bvc-place">' + esc(e.place) + '</p>' : '') +
+              (e.summary ? '<p class="bvc-desc">' + esc(e.summary) + '</p>' : '') +
+              (e.hours ? '<p class="bvc-hours">🕘 ' + esc(e.hours) + '</p>' : '') +
+              (e.caution ? '<p class="bvc-caution">⚠️ ' + esc(e.caution) + '</p>' : '') +
+              '<p class="bvc-meta">' + agesHTML(e.ages) +
+              (e.cost ? '<span class="bvc-cost">' + esc(e.cost) + '</span>' : '') + '</p>' +
+              '<div class="bvc-btns">' +
+              (e.mapq ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(mapURL(e.mapq)) + '" target="_blank" rel="noopener">📍 地図</a>' : '') +
+              (safeURL(e.url) ? '<a class="bvc-btn bvc-btn-sub" href="' + esc(safeURL(e.url)) + '" target="_blank" rel="noopener">🔗 公式</a>' : '') +
+              '</div></article>';
+          }).join('');
+      }
       // 会期もの（「〜10/14まで」のように、日付ではなく期間で開いているもの）
-      var spans = events.filter(function (e) { return e.span && (!e.span.to || e.span.to >= today); });
+      var spans = events.filter(function (e) { return e.span && (!e.span.to || e.span.to >= today); }).filter(passAge);
       if (spans.length) {
         html += '<' + hSub + ' class="bvc-tailhead">📖 会期中ずっと見られるもの' + '</' + hSub + '>' +
           spans.map(function (e) {
@@ -783,7 +935,7 @@
       // 日程が確定していないもの（載せないより、存在を知らせるほうを優先する方針）
       var tent = events.filter(function (e) {
         return e.tentative && (e.dates || []).some(function (d) { return d >= today; });
-      });
+      }).filter(passAge);
       if (tent.length) {
         html += '<' + hSub + ' class="bvc-tailhead">🔎 日程がまだ確定していないもの' + '</' + hSub + '>' +
           '<p class="bvc-tailnote">例年の時期から拾ったものです。日付はカレンダーのマス目には入れていません。公式で確認してからお出かけください。</p>' +
