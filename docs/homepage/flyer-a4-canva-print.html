@@ -55,7 +55,25 @@
   .balloonB{ left:172.4mm;top:165.9mm; width:25.4mm; }
   .hills   { left:10.8mm; top:243.8mm; width:188.4mm; }
   .tree    { left:25.2mm; top:220.5mm; width:29.1mm; }
-  .family  { left:54.3mm; top:230.5mm; width:43.7mm; }
+  /* ★家族を差し替えた（2026-09-20）。元素材は**左右の2体が壊れていて**、
+       左は白い塊、右は体が三角で脚が1本。子どもに見えない。
+       オーナー提供の棒人間に、**カラー版の実測色**を塗って置き換えた
+       （線 #374949・服はカラー版 family.png から拾った色。scripts/make-stick-family-color.py）。
+       置き方は白黒版と同じ計算。カラーの丘とカラーの木を測り直して一致を確認した
+       （稜線の差 0.1mm 以内・木の高さ 43.2mm と 43.3mm）。
+       大人の背丈 19.5mm ＝ 木の45%。
+       🔴 **丘は2枚ある。**奥の淡い青と、手前の緑。最初は「いちばん上の不透明画素」で
+       測ってしまい、**奥の青い丘の稜線**に乗せていた（左端で 7.5mm 浮いていた）。
+       **カラー版では2枚の色が見えるので、浮いているのが分かる。**
+       いまは **HSVで緑だけを抜き、その上端**に乗せている。
+       各 top は「足もとの x での**緑の上端** ＋ 0.53mm − 背丈」。
+       水彩のふちは1列だと荒れるので、**±1.5mm の中央値**を取っている。
+       🔴 **新生児訪問で配る紙なので、はいはいの赤ちゃんが要る。**元素材には赤ちゃんがいない。 */
+  .f-dad { left:72.0mm; top:240.4mm; width:6.7mm; }
+  .f-mom { left:79.0mm; top:242.6mm; width:7.2mm; }
+  .f-baby{ left:84.2mm; top:254.7mm; width:5.7mm;  }
+  .f-boy { left:89.2mm; top:249.1mm; width:7.7mm; }
+  .f-girl{ left:96.5mm; top:252.7mm; width:7.2mm; }
   .petalsA { left:168.8mm;top:201.5mm; width:29.1mm; opacity:.95; }
   .petalsB { left:58.0mm; top:207.1mm; width:7.4mm;  opacity:.95; }
   .petalsC { left:105.1mm;top:207.1mm; width:11.1mm; opacity:.95; }
@@ -98,7 +116,11 @@
   <img class="art petalsC"  src="assets/art/canva/petals-c.png"  alt="">
   <img class="art hills"    src="assets/art/canva/hills.png"     alt="">
   <img class="art tree"     src="assets/art/canva/tree.png"      alt="">
-  <img class="art family"   src="assets/art/canva/family.png"    alt="">
+  <img class="art f-dad"   src="assets/art/canva/stick-dad-color.png"  alt="">
+  <img class="art f-mom"   src="assets/art/canva/stick-mom-color.png"  alt="">
+  <img class="art f-boy"   src="assets/art/canva/stick-boy-color.png"  alt="">
+  <img class="art f-girl"  src="assets/art/canva/stick-girl-color.png" alt="">
+  <img class="art f-baby"  src="assets/art/canva/stick-baby-color.png" alt="">
 
   <div class="qrcard">
     <img src="assets/qr/f-hand.png" alt="ぼんぼやーじゅ通信のホームページのQRコード">
