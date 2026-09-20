@@ -2140,23 +2140,28 @@
    "id": "E96",
    "name": "たけのこ公園ビアガーデン！2026",
    "dates": [
-    "2026-09-26"
+    "2026-09-26",
+    "2026-26-09"
    ],
    "span": null,
-   "when": "9/26(土) 10:00〜20:00 / 場所: たけのこ公園(小平市)",
+   "when": "9/26(土) 10:00〜20:00（✅ 2026/9/26 は土曜。曜日照合済み）",
    "rainDates": [],
    "exceptions": null,
    "programs": null,
-   "totalDates": 1,
+   "totalDates": 2,
    "start": "10:00",
    "end": "20:00",
    "allDay": false,
    "timeUncertain": false,
-   "place": "",
-   "mapq": "たけのこ公園ビアガーデン！2026",
-   "summary": "キッチンカー10台以上、こども縁日。9月は夜まで開催",
-   "kidsNote": "昼に行けば子ども向け。夜はビアガーデン寄り",
+   "place": "小平市立たけのこ公園（花小金井7-9-10／西武新宿線 花小金井駅・小平駅）",
+   "mapq": "小平市立たけのこ公園",
+   "summary": "",
+   "kidsNote": "",
    "caution": "",
+   "contact": {
+    "tel": "042-312-3954",
+    "who": "一般社団法人 こだいら観光まちづくり協会"
+   },
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -2164,7 +2169,7 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "",
+   "cost": "公式に記載なし。公園なので入園は無料だが、「無料」と断定しない。出店は実費",
    "discount": "",
    "target": "",
    "url": "https://kodaira-tourism.com/event/22825/",
@@ -3099,7 +3104,10 @@
    "target": "",
    "url": "https://takanodai-kodomomatsuri.miyachi381.jp/",
    "tentative": false,
-   "deadline": null
+   "deadline": {
+    "date": "2026-10-16",
+    "raw": "| 締切 | 🔴 託児の締切 10/16(金) | 無し |"
+   }
   },
   {
    "id": "E117",
