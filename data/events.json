@@ -3796,7 +3796,7 @@
    "place": "井の頭公園 文化交流広場（西園・ジブリ美術館の裏／三鷹市）",
    "mapq": "井の頭公園 文化交流広場",
    "summary": "三鷹・吉祥寺のオーガニックなお店が集まる、衣・食・住のトータルライフイベント。 衣・食・住を体験で学ぶワークショップ",
-   "kidsNote": "暫定。",
+   "kidsNote": "",
    "caution": "",
    "contact": null,
    "lastEntry": "",
@@ -3811,7 +3811,7 @@
    "target": "",
    "url": "https://organicfesta.morinohito.net/",
    "status": "候補",
-   "confidence": "日時・会場・順延の扱いは告知画像で確認（2026-09-20）／入場料は未確認",
+   "confidence": "日時・会場・順延・入場無料・2026年の子ども向け企画まで、事務局に直接確認済み（2026-09-21）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
