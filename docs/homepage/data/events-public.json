@@ -170,7 +170,9 @@
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "overall": "◎"
+    "baby": "◎",
+    "pre": "◎",
+    "elem": "◎"
    },
    "cost": "",
    "discount": "",
@@ -660,7 +662,9 @@
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "overall": "◎"
+    "baby": "◎",
+    "pre": "◎",
+    "elem": "◎"
    },
    "cost": "",
    "discount": "",
@@ -766,7 +770,7 @@
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "baby": null,
+    "baby": "○",
     "pre": "◎",
     "elem": "◎"
    },
@@ -803,7 +807,7 @@
    "lastEntry": "最終受付16:00",
    "hours": "",
    "ages": {
-    "baby": null,
+    "baby": "△",
     "pre": "○",
     "elem": "◎"
    },
@@ -851,8 +855,8 @@
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "baby": null,
-    "pre": null,
+    "baby": "△",
+    "pre": "△",
     "elem": "○"
    },
    "cost": "",
@@ -882,12 +886,12 @@
    "place": "",
    "mapq": "田無アスタ",
    "summary": "",
-   "kidsNote": "保護者向けの色合いが強い",
+   "kidsNote": "屋内。保護者向けの色合いが強い",
    "caution": "",
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "baby": null,
+    "baby": "○",
     "pre": "○",
     "elem": "○"
    },
@@ -917,7 +921,7 @@
    "place": "中央公民館(小川町2-1325)",
    "mapq": "小平市中央公民館",
    "summary": "サッカーの名選手を目指す少年が、岩手から転校してきた子を励まし本当の「ともだち」になろうとする話",
-   "kidsNote": "当日直接。無料の見込み(市報に費用の記載なし・要確認)",
+   "kidsNote": "上映中は暗くなります。当日直接",
    "caution": "",
    "contact": {
     "tel": "042-341-0861",
@@ -926,7 +930,7 @@
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "baby": null,
+    "baby": "△",
     "pre": "○",
     "elem": "◎"
    },
@@ -1065,7 +1069,7 @@
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "baby": null,
+    "baby": "○",
     "pre": "○",
     "elem": "○"
    },
@@ -1095,7 +1099,7 @@
    "place": "中央公民館1階視聴覚室・中央図書館北側駐車場(小川町2-1325) ※駐車台数に限りあり。公共交通機関の利用を推奨",
    "mapq": "小平市中央公民館",
    "summary": "AR(拡張現実)体験・VR(仮想現実)体験・AED体験・放水体験・はしご車搭乗体験(20組) ※防災訓練体験者に抽選券を配布",
-   "kidsNote": "体験ものが多く、働く車好きに刺さる",
+   "kidsNote": "体験ものが多く、働く車好きに刺さる。見るだけでも持ちます",
    "caution": "荒天時は中止の場合あり(中止は小平消防署HPで告知)",
    "contact": {
     "tel": "042-341-0119",
@@ -1104,7 +1108,7 @@
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "baby": null,
+    "baby": "○",
     "pre": "◎",
     "elem": "◎"
    },
@@ -1138,12 +1142,12 @@
    "place": "田無アスタ2階センターコート",
    "mapq": "田無アスタ",
    "summary": "ポケモングッズが無料で貰えるイベント。チラシに「だれでも参加OK!!」と明記",
-   "kidsNote": "無料でグッズがもらえるので費用ゼロで満足度が出せる。 平日開催なので空いている。7/21〜24にも同内容を実施済みで定期開催の見込み",
+   "kidsNote": "だれでも参加OK。無料でグッズがもらえるので費用ゼロで満足度が出せる。 平日開催なので空いている。7/21〜24にも同内容を実施済みで定期開催の見込み",
    "caution": "",
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "baby": null,
+    "baby": "○",
     "pre": "◎",
     "elem": "◎"
    },
@@ -1320,7 +1324,7 @@
    "lastEntry": "最終受付16:30",
    "hours": "",
    "ages": {
-    "baby": null,
+    "baby": "△",
     "pre": "◎",
     "elem": "◎"
    },
@@ -1465,14 +1469,14 @@
    "place": "小川町二丁目児童館",
    "mapq": "小川町二丁目児童館",
    "summary": "",
-   "kidsNote": "該当家庭には代替の効かない場",
+   "kidsNote": "ふたご・みつごの家庭の集まり。該当家庭には代替の効かない場",
    "caution": "時間は館の予定表・おたよりで要確認",
    "lastEntry": "",
    "hours": "",
    "ages": {
     "baby": "◎",
-    "pre": null,
-    "elem": null
+    "pre": "○",
+    "elem": "✕"
    },
    "cost": "無料(児童館行事) / 対象: 双子・多胎児の親子",
    "discount": "",
@@ -1536,7 +1540,7 @@
    "place": "小平元気村おがわ東 屋外広場 ※雨天時は屋内広場",
    "mapq": "小平元気村おがわ東 屋外広場",
    "summary": "箱根駅伝などに出場経験のある東京経済大学陸上競技部の吉村匠監督から正しいフォームを学ぶ",
-   "kidsNote": "保護者の承諾が必要。運動できる服装・タオル・飲み物・着替え",
+   "kidsNote": "小学1〜4年生が対象。保護者の承諾が必要。運動できる服装・タオル・飲み物・着替え",
    "caution": "",
    "contact": {
     "tel": "042-349-1350",
@@ -1545,8 +1549,8 @@
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "baby": null,
-    "pre": null,
+    "baby": "✕",
+    "pre": "✕",
     "elem": "◎"
    },
    "cost": "",
@@ -1578,13 +1582,13 @@
    "place": "花小金井南児童館(花小金井南町3-3-17 コミュニティセンター2階) ☎042-461-9988",
    "mapq": "小平市花小金井南児童館 ☎042-461-9988",
    "summary": "",
-   "kidsNote": "無料・徒歩圏・屋内。雨の日の行き先として最強クラス",
+   "kidsNote": "小学1〜3年生が対象。無料・徒歩圏・屋内。雨の日の行き先として最強クラス",
    "caution": "時間は要確認",
    "lastEntry": "",
    "hours": "9:00〜18:00 / 休館: 第1・第3火曜",
    "ages": {
-    "baby": null,
-    "pre": null,
+    "baby": "✕",
+    "pre": "✕",
     "elem": "◎"
    },
    "cost": "無料 / 対象: 小学1〜3年生",
@@ -1613,7 +1617,7 @@
    "place": "小平第六小学校 体育館",
    "mapq": "小平第六小学校 体育館",
    "summary": "テニス・バドミントン・卓球の要素を持つニュースポーツ。パドルの貸出あり",
-   "kidsNote": "屋内・雨でも実施",
+   "kidsNote": "小学生以上が対象。屋内なので雨でも実施",
    "caution": "",
    "contact": {
     "tel": "042-346-9612",
@@ -1622,8 +1626,8 @@
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "baby": null,
-    "pre": null,
+    "baby": "✕",
+    "pre": "✕",
     "elem": "◎"
    },
    "cost": "",
@@ -1699,7 +1703,7 @@
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "baby": null,
+    "baby": "✕",
     "pre": "○",
     "elem": "◎"
    },
@@ -1803,12 +1807,12 @@
    "place": "小平第十三小学校 校庭",
    "mapq": "小平第十三小学校 校庭",
    "summary": "ラグビーの基礎練習。幼児・低学年=タグラグビー / 中学年=7人制 / 高学年=9人制",
-   "kidsNote": "未就学から参加できるのが貴重",
+   "kidsNote": "年中から参加できるのが貴重（0〜2歳は対象外）",
    "caution": "",
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "baby": null,
+    "baby": "✕",
     "pre": "◎",
     "elem": "◎"
    },
@@ -2046,12 +2050,12 @@
    "place": "",
    "mapq": "東京クラフトFESTA2026 feat.多摩",
    "summary": "多摩地域のクラフトビール・食。連休中の都心おでかけ枠",
-   "kidsNote": "酒類主体なので日中・短時間向き",
+   "kidsNote": "都庁前の広場。酒類が主役なので、日中の短時間向き",
    "caution": "",
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "baby": null,
+    "baby": "△",
     "pre": "○",
     "elem": "○"
    },
@@ -2084,13 +2088,13 @@
    "place": "",
    "mapq": "まち巡りガイドツアー",
    "summary": "",
-   "kidsNote": "歩行距離が長い。",
+   "kidsNote": "9:30〜13:00 の約3時間半を歩きます。未就学児にはきびしい",
    "caution": "",
    "lastEntry": "",
    "hours": "",
    "ages": {
-    "baby": null,
-    "pre": null,
+    "baby": "✕",
+    "pre": "✕",
     "elem": "△"
    },
    "cost": "",
@@ -2270,7 +2274,7 @@
    "place": "鈴木公民館(鈴木町2-772) / 講師: 川村あやみさん(自然食品レストラン店長)",
    "mapq": "小平市鈴木公民館",
    "summary": "",
-   "kidsNote": "保護者向け(調理実習)",
+   "kidsNote": "大人向けの調理実習です。保育の案内はありません",
    "caution": "①②どちらかを選ぶ選択制(全2回ではない)",
    "contact": {
     "tel": "042-388-0050",
@@ -2278,7 +2282,11 @@
    },
    "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "baby": "✕",
+    "pre": "✕",
+    "elem": "✕"
+   },
    "cost": "700円 / 定員 各8人(抽選) / 対象: 市内在住・在勤・在学の方",
    "discount": "",
    "target": "",
@@ -2311,11 +2319,15 @@
    "place": "小川公民館(小川町1-1012) ☎042-343-3620",
    "mapq": "小平市小川公民館 ☎042-343-3620",
    "summary": "",
-   "kidsNote": "保育付き＝親が主役の講座。下の子がいる家庭でも参加できる数少ない枠",
+   "kidsNote": "保育付き＝親が主役の講座。下の子がいても参加できる数少ない枠",
    "caution": "",
    "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "baby": "○",
+    "pre": "○",
+    "elem": "✕"
+   },
    "cost": "無料 / 定員: 15人",
    "discount": "",
    "target": "市内在住・在勤・在学の子育て中の方",
@@ -2380,15 +2392,19 @@
    "end": "16:00",
    "allDay": false,
    "timeUncertain": false,
-   "place": "新小平駅前広場（JR武蔵野線 新小平駅）",
-   "mapq": "新小平駅",
+   "place": "新小平駅 駅前ロータリー（JR武蔵野線 新小平駅）",
+   "mapq": "新小平駅 駅",
    "summary": "",
    "kidsNote": "",
    "caution": "",
    "lastEntry": "",
    "hours": "",
-   "ages": null,
-   "cost": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "入場無料",
    "discount": "",
    "target": "",
    "url": "https://kodaira-tourism.com/event/22948/",
@@ -2533,7 +2549,11 @@
    "caution": "",
    "lastEntry": "",
    "hours": "",
-   "ages": null,
+   "ages": {
+    "baby": "◎",
+    "pre": "✕",
+    "elem": "✕"
+   },
    "cost": "",
    "discount": "",
    "target": "市内在住で、10/6時点で生後2〜5か月の第一子とお母さん(全4回参加できる方)",
@@ -2605,8 +2625,8 @@
    "hours": "",
    "ages": {
     "baby": "◎",
-    "pre": null,
-    "elem": null
+    "pre": "○",
+    "elem": "✕"
    },
    "cost": "",
    "discount": "",
@@ -2626,24 +2646,28 @@
     "2026-10-11"
    ],
    "span": null,
-   "when": "10/10(土)・10/11(日) / 場所: 小平市(ブリヂストン関連会場)",
+   "when": "10/10(土) 10:00〜20:00 ／ 10/11(日) 10:00〜17:00（予定）",
    "rainDates": [],
    "exceptions": null,
    "programs": null,
    "totalDates": 2,
-   "start": null,
-   "end": null,
-   "allDay": true,
+   "start": "10:00",
+   "end": "20:00",
+   "allDay": false,
    "timeUncertain": false,
-   "place": "",
-   "mapq": "こだいらクラフトFESTA2026 feat.ブリヂストン",
-   "summary": "",
+   "place": "ブリヂストン南グラウンド（小平市小川東町3-3）",
+   "mapq": "小平市ブリヂストン南グラウンド",
+   "summary": "市民が手がけるクラフト（手づくり）が集まる祭典。クラフトビール・ハンドメイド・地元の食",
    "kidsNote": "",
    "caution": "",
    "lastEntry": "",
    "hours": "",
-   "ages": null,
-   "cost": "",
+   "ages": {
+    "baby": "△",
+    "pre": "○",
+    "elem": "○"
+   },
+   "cost": "公式サイトでご確認ください",
    "discount": "",
    "target": "",
    "url": "https://kodaira-tourism.com/event/22841/",
@@ -2754,8 +2778,8 @@
    "hours": "",
    "ages": {
     "baby": "◎",
-    "pre": null,
-    "elem": null
+    "pre": "✕",
+    "elem": "✕"
    },
    "cost": "",
    "discount": "",
@@ -2828,13 +2852,13 @@
    "place": "小平市ふれあい下水道館 地下1階 講座室(上水本町1-25-31 / 西武国分寺線 鷹の台駅)",
    "mapq": "小平市ふれあい下水道館 地下 講座室",
    "summary": "2本立て。【工作】ハロウィーンリースと竹花瓶をつくろう！ ＋【講座】不思議な昆虫の目を観察しよう",
-   "kidsNote": "小学生が対象。年中・年長は入れない。／ ／ 👶—",
+   "kidsNote": "小学生が対象。保護者は1名まで同伴できます",
    "caution": "",
    "lastEntry": "",
    "hours": "毎週月曜(休・祝日の場合はその直近の平日)。 2026年9月は 9/7・9/14・9/24(木)・9/28 が休館（連休中の振替が9/24(木)に来ている）。",
    "ages": {
-    "baby": null,
-    "pre": "△",
+    "baby": "✕",
+    "pre": "✕",
     "elem": "◎"
    },
    "cost": "🔴 参加費 無料（館のチラシPDFで確認済み。館じたいも入館無料）",
@@ -3112,7 +3136,7 @@
     "2026-10-31"
    ],
    "span": null,
-   "when": "10/31(土) 10:00〜13:30 / 場所: 中央公民館",
+   "when": "10/31(土) 10:00〜13:30",
    "rainDates": [],
    "exceptions": null,
    "programs": null,
@@ -3121,20 +3145,27 @@
    "end": "13:30",
    "allDay": false,
    "timeUncertain": false,
-   "place": "",
-   "mapq": "親子でうどん作り体験",
-   "summary": "ドッグラン、犬のしつけ方と防災相談・ペット防災展示、スポーツ体験(ピックルボール・モルック)、 施設整備のオープンハウス",
-   "kidsNote": "",
+   "place": "小平市中央公民館 地下実習室（小川町2-1325）",
+   "mapq": "小平市中央公民館 地下実習室",
+   "summary": "江戸期から小平に伝わる伝統食「粉うどん」を親子で打ち、500gを作って持ち帰る",
+   "kidsNote": "小学3年生から。",
    "caution": "",
    "lastEntry": "",
    "hours": "",
-   "ages": null,
-   "cost": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "✕",
+    "elem": "◎"
+   },
+   "cost": "1,500円（1組）",
    "discount": "",
-   "target": "",
+   "target": "小学3年生以上と保護者、2人1組",
    "url": "https://kodaira-tourism.com/event/22851/",
    "tentative": false,
-   "deadline": null
+   "deadline": {
+    "date": "2026-09-24",
+    "raw": "🔴 申込: 9/24(木) 10:00 から、申込みフォーム（Google Forms）で先着順"
+   }
   },
   {
    "id": "E122",
