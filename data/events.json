@@ -2978,7 +2978,7 @@
     "2026-10-09"
    ],
    "span": null,
-   "when": "2026年10月9日(金) 10:00〜11:30　⚠️ 告知に「（予定）」と書かれている。要確認",
+   "when": "2026年10月9日(金) 10:00〜11:30　✅ 確定",
    "rainDates": [],
    "exceptions": null,
    "programs": null,
@@ -3004,8 +3004,8 @@
    "discount": "",
    "target": "",
    "url": "https://www.koguma-waccacca.com/",
-   "status": "候補",
-   "confidence": "主催の告知で確認（曜日照合済み: 2026-10-09 は金曜）/ 時間は「予定」のまま",
+   "status": "承認済",
+   "confidence": "✅ 日時・会場・費用・予約不要、すべて主催者本人から確認済み（2026-09-22） （曜日照合済み: 2026-10-09 は金曜）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
