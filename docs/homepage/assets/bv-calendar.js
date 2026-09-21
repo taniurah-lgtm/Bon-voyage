@@ -413,6 +413,7 @@
   //   0〜2歳と小学生では行ける先が違うので、家に合うものだけを見たい。
   var AGE_KEYS = { baby: 'baby', pre: 'pre', elem: 'elem' };
   var AGE_LABEL = { baby: '👶 あかちゃん', pre: '🧒 未就学', elem: '🎒 小学生' };
+  var AGE_ORDER = ['baby', 'pre', 'elem'];
 
   // その年齢の評価を取り出す。古い書式（総合評価だけ）は3つとも同じ扱いにする。
   function ageMark(ev, key) {
@@ -485,22 +486,30 @@
       });
     });
 
-    // ── 年齢の絞り込み（1つだけ選べる。null＝ぜんぶ）
-    var ageFilter = null;
+    // ── 年齢の絞り込み（複数えらべる。空＝ぜんぶ）
+    //   🔴 えらんだ年齢の子が「みんな行ける」ものだけを出す（AND）。
+    //      きょうだいがいる家では、上の子と下の子の両方が行ける先を探すことになる。
+    var ageSel = [];
     try {
-      var saved = localStorage.getItem('bvc.age');
-      if (saved && AGE_KEYS[saved]) ageFilter = saved;
+      var saved = (localStorage.getItem('bvc.age') || '').split(',');
+      ageSel = saved.filter(function (k) { return AGE_KEYS[k]; });
     } catch (err) { /* プライベートウィンドウ等。既定の「ぜんぶ」で動く */ }
 
-    function passAge(ev) { return !ageFilter || ageOK(ev, ageFilter); }
-    // 絞り込み中に「目安が無いので判定できない」もの。消さずに別枠へ回す。
-    function isUnrated(ev) { return !!ageFilter && ageUnknown(ev, ageFilter); }
+    function passAge(ev) {
+      if (!ageSel.length) return true;
+      // AND。1つでも ◎/○ でなければ落とす
+      return ageSel.every(function (k) { return ageOK(ev, k); });
+    }
+    // 絞り込み中に「目安が無いので判定できない」もの。黙って消さず、件数で知らせる。
+    function isUnrated(ev) {
+      return ageSel.length > 0 && ageSel.some(function (k) { return ageUnknown(ev, k); });
+    }
 
     // 絞り込みを通した日付→イベント。マス目の点も、この結果で打つ。
     // （点は出るのに開くと空、という状態を作らないため）
     var viewByDate = byDate;
     function applyFilter() {
-      if (!ageFilter) { viewByDate = byDate; return; }
+      if (!ageSel.length) { viewByDate = byDate; return; }
       viewByDate = {};
       Object.keys(byDate).forEach(function (d) {
         var keep = byDate[d].filter(passAge);
@@ -588,20 +597,30 @@
 
     function syncAgeUI() {
       root.querySelectorAll('.bvc-agebtn').forEach(function (b) {
-        var on = (b.dataset.age || null) === ageFilter;
+        var k = b.dataset.age || '';
+        var on = k ? ageSel.indexOf(k) >= 0 : ageSel.length === 0;
         b.setAttribute('aria-pressed', on ? 'true' : 'false');
         b.classList.toggle('is-on', on);
       });
       var note = root.querySelector('.bvc-agenote');
       if (!note) return;
-      if (!ageFilter) { note.hidden = true; note.textContent = ''; return; }
+      if (!ageSel.length) { note.hidden = true; note.textContent = ''; return; }
       // 絞ると何件が外れたかを出す。黙って消えると「予定が減った」と誤解される。
       var all = events.filter(function (e) { return !e.tentative && (e.dates || []).length; });
       var kept = all.filter(passAge).length;
       var unrated = all.filter(isUnrated).length;
+      var names = ageSel.map(function (k) { return AGE_LABEL[k]; }).join('・');
       note.hidden = false;
-      note.textContent = AGE_LABEL[ageFilter] + 'が ◎ か ○ の予定だけにしています（' + kept + '件）。' +
-        (unrated ? '年齢の目安がついていない ' + unrated + '件は出ていません。' : '');
+      // 🔴 短く。この案内はカレンダーの表の上に入るので、長いと表が画面の外へ出る。
+      note.textContent = ageSel.length > 1
+        ? names + ' が そろって行ける予定だけ（' + kept + '件）。' +
+          (unrated ? '目安のない ' + unrated + '件は出ていません。' : '')
+        : names + ' が行ける予定だけ（' + kept + '件）。' +
+          (unrated ? '目安のない ' + unrated + '件は出ていません。' : '');
+      if (!kept) {
+        note.textContent = names + ' が そろって行ける予定は、いまのところありません。' +
+          '年齢をひとつ減らすか、「ぜんぶ」に戻してみてください。';
+      }
     }
 
     syncAgeUI();
@@ -625,10 +644,18 @@
       }
       var ageBtn = e.target.closest('.bvc-agebtn');
       if (ageBtn) {
-        var next = ageBtn.dataset.age || null;
-        ageFilter = (next && AGE_KEYS[next]) ? next : null;
+        var key = ageBtn.dataset.age || '';
+        if (!key) {
+          ageSel = [];                       // 「ぜんぶ」＝解除
+        } else if (AGE_KEYS[key]) {
+          var at = ageSel.indexOf(key);
+          if (at >= 0) ageSel.splice(at, 1); // もう一度押したら外す
+          else ageSel.push(key);
+          // 表示の順は 👶→🧒→🎒 に揃える（押した順だと案内文が毎回入れ替わる）
+          ageSel.sort(function (a, b) { return AGE_ORDER.indexOf(a) - AGE_ORDER.indexOf(b); });
+        }
         try {
-          if (ageFilter) localStorage.setItem('bvc.age', ageFilter);
+          if (ageSel.length) localStorage.setItem('bvc.age', ageSel.join(','));
           else localStorage.removeItem('bvc.age');
         } catch (err) { /* 保存できなくても動く */ }
         applyFilter();
