@@ -368,7 +368,7 @@
     <a class="bvnav-brand" href="/">ぼんぼやーじゅ通信</a>
     <div class="bvnav-links">
       <a href="/" aria-current="page" class="bv-hide-sm">通信について</a>
-      <a href="/calendar.html"><span class="bv-lg">おでかけ</span>カレンダー</a>
+      <a class="bvnav-cal" href="/calendar.html">📅<span class="bv-lg">おでかけ</span>カレンダー</a>
       <a href="/map.html"><span class="bv-lg">おでかけ</span>マップ</a>
       <a class="bvnav-cta" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE<span class="bv-lg">で受け取る</span></a>
     </div>
@@ -392,15 +392,18 @@
         <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.9 3 2.75 6.36 2.75 10.5c0 3.7 3.3 6.8 7.78 7.4.3.06.71.2.81.46.09.24.06.6.03.85l-.13.79c-.04.24-.19.93.82.51 1.01-.42 5.45-3.21 7.44-5.5 1.37-1.5 2.02-3.03 2.02-4.51C21.25 6.36 17.1 3 12 3Z"/></svg>
         LINEで友だち追加（無料）
       </a>
-      <a class="btn btn-ghost" href="#issue">最新号を読む</a>
+      <!-- HERO-CAL:START ここは scripts/build-calendar.mjs が書き換える。手で直さない -->
+      <a class="btn btn-ghost" href="/calendar.html">今週末の予定 8件 →</a>
+      <!-- HERO-CAL:END -->
     </div>
     <p class="hero-note fade d3">友だち追加だけで届きます。個人情報の入力は不要です。</p>
   </div>
 </header>
 
 <nav class="pagenav wrap" aria-label="このページの中身">
+  <a href="/calendar.html">おでかけカレンダー</a>
   <a href="#issue">最新号を読む</a>
-  <a href="#tools">いつでも見られる3つ</a>
+  <a href="#tools">カレンダー・マップ・バックナンバー</a>
   <a href="#contact">お問い合わせ</a>
 </nav>
 
@@ -450,6 +453,36 @@
     </ul>
   </section>
 
+  <section id="tools" class="wrap">
+    <div class="stop"><span class="pin"></span><span class="label">Tools</span></div>
+    <h2>いつでも見られる3つ</h2>
+    <div class="tools">
+      <a class="tool" href="calendar.html">
+        <span class="tool-ic">📅</span>
+        <span class="tool-body">
+          <b>おでかけカレンダー</b>
+          <span><b>先の予定まで</b>日付から探せます。気になった予定は<b>ワンタップでご自分のカレンダーへ</b>。申込の締切も先のぶんまで出ます</span>
+        </span>
+      </a>
+      <a class="tool" href="map.html">
+        <span class="tool-ic">🗺</span>
+        <span class="tool-body">
+          <b>みんなのおでかけマップ</b>
+          <span><span data-bv-post="on" hidden>「行ってよかった」を地元の家庭で持ち寄っている地図。<b>このページから直接書き込めます</b></span><span data-bv-post="off">「行ってよかった」を地元の家庭で持ち寄っている地図。<b>LINEでひとことお寄せいただけます</b></span></span>
+        </span>
+      </a>
+      <a class="tool" href="issues.html">
+        <span class="tool-ic">📮</span>
+        <span class="tool-body">
+          <b>バックナンバー</b>
+          <span>これまでにお届けした号を<b>そのまま読めます</b>。あとから取り下げた記載には、訂正を添えています</span>
+        </span>
+      </a>
+    </div>
+    <p class="support-line">通信も、いつでも見られるこの3つも、どなたでも無料でお使いいただけます。</p>
+    <p class="support-line">ChatGPTやGeminiなど、チャット型のAIをお使いの方へ　→　<a href="/ai/">AIに聞くためのおでかけ一覧</a></p>
+  </section>
+
   <section id="issue" class="wrap">
     <div class="stop"><span class="pin"></span><span class="label">Latest issue</span></div>
     <h2>最新号のプレビュー</h2>
@@ -484,31 +517,6 @@
       </div>
     </article>
     <!-- ISSUE:END -->
-    <div class="tools" id="tools">
-      <a class="tool" href="calendar.html">
-        <span class="tool-ic">📅</span>
-        <span class="tool-body">
-          <b>おでかけカレンダー</b>
-          <span><b>先の予定まで</b>日付から探せます。気になった予定は<b>ワンタップでご自分のカレンダーへ</b>。申込の締切も先のぶんまで出ます</span>
-        </span>
-      </a>
-      <a class="tool" href="map.html">
-        <span class="tool-ic">🗺</span>
-        <span class="tool-body">
-          <b>みんなのおでかけマップ</b>
-          <span><span data-bv-post="on" hidden>「行ってよかった」を地元の家庭で持ち寄っている地図。<b>このページから直接書き込めます</b></span><span data-bv-post="off">「行ってよかった」を地元の家庭で持ち寄っている地図。<b>LINEでひとことお寄せいただけます</b></span></span>
-        </span>
-      </a>
-      <a class="tool" href="issues.html">
-        <span class="tool-ic">📮</span>
-        <span class="tool-body">
-          <b>バックナンバー</b>
-          <span>これまでにお届けした号を<b>そのまま読めます</b>。あとから取り下げた記載には、訂正を添えています</span>
-        </span>
-      </a>
-    </div>
-    <p class="support-line">通信も、いつでも見られるこの3つも、どなたでも無料でお使いいただけます。</p>
-    <p class="support-line">ChatGPTやGeminiなど、チャット型のAIをお使いの方へ　→　<a href="/ai/">AIに聞くためのおでかけ一覧</a></p>
   </section>
 
   <section id="trust" class="wrap">

@@ -359,3 +359,61 @@ if (internalLeaks.length) {
 } else {
   console.log('  ✅ 内部の判断が公開データに出ていないことを確認しました。');
 }
+
+// ───────────────────────────────────────────────────────────────
+// トップページのヒーローにある2つ目のボタンを、今週末の件数つきに差し替える。
+//
+// なぜ件数を出すか（2026-09-21）:
+//   「おでかけカレンダー」という言葉だけでは、中に何があるか伝わらない。
+//   実測でトップ92訪問に対してカレンダー18。中身ではなく、たどり着けていなかった。
+//   件数が出ていれば「中に何かある」と分かる。
+//
+// 🔴 手で書かない。号ごとに数が変わるので、必ずここから入れる。
+//    0件のときは数字を出さない（「0件」と書いたボタンは、押さない理由になる）。
+// ───────────────────────────────────────────────────────────────
+{
+  const HOME = 'docs/homepage/index.html';
+  const d = new Date(Date.now() + 9 * 3600 * 1000); // JST
+  const iso = (x) => x.toISOString().slice(0, 10);
+  const dow = d.getUTCDay(); // 0=日 6=土
+
+  // 「今週末」= 次に来る土日。土曜なら今日と明日、日曜なら今日だけ。
+  const weekend = [];
+  if (dow === 6) {
+    weekend.push(iso(d), iso(new Date(d.getTime() + 864e5)));
+  } else if (dow === 0) {
+    weekend.push(iso(d));
+  } else {
+    const sat = new Date(d.getTime() + (6 - dow) * 864e5);
+    weekend.push(iso(sat), iso(new Date(sat.getTime() + 864e5)));
+  }
+
+  // 同じイベントが土日にまたがっても1件として数える
+  const ids = new Set();
+  for (const e of pub) for (const x of e.dates || []) if (weekend.includes(x)) ids.add(e.id);
+  const n = ids.size;
+
+  const label = n > 0 ? `今週末の予定 ${n}件 →` : 'おでかけカレンダーを見る →';
+  const block =
+    '      <!-- HERO-CAL:START ここは scripts/build-calendar.mjs が書き換える。手で直さない -->\n' +
+    `      <a class="btn btn-ghost" href="/calendar.html">${label}</a>\n` +
+    '      <!-- HERO-CAL:END -->';
+
+  try {
+    const home = readFileSync(HOME, 'utf8');
+    const re = /[ \t]*<!-- HERO-CAL:START[\s\S]*?<!-- HERO-CAL:END -->/;
+    if (!re.test(home)) {
+      console.log('  ⚠️ トップページに HERO-CAL の目印がありません。ボタンは差し替えていません。');
+    } else {
+      const next = home.replace(re, block);
+      if (next !== home) {
+        writeFileSync(HOME, next);
+        console.log(`wrote ${HOME}（ヒーローのボタン: 「${label}」／${weekend.join('・')}）`);
+      } else {
+        console.log(`  ヒーローのボタンは変更なし（「${label}」）`);
+      }
+    }
+  } catch (e) {
+    console.log(`  ⚠️ トップページを更新できませんでした: ${e.message}`);
+  }
+}
