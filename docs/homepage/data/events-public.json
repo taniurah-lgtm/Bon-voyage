@@ -2377,6 +2377,41 @@
    "deadline": null
   },
   {
+   "id": "E143",
+   "name": "0歳からのプラネタリウム（多摩六都科学館）",
+   "dates": [
+    "2026-10-02"
+   ],
+   "span": null,
+   "when": "2026年10月2日(金)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "多摩六都科学館 サイエンスエッグ（西東京市芝久保町5-10-64）— 花小金井から自転車・バス圏",
+   "mapq": "多摩六都科学館 サイエンスエッグ",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "○",
+    "elem": "△"
+   },
+   "cost": "大人520円 / 小人210円 ※別途入館料が必要",
+   "discount": "",
+   "target": "0歳から3歳くらいの乳幼児とそのご家族",
+   "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3349&day=2026-10-02",
+   "tentative": false,
+   "deadline": null
+  },
+  {
    "id": "E116",
    "name": "新小平マーケット",
    "dates": [
