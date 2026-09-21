@@ -96,6 +96,9 @@ const ASK_SPEC = (spot) => `【Threads・問いかけ】（200字以内・**上�
   **行ったことがないから迷っている。これは事実なので、書いてよい。**
   「行くか迷っています」「はじめてなので勝手が分かりません」「気になっているけれど踏み切れない」
 - 🔴 **問いは1つだけ。**2つ聞くと、答えるのが面倒になって誰も答えない。
+- 🔴 **自分の子のことを聞かない。**「うちの子は楽しめますか」は**相手が答えようがない。**
+  **場所のことを聞く。**「何時ごろが空いていますか」「何歳くらいから楽しめますか」のように、
+  **行ったことがある人なら誰でも答えられる形にする。**
 - 聞くのは、**行く前に知りたいのに、公式に書いていないこと**。
   混み具合／ちょうどいい時間帯／ベビーカーで回れるか／駐車場／
   小さい子がどのくらい楽しめるか／近くでごはんを食べるなら／持っていくといいもの
@@ -146,7 +149,11 @@ const PROMPT = (ledger, recent, spot) => `あなたは、花小金井まわり�
 - 「こんなの見つけたよ🎈」くらいの、地元のおすそわけの空気。
 
 # 出力フォーマット（${ASK_TODAY ? 'この3ブロックだけを' : 'この2ブロックだけを'}、この見出しで出力）
-【Threads・紹介 1/2】（180字以内・**これを最初に投稿する**）
+${ASK_TODAY && spot ? `🔴 **【紹介】には「${spot.name}」を選ばないこと。**
+そこは下の【問いかけ】で扱う。**紹介と問いかけが同じ場所になると、同じ話を2回する投稿になる。**
+【紹介】は、必ず**別の**イベント/スポットを【台帳】から選ぶ。
+
+` : ''}【Threads・紹介 1/2】（180字以内・**これを最初に投稿する**）
 - **短く。リンクもハッシュタグも書かない**（リンクを入れると伸びにくい）。
 - 1〜2文で「こんなのがあるらしい」＋**イベント名・日付・場所**。
 - 最後を**言い切らない**（続きが読みたくなる形にする）。例:
@@ -185,6 +192,18 @@ const BLOCKS = ['【Threads・紹介 1/2】', '【Threads・紹介 2/2】']
   .concat(ASK_TODAY && SPOT ? ['【Threads・問いかけ】'] : []);
 const isComplete = (t) => BLOCKS.every(b => t.includes(b));
 
+// 紹介と問いかけが同じ場所になっていないか。なっていたら作り直す
+// （2026-09-22、問いかけ用に渡したスポット名を紹介にも使ってしまう回があった）。
+function sameSubject(t) {
+  if (!ASK_TODAY || !SPOT) return false;
+  const i = t.indexOf('【Threads・問いかけ】');
+  const intro = i < 0 ? t : t.slice(0, i);
+  // 「小川西町中宿地域センター 出張こども広場」のような長い名前は、
+  // 前半（空白/記号までの塊）が紹介に出ていれば同じ話とみなす
+  const key = SPOT.name.split(/[ 　（(]/)[0];
+  return key.length >= 4 && intro.includes(key);
+}
+
 async function callGemini(model, prompt, useThinking, maxTokens) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${KEY}`;
   const generationConfig = { temperature: 0.7, maxOutputTokens: maxTokens };
@@ -219,9 +238,11 @@ async function gen() {
           if (e.status !== 400) break; // 404/429など: 思考なし再試行は無駄→次へ
           continue;
         }
-        if (isComplete(r.text)) return { text: r.text, model };
+        if (isComplete(r.text) && !sameSubject(r.text)) return { text: r.text, model };
         const miss = BLOCKS.filter(b => !r.text.includes(b)).join('');
-        errs.push(`${model}/${maxTokens}${useThinking ? '' : '(思考なし)'}: 不完全(${miss}が欠落, finishReason=${r.finishReason})`);
+        const why = miss ? `不完全(${miss}が欠落, finishReason=${r.finishReason})`
+                         : `紹介と問いかけが同じ場所(${SPOT && SPOT.name})`;
+        errs.push(`${model}/${maxTokens}${useThinking ? '' : '(思考なし)'}: ${why}`);
         if (!partial || r.text.length > partial.text.length) partial = { text: r.text, model };
         break; // 同じ条件で思考ありなしを変えても改善しないので次のトークン量へ
       }
@@ -241,11 +262,13 @@ if (!KEY) {
 } else {
   try {
     const { text, model, incomplete } = await gen();
-    const head = incomplete
-      ? `# ${TODAY} SNSドラフト（⚠️途中で切れています・投稿前に補ってください）`
+    const dup = sameSubject(text);
+    const head = (incomplete || dup)
+      ? `# ${TODAY} SNSドラフト（⚠️投稿前に直すところがあります）`
       : `# ${TODAY} SNSドラフト（承認待ち・まだ投稿していません）`;
     body = `${head}\n\n` +
-      (incomplete ? `> 生成が途中で終わり、ブロックが足りていません。欠けている分は手で書き足すか、Actions から「SNS drafts」を再実行してください。\n\n` : '') +
+      (incomplete ? `> ⚠️ 生成が途中で終わり、ブロックが足りていません。欠けている分は手で書き足すか、Actions から「SNS drafts」を再実行してください。\n\n` : '') +
+      (dup ? `> 🔴 **紹介と問いかけが同じ場所（${SPOT && SPOT.name}）になっています。**同じ話を2回する投稿になるので、どちらかを別のものに差し替えるか、Actions から「SNS drafts」を再実行してください。\n\n` : '') +
       `${text}\n\n---\n` +
       `※自動生成（model: ${model}）。投稿前に日付・事実・トーンを目視確認してください。\n` +
       `※【紹介 1/2】を投稿し、その**返信として【紹介 2/2】**をぶら下げる。1/2にリンクを入れない。\n` +
