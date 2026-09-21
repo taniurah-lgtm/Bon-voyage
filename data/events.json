@@ -555,49 +555,6 @@
    "source": "events/2026-07.md"
   },
   {
-   "id": "E137",
-   "name": "たかのだい 畑のごちそう 第4にちよう市",
-   "dates": [
-    "2026-07-26",
-    "2026-09-27"
-   ],
-   "span": null,
-   "when": "9/27(日) ※月次開催（毎月 第4日曜とみられる。7月は7/26開催）",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 2,
-   "start": null,
-   "end": null,
-   "allDay": true,
-   "timeUncertain": false,
-   "place": "小平中央公園(津田町1-1 / 西武国分寺線 鷹の台駅) 駐車場66台",
-   "mapq": "小平中央公園",
-   "summary": "地域の農作物販売、キッチンカー、手作り品の出店",
-   "kidsNote": "広い公園。屋外。駐車場がある",
-   "caution": "月次開催（毎月 第4日曜とみられる。7月は7/26開催）",
-   "contact": null,
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "○",
-    "pre": "◎",
-    "elem": "◎"
-   },
-   "cost": "",
-   "discount": "",
-   "target": "",
-   "url": "https://kodaira-parks.jp/news/2800",
-   "status": "候補",
-   "confidence": "日付・会場は公式カレンダーで確認済み / 時間・雨天時は未確認(要確認)",
-   "tentative": false,
-   "deadline": {
-    "date": "2026-10-16",
-    "raw": "託児（ママメイト埼玉支部・締切10/16）・仮装OK・駐車場なし・2階席はエレベーターなしまで入っている）。"
-   },
-   "source": "events/2026-10.md"
-  },
-  {
    "id": "E22",
    "name": "小平グリーンロード灯りまつり",
    "dates": [
@@ -2595,6 +2552,48 @@
    "source": "events/2026-09.md"
   },
   {
+   "id": "E137",
+   "name": "たかのだい 畑のごちそう 第4にちよう市",
+   "dates": [
+    "2026-09-27"
+   ],
+   "span": null,
+   "when": "9/27(日) — ✅ 毎月 第4日曜の定例（2026-09-21・たかの台こども祭り実行委員会から）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "小平中央公園(津田町1-1 / 西武国分寺線 鷹の台駅) 駐車場66台",
+   "mapq": "小平中央公園",
+   "summary": "地域の農作物販売、キッチンカー、手作り品の出店",
+   "kidsNote": "広い公園。屋外。駐車場がある",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "https://kodaira-parks.jp/news/2800",
+   "status": "候補（10月は",
+   "confidence": "日付・会場は公式カレンダーで確認済み / 毎月第4日曜は主催関係者から確認済み / 時間・雨天時は未確認(要確認)",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-10-16",
+    "raw": "託児（ママメイト埼玉支部・締切10/16）・仮装OK・駐車場なし・2階席はエレベーターなしまで入っている）。"
+   },
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E53",
    "name": "子育て支援講座「素材の味を活かしたカラフル弁当を作ろう」",
    "dates": [
@@ -4027,16 +4026,7 @@
    "E3"
   ],
   "2026-07-26": [
-   "E17",
-   "E137"
-  ],
-  "2026-09-27": [
-   "E137",
-   "E113",
-   "E77",
-   "E106",
-   "E107",
-   "E132"
+   "E17"
   ],
   "2026-08-01": [
    "E22",
@@ -4210,6 +4200,14 @@
   "2026-09-25": [
    "E113",
    "E77"
+  ],
+  "2026-09-27": [
+   "E113",
+   "E77",
+   "E106",
+   "E107",
+   "E132",
+   "E137"
   ],
   "2026-09-28": [
    "E113"
