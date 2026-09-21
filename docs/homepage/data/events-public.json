@@ -36,42 +36,6 @@
    "deadline": null
   },
   {
-   "id": "E1",
-   "name": "みたままつり(靖国神社・第79回)",
-   "dates": [
-    "2026-07-13",
-    "2026-07-14",
-    "2026-07-15",
-    "2026-07-16"
-   ],
-   "span": null,
-   "when": "7/13(月)〜16(木) 日没〜21:30(献灯点灯)",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 4,
-   "start": "21:30",
-   "end": null,
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "靖国神社(九段下駅 徒歩5分)/花小金井から東西線直通 約45〜55分",
-   "mapq": "靖国神社",
-   "summary": "約3万の献灯、青森ねぶた、盆踊り。露店は縮小しキッチンカー中心",
-   "kidsNote": "境内が広くベビーカー可。平日開催で比較的動きやすい",
-   "caution": "",
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "overall": "○"
-   },
-   "cost": "",
-   "discount": "",
-   "target": "",
-   "url": "https://www.yasukuni.or.jp/news_detail.html?id=701",
-   "tentative": false,
-   "deadline": null
-  },
-  {
    "id": "E13",
    "name": "花小金井夏祭り・サンバフェスティバル",
    "dates": [
@@ -102,41 +66,6 @@
    "discount": "",
    "target": "",
    "url": "https://festival.hanakoganei.net/",
-   "tentative": false,
-   "deadline": null
-  },
-  {
-   "id": "E18",
-   "name": "キチジョージえんにち2026(コピス吉祥寺)",
-   "dates": [
-    "2026-07-18",
-    "2026-07-19",
-    "2026-07-20"
-   ],
-   "span": null,
-   "when": "7/18(土)〜20(月・祝) 15:00〜21:00(最終日〜19:00)入場無料",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 3,
-   "start": "15:00",
-   "end": "21:00",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "コピス吉祥寺A館3階(吉祥寺駅北口 徒歩3分)",
-   "mapq": "コピス吉祥寺A館",
-   "summary": "テーマ「もののけきぶん」。屋台、ワークショップ、館内もののけ探し",
-   "kidsNote": "商業施設内でトイレ・授乳室・エレベーター完備。ベビーカー最適",
-   "caution": "",
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "overall": "◎"
-   },
-   "cost": "",
-   "discount": "",
-   "target": "",
-   "url": "https://www.atpress.ne.jp/news/610885",
    "tentative": false,
    "deadline": null
   },
@@ -386,39 +315,6 @@
    "discount": "",
    "target": "",
    "url": "https://hanabi.tokyo-tachikawa.org/",
-   "tentative": false,
-   "deadline": null
-  },
-  {
-   "id": "E6",
-   "name": "隅田川花火大会",
-   "dates": [
-    "2026-07-25"
-   ],
-   "span": null,
-   "when": "7/25(土) 19:00〜20:30",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": "19:00",
-   "end": "20:30",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "浅草・押上一帯/約1時間10分",
-   "mapq": "浅草",
-   "summary": "",
-   "kidsNote": "約90万人。有料席確保時のみ検討",
-   "caution": "",
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "overall": "✕〜△"
-   },
-   "cost": "",
-   "discount": "",
-   "target": "",
-   "url": "https://www.sumidagawa-hanabi.com/",
    "tentative": false,
    "deadline": null
   },
@@ -2028,44 +1924,6 @@
    "deadline": null
   },
   {
-   "id": "E99",
-   "name": "まち巡りガイドツアー",
-   "dates": [
-    "2026-09-24"
-   ],
-   "span": {
-    "from": "2026-09-24",
-    "to": "2026-10-31"
-   },
-   "when": "9/24(木)〜10/31(土) 9:30〜13:00 / 内容: 津田塾大・武蔵野美大、小川地区、玉川上水を歩く",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": "09:30",
-   "end": "13:00",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "",
-   "mapq": "まち巡りガイドツアー",
-   "summary": "",
-   "kidsNote": "9:30〜13:00 の約3時間半を歩きます。未就学児にはきびしい",
-   "caution": "",
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "✕",
-    "pre": "✕",
-    "elem": "△"
-   },
-   "cost": "",
-   "discount": "",
-   "target": "",
-   "url": "https://kodaira-tourism.com/event/20621/",
-   "tentative": false,
-   "deadline": null
-  },
-  {
    "id": "E106",
    "name": "熊野宮 神幸祭",
    "dates": [
@@ -3482,36 +3340,6 @@
    "cost": "",
    "discount": "",
    "url": "https://www.city.kodaira.tokyo.jp/kurashi/113/113055.html"
-  },
-  {
-   "id": "E9",
-   "name": "西東京いこいの森公園 噴水広場",
-   "span": "7/1(水)〜10/12(月) 10:30〜15:15(45分稼働+15分休止、気温25度未満・悪天候中止、毎月第2火曜点検)無料",
-   "place": "西東京市緑町/車・自転車約10分",
-   "mapq": "西東京いこいの森公園",
-   "summary": "",
-   "kidsNote": "オムツ児も遊べる噴水型",
-   "ages": {
-    "overall": "◎"
-   },
-   "cost": "",
-   "discount": "",
-   "url": "https://www.city.nishitokyo.lg.jp/kurasi/koen/kouenmizuasobi.html"
-  },
-  {
-   "id": "E10",
-   "name": "西武園ゆうえんちプール",
-   "span": "6/27(土)〜9/23(水祝)(6/27〜7/17と9月は土日祝のみ)〜17:00",
-   "place": "東村山乗換 西武園駅すぐ/電車約20〜25分",
-   "mapq": "西武園ゆうえんちプール",
-   "summary": "",
-   "kidsNote": "こどもプール・波のプール・流れるプール。水遊び用オムツ+水着でOK(2歳児可)。小3以下は16歳以上の同伴入水必須",
-   "ages": {
-    "overall": "◎"
-   },
-   "cost": "大人3,400円/未就学児(3歳〜)1,500円(2歳以下は要確認・無料見込み)",
-   "discount": "",
-   "url": "https://www.seibuen-amusement-park.jp/seibuenpool/index.html"
   },
   {
    "id": "E63",
