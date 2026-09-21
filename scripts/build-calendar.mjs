@@ -167,6 +167,19 @@ const page = `<!doctype html>
   .fallback { margin-top: 1rem; }
   .fallback h3 { font-family: var(--maru); font-weight: 800; font-size: .95rem; margin: 1.1rem 0 .4rem; }
   .fallback li { font-size: .9rem; }
+  .bvc-invite {
+    margin: 1.8rem 0 .4rem; padding: 1.2rem 1.1rem; border-radius: 16px;
+    background: var(--surface-2, #F3F7F9); border: 1px solid rgba(44,124,158,.22);
+    text-align: center;
+  }
+  .bvc-invite-h { font-family: var(--maru); font-weight: 800; font-size: 1.05rem; margin: 0 0 .5rem; }
+  .bvc-invite-b { font-size: .88rem; line-height: 1.7; color: var(--ink-soft, #63727B); margin: 0 0 .9rem; }
+  .bvc-invite-btn {
+    display: inline-block; background: #06C755; color: #fff; text-decoration: none;
+    font-weight: 800; font-size: 1rem; border-radius: 999px; padding: .85rem 1.8rem;
+    box-shadow: 0 6px 18px rgba(6,199,85,.28); min-height: 44px;
+  }
+  @media (max-width: 480px) { .bvc-invite-btn { display: block; } }
   .stamp { font-size: .8rem; color: var(--ink-faint); margin-top: 2rem; }
 </style>
 </head>
@@ -199,6 +212,15 @@ const page = `<!doctype html>
 
   <!-- 「読み込んでいます」は JS 側で入れる。noscript のときに残ると案内が二重になる -->
   <div id="cal"></div>
+
+  <!-- ★カレンダーを見終わった直後。サイトの中でいちばん温度の高い場所。
+       ここに案内が無かったので、カレンダーまで来た人が戻る道を持っていなかった
+       （2026-09-21、トップ92に対してカレンダー18、カレンダーからの導線はナビの1つだけ） -->
+  <aside class="bvc-invite">
+    <p class="bvc-invite-h">このカレンダー、毎週おとどけしています。</p>
+    <p class="bvc-invite-b">今週いくならどれか、天気に合わせて選んだものを、毎週水曜の朝に。<br>友だち追加だけで届きます。個人情報の入力は不要です。</p>
+    <a class="bvc-invite-btn" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINEで受け取る（無料）</a>
+  </aside>
 
   <!-- JavaScript が動かない環境と、検索エンジン向けの一覧。中身は上のカレンダーと同じ。 -->
   <div class="fallback">
