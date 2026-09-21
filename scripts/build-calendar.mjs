@@ -89,6 +89,29 @@ writeFileSync(
   )
 );
 
+// 🔴 2026-09-21: 台帳の「内部の判断」が、そのまま公開カードに出ていた。
+//   たけのこ公園ビアガーデンの料金欄に
+//   「公式に記載なし。公園なので入園は無料だが、『無料』と断定しない。出店は実費」
+//   と出ていた。ほかにも「曜日検証済み」「ステータス: 候補」、
+//   CLAUDE.md への参照まで、合わせて28件が公開JSONに載っていた。
+//   CLAUDE.md「公開物に書かないこと」= 内部の判定理由は出さない。
+//   ★ここでは黙って消さない。消すと台帳を直す機会が失われ、また同じことが起きる。
+//     ビルドのたびに名指しで出して、台帳の書き方を直させる。
+const INTERNAL_WORDS = [
+  '断定しない', '書かない', '出さない', '台帳', '巡回', '判定', '紙面',
+  'ステータス', '検証', 'CLAUDE', '内部メモ', '再確認', '裏取り',
+];
+const READER_FIELDS = ['cost', 'summary', 'kidsNote', 'caution', 'hours', 'target', 'discount', 'place', 'when', 'name'];
+const internalLeaks = [];
+for (const e of pub.concat(spans, deadlineOnly)) {
+  for (const f of READER_FIELDS) {
+    const v = e[f];
+    if (typeof v !== 'string') continue;
+    const hit = INTERNAL_WORDS.find((w) => v.includes(w));
+    if (hit) internalLeaks.push({ id: e.id, field: f, word: hit, text: v.slice(0, 70) });
+  }
+}
+
 const esc = (s = '') =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -302,3 +325,15 @@ writeFileSync(OUT, page);
 console.log(`wrote ${OUT}`);
 console.log(`  公開: ${pub.length}件（うち暫定 ${pub.filter((e) => e.tentative).length}件）/ 会期もの ${spans.length}件 / 締切だけ ${deadlineOnly.length}件`);
 console.log(`wrote ${OUT_JSON}（★公開される。台帳の内部メモが入っていないことを必ず確認する）`);
+
+if (internalLeaks.length) {
+  console.log('');
+  console.log(`🔴 内部の判断が公開データに ${internalLeaks.length}件 出ています。台帳の書き方を直してください。`);
+  for (const l of internalLeaks) {
+    console.log(`   ${l.id} の「${l.field}」に「${l.word}」— ${l.text}`);
+  }
+  console.log('   直し方: 読者に見せる行には結果だけを書き、理由は「- 内部メモ: 〜」の行に移す。');
+  console.log('   （読者向けの行から拾われるのは 費用/料金/内容/子連れ/日時/場所/対象/割引/時間）');
+} else {
+  console.log('  ✅ 内部の判断が公開データに出ていないことを確認しました。');
+}
