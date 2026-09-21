@@ -2,8 +2,11 @@
 /*
  * Threads へ「その日のドラフトの Threads ブロック」を投稿する（Phase 2）。
  *
- * 🔴 2026-09-21、ドラフトが【Threads・紹介】【Threads・問いかけ】の2本になった。
- *    THREADS_VARIANT で選ぶ（既定は 紹介）。古い【Threads】しか無い日も読めるようにしてある。
+ * 🔴 2026-09-21、ドラフトが3ブロックになった。THREADS_VARIANT で選ぶ:
+ *      紹介1  …【Threads・紹介 1/2】既定。これを先に投稿する
+ *      紹介2  …【Threads・紹介 2/2】**同じ日の 紹介1 への返信としてぶら下げる**
+ *      問いかけ…【Threads・問いかけ】別の対象（マップのスポット）なので単独で出す
+ *    古い【Threads】しか無い日のドラフトも読めるようにしてある。
  * 承認フロー: ドラフト(social/drafts/DATE.md)を人が見てOKなら、この workflow を手動実行 → 投稿。
  *
  * 必要な環境変数（GitHub Secrets）:
@@ -24,11 +27,16 @@ const FORCE = process.env.THREADS_FORCE === '1';
 const API = 'https://graph.threads.net/v1.0';
 const STATE = 'social/state/threads-posted.json';
 
-const VARIANT = process.env.THREADS_VARIANT === '問いかけ' ? '問いかけ' : '紹介';
+const VARIANTS = {
+  '紹介1': ['【Threads・紹介 1/2】', '【Threads・紹介】', '【Threads】'],
+  '紹介2': ['【Threads・紹介 2/2】'],
+  '問いかけ': ['【Threads・問いかけ】'],
+};
+const VARIANT = VARIANTS[process.env.THREADS_VARIANT] ? process.env.THREADS_VARIANT : '紹介1';
 
 function extractThreads(md) {
-  // 新しい見出し → 旧【Threads】の順に探す（過去のドラフトも投稿できるように）
-  const heads = [`【Threads・${VARIANT}】`, '【Threads】'];
+  // 新しい見出し → 古い見出しの順に探す（過去のドラフトも投稿できるように）
+  const heads = VARIANTS[VARIANT];
   for (const head of heads) {
     const i = md.indexOf(head);
     if (i < 0) continue;
@@ -40,7 +48,7 @@ function extractThreads(md) {
     s = s.replace(/^\s*（[^）]*）\s*/, '').trim(); // 先頭の「（…字以内）」除去
     if (s) return s;
   }
-  throw new Error(`ドラフトに【Threads・${VARIANT}】(または【Threads】)ブロックがありません`);
+  throw new Error(`ドラフトに ${heads.join(' / ')} のいずれも見つかりません`);
 }
 function loadLog() { try { return JSON.parse(readFileSync(STATE, 'utf8')); } catch { return []; } }
 
@@ -56,9 +64,22 @@ if (text.length > 500) throw new Error(`Threads本文が500字を超えていま
 console.log(`--- ${DATE} 投稿する本文（${text.length}字）---\n${text}\n----------------------------------------`);
 
 const log = loadLog();
-if (!FORCE && log.some(e => e.date === DATE)) {
-  console.log(`スキップ: ${DATE} は既に投稿済みです（再投稿は THREADS_FORCE=1）。`);
+// 同じ日でも 紹介1 / 紹介2 / 問いかけ は別物なので、日付だけで弾かない。
+// （variant を持たない古い記録は「紹介1」とみなす）
+const sameKind = (e) => e.date === DATE && (e.variant || '紹介1') === VARIANT;
+if (!FORCE && log.some(sameKind)) {
+  console.log(`スキップ: ${DATE} の「${VARIANT}」は既に投稿済みです（再投稿は THREADS_FORCE=1）。`);
   process.exit(0);
+}
+
+// 紹介2 は、同じ日の 紹介1 にぶら下げる。親が無ければ投稿しない
+// （単独で出すと、前置きの無い続きだけが流れることになる）。
+let replyTo = null;
+if (VARIANT === '紹介2') {
+  const parent = [...log].reverse().find(e => e.date === DATE && (e.variant || '紹介1') === '紹介1');
+  if (!parent) throw new Error(`${DATE} の「紹介1」がまだ投稿されていません。先にそちらを出してください。`);
+  replyTo = parent.id;
+  console.log(`返信としてぶら下げます → 親の投稿ID ${replyTo}`);
 }
 if (DRY) {
   console.log('DRY-RUN: 実際には投稿しません（トークン未設定 or THREADS_DRY_RUN=1）。');
@@ -76,13 +97,17 @@ async function api(endpoint, params) {
 }
 
 // 1) コンテナ作成 → 2) 数秒待って publish（Threads推奨）
-const created = await api(`${USER}/threads`, { media_type: 'TEXT', text });
+const created = await api(`${USER}/threads`, {
+  media_type: 'TEXT',
+  text,
+  ...(replyTo ? { reply_to_id: replyTo } : {}),
+});
 if (!created.id) throw new Error('creation id が返りませんでした: ' + JSON.stringify(created));
 await new Promise(r => setTimeout(r, 3000));
 const published = await api(`${USER}/threads_publish`, { creation_id: created.id });
 console.log('投稿完了:', JSON.stringify(published));
 
 mkdirSync('social/state', { recursive: true });
-log.push({ date: DATE, id: published.id || created.id, at: new Date().toISOString() });
+log.push({ date: DATE, variant: VARIANT, id: published.id || created.id, at: new Date().toISOString(), ...(replyTo ? { replyTo } : {}) });
 writeFileSync(STATE, JSON.stringify(log, null, 2) + '\n');
 console.log('記録:', STATE);

@@ -14,11 +14,11 @@ on:
         required: false
         default: ""
       variant:
-        description: "どちらを投稿するか（紹介 / 問いかけ）。紹介と問いかけは日を分ける"
+        description: "どれを投稿するか。紹介2は同じ日の紹介1への返信としてぶら下がる"
         required: false
         type: choice
-        options: ["紹介", "問いかけ"]
-        default: "紹介"
+        options: ["紹介1", "紹介2", "問いかけ"]
+        default: "紹介1"
 
 permissions:
   contents: write
