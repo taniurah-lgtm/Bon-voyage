@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 /*
- * Threads へ「その日のドラフトの【Threads】ブロック」を投稿する（Phase 2）。
+ * Threads へ「その日のドラフトの Threads ブロック」を投稿する（Phase 2）。
+ *
+ * 🔴 2026-09-21、ドラフトが【Threads・紹介】【Threads・問いかけ】の2本になった。
+ *    THREADS_VARIANT で選ぶ（既定は 紹介）。古い【Threads】しか無い日も読めるようにしてある。
  * 承認フロー: ドラフト(social/drafts/DATE.md)を人が見てOKなら、この workflow を手動実行 → 投稿。
  *
  * 必要な環境変数（GitHub Secrets）:
@@ -21,14 +24,23 @@ const FORCE = process.env.THREADS_FORCE === '1';
 const API = 'https://graph.threads.net/v1.0';
 const STATE = 'social/state/threads-posted.json';
 
+const VARIANT = process.env.THREADS_VARIANT === '問いかけ' ? '問いかけ' : '紹介';
+
 function extractThreads(md) {
-  const i = md.indexOf('【Threads】');
-  if (i < 0) throw new Error('ドラフトに【Threads】ブロックがありません');
-  let s = md.slice(i + '【Threads】'.length);
-  const j = s.indexOf('【X】');
-  if (j >= 0) s = s.slice(0, j);
-  s = s.replace(/^\s*（[^）]*）\s*/, '').trim(); // 先頭の「（…字以内）」除去
-  return s;
+  // 新しい見出し → 旧【Threads】の順に探す（過去のドラフトも投稿できるように）
+  const heads = [`【Threads・${VARIANT}】`, '【Threads】'];
+  for (const head of heads) {
+    const i = md.indexOf(head);
+    if (i < 0) continue;
+    let s = md.slice(i + head.length);
+    const j = s.indexOf('【');        // 次のブロックまで
+    if (j >= 0) s = s.slice(0, j);
+    const k = s.indexOf('\n---');      // 末尾の注記まで
+    if (k >= 0) s = s.slice(0, k);
+    s = s.replace(/^\s*（[^）]*）\s*/, '').trim(); // 先頭の「（…字以内）」除去
+    if (s) return s;
+  }
+  throw new Error(`ドラフトに【Threads・${VARIANT}】(または【Threads】)ブロックがありません`);
 }
 function loadLog() { try { return JSON.parse(readFileSync(STATE, 'utf8')); } catch { return []; } }
 

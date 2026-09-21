@@ -13,6 +13,12 @@ on:
         description: "1 なら投稿せず本文だけ確認"
         required: false
         default: ""
+      variant:
+        description: "どちらを投稿するか（紹介 / 問いかけ）。紹介と問いかけは日を分ける"
+        required: false
+        type: choice
+        options: ["紹介", "問いかけ"]
+        default: "紹介"
 
 permissions:
   contents: write
@@ -39,6 +45,7 @@ jobs:
           THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
           POST_DATE: ${{ github.event.inputs.date }}
           THREADS_DRY_RUN: ${{ github.event.inputs.dry_run }}
+          THREADS_VARIANT: ${{ github.event.inputs.variant }}
         run: node scripts/social/post-threads.mjs
       - name: Commit post log
         run: |
