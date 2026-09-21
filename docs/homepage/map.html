@@ -20,6 +20,19 @@
 <style>
   main { padding: 2rem 0 1rem; }
   .count { margin-top: 1rem; font-size: .88rem; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .45rem .95rem; display: inline-block; }
+  .bvc-invite {
+    margin: 1.8rem 0 .4rem; padding: 1.2rem 1.1rem; border-radius: 16px;
+    background: var(--surface-2, #F3F7F9); border: 1px solid rgba(44,124,158,.22);
+    text-align: center;
+  }
+  .bvc-invite-h { font-family: var(--maru); font-weight: 800; font-size: 1.05rem; margin: 0 0 .5rem; }
+  .bvc-invite-b { font-size: .88rem; line-height: 1.7; color: var(--ink-soft, #63727B); margin: 0 0 .9rem; }
+  .bvc-invite-btn {
+    display: inline-block; background: #06C755; color: #fff; text-decoration: none;
+    font-weight: 800; font-size: 1rem; border-radius: 999px; padding: .85rem 1.8rem;
+    box-shadow: 0 6px 18px rgba(6,199,85,.28); min-height: 44px;
+  }
+  @media (max-width: 480px) { .bvc-invite-btn { display: block; } }
   .nav-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 0; }
   .nav-pills a { font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none; color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .4rem .9rem; }
 
@@ -560,6 +573,15 @@
     <noscript><p class="bvm-fail">投稿フォームの表示にJavaScriptを使っています。切っている方は
       <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a>でお知らせいただければ、こちらで載せます。</p></noscript>
   </section>
+
+  <!-- ★地図を見終わった直後。Threadsの問いかけに答えてくれた人が来るのも、ここ。
+       ここに案内が無く、LINEへの道が noscript の中と上のナビだけだった
+       （2026-09-21。カレンダーと同じ穴が空いていた） -->
+  <aside class="bvc-invite">
+    <p class="bvc-invite-h">この地図、毎週すこしずつ増えています。</p>
+    <p class="bvc-invite-b">地元の方に教えていただいた場所を足しています。<br>今週どこへ行くかは、毎週水曜の朝にLINEでおとどけしています。<br>友だち追加だけで届きます。個人情報の入力は不要です。</p>
+    <a class="bvc-invite-btn" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINEで受け取る（無料）</a>
+  </aside>
 
   <p class="support-line">この地図は、どなたでも無料でお使いいただけます。</p>
 
