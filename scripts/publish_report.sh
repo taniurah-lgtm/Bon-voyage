@@ -9,12 +9,28 @@
 # いちばん大事な性質: **push が通らないかぎり LINE を送らない。**
 #   先に送ってしまうと、届いたのに記録が無い状態になり、あとから復元できない。
 #
-# 使い方: scripts/publish_report.sh reports/free/2026-08-26.md [--force]
+# 使い方:
+#   scripts/publish_report.sh reports/free/2026-08-26.md            … 配信する
+#   scripts/publish_report.sh reports/free/2026-08-26.md --check    … 検査だけ。送らない
+#   scripts/publish_report.sh reports/free/2026-08-26.md --force    … 枠を超えても送る
+#
+# 🔴 --check を足した理由（2026-09-22）:
+#   「中身を確かめたい」だけでこれを実行してしまい、commit と push まで走った。
+#   配信の直前（5/5）で止まったので事故にはならなかったが、**止まったのは偶然**だった。
+#   **確かめる道が無い道具は、確かめるために実行される。**
 set -uo pipefail
 
 BRANCH="claude/family-event-planning-rfwmo8"
 REPORT="${1:-}"
-FORCE="${2:-}"
+MODE="${2:-}"
+FORCE=""
+CHECK_ONLY=""
+case "$MODE" in
+  --force) FORCE="--force" ;;
+  --check|--dry-run) CHECK_ONLY="1" ;;
+  "") ;;
+  *) echo "ERROR: 知らないオプション: $MODE（--check か --force）" >&2; exit 1 ;;
+esac
 
 die(){ echo "ERROR: $*" >&2; exit 1; }
 note(){ echo "  $*"; }
@@ -35,8 +51,12 @@ t = open(sys.argv[1], encoding='utf-8').read()
 t = re.sub(r'<!--.*?-->', '', t, flags=re.S)
 print(re.sub(r'\n{3,}', '\n\n', t).strip('\n'))
 PYEOF
-RAWC=$(wc -m < "$REPORT" | tr -d ' ')
-CHARS=$(wc -m < "$BODY" | tr -d ' ')
+# 🔴 wc -m は LANG が未設定だとバイト数を返す（日本語で約2.4倍）。
+#    2026-09-22、1,441文字の号が 3,478 と出て「上限超え」に見えた。
+#    2026-09-16 の分割文字化けと同じ原因。**文字を数えるのは python3 に任せる。**
+count_chars(){ python3 -c 'import sys;print(len(open(sys.argv[1],encoding="utf-8").read()))' "$1"; }
+RAWC=$(count_chars "$REPORT")
+CHARS=$(count_chars "$BODY")
 if (( RAWC - CHARS > 10 )); then
   note "下書きの指示ブロックを $(( RAWC - CHARS )) 文字ぶん落としました（読者には届きません）"
 fi
@@ -56,7 +76,15 @@ note "文字数: ${CHARS} / 行数: ${LINES}（空行を除く。上限 1,468文
 if (( CHARS > 1468 )) || (( LINES > 42 )); then
   note "⚠️ 上限を超えています（CLAUDE.md の分量のきまり）"
 fi
+echo "── 読者に届く本文（ここから）──"
+cat "$BODY"
+echo "── ここまで ──"
 rm -f "$BODY"
+
+if [[ -n "$CHECK_ONLY" ]]; then
+  echo "▶ --check のため、ここで終了します。commit も push も配信もしていません。"
+  exit 0
+fi
 
 echo "▶ 2/5 LINE無料枠の確認"
 if [[ -z "${LINE_CHANNEL_ACCESS_TOKEN:-}" ]]; then
