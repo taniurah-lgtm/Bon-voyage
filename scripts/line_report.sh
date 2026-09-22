@@ -25,7 +25,17 @@ fi
 mapfile -t CHUNK_FILES < <(python3 - "$1" <<'PYEOF'
 import sys, tempfile
 MAX = 4500                     # LINEの上限は5000文字。安全側で4500
-text = open(sys.argv[1], encoding='utf-8').read().rstrip('\n')
+text = open(sys.argv[1], encoding='utf-8').read()
+
+# 🔴 2026-09-22 に見つかった穴: 下書きの指示ブロックが <!-- --> で書かれていて、
+#    ここはファイル全文をそのまま送っていた。9/23号には
+#    台帳ID・巡回の仕組み・スクリプト名・先方とのやりとりが入ったまま残っており、
+#    そのまま読者76人へ流れるところだった（CLAUDE.md「🔒 公開物に書かないこと」）。
+#    publish_report.sh の事前検査も、この書き方は拾えていなかった。
+#    → **送る直前に、HTMLコメントを必ず落とす。**
+import re
+text = re.sub(r'<!--.*?-->', '', text, flags=re.S)
+text = re.sub(r'\n{3,}', '\n\n', text).strip('\n')
 
 # 行の切れ目で割る。1行がMAXを超えることはまず無いが、超えたらその行だけ文字で割る。
 parts, cur = [], ''

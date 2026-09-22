@@ -25,16 +25,38 @@ note(){ echo "  $*"; }
 
 echo "▶ 1/5 事前検査"
 
-# 下書きの指示書き・内部ラベルが本文に混ざっていないか。
-# line_report.sh はファイル全文をそのまま送るので、混入は事故に直結する。
-LEAK=$(grep -nE '決めてあげる|配信前にやること|区切り線より下|版下|^# 【下書き】|ここまで指示|TODO' "$REPORT" || true)
+# 🔴 2026-09-22: 下書きの指示ブロックは <!-- --> で書かれていることがあり、
+#    下の grep では拾えていなかった。line_report.sh 側でコメントを落とすようにしたので、
+#    ここでは「落とした後の本文」を検査し、数字も落とした後で数える。
+BODY=$(mktemp)
+python3 - "$REPORT" > "$BODY" <<'PYEOF'
+import re, sys
+t = open(sys.argv[1], encoding='utf-8').read()
+t = re.sub(r'<!--.*?-->', '', t, flags=re.S)
+print(re.sub(r'\n{3,}', '\n\n', t).strip('\n'))
+PYEOF
+RAWC=$(wc -m < "$REPORT" | tr -d ' ')
+CHARS=$(wc -m < "$BODY" | tr -d ' ')
+if (( RAWC - CHARS > 10 )); then
+  note "下書きの指示ブロックを $(( RAWC - CHARS )) 文字ぶん落としました（読者には届きません）"
+fi
+
+# 落とした後の本文に、指示書き・内部ラベル・台帳IDが残っていないか。
+LEAK=$(grep -nE '決めてあげる|配信前にやること|区切り線より下|版下|^# 【下書き】|ここまで指示|TODO|台帳|巡回|scripts/|sent\.log|E[0-9]{2,3}[ 　]*[（(]' "$BODY" || true)
 if [[ -n "$LEAK" ]]; then
   echo "$LEAK" >&2
+  rm -f "$BODY"
   die "本文に指示書き/内部ラベルが混ざっています。取り除いてから再実行してください。"
 fi
 
-CHARS=$(wc -m < "$REPORT" | tr -d ' ')
-note "文字数: ${CHARS}(1通4500字で分割されます)"
+# 🔴 行数は「空行を除いた行数」で数える。9/2便＝1,468文字・全51行・空行を除いて42行。
+#    docs/line-setup.md の上限はこの数え方。全行で数えると毎回オーバーに見える。
+LINES=$(grep -cve '^[[:space:]]*$' < "$BODY")
+note "文字数: ${CHARS} / 行数: ${LINES}（空行を除く。上限 1,468文字 / 42行）"
+if (( CHARS > 1468 )) || (( LINES > 42 )); then
+  note "⚠️ 上限を超えています（CLAUDE.md の分量のきまり）"
+fi
+rm -f "$BODY"
 
 echo "▶ 2/5 LINE無料枠の確認"
 if [[ -z "${LINE_CHANNEL_ACCESS_TOKEN:-}" ]]; then
