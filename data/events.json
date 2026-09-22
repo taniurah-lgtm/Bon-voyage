@@ -3289,6 +3289,46 @@
    "source": "events/2026-10.md"
   },
   {
+   "id": "E148",
+   "name": "2026 秋のパンマルシェ（ところざわサクラタウン）**10/17(土)・18(日)・遠出枠**",
+   "dates": [
+    "2026-10-17",
+    "2026-10-18"
+   ],
+   "span": null,
+   "when": "2026年10月17日(土)・18日(日) 11:00〜16:00（予定）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "11:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "ところざわサクラタウン 中央広場ほか（所沢市東所沢和田3-31-3）",
+   "mapq": "ところざわサクラタウン 中央広場",
+   "summary": "埼玉県内外のベーカリーが集まる。秋限定・新作のパン。 ハロウィンにちなんだワークショップ／フリーライブステージ",
+   "kidsNote": "屋外の広場",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "⚠️ 記載なし（要確認）",
+   "discount": "",
+   "target": "",
+   "url": "https://group.kadokawa.co.jp/information/promotional_topics/article-15705.html",
+   "status": "候補（10/14号の「ほかにも」枠。遠出なので一推しにはしない）",
+   "confidence": "日程・時間・会場・内容は主催の告知で確認済み（2026-09-22）／入場料は未取得",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E134",
    "name": "第48回 小平市民まつり",
    "dates": [
@@ -3446,6 +3486,46 @@
    "url": "",
    "status": "保留（許可と入場料が取れるまで、号にも公開データにも出さない）",
    "confidence": "日時・会場・主催はチラシで確認。来場者向けの情報（入場料・雨天時）は未取得",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
+   "id": "E147",
+   "name": "第47回 所沢市民フェスティバル",
+   "dates": [
+    "2026-10-24",
+    "2026-10-25"
+   ],
+   "span": null,
+   "when": "2026年10月24日(土)・25日(日) 10:00〜16:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "10:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "所沢航空記念公園（所沢市並木1-9-1／西武新宿線 航空公園駅すぐ）",
+   "mapq": "所沢航空記念公園",
+   "summary": "CULTURE / BRAND / KIDS / 市民活動・行政PR の4本立て。 公式の言葉で 「こどもたちが思いっきり遊べる企画が満載」",
+   "kidsNote": "広い公園・屋外・出入り自由",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "併設の所沢航空発祥記念館は長期休館中で、記念館の駐車場も閉鎖されています （2025年9月1日〜2027年3月末の予定）。電車なら航空公園駅すぐです。",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "⚠️ 記載なし（要確認）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.tokofes.com/about/",
+   "status": "候補",
+   "confidence": "日程・時間・会場・内容は公式確認済み（2026-09-22）／入場料は未取得",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
@@ -3746,6 +3826,46 @@
    "url": "https://organicfesta.morinohito.net/",
    "status": "候補",
    "confidence": "日時・会場・順延・入場無料・2026年の企画・タイムテーブル・出店まで、事務局から公式チラシを直接もらって確認済み（2026-09-21）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
+   "id": "E149",
+   "name": "ちょっとおでかけ「秋の夜長の自然文化園」",
+   "dates": [
+    "2026-11-07",
+    "2026-11-08"
+   ],
+   "span": null,
+   "when": "2026年11月7日(土)・8日(日) ✅ 公式トップで告知を確認（2026-09-22）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "井の頭自然文化園 本園（武蔵野市御殿山1-17-6）",
+   "mapq": "井の頭自然文化園 本園",
+   "summary": "夜の動物たちを見られる。（2025年の回は飼育係のガイド・彫刻のライトアップ・ ゲストのライブがあった。⚠️ 2026年の中身は未発表）",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "✅ 一般400円／中学生150円／65歳以上200円",
+   "discount": "",
+   "target": "",
+   "url": "https://www.tokyo-zoo.net/zoo/ino/",
+   "status": "候補",
+   "confidence": "日程と入園料は公式確認済み（2026-09-22）／延長時間と中身は未取得",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
@@ -4211,19 +4331,23 @@
    "E111",
    "E135",
    "E141",
-   "E144"
+   "E144",
+   "E148"
   ],
   "2026-10-18": [
    "E145",
    "E141",
+   "E148",
    "E134"
   ],
   "2026-11-07": [
    "E145",
-   "E142"
+   "E142",
+   "E149"
   ],
   "2026-11-08": [
-   "E145"
+   "E145",
+   "E149"
   ],
   "2026-11-14": [
    "E145",
@@ -4262,10 +4386,12 @@
   ],
   "2026-10-24": [
    "E140",
-   "E131"
+   "E131",
+   "E147"
   ],
   "2026-10-25": [
    "E140",
+   "E147",
    "E103",
    "E139"
   ],

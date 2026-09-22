@@ -2885,6 +2885,42 @@
    }
   },
   {
+   "id": "E148",
+   "name": "2026 秋のパンマルシェ（ところざわサクラタウン）**10/17(土)・18(日)・遠出枠**",
+   "dates": [
+    "2026-10-17",
+    "2026-10-18"
+   ],
+   "span": null,
+   "when": "2026年10月17日(土)・18日(日) 11:00〜16:00（予定）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "11:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "ところざわサクラタウン 中央広場ほか（所沢市東所沢和田3-31-3）",
+   "mapq": "ところざわサクラタウン 中央広場",
+   "summary": "埼玉県内外のベーカリーが集まる。秋限定・新作のパン。 ハロウィンにちなんだワークショップ／フリーライブステージ",
+   "kidsNote": "屋外の広場",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "⚠️ 記載なし（要確認）",
+   "discount": "",
+   "target": "",
+   "url": "https://group.kadokawa.co.jp/information/promotional_topics/article-15705.html",
+   "tentative": false,
+   "deadline": null
+  },
+  {
    "id": "E134",
    "name": "第48回 小平市民まつり",
    "dates": [
@@ -3027,6 +3063,42 @@
    "discount": "",
    "target": "",
    "url": "",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E147",
+   "name": "第47回 所沢市民フェスティバル",
+   "dates": [
+    "2026-10-24",
+    "2026-10-25"
+   ],
+   "span": null,
+   "when": "2026年10月24日(土)・25日(日) 10:00〜16:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "10:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "所沢航空記念公園（所沢市並木1-9-1／西武新宿線 航空公園駅すぐ）",
+   "mapq": "所沢航空記念公園",
+   "summary": "CULTURE / BRAND / KIDS / 市民活動・行政PR の4本立て。 公式の言葉で 「こどもたちが思いっきり遊べる企画が満載」",
+   "kidsNote": "広い公園・屋外・出入り自由",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "併設の所沢航空発祥記念館は長期休館中で、記念館の駐車場も閉鎖されています （2025年9月1日〜2027年3月末の予定）。電車なら航空公園駅すぐです。",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "⚠️ 記載なし（要確認）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.tokofes.com/about/",
    "tentative": false,
    "deadline": null
   },
@@ -3295,6 +3367,42 @@
    "discount": "",
    "target": "",
    "url": "https://organicfesta.morinohito.net/",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E149",
+   "name": "ちょっとおでかけ「秋の夜長の自然文化園」",
+   "dates": [
+    "2026-11-07",
+    "2026-11-08"
+   ],
+   "span": null,
+   "when": "2026年11月7日(土)・8日(日) ✅ 公式トップで告知を確認（2026-09-22）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "井の頭自然文化園 本園（武蔵野市御殿山1-17-6）",
+   "mapq": "井の頭自然文化園 本園",
+   "summary": "夜の動物たちを見られる。（2025年の回は飼育係のガイド・彫刻のライトアップ・ ゲストのライブがあった。⚠️ 2026年の中身は未発表）",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "✅ 一般400円／中学生150円／65歳以上200円",
+   "discount": "",
+   "target": "",
+   "url": "https://www.tokyo-zoo.net/zoo/ino/",
    "tentative": false,
    "deadline": null
   },
