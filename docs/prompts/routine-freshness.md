@@ -6,6 +6,19 @@
 
 **まず `add_repo` ツールを呼ぶ。** 引数は `owner: "taniurah-lgtm"` / `repo: "Bon-voyage"` / `access: "push"`。
 
+🔴 **これを飛ばすと git は必ず403で落ちる**（2026-09-09に発生）。
+定期実行のセッションは、リポジトリが authorized set に入っていない状態で起動する。
+その状態では git プロキシが認証情報を注入しないので、clone も push も
+`access denied by the git proxy ... 403` で失敗する。
+
+🔴 **push が403で落ちたら、それは `add_repo` を呼んでいないから。**
+**もう一度 `add_repo` を呼んでから push し直す。**
+**「push できませんでした」で終わらせない。**
+
+★2026-09-23 追記: **この警告文は、うまく回っている他の2つのRoutine（note・水曜巡回）には
+最初からあったが、この仕事にだけ無かった。**
+**9/22・9/23 と2回続けて、調べたのにコミットが1つも残らなかった。**
+
 ```bash
 REPO=$(ls -d /home/user/Bon-voyage /home/user/bon-voyage 2>/dev/null | head -1)
 if [ -z "$REPO" ] || ! git -C "$REPO" rev-parse HEAD >/dev/null 2>&1; then
@@ -34,15 +47,18 @@ TZ=Asia/Tokyo date +%Y-%m-%d
 ## 手順1 今日やるぶんを出す
 
 ```bash
-node scripts/stale-check.mjs 5
+node scripts/stale-check.mjs 3
 ```
 
-**近いのに穴があるもの**が、優先順に5件出る。**7日以内に確認済みのものは出ない**ので、
+**近いのに穴があるもの**が、優先順に3件出る。**7日以内に確認済みのものは出ない**ので、
 毎日走らせても同じものを繰り返さない。**0件なら、何もせず「対応不要」と1行で報告して終わる。**
 
 ## 手順2 5件を、公式で確かめる
 
-**校閲部（`editorial`）に渡してよい。**5件まとめて渡すのが速い。
+**校閲部（`editorial`）に渡してよい。**3件まとめて渡すのが速い。
+
+★2026-09-23、**5件から3件に減らした。**2回続けて、調べ終わる前に力尽きていた。
+**3件を確実に直して push するほうが、5件調べて何も残らないよりよい。**
 
 確かめるのは、その回で**穴になっている項目だけ**（`stale-check` が「埋めるもの」に出す）。
 
@@ -97,7 +113,7 @@ git push -u origin claude/family-event-planning-rfwmo8
 **次のどちらかに到達するまで終わらない。**
 
 - **(A) commit と push まで成功した**
-- **(B) 直すところが1件も無かった**（`stale-check` が0件 か、5件すべて公式に記載が無かった）
+- **(B) 直すところが1件も無かった**（`stale-check` が0件 か、3件すべて公式に記載が無かった）
   — その**理由を1件ずつ**書いて終わる
 
 ⚠️ **調べただけで終わらない。**
@@ -109,7 +125,7 @@ git push -u origin claude/family-event-planning-rfwmo8
 **「push しました」で終わらない。**`git log origin/claude/family-event-planning-rfwmo8 --oneline -1`
 を実行して、**自分のコミットが origin に乗ったことを目で確かめる。**
 
-🔴 **1件でも取れたら、その時点で commit する。**5件ぜんぶ終わってからまとめようとして、
+🔴 **1件でも取れたら、その時点で commit する。**3件ぜんぶ終わってからまとめようとして、
 途中で力尽きると、**何も残らない。**
 
 ## 🔴 確認日は「確度」の行に YYYY-MM-DD で書く（2026-09-22 追加）
@@ -134,7 +150,9 @@ git push -u origin claude/family-event-planning-rfwmo8
 
 ## 手順5 報告（必須）
 
-1. `stale-check` が出した5件の ID と名前
+0. 🔴 **`git log origin/claude/family-event-planning-rfwmo8 --oneline -1` の出力をそのまま貼る。**
+   **自分のコミットが乗っていなければ、この仕事は失敗である。そう書く**
+1. `stale-check` が出した3件の ID と名前
 2. **1件ずつ、何が埋まって、何が埋まらなかったか**
 3. 🔴 **号の予定が変わる発見**（日程が動いた・中止・申込開始が近い・料金が判明）は、
    **いちばん上に、目立つように書く**。オーナーはここだけ見て動くことがある
