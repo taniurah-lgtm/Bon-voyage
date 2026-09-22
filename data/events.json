@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-22",
+ "generated": "2026-09-23",
  "events": [
   {
    "id": "E51",
@@ -2899,6 +2899,57 @@
    "source": "events/2026-09.md"
   },
   {
+   "id": "E145",
+   "name": "多摩六都科学館「ザクロ石を観察しよう」",
+   "dates": [
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-17",
+    "2026-10-18",
+    "2026-11-03",
+    "2026-11-07",
+    "2026-11-08",
+    "2026-11-14",
+    "2026-11-15"
+   ],
+   "span": null,
+   "when": "10/10(土)〜12(月)、10/17(土)、10/18(日)、11/3(火)、11/7(土)、11/8(日)、11/14(土)、11/15(日)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 10,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "多摩六都科学館 地球の部屋（ちきゅうラボ）",
+   "mapq": "多摩六都科学館 地球の部屋",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "入館料のみ（別料金はかからない）",
+   "discount": "",
+   "target": "どなたでも",
+   "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3672&day=2026-10-10",
+   "status": "候補（会期が長いので、雨の週の差し替え札に使う）",
+   "confidence": "公式確認済み（2026-09-22）",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-09-04",
+    "raw": "> （E70 子育ては私のキャリア＝申込9/4締切が既に過ぎている／E81 タッチケア）。"
+   },
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E98",
    "name": "こだいらクラフトFESTA2026 feat.ブリヂストン",
    "dates": [
@@ -3193,6 +3244,48 @@
    "confidence": "日付・時間・会場・雨天時の扱い・参加団体まで公式確認済み（2026-09-20）",
    "tentative": false,
    "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
+   "id": "E144",
+   "name": "多摩六都科学館 天体観望会【10月】",
+   "dates": [
+    "2026-10-17"
+   ],
+   "span": null,
+   "when": "2026年10月17日(土) 18:30〜20:00（受付開始 18:00）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "18:30",
+   "end": "20:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "多摩六都科学館 サイエンスエッグ・屋上（西東京市芝久保町5-10-64）",
+   "mapq": "多摩六都科学館 サイエンスエッグ",
+   "summary": "",
+   "kidsNote": "小学生と保護者の組だけ。夜18:30〜20:00",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "✕",
+    "elem": "◎"
+   },
+   "cost": "1人 100円",
+   "discount": "",
+   "target": "小学生〜大人（小学生は保護者と参加）",
+   "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3674&day=2026-10-17",
+   "status": "🔴",
+   "confidence": "公式確認済み（2026-09-22）",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-10-02",
+    "raw": "定員 50人 / 抽選 / 🔴 締切 10月2日(金)必着"
+   },
    "source": "events/2026-10.md"
   },
   {
@@ -3658,6 +3751,46 @@
    "source": "events/2026-11.md"
   },
   {
+   "id": "E146",
+   "name": "第36回 小平市産業まつり ⚠️**日程は裏が取れていない**",
+   "dates": [
+    "2026-11-14",
+    "2026-11-15"
+   ],
+   "span": null,
+   "when": "2026年11月14日(土)〜15日(日)（⚠️要確認）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "福祉会館前市民広場・中央公民館ほか（小川町2-1333 周辺）⚠️要確認",
+   "mapq": "福祉会館前市民広場",
+   "summary": "",
+   "kidsNote": "暫定。内容が取れていない。",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "入場無料（物販・飲食は実費）⚠️要確認",
+   "discount": "",
+   "target": "",
+   "url": "https://www.city.kodaira.tokyo.jp/event/123/123638.html",
+   "status": "候補（日程要確認）",
+   "confidence": "🔴 未確認（2026-09-22 に当たったが取れなかった）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
    "id": "E118",
    "name": "玉川上水わくわくクリーンフェスティバル（第2回・WAKU WA CLEAN）",
    "dates": [
@@ -4041,7 +4174,8 @@
    "E93"
   ],
   "2026-11-03": [
-   "E93"
+   "E93",
+   "E145"
   ],
   "2026-10-09": [
    "E130",
@@ -4060,14 +4194,44 @@
    "E80"
   ],
   "2026-10-10": [
+   "E145",
    "E98"
   ],
   "2026-10-11": [
+   "E145",
    "E98",
    "E123"
   ],
   "2026-10-12": [
+   "E145",
    "E105"
+  ],
+  "2026-10-17": [
+   "E145",
+   "E111",
+   "E135",
+   "E141",
+   "E144"
+  ],
+  "2026-10-18": [
+   "E145",
+   "E141",
+   "E134"
+  ],
+  "2026-11-07": [
+   "E145",
+   "E142"
+  ],
+  "2026-11-08": [
+   "E145"
+  ],
+  "2026-11-14": [
+   "E145",
+   "E146"
+  ],
+  "2026-11-15": [
+   "E145",
+   "E146"
   ],
   "2026-10-15": [
    "E81"
@@ -4077,15 +4241,6 @@
   ],
   "2026-10-29": [
    "E81"
-  ],
-  "2026-10-17": [
-   "E111",
-   "E135",
-   "E141"
-  ],
-  "2026-10-18": [
-   "E141",
-   "E134"
   ],
   "2026-26-10": [
    "E134"
@@ -4121,9 +4276,6 @@
    "E122",
    "E126",
    "E54"
-  ],
-  "2026-11-07": [
-   "E142"
   ],
   "2026-11-22": [
    "E118"
