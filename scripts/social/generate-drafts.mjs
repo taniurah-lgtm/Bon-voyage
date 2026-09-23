@@ -37,7 +37,10 @@ const MODELS = process.env.GEMINI_MODEL
   ? [process.env.GEMINI_MODEL]
   : ['gemini-flash-latest', 'gemini-2.0-flash', 'gemini-flash-lite-latest', 'gemini-2.5-flash-lite'];
 const KEY = process.env.GEMINI_API_KEY || '';
-const HP = 'https://bonvoya.nicomaru.tokyo/f';
+// 🔴 2026-09-23、/f から /th に変えた。/f は紙（チラシのQR）の計測コードで、
+//    Threadsの投稿が9/2から65日ぶん /f にリンクしていたため、紙とThreadsの流入が混ざっていた。
+//    /th は Threads 専用。GoatCounter でパスごとに分けて数えられる。
+const HP = 'https://bonvoya.nicomaru.tokyo/th';
 
 // 問いかけは隔日。紀元からの通日の偶奇で決める（月末月初でも2日続かない）。
 // ASK_DAY=1 で今日だけ強制的に作らせる（手で確かめたいとき用）。
