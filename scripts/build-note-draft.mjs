@@ -241,6 +241,10 @@ writeFileSync(
   `date: ${today}（${WD}）
 type: ${type}
 topic: ${d.topic}
+published:
+# ↑ note に貼ったら、その記事のURLをここに書いてください（例 published: https://note.com/bon_voyage_mail/n/xxxxx）
+#   🔴 2026-09-23 に足しました。**公開した note 記事のURLを、こちらが1件も持っていなかった。**
+#   URLが無いと、ホームページから記事へリンクできず、検索にも拾われません。
 
 # 題名の候補（1つ選んで、残りは消す）
 
