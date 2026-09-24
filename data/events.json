@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-24",
+ "generated": "2026-09-25",
  "events": [
   {
    "id": "E51",
@@ -3067,9 +3067,9 @@
    "cost": "✅ 全ステージ観覧無料",
    "discount": "",
    "target": "",
-   "url": "https://www.ksc50.com/info_type/event/",
+   "url": "https://kodaira-tourism.com/event/22974/",
    "status": "候補",
-   "confidence": "✅ 日時・3会場・観覧無料・雨天時・抽選会・出演者までポスターで確認済み（2026-09-21）",
+   "confidence": "✅ 公式確認済み（2026-09-25） — 日時・3会場・観覧無料・雨天時・抽選会・出演者・全タイムテーブル（協会の公式ページ）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
