@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-23",
+ "generated": "2026-09-24",
  "events": [
   {
    "id": "E16",
@@ -3514,42 +3514,6 @@
    "discount": "",
    "target": "",
    "url": "https://www.city.kodaira.tokyo.jp/kurashi/002/002590.html",
-   "tentative": false,
-   "deadline": null
-  },
-  {
-   "id": "E75",
-   "name": "多摩六都科学館「第13回全国KAPLA®大会に応募しよう!」",
-   "dates": [],
-   "span": {
-    "from": null,
-    "to": "2026-09-23"
-   },
-   "when": "〜9/23(水)。9月の実施日は 9/4〜6・9/8〜13・9/15〜23、各日 10:00〜16:00",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 0,
-   "start": "10:00",
-   "end": "16:00",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "多摩六都科学館(西東京市芝久保町5-10-64) — 花小金井から自転車・バス圏",
-   "mapq": "多摩六都科学館",
-   "summary": "木製ブロック KAPLA® を自由に積んで造形。作品を全国大会に応募できる",
-   "kidsNote": "見てるだけでも。屋内・冷暖房あり・時間制限がゆるい。連休の雨予報の日に強い",
-   "caution": "",
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "○",
-    "pre": "◎",
-    "elem": "◎"
-   },
-   "cost": "展示室の入館券だけでOK — 大人520円 / 小人(4歳〜高校生)210円",
-   "discount": "",
-   "target": "",
-   "url": "https://www.tamarokuto.or.jp/calendar/",
    "tentative": false,
    "deadline": null
   }
