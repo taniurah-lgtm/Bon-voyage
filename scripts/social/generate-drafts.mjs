@@ -242,6 +242,54 @@ function sameSubject(t) {
   return key.length >= 4 && intro.includes(key);
 }
 
+// 【紹介】が「もう終わったもの」か「直近と同じもの」なら作り直す。
+// 🔴 2026-09-24・25、2日続けて「KAPLA大会が開催中です」を出した。会期は 9/23 で終わっていた
+//    （本文にも「会期：〜9/23」と書いてあった）。プロンプトで「本日以降」「重複は選ばない」と
+//    頼んでも、軽いモデルは守らない日がある。**頼むだけでなく、出てきたものを検査する。**
+function introOf(t) {
+  const i = t.indexOf('【Threads・問いかけ】');
+  return i < 0 ? t : t.slice(0, i);
+}
+// 本文の M/D をすべて拾い、いちばん遅い日が今日より前なら「終わったもの」。
+// 日付が1つも無いもの（通年の施設など）は判定しない。
+// 見出しの【紹介 1/2】【紹介 2/2】は日付ではないので、先に外す（外さないと 1/2 を1月2日と読む）。
+function staleReason(t) {
+  const [y, m, d] = TODAY.split('-').map(Number);
+  const today = Date.UTC(y, m - 1, d);
+  let latest = null;
+  for (const [, mm, dd] of introOf(t).replace(/【[^】]*】/g, '').matchAll(/(?<![\d/])(\d{1,2})\/(\d{1,2})(?![\d/])/g)) {
+    const M = +mm, D = +dd;
+    if (M < 1 || M > 12 || D < 1 || D > 31) continue;
+    const yr = (m - M > 6) ? y + 1 : (M - m > 6 ? y - 1 : y); // 12月に1月の話をする等
+    const ts = Date.UTC(yr, M - 1, D);
+    if (latest === null || ts > latest) latest = ts;
+  }
+  if (latest !== null && latest < today) {
+    const dt = new Date(latest);
+    return `終わったイベント(最後の日付 ${dt.getUTCMonth() + 1}/${dt.getUTCDate()})`;
+  }
+  return '';
+}
+// 直近3日のドラフトの【紹介 1/2】と、書き出しが同じなら「同じ話」。
+function firstIntroLine(t) {
+  const m = t.match(/【Threads・紹介 1\/2】[^\n]*\n+([^\n]+)/);
+  return m ? m[1].replace(/\s/g, '').slice(0, 24) : '';
+}
+function recentIntroLines() {
+  let files = [];
+  try { files = readdirSync('social/drafts').filter(f => /^\d{4}-\d{2}-\d{2}\.md$/.test(f) && f < TODAY + '.md').sort(); } catch {}
+  return files.slice(-3).map(f => ({ f, line: firstIntroLine(readFileSync('social/drafts/' + f, 'utf8')) }))
+    .filter(x => x.line);
+}
+const RECENT_INTROS = recentIntroLines();
+function repeatReason(t) {
+  const line = firstIntroLine(t);
+  const hit = line && RECENT_INTROS.find(x => x.line === line);
+  return hit ? `直近と同じ紹介(${hit.f})` : '';
+}
+// 作り直すときに、モデルへ「これは選ばない」と足す文
+const avoidNote = (why, t) => `\n\n# 🔴 前回の案は使えなかった（${why}）\n次の書き出しの話題は**選ばない**。台帳から別のものを選ぶこと:\n${introOf(t).split('\n').filter(Boolean).slice(1, 3).join('\n')}\n`;
+
 async function callGemini(model, prompt, useThinking, maxTokens) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${KEY}`;
   const generationConfig = { temperature: 0.7, maxOutputTokens: maxTokens };
@@ -260,7 +308,7 @@ async function callGemini(model, prompt, useThinking, maxTokens) {
 }
 
 async function gen() {
-  const prompt = PROMPT(loadLedger(), loadRecentDrafts(), SPOT);
+  let prompt = PROMPT(loadLedger(), loadRecentDrafts(), SPOT);
   const errs = [];
   let partial = null; // 途中で切れた草案（最後の保険。何も無いよりはマシ）
   for (const model of MODELS) {
@@ -276,12 +324,15 @@ async function gen() {
           if (e.status !== 400) break; // 404/429など: 思考なし再試行は無駄→次へ
           continue;
         }
-        if (isComplete(r.text) && !sameSubject(r.text)) return { text: r.text, model };
+        const bad = isComplete(r.text) ? (staleReason(r.text) || repeatReason(r.text)) : '';
+        if (isComplete(r.text) && !sameSubject(r.text) && !bad) return { text: r.text, model };
         const miss = BLOCKS.filter(b => !r.text.includes(b)).join('');
         const why = miss ? `不完全(${miss}が欠落, finishReason=${r.finishReason})`
+                  : bad ? bad
                          : `紹介と問いかけが同じ場所(${SPOT && SPOT.name})`;
         errs.push(`${model}/${maxTokens}${useThinking ? '' : '(思考なし)'}: ${why}`);
         if (!partial || r.text.length > partial.text.length) partial = { text: r.text, model };
+        if (bad) { prompt += avoidNote(bad, r.text); break; } // 同じ話を避けさせて次へ
         break; // 同じ条件で思考ありなしを変えても改善しないので次のトークン量へ
       }
     }
@@ -301,11 +352,13 @@ if (!KEY) {
   try {
     const { text, model, incomplete } = await gen();
     const dup = sameSubject(text);
-    const head = (incomplete || dup)
+    const bad = staleReason(text) || repeatReason(text);
+    const head = (incomplete || dup || bad)
       ? `# ${TODAY} SNSドラフト（⚠️投稿前に直すところがあります）`
       : `# ${TODAY} SNSドラフト（承認待ち・まだ投稿していません）`;
     body = `${head}\n\n` +
       (incomplete ? `> ⚠️ 生成が途中で終わり、ブロックが足りていません。欠けている分は手で書き足すか、Actions から「SNS drafts」を再実行してください。\n\n` : '') +
+      (bad ? `> 🔴 **${bad}。**このまま投稿しないでください。別のイベントに差し替えるか、Actions から「SNS drafts」を再実行してください。\n\n` : '') +
       (dup ? `> 🔴 **紹介と問いかけが同じ場所（${SPOT && SPOT.name}）になっています。**同じ話を2回する投稿になるので、どちらかを別のものに差し替えるか、Actions から「SNS drafts」を再実行してください。\n\n` : '') +
       `${text}\n\n---\n` +
       `※自動生成（model: ${model}）。投稿前に日付・事実・トーンを目視確認してください。\n` +
