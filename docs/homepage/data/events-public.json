@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-25",
+ "generated": "2026-09-26",
  "events": [
   {
    "id": "E16",
@@ -2230,6 +2230,41 @@
    "discount": "",
    "target": "",
    "url": "https://www.tamarokuto.or.jp/blog/press/2026/09/17/event_railway/",
+   "tentative": false,
+   "deadline": null
+  },
+  {
+   "id": "E152",
+   "name": "都民の日 都立施設の無料公開",
+   "dates": [
+    "2026-10-01"
+   ],
+   "span": null,
+   "when": "2026年10月1日(木)（平日。一日だけ）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "",
+   "mapq": "都民の日 都立施設の無料公開",
+   "summary": "都立の動物園・植物園・庭園・博物館などの入園料・入館料が無料",
+   "kidsNote": "たてもの園は屋外移動あり。雨なら第一候補にしない。",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "https://www.koho.metro.tokyo.lg.jp/2026/09/08.html",
    "tentative": false,
    "deadline": null
   },
