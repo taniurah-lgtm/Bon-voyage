@@ -268,7 +268,7 @@ Meta のビジネス認証は、書類を見るだけでなく
 - [x] ~~**2. Meta開発者アカウントのSMSを通す**~~ ✅ **2026-09-25 済み**（既存の個人アカウントで。新しいFacebookアカウントは作らない＝1人1アカウントの規約、止められるとアプリごと消える）
 - [x] ~~**3. アプリを作る**~~ ✅ 2026-09-25 **Bonvoya Tsushin**（権限: threads_basic / threads_keyword_search / threads_manage_insights。テスター bonvoya_tokyo 承認済み）
   - 🟡 アイコン1024・プライバシーポリシーURL は**審査の前に**入れる（まだ）
-- [ ] **4. トークンを取り、`keyword_search` を1回叩く**（★30日以内に提出する）
+- [x] ~~**4. トークンを取り、`keyword_search` を1回叩く**~~ ✅ 2026-09-26（★**10/25ごろまでに提出**）
   - 2026-09-26: 鍵は「ユースケース → カスタマイズ → 設定」の**一番下の「ユーザートークン生成ツール」**で取れた（ダッシュボードには無い）
   - ✅ `/me?fields=id,username` と `/me/threads?fields=id,text,timestamp&limit=3` は**成功**（基本の読み取りは動く）
   - ❌ `keyword_search` は `{"error":{"code":1,"message":"An unknown error occurred"}}` → `fields` を足しても削っても **HTTP 500**。
@@ -276,7 +276,16 @@ Meta のビジネス認証は、書類を見るだけでなく
   - 🔴 **鍵がチャットに貼られた**（応答の `paging.next` のURLに鍵が入っている）。**その鍵は取り消して作り直す**
     （Threads → 設定 → その他の設定 → ウェブサイトの許可 → アクティブ → Bonvoya Tsushin を削除 → 生成ツールでもう一度）。
     **これからは応答をまるごと貼らない。**「成功／エラー」と、エラーの文だけ
-  - 次: 作り直すときの**許可の画面に「キーワード検索」の権限が並んでいるか**を見る（並んでいなければ鍵に入っていない）
+  - 🔎 **原因: 「ユーザートークン生成ツール」の鍵には keyword_search が入らない。**
+    許可の画面に並ぶのは 情報表示・投稿・返信管理・インサイト・返信読み取り の5つだけだった
+  - ✅ **2026-09-26 解決。**OAuth で scope を指定して取り直した:
+    1. 設定 → リダイレクトコールバックURL に `https://localhost/`
+    2. `https://threads.net/oauth/authorize?client_id=<アプリID>&redirect_uri=https://localhost/&scope=threads_basic,threads_keyword_search,threads_manage_insights&response_type=code`
+       → 許可の画面に **Search and reply to public Threads posts** が出る → 続行 → アドレス欄の `code=`（`#_` の手前まで）
+    3. `https://graph.threads.net/oauth/access_token?client_id=…&client_secret=…&grant_type=authorization_code&redirect_uri=https://localhost/&code=…`（**GETで通った**）
+    4. `https://graph.threads.net/access_token?grant_type=th_exchange_token&client_secret=…&access_token=<短い鍵>` → **60日の鍵（2026-11-25ごろ切れる）**
+    5. `keyword_search?q=kodaira` → **成功（約10件）**
+  - ★**審査の提出期限: この成功（2026-09-26）から30日以内＝10/25ごろまで**
 - [ ] **5. 権限の行が Standard か Advanced かを見る**（Standard なら開業届を待たずに6へ）
 - [ ] **6. ビジネス認証**（開業届の控え。1〜5営業日）★**名義の揃え方は §7.5**
 - [ ] **7. スクリーンキャストを撮る**（1080p以上・幅1440px以下・音声なし・英語UI）
