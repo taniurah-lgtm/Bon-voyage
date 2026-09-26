@@ -286,6 +286,7 @@ Meta のビジネス認証は、書類を見るだけでなく
     4. `https://graph.threads.net/access_token?grant_type=th_exchange_token&client_secret=…&access_token=<短い鍵>` → **60日の鍵（2026-11-25ごろ切れる）**
     5. `keyword_search?q=kodaira` → **成功（約10件）**
   - ★**審査の提出期限: この成功（2026-09-26）から30日以内＝10/25ごろまで**
+  - 確認: `fields=id,username,timestamp` で見ると**10件すべて bonvoya_tokyo**（他人の投稿は返らない＝§0②のとおり）。**審査は要る**
 - [ ] **5. 権限の行が Standard か Advanced かを見る**（Standard なら開業届を待たずに6へ）
 - [ ] **6. ビジネス認証**（開業届の控え。1〜5営業日）★**名義の揃え方は §7.5**
 - [ ] **7. スクリーンキャストを撮る**（1080p以上・幅1440px以下・音声なし・英語UI）
