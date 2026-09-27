@@ -151,7 +151,7 @@ ls -l reports/free/$(TZ=Asia/Tokyo date +%Y-%m-%d).md 2>/dev/null
 ```
 【ぼんぼやーじゅ通信 M/D(水)】
 （天気のひとこと）
-■今週の一推し（3〜5行・📍地図はこの1件だけ）
+■今週の一推し（3〜5行。📍地図リンクは付けない＝ページのカードにある）
 ■今週のおでかけ、年齢別に
 👶 赤ちゃん連れ → https://bonvoya.nicomaru.tokyo/week/YYYY-MM-DD/baby/
 🧒 未就学の子 → https://bonvoya.nicomaru.tokyo/week/YYYY-MM-DD/pre/
