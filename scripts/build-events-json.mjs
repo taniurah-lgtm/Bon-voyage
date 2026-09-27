@@ -38,6 +38,9 @@ const normalize = (s) =>
 
 // 「8/23」→ 2026-08-23。月が7より小さいものは翌年（台帳は7月始まり）
 function toISO(month, day) {
+  // 🔴 2026-09-27: 「2026/10/11」の「26/10」を月日と読み、2026-26-10 という日付を作っていた。
+  //    ありえない月日は日付として扱わない（下の toSlash でも YYYY/M/D を M/D に寄せている）。
+  if (!(month >= 1 && month <= 12 && day >= 1 && day <= 31)) return null;
   const y = month >= 7 ? BASE_YEAR : BASE_YEAR + 1;
   return `${y}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 }
@@ -88,6 +91,8 @@ function splitRainDates(raw) {
 const toSlash = (s) =>
   s
     .replace(/(?:\d{4}\s*年)?\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日/g, '$1/$2')
+    // 「2026/10/11」→「10/11」（そのままだと「26/10」を月日と読む）
+    .replace(/(?<!\d)\d{4}\s*\/\s*(\d{1,2})\s*\/\s*(\d{1,2})/g, '$1/$2')
     // 「10/3(土)・4日(日)」の 2件目以降。曜日の括弧が続くときだけ「日」を落とす
     .replace(/(\d{1,2})\s*日(?=\s*\((?:月|火|水|木|金|土|日)\))/g, '$1');
 
@@ -562,8 +567,16 @@ for (const file of files) {
     }
   }
 
+  // 🔴 2026-09-27: 日時の行に書いた**裏取りのメモ**（「（✅ 2026/10/11 は日曜。曜日照合済み）」など）が、
+  //    公開カレンダーの「いつ」にそのまま出ていた（CLAUDE.md「🔒 公開物に書かないこと」＝内部の判定理由）。
+  //    ✅ から始まるメモは、括弧ごと（括弧が無ければ行末まで）落とす。台帳の書き方は変えない。
+  const stripNotes = (w) => (w || '')
+    .replace(/\s*[（(][^（）()]*✅[^（）()]*[）)]/g, '')
+    .replace(/\s*[—–-]?\s*✅.*$/, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
   for (const b of blocks) {
-    const when = field(b.lines, ['日時', '会期', '日程']);
+    const when = stripNotes(field(b.lines, ['日時', '会期', '日程']));
     const spanField = field(b.lines, ['期間']);           // 「例年7月上旬〜9月上旬」など季節もの
     const status = (field(b.lines, ['ステータス']) ||
       (b.lines.find((l) => /ステータス\s*:/.test(l)) || '').split(/ステータス\s*:/)[1] || '').trim();
