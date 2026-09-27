@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /*
- * 号ごとの「年齢別ページ」を作る（2026-10-07号から）。
+ * 号ごとの「年齢別ページ」を作る（2026-09-30号から）。
  *   node scripts/build-weekly.mjs
  *
  * LINEの本文は「今週の一推し」と、年齢別ページへのリンク3本だけにする。
@@ -91,7 +91,7 @@ function dateChip(ev) {
 
 function card(item, ev, { pick = false } = {}) {
   const a = ev.ages || {};
-  const ages = AGES.map((g) => `<span class="age ${markClass(a[g.key])}">${AGE_SHORT[g.key]}<b>${esc(a[g.key] || '？')}</b></span>`).join('');
+  const ages = AGES.map((g) => `<span class="age ${markClass(a[g.key])}" title="${AGE_SHORT[g.key]}">${g.icon}<b>${esc(a[g.key] || '？')}</b></span>`).join('');
   const rokuto = /多摩六都/.test(`${ev.name}${ev.place}`);
   const note = item.note || ev.kidsNote || '';
   return `
@@ -110,10 +110,12 @@ function card(item, ev, { pick = false } = {}) {
       </div>
     </div>
     ${note ? `<p class="note">${esc(note)}</p>` : ''}
-    <div class="ages">${ages}</div>
-    <div class="acts">
-      ${ev.url ? `<a class="btn ghost" href="${esc(ev.url)}" target="_blank" rel="noopener">公式サイト${ICON.out}</a>` : ''}
-      ${ev.mapq ? `<a class="btn solid" href="${esc(mapUrl(ev.mapq))}" target="_blank" rel="noopener" data-goatcounter-click="${esc('地図｜' + ev.name)}">地図をひらく${ICON.out}</a>` : ''}
+    <div class="foot">
+      <div class="ages">${ages}</div>
+      <div class="acts">
+        ${ev.url ? `<a class="btn ghost" href="${esc(ev.url)}" target="_blank" rel="noopener">公式${ICON.out}</a>` : ''}
+        ${ev.mapq ? `<a class="btn solid" href="${esc(mapUrl(ev.mapq))}" target="_blank" rel="noopener" data-goatcounter-click="${esc('地図｜' + ev.name)}">地図${ICON.out}</a>` : ''}
+      </div>
     </div>
     ${rokuto ? '<p class="fine">※最新の情報は多摩六都科学館ウェブサイトでご確認ください。</p>' : ''}
   </article>`;
@@ -186,7 +188,7 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
   .sec::after { content: ""; flex: 1; height: 1px; background: var(--w-line); align-self: center; }
   .card { background: var(--w-card); border-radius: 18px; padding: .8rem .85rem .75rem; margin-bottom: .6rem; box-shadow: var(--w-shadow); }
   .card.pick { background: linear-gradient(160deg, var(--w-wash), var(--w-card) 60%); outline: 1px solid color-mix(in srgb, var(--w-accent) 35%, transparent); }
-  .ribbon { display: flex; align-items: center; gap: .5rem; font-family: var(--w-maru); font-weight: 700; font-size: .74rem; color: var(--w-accent-ink); margin: 0 0 .55rem; }
+  .ribbon { display: flex; align-items: center; gap: .5rem; font-family: var(--w-maru); font-weight: 700; font-size: .74rem; color: var(--w-accent-ink); margin: 0 0 .4rem; }
   .ribbon span { font-family: var(--w-en); font-weight: 500; font-size: .62rem; letter-spacing: .18em; color: #fff; background: var(--w-accent); border-radius: 999px; padding: .12rem .55rem; }
   .row { display: flex; gap: .8rem; }
   .chip { flex: none; width: 4.1rem; white-space: nowrap; text-align: center; padding-top: .1rem; border-right: 1px solid var(--w-line); padding-right: .7rem; }
@@ -198,19 +200,20 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
   .facts { list-style: none; margin: 0; padding: 0; font-size: .75rem; line-height: 1.55; color: var(--w-soft); }
   .facts li { display: flex; gap: .35rem; align-items: flex-start; overflow-wrap: anywhere; }
   .facts svg { flex: none; width: 13px; height: 13px; margin-top: .22rem; fill: none; stroke: var(--w-faint); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-  .note { font-size: .78rem; line-height: 1.7; margin: .5rem 0 0; padding: .45rem .65rem; background: color-mix(in srgb, var(--w-sage-wash) 70%, transparent); border-radius: 12px; }
-  .ages { display: flex; flex-wrap: wrap; gap: .3rem; margin: .6rem 0 0; }
-  .age { font-size: .68rem; color: var(--w-soft); border-radius: 999px; padding: .1rem .5rem; border: 1px solid var(--w-line); }
-  .age b { font-weight: 700; margin-left: .2rem; }
+  .note { font-size: .77rem; line-height: 1.65; margin: .45rem 0 0; padding: .4rem .6rem; background: color-mix(in srgb, var(--w-sage-wash) 70%, transparent); border-radius: 12px; }
+  .foot { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-top: .55rem; }
+  .ages { display: flex; flex-wrap: wrap; gap: .25rem; min-width: 0; }
+  .age { font-size: .7rem; color: var(--w-soft); border-radius: 999px; padding: .05rem .45rem; white-space: nowrap; border: 1px solid var(--w-line); }
+  .age b { font-weight: 700; margin-left: .15rem; }
   .age.m-best { background: var(--w-wash); border-color: transparent; color: var(--w-accent-ink); }
   .age.m-ok { background: var(--w-sage-wash); border-color: transparent; color: color-mix(in srgb, var(--w-sage) 70%, var(--w-ink)); }
   .age.m-no { opacity: .55; }
-  .acts { display: flex; gap: .45rem; margin-top: .55rem; }
-  .btn { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: .3rem; min-height: 38px; border-radius: 999px; font-family: var(--w-maru); font-weight: 700; font-size: .76rem; text-decoration: none; }
+  .acts { display: flex; gap: .3rem; flex: none; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: .25rem; min-height: 36px; padding: 0 .8rem; border-radius: 999px; font-family: var(--w-maru); font-weight: 700; font-size: .74rem; text-decoration: none; white-space: nowrap; }
   .btn svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .btn.ghost { color: var(--w-ink); border: 1px solid var(--w-line); background: transparent; }
   .btn.solid { color: #fff; background: var(--w-accent); }
-  .fine { font-size: .66rem; color: var(--w-faint); margin: .5rem 0 0; }
+  .fine { font-size: .64rem; color: var(--w-faint); margin: .35rem 0 0; }
   .empty { color: var(--w-faint); font-size: .8rem; text-align: center; padding: 1.2rem 0; }
   .sponsors { margin-top: 1.8rem; padding: 1rem 1.1rem; border-radius: 18px; background: var(--w-card); box-shadow: var(--w-shadow); font-size: .78rem; color: var(--w-soft); }
   .sponsors ul { padding-left: 1.1em; margin: .4rem 0 0; line-height: 1.9; }

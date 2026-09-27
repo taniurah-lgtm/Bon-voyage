@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>ページが見つかりません｜ぼんぼやーじゅ通信</title>
+<link rel="stylesheet" href="/assets/bv-tokens.css">
+<style>
+  body { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; text-align: center; }
+  .card { max-width: 420px; }
+  .brand { font-family: var(--maru); font-weight: 800; font-size: 1.3rem; color: var(--sky-deep); }
+  h1 { font-family: var(--maru); font-size: 1.05rem; margin: 1.2rem 0 .6rem; }
+  p { font-size: .9rem; color: var(--ink-soft); line-height: 1.9; }
+  .btns { display: flex; flex-direction: column; gap: .6rem; margin-top: 1.4rem; }
+  .btns a { display: block; border-radius: 999px; padding: .8rem 1rem; font-weight: 700; text-decoration: none; }
+  .again { background: var(--sky-deep); color: var(--on-sky); }
+  .home { border: 1px solid var(--line-strong); color: var(--sky-deep); }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="brand">ぼんぼやーじゅ通信</div>
+  <div id="week" hidden>
+    <h1>今週号のページを、いま準備しています</h1>
+    <p>LINEでお届けした直後は、ページが開けるまで数分かかることがあります。<br>少し時間をおいて、もう一度開いてください。</p>
+    <div class="btns"><a class="again" href="" id="again">もう一度ひらく</a><a class="home" href="/">トップページへ</a></div>
+  </div>
+  <div id="other">
+    <h1>ページが見つかりませんでした</h1>
+    <p>アドレスが変わったか、公開を終えたページかもしれません。</p>
+    <div class="btns"><a class="again" href="/">トップページへ</a><a class="home" href="/calendar.html">おでかけカレンダー</a></div>
+  </div>
+</div>
+<script>
+  if (location.pathname.indexOf('/week/') === 0) {
+    document.getElementById('week').hidden = false;
+    document.getElementById('other').hidden = true;
+    document.getElementById('again').href = location.pathname;
+  }
+</script>
+</body>
+</html>
