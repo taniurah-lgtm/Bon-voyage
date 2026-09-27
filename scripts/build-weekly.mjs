@@ -318,6 +318,10 @@ for (const f of files) {
   <script>
   (function () {
     var tabs = document.querySelectorAll('.tabs a'), panels = document.querySelectorAll('.panel');
+    // サイト上部のメニューも画面に貼りつくので、タブはその下に止める（重なるとタブが隠れる）
+    var bar = document.querySelector('.tabs'), nav = document.querySelector('.bvnav');
+    function stick() { if (bar) bar.style.top = (nav ? nav.offsetHeight : 0) + 'px'; }
+    stick(); window.addEventListener('resize', stick);
     function show(k) {
       for (var i = 0; i < panels.length; i++) panels[i].hidden = panels[i].getAttribute('data-age') !== k;
       for (var j = 0; j < tabs.length; j++) tabs[j].setAttribute('aria-selected', tabs[j].getAttribute('data-tab') === k);
