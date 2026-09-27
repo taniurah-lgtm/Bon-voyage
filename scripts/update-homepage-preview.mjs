@@ -62,7 +62,8 @@ function agesHtml(line) {
 }
 
 function parseReport(text) {
-  const lines = text.split(/\r?\n/);
+  // 🔴 2026-09-27: 下書きの指示ブロック（<!-- -->）は読者に届いていない。ここでも必ず落とす
+  const lines = text.replace(/<!--[\s\S]*?-->/g, '').split(/\r?\n/);
   const head = lines.find(l => l.includes('ぼんぼやーじゅ通信')) || '';
   const md = head.match(/(\d{1,2})\s*\/\s*(\d{1,2})\s*[（(]\s*(.)\s*[）)]/);
   const year = (REPORT_PATH.match(/(\d{4})-\d{2}-\d{2}/) || [])[1] || new Date().getFullYear();

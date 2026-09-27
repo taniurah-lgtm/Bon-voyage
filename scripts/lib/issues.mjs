@@ -41,8 +41,14 @@ const CORRECTIONS = [
 /** 新しい号が先頭。{ file, y, m, d, wd, linked, fixes[] } の配列を返す */
 export function readIssues(dir = DIR) {
   if (!existsSync(dir)) return [];
+  // 🔴 2026-09-27: **送っていない号がバックナンバーに出ていた**（9/30号の下書きを置いた時点で公開された）。
+  //    過去号は「お届けしたもの」なので、sent.log に載った号だけにする（CLAUDE.md 手順7と同じ考え方）。
+  const sentPath = `${dir}/sent.log`;
+  const sent = new Set(existsSync(sentPath)
+    ? readFileSync(sentPath, 'utf8').split('\n').map((l) => l.split(/\s+/)[0]).filter(Boolean) : []);
   return readdirSync(dir)
     .filter((f) => /^\d{4}-\d{2}-\d{2}\.md$/.test(f))   // _draft- は除く
+    .filter((f) => sent.has(f.replace('.md', '')))
     .sort()
     .reverse()
     .map((f) => {
@@ -50,7 +56,10 @@ export function readIssues(dir = DIR) {
       const [y, m, d] = f.replace('.md', '').split('-').map(Number);
       const wd = '日月火水木金土'[new Date(Date.UTC(y, m - 1, d)).getUTCDay()];
       // 1行目の題名は日付が入っているので、見出しは呼ぶ側で組む
-      const body = fixWords(stripArtifacts(raw.split('\n').slice(1).join('\n')));
+      // 🔴 2026-09-27: 下書きの指示ブロック（<!-- -->）が、台帳IDや段取りごとバックナンバーに出ていた。
+      //    読者に届いたのは、送る直前にこれを落とした本文（line_report.sh と同じ）。ここでも必ず落とす。
+      const sentBody = raw.replace(/<!--[\s\S]*?-->/g, '').replace(/\n{3,}/g, '\n\n');
+      const body = fixWords(stripArtifacts(sentBody.split('\n').slice(1).join('\n')));
       // 号のなかのURLは、読めるだけでなく押せるようにする（素テキストだと開けない）。
       // ★終端を「空白・和文の記号・引用符」までにする。\w だけだと日本語の直前で切れて
       //   「?api=1&query=」のような空クエリのリンクができる。
