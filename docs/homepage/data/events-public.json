@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-26",
+ "generated": "2026-09-27",
  "events": [
   {
    "id": "E16",
@@ -2411,6 +2411,42 @@
    "deadline": null
   },
   {
+   "id": "E154",
+   "name": "前原盆踊り大会2026（小金井市・野川緑地公園）",
+   "dates": [
+    "2026-10-03",
+    "2026-10-04"
+   ],
+   "span": null,
+   "when": "10/3(土) 17:00〜21:00 ／ 10/4(日) 11:00〜18:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "17:00",
+   "end": "21:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "野川緑地公園（三角公園） 小金井市前原町3-3-3",
+   "mapq": "野川緑地公園",
+   "summary": "盆踊り。「お子様にはお菓子をプレゼント！（両日300個限定）」",
+   "kidsNote": "10/4の昼の部が未就学児向き。",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "記載なし（入場の料金の記載なし＝(要確認)）",
+   "discount": "",
+   "target": "",
+   "url": "https://koganei-kanko.jp/event/15196",
+   "tentative": false,
+   "deadline": null
+  },
+  {
    "id": "E136",
    "name": "列車のトイレ写真展 〜日本全国編〜",
    "dates": [
@@ -2691,6 +2727,42 @@
    }
   },
   {
+   "id": "E153",
+   "name": "みんなのあおぞら音楽会",
+   "dates": [
+    "2026-10-11",
+    "2026-26-10"
+   ],
+   "span": null,
+   "when": "2026年10月11日(日) 11:00〜15:00（✅ 2026/10/11 は日曜）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "11:00",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小金井公園 パークス売店向かい",
+   "mapq": "小金井公園 パークス売店向かい",
+   "summary": "エレクトーンコンサート（3回公演）／カフェコーナー（キッチンカー）／ ワークショップ（アロマ・お花・ハンドドラム制作・ハロウィン工作）",
+   "kidsNote": "屋外・公園の中。ベビーカーで行ける場所＝売店前。",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "○"
+   },
+   "cost": "一部有料（どれが有料かは記載なし＝(要確認)）",
+   "discount": "",
+   "target": "記載なし（「お子さまから大人まで楽しめる」）",
+   "url": "https://www.tokyo-park.or.jp/park/koganei/news/2026/10_11.html",
+   "tentative": false,
+   "deadline": null
+  },
+  {
    "id": "E105",
    "name": "第5回 ミラクルミュージックマーケット（MMM）",
    "dates": [
@@ -2880,44 +2952,6 @@
    "url": "https://sites.google.com/view/tsudafes67**（第67回",
    "tentative": false,
    "deadline": null
-  },
-  {
-   "id": "E144",
-   "name": "多摩六都科学館 天体観望会【10月】",
-   "dates": [
-    "2026-10-17"
-   ],
-   "span": null,
-   "when": "2026年10月17日(土) 18:30〜20:00（受付開始 18:00）",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": "18:30",
-   "end": "20:00",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "多摩六都科学館 サイエンスエッグ・屋上（西東京市芝久保町5-10-64）",
-   "mapq": "多摩六都科学館 サイエンスエッグ",
-   "summary": "",
-   "kidsNote": "小学生と保護者の組だけ。夜18:30〜20:00",
-   "caution": "",
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "✕",
-    "pre": "✕",
-    "elem": "◎"
-   },
-   "cost": "1人 100円",
-   "discount": "",
-   "target": "小学生〜大人（小学生は保護者と参加）",
-   "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3674&day=2026-10-17",
-   "tentative": false,
-   "deadline": {
-    "date": "2026-10-02",
-    "raw": "定員 50人 / 抽選 / 🔴 締切 10月2日(金)必着"
-   }
   },
   {
    "id": "E148",

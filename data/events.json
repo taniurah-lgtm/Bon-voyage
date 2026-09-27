@@ -2680,7 +2680,7 @@
    "discount": "",
    "target": "",
    "url": "https://kodaira-tourism.com/event/22948/",
-   "status": "候補",
+   "status": "**承認済",
    "confidence": "日時・会場・入場無料・出店内容・荒天中止まで確認済み（2026-09-21）",
    "tentative": false,
    "deadline": null,
@@ -2762,6 +2762,46 @@
    "url": "https://www.tamarokuto.or.jp/blog/press/2026/09/17/event_railway/",
    "status": "🔴",
    "confidence": "公式確認済み",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
+   "id": "E154",
+   "name": "前原盆踊り大会2026（小金井市・野川緑地公園）",
+   "dates": [
+    "2026-10-03",
+    "2026-10-04"
+   ],
+   "span": null,
+   "when": "10/3(土) 17:00〜21:00 ／ 10/4(日) 11:00〜18:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "17:00",
+   "end": "21:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "野川緑地公園（三角公園） 小金井市前原町3-3-3",
+   "mapq": "野川緑地公園",
+   "summary": "盆踊り。「お子様にはお菓子をプレゼント！（両日300個限定）」",
+   "kidsNote": "10/4の昼の部が未就学児向き。",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "記載なし（入場の料金の記載なし＝(要確認)）",
+   "discount": "",
+   "target": "",
+   "url": "https://koganei-kanko.jp/event/15196",
+   "status": "候補",
+   "confidence": "協会ページで確認（2026-09-27）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
@@ -3075,6 +3115,46 @@
    "source": "events/2026-10.md"
   },
   {
+   "id": "E153",
+   "name": "みんなのあおぞら音楽会",
+   "dates": [
+    "2026-10-11",
+    "2026-26-10"
+   ],
+   "span": null,
+   "when": "2026年10月11日(日) 11:00〜15:00（✅ 2026/10/11 は日曜）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "11:00",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小金井公園 パークス売店向かい",
+   "mapq": "小金井公園 パークス売店向かい",
+   "summary": "エレクトーンコンサート（3回公演）／カフェコーナー（キッチンカー）／ ワークショップ（アロマ・お花・ハンドドラム制作・ハロウィン工作）",
+   "kidsNote": "屋外・公園の中。ベビーカーで行ける場所＝売店前。",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "○"
+   },
+   "cost": "一部有料（どれが有料かは記載なし＝(要確認)）",
+   "discount": "",
+   "target": "記載なし（「お子さまから大人まで楽しめる」）",
+   "url": "https://www.tokyo-park.or.jp/park/koganei/news/2026/10_11.html",
+   "status": "候補",
+   "confidence": "公式確認済み（2026-09-27）/ 有料の範囲だけ未取得",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E105",
    "name": "第5回 ミラクルミュージックマーケット（MMM）",
    "dates": [
@@ -3283,48 +3363,6 @@
    "confidence": "日付・時間・会場・雨天時の扱い・参加団体まで公式確認済み（2026-09-20）",
    "tentative": false,
    "deadline": null,
-   "source": "events/2026-10.md"
-  },
-  {
-   "id": "E144",
-   "name": "多摩六都科学館 天体観望会【10月】",
-   "dates": [
-    "2026-10-17"
-   ],
-   "span": null,
-   "when": "2026年10月17日(土) 18:30〜20:00（受付開始 18:00）",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": "18:30",
-   "end": "20:00",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "多摩六都科学館 サイエンスエッグ・屋上（西東京市芝久保町5-10-64）",
-   "mapq": "多摩六都科学館 サイエンスエッグ",
-   "summary": "",
-   "kidsNote": "小学生と保護者の組だけ。夜18:30〜20:00",
-   "caution": "",
-   "contact": null,
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "✕",
-    "pre": "✕",
-    "elem": "◎"
-   },
-   "cost": "1人 100円",
-   "discount": "",
-   "target": "小学生〜大人（小学生は保護者と参加）",
-   "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3674&day=2026-10-17",
-   "status": "🔴",
-   "confidence": "公式確認済み（2026-09-22）",
-   "tentative": false,
-   "deadline": {
-    "date": "2026-10-02",
-    "raw": "定員 50人 / 抽選 / 🔴 締切 10月2日(金)必着"
-   },
    "source": "events/2026-10.md"
   },
   {
@@ -4320,11 +4358,13 @@
   "2026-10-03": [
    "E116",
    "E127",
-   "E128"
+   "E128",
+   "E154"
   ],
   "2026-10-04": [
    "E127",
-   "E128"
+   "E128",
+   "E154"
   ],
   "2026-10-06": [
    "E136",
@@ -4360,7 +4400,8 @@
   "2026-10-11": [
    "E145",
    "E98",
-   "E123"
+   "E123",
+   "E153"
   ],
   "2026-10-12": [
    "E145",
@@ -4371,7 +4412,6 @@
    "E111",
    "E135",
    "E141",
-   "E144",
    "E148"
   ],
   "2026-10-18": [
@@ -4397,6 +4437,10 @@
    "E145",
    "E146"
   ],
+  "2026-26-10": [
+   "E153",
+   "E134"
+  ],
   "2026-10-15": [
    "E81"
   ],
@@ -4405,9 +4449,6 @@
   ],
   "2026-10-29": [
    "E81"
-  ],
-  "2026-26-10": [
-   "E134"
   ],
   "2026-10-21": [
    "E100"
@@ -4737,10 +4778,23 @@
    "when": ""
   },
   {
+   "id": "E144",
+   "name": "多摩六都科学館 天体観望会【10月】",
+   "reason": "ステータス「見送り（9/30号には入れない。オーナー決定」のため除外",
+   "when": "2026年10月17日(土) 18:30〜20:00（受付開始 18:00）"
+  },
+  {
    "id": "E125",
    "name": "第15回 こそだてフェスタ@西東京",
    "reason": "ステータス「🔴」のため除外",
    "when": "2026年（令和8年）10月12日(月・祝) 10:00〜15:00"
+  },
+  {
+   "id": "E155",
+   "name": "江戸東京たてもの園「粘土で作ろう！縄文の土偶！」ほか",
+   "confidence": "日時は園の公式スケジュールで確認（2026-09-27）/ 土偶の料金・申込は未取得",
+   "reason": "日時・期間の行が無い",
+   "when": ""
   },
   {
    "id": "E65",
