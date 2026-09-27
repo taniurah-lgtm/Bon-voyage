@@ -15,9 +15,10 @@
  *   docs/homepage/week/YYYY-MM-DD/index.html        … 年齢別と同じ中身（赤ちゃんのタブから）
  *   docs/homepage/week/YYYY-MM-DD/{baby,pre,elem}/  … 年齢別
  *
- * 🔴 **LINEで送る前にページを出さない。**（2026-09-09、下書きの時点でサイトに出て、
- *    LINEの読者よりホームページのほうが先に今週号を読めた。CLAUDE.md 手順7）
- *    sent.log に日付が無い号は、作らない。
+ * 🔴 公開するのは **"ready": true の号か、送った号（sent.log）だけ。**
+ *    2026-09-27 オーナー決定で、ページはLINEの1時間前（準備Routineの push）に出す。
+ *    ホームページ・カレンダー・サイトマップからは辿れない（2026-09-09 の「ホームページが先に読める」は起きない）。
+ *    ホームページの「最新号のプレビュー」は、これまでどおり sent.log で切り替わる。
  *
  * 🔒 ページにもURLにも、計測の仕組みを書かない。/week/日付/baby は「赤ちゃん向けのページ」であって、
  *    計測用のコードではない（見る人にとって意味のある名前にしてある）。
@@ -263,10 +264,15 @@ const problems = [];
 for (const f of files) {
   const date = f.slice(0, 10);
   const outBase = `${OUT_DIR}/${date}`;
-  if (!sent.has(date)) {
+  const spec0 = JSON.parse(readFileSync(`${SRC_DIR}/${f}`, 'utf8'));
+  // 🔴 2026-09-27 オーナー決定: **ページはLINEの1時間前に出す**（受け取ってすぐリンクを押す人が多い）。
+  //    準備Routine（水07:50）が "ready": true を付けて push した時点で公開する。
+  //    ホームページ・カレンダー・サイトマップからは辿れないので、LINEの読者より先に今週号が読まれることはない。
+  //    ready が無く、送ってもいない号は出さない。
+  if (!sent.has(date) && spec0.ready !== true) {
     // 送っていない号は出さない。前に組んだものが残っていたら消す（取り消した号など）
     if (existsSync(outBase)) rmSync(outBase, { recursive: true, force: true });
-    console.log(`  ${date}: まだ送っていないので作らない`);
+    console.log(`  ${date}: まだ準備中（ready でも送信済みでもない）なので作らない`);
     continue;
   }
   const spec = JSON.parse(readFileSync(`${SRC_DIR}/${f}`, 'utf8'));
