@@ -62,25 +62,58 @@ const LEAK = /\bE\d{2,3}\b|台帳|巡回|スクリプト|Routine|Claude|GoatCoun
 const mapUrl = (q) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 const rank = (m) => ({ '◎': 0, '○': 1 }[m] ?? 9);
 
+// --- 見た目（2026-09-27 オーナー指示: 30代のお母さんに刺さる、雑誌のような落ち着いたページに） ---
+const WDJ = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+const ICON = {
+  when: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>',
+  where: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10" r="2.3"/></svg>',
+  cost: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9 8l3 4 3-4M9 13h6M9 16h6M12 12v6"/></svg>',
+  who: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.8 3.6-6 7-6s6.2 2.2 7 6"/></svg>',
+  out: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-8 8M18 14v4a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18V7.5A1.5 1.5 0 0 1 5.5 6H10"/></svg>',
+};
+const AGE_SHORT = { baby: '赤ちゃん', pre: '未就学', elem: '小学生' };
+const markClass = (m) => ({ '◎': 'm-best', '○': 'm-ok', '△': 'm-maybe' }[m] || 'm-no');
+
+// 日付の札（左の大きい数字）。複数日は「10/3–4」、長い会期は「〜12/27」
+function dateChip(ev) {
+  const ds = (ev.dates || []).slice().sort();
+  const fmt = (iso) => { const [, m, d] = iso.split('-').map(Number); return { m, d, w: WDJ[new Date(iso + 'T00:00:00Z').getUTCDay()] }; };
+  if (ds.length) {
+    const a = fmt(ds[0]);
+    if (ds.length === 1) return `<div class="chip"><span class="md">${a.m}/${a.d}</span><span class="wd">${a.w}</span></div>`;
+    const b = fmt(ds[ds.length - 1]);
+    const tail = b.m === a.m ? `–${b.d}` : `–${b.m}/${b.d}`;
+    return `<div class="chip"><span class="md">${a.m}/${a.d}<small>${tail}</small></span><span class="wd">${ds.length}DAYS</span></div>`;
+  }
+  if (ev.span && ev.span.to) { const b = fmt(ev.span.to); return `<div class="chip"><span class="md"><small>〜</small>${b.m}/${b.d}</span><span class="wd">UNTIL</span></div>`; }
+  return `<div class="chip"><span class="md">—</span><span class="wd">OPEN</span></div>`;
+}
+
 function card(item, ev, { pick = false } = {}) {
   const a = ev.ages || {};
-  const marks = AGES.map((g) => `${g.icon}${a[g.key] || '？'}`).join(' ');
+  const ages = AGES.map((g) => `<span class="age ${markClass(a[g.key])}">${AGE_SHORT[g.key]}<b>${esc(a[g.key] || '？')}</b></span>`).join('');
   const rokuto = /多摩六都/.test(`${ev.name}${ev.place}`);
   const note = item.note || ev.kidsNote || '';
   return `
   <article class="card${pick ? ' pick' : ''}">
-    <h3>${pick ? '<span class="badge">一推し</span>' : ''}${esc(ev.name)}</h3>
-    <ul class="facts">
-      <li>🗓 ${esc(ev.when || '')}</li>
-      <li>📍 ${esc(ev.place || '')}</li>
-      ${ev.cost ? `<li>💴 ${esc(ev.cost)}</li>` : ''}
-      ${ev.target ? `<li>👤 ${esc(ev.target)}</li>` : ''}
-    </ul>
+    ${pick ? '<p class="ribbon"><span>PICK UP</span>今週の一推し</p>' : ''}
+    <div class="row">
+      ${dateChip(ev)}
+      <div class="body">
+        <h3>${esc(ev.name)}</h3>
+        <ul class="facts">
+          <li>${ICON.when}<span>${esc(ev.when || '')}</span></li>
+          ${ev.place ? `<li>${ICON.where}<span>${esc(ev.place)}</span></li>` : ''}
+          ${ev.cost ? `<li>${ICON.cost}<span>${esc(ev.cost)}</span></li>` : ''}
+          ${ev.target ? `<li>${ICON.who}<span>${esc(ev.target)}</span></li>` : ''}
+        </ul>
+      </div>
+    </div>
     ${note ? `<p class="note">${esc(note)}</p>` : ''}
-    <div class="foot">
-      <span class="marks">${marks}</span>
-      ${ev.url ? `<a href="${esc(ev.url)}" target="_blank" rel="noopener">公式</a>` : ''}
-      ${ev.mapq ? `<a href="${esc(mapUrl(ev.mapq))}" target="_blank" rel="noopener" data-goatcounter-click="${esc('地図｜' + ev.name)}">地図</a>` : ''}
+    <div class="ages">${ages}</div>
+    <div class="acts">
+      ${ev.url ? `<a class="btn ghost" href="${esc(ev.url)}" target="_blank" rel="noopener">公式サイト${ICON.out}</a>` : ''}
+      ${ev.mapq ? `<a class="btn solid" href="${esc(mapUrl(ev.mapq))}" target="_blank" rel="noopener" data-goatcounter-click="${esc('地図｜' + ev.name)}">地図をひらく${ICON.out}</a>` : ''}
     </div>
     ${rokuto ? '<p class="fine">※最新の情報は多摩六都科学館ウェブサイトでご確認ください。</p>' : ''}
   </article>`;
@@ -93,7 +126,7 @@ function sponsorBlock() {
     .join('');
   return `
   <section class="sponsors">
-    <h2>ご協賛</h2>
+    <p class="kicker">SUPPORTED BY</p>
     <p>この通信は、次の方々のご協賛で運営しています。</p>
     <ul>${list}</ul>
   </section>`;
@@ -114,35 +147,76 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:image" content="${SITE}/assets/hero-park.jpg">
 <meta property="og:locale" content="ja_JP">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&family=Zen+Maru+Gothic:wght@500;700&display=swap">
 <link rel="stylesheet" href="/assets/bv-tokens.css">
 <link rel="stylesheet" href="/assets/bv-nav.css">
 <script src="/assets/analytics.js" defer></script>
 <style>
-  .ghead-in { padding-top: .9rem; padding-bottom: .7rem; }
-  .ghead h1 { font-size: 1.25rem; margin: 0; }
-  .ghead .eyebrow { font-size: .8rem; }
-  main { padding: .4rem 0 1rem; font-size: .84rem; }
-  .tabs { position: sticky; top: 0; z-index: 5; display: flex; gap: .3rem; background: var(--body, #fff); padding: .5rem 0; border-bottom: 1px solid var(--line); margin-bottom: .6rem; }
-  .tabs a { flex: 1; text-align: center; font-family: var(--maru); font-weight: 700; font-size: .8rem; text-decoration: none; color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .45rem .2rem; min-height: 36px; display: flex; align-items: center; justify-content: center; }
-  .tabs a[aria-selected="true"] { background: var(--sky-deep); color: var(--on-sky, #fff); border-color: var(--sky-deep); }
-  h2 { font-family: var(--maru); font-size: .92rem; color: var(--sky-deep); margin: 1rem 0 .4rem; }
-  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .6rem .75rem; margin-bottom: .5rem; }
-  .card.pick { border: 2px solid var(--marigold); }
-  .badge { font-size: .68rem; font-weight: 700; color: var(--marigold-ink); background: var(--marigold-wash); border-radius: 999px; padding: .05rem .45rem; margin-right: .35rem; vertical-align: .1em; }
-  .card h3 { font-family: var(--maru); font-size: .92rem; line-height: 1.45; margin: 0 0 .3rem; color: var(--ink); }
-  .facts { list-style: none; margin: 0; padding: 0; font-size: .8rem; line-height: 1.6; color: var(--ink-soft); }
-  .facts li { overflow-wrap: anywhere; }
-  .note { font-size: .82rem; line-height: 1.65; margin: .3rem 0 0; }
-  .foot { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin-top: .4rem; }
-  .marks { font-size: .78rem; margin-right: auto; }
-  .foot a { font-weight: 700; font-size: .78rem; text-decoration: none; color: var(--sky-deep); background: var(--sky-wash); border-radius: 999px; padding: .35rem .8rem; min-height: 34px; display: inline-flex; align-items: center; }
-  .fine { font-size: .7rem; color: var(--ink-faint); margin: .35rem 0 0; }
-  .empty { color: var(--ink-faint); font-size: .82rem; }
-  .sponsors { margin-top: 1.4rem; border-top: 1px solid var(--line); padding-top: .8rem; font-size: .8rem; color: var(--ink-soft); }
-  .sponsors h2 { margin-top: 0; }
-  .sponsors ul { padding-left: 1.2em; line-height: 1.8; }
-  .sponsors span { margin-left: .5em; color: var(--ink-faint); }
-  .stamp { font-size: .74rem; color: var(--ink-faint); margin-top: 1.2rem; line-height: 1.7; }
+  :root {
+    --w-bg:#FAF6F0; --w-card:#FFFFFF; --w-ink:#3B3530; --w-soft:#766B62; --w-faint:#A3978D; --w-line:#EEE5D9;
+    --w-accent:#C9755B; --w-accent-ink:#A5563E; --w-wash:#F8EAE2; --w-sage:#7E9A7A; --w-sage-wash:#EBF0E7; --w-shadow:0 1px 2px rgba(80,60,40,.04),0 6px 18px rgba(80,60,40,.06);
+    --w-en:"Jost","Helvetica Neue",Arial,sans-serif; --w-maru:"Zen Maru Gothic",var(--maru);
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --w-bg:#1D1A18; --w-card:#272320; --w-ink:#F1EBE4; --w-soft:#C4B8AD; --w-faint:#90857B; --w-line:#3A342F;
+    --w-accent:#E39A7F; --w-accent-ink:#EDB29C; --w-wash:#3A2A24; --w-sage:#A2BC9E; --w-sage-wash:#2A3328; --w-shadow:0 1px 2px rgba(0,0,0,.3);
+  } }
+  :root[data-theme="dark"] {
+    --w-bg:#1D1A18; --w-card:#272320; --w-ink:#F1EBE4; --w-soft:#C4B8AD; --w-faint:#90857B; --w-line:#3A342F;
+    --w-accent:#E39A7F; --w-accent-ink:#EDB29C; --w-wash:#3A2A24; --w-sage:#A2BC9E; --w-sage-wash:#2A3328; --w-shadow:0 1px 2px rgba(0,0,0,.3);
+  }
+  body { background: var(--w-bg); color: var(--w-ink); }
+  .hero { position: relative; overflow: hidden; padding: 1.5rem 0 1.1rem; }
+  .hero::before, .hero::after { content: ""; position: absolute; border-radius: 50%; filter: blur(2px); z-index: 0; }
+  .hero::before { width: 13rem; height: 13rem; right: -3.5rem; top: -5rem; background: radial-gradient(circle, var(--w-wash) 0%, transparent 70%); }
+  .hero::after { width: 9rem; height: 9rem; left: -3rem; bottom: -4rem; background: radial-gradient(circle, var(--w-sage-wash) 0%, transparent 70%); }
+  .hero .wrap { position: relative; z-index: 1; }
+  .kicker { font-family: var(--w-en); font-size: .68rem; letter-spacing: .22em; color: var(--w-accent-ink); margin: 0; }
+  .hero h1 { font-family: var(--w-maru); font-weight: 700; font-size: 1.55rem; letter-spacing: .04em; line-height: 1.35; margin: .25rem 0 .2rem; }
+  .hero .issue { font-size: .76rem; color: var(--w-soft); }
+  main { padding: 0 0 1.5rem; font-size: .84rem; }
+  .tabs { position: sticky; top: 0; z-index: 5; display: flex; gap: .25rem; padding: .3rem; margin: 0 0 1rem; background: color-mix(in srgb, var(--w-line) 70%, var(--w-bg)); border-radius: 999px; box-shadow: 0 0 0 .45rem var(--w-bg); }
+  .tabs a { flex: 1; text-align: center; font-family: var(--w-maru); font-weight: 700; font-size: .8rem; text-decoration: none; color: var(--w-soft); border-radius: 999px; padding: .5rem .2rem; min-height: 40px; display: flex; align-items: center; justify-content: center; transition: background .2s, color .2s; }
+  .tabs a[aria-selected="true"] { background: var(--w-card); color: var(--w-accent-ink); box-shadow: var(--w-shadow); }
+  .sec { display: flex; align-items: baseline; gap: .6rem; margin: 1.3rem 0 .6rem; }
+  .sec .kicker { flex: none; }
+  .sec h2 { font-family: var(--w-maru); font-weight: 700; font-size: .95rem; margin: 0; color: var(--w-ink); }
+  .sec::after { content: ""; flex: 1; height: 1px; background: var(--w-line); align-self: center; }
+  .card { background: var(--w-card); border-radius: 18px; padding: .8rem .85rem .75rem; margin-bottom: .6rem; box-shadow: var(--w-shadow); }
+  .card.pick { background: linear-gradient(160deg, var(--w-wash), var(--w-card) 60%); outline: 1px solid color-mix(in srgb, var(--w-accent) 35%, transparent); }
+  .ribbon { display: flex; align-items: center; gap: .5rem; font-family: var(--w-maru); font-weight: 700; font-size: .74rem; color: var(--w-accent-ink); margin: 0 0 .55rem; }
+  .ribbon span { font-family: var(--w-en); font-weight: 500; font-size: .62rem; letter-spacing: .18em; color: #fff; background: var(--w-accent); border-radius: 999px; padding: .12rem .55rem; }
+  .row { display: flex; gap: .8rem; }
+  .chip { flex: none; width: 4.1rem; white-space: nowrap; text-align: center; padding-top: .1rem; border-right: 1px solid var(--w-line); padding-right: .7rem; }
+  .chip .md { display: block; font-family: var(--w-en); font-weight: 500; font-size: 1.1rem; line-height: 1.15; color: var(--w-ink); letter-spacing: .01em; }
+  .chip .md small { font-size: .72rem; color: var(--w-soft); }
+  .chip .wd { display: block; font-family: var(--w-en); font-size: .6rem; letter-spacing: .16em; color: var(--w-accent-ink); margin-top: .15rem; }
+  .body { min-width: 0; flex: 1; }
+  .card h3 { font-family: var(--w-maru); font-weight: 700; font-size: .95rem; line-height: 1.5; margin: 0 0 .35rem; }
+  .facts { list-style: none; margin: 0; padding: 0; font-size: .75rem; line-height: 1.55; color: var(--w-soft); }
+  .facts li { display: flex; gap: .35rem; align-items: flex-start; overflow-wrap: anywhere; }
+  .facts svg { flex: none; width: 13px; height: 13px; margin-top: .22rem; fill: none; stroke: var(--w-faint); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .note { font-size: .78rem; line-height: 1.7; margin: .5rem 0 0; padding: .45rem .65rem; background: color-mix(in srgb, var(--w-sage-wash) 70%, transparent); border-radius: 12px; }
+  .ages { display: flex; flex-wrap: wrap; gap: .3rem; margin: .6rem 0 0; }
+  .age { font-size: .68rem; color: var(--w-soft); border-radius: 999px; padding: .1rem .5rem; border: 1px solid var(--w-line); }
+  .age b { font-weight: 700; margin-left: .2rem; }
+  .age.m-best { background: var(--w-wash); border-color: transparent; color: var(--w-accent-ink); }
+  .age.m-ok { background: var(--w-sage-wash); border-color: transparent; color: color-mix(in srgb, var(--w-sage) 70%, var(--w-ink)); }
+  .age.m-no { opacity: .55; }
+  .acts { display: flex; gap: .45rem; margin-top: .55rem; }
+  .btn { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: .3rem; min-height: 38px; border-radius: 999px; font-family: var(--w-maru); font-weight: 700; font-size: .76rem; text-decoration: none; }
+  .btn svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .btn.ghost { color: var(--w-ink); border: 1px solid var(--w-line); background: transparent; }
+  .btn.solid { color: #fff; background: var(--w-accent); }
+  .fine { font-size: .66rem; color: var(--w-faint); margin: .5rem 0 0; }
+  .empty { color: var(--w-faint); font-size: .8rem; text-align: center; padding: 1.2rem 0; }
+  .sponsors { margin-top: 1.8rem; padding: 1rem 1.1rem; border-radius: 18px; background: var(--w-card); box-shadow: var(--w-shadow); font-size: .78rem; color: var(--w-soft); }
+  .sponsors ul { padding-left: 1.1em; margin: .4rem 0 0; line-height: 1.9; }
+  .sponsors span { margin-left: .5em; color: var(--w-faint); }
+  .stamp { font-size: .7rem; color: var(--w-faint); margin-top: 1.4rem; line-height: 1.8; text-align: center; }
+  .back { font-size: .8rem; }
 </style>
 </head>
 <body>
@@ -156,15 +230,16 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
     </div>
   </div>
 </nav>
-<header class="ghead">
-  <div class="ghead-in">
-    <div class="eyebrow">${esc(head.eyebrow)}</div>
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">${esc(head.kicker)}</p>
     <h1>${esc(head.h1)}</h1>
+    <p class="issue">${esc(head.issue)}</p>
   </div>
 </header>
 <main class="wrap">
 ${body}
-  <p class="stamp">日程・料金は変わることがあります。おでかけの前に、各公式ページでご確認ください。<br>
+  <p class="stamp">日程・料金は変わることがあります。おでかけの前に、各公式サイトでご確認ください。<br>
     市や施設の公式ページで一件ずつ確かめています。</p>
   <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>
 </main>
@@ -220,8 +295,9 @@ for (const f of files) {
     const now = forAge(items, g.key);
     const next = forAge(ahead, g.key);
     return `<section class="panel" id="${g.key}" data-age="${g.key}">
+  <div class="sec"><p class="kicker">THIS WEEK</p><h2>今週のおでかけ</h2></div>
   ${now.length ? now.map(({ it, ev }) => card(it, ev, { pick: it.id === spec.pick })).join('') : '<p class="empty">今週は、この年齢向けの催しが少なめです。ほかのタブもご覧ください。</p>'}
-  ${next.length ? `<h2>先取り・申込の締切</h2>${next.map(({ it, ev }) => card(it, ev)).join('')}` : ''}
+  ${next.length ? `<div class="sec"><p class="kicker">COMING UP</p><h2>先取り・申込の締切</h2></div>${next.map(({ it, ev }) => card(it, ev)).join('')}` : ''}
 </section>`;
   };
   const tabbed = (active) => `
@@ -250,7 +326,7 @@ for (const f of files) {
       title: `${g.icon} ${g.label}｜${issue}｜ぼんぼやーじゅ通信`,
       desc: `${issue}のおでかけ情報を、年齢別に公式ページ・地図つきで。`,
       path: `/week/${date}/${g.key}/`,
-      head: { eyebrow: issue, h1: '今週のおでかけ' },
+      head: { kicker: `WEEKEND GUIDE · ${m}.${String(d).padStart(2, '0')} ${WDJ[new Date(Date.UTC(y, m - 1, d)).getUTCDay()]}`, h1: '今週のおでかけ', issue: `ぼんぼやーじゅ通信 ${issue}` },
       body: tabbed(g.key),
     }));
   }
@@ -258,7 +334,7 @@ for (const f of files) {
     title: `${issue}｜ぼんぼやーじゅ通信`,
     desc: `${issue}のおでかけ情報を、年齢別に公式ページ・地図つきで。`,
     path: `/week/${date}/`,
-    head: { eyebrow: issue, h1: '今週のおでかけ' },
+    head: { kicker: `WEEKEND GUIDE · ${m}.${String(d).padStart(2, '0')} ${WDJ[new Date(Date.UTC(y, m - 1, d)).getUTCDay()]}`, h1: '今週のおでかけ', issue: `ぼんぼやーじゅ通信 ${issue}` },
     body: tabbed('baby'),
   }));
   built++;
