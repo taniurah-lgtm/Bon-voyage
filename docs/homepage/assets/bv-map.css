@@ -78,6 +78,8 @@
      ふきだしの中でスクロールさせて、地図の中に収める。 */
   max-height: 7.5rem; overflow-y: auto; -webkit-overflow-scrolling: touch;
 }
+.bvm-pop-gmap { display: flex; align-items: center; justify-content: center; gap: .3rem; margin-top: .5rem; min-height: 44px; border-radius: 999px; background: #2C7C9E; color: #fff !important; font-family: var(--maru); font-weight: 800; font-size: .8rem; white-space: nowrap; padding: 0 .9rem; text-decoration: none; }
+.bvm-pop-gmap::before { content: "📍"; }
 .bvm-pop-links { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .35rem; font-size: .8rem; font-weight: 700; }
 
 /* 一覧側で「いまここ」を光らせる */

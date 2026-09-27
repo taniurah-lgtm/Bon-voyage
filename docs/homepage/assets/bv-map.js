@@ -152,8 +152,9 @@
           : '') +
         // リンクは声より前に置く。声が長いとふきだしが伸びて、
         // ボタンが地図の外に押し出されて押せなくなる（300字の投稿で実際に起きた）。
+        // 2026-09-27 オーナー指示: 下の地図はこのまま、**Googleマップへのボタンを大きく**（アプリで開ける）
+        '<a class="bvm-pop-gmap" href="' + esc(sp.map || mapURL(sp.name)) + '" target="_blank" rel="noopener">Googleマップで開く</a>' +
         '<span class="bvm-pop-links">' +
-        '<a href="' + esc(sp.map || mapURL(sp.name)) + '" target="_blank" rel="noopener">📍 地図で見る</a>' +
         (sp.official ? '<a href="' + esc(sp.official) + '" target="_blank" rel="noopener">🔗 公式</a>' : '') +
         // 飛び先の一覧が無いページ（会員ページ）でこれを出すと、押しても何も起きず、
         // 履歴に # だけが積まれる。一覧があるページだけ出す。
