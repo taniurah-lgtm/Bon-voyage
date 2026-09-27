@@ -19,6 +19,10 @@ echo "── 公開カレンダー（誰でも・台帳の全期間）"
 node scripts/build-calendar.mjs
 
 echo
+echo "── 号ごとの年齢別ページ（送った号だけ。10/7号から）"
+node scripts/build-weekly.mjs
+
+echo
 echo "── 公開マップ（地図＋投稿フォーム）"
 node scripts/build-map.mjs
 
