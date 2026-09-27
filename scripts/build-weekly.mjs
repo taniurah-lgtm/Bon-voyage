@@ -122,16 +122,25 @@ function card(item, ev, { pick = false } = {}) {
   </article>`;
 }
 
+// 協賛（2026-09-27 オーナー決定: A案＝ロゴ入りのカード）
+// data/sponsors.json: [{ "name": "…", "url": "…", "note": "ひとこと", "logo": "/assets/sponsors/xxx.png", "color": "#C9755B" }]
+//   logo が無ければ、頭文字の丸いマーク（color で色を変えられる）
 function sponsorBlock() {
   if (!Array.isArray(sponsors) || !sponsors.length) return '';
-  const list = sponsors
-    .map((s) => `<li>${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>` : esc(s.name)}${s.note ? `<span>${esc(s.note)}</span>` : ''}</li>`)
-    .join('');
+  const cards = sponsors.map((s) => {
+    const mark = s.logo
+      ? `<img src="${esc(s.logo)}" alt="" loading="lazy">`
+      : `<span class="mono" style="${s.color ? `background:${esc(s.color)}` : ''}">${esc([...String(s.name)][0] || '')}</span>`;
+    const inner = `<span class="logo">${mark}</span><span class="txt"><b>${esc(s.name)}</b>${s.note ? `<small>${esc(s.note)}</small>` : ''}</span>`;
+    return s.url
+      ? `<a class="sp" href="${esc(s.url)}" target="_blank" rel="noopener sponsored">${inner}</a>`
+      : `<div class="sp">${inner}</div>`;
+  }).join('');
   return `
   <section class="sponsors">
     <p class="kicker">SUPPORTED BY</p>
-    <p>この通信は、次の方々のご協賛で運営しています。</p>
-    <ul>${list}</ul>
+    <p class="sp-lead">この通信は、次の方々のご協賛で運営しています。</p>
+    <div class="sp-grid">${cards}</div>
   </section>`;
 }
 
@@ -216,9 +225,17 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
   .btn.solid { color: #fff; background: var(--w-accent); }
   .fine { font-size: .64rem; color: var(--w-faint); margin: .35rem 0 0; }
   .empty { color: var(--w-faint); font-size: .8rem; text-align: center; padding: 1.2rem 0; }
-  .sponsors { margin-top: 1.8rem; padding: 1rem 1.1rem; border-radius: 18px; background: var(--w-card); box-shadow: var(--w-shadow); font-size: .78rem; color: var(--w-soft); }
-  .sponsors ul { padding-left: 1.1em; margin: .4rem 0 0; line-height: 1.9; }
-  .sponsors span { margin-left: .5em; color: var(--w-faint); }
+  .sponsors { margin-top: 1.8rem; }
+  .sp-lead { font-size: .74rem; color: var(--w-soft); margin: .2rem 0 .6rem; }
+  .sp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+  .sp { display: flex; flex-direction: column; align-items: center; text-align: center; gap: .4rem; padding: .8rem .5rem .7rem; background: var(--w-card); border-radius: 16px; box-shadow: var(--w-shadow); text-decoration: none; color: var(--w-ink); }
+  .sp .logo { width: 64px; height: 64px; border-radius: 14px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--w-bg); }
+  .sp .logo img { width: 100%; height: 100%; object-fit: contain; }
+  .sp .mono { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--w-maru); font-weight: 700; font-size: 1.5rem; color: #fff; background: var(--w-accent); }
+  .sp .txt { display: flex; flex-direction: column; gap: .1rem; min-width: 0; }
+  .sp b { font-family: var(--w-maru); font-weight: 700; font-size: .78rem; line-height: 1.4; }
+  .sp small { font-size: .66rem; color: var(--w-soft); line-height: 1.45; }
+  @media (min-width: 560px) { .sp-grid { grid-template-columns: repeat(3, 1fr); } }
   .stamp { font-size: .7rem; color: var(--w-faint); margin-top: 1.4rem; line-height: 1.8; text-align: center; }
   .back { font-size: .8rem; }
 </style>
