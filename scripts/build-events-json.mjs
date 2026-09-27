@@ -810,6 +810,31 @@ writeFileSync(OUT, JSON.stringify(payload, null, 1));
 
 // ---- 落ちたものを必ず表示する（黙って0件にしない）--------------------------
 const firm = events.filter((e) => !e.tentative).length;
+
+// 🔴 2026-09-27 オーナー指示: **台帳に載せるものは、必ず年齢の目安（👶 🧒 🎒 の3つ）を付ける。**
+//    10/7号からの年齢別ページは、この目安で振り分ける。欠けていると、どのタブにも出ずに**黙って漏れる**。
+{
+  const today = new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Tokyo' });
+  const upcoming = (e) => (e.dates || []).some((d) => d >= today) || (e.span && (!e.span.to || e.span.to >= today));
+  const lack = events.filter((e) => upcoming(e) && !(e.ages && e.ages.baby && e.ages.pre && e.ages.elem));
+  // カレンダーに載らない（日時の書き方が読めない）ものも拾う。今月以降の台帳で、見送り・終了でないもの
+  const ym = today.slice(0, 7);
+  const seen = new Set(lack.map((e) => e.id));
+  for (const f of readdirSync('events').filter((x) => /^\d{4}-\d{2}\.md$/.test(x) && x.slice(0, 7) >= ym)) {
+    for (const blk of readFileSync(`events/${f}`, 'utf8').split(/\n(?=### E\d+)/)) {
+      const m = blk.match(/^### (E\d+)\.\s*(.*)/);
+      if (!m || seen.has(m[1])) continue;
+      if (/ステータス[:：][^\n]*(見送り|終了)/.test(blk)) continue;
+      if (/👶\s*[◎○△✕x×]/.test(blk) && /🧒\s*[◎○△✕x×]/.test(blk) && /🎒\s*[◎○△✕x×]/.test(blk)) continue;
+      lack.push({ id: m[1], name: m[2].replace(/[★*].*$/, '').trim() });
+      seen.add(m[1]);
+    }
+  }
+  if (lack.length) {
+    console.log(`  🔴 年齢の目安が欠けているもの ${lack.length}件（年齢別ページのどのタブにも出ない）:`);
+    for (const e of lack) console.log(`     ${e.id} ${e.name}  → 台帳に「- 子連れ: 👶? 🧒? 🎒?」を3つとも書く`);
+  }
+}
 console.log(`wrote ${OUT}`);
 console.log(`  確定 ${firm}件 / 暫定 ${events.length - firm}件 / 常設・季節 ${standing.length}件 / 載せられなかったもの ${unresolved.length}件`);
 for (const u of unresolved) console.log(`  - ${u.id} ${u.name}: ${u.reason}${u.when ? ` 「${u.when}」` : ''}`);

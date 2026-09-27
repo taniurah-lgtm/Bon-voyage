@@ -196,6 +196,8 @@ for (const f of files) {
     (list || []).map((it) => {
       const ev = byId.get(it.id);
       if (!ev) problems.push(`${date}: ${it.id} が公開データに無い（ステータスが見送り・保留か、日付が取れていない）`);
+      else if (!(ev.ages && ev.ages.baby && ev.ages.pre && ev.ages.elem))
+        problems.push(`${date}: ${it.id} に年齢の目安（👶🧒🎒）が3つそろっていない。どのタブに出すか決められない`);
       if (it.note && LEAK.test(it.note)) problems.push(`${date}: ${it.id} のひとことに内部の話が入っている: ${it.note}`);
       return ev ? { it, ev } : null;
     }).filter(Boolean);
