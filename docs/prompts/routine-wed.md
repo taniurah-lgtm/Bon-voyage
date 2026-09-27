@@ -4,6 +4,8 @@
 ★2026-09-27 オーナー決定: **LINEを受け取ってすぐリンクを押す人が多い。ページを先に出し、1時間後にLINEを送る。**
 （9/30号から。LINEは入口、中身は年齢別ページ `CLAUDE.md`）
 
+★このプロンプトの正本は リポジトリの `docs/prompts/routine-wed.md`。直すときは両方直す。
+
 ## 手順0 リポジトリを使えるようにする（いちばん最初にこれ）
 
 **まず `add_repo` ツールを呼ぶ。** 引数は `owner: "taniurah-lgtm"` / `repo: "Bon-voyage"` / `access: "push"`。
