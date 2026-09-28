@@ -297,3 +297,40 @@ Meta のビジネス認証は、書類を見るだけでなく
 **2・6 は本人確認なので、オーナーの手でしかできない。**
 
 > ✅ **1が済んでいたので、この申請の最長の道は消えた。**残りは Meta の画面の作業と、審査の待ち時間だけ。
+
+---
+
+## ⑥ 提出物（2026-09-28 用意）
+
+- **アイコン**: `docs/print/meta-app-icon-1024.png`（1024×1024。LINEのアイコンと同じ絵）
+- **プライバシーポリシー**: `https://bonvoya.nicomaru.tokyo/tokushoho.html`
+  - 2026-09-28、「Threadsの公開投稿について」の項目と、**英語の要約**（Privacy summary）を足した。
+    運営者名「ニコマル（Nicomaru）」もページに出した（ビジネス認証・LINE認証で名前とサイトをつなぐため）
+  - 🔒 **公開ページに書いたのは「公開投稿を運営者が読むことがある・保存しない・第三者に渡さない・自動で返信しない」だけ。**
+    API・自動化・キーワードの一覧は書いていない（CLAUDE.md「公開物に書かないこと」）
+
+### 説明文（App Review の threads_keyword_search 用・英語）
+
+> **What the app does:** Bonvoya Tsushin is a free weekly newsletter for families with small children in Kodaira City, Tokyo.
+> The operator uses this app to find public Threads posts by local parents, using place-name keywords
+> (for example "小平" / Kodaira, "花小金井" / Hanakoganei).
+>
+> **Why we need threads_keyword_search:** Without this permission, keyword search only returns our own posts,
+> so the feature cannot work. We need to see public posts from other users in our area.
+>
+> **How the data is used:** Search results are only displayed to the operator (one person) inside the app.
+> The operator reads each post and, when appropriate, writes a reply by hand to share local event information.
+> **The app never posts or replies automatically.** We do not store the retrieved posts and we do not share them with third parties.
+>
+> **User benefit:** Local parents who are looking for weekend activities for their children can learn about free,
+> officially verified local events.
+
+### 画面録画の台本（1080p以上・幅1440px以下・音声なし・マウスが見える・英語UI）
+
+1. ブラウザの言語を英語にする（Chromeの設定 → 言語 → English を一番上）
+2. 録画開始。`https://threads.net/oauth/authorize?client_id=…&redirect_uri=https://localhost/&scope=threads_basic,threads_keyword_search,threads_manage_insights&response_type=code` を開く
+3. 許可の画面で **「Search and reply to public Threads posts」** が並んでいるのを**マウスで指してから**、続行
+4. （code → 短い鍵 → 60日の鍵 の取り替えは録画しなくてよい。録画を一度止めてよい）
+5. `https://graph.threads.net/v1.0/keyword_search?q=kodaira&fields=id,username,text,timestamp&access_token=…` を開き、**結果が画面に出る**ところを映す
+   🔴 **アドレス欄の鍵（access_token=…）が映らないように**、ページを開いたらすぐアドレス欄の外をクリックし、結果の部分だけを映す
+6. 結果の1件をマウスで指して、「運営者が読む」ことを示す。録画終了
