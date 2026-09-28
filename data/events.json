@@ -3131,7 +3131,7 @@
    "timeUncertain": false,
    "place": "小金井公園 パークス売店向かい",
    "mapq": "小金井公園 パークス売店向かい",
-   "summary": "エレクトーンコンサート（3回公演）／カフェコーナー（キッチンカー）／ ワークショップ（アロマ・お花・ハンドドラム制作・ハロウィン工作）",
+   "summary": "エレクトーンコンサート（3回公演: 11:00〜11:30・13:00〜13:30・14:30〜15:00）／カフェコーナー（キッチンカー）／ ワークショップ（アロマ・お花・ハンドドラム制作・ハロウィン工作）",
    "kidsNote": "屋外・公園の中。ベビーカーで行ける場所＝売店前。",
    "caution": "",
    "contact": null,
@@ -3443,6 +3443,45 @@
    "source": "events/2026-10.md"
   },
   {
+   "id": "E157",
+   "name": "三鷹の森フェスティバル2026",
+   "dates": [
+    "2026-10-18"
+   ],
+   "span": null,
+   "when": "2026年10月18日(日) 10:30〜17:00（予定） ※小雨決行",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:30",
+   "end": "17:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "井の頭恩賜公園 西園 文化交流広場（三鷹の森ジブリ美術館の隣）",
+   "mapq": "井の頭恩賜公園 西園 文化交流広場",
+   "summary": "ステージプログラム（詳細は公式Facebook）。子ども向けの企画は公式に記載なし",
+   "kidsNote": "屋外・芝生の広場。子ども向け企画は未確認。",
+   "caution": "小雨決行",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "○",
+    "elem": "○"
+   },
+   "cost": "入場無料",
+   "discount": "",
+   "target": "",
+   "url": "https://www.ghibli-museum.jp/news/015611/",
+   "status": "候補（遠出枠）。🔴",
+   "confidence": "公式確認済み（2026-09-28） / 子ども向け企画は未取得",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E100",
    "name": "はじめての自転車教室（小金井公園 サイクリングセンター）",
    "dates": [
@@ -3732,6 +3771,49 @@
     "date": "2026-09-24",
     "raw": "🔴 申込: 9/24(木) 10:00 から、申込みフォーム（Google Forms）で先着順"
    },
+   "source": "events/2026-10.md"
+  },
+  {
+   "id": "E156",
+   "name": "上水南公民館まつり音楽会 ミュージックベルコンサート",
+   "dates": [
+    "2026-10-31"
+   ],
+   "span": null,
+   "when": "2026年10月31日(土) 11:00〜12:00（開場 10:30）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "11:00",
+   "end": "12:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "上水南公民館 ホール（小平市上水南町1-27-1）",
+   "mapq": "小平市上水南公民館 ホール",
+   "summary": "日本の季節を感じる童謡やアニメの主題曲など、子どもも楽しめる曲をミュージックベルで。リトミック体験もある",
+   "kidsNote": "屋内・1時間。リトミックがあるので未就学児が参加できる。",
+   "caution": "",
+   "contact": {
+    "tel": "042-325-4133",
+    "mail": "",
+    "who": ""
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "小学生以下・小学生・中高生・大人・高齢者・親子（公式の表記）",
+   "url": "https://www.city.kodaira.tokyo.jp/event/129/129951.html",
+   "status": "候補",
+   "confidence": "公式確認済み（2026-09-28）",
+   "tentative": false,
+   "deadline": null,
    "source": "events/2026-10.md"
   },
   {
@@ -4412,7 +4494,8 @@
    "E145",
    "E141",
    "E148",
-   "E134"
+   "E134",
+   "E157"
   ],
   "2026-11-07": [
    "E145",
@@ -4467,7 +4550,8 @@
    "E139"
   ],
   "2026-10-31": [
-   "E117"
+   "E117",
+   "E156"
   ],
   "2026-11-01": [
    "E122",
