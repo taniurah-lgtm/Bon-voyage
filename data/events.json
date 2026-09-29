@@ -2806,6 +2806,50 @@
    "source": "events/2026-10.md"
   },
   {
+   "id": "E161",
+   "name": "KICHIJOJI STREET PICNIC 2026（吉祥寺駅南口パークロード）",
+   "dates": [
+    "2026-10-03",
+    "2026-10-04"
+   ],
+   "span": null,
+   "when": "2026年10月3日(土) 15:00〜22:00／雨天延期 10/4(日)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "15:00",
+   "end": "22:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "吉祥寺駅南口 パークロード・南口暫定広場ほか（武蔵野市）",
+   "mapq": "吉祥寺駅南口 パークロード",
+   "summary": "地域のお店の屋台、ピクニック席、子ども向けのゲームや動物ふれあいコーナー（キッズコーナーの時間は（要確認））",
+   "kidsNote": "夜のピクニックは19:30から。小さい子は15時台の屋台・キッズコーナーのほうが行きやすい。",
+   "caution": "",
+   "contact": {
+    "tel": "0422-60-1982",
+    "mail": "",
+    "who": "武蔵野市 都市整備部 都市再生課"
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "○",
+    "elem": "○"
+   },
+   "cost": "入場無料・事前申込不要（飲食・物販は実費）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.city.musashino.lg.jp/shiseijoho/shisaku_keikaku/toshiseibibu_shisaku_keikaku/parkarea/1052137.html",
+   "status": "承認済",
+   "confidence": "武蔵野市の公式ページで確認（2026-09-29）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E136",
    "name": "列車のトイレ写真展 〜日本全国編〜",
    "dates": [
@@ -4474,12 +4518,14 @@
    "E116",
    "E127",
    "E128",
-   "E154"
+   "E154",
+   "E161"
   ],
   "2026-10-04": [
    "E127",
    "E128",
-   "E154"
+   "E154",
+   "E161"
   ],
   "2026-10-06": [
    "E136",
