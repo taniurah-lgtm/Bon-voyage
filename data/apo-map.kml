@@ -213,6 +213,21 @@
 E151 園庭開放</description>
   </Placemark>
   <Placemark>
+    <name>みんデパ事務局（11/21 東部公園）</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>みんデパ事務局（11/21 東部公園）</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>設置済</value></Data>
+      <Data name="種別"><value>イベント</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>9/29 代表の森さんと会って口頭でOK。朝のお手伝いを少し引き受けた</value></Data>
+    </ExtendedData>
+    <description>種別: イベント
+住所: 未確認（名称で検索して配置）
+9/29 代表の森さんと会って口頭でOK。朝のお手伝いを少し引き受けた</description>
+  </Placemark>
+  <Placemark>
     <name>りんどう幼稚園</name>
     <styleUrl>#交渉中</styleUrl>
     <address>小平市花小金井1-26-34</address>
@@ -257,21 +272,6 @@ E150 にこにこクラブ。一園に偏らない書き方を理解済み</desc
     <description>種別: 不動産
 住所: 未確認（名称で検索して配置）
 9/3 打診</description>
-  </Placemark>
-  <Placemark>
-    <name>みんデパ事務局（11/21 東部公園）</name>
-    <styleUrl>#交渉中</styleUrl>
-    <address>みんデパ事務局（11/21 東部公園）</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>交渉中</value></Data>
-      <Data name="種別"><value>イベント</value></Data>
-      <Data name="電話"><value></value></Data>
-      <Data name="住所"><value>未確認</value></Data>
-      <Data name="メモ"><value>親子連れ・花小金井</value></Data>
-    </ExtendedData>
-    <description>種別: イベント
-住所: 未確認（名称で検索して配置）
-親子連れ・花小金井</description>
   </Placemark>
   <Placemark>
     <name>小川パレットラボ（市民協働課の場）</name>
