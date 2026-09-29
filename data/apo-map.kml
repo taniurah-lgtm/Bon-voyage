@@ -2656,5 +2656,20 @@ docs/distribution.md に台本</description>
     <description>種別: お店
 住所: 未確認（名称で検索して配置）</description>
   </Placemark>
+  <Placemark>
+    <name>BANANA MONSTER（海外こども服のお店）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市美園町1-7-14</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>お店</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>小平市美園町1-7-14</value></Data>
+      <Data name="メモ"><value>Threads @bananamonster__・小平駅徒歩2分。店そのものは催しではないので号には載せない（載せるのはイベントがあるとき）。協賛候補にもなりうる（子育て家庭が客・個人店・SNSに手間をかけている）</value></Data>
+    </ExtendedData>
+    <description>種別: お店
+住所: 小平市美園町1-7-14
+Threads @bananamonster__・小平駅徒歩2分。店そのものは催しではないので号には載せない（載せるのはイベントがあるとき）。協賛候補にもなりうる（子育て家庭が客・個人店・SNSに手間をかけている）</description>
+  </Placemark>
 </Document>
 </kml>
