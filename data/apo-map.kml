@@ -28,471 +28,2633 @@
     </IconStyle>
   </Style>
   <Placemark>
-    <name>しゅしゅ</name>
+    <name>しゅしゅ（パン屋）</name>
     <styleUrl>#設置済</styleUrl>
-    <address>しゅしゅ 小平市花小金井 パン</address>
+    <address>しゅしゅ（パン屋）</address>
     <ExtendedData>
       <Data name="ステータス"><value>設置済</value></Data>
-      <Data name="種別"><value>個人店</value></Data>
+      <Data name="種別"><value>お店</value></Data>
       <Data name="電話"><value></value></Data>
       <Data name="住所"><value>未確認</value></Data>
-      <Data name="メモ"><value>パン屋。行きつけで通った。★住所を入れると位置が正確になります</value></Data>
+      <Data name="メモ"><value>行きつけで通った1件目</value></Data>
     </ExtendedData>
-    <description>種別: 個人店
+    <description>種別: お店
 住所: 未確認（名称で検索して配置）
-パン屋。行きつけで通った。★住所を入れると位置が正確になります</description>
+行きつけで通った1件目</description>
   </Placemark>
   <Placemark>
     <name>珈琲豆焙煎所 ロースターズクラブ</name>
     <styleUrl>#設置済</styleUrl>
-    <address>珈琲豆焙煎所 ロースターズクラブ 小平市花小金井</address>
+    <address>珈琲豆焙煎所 ロースターズクラブ</address>
     <ExtendedData>
       <Data name="ステータス"><value>設置済</value></Data>
-      <Data name="種別"><value>個人店</value></Data>
+      <Data name="種別"><value>お店</value></Data>
       <Data name="電話"><value></value></Data>
       <Data name="住所"><value>未確認</value></Data>
-      <Data name="メモ"><value>自家焙煎珈琲。行きつけで通った。★住所を入れると位置が正確になります</value></Data>
+      <Data name="メモ"><value></value></Data>
     </ExtendedData>
-    <description>種別: 個人店
-住所: 未確認（名称で検索して配置）
-自家焙煎珈琲。行きつけで通った。★住所を入れると位置が正確になります</description>
+    <description>種別: お店
+住所: 未確認（名称で検索して配置）</description>
   </Placemark>
   <Placemark>
-    <name>小平市民活動支援センター あすぴあ ※10/31まで現施設</name>
+    <name>あすぴあ（市民活動支援センター）</name>
     <styleUrl>#設置済</styleUrl>
-    <address>東京都小平市小川東町4-2-1</address>
+    <address>小平市小川東町4-2-1 元気村おがわ東2F</address>
     <ExtendedData>
       <Data name="ステータス"><value>設置済</value></Data>
       <Data name="種別"><value>公共</value></Data>
       <Data name="電話"><value>042-348-2104</value></Data>
-      <Data name="住所"><value>東京都小平市小川東町4-2-1</value></Data>
-      <Data name="メモ"><value>★2026-08-16 利用団体登録(第254号・有効期限2029/3/31)＋チラシ設置 完了。10/31で現施設終了、11/1から小川パレットへ。移転後に置き直す</value></Data>
+      <Data name="住所"><value>小平市小川東町4-2-1 元気村おがわ東2F</value></Data>
+      <Data name="メモ"><value>ラック・廊下掲示板</value></Data>
     </ExtendedData>
     <description>種別: 公共
-住所: 東京都小平市小川東町4-2-1
+住所: 小平市小川東町4-2-1 元気村おがわ東2F
 電話: 042-348-2104
-★2026-08-16 利用団体登録(第254号・有効期限2029/3/31)＋チラシ設置 完了。10/31で現施設終了、11/1から小川パレットへ。移転後に置き直す</description>
+ラック・廊下掲示板</description>
+  </Placemark>
+  <Placemark>
+    <name>おひさまひろば（子ども家庭支援センター）</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>小平市小川東町4-2-1 元気村おがわ東2F</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>設置済</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-348-2100</value></Data>
+      <Data name="住所"><value>小平市小川東町4-2-1 元気村おがわ東2F</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 公共
+住所: 小平市小川東町4-2-1 元気村おがわ東2F
+電話: 042-348-2100</description>
+  </Placemark>
+  <Placemark>
+    <name>多摩六都科学館</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>西東京市芝久保町5-10-64</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>設置済</value></Data>
+      <Data name="種別"><value>おでかけ先</value></Data>
+      <Data name="電話"><value>042-469-6100</value></Data>
+      <Data name="住所"><value>西東京市芝久保町5-10-64</value></Data>
+      <Data name="メモ"><value>プレスリリースがメールで届く関係</value></Data>
+    </ExtendedData>
+    <description>種別: おでかけ先
+住所: 西東京市芝久保町5-10-64
+電話: 042-469-6100
+プレスリリースがメールで届く関係</description>
+  </Placemark>
+  <Placemark>
+    <name>ルネこだいら（市民文化会館）</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>小平市美園町1-8-5</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>設置済</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-345-5111</value></Data>
+      <Data name="住所"><value>小平市美園町1-8-5</value></Data>
+      <Data name="メモ"><value>子ども向けプレスリリースを郵送してくれる</value></Data>
+    </ExtendedData>
+    <description>種別: 公共
+住所: 小平市美園町1-8-5
+電話: 042-345-5111
+子ども向けプレスリリースを郵送してくれる</description>
   </Placemark>
   <Placemark>
     <name>花小金井南公民館</name>
-    <styleUrl>#交渉中</styleUrl>
-    <address>東京都小平市花小金井南町2-12-6</address>
+    <styleUrl>#設置済</styleUrl>
+    <address>小平市花小金井南町2-12-6</address>
     <ExtendedData>
-      <Data name="ステータス"><value>交渉中</value></Data>
+      <Data name="ステータス"><value>設置済</value></Data>
       <Data name="種別"><value>公共</value></Data>
       <Data name="電話"><value>042-461-0861</value></Data>
-      <Data name="住所"><value>東京都小平市花小金井南町2-12-6</value></Data>
-      <Data name="メモ"><value>副館長が口頭で承諾「中身を見てから置いてみますね」。設置は未確認。1〜2週間後に補充の申し出の形で確認する</value></Data>
+      <Data name="住所"><value>小平市花小金井南町2-12-6</value></Data>
+      <Data name="メモ"><value></value></Data>
     </ExtendedData>
     <description>種別: 公共
-住所: 東京都小平市花小金井南町2-12-6
-電話: 042-461-0861
-副館長が口頭で承諾「中身を見てから置いてみますね」。設置は未確認。1〜2週間後に補充の申し出の形で確認する</description>
+住所: 小平市花小金井南町2-12-6
+電話: 042-461-0861</description>
   </Placemark>
   <Placemark>
-    <name>小川パレット（11/1オープン）</name>
-    <styleUrl>#交渉中</styleUrl>
-    <address>東京都小平市小川西町4-16-1</address>
+    <name>市民協働・男女参画推進課（地域センター20館＋元気村）</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>小平市市役所1階</address>
     <ExtendedData>
-      <Data name="ステータス"><value>交渉中</value></Data>
+      <Data name="ステータス"><value>設置済</value></Data>
       <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>070-4510-8196</value></Data>
-      <Data name="住所"><value>東京都小平市小川西町4-16-1</value></Data>
-      <Data name="メモ"><value>★2026-08-16 施設利用登録 完了(利用者ID 10129393)。11/1オープン。公民館・図書館・あすぴあ・男女共同参画センター・西部出張所が集約。キッズスペース新設。掲示ルールが固まる前に話を通す。窓口 市民協働・男女参画推進課 042-346-9532 / 指定管理者 070-4510-8196</value></Data>
+      <Data name="電話"><value>042-346-9618</value></Data>
+      <Data name="住所"><value>小平市市役所1階</value></Data>
+      <Data name="メモ"><value>毎月1日ごろ・中旬の2便</value></Data>
     </ExtendedData>
     <description>種別: 公共
-住所: 東京都小平市小川西町4-16-1
-電話: 070-4510-8196
-★2026-08-16 施設利用登録 完了(利用者ID 10129393)。11/1オープン。公民館・図書館・あすぴあ・男女共同参画センター・西部出張所が集約。キッズスペース新設。掲示ルールが固まる前に話を通す。窓口 市民協働・男女参画推進課 042-346-9532 / 指定管理者 070-4510-8196</description>
+住所: 小平市市役所1階
+電話: 042-346-9618
+毎月1日ごろ・中旬の2便</description>
   </Placemark>
   <Placemark>
-    <name>花小金井南児童館</name>
-    <styleUrl>#候補</styleUrl>
-    <address>東京都小平市花小金井南町3-3-17</address>
+    <name>こども若者みらい課（児童館3館）</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>こども若者みらい課（児童館3館）</address>
     <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="ステータス"><value>設置済</value></Data>
       <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>042-461-9988</value></Data>
-      <Data name="住所"><value>東京都小平市花小金井南町3-3-17</value></Data>
-      <Data name="メモ"><value>読者層が丸ごといる。設置2件の実績を持って行く</value></Data>
-    </ExtendedData>
-    <description>種別: 公共
-住所: 東京都小平市花小金井南町3-3-17
-電話: 042-461-9988
-読者層が丸ごといる。設置2件の実績を持って行く</description>
-  </Placemark>
-  <Placemark>
-    <name>東部市民センター（花小金井図書館・東部出張所）</name>
-    <styleUrl>#候補</styleUrl>
-    <address>東京都小平市花小金井1-8-1</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>042-467-1211</value></Data>
-      <Data name="住所"><value>東京都小平市花小金井1-8-1</value></Data>
-      <Data name="メモ"><value>駅近の1棟に複数窓口。図書館は042-467-1215</value></Data>
-    </ExtendedData>
-    <description>種別: 公共
-住所: 東京都小平市花小金井1-8-1
-電話: 042-467-1211
-駅近の1棟に複数窓口。図書館は042-467-1215</description>
-  </Placemark>
-  <Placemark>
-    <name>花小金井北公民館（花小金井北分室）</name>
-    <styleUrl>#候補</styleUrl>
-    <address>東京都小平市花小金井5-41-3</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>042-462-5790</value></Data>
-      <Data name="住所"><value>東京都小平市花小金井5-41-3</value></Data>
-      <Data name="メモ"><value>図書館分室が同居＝親子の動線が濃い</value></Data>
-    </ExtendedData>
-    <description>種別: 公共
-住所: 東京都小平市花小金井5-41-3
-電話: 042-462-5790
-図書館分室が同居＝親子の動線が濃い</description>
-  </Placemark>
-  <Placemark>
-    <name>子ども家庭支援センター</name>
-    <styleUrl>#候補</styleUrl>
-    <address>東京都小平市小川東町4-2-1</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>042-348-2100</value></Data>
-      <Data name="住所"><value>東京都小平市小川東町4-2-1</value></Data>
-      <Data name="メモ"><value>行政の子育て支援の本丸。小平元気村おがわ東2F。あすぴあと同じ建物</value></Data>
-    </ExtendedData>
-    <description>種別: 公共
-住所: 東京都小平市小川東町4-2-1
-電話: 042-348-2100
-行政の子育て支援の本丸。小平元気村おがわ東2F。あすぴあと同じ建物</description>
-  </Placemark>
-  <Placemark>
-    <name>小平市役所 市民協働・男女参画推進課</name>
-    <styleUrl>#候補</styleUrl>
-    <address>小平市役所</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>042-346-9809</value></Data>
+      <Data name="電話"><value>042-348-2102</value></Data>
       <Data name="住所"><value>未確認</value></Data>
-      <Data name="メモ"><value>市役所1階。申請ルートの相談先</value></Data>
+      <Data name="メモ"><value>はなみん・おがいち・おがにん</value></Data>
     </ExtendedData>
     <description>種別: 公共
 住所: 未確認（名称で検索して配置）
-電話: 042-346-9809
-市役所1階。申請ルートの相談先</description>
+電話: 042-348-2102
+はなみん・おがいち・おがにん</description>
   </Placemark>
   <Placemark>
-    <name>中央公民館</name>
-    <styleUrl>#候補</styleUrl>
-    <address>東京都小平市小川町2-1325</address>
+    <name>こども家庭センター 母子保健（保健師の新生児訪問）</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>小平市学園東町1-19-12 健康センター</address>
     <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="ステータス"><value>設置済</value></Data>
       <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>042-341-0861</value></Data>
-      <Data name="住所"><value>東京都小平市小川町2-1325</value></Data>
-      <Data name="メモ"><value>市内最大館</value></Data>
+      <Data name="電話"><value>042-346-3701</value></Data>
+      <Data name="住所"><value>小平市学園東町1-19-12 健康センター</value></Data>
+      <Data name="メモ"><value>棚は一律NG→訪問で手渡し</value></Data>
     </ExtendedData>
     <description>種別: 公共
-住所: 東京都小平市小川町2-1325
-電話: 042-341-0861
-市内最大館</description>
+住所: 小平市学園東町1-19-12 健康センター
+電話: 042-346-3701
+棚は一律NG→訪問で手渡し</description>
   </Placemark>
   <Placemark>
-    <name>小川公民館（小川分室）</name>
-    <styleUrl>#候補</styleUrl>
-    <address>東京都小平市小川町1-1012</address>
+    <name>ビッグ・エー 小平鈴木店</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>小平市鈴木町1-345-5</address>
     <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="ステータス"><value>設置済</value></Data>
+      <Data name="種別"><value>お店</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>小平市鈴木町1-345-5</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: お店
+住所: 小平市鈴木町1-345-5</description>
+  </Placemark>
+  <Placemark>
+    <name>小平みどり幼稚園（みどりこども園）</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>小平市鈴木町1-341</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>設置済</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-342-2215</value></Data>
+      <Data name="住所"><value>小平市鈴木町1-341</value></Data>
+      <Data name="メモ"><value>E151 園庭開放</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市鈴木町1-341
+電話: 042-342-2215
+E151 園庭開放</description>
+  </Placemark>
+  <Placemark>
+    <name>りんどう幼稚園</name>
+    <styleUrl>#交渉中</styleUrl>
+    <address>小平市花小金井1-26-34</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>交渉中</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-462-3133</value></Data>
+      <Data name="住所"><value>小平市花小金井1-26-34</value></Data>
+      <Data name="メモ"><value>E150 にこにこクラブ。一園に偏らない書き方を理解済み</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市花小金井1-26-34
+電話: 042-462-3133
+E150 にこにこクラブ。一園に偏らない書き方を理解済み</description>
+  </Placemark>
+  <Placemark>
+    <name>ダイワ住友（不動産）</name>
+    <styleUrl>#交渉中</styleUrl>
+    <address>ダイワ住友（不動産）</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>交渉中</value></Data>
+      <Data name="種別"><value>不動産</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>9/3 打診</value></Data>
+    </ExtendedData>
+    <description>種別: 不動産
+住所: 未確認（名称で検索して配置）
+9/3 打診</description>
+  </Placemark>
+  <Placemark>
+    <name>そのだ不動産</name>
+    <styleUrl>#交渉中</styleUrl>
+    <address>そのだ不動産</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>交渉中</value></Data>
+      <Data name="種別"><value>不動産</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>9/3 打診</value></Data>
+    </ExtendedData>
+    <description>種別: 不動産
+住所: 未確認（名称で検索して配置）
+9/3 打診</description>
+  </Placemark>
+  <Placemark>
+    <name>みんデパ事務局（11/21 東部公園）</name>
+    <styleUrl>#交渉中</styleUrl>
+    <address>みんデパ事務局（11/21 東部公園）</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>交渉中</value></Data>
+      <Data name="種別"><value>イベント</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>親子連れ・花小金井</value></Data>
+    </ExtendedData>
+    <description>種別: イベント
+住所: 未確認（名称で検索して配置）
+親子連れ・花小金井</description>
+  </Placemark>
+  <Placemark>
+    <name>小川パレットラボ（市民協働課の場）</name>
+    <styleUrl>#交渉中</styleUrl>
+    <address>小平市小川西町中宿地域センター</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>交渉中</value></Data>
       <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>042-343-3620</value></Data>
-      <Data name="住所"><value>東京都小平市小川町1-1012</value></Data>
-      <Data name="メモ"><value>図書館分室併設</value></Data>
+      <Data name="電話"><value>070-8683-9652</value></Data>
+      <Data name="住所"><value>小平市小川西町中宿地域センター</value></Data>
+      <Data name="メモ"><value>お願いは10/14以降</value></Data>
     </ExtendedData>
     <description>種別: 公共
-住所: 東京都小平市小川町1-1012
-電話: 042-343-3620
-図書館分室併設</description>
+住所: 小平市小川西町中宿地域センター
+電話: 070-8683-9652
+お願いは10/14以降</description>
   </Placemark>
   <Placemark>
-    <name>上宿公民館</name>
-    <styleUrl>#候補</styleUrl>
-    <address>東京都小平市小川町1-308</address>
+    <name>料理教室なつやすみ（露崎さん）</name>
+    <styleUrl>#交渉中</styleUrl>
+    <address>料理教室なつやすみ（露崎さん）</address>
     <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="ステータス"><value>交渉中</value></Data>
+      <Data name="種別"><value>お店</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>協賛 L9</value></Data>
+    </ExtendedData>
+    <description>種別: お店
+住所: 未確認（名称で検索して配置）
+協賛 L9</description>
+  </Placemark>
+  <Placemark>
+    <name>にことカフェ</name>
+    <styleUrl>#交渉中</styleUrl>
+    <address>にことカフェ</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>交渉中</value></Data>
+      <Data name="種別"><value>お店</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>E133</value></Data>
+    </ExtendedData>
+    <description>種別: お店
+住所: 未確認（名称で検索して配置）
+E133</description>
+  </Placemark>
+  <Placemark>
+    <name>こぐま（koguma-waccacca）</name>
+    <styleUrl>#交渉中</styleUrl>
+    <address>こぐま（koguma-waccacca）</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>交渉中</value></Data>
+      <Data name="種別"><value>お店</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: お店
+住所: 未確認（名称で検索して配置）</description>
+  </Placemark>
+  <Placemark>
+    <name>小平マルシェ</name>
+    <styleUrl>#交渉中</styleUrl>
+    <address>小平マルシェ</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>交渉中</value></Data>
+      <Data name="種別"><value>イベント</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: イベント
+住所: 未確認（名称で検索して配置）</description>
+  </Placemark>
+  <Placemark>
+    <name>ASA（おしゃべり屋さん）</name>
+    <styleUrl>#交渉中</styleUrl>
+    <address>ASA（おしゃべり屋さん）</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>交渉中</value></Data>
+      <Data name="種別"><value>お店</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>協賛 L10</value></Data>
+    </ExtendedData>
+    <description>種別: お店
+住所: 未確認（名称で検索して配置）
+協賛 L10</description>
+  </Placemark>
+  <Placemark>
+    <name>都立小金井公園</name>
+    <styleUrl>#断られた</styleUrl>
+    <address>都立小金井公園</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>断られた</value></Data>
+      <Data name="種別"><value>おでかけ先</value></Data>
+      <Data name="電話"><value>042-385-5611</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>たてもの園も都立＝同じ見込み</value></Data>
+    </ExtendedData>
+    <description>種別: おでかけ先
+住所: 未確認（名称で検索して配置）
+電話: 042-385-5611
+たてもの園も都立＝同じ見込み</description>
+  </Placemark>
+  <Placemark>
+    <name>保育課（全園一括）</name>
+    <styleUrl>#断られた</styleUrl>
+    <address>保育課（全園一括）</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>断られた</value></Data>
       <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>042-345-1164</value></Data>
-      <Data name="住所"><value>東京都小平市小川町1-308</value></Data>
+      <Data name="電話"><value>042-346-9645</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
       <Data name="メモ"><value></value></Data>
     </ExtendedData>
     <description>種別: 公共
-住所: 東京都小平市小川町1-308
-電話: 042-345-1164</description>
+住所: 未確認（名称で検索して配置）
+電話: 042-346-9645</description>
   </Placemark>
   <Placemark>
-    <name>上水南公民館（上水南分室）</name>
-    <styleUrl>#候補</styleUrl>
-    <address>東京都小平市上水南町1-27-1</address>
+    <name>小平商工会</name>
+    <styleUrl>#断られた</styleUrl>
+    <address>小平商工会</address>
     <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>042-325-4133</value></Data>
-      <Data name="住所"><value>東京都小平市上水南町1-27-1</value></Data>
-      <Data name="メモ"><value>図書館分室併設</value></Data>
+      <Data name="ステータス"><value>断られた</value></Data>
+      <Data name="種別"><value>団体</value></Data>
+      <Data name="電話"><value>042-344-2311</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
     </ExtendedData>
-    <description>種別: 公共
-住所: 東京都小平市上水南町1-27-1
-電話: 042-325-4133
-図書館分室併設</description>
+    <description>種別: 団体
+住所: 未確認（名称で検索して配置）
+電話: 042-344-2311</description>
   </Placemark>
   <Placemark>
-    <name>小川西町公民館 ※9/30で終了</name>
-    <styleUrl>#候補</styleUrl>
-    <address>東京都小平市小川西町4-10-13</address>
+    <name>男女共同参画センター ひらく（窓口）</name>
+    <styleUrl>#断られた</styleUrl>
+    <address>男女共同参画センター ひらく（窓口）</address>
     <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="ステータス"><value>断られた</value></Data>
       <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>042-343-1415</value></Data>
-      <Data name="住所"><value>東京都小平市小川西町4-10-13</value></Data>
-      <Data name="メモ"><value>★市報8/5号: 小川西町図書館は7/30終了済、公民館も9/30まで。11/1から小川パレットへ移転。回るなら9月中、でなければ小川パレットへ</value></Data>
-    </ExtendedData>
-    <description>種別: 公共
-住所: 東京都小平市小川西町4-10-13
-電話: 042-343-1415
-★市報8/5号: 小川西町図書館は7/30終了済、公民館も9/30まで。11/1から小川パレットへ移転。回るなら9月中、でなければ小川パレットへ</description>
-  </Placemark>
-  <Placemark>
-    <name>仲町公民館（仲町図書館）</name>
-    <styleUrl>#候補</styleUrl>
-    <address>東京都小平市仲町145</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>042-341-0862</value></Data>
-      <Data name="住所"><value>東京都小平市仲町145</value></Data>
-      <Data name="メモ"><value>図書館併設</value></Data>
-    </ExtendedData>
-    <description>種別: 公共
-住所: 東京都小平市仲町145
-電話: 042-341-0862
-図書館併設</description>
-  </Placemark>
-  <Placemark>
-    <name>津田公民館（津田図書館）</name>
-    <styleUrl>#候補</styleUrl>
-    <address>東京都小平市津田町3-11-1</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>042-342-0863</value></Data>
-      <Data name="住所"><value>東京都小平市津田町3-11-1</value></Data>
-      <Data name="メモ"><value>図書館併設</value></Data>
-    </ExtendedData>
-    <description>種別: 公共
-住所: 東京都小平市津田町3-11-1
-電話: 042-342-0863
-図書館併設</description>
-  </Placemark>
-  <Placemark>
-    <name>大沼公民館（大沼図書館）</name>
-    <styleUrl>#候補</styleUrl>
-    <address>東京都小平市大沼町7-1-17</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>042-342-1888</value></Data>
-      <Data name="住所"><value>東京都小平市大沼町7-1-17</value></Data>
-      <Data name="メモ"><value>図書館併設</value></Data>
-    </ExtendedData>
-    <description>種別: 公共
-住所: 東京都小平市大沼町7-1-17
-電話: 042-342-1888
-図書館併設</description>
-  </Placemark>
-  <Placemark>
-    <name>鈴木公民館</name>
-    <styleUrl>#候補</styleUrl>
-    <address>東京都小平市鈴木町2-772</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>公共</value></Data>
-      <Data name="電話"><value>042-388-0050</value></Data>
-      <Data name="住所"><value>東京都小平市鈴木町2-772</value></Data>
+      <Data name="電話"><value>042-348-2112</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
       <Data name="メモ"><value></value></Data>
     </ExtendedData>
     <description>種別: 公共
-住所: 東京都小平市鈴木町2-772
-電話: 042-388-0050</description>
+住所: 未確認（名称で検索して配置）
+電話: 042-348-2112</description>
+  </Placemark>
+  <Placemark>
+    <name>小平花小金井幼稚園（こども園・さくらんぼ保育園）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井2-9-11</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-461-9226</value></Data>
+      <Data name="住所"><value>小平市花小金井2-9-11</value></Data>
+      <Data name="メモ"><value>9/25 遠足で不在→「来週かけて」。E151 hanahanaひろば</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市花小金井2-9-11
+電話: 042-461-9226
+9/25 遠足で不在→「来週かけて」。E151 hanahanaひろば</description>
+  </Placemark>
+  <Placemark>
+    <name>比留間医院（内科・小児科）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井1-9-15</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-461-1636</value></Data>
+      <Data name="住所"><value>小平市花小金井1-9-15</value></Data>
+      <Data name="メモ"><value>docs/clinic-6-script.md</value></Data>
+    </ExtendedData>
+    <description>種別: 小児科
+住所: 小平市花小金井1-9-15
+電話: 042-461-1636
+docs/clinic-6-script.md</description>
   </Placemark>
   <Placemark>
     <name>花小金井駅前こどもクリニック</name>
     <styleUrl>#候補</styleUrl>
-    <address>花小金井駅前こどもクリニック 小平市</address>
+    <address>小平市花小金井1-10-11 875ビル201</address>
     <ExtendedData>
       <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>子育て民間</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
       <Data name="電話"><value>042-465-2255</value></Data>
-      <Data name="住所"><value>未確認</value></Data>
-      <Data name="メモ"><value>駅徒歩1分。待合の滞在が長い。火・祝休診。★住所要確認</value></Data>
+      <Data name="住所"><value>小平市花小金井1-10-11 875ビル201</value></Data>
+      <Data name="メモ"><value></value></Data>
     </ExtendedData>
-    <description>種別: 子育て民間
-住所: 未確認（名称で検索して配置）
-電話: 042-465-2255
-駅徒歩1分。待合の滞在が長い。火・祝休診。★住所要確認</description>
+    <description>種別: 小児科
+住所: 小平市花小金井1-10-11 875ビル201
+電話: 042-465-2255</description>
   </Placemark>
   <Placemark>
-    <name>がんぼクリニック</name>
+    <name>どんぐりこどもクリニック花小金井</name>
     <styleUrl>#候補</styleUrl>
-    <address>がんぼクリニック 小平市花小金井</address>
+    <address>小平市花小金井南町2-21-7</address>
     <ExtendedData>
       <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>子育て民間</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-465-2288</value></Data>
+      <Data name="住所"><value>小平市花小金井南町2-21-7</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 小児科
+住所: 小平市花小金井南町2-21-7
+電話: 042-465-2288</description>
+  </Placemark>
+  <Placemark>
+    <name>こだいら観光まちづくり協会</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市学園東町1-16-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>団体</value></Data>
+      <Data name="電話"><value>042-312-3954</value></Data>
+      <Data name="住所"><value>小平市学園東町1-16-1</value></Data>
+      <Data name="メモ"><value>ルネこだいらの財団も会員</value></Data>
+    </ExtendedData>
+    <description>種別: 団体
+住所: 小平市学園東町1-16-1
+電話: 042-312-3954
+ルネこだいらの財団も会員</description>
+  </Placemark>
+  <Placemark>
+    <name>はなこキッズクリニック</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市鈴木町2-865-97</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-401-1230</value></Data>
+      <Data name="住所"><value>小平市鈴木町2-865-97</value></Data>
+      <Data name="メモ"><value>ガイドP14・番号は冊子の広告から。かける前に公式で確認</value></Data>
+    </ExtendedData>
+    <description>種別: 小児科
+住所: 小平市鈴木町2-865-97
+電話: 042-401-1230
+ガイドP14・番号は冊子の広告から。かける前に公式で確認</description>
+  </Placemark>
+  <Placemark>
+    <name>遠藤こどもクリニック</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市大沼町1-21-8</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-343-0066</value></Data>
+      <Data name="住所"><value>小平市大沼町1-21-8</value></Data>
+      <Data name="メモ"><value>ガイドP19・番号は冊子の広告から。かける前に公式で確認</value></Data>
+    </ExtendedData>
+    <description>種別: 小児科
+住所: 小平市大沼町1-21-8
+電話: 042-343-0066
+ガイドP19・番号は冊子の広告から。かける前に公式で確認</description>
+  </Placemark>
+  <Placemark>
+    <name>カラムンの森こどもクリニック</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市小川町2-1210</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-313-4455</value></Data>
+      <Data name="住所"><value>小平市小川町2-1210</value></Data>
+      <Data name="メモ"><value>ガイドP20・番号は冊子の広告から。かける前に公式で確認</value></Data>
+    </ExtendedData>
+    <description>種別: 小児科
+住所: 小平市小川町2-1210
+電話: 042-313-4455
+ガイドP20・番号は冊子の広告から。かける前に公式で確認</description>
+  </Placemark>
+  <Placemark>
+    <name>ちあきこどもクリニック</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市栄町2-3-7</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-349-2012</value></Data>
+      <Data name="住所"><value>小平市栄町2-3-7</value></Data>
+      <Data name="メモ"><value>ガイドP4・番号は冊子の広告から。かける前に公式で確認</value></Data>
+    </ExtendedData>
+    <description>種別: 小児科
+住所: 小平市栄町2-3-7
+電話: 042-349-2012
+ガイドP4・番号は冊子の広告から。かける前に公式で確認</description>
+  </Placemark>
+  <Placemark>
+    <name>鈴木小児科内科医院</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市学園西町2-11-28</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-341-0353</value></Data>
+      <Data name="住所"><value>小平市学園西町2-11-28</value></Data>
+      <Data name="メモ"><value>ガイドP19・番号は冊子の広告から。かける前に公式で確認</value></Data>
+    </ExtendedData>
+    <description>種別: 小児科
+住所: 小平市学園西町2-11-28
+電話: 042-341-0353
+ガイドP19・番号は冊子の広告から。かける前に公式で確認</description>
+  </Placemark>
+  <Placemark>
+    <name>たかの台こどもクリニック</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市津田町1-3-8</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-345-2525</value></Data>
+      <Data name="住所"><value>小平市津田町1-3-8</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 小児科
+住所: 小平市津田町1-3-8
+電話: 042-345-2525</description>
+  </Placemark>
+  <Placemark>
+    <name>岡部こどもクリニック</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市小川町1-512-12</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-349-1152</value></Data>
+      <Data name="住所"><value>小平市小川町1-512-12</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 小児科
+住所: 小平市小川町1-512-12
+電話: 042-349-1152</description>
+  </Placemark>
+  <Placemark>
+    <name>くろさわ子どもクリニック</name>
+    <styleUrl>#候補</styleUrl>
+    <address>くろさわ子どもクリニック</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-323-9630</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 小児科
+住所: 未確認（名称で検索して配置）
+電話: 042-323-9630</description>
+  </Placemark>
+  <Placemark>
+    <name>がんぼクリニック（小児科・耳鼻科）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>がんぼクリニック（小児科・耳鼻科）</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
       <Data name="電話"><value>042-465-8774</value></Data>
       <Data name="住所"><value>未確認</value></Data>
-      <Data name="メモ"><value>内科・小児科。日祝休。★住所要確認</value></Data>
+      <Data name="メモ"><value></value></Data>
     </ExtendedData>
-    <description>種別: 子育て民間
+    <description>種別: 小児科
 住所: 未確認（名称で検索して配置）
-電話: 042-465-8774
-内科・小児科。日祝休。★住所要確認</description>
+電話: 042-465-8774</description>
   </Placemark>
   <Placemark>
-    <name>多摩六都科学館</name>
+    <name>花小金井北クリニック</name>
     <styleUrl>#候補</styleUrl>
-    <address>多摩六都科学館</address>
+    <address>小平市花小金井2-2-13</address>
     <ExtendedData>
       <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>おでかけ先</value></Data>
-      <Data name="電話"><value></value></Data>
-      <Data name="住所"><value>未確認</value></Data>
-      <Data name="メモ"><value>読者層と完全一致。自社ガイドで紹介済み＝訪問の口実になる</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-467-2477</value></Data>
+      <Data name="住所"><value>小平市花小金井2-2-13</value></Data>
+      <Data name="メモ"><value></value></Data>
     </ExtendedData>
-    <description>種別: おでかけ先
-住所: 未確認（名称で検索して配置）
-読者層と完全一致。自社ガイドで紹介済み＝訪問の口実になる</description>
+    <description>種別: 小児科
+住所: 小平市花小金井2-2-13
+電話: 042-467-2477</description>
   </Placemark>
   <Placemark>
-    <name>都立小金井公園 サービスセンター</name>
+    <name>松清医院</name>
     <styleUrl>#候補</styleUrl>
-    <address>都立小金井公園 サービスセンター</address>
+    <address>小平市花小金井3-5-40</address>
     <ExtendedData>
       <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>おでかけ先</value></Data>
-      <Data name="電話"><value></value></Data>
-      <Data name="住所"><value>未確認</value></Data>
-      <Data name="メモ"><value>近隣最大の遊び場。都立のため規定は厳しめ</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-463-8128</value></Data>
+      <Data name="住所"><value>小平市花小金井3-5-40</value></Data>
+      <Data name="メモ"><value></value></Data>
     </ExtendedData>
-    <description>種別: おでかけ先
-住所: 未確認（名称で検索して配置）
-近隣最大の遊び場。都立のため規定は厳しめ</description>
+    <description>種別: 小児科
+住所: 小平市花小金井3-5-40
+電話: 042-463-8128</description>
   </Placemark>
   <Placemark>
-    <name>江戸東京たてもの園</name>
+    <name>八木メディカルクリニック</name>
     <styleUrl>#候補</styleUrl>
-    <address>江戸東京たてもの園</address>
+    <address>小平市花小金井6-17-5</address>
     <ExtendedData>
       <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>おでかけ先</value></Data>
-      <Data name="電話"><value></value></Data>
-      <Data name="住所"><value>未確認</value></Data>
-      <Data name="メモ"><value>小金井公園内。ガイド掲載済み</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-460-3861</value></Data>
+      <Data name="住所"><value>小平市花小金井6-17-5</value></Data>
+      <Data name="メモ"><value></value></Data>
     </ExtendedData>
-    <description>種別: おでかけ先
-住所: 未確認（名称で検索して配置）
-小金井公園内。ガイド掲載済み</description>
+    <description>種別: 小児科
+住所: 小平市花小金井6-17-5
+電話: 042-460-3861</description>
   </Placemark>
   <Placemark>
-    <name>小平ふるさと村</name>
+    <name>竹本内科小児科医院</name>
     <styleUrl>#候補</styleUrl>
-    <address>小平ふるさと村</address>
+    <address>小平市鈴木町2-205</address>
     <ExtendedData>
       <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>おでかけ先</value></Data>
-      <Data name="電話"><value></value></Data>
-      <Data name="住所"><value>未確認</value></Data>
-      <Data name="メモ"><value>週末の子連れが多い市の施設</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-461-7303</value></Data>
+      <Data name="住所"><value>小平市鈴木町2-205</value></Data>
+      <Data name="メモ"><value></value></Data>
     </ExtendedData>
-    <description>種別: おでかけ先
-住所: 未確認（名称で検索して配置）
-週末の子連れが多い市の施設</description>
+    <description>種別: 小児科
+住所: 小平市鈴木町2-205
+電話: 042-461-7303</description>
   </Placemark>
   <Placemark>
-    <name>ガスミュージアム</name>
+    <name>大林医院</name>
     <styleUrl>#候補</styleUrl>
-    <address>ガスミュージアム 小平市</address>
+    <address>小平市鈴木町2-242-4</address>
     <ExtendedData>
       <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>おでかけ先</value></Data>
-      <Data name="電話"><value></value></Data>
-      <Data name="住所"><value>未確認</value></Data>
-      <Data name="メモ"><value>入場無料。企業運営で掲示基準あり</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-461-7677</value></Data>
+      <Data name="住所"><value>小平市鈴木町2-242-4</value></Data>
+      <Data name="メモ"><value></value></Data>
     </ExtendedData>
-    <description>種別: おでかけ先
-住所: 未確認（名称で検索して配置）
-入場無料。企業運営で掲示基準あり</description>
+    <description>種別: 小児科
+住所: 小平市鈴木町2-242-4
+電話: 042-461-7677</description>
   </Placemark>
   <Placemark>
-    <name>田無神社</name>
+    <name>清水小児科内科医院</name>
     <styleUrl>#候補</styleUrl>
-    <address>田無神社</address>
+    <address>小平市大沼町4-43-32</address>
     <ExtendedData>
       <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>その他</value></Data>
-      <Data name="電話"><value></value></Data>
-      <Data name="住所"><value>未確認</value></Data>
-      <Data name="メモ"><value>七五三・お宮参りの動線。社務所で宮司へ。カード置きを狙う</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-343-2255</value></Data>
+      <Data name="住所"><value>小平市大沼町4-43-32</value></Data>
+      <Data name="メモ"><value></value></Data>
     </ExtendedData>
-    <description>種別: その他
-住所: 未確認（名称で検索して配置）
-七五三・お宮参りの動線。社務所で宮司へ。カード置きを狙う</description>
+    <description>種別: 小児科
+住所: 小平市大沼町4-43-32
+電話: 042-343-2255</description>
   </Placemark>
   <Placemark>
-    <name>熊野宮</name>
+    <name>吉元医院</name>
     <styleUrl>#候補</styleUrl>
-    <address>熊野宮 小平市</address>
+    <address>吉元医院</address>
     <ExtendedData>
       <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>その他</value></Data>
-      <Data name="電話"><value></value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-461-5975</value></Data>
       <Data name="住所"><value>未確認</value></Data>
-      <Data name="メモ"><value>七五三の動線</value></Data>
+      <Data name="メモ"><value></value></Data>
     </ExtendedData>
-    <description>種別: その他
+    <description>種別: 小児科
 住所: 未確認（名称で検索して配置）
-七五三の動線</description>
+電話: 042-461-5975</description>
   </Placemark>
   <Placemark>
-    <name>花小金井商栄会</name>
+    <name>ふくろうの森クリニック</name>
     <styleUrl>#候補</styleUrl>
-    <address>花小金井駅 北口 商店街</address>
+    <address>ふくろうの森クリニック</address>
     <ExtendedData>
       <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>その他</value></Data>
+      <Data name="種別"><value>小児科</value></Data>
+      <Data name="電話"><value>042-462-2960</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>ガイドP17</value></Data>
+    </ExtendedData>
+    <description>種別: 小児科
+住所: 未確認（名称で検索して配置）
+電話: 042-462-2960
+ガイドP17</description>
+  </Placemark>
+  <Placemark>
+    <name>はなここどもの歯のクリニック（小児歯科専門）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>はなここどもの歯のクリニック（小児歯科専門）</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-452-5725</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>ガイドP71</value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 未確認（名称で検索して配置）
+電話: 042-452-5725
+ガイドP71</description>
+  </Placemark>
+  <Placemark>
+    <name>とみた歯科医院（小児歯科専門医）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井1-8-6</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-460-0418</value></Data>
+      <Data name="住所"><value>小平市花小金井1-8-6</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 小平市花小金井1-8-6
+電話: 042-460-0418</description>
+  </Placemark>
+  <Placemark>
+    <name>神津歯科医院</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井2-1-1 ルミエール花小金井2F</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-467-1164</value></Data>
+      <Data name="住所"><value>小平市花小金井2-1-1 ルミエール花小金井2F</value></Data>
+      <Data name="メモ"><value>ガイドP18</value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 小平市花小金井2-1-1 ルミエール花小金井2F
+電話: 042-467-1164
+ガイドP18</description>
+  </Placemark>
+  <Placemark>
+    <name>SHO DENTAL Salon</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井1-10-11 875ビル302</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-452-3758</value></Data>
+      <Data name="住所"><value>小平市花小金井1-10-11 875ビル302</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 小平市花小金井1-10-11 875ビル302
+電話: 042-452-3758</description>
+  </Placemark>
+  <Placemark>
+    <name>三珠歯科医院</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井南町1-12-2</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-465-8118</value></Data>
+      <Data name="住所"><value>小平市花小金井南町1-12-2</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 小平市花小金井南町1-12-2
+電話: 042-465-8118</description>
+  </Placemark>
+  <Placemark>
+    <name>奥村歯科医院</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井1-12-2</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-467-0311</value></Data>
+      <Data name="住所"><value>小平市花小金井1-12-2</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 小平市花小金井1-12-2
+電話: 042-467-0311</description>
+  </Placemark>
+  <Placemark>
+    <name>ヒロ歯科</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井5-52-10</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-451-7676</value></Data>
+      <Data name="住所"><value>小平市花小金井5-52-10</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 小平市花小金井5-52-10
+電話: 042-451-7676</description>
+  </Placemark>
+  <Placemark>
+    <name>なかじま歯科医院</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井南町1-14-22</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-451-3561</value></Data>
+      <Data name="住所"><value>小平市花小金井南町1-14-22</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 小平市花小金井南町1-14-22
+電話: 042-451-3561</description>
+  </Placemark>
+  <Placemark>
+    <name>とおる歯科クリニック</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井南町1-13-15</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-466-0086</value></Data>
+      <Data name="住所"><value>小平市花小金井南町1-13-15</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 小平市花小金井南町1-13-15
+電話: 042-466-0086</description>
+  </Placemark>
+  <Placemark>
+    <name>影山歯科医院</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井4-13-11</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-467-8241</value></Data>
+      <Data name="住所"><value>小平市花小金井4-13-11</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 小平市花小金井4-13-11
+電話: 042-467-8241</description>
+  </Placemark>
+  <Placemark>
+    <name>しみず歯科クリニック</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井南町1-26-6</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-462-2211</value></Data>
+      <Data name="住所"><value>小平市花小金井南町1-26-6</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 小平市花小金井南町1-26-6
+電話: 042-462-2211</description>
+  </Placemark>
+  <Placemark>
+    <name>つるた歯科医院</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井2-31-15</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-466-6088</value></Data>
+      <Data name="住所"><value>小平市花小金井2-31-15</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 小平市花小金井2-31-15
+電話: 042-466-6088</description>
+  </Placemark>
+  <Placemark>
+    <name>ほんま歯科医院</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市鈴木町1-462-5</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-320-8241</value></Data>
+      <Data name="住所"><value>小平市鈴木町1-462-5</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 小平市鈴木町1-462-5
+電話: 042-320-8241</description>
+  </Placemark>
+  <Placemark>
+    <name>青木歯科クリニック</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市鈴木町2-846-29</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-383-2648</value></Data>
+      <Data name="住所"><value>小平市鈴木町2-846-29</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 小平市鈴木町2-846-29
+電話: 042-383-2648</description>
+  </Placemark>
+  <Placemark>
+    <name>おのさと歯科</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市美園町2-19-17</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-313-4180</value></Data>
+      <Data name="住所"><value>小平市美園町2-19-17</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 小平市美園町2-19-17
+電話: 042-313-4180</description>
+  </Placemark>
+  <Placemark>
+    <name>一橋学園歯科</name>
+    <styleUrl>#候補</styleUrl>
+    <address>一橋学園歯科</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-345-8181</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 未確認（名称で検索して配置）
+電話: 042-345-8181</description>
+  </Placemark>
+  <Placemark>
+    <name>中澤歯科医院</name>
+    <styleUrl>#候補</styleUrl>
+    <address>中澤歯科医院</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-341-0025</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 未確認（名称で検索して配置）
+電話: 042-341-0025</description>
+  </Placemark>
+  <Placemark>
+    <name>ルミネス歯科クリニック</name>
+    <styleUrl>#候補</styleUrl>
+    <address>ルミネス歯科クリニック</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value>042-313-6664</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 未確認（名称で検索して配置）
+電話: 042-313-6664</description>
+  </Placemark>
+  <Placemark>
+    <name>こころ歯科クリニック（キッズスペース）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>こころ歯科クリニック（キッズスペース）</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
       <Data name="電話"><value></value></Data>
       <Data name="住所"><value>未確認</value></Data>
-      <Data name="メモ"><value>通れば加盟店にまとめて展開できる。事務局連絡先は要確認</value></Data>
+      <Data name="メモ"><value>kokoroshika.com</value></Data>
     </ExtendedData>
-    <description>種別: その他
+    <description>種別: 歯科
 住所: 未確認（名称で検索して配置）
-通れば加盟店にまとめて展開できる。事務局連絡先は要確認</description>
+kokoroshika.com</description>
+  </Placemark>
+  <Placemark>
+    <name>米満歯科医院（キッズルーム）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>米満歯科医院（キッズルーム）</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>歯科</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>yonemitsushika.com</value></Data>
+    </ExtendedData>
+    <description>種別: 歯科
+住所: 未確認（名称で検索して配置）
+yonemitsushika.com</description>
+  </Placemark>
+  <Placemark>
+    <name>ジュンレディースクリニック小平（産婦人科）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市喜平町1-14-20</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>産科・助産</value></Data>
+      <Data name="電話"><value>042-329-4103</value></Data>
+      <Data name="住所"><value>小平市喜平町1-14-20</value></Data>
+      <Data name="メモ"><value>産後ケア入院の委託先</value></Data>
+    </ExtendedData>
+    <description>種別: 産科・助産
+住所: 小平市喜平町1-14-20
+電話: 042-329-4103
+産後ケア入院の委託先</description>
+  </Placemark>
+  <Placemark>
+    <name>中野産婦人科医院</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市津田町1-4-8</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>産科・助産</value></Data>
+      <Data name="電話"><value>042-341-6565</value></Data>
+      <Data name="住所"><value>小平市津田町1-4-8</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 産科・助産
+住所: 小平市津田町1-4-8
+電話: 042-341-6565</description>
+  </Placemark>
+  <Placemark>
+    <name>ペルフェ滝山マタニティクリニック</name>
+    <styleUrl>#候補</styleUrl>
+    <address>東久留米市</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>産科・助産</value></Data>
+      <Data name="電話"><value>042-477-3508</value></Data>
+      <Data name="住所"><value>東久留米市</value></Data>
+      <Data name="メモ"><value>東久留米</value></Data>
+    </ExtendedData>
+    <description>種別: 産科・助産
+住所: 東久留米市
+電話: 042-477-3508
+東久留米</description>
+  </Placemark>
+  <Placemark>
+    <name>花小金井レディースクリニック</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井南町1-19-3 SORA1階</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>産科・助産</value></Data>
+      <Data name="電話"><value>042-497-5218</value></Data>
+      <Data name="住所"><value>小平市花小金井南町1-19-3 SORA1階</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 産科・助産
+住所: 小平市花小金井南町1-19-3 SORA1階
+電話: 042-497-5218</description>
+  </Placemark>
+  <Placemark>
+    <name>矢島助産院（小平市 産後ケア委託）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>矢島助産院（小平市 産後ケア委託）</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>産科・助産</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 産科・助産
+住所: 未確認（名称で検索して配置）</description>
+  </Placemark>
+  <Placemark>
+    <name>ここみ助産所</name>
+    <styleUrl>#候補</styleUrl>
+    <address>西東京市</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>産科・助産</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>西東京市</value></Data>
+      <Data name="メモ"><value>西東京</value></Data>
+    </ExtendedData>
+    <description>種別: 産科・助産
+住所: 西東京市
+西東京</description>
+  </Placemark>
+  <Placemark>
+    <name>たんぽぽ病児保育室</name>
+    <styleUrl>#候補</styleUrl>
+    <address>たんぽぽ病児保育室</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>子育て支援</value></Data>
+      <Data name="電話"><value>042-312-3326</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 子育て支援
+住所: 未確認（名称で検索して配置）
+電話: 042-312-3326</description>
+  </Placemark>
+  <Placemark>
+    <name>e-アクア薬局</name>
+    <styleUrl>#候補</styleUrl>
+    <address>e-アクア薬局</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>薬局</value></Data>
+      <Data name="電話"><value>042-343-5920</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 薬局
+住所: 未確認（名称で検索して配置）
+電話: 042-343-5920</description>
+  </Placemark>
+  <Placemark>
+    <name>駅前こどもクリニックの門前薬局</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井1-10-11付近</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>薬局</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>小平市花小金井1-10-11付近</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 薬局
+住所: 小平市花小金井1-10-11付近</description>
+  </Placemark>
+  <Placemark>
+    <name>弥生台幼稚園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井4-9-20</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-473-2525</value></Data>
+      <Data name="住所"><value>小平市花小金井4-9-20</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市花小金井4-9-20
+電話: 042-473-2525
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>ひめゆりこども園・小平姫百合幼稚園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市上水新町1-5-15</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-343-1832</value></Data>
+      <Data name="住所"><value>小平市上水新町1-5-15</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市上水新町1-5-15
+電話: 042-343-1832
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>まるやまこども園・丸山幼稚園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市小川東町1-29-21</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-341-0935</value></Data>
+      <Data name="住所"><value>小平市小川東町1-29-21</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市小川東町1-29-21
+電話: 042-341-0935
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>めぐみこども園・小平学園幼稚園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市学園東町1-2-41</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-341-0228</value></Data>
+      <Data name="住所"><value>小平市学園東町1-2-41</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市学園東町1-2-41
+電話: 042-341-0228
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>小平神明こども園・小平神明幼稚園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市小川町1-2572</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-341-0938</value></Data>
+      <Data name="住所"><value>小平市小川町1-2572</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市小川町1-2572
+電話: 042-341-0938
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>白梅学園大学附属白梅幼稚園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市小川町1-830</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-343-1335</value></Data>
+      <Data name="住所"><value>小平市小川町1-830</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市小川町1-830
+電話: 042-343-1335
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>たかのだい幼稚園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市上水本町1-21-3</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-323-3232</value></Data>
+      <Data name="住所"><value>小平市上水本町1-21-3</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市上水本町1-21-3
+電話: 042-323-3232
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>なおび幼稚園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市上水本町4-21-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-321-4671</value></Data>
+      <Data name="住所"><value>小平市上水本町4-21-1</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市上水本町4-21-1
+電話: 042-321-4671
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>小平あおば幼稚園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市上水南町2-8-15</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-323-2727</value></Data>
+      <Data name="住所"><value>小平市上水南町2-8-15</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市上水南町2-8-15
+電話: 042-323-2727
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>洗心幼稚園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市学園西町2-21-9</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-341-3200</value></Data>
+      <Data name="住所"><value>小平市学園西町2-21-9</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市学園西町2-21-9
+電話: 042-341-3200
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>小平なみき幼稚園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市仲町306-3</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-341-3810</value></Data>
+      <Data name="住所"><value>小平市仲町306-3</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市仲町306-3
+電話: 042-341-3810
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>小平若竹幼稚園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市回田町122-3</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-321-4072</value></Data>
+      <Data name="住所"><value>小平市回田町122-3</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市回田町122-3
+電話: 042-321-4072
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>花小金井愛育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井1-26-10</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-461-9549</value></Data>
+      <Data name="住所"><value>小平市花小金井1-26-10</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市花小金井1-26-10
+電話: 042-461-9549</description>
+  </Placemark>
+  <Placemark>
+    <name>Gakkenほいくえん花小金井</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井3-1-21-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-451-7020</value></Data>
+      <Data name="住所"><value>小平市花小金井3-1-21-1</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市花小金井3-1-21-1
+電話: 042-451-7020</description>
+  </Placemark>
+  <Placemark>
+    <name>しあわせの森保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井南町1-6-20</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-497-5678</value></Data>
+      <Data name="住所"><value>小平市花小金井南町1-6-20</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市花小金井南町1-6-20
+電話: 042-497-5678</description>
+  </Placemark>
+  <Placemark>
+    <name>ドリームキッズ花南保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井南町1-8-10</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-465-6610</value></Data>
+      <Data name="住所"><value>小平市花小金井南町1-8-10</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市花小金井南町1-8-10
+電話: 042-465-6610</description>
+  </Placemark>
+  <Placemark>
+    <name>あゆみの森保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井南町2-3-19</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-420-2870</value></Data>
+      <Data name="住所"><value>小平市花小金井南町2-3-19</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市花小金井南町2-3-19
+電話: 042-420-2870</description>
+  </Placemark>
+  <Placemark>
+    <name>小平花小金井雲母保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井南町2-10-40</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-452-2520</value></Data>
+      <Data name="住所"><value>小平市花小金井南町2-10-40</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市花小金井南町2-10-40
+電話: 042-452-2520</description>
+  </Placemark>
+  <Placemark>
+    <name>白梅保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井南町2-12-5</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-466-2015</value></Data>
+      <Data name="住所"><value>小平市花小金井南町2-12-5</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市花小金井南町2-12-5
+電話: 042-466-2015</description>
+  </Placemark>
+  <Placemark>
+    <name>花小金井おひさま保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井南町3-34-49</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-452-9913</value></Data>
+      <Data name="住所"><value>小平市花小金井南町3-34-49</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市花小金井南町3-34-49
+電話: 042-452-9913</description>
+  </Placemark>
+  <Placemark>
+    <name>花小金井にこにこ保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井4-11-22</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-452-2205</value></Data>
+      <Data name="住所"><value>小平市花小金井4-11-22</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市花小金井4-11-22
+電話: 042-452-2205</description>
+  </Placemark>
+  <Placemark>
+    <name>はなこがねい保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井5-41-11</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-452-7736</value></Data>
+      <Data name="住所"><value>小平市花小金井5-41-11</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市花小金井5-41-11
+電話: 042-452-7736</description>
+  </Placemark>
+  <Placemark>
+    <name>アスク花小金井保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井6-16-3</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-452-0107</value></Data>
+      <Data name="住所"><value>小平市花小金井6-16-3</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市花小金井6-16-3
+電話: 042-452-0107</description>
+  </Placemark>
+  <Placemark>
+    <name>このはな保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井7-27-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-497-5327</value></Data>
+      <Data name="住所"><value>小平市花小金井7-27-1</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市花小金井7-27-1
+電話: 042-497-5327</description>
+  </Placemark>
+  <Placemark>
+    <name>まなびの森保育園花小金井</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市回田町315-7</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-401-0880</value></Data>
+      <Data name="住所"><value>小平市回田町315-7</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市回田町315-7
+電話: 042-401-0880</description>
+  </Placemark>
+  <Placemark>
+    <name>美園おひさま保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市美園町3-18-11</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-386-4833</value></Data>
+      <Data name="住所"><value>小平市美園町3-18-11</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市美園町3-18-11
+電話: 042-386-4833</description>
+  </Placemark>
+  <Placemark>
+    <name>こぶし保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市鈴木町1-148</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-344-1717</value></Data>
+      <Data name="住所"><value>小平市鈴木町1-148</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市鈴木町1-148
+電話: 042-344-1717</description>
+  </Placemark>
+  <Placemark>
+    <name>すずのき台保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市鈴木町1-166-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-313-6355</value></Data>
+      <Data name="住所"><value>小平市鈴木町1-166-1</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市鈴木町1-166-1
+電話: 042-313-6355</description>
+  </Placemark>
+  <Placemark>
+    <name>プチ・ふたば保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市鈴木町1-344</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-341-2222</value></Data>
+      <Data name="住所"><value>小平市鈴木町1-344</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市鈴木町1-344
+電話: 042-341-2222</description>
+  </Placemark>
+  <Placemark>
+    <name>やさしい森保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市鈴木町1-463-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-312-0894</value></Data>
+      <Data name="住所"><value>小平市鈴木町1-463-1</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市鈴木町1-463-1
+電話: 042-312-0894</description>
+  </Placemark>
+  <Placemark>
+    <name>うれしい森保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市鈴木町2-147-10</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-439-5509</value></Data>
+      <Data name="住所"><value>小平市鈴木町2-147-10</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市鈴木町2-147-10
+電話: 042-439-5509</description>
+  </Placemark>
+  <Placemark>
+    <name>うめのき保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市鈴木町2-186-4</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-497-6152</value></Data>
+      <Data name="住所"><value>小平市鈴木町2-186-4</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市鈴木町2-186-4
+電話: 042-497-6152</description>
+  </Placemark>
+  <Placemark>
+    <name>こだすずコスモ保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市鈴木町2-621-21</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-388-3130</value></Data>
+      <Data name="住所"><value>小平市鈴木町2-621-21</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市鈴木町2-621-21
+電話: 042-388-3130</description>
+  </Placemark>
+  <Placemark>
+    <name>すこやかな森保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市鈴木町2-865-8</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-316-1310</value></Data>
+      <Data name="住所"><value>小平市鈴木町2-865-8</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市鈴木町2-865-8
+電話: 042-316-1310</description>
+  </Placemark>
+  <Placemark>
+    <name>ひめゆり保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市天神町2-6-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-345-7322</value></Data>
+      <Data name="住所"><value>小平市天神町2-6-1</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市天神町2-6-1
+電話: 042-345-7322</description>
+  </Placemark>
+  <Placemark>
+    <name>てんじん保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市天神町2-11-26</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-313-5030</value></Data>
+      <Data name="住所"><value>小平市天神町2-11-26</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市天神町2-11-26
+電話: 042-313-5030</description>
+  </Placemark>
+  <Placemark>
+    <name>たのしい森保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市小川町1-3004-5</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-313-5960</value></Data>
+      <Data name="住所"><value>小平市小川町1-3004-5</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市小川町1-3004-5
+電話: 042-313-5960</description>
+  </Placemark>
+  <Placemark>
+    <name>まなびの森保育園新小平</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市小川町2-1316-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-347-3231</value></Data>
+      <Data name="住所"><value>小平市小川町2-1316-1</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市小川町2-1316-1
+電話: 042-347-3231</description>
+  </Placemark>
+  <Placemark>
+    <name>まるやま保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市小川東町1-32-13</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-312-1995</value></Data>
+      <Data name="住所"><value>小平市小川東町1-32-13</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市小川東町1-32-13
+電話: 042-312-1995</description>
+  </Placemark>
+  <Placemark>
+    <name>小平にこにこ保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市小川東町1-38-18</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-344-8181</value></Data>
+      <Data name="住所"><value>小平市小川東町1-38-18</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市小川東町1-38-18
+電話: 042-344-8181</description>
+  </Placemark>
+  <Placemark>
+    <name>れんげ萩山保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市小川東町4-3-18</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-344-1486</value></Data>
+      <Data name="住所"><value>小平市小川東町4-3-18</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市小川東町4-3-18
+電話: 042-344-1486</description>
+  </Placemark>
+  <Placemark>
+    <name>にじいろ保育園上水本町</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市上水本町4-11-9</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-359-4815</value></Data>
+      <Data name="住所"><value>小平市上水本町4-11-9</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市上水本町4-11-9
+電話: 042-359-4815</description>
+  </Placemark>
+  <Placemark>
+    <name>小平一橋学園雲母保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市喜平町1-1-2</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-300-4111</value></Data>
+      <Data name="住所"><value>小平市喜平町1-1-2</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市喜平町1-1-2
+電話: 042-300-4111</description>
+  </Placemark>
+  <Placemark>
+    <name>小平どろんこ保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市津田町3-33-13</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-312-3058</value></Data>
+      <Data name="住所"><value>小平市津田町3-33-13</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市津田町3-33-13
+電話: 042-312-3058</description>
+  </Placemark>
+  <Placemark>
+    <name>よつぎ第三保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市津田町3-25-10</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-345-5044</value></Data>
+      <Data name="住所"><value>小平市津田町3-25-10</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市津田町3-25-10
+電話: 042-345-5044</description>
+  </Placemark>
+  <Placemark>
+    <name>ふれあいの森保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市学園西町2-9-17</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-312-3922</value></Data>
+      <Data name="住所"><value>小平市学園西町2-9-17</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市学園西町2-9-17
+電話: 042-312-3922</description>
+  </Placemark>
+  <Placemark>
+    <name>小平学園西雲母保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市学園西町3-27-14</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-349-8221</value></Data>
+      <Data name="住所"><value>小平市学園西町3-27-14</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市学園西町3-27-14
+電話: 042-349-8221</description>
+  </Placemark>
+  <Placemark>
+    <name>ゆたか保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市学園東町575-35</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-341-2832</value></Data>
+      <Data name="住所"><value>小平市学園東町575-35</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市学園東町575-35
+電話: 042-341-2832</description>
+  </Placemark>
+  <Placemark>
+    <name>学園まるやま保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市学園東町2-6-35</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-313-2130</value></Data>
+      <Data name="住所"><value>小平市学園東町2-6-35</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市学園東町2-6-35
+電話: 042-313-2130</description>
+  </Placemark>
+  <Placemark>
+    <name>なかまち保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市仲町7-19</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-313-2367</value></Data>
+      <Data name="住所"><value>小平市仲町7-19</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市仲町7-19
+電話: 042-313-2367</description>
+  </Placemark>
+  <Placemark>
+    <name>小平なみき保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市仲町304-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-344-2030</value></Data>
+      <Data name="住所"><value>小平市仲町304-1</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市仲町304-1
+電話: 042-344-2030</description>
+  </Placemark>
+  <Placemark>
+    <name>仲町にこにこ保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市仲町351-38</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-344-8118</value></Data>
+      <Data name="住所"><value>小平市仲町351-38</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市仲町351-38
+電話: 042-344-8118</description>
+  </Placemark>
+  <Placemark>
+    <name>ゆりのこ保育園</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市仲町521</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-312-1901</value></Data>
+      <Data name="住所"><value>小平市仲町521</value></Data>
+      <Data name="メモ"><value>ゆりのこ保育園は駅広告を出している（協賛候補 L2）</value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市仲町521
+電話: 042-312-1901
+ゆりのこ保育園は駅広告を出している（協賛候補 L2）</description>
+  </Placemark>
+  <Placemark>
+    <name>コビープリスクールこだいら</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市大沼町1-3-8</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>保育園</value></Data>
+      <Data name="電話"><value>042-312-3801</value></Data>
+      <Data name="住所"><value>小平市大沼町1-3-8</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 保育園
+住所: 小平市大沼町1-3-8
+電話: 042-312-3801</description>
+  </Placemark>
+  <Placemark>
+    <name>中央図書館（市立図書館8館の元締め）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市小川町2-1325</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-345-1246</value></Data>
+      <Data name="住所"><value>小平市小川町2-1325</value></Data>
+      <Data name="メモ"><value>図書館は20館の系統に入っていない</value></Data>
+    </ExtendedData>
+    <description>種別: 公共
+住所: 小平市小川町2-1325
+電話: 042-345-1246
+図書館は20館の系統に入っていない</description>
+  </Placemark>
+  <Placemark>
+    <name>花小金井図書館（東部市民センター内）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井1-8-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-467-1215</value></Data>
+      <Data name="住所"><value>小平市花小金井1-8-1</value></Data>
+      <Data name="メモ"><value>東部出張所も同じ建物</value></Data>
+    </ExtendedData>
+    <description>種別: 公共
+住所: 小平市花小金井1-8-1
+電話: 042-467-1215
+東部出張所も同じ建物</description>
+  </Placemark>
+  <Placemark>
+    <name>中央公民館（公民館11館の元締め）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市小川町2-1325</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-341-0861</value></Data>
+      <Data name="住所"><value>小平市小川町2-1325</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 公共
+住所: 小平市小川町2-1325
+電話: 042-341-0861</description>
+  </Placemark>
+  <Placemark>
+    <name>花小金井北公民館（図書館分室あり）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井5-41-3</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-462-5790</value></Data>
+      <Data name="住所"><value>小平市花小金井5-41-3</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 公共
+住所: 小平市花小金井5-41-3
+電話: 042-462-5790</description>
+  </Placemark>
+  <Placemark>
+    <name>こども広場（市内6か所・さわやか館ほか）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井4-21-2（さわやか館）</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>子育て支援</value></Data>
+      <Data name="電話"><value>042-346-9821</value></Data>
+      <Data name="住所"><value>小平市花小金井4-21-2（さわやか館）</value></Data>
+      <Data name="メモ"><value>0歳〜中学生の遊び場。運営は委託</value></Data>
+    </ExtendedData>
+    <description>種別: 子育て支援
+住所: 小平市花小金井4-21-2（さわやか館）
+電話: 042-346-9821
+0歳〜中学生の遊び場。運営は委託</description>
+  </Placemark>
+  <Placemark>
+    <name>ファミリー・サポート・センター</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市小川東町4-2-1 元気村おがわ東2F</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>子育て支援</value></Data>
+      <Data name="電話"><value>042-348-1780</value></Data>
+      <Data name="住所"><value>小平市小川東町4-2-1 元気村おがわ東2F</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 子育て支援
+住所: 小平市小川東町4-2-1 元気村おがわ東2F
+電話: 042-348-1780</description>
+  </Placemark>
+  <Placemark>
+    <name>こだいら子育てガイド（担当課）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市市役所2階</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>公共</value></Data>
+      <Data name="電話"><value>042-346-9821</value></Data>
+      <Data name="住所"><value>小平市市役所2階</value></Data>
+      <Data name="メモ"><value>母子手帳バッグに同封＝全数</value></Data>
+    </ExtendedData>
+    <description>種別: 公共
+住所: 小平市市役所2階
+電話: 042-346-9821
+母子手帳バッグに同封＝全数</description>
+  </Placemark>
+  <Placemark>
+    <name>小平市社会福祉協議会（こども食堂の窓口）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市学園東町1-19-13</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>団体</value></Data>
+      <Data name="電話"><value>042-344-1217</value></Data>
+      <Data name="住所"><value>小平市学園東町1-19-13</value></Data>
+      <Data name="メモ"><value>生活相談支援センター 042-349-0151</value></Data>
+    </ExtendedData>
+    <description>種別: 団体
+住所: 小平市学園東町1-19-13
+電話: 042-344-1217
+生活相談支援センター 042-349-0151</description>
+  </Placemark>
+  <Placemark>
+    <name>白梅学園大学 子ども学研究所</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市小川町1-830</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>大学・団体</value></Data>
+      <Data name="電話"><value>042-342-2311</value></Data>
+      <Data name="住所"><value>小平市小川町1-830</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 大学・団体
+住所: 小平市小川町1-830
+電話: 042-342-2311</description>
+  </Placemark>
+  <Placemark>
+    <name>花小金井商栄会 事務局</name>
+    <styleUrl>#候補</styleUrl>
+    <address>花小金井商栄会 事務局</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>商店会</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>通れば加盟店に一気に</value></Data>
+    </ExtendedData>
+    <description>種別: 商店会
+住所: 未確認（名称で検索して配置）
+通れば加盟店に一気に</description>
+  </Placemark>
+  <Placemark>
+    <name>せいぶ通り商店会（日吉屋豆腐店）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井南町2-17-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>商店会</value></Data>
+      <Data name="電話"><value>042-462-5626</value></Data>
+      <Data name="住所"><value>小平市花小金井南町2-17-1</value></Data>
+      <Data name="メモ"><value>docs/distribution.md に台本</value></Data>
+    </ExtendedData>
+    <description>種別: 商店会
+住所: 小平市花小金井南町2-17-1
+電話: 042-462-5626
+docs/distribution.md に台本</description>
   </Placemark>
   <Placemark>
     <name>コープ花小金井店</name>
     <styleUrl>#候補</styleUrl>
-    <address>コープ 花小金井</address>
+    <address>コープ花小金井店</address>
     <ExtendedData>
       <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>生活動線</value></Data>
+      <Data name="種別"><value>お店</value></Data>
       <Data name="電話"><value></value></Data>
       <Data name="住所"><value>未確認</value></Data>
-      <Data name="メモ"><value>生協は地域活動に寛容。組合員向け掲示板があることが多い</value></Data>
+      <Data name="メモ"><value></value></Data>
     </ExtendedData>
-    <description>種別: 生活動線
+    <description>種別: お店
+住所: 未確認（名称で検索して配置）</description>
+  </Placemark>
+  <Placemark>
+    <name>小平市立小学校PTA連合会</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市立小学校PTA連合会</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>大学・団体</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>連絡はフォームのみ</value></Data>
+    </ExtendedData>
+    <description>種別: 大学・団体
 住所: 未確認（名称で検索して配置）
-生協は地域活動に寛容。組合員向け掲示板があることが多い</description>
+連絡はフォームのみ</description>
+  </Placemark>
+  <Placemark>
+    <name>イトマンスイミングスクール小平校</name>
+    <styleUrl>#候補</styleUrl>
+    <address>イトマンスイミングスクール小平校</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>習い事</value></Data>
+      <Data name="電話"><value>042-341-1500</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>ガイドP9・ガイド広告主</value></Data>
+    </ExtendedData>
+    <description>種別: 習い事
+住所: 未確認（名称で検索して配置）
+電話: 042-341-1500
+ガイドP9・ガイド広告主</description>
+  </Placemark>
+  <Placemark>
+    <name>安倍みを子バレエスタジオ</name>
+    <styleUrl>#候補</styleUrl>
+    <address>安倍みを子バレエスタジオ</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>習い事</value></Data>
+      <Data name="電話"><value>042-345-0334</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>駅広告・ガイド広告主（協賛 L1）</value></Data>
+    </ExtendedData>
+    <description>種別: 習い事
+住所: 未確認（名称で検索して配置）
+電話: 042-345-0334
+駅広告・ガイド広告主（協賛 L1）</description>
+  </Placemark>
+  <Placemark>
+    <name>バレエスタジオ クロレ</name>
+    <styleUrl>#候補</styleUrl>
+    <address>バレエスタジオ クロレ</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>習い事</value></Data>
+      <Data name="電話"><value>042-468-1688</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>ガイド広告主</value></Data>
+    </ExtendedData>
+    <description>種別: 習い事
+住所: 未確認（名称で検索して配置）
+電話: 042-468-1688
+ガイド広告主</description>
+  </Placemark>
+  <Placemark>
+    <name>YT TENNIS SCHOOL</name>
+    <styleUrl>#候補</styleUrl>
+    <address>YT TENNIS SCHOOL</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>習い事</value></Data>
+      <Data name="電話"><value>042-325-9282</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>ガイド広告主</value></Data>
+    </ExtendedData>
+    <description>種別: 習い事
+住所: 未確認（名称で検索して配置）
+電話: 042-325-9282
+ガイド広告主</description>
+  </Placemark>
+  <Placemark>
+    <name>ウィズダムアカデミー小平校（民間学童）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>ウィズダムアカデミー小平校（民間学童）</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>習い事</value></Data>
+      <Data name="電話"><value>03-6914-0581</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>ガイド広告主</value></Data>
+    </ExtendedData>
+    <description>種別: 習い事
+住所: 未確認（名称で検索して配置）
+電話: 03-6914-0581
+ガイド広告主</description>
+  </Placemark>
+  <Placemark>
+    <name>ハイタッチ小平小川教室（児童発達支援）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>ハイタッチ小平小川教室（児童発達支援）</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>習い事</value></Data>
+      <Data name="電話"><value>042-537-8653</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>ガイド広告主</value></Data>
+    </ExtendedData>
+    <description>種別: 習い事
+住所: 未確認（名称で検索して配置）
+電話: 042-537-8653
+ガイド広告主</description>
+  </Placemark>
+  <Placemark>
+    <name>学研スクエア 花小金井駅前いなげや教室</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井 いなげや2階</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>習い事</value></Data>
+      <Data name="電話"><value>0120-415-861</value></Data>
+      <Data name="住所"><value>小平市花小金井 いなげや2階</value></Data>
+      <Data name="メモ"><value>本部の番号。教室で直接が早い</value></Data>
+    </ExtendedData>
+    <description>種別: 習い事
+住所: 小平市花小金井 いなげや2階
+電話: 0120-415-861
+本部の番号。教室で直接が早い</description>
+  </Placemark>
+  <Placemark>
+    <name>カルチャースタジオ花</name>
+    <styleUrl>#候補</styleUrl>
+    <address>カルチャースタジオ花</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>習い事</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>協賛 L6。徒歩圏</value></Data>
+    </ExtendedData>
+    <description>種別: 習い事
+住所: 未確認（名称で検索して配置）
+協賛 L6。徒歩圏</description>
+  </Placemark>
+  <Placemark>
+    <name>公文式 花小金井駅北口教室</name>
+    <styleUrl>#候補</styleUrl>
+    <address>公文式 花小金井駅北口教室</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>習い事</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 習い事
+住所: 未確認（名称で検索して配置）</description>
+  </Placemark>
+  <Placemark>
+    <name>公文式 花小金井駅南教室</name>
+    <styleUrl>#候補</styleUrl>
+    <address>公文式 花小金井駅南教室</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>習い事</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 習い事
+住所: 未確認（名称で検索して配置）</description>
+  </Placemark>
+  <Placemark>
+    <name>公文式 花小金井6丁目教室</name>
+    <styleUrl>#候補</styleUrl>
+    <address>公文式 花小金井6丁目教室</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>習い事</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 習い事
+住所: 未確認（名称で検索して配置）</description>
+  </Placemark>
+  <Placemark>
+    <name>公文式 小平五小南教室</name>
+    <styleUrl>#候補</styleUrl>
+    <address>公文式 小平五小南教室</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>習い事</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 習い事
+住所: 未確認（名称で検索して配置）</description>
+  </Placemark>
+  <Placemark>
+    <name>スタジオタカノ 小平店</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市鈴木町1-206-3</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>写真館</value></Data>
+      <Data name="電話"><value>042-342-8830</value></Data>
+      <Data name="住所"><value>小平市鈴木町1-206-3</value></Data>
+      <Data name="メモ"><value>水・木定休</value></Data>
+    </ExtendedData>
+    <description>種別: 写真館
+住所: 小平市鈴木町1-206-3
+電話: 042-342-8830
+水・木定休</description>
+  </Placemark>
+  <Placemark>
+    <name>フォトスタジオ ムーピー</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市学園東町2-14-16</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>写真館</value></Data>
+      <Data name="電話"><value>042-349-2833</value></Data>
+      <Data name="住所"><value>小平市学園東町2-14-16</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 写真館
+住所: 小平市学園東町2-14-16
+電話: 042-349-2833</description>
+  </Placemark>
+  <Placemark>
+    <name>コフレ小平STUDIO</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市仲町361</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>写真館</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>小平市仲町361</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 写真館
+住所: 小平市仲町361</description>
+  </Placemark>
+  <Placemark>
+    <name>熊野宮</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市仲町361</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>神社</value></Data>
+      <Data name="電話"><value>042-344-0638</value></Data>
+      <Data name="住所"><value>小平市仲町361</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 神社
+住所: 小平市仲町361
+電話: 042-344-0638</description>
+  </Placemark>
+  <Placemark>
+    <name>小平神明宮（森写真館）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平神明宮（森写真館）</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>神社</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: 神社
+住所: 未確認（名称で検索して配置）</description>
+  </Placemark>
+  <Placemark>
+    <name>田無神社</name>
+    <styleUrl>#候補</styleUrl>
+    <address>西東京市</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>神社</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>西東京市</value></Data>
+      <Data name="メモ"><value>西東京</value></Data>
+    </ExtendedData>
+    <description>種別: 神社
+住所: 西東京市
+西東京</description>
+  </Placemark>
+  <Placemark>
+    <name>ホームメイトFC花小金井店</name>
+    <styleUrl>#候補</styleUrl>
+    <address>ホームメイトFC花小金井店</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>不動産</value></Data>
+      <Data name="電話"><value>042-452-6414</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>ガイド広告主</value></Data>
+    </ExtendedData>
+    <description>種別: 不動産
+住所: 未確認（名称で検索して配置）
+電話: 042-452-6414
+ガイド広告主</description>
+  </Placemark>
+  <Placemark>
+    <name>藤友コーポレーション</name>
+    <styleUrl>#候補</styleUrl>
+    <address>藤友コーポレーション</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>不動産</value></Data>
+      <Data name="電話"><value>042-316-5142</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>ガイド広告主</value></Data>
+    </ExtendedData>
+    <description>種別: 不動産
+住所: 未確認（名称で検索して配置）
+電話: 042-316-5142
+ガイド広告主</description>
+  </Placemark>
+  <Placemark>
+    <name>ことぶき不動産</name>
+    <styleUrl>#候補</styleUrl>
+    <address>ことぶき不動産</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>不動産</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>協賛 L7</value></Data>
+    </ExtendedData>
+    <description>種別: 不動産
+住所: 未確認（名称で検索して配置）
+協賛 L7</description>
+  </Placemark>
+  <Placemark>
+    <name>トーショー交通（マタニティタクシー）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>トーショー交通（マタニティタクシー）</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>その他</value></Data>
+      <Data name="電話"><value>0120-528-963</value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value>ガイド広告主</value></Data>
+    </ExtendedData>
+    <description>種別: その他
+住所: 未確認（名称で検索して配置）
+電話: 0120-528-963
+ガイド広告主</description>
+  </Placemark>
+  <Placemark>
+    <name>こだキッズタウン（10/31 小平第六小）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市小川東町3-1-2</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>イベント</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>小平市小川東町3-1-2</value></Data>
+      <Data name="メモ"><value>協賛欄に のま整骨院・Socio-Craft・ar</value></Data>
+    </ExtendedData>
+    <description>種別: イベント
+住所: 小平市小川東町3-1-2
+協賛欄に のま整骨院・Socio-Craft・ar</description>
+  </Placemark>
+  <Placemark>
+    <name>のま整骨院</name>
+    <styleUrl>#候補</styleUrl>
+    <address>のま整骨院</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>お店</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: お店
+住所: 未確認（名称で検索して配置）</description>
+  </Placemark>
+  <Placemark>
+    <name>Socio-Craft</name>
+    <styleUrl>#候補</styleUrl>
+    <address>Socio-Craft</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>お店</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: お店
+住所: 未確認（名称で検索して配置）</description>
+  </Placemark>
+  <Placemark>
+    <name>ar【アール】</name>
+    <styleUrl>#候補</styleUrl>
+    <address>ar【アール】</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>お店</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: お店
+住所: 未確認（名称で検索して配置）</description>
+  </Placemark>
+  <Placemark>
+    <name>新小平マーケット</name>
+    <styleUrl>#候補</styleUrl>
+    <address>新小平マーケット</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>イベント</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: イベント
+住所: 未確認（名称で検索して配置）</description>
+  </Placemark>
+  <Placemark>
+    <name>花小金井夜市</name>
+    <styleUrl>#候補</styleUrl>
+    <address>小平市花小金井駅北口広場</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>イベント</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>小平市花小金井駅北口広場</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: イベント
+住所: 小平市花小金井駅北口広場</description>
+  </Placemark>
+  <Placemark>
+    <name>コインランドリー（子連れが待つ）</name>
+    <styleUrl>#候補</styleUrl>
+    <address>コインランドリー（子連れが待つ）</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>候補</value></Data>
+      <Data name="種別"><value>お店</value></Data>
+      <Data name="電話"><value></value></Data>
+      <Data name="住所"><value>未確認</value></Data>
+      <Data name="メモ"><value></value></Data>
+    </ExtendedData>
+    <description>種別: お店
+住所: 未確認（名称で検索して配置）</description>
   </Placemark>
 </Document>
 </kml>
