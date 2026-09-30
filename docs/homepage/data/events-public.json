@@ -3692,6 +3692,41 @@
    "deadline": null
   },
   {
+   "id": "E163",
+   "name": "西武グループ こども応援プロジェクト「キッズフェスタ2026」（西武園ゆうえんち）",
+   "dates": [
+    "2026-11-07"
+   ],
+   "span": null,
+   "when": "2026年11月7日(土) 10:00〜17:00（最終入場16:00）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "17:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "西武園ゆうえんち（埼玉県所沢市山口2964）",
+   "mapq": "西武園ゆうえんち",
+   "summary": "「レッツゴー！レオランド」エリアでステージ・ブース（詳細は公式で順次）",
+   "kidsNote": "3歳未満は無料。レオランドは小さい子向けのエリア。",
+   "caution": "",
+   "lastEntry": "最終入場16:00",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "特別チケット「キッズフェスタ 思い出1日レヂャー切符」（入園＋園内アトラクション。一部の体験は別料金）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.seibuholdings.co.jp/kodomo-support/kidsfesta2026.html",
+   "tentative": false,
+   "deadline": null
+  },
+  {
    "id": "E146",
    "name": "第36回 小平市産業まつり ⚠️**日程は裏が取れていない**",
    "dates": [
