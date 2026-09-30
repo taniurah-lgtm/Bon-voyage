@@ -2438,27 +2438,29 @@
    "name": "「はじめの一歩」第一子の赤ちゃんとお母さんへ",
    "dates": [
     "2026-10-06",
-    "2026-10-27",
-    "2026-11-03"
+    "2026-10-13",
+    "2026-10-20",
+    "2026-11-10"
    ],
-   "span": {
-    "from": "2026-10-06",
-    "to": "2026-11-10"
-   },
-   "when": "10/6〜11/10の毎週火曜 14:00〜15:30 全4回(10/27・11/3を除く)",
+   "span": null,
+   "when": "10/6(火)・10/13(火)・10/20(火)・11/10(火) 14:00〜15:30 全4回",
    "rainDates": [],
    "exceptions": null,
    "programs": null,
-   "totalDates": 3,
+   "totalDates": 4,
    "start": "14:00",
    "end": "15:30",
    "allDay": false,
    "timeUncertain": false,
-   "place": "",
-   "mapq": "「はじめの一歩」第一子の赤ちゃんとお母さんへ",
-   "summary": "",
+   "place": "小平市子ども家庭支援センター（小平市小川東町4-2-1 小平元気村おがわ東 2階）",
+   "mapq": "小平市子ども家庭支援センター",
+   "summary": "(要確認)（公式に説明文が無い）",
    "kidsNote": "",
    "caution": "",
+   "contact": {
+    "tel": "042-348-2100",
+    "who": ""
+   },
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -2469,7 +2471,7 @@
    "cost": "",
    "discount": "",
    "target": "市内在住で、10/6時点で生後2〜5か月の第一子とお母さん(全4回参加できる方)",
-   "url": "",
+   "url": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202610.pdf",
    "tentative": false,
    "deadline": null
   },
