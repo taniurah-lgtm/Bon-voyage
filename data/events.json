@@ -3633,12 +3633,12 @@
     "pre": "○",
     "elem": "✕"
    },
-   "cost": "（要確認）（告知に記載なし）",
+   "cost": "無料（✅ 講師に確認 2026-09-30）",
    "discount": "",
    "target": "乳幼児と保護者（保護者のみの参加もOK）／定員: なし／申込: 不要",
    "url": "",
-   "status": "候補",
-   "confidence": "主催の告知で確認（2026-09-30）。料金は未確認",
+   "status": "承認済",
+   "confidence": "講師の告知と講師への確認（2026-09-30）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
