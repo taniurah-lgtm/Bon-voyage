@@ -2268,49 +2268,6 @@
    "source": "events/2026-09.md"
   },
   {
-   "id": "E96",
-   "name": "たけのこ公園ビアガーデン！2026",
-   "dates": [
-    "2026-09-26"
-   ],
-   "span": null,
-   "when": "9/26(土) 10:00〜20:00",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": "10:00",
-   "end": "20:00",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "小平市立たけのこ公園（花小金井7-9-10／西武新宿線 花小金井駅・小平駅）",
-   "mapq": "小平市立たけのこ公園",
-   "summary": "",
-   "kidsNote": "",
-   "caution": "",
-   "contact": {
-    "tel": "042-312-3954",
-    "mail": "",
-    "who": "一般社団法人 こだいら観光まちづくり協会"
-   },
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "○",
-    "pre": "◎",
-    "elem": "◎"
-   },
-   "cost": "入場無料（公園の催し）。出店・飲食は実費",
-   "discount": "",
-   "target": "",
-   "url": "https://kodaira-tourism.com/event/22825/",
-   "status": "承認済",
-   "confidence": "日時・会場・出店・こども縁日の中身は公式掲載で確認済み",
-   "tentative": false,
-   "deadline": null,
-   "source": "events/2026-09.md"
-  },
-  {
    "id": "E107",
    "name": "太陽福祉センターまつり",
    "dates": [
@@ -4590,8 +4547,7 @@
    "E112",
    "E113",
    "E77",
-   "E106",
-   "E96"
+   "E106"
   ],
   "2026-09-24": [
    "E113",
@@ -5001,6 +4957,12 @@
    "confidence": "",
    "reason": "日時・期間の行が無い",
    "when": ""
+  },
+  {
+   "id": "E96",
+   "name": "たけのこ公園ビアガーデン！2026",
+   "reason": "ステータス「終了（天候不良のため中止）（9/23号に掲載済み。2026-09-30」のため除外",
+   "when": "9/26(土) 10:00〜20:00"
   },
   {
    "id": "E99",

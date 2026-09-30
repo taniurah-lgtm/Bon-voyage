@@ -228,6 +228,22 @@ E151 園庭開放</description>
 9/29 代表の森さんと会って口頭でOK。朝のお手伝いを少し引き受けた</description>
   </Placemark>
   <Placemark>
+    <name>こだいら観光まちづくり協会</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>小平市学園東町1-16-1</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>設置済</value></Data>
+      <Data name="種別"><value>団体</value></Data>
+      <Data name="電話"><value>042-312-3954</value></Data>
+      <Data name="住所"><value>小平市学園東町1-16-1</value></Data>
+      <Data name="メモ"><value>https://kodaira-tourism.com/news/23007/ ／ ビアガーデン(E96)は天候不良で中止だった</value></Data>
+    </ExtendedData>
+    <description>種別: 団体
+住所: 小平市学園東町1-16-1
+電話: 042-312-3954
+https://kodaira-tourism.com/news/23007/ ／ ビアガーデン(E96)は天候不良で中止だった</description>
+  </Placemark>
+  <Placemark>
     <name>りんどう幼稚園</name>
     <styleUrl>#交渉中</styleUrl>
     <address>小平市花小金井1-26-34</address>
@@ -484,22 +500,6 @@ docs/clinic-6-script.md</description>
     <description>種別: 小児科
 住所: 小平市花小金井南町2-21-7
 電話: 042-465-2288</description>
-  </Placemark>
-  <Placemark>
-    <name>こだいら観光まちづくり協会</name>
-    <styleUrl>#候補</styleUrl>
-    <address>小平市学園東町1-16-1</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>団体</value></Data>
-      <Data name="電話"><value>042-312-3954</value></Data>
-      <Data name="住所"><value>小平市学園東町1-16-1</value></Data>
-      <Data name="メモ"><value>ルネこだいらの財団も会員</value></Data>
-    </ExtendedData>
-    <description>種別: 団体
-住所: 小平市学園東町1-16-1
-電話: 042-312-3954
-ルネこだいらの財団も会員</description>
   </Placemark>
   <Placemark>
     <name>はなこキッズクリニック</name>
