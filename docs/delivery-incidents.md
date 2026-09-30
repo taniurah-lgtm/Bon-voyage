@@ -171,3 +171,14 @@ git rev-parse --show-toplevel && git branch --show-current
 - **`sources: []` のルーティンは、リポジトリを持たないコンテナで起きる**
 - **だが git の認証は環境が持っているので、自分でクローンすれば回復できる**
 - ルーティンを**新しく作るときは、必ず手順0にクローンを入れる**
+
+## 2026-09-30（水）9/30号 — 09:00 の配信Routineが push 403 で止まった（09:24 に手動で配信）
+
+- **何が起きたか**: 09:00 の配信Routine（新しいセッションで起動）が「`add_repo` ツールが無い」と判断して呼ばず、
+  `publish_report.sh` の 4/5（push）が `access denied by the git proxy ... 403` で4回失敗。**push が通らないので LINE は送られなかった**（道具の設計どおり止まった。二重配信・記録漏れは無し）
+- **原因**: ①Routine のセッション設定にリポジトリが入っていなかった　②`add_repo` は後から読み込む形のツールで、ToolSearch で読み込まずに「無い」と判断した
+- **直したこと**:
+  - オーナーが Routine のソースに Bon-voyage を追加（次回から新しいセッションに最初から入る）
+  - 配信Routine（trig_01UxYbbiARUStn7ZCJXa7bNM）の手順0に「`add_repo` は ToolSearch で `select:mcp__Claude_Code_Remote__add_repo` を読み込んでから呼ぶ」を追記
+  - 9/30号は、push できる会話から `scripts/publish_report.sh reports/free/2026-09-30.md` で配信（09:24・1通・今月588通）。sent.log も push 済み
+- **読者への影響**: 約24分の遅れ。年齢別ページは 07:50 の準備で公開済みだった
