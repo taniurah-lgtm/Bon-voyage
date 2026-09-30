@@ -3609,6 +3609,45 @@
    "source": "events/2026-10.md"
   },
   {
+   "id": "E162",
+   "name": "子育て講座「育脳・自己肯定感・非認知能力」＋親子体操（さわやか館）",
+   "dates": [
+    "2026-10-23"
+   ],
+   "span": null,
+   "when": "2026年10月23日(金) 11:00〜11:45",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "11:00",
+   "end": "11:45",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "さわやか館（小平市花小金井4-21-2）",
+   "mapq": "小平市さわやか館",
+   "summary": "育脳・自己肯定感・非認知能力のお話、親子ワーク、親子体操、雑談・交流",
+   "kidsNote": "乳幼児親子向け。じっと座るのが苦手な子も歓迎と明記。",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "○",
+    "elem": "✕"
+   },
+   "cost": "（要確認）（告知に記載なし）",
+   "discount": "",
+   "target": "乳幼児と保護者（保護者のみの参加もOK）／定員: なし／申込: 不要",
+   "url": "",
+   "status": "候補",
+   "confidence": "主催の告知で確認（2026-09-30）。料金は未確認",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E131",
    "name": "min'na de part ナイトミュージアムマルシェ（ガスミュージアム）",
    "dates": [
@@ -4621,7 +4660,8 @@
    "E100"
   ],
   "2026-10-23": [
-   "E140"
+   "E140",
+   "E162"
   ],
   "2026-10-24": [
    "E140",
