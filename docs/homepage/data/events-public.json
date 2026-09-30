@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-30",
+ "generated": "2026-10-01",
  "events": [
   {
    "id": "E16",
@@ -1790,57 +1790,6 @@
    "discount": "",
    "target": "",
    "url": "https://www.tokyo-park.or.jp/park/koganei/news/2026/9_19.html",
-   "tentative": false,
-   "deadline": null
-  },
-  {
-   "id": "E113",
-   "name": "東久留米市立中央図書館「図書館フェス2026」",
-   "dates": [
-    "2026-09-19",
-    "2026-09-20",
-    "2026-09-21",
-    "2026-09-22",
-    "2026-09-23",
-    "2026-09-24",
-    "2026-09-25",
-    "2026-09-26",
-    "2026-09-27",
-    "2026-09-28",
-    "2026-09-29",
-    "2026-09-30",
-    "2026-10-01"
-   ],
-   "span": null,
-   "when": "9/19(土)〜10/1(木)",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 13,
-   "start": null,
-   "end": null,
-   "allDay": true,
-   "timeUncertain": false,
-   "place": "東久留米市立中央図書館（東久留米市中央町2-6-23）",
-   "mapq": "東久留米市立中央図書館",
-   "summary": "",
-   "kidsNote": "屋内。連休をまたいでいる",
-   "caution": "",
-   "contact": {
-    "tel": "042-475-4646",
-    "who": ""
-   },
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "○",
-    "pre": "◎",
-    "elem": "◎"
-   },
-   "cost": "",
-   "discount": "",
-   "target": "",
-   "url": "https://www.city.higashikurume.lg.jp/library/1024999/1029654.html",
    "tentative": false,
    "deadline": null
   },
