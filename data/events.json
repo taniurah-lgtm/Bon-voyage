@@ -3670,6 +3670,52 @@
    "source": "events/2026-10.md"
   },
   {
+   "id": "E164",
+   "name": "講演会「絵本作家が語る〜赤ちゃん絵本の魅力と楽しみ方〜」（中央図書館）",
+   "dates": [
+    "2026-10-24"
+   ],
+   "span": null,
+   "when": "2026年10月24日(土) 14:00〜16:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "14:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市中央図書館 3階 視聴覚室（小川町2-1325）",
+   "mapq": "小平市中央図書館",
+   "summary": "絵本作家こがようこさんが、赤ちゃん絵本の魅力や楽しみ方、読み聞かせが子どもの心と育ちに果たす役割を話す。『おせんべやけたかな』の制作秘話も",
+   "kidsNote": "保護者向けの講演。赤ちゃん絵本がテーマ。保育6名の枠あり。",
+   "caution": "",
+   "contact": {
+    "tel": "042-345-1246",
+    "mail": "",
+    "who": "中央図書館"
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "○",
+    "elem": "✕"
+   },
+   "cost": "（要確認）（市のお知らせに記載なし）",
+   "discount": "",
+   "target": "",
+   "url": "https://library.kodaira.ed.jp/",
+   "status": "候補",
+   "confidence": "市のお知らせで確認（2026-10-01）。費用・保育の年齢は未確認",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-10-01",
+    "raw": "🔴 10/1(木) 22:00から申込フォームで受付・先着順（https://logoform.jp/form/exdH/1693732 ）"
+   },
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E103",
    "name": "音楽の絵本 halloween（ルネこだいら 大ホール）",
    "dates": [
@@ -4637,7 +4683,8 @@
   "2026-10-24": [
    "E140",
    "E131",
-   "E147"
+   "E147",
+   "E164"
   ],
   "2026-10-25": [
    "E140",
