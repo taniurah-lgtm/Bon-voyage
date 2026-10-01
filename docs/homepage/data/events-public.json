@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-01",
+ "generated": "2026-10-02",
  "events": [
   {
    "id": "E16",
@@ -2214,7 +2214,7 @@
   },
   {
    "id": "E116",
-   "name": "新小平マーケット",
+   "name": "新小平マルシェ",
    "dates": [
     "2026-10-03"
    ],
@@ -2230,7 +2230,7 @@
    "timeUncertain": false,
    "place": "新小平駅 駅前ロータリー（JR武蔵野線 新小平駅）",
    "mapq": "新小平駅 駅",
-   "summary": "",
+   "summary": "毎年恒例の駅前マルシェ。JRの体験コーナー・白梅学園大学の企画・地元のお菓子屋が並ぶ",
    "kidsNote": "",
    "caution": "",
    "lastEntry": "",
@@ -2511,48 +2511,6 @@
    "deadline": null
   },
   {
-   "id": "E80",
-   "name": "仲町公民館 子育て支援講座「ゼロから1歳児のための子育てあれこれ」",
-   "dates": [
-    "2026-10-09",
-    "2026-10-30",
-    "2026-11-13",
-    "2026-11-20",
-    "2026-11-27"
-   ],
-   "span": null,
-   "when": "10/9(金)・10/30(金)・11/13(金)・11/20(金)・11/27(金) 各10:00〜12:00 全5回",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 5,
-   "start": "10:00",
-   "end": "12:00",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "仲町公民館（なかまちテラス）2階講座室ほか ☎042-341-0862",
-   "mapq": "仲町公民館",
-   "summary": "",
-   "kidsNote": "0〜1歳の親向け。保育付き＝親が主役の講座。妊婦も対象なのが珍しい",
-   "caution": "",
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "◎",
-    "pre": "○",
-    "elem": "✕"
-   },
-   "cost": "",
-   "discount": "",
-   "target": "市内在住で、出産予定の妊婦の方／現在0〜1歳児のお子さんをお持ちの方",
-   "url": "https://www.city.kodaira.tokyo.jp/event/129/129611.html",
-   "tentative": false,
-   "deadline": {
-    "date": "2026-09-25",
-    "raw": "申込締切: 9/25(金) 電話または申込フォーム"
-   }
-  },
-  {
    "id": "E145",
    "name": "多摩六都科学館「ザクロ石を観察しよう」",
    "dates": [
@@ -2579,24 +2537,24 @@
    "timeUncertain": false,
    "place": "多摩六都科学館 地球の部屋（ちきゅうラボ）",
    "mapq": "多摩六都科学館 地球の部屋",
-   "summary": "",
+   "summary": "ザクロ石（ガーネット）という鉱物を見る回。宝石にも使われる石で、身近な場所でも見つかる。 いろいろな色や形を見比べる",
    "kidsNote": "",
    "caution": "",
    "lastEntry": "",
-   "hours": "",
+   "hours": "🔴 10/5(月)〜9(金)は休館。初日の10/10(土)は開館",
    "ages": {
     "baby": "○",
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "入館料のみ（別料金はかからない）",
+   "cost": "入館料のみ（別料金はかからない）。展示室のみ 大人520円 / 小人〈4歳〜高校生〉210円 / 4歳未満は無料",
    "discount": "",
    "target": "どなたでも",
    "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3672&day=2026-10-10",
    "tentative": false,
    "deadline": {
-    "date": "2026-09-04",
-    "raw": "> （E70 子育ては私のキャリア＝申込9/4締切が既に過ぎている／E81 タッチケア）。"
+    "date": "2026-11-15",
+    "raw": "内部メモ: 10/10・11/15 までの全10日、時間枠4コマ、場所、入館料、申込不要、定員なし、内容を公式で取り直した。"
    }
   },
   {
@@ -3224,6 +3182,48 @@
    "url": "https://www.tokofes.com/about/",
    "tentative": false,
    "deadline": null
+  },
+  {
+   "id": "E164",
+   "name": "講演会「絵本作家が語る〜赤ちゃん絵本の魅力と楽しみ方〜」（中央図書館）",
+   "dates": [
+    "2026-10-24"
+   ],
+   "span": null,
+   "when": "2026年10月24日(土) 14:00〜16:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "14:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市中央図書館 3階 視聴覚室（小川町2-1325）",
+   "mapq": "小平市中央図書館",
+   "summary": "絵本作家こがようこさんが、赤ちゃん絵本の魅力や楽しみ方、読み聞かせが子どもの心と育ちに果たす役割を話す。『おせんべやけたかな』の制作秘話も",
+   "kidsNote": "保護者向けの講演。赤ちゃん絵本がテーマ。保育6名の枠あり。",
+   "caution": "",
+   "contact": {
+    "tel": "042-345-1246",
+    "who": "中央図書館"
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "○",
+    "elem": "✕"
+   },
+   "cost": "（要確認）（市のお知らせに記載なし）",
+   "discount": "",
+   "target": "",
+   "url": "https://library.kodaira.ed.jp/",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-10-01",
+    "raw": "🔴 10/1(木) 22:00から申込フォームで受付・先着順（https://logoform.jp/form/exdH/1693732 ）"
+   }
   },
   {
    "id": "E103",
