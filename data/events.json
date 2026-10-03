@@ -2752,6 +2752,46 @@
    "source": "events/2026-10.md"
   },
   {
+   "id": "E165",
+   "name": "武蔵野神社 睦会 祭礼（花小金井8丁目）",
+   "dates": [
+    "2026-10-03",
+    "2026-10-04"
+   ],
+   "span": null,
+   "when": "2026年10月3日(土) 15:30〜21:00 ／ 10月4日(日) 14:00〜20:00ごろ（舞台予定表より。「都合により変更する場合があります」）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "15:30",
+   "end": "21:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "武蔵野神社（小平市花小金井8-2-6）。花小金井駅からバス約10分",
+   "mapq": "小平市武蔵野神社",
+   "summary": "",
+   "kidsNote": "子供みこしとお菓子配布。夜の部は遅いので、小さい子は夕方まで。",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "記載なし（神社の祭礼）",
+   "discount": "",
+   "target": "",
+   "url": "http://www.tokyo-jinjacho.or.jp/kitatama/kodaira/5413",
+   "status": "Threadsで当日朝に告知のみ（号には間に合わない）。来年の巡回先に入れる",
+   "confidence": "神社の掲示で確認（2026-10-03）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E136",
    "name": "列車のトイレ写真展 〜日本全国編〜",
    "dates": [
@@ -4525,13 +4565,15 @@
    "E127",
    "E128",
    "E154",
-   "E161"
+   "E161",
+   "E165"
   ],
   "2026-10-04": [
    "E127",
    "E128",
    "E154",
-   "E161"
+   "E161",
+   "E165"
   ],
   "2026-10-06": [
    "E136",
