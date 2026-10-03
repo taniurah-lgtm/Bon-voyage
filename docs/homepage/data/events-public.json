@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03",
+ "generated": "2026-10-04",
  "events": [
   {
    "id": "E16",
@@ -2396,6 +2396,42 @@
    "deadline": null
   },
   {
+   "id": "E165",
+   "name": "武蔵野神社 睦会 祭礼（花小金井8丁目）",
+   "dates": [
+    "2026-10-03",
+    "2026-10-04"
+   ],
+   "span": null,
+   "when": "2026年10月3日(土) 15:30〜21:00 ／ 10月4日(日) 14:00〜20:00ごろ（舞台予定表より。「都合により変更する場合があります」）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "15:30",
+   "end": "21:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "武蔵野神社（小平市花小金井8-2-6）。花小金井駅からバス約10分",
+   "mapq": "小平市武蔵野神社",
+   "summary": "",
+   "kidsNote": "子供みこしとお菓子配布。夜の部は遅いので、小さい子は夕方まで。",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "記載なし（神社の祭礼）",
+   "discount": "",
+   "target": "",
+   "url": "http://www.tokyo-jinjacho.or.jp/kitatama/kodaira/5413",
+   "tentative": false,
+   "deadline": null
+  },
+  {
    "id": "E136",
    "name": "列車のトイレ写真展 〜日本全国編〜",
    "dates": [
@@ -2741,46 +2777,6 @@
    "deadline": null
   },
   {
-   "id": "E81",
-   "name": "上宿公民館 子育て支援講座「親子の絆を深めるタッチケア」",
-   "dates": [
-    "2026-10-15",
-    "2026-10-22",
-    "2026-10-29"
-   ],
-   "span": null,
-   "when": "10/15(木)・10/22(木)・10/29(木) 各10:00〜11:30 全3回",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 3,
-   "start": "10:00",
-   "end": "11:30",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "上宿公民館 和室1 ☎042-345-1164",
-   "mapq": "上宿公民館 和室1 ☎042-345-1164",
-   "summary": "",
-   "kidsNote": "生後2か月から入れる枠は貴重。ハイハイ前までなので該当期間が短い＝逃すと次が無い",
-   "caution": "",
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "◎",
-    "pre": "✕",
-    "elem": "✕"
-   },
-   "cost": "",
-   "discount": "",
-   "target": "市内在住の「お母さんと赤ちゃん」（生後2か月〜ハイハイまで）",
-   "url": "https://www.city.kodaira.tokyo.jp/event/129/129642.html",
-   "tentative": false,
-   "deadline": {
-    "date": "2026-09-30",
-    "raw": "申込締切: 9/30(水) 電話またはウェブフォーム"
-   }
-  },
-  {
    "id": "E111",
    "name": "ちびっこ集まれ 親子でヨーイドン",
    "dates": [
@@ -2939,7 +2935,7 @@
     "2026-10-18"
    ],
    "span": null,
-   "when": "2026年10月18日(日)",
+   "when": "2026年10月18日(日) 午前9時30分〜午後4時30分",
    "rainDates": [],
    "exceptions": null,
    "programs": null,
@@ -2950,7 +2946,7 @@
    "timeUncertain": false,
    "place": "あかしあ通り（青梅街道 仲町交差点〜小平団地西交差点の約1.5km／小平駅から徒歩10分）",
    "mapq": "あかしあ通り",
-   "summary": "子どもみこし、小平よさこい、ダンスパレード、各団体のパフォーマンスパレード、大人みこし",
+   "summary": "子どもみこし、ダンスパレード、パフォーマンスパレード、大人みこし、模擬店多数",
    "kidsNote": "市内最大規模。子どもみこしがある",
    "caution": "",
    "lastEntry": "",
@@ -2960,12 +2956,15 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "",
+   "cost": "(要確認) 模擬店・物販は実費",
    "discount": "",
    "target": "",
-   "url": "https://www.city.kodaira.tokyo.jp/shihou/129/129275.html",
+   "url": "https://www.city.kodaira.tokyo.jp/shihou/files/130782/130782/att_0000025.pdf",
    "tentative": false,
-   "deadline": null
+   "deadline": {
+    "date": "2026-10-01",
+    "raw": "確度: 公式確認済み（2026-10-04） — 日時・時間割・交通規制・バスう回・雨天時・駐車場・申込の有無まで市報10/1号と"
+   }
   },
   {
    "id": "E157",
