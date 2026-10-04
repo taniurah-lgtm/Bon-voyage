@@ -63,6 +63,53 @@ const LEAK = /\bE\d{2,3}\b|台帳|巡回|スクリプト|Routine|Claude|GoatCoun
 const mapUrl = (q) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 const rank = (m) => ({ '◎': 0, '○': 1 }[m] ?? 9);
 
+// --- カレンダー登録（2026-10-04 オーナー指示: 10/7号から「公式・地図」に加えてカレンダー登録も） ---
+// Android・パソコン → Googleカレンダーの登録画面。iPhone → .ics を開くと標準のカレンダーに入る。
+// 🔴 時刻が分からないものは終日にする。終わりの時刻が無いものは「開始と同じ時刻」にして、長さを推測しない。
+const ymd = (iso) => iso.replace(/-/g, '');
+const nextDay = (iso) => { const t = new Date(iso + 'T00:00:00Z'); t.setUTCDate(t.getUTCDate() + 1); return t.toISOString().slice(0, 10); };
+const hhmm = (t) => (t || '').replace(':', '').padStart(4, '0') + '00';
+function calData(ev) {
+  const ds = (ev.dates || []).slice().sort();
+  if (!ds.length) return null; // 会期もの・日付の無いものは出さない
+  const timed = ds.length === 1 && ev.start && !ev.timeUncertain;
+  const details = [ev.when, ev.url ? `公式: ${ev.url}` : '', ev.mapq ? `地図: ${mapUrl(ev.mapq)}` : '',
+    'おでかけの前に、公式サイトで最新の情報をご確認ください。', `ぼんぼやーじゅ通信 ${SITE}/`].filter(Boolean).join('\n');
+  return {
+    title: ev.name, place: (ev.place || '').split(/\s*[—–]\s*/)[0].trim(), details, timed,
+    from: timed ? `${ymd(ds[0])}T${hhmm(ev.start)}` : ymd(ds[0]),
+    to: timed ? `${ymd(ds[0])}T${hhmm(ev.end || ev.start)}` : ymd(nextDay(ds[ds.length - 1])),
+    startMin: timed ? Number(ev.start.split(':')[0]) * 60 + Number(ev.start.split(':')[1]) : 0,
+  };
+}
+const googleCal = (c) => 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+  + `&text=${encodeURIComponent(c.title)}&dates=${c.from}/${c.to}`
+  + (c.timed ? '&ctz=Asia/Tokyo' : '')
+  + `&details=${encodeURIComponent(c.details)}` + (c.place ? `&location=${encodeURIComponent(c.place)}` : '');
+// iCalendar は1行75バイトまで（日本語は文字の途中で切らない）
+function fold(line) {
+  const out = []; let cur = '';
+  for (const ch of line) {
+    if (Buffer.byteLength(cur + ch) > 73) { out.push(cur); cur = ' ' + ch; } else cur += ch;
+  }
+  out.push(cur); return out.join('\r\n');
+}
+const icsEsc = (t) => String(t).replace(/\\/g, '\\\\').replace(/;/g, '\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+function icsText(c, uid) {
+  const dt = (k, v) => c.timed ? `${k};TZID=Asia/Tokyo:${v}` : `${k};VALUE=DATE:${v}`;
+  // 前日の18:00に知らせる（開始からさかのぼる分数）
+  const before = c.timed ? c.startMin + 6 * 60 : 6 * 60;
+  const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//bonvoya//weekly//JA', 'CALSCALE:GREGORIAN',
+    'BEGIN:VTIMEZONE', 'TZID:Asia/Tokyo', 'BEGIN:STANDARD', 'DTSTART:19700101T000000', 'TZOFFSETFROM:+0900', 'TZOFFSETTO:+0900', 'TZNAME:JST', 'END:STANDARD', 'END:VTIMEZONE',
+    'BEGIN:VEVENT', `UID:${uid}@bonvoya.nicomaru.tokyo`, `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').slice(0, 15)}Z`,
+    dt('DTSTART', c.from), dt('DTEND', c.to), `SUMMARY:${icsEsc(c.title)}`,
+    c.place ? `LOCATION:${icsEsc(c.place)}` : '', `DESCRIPTION:${icsEsc(c.details)}`,
+    'BEGIN:VALARM', 'ACTION:DISPLAY', `DESCRIPTION:${icsEsc(c.title)}`, `TRIGGER:-PT${before}M`, 'END:VALARM',
+    'END:VEVENT', 'END:VCALENDAR'].filter(Boolean);
+  return lines.map(fold).join('\r\n') + '\r\n';
+}
+let CAL = new Map(); // 号ごとに作り直す: 台帳ID → { google, ics }
+
 // --- 見た目（2026-09-27 オーナー指示: 30代のお母さんに刺さる、雑誌のような落ち着いたページに） ---
 const WDJ = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 const ICON = {
@@ -70,6 +117,7 @@ const ICON = {
   where: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10" r="2.3"/></svg>',
   cost: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9 8l3 4 3-4M9 13h6M9 16h6M12 12v6"/></svg>',
   who: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.8 3.6-6 7-6s6.2 2.2 7 6"/></svg>',
+  cal: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>',
   out: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-8 8M18 14v4a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18V7.5A1.5 1.5 0 0 1 5.5 6H10"/></svg>',
 };
 const AGE_SHORT = { baby: '赤ちゃん', pre: '未就学', elem: '小学生' };
@@ -115,6 +163,7 @@ function card(item, ev, { pick = false } = {}) {
       <div class="ages">${ages}</div>
       <div class="acts">
         ${ev.url ? `<a class="btn ghost" href="${esc(ev.url)}" target="_blank" rel="noopener">公式${ICON.out}</a>` : ''}
+        ${CAL.get(ev.id) ? `<a class="btn ghost cal" href="${esc(CAL.get(ev.id).google)}" data-ics="${esc(CAL.get(ev.id).ics)}" target="_blank" rel="noopener" data-goatcounter-click="${esc('カレンダー｜' + ev.name)}">${ICON.cal}カレンダー</a>` : ''}
         ${ev.mapq ? `<a class="btn solid" href="${esc(mapUrl(ev.mapq))}" target="_blank" rel="noopener" data-goatcounter-click="${esc('地図｜' + ev.name)}">地図${ICON.out}</a>` : ''}
       </div>
     </div>
@@ -211,14 +260,14 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
   .facts li { display: flex; gap: .35rem; align-items: flex-start; overflow-wrap: anywhere; }
   .facts svg { flex: none; width: 13px; height: 13px; margin-top: .22rem; fill: none; stroke: var(--w-faint); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .note { font-size: .77rem; line-height: 1.65; margin: .45rem 0 0; padding: .4rem .6rem; background: color-mix(in srgb, var(--w-sage-wash) 70%, transparent); border-radius: 12px; }
-  .foot { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-top: .55rem; }
+  .foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .45rem .5rem; margin-top: .55rem; }
   .ages { display: flex; flex-wrap: wrap; gap: .25rem; min-width: 0; }
   .age { font-size: .7rem; color: var(--w-soft); border-radius: 999px; padding: .05rem .45rem; white-space: nowrap; border: 1px solid var(--w-line); }
   .age b { font-weight: 700; margin-left: .15rem; }
   .age.m-best { background: var(--w-wash); border-color: transparent; color: var(--w-accent-ink); }
   .age.m-ok { background: var(--w-sage-wash); border-color: transparent; color: color-mix(in srgb, var(--w-sage) 70%, var(--w-ink)); }
   .age.m-no { opacity: .55; }
-  .acts { display: flex; gap: .3rem; flex: none; }
+  .acts { display: flex; gap: .3rem; flex: none; margin-left: auto; }
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: .25rem; min-height: 36px; padding: 0 .8rem; border-radius: 999px; font-family: var(--w-maru); font-weight: 700; font-size: .74rem; text-decoration: none; white-space: nowrap; }
   .btn svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .btn.ghost { color: var(--w-ink); border: 1px solid var(--w-line); background: transparent; }
@@ -309,6 +358,20 @@ for (const f of files) {
   const wd = WD[new Date(Date.UTC(y, m - 1, d)).getUTCDay()];
   const issue = `${m}/${d}(${wd})号`;
 
+  // カレンダー登録の材料（iPhone 用の .ics は /week/<日付>/cal/<番号>.ics。ファイル名に台帳IDを出さない）
+  CAL = new Map();
+  rmSync(`${outBase}/cal`, { recursive: true, force: true });
+  let calN = 0;
+  for (const { ev } of [...items, ...ahead]) {
+    if (CAL.has(ev.id)) continue;
+    const c = calData(ev);
+    if (!c) continue;
+    calN++;
+    mkdirSync(`${outBase}/cal`, { recursive: true });
+    writeFileSync(`${outBase}/cal/${calN}.ics`, icsText(c, `${date}-${calN}`));
+    CAL.set(ev.id, { google: googleCal(c), ics: `/week/${date}/cal/${calN}.ics` });
+  }
+
   const forAge = (list, key) =>
     list.filter(({ ev }) => ['◎', '○'].includes((ev.ages || {})[key]))
       // その年齢に◎のものを先に。同じ印の中では一推しを先に（赤ちゃんのページで、○の一推しより◎を上に）
@@ -346,6 +409,9 @@ for (const f of files) {
     for (var i = 0; i < tabs.length; i++) tabs[i].addEventListener('click', function (e) {
       e.preventDefault(); show(this.getAttribute('data-tab')); window.scrollTo(0, 0);
     });
+    // iPhone・iPad は .ics を開くと標準のカレンダーに入る（Googleカレンダーの画面は使わない）
+    var ua = navigator.userAgent, ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    if (ios) { var cs = document.querySelectorAll('a.cal[data-ics]'); for (var k = 0; k < cs.length; k++) { cs[k].href = cs[k].getAttribute('data-ics'); cs[k].removeAttribute('target'); } }
     show(${JSON.stringify(active)});
   })();
   </script>`;
