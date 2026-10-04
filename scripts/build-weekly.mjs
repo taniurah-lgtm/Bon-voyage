@@ -162,9 +162,9 @@ function card(item, ev, { pick = false } = {}) {
     <div class="foot">
       <div class="ages">${ages}</div>
       <div class="acts">
-        ${ev.url ? `<a class="btn ghost" href="${esc(ev.url)}" target="_blank" rel="noopener">公式${ICON.out}</a>` : ''}
-        ${CAL.get(ev.id) ? `<a class="btn ghost cal" href="${esc(CAL.get(ev.id).google)}" data-ics="${esc(CAL.get(ev.id).ics)}" target="_blank" rel="noopener" data-goatcounter-click="${esc('カレンダー｜' + ev.name)}">${ICON.cal}カレンダー</a>` : ''}
-        ${ev.mapq ? `<a class="btn solid" href="${esc(mapUrl(ev.mapq))}" target="_blank" rel="noopener" data-goatcounter-click="${esc('地図｜' + ev.name)}">地図${ICON.out}</a>` : ''}
+        ${ev.url ? `<a class="btn ghost" href="${esc(ev.url)}" target="_blank" rel="noopener">公式</a>` : ''}
+        ${CAL.get(ev.id) ? `<a class="btn ghost cal" aria-label="カレンダーに登録" href="${esc(CAL.get(ev.id).google)}" data-ics="${esc(CAL.get(ev.id).ics)}" target="_blank" rel="noopener" data-goatcounter-click="${esc('カレンダー｜' + ev.name)}">${ICON.cal}登録</a>` : ''}
+        ${ev.mapq ? `<a class="btn solid" href="${esc(mapUrl(ev.mapq))}" target="_blank" rel="noopener" data-goatcounter-click="${esc('地図｜' + ev.name)}">地図</a>` : ''}
       </div>
     </div>
     ${rokuto ? '<p class="fine">※最新の情報は多摩六都科学館ウェブサイトでご確認ください。</p>' : ''}
@@ -255,21 +255,21 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
   .chip .md small { font-size: .72rem; color: var(--w-soft); }
   .chip .wd { display: block; font-family: var(--w-en); font-size: .6rem; letter-spacing: .16em; color: var(--w-accent-ink); margin-top: .15rem; }
   .body { min-width: 0; flex: 1; }
-  .card h3 { font-family: var(--w-maru); font-weight: 700; font-size: .95rem; line-height: 1.5; margin: 0 0 .35rem; }
-  .facts { list-style: none; margin: 0; padding: 0; font-size: .75rem; line-height: 1.55; color: var(--w-soft); }
+  .card h3 { font-family: var(--w-maru); font-weight: 700; font-size: .9rem; line-height: 1.5; margin: 0 0 .3rem; }
+  .facts { list-style: none; margin: 0; padding: 0; font-size: .71rem; line-height: 1.55; color: var(--w-soft); }
   .facts li { display: flex; gap: .35rem; align-items: flex-start; overflow-wrap: anywhere; }
   .facts svg { flex: none; width: 13px; height: 13px; margin-top: .22rem; fill: none; stroke: var(--w-faint); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-  .note { font-size: .77rem; line-height: 1.65; margin: .45rem 0 0; padding: .4rem .6rem; background: color-mix(in srgb, var(--w-sage-wash) 70%, transparent); border-radius: 12px; }
-  .foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .45rem .5rem; margin-top: .55rem; }
-  .ages { display: flex; flex-wrap: wrap; gap: .25rem; min-width: 0; }
-  .age { font-size: .7rem; color: var(--w-soft); border-radius: 999px; padding: .05rem .45rem; white-space: nowrap; border: 1px solid var(--w-line); }
-  .age b { font-weight: 700; margin-left: .15rem; }
+  .note { font-size: .73rem; line-height: 1.65; margin: .45rem 0 0; padding: .4rem .6rem; background: color-mix(in srgb, var(--w-sage-wash) 70%, transparent); border-radius: 12px; }
+  .foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .4rem .3rem; margin-top: .5rem; }
+  .ages { display: flex; flex-wrap: nowrap; gap: .18rem; min-width: 0; }
+  .age { font-size: .62rem; color: var(--w-soft); border-radius: 999px; padding: .05rem .3rem; white-space: nowrap; border: 1px solid var(--w-line); }
+  .age b { font-weight: 700; margin-left: .08rem; }
   .age.m-best { background: var(--w-wash); border-color: transparent; color: var(--w-accent-ink); }
   .age.m-ok { background: var(--w-sage-wash); border-color: transparent; color: color-mix(in srgb, var(--w-sage) 70%, var(--w-ink)); }
   .age.m-no { opacity: .55; }
-  .acts { display: flex; gap: .3rem; flex: none; margin-left: auto; }
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: .25rem; min-height: 36px; padding: 0 .8rem; border-radius: 999px; font-family: var(--w-maru); font-weight: 700; font-size: .74rem; text-decoration: none; white-space: nowrap; }
-  .btn svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .acts { display: flex; gap: .2rem; flex: none; margin-left: auto; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: .15rem; min-height: 32px; padding: 0 .5rem; border-radius: 999px; font-family: var(--w-maru); font-weight: 700; font-size: .66rem; text-decoration: none; white-space: nowrap; }
+  .btn svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .btn.ghost { color: var(--w-ink); border: 1px solid var(--w-line); background: transparent; }
   .btn.solid { color: #fff; background: var(--w-accent); }
   .fine { font-size: .64rem; color: var(--w-faint); margin: .35rem 0 0; }
