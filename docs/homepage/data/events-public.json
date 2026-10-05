@@ -33,7 +33,8 @@
    "target": "",
    "url": "https://www.higasimurayama-yasakajinja.jp/cont5/main.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E13",
@@ -67,7 +68,8 @@
    "target": "",
    "url": "https://festival.hanakoganei.net/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E7",
@@ -108,7 +110,8 @@
    "target": "",
    "url": "https://www.seibuen-amusement-park.jp/2026summer/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E2",
@@ -141,7 +144,8 @@
    "target": "",
    "url": "https://www.ookunitamajinja.or.jp/matsuri/7-sumomo.php",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E3",
@@ -177,7 +181,8 @@
    "target": "",
    "url": "https://summer.walkerplus.com/odekake/detail_e/ar0313e71549/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E4",
@@ -212,7 +217,8 @@
    "target": "",
    "url": "https://www.mod.go.jp/asdf/iruma/kouhou/public_FW/index2025.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E14",
@@ -249,7 +255,8 @@
    "target": "",
    "url": "https://kodaira-tourism.com/event/3369/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E17",
@@ -283,7 +290,8 @@
    "target": "",
    "url": "https://koganeiawaodori.jp/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "other"
   },
   {
    "id": "E5",
@@ -316,7 +324,8 @@
    "target": "",
    "url": "https://hanabi.tokyo-tachikawa.org/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E22",
@@ -349,7 +358,8 @@
    "target": "",
    "url": "https://www.city.kodaira.tokyo.jp/event/127/127980.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E23",
@@ -383,7 +393,8 @@
    "target": "",
    "url": "https://www.tatemonoen.jp/event/page/2026_yusuzumi.php",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "spot"
   },
   {
    "id": "E24",
@@ -416,7 +427,8 @@
    "target": "",
    "url": "https://www.city.sayama.saitama.jp/kankou/kanko/tanabata/index.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E25",
@@ -449,7 +461,8 @@
    "target": "",
    "url": "https://higashikurume.net/event.html",
    "tentative": true,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E26",
@@ -483,7 +496,8 @@
    "target": "",
    "url": "https://musashino-kanko.com/topics/musashino_natsumaturi-bonodori/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E36",
@@ -528,7 +542,8 @@
    "target": "",
    "url": "https://www.seibuen-amusement-park.jp/2026summer/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E31",
@@ -565,7 +580,8 @@
    "target": "",
    "url": "https://www.sumiyoshijinja.or.jp/information.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E35",
@@ -600,7 +616,8 @@
    "target": "",
    "url": "https://www.jinguhanabi.com/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "other"
   },
   {
    "id": "E56",
@@ -636,7 +653,8 @@
    "target": "",
    "url": "https://www.asta.co.jp/event/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E57",
@@ -673,7 +691,8 @@
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260817.pdf",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "other"
   },
   {
    "id": "E44",
@@ -721,7 +740,8 @@
    "target": "",
    "url": "",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E62",
@@ -757,7 +777,8 @@
    "target": "",
    "url": "",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E45",
@@ -796,7 +817,8 @@
    "target": "",
    "url": "",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E37",
@@ -830,7 +852,8 @@
    "target": "",
    "url": "https://mitaka-awaodori.com/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "other"
   },
   {
    "id": "E39",
@@ -864,7 +887,8 @@
    "target": "",
    "url": "https://www.azabujuban.or.jp/topics/topics_event/23867/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E58",
@@ -900,7 +924,8 @@
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260822_2.pdf",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E64",
@@ -935,7 +960,8 @@
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260822.pdf",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "other"
   },
   {
    "id": "E47",
@@ -974,7 +1000,8 @@
    "target": "",
    "url": "",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E61",
@@ -1013,7 +1040,8 @@
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260824.pdf",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "other"
   },
   {
    "id": "E38",
@@ -1047,7 +1075,8 @@
    "target": "",
    "url": "http://takiyama.in.coocan.jp/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E40",
@@ -1087,7 +1116,8 @@
    "target": "",
    "url": "https://akishima-kujiramatsuri.jp/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E41",
@@ -1120,7 +1150,8 @@
    "target": "",
    "url": "https://www.city.musashimurayama.lg.jp/kankou/1004434/1001617.html",
    "tentative": true,
-   "deadline": null
+   "deadline": null,
+   "cat": "spot"
   },
   {
    "id": "E42",
@@ -1154,7 +1185,8 @@
    "target": "",
    "url": "https://www.koenji-awaodori.com/about/about01.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "other"
   },
   {
    "id": "E59",
@@ -1190,7 +1222,8 @@
    "target": "",
    "url": "https://www.asta.co.jp/event/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "other"
   },
   {
    "id": "E68",
@@ -1225,7 +1258,8 @@
    "target": "市内在住の小・中学生。保護者同伴なら未就学児も可",
    "url": "https://www.city.kodaira.tokyo.jp/event/129/129131.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E60",
@@ -1266,7 +1300,8 @@
    "target": "",
    "url": "https://www.asta.co.jp/update/event_260831.pdf",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "other"
   },
   {
    "id": "E110",
@@ -1304,7 +1339,8 @@
    "target": "どなたでも",
    "url": "https://www.tamarokuto.or.jp/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "spot"
   },
   {
    "id": "E71",
@@ -1340,7 +1376,8 @@
    "target": "",
    "url": "https://kodaji.ashita-ba.co.jp/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E95",
@@ -1376,7 +1413,8 @@
    "target": "",
    "url": "",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E48",
@@ -1418,7 +1456,8 @@
    "deadline": {
     "date": "2026-08-28",
     "raw": "8/5(水)〜28(金) 申込フォーム(先着順)"
-   }
+   },
+   "cat": "public"
   },
   {
    "id": "E72",
@@ -1453,7 +1492,8 @@
    "target": "",
    "url": "https://kodaji.ashita-ba.co.jp/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E50",
@@ -1495,7 +1535,8 @@
    "deadline": {
     "date": "2026-08-24",
     "raw": "8/24(月)まで 申込フォーム(電話・電子メール可)"
-   }
+   },
+   "cat": "class"
   },
   {
    "id": "E69",
@@ -1534,7 +1575,8 @@
    "target": "市公式の対象欄に 「小学生以下・小学生・中高生・大人・高齢者・親子」 と明記",
    "url": "https://www.city.kodaira.tokyo.jp/event/129/129344.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E73",
@@ -1569,7 +1611,8 @@
    "target": "",
    "url": "https://kodaji.ashita-ba.co.jp/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E74",
@@ -1607,7 +1650,8 @@
    "target": "",
    "url": "https://www.showakinen-koen.jp/event/56303/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E76",
@@ -1643,7 +1687,8 @@
    "target": "",
    "url": "https://www.tatemonoen.jp/event/schedule/2026/schedule789.php",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "spot"
   },
   {
    "id": "E49",
@@ -1681,7 +1726,8 @@
    "deadline": {
     "date": "2026-09-12",
     "raw": "8/5(水)〜9/12(土)までに電子メールで件名に参加者の氏名・学年を明記"
-   }
+   },
+   "cat": "class"
   },
   {
    "id": "E52",
@@ -1716,7 +1762,8 @@
    "target": "",
    "url": "https://ensenblelunare.jimdofree.com/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E104",
@@ -1751,7 +1798,8 @@
    "target": "",
    "url": "https://www.kodairahmassoc.com/event-details/hanakoganeiyajishuttenshaboshu",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E112",
@@ -1791,7 +1839,8 @@
    "target": "",
    "url": "https://www.tokyo-park.or.jp/park/koganei/news/2026/9_19.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "spot"
   },
   {
    "id": "E77",
@@ -1834,7 +1883,8 @@
    "target": "",
    "url": "https://www.tatemonoen.jp/event/schedule/2026/schedule789.php",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "spot"
   },
   {
    "id": "E97",
@@ -1870,7 +1920,8 @@
    "target": "",
    "url": "https://kodaira-tourism.com/event/22870/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E106",
@@ -1906,7 +1957,8 @@
    "target": "",
    "url": "https://kumanogu.com/shinkousai/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E107",
@@ -1945,7 +1997,8 @@
    "target": "",
    "url": "https://www.syakaifukushi.kodaira.tokyo.jp/service/news/taisyo/20260722.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E132",
@@ -1980,7 +2033,8 @@
    "target": "",
    "url": "",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E137",
@@ -2018,7 +2072,8 @@
    "deadline": {
     "date": "2026-10-16",
     "raw": "託児（ママメイト埼玉支部・締切10/16）・仮装OK・駐車場なし・2階席はエレベーターなしまで入っている）。"
-   }
+   },
+   "cat": "spot"
   },
   {
    "id": "E70",
@@ -2059,7 +2114,8 @@
    "deadline": {
     "date": "2026-09-04",
     "raw": "申込締切: 9/4(金) 申込フォームまたは電話(月曜・日曜・祝日を除く)"
-   }
+   },
+   "cat": "public"
   },
   {
    "id": "E129",
@@ -2097,7 +2153,8 @@
    "target": "",
    "url": "https://www.tamarokuto.or.jp/blog/press/2026/09/17/event_railway/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "spot"
   },
   {
    "id": "E152",
@@ -2132,7 +2189,8 @@
    "target": "",
    "url": "https://www.tokyo-zoo.net/inokashira/visitor-info/tickets/index.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "other"
   },
   {
    "id": "E143",
@@ -2167,7 +2225,8 @@
    "target": "0歳から3歳くらいの乳幼児とそのご家族",
    "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3349&day=2026-10-02",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "spot"
   },
   {
    "id": "E116",
@@ -2202,7 +2261,8 @@
    "target": "",
    "url": "https://kodaira-tourism.com/event/22948/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E127",
@@ -2238,7 +2298,8 @@
    "target": "",
    "url": "https://www.tamarokuto.or.jp/blog/press/2026/09/17/event_railway/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "spot"
   },
   {
    "id": "E128",
@@ -2274,7 +2335,8 @@
    "target": "小学生",
    "url": "https://www.tamarokuto.or.jp/blog/press/2026/09/17/event_railway/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "spot"
   },
   {
    "id": "E154",
@@ -2310,7 +2372,8 @@
    "target": "",
    "url": "https://koganei-kanko.jp/event/15196",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E161",
@@ -2350,7 +2413,8 @@
    "target": "",
    "url": "https://www.city.musashino.lg.jp/shiseijoho/shisaku_keikaku/toshiseibibu_shisaku_keikaku/parkarea/1052137.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "spot"
   },
   {
    "id": "E165",
@@ -2386,7 +2450,8 @@
    "target": "",
    "url": "http://www.tokyo-jinjacho.or.jp/kitatama/kodaira/5413",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E136",
@@ -2424,7 +2489,8 @@
    "target": "",
    "url": "https://kodaira-sewer.jp/events/2600",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E93",
@@ -2466,7 +2532,8 @@
    "target": "市内在住で、10/6時点で生後2〜5か月の第一子とお母さん(全4回参加できる方)",
    "url": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202610.pdf",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E130",
@@ -2501,7 +2568,8 @@
    "target": "",
    "url": "https://www.koguma-waccacca.com/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E145",
@@ -2548,7 +2616,8 @@
    "deadline": {
     "date": "2026-11-15",
     "raw": "内部メモ: 10/10・11/15 までの全10日、時間枠4コマ、場所、入館料、申込不要、定員なし、内容を公式で取り直した。"
-   }
+   },
+   "cat": "spot"
   },
   {
    "id": "E160",
@@ -2583,7 +2652,8 @@
    "target": "",
    "url": "",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "class"
   },
   {
    "id": "E98",
@@ -2619,7 +2689,8 @@
    "target": "",
    "url": "https://2026.kodairacraft.tokyo/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E123",
@@ -2661,7 +2732,8 @@
    "deadline": {
     "date": "2026-10-16",
     "raw": "> E122 の申込締切は 10/16(金)。"
-   }
+   },
+   "cat": "fest"
   },
   {
    "id": "E153",
@@ -2696,7 +2768,8 @@
    "target": "記載なし（「お子さまから大人まで楽しめる」）",
    "url": "https://www.tokyo-park.or.jp/park/koganei/news/2026/10_11.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "spot"
   },
   {
    "id": "E105",
@@ -2731,7 +2804,8 @@
    "target": "",
    "url": "https://kodaira-tourism.com/event/22974/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E111",
@@ -2773,7 +2847,8 @@
    "deadline": {
     "date": "2026-10-05",
     "raw": "🔴 申込締切: 10/5(月) 申込フォームから"
-   }
+   },
+   "cat": "class"
   },
   {
    "id": "E135",
@@ -2811,7 +2886,8 @@
    "deadline": {
     "date": "2026-10-16",
     "raw": "9/20(日) 10:00 から受付開始。10/16(金)まで。先着順"
-   }
+   },
+   "cat": "public"
   },
   {
    "id": "E141",
@@ -2847,7 +2923,8 @@
    "target": "",
    "url": "https://sites.google.com/view/tsudafes67**（第67回",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E148",
@@ -2883,7 +2960,8 @@
    "target": "",
    "url": "https://group.kadokawa.co.jp/information/promotional_topics/article-15705.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E134",
@@ -2921,7 +2999,8 @@
    "deadline": {
     "date": "2026-10-01",
     "raw": "確度: 公式確認済み（2026-10-04） — 日時・時間割・交通規制・バスう回・雨天時・駐車場・申込の有無まで市報10/1号と"
-   }
+   },
+   "cat": "fest"
   },
   {
    "id": "E157",
@@ -2956,7 +3035,8 @@
    "target": "",
    "url": "https://www.ghibli-museum.jp/news/015611/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E100",
@@ -2994,7 +3074,8 @@
    "target": "4〜6歳。ペダル付き自転車が未経験、または練習中の子。対象身長 100〜115cm",
    "url": "https://event.cyclestart.jp/kids-event-entry/koganei261021",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "class"
   },
   {
    "id": "E140",
@@ -3031,7 +3112,8 @@
    "target": "",
    "url": "https://geisai.jp/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E162",
@@ -3066,7 +3148,8 @@
    "target": "乳幼児と保護者（保護者のみの参加もOK）／定員: なし／申込: 不要",
    "url": "",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E131",
@@ -3101,7 +3184,8 @@
    "target": "",
    "url": "",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E147",
@@ -3137,7 +3221,8 @@
    "target": "",
    "url": "https://www.tokofes.com/about/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E164",
@@ -3179,7 +3264,8 @@
    "deadline": {
     "date": "2026-10-01",
     "raw": "🔴 10/1(木) 22:00から申込フォームで受付・先着順（https://logoform.jp/form/exdH/1693732 ）"
-   }
+   },
+   "cat": "public"
   },
   {
    "id": "E103",
@@ -3217,7 +3303,8 @@
    "deadline": {
     "date": "2026-10-16",
     "raw": "⏳ 託児サービスあり。締切 10月16日(金)"
-   }
+   },
+   "cat": "public"
   },
   {
    "id": "E139",
@@ -3255,7 +3342,8 @@
    "deadline": {
     "date": "2026-10-16",
     "raw": "| 締切 | 🔴 託児の締切 10/16(金) | 無し |"
-   }
+   },
+   "cat": "fest"
   },
   {
    "id": "E117",
@@ -3293,7 +3381,8 @@
    "deadline": {
     "date": "2026-09-24",
     "raw": "🔴 申込: 9/24(木) 10:00 から、申込みフォーム（Google Forms）で先着順"
-   }
+   },
+   "cat": "public"
   },
   {
    "id": "E156",
@@ -3332,7 +3421,8 @@
    "target": "小学生以下・小学生・中高生・大人・高齢者・親子（公式の表記）",
    "url": "https://www.city.kodaira.tokyo.jp/event/129/129951.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E159",
@@ -3367,7 +3457,8 @@
    "target": "",
    "url": "",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E122",
@@ -3409,7 +3500,8 @@
    "deadline": {
     "date": "2026-10-16",
     "raw": "🔴 申込締切: 10月16日(金) 24:00まで（二次元コードから。電話での受付も可能）"
-   }
+   },
+   "cat": "fest"
   },
   {
    "id": "E126",
@@ -3447,7 +3539,8 @@
    "deadline": {
     "date": "2026-10-16",
     "raw": "> | 参加 | 事前申込・抽選（締切10/16） | 入退場自由 |"
-   }
+   },
+   "cat": "fest"
   },
   {
    "id": "E54",
@@ -3486,7 +3579,8 @@
    "target": "",
    "url": "https://ogawa-palette.jp/**（2026-09-14",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E142",
@@ -3521,7 +3615,8 @@
    "target": "",
    "url": "https://organicfesta.morinohito.net/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E149",
@@ -3557,7 +3652,8 @@
    "target": "",
    "url": "https://www.tokyo-zoo.net/zoo/ino/",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "spot"
   },
   {
    "id": "E163",
@@ -3592,7 +3688,8 @@
    "target": "",
    "url": "https://www.seibuholdings.co.jp/kodomo-support/kidsfesta2026.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E146",
@@ -3628,7 +3725,8 @@
    "target": "",
    "url": "https://www.city.kodaira.tokyo.jp/event/123/123638.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E118",
@@ -3663,7 +3761,8 @@
    "target": "",
    "url": "",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E51",
@@ -3703,7 +3802,8 @@
    "target": "",
    "url": "https://www.city.kodaira.tokyo.jp/kurashi/002/002590.html",
    "tentative": false,
-   "deadline": null
+   "deadline": null,
+   "cat": "public"
   }
  ],
  "standing": [
@@ -3720,7 +3820,8 @@
    },
    "cost": "",
    "discount": "",
-   "url": "https://www.city.kodaira.tokyo.jp/kurashi/113/113055.html"
+   "url": "https://www.city.kodaira.tokyo.jp/kurashi/113/113055.html",
+   "cat": "spot"
   },
   {
    "id": "E63",
@@ -3737,7 +3838,8 @@
    },
    "cost": "",
    "discount": "",
-   "url": "https://www.asta.co.jp/update/kids_stamp_2025.pdf"
+   "url": "https://www.asta.co.jp/update/kids_stamp_2025.pdf",
+   "cat": "other"
   },
   {
    "id": "E114",
@@ -3754,7 +3856,8 @@
    },
    "cost": "",
    "discount": "",
-   "url": "https://www.tokyo-park.or.jp/park/koganei/news/index.html"
+   "url": "https://www.tokyo-park.or.jp/park/koganei/news/index.html",
+   "cat": "spot"
   }
  ]
 }

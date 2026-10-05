@@ -414,6 +414,10 @@
   var AGE_KEYS = { baby: 'baby', pre: 'pre', elem: 'elem' };
   var AGE_LABEL = { baby: '👶 あかちゃん', pre: '🧒 未就学', elem: '🎒 小学生' };
   var AGE_ORDER = ['baby', 'pre', 'elem'];
+  // 種類の絞り込み（2026-10-05 追加）。1つだけ選ぶ。種類は公開データの cat（作るときに名前と場所から振る）
+  // ボタンは短く（カレンダーの表を画面の下へ押し出さない）。中身: お祭り・マルシェ／公民館・図書館・児童館／科学館・動物園・公園／講座・体験
+  var CAT_LABEL = { fest: '🎪 お祭り・マルシェ', public: '🏛 公民館・児童館', spot: '🔬 科学館・公園', 'class': '✂️ 講座・体験' };
+  var CAT_ORDER = ['fest', 'public', 'spot', 'class'];
 
   // その年齢の評価を取り出す。古い書式（総合評価だけ）は3つとも同じ扱いにする。
   function ageMark(ev, key) {
@@ -495,7 +499,14 @@
       ageSel = saved.filter(function (k) { return AGE_KEYS[k]; });
     } catch (err) { /* プライベートウィンドウ等。既定の「ぜんぶ」で動く */ }
 
+    var catSel = '';
+    try {
+      var savedCat = localStorage.getItem('bvc.cat') || '';
+      if (CAT_LABEL[savedCat]) catSel = savedCat;
+    } catch (err) { /* 既定の「ぜんぶ」で動く */ }
+
     function passAge(ev) {
+      if (catSel && (ev.cat || 'other') !== catSel) return false;
       if (!ageSel.length) return true;
       // AND。1つでも ◎/○ でなければ落とす
       return ageSel.every(function (k) { return ageOK(ev, k); });
@@ -509,7 +520,7 @@
     // （点は出るのに開くと空、という状態を作らないため）
     var viewByDate = byDate;
     function applyFilter() {
-      if (!ageSel.length) { viewByDate = byDate; return; }
+      if (!ageSel.length && !catSel) { viewByDate = byDate; return; }
       viewByDate = {};
       Object.keys(byDate).forEach(function (d) {
         var keep = byDate[d].filter(passAge);
@@ -568,6 +579,11 @@
       '<button class="bvc-agebtn" type="button" data-age="baby" aria-pressed="false">👶 あかちゃん</button>' +
       '<button class="bvc-agebtn" type="button" data-age="pre" aria-pressed="false">🧒 未就学</button>' +
       '<button class="bvc-agebtn" type="button" data-age="elem" aria-pressed="false">🎒 小学生</button>' +
+      '</div>' +
+      '<div class="bvc-agefilter bvc-catfilter" role="group" aria-label="種類でしぼる">' +
+      '<span class="bvc-agelabel">なにを探す？</span>' +
+      '<button class="bvc-catbtn" type="button" data-cat="" aria-pressed="true">ぜんぶ</button>' +
+      CAT_ORDER.map(function (k) { return '<button class="bvc-catbtn" type="button" data-cat="' + k + '" aria-pressed="false">' + CAT_LABEL[k] + '</button>'; }).join('') +
       '<p class="bvc-agenote" hidden></p>' +
       '</div>' +
       // 今日・3日以内の締切だけは上に出す。下の枠は4画面ぶん下にあって、
@@ -602,15 +618,29 @@
         b.setAttribute('aria-pressed', on ? 'true' : 'false');
         b.classList.toggle('is-on', on);
       });
+      root.querySelectorAll('.bvc-catbtn').forEach(function (b) {
+        var k = b.dataset.cat || '';
+        var on = k === catSel;
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        b.classList.toggle('is-on', on);
+      });
       var note = root.querySelector('.bvc-agenote');
       if (!note) return;
-      if (!ageSel.length) { note.hidden = true; note.textContent = ''; return; }
+      if (!ageSel.length && !catSel) { note.hidden = true; note.textContent = ''; return; }
       // 絞ると何件が外れたかを出す。黙って消えると「予定が減った」と誤解される。
       var all = events.filter(function (e) { return !e.tentative && (e.dates || []).length; });
       var kept = all.filter(passAge).length;
       var unrated = all.filter(isUnrated).length;
       var names = ageSel.map(function (k) { return AGE_LABEL[k]; }).join('・');
       note.hidden = false;
+      if (!ageSel.length) {
+        // 種類だけで絞っているとき
+        note.textContent = kept
+          ? CAT_LABEL[catSel] + ' だけ（' + kept + '件）。'
+          : CAT_LABEL[catSel] + ' は、いまのところありません。「ぜんぶ」に戻してみてください。';
+        return;
+      }
+      if (catSel) names = CAT_LABEL[catSel] + '（' + names + '）';
       // 🔴 短く。この案内はカレンダーの表の上に入るので、長いと表が画面の外へ出る。
       note.textContent = ageSel.length > 1
         ? names + ' が そろって行ける予定だけ（' + kept + '件）。' +
@@ -664,6 +694,24 @@
         if (!selected || !(viewByDate[selected] || []).length) {
           var cand = Object.keys(viewByDate).sort().filter(function (d) { return d >= today; });
           selected = cand[0] || Object.keys(viewByDate).sort().pop() || null;
+          if (selected && months.indexOf(selected.slice(0, 7)) >= 0) view = selected.slice(0, 7);
+        }
+        syncAgeUI();
+        render();
+        return;
+      }
+      var catBtn = e.target.closest('.bvc-catbtn');
+      if (catBtn) {
+        var ck = catBtn.dataset.cat || '';
+        catSel = (ck && ck !== catSel && CAT_LABEL[ck]) ? ck : '';   // もう一度押したら外す
+        try {
+          if (catSel) localStorage.setItem('bvc.cat', catSel);
+          else localStorage.removeItem('bvc.cat');
+        } catch (err) { /* 保存できなくても動く */ }
+        applyFilter();
+        if (!selected || !(viewByDate[selected] || []).length) {
+          var cand2 = Object.keys(viewByDate).sort().filter(function (d) { return d >= today; });
+          selected = cand2[0] || Object.keys(viewByDate).sort().pop() || null;
           if (selected && months.indexOf(selected.slice(0, 7)) >= 0) view = selected.slice(0, 7);
         }
         syncAgeUI();

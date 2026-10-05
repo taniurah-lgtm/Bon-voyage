@@ -290,18 +290,20 @@
   font-family: var(--maru); font-weight: 800; font-size: .82rem;
   color: var(--ink-soft); margin-right: .15rem;
 }
-.bvc-agebtn {
+.bvc-agebtn, .bvc-catbtn {
   font-family: var(--maru); font-weight: 700; font-size: .82rem;
   color: var(--sky-deep); background: var(--surface);
   border: 1px solid var(--line-strong); border-radius: 999px;
   /* 指で押せる高さを確保する。ほかのボタン（44px）と揃える */
   padding: .42rem .8rem; min-height: 40px; cursor: pointer; line-height: 1;
 }
-.bvc-agebtn:hover { background: var(--surface-2); }
-.bvc-agebtn:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
-.bvc-agebtn.is-on {
+.bvc-agebtn:hover, .bvc-catbtn:hover { background: var(--surface-2); }
+.bvc-agebtn:focus-visible, .bvc-catbtn:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+.bvc-agebtn.is-on, .bvc-catbtn.is-on {
   background: var(--sky-deep); color: #fff; border-color: var(--sky-deep);
 }
+.bvc-catfilter { margin-top: .1rem; }
+.bvc-catbtn { font-size: .78rem; padding: .38rem .7rem; }
 .bvc-agenote {
   flex-basis: 100%; margin: .15rem 0 0;
   font-size: .78rem; line-height: 1.6; color: var(--ink-soft);

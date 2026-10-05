@@ -47,8 +47,22 @@ const sanitizeContact = (c) => {
   return { tel, who: /(課|係|センター|協会|公民館|図書館|館|市|署|会)$/.test(who) ? who : '' };
 };
 
+// 種類（2026-10-05 オーナー指示: カレンダーを「お祭り・マルシェ／公民館・図書館・児童館／科学館・動物園・公園／講座・体験」で絞れるように）
+// 名前と場所の言葉から自動で振る。先に当たったものが勝つ（マルシェ＠公園はお祭り、講座＠公民館は公民館）。
+const CATS = [
+  ['fest', (n, p) => /祭|まつり|マルシェ|夜市|盆踊り|フェス|マーケット|ビアガーデン|縁日|ピクニック|キッズタウン|みんデパ|夏祭|フリマ|朝市|ハロウィン|FESTA|フェスタ|カップ/.test(n)],
+  ['public', (n, p) => /公民館|図書館|児童館|地域センター|市民センター|元気村|さわやか館|こども広場|ルネこだいら|市民文化会館|福祉会館|健康センター|小川パレット|あすぴあ|子ども家庭支援|おひさまひろば|交流館|市役所|学習センター|なかまちテラス|下水道館/.test(n + ' ' + p)],
+  ['class', (n, p) => /講座|教室|ワークショップ|体験|講演|おはなし会|読み聞かせ|体操|工作|クッキング|セミナー|ヨーイドン|運動会/.test(n)],
+  ['spot', (n, p) => /科学館|動物園|自然文化園|ゆうえんち|遊園地|博物館|美術館|たてもの園|水族館|公園|プール|ふるさと村|アイスアリーナ|資料館|プラネタリウム|牧場|農園|緑地|広場/.test(n + ' ' + p)],
+];
+const catOf = (e) => {
+  const n = e.name || '', p = e.place || '';
+  const hit = CATS.find(([, f]) => f(n, p));
+  return hit ? hit[0] : 'other';
+};
+
 const stripInternal = (e) => {
-  const out = { ...e };
+  const out = { ...e, cat: catOf(e) };
   for (const k of INTERNAL) delete out[k];
   const c = sanitizeContact(out.contact);
   if (c) out.contact = c; else delete out.contact;
@@ -204,7 +218,7 @@ const page = `<!doctype html>
 </header>
 
 <main class="wrap">
-  <p class="lead">点の日に予定あり。タップでその日の予定が出ます。<b>台帳にある予定を、先のぶんまで全部</b>のせています。</p>
+  <p class="lead">点の日に予定あり。タップでその日の予定が出ます。<b>わかっている予定を、先のぶんまで全部</b>のせています。上のボタンで、年齢や種類でしぼれます。</p>
 
   <noscript>
     <div class="noscript">このカレンダーは表示にJavaScriptを使っています。切っている場合は、下の一覧をご覧ください。</div>
