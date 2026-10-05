@@ -249,11 +249,12 @@
 
   @media (prefers-reduced-motion: reduce) { .fade { animation: none; opacity: 1; transform: none; } }
 
-  /* 無料で使える3つのページ（カレンダー・マップ・バックナンバー）。
-     通信は流れるが、こちらは残って自分のタイミングで開ける。それが3つの共通点。
+  /* 無料で使える4つのページ（カレンダー・マップ・バックナンバー・園庭開放）。
+     通信は流れるが、こちらは残って自分のタイミングで開ける。それが4つの共通点。
+     2026-10-05 に園庭開放のまとめを足して4つにした（広い画面は2列×2段）。
      以前はここが20pxのテキストリンクで、ページの中で見つけてもらえなかった。 */
   .tools { display: grid; gap: .8rem; margin-top: 1.8rem; }
-  @media (min-width: 42rem) { .tools { grid-template-columns: 1fr 1fr 1fr; } }
+  @media (min-width: 42rem) { .tools { grid-template-columns: 1fr 1fr; } }
   .tool {
     display: flex; gap: .8rem; align-items: flex-start; text-decoration: none;
     background: var(--surface); border: 1px solid var(--line-strong);
@@ -455,7 +456,7 @@
 
   <section id="tools" class="wrap">
     <div class="stop"><span class="pin"></span><span class="label">Tools</span></div>
-    <h2>いつでも見られる3つ</h2>
+    <h2>いつでも見られる4つ</h2>
     <div class="tools">
       <a class="tool" href="calendar.html">
         <span class="tool-ic">📅</span>
@@ -471,6 +472,13 @@
           <span><span data-bv-post="on" hidden>「行ってよかった」を地元の家庭で持ち寄っている地図。<b>このページから直接書き込めます</b></span><span data-bv-post="off">「行ってよかった」を地元の家庭で持ち寄っている地図。<b>LINEでひとことお寄せいただけます</b></span></span>
         </span>
       </a>
+      <a class="tool" href="entei.html">
+        <span class="tool-ic">🌱</span>
+        <span class="tool-body">
+          <b>園庭開放・未就園児の会</b>
+          <span>小平の幼稚園・こども園15園の、<b>在園していなくても行ける会</b>。予約のいる・いらないと、<b>これから2週間の日</b>がひと目でわかります</span>
+        </span>
+      </a>
       <a class="tool" href="issues.html">
         <span class="tool-ic">📮</span>
         <span class="tool-body">
@@ -479,7 +487,7 @@
         </span>
       </a>
     </div>
-    <p class="support-line">通信も、いつでも見られるこの3つも、どなたでも無料でお使いいただけます。</p>
+    <p class="support-line">通信も、いつでも見られるこの4つも、どなたでも無料でお使いいただけます。</p>
     <p class="support-line">ChatGPTやGeminiなど、チャット型のAIをお使いの方へ　→　<a href="/ai/">AIに聞くためのおでかけ一覧</a></p>
   </section>
 

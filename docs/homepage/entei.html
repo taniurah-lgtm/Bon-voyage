@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>園庭開放・未就園児の会（小平の幼稚園・こども園）｜ぼんぼやーじゅ通信</title>
+<meta name="description" content="小平市内の私立幼稚園・こども園15園の、園庭開放と未就園児向けの会。曜日・時間・対象・予約のいる・いらないを、各園の公式ページで一園ずつ確かめてまとめています。">
+<link rel="canonical" href="https://bonvoya.nicomaru.tokyo/entei.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://bonvoya.nicomaru.tokyo/entei.html">
+<meta property="og:title" content="園庭開放・未就園児の会（小平の幼稚園・こども園）">
+<meta property="og:description" content="小平市内の私立幼稚園・こども園15園の、園庭開放と未就園児向けの会。曜日・時間・対象・予約のいる・いらないを、各園の公式ページで一園ずつ確かめてまとめています。">
+<meta property="og:locale" content="ja_JP">
+<link rel="stylesheet" href="/assets/bv-tokens.css">
+<link rel="stylesheet" href="/assets/bv-nav.css">
+<script src="/assets/analytics.js" defer></script>
+<style>
+  main { padding: 1.2rem 0 1rem; }
+  .ghead-in { padding-top: 1.4rem; padding-bottom: 1.2rem; }
+  .ghead h1 { font-size: clamp(1.45rem, 4.8vw, 2rem); margin-bottom: .35rem; }
+  .ghead .sub { font-size: .92rem; line-height: 1.75; }
+  .lead { color: var(--ink-soft); font-size: .86rem; line-height: 1.75; margin-bottom: 1rem; }
+  h2.sec { font-family: var(--maru); font-weight: 800; font-size: 1.12rem; margin: 1.6rem 0 .6rem; }
+
+  /* これから2週間 */
+  .soon { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); box-shadow: var(--shadow-soft); padding: .9rem 1rem; }
+  .soon h3 { font-family: var(--maru); font-weight: 800; font-size: .92rem; margin: 0 0 .45rem; color: var(--sky-deep); }
+  .soon h3 + ul { margin-bottom: .2rem; }
+  .soon ul { list-style: none; margin: 0 0 .8rem; padding: 0; }
+  .soon li { display: flex; gap: .7rem; padding: .38rem 0; border-top: 1px dashed var(--line); font-size: .88rem; line-height: 1.55; }
+  .soon li:first-child { border-top: 0; }
+  .soon .sd { flex: none; width: 4.6em; font-family: var(--maru); font-weight: 800; color: var(--ink); }
+  .soon .sb a { font-weight: 700; color: var(--link-ink); text-decoration: none; }
+  .soon small { display: block; color: var(--ink-faint); font-size: .76rem; }
+  .soon .empty { color: var(--ink-soft); font-size: .86rem; }
+  .soon .wk { font-size: .78rem; color: var(--ink-faint); margin-top: .2rem; }
+
+  /* 園ごと */
+  .en { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); box-shadow: var(--shadow-soft); padding: 1rem 1.05rem .8rem; margin-bottom: .9rem; scroll-margin-top: 64px; }
+  .en-h { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  .en h2 { font-family: var(--maru); font-weight: 800; font-size: 1.04rem; margin: 0; line-height: 1.4; }
+  .town { font-size: .78rem; color: var(--ink-faint); }
+  .intro { font-size: .86rem; color: var(--ink-soft); margin-top: .35rem; line-height: 1.7; }
+  .prog { margin-top: .8rem; padding-top: .7rem; border-top: 1px solid var(--line); }
+  .prog:first-of-type { border-top: 0; padding-top: 0; }
+  .prog h3 { font-family: var(--maru); font-weight: 800; font-size: .94rem; margin: 0 0 .35rem; line-height: 1.5; }
+  .tag { display: inline-block; font-size: .66rem; font-weight: 700; border-radius: 999px; padding: .05rem .5rem; vertical-align: .12em; margin-left: .2rem; white-space: nowrap; }
+  .tag.ok { background: var(--sky-wash); color: var(--sky-deep); }
+  .tag.bk { background: var(--marigold-wash); color: var(--marigold-ink); }
+  .when { font-size: .88rem; font-weight: 700; margin-bottom: .3rem; }
+  .dates { list-style: none; margin: 0 0 .45rem; padding: 0; display: flex; flex-wrap: wrap; gap: .3rem; }
+  .dates li { font-size: .8rem; background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: .1rem .45rem; line-height: 1.6; }
+  .dates li b { font-family: var(--maru); }
+  .dates li span { margin-left: .3rem; color: var(--ink-soft); }
+  .more { font-size: .82rem; color: var(--ink-soft); background: var(--surface-2); border-radius: 8px; padding: .35rem .6rem; margin-bottom: .45rem; line-height: 1.65; }
+  .kvs { display: grid; gap: .12rem; }
+  .kv { display: flex; gap: .6rem; font-size: .84rem; line-height: 1.6; }
+  .kv .k { flex: none; width: 3.6em; color: var(--ink-faint); font-size: .78rem; padding-top: .08rem; }
+  .notes { margin: .35rem 0 0; padding-left: 1.1rem; font-size: .8rem; color: var(--ink-soft); line-height: 1.65; }
+  .fn { font-size: .78rem; color: var(--ink-faint); margin-top: .6rem; line-height: 1.6; }
+  .en-f { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .6rem; margin-top: .7rem; padding-top: .5rem; border-top: 1px solid var(--line); }
+  .chk { font-size: .72rem; color: var(--ink-faint); }
+  .acts { margin-left: auto; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .35rem; }
+  .lk { display: inline-flex; align-items: center; min-height: 36px; font-size: .78rem; font-weight: 700; text-decoration: none; color: var(--link-ink); border: 1px solid var(--line-strong); border-radius: 999px; padding: 0 .75rem; background: var(--surface); white-space: nowrap; }
+
+  /* 園の目次 */
+  .idx { display: grid; gap: .3rem; margin: 0 0 1.1rem; font-size: .84rem; }
+  .idx div { display: grid; grid-template-columns: 4.6em 1fr; align-items: baseline; gap: .7rem; }
+  .idx .it { font-size: .74rem; color: var(--ink-faint); }
+  .idx .il { display: flex; flex-wrap: wrap; gap: 0 .8rem; }
+  .idx a { font-weight: 700; color: var(--link-ink); text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
+
+  /* ほかの園 */
+  .others { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+  .others li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: .7rem .9rem; font-size: .85rem; line-height: 1.7; }
+  .others b { font-family: var(--maru); }
+  .others .town { margin-left: .4rem; }
+  .others a { font-size: .78rem; font-weight: 700; margin-left: .3rem; }
+
+  .tips { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .9rem 1.1rem; }
+  .tips ul { margin: 0; padding-left: 1.1rem; font-size: .86rem; line-height: 1.75; }
+  .tips li + li { margin-top: .25rem; }
+  .about { font-size: .82rem; color: var(--ink-soft); line-height: 1.8; margin-top: 1.4rem; }
+  .nav-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.6rem 0 0; }
+  .nav-pills a { font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none; color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .4rem .9rem; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<nav class="bvnav" aria-label="サイト内">
+  <div class="bvnav-in">
+    <a class="bvnav-brand" href="/">ぼんぼやーじゅ通信</a>
+    <div class="bvnav-links">
+      <a href="/" class="bv-hide-sm">通信について</a>
+      <a class="bvnav-cal" href="/calendar.html">📅<span class="bv-lg">おでかけ</span>カレンダー</a>
+      <a href="/map.html"><span class="bv-lg">おでかけ</span>マップ</a>
+      <a class="bvnav-cta" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE<span class="bv-lg">で受け取る</span></a>
+    </div>
+  </div>
+</nav>
+<header class="ghead">
+  <div class="ghead-in">
+    <div class="eyebrow">Bon Voyage,</div>
+    <h1>園庭開放と<br>未就園児の会</h1>
+    <p class="sub">入園前の子と、幼稚園の園庭で遊べる日。小平市内の私立幼稚園・こども園15園の公式ページを、一園ずつ確かめてまとめました。</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="lead">在園していなくても参加できる会だけを載せています。2歳児クラスのような入会制のプレ教室は、このページでは扱っていません。雨や園の行事で中止になる日があるので、<b>出かける前に各園のページで</b>確かめてください。</p>
+
+  <section class="soon" aria-labelledby="soon-h">
+    <h3 id="soon-h">これから2週間の、予約なしで行ける日</h3>
+    <ul id="soon">
+        <li data-d="2026-10-07"><span class="sd">10/7(水)</span><span class="sb"><a href="#rindou">りんどう幼稚園</a> にこにこクラブ　お譲り会</span></li>
+        <li data-d="2026-10-07"><span class="sd">10/7(水)</span><span class="sb"><a href="#aoba">小平あおば幼稚園</a> 遊ぼうの日（平日に園庭で遊べる日）<small>9:00〜10:00</small></span></li>
+        <li data-d="2026-10-07"><span class="sd">10/7(水)</span><span class="sb"><a href="#shiraume">白梅幼稚園</a> 園庭開放<small>10:00〜11:00</small></span></li>
+        <li data-d="2026-10-08"><span class="sd">10/8(木)</span><span class="sb"><a href="#shinmei">小平神明こども園</a> えんていかいほう<small>10:00〜12:00</small></span></li>
+        <li data-d="2026-10-15"><span class="sd">10/15(木)</span><span class="sb"><a href="#megumi">めぐみこども園</a> 園庭開放<small>10:00〜11:30</small></span></li>
+        <li data-d="2026-10-15"><span class="sd">10/15(木)</span><span class="sb"><a href="#shinmei">小平神明こども園</a> えんていかいほう<small>10:00〜12:00</small></span></li>
+        <li data-d="2026-10-19"><span class="sd">10/19(月)</span><span class="sb"><a href="#megumi">めぐみこども園</a> 子育て広場「みどりのまきば」（お部屋の開放）<small>10:00〜13:00</small></span></li>
+        <li data-d="2026-10-19"><span class="sd">10/19(月)</span><span class="sb"><a href="#rindou">りんどう幼稚園</a> にこにこクラブ　園庭開放</span></li>
+        <li data-d="2026-10-21"><span class="sd">10/21(水)</span><span class="sb"><a href="#shiraume">白梅幼稚園</a> 園庭開放<small>10:00〜11:00</small></span></li>
+        <li data-d="2026-10-22"><span class="sd">10/22(木)</span><span class="sb"><a href="#shinmei">小平神明こども園</a> えんていかいほう<small>10:00〜12:00</small></span></li>
+        <li data-d="2026-10-27"><span class="sd">10/27(火)</span><span class="sb"><a href="#aoba">小平あおば幼稚園</a> 未就園児ミニ運動会<small>10:00〜11:00ごろ（開場 9:40）</small></span></li>
+        <li data-d="2026-10-28"><span class="sd">10/28(水)</span><span class="sb"><a href="#megumi">めぐみこども園</a> 園庭開放<small>10:00〜11:30</small></span></li>
+        <li data-d="2026-10-28"><span class="sd">10/28(水)</span><span class="sb"><a href="#aoba">小平あおば幼稚園</a> 遊ぼうの日（平日に園庭で遊べる日）<small>9:00〜10:00</small></span></li>
+        <li data-d="2026-10-29"><span class="sd">10/29(木)</span><span class="sb"><a href="#shinmei">小平神明こども園</a> えんていかいほう<small>10:00〜12:00</small></span></li>
+        <li data-d="2026-10-31"><span class="sd">10/31(土)</span><span class="sb"><a href="#aoba">小平あおば幼稚園</a> 園庭開放日（土曜）<small>10:00〜16:00</small></span></li>
+        <li data-d="2026-11-04"><span class="sd">11/4(水)</span><span class="sb"><a href="#megumi">めぐみこども園</a> 子育て広場「みどりのまきば」（お部屋の開放）<small>10:00〜13:00</small></span></li>
+        <li data-d="2026-11-09"><span class="sd">11/9(月)</span><span class="sb"><a href="#hanakoganei">小平花小金井こども園</a> Hana🌸Hanaひろば　園庭開放</span></li>
+        <li data-d="2026-11-09"><span class="sd">11/9(月)</span><span class="sb"><a href="#sensin">洗心幼稚園</a> 幼稚園で遊ぼう（園庭・お部屋の開放）<small>10:15〜11:45（時間内の出入り自由）</small></span></li>
+        <li data-d="2026-11-11"><span class="sd">11/11(水)</span><span class="sb"><a href="#megumi">めぐみこども園</a> 園庭開放<small>10:00〜11:30</small></span></li>
+        <li data-d="2026-11-11"><span class="sd">11/11(水)</span><span class="sb"><a href="#aoba">小平あおば幼稚園</a> 遊ぼうの日（平日に園庭で遊べる日）<small>9:00〜10:00</small></span></li>
+        <li data-d="2026-11-11"><span class="sd">11/11(水)</span><span class="sb"><a href="#shiraume">白梅幼稚園</a> 園庭開放<small>10:00〜11:00</small></span></li>
+        <li data-d="2026-11-16"><span class="sd">11/16(月)</span><span class="sb"><a href="#sensin">洗心幼稚園</a> 幼稚園で遊ぼう（園庭・お部屋の開放）<small>10:15〜11:45（時間内の出入り自由）</small></span></li>
+        <li data-d="2026-11-18"><span class="sd">11/18(水)</span><span class="sb"><a href="#megumi">めぐみこども園</a> 子育て広場「みどりのまきば」（お部屋の開放）<small>10:00〜13:00</small></span></li>
+        <li data-d="2026-11-18"><span class="sd">11/18(水)</span><span class="sb"><a href="#aoba">小平あおば幼稚園</a> 遊ぼうの日（平日に園庭で遊べる日）<small>9:00〜10:00</small></span></li>
+        <li data-d="2026-11-25"><span class="sd">11/25(水)</span><span class="sb"><a href="#megumi">めぐみこども園</a> 園庭開放<small>10:00〜11:30</small></span></li>
+        <li data-d="2026-11-25"><span class="sd">11/25(水)</span><span class="sb"><a href="#aoba">小平あおば幼稚園</a> 遊ぼうの日（平日に園庭で遊べる日）<small>9:00〜10:00</small></span></li>
+        <li data-d="2026-11-25"><span class="sd">11/25(水)</span><span class="sb"><a href="#shiraume">白梅幼稚園</a> 園庭開放<small>10:00〜11:00</small></span></li>
+        <li data-d="2026-11-30"><span class="sd">11/30(月)</span><span class="sb"><a href="#rindou">りんどう幼稚園</a> にこにこクラブ　園庭開放</span></li>
+        <li data-d="2026-12-07"><span class="sd">12/7(月)</span><span class="sb"><a href="#sensin">洗心幼稚園</a> 幼稚園で遊ぼう（園庭・お部屋の開放）<small>10:15〜11:45（時間内の出入り自由）</small></span></li>
+        <li data-d="2026-12-09"><span class="sd">12/9(水)</span><span class="sb"><a href="#rindou">りんどう幼稚園</a> にこにこクラブ　園庭開放</span></li>
+        <li data-d="2026-12-09"><span class="sd">12/9(水)</span><span class="sb"><a href="#shiraume">白梅幼稚園</a> 園庭開放<small>10:00〜11:00</small></span></li>
+        <li data-d="2026-12-10"><span class="sd">12/10(木)</span><span class="sb"><a href="#hanakoganei">小平花小金井こども園</a> Hana🌸Hanaひろば　園庭開放</span></li>
+        <li data-d="2027-01-13"><span class="sd">1/13(水)</span><span class="sb"><a href="#megumi">めぐみこども園</a> 園庭開放<small>10:00〜11:30</small></span></li>
+        <li data-d="2027-01-18"><span class="sd">1/18(月)</span><span class="sb"><a href="#sensin">洗心幼稚園</a> 幼稚園で遊ぼう（園庭・お部屋の開放）<small>10:15〜11:45（時間内の出入り自由）</small></span></li>
+        <li data-d="2027-01-20"><span class="sd">1/20(水)</span><span class="sb"><a href="#megumi">めぐみこども園</a> 子育て広場「みどりのまきば」（お部屋の開放）<small>10:00〜13:00</small></span></li>
+        <li data-d="2027-01-20"><span class="sd">1/20(水)</span><span class="sb"><a href="#aoba">小平あおば幼稚園</a> 遊ぼうの日（平日に園庭で遊べる日）<small>9:00〜10:00</small></span></li>
+        <li data-d="2027-01-20"><span class="sd">1/20(水)</span><span class="sb"><a href="#shiraume">白梅幼稚園</a> 園庭開放<small>10:00〜11:00</small></span></li>
+        <li data-d="2027-01-25"><span class="sd">1/25(月)</span><span class="sb"><a href="#sensin">洗心幼稚園</a> 幼稚園で遊ぼう（園庭・お部屋の開放）<small>10:15〜11:45（時間内の出入り自由）</small></span></li>
+        <li data-d="2027-01-27"><span class="sd">1/27(水)</span><span class="sb"><a href="#aoba">小平あおば幼稚園</a> 遊ぼうの日（平日に園庭で遊べる日）<small>9:00〜10:00</small></span></li>
+        <li data-d="2027-01-27"><span class="sd">1/27(水)</span><span class="sb"><a href="#shiraume">白梅幼稚園</a> 園庭開放<small>10:00〜11:00</small></span></li>
+        <li data-d="2027-01-28"><span class="sd">1/28(木)</span><span class="sb"><a href="#megumi">めぐみこども園</a> 園庭開放<small>10:00〜11:30</small></span></li>
+        <li data-d="2027-02-03"><span class="sd">2/3(水)</span><span class="sb"><a href="#megumi">めぐみこども園</a> 子育て広場「みどりのまきば」（お部屋の開放）<small>10:00〜13:00</small></span></li>
+        <li data-d="2027-02-03"><span class="sd">2/3(水)</span><span class="sb"><a href="#shiraume">白梅幼稚園</a> 園庭開放<small>10:00〜11:00</small></span></li>
+        <li data-d="2027-02-08"><span class="sd">2/8(月)</span><span class="sb"><a href="#sensin">洗心幼稚園</a> 幼稚園で遊ぼう（園庭・お部屋の開放）<small>10:15〜11:45（時間内の出入り自由）</small></span></li>
+        <li data-d="2027-02-10"><span class="sd">2/10(水)</span><span class="sb"><a href="#megumi">めぐみこども園</a> 園庭開放<small>10:00〜11:30</small></span></li>
+        <li data-d="2027-02-17"><span class="sd">2/17(水)</span><span class="sb"><a href="#aoba">小平あおば幼稚園</a> 遊ぼうの日（平日に園庭で遊べる日）<small>9:00〜10:00</small></span></li>
+        <li data-d="2027-02-17"><span class="sd">2/17(水)</span><span class="sb"><a href="#shiraume">白梅幼稚園</a> 園庭開放<small>10:00〜11:00</small></span></li>
+        <li data-d="2027-02-18"><span class="sd">2/18(木)</span><span class="sb"><a href="#megumi">めぐみこども園</a> 子育て広場「みどりのまきば」（お部屋の開放）<small>10:00〜13:00</small></span></li>
+        <li data-d="2027-02-24"><span class="sd">2/24(水)</span><span class="sb"><a href="#megumi">めぐみこども園</a> 園庭開放<small>10:00〜11:30</small></span></li>
+        <li data-d="2027-02-24"><span class="sd">2/24(水)</span><span class="sb"><a href="#aoba">小平あおば幼稚園</a> 遊ぼうの日（平日に園庭で遊べる日）<small>9:00〜10:00</small></span></li>
+        <li data-d="2027-03-03"><span class="sd">3/3(水)</span><span class="sb"><a href="#aoba">小平あおば幼稚園</a> 遊ぼうの日（平日に園庭で遊べる日）<small>9:00〜10:00</small></span></li>
+        <li data-d="2027-03-03"><span class="sd">3/3(水)</span><span class="sb"><a href="#shiraume">白梅幼稚園</a> 園庭開放<small>10:00〜11:00</small></span></li>
+        <li data-d="2027-03-10"><span class="sd">3/10(水)</span><span class="sb"><a href="#aoba">小平あおば幼稚園</a> 遊ぼうの日（平日に園庭で遊べる日）<small>9:00〜10:00</small></span></li>
+        <li data-d="2027-03-15"><span class="sd">3/15(月)</span><span class="sb"><a href="#rindou">りんどう幼稚園</a> にこにこクラブ　園庭開放</span></li>
+        <li data-d="2027-03-27"><span class="sd">3/27(土)</span><span class="sb"><a href="#aoba">小平あおば幼稚園</a> 園庭開放日（土曜）<small>10:00〜16:00</small></span></li>
+    </ul>
+    <p class="empty" id="soon-empty" hidden>この2週間に日付の決まった会は見つかっていません。下の「毎週」の園や、各園のページをご覧ください。</p>
+    <h3>毎週ひらいている園</h3>
+    <ul>
+        <li><span class="sd">毎週水</span><span class="sb"><a href="#himeyuri">ひめゆりこども園</a> ひよこサロン（園庭開放）<small>10:00〜11:30</small></span></li>
+        <li><span class="sd">毎週水</span><span class="sb"><a href="#midori">小平みどりこども園</a> 園庭開放<small>10:00〜11:00</small></span></li>
+    </ul>
+    <p class="wk">毎週の会も、お休みの週や中止の日があります。各園の案内をご覧ください。</p>
+  </section>
+
+  <h2 class="sec">園ごとの案内</h2>
+  <nav class="idx" aria-label="園の一覧">
+    <div><span class="it">小川町</span><span class="il"><a href="#shinmei">小平神明こども園</a><a href="#shiraume">白梅幼稚園</a></span></div>
+    <div><span class="it">学園西町</span><span class="il"><a href="#sensin">洗心幼稚園</a></span></div>
+    <div><span class="it">学園東町</span><span class="il"><a href="#megumi">めぐみこども園</a></span></div>
+    <div><span class="it">上水新町</span><span class="il"><a href="#himeyuri">ひめゆりこども園</a></span></div>
+    <div><span class="it">上水本町</span><span class="il"><a href="#naobi">なおび幼稚園</a></span></div>
+    <div><span class="it">上水南町</span><span class="il"><a href="#aoba">小平あおば幼稚園</a></span></div>
+    <div><span class="it">鈴木町</span><span class="il"><a href="#midori">小平みどりこども園</a></span></div>
+    <div><span class="it">花小金井</span><span class="il"><a href="#rindou">りんどう幼稚園</a><a href="#hanakoganei">小平花小金井こども園</a><a href="#yayoidai">弥生台幼稚園</a></span></div>
+    <div><span class="it">回田町</span><span class="il"><a href="#wakatake">小平若竹幼稚園</a></span></div>
+  </nav>
+  <article class="en" id="shinmei">
+      <div class="en-h">
+        <h2>小平神明こども園（小平神明幼稚園）</h2>
+        <p class="town">小川町</p>
+      </div>
+      
+      <div class="prog">
+        <h3>えんていかいほう <span class="tag ok">予約なしで行ける</span></h3>
+        <ul class="dates"><li data-d="2026-10-08"><b>10/8(木)</b></li><li data-d="2026-10-15"><b>10/15(木)</b></li><li data-d="2026-10-22"><b>10/22(木)</b></li><li data-d="2026-10-29"><b>10/29(木)</b></li></ul><p class="more">11月からの日程は、まだ出ていません（10/5時点）</p><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:00〜12:00</span></div>
+          
+          
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+          <div class="kv"><span class="k">雨の日</span><span class="v">雨の日は中止</span></div>
+        </div>
+        <ul class="notes"><li>園庭と裏山で自由に遊べます</li><li>子どもの着替えと水筒を持って</li></ul>
+      </div>
+      
+      <div class="en-f">
+        <span class="chk">2026年10月5日に、園の公式ページで確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://keyakinomori.org/newsblog_youchien/%e5%9c%92%e5%ba%ad%e9%96%8b%e6%94%be%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%ef%bc%889%e6%9c%88-10%e6%9c%88%ef%bc%89/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平神明こども園｜公式">公式ページ</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E7%A5%9E%E6%98%8E%E3%81%93%E3%81%A9%E3%82%82%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%B0%8F%E5%B7%9D%E7%94%BA1-2572" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平神明こども園｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="en" id="shiraume">
+      <div class="en-h">
+        <h2>白梅幼稚園（白梅学園大学附属）</h2>
+        <p class="town">小川町</p>
+      </div>
+      
+      <div class="prog">
+        <h3>園庭開放 <span class="tag ok">予約なしで行ける</span></h3>
+        <ul class="dates"><li data-d="2026-10-07"><b>10/7(水)</b></li><li data-d="2026-10-21"><b>10/21(水)</b></li><li data-d="2026-11-11"><b>11/11(水)</b></li><li data-d="2026-11-25"><b>11/25(水)</b></li><li data-d="2026-12-09"><b>12/9(水)</b></li><li data-d="2027-01-20"><b>1/20(水)</b></li><li data-d="2027-01-27"><b>1/27(水)</b></li><li data-d="2027-02-03"><b>2/3(水)</b></li><li data-d="2027-02-17"><b>2/17(水)</b></li><li data-d="2027-03-03"><b>3/3(水)</b></li></ul><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:00〜11:00</span></div>
+          
+          
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+          <div class="kv"><span class="k">雨の日</span><span class="v">雨の日はお休み</span></div>
+        </div>
+        <ul class="notes"><li>在園児もいます。お子さんから目を離さずに</li></ul>
+      </div>
+      <div class="prog">
+        <h3>おはなし会・あそぼう会 <span class="tag bk">申込みがいる</span></h3>
+        <ul class="dates"><li data-d="2026-10-14"><b>10/14(水)</b><span>おはなし会</span></li><li data-d="2026-12-02"><b>12/2(水)</b><span>あそぼう会（へんしんごっこ）</span></li><li data-d="2027-01-13"><b>1/13(水)</b><span>おはなし会</span></li><li data-d="2027-02-24"><b>2/24(水)</b><span>あそぼう会（おみせやさんごっこ）</span></li></ul><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:00〜11:00</span></div>
+          
+          
+          <div class="kv"><span class="k">予約</span><span class="v">申込みが必要（前日15時まで）。1〜2月の会は 11/4 から受付</span></div>
+          
+        </div>
+        
+      </div>
+      
+      <div class="en-f">
+        <span class="chk">2026年10月5日に、園の公式ページで確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://kinder.shiraume.ac.jp/toddler/playing/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜白梅幼稚園｜公式">公式ページ</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E7%99%BD%E6%A2%85%E5%B9%BC%E7%A8%9A%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%B0%8F%E5%B7%9D%E7%94%BA1-830" target="_blank" rel="noopener" data-goatcounter-click="園庭｜白梅幼稚園｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="en" id="sensin">
+      <div class="en-h">
+        <h2>洗心幼稚園</h2>
+        <p class="town">学園西町</p>
+      </div>
+      
+      <div class="prog">
+        <h3>幼稚園で遊ぼう（園庭・お部屋の開放） <span class="tag ok">予約なしで行ける</span></h3>
+        <ul class="dates"><li data-d="2026-11-09"><b>11/9(月)</b></li><li data-d="2026-11-16"><b>11/16(月)</b></li><li data-d="2026-12-07"><b>12/7(月)</b></li><li data-d="2027-01-18"><b>1/18(月)</b></li><li data-d="2027-01-25"><b>1/25(月)</b></li><li data-d="2027-02-08"><b>2/8(月)</b></li></ul><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:15〜11:45（時間内の出入り自由）</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">未就園の子ならどなたでも（親子で）</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+          
+        </div>
+        <ul class="notes"><li>天然芝の園庭。お部屋には0〜1歳向けのおもちゃもあります</li><li>当日、住所と名前の記入があります</li><li>駐車場はありません</li><li>飲食物の持ちこみはひかえて（ミルク・離乳食・水筒はOK）</li></ul>
+      </div>
+      <div class="prog">
+        <h3>未就園児 親子あそび会 </h3>
+        <ul class="dates"><li data-d="2026-12-14"><b>12/14(月)</b><span>クリスマス会</span></li><li data-d="2027-03-01"><b>3/1(月)</b><span>体操・English</span></li></ul><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:15〜11:30（12:00まで園庭で自由あそび）</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">未就園の子ならどなたでも（親子で）</span></div>
+          
+          <div class="kv"><span class="k">予約</span><span class="v">園のページに予約の案内はありません</span></div>
+          
+        </div>
+        <ul class="notes"><li>先生と親子あそび。子育て相談もあります（相談は電話で予約）</li></ul>
+      </div>
+      <p class="fn">日程の追加は、園のホームページとInstagramで案内されます。</p>
+      <div class="en-f">
+        <span class="chk">2026年10月5日に、園の公式ページで確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://sensin.ed.jp/archives/info/event" target="_blank" rel="noopener" data-goatcounter-click="園庭｜洗心幼稚園｜公式">公式ページ</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E6%B4%97%E5%BF%83%E5%B9%BC%E7%A8%9A%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%AD%A6%E5%9C%92%E8%A5%BF%E7%94%BA2-21-9" target="_blank" rel="noopener" data-goatcounter-click="園庭｜洗心幼稚園｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="en" id="megumi">
+      <div class="en-h">
+        <h2>めぐみこども園（小平学園幼稚園）</h2>
+        <p class="town">学園東町</p>
+      </div>
+      
+      <div class="prog">
+        <h3>園庭開放 <span class="tag ok">予約なしで行ける</span></h3>
+        <ul class="dates"><li data-d="2026-10-15"><b>10/15(木)</b></li><li data-d="2026-10-28"><b>10/28(水)</b></li><li data-d="2026-11-11"><b>11/11(水)</b></li><li data-d="2026-11-25"><b>11/25(水)</b></li><li data-d="2027-01-13"><b>1/13(水)</b></li><li data-d="2027-01-28"><b>1/28(木)</b></li><li data-d="2027-02-10"><b>2/10(水)</b></li><li data-d="2027-02-24"><b>2/24(水)</b></li></ul><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:00〜11:30</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">0歳〜就学前の子と保護者</span></div>
+          
+          <div class="kv"><span class="k">予約</span><span class="v">園のページに予約の案内はありません</span></div>
+          <div class="kv"><span class="k">雨の日</span><span class="v">雨の日は中止</span></div>
+        </div>
+        <ul class="notes"><li>お茶・水のほかの飲食はひかえて（水筒を持って）</li><li>おもちゃは持ちこまないで</li></ul>
+      </div>
+      <div class="prog">
+        <h3>子育て広場「みどりのまきば」（お部屋の開放） <span class="tag ok">予約なしで行ける</span></h3>
+        <ul class="dates"><li data-d="2026-10-19"><b>10/19(月)</b></li><li data-d="2026-11-04"><b>11/4(水)</b></li><li data-d="2026-11-18"><b>11/18(水)</b></li><li data-d="2027-01-20"><b>1/20(水)</b></li><li data-d="2027-02-03"><b>2/3(水)</b></li><li data-d="2027-02-18"><b>2/18(木)</b></li></ul><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:00〜13:00</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">0歳〜就学前の子と保護者</span></div>
+          
+          <div class="kv"><span class="k">予約</span><span class="v">園のページに予約の案内はありません</span></div>
+          
+        </div>
+        <ul class="notes"><li>お部屋のおもちゃで自由に遊べます。先生がいるので、気軽に声をかけて</li><li>お弁当を持ってきてもOK（11:40ごろからランチタイム）。お菓子・ジュースはひかえて</li></ul>
+      </div>
+      
+      <div class="en-f">
+        <span class="chk">2026年10月5日に、園の公式ページで確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://kodairagakuenkindergarten.com/two-year-old-class/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜めぐみこども園｜公式">公式ページ</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E3%82%81%E3%81%90%E3%81%BF%E3%81%93%E3%81%A9%E3%82%82%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%AD%A6%E5%9C%92%E6%9D%B1%E7%94%BA1-2-41" target="_blank" rel="noopener" data-goatcounter-click="園庭｜めぐみこども園｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="en" id="himeyuri">
+      <div class="en-h">
+        <h2>ひめゆりこども園（小平姫百合幼稚園）</h2>
+        <p class="town">上水新町</p>
+      </div>
+      
+      <div class="prog">
+        <h3>ひよこサロン（園庭開放） <span class="tag ok">予約なしで行ける</span></h3>
+        <p class="when">毎週水曜（5月〜3月。8月はお休み）</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:00〜11:30</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">0〜3歳の未就園児と保護者</span></div>
+          
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし（受付をすませたら自由に遊べます）</span></div>
+          <div class="kv"><span class="k">雨の日</span><span class="v">雨の日は中止</span></div>
+        </div>
+        <ul class="notes"><li>園の行事などで中止の日があります。毎月の日程は園のホームページで</li><li>10月は、ひよこサロンの日に園内見学会があります（希望者・当日受付で申込み）</li></ul>
+      </div>
+      
+      <div class="en-f">
+        <span class="chk">2026年10月5日に、園の公式ページで確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://himeyuri.ed.jp/pre/hiyoko/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜ひめゆりこども園｜公式">公式ページ</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E3%81%B2%E3%82%81%E3%82%86%E3%82%8A%E3%81%93%E3%81%A9%E3%82%82%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E4%B8%8A%E6%B0%B4%E6%96%B0%E7%94%BA1-5-15" target="_blank" rel="noopener" data-goatcounter-click="園庭｜ひめゆりこども園｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="en" id="naobi">
+      <div class="en-h">
+        <h2>なおび幼稚園</h2>
+        <p class="town">上水本町</p>
+      </div>
+      
+      <div class="prog">
+        <h3>にこにこ広場 <span class="tag ok">予約なしで行ける</span></h3>
+        <p class="more">開催日は毎月、園のホームページのお知らせで発表されます。10月分はまだ出ていません（10/5時点）。9月は金曜の開催でした</p><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:30〜12:00（9月の回）</span></div>
+          
+          
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+          <div class="kv"><span class="k">雨の日</span><span class="v">雨の日はお部屋で過ごせます（9月の案内より）</span></div>
+        </div>
+        
+      </div>
+      
+      <div class="en-f">
+        <span class="chk">2026年10月5日に、園の公式ページで確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://www.naobi.net/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜なおび幼稚園｜公式">公式ページ</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E3%81%AA%E3%81%8A%E3%81%B3%E5%B9%BC%E7%A8%9A%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E4%B8%8A%E6%B0%B4%E6%9C%AC%E7%94%BA4-21-1" target="_blank" rel="noopener" data-goatcounter-click="園庭｜なおび幼稚園｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="en" id="aoba">
+      <div class="en-h">
+        <h2>小平あおば幼稚園</h2>
+        <p class="town">上水南町</p>
+      </div>
+      
+      <div class="prog">
+        <h3>遊ぼうの日（平日に園庭で遊べる日） <span class="tag ok">予約なしで行ける</span></h3>
+        <ul class="dates"><li data-d="2026-10-07"><b>10/7(水)</b></li><li data-d="2026-10-28"><b>10/28(水)</b></li><li data-d="2026-11-11"><b>11/11(水)</b></li><li data-d="2026-11-18"><b>11/18(水)</b></li><li data-d="2026-11-25"><b>11/25(水)</b></li><li data-d="2027-01-20"><b>1/20(水)</b></li><li data-d="2027-01-27"><b>1/27(水)</b></li><li data-d="2027-02-17"><b>2/17(水)</b></li><li data-d="2027-02-24"><b>2/24(水)</b></li><li data-d="2027-03-03"><b>3/3(水)</b></li><li data-d="2027-03-10"><b>3/10(水)</b></li></ul><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">9:00〜10:00</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">未就園児</span></div>
+          
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし（直接どうぞ）</span></div>
+          <div class="kv"><span class="k">雨の日</span><span class="v">雨の日は中止。暑い日・寒い日は室内のホールで</span></div>
+        </div>
+        <ul class="notes"><li>在園児の様子も見られます</li><li>自転車をとめられます</li><li>かぜの症状があるときは見合わせを。けがは各家庭での対応になります</li></ul>
+      </div>
+      <div class="prog">
+        <h3>園庭開放日（土曜） <span class="tag ok">予約なしで行ける</span></h3>
+        <ul class="dates"><li data-d="2026-10-31"><b>10/31(土)</b></li><li data-d="2027-03-27"><b>3/27(土)</b></li></ul><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:00〜16:00</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">未就園児・在園児・小学生</span></div>
+          
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+          
+        </div>
+        <ul class="notes"><li>駐輪場あり</li></ul>
+      </div>
+      <div class="prog">
+        <h3>未就園児ミニ運動会 <span class="tag ok">予約なしで行ける</span></h3>
+        <ul class="dates"><li data-d="2026-10-27"><b>10/27(火)</b></li></ul><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:00〜11:00ごろ（開場 9:40）</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">未就園児</span></div>
+          
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+          <div class="kv"><span class="k">雨の日</span><span class="v">雨の日は室内のホールで</span></div>
+        </div>
+        <ul class="notes"><li>在園児の演技の参観、わらべうた、かけっこ、おみやげ</li><li>自転車はとめられます。車はとめられません（近くのコインパーキングへ）</li></ul>
+      </div>
+      
+      <div class="en-f">
+        <span class="chk">2026年10月5日に、園の公式ページで確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://kodaira-aoba.info/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平あおば幼稚園｜公式">公式ページ</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E3%81%82%E3%81%8A%E3%81%B0%E5%B9%BC%E7%A8%9A%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E4%B8%8A%E6%B0%B4%E5%8D%97%E7%94%BA2-8-15" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平あおば幼稚園｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="en" id="midori">
+      <div class="en-h">
+        <h2>小平みどりこども園（小平みどり幼稚園）</h2>
+        <p class="town">鈴木町</p>
+      </div>
+      
+      <div class="prog">
+        <h3>園庭開放 <span class="tag ok">予約なしで行ける</span></h3>
+        <p class="when">毎週水曜（第5水曜と、長いお休みの間は原則なし）</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:00〜11:00</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">地域の未就園児と保護者</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし（正門からどうぞ）</span></div>
+          <div class="kv"><span class="k">雨の日</span><span class="v">天気や行事で中止になることがあります</span></div>
+        </div>
+        <ul class="notes"><li>先生に子育ての質問もできます</li><li>ベビーカーのまま園内に入れます。オムツ替えの場所あり</li><li>駐輪場あり・駐車場なし</li></ul>
+      </div>
+      <div class="prog">
+        <h3>育児相談 <span class="tag bk">申込みがいる</span></h3>
+        <p class="when">毎週月曜（第5月曜と、長いお休みの間は原則なし）</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:00〜11:00</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">電話で予約</span></div>
+          
+        </div>
+        
+      </div>
+      
+      <div class="en-f">
+        <span class="chk">2026年10月5日に、園の公式ページで確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://www.k-midori.com/preschool/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平みどりこども園｜公式">公式ページ</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E3%81%BF%E3%81%A9%E3%82%8A%E3%81%93%E3%81%A9%E3%82%82%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E9%88%B4%E6%9C%A8%E7%94%BA1-341" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平みどりこども園｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="en" id="rindou">
+      <div class="en-h">
+        <h2>りんどう幼稚園</h2>
+        <p class="town">花小金井</p>
+      </div>
+      <p class="intro">「にこにこクラブ」として、地域にお住まいの保護者と未就園児に園を開いています。</p>
+      <div class="prog">
+        <h3>にこにこクラブ　園庭開放 <span class="tag ok">予約なしで行ける</span></h3>
+        <ul class="dates"><li data-d="2026-10-19"><b>10/19(月)</b></li><li data-d="2026-11-30"><b>11/30(月)</b></li><li data-d="2026-12-09"><b>12/9(水)</b></li><li data-d="2027-03-15"><b>3/15(月)</b></li></ul><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          
+          <div class="kv"><span class="k">対象</span><span class="v">地域にお住まいの保護者と未就園児</span></div>
+          
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+          
+        </div>
+        
+      </div>
+      <div class="prog">
+        <h3>にこにこクラブ　お譲り会 <span class="tag ok">予約なしで行ける</span></h3>
+        <ul class="dates"><li data-d="2026-10-07"><b>10/7(水)</b></li></ul><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          
+          <div class="kv"><span class="k">対象</span><span class="v">地域にお住まいの保護者と未就園児</span></div>
+          
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+          
+        </div>
+        
+      </div>
+      <div class="prog">
+        <h3>にこにこクラブ　親子のイベント <span class="tag bk">申込みがいる</span></h3>
+        <ul class="dates"><li data-d="2026-10-14"><b>10/14(水)</b><span>劇団プーク 観劇会</span></li><li data-d="2026-11-05"><b>11/5(木)</b><span>ベビーマッサージ</span></li><li data-d="2026-12-17"><b>12/17(木)</b><span>にこカフェ〜ビー玉船に乗ろう〜</span></li><li data-d="2027-02-12"><b>2/12(金)</b><span>にこカフェ〜花紙であそぼう〜</span></li><li data-d="2027-03-18"><b>3/18(木)</b><span>抱っこ紐講習会</span></li></ul><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          
+          <div class="kv"><span class="k">対象</span><span class="v">地域にお住まいの保護者と未就園児</span></div>
+          
+          <div class="kv"><span class="k">予約</span><span class="v">申込みが必要（園のホームページの「お知らせ」から各回ごとに）</span></div>
+          
+        </div>
+        
+      </div>
+      <p class="fn">時間と費用は、各回のお知らせで案内されます。</p>
+      <div class="en-f">
+        <span class="chk">2026年10月5日に、園の公式ページで確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://www.rindou.ed.jp/support/nikoniko.php" target="_blank" rel="noopener" data-goatcounter-click="園庭｜りんどう幼稚園｜公式">公式ページ</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E3%82%8A%E3%82%93%E3%81%A9%E3%81%86%E5%B9%BC%E7%A8%9A%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E8%8A%B1%E5%B0%8F%E9%87%91%E4%BA%951-26-34" target="_blank" rel="noopener" data-goatcounter-click="園庭｜りんどう幼稚園｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="en" id="hanakoganei">
+      <div class="en-h">
+        <h2>小平花小金井こども園（小平花小金井幼稚園）</h2>
+        <p class="town">花小金井</p>
+      </div>
+      <p class="intro">「Hana🌸Hanaひろば」として、未就園の親子に園を開いています。対象は令和5年4月2日以降に生まれたお子さんと保護者で、ほかの園に通っている子も対象の年齢なら参加できます。費用は無料です。</p>
+      <div class="prog">
+        <h3>Hana🌸Hanaひろば　園庭開放 <span class="tag ok">予約なしで行ける</span></h3>
+        <ul class="dates"><li data-d="2026-11-09"><b>11/9(月)</b></li><li data-d="2026-12-10"><b>12/10(木)</b></li></ul><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          
+          <div class="kv"><span class="k">対象</span><span class="v">令和5年4月2日以降に生まれたお子さんと保護者</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+          
+        </div>
+        
+      </div>
+      <div class="prog">
+        <h3>Hana🌸Hanaひろば　親子のイベント <span class="tag bk">申込みがいる</span></h3>
+        <ul class="dates"><li data-d="2026-10-06"><b>10/6(火)</b><span>親子体操教室</span></li><li data-d="2026-10-17"><b>10/17(土)</b><span>運動会（未就園児の競技）</span></li><li data-d="2026-10-20"><b>10/20(火)</b><span>親子体操教室</span></li><li data-d="2026-10-21"><b>10/21(水)</b><span>プレイルームデー</span></li><li data-d="2026-10-28"><b>10/28(水)</b><span>園まつり</span></li><li data-d="2026-11-10"><b>11/10(火)</b><span>親子体操教室</span></li><li data-d="2026-11-24"><b>11/24(火)</b><span>親子体操教室</span></li><li data-d="2026-11-25"><b>11/25(水)</b><span>プレイルームデー</span></li><li data-d="2026-12-01"><b>12/1(火)</b><span>親子体操教室</span></li></ul><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          
+          <div class="kv"><span class="k">対象</span><span class="v">令和5年4月2日以降に生まれたお子さんと保護者</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">申込みが必要（方法は園のホームページ・Instagramで案内）</span></div>
+          
+        </div>
+        
+      </div>
+      <p class="fn">日程は園の公式Instagramの案内で確かめました。時間は各回の案内で。変更や中止は園のホームページで案内されます。</p>
+      <div class="en-f">
+        <span class="chk">2026年10月5日に、園の公式ページで確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://hanakoganei.ed.jp/support/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平花小金井こども園｜公式">公式ページ</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E8%8A%B1%E5%B0%8F%E9%87%91%E4%BA%95%E3%81%93%E3%81%A9%E3%82%82%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E8%8A%B1%E5%B0%8F%E9%87%91%E4%BA%952-9-11" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平花小金井こども園｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="en" id="yayoidai">
+      <div class="en-h">
+        <h2>弥生台幼稚園</h2>
+        <p class="town">花小金井</p>
+      </div>
+      
+      <div class="prog">
+        <h3>オレンジクラブ（園庭開放・教育相談） <span class="tag ok">予約なしで行ける</span></h3>
+        <p class="more">日時は園のInstagramで案内されています</p><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          
+          <div class="kv"><span class="k">対象</span><span class="v">0歳〜未就園の子とその家族</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">園のページに予約の案内はありません</span></div>
+          
+        </div>
+        <ul class="notes"><li>広い園庭で親子で遊べます。育児の悩みも相談できます</li></ul>
+      </div>
+      
+      <div class="en-f">
+        <span class="chk">2026年10月5日に、園の公式ページで確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://www.yayoidai.jp/price" target="_blank" rel="noopener" data-goatcounter-click="園庭｜弥生台幼稚園｜公式">公式ページ</a> <a class="lk" href="https://www.instagram.com/yayoidai_1110/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜弥生台幼稚園｜sns">Instagram</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%BC%A5%E7%94%9F%E5%8F%B0%E5%B9%BC%E7%A8%9A%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E8%8A%B1%E5%B0%8F%E9%87%91%E4%BA%954-9-20" target="_blank" rel="noopener" data-goatcounter-click="園庭｜弥生台幼稚園｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="en" id="wakatake">
+      <div class="en-h">
+        <h2>小平若竹幼稚園</h2>
+        <p class="town">回田町</p>
+      </div>
+      
+      <div class="prog">
+        <h3>園庭開放 <span class="tag ok">予約なしで行ける</span></h3>
+        <p class="more">10月からの日程は、まだ出ていません（10/5時点）。これまでは月曜の開催でした</p><p class="more done" hidden>今年度ここに出ている日は終わりました。次の日程は園のページで。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:15〜11:00</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">未就園児と保護者</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし（初めての日は受付を）</span></div>
+          <div class="kv"><span class="k">雨の日</span><span class="v">天気や感染症で中止になることがあります</span></div>
+        </div>
+        
+      </div>
+      
+      <div class="en-f">
+        <span class="chk">2026年10月5日に、園の公式ページで確かめました</span>
+        <span class="acts">
+          <a class="lk" href="http://www.kodaira-wakatake.sakura.ne.jp/event.html" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平若竹幼稚園｜公式">公式ページ</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E8%8B%A5%E7%AB%B9%E5%B9%BC%E7%A8%9A%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%9B%9E%E7%94%B0%E7%94%BA122-3" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平若竹幼稚園｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+
+  <h2 class="sec">ほかの園</h2>
+  <p class="lead">公式ページに、在園していなくても参加できる会の日程が見つからなかった園です。</p>
+  <ul class="others">
+    <li><b>まるやまこども園（丸山幼稚園）</b><span class="town">小川東町</span><br>2歳児の未就園児クラブ「まるちゃんクラブ」（入会制）があります。今年度の詳しい案内は準備中とのことです。<a href="https://maruyama-ac.jp/support/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜まるやまこども園｜公式">園のページ</a></li>
+    <li><b>たかのだい幼稚園</b><span class="town">上水本町</span><br>未就園児の親子教室があります。日程は園へお問い合わせを、とのことです。<a href="https://www.takanodai-youchien.com/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜たかのだい幼稚園｜公式">園のページ</a></li>
+    <li><b>小平なみき幼稚園</b><span class="town">仲町</span><br>未就園児向けの教室は、いま調整中とのことです。新しい案内は、園のホームページの新着情報で出ます。<a href="https://namikiyouchien.com/preschool/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平なみき幼稚園｜公式">園のページ</a></li>
+  </ul>
+
+  <h2 class="sec">行く前に</h2>
+  <div class="tips">
+    <ul>
+      <li>園は、在園の子どもたちが毎日すごしている場所です。飲食・おもちゃ・自転車など、各園のお願いを守って。</li>
+      <li>駐車場のない園がほとんどです。歩き・自転車・バスで。</li>
+      <li>園庭では、在園の子どもたちも遊んでいることがあります。お子さんから目を離さずに。</li>
+      <li>入園を考えている園なら、ふだんの雰囲気を見られる機会にもなります。</li>
+    </ul>
+  </div>
+
+  <p class="about">各園の公式ページ（園のInstagramを含む）で、園ごとに確かめた日を書いています。まとめサイトからの転載はしていません。<br>
+  内容のまちがいや、載っていない会に気づいたら、<a href="/#contact">お問い合わせ</a>から教えてください。園の方からのご連絡も歓迎です。</p>
+
+  <div class="nav-pills">
+    <a href="/calendar.html">おでかけカレンダー</a>
+    <a href="/map.html">おでかけマップ</a>
+    <a href="/guide.html">おでかけガイド</a>
+    <a href="/issues.html">バックナンバー</a>
+  </div>
+  <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>
+</main>
+
+<footer>
+  <div class="fmark">ぼんぼやーじゅ通信</div>
+  <a href="/tokushoho.html">免責事項・個人情報の取り扱い</a><br>
+  © 2026 ぼんぼやーじゅ通信
+</footer>
+
+<script>
+/* 開いた日に合わせて、過ぎた日を隠す（組んだ日より後に開いても古くならないように） */
+(function () {
+  var t = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+  var lim = new Date(Date.now() + (9 * 3600e3) + 13 * 864e5).toISOString().slice(0, 10);
+  document.querySelectorAll('.dates li[data-d]').forEach(function (li) {
+    if (li.getAttribute('data-d') < t) li.hidden = true;
+  });
+  document.querySelectorAll('.prog').forEach(function (g) {
+    var ul = g.querySelector('.dates'), done = g.querySelector('.done');
+    if (!ul || !done) return;
+    var left = ul.querySelectorAll('li:not([hidden])').length;
+    if (!left) { ul.hidden = true; if (!g.querySelector('.more:not(.done)')) done.hidden = false; }
+  });
+  var shown = 0;
+  document.querySelectorAll('#soon li[data-d]').forEach(function (li) {
+    var d = li.getAttribute('data-d');
+    var on = d >= t && d <= lim;
+    li.hidden = !on; if (on) shown++;
+  });
+  if (!shown) document.getElementById('soon-empty').hidden = false;
+})();
+</script>
+</body>
+</html>

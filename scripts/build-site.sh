@@ -23,6 +23,10 @@ echo "── 号ごとの年齢別ページ（送った号だけ。10/7号から
 node scripts/build-weekly.mjs
 
 echo
+echo "── 園庭開放・未就園児の会（園ごとのまとめ）"
+node scripts/build-entei.mjs
+
+echo
 echo "── 公開マップ（地図＋投稿フォーム）"
 node scripts/build-map.mjs
 

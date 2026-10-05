@@ -285,6 +285,10 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
   .sp b { font-family: var(--w-maru); font-weight: 700; font-size: .78rem; line-height: 1.4; }
   .sp small { font-size: .66rem; color: var(--w-soft); line-height: 1.45; }
   @media (min-width: 560px) { .sp-grid { grid-template-columns: repeat(3, 1fr); } }
+  /* 毎週くり返す会は号に載せきれないので、まとめページへ（👶・🧒のタブだけ） */
+  .entei { display: block; margin-top: 1.2rem; padding: .75rem .95rem; border-radius: 16px; background: var(--w-card); box-shadow: var(--w-shadow); text-decoration: none; color: var(--w-ink); font-size: .8rem; }
+  .entei b { font-family: var(--w-maru); font-weight: 700; font-size: .86rem; color: var(--w-accent-ink); }
+  .entei span { display: block; margin-top: .15rem; color: var(--w-soft); font-size: .72rem; line-height: 1.6; }
   .stamp { font-size: .7rem; color: var(--w-faint); margin-top: 1.4rem; line-height: 1.8; text-align: center; }
   .back { font-size: .8rem; }
 </style>
@@ -387,6 +391,7 @@ for (const f of files) {
   <div class="sec"><p class="kicker">THIS WEEK</p><h2>今週のおでかけ</h2></div>
   ${now.length ? now.map(({ it, ev }) => card(it, ev, { pick: it.id === spec.pick })).join('') : '<p class="empty">今週は、この年齢向けの催しが少なめです。ほかのタブもご覧ください。</p>'}
   ${next.length ? `<div class="sec"><p class="kicker">COMING UP</p><h2>先取り・申込の締切</h2></div>${next.map(({ it, ev }) => card(it, ev)).join('')}` : ''}
+  ${g.key !== 'elem' ? `<a class="entei" href="/entei.html" data-goatcounter-click="週｜園庭開放">🌱 <b>園庭開放・未就園児の会</b><span>入園前の子と、幼稚園の園庭で遊べる日。小平の幼稚園・こども園ごとに、これから2週間の日がわかります</span></a>` : ''}
 </section>`;
   };
   const tabbed = (active) => `
