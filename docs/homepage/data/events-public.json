@@ -3134,7 +3134,7 @@
    "timeUncertain": false,
    "place": "武蔵野美術大学 鷹の台キャンパス（小平市小川町1-736）",
    "mapq": "小平市武蔵野美術大学 鷹の台キャンパス",
-   "summary": "",
+   "summary": "美術大学の学園祭。学生の作品展示・模擬店。ワークショップも実施される",
    "kidsNote": "暫定。",
    "caution": "",
    "lastEntry": "",
@@ -3144,7 +3144,7 @@
     "pre": "○",
     "elem": "◎"
    },
-   "cost": "入場無料",
+   "cost": "(要確認) 公式サイトに料金の記載がありません",
    "discount": "",
    "target": "",
    "url": "https://geisai.jp/",
@@ -3976,8 +3976,8 @@
    "timeUncertain": false,
    "place": "中央図書館2階展示ギャラリー(小川町2-1325)",
    "mapq": "小平市中央図書館",
-   "summary": "立体的な仕掛けが飛び出すポップアップ絵本を展示。外国のポップアップも",
-   "kidsNote": "雨の日・猛暑日の屋内候補。無料",
+   "summary": "立体的な仕掛けが飛び出すポップアップ絵本を展示。海外のポップアップ絵本の紹介が中心",
+   "kidsNote": "雨の日の屋内候補。観覧無料",
    "caution": "",
    "contact": {
     "tel": "042-345-1246",
@@ -3990,10 +3990,10 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "",
+   "cost": "無料",
    "discount": "",
    "target": "",
-   "url": "https://www.city.kodaira.tokyo.jp/kurashi/002/002590.html",
+   "url": "https://library.kodaira.ed.jp/viewer/info.html?id=387",
    "tentative": false,
    "deadline": null,
    "cat": "public"
