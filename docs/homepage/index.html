@@ -249,8 +249,9 @@
 
   @media (prefers-reduced-motion: reduce) { .fade { animation: none; opacity: 1; transform: none; } }
 
-  /* 無料で使える4つのページ（カレンダー・マップ・バックナンバー・園庭開放）。
-     通信は流れるが、こちらは残って自分のタイミングで開ける。それが4つの共通点。
+  /* 無料で使えるページ（カレンダー・マップ・園庭開放・定例・バックナンバー）。
+     通信は流れるが、こちらは残って自分のタイミングで開ける。それが共通点。
+     2026-10-06 に児童館・図書館の定例を足して5つにした。
      2026-10-05 に園庭開放のまとめを足して4つにした（広い画面は2列×2段）。
      以前はここが20pxのテキストリンクで、ページの中で見つけてもらえなかった。 */
   .tools { display: grid; gap: .8rem; margin-top: 1.8rem; }
@@ -456,7 +457,7 @@
 
   <section id="tools" class="wrap">
     <div class="stop"><span class="pin"></span><span class="label">Tools</span></div>
-    <h2>いつでも見られる4つ</h2>
+    <h2>いつでも見られる5つ</h2>
     <div class="tools">
       <a class="tool" href="calendar.html">
         <span class="tool-ic">📅</span>
@@ -479,6 +480,13 @@
           <span>小平の幼稚園・こども園15園の、<b>在園していなくても行ける会</b>。予約のいる・いらないと、<b>これから2週間の日</b>がひと目でわかります</span>
         </span>
       </a>
+      <a class="tool" href="teirei.html">
+        <span class="tool-ic">📚</span>
+        <span class="tool-body">
+          <b>児童館・図書館・子育てひろばの定例</b>
+          <span>図書館のおはなし会・絵本のへや、児童館のこども広場など、<b>毎月くり返す無料の会</b>。年齢でしぼって、これから2週間の日がわかります</span>
+        </span>
+      </a>
       <a class="tool" href="issues.html">
         <span class="tool-ic">📮</span>
         <span class="tool-body">
@@ -487,7 +495,7 @@
         </span>
       </a>
     </div>
-    <p class="support-line">通信も、いつでも見られるこの4つも、どなたでも無料でお使いいただけます。</p>
+    <p class="support-line">通信も、いつでも見られるこの5つも、どなたでも無料でお使いいただけます。</p>
     <p class="support-line">ChatGPTやGeminiなど、チャット型のAIをお使いの方へ　→　<a href="/ai/">AIに聞くためのおでかけ一覧</a></p>
   </section>
 

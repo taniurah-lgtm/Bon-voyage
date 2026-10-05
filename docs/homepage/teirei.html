@@ -1,0 +1,1049 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>児童館・図書館・子育てひろばの定例（小平）｜ぼんぼやーじゅ通信</title>
+<meta name="description" content="小平市の図書館のおはなし会・絵本のへや、児童館のこども広場、子育てひろば、地域センターの出張ひろば。毎月くり返す会の日程を、公式の案内で確かめてまとめています。">
+<link rel="canonical" href="https://bonvoya.nicomaru.tokyo/teirei.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://bonvoya.nicomaru.tokyo/teirei.html">
+<meta property="og:title" content="児童館・図書館・子育てひろばの定例（小平）">
+<meta property="og:description" content="小平市の図書館のおはなし会・絵本のへや、児童館のこども広場、子育てひろば、地域センターの出張ひろば。毎月くり返す会の日程を、公式の案内で確かめてまとめています。">
+<meta property="og:locale" content="ja_JP">
+<link rel="stylesheet" href="/assets/bv-tokens.css">
+<link rel="stylesheet" href="/assets/bv-nav.css">
+<script src="/assets/analytics.js" defer></script>
+<style>
+  main { padding: 1.2rem 0 1rem; }
+  .ghead-in { padding-top: 1.4rem; padding-bottom: 1.2rem; }
+  .ghead h1 { font-size: clamp(1.45rem, 4.8vw, 2rem); margin-bottom: .35rem; }
+  .ghead .sub { font-size: .92rem; line-height: 1.75; }
+  .lead { color: var(--ink-soft); font-size: .86rem; line-height: 1.75; margin-bottom: 1rem; }
+  h2.sec { font-family: var(--maru); font-weight: 800; font-size: 1.12rem; margin: 1.8rem 0 .4rem; }
+  .sec-lead { color: var(--ink-soft); font-size: .84rem; line-height: 1.7; margin-bottom: .8rem; }
+
+  /* 年齢でしぼる */
+  .agef { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 .9rem; }
+  .agef button { font-family: var(--maru); font-weight: 700; font-size: .8rem; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); border-radius: 999px; padding: .4rem .85rem; min-height: 36px; cursor: pointer; }
+  .agef button[aria-pressed="true"] { background: var(--sky-deep); border-color: var(--sky-deep); color: var(--on-sky); }
+
+  /* これから2週間 */
+  .soon { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); box-shadow: var(--shadow-soft); padding: .9rem 1rem; }
+  .soon h3 { font-family: var(--maru); font-weight: 800; font-size: .92rem; margin: 0 0 .45rem; color: var(--sky-deep); }
+  .soon > ul { list-style: none; margin: 0 0 .9rem; padding: 0; }
+  .soon .day { display: grid; grid-template-columns: 4.7em 1fr; gap: .6rem; padding: .45rem 0; border-top: 1px dashed var(--line); }
+  .soon .day:first-child { border-top: 0; }
+  .soon .sd { font-family: var(--maru); font-weight: 800; font-size: .88rem; }
+  .soon .day ul, .soon .reg { list-style: none; margin: 0; padding: 0; }
+  .soon .day li, .soon .reg li { font-size: .84rem; line-height: 1.55; padding: .1rem 0; }
+  .soon .reg li { padding: .35rem 0; border-top: 1px dashed var(--line); }
+  .soon .reg li:first-child { border-top: 0; }
+  .soon a { font-weight: 700; color: var(--link-ink); text-decoration: none; }
+  .soon small { display: block; color: var(--ink-faint); font-size: .74rem; }
+  .soon .empty, .soon .wk { color: var(--ink-faint); font-size: .78rem; }
+
+  /* 目次 */
+  .idx { display: flex; flex-wrap: wrap; gap: .35rem; margin: 1rem 0 0; }
+  .idx a { font-size: .8rem; font-weight: 700; text-decoration: none; color: var(--link-ink); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .3rem .75rem; }
+
+  /* 施設ごと */
+  .pl { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); box-shadow: var(--shadow-soft); padding: 1rem 1.05rem .8rem; margin-bottom: .9rem; scroll-margin-top: 64px; }
+  .pl-h { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  .pl h2 { font-family: var(--maru); font-weight: 800; font-size: 1.04rem; margin: 0; line-height: 1.4; }
+  .town { font-size: .78rem; color: var(--ink-faint); }
+  .intro { font-size: .84rem; color: var(--ink-soft); margin-top: .35rem; line-height: 1.7; }
+  .prog { margin-top: .8rem; padding-top: .7rem; border-top: 1px solid var(--line); }
+  .pl > .prog:first-of-type { border-top: 0; padding-top: 0; }
+  .prog h3 { font-family: var(--maru); font-weight: 800; font-size: .94rem; margin: 0 0 .35rem; line-height: 1.5; }
+  .tag, .agetag { display: inline-block; font-size: .64rem; font-weight: 700; border-radius: 999px; padding: .05rem .5rem; vertical-align: .12em; margin-left: .15rem; white-space: nowrap; }
+  .agetag { background: var(--surface-2); color: var(--ink-soft); }
+  .tag.ok { background: var(--sky-wash); color: var(--sky-deep); }
+  .tag.bk { background: var(--marigold-wash); color: var(--marigold-ink); }
+  .when { font-size: .88rem; font-weight: 700; margin-bottom: .3rem; }
+  .dates { list-style: none; margin: 0 0 .45rem; padding: 0; display: flex; flex-wrap: wrap; gap: .3rem; }
+  .dates.long { flex-direction: column; }
+  .dates li { font-size: .8rem; background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: .1rem .45rem; line-height: 1.6; }
+  .dates li b { font-family: var(--maru); }
+  .dates li span { margin-left: .35rem; color: var(--ink-soft); }
+  .morebtn { font-size: .76rem; font-weight: 700; color: var(--link-ink); background: none; border: 0; padding: .2rem 0 .5rem; cursor: pointer; min-height: 32px; }
+  .more { font-size: .82rem; color: var(--ink-soft); background: var(--surface-2); border-radius: 8px; padding: .35rem .6rem; margin: .4rem 0 .45rem; line-height: 1.65; }
+  .kvs { display: grid; gap: .12rem; }
+  .kv { display: flex; gap: .6rem; font-size: .84rem; line-height: 1.6; }
+  .kv .k { flex: none; width: 3.6em; color: var(--ink-faint); font-size: .78rem; padding-top: .08rem; }
+  .notes { margin: .35rem 0 0; padding-left: 1.1rem; font-size: .8rem; color: var(--ink-soft); line-height: 1.65; }
+  .src { display: inline-flex; align-items: center; min-height: 32px; font-size: .76rem; font-weight: 700; color: var(--link-ink); text-decoration: none; }
+  .fn { font-size: .78rem; color: var(--ink-faint); margin-top: .6rem; line-height: 1.6; }
+  .pl-f { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .6rem; margin-top: .7rem; padding-top: .5rem; border-top: 1px solid var(--line); }
+  .chk { font-size: .72rem; color: var(--ink-faint); }
+  .acts { margin-left: auto; display: flex; flex-wrap: wrap; gap: .35rem; }
+  .lk { display: inline-flex; align-items: center; min-height: 36px; font-size: .78rem; font-weight: 700; text-decoration: none; color: var(--link-ink); border: 1px solid var(--line-strong); border-radius: 999px; padding: 0 .85rem; background: var(--surface); white-space: nowrap; }
+
+  .tips { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .9rem 1.1rem; }
+  .tips ul { margin: 0; padding-left: 1.1rem; font-size: .86rem; line-height: 1.75; }
+  .tips li + li { margin-top: .25rem; }
+  .about { font-size: .82rem; color: var(--ink-soft); line-height: 1.8; margin-top: 1.4rem; }
+  .nav-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.6rem 0 0; }
+  .nav-pills a { font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none; color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .4rem .9rem; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<nav class="bvnav" aria-label="サイト内">
+  <div class="bvnav-in">
+    <a class="bvnav-brand" href="/">ぼんぼやーじゅ通信</a>
+    <div class="bvnav-links">
+      <a href="/" class="bv-hide-sm">通信について</a>
+      <a class="bvnav-cal" href="/calendar.html">📅<span class="bv-lg">おでかけ</span>カレンダー</a>
+      <a href="/map.html"><span class="bv-lg">おでかけ</span>マップ</a>
+      <a class="bvnav-cta" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE<span class="bv-lg">で受け取る</span></a>
+    </div>
+  </div>
+</nav>
+<header class="ghead">
+  <div class="ghead-in">
+    <div class="eyebrow">Bon Voyage,</div>
+    <h1>児童館・図書館・<br>子育てひろばの定例</h1>
+    <p class="sub">毎月くり返す、無料の会。図書館のおはなし会と絵本のへや、児童館のこども広場、子育てひろば、地域センターへの出張ひろばを、小平市内ぶんまとめました。</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="lead">日程は、図書館・児童館・子ども家庭支援センターの公式の案内で確かめています。行事や天候で変わることがあるので、<b>出かける前に各施設の案内で</b>確かめてください。</p>
+
+  <div class="agef" role="group" aria-label="年齢でしぼる">
+    <button type="button" data-f="" aria-pressed="true">すべて</button>
+    <button type="button" data-f="baby" aria-pressed="false">👶 0〜3歳</button>
+    <button type="button" data-f="kids" aria-pressed="false">🧒🎒 4歳〜小学生</button>
+  </div>
+
+  <section class="soon" aria-labelledby="soon-h">
+    <h3 id="soon-h">これから2週間の、予約なしで行ける日</h3>
+    <ul id="soon">
+        <li class="day" data-d="2026-10-06"><span class="sd">10/6(火)</span><ul><li data-age="baby"><a href="#chuo">中央図書館</a> 絵本のへや<small>11:00〜11:20（受付 10:40〜、1階児童コーナー）</small></li><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2026-10-07"><span class="sd">10/7(水)</span><ul><li data-age="baby"><a href="#ogaichi">小川町一丁目児童館</a> いっしょにおはなし（絵本の読み聞かせ）<small>10:45〜11:00</small></li></ul></li>
+        <li class="day" data-d="2026-10-08"><span class="sd">10/8(木)</span><ul><li data-age="baby"><a href="#ohisama">おひさまひろば</a> 0歳さんあつまれ 10:00〜11:30（初めての方は10:00、2回目からは10:30受付）</li></ul></li>
+        <li class="day" data-d="2026-10-10"><span class="sd">10/10(土)</span><ul><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>14:00〜14:30</small></li></ul></li>
+        <li class="day" data-d="2026-10-11"><span class="sd">10/11(日)</span><ul><li data-age="kids"><a href="#nakamachi">仲町図書館</a> おはなし会<small>11:00〜11:30</small></li></ul></li>
+        <li class="day" data-d="2026-10-13"><span class="sd">10/13(火)</span><ul><li data-age="baby"><a href="#shutchohiroba">出張ひろば</a> 東部市民センター 和室：0歳（ハイハイ前）さんとプレママパパあつまれ（10:20からお話会）</li></ul></li>
+        <li class="day" data-d="2026-10-14"><span class="sd">10/14(水)</span><ul><li data-age="baby"><a href="#kihei">喜平図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#kihei">喜平図書館</a> おはなし会<small>15:30〜16:00</small></li><li data-age="baby"><a href="#oonuma">大沼図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#oonuma">大沼図書館</a> おはなし会<small>16:00〜16:30</small></li></ul></li>
+        <li class="day" data-d="2026-10-16"><span class="sd">10/16(金)</span><ul><li data-age="baby"><a href="#ohisama">おひさまひろば</a> 1歳さんあつまれ 10:30〜11:30</li></ul></li>
+        <li class="day" data-d="2026-10-17"><span class="sd">10/17(土)</span><ul><li data-age="baby"><a href="#ohisama">おひさまひろば</a> おとうさんタイム 10:30〜11:30（未就学の子とお父さん）</li></ul></li>
+        <li class="day" data-d="2026-10-18"><span class="sd">10/18(日)</span><ul><li data-age="kids"><a href="#nakamachi">仲町図書館</a> おはなし会<small>11:00〜11:30</small></li></ul></li>
+        <li class="day" data-d="2026-10-20"><span class="sd">10/20(火)</span><ul><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2026-10-21"><span class="sd">10/21(水)</span><ul><li data-age="baby"><a href="#tsuda">津田図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#tsuda">津田図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2026-10-22"><span class="sd">10/22(木)</span><ul><li data-age="kids"><a href="#kihei">喜平図書館</a> おはなし会<small>15:30〜16:00</small></li><li data-age="kids"><a href="#oonuma">大沼図書館</a> おはなし会<small>16:00〜16:30</small></li></ul></li>
+        <li class="day" data-d="2026-10-23"><span class="sd">10/23(金)</span><ul><li data-age="baby"><a href="#ohisama">おひさまひろば</a> 心理士さんとお話をする会「すくすくの会」14:00〜14:30</li><li data-age="baby"><a href="#ogaichi">小川町一丁目児童館</a> いっしょにおはなし（絵本の読み聞かせ）<small>10:45〜11:00</small></li></ul></li>
+        <li class="day" data-d="2026-10-27"><span class="sd">10/27(火)</span><ul><li data-age="baby"><a href="#ohisama">おひさまひろば</a> 助産師さんの相談会「りぼんの会」10:00〜11:30（1歳3か月ぐらいまで。体重も測れます）</li><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2026-10-28"><span class="sd">10/28(水)</span><ul><li data-age="baby"><a href="#kamijuku">上宿図書館</a> 絵本のへや<small>11:00〜11:20</small></li></ul></li>
+        <li class="day" data-d="2026-10-30"><span class="sd">10/30(金)</span><ul><li data-age="baby"><a href="#shutchohiroba">出張ひろば</a> 鈴木公民館 和室：0歳さんあつまれ（初めての方は10:00、2回目からは10:30受付）</li></ul></li>
+        <li class="day" data-d="2026-10-31"><span class="sd">10/31(土)</span><ul><li data-age="baby"><a href="#ohisama">おひさまひろば</a> おひさまマーケット 14:00〜16:00（寄付のこども服を無料でお譲り。受付15:30まで）</li></ul></li>
+        <li class="day" data-d="2026-11-01"><span class="sd">11/1(日)</span><ul><li data-age="kids"><a href="#tsuda">津田図書館</a> おはなし会<small>11:00〜11:30</small></li></ul></li>
+        <li class="day" data-d="2026-11-05"><span class="sd">11/5(木)</span><ul><li data-age="baby"><a href="#nakamachi">仲町図書館</a> 絵本のへや<small>11:00〜11:20（11時までに直接どうぞ）</small></li></ul></li>
+        <li class="day" data-d="2026-11-08"><span class="sd">11/8(日)</span><ul><li data-age="kids"><a href="#nakamachi">仲町図書館</a> おはなし会<small>11:00〜11:30</small></li></ul></li>
+        <li class="day" data-d="2026-11-10"><span class="sd">11/10(火)</span><ul><li data-age="baby"><a href="#chuo">中央図書館</a> 絵本のへや<small>11:00〜11:20（受付 10:40〜、1階児童コーナー）</small></li><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2026-11-11"><span class="sd">11/11(水)</span><ul><li data-age="baby"><a href="#kihei">喜平図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#kihei">喜平図書館</a> おはなし会<small>15:30〜16:00</small></li><li data-age="baby"><a href="#oonuma">大沼図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#oonuma">大沼図書館</a> おはなし会<small>16:00〜16:30</small></li></ul></li>
+        <li class="day" data-d="2026-11-14"><span class="sd">11/14(土)</span><ul><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>14:00〜14:30</small></li></ul></li>
+        <li class="day" data-d="2026-11-15"><span class="sd">11/15(日)</span><ul><li data-age="kids"><a href="#nakamachi">仲町図書館</a> おはなし会<small>11:00〜11:30</small></li></ul></li>
+        <li class="day" data-d="2026-11-17"><span class="sd">11/17(火)</span><ul><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2026-11-18"><span class="sd">11/18(水)</span><ul><li data-age="baby"><a href="#tsuda">津田図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#tsuda">津田図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2026-11-24"><span class="sd">11/24(火)</span><ul><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2026-11-25"><span class="sd">11/25(水)</span><ul><li data-age="baby"><a href="#kamijuku">上宿図書館</a> 絵本のへや<small>11:00〜11:20</small></li></ul></li>
+        <li class="day" data-d="2026-11-26"><span class="sd">11/26(木)</span><ul><li data-age="kids"><a href="#kihei">喜平図書館</a> おはなし会<small>15:30〜16:00</small></li><li data-age="kids"><a href="#oonuma">大沼図書館</a> おはなし会<small>16:00〜16:30</small></li></ul></li>
+        <li class="day" data-d="2026-12-01"><span class="sd">12/1(火)</span><ul><li data-age="baby"><a href="#chuo">中央図書館</a> 絵本のへや<small>11:00〜11:20（受付 10:40〜、1階児童コーナー）</small></li><li data-age="kids"><a href="#chuo">中央図書館</a> スペシャルおはなし会</li></ul></li>
+        <li class="day" data-d="2026-12-03"><span class="sd">12/3(木)</span><ul><li data-age="baby"><a href="#nakamachi">仲町図書館</a> 絵本のへや<small>11:00〜11:20（11時までに直接どうぞ）</small></li></ul></li>
+        <li class="day" data-d="2026-12-06"><span class="sd">12/6(日)</span><ul><li data-age="kids"><a href="#tsuda">津田図書館</a> おはなし会<small>11:00〜11:30</small></li></ul></li>
+        <li class="day" data-d="2026-12-09"><span class="sd">12/9(水)</span><ul><li data-age="baby"><a href="#kihei">喜平図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#kihei">喜平図書館</a> スペシャルおはなし会</li><li data-age="baby"><a href="#oonuma">大沼図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#oonuma">大沼図書館</a> スペシャルおはなし会</li></ul></li>
+        <li class="day" data-d="2026-12-12"><span class="sd">12/12(土)</span><ul><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>14:00〜14:30</small></li></ul></li>
+        <li class="day" data-d="2026-12-13"><span class="sd">12/13(日)</span><ul><li data-age="kids"><a href="#nakamachi">仲町図書館</a> おはなし会<small>11:00〜11:30</small></li></ul></li>
+        <li class="day" data-d="2026-12-15"><span class="sd">12/15(火)</span><ul><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2026-12-16"><span class="sd">12/16(水)</span><ul><li data-age="baby"><a href="#tsuda">津田図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#tsuda">津田図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2026-12-20"><span class="sd">12/20(日)</span><ul><li data-age="kids"><a href="#nakamachi">仲町図書館</a> おはなし会<small>11:00〜11:30</small></li></ul></li>
+        <li class="day" data-d="2026-12-22"><span class="sd">12/22(火)</span><ul><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2026-12-23"><span class="sd">12/23(水)</span><ul><li data-age="baby"><a href="#kamijuku">上宿図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#tsuda">津田図書館</a> スペシャルおはなし会（15:30〜）</li></ul></li>
+        <li class="day" data-d="2026-12-24"><span class="sd">12/24(木)</span><ul><li data-age="kids"><a href="#kihei">喜平図書館</a> おはなし会<small>15:30〜16:00</small></li><li data-age="kids"><a href="#oonuma">大沼図書館</a> おはなし会<small>16:00〜16:30</small></li></ul></li>
+        <li class="day" data-d="2027-01-07"><span class="sd">1/7(木)</span><ul><li data-age="baby"><a href="#nakamachi">仲町図書館</a> 絵本のへや<small>11:00〜11:20（11時までに直接どうぞ）</small></li></ul></li>
+        <li class="day" data-d="2027-01-09"><span class="sd">1/9(土)</span><ul><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>14:00〜14:30</small></li></ul></li>
+        <li class="day" data-d="2027-01-10"><span class="sd">1/10(日)</span><ul><li data-age="kids"><a href="#nakamachi">仲町図書館</a> おはなし会<small>11:00〜11:30</small></li><li data-age="kids"><a href="#tsuda">津田図書館</a> おはなし会<small>11:00〜11:30</small></li></ul></li>
+        <li class="day" data-d="2027-01-12"><span class="sd">1/12(火)</span><ul><li data-age="baby"><a href="#chuo">中央図書館</a> 絵本のへや<small>11:00〜11:20（受付 10:40〜、1階児童コーナー）</small></li><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2027-01-13"><span class="sd">1/13(水)</span><ul><li data-age="baby"><a href="#kihei">喜平図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#kihei">喜平図書館</a> おはなし会<small>15:30〜16:00</small></li><li data-age="baby"><a href="#oonuma">大沼図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#oonuma">大沼図書館</a> おはなし会<small>16:00〜16:30</small></li></ul></li>
+        <li class="day" data-d="2027-01-17"><span class="sd">1/17(日)</span><ul><li data-age="kids"><a href="#nakamachi">仲町図書館</a> おはなし会<small>11:00〜11:30</small></li></ul></li>
+        <li class="day" data-d="2027-01-19"><span class="sd">1/19(火)</span><ul><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2027-01-20"><span class="sd">1/20(水)</span><ul><li data-age="baby"><a href="#tsuda">津田図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#tsuda">津田図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2027-01-26"><span class="sd">1/26(火)</span><ul><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2027-01-27"><span class="sd">1/27(水)</span><ul><li data-age="baby"><a href="#kamijuku">上宿図書館</a> 絵本のへや<small>11:00〜11:20</small></li></ul></li>
+        <li class="day" data-d="2027-01-28"><span class="sd">1/28(木)</span><ul><li data-age="kids"><a href="#kihei">喜平図書館</a> おはなし会<small>15:30〜16:00</small></li><li data-age="kids"><a href="#oonuma">大沼図書館</a> おはなし会<small>16:00〜16:30</small></li></ul></li>
+        <li class="day" data-d="2027-02-02"><span class="sd">2/2(火)</span><ul><li data-age="baby"><a href="#chuo">中央図書館</a> 絵本のへや<small>11:00〜11:20（受付 10:40〜、1階児童コーナー）</small></li><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2027-02-04"><span class="sd">2/4(木)</span><ul><li data-age="baby"><a href="#nakamachi">仲町図書館</a> 絵本のへや<small>11:00〜11:20（11時までに直接どうぞ）</small></li></ul></li>
+        <li class="day" data-d="2027-02-07"><span class="sd">2/7(日)</span><ul><li data-age="kids"><a href="#tsuda">津田図書館</a> おはなし会<small>11:00〜11:30</small></li></ul></li>
+        <li class="day" data-d="2027-02-09"><span class="sd">2/9(火)</span><ul><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2027-02-10"><span class="sd">2/10(水)</span><ul><li data-age="baby"><a href="#kihei">喜平図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#kihei">喜平図書館</a> おはなし会<small>15:30〜16:00</small></li><li data-age="baby"><a href="#oonuma">大沼図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#oonuma">大沼図書館</a> おはなし会<small>16:00〜16:30</small></li></ul></li>
+        <li class="day" data-d="2027-02-13"><span class="sd">2/13(土)</span><ul><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>14:00〜14:30</small></li></ul></li>
+        <li class="day" data-d="2027-02-14"><span class="sd">2/14(日)</span><ul><li data-age="kids"><a href="#nakamachi">仲町図書館</a> おはなし会<small>11:00〜11:30</small></li></ul></li>
+        <li class="day" data-d="2027-02-16"><span class="sd">2/16(火)</span><ul><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2027-02-17"><span class="sd">2/17(水)</span><ul><li data-age="baby"><a href="#tsuda">津田図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#tsuda">津田図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2027-02-21"><span class="sd">2/21(日)</span><ul><li data-age="kids"><a href="#nakamachi">仲町図書館</a> おはなし会<small>11:00〜11:30</small></li></ul></li>
+        <li class="day" data-d="2027-02-24"><span class="sd">2/24(水)</span><ul><li data-age="baby"><a href="#kamijuku">上宿図書館</a> 絵本のへや<small>11:00〜11:20</small></li></ul></li>
+        <li class="day" data-d="2027-02-25"><span class="sd">2/25(木)</span><ul><li data-age="kids"><a href="#kihei">喜平図書館</a> おはなし会<small>15:30〜16:00</small></li><li data-age="kids"><a href="#oonuma">大沼図書館</a> おはなし会<small>16:00〜16:30</small></li></ul></li>
+        <li class="day" data-d="2027-03-02"><span class="sd">3/2(火)</span><ul><li data-age="baby"><a href="#chuo">中央図書館</a> 絵本のへや<small>11:00〜11:20（受付 10:40〜、1階児童コーナー）</small></li><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2027-03-04"><span class="sd">3/4(木)</span><ul><li data-age="baby"><a href="#nakamachi">仲町図書館</a> 絵本のへや<small>11:00〜11:20（11時までに直接どうぞ）</small></li></ul></li>
+        <li class="day" data-d="2027-03-07"><span class="sd">3/7(日)</span><ul><li data-age="kids"><a href="#tsuda">津田図書館</a> おはなし会<small>11:00〜11:30</small></li></ul></li>
+        <li class="day" data-d="2027-03-10"><span class="sd">3/10(水)</span><ul><li data-age="baby"><a href="#kihei">喜平図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#kihei">喜平図書館</a> おはなし会<small>15:30〜16:00</small></li><li data-age="baby"><a href="#oonuma">大沼図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#oonuma">大沼図書館</a> おはなし会<small>16:00〜16:30</small></li></ul></li>
+        <li class="day" data-d="2027-03-13"><span class="sd">3/13(土)</span><ul><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>14:00〜14:30</small></li></ul></li>
+        <li class="day" data-d="2027-03-14"><span class="sd">3/14(日)</span><ul><li data-age="kids"><a href="#nakamachi">仲町図書館</a> おはなし会<small>11:00〜11:30</small></li></ul></li>
+        <li class="day" data-d="2027-03-16"><span class="sd">3/16(火)</span><ul><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2027-03-17"><span class="sd">3/17(水)</span><ul><li data-age="baby"><a href="#tsuda">津田図書館</a> 絵本のへや<small>11:00〜11:20</small></li><li data-age="kids"><a href="#tsuda">津田図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2027-03-21"><span class="sd">3/21(日)</span><ul><li data-age="kids"><a href="#nakamachi">仲町図書館</a> おはなし会<small>11:00〜11:30</small></li></ul></li>
+        <li class="day" data-d="2027-03-23"><span class="sd">3/23(火)</span><ul><li data-age="kids"><a href="#chuo">中央図書館</a> おはなし会<small>15:30〜16:00</small></li></ul></li>
+        <li class="day" data-d="2027-03-24"><span class="sd">3/24(水)</span><ul><li data-age="baby"><a href="#kamijuku">上宿図書館</a> 絵本のへや<small>11:00〜11:20</small></li></ul></li>
+        <li class="day" data-d="2027-03-25"><span class="sd">3/25(木)</span><ul><li data-age="kids"><a href="#kihei">喜平図書館</a> おはなし会<small>15:30〜16:00</small></li><li data-age="kids"><a href="#oonuma">大沼図書館</a> おはなし会<small>16:00〜16:30</small></li></ul></li>
+    </ul>
+    <p class="empty" id="soon-empty" hidden>この2週間に、この年齢向けの日付つきの会は見つかっていません。下の「決まった曜日」をご覧ください。</p>
+    <h3>決まった曜日・時間にひらいているもの</h3>
+    <ul class="reg">
+        <li data-age="baby"><a href="#hanamin">花小金井南児童館</a> こども広場（子育て親子の交流の場）<small>毎日 9:00〜14:00</small></li>
+        <li data-age="baby"><a href="#hanamin">花小金井南児童館</a> ふたごの日（ふたごマーク）<small>毎月 第1・第3土曜</small></li>
+        <li data-age="kids"><a href="#hanamin">花小金井南児童館</a> 小学生のドッジビー・ドッジボール<small>毎月 第2水曜 ドッジビー／第3水曜 ドッジボール（16:00〜）</small></li>
+        <li data-age="baby"><a href="#oganin">小川町二丁目児童館</a> こども広場（子育て親子の交流の場）<small>毎日 9:00〜14:00</small></li>
+        <li data-age="baby"><a href="#ogaichi">小川町一丁目児童館</a> こども広場（子育て親子の交流の場）<small>9:00〜14:00</small></li>
+        <li data-age="baby"><a href="#ogaichi">小川町一丁目児童館</a> ふたごの日（ふたごマーク）<small>毎月 第1・第3土曜</small></li>
+        <li data-age="kids"><a href="#ogaichi">小川町一丁目児童館</a> めちゃやるタイム（みんなでドッジボール）<small>10月は毎週水曜。低学年 15:30〜16:00／高学年 16:00〜16:30</small></li>
+        <li data-age="all"><a href="#miyuki">出張こども広場</a> 出張こども広場（花小金井南児童館の出張）<small>毎週金曜と第3日曜 10:00〜18:00</small></li>
+        <li data-age="all"><a href="#gakuenhigashi">出張こども広場</a> 出張こども広場（小川町二丁目児童館の出張）<small>毎週木曜と第2日曜 10:00〜18:00</small></li>
+        <li data-age="all"><a href="#nakajuku">出張こども広場</a> 出張こども広場（小川町一丁目児童館の出張）<small>毎週水曜と第1日曜 10:00〜18:00</small></li>
+    </ul>
+    <p class="wk">休館日や行事の日は、お休みになることがあります。</p>
+  </section>
+
+  <nav class="idx" aria-label="施設の一覧">
+    <a href="#sec-lib">図書館</a>
+    <a href="#sec-jidokan">児童館</a>
+    <a href="#sec-hiroba">子育てひろば（子ども家庭支援センター）</a>
+    <a href="#sec-chiiki">地域センター・公民館で開かれるもの</a>
+  </nav>
+
+  <h2 class="sec" id="sec-lib">図書館の「絵本のへや」と「おはなし会」</h2>
+  <p class="sec-lead">小平市立図書館。0〜3歳は「絵本のへや」、4歳から小学生は「おはなし会」。どちらも無料です。</p>
+  <article class="pl" id="chuo" data-ages="baby kids">
+      <div class="pl-h"><h2>中央図書館</h2><p class="town">小川町</p></div>
+      
+      
+      <div class="prog" data-age="baby">
+        <h3>絵本のへや <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates"><li data-d="2026-10-06"><b>10/6(火)</b></li><li data-d="2026-11-10"><b>11/10(火)</b></li><li data-d="2026-12-01"><b>12/1(火)</b></li><li data-d="2027-01-12"><b>1/12(火)</b></li><li data-d="2027-02-02"><b>2/2(火)</b></li><li data-d="2027-03-02"><b>3/2(火)</b></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">11:00〜11:20（受付 10:40〜、1階児童コーナー）</span></div>
+          <div class="kv"><span class="k">場所</span><span class="v">2階おはなし室</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">0〜3歳（保護者と）</span></div>
+          <div class="kv"><span class="k">定員</span><span class="v">12組（先着。受付の時点で多いときは抽選）</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし（当日受付）</span></div>
+        </div>
+        <ul class="notes"><li>毎月第1火曜（祝日の月は第2火曜）</li><li>絵本の読み聞かせ、手遊び、わらべうた。終わったあと正午まで、おはなし室が開いています</li></ul>
+        <a class="src" href="https://library.kodaira.ed.jp/viewer/info.html?id=324" target="_blank" rel="noopener" data-goatcounter-click="定例｜中央図書館｜絵本のへや">この会の案内（公式）</a>
+      </div>
+      <div class="prog" data-age="kids">
+        <h3>おはなし会 <span class="agetag">🧒🎒 4歳〜小学生</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates"><li data-d="2026-10-06"><b>10/6(火)</b></li><li data-d="2026-10-10"><b>10/10(土)</b></li><li data-d="2026-10-20"><b>10/20(火)</b></li><li data-d="2026-10-27"><b>10/27(火)</b></li><li data-d="2026-11-10"><b>11/10(火)</b></li><li data-d="2026-11-14"><b>11/14(土)</b></li><li data-d="2026-11-17"><b>11/17(火)</b></li><li data-d="2026-11-24"><b>11/24(火)</b></li><li data-d="2026-12-01"><b>12/1(火)</b><span>スペシャルおはなし会</span></li><li data-d="2026-12-12"><b>12/12(土)</b></li><li data-d="2026-12-15"><b>12/15(火)</b></li><li data-d="2026-12-22"><b>12/22(火)</b></li><li data-d="2027-01-09"><b>1/9(土)</b></li><li data-d="2027-01-12"><b>1/12(火)</b></li><li data-d="2027-01-19"><b>1/19(火)</b></li><li data-d="2027-01-26"><b>1/26(火)</b></li><li data-d="2027-02-02"><b>2/2(火)</b></li><li data-d="2027-02-09"><b>2/9(火)</b></li><li data-d="2027-02-13"><b>2/13(土)</b></li><li data-d="2027-02-16"><b>2/16(火)</b></li><li data-d="2027-03-02"><b>3/2(火)</b></li><li data-d="2027-03-13"><b>3/13(土)</b></li><li data-d="2027-03-16"><b>3/16(火)</b></li><li data-d="2027-03-23"><b>3/23(火)</b></li></ul><button type="button" class="morebtn" hidden>ほかの日も見る</button>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">火曜 15:30〜16:00／土曜 14:00〜14:30</span></div>
+          <div class="kv"><span class="k">場所</span><span class="v">2階おはなし室</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">4歳から小学生</span></div>
+          <div class="kv"><span class="k">定員</span><span class="v">25名程度（先着）</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし（当日、1階児童コーナーで受付）</span></div>
+        </div>
+        <ul class="notes"><li>毎月第1・3・4火曜と第2土曜</li><li>途中からは入れないので、始まる前に</li></ul>
+        
+      </div>
+      
+      <div class="pl-f">
+        <span class="chk">2026年10月6日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://library.kodaira.ed.jp/viewer/info.html?id=326" target="_blank" rel="noopener" data-goatcounter-click="定例｜中央図書館｜公式">公式</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E7%AB%8B%E4%B8%AD%E5%A4%AE%E5%9B%B3%E6%9B%B8%E9%A4%A8" target="_blank" rel="noopener" data-goatcounter-click="定例｜中央図書館｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="pl" id="nakamachi" data-ages="baby kids">
+      <div class="pl-h"><h2>仲町図書館（なかまちテラス）</h2></div>
+      
+      
+      <div class="prog" data-age="baby">
+        <h3>絵本のへや <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates"><li data-d="2026-11-05"><b>11/5(木)</b></li><li data-d="2026-12-03"><b>12/3(木)</b></li><li data-d="2027-01-07"><b>1/7(木)</b></li><li data-d="2027-02-04"><b>2/4(木)</b></li><li data-d="2027-03-04"><b>3/4(木)</b></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">11:00〜11:20（11時までに直接どうぞ）</span></div>
+          <div class="kv"><span class="k">場所</span><span class="v">なかまちテラス 地下1階 和室</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">0〜3歳（保護者と）</span></div>
+          <div class="kv"><span class="k">定員</span><span class="v">7組（当日先着）</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし（当日受付）</span></div>
+        </div>
+        <ul class="notes"><li>毎月第1木曜</li><li>絵本の読み聞かせ、手遊び、わらべうた。終わったあと正午まで、おはなし室が開いています</li></ul>
+        <a class="src" href="https://library.kodaira.ed.jp/viewer/info.html?id=308" target="_blank" rel="noopener" data-goatcounter-click="定例｜仲町図書館｜絵本のへや">この会の案内（公式）</a>
+      </div>
+      <div class="prog" data-age="kids">
+        <h3>おはなし会 <span class="agetag">🧒🎒 4歳〜小学生</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates"><li data-d="2026-10-11"><b>10/11(日)</b></li><li data-d="2026-10-18"><b>10/18(日)</b></li><li data-d="2026-11-08"><b>11/8(日)</b></li><li data-d="2026-11-15"><b>11/15(日)</b></li><li data-d="2026-12-13"><b>12/13(日)</b></li><li data-d="2026-12-20"><b>12/20(日)</b></li><li data-d="2027-01-10"><b>1/10(日)</b></li><li data-d="2027-01-17"><b>1/17(日)</b></li><li data-d="2027-02-14"><b>2/14(日)</b></li><li data-d="2027-02-21"><b>2/21(日)</b></li><li data-d="2027-03-14"><b>3/14(日)</b></li><li data-d="2027-03-21"><b>3/21(日)</b></li></ul><button type="button" class="morebtn" hidden>ほかの日も見る</button>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">11:00〜11:30</span></div>
+          <div class="kv"><span class="k">場所</span><span class="v">なかまちテラス 地下1階 おはなし室</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">4歳から小学生</span></div>
+          <div class="kv"><span class="k">定員</span><span class="v">10名（先着）</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし（当日受付）</span></div>
+        </div>
+        <ul class="notes"><li>毎月第2・第3日曜</li><li>途中からは入れないので、始まる前に</li></ul>
+        
+      </div>
+      
+      <div class="pl-f">
+        <span class="chk">2026年10月6日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://library.kodaira.ed.jp/viewer/info.html?id=325" target="_blank" rel="noopener" data-goatcounter-click="定例｜仲町図書館｜公式">公式</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E3%81%AA%E3%81%8B%E3%81%BE%E3%81%A1%E3%83%86%E3%83%A9%E3%82%B9%20%E5%B0%8F%E5%B9%B3" target="_blank" rel="noopener" data-goatcounter-click="定例｜仲町図書館｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="pl" id="kihei" data-ages="baby kids">
+      <div class="pl-h"><h2>喜平図書館</h2></div>
+      
+      
+      <div class="prog" data-age="baby">
+        <h3>絵本のへや <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates"><li data-d="2026-10-14"><b>10/14(水)</b></li><li data-d="2026-11-11"><b>11/11(水)</b></li><li data-d="2026-12-09"><b>12/9(水)</b></li><li data-d="2027-01-13"><b>1/13(水)</b></li><li data-d="2027-02-10"><b>2/10(水)</b></li><li data-d="2027-03-10"><b>3/10(水)</b></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">11:00〜11:20</span></div>
+          <div class="kv"><span class="k">場所</span><span class="v">2階おはなし室</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">0〜3歳（保護者と）</span></div>
+          <div class="kv"><span class="k">定員</span><span class="v">13組程度（先着）</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし（当日受付）</span></div>
+        </div>
+        <ul class="notes"><li>毎月第2水曜</li><li>絵本の読み聞かせ、手遊び、わらべうた。終わったあと正午まで、おはなし室が開いています</li></ul>
+        <a class="src" href="https://library.kodaira.ed.jp/viewer/info.html?id=336" target="_blank" rel="noopener" data-goatcounter-click="定例｜喜平図書館｜絵本のへや">この会の案内（公式）</a>
+      </div>
+      <div class="prog" data-age="kids">
+        <h3>おはなし会 <span class="agetag">🧒🎒 4歳〜小学生</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates"><li data-d="2026-10-14"><b>10/14(水)</b></li><li data-d="2026-10-22"><b>10/22(木)</b></li><li data-d="2026-11-11"><b>11/11(水)</b></li><li data-d="2026-11-26"><b>11/26(木)</b></li><li data-d="2026-12-09"><b>12/9(水)</b><span>スペシャルおはなし会</span></li><li data-d="2026-12-24"><b>12/24(木)</b></li><li data-d="2027-01-13"><b>1/13(水)</b></li><li data-d="2027-01-28"><b>1/28(木)</b></li><li data-d="2027-02-10"><b>2/10(水)</b></li><li data-d="2027-02-25"><b>2/25(木)</b></li><li data-d="2027-03-10"><b>3/10(水)</b></li><li data-d="2027-03-25"><b>3/25(木)</b></li></ul><button type="button" class="morebtn" hidden>ほかの日も見る</button>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">15:30〜16:00</span></div>
+          <div class="kv"><span class="k">場所</span><span class="v">おはなし室</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">4歳から小学生</span></div>
+          <div class="kv"><span class="k">定員</span><span class="v">25名程度（先着）</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし（当日、1階児童コーナーで受付）</span></div>
+        </div>
+        <ul class="notes"><li>毎月第2水曜・第4木曜</li><li>途中からは入れないので、始まる前に</li></ul>
+        
+      </div>
+      
+      <div class="pl-f">
+        <span class="chk">2026年10月6日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://library.kodaira.ed.jp/viewer/info.html?id=335" target="_blank" rel="noopener" data-goatcounter-click="定例｜喜平図書館｜公式">公式</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E7%AB%8B%E5%96%9C%E5%B9%B3%E5%9B%B3%E6%9B%B8%E9%A4%A8" target="_blank" rel="noopener" data-goatcounter-click="定例｜喜平図書館｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="pl" id="hanakoganei" data-ages="baby kids">
+      <div class="pl-h"><h2>花小金井図書館</h2></div>
+      
+      
+      <div class="prog" data-age="baby">
+        <h3>絵本のへや <span class="agetag">👶 0〜3歳</span> <span class="tag bk">申込み・登録</span></h3>
+        
+        <ul class="dates"><li data-d="2026-11-05"><b>11/5(木)</b></li><li data-d="2026-12-03"><b>12/3(木)</b></li><li data-d="2027-01-14"><b>1/14(木)</b></li><li data-d="2027-02-04"><b>2/4(木)</b></li><li data-d="2027-03-04"><b>3/4(木)</b></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">11:00〜11:20ごろ（10時から受付）</span></div>
+          <div class="kv"><span class="k">場所</span><span class="v">東部市民センター 1階 和室（図書館ではありません）</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">0〜3歳（保護者と）</span></div>
+          <div class="kv"><span class="k">定員</span><span class="v">15組程度（先着）</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約が必要（日程表に、予約の受付開始日が書かれています）</span></div>
+        </div>
+        <ul class="notes"><li>おおむね毎月第1木曜（1月は1/14）</li><li>予約した方は出入り自由です</li></ul>
+        <a class="src" href="https://library.kodaira.ed.jp/viewer/info.html?id=332" target="_blank" rel="noopener" data-goatcounter-click="定例｜花小金井図書館｜絵本のへや">この会の案内（公式）</a>
+      </div>
+      <div class="prog" data-age="kids">
+        <h3>おはなし会 <span class="agetag">🧒🎒 4歳〜小学生</span> <span class="tag bk">申込み・登録</span></h3>
+        
+        <ul class="dates"><li data-d="2026-10-07"><b>10/7(水)</b></li><li data-d="2026-10-21"><b>10/21(水)</b></li><li data-d="2026-11-04"><b>11/4(水)</b></li><li data-d="2026-11-18"><b>11/18(水)</b></li><li data-d="2026-12-02"><b>12/2(水)</b></li><li data-d="2026-12-16"><b>12/16(水)</b></li><li data-d="2027-01-06"><b>1/6(水)</b></li><li data-d="2027-01-20"><b>1/20(水)</b></li><li data-d="2027-02-03"><b>2/3(水)</b></li><li data-d="2027-02-17"><b>2/17(水)</b></li><li data-d="2027-03-03"><b>3/3(水)</b></li><li data-d="2027-03-17"><b>3/17(水)</b></li></ul><button type="button" class="morebtn" hidden>ほかの日も見る</button>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">15:30〜（30分ほど）</span></div>
+          <div class="kv"><span class="k">場所</span><span class="v">3階おはなし室（受付は2階）</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">4歳から小学生</span></div>
+          <div class="kv"><span class="k">定員</span><span class="v">10名程度</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">図書館のページは当日受付、年間の日程表は「予約開始日」つき。行く前に図書館へ</span></div>
+        </div>
+        <ul class="notes"><li>毎月第1・3水曜（祝日の週は次の週）</li><li>途中からは入れないので、始まる前に</li></ul>
+        
+      </div>
+      
+      <div class="pl-f">
+        <span class="chk">2026年10月6日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://library.kodaira.ed.jp/viewer/info.html?id=298" target="_blank" rel="noopener" data-goatcounter-click="定例｜花小金井図書館｜公式">公式</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E7%AB%8B%E8%8A%B1%E5%B0%8F%E9%87%91%E4%BA%95%E5%9B%B3%E6%9B%B8%E9%A4%A8" target="_blank" rel="noopener" data-goatcounter-click="定例｜花小金井図書館｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="pl" id="kamijuku" data-ages="baby kids">
+      <div class="pl-h"><h2>上宿図書館</h2></div>
+      
+      
+      <div class="prog" data-age="baby">
+        <h3>絵本のへや <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates"><li data-d="2026-10-28"><b>10/28(水)</b></li><li data-d="2026-11-25"><b>11/25(水)</b></li><li data-d="2026-12-23"><b>12/23(水)</b></li><li data-d="2027-01-27"><b>1/27(水)</b></li><li data-d="2027-02-24"><b>2/24(水)</b></li><li data-d="2027-03-24"><b>3/24(水)</b></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">11:00〜11:20</span></div>
+          <div class="kv"><span class="k">場所</span><span class="v">2階おはなし室</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">0〜3歳（保護者と）</span></div>
+          <div class="kv"><span class="k">定員</span><span class="v">10組程度</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし（直接おはなし室へ）</span></div>
+        </div>
+        <ul class="notes"><li>毎月第4水曜</li><li>絵本の読み聞かせ、手遊び。保護者も参加でき、出入り自由です</li></ul>
+        <a class="src" href="https://library.kodaira.ed.jp/viewer/info.html?id=329" target="_blank" rel="noopener" data-goatcounter-click="定例｜上宿図書館｜絵本のへや">この会の案内（公式）</a>
+      </div>
+      <div class="prog" data-age="kids">
+        <h3>おはなし会 <span class="agetag">🧒🎒 4歳〜小学生</span> <span class="tag bk">申込み・登録</span></h3>
+        
+        <ul class="dates"><li data-d="2026-10-08"><b>10/8(木)</b></li><li data-d="2026-10-28"><b>10/28(水)</b></li><li data-d="2026-11-12"><b>11/12(木)</b></li><li data-d="2026-11-25"><b>11/25(水)</b></li><li data-d="2026-12-10"><b>12/10(木)</b></li><li data-d="2026-12-23"><b>12/23(水)</b></li><li data-d="2027-01-14"><b>1/14(木)</b></li><li data-d="2027-01-27"><b>1/27(水)</b></li><li data-d="2027-02-04"><b>2/4(木)</b></li><li data-d="2027-02-24"><b>2/24(水)</b></li><li data-d="2027-03-11"><b>3/11(木)</b></li><li data-d="2027-03-24"><b>3/24(水)</b></li></ul><button type="button" class="morebtn" hidden>ほかの日も見る</button>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">15:30〜16:00</span></div>
+          <div class="kv"><span class="k">場所</span><span class="v">2階おはなし室</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">4歳から小学生</span></div>
+          <div class="kv"><span class="k">定員</span><span class="v">25名程度</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">電話かカウンターで予約（当日の申込みもできます）</span></div>
+        </div>
+        <ul class="notes"><li>毎月第2木曜・第4水曜（そうでない月もあります）</li><li>途中からは入れないので、始まる前に</li></ul>
+        
+      </div>
+      
+      <div class="pl-f">
+        <span class="chk">2026年10月6日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://library.kodaira.ed.jp/viewer/info.html?id=317" target="_blank" rel="noopener" data-goatcounter-click="定例｜上宿図書館｜公式">公式</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E7%AB%8B%E4%B8%8A%E5%AE%BF%E5%9B%B3%E6%9B%B8%E9%A4%A8" target="_blank" rel="noopener" data-goatcounter-click="定例｜上宿図書館｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="pl" id="oonuma" data-ages="baby kids">
+      <div class="pl-h"><h2>大沼図書館</h2></div>
+      
+      
+      <div class="prog" data-age="baby">
+        <h3>絵本のへや <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates"><li data-d="2026-10-14"><b>10/14(水)</b></li><li data-d="2026-11-11"><b>11/11(水)</b></li><li data-d="2026-12-09"><b>12/9(水)</b></li><li data-d="2027-01-13"><b>1/13(水)</b></li><li data-d="2027-02-10"><b>2/10(水)</b></li><li data-d="2027-03-10"><b>3/10(水)</b></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">11:00〜11:20</span></div>
+          <div class="kv"><span class="k">場所</span><span class="v">おはなし室</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">0〜3歳（保護者と）</span></div>
+          <div class="kv"><span class="k">定員</span><span class="v">10組程度</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし（当日、カウンターで受付）</span></div>
+        </div>
+        <ul class="notes"><li>毎月第2水曜</li><li>受付のあとは出入り自由です</li></ul>
+        <a class="src" href="https://library.kodaira.ed.jp/viewer/info.html?id=330" target="_blank" rel="noopener" data-goatcounter-click="定例｜大沼図書館｜絵本のへや">この会の案内（公式）</a>
+      </div>
+      <div class="prog" data-age="kids">
+        <h3>おはなし会 <span class="agetag">🧒🎒 4歳〜小学生</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates"><li data-d="2026-10-14"><b>10/14(水)</b></li><li data-d="2026-10-22"><b>10/22(木)</b></li><li data-d="2026-11-11"><b>11/11(水)</b></li><li data-d="2026-11-26"><b>11/26(木)</b></li><li data-d="2026-12-09"><b>12/9(水)</b><span>スペシャルおはなし会</span></li><li data-d="2026-12-24"><b>12/24(木)</b></li><li data-d="2027-01-13"><b>1/13(水)</b></li><li data-d="2027-01-28"><b>1/28(木)</b></li><li data-d="2027-02-10"><b>2/10(水)</b></li><li data-d="2027-02-25"><b>2/25(木)</b></li><li data-d="2027-03-10"><b>3/10(水)</b></li><li data-d="2027-03-25"><b>3/25(木)</b></li></ul><button type="button" class="morebtn" hidden>ほかの日も見る</button>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">16:00〜16:30（12/9は15:30から）</span></div>
+          <div class="kv"><span class="k">場所</span><span class="v">おはなし室</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">4歳から小学生</span></div>
+          <div class="kv"><span class="k">定員</span><span class="v">10組程度</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし（当日、カウンターで受付）</span></div>
+        </div>
+        <ul class="notes"><li>毎月第2水曜・第4木曜</li><li>途中からは入れないので、始まる前に</li></ul>
+        
+      </div>
+      
+      <div class="pl-f">
+        <span class="chk">2026年10月6日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://library.kodaira.ed.jp/viewer/info.html?id=327" target="_blank" rel="noopener" data-goatcounter-click="定例｜大沼図書館｜公式">公式</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E7%AB%8B%E5%A4%A7%E6%B2%BC%E5%9B%B3%E6%9B%B8%E9%A4%A8" target="_blank" rel="noopener" data-goatcounter-click="定例｜大沼図書館｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="pl" id="tsuda" data-ages="baby kids">
+      <div class="pl-h"><h2>津田図書館</h2><p class="town">津田町</p></div>
+      
+      
+      <div class="prog" data-age="baby">
+        <h3>絵本のへや <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates"><li data-d="2026-10-21"><b>10/21(水)</b></li><li data-d="2026-11-18"><b>11/18(水)</b></li><li data-d="2026-12-16"><b>12/16(水)</b></li><li data-d="2027-01-20"><b>1/20(水)</b></li><li data-d="2027-02-17"><b>2/17(水)</b></li><li data-d="2027-03-17"><b>3/17(水)</b></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">11:00〜11:20</span></div>
+          <div class="kv"><span class="k">場所</span><span class="v">おはなし室</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">0〜3歳（保護者と）</span></div>
+          <div class="kv"><span class="k">定員</span><span class="v">10組（先着）</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし（当日、児童コーナーで受付）</span></div>
+        </div>
+        <ul class="notes"><li>毎月第3水曜</li><li>出入り自由です</li></ul>
+        <a class="src" href="https://library.kodaira.ed.jp/viewer/info.html?id=331" target="_blank" rel="noopener" data-goatcounter-click="定例｜津田図書館｜絵本のへや">この会の案内（公式）</a>
+      </div>
+      <div class="prog" data-age="kids">
+        <h3>おはなし会 <span class="agetag">🧒🎒 4歳〜小学生</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates long"><li data-d="2026-10-21"><b>10/21(水)</b></li><li data-d="2026-11-01"><b>11/1(日)</b></li><li data-d="2026-11-18"><b>11/18(水)</b></li><li data-d="2026-12-06"><b>12/6(日)</b></li><li data-d="2026-12-16"><b>12/16(水)</b></li><li data-d="2026-12-23"><b>12/23(水)</b><span>スペシャルおはなし会（15:30〜）</span></li><li data-d="2027-01-10"><b>1/10(日)</b></li><li data-d="2027-01-20"><b>1/20(水)</b></li><li data-d="2027-02-07"><b>2/7(日)</b></li><li data-d="2027-02-17"><b>2/17(水)</b></li><li data-d="2027-03-07"><b>3/7(日)</b></li><li data-d="2027-03-17"><b>3/17(水)</b></li></ul><button type="button" class="morebtn" hidden>ほかの日も見る</button>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">日曜 11:00〜11:30／水曜 15:30〜16:00</span></div>
+          <div class="kv"><span class="k">場所</span><span class="v">おはなし室</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">4歳から小学生</span></div>
+          <div class="kv"><span class="k">定員</span><span class="v">20人（先着）</span></div>
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし（当日、児童コーナーで受付）</span></div>
+        </div>
+        <ul class="notes"><li>毎月第1日曜（1月は第2日曜）と第3水曜</li><li>途中からは入れないので、始まる前に</li></ul>
+        
+      </div>
+      
+      <div class="pl-f">
+        <span class="chk">2026年10月6日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://library.kodaira.ed.jp/viewer/info.html?id=328" target="_blank" rel="noopener" data-goatcounter-click="定例｜津田図書館｜公式">公式</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E7%AB%8B%E6%B4%A5%E7%94%B0%E5%9B%B3%E6%9B%B8%E9%A4%A8" target="_blank" rel="noopener" data-goatcounter-click="定例｜津田図書館｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="pl" id="ogawanishi" data-ages="all">
+      <div class="pl-h"><h2>小川西町図書館</h2></div>
+      
+      <p class="more">新しい建物への移転準備のため、8月から10月は休館しています。おはなし会・絵本のへやもお休みで、11月からの日程は決まりしだい図書館から案内されます。</p>
+      
+      
+      <div class="pl-f">
+        <span class="chk">2026年10月6日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://library.kodaira.ed.jp/viewer/info.html?id=287" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川西町図書館｜公式">公式</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E7%AB%8B%E5%B0%8F%E5%B7%9D%E8%A5%BF%E7%94%BA%E5%9B%B3%E6%9B%B8%E9%A4%A8" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川西町図書館｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+
+  <h2 class="sec" id="sec-jidokan">児童館</h2>
+  <p class="sec-lead">市内に3館。乳幼児親子の「こども広場」は、どの館も9時から14時まで。月ごとの催しは各館のおたよりで。</p>
+  <article class="pl" id="hanamin" data-ages="baby kids">
+      <div class="pl-h"><h2>花小金井南児童館（はなみん）</h2><p class="town">花小金井南町</p></div>
+      <p class="intro">開館 9:00〜19:00（乳幼児親子・小学生は18時まで。日曜は18時まで）。休館は第1・3火曜（祝日のときは翌日）と年末年始。無料。</p>
+      
+      <div class="prog" data-age="baby">
+        <h3>こども広場（子育て親子の交流の場） <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        <p class="when">毎日 9:00〜14:00</p>
+        
+        
+        
+        <div class="kvs">
+          
+          
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>平日の11時ごろに手遊びや「おおきなくりのきのしたで」など。土日の一部の日はアンパンマン体操</li><li>12:00〜13:00はランチタイム。持ってきたお弁当を館内で食べられます（ごみは持ち帰り）</li><li>子育ての相談（ひろば相談）も、いつでも職員に</li></ul>
+        
+      </div>
+      <div class="prog" data-age="baby">
+        <h3>ふたごの日（ふたごマーク） <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        <p class="when">毎月 第1・第3土曜</p>
+        
+        
+        
+        <div class="kvs">
+          
+          
+          <div class="kv"><span class="k">対象</span><span class="v">ふたごの乳幼児親子</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>ふたごの親子が集まるきっかけの日として案内されています</li></ul>
+        
+      </div>
+      <div class="prog" data-age="baby">
+        <h3>乳幼児親子クラス（後期・登録制） <span class="agetag">👶 0〜3歳</span> <span class="tag bk">申込み・登録</span></h3>
+        <p class="when">11月〜3月。ちっちゃ芽＝第1水曜／ふたば＝第2水曜／みつば＝第3水曜（午前）</p>
+        <ul class="dates long"><li data-d="2026-10-23"><b>10/23(金)</b><span>申込の締切（10/13から受付）</span></li></ul>
+        
+        
+        <div class="kvs">
+          
+          
+          <div class="kv"><span class="k">対象</span><span class="v">ちっちゃ芽 2025/4/2〜2026/4/1生まれ（首がすわってから）／ふたば 2024/4/2〜2025/4/1生まれ／みつば 2023/4/2〜2024/4/1生まれ</span></div>
+          
+          
+          <div class="kv"><span class="k">予約</span><span class="v">10/13(火)〜10/23(金)に児童館へ直接（電話不可）。各30組・先着</span></div>
+        </div>
+        <ul class="notes"><li>同じ学年のお友だちと、ふれあい遊びや制作。1回30分（みつばは40分）</li></ul>
+        
+      </div>
+      <div class="prog" data-age="kids">
+        <h3>小学生のドッジビー・ドッジボール <span class="agetag">🧒🎒 4歳〜小学生</span> <span class="tag ok">予約なし</span></h3>
+        <p class="when">毎月 第2水曜 ドッジビー／第3水曜 ドッジボール（16:00〜）</p>
+        
+        
+        
+        <div class="kvs">
+          
+          
+          <div class="kv"><span class="k">対象</span><span class="v">小学生以上</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        
+        
+      </div>
+      <p class="fn">月ごとの催しは「はなみんだより」に出ます。</p>
+      <div class="pl-f">
+        <span class="chk">2026年10月6日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜花小金井南児童館｜公式">公式</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E7%AB%8B%E8%8A%B1%E5%B0%8F%E9%87%91%E4%BA%95%E5%8D%97%E5%85%90%E7%AB%A5%E9%A4%A8" target="_blank" rel="noopener" data-goatcounter-click="定例｜花小金井南児童館｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="pl" id="oganin" data-ages="baby">
+      <div class="pl-h"><h2>小川町二丁目児童館（おがにん）</h2><p class="town">小川町</p></div>
+      <p class="intro">開館 月〜土 9:00〜19:00、日・祝 9:00〜18:00（乳幼児・小学生は18時まで）。休館は第1・3火曜（祝日のときは翌日以降の平日）と年末年始。無料で、はじめての日に利用登録をします。</p>
+      
+      <div class="prog" data-age="baby">
+        <h3>こども広場（子育て親子の交流の場） <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        <p class="when">毎日 9:00〜14:00</p>
+        
+        
+        
+        <div class="kvs">
+          
+          
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>平日の11時に「ふれあいタイム」（手遊び、読み聞かせ、アンパンマン体操）</li><li>子育ての相談（ひろば相談）も</li></ul>
+        
+      </div>
+      <div class="prog" data-age="baby">
+        <h3>乳幼児親子クラス <span class="agetag">👶 0〜3歳</span> </h3>
+        
+        <ul class="dates"><li data-d="2026-10-13"><b>10/13(火)</b><span>うさぎ（ハイハイまで）</span></li><li data-d="2026-10-27"><b>10/27(火)</b><span>コアラ（歩ける〜）</span></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:30〜11:10</span></div>
+          
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児親子</span></div>
+          <div class="kv"><span class="k">定員</span><span class="v">各クラス30組程度</span></div>
+          
+          <div class="kv"><span class="k">予約</span><span class="v">公式に予約の案内はありません</span></div>
+        </div>
+        <ul class="notes"><li>火曜。10月はハロウィン</li></ul>
+        
+      </div>
+      <p class="fn">月ごとの催しは「おがにんだより」に出ます。</p>
+      <div class="pl-f">
+        <span class="chk">2026年10月6日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川町二丁目児童館｜公式">公式</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E7%AB%8B%E5%B0%8F%E5%B7%9D%E7%94%BA%E4%BA%8C%E4%B8%81%E7%9B%AE%E5%85%90%E7%AB%A5%E9%A4%A8" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川町二丁目児童館｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="pl" id="ogaichi" data-ages="baby kids">
+      <div class="pl-h"><h2>小川町一丁目児童館（おがいち）</h2><p class="town">小川町</p></div>
+      <p class="intro">開館 月〜土 9:00〜19:00、日・祝 9:00〜18:00（乳幼児・小学生は18時まで）。休館は第1・3火曜（祝日のときは翌日以降の平日）と年末年始（12/28〜1/4）。無料。</p>
+      
+      <div class="prog" data-age="baby">
+        <h3>こども広場（子育て親子の交流の場） <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        <p class="when">9:00〜14:00</p>
+        
+        
+        
+        <div class="kvs">
+          
+          
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>平日の10:30から、手遊びや体操（アンパンマン体操）</li><li>子育ての相談（ひろば相談）も</li></ul>
+        
+      </div>
+      <div class="prog" data-age="baby">
+        <h3>いっしょにおはなし（絵本の読み聞かせ） <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates"><li data-d="2026-10-07"><b>10/7(水)</b></li><li data-d="2026-10-23"><b>10/23(金)</b></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:45〜11:00</span></div>
+          
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児親子</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        
+        
+      </div>
+      <div class="prog" data-age="baby">
+        <h3>ふたごの日（ふたごマーク） <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        <p class="when">毎月 第1・第3土曜</p>
+        
+        
+        
+        <div class="kvs">
+          
+          
+          <div class="kv"><span class="k">対象</span><span class="v">ふたごの乳幼児親子</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        
+        
+      </div>
+      <div class="prog" data-age="baby">
+        <h3>乳幼児親子クラス（後期・登録制） <span class="agetag">👶 0〜3歳</span> <span class="tag bk">申込み・登録</span></h3>
+        
+        <ul class="dates"><li data-d="2026-10-27"><b>10/27(火)</b><span>ふたば・みつば</span></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:45〜11:15</span></div>
+          
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児親子</span></div>
+          
+          
+          <div class="kv"><span class="k">予約</span><span class="v">登録制（登録は随時受付中）</span></div>
+        </div>
+        <ul class="notes"><li>ちっちゃ芽クラスは10/2（終了）</li></ul>
+        
+      </div>
+      <div class="prog" data-age="kids">
+        <h3>めちゃやるタイム（みんなでドッジボール） <span class="agetag">🧒🎒 4歳〜小学生</span> <span class="tag ok">予約なし</span></h3>
+        <p class="when">10月は毎週水曜。低学年 15:30〜16:00／高学年 16:00〜16:30</p>
+        
+        
+        
+        <div class="kvs">
+          
+          
+          <div class="kv"><span class="k">対象</span><span class="v">小学生</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        
+        
+      </div>
+      <p class="fn">月ごとの催しは「おがいちだより」に出ます。</p>
+      <div class="pl-f">
+        <span class="chk">2026年10月6日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川町一丁目児童館｜公式">公式</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E7%AB%8B%E5%B0%8F%E5%B7%9D%E7%94%BA%E4%B8%80%E4%B8%81%E7%9B%AE%E5%85%90%E7%AB%A5%E9%A4%A8" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川町一丁目児童館｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+
+  <h2 class="sec" id="sec-hiroba">子育てひろば（子ども家庭支援センター）</h2>
+  <p class="sec-lead">未就学の子と保護者のひろば。月ごとのプログラムは、申込みなしで参加できます。</p>
+  <article class="pl" id="ohisama" data-ages="baby">
+      <div class="pl-h"><h2>子ども家庭支援センター 子育て交流ひろば「おひさま」</h2><p class="town">小川東町</p></div>
+      <p class="intro">小平元気村おがわ東の2階。西武拝島線 萩山駅から徒歩約5分。ひろばは火〜土 10:00〜18:00（日・月・祝は休み）で、市外の方も使えます。11:30〜13:00は昼食が食べられます（12:40までに入室）。</p>
+      
+      <div class="prog" data-age="baby">
+        <h3>10月のプログラム（申込みなし・無料） <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates long"><li data-d="2026-10-08"><b>10/8(木)</b><span>0歳さんあつまれ 10:00〜11:30（初めての方は10:00、2回目からは10:30受付）</span></li><li data-d="2026-10-16"><b>10/16(金)</b><span>1歳さんあつまれ 10:30〜11:30</span></li><li data-d="2026-10-17"><b>10/17(土)</b><span>おとうさんタイム 10:30〜11:30（未就学の子とお父さん）</span></li><li data-d="2026-10-23"><b>10/23(金)</b><span>心理士さんとお話をする会「すくすくの会」14:00〜14:30</span></li><li data-d="2026-10-27"><b>10/27(火)</b><span>助産師さんの相談会「りぼんの会」10:00〜11:30（1歳3か月ぐらいまで。体重も測れます）</span></li><li data-d="2026-10-31"><b>10/31(土)</b><span>おひさまマーケット 14:00〜16:00（寄付のこども服を無料でお譲り。受付15:30まで）</span></li></ul>
+        <p class="more">11月のプログラムは「子ども家庭支援センターだより」11月号で出ます</p>
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          
+          
+          <div class="kv"><span class="k">対象</span><span class="v">未就学の子と保護者（会ごとに対象があります）</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし（当日、直接どうぞ）</span></div>
+        </div>
+        <ul class="notes"><li>プログラムは小平市在住の方が対象です（ひろばの利用は市外の方も）</li></ul>
+        
+      </div>
+      
+      <div class="pl-f">
+        <span class="chk">2026年10月6日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202610.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜子ども家庭支援センター 子育て交流ひろば「おひさま」｜公式">公式</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%85%83%E6%B0%97%E6%9D%91%E3%81%8A%E3%81%8C%E3%82%8F%E6%9D%B1" target="_blank" rel="noopener" data-goatcounter-click="定例｜子ども家庭支援センター 子育て交流ひろば「おひさま」｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+
+  <h2 class="sec" id="sec-chiiki">地域センター・公民館で開かれるもの</h2>
+  <p class="sec-lead">児童館と子育てひろばが、地域センターや公民館に出張してくる日です。</p>
+  <article class="pl" id="miyuki" data-ages="all">
+      <div class="pl-h"><h2>出張こども広場（御幸地域センター）</h2><p class="town">御幸町</p></div>
+      
+      
+      <div class="prog" data-age="all">
+        <h3>出張こども広場（花小金井南児童館の出張） <span class="agetag">だれでも</span> <span class="tag ok">予約なし</span></h3>
+        <p class="when">毎週金曜と第3日曜 10:00〜18:00</p>
+        
+        
+        
+        <div class="kvs">
+          
+          
+          
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>くわしくは花小金井南児童館へ</li></ul>
+        
+      </div>
+      
+      <div class="pl-f">
+        <span class="chk">2026年10月6日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%BE%A1%E5%B9%B8%E5%9C%B0%E5%9F%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="pl" id="gakuenhigashi" data-ages="all">
+      <div class="pl-h"><h2>出張こども広場（学園東町地域センター）</h2><p class="town">学園東町</p></div>
+      
+      
+      <div class="prog" data-age="all">
+        <h3>出張こども広場（小川町二丁目児童館の出張） <span class="agetag">だれでも</span> <span class="tag ok">予約なし</span></h3>
+        <p class="when">毎週木曜と第2日曜 10:00〜18:00</p>
+        
+        
+        
+        <div class="kvs">
+          
+          
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児・小学生・中学生</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>催しは「出張こども広場だより」で</li></ul>
+        
+      </div>
+      
+      <div class="pl-f">
+        <span class="chk">2026年10月6日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%AD%A6%E5%9C%92%E6%9D%B1%E7%94%BA%E5%9C%B0%E5%9F%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="pl" id="nakajuku" data-ages="all">
+      <div class="pl-h"><h2>出張こども広場（小川西町中宿地域センター）</h2><p class="town">小川西町</p></div>
+      
+      
+      <div class="prog" data-age="all">
+        <h3>出張こども広場（小川町一丁目児童館の出張） <span class="agetag">だれでも</span> <span class="tag ok">予約なし</span></h3>
+        <p class="when">毎週水曜と第1日曜 10:00〜18:00</p>
+        
+        
+        
+        <div class="kvs">
+          
+          
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児・小学生・中学生</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>催しは「出張ひろばだより」で</li></ul>
+        
+      </div>
+      
+      <div class="pl-f">
+        <span class="chk">2026年10月6日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%B0%8F%E5%B7%9D%E8%A5%BF%E7%94%BA%E4%B8%AD%E5%AE%BF%E5%9C%B0%E5%9F%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+  <article class="pl" id="shutchohiroba" data-ages="baby">
+      <div class="pl-h"><h2>出張ひろば（子ども家庭支援センター）</h2><p class="town">東部市民センター・鈴木公民館</p></div>
+      
+      
+      <div class="prog" data-age="baby">
+        <h3>出張ひろば <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates long"><li data-d="2026-10-13"><b>10/13(火)</b><span>東部市民センター 和室：0歳（ハイハイ前）さんとプレママパパあつまれ（10:20からお話会）</span></li><li data-d="2026-10-30"><b>10/30(金)</b><span>鈴木公民館 和室：0歳さんあつまれ（初めての方は10:00、2回目からは10:30受付）</span></li></ul>
+        <p class="more">11月の出張ひろばは「子ども家庭支援センターだより」11月号で出ます</p>
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          <div class="kv"><span class="k">時間</span><span class="v">10:00〜11:30</span></div>
+          
+          <div class="kv"><span class="k">対象</span><span class="v">0歳の子と保護者、妊娠中の方とその家族（回によります）</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>赤ちゃん用の敷物を持って</li><li>小平市在住の方が対象</li></ul>
+        
+      </div>
+      
+      <div class="pl-f">
+        <span class="chk">2026年10月6日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202610.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張ひろば｜公式">公式</a>
+          <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E6%9D%B1%E9%83%A8%E5%B8%82%E6%B0%91%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張ひろば｜地図">地図</a>
+        </span>
+      </div>
+    </article>
+
+  <p class="lead">公民館の子ども向けの講座は、回ごとに日にちが決まっているので、<a href="/calendar.html">おでかけカレンダー</a>の「🏛 公民館・児童館」にのせています。</p>
+
+  <h2 class="sec">行く前に</h2>
+  <div class="tips">
+    <ul>
+      <li>児童館・図書館には駐車場がありません。歩き・自転車・バスで。</li>
+      <li>おはなし会は、途中からは入れません。少し早めに。</li>
+      <li>子育てひろばのプログラムと出張ひろばは、小平市在住の方が対象です。</li>
+    </ul>
+  </div>
+
+  <p class="about">各施設の公式の案内（ホームページ、おたより、年間の予定表）で、施設ごとに確かめた日を書いています。まとめサイトからの転載はしていません。<br>
+  内容のまちがいに気づいたら、<a href="/#contact">お問い合わせ</a>から教えてください。</p>
+
+  <div class="nav-pills">
+    <a href="/calendar.html">おでかけカレンダー</a>
+    <a href="/entei.html">園庭開放・未就園児の会</a>
+    <a href="/map.html">おでかけマップ</a>
+    <a href="/issues.html">バックナンバー</a>
+  </div>
+  <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>
+</main>
+
+<footer>
+  <div class="fmark">ぼんぼやーじゅ通信</div>
+  <a href="/tokushoho.html">免責事項・個人情報の取り扱い</a><br>
+  © 2026 ぼんぼやーじゅ通信
+</footer>
+
+<script>
+(function () {
+  var SHOW = 6;
+  var t = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+  var lim = new Date(Date.now() + 9 * 3600e3 + 13 * 864e5).toISOString().slice(0, 10);
+  var age = '';
+  try { age = localStorage.getItem('bvt.age') || ''; } catch (e) {}
+
+  // 過ぎた日を隠し、先の SHOW 回だけ見せる
+  document.querySelectorAll('.prog').forEach(function (g) {
+    var ul = g.querySelector('.dates');
+    if (!ul) return;
+    var left = [];
+    ul.querySelectorAll('li[data-d]').forEach(function (li) {
+      if (li.getAttribute('data-d') < t) li.hidden = true; else left.push(li);
+    });
+    var done = g.querySelector('.done');
+    if (!left.length) { ul.hidden = true; if (done && !g.querySelector('.more:not(.done)')) done.hidden = false; return; }
+    var btn = g.querySelector('.morebtn');
+    if (left.length > SHOW && btn) {
+      left.slice(SHOW).forEach(function (li) { li.hidden = true; li.classList.add('later'); });
+      btn.hidden = false;
+      btn.addEventListener('click', function () {
+        ul.querySelectorAll('li.later').forEach(function (li) { li.hidden = false; });
+        btn.hidden = true;
+      });
+    } else if (btn) btn.hidden = true;
+  });
+
+  function apply() {
+    var ok = function (a) { return !age || a === age || a === 'all'; };
+    var shown = 0;
+    document.querySelectorAll('#soon .day').forEach(function (day) {
+      var d = day.getAttribute('data-d'), n = 0;
+      day.querySelectorAll('li[data-age]').forEach(function (li) {
+        var on = ok(li.getAttribute('data-age')); li.hidden = !on; if (on) n++;
+      });
+      var vis = d >= t && d <= lim && n > 0;
+      day.hidden = !vis; if (vis) shown++;
+    });
+    document.getElementById('soon-empty').hidden = shown > 0;
+    document.querySelectorAll('.reg li[data-age], .prog[data-age]').forEach(function (el) {
+      el.hidden = !ok(el.getAttribute('data-age'));
+    });
+    document.querySelectorAll('.pl').forEach(function (pl) {
+      var any = pl.querySelectorAll('.prog:not([hidden])').length;
+      pl.hidden = !!age && pl.querySelectorAll('.prog').length > 0 && !any;
+    });
+    document.querySelectorAll('.agef button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-f') === age));
+    });
+  }
+  document.querySelectorAll('.agef button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      age = b.getAttribute('data-f');
+      try { localStorage.setItem('bvt.age', age); } catch (e) {}
+      apply();
+    });
+  });
+  apply();
+})();
+</script>
+</body>
+</html>

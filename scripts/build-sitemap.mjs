@@ -21,6 +21,7 @@ const PAGES = {
   'map.html': { freq: 'weekly', pri: '0.9' },
   'guide.html': { freq: 'monthly', pri: '0.8' },
   'entei.html': { freq: 'weekly', pri: '0.8' },
+  'teirei.html': { freq: 'weekly', pri: '0.8' },
   'issues.html': { freq: 'weekly', pri: '0.8' },
   'ai/index.html': { loc: '/ai/', freq: 'weekly', pri: '0.7' },
   'tokushoho.html': { freq: 'yearly', pri: '0.3' },

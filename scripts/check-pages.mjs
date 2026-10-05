@@ -54,6 +54,7 @@ const PAGES = [
   ['/ai/', ['#copy', '.q']],
   ['/guide.html', ['body']],
   ['/entei.html', ['.en', '#soon']],
+  ['/teirei.html', ['.pl', '#soon .day']],
   ['/tokushoho.html', ['body']],
 ];
 

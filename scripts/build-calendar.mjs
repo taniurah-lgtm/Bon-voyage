@@ -314,6 +314,7 @@ ${(() => {
     <a href="/">通信について</a>
     <a href="/map.html">おでかけマップ</a>
     <a href="/entei.html">園庭開放・未就園児の会</a>
+    <a href="/teirei.html">児童館・図書館の定例</a>
     <a href="/issues.html">バックナンバー</a>
     <a href="/#contact">お問い合わせ</a>
   </div>

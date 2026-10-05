@@ -392,6 +392,7 @@ for (const f of files) {
   ${now.length ? now.map(({ it, ev }) => card(it, ev, { pick: it.id === spec.pick })).join('') : '<p class="empty">今週は、この年齢向けの催しが少なめです。ほかのタブもご覧ください。</p>'}
   ${next.length ? `<div class="sec"><p class="kicker">COMING UP</p><h2>先取り・申込の締切</h2></div>${next.map(({ it, ev }) => card(it, ev)).join('')}` : ''}
   ${g.key !== 'elem' ? `<a class="entei" href="/entei.html" data-goatcounter-click="週｜園庭開放">🌱 <b>園庭開放・未就園児の会</b><span>入園前の子と、幼稚園の園庭で遊べる日。小平の幼稚園・こども園ごとに、これから2週間の日がわかります</span></a>` : ''}
+  <a class="entei" href="/teirei.html" data-goatcounter-click="週｜定例">📚 <b>児童館・図書館・子育てひろばの定例</b><span>図書館のおはなし会や絵本のへや、児童館のこども広場など、毎月くり返す無料の会</span></a>
 </section>`;
   };
   const tabbed = (active) => `
