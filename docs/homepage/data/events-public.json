@@ -3846,6 +3846,47 @@
    "cat": "fest"
   },
   {
+   "id": "E171",
+   "name": "花小金井南児童館 乳幼児親子クラス（後期・登録制）",
+   "dates": [
+    "2026-11-11",
+    "2026-11-18",
+    "2026-11-25"
+   ],
+   "span": null,
+   "when": "2026年11月11日(水)・18日(水)・25日(水)（各クラスの初回。3月まで、おおむね月1回・1回30分。みつばは40分）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 3,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "花小金井南児童館（小平市花小金井南町3-3-17 コミュニティセンター2階）",
+   "mapq": "小平市花小金井南児童館",
+   "summary": "同じ学年のお友だちと、保護者とのふれあい遊びや、クレヨン等を使った制作",
+   "kidsNote": "0〜3歳の親子が対象。",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "○",
+    "elem": "✕"
+   },
+   "cost": "記載なし",
+   "discount": "",
+   "target": "",
+   "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-10-23",
+    "raw": "🔴 申込: 10/13(火)〜10/23(金)、児童館へ直接来館（電話不可）。先着各30組"
+   },
+   "cat": "public"
+  },
+  {
    "id": "E146",
    "name": "第36回 小平市産業まつり ⚠️**日程は裏が取れていない**",
    "dates": [
