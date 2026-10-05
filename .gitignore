@@ -7,3 +7,7 @@ profiles/*.local.md
 # 秘密情報
 .env
 *.token
+
+# 号ごとの年齢別ページは公開のたびに組む（deploy-homepage.yml の build-weekly）。
+# 手元で組んだものをコミットしない（送っていない号が混ざらないように）
+docs/homepage/week/
