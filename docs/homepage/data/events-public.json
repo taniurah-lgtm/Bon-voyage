@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-05",
+ "generated": "2026-10-06",
  "events": [
   {
    "id": "E16",
@@ -2656,6 +2656,43 @@
    "cat": "class"
   },
   {
+   "id": "E166",
+   "name": "田無神社 例大祭（西東京）",
+   "dates": [
+    "2026-10-10",
+    "2026-10-11"
+   ],
+   "span": null,
+   "when": "2026年10月10日(土)〜11日(日)（10日が宵宮、11日が本宮）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "田無神社（西東京市田無町3-7-4）。西武新宿線 田無駅から歩ける（花小金井から2駅）",
+   "mapq": "田無神社",
+   "summary": "",
+   "kidsNote": "神輿と宮太鼓を見に行く。人出が多いので、ベビーカーは境内の混み具合を見て。",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "記載なし（神社の祭礼）",
+   "discount": "",
+   "target": "",
+   "url": "http://tanashijinja.or.jp/info/reitaisai",
+   "tentative": false,
+   "deadline": null,
+   "cat": "fest"
+  },
+  {
    "id": "E98",
    "name": "こだいらクラフトFESTA2026 feat.ブリヂストン",
    "dates": [
@@ -3268,6 +3305,43 @@
    "cat": "public"
   },
   {
+   "id": "E169",
+   "name": "パークレンジャーと行く！秋のこだいら生きもの調査隊！",
+   "dates": [
+    "2026-10-24",
+    "2026-11-07"
+   ],
+   "span": null,
+   "when": "10/24(土) 9:00〜11:00（雨天決行、荒天は 11/7(土) に順延）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "09:00",
+   "end": "11:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平ふるさと村（小平市天神町2-57）",
+   "mapq": "小平市小平ふるさと村",
+   "summary": "生きものの専門家「パークレンジャー」と、ふるさと村を探検して生きものを探す",
+   "kidsNote": "小学生と保護者が対象。",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "✕",
+    "elem": "◎"
+   },
+   "cost": "記載なし",
+   "discount": "",
+   "target": "市内在住・在学の小学生と保護者（親子向け）／ 10組20名・先着順",
+   "url": "https://www.city.kodaira.tokyo.jp/event/130/130026.html",
+   "tentative": false,
+   "deadline": null,
+   "cat": "spot"
+  },
+  {
    "id": "E103",
    "name": "音楽の絵本 halloween（ルネこだいら 大ホール）",
    "dates": [
@@ -3459,6 +3533,86 @@
    "tentative": false,
    "deadline": null,
    "cat": "fest"
+  },
+  {
+   "id": "E167",
+   "name": "第49回 上水南公民館まつり",
+   "dates": [
+    "2026-10-31",
+    "2026-11-01"
+   ],
+   "span": null,
+   "when": "10/31(土) 10:00〜16:00 ／ 11/1(日) 10:00〜15:00（申込不要）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "10:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "上水南公民館（小平市上水南町1-27-1）",
+   "mapq": "小平市上水南公民館",
+   "summary": "",
+   "kidsNote": "ザリガニ釣りとバルーンアートは土曜の昼まで。仮装で行くと楽しい。",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "入場は申込不要。模擬店・お茶席は有料",
+   "discount": "",
+   "target": "",
+   "url": "https://www.city.kodaira.tokyo.jp/event/129/129946.html",
+   "tentative": false,
+   "deadline": null,
+   "cat": "fest"
+  },
+  {
+   "id": "E168",
+   "name": "小川公民館 土曜こども広場友・遊「機械式オルゴールをつくろう」",
+   "dates": [
+    "2026-10-31"
+   ],
+   "span": null,
+   "when": "10/31(土) 14:00〜",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "14:00",
+   "end": null,
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小川公民館 ホール（小平市小川町1-1012）",
+   "mapq": "小平市小川公民館 ホール",
+   "summary": "手回し式の機械式オルゴールを作る。完成品は持ち帰り",
+   "kidsNote": "小学生の工作講座。",
+   "caution": "",
+   "contact": {
+    "tel": "042-343-3620",
+    "who": ""
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "✕",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "市内在住・在学の小学生 ／ 定員10人（超えたら抽選） ／ 費用: 500円（材料費）",
+   "url": "https://www.city.kodaira.tokyo.jp/event/files/129155/129155/att_0000008.pdf",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-10-23",
+    "raw": "🔴 申込: 申込フォームまたは電話（小川公民館 042-343-3620、火〜土 9:00〜17:00）。締切 10/22(木)。当落は10/23以降に全員へ連絡"
+   },
+   "cat": "public"
   },
   {
    "id": "E122",
@@ -3763,6 +3917,45 @@
    "tentative": false,
    "deadline": null,
    "cat": "fest"
+  },
+  {
+   "id": "E170",
+   "name": "多摩六都科学館 キッチンサイエンス「カラーマジックケーキを作ろう」",
+   "dates": [
+    "2026-11-22"
+   ],
+   "span": null,
+   "when": "11/22(日) 13:30〜15:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "13:30",
+   "end": "15:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "多摩六都科学館 科学学習室（西東京市芝久保町5-10-64）",
+   "mapq": "多摩六都科学館 科学学習室",
+   "summary": "酸性・アルカリ性で色が変わる化学実験と、ブルーベリージャムの色素（アントシアニン）で3色のパウンドケーキを作る調理実習",
+   "kidsNote": "小学4年生から。きょうだいの付き添い入室はできない。",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "✕",
+    "elem": "○"
+   },
+   "cost": "1,500円（Gemini は「記載なし」と書いていたが、公式に明記）",
+   "discount": "",
+   "target": "小学4年生〜大人（小学生は保護者と参加。参加者以外は入室不可）／ 定員24人",
+   "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3719&day=2026-11-22",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-11-09",
+    "raw": "🔴 申込: Webで抽選。締切 11/9(月)必着。1組1回のみ。当選者にだけ締切から3日以内に参加券"
+   },
+   "cat": "spot"
   },
   {
    "id": "E51",
