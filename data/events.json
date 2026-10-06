@@ -3166,52 +3166,6 @@
    "source": "events/2026-10.md"
   },
   {
-   "id": "E111",
-   "name": "ちびっこ集まれ 親子でヨーイドン",
-   "dates": [
-    "2026-10-17"
-   ],
-   "span": null,
-   "when": "10/17(土) 13:30〜15:00",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": "13:30",
-   "end": "15:00",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "小平第六小学校 体育館（小川東町3-1-2）★駐車場なし",
-   "mapq": "小平第六小学校 体育館",
-   "summary": "レクリエーションと、手作りコースでの障害物競走",
-   "kidsNote": "対象外・未就学児まで。",
-   "caution": "",
-   "contact": {
-    "tel": "042-346-9612",
-    "mail": "",
-    "who": ""
-   },
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "✕",
-    "pre": "◎",
-    "elem": "✕"
-   },
-   "cost": "",
-   "discount": "",
-   "target": "市内在住・在勤の保護者と3歳以上の未就学児（親子のペアで応募）",
-   "url": "https://www.city.kodaira.tokyo.jp/event/130/130344.html",
-   "status": "候補",
-   "confidence": "公式確認済み",
-   "tentative": false,
-   "deadline": {
-    "date": "2026-10-05",
-    "raw": "🔴 申込締切: 10/5(月) 申込フォームから"
-   },
-   "source": "events/2026-10.md"
-  },
-  {
    "id": "E135",
    "name": "学習講座「ハロウィーンリースと竹花瓶をつくろう！」＋「不思議な昆虫の目を観察しよう」",
    "dates": [
@@ -3323,12 +3277,12 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "⚠️ 記載なし（要確認）",
+   "cost": "入場無料（パンの購入は実費）",
    "discount": "",
    "target": "",
    "url": "https://group.kadokawa.co.jp/information/promotional_topics/article-15705.html",
    "status": "候補（10/14号の「ほかにも」枠。遠出なので一推しにはしない）",
-   "confidence": "日程・時間・会場・内容は主催の告知で確認済み（2026-09-22）／入場料は未取得",
+   "confidence": "公式確認済み（2026-10-07）— 日程・入場無料・会場・内容。 時間は公式・主催とも「（予定）」のままで確定していない",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
@@ -3393,7 +3347,7 @@
    "timeUncertain": false,
    "place": "井の頭恩賜公園 西園 文化交流広場（三鷹の森ジブリ美術館の隣）",
    "mapq": "井の頭恩賜公園 西園 文化交流広場",
-   "summary": "ステージプログラム（詳細は公式Facebook）。子ども向けの企画は公式に記載なし",
+   "summary": "ステージプログラム（詳細は公式でご確認ください）。子ども向けの企画は公式に記載なし",
    "kidsNote": "屋外・芝生の広場。子ども向け企画は未確認。",
    "caution": "小雨決行",
    "contact": null,
@@ -3409,7 +3363,7 @@
    "target": "",
    "url": "https://www.ghibli-museum.jp/news/015611/",
    "status": "候補（遠出枠）。🔴",
-   "confidence": "公式確認済み（2026-09-28） / 子ども向け企画は未取得",
+   "confidence": "公式確認済み（2026-10-07）— 日程・入場無料・小雨決行・会場。 時間は「（予定）」のまま。子ども向け企画は今回も取れなかった",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
@@ -4767,7 +4721,6 @@
   ],
   "2026-10-17": [
    "E145",
-   "E111",
    "E135",
    "E141",
    "E148"
@@ -5173,6 +5126,12 @@
    "confidence": "園の公式Instagramのチラシ画像で確認（2026-09-14）",
    "reason": "日時・期間の行が無い",
    "when": ""
+  },
+  {
+   "id": "E111",
+   "name": "ちびっこ集まれ 親子でヨーイドン",
+   "reason": "ステータス「見送り（2026-10-07）—」のため除外",
+   "when": "10/17(土) 13:30〜15:00"
   },
   {
    "id": "E144",

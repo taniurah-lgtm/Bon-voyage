@@ -2845,49 +2845,6 @@
    "cat": "fest"
   },
   {
-   "id": "E111",
-   "name": "ちびっこ集まれ 親子でヨーイドン",
-   "dates": [
-    "2026-10-17"
-   ],
-   "span": null,
-   "when": "10/17(土) 13:30〜15:00",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": "13:30",
-   "end": "15:00",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "小平第六小学校 体育館（小川東町3-1-2）★駐車場なし",
-   "mapq": "小平第六小学校 体育館",
-   "summary": "レクリエーションと、手作りコースでの障害物競走",
-   "kidsNote": "対象外・未就学児まで。",
-   "caution": "",
-   "contact": {
-    "tel": "042-346-9612",
-    "who": ""
-   },
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "✕",
-    "pre": "◎",
-    "elem": "✕"
-   },
-   "cost": "",
-   "discount": "",
-   "target": "市内在住・在勤の保護者と3歳以上の未就学児（親子のペアで応募）",
-   "url": "https://www.city.kodaira.tokyo.jp/event/130/130344.html",
-   "tentative": false,
-   "deadline": {
-    "date": "2026-10-05",
-    "raw": "🔴 申込締切: 10/5(月) 申込フォームから"
-   },
-   "cat": "class"
-  },
-  {
    "id": "E135",
    "name": "学習講座「ハロウィーンリースと竹花瓶をつくろう！」＋「不思議な昆虫の目を観察しよう」",
    "dates": [
@@ -2992,7 +2949,7 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "⚠️ 記載なし（要確認）",
+   "cost": "入場無料（パンの購入は実費）",
    "discount": "",
    "target": "",
    "url": "https://group.kadokawa.co.jp/information/promotional_topics/article-15705.html",
@@ -3057,7 +3014,7 @@
    "timeUncertain": false,
    "place": "井の頭恩賜公園 西園 文化交流広場（三鷹の森ジブリ美術館の隣）",
    "mapq": "井の頭恩賜公園 西園 文化交流広場",
-   "summary": "ステージプログラム（詳細は公式Facebook）。子ども向けの企画は公式に記載なし",
+   "summary": "ステージプログラム（詳細は公式でご確認ください）。子ども向けの企画は公式に記載なし",
    "kidsNote": "屋外・芝生の広場。子ども向け企画は未確認。",
    "caution": "小雨決行",
    "lastEntry": "",
