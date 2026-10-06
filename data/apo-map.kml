@@ -1280,22 +1280,6 @@ yonemitsushika.com</description>
 市の公式一覧（認定こども園・私立幼稚園）</description>
   </Placemark>
   <Placemark>
-    <name>白梅学園大学附属白梅幼稚園</name>
-    <styleUrl>#候補</styleUrl>
-    <address>小平市小川町1-830</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>幼稚園・こども園</value></Data>
-      <Data name="電話"><value>042-343-1335</value></Data>
-      <Data name="住所"><value>小平市小川町1-830</value></Data>
-      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
-    </ExtendedData>
-    <description>種別: 幼稚園・こども園
-住所: 小平市小川町1-830
-電話: 042-343-1335
-市の公式一覧（認定こども園・私立幼稚園）</description>
-  </Placemark>
-  <Placemark>
     <name>たかのだい幼稚園</name>
     <styleUrl>#候補</styleUrl>
     <address>小平市上水本町1-21-3</address>
