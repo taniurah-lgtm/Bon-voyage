@@ -182,3 +182,11 @@ git rev-parse --show-toplevel && git branch --show-current
   - 配信Routine（trig_01UxYbbiARUStn7ZCJXa7bNM）の手順0に「`add_repo` は ToolSearch で `select:mcp__Claude_Code_Remote__add_repo` を読み込んでから呼ぶ」を追記
   - 9/30号は、push できる会話から `scripts/publish_report.sh reports/free/2026-09-30.md` で配信（09:24・1通・今月588通）。sent.log も push 済み
 - **読者への影響**: 約24分の遅れ。年齢別ページは 07:50 の準備で公開済みだった
+
+## 2026-10-07 朝 — ホームページの公開（Deploy）が失敗（配信前に直した）
+
+- **何が起きた**: 07:52 の準備のあと、同じ朝の裏取りで **E111（親子でヨーイドン）を見送り**にした。
+  9/30号（送ったあとの号）がE111を載せていたため、`build-weekly.mjs` が「公開データに無い」で止まり、Deploy が失敗（GitHubからオーナーにメール）。
+- **影響**: なし。10/7号の年齢別ページ（baby/pre/elem）は 200 で開けていた。新しい変更が公開されない状態だった
+- **直したこと**: **送ったあとの号**は、見送り・終了にした催しをその号のページから外して組み、止めない。止めるのは**これから送る号**だけ（commit 1b797ac）。08:2x に Deploy 成功・3ページ 200 を確認
+- **教訓**: 過去の号は「固まったもの」。台帳の状態が後から変わっても、過去の号で公開全体を止めない
