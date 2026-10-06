@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<title>送付状（チラシ郵送用）</title>
+<!-- 園へチラシを郵送するときの送付状。A4・白黒。1枚目＝小平みどり幼稚園、2枚目＝宛名を手書きする汎用。
+     日付と部数は空欄（手書き）。売り込みは書かない（docs/apo-list.md・2026-09-25 みどり幼稚園の取り決め）。 -->
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; color: #000; background: #fff; font-family: "Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif; }
+  .page { width: 210mm; height: 297mm; padding: 28mm 25mm 22mm; position: relative; page-break-after: always; font-size: 11pt; line-height: 1.9; }
+  .page:last-child { page-break-after: auto; }
+  .date { text-align: right; }
+  .to { margin-top: 10mm; font-size: 13pt; line-height: 1.7; }
+  .to .addr { font-size: 10pt; }
+  .to .name { font-size: 15pt; margin-top: 1mm; }
+  .to .blank { display: inline-block; border-bottom: 1px solid #000; width: 95mm; height: 9mm; }
+  .from { margin-top: 8mm; margin-left: auto; width: 82mm; font-size: 10pt; line-height: 1.75; }
+  .from .org { font-size: 12pt; }
+  .from .line { display: inline-block; border-bottom: 1px solid #000; width: 42mm; }
+  h1 { text-align: center; font-size: 17pt; letter-spacing: .3em; margin: 16mm 0 10mm; font-weight: 600; }
+  .body p { margin: 0 0 1em; text-indent: 1em; }
+  .ki { text-align: center; margin: 9mm 0 5mm; }
+  table { margin: 0 auto; border-collapse: collapse; font-size: 11.5pt; }
+  td { border: 1px solid #000; padding: 3.5mm 6mm; }
+  td.k { width: 30mm; text-align: center; }
+  td.v { width: 100mm; white-space: nowrap; }
+  .ijo { text-align: right; margin-top: 6mm; }
+  .foot { position: absolute; left: 25mm; right: 25mm; bottom: 18mm; font-size: 8.5pt; border-top: 1px solid #000; padding-top: 2.5mm; line-height: 1.6; font-family: "Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; }
+</style>
+</head>
+<body>
+
+<!-- 1枚目：小平みどり幼稚園 -->
+<section class="page">
+  <div class="date">2026年　　月　　日</div>
+  <div class="to">
+    <div class="addr">〒187-0011　東京都小平市鈴木町1-341</div>
+    <div class="name">小平みどり幼稚園<br>園長先生</div>
+  </div>
+  <div class="from">
+    <div class="org">ぼんぼやーじゅ通信の会</div>
+    小平市民活動支援センター あすぴあ<br>登録団体（第254号）<br>
+    担当　<span class="line"></span>
+  </div>
+
+  <h1>送付のご案内</h1>
+  <div class="body">
+    <p>いつも大変お世話になっております。先日はチラシを置いていただき、本当にありがとうございました。</p>
+    <p>今月分のチラシをお送りいたします。お手すきの際に、玄関などに置いていただけましたら幸いです。</p>
+    <p>園の皆さまにも、どうぞよろしくお伝えください。</p>
+  </div>
+
+  <div class="ki">記</div>
+  <table>
+    <tr><td class="k">同封物</td><td class="v">「ぼんぼやーじゅ通信」チラシ　　　　　部</td></tr>
+  </table>
+  <div class="ijo">以上</div>
+
+  <div class="foot">ぼんぼやーじゅ通信の会（運営：ニコマル）　お問い合わせ：tokyo.papa.home@gmail.com<br>
+  ホームページ：https://bonvoya.nicomaru.tokyo/</div>
+</section>
+
+<!-- 2枚目：宛名を手書きする汎用 -->
+<section class="page">
+  <div class="date">2026年　　月　　日</div>
+  <div class="to">
+    <div class="addr">〒　　　-　　　　<span class="blank" style="width:110mm;height:7mm"></span></div>
+    <div class="name"><span class="blank"></span><br><span class="blank" style="width:60mm"></span>　様</div>
+  </div>
+  <div class="from">
+    <div class="org">ぼんぼやーじゅ通信の会</div>
+    小平市民活動支援センター あすぴあ<br>登録団体（第254号）<br>
+    担当　<span class="line"></span>
+  </div>
+
+  <h1>送付のご案内</h1>
+  <div class="body">
+    <p>いつも大変お世話になっております。</p>
+    <p>チラシをお送りいたします。お手すきの際に、置いていただけましたら幸いです。</p>
+    <p>今後とも、どうぞよろしくお願いいたします。</p>
+  </div>
+
+  <div class="ki">記</div>
+  <table>
+    <tr><td class="k">同封物</td><td class="v">「ぼんぼやーじゅ通信」チラシ　　　　　部</td></tr>
+  </table>
+  <div class="ijo">以上</div>
+
+  <div class="foot">ぼんぼやーじゅ通信の会（運営：ニコマル）　お問い合わせ：tokyo.papa.home@gmail.com<br>
+  ホームページ：https://bonvoya.nicomaru.tokyo/</div>
+</section>
+</body>
+</html>
