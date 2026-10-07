@@ -2614,8 +2614,8 @@
    "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3672&day=2026-10-10",
    "tentative": false,
    "deadline": {
-    "date": "2026-11-15",
-    "raw": "内部メモ: 10/10・11/15 までの全10日、時間枠4コマ、場所、入館料、申込不要、定員なし、内容を公式で取り直した。"
+    "date": "2026-09-04",
+    "raw": "> （E70 子育ては私のキャリア＝申込9/4締切が既に過ぎている／E81 タッチケア）。"
    },
    "cat": "spot"
   },
@@ -2647,7 +2647,7 @@
     "pre": "◎",
     "elem": "○"
    },
-   "cost": "中学生以上 1人500円／小学生以下は無料（✅ 主催に確認 2026-09-30）",
+   "cost": "中学生以上 1人500円／小学生以下は無料",
    "discount": "",
    "target": "",
    "url": "",
@@ -2876,7 +2876,7 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "✅ 全ステージ観覧無料",
+   "cost": "全ステージ観覧無料",
    "discount": "",
    "target": "",
    "url": "https://kodaira-tourism.com/event/22974/",
@@ -3030,10 +3030,7 @@
    "target": "",
    "url": "https://www.city.kodaira.tokyo.jp/shihou/files/130782/130782/att_0000025.pdf",
    "tentative": false,
-   "deadline": {
-    "date": "2026-10-01",
-    "raw": "確度: 公式確認済み（2026-10-04） — 日時・時間割・交通規制・バスう回・雨天時・駐車場・申込の有無まで市報10/1号と"
-   },
+   "deadline": null,
    "cat": "fest"
   },
   {
@@ -3177,7 +3174,7 @@
     "pre": "○",
     "elem": "✕"
    },
-   "cost": "無料（✅ 講師に確認 2026-09-30）",
+   "cost": "無料",
    "discount": "",
    "target": "乳幼児と保護者（保護者のみの参加もOK）／定員: なし／申込: 不要",
    "url": "",
@@ -3801,7 +3798,7 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "✅ 入場無料",
+   "cost": "入場無料",
    "discount": "",
    "target": "",
    "url": "https://organicfesta.morinohito.net/",
@@ -3838,7 +3835,7 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "✅ 一般400円／中学生150円／65歳以上200円",
+   "cost": "一般400円／中学生150円／65歳以上200円",
    "discount": "",
    "target": "",
    "url": "https://www.tokyo-zoo.net/zoo/ino/",

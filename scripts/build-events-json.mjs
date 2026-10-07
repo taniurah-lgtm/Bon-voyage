@@ -246,6 +246,8 @@ const pad = (n) => String(n).padStart(2, '0');
 function extractDeadline(lines) {
   for (const l of lines) {
     if (!/申込|締切|応募/.test(l)) continue;
+    // 確度・出典・内部メモの行は申込の行ではない（2026-10-07、E134 の「確度: …申込の有無まで市報…」を締切として公開していた）
+    if (/^\s*-?\s*\**\s*(?:確度|出典|内部メモ|ステータス)/.test(l)) continue;
     const s = normalize(l);
     const { dates, span } = extractDates(s);
     const cands = dates.concat(span && span.to ? [span.to] : []);
@@ -476,6 +478,9 @@ function facilityQuery(name) {
 // これがそのまま公開ページに出ていた（.ics の説明欄にも入って読者のカレンダーに残る）。
 // 記号は読者向けの言い方に寄せ、運営メモは削る。
 const STRIP = [
+  // 確かめた印と、確かめた相手・日付の注記（台帳の内部の記録。2026-10-07、料金欄に「✅ 主催に確認 2026-09-30」が出ていた）
+  [/[（(][^（）()]*?(?:に確認|で確認|確認済み?)[^（）()]*?\d{4}-\d{2}-\d{2}[^（）()]*[）)]/g, ''],
+  [/✅\s*/g, ''],
   // 台帳の書きかけ記法。読者には壊れたプレースホルダに見える
   //（「開設園の一覧は小平市公式(URL)を参照」がそのまま出ていた）
   [/\s*[（(]\s*URL\s*[）)]/g, ''],
