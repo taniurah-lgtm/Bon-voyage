@@ -3002,6 +3002,49 @@
    "source": "events/2026-10.md"
   },
   {
+   "id": "E172",
+   "name": "みんなでかざろうイルミネーション（なかまちテラス）",
+   "dates": [
+    "2026-10-10"
+   ],
+   "span": null,
+   "when": "2026年10月10日(土) 13:00〜17:00（作業が終わりしだい終了）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "13:00",
+   "end": "17:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "なかまちテラス（仲町公民館・仲町図書館の複合館）",
+   "mapq": "なかまちテラス",
+   "summary": "職業能力開発総合大学校（職業大）の学生さんと一緒に、イルミネーションづくりのお手伝い",
+   "kidsNote": "飾りつけの作業。対象年齢の記載なし。",
+   "caution": "",
+   "contact": {
+    "tel": "042-341-0862",
+    "mail": "",
+    "who": ""
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "",
+   "status": "候補（10/7号には間に合わず。10/10の当日朝にThreadsで出すなら可）",
+   "confidence": "市のメール配信の原文で確認（2026-10-07）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E98",
    "name": "こだいらクラフトFESTA2026 feat.ブリヂストン",
    "dates": [
@@ -3954,6 +3997,49 @@
    "source": "events/2026-10.md"
   },
   {
+   "id": "E173",
+   "name": "なかまちテラス イルミネーション点灯式",
+   "dates": [
+    "2026-10-31"
+   ],
+   "span": null,
+   "when": "2026年10月31日(土) 17:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "17:00",
+   "end": null,
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "なかまちテラス 正面玄関前",
+   "mapq": "なかまちテラス 正面玄関前",
+   "summary": "イルミネーションの点灯式（10/10に飾りつけたもの）",
+   "kidsNote": "夕方5時・屋外で短時間。ハロウィンの日。",
+   "caution": "",
+   "contact": {
+    "tel": "042-341-0862",
+    "mail": "",
+    "who": ""
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "",
+   "status": "候補",
+   "confidence": "市のメール配信の原文で確認（2026-10-07）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E122",
    "name": "第2回 小平モルックカップ",
    "dates": [
@@ -4284,6 +4370,52 @@
    "confidence": "🔴 未確認（2026-09-22 に当たったが取れなかった）",
    "tentative": false,
    "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
+   "id": "E174",
+   "name": "土曜こども広場友＆遊「わくわく科学工作 紙コップスピーカーワークショップ」",
+   "dates": [
+    "2026-11-21"
+   ],
+   "span": null,
+   "when": "2026年11月21日(土) 10:30〜12:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:30",
+   "end": "12:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "（要確認）メールでは「なかまちテラスからのご案内」の公民館NEWSとして出ている（仲町公民館の見込み。会場の明記なし）",
+   "mapq": "",
+   "summary": "",
+   "kidsNote": "小学生の工作。",
+   "caution": "",
+   "contact": {
+    "tel": "042-341-0862",
+    "mail": "",
+    "who": ""
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "✕",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "市内在住の小学生 ／ 定員20名 ／ 費用: 無料 ／ 持ち物: 飲み物",
+   "url": "",
+   "status": "候補",
+   "confidence": "市のメール配信の原文で確認（2026-10-07）。会場・申込方法は未取得",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-11-07",
+    "raw": "🔴 申込: 11/7(土) 9:00から先着順（申込方法の記載なし。仲町公民館 042-341-0862）"
+   },
    "source": "events/2026-11.md"
   },
   {
@@ -4706,6 +4838,7 @@
    "E145",
    "E160",
    "E166",
+   "E172",
    "E98"
   ],
   "2026-10-11": [
@@ -4789,7 +4922,8 @@
    "E156",
    "E159",
    "E167",
-   "E168"
+   "E168",
+   "E173"
   ],
   "2026-11-01": [
    "E167",
@@ -4802,6 +4936,9 @@
   ],
   "2026-11-25": [
    "E171"
+  ],
+  "2026-11-21": [
+   "E174"
   ],
   "2026-11-22": [
    "E118",
