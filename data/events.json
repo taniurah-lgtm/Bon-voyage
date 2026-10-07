@@ -3724,12 +3724,12 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "",
+   "cost": "〈全席指定〉高校生以上 1,500円 / 3歳〜中学生 500円 / 0歳〜2歳 100円（0歳から有料）",
    "discount": "",
    "target": "",
    "url": "https://www.superkids.co.jp/ticket/`",
    "status": "候補",
-   "confidence": "公式確認済み（2026-09-05・ルネこだいらで現地のチラシを入手）",
+   "confidence": "公式確認済み（2026-10-08）— 日時・開場・会場・料金・託児料・託児の締切・仮装歓迎を 公式の公演ページ（https://www.runekodaira.jp/events/d01537.html ）で再確認。終演予定 15:30 も公式に記載",
    "tentative": false,
    "deadline": {
     "date": "2026-10-16",
