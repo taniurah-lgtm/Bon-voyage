@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-08",
+ "generated": "2026-10-09",
  "events": [
   {
    "id": "E16",
@@ -2076,6 +2076,45 @@
    "cat": "spot"
   },
   {
+   "id": "E175",
+   "name": "多摩六都科学館 プラネタリウム「宇宙クルーズ2026〈追跡！ボイジャー1号〉」",
+   "dates": [
+    "2026-09-29"
+   ],
+   "span": {
+    "from": "2026-09-29",
+    "to": "2026-12-27"
+   },
+   "when": "2026年9月29日(火)〜12月27日(日)（投影時間 約45分。1日の回数・時刻は館の「イベント・カレンダー」で日ごとに確認）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "多摩六都科学館 プラネタリウムドーム「サイエンスエッグ」（西東京市芝久保町5-10-64）",
+   "mapq": "多摩六都科学館 プラネタリウムドーム「サイエンスエッグ」",
+   "summary": "夏の「宇宙クルーズ2026〈出航！天の川航路〉」の続き（シリーズ第2弾）。地球から最も遠い人工物「ボイジャー1号」を追いかける。 1977年の打ち上げから約50年の旅（木星・土星のそば、太陽系の外へ）と、長く動き続ける工夫（原子力電池・大きなアンテナ・ゴールデンレコード）を、 解説員がその場で話しながら見せる。2026年11月、ボイジャー1号は地球から「1光日」より遠くへ届く",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "月曜休館（祝日・振替休日は開館し、翌日が休館）／祝日の翌日も休館（E145 と同じ規定。日ごとは館のカレンダーで）",
+   "ages": {
+    "baby": "△",
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "観覧付き入館券（展示室＋プラネタリウムか大型映像を1回）大人1,040円 / 小人〈4歳〜高校生〉420円",
+   "discount": "",
+   "target": "どなたでも。小学2年生以下は保護者と一緒に観覧（館の表記）",
+   "url": "https://www.tamarokuto.or.jp/blog/press/2026/10/07/planetarium_voyager/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "spot"
+  },
+  {
    "id": "E70",
    "name": "小川公民館 子育て支援講座「子育ては私のキャリア」【保育付き】",
    "dates": [
@@ -2785,8 +2824,8 @@
    "end": "15:00",
    "allDay": false,
    "timeUncertain": false,
-   "place": "中央公園 / 市民総合体育館",
-   "mapq": "中央公園",
+   "place": "中央公園 / 市民総合体育館（小平市津田町1-1-1）西武国分寺線 鷹の台駅から徒歩3分",
+   "mapq": "小平市中央公園",
    "summary": "",
    "kidsNote": "",
    "caution": "",
@@ -2955,7 +2994,7 @@
    "cost": "入場無料（学園祭の通例）。模擬店・物販は実費",
    "discount": "",
    "target": "",
-   "url": "https://sites.google.com/view/tsudafes67**（第67回",
+   "url": "https://sites.google.com/view/tsudafes67",
    "tentative": false,
    "deadline": null,
    "cat": "fest"
@@ -3366,7 +3405,7 @@
    "cost": "〈全席指定〉高校生以上 1,500円 / 3歳〜中学生 500円 / 0歳〜2歳 100円（0歳から有料）",
    "discount": "",
    "target": "",
-   "url": "https://www.superkids.co.jp/ticket/`",
+   "url": "https://www.superkids.co.jp/ticket/",
    "tentative": false,
    "deadline": {
     "date": "2026-10-16",
@@ -3765,7 +3804,7 @@
    "cost": "",
    "discount": "",
    "target": "",
-   "url": "https://ogawa-palette.jp/**（2026-09-14",
+   "url": "https://ogawa-palette.jp/",
    "tentative": false,
    "deadline": null,
    "cat": "public"
