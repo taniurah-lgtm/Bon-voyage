@@ -57,7 +57,7 @@ const pub = JSON.parse(readFileSync('docs/homepage/data/events-public.json', 'ut
 const byId = new Map(pub.events.map((e) => [e.id, e]));
 const sponsors = existsSync('data/sponsors.json') ? JSON.parse(readFileSync('data/sponsors.json', 'utf8')) : [];
 // 公園の催しに添える「買い出しのお店」（2026-10-08 オーナー: チラシを置いてくれたお店。店主の了解済み）
-//   data/picnic.json: [{ parks: ["小金井公園"], name, area, instagram, closedWeekdays: [0..6] | null }]
+//   data/picnic.json: [{ parks: ["小金井公園"], name, spot, hours, instagram, closedWeekdays: [0..6] | null }]
 //   🔴 instagram が空・休みの曜日が分からない（null）あいだは出さない。催しの日に閉まっている店へ行かせない
 const picnic = existsSync('data/picnic.json') ? JSON.parse(readFileSync('data/picnic.json', 'utf8')) : [];
 function picnicFor(ev) {
@@ -172,7 +172,7 @@ function card(item, ev, { pick = false } = {}) {
       </div>
     </div>
     ${note ? `<p class="note">${esc(note)}</p>` : ''}
-    ${pic ? `<p class="picnic">🥐 お昼は、公園の近くの「${esc(pic.name)}」（${esc(pic.area)}）で買ってピクニックも。予約はお店のInstagram（<a href="https://www.instagram.com/${esc(pic.instagram)}/" target="_blank" rel="noopener" data-goatcounter-click="${esc('ピクニック｜' + pic.name)}">@${esc(pic.instagram)}</a>）へ。<small>通信のチラシを置いてくださっているお店です。</small></p>` : ''}
+    ${pic ? `<p class="picnic">🥐 お昼は、${esc(pic.spot)}の「${esc(pic.name)}」で買ってピクニックも（${esc(pic.hours)}）。予約はお店のInstagram（<a href="https://www.instagram.com/${esc(pic.instagram)}/" target="_blank" rel="noopener" data-goatcounter-click="${esc('ピクニック｜' + pic.name)}">@${esc(pic.instagram)}</a>）へ。<small>通信のチラシを置いてくださっているお店です。</small></p>` : ''}
     <div class="foot">
       <div class="ages">${ages}</div>
       <div class="acts">
