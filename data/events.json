@@ -4068,9 +4068,9 @@
    "cost": "公式サイトでご確認ください",
    "discount": "",
    "target": "小平市民・在勤・在学の方",
-   "url": "",
+   "url": "https://www.city.kodaira.tokyo.jp/event/",
    "status": "候補",
-   "confidence": "チラシの現物を実見（2026-09-14。市の文化スポーツ課が発行）",
+   "confidence": "チラシの現物を実見（2026-09-14。市の文化スポーツ課が発行） ＋ 市公式のイベント一覧に掲載されたことを確認（2026-10-09）",
    "tentative": false,
    "deadline": {
     "date": "2026-10-16",
