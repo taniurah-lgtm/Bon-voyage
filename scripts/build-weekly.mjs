@@ -56,6 +56,17 @@ const sent = new Set(
 const pub = JSON.parse(readFileSync('docs/homepage/data/events-public.json', 'utf8'));
 const byId = new Map(pub.events.map((e) => [e.id, e]));
 const sponsors = existsSync('data/sponsors.json') ? JSON.parse(readFileSync('data/sponsors.json', 'utf8')) : [];
+// 公園の催しに添える「買い出しのお店」（2026-10-08 オーナー: チラシを置いてくれたお店。店主の了解済み）
+//   data/picnic.json: [{ parks: ["小金井公園"], name, area, instagram, closedWeekdays: [0..6] | null }]
+//   🔴 instagram が空・休みの曜日が分からない（null）あいだは出さない。催しの日に閉まっている店へ行かせない
+const picnic = existsSync('data/picnic.json') ? JSON.parse(readFileSync('data/picnic.json', 'utf8')) : [];
+function picnicFor(ev) {
+  const where = `${ev.name} ${ev.place || ''} ${ev.mapq || ''}`;
+  const days = (ev.dates || []).map((d) => new Date(d + 'T00:00:00Z').getUTCDay());
+  return picnic.find((p) => p.instagram && Array.isArray(p.closedWeekdays)
+    && p.parks.some((k) => where.includes(k))
+    && (!days.length || days.some((w) => !p.closedWeekdays.includes(w))));
+}
 
 // 🔒 ひとことに内部の話が混ざっていたら止める（台帳ID・仕組み・ファイル名）
 const LEAK = /\bE\d{2,3}\b|台帳|巡回|スクリプト|Routine|Claude|GoatCounter|\/f\/|\.md\b|\.json\b|裏取り|確度/;
@@ -144,6 +155,7 @@ function card(item, ev, { pick = false } = {}) {
   const rokuto = /多摩六都/.test(`${ev.name}${ev.place}`);
   const note = item.note || ev.kidsNote || '';
   const cal = CAL.get(ev.id);
+  const pic = picnicFor(ev);
   return `
   <article class="card${pick ? ' pick' : ''}">
     ${pick ? '<p class="ribbon"><span>PICK UP</span>今週の一推し</p>' : ''}
@@ -160,6 +172,7 @@ function card(item, ev, { pick = false } = {}) {
       </div>
     </div>
     ${note ? `<p class="note">${esc(note)}</p>` : ''}
+    ${pic ? `<p class="picnic">🥐 お昼は、公園の近くの「${esc(pic.name)}」（${esc(pic.area)}）で買ってピクニックも。予約はお店のInstagram（<a href="https://www.instagram.com/${esc(pic.instagram)}/" target="_blank" rel="noopener" data-goatcounter-click="${esc('ピクニック｜' + pic.name)}">@${esc(pic.instagram)}</a>）へ。<small>通信のチラシを置いてくださっているお店です。</small></p>` : ''}
     <div class="foot">
       <div class="ages">${ages}</div>
       <div class="acts">
@@ -287,6 +300,9 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
   .cm { display: block; width: 100%; box-sizing: border-box; padding: .6rem .8rem; border-radius: 12px; border: 1px solid var(--w-line); background: var(--w-card); color: var(--w-ink); font: 700 .74rem/1.4 var(--w-maru); text-align: left; text-decoration: none; cursor: pointer; }
   .cm-hint { font-size: .68rem; line-height: 1.6; color: var(--w-soft); margin: .1rem .2rem 0; }
   .cm-hint textarea { width: 100%; box-sizing: border-box; margin-top: .3rem; font-size: .72rem; }
+  .picnic { font-size: .72rem; line-height: 1.65; margin: .45rem 0 0; padding: .4rem .6rem; border-radius: 12px; border: 1px dashed var(--w-line); }
+  .picnic a { color: var(--w-accent-ink); font-weight: 700; }
+  .picnic small { display: block; font-size: .64rem; color: var(--w-faint); }
   .fine { font-size: .64rem; color: var(--w-faint); margin: .35rem 0 0; }
   .empty { color: var(--w-faint); font-size: .8rem; text-align: center; padding: 1.2rem 0; }
   .sponsors { margin-top: 1.8rem; }
