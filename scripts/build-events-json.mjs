@@ -385,14 +385,18 @@ function field(lines, keys) {
 }
 
 // URL は 「- URL:」優先、無ければ本文中の最初の http
+// 🔴 2026-10-08: 「**https://…**（第67回…」「`https://…/`」のように、太字・コードの記号や
+//   全角のかっこが URL の後ろにくっついて、公開データの url が開けない形になっていた（E141・E103）。
+//   URL に使えない文字（空白・* ` ' " < > と全角の記号）の手前で切る。
+const URL_RE = /https?:\/\/[^\s*`'"<>（）「」【】、。]+/;
 function findURL(lines) {
   const u = field(lines, ['URL', '出典']);
-  const m1 = u.match(/https?:\/\/\S+/);
-  if (m1) return m1[0].replace(/[)、。]+$/, '');
+  const m1 = u.match(URL_RE);
+  if (m1) return m1[0].replace(/[).,]+$/, '');
   for (const l of lines) {
     if (/^\s*[-*+]\s*(確度|ステータス)/.test(l)) continue;
-    const m = l.match(/https?:\/\/\S+/);
-    if (m) return m[0].replace(/[)、。]+$/, '');
+    const m = l.match(URL_RE);
+    if (m) return m[0].replace(/[).,]+$/, '');
   }
   return '';
 }

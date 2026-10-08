@@ -143,6 +143,7 @@ function card(item, ev, { pick = false } = {}) {
   const ages = AGES.map((g) => `<span class="age ${markClass(a[g.key])}" title="${AGE_SHORT[g.key]}">${g.icon}<b>${esc(a[g.key] || '？')}</b></span>`).join('');
   const rokuto = /多摩六都/.test(`${ev.name}${ev.place}`);
   const note = item.note || ev.kidsNote || '';
+  const cal = CAL.get(ev.id);
   return `
   <article class="card${pick ? ' pick' : ''}">
     ${pick ? '<p class="ribbon"><span>PICK UP</span>今週の一推し</p>' : ''}
@@ -163,10 +164,16 @@ function card(item, ev, { pick = false } = {}) {
       <div class="ages">${ages}</div>
       <div class="acts">
         ${ev.url ? `<a class="btn ghost" href="${esc(ev.url)}" target="_blank" rel="noopener">公式</a>` : ''}
-        ${CAL.get(ev.id) ? `<a class="btn ghost cal" aria-label="カレンダーに登録" href="${esc(CAL.get(ev.id).google)}" data-ics="${esc(CAL.get(ev.id).ics)}" target="_blank" rel="noopener" data-goatcounter-click="${esc('カレンダー｜' + ev.name)}">${ICON.cal}登録</a>` : ''}
+        ${cal ? `<button type="button" class="btn ghost cal" aria-label="カレンダーに登録" aria-expanded="false" data-goatcounter-click="${esc('カレンダー｜' + ev.name)}">${ICON.cal}登録</button>` : ''}
         ${ev.mapq ? `<a class="btn solid" href="${esc(mapUrl(ev.mapq))}" target="_blank" rel="noopener" data-goatcounter-click="${esc('地図｜' + ev.name)}">地図</a>` : ''}
       </div>
     </div>
+    ${cal ? `<div class="calmenu" hidden>
+      <a class="cm cm-ics" href="${esc(cal.ics)}" data-goatcounter-click="${esc('カレンダー(iPhone)｜' + ev.name)}"><span class="cm-dev">iPhone</span>のカレンダーに入れる</a>
+      <a class="cm" href="${esc(cal.google)}" target="_blank" rel="noopener" data-goatcounter-click="${esc('カレンダー(Google)｜' + ev.name)}">Googleカレンダーに入れる</a>
+      <button type="button" class="cm cm-copy" data-copy="${esc(cal.copy)}" data-goatcounter-click="${esc('カレンダー(コピー)｜' + ev.name)}">TimeTreeなどに貼る（予定をコピー）</button>
+      <p class="cm-hint" hidden></p>
+    </div>` : ''}
     ${rokuto ? '<p class="fine">※最新の情報は多摩六都科学館ウェブサイトでご確認ください。</p>' : ''}
   </article>`;
 }
@@ -272,6 +279,14 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
   .btn svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .btn.ghost { color: var(--w-ink); border: 1px solid var(--w-line); background: transparent; }
   .btn.solid { color: #fff; background: var(--w-accent); }
+  button.btn { cursor: pointer; font-size: .66rem; line-height: 1; color: inherit; }
+  button.btn.ghost { color: var(--w-ink); }
+  /* カレンダーの選択肢（2026-10-08: iPhone の LINE の中で .ics が開かず「押しても反応しない」と言われた） */
+  .calmenu { display: flex; flex-direction: column; gap: .3rem; margin-top: .5rem; padding: .55rem; border-radius: 14px; background: var(--w-bg); }
+  .calmenu[hidden] { display: none; }
+  .cm { display: block; width: 100%; box-sizing: border-box; padding: .6rem .8rem; border-radius: 12px; border: 1px solid var(--w-line); background: var(--w-card); color: var(--w-ink); font: 700 .74rem/1.4 var(--w-maru); text-align: left; text-decoration: none; cursor: pointer; }
+  .cm-hint { font-size: .68rem; line-height: 1.6; color: var(--w-soft); margin: .1rem .2rem 0; }
+  .cm-hint textarea { width: 100%; box-sizing: border-box; margin-top: .3rem; font-size: .72rem; }
   .fine { font-size: .64rem; color: var(--w-faint); margin: .35rem 0 0; }
   .empty { color: var(--w-faint); font-size: .8rem; text-align: center; padding: 1.2rem 0; }
   .sponsors { margin-top: 1.8rem; }
@@ -377,7 +392,9 @@ for (const f of files) {
     calN++;
     mkdirSync(`${outBase}/cal`, { recursive: true });
     writeFileSync(`${outBase}/cal/${calN}.ics`, icsText(c, `${date}-${calN}`));
-    CAL.set(ev.id, { google: googleCal(c), ics: `/week/${date}/cal/${calN}.ics` });
+    // TimeTree などに貼る用（外のサイトから予定を直接入れる入口が無いアプリ向け。2026-10-08）
+    const copy = [c.title, String(ev.when || '').replace(/（[^（）]{6,}）/g, ''), c.place, ev.url ? `公式: ${ev.url}` : ''].filter(Boolean).join('\n');
+    CAL.set(ev.id, { google: googleCal(c), ics: `/week/${date}/cal/${calN}.ics`, copy });
   }
 
   const forAge = (list, key) =>
@@ -419,9 +436,51 @@ for (const f of files) {
     for (var i = 0; i < tabs.length; i++) tabs[i].addEventListener('click', function (e) {
       e.preventDefault(); show(this.getAttribute('data-tab')); window.scrollTo(0, 0);
     });
-    // iPhone・iPad は .ics を開くと標準のカレンダーに入る（Googleカレンダーの画面は使わない）
+    // カレンダー登録は「どこに入れるか」を選んでもらう（2026-10-08）。
+    //   🔴 iPhone の LINE の中のブラウザは .ics を開けない（押しても何も起きない）。
+    //      LINE の中なら ?openExternalBrowser=1 を付けて Safari で開かせる → 「カレンダーに追加」が出る。
+    //   TimeTree には外のサイトから予定を入れる入口が無い → 予定の文をコピーして貼ってもらう。
     var ua = navigator.userAgent, ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
-    if (ios) { var cs = document.querySelectorAll('a.cal[data-ics]'); for (var k = 0; k < cs.length; k++) { cs[k].href = cs[k].getAttribute('data-ics'); cs[k].removeAttribute('target'); } }
+    var mac = !ios && /Macintosh/.test(ua), line = ua.indexOf(' Line/') >= 0;
+    var icsLinks = document.querySelectorAll('.cm-ics');
+    for (var k = 0; k < icsLinks.length; k++) {
+      var a = icsLinks[k];
+      if (!ios && !mac) { a.parentNode.removeChild(a); continue; }
+      if (mac) a.querySelector('.cm-dev').textContent = 'Mac';
+      if (ios && line) a.href = a.getAttribute('href') + '?openExternalBrowser=1';
+    }
+    function hint(menu, html) { var h = menu.querySelector('.cm-hint'); h.innerHTML = html; h.hidden = false; }
+    function copyText(t, ok, ng) {
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(ok, function () { fallback(t, ok, ng); }); }
+      else fallback(t, ok, ng);
+    }
+    function fallback(t, ok, ng) {
+      var ta = document.createElement('textarea'); ta.value = t; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, t.length);
+      var done = false; try { done = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta); done ? ok() : ng();
+    }
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('.cal') : null;
+      if (b) {
+        var m = b.closest('.card').querySelector('.calmenu');
+        m.hidden = !m.hidden; b.setAttribute('aria-expanded', String(!m.hidden));
+        return;
+      }
+      var i = e.target.closest ? e.target.closest('.cm-ics') : null;
+      if (i && ios && line) { hint(i.closest('.calmenu'), 'Safariに切りかわってから、「カレンダーに追加」の画面が出ます。'); return; }
+      var c = e.target.closest ? e.target.closest('.cm-copy') : null;
+      if (c) {
+        var menu = c.closest('.calmenu'), t = c.getAttribute('data-copy');
+        copyText(t, function () {
+          c.textContent = 'コピーしました ✓';
+          hint(menu, 'TimeTreeなどで予定を新しく作り、タイトルやメモに貼りつけてください。日にちと時間は、アプリで選んでください。');
+        }, function () {
+          var h = menu.querySelector('.cm-hint'); h.textContent = '自動でコピーできませんでした。下の文を長押ししてコピーしてください。';
+          var ta = document.createElement('textarea'); ta.value = t; ta.rows = 4; ta.readOnly = true; h.appendChild(ta); h.hidden = false;
+        });
+      }
+    });
     show(${JSON.stringify(active)});
   })();
   </script>`;
