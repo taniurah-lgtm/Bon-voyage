@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-09",
+ "generated": "2026-10-10",
  "events": [
   {
    "id": "E51",
@@ -3612,7 +3612,7 @@
     "2026-10-24"
    ],
    "span": null,
-   "when": "2026年10月24日(土) 14:00〜16:00",
+   "when": "2026年10月24日(土) 14:00〜16:00（13:30 開場）",
    "rainDates": [],
    "exceptions": null,
    "programs": null,
@@ -3638,16 +3638,16 @@
     "pre": "○",
     "elem": "✕"
    },
-   "cost": "（要確認）（市のお知らせに記載なし）",
+   "cost": "（要確認）",
    "discount": "",
-   "target": "",
-   "url": "https://library.kodaira.ed.jp/",
+   "target": "（要確認）",
+   "url": "https://library.kodaira.ed.jp/viewer/info.html?id=404",
    "status": "候補",
-   "confidence": "市のお知らせで確認（2026-10-01）。費用・保育の年齢は未確認",
+   "confidence": "公式確認済み（2026-10-10）。費用・講演会の対象年齢・申込の空き状況は、公式に記載が無く未取得",
    "tentative": false,
    "deadline": {
-    "date": "2026-10-01",
-    "raw": "🔴 10/1(木) 22:00から申込フォームで受付・先着順（https://logoform.jp/form/exdH/1693732 ）"
+    "date": "2026-10-15",
+    "raw": "🔴 託児の申込は講演会とは別。10/15(木)までに「託児申込書」を中央図書館1階カウンターへ提出"
    },
    "source": "events/2026-10.md"
   },
