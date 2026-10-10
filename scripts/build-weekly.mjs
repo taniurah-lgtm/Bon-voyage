@@ -75,17 +75,31 @@ function instaLabel(when) {
   if (iy - y === 1) return `昨年${m}月の様子`;
   return `${y}年${m}月の様子`;
 }
-const okInsta = (it) => (Array.isArray(it.insta) ? it.insta : []).slice(0, 2)
-  .filter((x) => x && INSTA_URL.test(x.url || '') && /^\d{4}-\d{2}$/.test(x.when || '') && /^[A-Za-z0-9._]{1,30}$/.test(x.by || ''));
+// 2026-10-10: インスタだけでなく、主催の「開催しました」報告ページや、催しを訪ねた記事にも付けられるようにした
+//   （津田塾祭は大学の報告ページとガクユニの訪問記があった）。インスタ以外は "by" にサイト名（例「津田塾大学」）を書く
+const WEB_URL = /^https:\/\/[^\s"'<>]+$/;
+const isInsta = (u) => /^https:\/\/www\.instagram\.com\//.test(u || '');
+const sceneOk = (x) => x && /^\d{4}-\d{2}$/.test(x.when || '') && (isInsta(x.url)
+  ? INSTA_URL.test(x.url) && /^[A-Za-z0-9._]{1,30}$/.test(x.by || '')
+  : WEB_URL.test(x.url || '') && /^[^<>]{1,20}$/.test(x.by || '') && !LEAK.test(x.by));
+const okInsta = (it) => (Array.isArray(it.insta) ? it.insta : []).slice(0, 2).filter(sceneOk);
+const sceneHref = (x) => (isInsta(x.url) ? x.url.match(INSTA_URL)[0] : x.url);
+const sceneBy = (x) => (isInsta(x.url) ? `Instagram @${x.by}` : `${x.by}のページ`);
 function instaProblems(it) {
   const list = it.insta || [];
   if (!Array.isArray(list)) return [`${it.id} の insta は [ ] で書く`];
   const out = [];
   if (list.length > 2) out.push(`${it.id} の insta は2件まで`);
   for (const x of list) {
-    if (!x || !INSTA_URL.test(x.url || '')) out.push(`${it.id} の insta の URL が投稿の形（instagram.com/p/… か /reel/…）になっていない: ${x && x.url}`);
-    if (!/^\d{4}-\d{2}$/.test((x && x.when) || '')) out.push(`${it.id} の insta に投稿の年月（"when": "2025-10"）が無い`);
-    if (!/^[A-Za-z0-9._]{1,30}$/.test((x && x.by) || '')) out.push(`${it.id} の insta に投稿したアカウント名（"by"）が無い・形が違う`);
+    if (!x) { out.push(`${it.id} の insta に空の行がある`); continue; }
+    if (!/^\d{4}-\d{2}$/.test(x.when || '')) out.push(`${it.id} の insta に様子の年月（"when": "2025-10"）が無い`);
+    if (isInsta(x.url)) {
+      if (!INSTA_URL.test(x.url)) out.push(`${it.id} の insta の URL が投稿の形（instagram.com/p/… か /reel/…）になっていない: ${x.url}`);
+      if (!/^[A-Za-z0-9._]{1,30}$/.test(x.by || '')) out.push(`${it.id} の insta に投稿したアカウント名（"by"）が無い・形が違う`);
+    } else {
+      if (!WEB_URL.test(x.url || '')) out.push(`${it.id} の insta の URL が https で始まっていない: ${x.url}`);
+      if (!/^[^<>]{1,20}$/.test(x.by || '') || LEAK.test(x.by || '')) out.push(`${it.id} の insta にサイト名（"by"・20字まで）が無い`);
+    }
   }
   return out;
 }
@@ -203,7 +217,7 @@ function card(item, ev, { pick = false } = {}) {
     </div>
     ${note ? `<p class="note">${esc(note)}</p>` : ''}
     ${pic ? `<p class="picnic">🥐 お昼は、${esc(pic.spot)}の「${esc(pic.name)}」で買ってピクニックも（${esc(pic.hours)}）。予約はお店のInstagram（<a href="https://www.instagram.com/${esc(pic.instagram)}/" target="_blank" rel="noopener" data-goatcounter-click="${esc('ピクニック｜' + pic.name)}">@${esc(pic.instagram)}</a>）へ。<small>通信のチラシを置いてくださっているお店です。</small></p>` : ''}
-    ${okInsta(item).length ? `<div class="insta">${okInsta(item).map((x) => `<a href="${esc(x.url.match(INSTA_URL)[0])}" target="_blank" rel="noopener" data-goatcounter-click="${esc('インスタ｜' + ev.name)}"><span class="ig">📷 ${esc(instaLabel(x.when))}</span><small>Instagram @${esc(x.by)}</small></a>`).join('')}</div>` : ''}
+    ${okInsta(item).length ? `<div class="insta">${okInsta(item).map((x) => `<a href="${esc(sceneHref(x))}" target="_blank" rel="noopener" data-goatcounter-click="${esc('様子｜' + ev.name)}"><span class="ig">📷 ${esc(instaLabel(x.when))}</span><small>${esc(sceneBy(x))}</small></a>`).join('')}</div>` : ''}
     <div class="foot">
       <div class="ages">${ages}</div>
       <div class="acts">
