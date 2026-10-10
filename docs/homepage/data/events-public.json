@@ -3440,7 +3440,7 @@
    "cost": "1,500円（1組）",
    "discount": "",
    "target": "小学3年生以上と保護者、2人1組",
-   "url": "https://kodaira-tourism.com/event/22851/",
+   "url": "",
    "tentative": false,
    "deadline": {
     "date": "2026-09-24",
@@ -3480,7 +3480,7 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "",
+   "cost": "無料（公式に明記）",
    "discount": "",
    "target": "小学生以下・小学生・中高生・大人・高齢者・親子（公式の表記）",
    "url": "https://www.city.kodaira.tokyo.jp/event/129/129951.html",
@@ -3762,6 +3762,42 @@
    "discount": "",
    "target": "",
    "url": "https://ogawa-palette.jp/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "public"
+  },
+  {
+   "id": "E178",
+   "name": "秋空のもと、遊んで・知ろう！in中央エリア",
+   "dates": [
+    "2026-11-03"
+   ],
+   "span": null,
+   "when": "2026年11月3日(火・祝) 10:00〜15:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市中央公民館 1階ロビー・旧福祉会館前市民広場",
+   "mapq": "小平市中央公民館ロビー",
+   "summary": "ドッグラン、犬のしつけ方と防災相談・ペット防災展示、スポーツ体験（ピックルボール・モルック）、 施設整備のオープンハウス",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "公式に記載なし（要確認）",
+   "discount": "",
+   "target": "公式の対象欄に「小学生以下・小学生・中高生・大人・高齢者・親子」と明記",
+   "url": "https://www.city.kodaira.tokyo.jp/event/130/130150.html",
    "tentative": false,
    "deadline": null,
    "cat": "public"
