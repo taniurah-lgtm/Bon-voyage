@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-10",
+ "generated": "2026-10-11",
  "events": [
   {
    "id": "E16",
@@ -3196,20 +3196,20 @@
    "timeUncertain": false,
    "place": "ガスミュージアム（小平市大沼町）",
    "mapq": "小平市ガスミュージアム",
-   "summary": "ハンドメイド／ワークショップ（工作・ヨガ・撮影会など）／ フード（焼き菓子・現地調理・キッチンカー）／パフォーマンス（歌・手品など）",
-   "kidsNote": "暫定。",
+   "summary": "ハンドメイド・ワークショップ／フード（焼き菓子・キッチンカー）",
+   "kidsNote": "",
    "caution": "",
    "lastEntry": "",
-   "hours": "館の通常営業は 10時〜17時・月曜休館。",
+   "hours": "",
    "ages": {
     "baby": "○",
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "未確認（要確認）",
+   "cost": "入館料 無料（公式ポスターに「入館料＆駐車場30台【無料】」と明記）",
    "discount": "",
    "target": "",
-   "url": "",
+   "url": "https://www.gasmuseum.jp/blog/261008/",
    "tentative": false,
    "deadline": null,
    "cat": "fest"
@@ -3874,6 +3874,45 @@
    "tentative": false,
    "deadline": null,
    "cat": "fest"
+  },
+  {
+   "id": "E176",
+   "name": "キーウ・クラシック・バレエ「チャイコフスキー 夢の3大バレエ 名場面集」（ルネこだいら 大ホール）",
+   "dates": [
+    "2026-11-07"
+   ],
+   "span": null,
+   "when": "2026年11月7日(土) 14:00開演（13:15開場）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "14:00",
+   "end": null,
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "ルネこだいら 大ホール（西武新宿線 小平駅南口から徒歩3分／小平市美園町1-8-5）",
+   "mapq": "ルネこだいら 大ホール",
+   "summary": "ウクライナのバレエ団「キーウ・クラシック・バレエ」が、「くるみ割り人形」「白鳥の湖」「眠れる森の美女」の名場面をつないで踊る公演。 「眠れる森の美女」の場面では、青い鳥や長靴をはいた猫、赤ずきんちゃんなど、おとぎ話の主人公たちが出てくる（チラシ）。 演奏は録音（特別録音音源）",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "全席指定 S席 5,500円 ／ A席 4,500円（子ども料金なし）。※4歳以上入場可",
+   "discount": "",
+   "target": "",
+   "url": "https://www.runekodaira.jp/events/d01538.html",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-10-30",
+    "raw": "⏳ 託児サービスあり。締切 10月30日(金)"
+   },
+   "cat": "public"
   },
   {
    "id": "E171",
