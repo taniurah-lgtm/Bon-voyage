@@ -137,12 +137,13 @@ git commit && git push
 
 | Routine | 正本 |
 |---|---|
-| ぼんぼやーじゅ通信 水曜巡回（**水 07:50・準備。LINEは送らない**）`trig_015negPsg8vTqthHxy8y9zpL` | `docs/prompts/routine-wed.md` |
+| ぼんぼやーじゅ通信 水曜巡回（**水 06:55・準備。LINEは送らない**。2026-10-10 に 07:50 から早めた）`trig_015negPsg8vTqthHxy8y9zpL` | `docs/prompts/routine-wed.md` |
 | 🆕 ぼんぼやーじゅ通信 配信（**水 09:00・準備済みの号をLINEへ**）`trig_01UxYbbiARUStn7ZCJXa7bNM` | `docs/prompts/routine-wed-send.md` |
 | ぼんぼやーじゅ通信 配信チェック（水 11:30）`trig_01JwhvamsSfsSV1xEDGLZbo4` | `docs/prompts/routine-wed-check.md` |
 
 > 🔴 **2026-09-27 水曜を2段にした**（オーナー決定）: **LINEを受け取ってすぐリンクを押す人が多い**ので、
-> 07:50 の準備で年齢別ページを公開し、**1時間後の 09:00 に LINE を送る**。
+> 06:55 の準備で年齢別ページを公開し、**オーナーに「📷 昨年の様子」のリンクを頼む**。**09:00 に LINE を送る**。
+> リンクが 09:00 を過ぎて届いても、準備の会話の中であとからページに足す（`docs/prompts/routine-wed.md` 手順7）。
 > Routine の中のプロンプトは「手順0（add_repo）＋正本を読んで従え」だけにした。**細かい決まりは正本のファイルだけを直せばよい。**
 | 🆕 **台帳の裏取り（毎朝 7:30）** | `docs/prompts/routine-freshness.md` |
 
