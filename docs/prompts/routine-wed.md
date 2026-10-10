@@ -173,7 +173,7 @@ ls -l reports/free/$(TZ=Asia/Tokyo date +%Y-%m-%d).md 2>/dev/null
 
 ### 年齢別ページの材料（`reports/free/web/<日付>.json`）
 
-すでにあれば**それが正**（オーナーと決めたもの）。**`"ready": true` を足すだけ**にする。無ければ作る:
+すでにあれば**それが正**（オーナーと決めたもの）。**`"ready": true` を足すだけ**にする。`insta`（インスタの様子のリンク）が入っていたら、消さずにそのまま残す。無ければ作る:
 
 ```json
 { "date": "YYYY-MM-DD", "ready": true, "pick": "E◯◯",

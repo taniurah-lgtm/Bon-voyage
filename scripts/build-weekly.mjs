@@ -60,6 +60,36 @@ const sponsors = existsSync('data/sponsors.json') ? JSON.parse(readFileSync('dat
 //   data/picnic.json: [{ parks: ["小金井公園"], name, spot, hours, instagram, closedWeekdays: [0..6] | null }]
 //   🔴 instagram が空・休みの曜日が分からない（null）あいだは出さない。催しの日に閉まっている店へ行かせない
 const picnic = existsSync('data/picnic.json') ? JSON.parse(readFileSync('data/picnic.json', 'utf8')) : [];
+// 📷 インスタの「その時の様子」（2026-10-10 オーナー指示）
+//   web/<日付>.json の item に "insta": [{ "url": "https://www.instagram.com/p/…/", "when": "2025-10", "by": "アカウント名" }]（2件まで）
+//   ボタンは「3か月前の様子」「昨年10月の様子」と、いつの投稿かをはっきり書く（今年と中身が違うことがあるので「雰囲気」でごまかさない）。
+//   写真は取り込まない（リンクだけ）。日時・料金は公式から書くので、インスタは様子を見るためだけ
+let ISSUE = '';
+const INSTA_URL = /^https:\/\/www\.instagram\.com\/(?:[A-Za-z0-9._]+\/)?(?:p|reel)\/[A-Za-z0-9_-]+\/?/;
+function instaLabel(when) {
+  const [iy, im] = ISSUE.split('-').map(Number);
+  const [y, m] = when.split('-').map(Number);
+  const diff = (iy - y) * 12 + (im - m);
+  if (diff <= 0) return '最近の様子';
+  if (iy === y) return `${diff}か月前の様子`;
+  if (iy - y === 1) return `昨年${m}月の様子`;
+  return `${y}年${m}月の様子`;
+}
+const okInsta = (it) => (Array.isArray(it.insta) ? it.insta : []).slice(0, 2)
+  .filter((x) => x && INSTA_URL.test(x.url || '') && /^\d{4}-\d{2}$/.test(x.when || '') && /^[A-Za-z0-9._]{1,30}$/.test(x.by || ''));
+function instaProblems(it) {
+  const list = it.insta || [];
+  if (!Array.isArray(list)) return [`${it.id} の insta は [ ] で書く`];
+  const out = [];
+  if (list.length > 2) out.push(`${it.id} の insta は2件まで`);
+  for (const x of list) {
+    if (!x || !INSTA_URL.test(x.url || '')) out.push(`${it.id} の insta の URL が投稿の形（instagram.com/p/… か /reel/…）になっていない: ${x && x.url}`);
+    if (!/^\d{4}-\d{2}$/.test((x && x.when) || '')) out.push(`${it.id} の insta に投稿の年月（"when": "2025-10"）が無い`);
+    if (!/^[A-Za-z0-9._]{1,30}$/.test((x && x.by) || '')) out.push(`${it.id} の insta に投稿したアカウント名（"by"）が無い・形が違う`);
+  }
+  return out;
+}
+
 function picnicFor(ev) {
   const where = `${ev.name} ${ev.place || ''} ${ev.mapq || ''}`;
   const days = (ev.dates || []).map((d) => new Date(d + 'T00:00:00Z').getUTCDay());
@@ -173,6 +203,7 @@ function card(item, ev, { pick = false } = {}) {
     </div>
     ${note ? `<p class="note">${esc(note)}</p>` : ''}
     ${pic ? `<p class="picnic">🥐 お昼は、${esc(pic.spot)}の「${esc(pic.name)}」で買ってピクニックも（${esc(pic.hours)}）。予約はお店のInstagram（<a href="https://www.instagram.com/${esc(pic.instagram)}/" target="_blank" rel="noopener" data-goatcounter-click="${esc('ピクニック｜' + pic.name)}">@${esc(pic.instagram)}</a>）へ。<small>通信のチラシを置いてくださっているお店です。</small></p>` : ''}
+    ${okInsta(item).length ? `<div class="insta">${okInsta(item).map((x) => `<a href="${esc(x.url.match(INSTA_URL)[0])}" target="_blank" rel="noopener" data-goatcounter-click="${esc('インスタ｜' + ev.name)}"><span class="ig">📷 ${esc(instaLabel(x.when))}を見る</span><small>Instagram @${esc(x.by)} の投稿</small></a>`).join('')}</div>` : ''}
     <div class="foot">
       <div class="ages">${ages}</div>
       <div class="acts">
@@ -300,6 +331,10 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
   .cm { display: block; width: 100%; box-sizing: border-box; padding: .6rem .8rem; border-radius: 12px; border: 1px solid var(--w-line); background: var(--w-card); color: var(--w-ink); font: 700 .74rem/1.4 var(--w-maru); text-align: left; text-decoration: none; cursor: pointer; }
   .cm-hint { font-size: .68rem; line-height: 1.6; color: var(--w-soft); margin: .1rem .2rem 0; }
   .cm-hint textarea { width: 100%; box-sizing: border-box; margin-top: .3rem; font-size: .72rem; }
+  .insta { display: flex; flex-direction: column; gap: .3rem; margin: .45rem 0 0; }
+  .insta a { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .1rem .5rem; padding: .5rem .75rem; border-radius: 12px; border: 1px solid var(--w-line); background: var(--w-card); color: var(--w-ink); text-decoration: none; }
+  .insta .ig { font-family: var(--w-maru); font-weight: 700; font-size: .76rem; color: var(--w-accent-ink); }
+  .insta small { font-size: .64rem; color: var(--w-faint); }
   .picnic { font-size: .72rem; line-height: 1.65; margin: .45rem 0 0; padding: .4rem .6rem; border-radius: 12px; border: 1px dashed var(--w-line); }
   .picnic a { color: var(--w-accent-ink); font-weight: 700; }
   .picnic small { display: block; font-size: .64rem; color: var(--w-faint); }
@@ -388,11 +423,13 @@ for (const f of files) {
       else if (!(ev.ages && ev.ages.baby && ev.ages.pre && ev.ages.elem))
         problems.push(`${date}: ${it.id} に年齢の目安（👶🧒🎒）が3つそろっていない。どのタブに出すか決められない`);
       if (it.note && LEAK.test(it.note)) problems.push(`${date}: ${it.id} のひとことに内部の話が入っている: ${it.note}`);
+      for (const pmsg of instaProblems(it)) problems.push(`${date}: ${pmsg}`);
       return ev ? { it, ev } : null;
     }).filter(Boolean);
   const items = resolve(spec.items);
   const ahead = resolve(spec.ahead);
 
+  ISSUE = date;
   const [y, m, d] = date.split('-').map(Number);
   const wd = WD[new Date(Date.UTC(y, m - 1, d)).getUTCDay()];
   const issue = `${m}/${d}(${wd})号`;
