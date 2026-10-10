@@ -203,7 +203,7 @@ function card(item, ev, { pick = false } = {}) {
     </div>
     ${note ? `<p class="note">${esc(note)}</p>` : ''}
     ${pic ? `<p class="picnic">🥐 お昼は、${esc(pic.spot)}の「${esc(pic.name)}」で買ってピクニックも（${esc(pic.hours)}）。予約はお店のInstagram（<a href="https://www.instagram.com/${esc(pic.instagram)}/" target="_blank" rel="noopener" data-goatcounter-click="${esc('ピクニック｜' + pic.name)}">@${esc(pic.instagram)}</a>）へ。<small>通信のチラシを置いてくださっているお店です。</small></p>` : ''}
-    ${okInsta(item).length ? `<div class="insta">${okInsta(item).map((x) => `<a href="${esc(x.url.match(INSTA_URL)[0])}" target="_blank" rel="noopener" data-goatcounter-click="${esc('インスタ｜' + ev.name)}"><span class="ig">📷 ${esc(instaLabel(x.when))}を見る</span><small>Instagram @${esc(x.by)} の投稿</small></a>`).join('')}</div>` : ''}
+    ${okInsta(item).length ? `<div class="insta">${okInsta(item).map((x) => `<a href="${esc(x.url.match(INSTA_URL)[0])}" target="_blank" rel="noopener" data-goatcounter-click="${esc('インスタ｜' + ev.name)}"><span class="ig">📷 ${esc(instaLabel(x.when))}</span><small>Instagram @${esc(x.by)}</small></a>`).join('')}</div>` : ''}
     <div class="foot">
       <div class="ages">${ages}</div>
       <div class="acts">
@@ -331,10 +331,11 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
   .cm { display: block; width: 100%; box-sizing: border-box; padding: .6rem .8rem; border-radius: 12px; border: 1px solid var(--w-line); background: var(--w-card); color: var(--w-ink); font: 700 .74rem/1.4 var(--w-maru); text-align: left; text-decoration: none; cursor: pointer; }
   .cm-hint { font-size: .68rem; line-height: 1.6; color: var(--w-soft); margin: .1rem .2rem 0; }
   .cm-hint textarea { width: 100%; box-sizing: border-box; margin-top: .3rem; font-size: .72rem; }
-  .insta { display: flex; flex-direction: column; gap: .3rem; margin: .45rem 0 0; }
-  .insta a { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .1rem .5rem; padding: .5rem .75rem; border-radius: 12px; border: 1px solid var(--w-line); background: var(--w-card); color: var(--w-ink); text-decoration: none; }
-  .insta .ig { font-family: var(--w-maru); font-weight: 700; font-size: .76rem; color: var(--w-accent-ink); }
-  .insta small { font-size: .64rem; color: var(--w-faint); }
+  /* 2026-10-10 オーナー: 余白を詰めて、縦に伸ばさない（1件1行のピル。2件なら横に並ぶ） */
+  .insta { display: flex; flex-wrap: wrap; gap: .25rem; margin: .4rem 0 0; }
+  .insta a { display: inline-flex; align-items: center; gap: .35rem; max-width: 100%; padding: .2rem .6rem; border-radius: 999px; border: 1px solid var(--w-line); background: var(--w-card); color: var(--w-ink); text-decoration: none; line-height: 1.4; }
+  .insta .ig { font-family: var(--w-maru); font-weight: 700; font-size: .68rem; color: var(--w-accent-ink); white-space: nowrap; }
+  .insta small { font-size: .6rem; color: var(--w-faint); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
   .picnic { font-size: .72rem; line-height: 1.65; margin: .45rem 0 0; padding: .4rem .6rem; border-radius: 12px; border: 1px dashed var(--w-line); }
   .picnic a { color: var(--w-accent-ink); font-weight: 700; }
   .picnic small { display: block; font-size: .64rem; color: var(--w-faint); }
