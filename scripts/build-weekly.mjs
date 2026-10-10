@@ -83,7 +83,13 @@ const sceneOk = (x) => x && /^\d{4}-\d{2}$/.test(x.when || '') && (isInsta(x.url
   ? INSTA_URL.test(x.url) && /^[A-Za-z0-9._]{1,30}$/.test(x.by || '')
   : WEB_URL.test(x.url || '') && /^[^<>]{1,20}$/.test(x.by || '') && !LEAK.test(x.by));
 const okInsta = (it) => (Array.isArray(it.insta) ? it.insta : []).slice(0, 2).filter(sceneOk);
-const sceneHref = (x) => (isInsta(x.url) ? x.url.match(INSTA_URL)[0] : x.url);
+// インスタは追跡用のパラメータ（igsh・mdxt など）を落とす。何枚目の写真か（img_index）だけは残す（選んだ写真が開くように）
+const sceneHref = (x) => {
+  if (!isInsta(x.url)) return x.url;
+  const base = x.url.match(INSTA_URL)[0].replace(/\/?$/, '/');
+  const n = (x.url.match(/[?&]img_index=(\d{1,2})/) || [])[1];
+  return n ? `${base}?img_index=${n}` : base;
+};
 const sceneBy = (x) => (isInsta(x.url) ? `Instagram @${x.by}` : `${x.by}のページ`);
 function instaProblems(it) {
   const list = it.insta || [];
