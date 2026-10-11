@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-11",
+ "generated": "2026-10-12",
  "events": [
   {
    "id": "E51",
@@ -3527,6 +3527,89 @@
    "source": "events/2026-10.md"
   },
   {
+   "id": "E181",
+   "name": "花と光のムーブメント 小金井公園「秋彩ものがたり」",
+   "dates": [
+    "2026-10-23"
+   ],
+   "span": {
+    "from": "2026-10-23",
+    "to": "2026-11-08"
+   },
+   "when": "2026年10月23日(金)〜11月8日(日)（点灯 月〜金 17:00〜20:00／土日祝 17:00〜20:30）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "17:00",
+   "end": "20:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "都立小金井公園 いこいの広場、江戸東京たてもの園付近（花小金井駅から西武バス「小金井公園西口」）",
+   "mapq": "都立小金井公園 いこいの広場",
+   "summary": "東京都の「花と光のムーブメント」の小金井公園版。昼は秋の花の装飾、夜はライトアップ。7つのエリア",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "入場無料（公式に明記。ワークショップは別料金）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.tokyo-park.or.jp/special/flowerandlight/koganei2026autumn/",
+   "status": "候補",
+   "confidence": "公式確認済み（2026-10-11）— 会期・点灯時間・会場・入場無料・7つのエリア・ワークショップ5つ（日時・対象・費用・申込）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
+   "id": "E182",
+   "name": "花と光のムーブメント「空に浮かぶ希望のあかり〜お月見ランタン〜」（小金井公園）",
+   "dates": [
+    "2026-10-23",
+    "2026-10-24",
+    "2026-10-25"
+   ],
+   "span": null,
+   "when": "2026年10月23日(金)・24日(土)・25日(日) 17:30（打ち上げ）〜20:00（受付は16:45から）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 3,
+   "start": "17:30",
+   "end": null,
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "都立小金井公園（花と光のムーブメント E181 の会場内）",
+   "mapq": "都立小金井公園",
+   "summary": "ろうそくのように光るLEDライトに和紙の笠をかぶせたランタンを、みんなで一斉に浮かべる。17:30以降は受付した人から順に打ち上げを案内。 浮かべたランタンは持ち帰れる",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "1基 1,000円（1基につき最大4人まで）",
+   "discount": "",
+   "target": "どなたでも（未就学児は保護者同伴）",
+   "url": "https://www.tokyo-park.or.jp/special/flowerandlight/koganei2026autumn/",
+   "status": "候補",
+   "confidence": "公式確認済み（2026-10-11）— 日時・受付開始・費用・1基4人・持ち帰り・予約制",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-10.md"
+  },
+  {
    "id": "E131",
    "name": "min'na de part ナイトミュージアムマルシェ（ガスミュージアム）",
    "dates": [
@@ -3777,6 +3860,51 @@
     "date": "2026-10-16",
     "raw": "| 締切 | 🔴 託児の締切 10/16(金) | 無し |"
    },
+   "source": "events/2026-10.md"
+  },
+  {
+   "id": "E179",
+   "name": "小金井公園コスモスまつり2026",
+   "dates": [
+    "2026-10-25"
+   ],
+   "span": null,
+   "when": "2026年10月25日(日) 10:00〜15:00（雨天の場合は11/1に延期）",
+   "rainDates": [
+    "2026-11-01"
+   ],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小金井公園 つつじ山広場（花小金井駅 南口から歩ける）",
+   "mapq": "小金井公園 つつじ山広場",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": {
+    "tel": "042-385-5611",
+    "mail": "",
+    "who": ""
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "一部有料（どれが有料かは公式に書いていない。「無料」と書かない）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.tokyo-park.or.jp/park/koganei/news/2026/10_25_2026.html",
+   "status": "候補",
+   "confidence": "公式確認済み（2026-10-11）— 日時・雨天延期・会場・整理券の配り方と回・ワークショップ・クイズラリー・一部有料",
+   "tentative": false,
+   "deadline": null,
    "source": "events/2026-10.md"
   },
   {
@@ -4363,6 +4491,47 @@
    "source": "events/2026-11.md"
   },
   {
+   "id": "E180",
+   "name": "小金井公園「秋のSLライトアップ」",
+   "dates": [
+    "2026-11-07"
+   ],
+   "span": null,
+   "when": "2026年11月7日(土) 17:00〜20:00（雨天の場合は11/8に延期）",
+   "rainDates": [
+    "2026-11-08"
+   ],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "17:00",
+   "end": "20:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小金井公園 SL展示場（花小金井駅 南口から歩ける）",
+   "mapq": "小金井公園 SL展示場",
+   "summary": "夜のSLのヘッドライトを点灯。模擬発煙のタイミングで光と煙の景色。客車の車内灯も点ける。 SL製造80周年の記念ヘッドマーク（9月の投票で選ばれたデザイン）をお披露目",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "https://www.tokyo-park.or.jp/park/koganei/news/2026/11_7_sl.html",
+   "status": "候補",
+   "confidence": "公式確認済み（2026-10-11）— 日時・雨天延期・会場・入場無料・内容",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
    "id": "E171",
    "name": "花小金井南児童館 乳幼児親子クラス（後期・登録制）",
    "dates": [
@@ -4942,7 +5111,8 @@
    "E142",
    "E149",
    "E163",
-   "E176"
+   "E176",
+   "E180"
   ],
   "2026-11-08": [
    "E145",
@@ -4971,10 +5141,13 @@
   ],
   "2026-10-23": [
    "E140",
-   "E162"
+   "E162",
+   "E181",
+   "E182"
   ],
   "2026-10-24": [
    "E140",
+   "E182",
    "E131",
    "E147",
    "E164",
@@ -4982,9 +5155,11 @@
   ],
   "2026-10-25": [
    "E140",
+   "E182",
    "E147",
    "E103",
-   "E139"
+   "E139",
+   "E179"
   ],
   "2026-10-31": [
    "E117",
