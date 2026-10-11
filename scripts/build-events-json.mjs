@@ -69,18 +69,23 @@ const LONG_SPAN = 14;
 const RAIN_RE = /[（(]?[^（()）]*?(?:雨天|荒天|悪天)[^（()）]*?(?:順延|延期|予備日)[^（()）]*?[）)]?/g;
 function splitRainDates(raw) {
   const s = normalize(raw);
-  const rainParts = s.match(RAIN_RE) || [];
-  if (!rainParts.length) return { when: raw, rain: [] };
+  // 🔴 2026-10-11: 切り取りを正規化した文字列（半角のかっこ）で探していたので、台帳が全角の
+  //   「（雨天の場合は11/1に延期）」だと元の文から消えず、延期日が開催日として残っていた（E179・E180）。
+  //   normalize は1文字→1文字の置き換えだけなので、位置は元の文と同じ。位置で切り取る。
+  const hits = [...s.matchAll(RAIN_RE)].filter((m) => m[0]);
+  if (!hits.length) return { when: raw, rain: [] };
   // 順延の節に日付があるものだけを切り出す（「雨天中止」「雨天決行」だけなら触らない）
-  const withDate = rainParts.filter((t) => /\d{1,2}\s*\/\s*\d{1,2}|\d{1,2}\s*[（(](?:月|火|水|木|金|土|日)/.test(toSlash(normalize(t))));
+  const withDate = hits.filter((m) => /\d{1,2}\s*\/\s*\d{1,2}|\d{1,2}\s*[（(](?:月|火|水|木|金|土|日)/.test(toSlash(m[0])));
   if (!withDate.length) return { when: raw, rain: [] };
-  let stripped = raw;
   const rain = [];
-  for (const part of withDate) {
-    const { dates } = extractDates(part);
-    rain.push(...dates);
-    stripped = stripped.split(part).join(' ');
+  let stripped = '';
+  let at = 0;
+  for (const m of withDate) {
+    rain.push(...extractDates(m[0]).dates);
+    stripped += raw.slice(at, m.index) + ' ';
+    at = m.index + m[0].length;
   }
+  stripped += raw.slice(at);
   return { when: stripped.replace(/\s{2,}/g, ' ').trim(), rain: [...new Set(rain)] };
 }
 
