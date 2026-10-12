@@ -3805,14 +3805,17 @@
     "pre": "✕",
     "elem": "◎"
    },
-   "cost": "記載なし",
+   "cost": "（要確認）公式サイトでご確認ください",
    "discount": "",
    "target": "市内在住・在学の小学生と保護者（親子向け）／ 10組20名・先着順",
    "url": "https://www.city.kodaira.tokyo.jp/event/130/130026.html",
    "status": "候補",
-   "confidence": "公式確認済み（2026-10-05）",
+   "confidence": "2026-10-13 に再確認を試みたが、市の公式ページが取れず確証を更新できなかった",
    "tentative": false,
-   "deadline": null,
+   "deadline": {
+    "date": "2026-10-21",
+    "raw": "🔴 申込の受付状況: 未確認（要確認）。先着10組で、締切 10/21(水) が目前。すでに埋まっている可能性がある"
+   },
    "source": "events/2026-10.md"
   },
   {
@@ -4173,7 +4176,7 @@
    "timeUncertain": false,
    "place": "上水南公民館（小平市上水南町1-27-1）",
    "mapq": "小平市上水南公民館",
-   "summary": "",
+   "summary": "館庭でザリガニ釣りとバルーンアート、和室でこども向けアトラクション。ハロウィンの仮装で行くとプレゼントがもらえる。 近隣の園児・小学生の作品展示と舞台発表、模擬店もある（10/31(土)の昼までが子ども向けの中心）",
    "kidsNote": "ザリガニ釣りとバルーンアートは土曜の昼まで。仮装で行くと楽しい。",
    "caution": "",
    "contact": null,
@@ -4189,7 +4192,7 @@
    "target": "",
    "url": "https://www.city.kodaira.tokyo.jp/event/129/129946.html",
    "status": "候補",
-   "confidence": "公式確認済み（2026-10-05）",
+   "confidence": "2026-10-13 に再確認を試みたが、市の公式ページが取れず確証を更新できなかった",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
@@ -4232,7 +4235,7 @@
    "target": "市内在住・在学の小学生 ／ 定員10人（超えたら抽選）",
    "url": "https://www.city.kodaira.tokyo.jp/event/files/129155/129155/att_0000008.pdf",
    "status": "候補",
-   "confidence": "公式確認済み（2026-10-05）",
+   "confidence": "2026-10-13 に再確認を試みたが、市の公式PDFが取れず確証を更新できなかった",
    "tentative": false,
    "deadline": {
     "date": "2026-10-23",
