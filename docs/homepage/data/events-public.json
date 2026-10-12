@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-12",
+ "generated": "2026-10-13",
  "events": [
   {
    "id": "E16",
@@ -3256,6 +3256,44 @@
    "cat": "spot"
   },
   {
+   "id": "E186",
+   "name": "小川パレット（小川駅西口複合施設）プレオープン（内覧）",
+   "dates": [
+    "2026-10-23",
+    "2026-10-24",
+    "2026-10-25"
+   ],
+   "span": null,
+   "when": "2026年10月23日(金)〜25日(日) 13:00〜17:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 3,
+   "start": "13:00",
+   "end": "17:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小川パレット（小平市小川西町4-16-1 小川駅西口の再開発ビル 4・5階）",
+   "mapq": "小平市小川パレット",
+   "summary": "11/1(日)のオープンの前に、施設の中を見学できる。貸し部屋などの使用者登録もできる。 本の貸出・貸し部屋の使用は 11/1 から",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "○",
+    "elem": "○"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "https://ogawa-palette.jp/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "public"
+  },
+  {
    "id": "E131",
    "name": "min'na de part ナイトミュージアムマルシェ（ガスミュージアム）",
    "dates": [
@@ -3407,6 +3445,82 @@
    "tentative": false,
    "deadline": null,
    "cat": "spot"
+  },
+  {
+   "id": "E184",
+   "name": "ところざわサクラタウン「ハロウィンマルシェ」",
+   "dates": [
+    "2026-10-24",
+    "2026-10-25"
+   ],
+   "span": null,
+   "when": "2026年10月24日(土)・25日(日) 11:00〜17:00（予定）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "11:00",
+   "end": "17:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "ところざわサクラタウン 中央広場ほか（所沢市東所沢和田3-31-3／JR武蔵野線 東所沢駅）",
+   "mapq": "ところざわサクラタウン 中央広場",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "◎",
+    "elem": "○"
+   },
+   "cost": "入場無料（一部有料コンテンツあり）",
+   "discount": "",
+   "target": "",
+   "url": "https://tokorozawa-sakuratown.com/event_categories/halloween-marche.html",
+   "tentative": false,
+   "deadline": null,
+   "cat": "fest"
+  },
+  {
+   "id": "E185",
+   "name": "東久留米市立中央図書館「えほんのもりのあきまつり『色、いろいろ』」",
+   "dates": [
+    "2026-10-24"
+   ],
+   "span": {
+    "from": "2026-10-24",
+    "to": "2026-11-15"
+   },
+   "when": "2026年10月24日(土)〜11月15日(日) 9:00〜19:00（毎週金曜は全館休館。最終日は16:00まで）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "09:00",
+   "end": "19:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "東久留米市立中央図書館 1階 絵本の森（東久留米市中央町2-6-23）",
+   "mapq": "東久留米市立中央図書館 絵本の森",
+   "summary": "東久留米子ども読書週間に合わせて、さまざまな「色」と出会える絵本を集めて展示",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "2026年10月24日(土)〜11月15日(日) 9:00〜19:00（毎週金曜は全館休館。最終日は16:00まで）",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "○"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "乳幼児から小学生",
+   "url": "https://www.city.higashikurume.lg.jp/library/1024999/1029786.html",
+   "tentative": false,
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E103",
@@ -3712,9 +3826,9 @@
     "pre": "✕",
     "elem": "◎"
    },
-   "cost": "",
+   "cost": "500円（材料費）",
    "discount": "",
-   "target": "市内在住・在学の小学生 ／ 定員10人（超えたら抽選） ／ 費用: 500円（材料費）",
+   "target": "市内在住・在学の小学生 ／ 定員10人（超えたら抽選）",
    "url": "https://www.city.kodaira.tokyo.jp/event/files/129155/129155/att_0000008.pdf",
    "tentative": false,
    "deadline": {
@@ -3920,6 +4034,43 @@
    "tentative": false,
    "deadline": null,
    "cat": "public"
+  },
+  {
+   "id": "E183",
+   "name": "江戸東京たてもの園「夜間特別開園 たてもののライトアップ」",
+   "dates": [
+    "2026-11-06",
+    "2026-11-07"
+   ],
+   "span": null,
+   "when": "2026年11月6日(金)・7日(土) 16:30〜20:30（開園は9:30から。入園は20:00まで）※荒天時中止",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "16:30",
+   "end": "20:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "江戸東京たてもの園（小金井市桜町3-7-1 都立小金井公園内）",
+   "mapq": "江戸東京たてもの園",
+   "summary": "夜の園内に、たてもののライトアップ・キャンドルナイト・竹灯篭の小道。 農家の囲炉裏、洋館（デ・ラランデ邸）の暖炉に火が入る。ガス灯の点灯、銭湯（子宝湯）の湯船を張ってライトアップ（入浴はできない）、行灯や灯油ランプの昔のあかり",
+   "kidsNote": "",
+   "caution": "荒天時中止",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "観覧料が必要。一般400円・大学生320円・高校生200円・65歳以上200円／中学生以下 無料（園の観覧料の決まり）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.tatemonoen.jp/event/page/2026_lightup.php",
+   "tentative": false,
+   "deadline": null,
+   "cat": "spot"
   },
   {
    "id": "E142",
