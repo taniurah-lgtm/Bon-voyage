@@ -253,6 +253,11 @@ function extractDeadline(lines) {
     if (!/申込|締切|応募/.test(l)) continue;
     // 確度・出典・内部メモの行は申込の行ではない（2026-10-07、E134 の「確度: …申込の有無まで市報…」を締切として公開していた）
     if (/^\s*-?\s*\**\s*(?:確度|出典|内部メモ|ステータス)/.test(l)) continue;
+    // 表の行（| … | … |）は、たいてい**よその回との比較表**。その回の申込の行ではない。
+    //   （2026-10-14、E139 たかの台こども祭りが、同じ節にある E103 との比較表の
+    //    「| 締切 | 🔴 託児の締切 10/16(金) | 無し |」を自分の締切として公開していた。
+    //    この回に申込締切は無い。読者には「10/16までに申し込む催し」と出ていた）
+    if (/^\s*\|/.test(l)) continue;
     const s = normalize(l);
     const { dates, span } = extractDates(s);
     const cands = dates.concat(span && span.to ? [span.to] : []);
