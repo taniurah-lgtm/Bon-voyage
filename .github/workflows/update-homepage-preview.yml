@@ -16,20 +16,21 @@ on:
       - ".github/workflows/update-homepage-preview.yml"
   workflow_dispatch: {}
 
+# 🔴 2026-10-14: ここで docs/homepage をそのまま公開していたため、
+#   配信の直後に「Deploy homepage」（年齢別ページ・カレンダー等を組んでから出す）と競争になり、
+#   こちらが後から終わると**年齢別ページ（/week/）がまるごと消えた**（/week/ は組み立てて作るもので、リポジトリに無い）。
+#   10/14号は LINE を受け取った読者がページを開けなかった（09:17〜）。
+#   → **ここでは公開しない。**プレビューを書き換えて commit したら、「Deploy homepage」を起動して、そちらに組み立てと公開を任せる。
 permissions:
   contents: write
-  pages: write
-  id-token: write
+  actions: write
 
 concurrency:
-  group: pages
+  group: homepage-preview
   cancel-in-progress: false
 
 jobs:
   update:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       # ★2026-09-18: ブランチを1本にしたので、チェックアウトは1回で済む。
@@ -56,13 +57,9 @@ jobs:
             git commit -m "homepage: refresh latest-issue preview (auto)"
             git push origin HEAD:claude/family-event-planning-rfwmo8
           fi
-      # GITHUB_TOKEN による push は他ワークフローを起動しないため、ここで直接公開する
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload homepage
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: docs/homepage
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      # GITHUB_TOKEN の push は他のワークフローを起動しない。ただし workflow_dispatch なら起動できる。
+      # 公開は「Deploy homepage」だけが行う（年齢別ページ・カレンダー・園庭開放などを組んでから出す）。
+      - name: Ask "Deploy homepage" to build and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-homepage.yml --ref claude/family-event-planning-rfwmo8
