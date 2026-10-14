@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-14",
+ "generated": "2026-10-15",
  "events": [
   {
    "id": "E16",
@@ -2975,7 +2975,7 @@
    "timeUncertain": false,
    "place": "ところざわサクラタウン 中央広場ほか（所沢市東所沢和田3-31-3）",
    "mapq": "ところざわサクラタウン 中央広場",
-   "summary": "埼玉県内外のベーカリーが集まる。秋限定・新作のパン。 ハロウィンにちなんだワークショップ／フリーライブステージ",
+   "summary": "埼玉県内外のベーカリーが集まる。秋限定・新作のパン。ハロウィンのキャンドルワークショップ（有料）／フリーライブステージ",
    "kidsNote": "屋外の広場",
    "caution": "",
    "lastEntry": "",
@@ -3047,7 +3047,7 @@
    "timeUncertain": false,
    "place": "井の頭恩賜公園 西園 文化交流広場（三鷹の森ジブリ美術館の隣）",
    "mapq": "井の頭恩賜公園 西園 文化交流広場",
-   "summary": "ステージプログラム（詳細は公式でご確認ください）。子ども向けの企画は公式に記載なし",
+   "summary": "ライブステージとワークショップ（ステージプログラムの詳細は公式でご確認ください）",
    "kidsNote": "屋外・芝生の広場。子ども向け企画は未確認。",
    "caution": "小雨決行",
    "lastEntry": "",
@@ -4263,6 +4263,44 @@
    "cat": "spot"
   },
   {
+   "id": "E187",
+   "name": "多世代交流イベント「第3回 たけのこ公園まつり」",
+   "dates": [
+    "2026-11-07"
+   ],
+   "span": null,
+   "when": "2026年11月7日(土) 11:00〜15:00（雨天の場合は11/8に延期）",
+   "rainDates": [
+    "2026-11-08"
+   ],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "11:00",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市立たけのこ公園（小平市花小金井7-9-10／花小金井駅 南口から徒歩12分）",
+   "mapq": "小平市立たけのこ公園",
+   "summary": "自治会の防災と多世代交流のおまつり。豚汁・アルファ化米の無料配布、コダレンジャーショー、射的やスーパーボールすくい、手形・足形アート、よさこい",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "入場無料。ゲームはピンボールが無料、ほかは1回100円。食べ物は実費",
+   "discount": "",
+   "target": "",
+   "url": "https://hikarigaokajichikai.wixsite.com/home",
+   "tentative": false,
+   "deadline": null,
+   "cat": "fest"
+  },
+  {
    "id": "E171",
    "name": "花小金井南児童館 乳幼児親子クラス（後期・登録制）",
    "dates": [
@@ -4457,47 +4495,6 @@
     "raw": "🔴 申込: Webで抽選。締切 11/9(月)必着。1組1回のみ。当選者にだけ締切から3日以内に参加券"
    },
    "cat": "spot"
-  },
-  {
-   "id": "E51",
-   "name": "中央図書館ギャラリー展示「クラシックポップアップ絵本展」",
-   "dates": [],
-   "span": {
-    "from": null,
-    "to": "2026-10-14"
-   },
-   "when": "〜10/14(水)まで(会期確定)",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 0,
-   "start": null,
-   "end": null,
-   "allDay": true,
-   "timeUncertain": false,
-   "place": "中央図書館2階展示ギャラリー(小川町2-1325)",
-   "mapq": "小平市中央図書館",
-   "summary": "立体的な仕掛けが飛び出すポップアップ絵本を展示。海外のポップアップ絵本の紹介が中心",
-   "kidsNote": "雨の日の屋内候補。観覧無料",
-   "caution": "",
-   "contact": {
-    "tel": "042-345-1246",
-    "who": "中央図書館"
-   },
-   "lastEntry": "",
-   "hours": "平日10:00〜19:00 / 土日祝10:00〜17:00。 休館日は「金曜日」(祝日でも休館)。ほかに毎月第3木曜=資料整理日、年末年始、特別整理期間。",
-   "ages": {
-    "baby": "○",
-    "pre": "◎",
-    "elem": "◎"
-   },
-   "cost": "無料",
-   "discount": "",
-   "target": "",
-   "url": "https://library.kodaira.ed.jp/viewer/info.html?id=387",
-   "tentative": false,
-   "deadline": null,
-   "cat": "public"
   }
  ],
  "standing": [
