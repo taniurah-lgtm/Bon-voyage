@@ -7,7 +7,10 @@ name: Threads drafts (Phase 0 - generate only, no posting)
 # スケジュール(cron)はデフォルトブランチ(claude/family-event-planning-rfwmo8)でのみ発火する。
 on:
   schedule:
-    - cron: "0 22 * * *"   # 07:00 JST（22:00 UTC）daily。GitHub都合で数分ずれることあり
+    # 🔴 2026-10-15: 「0 22 * * *」（07:00 JST）にしていたが、実際に動くのは毎日 09:40〜11:50 JST だった
+    #    （GitHub の定時実行は、混む時間帯だと数時間遅れる）。朝7時の投稿に間に合わないので、
+    #    02:17 JST（17:17 UTC）に早める。半端な分にしたのは、毎時0分の混雑を避けるため。
+    - cron: "17 17 * * *"
   workflow_dispatch: {}
 
 permissions:
