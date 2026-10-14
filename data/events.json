@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-14",
+ "generated": "2026-10-15",
  "events": [
   {
    "id": "E51",
@@ -4699,6 +4699,47 @@
    "source": "events/2026-11.md"
   },
   {
+   "id": "E187",
+   "name": "多世代交流イベント「第3回 たけのこ公園まつり」",
+   "dates": [
+    "2026-11-07"
+   ],
+   "span": null,
+   "when": "2026年11月7日(土) 11:00〜15:00（雨天の場合は11/8に延期）",
+   "rainDates": [
+    "2026-11-08"
+   ],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "11:00",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市立たけのこ公園（小平市花小金井7-9-10／花小金井駅 南口から徒歩12分）",
+   "mapq": "小平市立たけのこ公園",
+   "summary": "自治会の防災と多世代交流のおまつり。豚汁・アルファ化米の無料配布、コダレンジャーショー、射的やスーパーボールすくい、手形・足形アート、よさこい",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "入場無料。ゲームはピンボールが無料、ほかは1回100円。食べ物は実費",
+   "discount": "",
+   "target": "",
+   "url": "https://hikarigaokajichikai.wixsite.com/home",
+   "status": "候補",
+   "confidence": "日時・会場・雨天延期・内容・タイムテーブル・無料配布・ゲーム料金はチラシの現物で確認（2026-10-14）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
    "id": "E171",
    "name": "花小金井南児童館 乳幼児親子クラス（後期・登録制）",
    "dates": [
@@ -5280,7 +5321,8 @@
    "E149",
    "E163",
    "E176",
-   "E180"
+   "E180",
+   "E187"
   ],
   "2026-11-08": [
    "E145",
