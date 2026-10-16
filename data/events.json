@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-16",
+ "generated": "2026-10-17",
  "events": [
   {
    "id": "E51",
@@ -4329,7 +4329,7 @@
    "target": "小平市民・在勤・在学の方",
    "url": "https://www.city.kodaira.tokyo.jp/event/",
    "status": "候補",
-   "confidence": "一部確認— チラシの現物を実見（2026-09-14。市の文化スポーツ課が発行） ＋ 市公式のイベント一覧に掲載されたことを確認",
+   "confidence": "一部確認— チラシの現物を実見（2026-09-14。市の文化スポーツ課が発行）",
    "tentative": false,
    "deadline": {
     "date": "2026-10-16",
@@ -4417,7 +4417,7 @@
    "target": "",
    "url": "https://ogawa-palette.jp/",
    "status": "候補",
-   "confidence": "公式確認済み（2026-09-14・開設日/受付時間/休館日/フロア）",
+   "confidence": "公式確認済み— プレオープン日程・使用料の全表・使用者登録の窓口を公式PDFと公式サイトで確認。 2026-09-14 に開設日/受付時間/休館日/フロアを確認済み。キッズスペースの料金だけは公式に記載が無く、未確認",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-08.md"
@@ -4456,7 +4456,7 @@
    "target": "公式の対象欄に「小学生以下・小学生・中高生・大人・高齢者・親子」と明記",
    "url": "https://www.city.kodaira.tokyo.jp/event/130/130150.html",
    "status": "候補",
-   "confidence": "公式確認済み（2026-09-16）— 日時・会場・内容・対象・申込不要・雨天時。費用は未取得",
+   "confidence": "一部確認— 日時・会場・内容・対象・申込不要は 2026-09-16 と 2026-10-17 の両方で確認。 費用は依然として未取得",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
