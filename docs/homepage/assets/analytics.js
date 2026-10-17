@@ -15,7 +15,7 @@
     try { localStorage.setItem('bv_from', m[1]); localStorage.setItem('bv_from_at', new Date().toISOString()); } catch (e) {}
   }
 
-  // LINEの友だち追加ボタンが押された数（2026-10-15）。「LINE追加｜入口｜押したページ」で数える
+  // LINEの友だち追加ボタンが押された数（2026-10-15）。「LINE追加｜入口｜押したページ｜ボタンの場所」で数える
   document.addEventListener('click', function (e) {
     var a = e.target && e.target.closest ? e.target.closest('a[href*="lin.ee/"], a[href*="line.me/R/ti/"]') : null;
     if (!a || !window.goatcounter || !window.goatcounter.count) return;
@@ -24,8 +24,14 @@
       var at = Date.parse(localStorage.getItem('bv_from_at') || '');
       if (at && Date.now() - at < 7 * 864e5) from = localStorage.getItem('bv_from') || '';
     } catch (err) {}
+    // 2026-10-17: どのボタンが押されたかも足す（上のバー／最初の画面／ページの下 など）
+    var sec = a.closest('section[id]');
+    var pos = a.classList.contains('bvnav-cta') ? '上のバー'
+      : a.closest('.hero') ? '最初の画面'
+      : a.classList.contains('bvc-invite-btn') ? 'カレンダーの案内'
+      : sec ? ({ tomodachi: 'ページの下' }[sec.id] || sec.id) : 'ほか';
     window.goatcounter.count({
-      path: 'LINE追加｜' + (from || '直接') + '｜' + (location.pathname.replace(/index\.html$/, '') || '/'),
+      path: 'LINE追加｜' + (from || '直接') + '｜' + (location.pathname.replace(/index\.html$/, '') || '/') + '｜' + pos,
       title: 'LINEの友だち追加ボタン',
       event: true
     });
