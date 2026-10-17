@@ -45,9 +45,11 @@ TimeTree の公開カレンダー「東村山周辺イベント」（https://tim
 | 10/17(土)・18(日) | 秋のパンマルシェ | 11:00〜16:00（予定） | ところざわサクラタウン（所沢市） | 入場無料（パンは実費）。公式 https://group.kadokawa.co.jp/information/promotional_topics/article-15705.html | |
 | 10/18(日) | 小平市民まつり | 9:30〜16:30 | あかしあ通り（小平駅から徒歩10分） | 公式 https://www.city.kodaira.tokyo.jp/shihou/files/130782/130782/att_0000025.pdf | |
 | 10/24(土)・25(日) | 所沢市民フェスティバル | 10:00〜16:00 | 所沢航空記念公園（航空公園駅すぐ） | 公式 https://www.tokofes.com/about/ | |
+| 10/25(日) | 久米川商店会「こどもたちのハロウィーン!!」 | 13:00 受付・スタート（雨天決行） | 久米川駅 南口の商店会（受付は栄町2丁目集会所） | 3歳〜小学生・無料・先着250人・申込不要。公式 https://www.kumegawashoutenkai.jp/2026/10/02/halloween2026/ | |
 | 10/25(日) | たかの台こども祭り | 10:00〜15:00 | 小平市立中央公園（鷹の台駅） | 入場無料。公式 https://takanodai-kodomomatsuri.miyachi381.jp/ | |
 | 10/25(日) | 音楽の絵本 halloween | 14:00開演 | ルネこだいら 大ホール（小平駅 徒歩3分） | 全席指定・要チケット（0〜2歳も100円）。公式 https://www.superkids.co.jp/ticket/ | |
 | 10/31(土) | こだキッズタウン | 10:00〜16:00 | 小平第六小学校（小平市小川東町） | 入場無料（お店は実費）。主催の Instagram @codakidstown | |
+| 10/31(土) | ハロウィン（合言葉でお菓子） | 10:00〜17:00（なくなり次第終了） | エミテラス所沢・グランエミオ所沢（所沢駅） | 小学生以下・仮装かハロウィングッズで。公式 https://et-ge-tokorozawa.com/emiterrace/event/detail.html?act=64011 | |
 | 11/7(土) | キッズフェスタ2026 | 10:00〜17:00 | 西武園ゆうえんち（所沢市） | 特別チケットが必要。公式 https://www.seibuholdings.co.jp/kodomo-support/kidsfesta2026.html | |
 
 **外したもの**: 武蔵野美術大学 芸術祭（料金が取れていない）／ガスミュージアムのナイトマルシェ（保留）／
