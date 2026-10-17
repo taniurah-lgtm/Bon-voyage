@@ -2910,7 +2910,7 @@
    "target": "どなたでも",
    "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3672&day=2026-10-10",
    "status": "候補（会期が長いので、雨の週の差し替え札に使う）",
-   "confidence": "公式確認済み（2026-10-10）",
+   "confidence": "公式確認済み",
    "tentative": false,
    "deadline": {
     "date": "2026-09-04",
@@ -3775,11 +3775,11 @@
    "target": "（要確認）",
    "url": "https://library.kodaira.ed.jp/viewer/info.html?id=404",
    "status": "候補",
-   "confidence": "公式確認済み（2026-10-10）。費用・講演会の対象年齢・申込の空き状況は、公式に記載が無く未取得",
+   "confidence": "公式確認済み。費用・講演会の対象年齢・申込の空き状況は、3回あたって公式に記載が無く未取得",
    "tentative": false,
    "deadline": {
     "date": "2026-10-15",
-    "raw": "🔴 託児の申込は講演会とは別。10/15(木)までに「託児申込書」を中央図書館1階カウンターへ提出"
+    "raw": "✅ 託児の申込は 10/15(木) で締切ずみ（講演会の申込とは別の受付だった）"
    },
    "source": "events/2026-10.md"
   },
@@ -4447,7 +4447,7 @@
    "cost": "入場無料・入退場自由。⚠️ ワークショップは有料の可能性（要確認）",
    "discount": "",
    "target": "",
-   "url": "",
+   "url": "http://kodaira-furusatomura.jp/",
    "status": "候補",
    "confidence": "主催アカウントの告知で確認（Threads @tocotonto_handmade）。 会場の施設情報は小平市公式ページで確認（2026-10-10）。ワークショップの料金・対象年齢・出店一覧は未取得",
    "tentative": false,

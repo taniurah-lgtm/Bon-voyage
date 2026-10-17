@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-17",
+ "generated": "2026-10-18",
  "events": [
   {
    "id": "E16",
@@ -3413,7 +3413,7 @@
    "tentative": false,
    "deadline": {
     "date": "2026-10-15",
-    "raw": "🔴 託児の申込は講演会とは別。10/15(木)までに「託児申込書」を中央図書館1階カウンターへ提出"
+    "raw": "✅ 託児の申込は 10/15(木) で締切ずみ（講演会の申込とは別の受付だった）"
    },
    "cat": "public"
   },
@@ -3651,6 +3651,42 @@
    "cat": "fest"
   },
   {
+   "id": "E189",
+   "name": "久米川商店会「こどもたちのハロウィーン!! お菓子はどこ？地図でさがそう！」",
+   "dates": [
+    "2026-10-25"
+   ],
+   "span": null,
+   "when": "2026年10月25日(日) 13:00 受付・スタート（雨天決行／定員になり次第受付終了）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "13:00",
+   "end": null,
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "久米川商店会（東村山市・久米川駅 南口の商店会エリア）。受付・本部は栄町2丁目集会所",
+   "mapq": "久米川商店会",
+   "summary": "本部で「参加証」を受け取り、地図を見ながら商店会のチェックポイントを回る → 最後に本部で参加確認をするとお菓子がもらえる（お菓子は選べない）",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "無料",
+   "discount": "",
+   "target": "3歳〜12歳（小学生まで）。保護者の付き添いが必要。定員250名",
+   "url": "https://www.kumegawashoutenkai.jp/2026/10/02/halloween2026/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "other"
+  },
+  {
    "id": "E117",
    "name": "親子でうどん作り体験",
    "dates": [
@@ -3886,6 +3922,42 @@
    "cat": "public"
   },
   {
+   "id": "E188",
+   "name": "エミテラス所沢・グランエミオ所沢「10/31 ハロウィンイベント」",
+   "dates": [
+    "2026-10-31"
+   ],
+   "span": null,
+   "when": "2026年10月31日(土) 10:00〜17:00（お菓子がなくなり次第終了）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "17:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "エミテラス所沢・グランエミオ所沢（所沢駅。花小金井から西武新宿線で約15分）",
+   "mapq": "エミテラス所沢",
+   "summary": "対象のお店のスタッフに「トリックオアトリート！」と言うと、お菓子がもらえる（1店舗1回）",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "無料",
+   "discount": "",
+   "target": "小学生以下。仮装しているか、ハロウィングッズを身につけていることが条件（公式）",
+   "url": "https://et-ge-tokorozawa.com/emiterrace/event/detail.html?act=64011",
+   "tentative": false,
+   "deadline": null,
+   "cat": "fest"
+  },
+  {
    "id": "E122",
    "name": "第2回 小平モルックカップ",
    "dates": [
@@ -3959,7 +4031,7 @@
    "cost": "入場無料・入退場自由。⚠️ ワークショップは有料の可能性（要確認）",
    "discount": "",
    "target": "",
-   "url": "",
+   "url": "http://kodaira-furusatomura.jp/",
    "tentative": false,
    "deadline": {
     "date": "2026-10-16",
