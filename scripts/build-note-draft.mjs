@@ -54,7 +54,10 @@ const drafted = readdirSync(OUT_DIR)
   })
   .filter(Boolean);
 const written = [...new Set([...published, ...drafted])];
-const usedAt = new Map(written.map((t, i) => [t, i]));   // 小さいほど古い
+// 🔴 同じ題材が何度も選ばれ続けないよう、「最後に書いた順」で古さを見る（2026-10-19）。
+//    初出の順で見ていたため、全分類を一度書いたあとは、いちばん最初の分類が毎回選ばれていた。
+const usedAt = new Map();
+[...published, ...drafted].forEach((t, i) => usedAt.set(t, i));   // 小さいほど古い
 /** まだ書いていないものを優先。全部書いていたら、いちばん古いものから */
 const pickFresh = (items, key) => {
   const fresh = items.filter((x) => !usedAt.has(key(x)));
