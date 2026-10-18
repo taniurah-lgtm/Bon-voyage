@@ -292,6 +292,47 @@ function staleReason(t) {
   }
   return '';
 }
+// 🔴 2026-10-19: コスモスまつり（10/25）を 10/12・13・17・19 と8日で4回選んでいた。
+//    書き出しの文が毎回少し違うので、下の「書き出しが同じ」では止まらなかった。
+//    **公式URLが同じなら同じ催し**とみなす。直近6日に出ていたら作り直す。
+//    ただし**開催の4日前以内なら、念押しとしてもう一度出してよい**（「3〜4日前の朝」が伸びる型）。
+const REPEAT_WINDOW_DAYS = 6;
+const REMIND_WITHIN_DAYS = 4;
+function introUrls(t) {
+  return [...introOf(t).matchAll(/https?:\/\/[^\s）)」]+/g)].map(m => m[0].replace(/[。、]+$/, ''))
+    .filter(u => !u.includes('bonvoya.nicomaru.tokyo'));
+}
+function latestDateOf(t) {
+  const [y, m] = TODAY.split('-').map(Number);
+  let latest = null;
+  for (const [, mm, dd] of introOf(t).replace(/【[^】]*】/g, '').matchAll(/(?<![\d/])(\d{1,2})\/(\d{1,2})(?![\d/])/g)) {
+    const M = +mm, D = +dd;
+    if (M < 1 || M > 12 || D < 1 || D > 31) continue;
+    const yr = (m - M > 6) ? y + 1 : (M - m > 6 ? y - 1 : y);
+    const ts = Date.UTC(yr, M - 1, D);
+    if (latest === null || ts > latest) latest = ts;
+  }
+  return latest;
+}
+function recentUrlDrafts() {
+  const today = Date.parse(TODAY + 'T00:00:00Z');
+  let files = [];
+  try { files = readdirSync('social/drafts').filter(f => /^\d{4}-\d{2}-\d{2}\.md$/.test(f) && f < TODAY + '.md').sort(); } catch {}
+  return files.filter(f => today - Date.parse(f.slice(0, 10) + 'T00:00:00Z') <= REPEAT_WINDOW_DAYS * 86400000)
+    .map(f => ({ f, urls: introUrls(readFileSync('social/drafts/' + f, 'utf8')) }));
+}
+const RECENT_URLS = recentUrlDrafts();
+function sameEventReason(t) {
+  const urls = introUrls(t);
+  if (!urls.length) return '';
+  const hit = RECENT_URLS.find(x => x.urls.some(u => urls.includes(u)));
+  if (!hit) return '';
+  const latest = latestDateOf(t);
+  const today = Date.parse(TODAY + 'T00:00:00Z');
+  if (latest !== null && latest - today <= REMIND_WITHIN_DAYS * 86400000) return ''; // 直前の念押しはよい
+  return `直近${REPEAT_WINDOW_DAYS}日に同じ催し(${hit.f})`;
+}
+
 // 直近3日のドラフトの【紹介 1/2】と、書き出しが同じなら「同じ話」。
 function firstIntroLine(t) {
   const m = t.match(/【Threads・紹介 1\/2】[^\n]*\n+([^\n]+)/);
@@ -307,7 +348,7 @@ const RECENT_INTROS = recentIntroLines();
 function repeatReason(t) {
   const line = firstIntroLine(t);
   const hit = line && RECENT_INTROS.find(x => x.line === line);
-  return hit ? `直近と同じ紹介(${hit.f})` : '';
+  return hit ? `直近と同じ紹介(${hit.f})` : sameEventReason(t);
 }
 // 作り直すときに、モデルへ「これは選ばない」と足す文
 const avoidNote = (why, t) => `\n\n# 🔴 前回の案は使えなかった（${why}）\n次の書き出しの話題は**選ばない**。台帳から別のものを選ぶこと:\n${introOf(t).split('\n').filter(Boolean).slice(1, 3).join('\n')}\n`;
