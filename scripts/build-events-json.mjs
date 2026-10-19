@@ -105,7 +105,8 @@ function extractDates(raw) {
   const s = toSlash(normalize(raw));
   const hits = [];                  // {iso, at, sep} sep = 直前の区切り文字
   let lastMonth = null;
-  const re = /(\d{1,2})\/(\d{1,2})|(?<![\d\/])(\d{1,2})\((?:月|火|水|木|金|土|日)/g;
+  // 曜日の字のあとは「)」「・」「祝」に限る（2026-10-19: 「15:30（日程要確認）」の「30(日」を30日と読んでいた）
+  const re = /(\d{1,2})\/(\d{1,2})|(?<![\d\/])(\d{1,2})\((?:月|火|水|木|金|土|日)(?=\)|・|祝)/g;
   let m;
   while ((m = re.exec(s)) !== null) {
     let iso = null;
