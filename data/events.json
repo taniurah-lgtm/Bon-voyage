@@ -3644,12 +3644,12 @@
     "pre": "○",
     "elem": "○"
    },
-   "cost": "",
+   "cost": "公式に記載なし（要確認）",
    "discount": "",
    "target": "",
    "url": "https://ogawa-palette.jp/",
    "status": "候補",
-   "confidence": "公式確認済み（2026-10-12）— 日時・申込不要・できること・駐車場なし",
+   "confidence": "公式確認済み（2026-10-20）— 日時・申込不要・できること・駐車場なし。料金とキッズスペースの詳細は公式に記載が無い",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
@@ -3898,12 +3898,12 @@
     "pre": "◎",
     "elem": "○"
    },
-   "cost": "",
+   "cost": "公式に記載なし（要確認）",
    "discount": "",
    "target": "乳幼児から小学生",
    "url": "https://www.city.higashikurume.lg.jp/library/1024999/1029786.html",
    "status": "候補（雨の週の差し替え札。東久留米の読者が増えたら厚くする）",
-   "confidence": "公式確認済み（2026-10-12）— 期間・時間・金曜休館・会場・対象",
+   "confidence": "公式確認済み（2026-10-20）— 期間・時間・金曜休館・会場・対象、および併催2件（秋空おはなし会・赤ちゃんと絵本）。料金は公式に記載が無い",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
@@ -3938,12 +3938,12 @@
     "pre": "○",
     "elem": "○"
    },
-   "cost": "不明（公民館まつりは入場無料のことが多いが、公式で確かめていないので書かない）",
+   "cost": "要確認",
    "discount": "",
    "target": "",
    "url": "",
-   "status": "候補（要確認）。確かめられたら",
-   "confidence": "🔴 未確認（二次情報のみ。一次は市のサイト障害で見られない）",
+   "status": "候補（要確認）。🔴",
+   "confidence": "🔴 未確認（2026-10-20 時点。二次情報のみ。一次は市のサイト障害で見られない）",
    "tentative": true,
    "deadline": null,
    "source": "events/2026-10.md"

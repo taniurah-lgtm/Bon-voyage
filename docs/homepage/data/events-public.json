@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-19",
+ "generated": "2026-10-20",
  "events": [
   {
    "id": "E16",
@@ -3289,7 +3289,7 @@
     "pre": "○",
     "elem": "○"
    },
-   "cost": "",
+   "cost": "公式に記載なし（要確認）",
    "discount": "",
    "target": "",
    "url": "https://ogawa-palette.jp/",
@@ -3525,11 +3525,48 @@
     "pre": "◎",
     "elem": "○"
    },
-   "cost": "",
+   "cost": "公式に記載なし（要確認）",
    "discount": "",
    "target": "乳幼児から小学生",
    "url": "https://www.city.higashikurume.lg.jp/library/1024999/1029786.html",
    "tentative": false,
+   "deadline": null,
+   "cat": "fest"
+  },
+  {
+   "id": "E193",
+   "name": "第52回 花小金井北公民館まつり",
+   "dates": [
+    "2026-10-24",
+    "2026-10-25"
+   ],
+   "span": null,
+   "when": "10/24(土) 10:00〜16:00 ／ 10/25(日) 10:00〜15:30（日程要確認）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "10:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "花小金井北公民館（花小金井駅の北側）",
+   "mapq": "花小金井北公民館",
+   "summary": "公民館で活動するサークルの作品展示・舞台発表、落語会など。一部の催しは事前申込",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "○",
+    "elem": "○"
+   },
+   "cost": "要確認",
+   "discount": "",
+   "target": "",
+   "url": "",
+   "tentative": true,
    "deadline": null,
    "cat": "fest"
   },
@@ -4419,25 +4456,25 @@
   },
   {
    "id": "E146",
-   "name": "第36回 小平市産業まつり ⚠️**日程は裏が取れていない**",
+   "name": "第36回 小平市産業まつり",
    "dates": [
     "2026-11-14",
     "2026-11-15"
    ],
    "span": null,
-   "when": "2026年11月14日(土)〜15日(日)（⚠️要確認）",
+   "when": "2026年11月14日(土)・15日(日) 10:00〜15:00",
    "rainDates": [],
    "exceptions": null,
    "programs": null,
    "totalDates": 2,
-   "start": null,
-   "end": null,
-   "allDay": true,
+   "start": "10:00",
+   "end": "15:00",
+   "allDay": false,
    "timeUncertain": false,
-   "place": "福祉会館前市民広場・中央公民館ほか（小川町2-1333 周辺）⚠️要確認",
-   "mapq": "福祉会館前市民広場",
+   "place": "小平ファーマーズ・マーケットと小平市役所周辺（JA の公式）",
+   "mapq": "小平ファーマーズ",
    "summary": "",
-   "kidsNote": "暫定。内容が取れていない。",
+   "kidsNote": "",
    "caution": "",
    "lastEntry": "",
    "hours": "",
@@ -4446,13 +4483,87 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "入場無料（物販・飲食は実費）⚠️要確認",
+   "cost": "入場の料金の案内は無い。販売・模擬店は実費",
    "discount": "",
    "target": "",
-   "url": "https://www.city.kodaira.tokyo.jp/event/123/123638.html",
+   "url": "https://www.jatm.or.jp/farming/advising/festival.php",
    "tentative": false,
    "deadline": null,
    "cat": "fest"
+  },
+  {
+   "id": "E194",
+   "name": "小川町二丁目児童館「ボルダリング」",
+   "dates": [
+    "2026-11-14"
+   ],
+   "span": null,
+   "when": "2026年11月14日(土) 13:15〜14:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "13:15",
+   "end": "14:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小川町二丁目児童館 遊戯室（小平市）",
+   "mapq": "小川町二丁目児童館 遊戯室",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "✕",
+    "elem": "◎"
+   },
+   "cost": "公式に記載なし（要確認。児童館の催し）",
+   "discount": "",
+   "target": "小学生。定員なし",
+   "url": "https://kodaji.ashita-ba.co.jp/calendar/index.php?action=View&event_id=0000162114",
+   "tentative": false,
+   "deadline": null,
+   "cat": "public"
+  },
+  {
+   "id": "E191",
+   "name": "第52回 小平市少年少女マラソン大会",
+   "dates": [
+    "2026-11-15"
+   ],
+   "span": null,
+   "when": "2026年11月15日(日)（雨天の場合は11/22に延期）",
+   "rainDates": [
+    "2026-11-22"
+   ],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "ブリヂストン小平グラウンド及び敷地内道路（小平市小川東町3-1）",
+   "mapq": "小平市ブリヂストン小平グラウンド及び敷地内道路",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "✕",
+    "elem": "◎"
+   },
+   "cost": "無料",
+   "discount": "",
+   "target": "小平市内在住・在学の小学3〜6年生（保護者の承諾があり、学校の体育の授業を受けられる児童）",
+   "url": "https://www.sportsentry.ne.jp/event/t/106670",
+   "tentative": false,
+   "deadline": null,
+   "cat": "other"
   },
   {
    "id": "E174",
@@ -4496,6 +4607,42 @@
     "raw": "🔴 申込: 11/7(土) 9:00から先着順（申込方法の記載なし。仲町公民館 042-341-0862）"
    },
    "cat": "public"
+  },
+  {
+   "id": "E190",
+   "name": "多摩六都科学館「天体観望会【11月】」",
+   "dates": [
+    "2026-11-21"
+   ],
+   "span": null,
+   "when": "2026年11月21日(土) 18:00〜19:30（受付 17:40〜）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "18:00",
+   "end": "19:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "多摩六都科学館（サイエンスエッグで解説 → 屋上で観望）",
+   "mapq": "多摩六都科学館",
+   "summary": "月、土星などを望遠鏡で見る",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "✕",
+    "elem": "◎"
+   },
+   "cost": "1人100円",
+   "discount": "",
+   "target": "圏域市民限定（小平市・東村山市・清瀬市・東久留米市・西東京市）。小学生〜大人。小学生は保護者と。参加者以外の同伴はできない",
+   "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3704&day=2026-11-21",
+   "tentative": false,
+   "deadline": null,
+   "cat": "spot"
   },
   {
    "id": "E118",
@@ -4571,6 +4718,81 @@
     "raw": "🔴 申込: Webで抽選。締切 11/9(月)必着。1組1回のみ。当選者にだけ締切から3日以内に参加券"
    },
    "cat": "spot"
+  },
+  {
+   "id": "E192",
+   "name": "NPO法人小平こども劇場「みんなで自然をあそぼう」",
+   "dates": [
+    "2026-11-22"
+   ],
+   "span": null,
+   "when": "2026年11月22日(日) 10:00〜15:00（10:00 集合）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "八国山緑地 ころころ広場（東村山市。西武園線 西武園駅から徒歩5分）",
+   "mapq": "八国山緑地 ころころ広場",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "1人200円（保険代など）",
+   "discount": "",
+   "target": "",
+   "url": "https://kodaira-kogeki.org/2026-11-22-shizen-wo-asobou/",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-11-06",
+    "raw": "11月6日(金)まで。事務所へのメールか、ページの申込フォーム"
+   },
+   "cat": "spot"
+  },
+  {
+   "id": "E195",
+   "name": "中央図書館「休館日の図書館に親子をご招待」",
+   "dates": [
+    "2026-12-18"
+   ],
+   "span": null,
+   "when": "公式の表記は「令和7年12月18日（木曜日）午前10時から正午」（日程要確認）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "小平市中央図書館（休館日の館内）",
+   "mapq": "小平市中央図書館",
+   "summary": "子どもは読み聞かせ・手遊びなど。大人はおはなし会・館内案内（希望者）。ほかは自由時間",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "小平市中央図書館（休館日の館内）",
+   "ages": {
+    "baby": "◎",
+    "pre": "◎",
+    "elem": "✕"
+   },
+   "cost": "公式に記載なし（要確認）",
+   "discount": "",
+   "target": "未就学児（生後6か月ごろ〜）とその保護者。1家族4人まで（子どもは2人まで）。大人だけ・子どもだけは不可",
+   "url": "https://library.kodaira.ed.jp/viewer/info.html?id=395",
+   "tentative": true,
+   "deadline": null,
+   "cat": "public"
   }
  ],
  "standing": [
