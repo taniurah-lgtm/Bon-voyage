@@ -38,6 +38,7 @@ VENUES = [
     ('poster',     'ポスター掲示（場所を問わない共通枠）'),
     ('hand',       '手渡し・口コミ'),
     ('kraft',      'クラフト紙チラシ（黒1色・A4）'),
+    ('takenoko',   'たけのこ公園まつり（11/7）の当日プログラム'),
 ]
 
 os.makedirs(OUT, exist_ok=True)
