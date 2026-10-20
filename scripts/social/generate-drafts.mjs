@@ -329,6 +329,9 @@ function sameEventReason(t) {
   if (!hit) return '';
   const latest = latestDateOf(t);
   const today = Date.parse(TODAY + 'T00:00:00Z');
+  // 🔴 2026-10-21: ただし**前日・前々日に出したものは、念押しでも続けない**（10/20 たかの台こども祭り → 10/21 も同じになりかけた）
+  const daysSince = (today - Date.parse(hit.f.slice(0, 10) + 'T00:00:00Z')) / 86400000;
+  if (daysSince <= 2) return `前日・前々日と同じ催し(${hit.f})`;
   if (latest !== null && latest - today <= REMIND_WITHIN_DAYS * 86400000) return ''; // 直前の念押しはよい
   return `直近${REPEAT_WINDOW_DAYS}日に同じ催し(${hit.f})`;
 }
