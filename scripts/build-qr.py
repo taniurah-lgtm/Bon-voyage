@@ -39,6 +39,7 @@ VENUES = [
     ('hand',       '手渡し・口コミ'),
     ('kraft',      'クラフト紙チラシ（黒1色・A4）'),
     ('takenoko',   'たけのこ公園まつり（11/7）の当日プログラム'),
+    ('tanashi',    '田無のオプチャ（スレッド内の返信）'),
 ]
 
 os.makedirs(OUT, exist_ok=True)
