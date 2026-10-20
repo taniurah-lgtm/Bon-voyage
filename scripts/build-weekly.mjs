@@ -90,7 +90,8 @@ const sceneHref = (x) => {
   const n = (x.url.match(/[?&]img_index=(\d{1,2})/) || [])[1];
   return n ? `${base}?img_index=${n}` : base;
 };
-const sceneBy = (x) => (isInsta(x.url) ? `Instagram @${x.by}` : `${x.by}のページ`);
+const isYoutube = (u) => /^https:\/\/(www\.youtube\.com|youtu\.be)\//.test(u || '');
+const sceneBy = (x) => (isInsta(x.url) ? `Instagram @${x.by}` : isYoutube(x.url) ? `${x.by}のYouTube` : `${x.by}のページ`);
 function instaProblems(it) {
   const list = it.insta || [];
   if (!Array.isArray(list)) return [`${it.id} の insta は [ ] で書く`];
