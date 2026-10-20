@@ -289,3 +289,16 @@ https://bonvoya.nicomaru.tokyo/
   （単体で読むと途中で終わる）。出すなら **Threadsの本文＋写真/チラシ画像** で
 - **動くなら: 認証済アカウントを申請する**（無料・審査あり）。投稿機能を早く使える可能性があり、「未認証」の表示も消える
 - 出典: https://www.lycbiz.com/jp/news/line-official-account/20260715/ ・ https://www.lycbiz.com/jp/manual/OfficialAccountManager/posts/
+
+## 🖼 本文の前に画像を1枚はさむ（2026-10-21〜）
+
+**オーナーと奥さまの案。**年齢別ページへのリンクが2割しか押されていない → 流し読みの人はリンクを見落とす。
+本文の前に「リンクの先にページがある」と分かる絵を1枚はさむ。
+
+- 号のファイルに1行: `<!-- line-image: https://bonvoya.nicomaru.tokyo/assets/line/<名前>.jpg -->`
+- `scripts/line_report.sh` が読んで、**1通目と同じ配信（同じリクエスト）**で「画像 → 本文」の順に送る。**通数は増えない**（1回の配信で数える）
+- 画像は HTML（チラシと同じ色・書体・絵）から書き出す: `node scripts/make-line-image.mjs docs/print/line/<元>.html <名前>`
+  → `docs/homepage/assets/line/<名前>.jpg`（1040×1040）と `<名前>-preview.jpg`（520×520・1MB未満）。**push してデプロイされてから**送る
+- 🔴 **画像が開けない・LINEの事前検査（validate）に通らないときは、画像を外して本文だけ送る。**画像のせいで号が届かない、は起こさない
+- `scripts/publish_report.sh <号> --check` で「画像: … 200 image/jpeg」と出れば準備できている
+- 1枚目は 10/21号「今週のおでかけは、リンクの先に。」（元 `docs/print/line/guide-2026-10-21.html`）。毎号は出さない（慣れると読まれない）。**リンクを押した割合を、画像あり・なしで比べる**
