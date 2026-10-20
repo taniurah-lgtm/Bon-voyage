@@ -57,10 +57,58 @@ PYEOF
 )
 
 echo "（${#CHUNK_FILES[@]}通に分けて送ります）"
+
+# ★2026-10-21: 本文の前に画像を1枚はさめるようにした（オーナーと奥さまの案）。
+#   年齢別ページへのリンクが2割しか押されていない → 流し読みでも「リンクの先にページがある」と分かる絵を先に出す。
+#   号のファイルに  <!-- line-image: https://bonvoya.nicomaru.tokyo/assets/line/<名前>.jpg -->  と書くと、
+#   **1通目と同じ配信（同じリクエスト）**で、画像 → 本文 の順に届く。1回の配信なので通数は増えない。
+#   プレビュー画像は <名前>-preview.jpg（1MB未満）。scripts/make-line-image.mjs が両方を書き出す。
+#   🔴 画像が開けない・LINEの事前検査に通らないときは、**画像を外して本文だけ送る**（画像のせいで号が届かない、を起こさない）
+IMG_URL=$(python3 - "$1" <<'PYEOF'
+import re, sys
+t = open(sys.argv[1], encoding='utf-8').read()
+m = re.search(r'<!--\s*line-image:\s*(https://\S+?\.(?:jpe?g|png))\s*-->', t)
+print(m.group(1) if m else '')
+PYEOF
+)
+IMG_PREV=""
+# 🔴 この区間は set -e の下にある。確認が失敗しても**配信そのものは止めない**よう、どのコマンドも || で受ける
+if [[ -n "$IMG_URL" ]]; then
+  IMG_PREV="${IMG_URL%.*}-preview.${IMG_URL##*.}"
+  img_ok=1
+  for u in "$IMG_URL" "$IMG_PREV"; do
+    info=$(curl -s -o /dev/null -w '%{http_code} %{content_type} %{size_download}' -m 30 "$u" 2>/dev/null || echo "000 - 0")
+    read -r code ctype size <<< "$info" || true
+    lim=10000000; [[ "$u" == "$IMG_PREV" ]] && lim=1000000
+    if [[ "$code" != "200" || "$ctype" != image/* || ! "$size" =~ ^[0-9]+$ || "$size" -eq 0 || "$size" -gt "$lim" ]]; then
+      echo "WARN: 画像が使えません（$u → $info）。画像を外して本文だけ送ります。" >&2
+      img_ok=0
+    fi
+  done
+  if (( img_ok == 1 )); then
+    vpayload=$(jq -n --arg o "$IMG_URL" --arg p "$IMG_PREV" --rawfile t "${CHUNK_FILES[0]}" \
+      '{messages: [{type:"image", originalContentUrl:$o, previewImageUrl:$p}, {type:"text", text:$t}]}' 2>/dev/null || echo "")
+    vcode=$(curl -sS -o /tmp/line_validate.json -w '%{http_code}' -m 20 \
+      -X POST https://api.line.me/v2/bot/message/validate/broadcast \
+      -H "Authorization: Bearer ${LINE_CHANNEL_ACCESS_TOKEN}" -H 'Content-Type: application/json' -d "$vpayload" 2>/dev/null || echo "000")
+    if [[ -z "$vpayload" || "$vcode" != "200" ]]; then
+      echo "WARN: LINEの事前検査に通りませんでした（HTTP $vcode）。画像を外して本文だけ送ります:" >&2
+      cat /tmp/line_validate.json >&2 2>/dev/null || true; echo >&2
+      img_ok=0
+    fi
+  fi
+  if (( img_ok == 1 )); then echo "（1通目の前に画像を1枚はさみます: $IMG_URL）"; else IMG_URL=""; fi
+fi
+
 part=0
 for cf in "${CHUNK_FILES[@]}"; do
   part=$(( part + 1 ))
-  payload=$(jq -n --rawfile t "$cf" '{messages: [{type: "text", text: $t}]}')
+  if (( part == 1 )) && [[ -n "$IMG_URL" ]]; then
+    payload=$(jq -n --arg o "$IMG_URL" --arg p "$IMG_PREV" --rawfile t "$cf" \
+      '{messages: [{type:"image", originalContentUrl:$o, previewImageUrl:$p}, {type:"text", text:$t}]}')
+  else
+    payload=$(jq -n --rawfile t "$cf" '{messages: [{type: "text", text: $t}]}')
+  fi
   rm -f "$cf"
 
   http_code=$(curl -sS -o /tmp/line_resp.json -w '%{http_code}' \

@@ -1,0 +1,83 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<title>LINE用の案内画像（10/21号の前に1枚）｜ぼんぼやーじゅ通信</title>
+<!--
+  2026-10-21 オーナー（と奥さま）の案: 年齢別ページへのリンクが2割しか押されていない。
+  文章を流し読みする人はリンクを見落とす → 本文の前に「リンクの先にページがある」と分かる絵を1枚はさむ。
+  ・チラシと同じ色・書体・絵（docs/homepage/flyer-a4-canva-print.html）で作る。AIっぽい作り絵にしない
+  ・右の画面は、本物の年齢別ページ（10/14号・未就学）の画面写真
+  ・書き出し: node scripts/make-line-image.mjs docs/print/line/guide-2026-10-21.html → 1040×1040 の JPEG
+-->
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ width:1040px; height:1040px; }
+  body{ font-family:"Zen Maru Gothic",sans-serif; background:#FFFDF7; color:#2A4B67; -webkit-font-smoothing:antialiased; }
+  .page{ position:relative; width:1040px; height:1040px; overflow:hidden; background:#FFFDF7; }
+  .top{ position:absolute; inset:0 0 auto 0; height:168px; background:#469197; color:#fff;
+        display:flex; align-items:center; padding:0 56px; gap:22px; z-index:3; }
+  .tag{ font-size:24px; font-weight:700; letter-spacing:.16em; border:2px solid rgba(255,255,255,.85);
+        border-radius:999px; padding:8px 20px 8px 24px; }
+  .brand{ font-family:"Mochiy Pop One",sans-serif; font-size:50px; letter-spacing:.02em; }
+  .balloon{ position:absolute; right:60px; top:22px; width:50px; }
+  .left{ position:absolute; left:56px; top:206px; width:548px; z-index:3; }
+  .catch{ font-family:"Zen Kurenaido",sans-serif; font-size:56px; line-height:1.25; color:#C88C5C;
+          letter-spacing:.03em; paint-order:stroke fill; -webkit-text-stroke:.03em currentColor; white-space:nowrap; }
+  .lead{ margin-top:22px; font-size:25px; line-height:1.6; font-weight:500; letter-spacing:.02em; }
+  .chips{ display:flex; gap:10px; margin:12px 0 10px; }
+  .chip{ font-size:22px; font-weight:700; color:#2C7C9E; background:#fff; border:2px solid #9FD0D2;
+         border-radius:999px; padding:7px 14px 8px; white-space:nowrap; }
+  .feat{ margin-top:24px; list-style:none; display:flex; flex-direction:column; gap:14px; }
+  .feat li{ display:flex; align-items:flex-start; gap:14px; font-size:25px; line-height:1.45; font-weight:500; }
+  .dot{ flex:none; width:40px; height:40px; border-radius:50%; background:#E6F2F2; color:#3B8F94;
+        display:flex; align-items:center; justify-content:center; font-size:21px; font-weight:700; margin-top:-2px; }
+  .new .dot{ background:#FBEBDD; color:#C88C5C; }
+  .newtag{ display:inline-block; font-size:17px; font-weight:700; color:#fff; background:#C88C5C;
+           border-radius:6px; padding:2px 9px 3px; margin-right:8px; letter-spacing:.06em; vertical-align:3px; }
+  .sub{ display:block; font-size:21px; color:#5C7487; margin-top:2px; }
+  .go{ margin-top:40px; font-family:"Zen Kurenaido",sans-serif; font-size:33px; white-space:nowrap;
+       color:#2A4B67; letter-spacing:.03em; }
+  .go .arr{ display:inline-block; color:#C88C5C; margin-right:6px; }
+  .hills{ position:absolute; left:-20px; width:1080px; bottom:-150px; opacity:.5; z-index:1; }
+  .family{ position:absolute; left:84px; bottom:46px; height:128px; z-index:2; }
+  .sun{ position:absolute; left:300px; bottom:118px; width:62px; opacity:.9; z-index:2; }
+  .cap{ position:absolute; right:52px; top:190px; width:350px; text-align:center; font-size:18px;
+        color:#5C7487; z-index:3; }
+  .phone{ position:absolute; right:52px; top:220px; width:350px; height:780px; border-radius:40px;
+          background:#fff; border:3px solid #2A4B67; padding:12px; z-index:2;
+          box-shadow:0 10px 0 rgba(42,75,103,.08); }
+  .screen{ width:100%; height:100%; border-radius:28px; overflow:hidden; background:#FBF6EE; }
+  .screen img{ width:100%; display:block; }
+  .call{ position:absolute; z-index:4; left:476px; top:868px; display:flex; align-items:center; gap:4px; }
+  .call .bubble{ background:#C88C5C; color:#fff; font-weight:700; font-size:20px; border-radius:999px;
+                 padding:7px 14px; letter-spacing:.04em; white-space:nowrap; }
+</style></head><body>
+<div class="page">
+  <div class="top">
+    <span class="tag">おしらせ</span>
+    <span class="brand">ぼんぼやーじゅ通信</span>
+    <img class="balloon" src="../../homepage/assets/art/canva/balloon-a.png" alt="">
+  </div>
+
+  <div class="left">
+    <div class="catch">今週のおでかけは、<br>リンクの先に。</div>
+    <p class="lead">LINEのいちばん下の、この3つを押すと</p>
+    <div class="chips"><span class="chip">👶 赤ちゃん連れ</span><span class="chip">🧒 未就学の子</span><span class="chip">🎒 小学生</span></div>
+    <p class="lead" style="margin-top:0">年齢ごとのページが開きます。</p>
+    <ul class="feat">
+      <li><span class="dot">1</span><span>公式サイトと地図に、ひと押しで</span></li>
+      <li><span class="dot">2</span><span>スマホのカレンダーに登録できます</span></li>
+      <li class="new"><span class="dot">3</span><span><span class="newtag">NEW</span>📷「昨年の様子」ボタン<span class="sub">写真や開催の報告で、雰囲気が分かります</span></span></li>
+    </ul>
+    <div class="go"><span class="arr">↓</span>このあとのリンクから、どうぞ</div>
+  </div>
+
+  <div class="cap">ページはこんな感じ（先週号）</div>
+  <div class="phone"><div class="screen"><img src="shot-week-2026-10-14-pre.png" alt=""></div></div>
+  <div class="call"><span class="bubble">NEW 📷 ここ</span>
+    <svg width="58" height="24" viewBox="0 0 58 24"><path d="M2 12 C 16 5, 32 19, 52 12" stroke="#C88C5C" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M45 5 L54 12 L45 19" stroke="#C88C5C" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+
+  <img class="hills" src="../../homepage/assets/art/canva/hills.png" alt="">
+  <img class="family" src="../../homepage/assets/art/canva/family-3.png" alt="">
+</div>
+</body>
+</html>

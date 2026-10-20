@@ -82,6 +82,18 @@ cat "$BODY"
 echo "── ここまで ──"
 rm -f "$BODY"
 
+# ★2026-10-21: 本文の前にはさむ画像（<!-- line-image: … -->）があれば、開けるかを見る
+IMG=$(grep -oE '<!--[[:space:]]*line-image:[[:space:]]*https://[^ ]+\.(jpe?g|png)' "$REPORT" | sed -E 's/.*line-image:[[:space:]]*//' | head -1)
+if [[ -n "$IMG" ]]; then
+  for u in "$IMG" "${IMG%.*}-preview.${IMG##*.}"; do
+    c=$(curl -s -o /dev/null -w '%{http_code} %{content_type} %{size_download}B' -m 20 "$u")
+    note "画像: $u → $c"
+  done
+  note "（本文の前に画像を1枚はさみます。開けないときは本文だけ送ります）"
+else
+  note "画像: なし"
+fi
+
 if [[ -n "$CHECK_ONLY" ]]; then
   echo "▶ --check のため、ここで終了します。commit も push も配信もしていません。"
   exit 0
