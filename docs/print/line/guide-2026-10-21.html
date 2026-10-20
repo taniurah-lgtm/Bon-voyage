@@ -37,7 +37,10 @@
        color:#2A4B67; letter-spacing:.03em; }
   .go .arr{ display:inline-block; color:#C88C5C; margin-right:6px; }
   .hills{ position:absolute; left:-20px; width:1080px; bottom:-150px; opacity:.5; z-index:1; }
-  .family{ position:absolute; left:84px; bottom:46px; height:128px; z-index:2; }
+  /* ★足もとを緑の丘の稜線に乗せる（2026-10-21 オーナー「浮いている」）。
+       丘（.hills）の緑の上端を画素で測ると、x=280〜400 で y≈978 と平ら。左の斜面（x=84〜184 は y=1030〜995）では3人が乗らない。
+       家族の絵（family-3.png・144px）の足は 135 行目 → 高さ128pxなら上端から120px。足を稜線より3px下（草の中）に：top=861 → bottom=1040-861-128=51 */
+  .family{ position:absolute; left:290px; bottom:51px; height:128px; z-index:2; }
   .sun{ position:absolute; left:300px; bottom:118px; width:62px; opacity:.9; z-index:2; }
   .cap{ position:absolute; right:52px; top:190px; width:350px; text-align:center; font-size:18px;
         color:#5C7487; z-index:3; }
