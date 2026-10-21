@@ -36,4 +36,14 @@
       event: true
     });
   }, true);
+
+  // 押されたリンクの題名は、見えている文字だけにする（2026-10-21）。
+  // data-goatcounter-title が無いと count.js は中のHTMLを題名にするので、
+  // 解析の画面に <span class="ig"> などがそのまま出ていた（「様子｜…」「週｜園庭開放」）
+  document.addEventListener('click', function (e) {
+    var el = e.target && e.target.closest ? e.target.closest('[data-goatcounter-click]') : null;
+    if (!el || el.dataset.goatcounterTitle) return;
+    var parts = Array.prototype.map.call(el.childNodes, function (n) { return (n.textContent || '').trim(); });
+    el.dataset.goatcounterTitle = parts.filter(Boolean).join(' ').replace(/\s+/g, ' ').slice(0, 100);
+  }, true);
 })();
