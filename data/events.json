@@ -4197,7 +4197,7 @@
    "target": "小学生以下・小学生・中高生・大人・高齢者・親子（公式の表記）",
    "url": "https://www.city.kodaira.tokyo.jp/event/129/129951.html",
    "status": "候補",
-   "confidence": "2026-10-11 に再確認を試みたが、市の公式ページが機械から取れず確証を更新できなかった",
+   "confidence": "2026-10-22 に再確認を試みたが、市の公式ページが取れず確証を更新できなかった",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
