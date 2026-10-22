@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-22",
+ "generated": "2026-10-23",
  "events": [
   {
    "id": "E16",
@@ -4186,7 +4186,10 @@
    "target": "",
    "url": "https://www.tatemonoen.jp/event/page/2026_lightup.php",
    "tentative": false,
-   "deadline": null,
+   "deadline": {
+    "date": "2026-11-04",
+    "raw": "手話通訳が必要な方の事前予約枠 5名・締切 11/4(水)17:00"
+   },
    "cat": "spot"
   },
   {
@@ -4242,9 +4245,9 @@
    "end": null,
    "allDay": true,
    "timeUncertain": false,
-   "place": "井の頭自然文化園 本園（武蔵野市御殿山1-17-6）",
+   "place": "井の頭自然文化園 本園（動物園）と分園（水生物園）の両方（武蔵野市御殿山1-17-6）",
    "mapq": "井の頭自然文化園 本園",
-   "summary": "夜の動物たちを見られる。（2025年の回は飼育係のガイド・彫刻のライトアップ・ ゲストのライブがあった。⚠️ 2026年の中身は未発表）",
+   "summary": "夜の動物たちを見られる。2026年の中身が公式に出た",
    "kidsNote": "",
    "caution": "",
    "lastEntry": "",
@@ -4257,7 +4260,7 @@
    "cost": "一般400円／中学生150円／65歳以上200円",
    "discount": "",
    "target": "",
-   "url": "https://www.tokyo-zoo.net/zoo/ino/",
+   "url": "https://www.tokyo-zoo.net/inokashira/news/12657/index.html",
    "tentative": false,
    "deadline": null,
    "cat": "spot"

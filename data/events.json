@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-22",
+ "generated": "2026-10-23",
  "events": [
   {
    "id": "E51",
@@ -4614,9 +4614,12 @@
    "target": "",
    "url": "https://www.tatemonoen.jp/event/page/2026_lightup.php",
    "status": "候補",
-   "confidence": "公式確認済み（2026-10-12）— 日時・入園締切・荒天中止・内容・観覧料（中学生以下無料）",
+   "confidence": "公式確認済み（2026-10-23）— 日時・入園締切・荒天中止・内容・観覧料（中学生以下無料）・ベビーカーの貸出・授乳室とおむつ替え・切り紙の詳細",
    "tentative": false,
-   "deadline": null,
+   "deadline": {
+    "date": "2026-11-04",
+    "raw": "手話通訳が必要な方の事前予約枠 5名・締切 11/4(水)17:00"
+   },
    "source": "events/2026-11.md"
   },
   {
@@ -4653,7 +4656,7 @@
    "target": "",
    "url": "https://organicfesta.morinohito.net/",
    "status": "候補",
-   "confidence": "日時・会場・順延・入場無料・2026年の企画・タイムテーブル・出店まで、事務局から公式チラシを直接もらって確認済み（2026-09-21）",
+   "confidence": "公式確認済み— 日時・会場・順延・入場無料・2026年の企画・タイムテーブル・出店は、事務局から公式チラシを直接もらって確認（2026-09-21）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
@@ -4675,9 +4678,9 @@
    "end": null,
    "allDay": true,
    "timeUncertain": false,
-   "place": "井の頭自然文化園 本園（武蔵野市御殿山1-17-6）",
+   "place": "井の頭自然文化園 本園（動物園）と分園（水生物園）の両方（武蔵野市御殿山1-17-6）",
    "mapq": "井の頭自然文化園 本園",
-   "summary": "夜の動物たちを見られる。（2025年の回は飼育係のガイド・彫刻のライトアップ・ ゲストのライブがあった。⚠️ 2026年の中身は未発表）",
+   "summary": "夜の動物たちを見られる。2026年の中身が公式に出た",
    "kidsNote": "",
    "caution": "",
    "contact": null,
@@ -4691,9 +4694,9 @@
    "cost": "一般400円／中学生150円／65歳以上200円",
    "discount": "",
    "target": "",
-   "url": "https://www.tokyo-zoo.net/zoo/ino/",
+   "url": "https://www.tokyo-zoo.net/inokashira/news/12657/index.html",
    "status": "候補",
-   "confidence": "日程と入園料は公式確認済み（2026-09-22）／延長時間と中身は未取得",
+   "confidence": "公式確認済み（2026-10-23）— 延長時間・入園の締切・2026年の内容・雨天時・対象（本園と分園）。入園料は 2026-09-22 の確認のまま",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
