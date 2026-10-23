@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<title>FAX送信票（園へチラシをFAXするとき）</title>
+<!-- 園から「FAXでチラシを送ってもらえれば、見て決める」と言われたときの送信票。A4・白黒。
+     2026-10-23 まるやまこども園（園長不在→FAXで見てもらう）で作った。台本は docs/en-phone-script.md。
+     宛先は URL の ?to=園名&name=園長先生&fax=FAX番号&date=日付 で入れる（node scripts/make-fax.mjs が入れる）。
+     FAXは細かい字がつぶれるので、本文は大きめ・線は太め。売り込みは書かない（送付状と同じ）。 -->
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; color: #000; background: #fff; font-family: "Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif; }
+  .page { width: 210mm; height: 297mm; padding: 24mm 24mm 20mm; position: relative; font-size: 12.5pt; line-height: 1.9; }
+  h1 { text-align: center; font-size: 22pt; letter-spacing: .25em; margin: 0 0 9mm; font-weight: 700; border-bottom: 1.2mm solid #000; padding-bottom: 3mm; }
+  .date { text-align: right; margin-bottom: 6mm; }
+  table.head { width: 100%; border-collapse: collapse; }
+  table.head td { border: .5mm solid #000; padding: 3mm 4.5mm; vertical-align: top; }
+  table.head td.k { width: 26mm; text-align: center; font-weight: 700; }
+  .to-name { font-size: 16pt; font-weight: 700; line-height: 1.5; }
+  .small { font-size: 11pt; line-height: 1.7; }
+  .body { margin-top: 9mm; }
+  .body p { margin: 0 0 1.1em; text-indent: 1em; }
+  .foot { position: absolute; left: 24mm; right: 24mm; bottom: 18mm; font-size: 10.5pt; border-top: .5mm solid #000; padding-top: 2.5mm; line-height: 1.6; font-family: "Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; }
+</style>
+</head>
+<body>
+<section class="page">
+  <h1>FAX送信のご案内</h1>
+  <div class="date" id="date">2026年　　月　　日</div>
+
+  <table class="head">
+    <tr><td class="k">宛先</td><td><div class="to-name"><span id="to">　</span><br><span id="name">園長先生</span></div><div class="small">FAX　<span id="fax">　</span></div></td></tr>
+    <tr><td class="k">送信元</td><td><b>ぼんぼやーじゅ通信の会</b><br><span class="small">小平市民活動支援センター あすぴあ 登録団体（第254号）<br>担当　谷裏　／　メール tokyo.papa.home@gmail.com</span></td></tr>
+    <tr><td class="k">枚数</td><td><span id="pages">2</span>枚（この送信票を含みます）</td></tr>
+  </table>
+
+  <div class="body">
+    <p>先日はお電話でご対応いただき、ありがとうございました。お話しいただいたとおり、チラシをお送りいたします。園長先生にご覧いただけましたら幸いです。</p>
+    <p>「ぼんぼやーじゅ通信」は、小平市の未就学児・小学生のいるご家庭に向けて、週末のおでかけ情報を毎週水曜日にLINEで無料でお届けしているものです。市や施設の公式ページで一件ずつ確かめた情報だけを載せています。</p>
+    <p>玄関に置いていただける場合は、チラシを郵送でお送りいたします。改めて、こちらからお電話いたします。</p>
+    <p>お忙しいところ恐れ入りますが、どうぞよろしくお願いいたします。</p>
+  </div>
+
+  <div class="foot">ぼんぼやーじゅ通信の会（運営：ニコマル）　ホームページ：https://bonvoya.nicomaru.tokyo/</div>
+</section>
+<script>
+  // ?to=園名&name=園長先生&fax=FAX番号&date=日付&pages=枚数
+  var q = new URLSearchParams(location.search);
+  ['to', 'name', 'fax', 'date', 'pages'].forEach(function (k) {
+    if (q.get(k)) document.getElementById(k).textContent = q.get(k);
+  });
+</script>
+</body>
+</html>
