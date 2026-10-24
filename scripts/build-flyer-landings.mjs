@@ -119,11 +119,11 @@ const jump = (v) => `<!doctype html>
 <title>ぼんぼやーじゅ通信｜小平の週末おでかけ便</title>
 <!-- Threadsのリンクカードはここを読む（転送のJSは実行されない）。ホームページと同じ見え方にそろえる -->
 <!-- ★2026-09-24: 手で足したら、このスクリプトを回したときに消えた。ここで出す -->
-<meta name="description" content="小平市の未就学児〜小学生のいるご家庭へ。週末のおでかけ情報を毎週水曜に無料でお届けします。">
+<meta name="description" content="小平市の、赤ちゃん・未就学児・小学生のいるご家庭へ。となりの市もふくめた週末のおでかけ情報を、毎週水曜に無料でお届けします。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bonvoya.nicomaru.tokyo/">
 <meta property="og:title" content="ぼんぼやーじゅ通信｜小平の週末おでかけ便">
-<meta property="og:description" content="小平市の未就学〜小学生のいるご家庭へ、週末のおでかけ情報を毎週水曜に無料でお届け。">
+<meta property="og:description" content="小平市の、赤ちゃん・未就学児・小学生のいるご家庭へ、となりの市もふくめた週末のおでかけ情報を毎週水曜に無料でお届け。">
 <meta property="og:image" content="https://bonvoya.nicomaru.tokyo/assets/hero-park.jpg">
 <meta property="og:locale" content="ja_JP">
 <style>
