@@ -30,7 +30,7 @@
  *     "items": [ { "id": "E105", "note": "ひとこと" }, ... ],   // 今週末・連休
  *     "ahead": [ { "id": "E111", "note": "締切10/5" }, ... ]    // 先取り・締切
  *   }
- *   各ページは、台帳の年齢の目安（◎○）で自動で絞る。◎を先に並べる。
+ *   各ページは、台帳の年齢の目安（◎○）で自動で絞る。一推しをいちばん上に、あとは日付順（同じ日は◎を先に）。
  */
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, rmSync } from 'node:fs';
 import { esc } from './lib/gate.mjs';
@@ -124,6 +124,16 @@ const LEAK = /\bE\d{2,3}\b|台帳|巡回|スクリプト|Routine|Claude|GoatCoun
 
 const mapUrl = (q) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 const rank = (m) => ({ '◎': 0, '○': 1 }[m] ?? 9);
+// 会期もの（〜11/8 など）。公開データでは dates に初日だけが入っている
+const isPeriod = (ev) => !!(ev.span && ev.span.to) && ev.span.to > ((ev.dates || []).slice().sort().pop() || '');
+// 並べる日は、左の日付の札と同じにする: 開催日のあるもの（初日 → 最終日の早い順）→ 会期もの（終わりの早い順）→ 日付の無いもの
+const dayKey = (ev) => {
+  if (isPeriod(ev)) return `1${ev.span.to}`;
+  const ds = (ev.dates || []).slice().sort();
+  return ds.length ? `0${ds[0]}${ds[ds.length - 1]}` : '2';
+};
+const startKey = (ev) => (ev.start ? ev.start.padStart(5, '0') : '99:99');
+const cmp = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 
 // --- カレンダー登録（2026-10-04 オーナー指示: 10/7号から「公式・地図」に加えてカレンダー登録も） ---
 // Android・パソコン → Googleカレンダーの登録画面。iPhone → .ics を開くと標準のカレンダーに入る。
@@ -186,9 +196,11 @@ const AGE_SHORT = { baby: '赤ちゃん', pre: '未就学', elem: '小学生' };
 const markClass = (m) => ({ '◎': 'm-best', '○': 'm-ok', '△': 'm-maybe' }[m] || 'm-no');
 
 // 日付の札（左の大きい数字）。複数日は「10/3–4」、長い会期は「〜12/27」
+//   ★会期ものに初日を出すと、号より前に始まったもの（10/14号の「10/6 TUE」）が、過ぎた催しに見える。終わりの日を出す
 function dateChip(ev) {
   const ds = (ev.dates || []).slice().sort();
   const fmt = (iso) => { const [, m, d] = iso.split('-').map(Number); return { m, d, w: WDJ[new Date(iso + 'T00:00:00Z').getUTCDay()] }; };
+  if (isPeriod(ev)) { const b = fmt(ev.span.to); return `<div class="chip"><span class="md"><small>〜</small>${b.m}/${b.d}</span><span class="wd">UNTIL</span></div>`; }
   if (ds.length) {
     const a = fmt(ds[0]);
     if (ds.length === 1) return `<div class="chip"><span class="md">${a.m}/${a.d}</span><span class="wd">${a.w}</span></div>`;
@@ -196,7 +208,6 @@ function dateChip(ev) {
     const tail = b.m === a.m ? `–${b.d}` : `–${b.m}/${b.d}`;
     return `<div class="chip"><span class="md">${a.m}/${a.d}<small>${tail}</small></span><span class="wd">${ds.length}DAYS</span></div>`;
   }
-  if (ev.span && ev.span.to) { const b = fmt(ev.span.to); return `<div class="chip"><span class="md"><small>〜</small>${b.m}/${b.d}</span><span class="wd">UNTIL</span></div>`; }
   return `<div class="chip"><span class="md">—</span><span class="wd">OPEN</span></div>`;
 }
 
@@ -474,8 +485,10 @@ for (const f of files) {
 
   const forAge = (list, key) =>
     list.filter(({ ev }) => ['◎', '○'].includes((ev.ages || {})[key]))
-      // その年齢に◎のものを先に。同じ印の中では一推しを先に（赤ちゃんのページで、○の一推しより◎を上に）
-      .sort((p, q) => rank(p.ev.ages[key]) - rank(q.ev.ages[key]) || (q.it.id === spec.pick) - (p.it.id === spec.pick));
+      // 一推しをいちばん上に（LINEの一推しには地図を付けていない。ページを開いてすぐ地図・様子を押せるように）。
+      // そのあとは日付順（2026-10-24 オーナー: 金・土・日が混ざっていた）。同じ日の中は、その年齢に◎のものを先に、始まる時間の早い順
+      .sort((p, q) => (q.it.id === spec.pick) - (p.it.id === spec.pick)
+        || cmp(dayKey(p.ev), dayKey(q.ev)) || rank(p.ev.ages[key]) - rank(q.ev.ages[key]) || cmp(startKey(p.ev), startKey(q.ev)));
 
   // 年齢別。**どのページにも3つの年齢の中身が入っていて、タブで切り替える**（ページは読み直さない）。
   // LINEで押したリンクのページ（= 最初に開いたタブ）だけが数えられるので、
