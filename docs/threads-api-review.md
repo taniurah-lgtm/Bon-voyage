@@ -268,7 +268,7 @@ Meta のビジネス認証は、書類を見るだけでなく
 - [x] ~~**2. Meta開発者アカウントのSMSを通す**~~ ✅ **2026-09-25 済み**（既存の個人アカウントで。新しいFacebookアカウントは作らない＝1人1アカウントの規約、止められるとアプリごと消える）
 - [x] ~~**3. アプリを作る**~~ ✅ 2026-09-25 **Bonvoya Tsushin**（権限: threads_basic / threads_keyword_search / threads_manage_insights。テスター bonvoya_tokyo 承認済み）
   - 🟡 アイコン1024・プライバシーポリシーURL は**審査の前に**入れる（まだ）
-- [x] ~~**4. トークンを取り、`keyword_search` を1回叩く**~~ ✅ 2026-09-26（★**10/25ごろまでに提出**）
+- [x] ~~**4. トークンを取り、`keyword_search` を1回叩く**~~ ✅ 2026-09-26（★提出の前30日以内にもう一度成功させる。下の訂正を見る）
   - 2026-09-26: 鍵は「ユースケース → カスタマイズ → 設定」の**一番下の「ユーザートークン生成ツール」**で取れた（ダッシュボードには無い）
   - ✅ `/me?fields=id,username` と `/me/threads?fields=id,text,timestamp&limit=3` は**成功**（基本の読み取りは動く）
   - ❌ `keyword_search` は `{"error":{"code":1,"message":"An unknown error occurred"}}` → `fields` を足しても削っても **HTTP 500**。
@@ -285,7 +285,11 @@ Meta のビジネス認証は、書類を見るだけでなく
     3. `https://graph.threads.net/oauth/access_token?client_id=…&client_secret=…&grant_type=authorization_code&redirect_uri=https://localhost/&code=…`（**GETで通った**）
     4. `https://graph.threads.net/access_token?grant_type=th_exchange_token&client_secret=…&access_token=<短い鍵>` → **60日の鍵（2026-11-25ごろ切れる）**
     5. `keyword_search?q=kodaira` → **成功（約10件）**
-  - ★**審査の提出期限: この成功（2026-09-26）から30日以内＝10/25ごろまで**
+  - ~~★審査の提出期限: この成功（2026-09-26）から30日以内＝10/25ごろまで~~
+    🔁 **2026-10-24 訂正: 期限ではない。**条件は「**提出する日から見て30日以内に、1回成功していること**」。
+    9/26 の分が切れても、**録画の日に叩き直せば満たせる**（録画で実際に検索するので、そこで自然に満たす）
+  - 2026-10-24: ブラウザで叩いたら `code 190`・`Failed to decode` → **鍵の文字列が壊れている**（コピーのときの空白・かっこ・引用符、または別の鍵）。
+    期限切れなら `Session has expired` と出るので別もの。**鍵が見つからなければ、録画の日に上の 1〜4 で取り直す**（60日の鍵は 11/25ごろ切れるので、どのみち取り直しになる）
   - 確認: `fields=id,username,timestamp` で見ると**10件すべて bonvoya_tokyo**（他人の投稿は返らない＝§0②のとおり）。**審査は要る**
 - [ ] **5. 権限の行が Standard か Advanced かを見る**（Standard なら開業届を待たずに6へ）
 - [ ] **6. ビジネス認証**（開業届の控え。1〜5営業日）★**名義の揃え方は §7.5**
