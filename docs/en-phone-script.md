@@ -226,7 +226,8 @@ Notion の「郵送・訪問の準備（夫）」の表に出る。**オーナ�
 
 ## 郵送するとき（オーナー）
 
-- 送付状は `docs/print/soufu-letter.pdf`（Word は `.docx`）の **4枚目**。宛名・部数・日付・担当を手書き
+- 🆕 **宛名・住所・部数入りの送付状は `node scripts/make-soufu.mjs --out 出力.pdf "園名|〒|住所|部数" ...`**（何園ぶんでも1つのPDF。文面は `soufu-letter` の4枚目と同じ。日付と担当は手書き）。郵便番号は郵便番号検索、園名と住所は園の公式で確かめる
+- 手書きでよければ `docs/print/soufu-letter.pdf`（Word は `.docx`）の **4枚目**（宛名・部数・日付・担当を手書き）
 - チラシは**いつものチラシ**（表 `docs/homepage/assets/flyer-a4-canva-html.pdf`・裏 `flyer-a4-canva-back.pdf`）。
   🔴 **FAXで見せたものと、届く紙を同じにする**（2026-10-23 オーナー。違う紙が届くと「違うじゃん」になる）。
   QRは `/f/hand` なので、園から来た人は「手渡しのチラシ」と同じ数字に入る
