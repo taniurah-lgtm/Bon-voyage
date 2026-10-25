@@ -2910,7 +2910,7 @@
    "target": "どなたでも",
    "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3672&day=2026-10-10",
    "status": "候補（会期が長いので、雨の週の差し替え札に使う）",
-   "confidence": "公式確認済み",
+   "confidence": "公式確認済み（2026-10-18）／再確認を試みたが公式が落ちていて取れず（2026-10-26）",
    "tentative": false,
    "deadline": {
     "date": "2026-09-04",
@@ -3775,7 +3775,7 @@
    "target": "（要確認）",
    "url": "https://library.kodaira.ed.jp/viewer/info.html?id=404",
    "status": "候補",
-   "confidence": "公式確認済み。費用・講演会の対象年齢・申込の空き状況は、3回あたって公式に記載が無く未取得",
+   "confidence": "公式確認済み（2026-10-18）／再確認を試みたが公式が落ちていて取れず（2026-10-26）。費用・講演会の対象年齢・申込の空き状況は、3回あたって公式に記載が無く未取得",
    "tentative": false,
    "deadline": {
     "date": "2026-10-15",
@@ -4576,9 +4576,9 @@
    "cost": "公式に記載なし（要確認）",
    "discount": "",
    "target": "公式の対象欄に「小学生以下・小学生・中高生・大人・高齢者・親子」と明記",
-   "url": "https://www.city.kodaira.tokyo.jp/event/130/130150.html",
+   "url": "https://www.syakaifukushi.kodaira.tokyo.jp/news/news/20260907_2.html",
    "status": "候補",
-   "confidence": "一部確認— 日時・会場・内容・対象・申込不要は 2026-09-16 と 2026-10-17 の両方で確認。 費用は依然として未取得",
+   "confidence": "一部確認— 日時・会場・内容・対象・申込不要は 2026-09-16 / 2026-10-17 / 2026-10-26 で確認。 同時開催の福祉バザーは公式本文を取得できた。費用は依然として未取得",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
