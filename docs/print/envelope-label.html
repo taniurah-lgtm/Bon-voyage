@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<title>封筒の宛名ラベル（園への郵送）</title>
+<!-- 園へチラシを郵送するときの宛名ラベル。A4 に刷って点線で切り、角形2号の封筒の表（宛名）と裏（差出人）に貼る。2026-10-25
+     ?zip=187-0002&addr=東京都小平市花小金井2-9-11&to=小平花小金井幼稚園&name=園長先生&fzip=…&faddr=…&fname=…
+     node scripts/make-envelope.mjs が入れる。🔒 差出人の住所はここ（リポジトリ）に書かない。刷るときに渡す -->
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; color: #000; background: #fff; font-family: "Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif; }
+  .page { width: 210mm; height: 297mm; position: relative; }
+  .cap { position: absolute; left: 20mm; font: 8pt/1 "Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif; color: #888; }
+  .label { position: absolute; left: 20mm; border: 0.4mm dashed #999; }
+  .to { top: 20mm; width: 170mm; height: 112mm; padding: 14mm 14mm 0 16mm; }
+  .to .zip { font-size: 17pt; letter-spacing: .08em; }
+  .to .addr { font-size: 19pt; margin-top: 2mm; line-height: 1.5; }
+  .to .org { font-size: 27pt; font-weight: 600; margin-top: 11mm; letter-spacing: .04em; }
+  .to .name { font-size: 25pt; margin: 2mm 0 0 34mm; letter-spacing: .06em; }
+  .to .zaichu { position: absolute; left: 16mm; bottom: 10mm; border: 0.5mm solid #C00; color: #C00; font-size: 14pt; padding: 1.2mm 4mm; letter-spacing: .15em; }
+  .from { top: 152mm; width: 125mm; height: 48mm; padding: 9mm 10mm 0 12mm; line-height: 1.6; }
+  .from .zip { font-size: 11pt; letter-spacing: .06em; }
+  .from .addr { font-size: 12pt; }
+  .from .org { font-size: 12pt; margin-top: 2.5mm; }
+  .from .name { font-size: 15pt; }
+</style>
+</head>
+<body>
+<section class="page">
+  <div class="cap" style="top:15mm">表（宛名）— 点線で切って、封筒の表に貼る</div>
+  <div class="label to">
+    <div class="zip">〒<span id="zip"></span></div>
+    <div class="addr" id="addr"></div>
+    <div class="org" id="to"></div>
+    <div class="name" id="name">園長先生</div>
+    <div class="zaichu">チラシ在中</div>
+  </div>
+  <div class="cap" style="top:147mm">裏（差出人）— 点線で切って、封筒の裏に貼る</div>
+  <div class="label from">
+    <div class="zip">〒<span id="fzip"></span></div>
+    <div class="addr" id="faddr"></div>
+    <div class="org" id="forg">ぼんぼやーじゅ通信の会</div>
+    <div class="name" id="fname"></div>
+  </div>
+</section>
+<script>
+  // ?zip=郵便番号&addr=住所&to=園名&name=宛名&fzip=差出人の郵便番号&faddr=差出人の住所&forg=団体名&fname=差出人の名前
+  var q = new URLSearchParams(location.search);
+  ['zip', 'addr', 'to', 'name', 'fzip', 'faddr', 'forg', 'fname'].forEach(function (k) {
+    if (q.get(k)) document.getElementById(k).textContent = q.get(k);
+  });
+</script>
+</body>
+</html>
