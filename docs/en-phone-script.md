@@ -229,6 +229,8 @@ Notion の「郵送・訪問の準備（夫）」の表に出る。**オーナ�
 - 🆕 **宛名・住所・部数入りの送付状は `node scripts/make-soufu.mjs --out 出力.pdf "園名|〒|住所|部数" ...`**（何園ぶんでも1つのPDF。文面は `soufu-letter` の4枚目と同じ。日付と担当は手書き）。郵便番号は郵便番号検索、園名と住所は園の公式で確かめる
 - 🆕 **封筒の宛名ラベルは `node scripts/make-envelope.mjs --out 出力.pdf --from "〒|住所|名前" "園名|〒|住所" ...`**（1園＝A4 1枚。点線で切り、**角形2号**の表に宛名・裏に差出人を貼る。「チラシ在中」入り）。
   🔒 **差出人の住所はリポジトリに書かない**（その都度 `--from` で渡す。PDFは作業場所に置き、渡したら消す）
+  - **Word 版**（使いまわし用・2026-10-25 オーナー）: `docs/print/envelope-label.docx`（花小金井・神明の2枚。差出人の住所はオーナーが Word で入れる。
+    ほかの園はページを複製して書き換える）。作り直すときは `NODE_PATH=$(npm root -g) node docs/print/make-envelope-docx.js`
 - 手書きでよければ `docs/print/soufu-letter.pdf`（Word は `.docx`）の **4枚目**（宛名・部数・日付・担当を手書き）
 - チラシは**いつものチラシ**（表 `docs/homepage/assets/flyer-a4-canva-html.pdf`・裏 `flyer-a4-canva-back.pdf`）。
   🔴 **FAXで見せたものと、届く紙を同じにする**（2026-10-23 オーナー。違う紙が届くと「違うじゃん」になる）。
