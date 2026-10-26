@@ -158,6 +158,8 @@ const PROMPT = (ledger, recent, spot) => `あなたは、花小金井まわり�
 - 🔴 台帳で「内部メモ」「紙面に付けない」「公開物には出さない」と書かれているURL・連絡先は使わない。
   **個人の電話番号・メールアドレスは書かない。**
 - **自動で返信はしない**（下書きを人が確かめて、人が投稿する）。
+- 🔴 **花小金井から小金井公園まで「歩いて行ける」「徒歩◯分」と書かない**（2026-10-21 オーナー。バスか自転車の距離）。
+- 🔴 **雨の延期日・予備日は開催日ではない。**本来の開催日が今日より前の催しは、延期日が先でも選ばない。
 
 # トーン（厳守）
 - やさしく淡々と。売り込まない。「急いで」「損」「今だけ」等の煽りは使わない。
@@ -265,20 +267,34 @@ function introOf(t) {
   const i = t.indexOf('【Threads・問いかけ】');
   return i < 0 ? t : t.slice(0, i);
 }
-// 本文の M/D をすべて拾い、いちばん遅い日が今日より前なら「終わったもの」。
-// 日付が1つも無いもの（通年の施設など）は判定しない。
+// 【紹介】の本文の M/D を拾って、日付（UTCの0時）の配列にする。
 // 見出しの【紹介 1/2】【紹介 2/2】は日付ではないので、先に外す（外さないと 1/2 を1月2日と読む）。
+// 🔴 2026-10-27: **雨の延期日を開催日として数えていた。**10/25 で終わったコスモスまつりを
+//    「10/25(日)に開かれます。雨天時は11/1(日)に延期」と 10/27 に出した（いちばん遅い 11/1 を見て「まだ先」と判定）。
+//    **雨天・延期・予備日の文脈にある日付は、開催日として数えない。**
+const RAIN_BEFORE = /雨|延期|予備日|順延/;
+const RAIN_AFTER = /^[^、。\n]{0,4}(に|へ)?(延期|順延)/;
+function introDateStamps(t) {
+  const [y, m] = TODAY.split('-').map(Number);
+  const s = introOf(t).replace(/【[^】]*】/g, '');
+  const out = [];
+  for (const mt of s.matchAll(/(?<![\d/])(\d{1,2})\/(\d{1,2})(?![\d/])/g)) {
+    const M = +mt[1], D = +mt[2];
+    if (M < 1 || M > 12 || D < 1 || D > 31) continue;
+    const before = s.slice(Math.max(0, mt.index - 12), mt.index).split(/[。\n]/).pop(); // 同じ文の中だけ見る
+    const after = s.slice(mt.index + mt[0].length, mt.index + mt[0].length + 10);
+    if (RAIN_BEFORE.test(before) || RAIN_AFTER.test(after)) continue;
+    const yr = (m - M > 6) ? y + 1 : (M - m > 6 ? y - 1 : y); // 12月に1月の話をする等
+    out.push(Date.UTC(yr, M - 1, D));
+  }
+  return out;
+}
+// 本文の日付のいちばん遅い日が今日より前なら「終わったもの」。
+// 日付が1つも無いもの（通年の施設など）は判定しない。
 function staleReason(t) {
   const [y, m, d] = TODAY.split('-').map(Number);
   const today = Date.UTC(y, m - 1, d);
-  let latest = null;
-  for (const [, mm, dd] of introOf(t).replace(/【[^】]*】/g, '').matchAll(/(?<![\d/])(\d{1,2})\/(\d{1,2})(?![\d/])/g)) {
-    const M = +mm, D = +dd;
-    if (M < 1 || M > 12 || D < 1 || D > 31) continue;
-    const yr = (m - M > 6) ? y + 1 : (M - m > 6 ? y - 1 : y); // 12月に1月の話をする等
-    const ts = Date.UTC(yr, M - 1, D);
-    if (latest === null || ts > latest) latest = ts;
-  }
+  const latest = latestDateOf(t);
   if (latest !== null && latest < today) {
     const dt = new Date(latest);
     return `終わったイベント(最後の日付 ${dt.getUTCMonth() + 1}/${dt.getUTCDate()})`;
@@ -303,16 +319,8 @@ function introUrls(t) {
     .filter(u => !u.includes('bonvoya.nicomaru.tokyo'));
 }
 function latestDateOf(t) {
-  const [y, m] = TODAY.split('-').map(Number);
-  let latest = null;
-  for (const [, mm, dd] of introOf(t).replace(/【[^】]*】/g, '').matchAll(/(?<![\d/])(\d{1,2})\/(\d{1,2})(?![\d/])/g)) {
-    const M = +mm, D = +dd;
-    if (M < 1 || M > 12 || D < 1 || D > 31) continue;
-    const yr = (m - M > 6) ? y + 1 : (M - m > 6 ? y - 1 : y);
-    const ts = Date.UTC(yr, M - 1, D);
-    if (latest === null || ts > latest) latest = ts;
-  }
-  return latest;
+  const ds = introDateStamps(t);
+  return ds.length ? Math.max(...ds) : null;
 }
 function recentUrlDrafts() {
   const today = Date.parse(TODAY + 'T00:00:00Z');
@@ -334,6 +342,14 @@ function sameEventReason(t) {
   if (daysSince <= 2) return `前日・前々日と同じ催し(${hit.f})`;
   if (latest !== null && latest - today <= REMIND_WITHIN_DAYS * 86400000) return ''; // 直前の念押しはよい
   return `直近${REPEAT_WINDOW_DAYS}日に同じ催し(${hit.f})`;
+}
+
+// 🔴 2026-10-21 オーナー: **花小金井から小金井公園まで「歩いて行ける」「徒歩◯分」とは書かない**（現実的でない。バスか自転車）。
+//    10/19・10/27 の下書きに「花小金井駅から歩いて行ける小金井公園」が出た。頼むだけでなく、出てきたものを検査する。
+function walkReason(t) {
+  const s = introOf(t);
+  return /小金井公園/.test(s) && /(歩いて(行ける|いける|すぐ|\d+\s*分)|徒歩\s*(圏|\d+\s*分))/.test(s)
+    ? '小金井公園を「歩いて行ける」と書いている（書かない約束）' : '';
 }
 
 // 直近3日のドラフトの【紹介 1/2】と、書き出しが同じなら「同じ話」。
@@ -390,7 +406,7 @@ async function gen() {
           if (e.status !== 400) break; // 404/429など: 思考なし再試行は無駄→次へ
           continue;
         }
-        const bad = isComplete(r.text) ? (staleReason(r.text) || repeatReason(r.text)) : '';
+        const bad = isComplete(r.text) ? (staleReason(r.text) || walkReason(r.text) || repeatReason(r.text)) : '';
         if (isComplete(r.text) && !sameSubject(r.text) && !bad) return { text: r.text, model };
         const miss = BLOCKS.filter(b => !r.text.includes(b)).join('');
         const why = miss ? `不完全(${miss}が欠落, finishReason=${r.finishReason})`
@@ -424,7 +440,7 @@ if (!KEY) {
     const cityHit = CITY_URL.test(gened.text);
     const text = cityHit ? gened.text.replace(CITY_URL, '') : gened.text;
     const dup = sameSubject(text);
-    const bad = staleReason(text) || repeatReason(text);
+    const bad = staleReason(text) || walkReason(text) || repeatReason(text);
     const head = (incomplete || dup || bad)
       ? `# ${TODAY} SNSドラフト（⚠️投稿前に直すところがあります）`
       : `# ${TODAY} SNSドラフト（承認待ち・まだ投稿していません）`;
