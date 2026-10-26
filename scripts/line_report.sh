@@ -100,6 +100,13 @@ if [[ -n "$IMG_URL" ]]; then
   if (( img_ok == 1 )); then echo "（1通目の前に画像を1枚はさみます: $IMG_URL）"; else IMG_URL=""; fi
 fi
 
+# ★2026-10-26: LINE の受付番号（x-line-request-id）を控える（オーナー指示）。
+#   これがあると、あとから「メッセージを開いた人数」と「リンクごとのクリック数」を LINE から直接取れる
+#   （scripts/line-insight.mjs。統計は送ってから14日間更新される。20未満の数は LINE の決まりで出ない）。
+#   それまでは解析の数字（年齢別ページを開いた回数）を「届いた人数」で割るしかなく、
+#   10/21号の案内画像が効いたかを判断できなかった。
+#   🔴 取れなくても配信は止めない（どの行も || で受ける）。受付番号は sent.log の4列目に書く
+req_ids=""
 part=0
 for cf in "${CHUNK_FILES[@]}"; do
   part=$(( part + 1 ))
@@ -111,7 +118,8 @@ for cf in "${CHUNK_FILES[@]}"; do
   fi
   rm -f "$cf"
 
-  http_code=$(curl -sS -o /tmp/line_resp.json -w '%{http_code}' \
+  rm -f /tmp/line_resp_headers.txt
+  http_code=$(curl -sS -o /tmp/line_resp.json -D /tmp/line_resp_headers.txt -w '%{http_code}' \
     -X POST https://api.line.me/v2/bot/message/broadcast \
     -H "Authorization: Bearer ${LINE_CHANNEL_ACCESS_TOKEN}" \
     -H 'Content-Type: application/json' \
@@ -122,7 +130,9 @@ for cf in "${CHUNK_FILES[@]}"; do
     cat /tmp/line_resp.json >&2
     exit 3
   fi
-  echo "OK: part $part を送信しました"
+  rid=$(tr -d '\r' < /tmp/line_resp_headers.txt 2>/dev/null | awk 'tolower($1) == "x-line-request-id:" { print $2; exit }' || true)
+  if [[ -n "$rid" ]]; then req_ids="${req_ids:+$req_ids,}$rid"; fi
+  echo "OK: part $part を送信しました${rid:+（LINEの受付番号 $rid）}"
 done
 
 echo "完了: $1 をLINEにブロードキャストしました"
@@ -137,9 +147,14 @@ if [[ -f "$sent_log" ]]; then
   if grep -qF "	$1	" "$sent_log"; then
     echo "（$1 はすでに配信の記録があります。追記しません）"
   else
-    printf '%s\t%s\t%s\n' "$issue_date" "$1" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$sent_log"
+    printf '%s\t%s\t%s\t%s\n' "$issue_date" "$1" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "${req_ids:--}" >> "$sent_log"
     echo "配信の記録を $sent_log に追記しました。"
     echo "→ この1行を rfwmo8 に push すると、ホームページのプレビューが今の号に切り替わります。"
+    if [[ -n "$req_ids" ]]; then
+      echo "LINEの受付番号を記録しました。開いた人数・クリック数は、翌日以降に: node scripts/line-insight.mjs $issue_date"
+    else
+      echo "WARN: LINEの受付番号が取れませんでした（配信はできています）。この号の開封・クリックは LINE からは取れません。" >&2
+    fi
   fi
 else
   echo "WARN: $sent_log がありません。ホームページのプレビューは切り替わりません。" >&2
