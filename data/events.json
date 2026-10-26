@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-26",
+ "generated": "2026-10-27",
  "events": [
   {
    "id": "E51",
@@ -2910,7 +2910,7 @@
    "target": "どなたでも",
    "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3672&day=2026-10-10",
    "status": "候補（会期が長いので、雨の週の差し替え札に使う）",
-   "confidence": "公式確認済み（2026-10-18）／再確認を試みたが公式が落ちていて取れず（2026-10-26）",
+   "confidence": "公式確認済み（2026-10-18）／再確認を試みたが公式が落ちていて取れず（2026-10-26・2026-10-27）",
    "tentative": false,
    "deadline": {
     "date": "2026-09-04",
@@ -4584,6 +4584,45 @@
    "source": "events/2026-11.md"
   },
   {
+   "id": "E197",
+   "name": "SAYAMA HILLS DAY（サヤマヒルズデイ）",
+   "dates": [
+    "2026-11-03"
+   ],
+   "span": null,
+   "when": "2026年11月3日(火・祝) 10:30〜15:00。少雨決行・荒天中止",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:30",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "都立狭山公園「風の広場」（東村山市・東大和市。西武多摩湖線 多摩湖駅のそば）",
+   "mapq": "都立狭山公園「風の広場」",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "無料（公式「※一部有料のワークショップがございます」）",
+   "discount": "",
+   "target": "",
+   "url": "https://sayamaparks.com/event/event-4025/",
+   "status": "候補",
+   "confidence": "公式確認済み（2026-10-26）— 日時・場所・料金・内容・時間・対象・雨天",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
    "id": "E183",
    "name": "江戸東京たてもの園「夜間特別開園 たてもののライトアップ」",
    "dates": [
@@ -4947,7 +4986,7 @@
    "target": "",
    "url": "https://www.jatm.or.jp/farming/advising/festival.php",
    "status": "候補",
-   "confidence": "公式（共催の JA）で確認済み（2026-10-19）— 日時・会場・JA側の内容。商工会側の内容は未取得",
+   "confidence": "公式（共催の JA）で確認済み（2026-10-19）／再確認（2026-10-27）で日時・会場・JA側の内容に変更なし — 雨天はJA公式に記載が無いことを確認。商工会側の内容は、市のサイト障害が続いていて未取得",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
@@ -4975,18 +5014,58 @@
    "caution": "",
    "contact": null,
    "lastEntry": "",
-   "hours": "",
+   "hours": "11/4(水)・11/17(火) は小川町二丁目児童館が休館（おたより11月号）",
    "ages": {
     "baby": "✕",
     "pre": "✕",
     "elem": "◎"
    },
-   "cost": "公式に記載なし（要確認。児童館の催し）",
+   "cost": "公式に記載なし（要確認）",
    "discount": "",
-   "target": "小学生。定員なし",
-   "url": "https://kodaji.ashita-ba.co.jp/calendar/index.php?action=View&event_id=0000162114",
+   "target": "1〜6年生（館の書き方）。定員なし。両日とも同じ",
+   "url": "https://kodaji.ashita-ba.co.jp/news/article/934/",
    "status": "候補",
-   "confidence": "公式確認済み（2026-10-19）— 日時・場所・対象・当日受付。費用だけ未記載",
+   "confidence": "公式確認済み（2026-10-27）— 日時（11/14・11/18 の2回）・対象・定員・当日受付・館の休館日。 参加費は、公式に記載が無く未取得。場所（遊戯室）は 2026-10-19 の詳細ページのまま",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
+   "id": "E198",
+   "name": "第23回 西東京市民まつり",
+   "dates": [
+    "2026-11-14",
+    "2026-11-15"
+   ],
+   "span": null,
+   "when": "2026年11月14日(土) 10:00〜16:00 ／ 15日(日) 9:00〜15:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "10:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "西東京いこいの森公園（西東京市緑町三丁目2番）",
+   "mapq": "西東京いこいの森公園",
+   "summary": "",
+   "kidsNote": "屋外の市民まつり。中身は一般向けの案内が出てから足す。",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "",
+   "discount": "",
+   "target": "",
+   "url": "https://www.city.nishitokyo.lg.jp/enjoy/bunkasai/matsuri/R8engei-parade.files/R8matsuri-engei.pdf",
+   "status": "候補",
+   "confidence": "一部確認（2026-10-26）— 回数・日時・会場は市の公式PDF。子ども向けの中身・費用は未取得",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
@@ -5149,11 +5228,14 @@
    "cost": "",
    "discount": "",
    "target": "",
-   "url": "",
+   "url": "https://docs.google.com/forms/d/e/1FAIpQLSf1KJjQRvoM4r69_avVYL0-Ego28_zmYLbGGF_L20vpA1nI2A/viewform",
    "status": "候補",
    "confidence": "主催アカウントの告知とチラシ画像で確認",
    "tentative": false,
-   "deadline": null,
+   "deadline": {
+    "date": "2026-11-19",
+    "raw": "主催の申込フォームから・11/19(木)まで。保険の手続きのため、フォームで申し込んだ人だけが参加できる"
+   },
    "source": "events/2026-11.md"
   },
   {
@@ -5238,6 +5320,87 @@
     "date": "2026-11-06",
     "raw": "11月6日(金)まで。事務所へのメールか、ページの申込フォーム"
    },
+   "source": "events/2026-11.md"
+  },
+  {
+   "id": "E199",
+   "name": "小金井公園「秋の樹木観察会」",
+   "dates": [
+    "2026-11-24"
+   ],
+   "span": null,
+   "when": "2026年11月24日(火) 10:00〜12:00。小雨決行（荒天で中止のときは当日受付で知らせる）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "12:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小金井公園（集合は 小金井公園サービスセンター前・当日 9:45 から受付）",
+   "mapq": "小金井公園",
+   "summary": "「秋を感じる樹木散歩〜この木 どんな木？〜」。公園の西側を歩いて樹木を観察（案内: 小金井公園樹木の会）",
+   "kidsNote": "平日の午前に2時間歩く。大人向けの内容。ベビーカーで歩けるかは公式に記載なし。",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "○",
+    "elem": "○"
+   },
+   "cost": "50円（当日現金）／申込: 不要",
+   "discount": "",
+   "target": "公式に記載なし（要確認）",
+   "url": "https://www.tokyo-park.or.jp/park/koganei/news/2026/11_24.html",
+   "status": "候補（平日。11/18",
+   "confidence": "公式確認済み（2026-10-26）— 日時・集合・費用・申込不要・雨天",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
+   "id": "E200",
+   "name": "萩山公園ライトアップ〜きらめく紅葉につつまれて〜",
+   "dates": [
+    "2026-11-28"
+   ],
+   "span": {
+    "from": "2026-11-28",
+    "to": "2026-12-13"
+   },
+   "when": "2026年11月28日(土)〜12月13日(日) 17:30〜20:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "17:30",
+   "end": "20:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市立萩山公園（小平市小川東町4-4）",
+   "mapq": "小平市立萩山公園",
+   "summary": "100本以上のイロハモミジの紅葉のライトアップ（街灯の明かりが少ない中に浮かび上がる）",
+   "kidsNote": "夕方から夜の公園。上着を。",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "5面 森の地図スタンプラリー・出張児童館（親子のふれあい遊び）・休館日の図書館に親子をご招待（E195）・ホッとHOTこだいらファミリーデイ・小平ふるさと村・ごみゼロフリーマーケット・ふれあい下水道館 11月の催し／ 6面 公民館の講座・イベント・小川公民館まつり・津田公民館まつり。本文（日付）は市のサイトが戻るまで取れない",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "公式に記載なし（要確認）",
+   "discount": "",
+   "target": "",
+   "url": "https://kodaira-tourism.com/event/23085/",
+   "status": "候補",
+   "confidence": "公式確認済み（2026-10-26）— 日時・場所・内容。料金は未記載",
+   "tentative": false,
+   "deadline": null,
    "source": "events/2026-11.md"
   },
   {
@@ -5640,7 +5803,8 @@
   ],
   "2026-11-03": [
    "E145",
-   "E178"
+   "E178",
+   "E197"
   ],
   "2026-11-07": [
    "E145",
@@ -5660,11 +5824,13 @@
   "2026-11-14": [
    "E145",
    "E146",
-   "E194"
+   "E194",
+   "E198"
   ],
   "2026-11-15": [
    "E145",
    "E146",
+   "E198",
    "E191"
   ],
   "2026-10-21": [
@@ -5741,6 +5907,12 @@
    "E118",
    "E170",
    "E192"
+  ],
+  "2026-11-24": [
+   "E199"
+  ],
+  "2026-11-28": [
+   "E200"
   ]
  },
  "unresolved": [
