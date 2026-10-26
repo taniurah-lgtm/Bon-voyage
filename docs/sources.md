@@ -262,6 +262,11 @@ E-mail koganei@tokyo-park.or.jp ／ 園長 若松正樹 様
 | いこーよ(市で絞れる: city_ids) | https://iko-yo.net/ | 📄🔍 | 毎回 | 推 |
 | ウォーカープラス(エリア×子ども×今日) | https://www.walkerplus.com/ | 📄🔍 | 毎回 | 推 |
 | WebSearch「花小金井 イベント 今週末」等 | — | 🔍 | 毎回 | 推・損 |
+| 🆕 まいぷれ東村山市・小平市・東大和市（編集部の記事・イベント一覧。2025-11 にリニューアル、地元の担い手は小平の会社） | https://higashimurayama.mypl.net/event/ | 📄 | 毎回 | 推 |
+
+- まいぷれは**見つける入口**。載せるときは**主催の公式で裏を取る**（`docs/handoff-gemini-research.md` と同じ扱い。出典に書かない）
+- 編集部が取材した記事・リールは、載せる催しの**「📷 様子」**に使える（`docs/weekly-pages.md`。サイト名は「まいぷれ」）
+- 2026-10-26 オーナー経由で知った（Threads の @mypl.higashimurayama・フォロワー約1,100）。**取材のお願いは `docs/tasks.md`**
 
 ## Tier 3:損カレンダーの弾薬庫(拡散エンジンの燃料)
 
