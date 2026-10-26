@@ -171,6 +171,65 @@ ${blocks.join('\n\n')}
     </article>`;
 }
 
+// PCのトップの右の列（最新号の抜き書き＋バックナンバー）。2026-10-26 オーナー: PCは3列に。スマホには出さない
+// ★プレビューと同じく、送った号（sent.log）だけから作る
+function sentReports() {
+  const log = 'reports/free/sent.log';
+  if (!existsSync(log)) return [];
+  return readFileSync(log, 'utf8').split(/\r?\n/)
+    .map((l) => l.trim()).filter((l) => l && !l.startsWith('#'))
+    .map((l) => l.split('\t')[1])
+    .filter((f) => f && /^reports\/free\/\d{4}-\d{2}-\d{2}\.md$/.test(f) && existsSync(f))
+    .sort().reverse();
+}
+const firstPick = (sections) => {
+  const pick = sections.find((s) => /一推し|おすすめ/.test(s.title) && !/室内|雨/.test(s.title));
+  return pick ? splitItems(pick.body)[0] : null;
+};
+const noLeadEmoji = (s) => s.replace(/^\p{Extended_Pictographic}️?\s*/u, '');
+const mdOf = (path) => { const m = path.match(/\d{4}-(\d{2})-(\d{2})/); return `${+m[1]}/${+m[2]}`; };
+
+function sideHtml(latestPath, { dateLabel, sections }) {
+  // 一推しが見つからない号（形が変わったとき）は、抜き書きの箱ごと出さない
+  const first = firstPick(sections);
+  const title = first ? noLeadEmoji(first[0]) : '';
+  const desc = first ? first.slice(1).filter((l) => !/^(👶|🧒|🎒|📍|🔗|https?:)/u.test(l)).join(' ') : '';
+  // 抜き書きは2文まで。歩いた時間の話は入れない（2026-10-21 オーナー: 小金井公園まで歩くのは現実的でない）
+  let excerpt = '';
+  for (const x of desc.split(/(?<=。)/).map((y) => y.trim()).filter((y) => y && !/歩/.test(y))) {
+    if (!excerpt) excerpt = x.length > 95 ? x.slice(0, 94) + '…' : x;
+    else if ((excerpt + x).length <= 95) excerpt += x;
+    else break;
+  }
+  const ages = first ? first.slice(1).filter((l) => /^(👶|🧒|🎒)/u.test(l)).join(' ') : '';
+  const backs = sentReports().filter((p) => p !== latestPath).slice(0, 5).map((p) => {
+    let t = '';
+    try { const f = firstPick(parseReport(readFileSync(p, 'utf8')).sections); if (f) t = noLeadEmoji(f[0]); } catch { /* 読めない号は題なしで */ }
+    t = t.split(/\s*〜|\s+(?=\d{1,2}\/\d|\d{1,2}:\d{2}|土日)/)[0];
+    return { md: mdOf(p), t: t.length > 30 ? t.slice(0, 29) + '…' : t };
+  });
+  const issueMd = dateLabel.replace(/^\d{4} \/ /, '').replace(/ \/ /g, '/');
+  return `    <section class="pc-card pc-latest" aria-labelledby="latest-h">
+      <p class="pc-kicker">LATEST</p>
+      <h2 class="pc-h" id="latest-h">最新号　${esc(issueMd)}</h2>
+${title ? `      <div class="pc-latest-box">
+        <span class="pc-tag">今週の一推し</span>
+        <h3>${tidy(title)}</h3>
+        ${excerpt ? `<p>${tidy(excerpt)}</p>` : ''}
+        ${agesHtml(ages)}
+      </div>
+` : ''}      <a class="pc-more" href="#issue">この号をぜんぶ読む →</a>
+    </section>
+    <section class="pc-card pc-backs" aria-labelledby="back-h">
+      <p class="pc-kicker">BACK NUMBERS</p>
+      <h2 class="pc-h" id="back-h">バックナンバー</h2>
+      <ul class="pc-backlist">
+${backs.map((b) => `        <li><a href="/issues.html"><span class="bd">${esc(b.md)}号</span><span class="bt">${tidy(b.t)}</span></a></li>`).join('\n')}
+      </ul>
+      <a class="pc-more" href="/issues.html">バックナンバーをすべて見る →</a>
+    </section>`;
+}
+
 const report = readFileSync(REPORT_PATH, 'utf8');
 const parsed = parseReport(report);
 if (!parsed.sections.length) { console.error(`レポートに ■ セクションがありません: ${REPORT_PATH}`); process.exit(1); }
@@ -181,7 +240,14 @@ const si = html.indexOf(START), ei = html.indexOf(END);
 if (si < 0 || ei < 0) { console.error('index.html に ISSUE:START / ISSUE:END マーカーがありません'); process.exit(1); }
 const startTagEnd = html.indexOf('-->', si) + 3;
 
-const next = html.slice(0, startTagEnd) + '\n' + buildHtml(parsed) + '\n    ' + html.slice(ei);
+let next = html.slice(0, startTagEnd) + '\n' + buildHtml(parsed) + '\n    ' + html.slice(ei);
+// 右の列（ISSUE-SIDE）。目印が無いページ（古い index.html）では何もしない
+const SS = '<!-- ISSUE-SIDE:START', SE = '<!-- ISSUE-SIDE:END -->';
+const ssi = next.indexOf(SS), sei = next.indexOf(SE);
+if (ssi >= 0 && sei > ssi) {
+  const sTagEnd = next.indexOf('-->', ssi) + 3;
+  next = next.slice(0, sTagEnd) + '\n' + sideHtml(REPORT_PATH, parsed) + '\n    ' + next.slice(sei);
+}
 if (next === html) { console.log('NO_CHANGE'); process.exit(0); }
 writeFileSync(HTML_PATH, next);
 console.log(`UPDATED ${HTML_PATH} <- ${REPORT_PATH} (${parsed.dateLabel})`);

@@ -122,20 +122,6 @@
   .btn-ghost:hover { border-color: var(--sky); }
   .btn .ic { width: 1.15em; height: 1.15em; }
   .hero-note { margin-top: .9rem; font-size: .86rem; color: var(--ink-soft); }
-  /* PC は写真を右に、もやをかけずに見せる（2026-10-25 オーナー「トップ画のPC版も」）。
-     広い画面では写真が白いもやで薄くなり、大きな木が文字の裏に隠れていた。スマホは今のまま */
-  .hero-pic { display: none; }
-  @media (min-width: 64rem) {
-    .hero { min-height: 0; background: linear-gradient(180deg, var(--sky-wash) 0%, var(--ground) 100%); }
-    .hero::before, .hero::after { display: none; }
-    .hero-inner { padding: 3.6rem 1.6rem 4.2rem; }
-    .hero-inner > * { max-width: 29.5rem; }
-    .hero-inner > .cta-row { max-width: 31rem; }
-    .lede, .lede-sub { word-break: auto-phrase; }
-    .wordmark { font-size: 3rem; }
-    .hero-pic { display: block; position: absolute; z-index: 2; top: 2.6rem; bottom: 2.6rem; left: calc(50% + 3.75rem); right: 0; margin: 0; border-radius: 28px 0 0 28px; overflow: hidden; box-shadow: var(--shadow); }
-    .hero-pic img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 34% 62%; }
-  }
 
   /* ---- sections ---- */
   section { padding: 3.4rem 0; }
@@ -306,6 +292,137 @@
 @media (max-width:620px){
   .range li{grid-template-columns:1fr;gap:3px;}
 }
+
+/* ===== PC（幅1180px以上）: 3列 =====
+   左＝いつでも見られる5つ・LINEのQR／真ん中＝あいさつ・今週末のおでかけ・本文／右＝最新号・バックナンバー・発行。
+   公園の写真は半透明でページの上のほういっぱいに敷き、下にいくほど地の色に溶かす。
+   これより狭い幅（スマホ・タブレット）は何も変えない。PCだけの部品はふだん display:none */
+.pc-bg, .side, .weekend { display: none; }
+@media (min-width: 73.75rem) {
+  :root {
+    --maru: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+    --body: "Zen Maru Gothic", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", sans-serif;
+    --pc-card: rgba(255,255,255,.9); --pc-line: rgba(236,231,219,.95); --pc-glow: rgba(255,255,255,.95);
+    --pc-photo: .45; --pc-nav: rgba(255,255,255,.72); --pc-line-green: #00813A; --pc-soft: #5A6971;
+    --pc-leaf-wash: #EAF4E8; --pc-leaf-ink: #2F6B34; --pc-blush-ink: #9C3F36; --pc-lav-wash: #F1EEF7; --pc-lav-ink: #5B4E8C; --pc-fit-ink: #1F5F7A;
+  }
+  body { position: relative; }
+  .bvnav { background: var(--pc-nav); }
+  .bvnav-in { max-width: 1360px; padding: 10px 32px; }
+  .bvnav-brand { font-size: 17px; }
+  .bvnav .bvnav-cta { background: var(--pc-line-green) !important; }
+  .bvnav .bvnav-cta:hover { background: #006B30 !important; }
+  .pc-bg { display: block; position: absolute; top: 0; left: 0; right: 0; height: 1040px; z-index: 0; pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 48%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 48%, transparent 100%); }
+  .pc-bg img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; opacity: var(--pc-photo); }
+  .page { position: relative; z-index: 1; max-width: 1360px; margin: 0 auto; padding: 28px 32px 64px; box-sizing: border-box;
+    display: grid; grid-template-columns: 240px minmax(0, 1fr) 272px; grid-template-areas: "left main right"; gap: 24px; align-items: start; }
+  .col-main { grid-area: main; min-width: 0; display: flex; flex-direction: column; gap: 28px; }
+  .side { display: flex; flex-direction: column; gap: 18px; }
+  .side-l { grid-area: left; }
+  .side-r { grid-area: right; }
+
+  /* あいさつは、写真の上にじかに（白い枠に入れない） */
+  .hero { min-height: 0; background: none; overflow: visible; display: block; }
+  .hero::before, .hero::after { display: none; }
+  .hero-inner { padding: 40px 8px 4px; max-width: none; text-align: center; }
+  .eyebrow { font-size: 1.25rem; color: var(--marigold-ink); text-shadow: 0 0 14px var(--pc-glow); margin-bottom: .1rem; }
+  .eyebrow::after { display: none; }
+  .wordmark { font-size: clamp(3rem, 4.1vw, 3.5rem); font-weight: 700; letter-spacing: .03em; line-height: 1.2; margin: 0 0 .9rem; text-shadow: 0 1px 20px var(--pc-glow), 0 0 4px var(--pc-glow); }
+  .lede { margin: 0 auto; max-width: 30em; font-size: 1.06rem; font-weight: 500; line-height: 1.9; word-break: auto-phrase; text-shadow: 0 1px 14px var(--pc-glow), 0 0 3px var(--pc-glow); }
+  .lede-sub { display: none; }
+  .badges { justify-content: center; margin-top: 1.1rem; }
+  .badge { background: var(--pc-card); border-color: var(--pc-line); box-shadow: none; color: var(--pc-soft); }
+  .cta-row { justify-content: center; margin-top: 1.2rem; }
+  .btn-line { background: var(--pc-line-green); }
+  .hero-note { margin-top: .9rem; }
+
+  /* 真ん中の本文（左右の列に出したものは、真ん中から外す） */
+  .pagenav, #tools, #tomodachi { display: none; }
+  .col-main main { display: flex; flex-direction: column; gap: 40px; }
+  .col-main main > section { padding: 0; }
+  .col-main .wrap { max-width: none; padding-left: 0; padding-right: 0; }
+  .col-main .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .col-main .card { padding: 1.25rem 1.05rem; }
+  .col-main .card .kicker { font-size: 1rem; gap: .4rem; }
+  .col-main .card .kicker .em { font-size: 1.2rem; }
+  .col-main .card p { font-size: .93rem; text-wrap: pretty; }
+
+  /* カード */
+  .pc-card, .weekend { background: var(--pc-card); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border: 1px solid var(--pc-line); border-radius: 22px; }
+  .pc-card { padding: 18px 20px 14px; }
+  .pc-kicker { margin: 0; font-size: 11.5px; font-weight: 700; letter-spacing: .16em; color: var(--pc-soft); }
+  .pc-h { margin: 0 0 8px; font-family: var(--maru); font-size: 17px; font-weight: 700; line-height: 1.5; color: var(--ink); }
+  .pc-h2 { margin: 0; font-family: var(--maru); font-size: 20px; font-weight: 700; line-height: 1.5; color: var(--ink); }
+  .pc-more { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; font-size: 14px; text-decoration: none; color: var(--link-ink); }
+  .pc-more:hover { text-decoration: underline; }
+
+  /* 左: いつでも見られる5つ */
+  .pc-tools { display: flex; flex-direction: column; gap: 2px; margin: 0 -8px; }
+  .pc-tools a { display: flex; gap: 12px; align-items: center; padding: 9px 8px; border-radius: 14px; text-decoration: none; color: var(--ink); min-height: 44px; }
+  .pc-tools a:hover { background: var(--surface-2); }
+  .pc-ic { flex: none; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+  .pc-ic svg { width: 20px; height: 20px; }
+  .ic-sky { background: var(--sky-wash); color: var(--link-ink); }
+  .ic-leaf { background: var(--pc-leaf-wash); color: var(--pc-leaf-ink); }
+  .ic-mari { background: var(--marigold-wash); color: var(--marigold-ink); }
+  .ic-blush { background: var(--blush-wash); color: var(--pc-blush-ink); }
+  .ic-lav { background: var(--pc-lav-wash); color: var(--pc-lav-ink); }
+  .pc-tt { display: flex; flex-direction: column; line-height: 1.45; }
+  .pc-tt b { font-size: 15px; font-weight: 700; word-break: auto-phrase; }
+  .pc-tt span { font-size: 12.5px; color: var(--pc-soft); }
+  .pc-qr { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding-bottom: 18px; }
+  .pc-qr img { width: 132px; height: 132px; display: block; border-radius: 8px; background: #fff; }
+  .pc-qr p { margin: 0; font-size: 12.5px; line-height: 1.7; color: var(--pc-soft); word-break: auto-phrase; }
+
+  /* 真ん中: 今週末のおでかけ */
+  .weekend { display: block; padding: 22px 26px 10px; }
+  .wk-top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 4px 16px; }
+  .wk-days { margin: 0; font-size: 13px; color: var(--pc-soft); }
+  .wk-list { list-style: none; margin: 12px 0 0; padding: 0; }
+  .wk-list li { display: flex; gap: 14px; align-items: center; padding: 11px 2px; border-top: 1px solid var(--line); }
+  .wk-d { flex: none; width: 64px; padding: 6px 0; border-radius: 12px; background: var(--marigold-wash); color: var(--marigold-ink); text-align: center; line-height: 1.25; font-size: 11.5px; }
+  .wk-d b { display: block; font-size: 17px; }
+  .wk-t { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; line-height: 1.5; }
+  .wk-t b { font-size: 15px; font-weight: 700; word-break: auto-phrase; }
+  .wk-t span { font-size: 12.5px; color: var(--pc-soft); }
+  .wk-fit { flex: none; padding: 3px 10px; border-radius: 999px; background: var(--sky-wash); color: var(--pc-fit-ink); font-size: 12px; font-weight: 700; white-space: nowrap; }
+
+  /* 右: 最新号・バックナンバー・発行 */
+  .pc-latest-box { border-radius: 16px; background: var(--ground); padding: 14px 14px 12px; }
+  .pc-tag { display: inline-block; padding: 2px 10px; border-radius: 999px; background: var(--marigold-wash); color: var(--marigold-ink); font-size: 12px; font-weight: 700; }
+  .pc-latest-box h3 { margin: 8px 0 4px; font-size: 15.5px; font-weight: 700; line-height: 1.55; word-break: auto-phrase; }
+  .pc-latest-box p { margin: 0; font-size: 13.5px; line-height: 1.8; }
+  .pc-latest-box .ages { margin-top: 8px; font-size: 12.5px; }
+  .pc-backlist { list-style: none; margin: 0; padding: 0; }
+  .pc-backlist li { border-top: 1px solid var(--line); }
+  .pc-backlist a { display: flex; gap: 12px; align-items: baseline; padding: 10px 2px; text-decoration: none; color: var(--ink); min-height: 44px; box-sizing: border-box; }
+  .pc-backlist a:hover .bt { text-decoration: underline; }
+  .pc-backlist .bd { flex: none; width: 52px; font-size: 13px; font-weight: 700; color: var(--link-ink); }
+  .pc-backlist .bt { flex: 1 1 auto; min-width: 0; font-size: 13.5px; line-height: 1.6; word-break: auto-phrase; }
+  .pc-pub { background: var(--surface-2); border-color: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .pc-pub p { margin: 0; font-size: 13px; line-height: 1.8; }
+  .pc-pub .pc-note { margin-top: 8px; font-size: 12.5px; color: var(--pc-soft); }
+}
+/* 画面の高さが足りるときだけ、左の列（5つ・QR）をスクロールについてこさせる */
+@media (min-width: 73.75rem) and (min-height: 47.5rem) {
+  .side-l { position: sticky; top: 86px; }
+}
+@media (min-width: 85rem) {
+  .page { grid-template-columns: 264px minmax(0, 1fr) 296px; gap: 32px; }
+}
+@media (min-width: 73.75rem) and (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pc-card: rgba(26,40,49,.88); --pc-line: rgba(56,80,92,.9); --pc-glow: rgba(19,31,40,.9); --pc-photo: .26; --pc-nav: rgba(19,31,40,.78); --pc-soft: #AAB9C1;
+    --pc-leaf-wash: #23362A; --pc-leaf-ink: #8FC489; --pc-blush-ink: #EC9C94; --pc-lav-wash: #2B2840; --pc-lav-ink: #BDB3EA; --pc-fit-ink: #9AD4EA;
+  }
+}
+@media (min-width: 73.75rem) {
+  :root[data-theme="dark"] {
+    --pc-card: rgba(26,40,49,.88); --pc-line: rgba(56,80,92,.9); --pc-glow: rgba(19,31,40,.9); --pc-photo: .26; --pc-nav: rgba(19,31,40,.78); --pc-soft: #AAB9C1;
+    --pc-leaf-wash: #23362A; --pc-leaf-ink: #8FC489; --pc-blush-ink: #EC9C94; --pc-lav-wash: #2B2840; --pc-lav-ink: #BDB3EA; --pc-fit-ink: #9AD4EA;
+  }
+}
 </style>
 <!-- 検索エンジンに「ぼんぼやーじゅ通信」という名前の実体を伝えるための構造化データ。
      ブランド名での検索に出るかどうかは、まずここで名前を認識してもらえるかによる。 -->
@@ -376,6 +493,8 @@
 }
 </script>
 <link rel="stylesheet" href="/assets/bv-nav.css">
+<!-- PC（幅1180px以上）だけ丸ゴシック。スマホでは使わないので、字形のファイルは読み込まれない -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&amp;display=swap" media="(min-width: 73.75rem)">
 <script src="/assets/analytics.js" defer></script>
 </head>
 <body>
@@ -391,6 +510,10 @@
   </div>
 </nav>
 
+<div class="pc-bg" aria-hidden="true"><img src="assets/hero-park.jpg" alt="" width="1600" height="1066" decoding="async"></div>
+
+<div class="page">
+<div class="col-main">
 <header class="hero">
   <div class="hero-inner">
     <div class="eyebrow fade">Bon Voyage,</div>
@@ -408,14 +531,29 @@
         <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.9 3 2.75 6.36 2.75 10.5c0 3.7 3.3 6.8 7.78 7.4.3.06.71.2.81.46.09.24.06.6.03.85l-.13.79c-.04.24-.19.93.82.51 1.01-.42 5.45-3.21 7.44-5.5 1.37-1.5 2.02-3.03 2.02-4.51C21.25 6.36 17.1 3 12 3Z"/></svg>
         LINEで友だち追加（無料）
       </a>
-      <!-- HERO-CAL:START ここは scripts/build-calendar.mjs が書き換える。手で直さない -->
+      <!-- HERO-CAL:START 自動で書き換わる。手で直さない -->
       <a class="btn btn-ghost" href="/calendar.html">今週末の予定 10件 →</a>
       <!-- HERO-CAL:END -->
     </div>
     <p class="hero-note fade d3">友だち追加だけで届きます。個人情報の入力は不要です。</p>
   </div>
-  <figure class="hero-pic fade d2" aria-hidden="true"><img src="assets/hero-park.jpg" alt="" width="1600" height="1066" decoding="async"></figure>
 </header>
+
+    <!-- WEEKEND:START 自動で書き換わる。手で直さない -->
+    <section class="weekend" aria-labelledby="wk-h">
+      <div class="wk-top"><div><p class="pc-kicker">THIS WEEKEND</p><h2 class="pc-h2" id="wk-h">今週末のおでかけ</h2></div><p class="wk-days">10/31(土)・11/1(日)　おでかけカレンダーから</p></div>
+      <ul class="wk-list">
+        <li><span class="wk-d"><b>10/31</b>土</span><span class="wk-t"><b>こだキッズタウン in 小平第六小学校</b><span>小平市立小平第六小学校・10:00〜・入場無料</span></span><span class="wk-fit">◎ 未就学・小学生</span></li>
+        <li><span class="wk-d"><b>10/31</b>土</span><span class="wk-t"><b>第49回 上水南公民館まつり</b><span>上水南公民館・10:00〜</span></span><span class="wk-fit">◎ 未就学・小学生</span></li>
+        <li><span class="wk-d"><b>10/31</b>土</span><span class="wk-t"><b>エミテラス所沢・グランエミオ所沢「10/31 ハロウィンイベント」</b><span>エミテラス所沢・グランエミオ所沢・10:00〜・無料</span></span><span class="wk-fit">◎ 未就学・小学生</span></li>
+        <li><span class="wk-d"><b>10/31</b>土</span><span class="wk-t"><b>上水南公民館まつり音楽会 ミュージックベルコンサート</b><span>上水南公民館 ホール・11:00〜・無料</span></span><span class="wk-fit">◎ 未就学・小学生</span></li>
+        <li><span class="wk-d"><b>11/1</b>日</span><span class="wk-t"><b>こもれびと水車のマルシェ vol.3（小平ふるさと村）</b><span>小平ふるさと村 柿の木公園・10:00〜・入場無料</span></span><span class="wk-fit">◎ 未就学・小学生</span></li>
+        <li><span class="wk-d"><b>11/1</b>日</span><span class="wk-t"><b>第2回 小平モルックカップ</b><span>花小金井南市民広場・10:00〜</span></span><span class="wk-fit">◎ 小学生</span></li>
+        <li><span class="wk-d"><b>11/1</b>日</span><span class="wk-t"><b>小川パレット オープン</b><span>小川駅西口再開発ビル4・5階</span></span><span class="wk-fit">◎ 赤ちゃん〜小学生</span></li>
+      </ul>
+      <a class="pc-more" href="/calendar.html">おでかけカレンダーで、先の予定まで見る →</a>
+    </section>
+    <!-- WEEKEND:END -->
 
 <nav class="pagenav wrap" aria-label="このページの中身">
   <a href="/calendar.html">おでかけカレンダー</a>
@@ -518,7 +656,7 @@
     <h2>最新号のプレビュー</h2>
     <p class="section-lede">実際にお届けしている通信の一例です。読みやすいプレーンな文章で、そのままスマホで開けます。</p>
 
-    <!-- ISSUE:START 自動更新ブロック。reports/free/ の最新号から scripts/update-homepage-preview.mjs が書き換えます（手で編集しても次回配信で上書きされます） -->
+    <!-- ISSUE:START 自動で書き換わる。手で直さない -->
     <article class="issue">
       <div class="issue-top">
         <span class="t">ぼんぼやーじゅ通信</span>
@@ -608,6 +746,61 @@
     </div>
   </section>
 </main>
+</div>
+
+<aside class="side side-l" aria-label="いつでも見られる5つ">
+  <section class="pc-card" aria-labelledby="tools-h">
+    <p class="pc-kicker">TOOLS</p>
+    <h2 class="pc-h" id="tools-h">いつでも見られる5つ</h2>
+    <nav class="pc-tools" aria-label="いつでも見られる5つ">
+      <a href="/calendar.html"><span class="pc-ic ic-sky"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span><span class="pc-tt"><b>おでかけカレンダー</b><span>日付から探せる・締切も</span></span></a>
+      <a href="/map.html"><span class="pc-ic ic-leaf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10" r="2.3"/></svg></span><span class="pc-tt"><b>おでかけマップ</b><span>地元の家庭のおすすめ</span></span></a>
+      <a href="/entei.html"><span class="pc-ic ic-mari"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v-8"/><path d="M12 12c0-4 3-6 7-6 0 4-3 6-7 6z"/><path d="M12 14c0-3-2.5-5-6-5 0 3 2.5 5 6 5z"/></svg></span><span class="pc-tt"><b>園庭開放・未就園児の会</b><span>幼稚園・こども園の日程</span></span></a>
+      <a href="/teirei.html"><span class="pc-ic ic-blush"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20"/></svg></span><span class="pc-tt"><b>児童館・図書館の定例</b><span>おはなし会・こども広場</span></span></a>
+      <a href="/issues.html"><span class="pc-ic ic-lav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2.5"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><span class="pc-tt"><b>バックナンバー</b><span>これまでの通信</span></span></a>
+    </nav>
+  </section>
+  <section class="pc-card pc-qr" aria-labelledby="qr-h">
+    <h2 class="pc-h" id="qr-h">スマホで受け取る</h2>
+    <img src="assets/line-qr.png" alt="LINEの友だち追加のQRコード" width="132" height="132" loading="lazy">
+    <p>スマホのカメラで読み取ると、LINEの友だち追加の画面が開きます。</p>
+  </section>
+</aside>
+
+<aside class="side side-r" aria-label="最新号とバックナンバー">
+    <!-- ISSUE-SIDE:START 自動で書き換わる。手で直さない -->
+    <section class="pc-card pc-latest" aria-labelledby="latest-h">
+      <p class="pc-kicker">LATEST</p>
+      <h2 class="pc-h" id="latest-h">最新号　10/21（水）号</h2>
+      <div class="pc-latest-box">
+        <span class="pc-tag">今週の一推し</span>
+        <h3>小金井公園コスモスまつり 10/25（日） 10:00〜15:00 つつじ山広場</h3>
+        <p>コスモス畑のお花摘みは整理券制で、午前の部は9:30、午後の部は13:00からお花摘みブースで配ります（各回約50人）。どんぐりとサクラの枝の工作、SLの投炭体験、クイズラリーも。</p>
+        <div class="ages">👶 ○　🧒 <b>◎</b>　🎒 <b>◎</b></div>
+      </div>
+      <a class="pc-more" href="#issue">この号をぜんぶ読む →</a>
+    </section>
+    <section class="pc-card pc-backs" aria-labelledby="back-h">
+      <p class="pc-kicker">BACK NUMBERS</p>
+      <h2 class="pc-h" id="back-h">バックナンバー</h2>
+      <ul class="pc-backlist">
+        <li><a href="/issues.html"><span class="bd">10/14号</span><span class="bt">第48回 小平市民まつり</span></a></li>
+        <li><a href="/issues.html"><span class="bd">10/7号</span><span class="bt">ミラクルミュージックマーケット</span></a></li>
+        <li><a href="/issues.html"><span class="bd">9/30号</span><span class="bt">科学館で学ぶ電車のひみつ</span></a></li>
+        <li><a href="/issues.html"><span class="bd">9/23号</span><span class="bt">小平の児童館3館（はなみん・おがいち・おがにん）</span></a></li>
+        <li><a href="/issues.html"><span class="bd">9/16号</span><span class="bt">多摩六都科学館「全国KAPLA大会に応募しよう!」</span></a></li>
+      </ul>
+      <a class="pc-more" href="/issues.html">バックナンバーをすべて見る →</a>
+    </section>
+    <!-- ISSUE-SIDE:END -->
+  <section class="pc-card pc-pub" aria-labelledby="pub-h">
+    <h2 class="pc-h" id="pub-h">発行</h2>
+    <p>ぼんぼやーじゅ通信の会<br>小平市民活動支援センター あすぴあ<br>登録団体（第254号）</p>
+    <p class="pc-note">日付や締切は、市や施設の公式ページで一件ずつ確かめています。</p>
+    <a class="pc-more" href="#contact">お問い合わせ →</a>
+  </section>
+</aside>
+</div>
 
 <footer>
   <div class="wrap">

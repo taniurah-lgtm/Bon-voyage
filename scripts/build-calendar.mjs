@@ -410,19 +410,69 @@ if (internalLeaks.length) {
   const n = ids.size;
 
   const label = n > 0 ? `今週末の予定 ${n}件 →` : 'おでかけカレンダーを見る →';
+  // 🔒 目印のコメントは公開ページのソースに出る。スクリプト名・ファイル名を書かない（CLAUDE.md「公開物に書かないこと」）
   const block =
-    '      <!-- HERO-CAL:START ここは scripts/build-calendar.mjs が書き換える。手で直さない -->\n' +
+    '      <!-- HERO-CAL:START 自動で書き換わる。手で直さない -->\n' +
     `      <a class="btn btn-ghost" href="/calendar.html">${label}</a>\n` +
     '      <!-- HERO-CAL:END -->';
 
+  // PCのトップの「今週末のおでかけ」（2026-10-26 オーナー: PCは3列に。スマホには出さない）。
+  //   上のボタンの件数と同じ「今週末」から、日付・時間の順に7件まで。0件なら欄ごと出さない
+  const AGE_JA = { baby: '赤ちゃん', pre: '未就学', elem: '小学生' };
+  const ageNames = (ks) => (ks.length === 3 ? '赤ちゃん〜小学生' : ks.map((k) => AGE_JA[k]).join('・'));
+  const fit = (a = {}) => {
+    const best = Object.keys(AGE_JA).filter((k) => a[k] === '◎');
+    const ok = Object.keys(AGE_JA).filter((k) => a[k] === '○');
+    return best.length ? `◎ ${ageNames(best)}` : ok.length ? `○ ${ageNames(ok)}` : '';
+  };
+  const WDJ = '日月火水木金土';
+  const md = (x) => { const [, m, dd] = x.split('-').map(Number); return { md: `${m}/${dd}`, wd: WDJ[new Date(x + 'T00:00:00Z').getUTCDay()] }; };
+  const sortKey = ({ e, day }) => day + (e.start || '99:99').padStart(5, '0');
+  const bestCount = (e) => Object.keys(AGE_JA).filter((k) => (e.ages || {})[k] === '◎').length;
+  // 土日どちらの催しも出るように、日ごとに枠を分ける（土曜だけで7件が埋まっていた）。
+  // 日の中では、◎の年齢が多い（＝どの家庭にも向く）ものから
+  const perDay = Math.ceil(7 / weekend.length);
+  const wkList = weekend
+    .flatMap((day) => pub
+      .filter((e) => (e.dates || []).filter((x) => weekend.includes(x)).sort()[0] === day)
+      .map((e) => ({ e, day }))
+      .sort((a, b) => bestCount(b.e) - bestCount(a.e) || sortKey(a).localeCompare(sortKey(b)))
+      .slice(0, perDay))
+    .slice(0, 7)
+    .sort((a, b) => sortKey(a).localeCompare(sortKey(b)));
+  const placeShort = (p = '') => p.split(/[（(／/—–]/)[0].trim().slice(0, 22);
+  const free = (c = '') => (/^入場無料/.test(c) ? '入場無料' : /^無料/.test(c) ? '無料' : '');
+  const wkItems = wkList.map(({ e, day }) => {
+    const sub = [placeShort(e.place), e.start ? `${e.start}〜` : '', free(e.cost)].filter(Boolean).join('・');
+    const f = fit(e.ages);
+    return `        <li><span class="wk-d"><b>${md(day).md}</b>${md(day).wd}</span><span class="wk-t"><b>${esc(e.name)}</b><span>${esc(sub)}</span></span>${f ? `<span class="wk-fit">${esc(f)}</span>` : ''}</li>`;
+  });
+  const wkDays = weekend.map((x) => `${md(x).md}(${md(x).wd})`).join('・');
+  const wkBlock =
+    '    <!-- WEEKEND:START 自動で書き換わる。手で直さない -->\n' +
+    (wkItems.length
+      ? '    <section class="weekend" aria-labelledby="wk-h">\n' +
+        '      <div class="wk-top"><div><p class="pc-kicker">THIS WEEKEND</p><h2 class="pc-h2" id="wk-h">今週末のおでかけ</h2></div>' +
+        `<p class="wk-days">${wkDays}　おでかけカレンダーから</p></div>\n` +
+        `      <ul class="wk-list">\n${wkItems.join('\n')}\n      </ul>\n` +
+        '      <a class="pc-more" href="/calendar.html">おでかけカレンダーで、先の予定まで見る →</a>\n' +
+        '    </section>\n'
+      : '') +
+    '    <!-- WEEKEND:END -->';
+
   try {
-    const home = readFileSync(HOME, 'utf8');
+    const home0 = readFileSync(HOME, 'utf8');
+    const reWk = /[ \t]*<!-- WEEKEND:START[\s\S]*?<!-- WEEKEND:END -->/;
+    if (!reWk.test(home0)) console.log('  ⚠️ トップページに WEEKEND の目印がありません。「今週末のおでかけ」は差し替えていません。');
+    const home = reWk.test(home0) ? home0.replace(reWk, wkBlock) : home0;
+    if (home !== home0) console.log(`  PCトップの「今週末のおでかけ」: ${wkItems.length}件（${wkDays}）`);
     const re = /[ \t]*<!-- HERO-CAL:START[\s\S]*?<!-- HERO-CAL:END -->/;
     if (!re.test(home)) {
+      if (home !== home0) writeFileSync(HOME, home);
       console.log('  ⚠️ トップページに HERO-CAL の目印がありません。ボタンは差し替えていません。');
     } else {
       const next = home.replace(re, block);
-      if (next !== home) {
+      if (next !== home0) {
         writeFileSync(HOME, next);
         console.log(`wrote ${HOME}（ヒーローのボタン: 「${label}」／${weekend.join('・')}）`);
       } else {
