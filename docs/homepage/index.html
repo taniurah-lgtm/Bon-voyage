@@ -122,6 +122,20 @@
   .btn-ghost:hover { border-color: var(--sky); }
   .btn .ic { width: 1.15em; height: 1.15em; }
   .hero-note { margin-top: .9rem; font-size: .86rem; color: var(--ink-soft); }
+  /* PC は写真を右に、もやをかけずに見せる（2026-10-25 オーナー「トップ画のPC版も」）。
+     広い画面では写真が白いもやで薄くなり、大きな木が文字の裏に隠れていた。スマホは今のまま */
+  .hero-pic { display: none; }
+  @media (min-width: 64rem) {
+    .hero { min-height: 0; background: linear-gradient(180deg, var(--sky-wash) 0%, var(--ground) 100%); }
+    .hero::before, .hero::after { display: none; }
+    .hero-inner { padding: 3.6rem 1.6rem 4.2rem; }
+    .hero-inner > * { max-width: 29.5rem; }
+    .hero-inner > .cta-row { max-width: 31rem; }
+    .lede, .lede-sub { word-break: auto-phrase; }
+    .wordmark { font-size: 3rem; }
+    .hero-pic { display: block; position: absolute; z-index: 2; top: 2.6rem; bottom: 2.6rem; left: calc(50% + 3.75rem); right: 0; margin: 0; border-radius: 28px 0 0 28px; overflow: hidden; box-shadow: var(--shadow); }
+    .hero-pic img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 34% 62%; }
+  }
 
   /* ---- sections ---- */
   section { padding: 3.4rem 0; }
@@ -400,6 +414,7 @@
     </div>
     <p class="hero-note fade d3">友だち追加だけで届きます。個人情報の入力は不要です。</p>
   </div>
+  <figure class="hero-pic fade d2" aria-hidden="true"><img src="assets/hero-park.jpg" alt="" width="1600" height="1066" decoding="async"></figure>
 </header>
 
 <nav class="pagenav wrap" aria-label="このページの中身">
