@@ -192,13 +192,16 @@ E-mail koganei@tokyo-park.or.jp ／ 園長 若松正樹 様
 
 | ソース | URL | 取得 | 頻度 | 柱 |
 |---|---|---|---|---|
-| 西武鉄道 子育て応援サイト「おでかけTOPIC」★子連れ特化 | https://kosodate.seiburailway.jp/topic/ | 🔍 | 毎回 | 推 |
+| 西武鉄道 子育て応援サイト「おでかけTOPIC」★子連れ特化 | https://kosodate.seiburailway.jp/topic/ | 🔍のみ（🔒 下の注） | 毎回 | 推 |
 | 西武鉄道 イベント・キャンペーン一覧(スタンプラリー/電車フェスタ/沿線企画) | https://www.seiburailway.jp/sightseeing/eventcampaigninfo/ | 🔍 | 毎回 | 推・損 |
 | 西武鉄道 おでかけTOP(沿線スポット) | https://www.seiburailway.jp/sightseeing/ | 🔍 | 補助 | 推 |
 | SEIBU GROUP こども応援プロジェクト(小児運賃均一・優待) | https://www.seibuholdings.co.jp/kodomo-support/ | 🔍 | 補助 | 損 |
 | 西武バス お知らせ・イベント・臨時運行(花火/イベントのシャトル) | https://www.seibubus.co.jp/news/ | 🔍 | 補助 | 推・損 |
 | 西武バス 1DayPass(全線700円乗り放題) / 西武鉄道×西武バス おトクにおでかけきっぷ(施設クーポン付) | https://www.seibubus.co.jp/rosen/teiki/oneday/ ・ https://www.seiburailway.jp/railway/ticket/specialticket/ | 🔍📄 | 補助 | 損 |
 | フォールバック: 鉄道コム 西武イベント / X @seibu_event | https://www.tetsudo.com/event/category/10009/ ・ https://x.com/seibu_event | 📄🔍 | 補助 | 推 |
+
+> 🔒 **2026-10-27: 子育て応援サイトは、Cloudflare で機械からの取得を止めている**（curl・WebFetch は403）。**ブラウザのふりをして開くなどの回り道はしない**（先方が機械を止めている意思を尊重する）。これまでも検索に出たものしか拾えておらず、**台帳にこのサイトから拾った催しは0件**。
+> 西武線の子ども向けの催し（キッズフェスタ・スタンプラリー・車両基地公開など）は、**本体の「イベント・キャンペーン一覧」と X @seibu_event** で拾う。このサイトを見るなら**人がスマホで見る**（オーナーの判断待ち）
 
 **巡回メモ**:
 - 子ども向けスタンプラリーは映画コラボが定番(例: 2026春「映画ドラえもん 新・のび太の海底鬼岩城」西武線スタンプラリー 2/6〜5/6・1日おでかけきっぷ連動)。開催期間は「イベント先取り情報」に載せ、行き方コスパ(企画乗車券)も添える。
