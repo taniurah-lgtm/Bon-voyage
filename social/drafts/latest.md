@@ -1,30 +1,51 @@
-# 2026-10-27 SNSドラフト（承認待ち・まだ投稿していません）
+# 2026-10-28 SNSドラフト（生成エラー）
 
-> 🔁 **Claude が差し替えました（10/27 朝）。**自動生成の案は、10/25 で終わった小金井公園コスモスまつりを「開かれます」と書いていて、
-> 「花小金井から歩いて行ける小金井公園」という書かない約束の表現も入っていました（雨の延期日 11/1 を開催日と読んでいた。生成の検査を直した）。
+```
+全モデル失敗:
+gemini-flash-latest/8192: 503 {
+  "error": {
+    "code": 503,
+    "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+    "status": "UNAVAILABLE"
+  }
+}
 
-【Threads・紹介 1/2】
-小川駅のすぐ前に、11/1(日)、市の新しい施設「小川パレット」がオープンします🎈
-オープンの11/1〜3は、入場無料の催しがいろいろ。
+gemini-flash-latest/16384: 429 {
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a
+gemini-2.0-flash/8192: 404 {
+  "error": {
+    "code": 404,
+    "message": "This model models/gemini-2.0-flash is no longer available. Please update your code to use models/gemini-3.8-flash for the latest features and improvemen
+gemini-2.0-flash/16384: 404 {
+  "error": {
+    "code": 404,
+    "message": "This model models/gemini-2.0-flash is no longer available. Please update your code to use models/gemini-3.8-flash for the latest features and improvemen
+gemini-flash-lite-latest/8192: 400 {
+  "error": {
+    "code": 400,
+    "message": "Request contains an invalid argument.",
+    "status": "INVALID_ARGUMENT"
+  }
+}
 
-小さい子と行くなら、まず気になるのが、
+gemini-flash-lite-latest/8192(思考なし): 429 {
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a
+gemini-flash-lite-latest/16384: 429 {
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a
+gemini-2.5-flash-lite/8192: 404 {
+  "error": {
+    "code": 404,
+    "message": "This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest 
+gemini-2.5-flash-lite/16384: 404 {
+  "error": {
+    "code": 404,
+    "message": "This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest 
+```
 
-【Threads・紹介 2/2】
-1日の和室「あそぼう・つくろう！わくわく和室ひろば」（10:30〜17:00）です。3日は15時からコダレンジャーのショーもあります。
-
-小川パレット オープン
-日時：11/1(日) 10:00〜17:00／11/2(月) 9:00〜17:00／11/3(火・祝) 9:00〜
-場所：小川駅西口の再開発ビル4・5階（西武拝島線・国分寺線 小川駅から徒歩1分）
-費用：入場無料（一部の講座は事前申込・有料）
-https://ogawa-palette.jp/
-
-ギャラリーのクイズラリーは3日間あって、景品つき（数量限定・17時まで）。専用の駐車場・駐輪場はないので、電車がおすすめです。
-
-くわしくは → https://bonvoya.nicomaru.tokyo/th
-#小平 #小川パレット #小川駅 #雨の日 #子連れおでかけ
-
----
-※Claude が差し替え（自動生成の案は使えなかったため）。中身は小川パレットの公式（オープニングイベントのチラシ）で確かめたもの。
-※【紹介 1/2】を投稿し、その**返信として【紹介 2/2】**をぶら下げる。1/2にリンクを入れない。
-※今日は【紹介】だけの日です（問いかけは隔日）。
-※飛び先は https://bonvoya.nicomaru.tokyo/th に統一（【紹介】のみ）。
+モデル名が原因なら Actions Variables に GEMINI_MODEL を設定してください（例: gemini-1.5-flash）。
