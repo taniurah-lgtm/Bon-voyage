@@ -2910,7 +2910,7 @@
    "target": "どなたでも",
    "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3672&day=2026-10-10",
    "status": "候補（会期が長いので、雨の週の差し替え札に使う）",
-   "confidence": "公式確認済み（2026-10-18）／再確認を試みたが公式が落ちていて取れず（2026-10-26・2026-10-27）",
+   "confidence": "確認を試みた日 2026-10-28（公式が3日続けて503で、取り直せていない） — 内容の裏は 2026-10-18 に公式で取ったものが最新。再確認は 10-26・10-27・10-28 のいずれも取れず",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
@@ -4898,12 +4898,12 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "",
+   "cost": "入場無料（公式に明記）",
    "discount": "",
    "target": "",
    "url": "https://www.tokyo-park.or.jp/park/koganei/news/2026/11_7_sl.html",
    "status": "候補",
-   "confidence": "公式確認済み（2026-10-11）— 日時・雨天延期・会場・入場無料・内容",
+   "confidence": "公式確認済み（2026-10-28）— 日時・雨天延期（11/8）・会場・入場無料・内容・主催を公式で取り直し、変更なし （初出の確認は 2026-10-11）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
@@ -5012,7 +5012,7 @@
    "timeUncertain": false,
    "place": "小平ファーマーズ・マーケットと小平市役所周辺（JA の公式）",
    "mapq": "小平ファーマーズ",
-   "summary": "",
+   "summary": "農産物と花きの販売、模擬店（サトイモコロッケ・焼きだんご・すいとん・焼きイモ）、農畜産物と花き・植木の品評会、宝分け。",
    "kidsNote": "",
    "caution": "",
    "contact": null,
@@ -5028,7 +5028,7 @@
    "target": "",
    "url": "https://www.jatm.or.jp/farming/advising/festival.php",
    "status": "候補",
-   "confidence": "公式（共催の JA）で確認済み（2026-10-19）／再確認（2026-10-27）で日時・会場・JA側の内容に変更なし — 雨天はJA公式に記載が無いことを確認。商工会側の内容は、市のサイト障害が続いていて未取得",
+   "confidence": "公式確認済み（2026-10-28）— 共催の JA東京むさしの公式で、日時・会場・JA側の内容に変更なし （初出の確認は 2026-10-19、以後 10-27・10-28 に再確認） — 雨天はJA公式に記載が無いことを確認。商工会側の内容は、市のサイト障害が続いていて未取得（要確認）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
