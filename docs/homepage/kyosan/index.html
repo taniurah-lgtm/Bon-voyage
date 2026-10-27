@@ -129,6 +129,31 @@
   .files a span { color: var(--ink-soft); font-size: .78rem; white-space: nowrap; }
   .who { font-size: .82rem; color: var(--ink-soft); line-height: 1.8; margin-top: 1.4rem; }
 
+  /* これからの広がり */
+  .road { list-style: none; margin: 0; padding: 0; display: grid; gap: .7rem; }
+  .road > li { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .9rem 1rem 1rem; }
+  .road > li.now { border-color: var(--sky-deep); box-shadow: 0 0 0 3px var(--sky-wash); }
+  .road .when { display: inline-flex; align-items: baseline; gap: .5rem; font-family: var(--maru); font-weight: 800; font-size: .8rem; color: var(--marigold-ink); background: var(--marigold-wash); border-radius: 999px; padding: .15rem .7rem; }
+  .road .now .when { color: var(--on-sky); background: var(--sky-deep); }
+  .road .when small { font-weight: 700; font-size: .72rem; opacity: .9; }
+  .road > li > b { display: block; font-family: var(--maru); font-weight: 800; font-size: 1.02rem; line-height: 1.5; margin: .5rem 0 .35rem; }
+  .road ul { margin: 0; padding-left: 1.15rem; display: grid; gap: .25rem; }
+  .road ul li { font-size: .88rem; line-height: 1.7; }
+  .road ul li::marker { color: var(--marigold); }
+  .room { margin-top: .9rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .9rem 1rem 1rem; }
+  .room .lab { font-size: .84rem; color: var(--ink-soft); }
+  .room .val { font-family: var(--maru); font-weight: 800; font-size: 1.75rem; line-height: 1.2; }
+  .room .val small { font-size: .85rem; margin-left: .15rem; }
+  .meter { height: 12px; border-radius: 999px; background: var(--sky-wash); overflow: hidden; margin-top: .6rem; }
+  .meter span { display: block; width: 1.5%; min-width: 6px; height: 100%; background: var(--sky-deep); border-radius: 999px; }
+  .m-lab { font-size: .88rem; margin-top: .45rem; }
+  .m-lab b { color: var(--link-ink); }
+  .room .nt { font-size: .74rem; color: var(--ink-soft); margin-top: .3rem; }
+  .lock { margin-top: .9rem; background: var(--marigold-wash); border-radius: var(--radius-sm); padding: .95rem 1rem; }
+  .lock b { display: block; font-family: var(--maru); font-weight: 800; font-size: 1rem; margin-bottom: .25rem; }
+  .lock p { font-size: .9rem; line-height: 1.75; }
+  .lock .small { font-size: .78rem; color: var(--ink-soft); margin-top: .35rem; }
+
   @media (max-width: 34rem) {
     .pay th, .pay td { display: block; width: auto; }
     .pay th { padding-bottom: .15rem; border-bottom: 0; }
@@ -208,7 +233,7 @@
   <section aria-labelledby="h-plans">
     <p class="kick">Plans</p>
     <h2 id="h-plans">協賛は2つ</h2>
-    <p class="say">どちらも、協賛であることを必ず表示します。</p>
+    <p class="say">どちらも、協賛であることを必ず表示します。両方のお申し込みもできます。</p>
     <div class="plans">
       <article class="plan a" aria-labelledby="h-a">
         <div class="plan-h">
@@ -247,6 +272,32 @@
           <a class="see" href="/kyosan/demo/#page">掲載イメージで見る →</a>
         </div>
       </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-road">
+    <p class="kick">Roadmap</p>
+    <h2 id="h-road">これからの広がり</h2>
+    <p class="say">読者は、市内の施設に置いていただいているチラシや、幼稚園で配っていただいているチラシ、地域のおまつりを通じて増えています。これから、こう広げていきます。</p>
+    <ol class="road">
+      <li class="now"><span class="when">いま<small>2026年11月</small></span><b>小平の子育て家庭に、毎週200人</b>
+        <ul><li>市内の地域センター20館・元気村・児童館に、毎月チラシ</li><li>市内の幼稚園4園で、チラシを配っていただいています</li><li>赤ちゃんのいるご家庭への訪問でも（こども家庭センター）</li><li>地域のおまつりのプログラムにも（11月）</li></ul></li>
+      <li><span class="when">この冬から春</span><b>市内の園へ、順に広げる</b>
+        <ul><li>市内の保育園（40園以上）・幼稚園へ、順にご案内</li><li>読者の声を聞いて、紙面をよりよく</li><li>めざす次の節目は、読者300人</li></ul></li>
+      <li><span class="when">読者300人から</span><b>となりの市へ</b>
+        <ul><li>西東京市のご家庭にも届けます</li><li>その次に、東久留米市・小金井市</li><li>協賛のお名前も、広がった先の読者に届きます</li></ul></li>
+    </ol>
+    <div class="room">
+      <div class="lab">小平市の子育て世帯</div>
+      <div class="val">約1万3千<small>世帯</small></div>
+      <div class="meter" role="img" aria-label="小平市の子育て世帯のうち、いまの読者は約1.5パーセント"><span></span></div>
+      <p class="m-lab"><b>いまの読者 200人 ＝ 約1.5%</b>　まだ始まったばかりです</p>
+      <p class="nt">0〜12歳 約2万1,600人（市の住民基本台帳）から試算した数です。</p>
+    </div>
+    <div class="lock">
+      <b>応援型は、お申し込みのときの料金で1年間</b>
+      <p>読者が増えても、お申し込みいただいた1年間の料金は変わりません。お名前は、広がった先の読者にも同じように届きます。</p>
+      <p class="small">掲載料金は2026年11月時点のものです。読者の数にあわせて見直していきます。</p>
     </div>
   </section>
 
@@ -315,6 +366,10 @@
       <p>応援型は、ページの下にロゴを載せられます。正方形の画像をお送りください。</p>
     </details>
     <details>
+      <summary>紹介型と応援型、両方申し込めますか？</summary>
+      <p>はい、できます。申込書の両方に印を付けてください。応援型のお店が、体験会などを紹介型で載せることもできます（医療機関は応援型だけです）。</p>
+    </details>
+    <details>
       <summary>途中でやめられますか？</summary>
       <p>紹介型は1回ごとのお申し込みなので、続けるかどうかは毎回決めていただけます。応援型は1年ごとで、自動では更新しません。</p>
     </details>
@@ -327,7 +382,7 @@
       <p class="mail"><a href="mailto:tokyo.papa.home@gmail.com?subject=%E5%8D%94%E8%B3%9B%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" data-goatcounter-click="協賛｜メール">tokyo.papa.home@gmail.com</a></p>
       <ul class="files">
         <li><a href="/kyosan/demo/" data-goatcounter-click="協賛｜掲載イメージ(下)"><b>掲載イメージ</b><span>スマホの画面で →</span></a></li>
-        <li><a href="/kyosan/bonvoya-kyosan.pdf" data-goatcounter-click="協賛｜資料PDF(下)"><b>この資料</b><span>PDF・A4 2ページ</span></a></li>
+        <li><a href="/kyosan/bonvoya-kyosan.pdf" data-goatcounter-click="協賛｜資料PDF(下)"><b>この資料</b><span>PDF・A4 3ページ</span></a></li>
         <li><a href="/kyosan/moushikomi.pdf" data-goatcounter-click="協賛｜申込書PDF"><b>掲載申込書</b><span>PDF・A4 1枚</span></a></li>
       </ul>
     </div>
