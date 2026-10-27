@@ -11,6 +11,9 @@
  *     （Googleドライブにもフォームと回答用スプレッドシートができています）
  *
  * 作られるもの: A 無料会員 / B 有料会員 / C 入会時 の3フォーム＋各回答シート
+ *
+ * 🆕 2026-10-27: 読者200人のお礼アンケート（匿名）は、下の「createReaderSurvey200」を選んで ▶ 実行。
+ *    A〜C は月額制度があったころの設計（料金・連絡先の設問がある）。いまは使わない（docs/surveys.md）。
  */
 function createBonvoyaSurveys() {
   var out = [];
@@ -87,4 +90,63 @@ function createBonvoyaSurveys() {
   MailApp.sendEmail(Session.getActiveUser().getEmail(), 'ぼんぼやーじゅ通信 アンケート3つ 作成完了', msg);
 
   Logger.log(msg); // 実行ログ（表示 > ログ）でも確認できます
+}
+
+/**
+ * 読者200人のお礼アンケート（2026-10-27 オーナー案。匿名・3分ほど・どの質問も任意）
+ * 設問と配信文は docs/surveys.md の「D」。実行すると、回答URL（短縮）と編集URLが自分宛メールに届く。
+ * 🔴 匿名のまま回答できるように: メールアドレスを集めない／1人1回の制限をかけない（かけるとGoogleへのログインが要る）
+ */
+function createReaderSurvey200() {
+  var f = FormApp.create('ぼんぼやーじゅ通信 読者アンケート（匿名）');
+  f.setDescription(
+    '読者が200人をこえました。いつも読んでくださって、ありがとうございます。\n' +
+    'これからの号づくりの参考にさせてください。お名前やメールアドレスは伺いません（匿名です）。\n' +
+    '3分ほどで、どの質問も答えられるところだけで大丈夫です（11/15(日)まで）。');
+  f.setCollectEmail(false);
+  f.setLimitOneResponsePerUser(false);
+  f.setAllowResponseEdits(false);
+  f.setShowLinkToRespondAgain(false);
+  f.setPublishingSummary(false);
+  f.setProgressBar(false);
+  f.setConfirmationMessage('ありがとうございました。いただいた声は、これからの号づくりに生かします。');
+  // 2025年からの新しいフォームは「公開」しないと回答を受け付けないことがある。古い環境では setPublished が無いので try で包む
+  try { f.setPublished(true); } catch (e) { /* 不要な環境 */ }
+  f.setAcceptingResponses(true);
+
+  f.addCheckboxItem().setTitle('お子さんの年齢（あてはまるものすべて）')
+    .setChoiceValues(['0〜2歳', '3〜6歳（未就学）', '小学生', '中学生以上']);
+  f.addMultipleChoiceItem().setTitle('お住まい')
+    .setChoiceValues(['小平市', '西東京市', '東久留米市', '東村山市', '小金井市']).showOtherOption(true);
+  f.addMultipleChoiceItem().setTitle('いちばん近い駅')
+    .setChoiceValues(['花小金井', '小平', '萩山', '小川', '一橋学園', '青梅街道', '鷹の台', '新小平']).showOtherOption(true);
+  f.addMultipleChoiceItem().setTitle('この通信を知ったきっかけ')
+    .setChoiceValues(['市の施設のチラシ（地域センター・児童館・図書館など）', '幼稚園・保育園・お店などのチラシ',
+      'Threads', 'Instagram', 'LINEのオープンチャット', '友だち・知り合いから', 'ネットで検索して']).showOtherOption(true);
+  f.addMultipleChoiceItem().setTitle('ふだんの読み方')
+    .setChoiceValues(['LINEの本文だけ読むことが多い', '年齢別のページまで開くことが多い', 'カレンダーやマップもよく見る', 'なかなか読めていない']);
+  f.addCheckboxItem().setTitle('役に立っているもの（あてはまるものすべて）')
+    .setChoiceValues(['今週の一推し', '年齢別のページ', 'イベント先取り情報（申込の締切など）', '週末の天気をふまえた提案',
+      'おでかけカレンダー', 'みんなのおでかけマップ', '園庭開放・児童館や図書館の定例のページ']);
+  f.addMultipleChoiceItem().setTitle('通信を見て、実際に出かけたことはありますか')
+    .setChoiceValues(['何度かある', '1回ある', 'まだない（予定を立てる参考にしている）', 'まだない']);
+  f.addCheckboxItem().setTitle('もっと増やしてほしい情報（あてはまるものすべて）')
+    .setChoiceValues(['雨の日・室内で過ごせる所', '赤ちゃん連れで行きやすい所', '小学生向けの体験・講座', '申込のいる催し・抽選の締切',
+      'お祭り・季節の行事', '公園・自然あそび', '電車でちょっと遠出', '無料・お金のかからない所', '平日に行ける所']).showOtherOption(true);
+  f.addMultipleChoiceItem().setTitle('届く日時（いまは水曜の朝9時ごろ）')
+    .setChoiceValues(['今のままがいい', '木曜か金曜のほうがいい', '前の晩のほうがいい', 'どれでもいい']);
+  f.addParagraphTextItem().setTitle('ご自由に（「この回がよかった」「ここが読みにくい」「こんな情報がほしい」など、ひとことでも）');
+
+  var ss = SpreadsheetApp.create('回答_読者アンケート（200人のお礼・匿名）');
+  f.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
+
+  var url = f.getPublishedUrl();
+  var shortUrl = url;
+  try { shortUrl = f.shortenFormUrl(url); } catch (e) { /* 短縮できなくても長いURLで使える */ }
+  var msg = '【読者アンケート（200人のお礼・匿名）】\n' +
+    '  回答URL（LINEに貼る）: ' + shortUrl + '\n' +
+    '  編集URL（自分用・人に渡さない）: ' + f.getEditUrl() + '\n' +
+    '  回答のスプレッドシート: ' + ss.getUrl();
+  MailApp.sendEmail(Session.getActiveUser().getEmail(), 'ぼんぼやーじゅ通信 読者アンケート 作成完了', msg);
+  Logger.log(msg);
 }
