@@ -118,7 +118,7 @@
 | `docs/sources.md` | 巡回先・天気の取得先・季節の入れ替え |
 | `docs/routines.md` | 定期実行の約束、9/16の再発防止 |
 | `docs/distribution.md` | 配布先と版下。踏んだ罠 |
-| `docs/apo-list.md` `docs/sponsor-leads.md` | 営業 |
+| `docs/apo-list.md` `docs/sponsor-leads.md` `docs/sponsor-apo.md` `docs/sponsor-script.md` | 営業（チラシの置き先／協賛の買い手・一覧・台本） |
 | `docs/share-kit.md` `docs/threads-reply-kit.md` | SNSの文面 |
 | `docs/tasks.md` | 残タスクの正本 |
 | `docs/branch-unification.md` | ブランチを1本にする段取り |
