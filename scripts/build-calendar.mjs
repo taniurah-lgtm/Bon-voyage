@@ -13,6 +13,7 @@
  *   出さないのは台帳の内部メモ（source / confidence / status）だけ。
  */
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { publicUrl } from './lib/city-site.mjs';
 
 const IN = 'data/events.json';
 const OUT = 'docs/homepage/calendar.html';
@@ -64,6 +65,7 @@ const catOf = (e) => {
 const stripInternal = (e) => {
   const out = { ...e, cat: catOf(e) };
   for (const k of INTERNAL) delete out[k];
+  out.url = publicUrl(out.url); // 市のサイトの障害の間は、開かないURLを出さない（lib/city-site.mjs）
   const c = sanitizeContact(out.contact);
   if (c) out.contact = c; else delete out.contact;
   return out;

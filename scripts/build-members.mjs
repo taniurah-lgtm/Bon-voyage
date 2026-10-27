@@ -27,6 +27,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { encryptFor, passphrases, ITER, CLIENT_DECRYPT, jsonInTag, esc, buildStamp } from './lib/gate.mjs';
 import { fixWords, readIssues, issuesHTML } from './lib/issues.mjs';
+import { publicUrl } from './lib/city-site.mjs';
 
 const OUT = 'docs/homepage/m/s7f2ka/index.html';
 const EVENTS = JSON.parse(readFileSync('data/events.json', 'utf8'));
@@ -46,7 +47,7 @@ const calData = {
     id: e.id, name: e.name, dates: e.dates, span: e.span, when: e.when,
     start: e.start, end: e.end, place: e.place, mapq: e.mapq,
     summary: e.summary, kidsNote: e.kidsNote, ages: e.ages,
-    cost: e.cost, target: e.target, url: e.url,
+    cost: e.cost, target: e.target, url: publicUrl(e.url),
     caution: e.caution, hours: e.hours, contact: e.contact, exceptions: e.exceptions,
     lastEntry: e.lastEntry, totalDates: e.totalDates, programs: e.programs,
     tentative: e.tentative, timeUncertain: e.timeUncertain, deadline: e.deadline,

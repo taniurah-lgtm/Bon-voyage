@@ -21,8 +21,10 @@
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { jsonInTag, esc } from './lib/gate.mjs';
+import { publicUrl } from './lib/city-site.mjs';
 
-const SPOTS = JSON.parse(readFileSync('data/map-spots.json', 'utf8'));
+// 市のサイトの障害の間は、開かない「公式」リンクを出さない（lib/city-site.mjs）
+const SPOTS = JSON.parse(readFileSync('data/map-spots.json', 'utf8')).map((s) => ({ ...s, official: publicUrl(s.official) }));
 const POSTS = JSON.parse(readFileSync('data/map-posts.json', 'utf8'));
 const OUT = 'docs/homepage/map.html';
 const TEXT_LIMIT = 300;   // ひとことの字数。誰でも同じ

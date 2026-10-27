@@ -259,6 +259,10 @@ function extractDeadline(lines) {
     //    「| 締切 | 🔴 託児の締切 10/16(金) | 無し |」を自分の締切として公開していた。
     //    この回に申込締切は無い。読者には「10/16までに申し込む催し」と出ていた）
     if (/^\s*\|/.test(l)) continue;
+    // 引用（>）は運営向けの覚書で、公開物に出さない（extractHours と同じ）。中に比較表が入っていることもある
+    //   （2026-10-27、E126 こもれびと水車のマルシェが、引用の中の比較表「| 参加 | 事前申込・抽選（締切10/16） | 入退場自由 |」を
+    //    自分の締切として公開していた。入退場自由で申込の無い催しが「10/16までに申し込む催し」に見えていた）
+    if (/^\s*>/.test(l)) continue;
     const s = normalize(l);
     const { dates, span } = extractDates(s);
     const cands = dates.concat(span && span.to ? [span.to] : []);

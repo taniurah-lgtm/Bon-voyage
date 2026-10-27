@@ -19,6 +19,7 @@
  * 在庫が尽きたら、いちばん古く書いた題材から順に戻る（更新記事として書き直す）。
  */
 import { readFileSync, readdirSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import { publicUrl } from './lib/city-site.mjs';
 
 const OUT_DIR = 'note';
 const args = process.argv.slice(2);
@@ -166,7 +167,7 @@ function weekDraft() {
 
   const item = (e) => `### ${e.name}
 
-${fact('いつ', e.when || jpDay(e.next))}${fact('どこ', e.place)}${fact('料金', e.cost)}${fact('年齢の目安', agesLine(e.ages))}${fact('子連れメモ', e.kidsNote)}${fact('注意', e.caution)}${fact('公式', e.url)}
+${fact('いつ', e.when || jpDay(e.next))}${fact('どこ', e.place)}${fact('料金', e.cost)}${fact('年齢の目安', agesLine(e.ages))}${fact('子連れメモ', e.kidsNote)}${fact('注意', e.caution)}${fact('公式', publicUrl(e.url))}
 ${e.summary || ''}
 `;
 

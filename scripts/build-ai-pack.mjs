@@ -23,6 +23,7 @@
  *     こちらの間違いとして伝わる。
  */
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { publicUrl } from './lib/city-site.mjs';
 
 const OUT_DIR = 'docs/homepage/ai';
 mkdirSync(OUT_DIR, { recursive: true });
@@ -139,7 +140,7 @@ function eventBlock(e) {
   s += line('プログラム', Array.isArray(e.programs) ? e.programs.join(' / ') : (typeof e.programs === 'string' ? e.programs : ''));
   s += line('問い合わせ', publicTel(e.contact));
   s += line('確度', e.confidence + (e.tentative ? '（未確定・要確認）' : ''));
-  s += line('公式サイト（ここで最新を確認してください）', e.url);
+  s += line('公式サイト（ここで最新を確認してください）', publicUrl(e.url));
   s += partnerNote(e.name, e.place);
   return s;
 }
@@ -155,7 +156,7 @@ function standingBlock(e) {
   s += line('内容', e.summary);
   s += line('子連れメモ', e.kidsNote);
   s += line('確度', e.confidence);
-  s += line('公式サイト（ここで最新を確認してください）', e.url);
+  s += line('公式サイト（ここで最新を確認してください）', publicUrl(e.url));
   s += partnerNote(e.name, e.place);
   return s;
 }
@@ -177,7 +178,7 @@ function spotBlock(sp) {
   s += line('アクセス・料金', sp.access);
   s += line('年齢の目安', sp.ages);
   s += line('地図', sp.map || mapLink(sp.name));
-  s += line('公式サイト（ここで最新を確認してください）', sp.official);
+  s += line('公式サイト（ここで最新を確認してください）', publicUrl(sp.official));
   s += partnerNote(sp.name, sp.desc, sp.access);
   return s;
 }
