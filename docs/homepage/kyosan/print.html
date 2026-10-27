@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>協賛のご案内（A4）｜ぼんぼやーじゅ通信</title>
+<style>
+  @page { size: 210mm 297mm; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif; color: #2E3A42; font-size: 8.6pt; line-height: 1.62;
+         -webkit-print-color-adjust: exact; print-color-adjust: exact; font-feature-settings: "palt" 1; background: #E9E6DF; }
+  .maru { font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", sans-serif; }
+  b, strong { font-weight: 700; }
+  p { margin: 0; }
+  .sheet { width: 210mm; height: 297mm; margin: 0 auto 8mm; background: #fff; position: relative; overflow: hidden; padding: 0 13mm; page-break-after: always; break-after: page; }
+  .sheet:last-child { page-break-after: auto; break-after: auto; margin-bottom: 0; }
+  @media print { body { background: #fff; } .sheet { margin: 0; } }
+
+  :root { --ink:#2E3A42; --soft:#56636B; --faint:#7F8A91; --line:#E4DED2; --wash:#F6F3EC;
+          --sky:#2C7C9E; --sky-ink:#226881; --sky-wash:#E8F3F7; --mari:#E3962F; --mari-ink:#8A5A12; --mari-wash:#FBF0DE;
+          --terra:#C9755B; --terra-ink:#A04F37; --terra-wash:#FBEDE6; --leaf:#5E9A5B; }
+
+  /* ---- 1ページ目の頭 ---- */
+  .band { margin: 0 -13mm; padding: 10mm 13mm 5.6mm; background: linear-gradient(160deg, var(--sky-wash), var(--mari-wash)); border-bottom: .3mm solid var(--line); }
+  .band-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8mm; }
+  .brand { font-size: 9.4pt; font-weight: 700; color: var(--sky-ink); letter-spacing: .04em; }
+  .brand i { font-family: Georgia, serif; font-style: italic; font-weight: 400; color: var(--mari-ink); margin-right: 2mm; }
+  h1 { font-size: 25pt; font-weight: 800; letter-spacing: .05em; line-height: 1.2; margin: 1mm 0 2.2mm; }
+  .lead { font-size: 10.6pt; line-height: 1.72; font-weight: 500; }
+  .ver { flex: none; text-align: right; font-size: 7.4pt; color: var(--soft); line-height: 1.7; padding-top: 1mm; }
+  .ver b { display: inline-block; font-size: 8.4pt; color: var(--ink); background: #fff; border: .25mm solid var(--line); border-radius: 99mm; padding: .4mm 3mm; margin-bottom: 1mm; }
+  .facts { display: flex; gap: 2.4mm; margin-top: 3.4mm; }
+  .facts span { display: inline-flex; align-items: center; gap: 1.6mm; font-size: 8pt; font-weight: 700; background: #fff; border: .25mm solid var(--line); border-radius: 99mm; padding: 1mm 3.4mm; }
+  .facts span::before { content: ""; width: 1.8mm; height: 1.8mm; border-radius: 50%; background: var(--mari); }
+
+  /* ---- 見出し ---- */
+  .h2 { display: flex; align-items: baseline; gap: 3mm; margin: 5.2mm 0 2.2mm; }
+  .h2.tight { margin: 4.2mm 0 2mm; }
+  .h2 b { font-size: 12.6pt; font-weight: 800; letter-spacing: .03em; }
+  .h2 i { font-family: Georgia, serif; font-style: italic; font-size: 9pt; color: var(--mari-ink); }
+  .h2::after { content: ""; flex: 1; height: .25mm; background: var(--line); align-self: center; }
+  .h2 span { font-size: 7.6pt; color: var(--soft); }
+
+  /* ---- 数字 ---- */
+  .nums { display: grid; grid-template-columns: 61mm 1fr; gap: 3.6mm; }
+  .hero { border: .3mm solid var(--line); border-radius: 4mm; padding: 3.6mm 4.4mm 2.6mm; background: #fff; }
+  .hero .lab { font-size: 8pt; color: var(--soft); }
+  .hero .val { font-size: 34pt; font-weight: 800; line-height: 1.05; letter-spacing: .01em; margin-top: .6mm; }
+  .hero .val small { font-size: 12pt; margin-left: .6mm; }
+  .hero .delta { font-size: 8.4pt; margin-top: 1mm; }
+  .hero .delta b { color: var(--sky-ink); }
+  .spark { width: 100%; height: auto; display: block; margin-top: 1mm; }
+  .spark .ln { fill: none; stroke: #56636B; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .spark .ar { fill: var(--sky-wash); }
+  .spark .bl { stroke: #D5CEBF; stroke-width: 1; }
+  .spark .end { fill: var(--sky); stroke: #fff; stroke-width: 2; }
+  .spark text { font-family: "Zen Maru Gothic", sans-serif; font-size: 11px; fill: #56636B; }
+  .spark text.now { fill: #2E3A42; font-weight: 800; font-size: 12px; }
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4mm; }
+  .tile { border: .3mm solid var(--line); border-radius: 3mm; padding: 2.3mm 3mm 2.1mm; background: #fff; }
+  .tile .val { font-size: 17pt; font-weight: 800; line-height: 1.15; }
+  .tile .val small { font-size: 8.4pt; margin-left: .3mm; }
+  .tile .lab { font-size: 8pt; font-weight: 700; margin-top: .4mm; line-height: 1.45; }
+  .tile .nt { font-size: 6.9pt; color: var(--soft); line-height: 1.5; margin-top: .4mm; }
+  .src { font-size: 6.8pt; color: var(--faint); margin-top: 1.4mm; }
+
+  /* ---- 掲載イメージ ---- */
+  .demo { display: grid; grid-template-columns: 1fr 1fr 1fr 30mm; gap: 3mm; align-items: start; }
+  .demo figure { margin: 0; }
+  .shot { border: .3mm solid var(--line); border-radius: 3mm; overflow: hidden; background: #fff; height: 56mm; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+  figcaption { font-size: 7.3pt; line-height: 1.55; margin-top: 1.4mm; color: var(--ink); }
+  figcaption b { font-weight: 700; }
+  .t { display: inline-block; font-size: 6.8pt; font-weight: 700; border-radius: 99mm; padding: 0 1.8mm; margin-right: 1mm; line-height: 1.7; }
+  .t.a { background: var(--terra-wash); color: var(--terra-ink); }
+  .t.b { background: var(--sky-wash); color: var(--sky-ink); }
+  .qrbox { text-align: center; border: .3mm solid var(--line); border-radius: 3mm; padding: 2.6mm 2mm 2.2mm; background: #fff; }
+  .qrbox img { width: 23mm; height: 23mm; display: block; margin: 0 auto; }
+  .qrbox p { font-size: 6.9pt; line-height: 1.5; margin-top: 1mm; }
+  .qrbox b { font-size: 7.6pt; }
+
+  /* ---- 掲載のきまり ---- */
+  .rules { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 4.4mm; }
+  .rules div { font-size: 7.8pt; line-height: 1.62; padding-left: 4.2mm; position: relative; }
+  .rules div::before { content: ""; position: absolute; left: 0; top: 1.4mm; width: 2.2mm; height: 2.2mm; border-radius: 50%; background: var(--sky); }
+  .rules b { display: block; font-size: 8.6pt; }
+
+  .pfoot { position: absolute; left: 13mm; right: 13mm; bottom: 7mm; display: flex; justify-content: space-between; align-items: flex-end; font-size: 6.9pt; color: var(--faint); border-top: .25mm solid var(--line); padding-top: 1.8mm; }
+
+  /* ---- 2ページ目 ---- */
+  .top2 { display: flex; justify-content: space-between; align-items: baseline; padding: 9mm 0 0; }
+  .top2 .brand { font-size: 8.6pt; }
+  .top2 .pg { font-size: 7.4pt; color: var(--faint); }
+  .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; align-items: stretch; }
+  .plan { border: .3mm solid var(--line); border-radius: 4mm; overflow: hidden; background: #fff; display: flex; flex-direction: column; }
+  .plan-h { padding: 2.5mm 4.2mm 2.1mm; }
+  .plan.a .plan-h { background: var(--terra-wash); }
+  .plan.b .plan-h { background: var(--sky-wash); }
+  .plan .nm { font-size: 8.4pt; font-weight: 800; letter-spacing: .06em; }
+  .plan.a .nm { color: var(--terra-ink); }
+  .plan.b .nm { color: var(--sky-ink); }
+  .plan h3 { font-size: 11.4pt; font-weight: 800; margin: .3mm 0 1.2mm; line-height: 1.4; }
+  .price { display: flex; align-items: baseline; gap: 2.4mm; flex-wrap: wrap; }
+  .price .p { font-size: 22pt; font-weight: 800; line-height: 1.1; }
+  .price .per { font-size: 10pt; margin-right: .8mm; }
+  .price small { font-size: 9.4pt; margin-left: .5mm; }
+  .price .unit { font-size: 7.6pt; color: var(--soft); font-family: "Zen Kaku Gothic New", sans-serif; }
+  .plan-b { padding: 2.4mm 4.2mm 2.8mm; flex: 1; display: flex; flex-direction: column; }
+  .incl { list-style: none; margin: 0; padding: 0; display: grid; gap: .8mm; }
+  .incl li { position: relative; padding-left: 4.4mm; font-size: 7.8pt; line-height: 1.55; }
+  .incl li::before { content: ""; position: absolute; left: .6mm; top: 1.45mm; width: 2.2mm; height: 1.2mm; border-left: .55mm solid var(--leaf); border-bottom: .55mm solid var(--leaf); transform: rotate(-45deg); }
+  .incl small { font-size: 6.9pt; color: var(--soft); }
+  .sample { margin-top: 2.4mm; background: var(--wash); border-radius: 2.4mm; padding: 2mm 2.8mm; font-size: 7.3pt; line-height: 1.6; }
+  .sample .cap { display: block; font-size: 6.7pt; color: var(--soft); margin-bottom: .4mm; }
+  .fit { margin-top: auto; padding-top: 2mm; border-top: .25mm dashed #D5CEBF; font-size: 7.4pt; line-height: 1.6; color: var(--soft); }
+  .plan-b .incl + .fit, .plan-b .sample + .fit { margin-top: 2.4mm; }
+  .fit b { color: var(--ink); font-size: 7.9pt; }
+
+  .flow { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; counter-reset: f; }
+  .flow div { counter-increment: f; position: relative; padding: 6.8mm 1.4mm 0; text-align: center; font-size: 7.2pt; line-height: 1.45; }
+  .flow div::before { content: counter(f); position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 5.6mm; height: 5.6mm; border-radius: 50%; background: var(--sky); color: #fff; font-family: "Zen Maru Gothic", sans-serif; font-weight: 800; font-size: 8pt; display: flex; align-items: center; justify-content: center; z-index: 1; }
+  .flow div::after { content: ""; position: absolute; top: 2.7mm; left: 50%; width: 100%; height: .3mm; background: #CFC8B8; }
+  .flow div:last-child::after { display: none; }
+  .flow b { display: block; font-size: 8.4pt; font-weight: 800; }
+  .flow span { color: var(--soft); font-size: 6.9pt; }
+  .note2 { font-size: 7.6pt; margin-top: 2.2mm; text-align: center; }
+  .note2 b { color: var(--sky-ink); }
+
+  table.pay { width: 100%; border-collapse: collapse; font-size: 7.8pt; line-height: 1.6; }
+  .pay th, .pay td { text-align: left; vertical-align: top; padding: 1.25mm 2.4mm; border-bottom: .25mm solid var(--line); }
+  .pay th { width: 21mm; background: var(--wash); font-weight: 700; color: var(--soft); font-size: 7.6pt; }
+  .pay tr:first-child th, .pay tr:first-child td { border-top: .25mm solid var(--line); }
+
+  .faq { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
+  .faq div { background: var(--wash); border-radius: 3mm; padding: 2.2mm 3mm; }
+  .faq b { display: block; font-size: 8.2pt; font-weight: 800; line-height: 1.5; margin-bottom: .9mm; }
+  .faq p { font-size: 7.3pt; line-height: 1.62; }
+
+  .contact { margin-top: 3.4mm; display: grid; grid-template-columns: 1fr 22mm; gap: 4mm; align-items: center; border-radius: 4mm; padding: 2.4mm 5mm; background: linear-gradient(160deg, var(--sky-wash), var(--mari-wash)); }
+  .contact .k { font-size: 11.6pt; font-weight: 800; }
+  .contact .mail { font-size: 12.4pt; font-weight: 800; color: var(--sky-ink); margin: .4mm 0 .6mm; letter-spacing: .01em; }
+  .contact p { font-size: 7.7pt; line-height: 1.65; }
+  .contact .qr { text-align: center; }
+  .contact .qr img { width: 19mm; height: 19mm; display: block; margin: 0 auto; background: #fff; border-radius: 1.6mm; }
+  .contact .qr span { display: block; font-size: 6.8pt; margin-top: .6mm; }
+</style>
+</head>
+<body>
+
+<!-- ======================= 1 ======================= -->
+<section class="sheet">
+  <div class="band">
+    <div class="band-top">
+      <div>
+        <div class="brand maru"><i>Bon Voyage,</i>ぼんぼやーじゅ通信</div>
+        <h1 class="maru">協賛のご案内</h1>
+      </div>
+      <div class="ver"><b>2026年11月版</b><br>数字は2026年10月26日時点</div>
+    </div>
+    <p class="lead">子育て中のご家庭が、毎週「今週末、どこへ行こう」と読む通信です。<br>お店の体験会や教室を、ほかのおでかけ情報と同じ形でご紹介します。</p>
+    <div class="facts"><span>毎週水曜の朝9時、LINEで</span><span>花小金井から30分の催しを、年齢別に</span><span>市や施設の公式ページで一件ずつ確認</span></div>
+  </div>
+
+  <div class="h2"><b class="maru">数字で見る</b><i>Numbers</i></div>
+  <div class="nums">
+    <div class="hero">
+      <div class="lab">LINEの友だち（10月26日）</div>
+      <div class="val maru">200<small>人</small></div>
+      <div class="delta">9月6日の66人から、<b>7週間で約3倍</b></div>
+      <svg class="spark" viewBox="0 0 280 84" role="img" aria-label="LINEの友だちの数の推移。9月6日66人から10月26日200人">
+        <path class="ar" d="M8.0 64.0 L8.0 49.6 L40.5 48.1 L73.0 47.4 L105.4 38.3 L137.9 35.9 L170.4 31.1 L202.9 26.0 L235.4 22.5 L240.0 20.4 L240.0 64.0 Z"/>
+        <line class="bl" x1="8" y1="64.5" x2="240" y2="64.5"/>
+        <path class="ln" d="M8.0 49.6 L40.5 48.1 L73.0 47.4 L105.4 38.3 L137.9 35.9 L170.4 31.1 L202.9 26.0 L235.4 22.5 L240.0 20.4"/>
+        <circle class="end" cx="240" cy="20.4" r="4.5"/>
+        <text x="8" y="44">66</text>
+        <text class="now" x="248" y="24">200</text>
+        <text x="8" y="80">9/6</text>
+        <text x="240" y="80" text-anchor="middle">10/26</text>
+      </svg>
+    </div>
+    <div>
+      <div class="tiles">
+        <div class="tile"><div class="val maru">196<small>人</small></div><div class="lab">LINEで届く人</div><div class="nt">友だち200人のうち、ブロックは4人（2%）だけ</div></div>
+        <div class="tile"><div class="val maru">89<small>%</small></div><div class="lab">女性</div><div class="nt">LINEの推計</div></div>
+        <div class="tile"><div class="val maru">69<small>%</small></div><div class="lab">30代</div><div class="nt">30〜44歳で85%（LINEの推計）</div></div>
+        <div class="tile"><div class="val maru">約2<small>割</small></div><div class="lab">年齢別ページの閲覧</div><div class="nt">毎号、届いた人数の約2割（10月の3号）</div></div>
+        <div class="tile"><div class="val maru">250<small>部</small></div><div class="lab">チラシ（11月分）</div><div class="nt">市の担当課を通じて、地域センター20館・元気村・児童館へ</div></div>
+        <div class="tile"><div class="val maru">第254<small>号</small></div><div class="lab">あすぴあ登録団体</div><div class="nt">小平市民活動支援センター</div></div>
+      </div>
+      <p class="src">性別・年代はLINEが推計した割合で、推計できない方を含めた全体に対する数字です。</p>
+    </div>
+  </div>
+
+  <div class="h2"><b class="maru">掲載イメージ</b><i>Image</i><span>実際にお送りした10/21号に、見本の協賛（〇〇）を入れたもの</span></div>
+  <div class="demo">
+    <figure>
+      <div class="shot"><img src="img/demo-line.png" alt="LINEの本文の見本"></div>
+      <figcaption><b>LINEの本文</b><br><span class="t a">紹介型</span>「先取り情報」に、頭に【PR】を付けて2行<br><span class="t b">応援型</span>いちばん下にお名前</figcaption>
+    </figure>
+    <figure>
+      <div class="shot"><img src="img/demo-card.png" alt="年齢別のページのカードの見本"></div>
+      <figcaption><b>年齢別のページ</b><br><span class="t a">紹介型</span>ほかの催しと同じ形のカードに「PR」。対象の年齢のタブにだけ出ます</figcaption>
+    </figure>
+    <figure>
+      <div class="shot"><img src="img/demo-sp.png" alt="ページの下の協賛欄の見本"></div>
+      <figcaption><b>ページの下</b><br><span class="t b">応援型</span>ロゴとお名前。お店のサイトへのリンクつき</figcaption>
+    </figure>
+    <div class="qrbox">
+      <img src="img/qr-demo.svg" alt="掲載イメージのページのQRコード">
+      <p><b>スマホで見る</b><br>チラシ・マップ・翌月のご報告の見本も</p>
+    </div>
+  </div>
+
+  <div class="h2"><b class="maru">掲載のきまり</b><i>Rules</i></div>
+  <div class="rules">
+    <div><b>「PR」と、はっきり表示します</b>景品表示法のステマ規制（2023年10月〜）に沿って、項目の頭に、周りと同じ大きさで。規制で問われるのはお店の側なので、表示はこちらで必ず入れます。</div>
+    <div><b>原稿はこちらで書き、掲載の前にお見せします</b>ほかの催しと同じ書き方で、事実だけを書きます。「いちばん」「必ず上達」のような言い方は使いません。</div>
+    <div><b>子連れに向かないものは、お断りしています</b>金額にかかわらず。政治・宗教、ギャンブル、貸金や投資の勧誘、連鎖販売、美容医療、健康食品の効果、お酒・たばこに関わるものは載せません。</div>
+    <div><b>医療機関は「応援型」でお受けします</b>医療広告のきまりの範囲（名称・診療科・場所）で、お名前を載せます。</div>
+  </div>
+
+  <div class="pfoot"><span>発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）</span><span>1 / 2</span></div>
+</section>
+
+<!-- ======================= 2 ======================= -->
+<section class="sheet">
+  <div class="top2"><div class="brand maru"><i>Bon Voyage,</i>ぼんぼやーじゅ通信　協賛のご案内</div><div class="pg">2026年11月版</div></div>
+
+  <div class="h2" style="margin-top:4mm"><b class="maru">協賛は2つ</b><i>Plans</i><span>どちらも、協賛であることを必ず表示します</span></div>
+  <div class="plans">
+    <div class="plan a">
+      <div class="plan-h">
+        <div class="nm maru">紹介型</div>
+        <h3 class="maru">体験会や教室を、1回ご紹介</h3>
+        <div class="price maru"><span class="p"><span class="per">1回</span>3,000<small>円</small></span><span class="unit">読者1人あたり約15円</span></div>
+      </div>
+      <div class="plan-b">
+        <ul class="incl">
+          <li>LINE本文の「イベント先取り情報」に2行（行の頭に【PR】）</li>
+          <li>年齢別のページに、ほかの催しと同じ形のカード（公式サイト・地図・カレンダー登録つき）</li>
+          <li>原稿はこちらで作成（年齢の目安・ベビーカー・おむつ替え・予約・料金を確かめて）</li>
+          <li>おでかけマップに、催しの日まで「PR」のピン</li>
+          <li>翌月に、読まれた数・押された数を1枚でご報告。過去の号にも残ります</li>
+        </ul>
+        <p class="fit"><b>1号に1件だけ。同じ業種は、同じ月に1社まで。</b><br>向いているもの：習い事の体験会（スイミング・体操・英語・リトミックなど）、摘み取り農園、室内の遊び場、ものづくり体験、写真館の撮影会</p>
+      </div>
+    </div>
+    <div class="plan b">
+      <div class="plan-h">
+        <div class="nm maru">応援型</div>
+        <h3 class="maru">お名前で、通信を1年応援</h3>
+        <div class="price maru"><span class="p"><span class="per">年</span>10,000<small>円</small></span><span class="unit">1号あたり約190円</span></div>
+      </div>
+      <div class="plan-b">
+        <ul class="incl">
+          <li>毎号のLINE本文のいちばん下に、お名前を1行（1年で約50号）</li>
+          <li>年齢別のページの下に、ロゴとお名前。お店のサイトへのリンクつき</li>
+          <li>毎月刷るチラシの協賛欄にも、お名前を<br><small>※置き先のきまりにより、協賛欄のない版を置くことがあります</small></li>
+        </ul>
+        <div class="sample"><span class="cap">見本（LINEの本文のいちばん下）</span>この通信は、次の方々のご協賛でお届けしています。〇〇小児科／〇〇歯科／〇〇不動産／〇〇整体院／〇〇保険</div>
+        <p class="fit"><b>5社まで。1業種1社。</b><br>向いているもの：小児科・歯科・不動産・保険・整体など。紙面と関係がなくても大丈夫。地域の子育てを応援するお店として、毎週お名前が届きます。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="h2 tight"><b class="maru">お申し込みから掲載まで</b><i>Flow</i></div>
+  <div class="flow">
+    <div><b class="maru">ご相談</b><span>催しと時期をうかがいます</span></div>
+    <div><b class="maru">掲載申込書</b><span>紙でも、メールでも</span></div>
+    <div><b class="maru">原稿づくり</b><span>こちらで書いてお見せします</span></div>
+    <div><b class="maru">請求書・お振込</b><span>原稿のご確認のあとに</span></div>
+    <div><b class="maru">掲載</b><span>水曜の朝9時に、LINEで</span></div>
+    <div><b class="maru">翌月のご報告</b><span>届いた・開いた・押された数</span></div>
+  </div>
+  <p class="note2"><b>お振込は、原稿をご確認いただいてから。</b>紹介型は、載せたい号の2週間前までにご相談ください（原稿の直しとお振込は、前の週の金曜まで）。</p>
+
+  <div class="h2 tight"><b class="maru">お支払い・お取り消し</b><i>Payment</i></div>
+  <table class="pay">
+    <tr><th>お支払い</th><td>銀行振込・前払い（紹介型は掲載の前、応援型は1年分をはじめに）。振込手数料はご負担をお願いします。</td></tr>
+    <tr><th>請求書</th><td>経理を担当する「ニコマル」の名義でお送りします。<b>お振込先は、請求書に書いてあります。</b></td></tr>
+    <tr><th>金額・書類</th><td>消費税の上乗せはありません。インボイスの登録はしていません。領収書はお振込の控えで代えさせてください（必要ならお出しします）。</td></tr>
+    <tr><th>お取り消し</th><td>紹介型：原稿が固まる前のお取り消しと、催しの中止は全額お返しします（別の号への振り替えも可）。<br>応援型：途中のご解約による返金はありません。通信を休止・終了したときは、残りを月割りでお返しします。</td></tr>
+  </table>
+
+  <div class="h2 tight"><b class="maru">よくあるご質問</b><i>Q&amp;A</i></div>
+  <div class="faq">
+    <div><b class="maru">無料で載っている催しと、何が違う？</b><p>ふだんの掲載は編集の判断で、載るか・いつ載るかはお約束できません。紹介型は、ご希望の号に必ず載ります。</p></div>
+    <div><b class="maru">200人で、効果はある？</b><p>人数は多くありません。そのかわり、届くのは子育て中のご家庭だけ。ポスティングのように、ほかのお宅には配られません。</p></div>
+    <div><b class="maru">効果は、どうやって分かる？</b><p>翌月に、届いた・開いた・押された数をお送りします。「通信を見た」の特典があれば、来店の数も分かります。</p></div>
+  </div>
+
+
+  <div class="contact">
+    <div>
+      <div class="k maru">お問い合わせ・お申し込み</div>
+      <div class="mail">tokyo.papa.home@gmail.com</div>
+      <p>件名に「協賛について」とお書きください。掲載申込書と、スマホで見られる掲載イメージは、右のQRのページにあります。<span style="color:#56636B">（経理・請求書の発行：ニコマル）</span></p>
+    </div>
+    <div class="qr"><img src="img/qr-kyosan.svg" alt="協賛のご案内のページのQRコード"><span>協賛のご案内</span></div>
+  </div>
+
+  <div class="pfoot"><span>発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）</span><span>2 / 2</span></div>
+</section>
+
+</body>
+</html>

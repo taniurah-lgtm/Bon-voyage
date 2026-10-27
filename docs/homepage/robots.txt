@@ -9,5 +9,7 @@ Disallow: /pop-
 Disallow: /meishi-
 Disallow: /ig-story.html
 Disallow: /x-header.html
+# 協賛のご案内（直接お渡しする資料。各ファイルにも noindex を入れてある）
+Disallow: /kyosan/
 
 Sitemap: https://bonvoya.nicomaru.tokyo/sitemap.xml

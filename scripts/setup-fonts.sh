@@ -27,12 +27,14 @@ get() { # get <ofl配下のパス>
 
 for f in Regular Medium Bold Black; do get "zenmarugothic/ZenMaruGothic-${f}.ttf"; done
 get "zenkurenaido/ZenKurenaido-Regular.ttf"
+# 協賛のご案内（kyosan/print.html・申込書）の本文。Noto Sans JP は可変フォントで、PDF に Type 3 で埋め込まれて重く・粗くなるため
+for f in Regular Medium Bold; do get "zenkakugothicnew/ZenKakuGothicNew-${f}.ttf"; done
 get "mochiypopone/MochiyPopOne-Regular.ttf"
 
 fc-cache -f >/dev/null 2>&1 || true
 echo
 ok=1
-for fam in "Zen Maru Gothic" "Zen Kurenaido" "Mochiy Pop One"; do
+for fam in "Zen Maru Gothic" "Zen Kurenaido" "Mochiy Pop One" "Zen Kaku Gothic New"; do
      if fc-list : family | tr ',' '\n' | grep -qxi "$fam"; then
     echo "  ⭕️ $fam"
   else

@@ -30,6 +30,8 @@
  *     "items": [ { "id": "E105", "note": "ひとこと" }, ... ],   // 今週末・連休
  *     "ahead": [ { "id": "E111", "note": "締切10/5" }, ... ]    // 先取り・締切
  *   }
+ *   協賛（紹介型・1回3,000円）の催しには "pr": "お店の名前" を足す → カードの頭に「PR　〇〇のご協賛で掲載」。
+ *   1号に1件まで・一推しにはしない（docs/sponsor-plan.md §14。消費者庁のステマ規制の運用基準に合わせて、頭に・周りと同じ大きさで）
  *   各ページは、台帳の年齢の目安（◎○）で自動で絞る。一推しをいちばん上に、あとは日付順（同じ日は◎を先に）。
  */
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, rmSync } from 'node:fs';
@@ -221,6 +223,7 @@ function card(item, ev, { pick = false } = {}) {
   return `
   <article class="card${pick ? ' pick' : ''}">
     ${pick ? '<p class="ribbon"><span>PICK UP</span>今週の一推し</p>' : ''}
+    ${item.pr ? `<p class="ribbon pr"><span>PR</span>${esc(item.pr)}のご協賛で掲載</p>` : ''}
     <div class="row">
       ${dateChip(ev)}
       <div class="body">
@@ -239,7 +242,7 @@ function card(item, ev, { pick = false } = {}) {
     <div class="foot">
       <div class="ages">${ages}</div>
       <div class="acts">
-        ${ev.url ? `<a class="btn ghost" href="${esc(ev.url)}" target="_blank" rel="noopener">公式</a>` : ''}
+        ${ev.url ? `<a class="btn ghost" href="${esc(ev.url)}" target="_blank" rel="noopener" data-goatcounter-click="${esc('公式｜' + ev.name)}">公式</a>` : ''}
         ${cal ? `<button type="button" class="btn ghost cal" aria-label="カレンダーに登録" aria-expanded="false" data-goatcounter-click="${esc('カレンダー｜' + ev.name)}">${ICON.cal}登録</button>` : ''}
         ${ev.mapq ? `<a class="btn solid" href="${esc(mapUrl(ev.mapq))}" target="_blank" rel="noopener" data-goatcounter-click="${esc('地図｜' + ev.name)}">地図</a>` : ''}
       </div>
@@ -300,16 +303,16 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
 <style>
   :root {
     --w-bg:#FAF6F0; --w-card:#FFFFFF; --w-ink:#3B3530; --w-soft:#766B62; --w-faint:#A3978D; --w-line:#EEE5D9;
-    --w-accent:#C9755B; --w-accent-ink:#A5563E; --w-wash:#F8EAE2; --w-sage:#7E9A7A; --w-sage-wash:#EBF0E7; --w-shadow:0 1px 2px rgba(80,60,40,.04),0 6px 18px rgba(80,60,40,.06);
+    --w-accent:#C9755B; --w-accent-ink:#A5563E; --w-wash:#F8EAE2; --w-sage:#7E9A7A; --w-sage-wash:#EBF0E7; --w-shadow:0 1px 2px rgba(80,60,40,.04),0 6px 18px rgba(80,60,40,.06); --w-pr:#5E5148; --w-pr-on:#FFFFFF;
     --w-en:"Jost","Helvetica Neue",Arial,sans-serif; --w-maru:"Zen Maru Gothic",var(--maru);
   }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
     --w-bg:#1D1A18; --w-card:#272320; --w-ink:#F1EBE4; --w-soft:#C4B8AD; --w-faint:#90857B; --w-line:#3A342F;
-    --w-accent:#E39A7F; --w-accent-ink:#EDB29C; --w-wash:#3A2A24; --w-sage:#A2BC9E; --w-sage-wash:#2A3328; --w-shadow:0 1px 2px rgba(0,0,0,.3);
+    --w-accent:#E39A7F; --w-accent-ink:#EDB29C; --w-wash:#3A2A24; --w-sage:#A2BC9E; --w-sage-wash:#2A3328; --w-shadow:0 1px 2px rgba(0,0,0,.3); --w-pr:#E6DCD2; --w-pr-on:#1D1A18;
   } }
   :root[data-theme="dark"] {
     --w-bg:#1D1A18; --w-card:#272320; --w-ink:#F1EBE4; --w-soft:#C4B8AD; --w-faint:#90857B; --w-line:#3A342F;
-    --w-accent:#E39A7F; --w-accent-ink:#EDB29C; --w-wash:#3A2A24; --w-sage:#A2BC9E; --w-sage-wash:#2A3328; --w-shadow:0 1px 2px rgba(0,0,0,.3);
+    --w-accent:#E39A7F; --w-accent-ink:#EDB29C; --w-wash:#3A2A24; --w-sage:#A2BC9E; --w-sage-wash:#2A3328; --w-shadow:0 1px 2px rgba(0,0,0,.3); --w-pr:#E6DCD2; --w-pr-on:#1D1A18;
   }
   body { background: var(--w-bg); color: var(--w-ink); }
   .hero { position: relative; overflow: hidden; padding: 1.5rem 0 1.1rem; }
@@ -332,6 +335,9 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
   .card.pick { background: linear-gradient(160deg, var(--w-wash), var(--w-card) 60%); outline: 1px solid color-mix(in srgb, var(--w-accent) 35%, transparent); }
   .ribbon { display: flex; align-items: center; gap: .5rem; font-family: var(--w-maru); font-weight: 700; font-size: .74rem; color: var(--w-accent-ink); margin: 0 0 .4rem; }
   .ribbon span { font-family: var(--w-en); font-weight: 500; font-size: .62rem; letter-spacing: .18em; color: #fff; background: var(--w-accent); border-radius: 999px; padding: .12rem .55rem; }
+  /* 協賛（紹介型）の「PR」。周りの文字より小さくしない・薄くしない・頭に置く（消費者庁 運用基準 第3-1(2)オ〜キ） */
+  .ribbon.pr { color: var(--w-ink); }
+  .ribbon.pr span { font-family: var(--w-maru); font-weight: 700; font-size: .74rem; letter-spacing: .1em; color: var(--w-pr-on); background: var(--w-pr); padding: .08rem .6rem; }
   .row { display: flex; gap: .8rem; }
   .chip { flex: none; width: 4.1rem; white-space: nowrap; text-align: center; padding-top: .1rem; border-right: 1px solid var(--w-line); padding-right: .7rem; }
   .chip .md { display: block; font-family: var(--w-en); font-weight: 500; font-size: 1.1rem; line-height: 1.15; color: var(--w-ink); letter-spacing: .01em; }
@@ -461,6 +467,13 @@ for (const f of files) {
     }).filter(Boolean);
   const items = resolve(spec.items);
   const ahead = resolve(spec.ahead);
+  // 協賛（紹介型）: 1号に1件まで。一推しには置かない（docs/sponsor-plan.md §14「冒頭に置かない」）
+  const prs = [...items, ...ahead].filter(({ it }) => it.pr !== undefined);
+  for (const { it } of prs) {
+    if (typeof it.pr !== 'string' || !it.pr.trim()) problems.push(`${date}: ${it.id} の pr（協賛のお店の名前）が空`);
+    if (it.id === spec.pick) problems.push(`${date}: ${it.id} は協賛（pr）なので、一推しにしない`);
+  }
+  if (prs.length > 1) problems.push(`${date}: 協賛（pr）が${prs.length}件ある。紹介型は1号に1件まで`);
 
   ISSUE = date;
   const [y, m, d] = date.split('-').map(Number);

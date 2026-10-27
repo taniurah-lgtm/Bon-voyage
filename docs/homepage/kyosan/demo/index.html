@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>掲載イメージ｜ぼんぼやーじゅ通信 協賛のご案内</title>
+<meta name="description" content="協賛が、LINE・年齢別のページ・チラシ・おでかけマップにどう載るかの見本です。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&family=Zen+Maru+Gothic:wght@500;700&display=swap">
+<link rel="stylesheet" href="/assets/bv-tokens.css">
+<script src="/assets/analytics.js" defer></script>
+<style>
+  :root {
+    --a: #C9755B; --a-ink: #A04F37; --a-wash: #FBEDE6;   /* 紹介型 */
+    --b: #2C7C9E; --b-ink: #226881; --b-wash: #E7F2F6;   /* 応援型 */
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --a: #E39A7F; --a-ink: #EDB29C; --a-wash: #3A2A24; --b: #6FBAD9; --b-ink: #9AD4EA; --b-wash: #1D3944;
+  } }
+  :root[data-theme="dark"] { --a: #E39A7F; --a-ink: #EDB29C; --a-wash: #3A2A24; --b: #6FBAD9; --b-ink: #9AD4EA; --b-wash: #1D3944; }
+
+  .ghead-in { padding-top: 1.6rem; padding-bottom: 1.4rem; }
+  .crumb { font-size: .82rem; margin: 0 0 .6rem; }
+  .crumb a { color: var(--link-ink); font-weight: 700; text-decoration: none; }
+  h1 { font-size: clamp(1.55rem, 6vw, 2.1rem); }
+  .lead { font-size: .95rem; color: var(--ink); line-height: 1.8; }
+  .legend { display: flex; flex-wrap: wrap; gap: .45rem .6rem; margin-top: .9rem; }
+  .tag { display: inline-flex; align-items: center; gap: .3rem; font-family: var(--maru); font-weight: 800; font-size: .78rem; line-height: 1; padding: .38rem .7rem; border-radius: 999px; white-space: nowrap; }
+  .tag.a { background: var(--a-wash); color: var(--a-ink); }
+  .tag.b { background: var(--b-wash); color: var(--b-ink); }
+  .tag i { font-style: normal; font-weight: 700; opacity: .85; }
+  .sample { display: inline-block; margin-top: .8rem; font-size: .78rem; color: var(--ink-soft); }
+
+  .jump { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .9rem; }
+  .jump a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 .85rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--line-strong); color: var(--link-ink); font-family: var(--maru); font-weight: 800; font-size: .84rem; text-decoration: none; }
+  .step { scroll-margin-top: 1rem; }
+  main { padding: 1.2rem 0 1rem; }
+  .step { margin: 2.2rem 0 0; }
+  .step:first-child { margin-top: .6rem; }
+  .step-h { display: flex; align-items: baseline; gap: .55rem; margin: 0 0 .35rem; }
+  .step-n { flex: none; font-family: var(--maru); font-weight: 800; font-size: .8rem; color: var(--on-sky); background: var(--sky-deep); width: 1.7rem; height: 1.7rem; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; transform: translateY(-.1rem); }
+  .step h2 { font-family: var(--maru); font-weight: 800; font-size: 1.12rem; line-height: 1.45; margin: 0; }
+  .step .say { font-size: .9rem; color: var(--ink-soft); margin: 0 0 .9rem; }
+  .points { list-style: none; margin: .9rem 0 0; padding: 0; display: flex; flex-direction: column; gap: .5rem; }
+  .points li { display: grid; grid-template-columns: auto 1fr; gap: .55rem; align-items: start; font-size: .88rem; line-height: 1.7; }
+  .points li .tag { margin-top: .12rem; }
+
+  /* ---- 画面の枠 ---- */
+  .screen { max-width: 400px; margin: 0 auto; border-radius: 26px; overflow: hidden; border: 1px solid var(--line-strong); box-shadow: 0 10px 34px rgba(40,50,60,.12); background: #fff; }
+  .screen-cap { text-align: center; font-size: .74rem; color: var(--ink-faint); margin: .5rem 0 0; }
+
+  /* ---- LINE のトーク画面（LINEの見た目なので、ダークでも明るいまま） ---- */
+  .ln-top { display: flex; align-items: center; gap: .5rem; padding: .7rem .9rem; background: #fff; border-bottom: 1px solid #E6E8EB; color: #111; font: 700 .92rem/1.2 var(--body); }
+  .ln-top .bk { font-size: 1.2rem; color: #333; margin-right: .1rem; }
+  .ln-body { background: #B9CBE3; padding: .9rem .7rem 1.1rem; }
+  .ln-date { display: table; margin: 0 auto .8rem; font-size: .68rem; color: #fff; background: rgba(40,60,90,.28); padding: .18rem .7rem; border-radius: 999px; }
+  .ln-msg { display: flex; gap: .45rem; align-items: flex-start; }
+  .ln-ava { flex: none; width: 34px; height: 34px; border-radius: 50%; background: #3E8EB0; color: #fff; display: flex; align-items: center; justify-content: center; font: 800 .8rem/1 var(--maru); }
+  .ln-col { min-width: 0; }
+  .ln-name { font-size: .66rem; color: #34465D; margin: 0 0 .2rem .1rem; }
+  .ln-row { display: flex; align-items: flex-end; gap: .3rem; }
+  .ln-bub { background: #fff; color: #111; border-radius: 18px; padding: .65rem .75rem; font: 400 .8rem/1.62 var(--body); white-space: pre-wrap; overflow-wrap: anywhere; min-width: 0; }
+  .ln-bub .u { color: #2463C6; }
+  .ln-time { flex: none; font-size: .6rem; color: #4D6079; }
+  .hl { display: block; border-radius: 10px; padding: .35rem .45rem; margin: .45rem -.45rem; }
+  .hl.a { background: #FDE6DA; box-shadow: inset 0 0 0 1.5px #D98A6E; }
+  .hl.b { background: #DCEFF6; box-shadow: inset 0 0 0 1.5px #5BA3C2; }
+  .hl-tag { display: table; font: 800 .6rem/1 var(--maru); color: #fff; border-radius: 999px; padding: .22rem .5rem; margin: 0 0 .25rem; white-space: nowrap; }
+  .hl.a .hl-tag { background: #B9644A; }
+  .hl.b .hl-tag { background: #2C7C9E; }
+
+  /* ---- 年齢別のページ（実物と同じ値を .wk の中だけに写したもの） ---- */
+  .br { display: flex; align-items: center; gap: .5rem; padding: .55rem .8rem; background: #F4F1EC; border-bottom: 1px solid #E5DED3; color: #6A6058; font: 400 .7rem/1.2 var(--body); }
+  .br .x { font-size: .95rem; }
+  .br .url { flex: 1; min-width: 0; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .wk {
+    --w-bg:#FAF6F0; --w-card:#FFFFFF; --w-ink:#3B3530; --w-soft:#766B62; --w-faint:#A3978D; --w-line:#EEE5D9;
+    --w-accent:#C9755B; --w-accent-ink:#A5563E; --w-wash:#F8EAE2; --w-sage:#7E9A7A; --w-sage-wash:#EBF0E7; --w-shadow:0 1px 2px rgba(80,60,40,.04),0 6px 18px rgba(80,60,40,.06);
+    --w-pr:#5E5148; --w-pr-on:#FFFFFF;
+    --w-en:"Jost","Helvetica Neue",Arial,sans-serif; --w-maru:"Zen Maru Gothic",var(--maru);
+    background: var(--w-bg); color: var(--w-ink); padding: 0 .9rem 1.2rem; font-size: 13.4px; line-height: 1.85;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .wk {
+    --w-bg:#1D1A18; --w-card:#272320; --w-ink:#F1EBE4; --w-soft:#C4B8AD; --w-faint:#90857B; --w-line:#3A342F;
+    --w-accent:#E39A7F; --w-accent-ink:#EDB29C; --w-wash:#3A2A24; --w-sage:#A2BC9E; --w-sage-wash:#2A3328; --w-shadow:0 1px 2px rgba(0,0,0,.3);
+    --w-pr:#E6DCD2; --w-pr-on:#1D1A18;
+  } }
+  :root[data-theme="dark"] .wk {
+    --w-bg:#1D1A18; --w-card:#272320; --w-ink:#F1EBE4; --w-soft:#C4B8AD; --w-faint:#90857B; --w-line:#3A342F;
+    --w-accent:#E39A7F; --w-accent-ink:#EDB29C; --w-wash:#3A2A24; --w-sage:#A2BC9E; --w-sage-wash:#2A3328; --w-shadow:0 1px 2px rgba(0,0,0,.3);
+    --w-pr:#E6DCD2; --w-pr-on:#1D1A18;
+  }
+  .wk .hero { padding: 1.1rem 0 .8rem; }
+  .wk .kicker { font-family: var(--w-en); font-size: .68rem; letter-spacing: .22em; color: var(--w-accent-ink); margin: 0; }
+  .wk .hero h3 { font-family: var(--w-maru); font-weight: 700; font-size: 1.4rem; letter-spacing: .04em; line-height: 1.35; margin: .2rem 0 .1rem; }
+  .wk .issue { font-size: .76rem; color: var(--w-soft); }
+  .wk .tabs { display: flex; gap: .25rem; padding: .3rem; margin: 0 0 .9rem; background: color-mix(in srgb, var(--w-line) 70%, var(--w-bg)); border-radius: 999px; }
+  .wk .tabs span { flex: 1; text-align: center; font-family: var(--w-maru); font-weight: 700; font-size: .78rem; color: var(--w-soft); border-radius: 999px; padding: .45rem .2rem; }
+  .wk .tabs .on { background: var(--w-card); color: var(--w-accent-ink); box-shadow: var(--w-shadow); }
+  .wk .sec { display: flex; align-items: baseline; gap: .6rem; margin: 1.1rem 0 .55rem; }
+  .wk .sec .kicker { flex: none; }
+  .wk .sec h4 { font-family: var(--w-maru); font-weight: 700; font-size: .92rem; margin: 0; color: var(--w-ink); }
+  .wk .sec::after { content: ""; flex: 1; height: 1px; background: var(--w-line); align-self: center; }
+  .wk .card { background: var(--w-card); border-radius: 18px; padding: .8rem .85rem .75rem; margin-bottom: .6rem; box-shadow: var(--w-shadow); }
+  .wk .card.pick { background: linear-gradient(160deg, var(--w-wash), var(--w-card) 60%); outline: 1px solid color-mix(in srgb, var(--w-accent) 35%, transparent); }
+  .wk .ribbon { display: flex; align-items: center; gap: .5rem; font-family: var(--w-maru); font-weight: 700; font-size: .74rem; color: var(--w-accent-ink); margin: 0 0 .4rem; line-height: 1.45; }
+  .wk .ribbon span { flex: none; font-family: var(--w-en); font-weight: 500; font-size: .62rem; letter-spacing: .18em; color: #fff; background: var(--w-accent); border-radius: 999px; padding: .12rem .55rem; }
+  /* PR は「周りの文字より小さくしない・薄くしない・頭に置く」（消費者庁 運用基準 第3-1(2)オ〜キ） */
+  .wk .ribbon.pr { color: var(--w-ink); }
+  .wk .ribbon.pr span { font-family: var(--w-maru); font-weight: 700; font-size: .74rem; letter-spacing: .1em; color: var(--w-pr-on); background: var(--w-pr); padding: .08rem .6rem; }
+  .wk .row { display: flex; gap: .8rem; }
+  .wk .chip { flex: none; width: 4.1rem; white-space: nowrap; text-align: center; padding-top: .1rem; border-right: 1px solid var(--w-line); padding-right: .7rem; }
+  .wk .chip .md { display: block; font-family: var(--w-en); font-weight: 500; font-size: 1.08rem; line-height: 1.15; color: var(--w-ink); letter-spacing: .01em; }
+  .wk .chip .wd { display: block; font-family: var(--w-en); font-size: .6rem; letter-spacing: .16em; color: var(--w-accent-ink); margin-top: .15rem; }
+  .wk .body { min-width: 0; flex: 1; }
+  .wk .card h5 { font-family: var(--w-maru); font-weight: 700; font-size: .9rem; line-height: 1.5; margin: 0 0 .3rem; }
+  .wk .facts { list-style: none; margin: 0; padding: 0; font-size: .71rem; line-height: 1.55; color: var(--w-soft); }
+  .wk .facts li { display: flex; gap: .35rem; align-items: flex-start; overflow-wrap: anywhere; }
+  .wk .facts svg { flex: none; width: 13px; height: 13px; margin-top: .22rem; fill: none; stroke: var(--w-faint); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .wk .note { font-size: .73rem; line-height: 1.65; margin: .45rem 0 0; padding: .4rem .6rem; background: color-mix(in srgb, var(--w-sage-wash) 70%, transparent); border-radius: 12px; }
+  .wk .insta { display: flex; flex-wrap: wrap; gap: .25rem; margin: .4rem 0 0; }
+  .wk .insta span { display: inline-flex; align-items: center; gap: .35rem; max-width: 100%; padding: .2rem .6rem; border-radius: 999px; border: 1px solid var(--w-line); background: var(--w-card); line-height: 1.4; }
+  .wk .insta .ig { font-family: var(--w-maru); font-weight: 700; font-size: .68rem; color: var(--w-accent-ink); white-space: nowrap; border: 0; padding: 0; }
+  .wk .insta small { font-size: .6rem; color: var(--w-faint); }
+  .wk .foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .4rem .3rem; margin-top: .5rem; }
+  .wk .ages { display: flex; flex-wrap: nowrap; gap: .18rem; min-width: 0; }
+  .wk .age { font-size: .62rem; color: var(--w-soft); border-radius: 999px; padding: .05rem .3rem; white-space: nowrap; border: 1px solid var(--w-line); }
+  .wk .age b { font-weight: 700; margin-left: .08rem; }
+  .wk .age.m-best { background: var(--w-wash); border-color: transparent; color: var(--w-accent-ink); }
+  .wk .age.m-ok { background: var(--w-sage-wash); border-color: transparent; color: color-mix(in srgb, var(--w-sage) 70%, var(--w-ink)); }
+  .wk .age.m-no { opacity: .55; }
+  .wk .acts { display: flex; gap: .2rem; flex: none; margin-left: auto; }
+  .wk .btn { display: inline-flex; align-items: center; justify-content: center; gap: .15rem; min-height: 30px; padding: 0 .5rem; border-radius: 999px; font-family: var(--w-maru); font-weight: 700; font-size: .66rem; white-space: nowrap; }
+  .wk .btn svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .wk .btn.ghost { color: var(--w-ink); border: 1px solid var(--w-line); }
+  .wk .btn.solid { color: #fff; background: var(--w-accent); }
+  .wk .more { text-align: center; font-size: .7rem; color: var(--w-faint); margin: .2rem 0 .4rem; letter-spacing: .05em; }
+  .wk .sponsors { margin-top: 1.4rem; }
+  .wk .sp-lead { font-size: .74rem; color: var(--w-soft); margin: .2rem 0 .6rem; }
+  .wk .sp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+  .wk .sp { display: flex; flex-direction: column; align-items: center; text-align: center; gap: .4rem; padding: .8rem .5rem .7rem; background: var(--w-card); border-radius: 16px; box-shadow: var(--w-shadow); color: var(--w-ink); }
+  .wk .sp .logo { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .wk .sp .mono { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--w-maru); font-weight: 700; font-size: 1.35rem; color: #fff; }
+  .wk .sp .txt { display: flex; flex-direction: column; gap: .1rem; min-width: 0; }
+  .wk .sp b { font-family: var(--w-maru); font-weight: 700; font-size: .76rem; line-height: 1.4; }
+  .wk .sp small { font-size: .64rem; color: var(--w-soft); line-height: 1.45; }
+  /* 見本の印（実物のページには出ない） */
+  .mark { position: relative; border-radius: 20px; padding: .45rem; margin: 0 -.45rem .6rem; }
+  .mark.a { box-shadow: inset 0 0 0 2px var(--a); background: color-mix(in srgb, var(--a-wash) 55%, transparent); }
+  .mark.b { box-shadow: inset 0 0 0 2px var(--b); background: color-mix(in srgb, var(--b-wash) 55%, transparent); }
+  .mark > .tag { display: table; margin: 0 0 .45rem .1rem; }
+  .mark.a > .tag { background: var(--a); color: #fff; }
+  .mark.b > .tag { background: var(--b); color: #fff; }
+  .mark .card { margin-bottom: 0; }
+
+  /* ---- 画像（チラシ・地図） ---- */
+  .pic { display: block; width: 100%; height: auto; }
+  .flyer { max-width: 400px; margin: 0 auto; border-radius: 16px; overflow: hidden; border: 1px solid var(--line-strong); background: #fff; box-shadow: 0 10px 34px rgba(40,50,60,.12); }
+
+  .zoom { max-width: 400px; margin: .7rem auto 0; display: flex; gap: .7rem; align-items: center; background: #fff; color: #1E1E1E; border: 1.5px solid #232323; border-radius: 10px; padding: .6rem .8rem; font: 400 .78rem/1.6 var(--maru); box-shadow: 0 0 0 4px var(--b-wash); }
+  .zoom .zb { flex: none; font-weight: 800; font-size: .8rem; letter-spacing: .1em; color: #fff; background: #232323; border-radius: 5px; padding: .15rem .5rem; }
+  .zoom b { display: block; font-weight: 800; font-size: .84rem; letter-spacing: .02em; }
+  .fine2 { font-size: .76rem; color: var(--ink-soft); margin-top: .5rem; }
+
+  /* ---- 翌月のご報告 ---- */
+  .rep { max-width: 400px; margin: 0 auto; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow-soft); padding: 1.1rem 1.15rem 1rem; }
+  .rep-h { font-family: var(--maru); font-weight: 800; font-size: .98rem; line-height: 1.5; margin: 0; }
+  .rep-sub { font-size: .76rem; color: var(--ink-soft); margin: .15rem 0 .7rem; }
+  .rep dl { margin: 0; display: grid; grid-template-columns: 1fr auto; border-top: 1px solid var(--line); }
+  .rep dt, .rep dd { margin: 0; padding: .5rem 0; border-bottom: 1px solid var(--line); font-size: .84rem; }
+  .rep dt { color: var(--ink); }
+  .rep dt small { display: block; font-size: .7rem; color: var(--ink-faint); line-height: 1.5; }
+  .rep dd { font-family: var(--maru); font-weight: 800; text-align: right; color: var(--ink-soft); padding-left: 1rem; }
+  .rep-foot { font-size: .74rem; color: var(--ink-soft); margin-top: .7rem; line-height: 1.7; }
+
+  /* ---- おしまいの案内 ---- */
+  .next { margin: 2.6rem 0 0; padding: 1.3rem 1.2rem; border-radius: var(--radius); background: linear-gradient(160deg, var(--sky-wash), var(--marigold-wash)); border: 1px solid var(--line); }
+  .next h2 { font-family: var(--maru); font-weight: 800; font-size: 1.08rem; margin: 0 0 .35rem; }
+  .next p { font-size: .9rem; color: var(--ink); }
+  .cta { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .9rem; }
+  .cta a { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 1.2rem; border-radius: 999px; font-family: var(--maru); font-weight: 800; font-size: .92rem; text-decoration: none; }
+  .cta .pri { background: var(--sky-deep); color: var(--on-sky); }
+  .cta .sec2 { background: var(--surface); color: var(--link-ink); border: 1px solid var(--line-strong); }
+  footer a { color: var(--ink-soft); }
+  @media (max-width: 40rem) {
+    .screen, .flyer { border-radius: 20px; }
+  }
+</style>
+</head>
+<body>
+<header class="ghead">
+  <div class="ghead-in">
+    <p class="crumb"><a href="/kyosan/">← 協賛のご案内</a></p>
+    <h1>掲載イメージ</h1>
+    <p class="lead">実際にお送りした<b>10/21(水)号</b>に、見本の協賛を入れてみました。<br>色の枠が、協賛でご用意する場所です。</p>
+    <div class="legend" aria-label="色の見方">
+      <span class="tag a">紹介型 <i>1回 3,000円</i></span>
+      <span class="tag b">応援型 <i>年 10,000円</i></span>
+    </div>
+    <p class="sample">※「〇〇」のお名前と、協賛の催しの中身は見本です。</p>
+    <nav class="jump" aria-label="この見本の目次"><a href="#line">① LINE</a><a href="#page">② ページ</a><a href="#flyer">③ チラシ</a><a href="#map">④ マップ</a><a href="#report">⑤ ご報告</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="step" id="line" aria-labelledby="h-line">
+    <div class="step-h"><span class="step-n">1</span><h2 id="h-line">水曜の朝9時、LINEにこう届きます</h2></div>
+    <p class="say">読者のLINEに、1通のメッセージで届きます（実際の号を、見やすく短くしたもの）。</p>
+    <div class="screen" role="group" aria-label="LINEのトーク画面の見本">
+      <div class="ln-top"><span class="bk" aria-hidden="true">‹</span>ぼんぼやーじゅ通信</div>
+      <div class="ln-body">
+        <span class="ln-date">10/21(水)</span>
+        <div class="ln-msg">
+          <span class="ln-ava" aria-hidden="true">ぼ</span>
+          <div class="ln-col">
+            <p class="ln-name">ぼんぼやーじゅ通信</p>
+            <div class="ln-row">
+<div class="ln-bub">【ぼんぼやーじゅ通信 10/21(水)】
+
+🌂 週末の天気（小平市）: 24(土) 雨・降水80%／25(日) くもり・降水40%
+
+■今週の一推し
+小金井公園コスモスまつり 10/25(日) 10:00〜15:00
+コスモス畑のお花摘み（整理券制）、どんぐりの工作、SLの投炭体験も。雨なら11/1(日)に延期です。
+👶○ 🧒◎ 🎒◎
+
+■今週のおでかけ、年齢別に
+たかの台こども祭り、商店会のハロウィンなどを、年齢ごとにまとめました。
+👶 赤ちゃん連れ
+<span class="u">https://bonvoya.nicomaru.tokyo/week/2026-10-21/baby/</span>
+🧒 未就学の子
+<span class="u">https://bonvoya.nicomaru.tokyo/week/2026-10-21/pre/</span>
+🎒 小学生
+<span class="u">https://bonvoya.nicomaru.tokyo/week/2026-10-21/elem/</span>
+
+■イベント先取り情報
+・小平市少年少女マラソン大会 11/15(日)
+　市内に住む・通う小学3〜6年生、無料。申込は10/23(金)17時まで。
+<span class="hl a"><span class="hl-tag">紹介型</span>・【PR】〇〇こども体操クラブ 秋の無料体験会 11/14(土)
+　3〜6歳・各回8組・予約制（11/12まで）。動きやすい服と飲み物を。ベビーカーは入口に置けます。</span>
+おでかけカレンダー・みんなのおでかけマップ・過去の号は、こちらから。
+<span class="u">https://bonvoya.nicomaru.tokyo/</span>
+<span class="hl b"><span class="hl-tag">応援型</span>この通信は、次の方々のご協賛でお届けしています。
+〇〇小児科／〇〇歯科／〇〇不動産／〇〇整体院／〇〇保険</span></div>
+              <span class="ln-time">9:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="points">
+      <li><span class="tag a">紹介型</span><span>「イベント先取り情報」の中に、2行でご紹介します。<b>行の頭に【PR】</b>と入れます。いちばん上（一推し）には置きません。</span></li>
+      <li><span class="tag b">応援型</span><span>毎号のいちばん下に、お名前を1行。1年で約50号、読者全員に届くメッセージに載ります。</span></li>
+    </ul>
+  </section>
+
+  <section class="step" id="page" aria-labelledby="h-page">
+    <div class="step-h"><span class="step-n">2</span><h2 id="h-page">リンクの先、年齢別のページ</h2></div>
+    <p class="say">LINEのリンクを押すと開くページです。催しごとに、日時・場所・料金と、ひとことを載せています。</p>
+    <div class="screen" role="group" aria-label="年齢別のページの見本">
+      <div class="br" aria-hidden="true"><span class="x">×</span><span class="url">bonvoya.nicomaru.tokyo/week/2026-10-21/pre/</span><span>⋯</span></div>
+      <div class="wk">
+        <div class="hero">
+          <p class="kicker">WEEKEND GUIDE · 10.21 WED</p>
+          <h3>今週のおでかけ</h3>
+          <p class="issue">ぼんぼやーじゅ通信 10/21(水)号</p>
+        </div>
+        <div class="tabs" aria-hidden="true"><span>👶 赤ちゃん</span><span class="on">🧒 未就学</span><span>🎒 小学生</span></div>
+
+        <div class="sec"><p class="kicker">THIS WEEK</p><h4>今週のおでかけ</h4></div>
+        <article class="card pick">
+          <p class="ribbon"><span>PICK UP</span>今週の一推し</p>
+          <div class="row">
+            <div class="chip"><span class="md">10/25</span><span class="wd">SUN</span></div>
+            <div class="body">
+              <h5>小金井公園コスモスまつり2026</h5>
+              <ul class="facts">
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>2026年10月25日(日) 10:00〜15:00</span></li>
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10" r="2.3"/></svg><span>小金井公園 つつじ山広場（花小金井駅から西武バス「小金井公園西口」）</span></li>
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9 8l3 4 3-4M9 13h6M9 16h6M12 12v6"/></svg><span>一部有料</span></li>
+              </ul>
+            </div>
+          </div>
+          <p class="note">コスモス畑のお花摘みは当日に配る整理券制で、午前の部は9:30から、午後の部は13:00から。各回約50人です。どんぐりとサクラの枝の工作、SLの投炭体験、クイズラリーも。雨なら11/1(日)に延期です。</p>
+          <div class="foot">
+            <div class="ages"><span class="age m-ok">👶<b>○</b></span><span class="age m-best">🧒<b>◎</b></span><span class="age m-best">🎒<b>◎</b></span></div>
+            <div class="acts"><span class="btn ghost">公式</span><span class="btn ghost"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>登録</span><span class="btn solid">地図</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="row">
+            <div class="chip"><span class="md">10/25</span><span class="wd">SUN</span></div>
+            <div class="body">
+              <h5>第3回 たかの台こども祭り</h5>
+              <ul class="facts">
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>10/25(日) 10:00〜15:00</span></li>
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10" r="2.3"/></svg><span>小平市立中央公園（じゃぶじゃぶ池周辺）／西武国分寺線 鷹の台駅</span></li>
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9 8l3 4 3-4M9 13h6M9 16h6M12 12v6"/></svg><span>入場無料</span></li>
+              </ul>
+            </div>
+          </div>
+          <p class="note">10:00にコダレンジャーのショー、13:30から仮装ハロウィンコンテスト（小学生以下・先着25組）。更衣室はないので、仮装は着て行きます。雨天決行・荒天中止です。</p>
+          <div class="foot">
+            <div class="ages"><span class="age m-ok">👶<b>○</b></span><span class="age m-best">🧒<b>◎</b></span><span class="age m-best">🎒<b>◎</b></span></div>
+            <div class="acts"><span class="btn ghost">公式</span><span class="btn ghost"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>登録</span><span class="btn solid">地図</span></div>
+          </div>
+        </article>
+        <p class="more">… このあと、今週のおでかけが10件続きます …</p>
+
+        <div class="sec"><p class="kicker">COMING UP</p><h4>先取り・申込の締切</h4></div>
+        <article class="card">
+          <div class="row">
+            <div class="chip"><span class="md">11/7</span><span class="wd">SAT</span></div>
+            <div class="body">
+              <h5>キーウ・クラシック・バレエ「チャイコフスキー 夢の3大バレエ 名場面集」（ルネこだいら）</h5>
+              <ul class="facts">
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>2026年11月7日(土) 14:00開演</span></li>
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9 8l3 4 3-4M9 13h6M9 16h6M12 12v6"/></svg><span>全席指定 S席 5,500円／A席 4,500円。4歳以上入場可</span></li>
+              </ul>
+            </div>
+          </div>
+          <p class="note">「くるみ割り人形」「白鳥の湖」「眠れる森の美女」の名場面。託児（0歳から）の予約は10/30(金)まで。</p>
+          <div class="foot">
+            <div class="ages"><span class="age m-no">👶<b>✕</b></span><span class="age m-ok">🧒<b>○</b></span><span class="age m-best">🎒<b>◎</b></span></div>
+            <div class="acts"><span class="btn ghost">公式</span><span class="btn ghost"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>登録</span><span class="btn solid">地図</span></div>
+          </div>
+        </article>
+
+        <div class="mark a">
+          <span class="tag">紹介型</span>
+          <article class="card">
+            <p class="ribbon pr"><span>PR</span>〇〇こども体操クラブのご協賛で掲載</p>
+            <div class="row">
+              <div class="chip"><span class="md">11/14</span><span class="wd">SAT</span></div>
+              <div class="body">
+                <h5>〇〇こども体操クラブ 秋の無料体験会</h5>
+                <ul class="facts">
+                  <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>2026年11月14日(土) 10:00〜10:45／11:00〜11:45</span></li>
+                  <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10" r="2.3"/></svg><span>〇〇こども体操クラブ（小平市〇〇町／花小金井駅から徒歩〇分）</span></li>
+                  <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9 8l3 4 3-4M9 13h6M9 16h6M12 12v6"/></svg><span>無料（体験会）</span></li>
+                  <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.8 3.6-6 7-6s6.2 2.2 7 6"/></svg><span>3〜6歳と保護者／定員: 各回8組／申込: 予約制（11/12まで・電話かお店のサイト）</span></li>
+                </ul>
+              </div>
+            </div>
+            <p class="note">マットと跳び箱で、からだを動かす45分。はじめての子は、保護者のそばで見学からでも大丈夫とのことです。動きやすい服と飲み物を。ベビーカーは入口に置けます。おむつ替えの台はありません。</p>
+            <div class="insta"><span><span class="ig">📷 昨年11月の様子</span><small>Instagram @〇〇</small></span></div>
+            <div class="foot">
+              <div class="ages"><span class="age m-no">👶<b>✕</b></span><span class="age m-best">🧒<b>◎</b></span><span class="age m-no">🎒<b>✕</b></span></div>
+              <div class="acts"><span class="btn ghost">公式</span><span class="btn ghost"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>登録</span><span class="btn solid">地図</span></div>
+            </div>
+          </article>
+        </div>
+
+        <article class="card">
+          <div class="row">
+            <div class="chip"><span class="md">11/22</span><span class="wd">SUN</span></div>
+            <div class="body">
+              <h5>NPO法人小平こども劇場「みんなで自然をあそぼう」</h5>
+              <ul class="facts">
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>2026年11月22日(日) 10:00〜15:00（悪天候の場合は11/29に延期）</span></li>
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10" r="2.3"/></svg><span>八国山緑地 ころころ広場（西武園駅から徒歩5分）</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="foot">
+            <div class="ages"><span class="age">👶<b>△</b></span><span class="age m-best">🧒<b>◎</b></span><span class="age m-best">🎒<b>◎</b></span></div>
+            <div class="acts"><span class="btn ghost">公式</span><span class="btn ghost"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>登録</span><span class="btn solid">地図</span></div>
+          </div>
+        </article>
+
+        <div class="mark b">
+          <span class="tag">応援型</span>
+          <section class="sponsors" style="margin-top:0">
+            <p class="kicker">SUPPORTED BY</p>
+            <p class="sp-lead">この通信は、次の方々のご協賛で運営しています。</p>
+            <div class="sp-grid">
+              <div class="sp"><span class="logo"><span class="mono" style="background:#5E8FA8">小</span></span><span class="txt"><b>〇〇小児科</b><small>小児科・アレルギー科</small></span></div>
+              <div class="sp"><span class="logo"><span class="mono" style="background:#C9755B">歯</span></span><span class="txt"><b>〇〇歯科</b><small>小児歯科</small></span></div>
+              <div class="sp"><span class="logo"><span class="mono" style="background:#7E9A7A">住</span></span><span class="txt"><b>〇〇不動産</b><small>花小金井の賃貸・売買</small></span></div>
+              <div class="sp"><span class="logo"><span class="mono" style="background:#B58B3E">整</span></span><span class="txt"><b>〇〇整体院</b><small>産後の骨盤ケア</small></span></div>
+              <div class="sp"><span class="logo"><span class="mono" style="background:#8A7BA8">保</span></span><span class="txt"><b>〇〇保険</b><small>学資・医療保険のご相談</small></span></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <p class="screen-cap">実際のページは <a href="/week/2026-10-21/pre/">こちら（10/21号・協賛なし）</a></p>
+    <ul class="points">
+      <li><span class="tag a">紹介型</span><span>ほかの催しと<b>同じ形のカード</b>で載ります。いちばん上に「PR」と、お店のお名前。公式サイト・カレンダー登録・地図のボタンもそのまま付きます。</span></li>
+      <li><span class="tag a">紹介型</span><span>年齢の目安が◎○のタブにだけ出ます。この見本（3〜6歳）なら「🧒 未就学」のタブだけ。対象でないご家庭のじゃまになりません。</span></li>
+      <li><span class="tag b">応援型</span><span>3つのタブすべての下に、ロゴとお名前。お店のサイトへのリンクも付けられます。</span></li>
+    </ul>
+  </section>
+
+  <section class="step" id="flyer" aria-labelledby="h-flyer">
+    <div class="step-h"><span class="step-n">3</span><h2 id="h-flyer">チラシの協賛欄</h2></div>
+    <p class="say">毎月刷っているチラシの裏面のいちばん下に、協賛欄を設けます。</p>
+    <figure class="flyer" style="margin-left:auto;margin-right:auto">
+      <img class="pic" src="../img/flyer-kyosan.png" width="794" height="332" alt="チラシの裏面の下のほう。QRコードの案内の下に「この通信は、次の方々のご協賛で運営しています」と5つのお名前が並んでいる見本" loading="lazy">
+    </figure>
+    <div class="zoom" aria-label="協賛欄を大きくしたもの">
+      <span class="zb">協賛</span><span>この通信は、次の方々のご協賛で運営しています。<b>〇〇小児科　〇〇歯科　〇〇不動産　〇〇整体院　〇〇保険</b></span>
+    </div>
+    <ul class="points">
+      <li><span class="tag b">応援型</span><span>お名前を載せます。11月分のチラシは<b>250部</b>。市の担当課を通じて、地域センター20館・元気村・児童館に置いていただいています。</span></li>
+    </ul>
+    <p class="fine2">※置き先のきまりによっては、協賛欄のない版を置くことがあります。</p>
+  </section>
+
+  <section class="step" id="map" aria-labelledby="h-map">
+    <div class="step-h"><span class="step-n">4</span><h2 id="h-map">おでかけマップに「PR」のピン</h2></div>
+    <p class="say">ホームページの「みんなのおでかけマップ」に、催しの日までピンを立てます。</p>
+    <div class="screen">
+      <img class="pic" src="../img/map-pr.jpg" width="720" height="1042" alt="おでかけマップの見本。花小金井駅の近くに「PR」と書かれたピンがあり、吹き出しに〇〇こども体操クラブの体験会の案内が出ている" loading="lazy">
+    </div>
+    <ul class="points">
+      <li><span class="tag a">紹介型</span><span>ほかのピンとは色を変え、「PR」と表示します。押すと催しの案内と、Googleマップへのボタンが出ます。</span></li>
+    </ul>
+  </section>
+
+  <section class="step" id="report" aria-labelledby="h-report">
+    <div class="step-h"><span class="step-n">5</span><h2 id="h-report">翌月に、1枚でご報告</h2></div>
+    <p class="say">載せたあとの数字を、LINEかメールでお送りします。</p>
+    <div class="rep">
+      <p class="rep-h">〇〇こども体操クラブさま　掲載のご報告</p>
+      <p class="rep-sub">10/21(水)号（紹介型）</p>
+      <dl>
+        <dt>届いた人</dt><dd>○○○人</dd>
+        <dt>LINEのメッセージを開いた人</dt><dd>○○○人</dd>
+        <dt>🧒 未就学のページが見られた回数</dt><dd>○○回</dd>
+        <dt>ボタンが押された回数<small>公式サイト・地図・カレンダー登録・📷 様子</small></dt><dd>○回</dd>
+        <dt>「通信を見た」で来られた方<small>お店で数えていただいた数</small></dt><dd>○組</dd>
+      </dl>
+      <p class="rep-foot">「通信を見た」とお伝えいただいた方への小さな特典（お店で決めていただくもの）を添えると、来店の数もわかります。</p>
+    </div>
+  </section>
+
+  <section class="next" aria-labelledby="h-next">
+    <h2 id="h-next">料金・お申し込みについて</h2>
+    <p>紹介型は1回3,000円、応援型は年10,000円です。原稿はこちらで書きます。</p>
+    <div class="cta">
+      <a class="pri" href="/kyosan/" data-goatcounter-click="協賛｜デモから案内へ">協賛のご案内を見る</a>
+      <a class="sec2" href="/kyosan/bonvoya-kyosan.pdf" data-goatcounter-click="協賛｜資料PDF">資料（PDF）</a>
+    </div>
+  </section>
+
+</main>
+<footer>
+  <div class="fmark">ぼんぼやーじゅ通信</div>
+  発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）<br>
+  <a href="/tokushoho.html">免責事項・個人情報の取り扱い</a>
+</footer>
+</body>
+</html>
