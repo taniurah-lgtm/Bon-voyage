@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-27",
+ "generated": "2026-10-28",
  "events": [
   {
    "id": "E16",
@@ -356,7 +356,7 @@
    "cost": "",
    "discount": "",
    "target": "",
-   "url": "https://www.city.kodaira.tokyo.jp/event/127/127980.html",
+   "url": "",
    "tentative": false,
    "deadline": null,
    "cat": "fest"
@@ -1256,7 +1256,7 @@
    "cost": "無料",
    "discount": "",
    "target": "市内在住の小・中学生。保護者同伴なら未就学児も可",
-   "url": "https://www.city.kodaira.tokyo.jp/event/129/129131.html",
+   "url": "",
    "tentative": false,
    "deadline": null,
    "cat": "fest"
@@ -1573,7 +1573,7 @@
    "cost": "無料 / 事前申込: 不要",
    "discount": "",
    "target": "市公式の対象欄に 「小学生以下・小学生・中高生・大人・高齢者・親子」 と明記",
-   "url": "https://www.city.kodaira.tokyo.jp/event/129/129344.html",
+   "url": "",
    "tentative": false,
    "deadline": null,
    "cat": "public"
@@ -2148,7 +2148,7 @@
    "cost": "無料 / 定員: 15人",
    "discount": "",
    "target": "市内在住・在勤・在学の子育て中の方",
-   "url": "https://www.city.kodaira.tokyo.jp/event/128/128376.html",
+   "url": "",
    "tentative": false,
    "deadline": {
     "date": "2026-09-04",
@@ -2609,10 +2609,7 @@
    "target": "どなたでも",
    "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3672&day=2026-10-10",
    "tentative": false,
-   "deadline": {
-    "date": "2026-09-04",
-    "raw": "> （E70 子育ては私のキャリア＝申込9/4締切が既に過ぎている／E81 タッチケア）。"
-   },
+   "deadline": null,
    "cat": "spot"
   },
   {
@@ -2800,12 +2797,9 @@
    "cost": "",
    "discount": "",
    "target": "市公式に「誰でも楽しめる」",
-   "url": "https://www.city.kodaira.tokyo.jp/kurashi/130/130559.html",
+   "url": "",
    "tentative": false,
-   "deadline": {
-    "date": "2026-10-16",
-    "raw": "> E122 の申込締切は 10/16(金)。"
-   },
+   "deadline": null,
    "cat": "fest"
   },
   {
@@ -3024,7 +3018,7 @@
    "cost": "(要確認) 模擬店・物販は実費",
    "discount": "",
    "target": "",
-   "url": "https://www.city.kodaira.tokyo.jp/shihou/files/130782/130782/att_0000025.pdf",
+   "url": "",
    "tentative": false,
    "deadline": null,
    "cat": "fest"
@@ -3449,7 +3443,7 @@
    "cost": "（要確認）公式サイトでご確認ください",
    "discount": "",
    "target": "市内在住・在学の小学生と保護者（親子向け）／ 10組20名・先着順",
-   "url": "https://www.city.kodaira.tokyo.jp/event/130/130026.html",
+   "url": "",
    "tentative": false,
    "deadline": {
     "date": "2026-10-21",
@@ -3652,10 +3646,8 @@
     "2026-10-25"
    ],
    "span": null,
-   "when": "2026年10月25日(日) 10:00〜15:00（雨天の場合は11/1に延期）",
-   "rainDates": [
-    "2026-11-01"
-   ],
+   "when": "2026年10月25日(日) 10:00〜15:00（予定どおり開催された）",
+   "rainDates": [],
    "exceptions": null,
    "programs": null,
    "totalDates": 1,
@@ -3797,7 +3789,7 @@
    "cost": "無料（公式に明記）",
    "discount": "",
    "target": "小学生以下・小学生・中高生・大人・高齢者・親子（公式の表記）",
-   "url": "https://www.city.kodaira.tokyo.jp/event/129/129951.html",
+   "url": "",
    "tentative": false,
    "deadline": null,
    "cat": "fest"
@@ -3870,7 +3862,7 @@
    "cost": "入場は申込不要。模擬店・お茶席は有料",
    "discount": "",
    "target": "",
-   "url": "https://www.city.kodaira.tokyo.jp/event/129/129946.html",
+   "url": "",
    "tentative": false,
    "deadline": null,
    "cat": "fest"
@@ -3910,7 +3902,7 @@
    "cost": "500円（材料費）",
    "discount": "",
    "target": "市内在住・在学の小学生 ／ 定員10人（超えたら抽選）",
-   "url": "https://www.city.kodaira.tokyo.jp/event/files/129155/129155/att_0000008.pdf",
+   "url": "",
    "tentative": false,
    "deadline": {
     "date": "2026-10-23",
@@ -4033,7 +4025,7 @@
    "cost": "公式サイトでご確認ください",
    "discount": "",
    "target": "小平市民・在勤・在学の方",
-   "url": "https://www.city.kodaira.tokyo.jp/event/",
+   "url": "",
    "tentative": false,
    "deadline": {
     "date": "2026-10-16",
@@ -4048,8 +4040,10 @@
     "2026-11-01"
    ],
    "span": null,
-   "when": "2026年11月1日(日) 10:00〜15:30",
-   "rainDates": [],
+   "when": "2026年11月1日(日) 10:00〜15:30（雨天の場合は11/3に延期）",
+   "rainDates": [
+    "2026-11-03"
+   ],
    "exceptions": null,
    "programs": null,
    "totalDates": 1,
@@ -4074,27 +4068,33 @@
    "target": "",
    "url": "http://kodaira-furusatomura.jp/",
    "tentative": false,
-   "deadline": {
-    "date": "2026-10-16",
-    "raw": "> | 参加 | 事前申込・抽選（締切10/16） | 入退場自由 |"
-   },
+   "deadline": null,
    "cat": "fest"
   },
   {
    "id": "E54",
    "name": "小川パレット オープン",
    "dates": [
-    "2026-11-01"
+    "2026-11-01",
+    "2026-11-02",
+    "2026-11-03"
    ],
    "span": null,
-   "when": "11/1(日)オープン",
+   "when": "11/1(日)オープン。オープニングイベントは 11/1(日)〜11/3(火・祝) 10:00〜17:00 ※2日は9:00から ※3日は9:00から",
    "rainDates": [],
-   "exceptions": null,
+   "exceptions": {
+    "2026-11-02": {
+     "start": "09:00"
+    },
+    "2026-11-03": {
+     "start": "09:00"
+    }
+   },
    "programs": null,
-   "totalDates": 1,
-   "start": null,
-   "end": null,
-   "allDay": true,
+   "totalDates": 3,
+   "start": "10:00",
+   "end": "17:00",
+   "allDay": false,
    "timeUncertain": false,
    "place": "小川駅西口再開発ビル4・5階(小川西町4-16-1)",
    "mapq": "小平市小川駅西口再開発ビル",
@@ -4230,6 +4230,45 @@
     "date": "2026-11-04",
     "raw": "手話通訳が必要な方の事前予約枠 5名・締切 11/4(水)17:00"
    },
+   "cat": "spot"
+  },
+  {
+   "id": "E201",
+   "name": "「ポップパップポルターズ」西武線スタンプラリー",
+   "dates": [
+    "2026-11-06"
+   ],
+   "span": {
+    "from": "2026-11-06",
+    "to": "2026-12-25"
+   },
+   "when": "2026年11月6日(金)〜12月25日(金) 9:30〜17:00（ラリーシートの引き換え・スタンプ・クリア賞の受け渡しの時間）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "09:30",
+   "end": "17:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "西武線のスタンプ設置駅（全6駅）: 池袋・練馬・石神井公園・所沢・田無・新所沢",
+   "mapq": "西武線のスタンプ設置駅",
+   "summary": "アニメ「ポップパップポルターズ」（テレビ朝日で10/4から放送中のミニチュアアニメ）のキャラクターのスタンプを6駅で集める。全部集めるとオリジナルステッカーシート（クリア賞）",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "専用の「西武線スタンプラリー1日おでかけきっぷ（ラリーシート引換券付）」大人1,200円／小児300円（西武線1日乗り降り自由。高麗〜西武秩父と多摩川線は除く）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.seiburailway.jp/newsroom/news/20261022_ppp_StampRally",
+   "tentative": false,
+   "deadline": null,
    "cat": "spot"
   },
   {
@@ -4489,7 +4528,7 @@
    "cost": "記載なし",
    "discount": "",
    "target": "",
-   "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
+   "url": "",
    "tentative": false,
    "deadline": {
     "date": "2026-10-23",
@@ -4809,8 +4848,10 @@
     "2026-11-22"
    ],
    "span": null,
-   "when": "2026年11月22日(日) 10:00〜15:00（10:00 集合）",
-   "rainDates": [],
+   "when": "2026年11月22日(日) 10:00〜15:00（10:00 集合）（少雨決行・悪天候の場合は11/29に延期）",
+   "rainDates": [
+    "2026-11-29"
+   ],
    "exceptions": null,
    "programs": null,
    "totalDates": 1,
@@ -4949,7 +4990,10 @@
    "target": "未就学児（生後6か月ごろ〜）とその保護者。1家族4人まで（子どもは2人まで）。大人だけ・子どもだけは不可",
    "url": "https://library.kodaira.ed.jp/viewer/info.html?id=395",
    "tentative": true,
-   "deadline": null,
+   "deadline": {
+    "date": "2026-10-31",
+    "raw": "10/31(土) 17:00まで（10/24(土) 10:00 から・図書館の申込フォーム）"
+   },
    "cat": "public"
   }
  ],
@@ -4967,7 +5011,7 @@
    },
    "cost": "",
    "discount": "",
-   "url": "https://www.city.kodaira.tokyo.jp/kurashi/113/113055.html",
+   "url": "",
    "cat": "spot"
   },
   {
