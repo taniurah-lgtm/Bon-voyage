@@ -1,0 +1,51 @@
+{
+  "_note": "名入れの原稿（住まいパック）の「子育て施設と今月の催し」シートに使う施設。市・都の公式で住所を確かめたものだけ置く。座標は国土地理院の住所検索（住所の代表点）。docs/b2b/README.md",
+  "checked": "2026-10-28",
+  "places": [
+    {
+      "kind": "図書館",
+      "name": "花小金井図書館",
+      "addr": "小平市花小金井1-8-1",
+      "note": "東部市民センターの中",
+      "lat": 35.727486,
+      "lng": 139.513535,
+      "source": "https://www.city.kodaira.tokyo.jp/kurashi/037/037020.html"
+    },
+    {
+      "kind": "公園",
+      "name": "東部公園",
+      "addr": "小平市花小金井6-13-1",
+      "note": "広さ約2万㎡・トイレあり",
+      "lat": 35.728756,
+      "lng": 139.508408,
+      "source": "https://www.city.kodaira.tokyo.jp/static/facility_map/01297.html"
+    },
+    {
+      "kind": "公園",
+      "name": "花小金井ひょうたん池公園",
+      "addr": "小平市花小金井南町3-3-15",
+      "note": "夏はじゃぶじゃぶ池が開く（2026年は9/7まで）",
+      "lat": 35.722473,
+      "lng": 139.518387,
+      "source": "https://www.city.kodaira.tokyo.jp/kurashi/113/113055.html"
+    },
+    {
+      "kind": "児童館",
+      "name": "花小金井南児童館",
+      "addr": "小平市花小金井南町3-3-17",
+      "note": "花小金井南地域センターの2階",
+      "lat": 35.722454,
+      "lng": 139.518707,
+      "source": "https://www.city.kodaira.tokyo.jp/kurashi/000/000180.html"
+    },
+    {
+      "kind": "大きな公園",
+      "name": "都立 小金井公園",
+      "addr": "小金井市関野町1-13-1（サービスセンター）",
+      "note": "公園は小平市花小金井南町三丁目にもまたがる。距離はサービスセンターまで",
+      "lat": 35.716434,
+      "lng": 139.521393,
+      "source": "https://www.tokyo-park.or.jp/park/koganei/index.html"
+    }
+  ]
+}

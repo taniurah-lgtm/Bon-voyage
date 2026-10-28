@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><title>お申込書（見本）｜ニコマル</title>
+<style>
+  @page { size: 210mm 297mm; margin: 0; }
+  :root { --ink:#2E3A42; --soft:#56636B; --faint:#7F8A91; --line:#E4DED2; --wash:#F6F3EC;
+          --sky:#2C7C9E; --sky-ink:#226881; --sky-wash:#E8F3F7; --mari:#E3962F; --mari-ink:#8A5A12; --mari-wash:#FBF0DE;
+          --terra:#C9755B; --terra-ink:#A04F37; --terra-wash:#FBEDE6; --leaf:#5E9A5B; --leaf-wash:#EAF2E7; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #fff; }
+  body { font-family: "Noto Sans JP", "Zen Kaku Gothic New", sans-serif; color: var(--ink); font-size: 8.8pt; line-height: 1.6;
+         -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .maru { font-family: "Zen Maru Gothic", sans-serif; }
+  .sheet { width: 210mm; height: 297mm; padding: 11mm 12mm 0; position: relative; overflow: hidden; }
+  .sample { position: absolute; top: 5mm; right: 12mm; font-size: 7pt; color: var(--terra-ink); border: .3mm solid var(--terra); border-radius: 1mm; padding: .3mm 1.6mm; letter-spacing: .1em; }
+  .foot { position: absolute; left: 12mm; right: 12mm; bottom: 7mm; font-size: 6.6pt; color: var(--faint); border-top: .25mm solid var(--line); padding-top: 1.6mm; display: flex; justify-content: space-between; gap: 4mm; }
+  .foot span:last-child { flex: none; white-space: nowrap; }
+  .emoji { font-family: "Noto Color Emoji", sans-serif; }
+  .age { display: inline-block; font-size: 7.4pt; color: var(--soft); background: var(--wash); border-radius: 1mm; padding: 0 1.4mm; margin: .6mm 1mm 0 0; }
+  .age.best { color: var(--leaf); background: var(--leaf-wash); font-weight: 700; }
+
+  .head { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: .6mm solid var(--ink); padding-bottom: 2mm; }
+  .head h1 { font-size: 15.5pt; }
+  .head .to { font-size: 8.4pt; color: var(--soft); text-align: right; }
+  .head .to b { font-size: 11pt; color: var(--ink); }
+  h2 { font-size: 10pt; margin: 3.6mm 0 1.4mm; }
+  table { width: 100%; border-collapse: collapse; font-size: 8.4pt; }
+  th, td { border: .25mm solid #BFB7A6; padding: 1.6mm 2.2mm; vertical-align: top; text-align: left; }
+  th { background: var(--wash); font-weight: 500; width: 34mm; }
+  .plans th { width: auto; }
+  .plans td:first-child { width: 31mm; white-space: nowrap; }
+  .plans td.p { white-space: nowrap; font-size: 10pt; font-weight: 700; }
+  .box { display: inline-block; width: 3.4mm; height: 3.4mm; border: .3mm solid var(--ink); vertical-align: -.5mm; margin-right: 1.2mm; }
+  .fill td { height: 8.4mm; }
+  ol.terms { margin: 0 0 0 4.6mm; font-size: 7.7pt; color: var(--soft); line-height: 1.55; }
+  ol.terms li { margin: .5mm 0; }
+  ol.terms b { color: var(--ink); }
+  .sign { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; margin-top: 3.4mm; font-size: 8.4pt; }
+  .sign div { border-bottom: .3mm solid var(--ink); padding-bottom: 6mm; }
+</style></head><body>
+<section class="sheet">
+  <span class="sample">見本</span>
+  <div class="head">
+    <h1 class="maru">「来月の子連れおでかけ」原稿・住まいパック　お申込書</h1>
+    <div class="to">お申込日　　　年　　月　　日<br><b class="maru">ニコマル</b> 行</div>
+  </div>
+
+  <h2 class="maru">プラン（原稿プランか住まいパックのどちらかに印を。名前なしは追加で）</h2>
+  <table class="plans">
+    <tr><th>プラン</th><th>中身</th><th>月額</th></tr>
+    <tr><td><span class="box"></span><b>原稿プラン</b></td><td>毎月の「来月の子連れおでかけ」（A4・お店の名前入り・PDF）と、お店のLINE・メールに貼る文。<br><b>1業種 × 1つの駅のまわりで1社だけ</b></td><td class="p">4,000円</td></tr>
+    <tr><td><span class="box"></span><b>住まいパック</b></td><td>原稿プランに加えて、物件の住所ごとの「まわりの子育て施設と今月の催し」（月5件まで）と、季節の名入れガイド（年2回）。<br><b>1つの駅のまわりで1社だけ</b></td><td class="p">8,000円</td></tr>
+    <tr><td><span class="box"></span>名前なし</td><td>通信の名前とQRコードを入れない形（標準は入れます）</td><td class="p">＋2,000円</td></tr>
+  </table>
+
+  <h2 class="maru">お申込者</h2>
+  <table class="fill">
+    <tr><th>会社・お店の名前</th><td></td></tr>
+    <tr><th>原稿に入れるお名前</th><td></td></tr>
+    <tr><th>ご担当者</th><td></td></tr>
+    <tr><th>ご住所</th><td></td></tr>
+    <tr><th>お電話・メール</th><td></td></tr>
+    <tr><th>対象の駅（1つ）</th><td></td></tr>
+    <tr><th>はじめる月</th><td>　　　　年　　月分から（3か月から。そのあとは1か月ごと）</td></tr>
+  </table>
+
+  <h2 class="maru">お約束（お申し込みの前にお読みください）</h2>
+  <ol class="terms">
+    <li><b>お支払い</b>：前払いです。毎月、請求書（ニコマル名義）をお送りします。振込手数料はご負担ください。消費税の上乗せはありません（インボイスの登録はしていません）。</li>
+    <li><b>お届け</b>：毎月20日ごろに、翌月分をメールでお送りします。物件の資料は、住所をいただいてから3営業日ほどでお送りします。</li>
+    <li><b>やめるとき</b>：前の月の10日までにご連絡ください。翌月分から止めます。お届けする前の月の分は、全額お返しします。</li>
+    <li><b>載せる催し</b>：市や施設、主催者の公式に出ている催しだけを、こちらで選んで載せます。お店の催しや商品の宣伝は入れられません（お店のひとことは、専用のわくにお店で書いていただけます）。</li>
+    <li><b>距離</b>：地図の上の直線距離の目安です。道のりや所要時間ではありません。「子育てしやすい」のような評価の言葉は書きません。物件の広告にお使いになるときは、不動産の表示のきまりに沿ってお使いください。</li>
+    <li><b>中止・変更</b>：催しは主催者の都合で中止・変更になることがあります。主催者・施設が、この原稿を推薦・後援するものではありません。</li>
+    <li><b>使える範囲</b>：お客さまへの配布（紙・メール・お店のLINE・お店のホームページ）にお使いいただけます。ほかの事業者への配布や販売はできません。</li>
+    <li><b>個人の情報</b>：お客さまの個人の情報はいただきません。原稿を受け取って使うだけの形です。</li>
+  </ol>
+
+  <div class="sign"><div>お申込者のお名前（ご署名）</div><div>受付（ニコマル）</div></div>
+  <div class="foot"><span>お問い合わせ：tokyo.papa.home@gmail.com（請求書の発行：ニコマル）</span><span>2026年10月版</span></div>
+</section>
+</body></html>
