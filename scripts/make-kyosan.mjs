@@ -151,18 +151,11 @@ const SUPPORTERS = ['〇〇小児科', '〇〇歯科', '〇〇不動産', '〇�
   const page = await browser.newPage({ viewport: { width: 400, height: 900 }, deviceScaleFactor: 2, colorScheme: 'light' });
   await page.goto(`${base}/kyosan/demo/`, { waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
-  // LINE: 「先取り情報」の見出しから、いちばん下の協賛の行まで
-  const r = await page.evaluate(() => {
-    const scr = document.querySelector('#line .screen').getBoundingClientRect();
-    const a = document.querySelector('#line .hl.a').getBoundingClientRect();
-    const b = document.querySelector('#line .hl.b').getBoundingClientRect();
-    return { x: scr.left + window.scrollX, y: a.top + window.scrollY - 92, w: scr.width, h: b.bottom - a.top + 92 + 14 };
-  });
-  await page.screenshot({ path: `${OUT}/img/demo-line.png`, fullPage: true, clip: { x: r.x, y: r.y, width: r.w, height: r.h } });
+  // LINE の本文には協賛を載せない（LINE公式アカウント利用規約 第18条(6)）ので、切り出すのはページだけ
   await page.locator('#page .mark.a').screenshot({ path: `${OUT}/img/demo-card.png` });
   await page.locator('#page .mark.b').screenshot({ path: `${OUT}/img/demo-sp.png` });
   await page.close();
-  console.log('  img/demo-line.png・demo-card.png・demo-sp.png');
+  console.log('  img/demo-card.png・demo-sp.png');
 }
 
 // ---- 媒体資料・申込書の PDF ----
