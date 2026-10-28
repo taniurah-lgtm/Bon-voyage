@@ -32,6 +32,7 @@
  *   }
  *   協賛（紹介型・1回3,000円）の催しには "pr": "お店の名前" を足す → カードの頭に「PR　〇〇のご協賛で掲載」。
  *   1号に1件まで・一推しにはしない（docs/sponsor-plan.md §14。消費者庁のステマ規制の運用基準に合わせて、頭に・周りと同じ大きさで）
+ *   🔴 協賛は LINE の本文（reports/free/<日付>.md）に載せない。これから送る号で見つけたらビルドを止める（2026-10-28）
  *   各ページは、台帳の年齢の目安（◎○）で自動で絞る。一推しをいちばん上に、あとは日付順（同じ日は◎を先に）。
  */
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, rmSync } from 'node:fs';
@@ -474,6 +475,20 @@ for (const f of files) {
     if (it.id === spec.pick) problems.push(`${date}: ${it.id} は協賛（pr）なので、一推しにしない`);
   }
   if (prs.length > 1) problems.push(`${date}: 協賛（pr）が${prs.length}件ある。紹介型は1号に1件まで`);
+  // 🔴 協賛は LINE の本文に載せない（LINE公式アカウント利用規約 第18条(6)。2026-10-28 オーナー決定・docs/sponsor-plan.md §14）。
+  //    PRなしで載せればステマ、PRつきなら規約違反。見るのはこれから送る号だけ（送ったあとの号は直せない）
+  const lineMd = `reports/free/${date}.md`;
+  if (!sent.has(date) && existsSync(lineMd)) {
+    const body = readFileSync(lineMd, 'utf8');
+    if (/【PR】|ご協賛で/.test(body)) problems.push(`${date}: LINE の本文に協賛の表示（【PR】・ご協賛で）がある。LINE には協賛を載せない`);
+    for (const { it, ev } of prs)
+      for (const w of [it.pr, ev.name])
+        if (typeof w === 'string' && w.trim() && body.includes(w.trim()))
+          problems.push(`${date}: 協賛の催し（${it.id}）が LINE の本文に入っている（「${w.trim()}」）。一推しにも先取り情報にも出さない`);
+    for (const s of sponsors)
+      if (s && typeof s.name === 'string' && s.name.trim() && body.includes(s.name.trim()))
+        problems.push(`${date}: 応援型の協賛（${s.name.trim()}）が LINE の本文に入っている。LINE には協賛を載せない`);
+  }
 
   ISSUE = date;
   const [y, m, d] = date.split('-').map(Number);
