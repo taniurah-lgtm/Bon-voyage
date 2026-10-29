@@ -1,4 +1,4 @@
-# 2026-10-29 SNSドラフト（生成エラー）
+# 2026-10-30 SNSドラフト（生成エラー）
 
 ```
 全モデル失敗:
@@ -10,10 +10,14 @@ gemini-flash-latest/8192: 503 {
   }
 }
 
-gemini-flash-latest/16384: 429 {
+gemini-flash-latest/16384: 503 {
   "error": {
-    "code": 429,
-    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a
+    "code": 503,
+    "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+    "status": "UNAVAILABLE"
+  }
+}
+
 gemini-2.0-flash/8192: 404 {
   "error": {
     "code": 404,
