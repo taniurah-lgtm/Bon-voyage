@@ -1,55 +1,27 @@
-# 2026-10-30 SNSドラフト（生成エラー）
+# 2026-10-31 SNSドラフト（承認待ち・まだ投稿していません）
 
-```
-全モデル失敗:
-gemini-flash-latest/8192: 503 {
-  "error": {
-    "code": 503,
-    "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
-    "status": "UNAVAILABLE"
-  }
-}
+【Threads・紹介 1/2】
+都立狭山公園で11/3(火・祝)、「SAYAMA HILLS DAY」が開かれます🎈
+10:30〜15:00、風の広場にて。入場無料です。
 
-gemini-flash-latest/16384: 503 {
-  "error": {
-    "code": 503,
-    "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
-    "status": "UNAVAILABLE"
-  }
-}
+焼きマシュマロ体験やどんぐりトトロ作りなど、秋の自然あそびが盛りだくさんですが、ふらっと立ち寄るなら知っておきたいのが、
 
-gemini-2.0-flash/8192: 404 {
-  "error": {
-    "code": 404,
-    "message": "This model models/gemini-2.0-flash is no longer available. Please update your code to use models/gemini-3.8-flash for the latest features and improvemen
-gemini-2.0-flash/16384: 404 {
-  "error": {
-    "code": 404,
-    "message": "This model models/gemini-2.0-flash is no longer available. Please update your code to use models/gemini-3.8-flash for the latest features and improvemen
-gemini-flash-lite-latest/8192: 400 {
-  "error": {
-    "code": 400,
-    "message": "Request contains an invalid argument.",
-    "status": "INVALID_ARGUMENT"
-  }
-}
+【Threads・紹介 2/2】
+予約なし・無料で当日ふらっと参加できる「青空ヨガ」があり、13:30からは3歳くらいから親子で一緒に体を動かせる回が用意されているところです。
 
-gemini-flash-lite-latest/8192(思考なし): 429 {
-  "error": {
-    "code": 429,
-    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a
-gemini-flash-lite-latest/16384: 429 {
-  "error": {
-    "code": 429,
-    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a
-gemini-2.5-flash-lite/8192: 404 {
-  "error": {
-    "code": 404,
-    "message": "This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest 
-gemini-2.5-flash-lite/16384: 404 {
-  "error": {
-    "code": 404,
-    "message": "This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest 
-```
+SAYAMA HILLS DAY（サヤマヒルズデイ）
+日時：11/3(火・祝) 10:30〜15:00（少雨決行・荒天中止）
+場所：都立狭山公園 風の広場（多摩湖駅すぐ）
+費用：入場無料（一部ワークショップは実費）
+https://sayamaparks.com/event/event-4025/
 
-モデル名が原因なら Actions Variables に GEMINI_MODEL を設定してください（例: gemini-1.5-flash）。
+薪割り体験やマウンテンバイクコーナー、地元のおいしいものが並ぶマルシェも並びます。ヨガマットの無料貸出もありますよ。秋風が心地よい広い公園なので、レジャーシートを持ってお散歩がてら出かけてみてくださいね。
+
+くわしくは → https://bonvoya.nicomaru.tokyo/th
+#狭山公園 #多摩湖 #東村山 #西武線 #サヤマヒルズデイ #外あそび #子連れおでかけ
+
+---
+※自動生成（model: gemini-flash-latest）。投稿前に日付・事実・トーンを目視確認してください。
+※【紹介 1/2】を投稿し、その**返信として【紹介 2/2】**をぶら下げる。1/2にリンクを入れない。
+※今日は【紹介】だけの日です（問いかけは隔日）。
+※飛び先は https://bonvoya.nicomaru.tokyo/th に統一（【紹介】のみ）。
