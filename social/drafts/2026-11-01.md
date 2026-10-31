@@ -1,51 +1,39 @@
-# 2026-11-01 SNSドラフト（生成エラー）
+# 2026-11-01 SNSドラフト（承認待ち・まだ投稿していません）
 
-```
-全モデル失敗:
-gemini-flash-latest/8192: 503 {
-  "error": {
-    "code": 503,
-    "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
-    "status": "UNAVAILABLE"
-  }
-}
+> 自動の生成が止まったため（混雑と上限で全モデル失敗）、Claude が同じ決まりで書いた。
 
-gemini-flash-latest/16384: 429 {
-  "error": {
-    "code": 429,
-    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a
-gemini-2.0-flash/8192: 404 {
-  "error": {
-    "code": 404,
-    "message": "This model models/gemini-2.0-flash is no longer available. Please update your code to use models/gemini-3.8-flash for the latest features and improvemen
-gemini-2.0-flash/16384: 404 {
-  "error": {
-    "code": 404,
-    "message": "This model models/gemini-2.0-flash is no longer available. Please update your code to use models/gemini-3.8-flash for the latest features and improvemen
-gemini-flash-lite-latest/8192: 400 {
-  "error": {
-    "code": 400,
-    "message": "Request contains an invalid argument.",
-    "status": "INVALID_ARGUMENT"
-  }
-}
+【Threads・紹介 1/2】
+小金井公園の中の江戸東京たてもの園で、11/6(金)・7(土)の夜に「夜間特別開園」があります🏮
+16:30〜20:30、昔のたてものがライトアップされて、竹灯篭の小道もできるそうです。
 
-gemini-flash-lite-latest/8192(思考なし): 429 {
-  "error": {
-    "code": 429,
-    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a
-gemini-flash-lite-latest/16384: 429 {
-  "error": {
-    "code": 429,
-    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a
-gemini-2.5-flash-lite/8192: 404 {
-  "error": {
-    "code": 404,
-    "message": "This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest 
-gemini-2.5-flash-lite/16384: 404 {
-  "error": {
-    "code": 404,
-    "message": "This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest 
-```
+子連れでいちばんうれしいのは、
 
-モデル名が原因なら Actions Variables に GEMINI_MODEL を設定してください（例: gemini-1.5-flash）。
+【Threads・紹介 2/2】
+中学生以下は観覧料が無料なところ。親だけ一般400円です。
+
+江戸東京たてもの園「夜間特別開園 たてもののライトアップ」
+日時：11/6(金)・7(土) 16:30〜20:30（入園は20:00まで・荒天のときは中止）
+場所：江戸東京たてもの園（都立小金井公園の中）
+費用：中学生以下 無料／一般400円
+https://www.tatemonoen.jp/event/page/2026_lightup.php
+
+農家の囲炉裏や洋館の暖炉に火が入り、銭湯の湯船もライトアップされます。園内はとても暗いので足もとに気をつけて。11/7は同じ公園でSLのライトアップもある夜なので、早めの時間がおすすめです。
+
+くわしくは → https://bonvoya.nicomaru.tokyo/th
+#江戸東京たてもの園 #小金井公園 #ライトアップ #夜のお散歩 #花小金井 #子連れおでかけ
+
+【Threads・問いかけ】
+大沼町のこども広場、赤ちゃんから小中学生まで使える無料の場所だそうで、ずっと気になっています。
+
+ただ、大きい子も来る場所だと、
+小さい子がのびのび遊べる時間があるのか分からなくて。
+
+未就学の子が遊びやすいのは、何時ごろですか🤔
+
+---
+※Claude が手で書いた（自動生成が失敗した日）。投稿前に日付・事実・トーンを目視確認してください。
+※【紹介 1/2】を投稿し、その**返信として【紹介 2/2】**をぶら下げる。1/2にリンクを入れない。
+※【問いかけ】は「大沼地域センター こども広場」について。**紹介とは別の対象**なので、同じ日でも重ならない。
+※【問いかけ】にリンクやハッシュタグを足さない（宣伝に見えると返事が来ない）。
+※返事が来たら「大沼地域センター こども広場」の fromReader に入れる（手順は scripts/social/README.md）。
+※飛び先は https://bonvoya.nicomaru.tokyo/th に統一（【紹介】のみ）。
