@@ -31,7 +31,7 @@
  *   FORCE=1         … その日の下書きがもう出来ていても作り直す（Actions の手動実行で選べる）
  *   DRY_RUN=1       … ファイルに書かず、画面に出すだけ（動くかの確認用）
  *
- * 🔴 2026-11-01: 朝に2回動く（02:17 と 04:47）。**その日の下書きが出来ていれば、2回目は何もしない**
+ * 🔴 2026-11-01: 夜中に2回動く（00:17 と 02:17 JST 指定。実際は3〜4時間遅れる）。**その日の下書きが出来ていれば、2回目は何もしない**
  *    （Claude やオーナーが手で書いた日も上書きしない）。
  */
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
@@ -476,7 +476,7 @@ if (!KEY) {
     console.log(incomplete ? '生成(不完全):' : '生成OK:', out, 'model:', model);
   } catch (e) {
     body = `# ${TODAY} SNSドラフト（生成エラー）\n\n\`\`\`\n${e.message}\n\`\`\`\n\n` +
-      `朝の2回目（04:47）でも作り直します。それでもだめなら Actions の「Threads drafts」を手で実行するか、Claude に「今日の下書きを書いて」と頼んでください。\n` +
+      `夜中の2回目でも作り直します（1回目が失敗した日）。それでもだめなら Actions の「Threads drafts」を手で実行するか、Claude に「今日の下書きを書いて」と頼んでください。\n` +
       `Actions の Variables の GEMINI_MODEL は空にしておく（空なら使えるモデルを自動で探す）。\n`;
     console.error('生成エラー:', e.message);
   }
