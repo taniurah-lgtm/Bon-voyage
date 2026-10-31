@@ -26,16 +26,19 @@
  *
  * 必要な環境変数:
  *   GEMINI_API_KEY  … Google AI Studio (aistudio.google.com) で発行。GitHub Secretsに登録。
- *   GEMINI_MODEL    … 任意。指定するとそのモデルだけ使う。未指定なら複数モデルを順に試す
- *                     （gemini-1.5-flash → 2.5-flash → 2.0-flash → flash-latest）。
+ *   GEMINI_MODEL    … 任意。指定するとそのモデルだけ使う。**ふだんは空にしておく**
+ *                     （空なら、使えるモデルを毎回 API に聞いて新しい順に試す。scripts/lib/gemini.mjs）。
+ *   FORCE=1         … その日の下書きがもう出来ていても作り直す（Actions の手動実行で選べる）
+ *   DRY_RUN=1       … ファイルに書かず、画面に出すだけ（動くかの確認用）
+ *
+ * 🔴 2026-11-01: 朝に2回動く（02:17 と 04:47）。**その日の下書きが出来ていれば、2回目は何もしない**
+ *    （Claude やオーナーが手で書いた日も上書きしない）。
  */
-import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
+import { geminiModels, takesThinkingBudget, withRetry, describeError } from '../lib/gemini.mjs';
 
 const TODAY = new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Tokyo' }); // YYYY-MM-DD (JST)
 // GEMINI_MODEL が指定されればそれだけを、無ければ複数モデルを順に試す（無料枠/可用性の違いを吸収）。
-const MODELS = process.env.GEMINI_MODEL
-  ? [process.env.GEMINI_MODEL]
-  : ['gemini-flash-latest', 'gemini-2.0-flash', 'gemini-flash-lite-latest', 'gemini-2.5-flash-lite'];
 const KEY = process.env.GEMINI_API_KEY || '';
 // 🔴 2026-09-23、/f から /th に変えた。/f は紙（チラシのQR）の計測コードで、
 //    Threadsの投稿が9/2から65日ぶん /f にリンクしていたため、紙とThreadsの流入が混ざっていた。
@@ -382,7 +385,7 @@ async function callGemini(model, prompt, useThinking, maxTokens) {
     body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig }),
   });
   const raw = await res.text();
-  if (!res.ok) { const err = new Error(`${res.status} ${raw.slice(0, 200)}`); err.status = res.status; throw err; }
+  if (!res.ok) { const err = new Error(describeError(res.status, raw).text); err.status = res.status; err.raw = raw; throw err; }
   const cand = JSON.parse(raw)?.candidates?.[0];
   const text = cand?.content?.parts?.map(p => p.text).join('') || '';
   if (!text) throw new Error('空応答');
@@ -393,18 +396,25 @@ async function gen() {
   let prompt = PROMPT(loadLedger(), loadRecentDrafts(), SPOT);
   const errs = [];
   let partial = null; // 途中で切れた草案（最後の保険。何も無いよりはマシ）
-  for (const model of MODELS) {
-    // 8192 で1回、足りなければ 16384 でもう1回（思考ぶんの余裕をとる）
-    for (const maxTokens of [8192, 16384]) {
-      // まず thinkingBudget:0 で試し、400（thinkingConfig非対応など）なら同じモデルを思考指定なしで再試行
-      for (const useThinking of [true, false]) {
+  const MODELS = await geminiModels(KEY);
+  console.log('試すモデル:', MODELS.join(' → '));
+  models: for (const model of MODELS) {
+    // 2.5系: 8192 で1回、足りなければ 16384 でもう1回。新しいモデルは思考ぶんの余裕をとって 16384 の1回だけ
+    const v25 = takesThinkingBudget(model);
+    for (const maxTokens of v25 ? [8192, 16384] : [16384]) {
+      // 2.5系: まず thinkingBudget:0 で試し、400 なら思考指定なしで再試行
+      for (const useThinking of v25 ? [true, false] : [false]) {
         let r;
         try {
-          r = await callGemini(model, prompt, useThinking, maxTokens);
+          // 503（混雑）・429（毎分の上限）は、待って同じモデルで試し直す（すぐ次を呼ぶと429になる）
+          r = await withRetry(() => callGemini(model, prompt, useThinking, maxTokens), (e, wait) => {
+            errs.push(`${model}: ${describeError(e.status, e.raw || '').text} → ${wait}秒待って再試行`);
+            console.log(`${model}: ${e.status} → ${wait}秒待って再試行`);
+          });
         } catch (e) {
           errs.push(`${model}/${maxTokens}${useThinking ? '' : '(思考なし)'}: ${e.message}`);
-          if (e.status !== 400) break; // 404/429など: 思考なし再試行は無駄→次へ
-          continue;
+          if (e.status === 400 && useThinking) continue; // 思考指定なしで同じモデルを再試行
+          continue models; // 404（引退）・429（1日の上限）・待っても503 → 次のモデルへ
         }
         const bad = isComplete(r.text) ? (staleReason(r.text) || walkReason(r.text) || repeatReason(r.text)) : '';
         if (isComplete(r.text) && !sameSubject(r.text) && !bad) return { text: r.text, model };
@@ -424,6 +434,11 @@ async function gen() {
 }
 
 const out = `social/drafts/${TODAY}.md`;
+// 🔴 その日の下書きが出来ていれば何もしない（朝の2回目・手で書いた日）。FORCE=1 なら作り直す
+if (!process.env.FORCE && existsSync(out) && /（承認待ち・まだ投稿していません）/.test(readFileSync(out, 'utf8').split('\n')[0])) {
+  console.log('今日の下書きはもう出来ている。何もしない:', out);
+  process.exit(0);
+}
 let body;
 if (!KEY) {
   body = `# ${TODAY} SNSドラフト（未生成）\n\n` +
@@ -461,10 +476,12 @@ if (!KEY) {
     console.log(incomplete ? '生成(不完全):' : '生成OK:', out, 'model:', model);
   } catch (e) {
     body = `# ${TODAY} SNSドラフト（生成エラー）\n\n\`\`\`\n${e.message}\n\`\`\`\n\n` +
-      `モデル名が原因なら Actions Variables に GEMINI_MODEL を設定してください（例: gemini-1.5-flash）。\n`;
+      `朝の2回目（04:47）でも作り直します。それでもだめなら Actions の「Threads drafts」を手で実行するか、Claude に「今日の下書きを書いて」と頼んでください。\n` +
+      `Actions の Variables の GEMINI_MODEL は空にしておく（空なら使えるモデルを自動で探す）。\n`;
     console.error('生成エラー:', e.message);
   }
 }
+if (process.env.DRY_RUN) { console.log('---- DRY_RUN（ファイルには書かない） ----\n' + body); process.exit(0); }
 writeFileSync(out, body);
 // 手動運用用: いつも同じURLで最新の草案を見られるように latest.md も更新する
 writeFileSync('social/drafts/latest.md', body);

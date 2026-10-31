@@ -11,7 +11,19 @@ on:
     #    （GitHub の定時実行は、混む時間帯だと数時間遅れる）。朝7時の投稿に間に合わないので、
     #    02:17 JST（17:17 UTC）に早める。半端な分にしたのは、毎時0分の混雑を避けるため。
     - cron: "17 17 * * *"
-  workflow_dispatch: {}
+    # 🔴 2026-11-01: 10/28〜11/1 に4回、混雑（503）と上限（429）で全モデル失敗した。朝にもう一度動かす（04:47 JST）。
+    #    その日の下書きが出来ていれば、2回目は何もしない（手で書いた日も上書きしない）。
+    - cron: "47 19 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "その日の下書きがあっても作り直す"
+        type: boolean
+        default: false
+      dry_run:
+        description: "ファイルに書かず、ログに出すだけ（動くかの確認）"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -23,6 +35,8 @@ concurrency:
 jobs:
   drafts:
     runs-on: ubuntu-latest
+    # 混雑のときは待って試し直す（1モデル最大5分）。それでも終わらなければ止める
+    timeout-minutes: 40
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,6 +50,8 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          FORCE: ${{ inputs.force && '1' || '' }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
         run: node scripts/social/generate-drafts.mjs
       - name: Commit drafts
         run: |

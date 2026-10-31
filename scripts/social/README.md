@@ -20,6 +20,11 @@
 - 毎日 02:17 JST（`.github/workflows/social-drafts.yml`。10/15 までは 07:00 指定で、実際は 9:40〜11:50 にできていた）に `generate-drafts.mjs` が走り、
   `events/` の台帳から Gemini で **Threads/X のドラフト**を作って `social/drafts/YYYY-MM-DD.md` にコミットする。
 - **投稿はまだしない**。生成物を人が見て確認する「承認ゲート」段階。
+- 🆕 **2026-11-01: 04:47 JST にもう一度動く。**その日の下書きが出来ていれば何もしない（手で書いた日も上書きしない）。
+  10/28〜11/1 に4回、Gemini の混雑（503）→ 直後の上限（429）と、引退したモデル（404）で「全モデル失敗」になった。
+  いまは **使えるモデルを毎回 API に聞き、503・429 は待って同じモデルで試し直す**（`scripts/lib/gemini.mjs`）。
+  - それでも「生成エラー」のときは、Actions の「Threads drafts」を手で実行（`force` に印）するか、**Claude に「今日の下書きを書いて」**と頼む
+  - Actions の Variables の `GEMINI_MODEL` は**空のまま**にしておく（入れるとそのモデルだけになり、引退したら止まる）
 
 ## 準備（オーナー）
 1. `GEMINI_API_KEY` を発行（[Google AI Studio](https://aistudio.google.com/) / tokyo.papa.home）。

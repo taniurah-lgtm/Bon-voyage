@@ -25,10 +25,9 @@
  *   取得に失敗していたら本文の先頭に警告を付ける。**ステータスが SUCCESS でない出力は裏取り前提で扱うこと。**
  */
 
+import { geminiModels, withRetry, describeError } from './lib/gemini.mjs';
+
 const KEY = process.env.GEMINI_API_KEY || '';
-const MODELS = process.env.GEMINI_MODEL
-  ? [process.env.GEMINI_MODEL]
-  : ['gemini-flash-latest', 'gemini-2.0-flash', 'gemini-flash-lite-latest'];
 
 const args = process.argv.slice(2);
 if (!args.length) {
@@ -79,7 +78,7 @@ async function call(model) {
     body: JSON.stringify(body),
   });
   const raw = await res.text();
-  if (!res.ok) { const e = new Error(`${res.status} ${raw.slice(0, 300)}`); e.status = res.status; throw e; }
+  if (!res.ok) { const e = new Error(describeError(res.status, raw).text); e.status = res.status; e.raw = raw; throw e; }
   const cand = JSON.parse(raw)?.candidates?.[0];
   const text = cand?.content?.parts?.map(p => p.text).filter(Boolean).join('') || '';
   if (!text) throw new Error('空応答');
@@ -94,8 +93,8 @@ async function call(model) {
 
 const errs = [];
 let out = null;
-for (const model of MODELS) {
-  try { out = { ...(await call(model)), model }; break; }
+for (const model of await geminiModels(KEY)) {
+  try { out = { ...(await withRetry(() => call(model), (e, wait) => console.error(`${model}: ${e.status} → ${wait}秒待って再試行`))), model }; break; }
   catch (e) { errs.push(`${model}: ${e.message}`); }
 }
 if (!out) { console.error('全モデル失敗:\n' + errs.join('\n')); process.exit(4); }
