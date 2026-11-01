@@ -4499,6 +4499,42 @@
    "cat": "fest"
   },
   {
+   "id": "E208",
+   "name": "小川公民館まつり（コダレンジャーのショー）",
+   "dates": [
+    "2026-11-08"
+   ],
+   "span": null,
+   "when": "2026年11月8日(日) 10:00〜10:30（コダレンジャーのヒーローショー）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "10:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小川公民館（小平市小川町1-1012）",
+   "mapq": "小平市小川公民館",
+   "summary": "小川公民館まつりの中で、地域宣伝隊コダレンジャーのヒーローショー（シールは「グリーンロードグリーン」）",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "○"
+   },
+   "cost": "記載なし（要確認）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.instagram.com/p/DfLutLokuk1/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "fest"
+  },
+  {
    "id": "E171",
    "name": "花小金井南児童館 乳幼児親子クラス（後期・登録制）",
    "dates": [
@@ -4833,7 +4869,7 @@
    "cost": "",
    "discount": "",
    "target": "",
-   "url": "https://docs.google.com/forms/d/e/1FAIpQLSf1KJjQRvoM4r69_avVYL0-Ego28_zmYLbGGF_L20vpA1nI2A/viewform",
+   "url": "https://www.instagram.com/p/DfLutLokuk1/",
    "tentative": false,
    "deadline": {
     "date": "2026-11-19",
@@ -4920,6 +4956,42 @@
     "raw": "11月6日(金)まで。事務所へのメールか、ページの申込フォーム"
    },
    "cat": "spot"
+  },
+  {
+   "id": "E209",
+   "name": "美園地域センター 出張こども広場「コダレンジャーショー」",
+   "dates": [
+    "2026-11-23"
+   ],
+   "span": null,
+   "when": "2026年11月23日(月・祝) 11:00〜12:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "11:00",
+   "end": "12:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "美園地域センター（小平市美園町1-19-2）。月曜の出張こども広場（10:00〜18:00・無料）の日",
+   "mapq": "小平市美園地域センター",
+   "summary": "出張こども広場で、地域宣伝隊コダレンジャーのヒーローショー（シールは「グリーンロードグリーン」）",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "○"
+   },
+   "cost": "記載なし（出張こども広場は無料）（要確認）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.instagram.com/p/DfLutLokuk1/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E199",
