@@ -5490,6 +5490,49 @@
    "source": "events/2026-11.md"
   },
   {
+   "id": "E207",
+   "name": "親子で楽しむおえかきワークショップ（津田図書館）",
+   "dates": [
+    "2026-11-29"
+   ],
+   "span": null,
+   "when": "2026年11月29日(日) 10:00〜11:30（開場 9:45）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "11:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "津田公民館 講座室（津田図書館の主催）",
+   "mapq": "津田図書館",
+   "summary": "小平市在住の絵本作家 かじりみな子さんが講師。絵本の読み聞かせ、絵本づくりの話、おえかきの実演、親子でおえかき",
+   "kidsNote": "",
+   "caution": "",
+   "contact": {
+    "tel": "042-341-1245",
+    "mail": "",
+    "who": ""
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "記載なし（要確認）。持ち物も記載なし（ポスターに詳しいことがある）",
+   "discount": "",
+   "target": "4歳から小学生と、その保護者",
+   "url": "https://library.kodaira.ed.jp/viewer/info.html?id=413",
+   "status": "候補",
+   "confidence": "図書館の公式で確認（2026-11-02）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
    "id": "E204",
    "name": "小平でのウクライナのクリスマス 2026",
    "dates": [
@@ -6045,6 +6088,9 @@
   ],
   "2026-11-28": [
    "E200"
+  ],
+  "2026-11-29": [
+   "E207"
   ],
   "2026-12-05": [
    "E204"
