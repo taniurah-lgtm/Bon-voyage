@@ -35,7 +35,7 @@ const [Y, M] = month.split('-').map(Number);
 // --- 載せてはいけない催し ---
 // 主催者とのやりとりで「通信への掲載」として許しをもらった催し・チラシを直接もらった催しは、名入れの原稿に入れない
 // （許しの範囲は通信まで。お店の配る紙に広げない）。docs/b2b/README.md
-const PERMISSION_ONLY = new Set(['E118', 'E119', 'E126', 'E130', 'E142', 'E187']);
+const PERMISSION_ONLY = new Set(['E118', 'E119', 'E126', 'E130', 'E142', 'E187', 'E203']);
 // 協賛（PR）の催しも入れない。号の web の item に "pr" が付いたもの
 const PR_IDS = new Set();
 if (existsSync('reports/free/web'))

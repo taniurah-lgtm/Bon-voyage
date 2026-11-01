@@ -4646,6 +4646,43 @@
    "cat": "fest"
   },
   {
+   "id": "E203",
+   "name": "village green のマルシェ（天神町）",
+   "dates": [
+    "2026-11-14",
+    "2026-11-29"
+   ],
+   "span": null,
+   "when": "2026年11月14日(土)・29日(日) 10:30〜15:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "10:30",
+   "end": "15:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "village green（小平市天神町3-7-1。E132 小平マルシェ vol.25 と同じ会場。小平ふるさと村のすぐ近く）",
+   "mapq": "小平市village green",
+   "summary": "「キッチンカー」「ワークショップ、販売」（主催の投稿）。出店はまだ募集中（「出店してみたい方ご連絡ください」）＝中身はこれから決まる",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "○"
+   },
+   "cost": "投稿に記載なし（要確認）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.threads.com/@syr_1213/post/DfMZCUJn1uU",
+   "tentative": false,
+   "deadline": null,
+   "cat": "fest"
+  },
+  {
    "id": "E191",
    "name": "第52回 小平市少年少女マラソン大会",
    "dates": [
@@ -4952,6 +4989,42 @@
    "discount": "",
    "target": "",
    "url": "https://kodaira-tourism.com/event/23085/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "spot"
+  },
+  {
+   "id": "E204",
+   "name": "小平でのウクライナのクリスマス 2026",
+   "dates": [
+    "2026-12-05"
+   ],
+   "span": null,
+   "when": "2026年12月5日(土) 12:00〜18:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "12:00",
+   "end": "18:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市中央公園（小平市津田町1-1-1）",
+   "mapq": "小平市中央公園",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "入場の料金は記載なし（要確認）。 ワークショップは有料・定員あり: クリスマス・スターは参加費1,500円（＋チケット手数料38円）・各回の定員10名、材料はすべて用意（公式のチケットページ）。 ほかの3つも「チケットを購入」のボタン（料金は各ページで要確認）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.ukrainehouse.jp/ja/event-details/ukrainian-christmas-in-kodaira-2026",
    "tentative": false,
    "deadline": null,
    "cat": "spot"

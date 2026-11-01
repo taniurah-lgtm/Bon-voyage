@@ -5112,6 +5112,46 @@
    "source": "events/2026-11.md"
   },
   {
+   "id": "E203",
+   "name": "village green のマルシェ（天神町）",
+   "dates": [
+    "2026-11-14",
+    "2026-11-29"
+   ],
+   "span": null,
+   "when": "2026年11月14日(土)・29日(日) 10:30〜15:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "10:30",
+   "end": "15:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "village green（小平市天神町3-7-1。E132 小平マルシェ vol.25 と同じ会場。小平ふるさと村のすぐ近く）",
+   "mapq": "小平市village green",
+   "summary": "「キッチンカー」「ワークショップ、販売」（主催の投稿）。出店はまだ募集中（「出店してみたい方ご連絡ください」）＝中身はこれから決まる",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "○"
+   },
+   "cost": "投稿に記載なし（要確認）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.threads.com/@syr_1213/post/DfMZCUJn1uU",
+   "status": "候補",
+   "confidence": "日時・会場は主催の投稿で確認（2026-11-01）／入場料・出店の中身は未発表",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
    "id": "E191",
    "name": "第52回 小平市少年少女マラソン大会",
    "dates": [
@@ -5445,6 +5485,45 @@
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
+  },
+  {
+   "id": "E204",
+   "name": "小平でのウクライナのクリスマス 2026",
+   "dates": [
+    "2026-12-05"
+   ],
+   "span": null,
+   "when": "2026年12月5日(土) 12:00〜18:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "12:00",
+   "end": "18:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市中央公園（小平市津田町1-1-1）",
+   "mapq": "小平市中央公園",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "入場の料金は記載なし（要確認）。 ワークショップは有料・定員あり: クリスマス・スターは参加費1,500円（＋チケット手数料38円）・各回の定員10名、材料はすべて用意（公式のチケットページ）。 ほかの3つも「チケットを購入」のボタン（料金は各ページで要確認）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.ukrainehouse.jp/ja/event-details/ukrainian-christmas-in-kodaira-2026",
+   "status": "候補",
+   "confidence": "日時・会場・プログラム・主催・後援は主催の公式で確認（2026-11-01）／入場料・雨天・マーケット全体は未取得",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-12.md"
   },
   {
    "id": "E195",
@@ -5873,7 +5952,8 @@
    "E146",
    "E194",
    "E198",
-   "E202"
+   "E202",
+   "E203"
   ],
   "2026-11-15": [
    "E145",
@@ -5949,6 +6029,9 @@
   "2026-11-25": [
    "E171"
   ],
+  "2026-11-29": [
+   "E203"
+  ],
   "2026-11-21": [
    "E174",
    "E190"
@@ -5963,6 +6046,9 @@
   ],
   "2026-11-28": [
    "E200"
+  ],
+  "2026-12-05": [
+   "E204"
   ]
  },
  "unresolved": [
