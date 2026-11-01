@@ -4610,6 +4610,42 @@
    "cat": "fest"
   },
   {
+   "id": "E202",
+   "name": "秋をたのしむ！「たのつくフェス」",
+   "dates": [
+    "2026-11-14"
+   ],
+   "span": null,
+   "when": "2026年11月14日(土) 10:30〜15:00（雨天決行）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:30",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "上水本町地域センター・地域センター公園（小平市上水本町3-11-11／西武国分寺線 鷹の台駅から徒歩15分）",
+   "mapq": "上水本町地域センター",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "参加費無料・申込み不要（当日、現地の受付で）",
+   "discount": "",
+   "target": "「小学生も幼児も保護者も！シニアの方まで遊びたい方はだれでも歓迎！」。幼児は保護者の同伴を（チラシ）",
+   "url": "https://tanotsuku.wixstudio.com/kodomo",
+   "tentative": false,
+   "deadline": null,
+   "cat": "fest"
+  },
+  {
    "id": "E191",
    "name": "第52回 小平市少年少女マラソン大会",
    "dates": [
