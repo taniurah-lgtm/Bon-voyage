@@ -226,7 +226,7 @@ const html = `<!doctype html>
   .soon .empty, .soon .wk { color: var(--ink-faint); font-size: .78rem; }
 
   /* 今月のおたより */
-  .otas { margin: 1rem 0 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .9rem 1rem; }
+  .otas { margin: 0 0 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .9rem 1rem; }
   .otas h3 { font-family: var(--maru); font-weight: 800; font-size: .92rem; margin: 0 0 .5rem; color: var(--sky-deep); }
   .otas ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: .45rem; }
   .otas a { display: flex; flex-direction: column; justify-content: center; min-height: 48px; padding: .45rem .75rem; border: 1px solid var(--line-strong); border-radius: 10px; font-weight: 700; font-size: .86rem; color: var(--link-ink); text-decoration: none; background: var(--surface); }
@@ -301,6 +301,7 @@ const html = `<!doctype html>
 </header>
 
 <main class="wrap">
+  ${otaStrip}
   <p class="lead">日程は、図書館・児童館・子ども家庭支援センターの公式の案内で確かめています。行事や天候で変わることがあるので、<b>出かける前に各施設の案内で</b>確かめてください。</p>
 
   <div class="agef" role="group" aria-label="年齢でしぼる">
@@ -321,8 +322,6 @@ const html = `<!doctype html>
     </ul>
     <p class="wk">休館日や行事の日は、お休みになることがあります。</p>
   </section>
-
-  ${otaStrip}
 
   <nav class="idx" aria-label="施設の一覧">
     ${data.sections.map((s) => `<a href="#sec-${s.key}">${esc(s.title.replace(/の「.*$/, ''))}</a>`).join('\n    ')}

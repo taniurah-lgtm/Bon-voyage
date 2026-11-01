@@ -45,7 +45,7 @@
   .soon .empty, .soon .wk { color: var(--ink-faint); font-size: .78rem; }
 
   /* 今月のおたより */
-  .otas { margin: 1rem 0 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .9rem 1rem; }
+  .otas { margin: 0 0 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .9rem 1rem; }
   .otas h3 { font-family: var(--maru); font-weight: 800; font-size: .92rem; margin: 0 0 .5rem; color: var(--sky-deep); }
   .otas ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: .45rem; }
   .otas a { display: flex; flex-direction: column; justify-content: center; min-height: 48px; padding: .45rem .75rem; border: 1px solid var(--line-strong); border-radius: 10px; font-weight: 700; font-size: .86rem; color: var(--link-ink); text-decoration: none; background: var(--surface); }
@@ -120,6 +120,11 @@
 </header>
 
 <main class="wrap">
+  <section class="otas" aria-labelledby="otas-h">
+    <h3 id="otas-h">📄 今月のおたより</h3>
+    <ul><li><a href="https://kodaji.ashita-ba.co.jp/news/article/933/" target="_blank" rel="noopener" data-goatcounter-click="定例｜花小金井南児童館｜おたより（上）">花小金井南児童館<small>はなみんだより 11月号</small></a></li><li><a href="https://kodaji.ashita-ba.co.jp/news/article/934/" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川町二丁目児童館｜おたより（上）">小川町二丁目児童館<small>おがにんだより 11月号</small></a></li><li><a href="https://kodaji.ashita-ba.co.jp/news/article/935/" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川町一丁目児童館｜おたより（上）">小川町一丁目児童館<small>おがいちだより 11月号</small></a></li><li><a href="https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202611.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜子ども家庭支援センター 子育て交流ひろば「おひさま」｜おたより（上）">おひさまひろば<small>子ども家庭支援センターだより 11月号（PDF）</small></a></li></ul>
+    <p class="wk">児童館と子育てひろばの、月ごとの催しの案内です（各館の公式）。地域センターのこども広場の「ひろばだより」は、市のサイトが戻りしだい足します。</p>
+  </section>
   <p class="lead">日程は、図書館・児童館・子ども家庭支援センターの公式の案内で確かめています。行事や天候で変わることがあるので、<b>出かける前に各施設の案内で</b>確かめてください。</p>
 
   <div class="agef" role="group" aria-label="年齢でしぼる">
@@ -209,12 +214,6 @@
         <li data-age="all"><a href="#nakajuku">出張こども広場</a> 出張こども広場（小川町一丁目児童館の出張）<small>毎週水曜と第1日曜 10:00〜18:00</small></li>
     </ul>
     <p class="wk">休館日や行事の日は、お休みになることがあります。</p>
-  </section>
-
-  <section class="otas" aria-labelledby="otas-h">
-    <h3 id="otas-h">📄 今月のおたより</h3>
-    <ul><li><a href="https://kodaji.ashita-ba.co.jp/news/article/933/" target="_blank" rel="noopener" data-goatcounter-click="定例｜花小金井南児童館｜おたより（上）">花小金井南児童館<small>はなみんだより 11月号</small></a></li><li><a href="https://kodaji.ashita-ba.co.jp/news/article/934/" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川町二丁目児童館｜おたより（上）">小川町二丁目児童館<small>おがにんだより 11月号</small></a></li><li><a href="https://kodaji.ashita-ba.co.jp/news/article/935/" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川町一丁目児童館｜おたより（上）">小川町一丁目児童館<small>おがいちだより 11月号</small></a></li><li><a href="https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202611.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜子ども家庭支援センター 子育て交流ひろば「おひさま」｜おたより（上）">おひさまひろば<small>子ども家庭支援センターだより 11月号（PDF）</small></a></li></ul>
-    <p class="wk">児童館と子育てひろばの、月ごとの催しの案内です（各館の公式）。地域センターのこども広場の「ひろばだより」は、市のサイトが戻りしだい足します。</p>
   </section>
 
   <nav class="idx" aria-label="施設の一覧">
