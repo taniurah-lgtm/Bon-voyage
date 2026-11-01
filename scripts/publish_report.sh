@@ -73,9 +73,18 @@ fi
 # 🔴 行数は「空行を除いた行数」で数える。9/2便＝1,468文字・全51行・空行を除いて42行。
 #    docs/line-setup.md の上限はこの数え方。全行で数えると毎回オーバーに見える。
 LINES=$(grep -cve '^[[:space:]]*$' < "$BODY")
-note "文字数: ${CHARS} / 行数: ${LINES}（空行を除く。上限 1,468文字 / 42行）"
-if (( CHARS > 1468 )) || (( LINES > 42 )); then
-  note "⚠️ 上限を超えています（CLAUDE.md の分量のきまり）"
+# 🆕 2026-11-01 オーナー決定: **毎週の号（reports/free/YYYY-MM-DD.md）の LINE 本文は500文字以内**
+#    （「ブラウザ（年齢別ページ）を目立たせたい」）。単発の1通（お礼・アンケートなど）は従来の上限
+if [[ "$(basename "$REPORT")" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}\.md$ ]]; then
+  note "文字数: ${CHARS} / 行数: ${LINES}（空行を除く。毎週の号の上限 500文字）"
+  if (( CHARS > 500 )); then
+    note "⚠️ 500文字を超えています（CLAUDE.md の分量のきまり）。中身は年齢別ページに寄せて、LINEは短く"
+  fi
+else
+  note "文字数: ${CHARS} / 行数: ${LINES}（空行を除く。上限 1,468文字 / 42行）"
+  if (( CHARS > 1468 )) || (( LINES > 42 )); then
+    note "⚠️ 上限を超えています（CLAUDE.md の分量のきまり）"
+  fi
 fi
 echo "── 読者に届く本文（ここから）──"
 cat "$BODY"
