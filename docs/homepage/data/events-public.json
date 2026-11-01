@@ -4156,6 +4156,46 @@
    "cat": "spot"
   },
   {
+   "id": "E205",
+   "name": "消防ふれあいまつり ～開放！小平消防署～",
+   "dates": [
+    "2026-11-03"
+   ],
+   "span": null,
+   "when": "2026年11月3日(火・祝) 10:00〜13:00（12:45 受付終了）（",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "13:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平消防署（小平市仲町21番地）",
+   "mapq": "小平市小平消防署",
+   "summary": "ポンプ車の乗車体験・ミニ防火衣の着装体験・AR訓練体験・キッズコーナー・火災実演コーナー・はしご車の搭乗体験・消防演技・スタンプラリー（参加者に景品）（消防署のお知らせ）",
+   "kidsNote": "",
+   "caution": "",
+   "contact": {
+    "tel": "042-341-0119",
+    "who": "小平消防署"
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "記載なし（要確認）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.tfd.metro.tokyo.lg.jp/fs/kodaira/oshirase.html",
+   "tentative": false,
+   "deadline": null,
+   "cat": "fest"
+  },
+  {
    "id": "E183",
    "name": "江戸東京たてもの園「夜間特別開園 たてもののライトアップ」",
    "dates": [
@@ -4233,6 +4273,46 @@
    "tentative": false,
    "deadline": null,
    "cat": "spot"
+  },
+  {
+   "id": "E206",
+   "name": "秋の火災予防運動の消防演習（小平市役所）",
+   "dates": [
+    "2026-11-06"
+   ],
+   "span": null,
+   "when": "2026年11月6日(金)（時刻は公式に記載なし・要確認）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "小平市役所",
+   "mapq": "小平市役所",
+   "summary": "小平消防署の消防演習。小平市出身の元バレーボール女子日本代表 大林素子さんが1日消防署長。演習中に消防ヘリコプターが飛ぶ予定（災害などの状況で飛べないことがある）",
+   "kidsNote": "",
+   "caution": "",
+   "contact": {
+    "tel": "042-341-0119",
+    "who": "小平消防署"
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "△"
+   },
+   "cost": "記載なし（要確認）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.tfd.metro.tokyo.lg.jp/fs/kodaira/oshirase.html",
+   "tentative": false,
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E142",
