@@ -481,6 +481,38 @@ if (!KEY) {
     console.error('生成エラー:', e.message);
   }
 }
+// 🆕 2026-11-01 半自動の検索（オーナー「Threads API の完全自動化が終わるまで、半自動ですぐに」）。
+//    Threads の検索をタップで開けるリンクを、毎朝の下書きの最後に付ける（生成に失敗した日も付く）。
+//    オーナーが5分ながめて、よさそうな投稿の URL か本文を Claude に貼る → 返信の案・台帳への起票。
+//    キーワードは「いつもの言葉（日替わりで3つ）」＋「これから10日の催しの名前（3つ）」
+function searchBlock() {
+  const BASE = ['小平 子連れ', '花小金井', '小平 子育て', '小平 おでかけ', '小平 公園', '小平 児童館',
+    '東久留米 子連れ', '西東京 子連れ', '小平 イベント', '東村山 子連れ', '小平 雨の日', '小平 ママ'];
+  const base = [0, 1, 2].map((i) => BASE[(EPOCH_DAY * 3 + i) % BASE.length]);
+  let names = [];
+  try {
+    const pub = JSON.parse(readFileSync('docs/homepage/data/events-public.json', 'utf8')).events;
+    const until = new Date(Date.parse(TODAY + 'T00:00:00Z') + 10 * 86400000).toISOString().slice(0, 10);
+    // 号で選んだ催しを先に（いちばん新しい号の web の items 順）。足りなければ、これから10日の祭り・大きめの催し
+    const byId = new Map(pub.map((e) => [e.id, e]));
+    const soon = (e) => (e.dates || []).some((d) => d >= TODAY && d <= until);
+    const specs = readdirSync('reports/free/web').filter((f) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).sort().reverse();
+    const chosen = specs.length ? (JSON.parse(readFileSync(`reports/free/web/${specs[0]}`, 'utf8')).items || []).map((it) => byId.get(it.id)).filter(Boolean) : [];
+    names = [...chosen.filter(soon), ...pub.filter((e) => e.cat === 'fest' && soon(e))]
+      .map((e) => (e.name.match(/「([^」]{2,20})」/) || [, e.name.replace(/[（(].*$/, '')])[1].replace(/^第\d+回\s*/, '').trim())
+      .filter((n) => n.length >= 3 && n.length <= 20);
+  } catch {}
+  const pick = [...new Set(names)].slice(0, 3);
+  const url = (q) => `https://www.threads.com/search?q=${encodeURIComponent(q)}&serp_type=default&filter=recent`;
+  const li = (q) => `- [${q}](${url(q)})`;
+  return `\n\n## 🔎 今日の検索（タップで Threads の検索が開く・5分）\n` +
+    `読者になりそうな人の投稿と、まだ知らない催しを探す。開いたら「最新」のタブに。\n` +
+    `**よさそうな投稿があったら、その URL か本文を Claude に貼る** → 返信の案（ネタ帳の事実だけで）と、催しなら台帳への起票。\n\n` +
+    `いつもの言葉:\n${base.map(li).join('\n')}\n` +
+    (pick.length ? `\nこれから10日の催し（ほかの人の感想・写真が出ていないか）:\n${pick.map(li).join('\n')}\n` : '');
+}
+body += searchBlock();
+
 if (process.env.DRY_RUN) { console.log('---- DRY_RUN（ファイルには書かない） ----\n' + body); process.exit(0); }
 writeFileSync(out, body);
 // 手動運用用: いつも同じURLで最新の草案を見られるように latest.md も更新する
