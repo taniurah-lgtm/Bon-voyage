@@ -25,6 +25,7 @@
  * 合言葉を知らない人には先の予定は見えない。
  */
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
+import { spotSlug } from './lib/spot-slug.mjs';
 import { encryptFor, passphrases, ITER, CLIENT_DECRYPT, jsonInTag, esc, buildStamp } from './lib/gate.mjs';
 import { fixWords, readIssues, issuesHTML } from './lib/issues.mjs';
 import { publicUrl } from './lib/city-site.mjs';
@@ -223,7 +224,7 @@ const voiceHTML = (p) =>
 // 地図だけで説明文がどこにも出ず、公開ページへ戻る導線も無かった。
 // 有料のページが無料の下位互換になっていたので、同じ一覧をこちらにも置く。
 // id は bv-map.js の slug() と同じ規則にする（ふきだしの「くわしく ↓」の飛び先）。
-const slug = (name) => 's-' + Buffer.from(name).toString('hex').slice(0, 12);
+const slug = spotSlug; // scripts/lib/spot-slug.mjs（2026-11-01 から名前の全部で作る）
 const spotsBySpot = new Map();
 for (const p of POSTS) {
   if (!spotsBySpot.has(p.spot)) spotsBySpot.set(p.spot, []);
@@ -481,7 +482,7 @@ const page = `<!doctype html>${buildStamp()}
 
 <script src="/assets/leaflet/leaflet.js"></script>
 <script src="/assets/bv-calendar.js"></script>
-<script src="/assets/bv-map.js"></script>
+<script src="/assets/bv-map.js?v=20261101"></script>
 <script>
 const BLOBS = ${JSON.stringify(BLOBS)};
 const ITER = ${ITER};

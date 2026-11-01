@@ -155,6 +155,8 @@
         // 2026-09-27 オーナー指示: 下の地図はこのまま、**Googleマップへのボタンを大きく**（アプリで開ける）
         '<a class="bvm-pop-gmap" href="' + esc(sp.map || mapURL(sp.name)) + '" target="_blank" rel="noopener">Googleマップで開く</a>' +
         '<span class="bvm-pop-links">' +
+        (sp.otayori ? '<a href="' + esc(sp.otayori.url) + '" target="_blank" rel="noopener">📄 今月のおたより</a>' : '') +
+        (sp.teirei ? '<a href="' + esc(sp.teirei) + '">📚 定例の日程</a>' : '') +
         (sp.official ? '<a href="' + esc(sp.official) + '" target="_blank" rel="noopener">🔗 公式</a>' : '') +
         // 飛び先の一覧が無いページ（会員ページ）でこれを出すと、押しても何も起きず、
         // 履歴に # だけが積まれる。一覧があるページだけ出す。
@@ -400,12 +402,13 @@
     return map;
   }
 
-  // build-map.mjs の slug() と同じ規則（スポット名 → 要素id）
+  // build-map.mjs の slug()（scripts/lib/spot-slug.mjs）と同じ規則（スポット名 → 要素id）
+  // 🔴 2026-11-01: 先頭6バイトだけだと46件中19件がぶつかっていた。名前の全部で作る
   function slug(name) {
     var bytes = new TextEncoder().encode(name);
     var hex = '';
     for (var i = 0; i < bytes.length; i++) hex += bytes[i].toString(16).padStart(2, '0');
-    return 's-' + hex.slice(0, 12);
+    return 's-' + hex;
   }
 
   global.BVMap = { mount: mount, slug: slug };

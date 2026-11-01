@@ -22,9 +22,20 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { jsonInTag, esc } from './lib/gate.mjs';
 import { publicUrl } from './lib/city-site.mjs';
+import { spotSlug } from './lib/spot-slug.mjs';
+
+// 🆕 2026-11-01 こども若者みらい課の提案:「各館のおたよりのリンクを、マップと組み合わせて」。
+//    おたよりのリンクは data/teirei.json の1か所にだけ書き、マップはそこから読む（毎月の差し替えも1か所）
+const TEIREI = new Map();
+for (const sec of JSON.parse(readFileSync('data/teirei.json', 'utf8')).sections)
+  for (const p of sec.places)
+    for (const name of p.spots || []) TEIREI.set(name, { otayori: p.otayori || null, teirei: `/teirei.html#${p.key}` });
 
 // 市のサイトの障害の間は、開かない「公式」リンクを出さない（lib/city-site.mjs）
-const SPOTS = JSON.parse(readFileSync('data/map-spots.json', 'utf8')).map((s) => ({ ...s, official: publicUrl(s.official) }));
+const SPOTS = JSON.parse(readFileSync('data/map-spots.json', 'utf8'))
+  .map((s) => ({ ...s, official: publicUrl(s.official), ...(TEIREI.get(s.name) || {}) }));
+for (const name of TEIREI.keys())
+  if (!SPOTS.some((s) => s.name === name)) console.error(`🔴 定例の spots「${name}」がマップに無い（名前の書き方を合わせる）`);
 const POSTS = JSON.parse(readFileSync('data/map-posts.json', 'utf8'));
 const OUT = 'docs/homepage/map.html';
 const TEXT_LIMIT = 300;   // ひとことの字数。誰でも同じ
@@ -47,12 +58,14 @@ const postHTML = (p) =>
   }</div></div>`;
 
 function slug(name) {
-  return 's-' + Buffer.from(name).toString('hex').slice(0, 12);
+  return spotSlug(name);
 }
 
 const spotHTML = (s) => {
   const shown = bySpot.get(s.name) || [];   // 全件出す（2026-09-04 以降、件数の制限なし）
   let links = `<a class="lk map" href="${esc(s.map || mapQ(s.name))}" target="_blank" rel="noopener">📍 地図</a>`;
+  if (s.otayori) links += `<a class="lk off" href="${esc(s.otayori.url)}" target="_blank" rel="noopener">📄 ${esc(s.otayori.label)}</a>`;
+  if (s.teirei) links += `<a class="lk off" href="${esc(s.teirei)}">📚 定例の日程</a>`;
   if (s.official) links += `<a class="lk off" href="${esc(s.official)}" target="_blank" rel="noopener">🔗 公式</a>`;
   return `      <div class="spot" id="${esc(slug(s.name))}" data-cat="${esc(s.cat)}">
         <div class="nm">${esc(s.name)}${
@@ -235,7 +248,7 @@ ${sections}
 </footer>
 
 <script src="/assets/leaflet/leaflet.js"></script>
-<script src="/assets/bv-map.js"></script>
+<script src="/assets/bv-map.js?v=20261101"></script>
 <script src="/assets/bv-post.js"></script>
 <script type="application/json" id="bv-spots">${jsonInTag(SPOTS)}</script>
 <script type="application/json" id="bv-posts">${jsonInTag(POSTS)}</script>
