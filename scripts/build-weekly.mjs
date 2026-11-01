@@ -218,6 +218,9 @@ function card(item, ev, { pick = false } = {}) {
   const a = ev.ages || {};
   const ages = AGES.map((g) => `<span class="age ${markClass(a[g.key])}" title="${AGE_SHORT[g.key]}">${g.icon}<b>${esc(a[g.key] || '？')}</b></span>`).join('');
   const rokuto = /多摩六都/.test(`${ev.name}${ev.place}`);
+  // 🆕 2026-11-01 オーナー:「公式からの指示はブラウザ側で」。小金井公園の一文はカードに付け、LINE本文には付けない。
+  //    江戸東京たてもの園は公園の中でも運営が別（情報は園のサイト）なので付けない
+  const koganei = /小金井公園/.test(`${ev.name}${ev.place}`) && !/たてもの園/.test(ev.name) && !/^江戸東京たてもの園/.test(ev.place || '');
   const note = item.note || ev.kidsNote || '';
   const cal = CAL.get(ev.id);
   const pic = picnicFor(ev);
@@ -255,6 +258,7 @@ function card(item, ev, { pick = false } = {}) {
       <p class="cm-hint" hidden></p>
     </div>` : ''}
     ${rokuto ? '<p class="fine">※最新の情報は多摩六都科学館ウェブサイトでご確認ください。</p>' : ''}
+    ${koganei ? '<p class="fine">※最新の情報は小金井公園の公式サイト・Xでご確認ください。</p>' : ''}
   </article>`;
 }
 
