@@ -5650,6 +5650,45 @@
    "source": "events/2026-12.md"
   },
   {
+   "id": "E210",
+   "name": "おんぷコンサート vol.2「クリスマスの音楽」（新小金井駅前 シェアリウム）",
+   "dates": [
+    "2026-12-06"
+   ],
+   "span": null,
+   "when": "2026年12月6日(日)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "シェアリウム（小金井市東町4-3-11 スカイグレーバー1階）",
+   "mapq": "シェアリウム",
+   "summary": "「くるみ割り人形」をお話しつきで、クラシックに合わせて体を動かしたりリズムをたたいたり。クリスマスソングをいっしょに歌う・クイズ・最後にバイオリンの体験",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "親子1組 1,500円／大人1人追加 1,000円／子ども1人追加 500円／2歳以下のきょうだい無料／大人だけの参加 1,500円。支払いは PayPay か現金",
+   "discount": "",
+   "target": "",
+   "url": "https://www.threads.com/@onpunomahou/post/DfOUQGqk8AI",
+   "status": "候補",
+   "confidence": "主催のチラシで確認（2026-11-03）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-12.md"
+  },
+  {
    "id": "E195",
    "name": "中央図書館「休館日の図書館に親子をご招待」",
    "dates": [
@@ -6176,6 +6215,9 @@
   ],
   "2026-12-05": [
    "E204"
+  ],
+  "2026-12-06": [
+   "E210"
   ]
  },
  "unresolved": [
