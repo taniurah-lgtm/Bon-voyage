@@ -420,7 +420,7 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
 <main class="wrap">
 ${body}
   <p class="stamp">日程・料金は変わることがあります。おでかけの前に、各公式サイトでご確認ください。<br>
-    市や施設の公式ページで一件ずつ確かめています。</p>
+    市や施設、主催者の公式の告知で一件ずつ確かめています。</p>
   <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>
 </main>
 <footer>
