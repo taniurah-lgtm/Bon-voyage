@@ -102,7 +102,7 @@ function createReaderSurvey200() {
   f.setDescription(
     '読者が200人をこえました。いつも読んでくださって、ありがとうございます。\n' +
     'これからの号づくりの参考にさせてください。お名前やメールアドレスは伺いません（匿名です）。\n' +
-    '3分ほどで、どの質問も答えられるところだけで大丈夫です（11/15(日)まで）。');
+    '3分ほどで、どの質問も答えられるところだけで大丈夫です（11/22(日)まで）。');
   f.setCollectEmail(false);
   f.setLimitOneResponsePerUser(false);
   f.setAllowResponseEdits(false);
