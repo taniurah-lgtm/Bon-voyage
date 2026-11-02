@@ -4495,7 +4495,7 @@
    "target": "公式の対象欄に「小学生以下・小学生・中高生・大人・高齢者・親子」と明記",
    "url": "https://www.syakaifukushi.kodaira.tokyo.jp/news/news/20260907_2.html",
    "status": "候補",
-   "confidence": "一部確認— 日時・会場・内容・対象・申込不要は 2026-09-16 / 2026-10-17 / 2026-10-26 で確認。 同時開催の福祉バザーは公式本文を取得できた。費用は依然として未取得",
+   "confidence": "一部確認— 日時・会場・内容・対象・申込不要は 2026-09-16 / 2026-10-17 / 2026-10-26 / 2026-11-03 で確認（11-03 は市のイベント一覧の検索要約まで）。 同時開催の福祉バザーは公式本文を取得できた。費用は依然として未取得",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
@@ -4534,7 +4534,7 @@
    "target": "",
    "url": "https://sayamaparks.com/event/event-4025/",
    "status": "候補",
-   "confidence": "公式確認済み（2026-10-26）— 日時・場所・料金・内容・時間・対象・雨天",
+   "confidence": "公式確認済み— 日時・場所・料金・内容・時間・対象・雨天。ベビーカーと駐車場は公式に記載なし",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
