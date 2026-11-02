@@ -13,6 +13,7 @@
  * 作られるもの: A 無料会員 / B 有料会員 / C 入会時 の3フォーム＋各回答シート
  *
  * 🆕 2026-10-27: 読者200人のお礼アンケート（匿名）は、下の「createReaderSurvey200」を選んで ▶ 実行。
+ *    2026-11-02 見直し（オーナー: 不快を与えないか・今後に要る質問か・多すぎないか・自由記述に力を・仲間意識）→ 選択式8問＋自由記述2つ
  *    A〜C は月額制度があったころの設計（料金・連絡先の設問がある）。いまは使わない（docs/surveys.md）。
  */
 function createBonvoyaSurveys() {
@@ -100,42 +101,76 @@ function createBonvoyaSurveys() {
 function createReaderSurvey200() {
   var f = FormApp.create('ぼんぼやーじゅ通信 読者アンケート（匿名）');
   f.setDescription(
-    '読者が200人をこえました。いつも読んでくださって、ありがとうございます。\n' +
-    'これからの号づくりの参考にさせてください。お名前やメールアドレスは伺いません（匿名です）。\n' +
-    '3分ほどで、どの質問も答えられるところだけで大丈夫です（11/22(日)まで）。');
+    '読者が200人をこえました。いつも読んでくださって、本当にありがとうございます。\n' +
+    'この通信は、花小金井に住む親がつくっています。これからも、小平の子育て家庭のみなさんといっしょに育てていけたらうれしいです。\n\n' +
+    'お名前やメールアドレスは伺いません（匿名です）。どの質問も、答えられるところだけで大丈夫です。3分ほど・11/15(日)まで。');
   f.setCollectEmail(false);
   f.setLimitOneResponsePerUser(false);
   f.setAllowResponseEdits(false);
   f.setShowLinkToRespondAgain(false);
   f.setPublishingSummary(false);
   f.setProgressBar(false);
-  f.setConfirmationMessage('ありがとうございました。いただいた声は、これからの号づくりに生かします。');
-  // 2025年からの新しいフォームは「公開」しないと回答を受け付けないことがある。古い環境では setPublished が無いので try で包む
+  f.setConfirmationMessage(
+    'ありがとうございました。いただいた声は、これからの号づくりに生かします。\n' +
+    '教えていただいたおでかけ先は、こちらで確かめてから、おでかけマップでおすそわけすることがあります（お名前は出しません）。\n' +
+    '「手伝ってもいいよ」に印をつけてくださった方は、よろしければ LINE のトークでひとこと送ってください。');
   try { f.setPublished(true); } catch (e) { /* 不要な環境 */ }
   f.setAcceptingResponses(true);
 
+  // 1. 年齢（だれ向けの号にするか）
   f.addCheckboxItem().setTitle('お子さんの年齢（あてはまるものすべて）')
-    .setChoiceValues(['0〜2歳', '3〜6歳（未就学）', '小学生', '中学生以上']);
-  f.addMultipleChoiceItem().setTitle('お住まい')
-    .setChoiceValues(['小平市', '西東京市', '東久留米市', '東村山市', '小金井市']).showOtherOption(true);
-  f.addMultipleChoiceItem().setTitle('いちばん近い駅')
-    .setChoiceValues(['花小金井', '小平', '萩山', '小川', '一橋学園', '青梅街道', '鷹の台', '新小平']).showOtherOption(true);
+    .setChoiceValues(['0〜2歳', '3〜6歳（未就学）', '小学生', '中学生以上', 'これから生まれる', '子どもはいない（祖父母・ご近所など）']);
+
+  // 2. 駅（チラシの置き先）
+  f.addMultipleChoiceItem().setTitle('ふだんよく使う駅')
+    .setHelpText('チラシを置かせていただく場所を決めるのに使います。')
+    .setChoiceValues(['花小金井', '小平', '萩山', '小川', '一橋学園', '青梅街道', '鷹の台', '新小平', '小平市の外の駅']);
+
+  // 3. きっかけ（どの入口が効いているか）
   f.addMultipleChoiceItem().setTitle('この通信を知ったきっかけ')
     .setChoiceValues(['市の施設のチラシ（地域センター・児童館・図書館など）', '幼稚園・保育園・お店などのチラシ',
       'Threads', 'Instagram', 'LINEのオープンチャット', '友だち・知り合いから', 'ネットで検索して']).showOtherOption(true);
-  f.addMultipleChoiceItem().setTitle('ふだんの読み方')
-    .setChoiceValues(['LINEの本文だけ読むことが多い', '年齢別のページまで開くことが多い', 'カレンダーやマップもよく見る', 'なかなか読めていない']);
-  f.addCheckboxItem().setTitle('役に立っているもの（あてはまるものすべて）')
-    .setChoiceValues(['今週の一推し', '年齢別のページ', 'イベント先取り情報（申込の締切など）', '週末の天気をふまえた提案',
-      'おでかけカレンダー', 'みんなのおでかけマップ', '園庭開放・児童館や図書館の定例のページ']);
+
+  // 4. よく使うもの（どこに手をかけるか）
+  f.addCheckboxItem().setTitle('よく見ているもの（あてはまるものすべて）')
+    .setChoiceValues(['LINEの本文（天気・今週の一推し）', '年齢別のページ', 'イベント先取り情報（申込の締切など）',
+      'おでかけカレンダー', 'みんなのおでかけマップ', '園庭開放・児童館や図書館の定例のページ', 'なかなか読めていない']);
+
+  // 5. 実際に出かけたか（通信が役に立っている根拠）
   f.addMultipleChoiceItem().setTitle('通信を見て、実際に出かけたことはありますか')
+    .setHelpText('行けていなくても、まったく大丈夫です。')
     .setChoiceValues(['何度かある', '1回ある', 'まだない（予定を立てる参考にしている）', 'まだない']);
+
+  // 6. 増やしてほしい情報
   f.addCheckboxItem().setTitle('もっと増やしてほしい情報（あてはまるものすべて）')
-    .setChoiceValues(['雨の日・室内で過ごせる所', '赤ちゃん連れで行きやすい所', '小学生向けの体験・講座', '申込のいる催し・抽選の締切',
-      'お祭り・季節の行事', '公園・自然あそび', '電車でちょっと遠出', '無料・お金のかからない所', '平日に行ける所']).showOtherOption(true);
-  f.addMultipleChoiceItem().setTitle('届く日時（いまは水曜の朝9時ごろ）')
-    .setChoiceValues(['今のままがいい', '木曜か金曜のほうがいい', '前の晩のほうがいい', 'どれでもいい']);
-  f.addParagraphTextItem().setTitle('ご自由に（「この回がよかった」「ここが読みにくい」「こんな情報がほしい」など、ひとことでも）');
+    .setChoiceValues(['雨の日・室内で過ごせる所', '赤ちゃん連れで行きやすい所', '小学生向けの体験・講座',
+      '申込のいる催し・抽選の締切', 'お祭り・季節の行事', '公園・自然あそび', '電車でちょっと遠出',
+      '無料・お金のかからない所', '平日に行ける所']).showOtherOption(true);
+
+  // 7. 地元のお店・教室（これからの紹介の参考）
+  f.addCheckboxItem().setTitle('地元のお店や教室で、通信で知りたいもの（あてはまるものすべて）')
+    .setHelpText('これからの紹介の参考にします。')
+    .setChoiceValues(['子連れで入りやすいカフェ・ごはんのお店', '習い事・体験教室', 'パン屋・お菓子屋',
+      '子どもの写真・記念日', '子ども服・おもちゃ・本のお店', '特にない']).showOtherOption(true);
+
+  // 8. 関わり方（仲間になってもらう入口。負担をかけない選択肢を先頭に）
+  f.addCheckboxItem().setTitle('これから、こんな形で関われたらうれしい（あてはまるものだけ）')
+    .setHelpText('「読むだけ」でもじゅうぶんうれしいです。')
+    .setChoiceValues(['読むだけでじゅうぶん', 'まわりの家庭に通信を教えたい', 'おでかけ先の情報を教えたい',
+      'チラシを置ける場所を紹介したい', '人が写っていない写真（会場・看板など）を提供したい']);
+
+  // ---- ここからが、いちばん聞きたいところ ----
+  f.addSectionHeaderItem().setTitle('ここからが、いちばん聞きたいところです')
+    .setHelpText('ひとことでも、とてもうれしいです。');
+
+  // 9. おすそわけ（マップの持ち寄り）
+  f.addParagraphTextItem().setTitle('最近、子どもと行ってよかった場所や催しを教えてください')
+    .setHelpText('公園・児童館・お店・イベントなど、なんでも。「雨の日に助かった」「〇歳でも楽しめた」など、ひとこと添えていただけるとうれしいです。\n' +
+      'こちらで確かめてから、おでかけマップでおすそわけすることがあります（お名前は出しません）。紹介してほしくない場合は、そう書き添えてください。');
+
+  // 10. 通信へのひとこと
+  f.addParagraphTextItem().setTitle('通信へのひとこと')
+    .setHelpText('「この回がよかった」「ここが読みにくい」「こんな情報がほしい」「応援してます」など、なんでもどうぞ。');
 
   var ss = SpreadsheetApp.create('回答_読者アンケート（200人のお礼・匿名）');
   f.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
