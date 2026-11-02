@@ -8,7 +8,7 @@
  *
  * 会員ページ(m/) とチラシの着地(f/) は noindex なので入れない。
  */
-import { readdirSync, statSync, writeFileSync, existsSync } from 'node:fs';
+import { readdirSync, statSync, writeFileSync, existsSync, readFileSync } from 'node:fs';
 
 const BASE = 'https://bonvoya.nicomaru.tokyo';
 const DIR = 'docs/homepage';
@@ -32,6 +32,11 @@ const rows = [];
 for (const [file, cfg] of Object.entries(PAGES)) {
   const path = `${DIR}/${file}`;
   if (!existsSync(path)) { console.log(`  – ${file}: 無いので入れない`); continue; }
+  // 🔴 2026-11-02: guide.html が noindex なのに sitemap に入っていた（Search Console では「送信された URL に noindex」のエラーになる）。
+  //    noindex のページは入れない。載せたくなったら、ページの <meta name="robots"> を外す
+  if (/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(readFileSync(path, 'utf8'))) {
+    console.log(`  ⚠ ${file}: noindex なので入れない`); continue;
+  }
   const lastmod = statSync(path).mtime.toISOString().slice(0, 10);
   rows.push(
     `  <url>\n    <loc>${BASE}${cfg.loc || '/' + file}</loc>\n` +

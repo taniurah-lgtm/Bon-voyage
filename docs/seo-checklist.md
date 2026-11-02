@@ -2,6 +2,13 @@
 
 **症状**（オーナー報告 2026-08-30）: 以前は検索でホームページが出ていたが、いま出ない。
 
+> 🆕 **2026-11-02 もう一度同じ症状**（オーナー「前に申請して一時期検索で出るようになっていたのに、今は出ていない。再度申請したい」）
+> - **サイト側は今回も健全**: トップ・calendar・map・teirei・issues などすべて 200、`X-Robots-Tag` なし、トップに noindex なし、canonical は自己参照、Search Console の認証タグ（google-site-verification）は入ったまま、robots.txt は `Allow: /`
+> - 🔴 **1つだけ食い違い**: **guide.html が `noindex,nofollow` なのに sitemap.xml に入っていた**（Search Console では「送信された URL に noindex タグが追加されています」のエラーになる）。
+>   `scripts/build-sitemap.mjs` を **noindex のページは自動で外す**ように直した（10ページ → 9ページ）。guide.html を検索に出すかは別に決める（タイトルが「花小金井 子連れおでかけガイド」のまま・noindex にした理由の記録は無い）
+> - /th/ と /f/ は noindex（計測用の入口なので正しい）。年齢別ページ（/week/…）は自己参照の canonical で公開
+> - **オーナーの手順**は下の「1. Search Console」。前回（8/30）と同じだが、**今回は結果の画面をスクショで貼ってもらい、除外の理由を記録する**
+
 ---
 
 ## 1. サイト側は健全だった（2026-08-30 実測）
