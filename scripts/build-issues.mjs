@@ -84,7 +84,6 @@ ${issuesHTML(issues) || '  <p class="lead">まだ号がありません。</p>'}
     <a href="/">通信について</a>
     <a href="/calendar.html">おでかけカレンダー</a>
     <a href="/map.html">おでかけマップ</a>
-    <a href="/guide.html">子連れおでかけガイド</a>
     <a href="/#contact">お問い合わせ</a>
   </div>
 

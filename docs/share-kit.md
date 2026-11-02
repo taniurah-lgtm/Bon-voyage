@@ -4,7 +4,7 @@
 
 ## 主要リンク
 - 友だち追加(LINE): https://lin.ee/YtcfjnX
-- おでかけガイド(登録フック): https://bonvoya.nicomaru.tokyo/guide.html
+- ~~おでかけガイド~~（2026-11-02 廃止。使わない）
 - ホームページ: https://bonvoya.nicomaru.tokyo/
 - 応援(note): https://note.com/bon_voyage_mail/membership
 - 友だち追加カード(印刷用A6): https://bonvoya.nicomaru.tokyo/card.html
@@ -60,7 +60,7 @@ https://lin.ee/YtcfjnX
 さっそく、お約束の【花小金井 子連れおでかけガイド】をどうぞ👇
 地元メモ＆地図つきで、“間違いない”おでかけ先をまとめました。スマホに保存して使ってくださいね。
 ▼花小金井 子連れおでかけガイド
-https://bonvoya.nicomaru.tokyo/guide.html
+https://bonvoya.nicomaru.tokyo/  （※おでかけガイドは 2026-11-02 に廃止。トップを案内する）
 
 これから毎週水曜に、花小金井まわりの週末おでかけ情報（天気に合わせた“今週これ”や、連休のおでかけアイデアも）をお届けします。
 

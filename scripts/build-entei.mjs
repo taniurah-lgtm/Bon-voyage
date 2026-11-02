@@ -321,7 +321,6 @@ const html = `<!doctype html>
     <a href="/calendar.html">おでかけカレンダー</a>
     <a href="/map.html">おでかけマップ</a>
     <a href="/teirei.html">児童館・図書館・子育てひろばの定例</a>
-    <a href="/guide.html">おでかけガイド</a>
     <a href="/issues.html">バックナンバー</a>
   </div>
   <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>
