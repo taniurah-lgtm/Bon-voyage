@@ -4664,19 +4664,19 @@
    "end": "14:00",
    "allDay": false,
    "timeUncertain": false,
-   "place": "小川町二丁目児童館 遊戯室（小平市）",
-   "mapq": "小川町二丁目児童館 遊戯室",
-   "summary": "",
+   "place": "小川町二丁目児童館 遊戯室（小平市小川町二丁目1154／小平市立第十五小学校の隣・地域センター2階）",
+   "mapq": "小平市小川町二丁目児童館 遊戯室",
+   "summary": "児童館の「ボルダリング」の回（当日受付・1〜6年生）。11/14は45分、11/18は30分の枠",
    "kidsNote": "",
    "caution": "",
    "lastEntry": "",
-   "hours": "11/4(水)・11/17(火) は小川町二丁目児童館が休館（おたより11月号）",
+   "hours": "乳幼児・小学生は 平日・土曜・日祝とも 9:00〜18:00（中高生は平日・土曜 9:00〜19:00・日祝 9:00〜18:00）。11/4(水)・11/17(火) は休館",
    "ages": {
     "baby": "✕",
     "pre": "✕",
     "elem": "◎"
    },
-   "cost": "公式に記載なし（要確認）",
+   "cost": "児童館の利用は無料（館の公式「利用料金：無料です。ただし、クッキングなどお金のかかるイベントもあります。」）。 ただしボルダリングの回そのものの参加費は、おたよりにも館の公式にも書かれていない（要確認）",
    "discount": "",
    "target": "1〜6年生（館の書き方）。定員なし。両日とも同じ",
    "url": "https://kodaji.ashita-ba.co.jp/news/article/934/",
@@ -4704,8 +4704,12 @@
    "place": "西東京いこいの森公園（西東京市緑町三丁目2番）",
    "mapq": "西東京いこいの森公園",
    "summary": "",
-   "kidsNote": "屋外の市民まつり。中身は一般向けの案内が出てから足す。",
+   "kidsNote": "屋外の市民まつり。子どもゾーン19テント・アスレチック・スポーツ体験あり。",
    "caution": "",
+   "contact": {
+    "tel": "042-420-2817",
+    "who": ""
+   },
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -4713,10 +4717,10 @@
     "pre": "◎",
     "elem": "◎"
    },
-   "cost": "",
+   "cost": "まつり全体の入場料は、市の公式ページに記載が無い（要確認）。 公式に「無料」と書いてあるのは「仮面ライダーマイス」ショーの観覧だけ（※観覧無料）。模擬店・工作などの実費は別",
    "discount": "",
    "target": "",
-   "url": "https://www.city.nishitokyo.lg.jp/enjoy/bunkasai/matsuri/R8engei-parade.files/R8matsuri-engei.pdf",
+   "url": "https://www.city.nishitokyo.lg.jp/enjoy/bunkasai/matsuri/23_nishitokyoshiminmatsuri.html",
    "tentative": false,
    "deadline": null,
    "cat": "fest"
