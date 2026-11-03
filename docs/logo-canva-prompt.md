@@ -96,3 +96,27 @@ A simple hand-drawn logo mark for a small local newsletter that tells families a
 - 黒1色のもの（リソグラフ・白黒のチラシ）
 
 受け取ったら差し替える先: `docs/homepage/assets/line-icon.png` ／ `docs/homepage/favicon.svg`（小さく描き直す）／ `docs/homepage/assets/note-icon.png` ／ `docs/print/meta-app-icon-1024.png` ／ チラシの見出し。LINE 公式アカウントのアイコンは、オーナーが設定画面で差し替える。
+
+## 5. 案37 → 直したもの（2026-11-03）
+
+オーナーが Canva AI で作った**案37**（円の中に、木・ベンチ・飛んでいく風船。英字「Bon Voyage / Weekly Letter」）を「おおむねこれでよい」として、Claude が手を入れた。
+
+- 線画は案37をそのまま写し取った（線の揺れ・円の切れ目も残す）。「案37」の書き込みを消した
+- **風船だけを赤（#E2553F）に**。いまの LINE のアイコンの赤い風船を引き継ぎ、ひと目で目が行く1点にした
+- 線は真っ黒ではなく、紺に近い墨色（#2F3E48）。背景はホームページの生成り（#FBFAF5）
+- 「Weekly Letter」を**「ぼんぼやーじゅ通信」**に（読者が LINE で見ている名前。「Bon Voyage」だけだと同名のお店が多い）。英字は Lora、日本語は Klee One
+- **アイコンは風船だけ**（全体のままだと、LINE の一覧の大きさでは木と文字がつぶれる）
+- 白黒1色と横長も作った
+
+ファイル（`docs/print/logo/`）:
+
+| ファイル | 使うところ |
+|---|---|
+| `logo-proposal.png` | 見比べ用（もと／直したもの／アイコンの大きさ別／白黒／横長） |
+| `logo-full.png`（1024・生成り）／`logo-full-clear.png`（背景透明） | ロゴ全体。チラシ・資料・note の見出し |
+| `icon-1024.png` | LINE・Threads・Instagram・Meta のアプリのアイコン |
+| `logo-horizontal.png`（背景透明）／`-mono` | チラシ・ホームページの見出し |
+| `logo-mono.png` | リソグラフ1色・白黒のチラシ |
+| `src/` | 作り直し用（もとの画像・トレースと組版のスクリプト） |
+
+🔴 **差し替えはオーナーのOKのあと**（LINE のアイコン・ファビコン・note・Meta・チラシ）。
