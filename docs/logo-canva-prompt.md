@@ -123,3 +123,25 @@ A simple hand-drawn logo mark for a small local newsletter that tells families a
 🔴 **差し替えはオーナーのOKのあと**（LINE のアイコン・ファビコン・note・Meta・チラシ）。
 
 **決定（2026-11-03 オーナー）: 日本語が上の版**。「Bon Voyage」をほんの少し大きく（全体 38→42px・横長 78→86px）。確認用 `logo-final-preview.png`。差し替えはOKの返事のあと。
+
+## 6. 決定: 案29の絵（2026-11-03 オーナー）
+
+「やはり絵はこちら」＝**案29**（円の中に、野の花の小さな花束と、そこから伸びるひもの風船）。文字は 5 で作った**日本語が上**（「ぼんぼやーじゅ通信」＋少し大きめの「Bon Voyage」）。「風船だけカラーは変」→ **カラー版は全体を塗る**。白黒版も作る。
+
+- 線は案29をそのまま写した（「案29」の書き込みと英字は消した）
+- 塗り: 葉 #A3CC93 ／ 花 ピンク #F3A9B9・山吹 #F2BE62・水色 #A6D2E6 ／ 風船 コーラル #EE7C64。線は墨色 #2F3E48、背景は生成り #FBFAF5
+- **アイコンは文字なし**の花束と風船を大きく（文字入りは LINE の一覧の大きさで読めない。円の線も外して絵を大きく）
+
+`docs/print/logo/`（案37の一式は `an37/` に移した）:
+
+| ファイル | 使うところ |
+|---|---|
+| `logo-proposal.png` | 全部の見比べ |
+| `logo-color.png`／`logo-color-clear.png`（背景透明） | ロゴ全体（カラー） |
+| `logo-mono.png`／`logo-mono-clear.png` | ロゴ全体（白黒）。リソグラフ1色・白黒のチラシ |
+| `icon-color-1024.png`／`icon-mono-1024.png` | LINE・Threads・Instagram・Meta のアプリのアイコン |
+| `logo-horizontal-color.png`／`logo-horizontal-mono.png`（背景透明） | チラシ・ホームページの見出し |
+| `src/` | 作り直し用（もとの画像・スクリプト） |
+
+🔴 差し替え（ファビコン・note・Meta・チラシ・ホームページ）は**オーナーのOKのあと**。水曜は 9:00 の配信が終わってから。
+
