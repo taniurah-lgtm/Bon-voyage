@@ -4760,6 +4760,42 @@
    "cat": "other"
   },
   {
+   "id": "E211",
+   "name": "スポーツチャレンジキャラバン（都立狭山公園）",
+   "dates": [
+    "2026-11-15"
+   ],
+   "span": null,
+   "when": "2026年11月15日(日) 10:00〜15:00（雨天延期。延期日は掲示にも公式にも記載なし＝要確認）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "都立狭山公園「風の広場」（東村山市多摩湖町3-17-19。西武多摩湖線 多摩湖駅 南口から徒歩8分）",
+   "mapq": "都立狭山公園「風の広場」",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "無料／申込: 不要（当日、各ブースで受付。種目ごとに受付表に名前を書く）",
+   "discount": "",
+   "target": "",
+   "url": "https://sayamaparks.com/event/event-4083/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "spot"
+  },
+  {
    "id": "E174",
    "name": "土曜こども広場友＆遊「わくわく科学工作 紙コップスピーカーワークショップ」",
    "dates": [
@@ -5066,6 +5102,45 @@
    "url": "https://kodaira-tourism.com/event/23085/",
    "tentative": false,
    "deadline": null,
+   "cat": "spot"
+  },
+  {
+   "id": "E212",
+   "name": "親子自然あそびProgram（3・4歳・都立狭山公園）",
+   "dates": [
+    "2026-11-28"
+   ],
+   "span": null,
+   "when": "2026年11月28日(土) 10:00〜12:00（受付 9:45〜）（荒天中止）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "12:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "都立狭山公園（東村山市多摩湖町3-17-19。西武多摩湖線 多摩湖駅 南口から徒歩8分）",
+   "mapq": "都立狭山公園",
+   "summary": "秋の自然とふれあう親子の自然あそび（講師: 一般社団法人遊心）",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "◎",
+    "elem": "✕"
+   },
+   "cost": "無料",
+   "discount": "",
+   "target": "3・4歳の子と保護者／定員: 各回20人（大人を含む）。多いときは抽選（当落は締切後に Peatix からメール）",
+   "url": "https://sayamaparks.com/event/",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-11-16",
+    "raw": "11月16日(月)まで。公園のホームページのイベント申込フォームから、ウェブ申込サイト「Peatix」で（Peatix から直接も可）"
+   },
    "cat": "spot"
   },
   {
