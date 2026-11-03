@@ -1,0 +1,56 @@
+# ロゴ（マーク）を Canva AI で作る — プロンプトと差し替え先
+
+2026-11-03 オーナー「そろそろロゴ／アイコンを作りたい。Canva AI で」。参考に挙がったのは、あすぴあの手描きのロゴ（温かさだけを参考にする。形は似せない）。
+
+## 方針
+
+- **いまの赤い風船を引き継ぐ**（LINE のアイコン＝読者が毎週見ている絵。ファビコンも風船）。そこに**「通信」＝手紙**を足す: **風船が、ひもに結んだ手紙を家族のもとへ運ぶ**
+- **絵（マーク）と文字は分けて作る**。画像を作る AI は日本語の文字をうまく描けない（字が崩れる）。文字は Canva の文字ツールで打つか、手で書いたものを取り込む
+- 季節のもの（桜・花火・雪）は入れない。地名（花小金井）も入れない
+- あすぴあのスクショを Canva AI に参考画像として**渡さない**（似てしまう）
+
+## 1. マーク（文字なし）
+
+```
+子育て中の家庭に、週末のおでかけ情報を届ける、地域の小さなお便りのロゴマークを作ってください。文字は入れず、絵のマークだけにしてください。
+
+モチーフ：ひもの先に小さな手紙（封筒）を結んだ、ひとつの風船。風船が手紙を運んで、家族のもとへ届くイメージ。
+タッチ：手描き。少しゆれた、やわらかい線。サインペンかクレヨンで描いたような質感。はんこのように素朴で温かい雰囲気。
+色：2色だけ。線は深い青（#2C7C9E）、風船は赤（#E04B3A）。背景は生成り（#FBFAF5）。
+形：正方形の真ん中に、マークを大きく1つ。まわりに余白をたっぷり。丸く切り抜いても欠けない配置。
+避けること：グラデーション、影、光沢、立体感、キラキラ、写実的な描き方、細かすぎる描き込み。スマホの小さなアイコンでも「風船と手紙」と分かる、太めの線で。
+```
+
+英語で書いたほうが通りやすいとき:
+
+```
+A simple hand-drawn logo mark for a small local newsletter that tells families about weekend outings. No text. One balloon with a small envelope tied to the end of its string, as if the balloon is delivering a letter. Soft, slightly wobbly marker or crayon lines, warm and plain like a rubber stamp. Only two flat colors: deep blue (#2C7C9E) for lines and red (#E04B3A) for the balloon, on an off-white (#FBFAF5) background. One large mark centered in a square with generous margins, so it still works when cropped to a circle and at small icon sizes. No gradients, no shadows, no gloss, no 3D, not realistic, not overly detailed.
+```
+
+モチーフの別案（1の「モチーフ：」の行だけ差し替える）:
+
+- **気球**: `モチーフ：小さな熱気球。かごの中に、手をふる親子が小さく見える。`
+- **子どもの後ろ姿**: `モチーフ：赤い風船を持って歩く、小さな子どもの後ろ姿。`
+
+## 2. 文字（Canva のエディタで）
+
+- 「ぼんぼやーじゅ通信」。2段にするなら、上が「ぼんぼやーじゅ」（大きく）、下が「通信」（小さく）。いまの LINE のアイコンと同じ組み方
+- 書体の候補（Canva にあるもの）: 手描きらしさ → Yusei Magic・Klee One ／ やわらかく → Zen Maru Gothic・Kiwi Maru。色は #2C7C9E
+- **いちばん手づくりらしくなる方法**: 白い紙に油性ペンで「ぼんぼやーじゅ通信」と手で書いて撮る → Canva の「背景除去」で文字だけにする → 色を #2C7C9E に変える。お子さんに風船の絵を描いてもらって、マークにする手もある
+- 形は2つ作る: **正方形（マークだけ、またはマークの下に文字）**＝アイコン用 ／ **横長（左にマーク、右に文字）**＝チラシ・ホームページの見出し用
+
+## 3. 選ぶときの確かめ
+
+1. スマホで縮めても（LINE のトーク一覧の大きさ）、風船と手紙だと分かる
+2. 黒1色にしても成り立つ（リソグラフ1色・白黒のチラシで使う）
+3. 丸く切り抜いても欠けない（LINE・Threads・Instagram・note のアイコンは丸）
+4. 有名な会社やお店のロゴに似ていない
+5. あすぴあのロゴに似ていない
+
+## 4. 書き出し → Claude に渡す
+
+- 正方形 PNG **1024×1024**（LINE・Threads・Instagram・Meta のアプリのアイコン）
+- 横長 PNG、**背景が透明**のもの（チラシ・ホームページ用）
+- 黒1色のもの（リソグラフ・白黒のチラシ）
+
+受け取ったら差し替える先: `docs/homepage/assets/line-icon.png` ／ `docs/homepage/favicon.svg`（小さく描き直す）／ `docs/homepage/assets/note-icon.png` ／ `docs/print/meta-app-icon-1024.png` ／ チラシの見出し。LINE 公式アカウントのアイコンは、オーナーが設定画面で差し替える。
