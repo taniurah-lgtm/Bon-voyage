@@ -118,5 +118,6 @@ A simple hand-drawn logo mark for a small local newsletter that tells families a
 | `logo-horizontal.png`（背景透明）／`-mono` | チラシ・ホームページの見出し |
 | `logo-mono.png` | リソグラフ1色・白黒のチラシ |
 | `src/` | 作り直し用（もとの画像・トレースと組版のスクリプト） |
+| **日本語が上の版（逆版）**: `logo-full-jp.png`／`-jp-clear`／`logo-mono-jp.png`／`logo-horizontal-jp.png`／`-jp-mono`／見比べ `logo-proposal-jp.png` | 2026-11-03 オーナー依頼。「ぼんぼやーじゅ通信」が大きく、「Bon Voyage」が下に小さく |
 
 🔴 **差し替えはオーナーのOKのあと**（LINE のアイコン・ファビコン・note・Meta・チラシ）。
