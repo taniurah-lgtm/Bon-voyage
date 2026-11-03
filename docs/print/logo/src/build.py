@@ -21,7 +21,7 @@ V={
 }
 BAL='365 70 470 470'
 tR=(f'<text x="744" y="550" text-anchor="middle" font-family="Klee One" font-weight="600" font-size="51" letter-spacing="1" fill="{NAVY}">ぼんぼやーじゅ通信</text>'
-    f'<text x="744" y="612" text-anchor="middle" font-family="Lora" font-weight="500" font-size="38" letter-spacing="2" fill="{NAVY}">Bon Voyage</text>')
+    f'<text x="744" y="617" text-anchor="middle" font-family="Lora" font-weight="500" font-size="42" letter-spacing="2" fill="{NAVY}">Bon Voyage</text>')
 def horiz(inkc,fillc,bg,tc,rev=False):
     bgrect=f'<rect width="1800" height="600" fill="{bg}"/>' if bg else ''
     f=f'<path d="{fill}" fill="{fillc}"/>' if fillc else ''
@@ -30,7 +30,7 @@ def horiz(inkc,fillc,bg,tc,rev=False):
       + (f'<text x="480" y="300" font-family="Lora" font-weight="500" font-size="150" fill="{tc}">Bon Voyage</text>'
       f'<text x="488" y="430" font-family="Klee One" font-weight="600" font-size="82" letter-spacing="8" fill="{tc}">ぼんぼやーじゅ通信</text></svg>' if not rev else
       f'<text x="478" y="300" font-family="Klee One" font-weight="600" font-size="118" letter-spacing="2" fill="{tc}">ぼんぼやーじゅ通信</text>'
-      f'<text x="486" y="405" font-family="Lora" font-weight="500" font-size="78" letter-spacing="4" fill="{tc}">Bon Voyage</text></svg>'))
+      f'<text x="486" y="412" font-family="Lora" font-weight="500" font-size="86" letter-spacing="4" fill="{tc}">Bon Voyage</text></svg>'))
 V['full-clear']=art(NAVY,RED,None,tA)
 V['horiz']=horiz(NAVY,RED,None,NAVY)
 V['horiz-mono']=horiz('#000',None,None,'#000')
