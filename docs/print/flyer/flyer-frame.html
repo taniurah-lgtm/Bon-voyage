@@ -57,6 +57,9 @@
   .cta .small{ font-size:2.9mm; line-height:1.8; letter-spacing:.02em; color:var(--soft); margin:1.5mm 0 0; }
   .cta .back{ font-family:"Lora",serif; font-style:italic; font-size:2.9mm; letter-spacing:.05em; color:var(--soft); margin:2mm 0 0; }
   .foot{ position:absolute; left:42mm; right:42mm; bottom:12mm; text-align:center; font-size:2.25mm; line-height:1.75; color:var(--soft); }
+  .ff{ display:flex; align-items:center; justify-content:center; gap:4mm; text-align:left; left:30mm; right:30mm; bottom:24mm; }
+  .back-page .ff{ bottom:13mm; }
+  .flogo{ width:21mm; height:21mm; flex:0 0 auto; }
 
   /* ── 裏 ── */
   .b-head{ top:20mm; }
@@ -100,11 +103,11 @@
 <div class="page" id="page"></div>
 
 <template id="front">
-  <div class="c f-to"><p class="eyebrow">WEEKLY LETTER FOR FAMILIES IN KODAIRA</p><p class="to">小平の、子育て中のご家庭へ</p></div>
+  <div class="c f-to"><p class="eyebrow">WEEKLY LETTER FOR FAMILIES</p><p class="to">子育て中のご家庭へ</p></div>
   <div class="c f-title"><p class="wm">ぼんぼやーじゅ通信</p><p class="bv">Bon Voyage</p></div>
   <div class="c f-head">
-    <h1 class="h1 mincho">週末のおでかけを<span class="dotrow"></span>水曜の朝に</h1>
-    <p class="lead soft">赤ちゃん・未就学児・小学生のいるご家庭へ。<br>となりの市も含めた週末のおでかけ情報を、<br>毎週水曜の朝、LINEで無料でお届けしています。</p>
+    <h1 class="h1 mincho">週末のおでかけを、水曜の朝に</h1>
+    <p class="lead soft">赤ちゃん・未就学児・小学生のいるご家庭へ。<br>小平と、となりの市も含めた週末のおでかけ情報を、<br>毎週水曜の朝、LINEで無料でお届けしています。</p>
   </div>
   <div class="points">
     <div class="pt"><span class="mk"></span><h3>年齢別に</h3><p>赤ちゃん連れ・未就学の子・<br>小学生のページに分けて</p></div>
@@ -115,12 +118,11 @@
   <div class="cta">
     <div class="qr"><img class="qrimg" src="../../homepage/assets/qr/f-hand.png" alt="ぼんぼやーじゅ通信のホームページのQRコード"><p class="u">bonvoya.nicomaru.tokyo</p></div>
     <div>
-      <p class="big">登録しなくても、<br>今週号が読めます</p>
-      <p class="small">ホームページで最新号をどうぞ。合いそうでしたら、同じページからLINEの友だち追加へ。お名前やご住所の入力はいりません。</p>
-      <p class="back">— 裏面に、届く紙面の見本があります</p>
+      <p class="big">LINEで友だち追加すると、<br>毎週水曜の朝に届きます</p>
+      <p class="small">QRからホームページを開き、「LINEで受け取る」を押すだけ。お名前やご住所の入力はいりません。合わなければ、いつでも解除できます。</p>
     </div>
   </div>
-  <div class="foot">発行：ぼんぼやーじゅ通信の会（小平市・花小金井）<br>小平市民活動支援センター あすぴあ 登録団体（第254号）<br>書いているのは、花小金井に住む子育て中の親です<br>お問い合わせ tokyo.papa.home@gmail.com ／ イベント情報の掲載は無料です</div>
+  <div class="foot ff"><img class="flogo" src="../../homepage/assets/brand/logo-color.png" alt="ぼんぼやーじゅ通信のロゴ"><div>発行：ぼんぼやーじゅ通信の会（小平市・花小金井）<br>小平市民活動支援センター あすぴあ 登録団体（第254号）<br>書いているのは、花小金井に住む子育て中の親です<br>お問い合わせ tokyo.papa.home@gmail.com ／ イベント情報の掲載は無料です</div></div>
 </template>
 
 <template id="back">
@@ -183,13 +185,13 @@
     <div class="bq">
       <div class="qr"><img class="qrimg" src="../../homepage/assets/qr/f-hand.png" alt="ぼんぼやーじゅ通信のホームページのQRコード"><p class="u">bonvoya.nicomaru.tokyo</p></div>
       <div>
-        <p class="big">登録しなくても、ぜんぶ読めます</p>
-        <p class="small">最新号もバックナンバーも、カレンダーとマップも、そのままご覧いただけます。読んでみて「毎週ほしい」と思われたら、同じページからLINEの友だち追加へ。合わなければ、いつでも解除できます。</p>
+        <p class="big">友だち追加で、毎週水曜の朝に</p>
+        <p class="small">QRからホームページを開き、「LINEで受け取る」から友だち追加へ。カレンダーやマップ、これまでの号もそこから見られます。合わなければ、いつでも解除できます。</p>
       </div>
     </div>
   </div>
 
-  <div class="foot">発行：ぼんぼやーじゅ通信の会（小平市・花小金井）<br>小平市民活動支援センター あすぴあ 登録団体（第254号）<br>イベント情報のご提供・チラシ設置のご相談 tokyo.papa.home@gmail.com ／ 掲載は無料です</div>
+  <div class="foot ff"><img class="flogo" src="../../homepage/assets/brand/logo-color.png" alt="ぼんぼやーじゅ通信のロゴ"><div>発行：ぼんぼやーじゅ通信の会（小平市・花小金井）<br>小平市民活動支援センター あすぴあ 登録団体（第254号）<br>イベント情報のご提供・チラシ設置のご相談 tokyo.papa.home@gmail.com ／ 掲載は無料です</div></div>
 </template>
 
 <script>
@@ -199,6 +201,7 @@
   if (bw) document.body.classList.add('bw');
   const page = document.getElementById('page');
   page.innerHTML = document.getElementById(side).innerHTML;
+  if (bw) page.querySelectorAll('.flogo').forEach((i) => i.src = '../../homepage/assets/brand/logo-mono.png');
   if (q.get('qr')) page.querySelectorAll('.qrimg').forEach((i) => i.src = '../../homepage/assets/qr/' + q.get('qr'));
 
   // ── 花の枠（ロゴの花束を四隅に）──
@@ -217,17 +220,58 @@
     const t = `translate(${x} ${y}) rotate(${rot}) scale(${s}) translate(-585 -105)`;
     return `<g transform="${t}">${fills(['red'])}<path d="${A.balloon}" fill="${INK}"/></g>`;
   };
-  const frame = `<rect x="8" y="8" width="194" height="281" rx="3" fill="none" stroke="${bw ? '#888' : '#CFC8B8'}" stroke-width=".3"/>`;
-  let art = frame;
+  // ── 花の枠（ロゴの花と葉を、細いつるに沿って並べる）──
+  const PC = A.pieces;
+  const piece = (name, x, y, rot, size) => {
+    const p = PC[name], [x0, y0, x1, y1] = p.box, cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+    const s = size / Math.max(x1 - x0, y1 - y0);
+    const f = ['leaf', 'pink', 'gold', 'sky'].map((k) => (p[k] && COL[k] !== 'none') ? `<path d="${p[k]}" fill="${COL[k]}"/>` : '').join('');
+    return `<g transform="translate(${x.toFixed(2)} ${y.toFixed(2)}) rotate(${rot.toFixed(1)}) scale(${s.toFixed(4)}) translate(${-cx} ${-cy})"><path d="${p.ink}" fill="none" stroke="${PAPER}" stroke-width="14" stroke-linejoin="round"/>${f}<path d="${p.ink}" fill="${INK}"/></g>`;
+  };
+  // 角の丸い四角に沿った点（周長の割合 t → 位置と向き）
+  const L = 15, T = 15, R = 195, B = 282, RR = 9;
+  const W_ = R - L - 2 * RR, H_ = B - T - 2 * RR, PER = 2 * (W_ + H_) + 2 * Math.PI * RR;
+  const at = (d) => {
+    d = ((d % PER) + PER) % PER;
+    const segs = [
+      ['l', W_, (u) => [L + RR + u, T, 0]],
+      ['a', Math.PI * RR / 2, (u) => { const a = -Math.PI / 2 + u / RR; return [R - RR + RR * Math.cos(a), T + RR + RR * Math.sin(a), a * 180 / Math.PI + 90]; }],
+      ['l', H_, (u) => [R, T + RR + u, 90]],
+      ['a', Math.PI * RR / 2, (u) => { const a = u / RR; return [R - RR + RR * Math.cos(a), B - RR + RR * Math.sin(a), a * 180 / Math.PI + 90]; }],
+      ['l', W_, (u) => [R - RR - u, B, 180]],
+      ['a', Math.PI * RR / 2, (u) => { const a = Math.PI / 2 + u / RR; return [L + RR + RR * Math.cos(a), B - RR + RR * Math.sin(a), a * 180 / Math.PI + 90]; }],
+      ['l', H_, (u) => [L, B - RR - u, 270]],
+      ['a', Math.PI * RR / 2, (u) => { const a = Math.PI + u / RR; return [L + RR + RR * Math.cos(a), T + RR + RR * Math.sin(a), a * 180 / Math.PI + 90]; }],
+    ];
+    for (const [, len, fn] of segs) { if (d <= len) return fn(d); d -= len; }
+    return segs[0][2](0);
+  };
+  // つる（少しゆらす）
+  let vine = '';
+  for (let d = 0; d <= PER; d += 1) {
+    const [x, y, ang] = at(d), w = 0.55 * Math.sin(d / 9) + 0.35 * Math.sin(d / 23);
+    const nx = -Math.sin(ang * Math.PI / 180), ny = Math.cos(ang * Math.PI / 180);
+    vine += `${d ? 'L' : 'M'}${(x + nx * w).toFixed(2)},${(y + ny * w).toFixed(2)}`;
+  }
+  let art = '';
   if (side === 'front') {
-    art += bouquet(6, 6, 135, 74, false) + bouquet(204, 291, -45, 74, false)
-         + bouquet(205, 7, -135, 48, true) + bouquet(5, 290, 45, 48, true)
-         + balloon(143, 76, 26, 6);
-  } else {
-    art += bouquet(205, 6, -135, 42, true) + bouquet(5, 291, 45, 44, true)
-         + bouquet(6, 6, 135, 36, false) + bouquet(204, 291, -45, 36, false);
+    art += `<path d="${vine}Z" fill="none" stroke="${INK}" stroke-width=".32" stroke-linecap="round"/>`;
+    const seq = ['fpink', 'stop', 'sright', 'fgold', 'slow', 'fbud', 'lbig', 'fsky', 'stop', 'slow', 'fpink', 'sright', 'fbud', 'lbig', 'fgold', 'stop', 'fsky', 'slow'];
+    const STEP = 17;
+    let k = 0;
+    for (let d = 4; d < PER - 6; d += STEP, k++) {
+      const name = seq[k % seq.length], [x, y, ang] = at(d), flower = name[0] === 'f';
+      const side_ = (k % 2 ? 1 : -1);
+      const nx = -Math.sin(ang * Math.PI / 180) * side_, ny = Math.cos(ang * Math.PI / 180) * side_;
+      const off = flower ? 0 : (side_ > 0 ? 2.6 : 1.4);
+      const rot = flower ? (k * 47) % 360 : ang + (side_ > 0 ? 90 : -90) + ((k * 23) % 30 - 15);
+      const size = flower ? (name === 'fbud' ? 7 : 13) : (name === 'lbig' ? 13 : 12);
+      art += piece(name, x + nx * off, y + ny * off, rot, size);
+    }
+    art += balloon(143, 76, 26, 6);
   }
   page.insertAdjacentHTML('afterbegin', `<svg class="art" viewBox="0 0 210 297" xmlns="http://www.w3.org/2000/svg">${art}</svg>`);
+  if (side === 'back') page.classList.add('back-page');
 </script>
 </body>
 </html>
