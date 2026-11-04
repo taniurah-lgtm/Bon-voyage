@@ -37,7 +37,9 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
 import { geminiModels, takesThinkingBudget, withRetry, describeError } from '../lib/gemini.mjs';
 
-const TODAY = new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Tokyo' }); // YYYY-MM-DD (JST)
+// 🆕 2026-11-05: 前の日の夕方に翌日の分を作れるように、DRAFT_DATE（YYYY-MM-DD）で日付を指定できる
+const TODAY = (/^\d{4}-\d{2}-\d{2}$/.test(process.env.DRAFT_DATE || '') ? process.env.DRAFT_DATE : '') ||
+  new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Tokyo' }); // YYYY-MM-DD (JST)
 // GEMINI_MODEL が指定されればそれだけを、無ければ複数モデルを順に試す（無料枠/可用性の違いを吸収）。
 const KEY = process.env.GEMINI_API_KEY || '';
 // 🔴 2026-09-23、/f から /th に変えた。/f は紙（チラシのQR）の計測コードで、
@@ -457,8 +459,8 @@ async function gen() {
 }
 
 const out = `social/drafts/${TODAY}.md`;
-// 🔴 その日の下書きが出来ていれば何もしない（朝の2回目・手で書いた日）。FORCE=1 なら作り直す
-if (!process.env.FORCE && existsSync(out) && /（承認待ち・まだ投稿していません）/.test(readFileSync(out, 'utf8').split('\n')[0])) {
+// 🔴 その日の下書きが出来ていれば何もしない（朝の2回目・手で書いた日・Claude が作った／差し替えた日）。FORCE=1 なら作り直す
+if (!process.env.FORCE && existsSync(out) && /（承認待ち・まだ投稿していません）|Claude が/.test(readFileSync(out, 'utf8').split('\n')[0])) {
   console.log('今日の下書きはもう出来ている。何もしない:', out);
   process.exit(0);
 }

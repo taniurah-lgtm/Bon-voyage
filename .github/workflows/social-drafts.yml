@@ -14,6 +14,12 @@ on:
     #    その日の下書きが出来ていれば、2回目は何もしない（手で書いた日も上書きしない）。
     #    ⚠️ 実際に動くのは指定の3〜4時間あと（10/30 は 06:29、10/31 は 05:27 JST に動いた）。
     #    だから「後ろにもう1回」ではなく「前にもう1回」。00:17 より前にすると JST の日付が前日になるので、ここが下限
+    # 🔴 2026-11-05: 11/5 は 06:21 JST に動き出し、06:43 に出来たが、保存（push）が他の書き込みと重なって失敗し、届かなかった。
+    #    → **前の日の夕方に、翌日の分を作る**（18:17・20:17 JST。数時間遅れても、日付が変わる前後には出来ている）。
+    #      夕方（12時以降）に動いたときは DRAFT_DATE=翌日 で作る。夜中・朝の2回は、出来ていなければ作る保険として残す。
+    #    → 保存は、ほかの書き込みを取り込んでから（pull --rebase）、最大4回やり直す
+    - cron: "17 9 * * *"
+    - cron: "17 11 * * *"
     - cron: "17 15 * * *"
     - cron: "17 17 * * *"
   workflow_dispatch:
@@ -48,8 +54,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+      - name: Which day
+        id: day
+        run: |
+          # 夕方（JST 12時以降）に動いたら、翌日の分を作る
+          if [ "$(TZ=Asia/Tokyo date +%H)" -ge 12 ]; then d=$(TZ=Asia/Tokyo date -d tomorrow +%F); else d=$(TZ=Asia/Tokyo date +%F); fi
+          echo "date=$d" >> "$GITHUB_OUTPUT"
+          echo "作る日: $d"
       - name: Generate drafts
         env:
+          DRAFT_DATE: ${{ steps.day.outputs.date }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
           FORCE: ${{ inputs.force && '1' || '' }}
@@ -63,6 +77,10 @@ jobs:
           if git diff --cached --quiet; then
             echo "変更なし（ドラフトの更新なし）"
           else
-            git commit -m "social: daily SNS drafts ($(TZ=Asia/Tokyo date +%F))"
-            git push
+            git commit -m "social: daily SNS drafts (${{ steps.day.outputs.date }})"
+            for i in 1 2 3 4; do
+              git pull --rebase origin "${{ github.ref_name }}" && git push && exit 0
+              echo "push に失敗。$((i*10))秒待ってやり直す"; sleep $((i*10))
+            done
+            exit 1
           fi
