@@ -4954,6 +4954,42 @@
    "cat": "spot"
   },
   {
+   "id": "E215",
+   "name": "3Dポーリングアニマル（テルル FLAT小平店）",
+   "dates": [
+    "2026-11-21"
+   ],
+   "span": null,
+   "when": "2026年11月21日(土)〜23日(月・祝) 10:30〜18:30（30分ごとの時間帯で予約。所要は60分が目安）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:30",
+   "end": "18:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "テルル FLAT小平店（小平市小川東町3-7-1 FLAT小平 2階）",
+   "mapq": "小平市テルル FLAT小平店",
+   "summary": "動物のフィギュアを選び、好きな絵の具を3色選んで流しかけて、マーブル模様のフィギュアを作る（ポーリングアート）。できたものはストラップを付けて持ち帰れる",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "参加無料",
+   "discount": "",
+   "target": "",
+   "url": "https://www.instagram.com/p/DfVCU4sn6ga/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "other"
+  },
+  {
    "id": "E118",
    "name": "玉川上水わくわくクリーンフェスティバル（第2回・WAKU WA CLEAN）",
    "dates": [
