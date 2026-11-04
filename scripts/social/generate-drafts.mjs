@@ -62,7 +62,9 @@ function upcomingIds() {
     const pub = JSON.parse(readFileSync('docs/homepage/data/events-public.json', 'utf8')).events || [];
     const from = new Date(Date.parse(TODAY + 'T00:00:00Z') + 2 * 86400000).toISOString().slice(0, 10);
     const until = new Date(Date.parse(TODAY + 'T00:00:00Z') + LEDGER_AHEAD_DAYS * 86400000).toISOString().slice(0, 10);
-    return new Set(pub.filter(e => (e.dates || []).some(d => d >= from && d <= until)).map(e => e.id));
+    // 長い会期（10/29〜11/29 など）は dates が初日だけなので、span の終わりも見る
+    const live = (e) => (e.dates || []).some(d => d >= from && d <= until) || (e.span && e.span.to >= from && e.span.from <= until);
+    return new Set(pub.filter(live).map(e => e.id));
   } catch { return null; }
 }
 function loadLedger() {
