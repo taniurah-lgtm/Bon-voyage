@@ -5895,6 +5895,46 @@
     "raw": "10/31(土) 17:00まで（10/24(土) 10:00 から・図書館の申込フォーム）"
    },
    "source": "events/2026-10.md"
+  },
+  {
+   "id": "E216",
+   "name": "年末のごほうびマーケット「わくわく冬色フェス」（田無アスタ）",
+   "dates": [
+    "2026-12-27",
+    "2026-12-28"
+   ],
+   "span": null,
+   "when": "2026年12月27日(日)・28日(月) 11:00〜17:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "11:00",
+   "end": "17:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "田無アスタ 2階 センターコート（西東京市。西武新宿線 田無駅 徒歩1分＝花小金井から2駅）",
+   "mapq": "田無アスタ",
+   "summary": "飲食の販売・ハンドメイド・親子ワークショップ・美容のブース。「子ども店長」は27日だけ",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "入場無料。ワークショップはすべて有料（予約の方法・支払い方法はブースごとに違う。各店の Instagram か主催の紹介投稿で確認）",
+   "discount": "",
+   "target": "",
+   "url": "",
+   "status": "候補",
+   "confidence": "主催のチラシで確認（2026-11-05）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-12.md"
   }
  ],
  "standing": [
@@ -6390,6 +6430,12 @@
   ],
   "2026-12-06": [
    "E210"
+  ],
+  "2026-12-27": [
+   "E216"
+  ],
+  "2026-12-28": [
+   "E216"
   ]
  },
  "unresolved": [
