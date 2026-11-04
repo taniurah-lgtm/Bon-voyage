@@ -214,11 +214,13 @@ function dateChip(ev) {
   return `<div class="chip"><span class="md">—</span><span class="wd">OPEN</span></div>`;
 }
 
-function card(item, ev, { pick = false } = {}) {
+function card(item, ev, { pick = false, age = '' } = {}) {
   const a = ev.ages || {};
   const ages = AGES.map((g) => `<span class="age ${markClass(a[g.key])}" title="${AGE_SHORT[g.key]}">${g.icon}<b>${esc(a[g.key] || '？')}</b></span>`).join('');
   const rokuto = /多摩六都/.test(`${ev.name}${ev.place}`);
-  const note = item.note || ev.kidsNote || '';
+  // 🆕 2026-11-04 オーナー: 年齢別のページに差をつける。同じ催しでも、ひとことを年齢ごとに書き分けてよい
+  //    web の item に "notes": {"baby": "…", "pre": "…", "elem": "…"}（無い年齢は "note" を使う）
+  const note = (item.notes && age && item.notes[age]) || item.note || ev.kidsNote || '';
   const cal = CAL.get(ev.id);
   const pic = picnicFor(ev);
   return `
@@ -463,6 +465,10 @@ for (const f of files) {
       else if (!(ev.ages && ev.ages.baby && ev.ages.pre && ev.ages.elem))
         problems.push(`${date}: ${it.id} に年齢の目安（👶🧒🎒）が3つそろっていない。どのタブに出すか決められない`);
       if (it.note && LEAK.test(it.note)) problems.push(`${date}: ${it.id} のひとことに内部の話が入っている: ${it.note}`);
+      for (const [k, v] of Object.entries(it.notes || {})) {
+        if (!['baby', 'pre', 'elem'].includes(k)) problems.push(`${date}: ${it.id} の notes に知らない年齢 "${k}"（baby・pre・elem のどれか）`);
+        else if (LEAK.test(String(v))) problems.push(`${date}: ${it.id} の${k}向けのひとことに内部の話が入っている: ${v}`);
+      }
       for (const pmsg of instaProblems(it)) problems.push(`${date}: ${pmsg}`);
       return ev ? { it, ev } : null;
     }).filter(Boolean);
@@ -526,8 +532,8 @@ for (const f of files) {
     const next = forAge(ahead, g.key);
     return `<section class="panel" id="${g.key}" data-age="${g.key}">
   <div class="sec"><p class="kicker">THIS WEEK</p><h2>今週のおでかけ</h2></div>
-  ${now.length ? now.map(({ it, ev }) => card(it, ev, { pick: it.id === spec.pick })).join('') : '<p class="empty">今週は、この年齢向けの催しが少なめです。ほかのタブもご覧ください。</p>'}
-  ${next.length ? `<div class="sec"><p class="kicker">COMING UP</p><h2>先取り・申込の締切</h2></div>${next.map(({ it, ev }) => card(it, ev)).join('')}` : ''}
+  ${now.length ? now.map(({ it, ev }) => card(it, ev, { pick: it.id === spec.pick, age: g.key })).join('') : '<p class="empty">今週は、この年齢向けの催しが少なめです。ほかのタブもご覧ください。</p>'}
+  ${next.length ? `<div class="sec"><p class="kicker">COMING UP</p><h2>先取り・申込の締切</h2></div>${next.map(({ it, ev }) => card(it, ev, { age: g.key })).join('')}` : ''}
   ${g.key !== 'elem' ? `<a class="entei" href="/entei.html" data-goatcounter-click="週｜園庭開放">🌱 <b>園庭開放・未就園児の会</b><span>入園前の子と、幼稚園の園庭で遊べる日。小平の幼稚園・こども園ごとに、これから2週間の日がわかります</span></a>` : ''}
   <a class="entei" href="/teirei.html" data-goatcounter-click="週｜定例">📚 <b>児童館・図書館・子育てひろばの定例</b><span>図書館のおはなし会や絵本のへや、児童館のこども広場など、毎月くり返す無料の会</span></a>
 </section>`;
@@ -620,6 +626,16 @@ for (const f of files) {
   }));
   built++;
   console.log(`  ${date}: ${issue} 今週末${items.length}件・先取り${ahead.length}件 → /week/${date}/ と baby/pre/elem`);
+  // 🆕 2026-11-04 オーナー「年齢別の内容はもっと差があるように」: そのタブにしか出ない催しを数える（目安は各3件以上）
+  {
+    const all = [...items, ...ahead];
+    const on = (x, k) => ['◎', '○'].includes((x.ev.ages || {})[k]);
+    const only = (k) => all.filter((x) => on(x, k) && AGES.filter((g) => g.key !== k).every((g) => !on(x, g.key))).length;
+    const own = (k) => all.filter((x) => x.it.notes && x.it.notes[k]).length;
+    const line = AGES.map((g) => `${g.icon}${only(g.key)}件`).join(' ');
+    const few = AGES.filter((g) => only(g.key) < 3).map((g) => g.tab);
+    if (!sent.has(date)) console.log(`    そのタブにしか出ない催し: ${line}（年齢別のひとこと ${AGES.map((g) => `${g.icon}${own(g.key)}`).join(' ')}）${few.length ? ` ⚠ 目安の3件に届かない: ${few.join('・')}` : ''}`);
+  }
 }
 
 if (problems.length) {
