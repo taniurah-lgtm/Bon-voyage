@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>A4チラシ（ロゴ版）｜ぼんぼやーじゅ通信</title>
+<!--
+  2026-11-04 新しいロゴに合わせたチラシの表。30代の、おしゃれに敏感な読者が手に取りたくなる紙。
+  ・色は ?mode=bw で白黒（FAX・リソ・白黒コピー用）
+  ・QRは ?qr=ファイル名（assets/qr/ の中）で差し替え
+  ・下端8mmは安全帯（家庭用プリンタ・コンビニは紙のふちまで刷れない）
+  作り直し: node scripts/build-flyer-logo.mjs
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500&family=Lora:ital,wght@0,500;1,400;1,500&family=Klee+One:wght@600&display=block" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  :root{
+    --paper:#FBFAF5; --ink:#2F3E48; --soft:#5E6B73; --line:#D9D3C4;
+    --pink:#F3A9B9; --gold:#F2BE62; --sky:#A6D2E6; --leaf:#A3CC93; --coral:#EE7C64;
+  }
+  .bw{ --paper:#FFFFFF; --ink:#111111; --soft:#333333; --line:#999999;
+       --pink:#111; --gold:#111; --sky:#111; --leaf:#111; --coral:#111; }
+  html,body{ margin:0; padding:0; background:#e9e6df; }
+  .page{ position:relative; width:210mm; height:297mm; margin:0 auto; overflow:hidden;
+         background:var(--paper); color:var(--ink);
+         font-family:"Zen Kaku Gothic New",sans-serif; }
+  /* 細い枠（上品に。端から6mm） */
+  .frame{ position:absolute; inset:6mm 6mm 6mm 6mm; border:0.25mm solid var(--line); border-radius:2mm; pointer-events:none; }
+
+  .top{ position:absolute; top:13mm; left:0; right:0; text-align:center; }
+  .eyebrow{ font-family:"Lora",serif; font-style:italic; font-size:3.4mm; letter-spacing:.32em; color:var(--soft); margin:0; }
+  .to{ font-family:"Shippori Mincho B1",serif; font-weight:500; font-size:4.1mm; letter-spacing:.18em; margin:2.4mm 0 0; }
+
+  .logo{ position:absolute; top:29mm; left:50%; width:118mm; transform:translateX(-50%); }
+  .logo img{ width:100%; display:block; }
+
+  .head{ position:absolute; top:152mm; left:0; right:0; text-align:center; }
+  .h1{ font-family:"Shippori Mincho B1",serif; font-weight:700; font-size:9.6mm; letter-spacing:.08em; margin:0; line-height:1.35; }
+  .h1 .dot{ display:inline-block; width:2.1mm; height:2.1mm; border-radius:50%; background:var(--coral); vertical-align:middle; margin:0 1.2mm 1.6mm; }
+  .lead{ font-size:3.55mm; line-height:1.95; letter-spacing:.06em; color:var(--soft); margin:4.2mm auto 0; width:150mm; }
+
+  .points{ position:absolute; top:198mm; left:17mm; right:17mm; display:grid; grid-template-columns:repeat(3,1fr); gap:5mm; }
+  .pt{ text-align:center; padding:0 1mm; }
+  .pt .mk{ display:block; width:3.2mm; height:3.2mm; border-radius:50%; margin:0 auto 2.2mm; }
+  .pt:nth-child(1) .mk{ background:var(--pink); }
+  .pt:nth-child(2) .mk{ background:var(--gold); }
+  .pt:nth-child(3) .mk{ background:var(--sky); }
+  .bw .pt .mk{ background:none; border:0.35mm solid #111; }
+  .pt h3{ font-family:"Shippori Mincho B1",serif; font-weight:700; font-size:4.5mm; letter-spacing:.1em; margin:0; }
+  .pt p{ font-size:3.0mm; line-height:1.75; letter-spacing:.03em; margin:1.8mm 0 0; color:var(--soft); }
+
+  .rule{ position:absolute; top:229.5mm; left:30mm; right:30mm; border-top:0.25mm solid var(--line); }
+
+  .cta{ position:absolute; top:235mm; left:24mm; right:24mm; display:flex; align-items:center; gap:8mm; }
+  .qr{ flex:0 0 auto; width:33mm; padding:2.6mm; background:#fff; border:0.25mm solid var(--line); border-radius:2mm; text-align:center; }
+  .qr img{ width:28mm; height:28mm; display:block; margin:0 auto; }
+  .qr .u{ font-family:"Lora",serif; font-size:2.35mm; letter-spacing:.02em; margin:1.4mm 0 0; color:var(--soft); }
+  .cta .txt{ flex:1 1 auto; }
+  .cta .big{ font-family:"Shippori Mincho B1",serif; font-weight:700; font-size:5.2mm; letter-spacing:.08em; margin:0; line-height:1.5; }
+  .cta .small{ font-size:3.0mm; line-height:1.8; letter-spacing:.03em; color:var(--soft); margin:1.6mm 0 0; }
+  .cta .back{ font-family:"Lora",serif; font-style:italic; font-size:3.0mm; letter-spacing:.06em; color:var(--soft); margin:2.2mm 0 0; }
+
+  .foot{ position:absolute; left:14mm; right:14mm; bottom:10mm; text-align:center; font-size:2.35mm; line-height:1.75; letter-spacing:.02em; color:var(--soft); }
+</style>
+</head>
+<body>
+<div class="page" id="page">
+  <div class="frame"></div>
+
+  <div class="top">
+    <p class="eyebrow">WEEKLY LETTER FOR FAMILIES IN KODAIRA</p>
+    <p class="to">小平の、子育て中のご家庭へ</p>
+  </div>
+
+  <div class="logo"><img id="logo" src="../../homepage/assets/brand/logo-color.png" alt="ぼんぼやーじゅ通信"></div>
+
+  <div class="head">
+    <h1 class="h1">週末のおでかけを<span class="dot"></span>水曜の朝に</h1>
+    <p class="lead">赤ちゃん・未就学児・小学生のいるご家庭へ。<br>となりの市も含めた週末のおでかけ情報を、<br>毎週水曜の朝、LINEで無料でお届けしています。</p>
+  </div>
+
+  <div class="points">
+    <div class="pt"><span class="mk"></span><h3>年齢別に</h3><p>赤ちゃん連れ・未就学の子・小学生。<br>それぞれのページにまとめています</p></div>
+    <div class="pt"><span class="mk"></span><h3>公式で確かめて</h3><p>市や施設の公式ページで、<br>一件ずつ確かめてから載せています</p></div>
+    <div class="pt"><span class="mk"></span><h3>公園から講座まで</h3><p>公園・児童館・図書館・科学館。<br>季節のお祭りや、申込のいる講座も</p></div>
+  </div>
+
+  <div class="rule"></div>
+
+  <div class="cta">
+    <div class="qr"><img id="qr" src="../../homepage/assets/qr/f-hand.png" alt="ぼんぼやーじゅ通信のホームページのQRコード"><p class="u">bonvoya.nicomaru.tokyo</p></div>
+    <div class="txt">
+      <p class="big">登録しなくても、<br>今週号が読めます</p>
+      <p class="small">ホームページで最新号をどうぞ。合いそうでしたら、同じページからLINEの友だち追加へ。お名前やご住所の入力はいりません。</p>
+      <p class="back">— 裏面に、届く紙面の見本があります</p>
+    </div>
+  </div>
+
+  <div class="foot">発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）<br>書いているのは、花小金井に住む子育て中の親です。お問い合わせ tokyo.papa.home@gmail.com ／ イベント情報の掲載は無料です</div>
+</div>
+<script>
+  const q = new URLSearchParams(location.search);
+  if (q.get('mode') === 'bw') { document.body.classList.add('bw'); document.getElementById('logo').src = '../../homepage/assets/brand/logo-mono.png'; }
+  if (q.get('qr')) document.getElementById('qr').src = '../../homepage/assets/qr/' + q.get('qr');
+</script>
+</body>
+</html>
