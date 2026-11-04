@@ -145,3 +145,6 @@ A simple hand-drawn logo mark for a small local newsletter that tells families a
 
 🔴 差し替え（ファビコン・note・Meta・チラシ・ホームページ）は**オーナーのOKのあと**。水曜は 9:00 の配信が終わってから。
 
+**✅ 2026-11-04 オーナー「これでokです！決定！」（案29・カラー全体塗り・日本語が上）。**
+差し替えた: ファビコン（`docs/homepage/favicon.svg`・アイコンを128pxで埋め込み）／`assets/line-icon.png`／`assets/note-icon.png`／`docs/print/meta-app-icon-1024.png`（どれも `icon-color-1024.png` から）。
+オーナーが設定するもの: LINE 公式アカウント・Threads・Instagram・note のアイコン（`icon-color-1024.png`）。チラシの見出しへの差し込みは次にチラシを刷り直すとき。
