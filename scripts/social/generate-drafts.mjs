@@ -53,10 +53,29 @@ const ASK_TODAY = process.env.ASK_DAY === '1' || EPOCH_DAY % 2 === 0;
 mkdirSync('social/drafts', { recursive: true });
 
 // --- 収集: 台帳（events/YYYY-MM.md の直近3ファイル）---
+// 🔴 2026-11-04: 台帳3か月ぶんをそのまま渡していたので、①終わった催し（11/3 の SAYAMA HILLS DAY）を 11/4 に選び、
+//    ②プロンプトが長すぎて生成が途中で切れた。**これから紹介できる催しの節（### E…）だけ**を渡す:
+//    公開データの日付のどれかが「明後日〜3週間先」に入るもの。公開データが読めないときは、従来どおり全部渡す。
+const LEDGER_AHEAD_DAYS = 21;
+function upcomingIds() {
+  try {
+    const pub = JSON.parse(readFileSync('docs/homepage/data/events-public.json', 'utf8')).events || [];
+    const from = new Date(Date.parse(TODAY + 'T00:00:00Z') + 2 * 86400000).toISOString().slice(0, 10);
+    const until = new Date(Date.parse(TODAY + 'T00:00:00Z') + LEDGER_AHEAD_DAYS * 86400000).toISOString().slice(0, 10);
+    return new Set(pub.filter(e => (e.dates || []).some(d => d >= from && d <= until)).map(e => e.id));
+  } catch { return null; }
+}
 function loadLedger() {
   let files = [];
   try { files = readdirSync('events').filter(f => /^\d{4}-\d{2}\.md$/.test(f)).sort(); } catch {}
-  return files.slice(-3).map(f => `===== events/${f} =====\n${readFileSync('events/' + f, 'utf8')}`).join('\n\n');
+  const ids = upcomingIds();
+  const parts = files.slice(-3).map(f => {
+    const md = readFileSync('events/' + f, 'utf8');
+    if (!ids) return `===== events/${f} =====\n${md}`;
+    const keep = md.split(/(?=^### E\d+\.)/m).filter(sec => { const m = sec.match(/^### (E\d+)\./); return m && ids.has(m[1]); });
+    return keep.length ? `===== events/${f}（これから紹介できるものだけ） =====\n${keep.join('\n')}` : '';
+  }).filter(Boolean);
+  return parts.join('\n\n');
 }
 
 // --- 問いかけの相手: data/map-spots.json から1件選ぶ ---
@@ -423,7 +442,9 @@ async function gen() {
                   : bad ? bad
                          : `紹介と問いかけが同じ場所(${SPOT && SPOT.name})`;
         errs.push(`${model}/${maxTokens}${useThinking ? '' : '(思考なし)'}: ${why}`);
-        if (!partial || r.text.length > partial.text.length) partial = { text: r.text, model };
+        // 🔴 2026-11-04: 最後の保険に「終わった催し」の草案を選ばない（長さより、使えるかを先に見る）
+        const staleNow = !!staleReason(r.text);
+        if (!partial || (partial.stale && !staleNow) || (partial.stale === staleNow && r.text.length > partial.text.length)) partial = { text: r.text, model, stale: staleNow };
         if (bad) { prompt += avoidNote(bad, r.text); break; } // 同じ話を避けさせて次へ
         break; // 同じ条件で思考ありなしを変えても改善しないので次のトークン量へ
       }

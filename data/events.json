@@ -5910,6 +5910,25 @@
    "url": "https://www.tokyo-park.or.jp/park/koganei/news/index.html",
    "confidence": "🟡 告知の存在と期間のみ確認。場所の詳細・投票方法・費用は未取得",
    "source": "events/2026-09.md"
+  },
+  {
+   "id": "E214",
+   "name": "国営昭和記念公園「秋の夜散歩2026」（立川）",
+   "span": "2026年10月29日(木)〜11月29日(日)、点灯 16:30〜20:30（最終入園 20:30・閉園 21:00）",
+   "place": "国営昭和記念公園（立川市）。夜の入退園は西立川口・立川口だけ",
+   "mapq": "国営昭和記念公園",
+   "summary": "",
+   "kidsNote": "",
+   "ages": {
+    "baby": "△",
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "入園料 大人450円・シルバー210円・中学生以下無料",
+   "discount": "",
+   "url": "https://www.showakinen-koen.jp/autumn-night-walk/",
+   "confidence": "公式で確認（2026-11-04）",
+   "source": "events/2026-11.md"
   }
  ],
  "byDate": {
