@@ -11,7 +11,7 @@
   A4に 3列×9段 = 27枚（縦向きの 6×4=24 より多い）。外側の余白に、切る線と折る線の目印。
   ?mode=bw で白黒。?one=1 で1枚だけ（見本）。作り直し: node scripts/build-sticker.mjs
 -->
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500&family=Lora:ital,wght@1,500&family=Klee+One:wght@600&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700&family=Lora:ital,wght@1,500&family=Klee+One:wght@600&display=block" rel="stylesheet">
 <script src="../../homepage/assets/brand/frame-art.js"></script>
 <style>
   @page { margin: 0; }
@@ -30,11 +30,11 @@
   .w1{ top:8.8mm; font-family:"Klee One",serif; font-weight:600; font-size:3.25mm; letter-spacing:.02em; }
   .w2{ top:13.0mm; font-family:"Klee One",serif; font-weight:600; font-size:3.25mm; letter-spacing:.3em; padding-left:.3em; }
   .bv{ top:17.8mm; font-family:"Lora",serif; font-style:italic; font-weight:500; font-size:1.9mm; letter-spacing:.1em; color:var(--soft); }
-  .tg{ top:1.3mm; font-size:1.6mm; letter-spacing:.02em; color:var(--soft); }
-  .qr{ top:4.2mm; line-height:0; }
-  .qr img{ width:19.6mm; height:19.6mm; display:inline-block; background:#fff; }
-  .q1{ top:24.1mm; font-size:1.6mm; letter-spacing:.01em; }
-  .q2{ top:26.4mm; font-size:1.25mm; color:var(--soft); }
+  /* 裏: 3cm角でも読める大きさに（2026-11-05 オーナー「QRの上と下の文字が小さい」）。アドレスの行はやめて2行だけ */
+  .tg{ top:2.6mm; font-size:2.35mm; line-height:1; letter-spacing:.04em; }
+  .qr{ top:5.9mm; line-height:0; }
+  .qr img{ width:18mm; height:18mm; display:inline-block; background:#fff; }
+  .q1{ top:24.9mm; font-size:2.35mm; line-height:1; font-weight:700; letter-spacing:.02em; }
   .marks{ position:absolute; inset:0; width:210mm; height:297mm; pointer-events:none; }
 </style>
 </head>
@@ -48,10 +48,9 @@
       <div class="c bv">Bon Voyage</div>
     </div>
     <div class="half back">
-      <div class="c tg">子連れの、週末のおでかけ情報</div>
+      <div class="c tg">週末のおでかけ情報</div>
       <div class="c qr"><img src="../../homepage/assets/qr/f-tag.png" alt="QRコード"></div>
-      <div class="c q1">毎週水曜の朝、LINEで（無料）</div>
-      <div class="c q2">bonvoya.nicomaru.tokyo</div>
+      <div class="c q1">毎週水曜・LINEで無料</div>
     </div>
   </div>
 </template>
