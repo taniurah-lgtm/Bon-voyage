@@ -5069,45 +5069,6 @@
    "cat": "fest"
   },
   {
-   "id": "E170",
-   "name": "多摩六都科学館 キッチンサイエンス「カラーマジックケーキを作ろう」",
-   "dates": [
-    "2026-11-22"
-   ],
-   "span": null,
-   "when": "11/22(日) 13:30〜15:30",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": "13:30",
-   "end": "15:30",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "多摩六都科学館 科学学習室（西東京市芝久保町5-10-64）",
-   "mapq": "多摩六都科学館 科学学習室",
-   "summary": "酸性・アルカリ性で色が変わる化学実験と、ブルーベリージャムの色素（アントシアニン）で3色のパウンドケーキを作る調理実習",
-   "kidsNote": "小学4年生から。きょうだいの付き添い入室はできない。",
-   "caution": "",
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "✕",
-    "pre": "✕",
-    "elem": "○"
-   },
-   "cost": "1,500円（Gemini は「記載なし」と書いていたが、公式に明記）",
-   "discount": "",
-   "target": "小学4年生〜大人（小学生は保護者と参加。参加者以外は入室不可）／ 定員24人",
-   "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3719&day=2026-11-22",
-   "tentative": false,
-   "deadline": {
-    "date": "2026-11-09",
-    "raw": "🔴 申込: Webで抽選。締切 11/9(月)必着。1組1回のみ。当選者にだけ締切から3日以内に参加券"
-   },
-   "cat": "spot"
-  },
-  {
    "id": "E192",
    "name": "NPO法人小平こども劇場「みんなで自然をあそぼう」",
    "dates": [
