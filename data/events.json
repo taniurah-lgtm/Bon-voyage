@@ -5734,6 +5734,48 @@
    "source": "events/2026-11.md"
   },
   {
+   "id": "E217",
+   "name": "国立天文台 三鷹キャンパス「定例観望会」",
+   "dates": [
+    "2026-11-28"
+   ],
+   "span": null,
+   "when": "2026年11月28日(土)。集合 グループ1 18:30／グループ2 19:05（10〜3月の集合は 18:30〜18:40／19:05〜19:15、終わりは 19:30ごろ／20:05ごろ）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "18:30",
+   "end": "18:40",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "国立天文台 三鷹キャンパス（三鷹市大沢）",
+   "mapq": "国立天文台 三鷹キャンパス",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "公式の読んだページに記載なし（要確認）",
+   "discount": "",
+   "target": "小学生以下（乳幼児を含む）は保護者の同伴が必要",
+   "url": "https://prc.nao.ac.jp/stargazing/",
+   "status": "候補",
+   "confidence": "公式で確認（2026-11-05）",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-11-19",
+    "raw": "事前申込・抽選。Webフォームだけ（電話の受付なし）。申込期間 11/18(水) 11:00 〜 11/19(木) 正午"
+   },
+   "source": "events/2026-11.md"
+  },
+  {
    "id": "E207",
    "name": "親子で楽しむおえかきワークショップ（津田図書館）",
    "dates": [
@@ -6420,7 +6462,8 @@
   ],
   "2026-11-28": [
    "E200",
-   "E212"
+   "E212",
+   "E217"
   ],
   "2026-11-29": [
    "E207"
