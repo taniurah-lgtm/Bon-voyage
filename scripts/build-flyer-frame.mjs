@@ -21,7 +21,7 @@ const OUT = 'docs/homepage/assets';
 mkdirSync(OUT, { recursive: true });
 const browser = await chromium.launch();
 let bad = false;
-for (const [mode, name] of [['?side=front', 'flyer-a4-frame-front'], ['?side=front&mode=bw', 'flyer-a4-frame-front-bw']]) {
+for (const [mode, name] of [['?side=front', 'flyer-a4-frame-front'], ['?side=front&mode=bw', 'flyer-a4-frame-front-bw'], ['?side=front&frame=lineB', 'flyer-a4-frame-front-b'], ['?side=front&frame=lineB&mode=bw', 'flyer-a4-frame-front-b-bw']]) {
   const url = SRC + mode;
   const p = await browser.newPage({ viewport: { width: 794, height: 1123 }, deviceScaleFactor: 2 });
   await p.goto(url, { waitUntil: 'networkidle' });
