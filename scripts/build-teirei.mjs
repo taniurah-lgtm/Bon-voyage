@@ -15,6 +15,7 @@
  * ★確かめた日（checked）から45日を過ぎた施設と、これからの日が無い会は、組むたびに🔴で知らせる。
  *   児童館・子育てひろばは月ごとのおたよりなので、毎月の第1水曜の巡回で取り直す（docs/sources.md）。
  */
+import { navSub } from './lib/nav.mjs';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { publicUrl } from './lib/city-site.mjs';
 import { spotSlug } from './lib/spot-slug.mjs';
@@ -286,11 +287,10 @@ const html = `<!doctype html>
     <a class="bvnav-brand" href="/">ぼんぼやーじゅ通信</a>
     <div class="bvnav-links">
       <a href="/" class="bv-hide-sm">通信について</a>
-      <a class="bvnav-cal" href="/calendar.html">📅<span class="bv-lg">おでかけ</span>カレンダー</a>
-      <a href="/map.html"><span class="bv-lg">おでかけ</span>マップ</a>
       <a class="bvnav-cta" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE<span class="bv-lg">で受け取る</span></a>
     </div>
   </div>
+${navSub('teirei')}
 </nav>
 <header class="ghead">
   <div class="ghead-in">

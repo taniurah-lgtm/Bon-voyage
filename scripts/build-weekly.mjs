@@ -35,6 +35,7 @@
  *   🔴 協賛は LINE の本文（reports/free/<日付>.md）に載せない。これから送る号で見つけたらビルドを止める（2026-10-28）
  *   各ページは、台帳の年齢の目安（◎○）で自動で絞る。一推しをいちばん上に、あとは日付順（同じ日は◎を先に）。
  */
+import { navSub } from './lib/nav.mjs';
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, rmSync } from 'node:fs';
 import { esc } from './lib/gate.mjs';
 
@@ -406,11 +407,10 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
   <div class="bvnav-in">
     <a class="bvnav-brand" href="/">ぼんぼやーじゅ通信</a>
     <div class="bvnav-links">
-      <a href="/calendar.html"><span class="bv-lg">おでかけ</span>カレンダー</a>
-      <a href="/map.html"><span class="bv-lg">おでかけ</span>マップ</a>
       <a href="/issues.html">バックナンバー</a>
     </div>
   </div>
+${navSub('')}
 </nav>
 <header class="hero">
   <div class="wrap">

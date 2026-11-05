@@ -14,6 +14,7 @@
  *   組んだ日の時点で過ぎている日は、最初から出さない。
  * ★確かめた日（checked）から45日を過ぎた園は、組むたびに🔴で知らせる。見直しの合図。
  */
+import { navSub } from './lib/nav.mjs';
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const SRC = 'data/entei.json';
@@ -256,11 +257,10 @@ const html = `<!doctype html>
     <a class="bvnav-brand" href="/">ぼんぼやーじゅ通信</a>
     <div class="bvnav-links">
       <a href="/" class="bv-hide-sm">通信について</a>
-      <a class="bvnav-cal" href="/calendar.html">📅<span class="bv-lg">おでかけ</span>カレンダー</a>
-      <a href="/map.html"><span class="bv-lg">おでかけ</span>マップ</a>
       <a class="bvnav-cta" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE<span class="bv-lg">で受け取る</span></a>
     </div>
   </div>
+${navSub('entei')}
 </nav>
 <header class="ghead">
   <div class="ghead-in">

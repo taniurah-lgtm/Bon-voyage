@@ -10,6 +10,7 @@
  *   月額制度の廃止にともない、公開側へ移した（`docs/strategy-2026-09.md`）。
  *   検索から入ってくる入口としても効くので、noindex にはしない。
  */
+import { navSub } from './lib/nav.mjs';
 import { writeFileSync } from 'node:fs';
 import { esc } from './lib/gate.mjs';
 import { readIssues, issuesHTML } from './lib/issues.mjs';
@@ -57,11 +58,10 @@ const page = `<!doctype html>
     <a class="bvnav-brand" href="/">ぼんぼやーじゅ通信</a>
     <div class="bvnav-links">
       <a href="/" class="bv-hide-sm">通信について</a>
-      <a href="/calendar.html"><span class="bv-lg">おでかけ</span>カレンダー</a>
-      <a href="/map.html"><span class="bv-lg">おでかけ</span>マップ</a>
       <a class="bvnav-cta" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE<span class="bv-lg">で受け取る</span></a>
     </div>
   </div>
+${navSub('')}
 </nav>
 <header class="ghead">
   <div class="ghead-in">

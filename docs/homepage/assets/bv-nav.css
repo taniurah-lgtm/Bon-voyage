@@ -34,3 +34,24 @@
   .bv-lg{display:none;}
   .bvnav-links{gap:2px;}
 }
+
+/* 2段目（2026-11-05）: カレンダー・マップ・園庭開放・児童館・図書館。スマホでも上からすぐ押せるように */
+.bvnav-sub{border-top:1px solid #EFEAE0;}
+.bvnav-sub-in{max-width:960px;margin:0 auto;padding:5px 12px 6px;display:flex;gap:6px;justify-content:center;
+  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.bvnav-sub-in::-webkit-scrollbar{display:none;}
+.bvnav-sub a{flex:none;display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:#2C7C9E;
+  text-decoration:none;padding:6px 12px;border-radius:999px;background:#EAF4F8;white-space:nowrap;}
+.bvnav-sub a:hover{background:#DCEEF5;}
+.bvnav-sub a[aria-current="page"]{background:#2C7C9E;color:#fff;}
+@media (max-width:420px){
+  /* 360px幅でも4つが1行に収まるように、絵文字を外して詰める */
+  .bvnav-sub-in{padding:5px 8px 6px;gap:4px;}
+  .bvnav-sub a{font-size:12px;padding:6px 8px;}
+  .bvnav-sub a span{display:none;}
+}
+@media (prefers-color-scheme:dark){
+  .bvnav-sub{border-top-color:#2A3B45;}
+  .bvnav-sub a{background:#1D3944;color:#9AD4EA;}
+  .bvnav-sub a[aria-current="page"]{background:#9AD4EA;color:#0E1A22;}
+}

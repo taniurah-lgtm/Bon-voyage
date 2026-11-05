@@ -12,6 +12,7 @@
  *   先のぶんまで、会員ページに置いていたものを全部こちらへ移した。
  *   出さないのは台帳の内部メモ（source / confidence / status）だけ。
  */
+import { navSub } from './lib/nav.mjs';
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { publicUrl } from './lib/city-site.mjs';
 
@@ -205,11 +206,10 @@ const page = `<!doctype html>
     <a class="bvnav-brand" href="/">ぼんぼやーじゅ通信</a>
     <div class="bvnav-links">
       <a href="/" class="bv-hide-sm">通信について</a>
-      <a href="/calendar.html" aria-current="page"><span class="bv-lg">おでかけ</span>カレンダー</a>
-      <a href="/map.html"><span class="bv-lg">おでかけ</span>マップ</a>
       <a class="bvnav-cta" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE<span class="bv-lg">で受け取る</span></a>
     </div>
   </div>
+${navSub('cal')}
 </nav>
 <header class="ghead">
   <div class="ghead-in">

@@ -19,6 +19,7 @@
  *   （`docs/strategy-2026-09.md`）。スポットも、みんなの投稿も、写真つきも、
  *   会員ページに置いていたものを全部こちらへ移し、誰でも全件見られる。
  */
+import { navSub } from './lib/nav.mjs';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { jsonInTag, esc } from './lib/gate.mjs';
 import { publicUrl } from './lib/city-site.mjs';
@@ -187,11 +188,10 @@ const page = `<!doctype html>
     <a class="bvnav-brand" href="/">ぼんぼやーじゅ通信</a>
     <div class="bvnav-links">
       <a href="/" class="bv-hide-sm">通信について</a>
-      <a href="/calendar.html"><span class="bv-lg">おでかけ</span>カレンダー</a>
-      <a href="/map.html" aria-current="page"><span class="bv-lg">おでかけ</span>マップ</a>
       <a class="bvnav-cta" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE<span class="bv-lg">で受け取る</span></a>
     </div>
   </div>
+${navSub('map')}
 </nav>
 <header class="ghead">
   <div class="ghead-in">
