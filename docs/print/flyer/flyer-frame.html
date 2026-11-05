@@ -78,6 +78,22 @@
   .lf .ff{ left:68mm; right:68mm; bottom:auto; top:214mm; gap:3mm; justify-content:center; }
   .lf .ff div{ font-size:2.05mm; line-height:1.65; }
   .lf .flogo{ width:12mm; height:12mm; }
+  /* B（花を控えめにした版）: 文字の場所を広く */
+  .lfb .f-to{ top:40mm; }
+  .lfb .f-title{ top:56mm; }
+  .lfb .wm{ font-size:13.2mm; }
+  .lfb .bv{ font-size:7.4mm; }
+  .lfb .f-head{ top:98mm; }
+  .lfb .h1{ font-size:8.8mm; }
+  .lfb .lead{ width:140mm; font-size:3.7mm; }
+  .lfb .points{ top:147mm; left:32mm; right:32mm; }
+  .lfb .pt h3{ font-size:4.6mm; } .lfb .pt p{ font-size:3.05mm; }
+  .lfb .cta{ top:182mm; left:34mm; right:30mm; gap:6mm; }
+  .lfb .qr{ width:32mm; padding:2.4mm; } .lfb .qr img{ width:27mm; height:27mm; }
+  .lfb .cta .big{ font-size:5.2mm; } .lfb .cta .small{ font-size:3mm; }
+  .lfb .ff{ left:52mm; right:52mm; top:228mm; gap:4mm; }
+  .lfb .ff div{ font-size:2.35mm; }
+  .lfb .flogo{ width:15mm; height:15mm; }
   /* ── 裏 ── */
   .b-head{ top:20mm; }
   .b-head h2{ font-size:5.9mm; letter-spacing:.1em; margin:2.2mm 0 0; }
@@ -292,8 +308,28 @@
     const s_ = 281 / L.h, ox = (210 - L.w * s_) / 2;
     const lc = bw ? {} : { leaf: '#BFDDB1', pink: '#F6BFCB', gold: '#F5CF86', sky: '#BEDDEB' };
     const lf = Object.entries(lc).map(([k, v]) => L[k] ? `<path d="${L[k]}" fill="${v}"/>` : '').join('');
-    art += `<g transform="translate(${ox.toFixed(2)} 8) scale(${s_.toFixed(5)})">${lf}<path d="${L.ink}" fill="${INK}"/></g>`;
-    art += balloon(150, 82, 18, 6);
+    const body = `${lf}<path d="${L.ink}" fill="${INK}"/>`;
+    if (q.get('frame') === 'lineB') {
+      // 2026-11-05 オーナー「Bをさらに花の量を控えめに。文字を書けるところを大きく」:
+      //   四隅の4つに分け、それぞれを角に寄せたまま縮める（花の形は変えない。辺のまん中が少し空く）
+      const k = Number(q.get('k') || 0.74), W = L.w, H = L.h, X0 = ox, Y0 = 8, X1 = ox + W * s_, Y1 = 8 + H * s_;
+      const quads = [
+        ['0,0 353,0 353,499 0,499', X0, Y0, 0, 0],
+        ['353,0 706,0 706,428 353,428', X1, Y0, -W, 0],
+        ['0,499 343,499 343,1024 0,1024', X0, Y1, 0, -H],
+        ['343,428 706,428 706,1024 343,1024', X1, Y1, -W, -H],
+      ];
+      let defs = '';
+      quads.forEach(([pts, ax, ay, tx, ty], i) => {
+        defs += `<clipPath id="q${i}"><polygon points="${pts}"/></clipPath>`;
+        art += `<g transform="translate(${ax.toFixed(2)} ${ay}) scale(${(s_ * k).toFixed(5)}) translate(${tx} ${ty})"><g clip-path="url(#q${i})">${body}</g></g>`;
+      });
+      art = `<defs>${defs}</defs>` + art;
+      page.classList.add('lfb');
+    } else {
+      art += `<g transform="translate(${ox.toFixed(2)} 8) scale(${s_.toFixed(5)})">${body}</g>`;
+    }
+    art += q.get('frame') === 'lineB' ? balloon(151, 69, 19, 6) : balloon(150, 82, 18, 6);
     page.classList.add('lf');
   } else if (side === 'front') {
     // 2026-11-05 オーナーの参考画像（水彩の野の花の縁）をそのまま縁に使う（「ダメ」で取りやめ。?frame=watercolor で出せる）
