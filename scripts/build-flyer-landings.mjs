@@ -50,6 +50,7 @@ const VENUES = [
   { code: 'tanashi',  label: '田無のオプチャ（スレッド内の返信）' },
   // 2026-11-05: お店のレジ横・入口に貼ってもらうステッカー（docs/print/sticker/）
   { code: 'sticker',  label: 'お店に貼るステッカー' },
+  { code: 'tag',      label: '3cm角の両面ミニカード（折るシール）' },
 ];
 
 const page = (v) => `<!doctype html>

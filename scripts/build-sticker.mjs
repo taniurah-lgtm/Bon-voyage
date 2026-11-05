@@ -19,4 +19,14 @@ for (const [qs, out, size] of [['', 'sticker-90mm', ['90mm', '90mm']], ['?mode=b
   const { hits } = await checkTextOverlap(p);
   console.log(out, '文字の重なり', hits.length);
 }
+// 3cm角の両面ミニカード（折るシール）: A4に27枚と、1枚の見本
+const TAG = pathToFileURL(resolve('docs/print/sticker/tag.html')).href;
+for (const [qs, out] of [['', 'tag-a4-27up'], ['?mode=bw', 'tag-a4-27up-bw']]) {
+  await p.goto(TAG + qs, { waitUntil: 'networkidle' }); await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(300);
+  await p.pdf({ path: `${D}/${out}.pdf`, width: '210mm', height: '297mm', printBackground: true, margin: { top: 0, right: 0, bottom: 0, left: 0 } });
+  const { hits } = await checkTextOverlap(p);
+  console.log(out, '文字の重なり', hits.length);
+}
+await p.goto(TAG + '?one=1', { waitUntil: 'networkidle' }); await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(300);
+await p.locator('.tag').first().screenshot({ path: `${D}/tag-preview.png` });
 await b.close();
