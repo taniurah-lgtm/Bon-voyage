@@ -53,9 +53,11 @@
     const s = len / 616;
     return `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s}) translate(-285 -897)"><path d="${A.bouquet}" fill="none" stroke="${PAPER}" stroke-width="16" stroke-linejoin="round"/>${fills(['leaf','pink','gold','sky'])}<path d="${A.bouquet}" fill="${INK}"/></g>`;
   };
+  // ロゴと同じ風船（2026-11-05 オーナー「ステッカーにも風船は必要」）
+  const balloon = (x, y, h, rot = 0) => `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${h / 340}) translate(-585 -105)">${fills(['red'])}<path d="${A.balloon}" fill="${INK}"/></g>`;
   const rect = (m) => `<rect x="${m}" y="${m}" width="${90 - 2 * m}" height="${90 - 2 * m}" rx="1.5" fill="none" stroke="${LC}" stroke-width=".25"/>`;
   const star = (x, y, r) => `<path d="M${x},${y - r} Q${x},${y} ${x + r},${y} Q${x},${y} ${x},${y + r} Q${x},${y} ${x - r},${y} Q${x},${y} ${x},${y - r}Z" fill="${LC}"/>`;
-  const art = rect(4) + rect(5.2) + star(86.6, 3.4, .9) + star(3.4, 86.6, .9) + bouquet(5, 24, 36, 19) + bouquet(75.5, 88.5, 30, 19);
+  const art = rect(4) + rect(5.2) + star(86.6, 3.4, .9) + star(3.4, 86.6, .9) + bouquet(5, 24, 36, 19) + bouquet(75.5, 88.5, 30, 19) + balloon(74, 27.5, 12, 6);
   document.querySelectorAll('.st').forEach((el) => el.insertAdjacentHTML('afterbegin', `<svg class="art" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">${art}</svg>`));
 </script>
 </body>
