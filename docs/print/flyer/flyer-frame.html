@@ -14,8 +14,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500&family=Lora:ital,wght@0,500;1,400;1,500&family=Klee+One:wght@600&display=block" rel="stylesheet">
 <script src="../../homepage/assets/brand/frame-art.js"></script>
-<script src="../../homepage/assets/brand/frame-line-A.js"></script>
-<script src="../../homepage/assets/brand/frame-line-B.js"></script>
 <style>
   @page { size: A4; margin: 0; }
   :root{
@@ -35,24 +33,23 @@
   .bw .dotrow{ background:#111; }
 
   /* ── 表 ── */
-  .f-to{ top:28mm; }
-  .wframe{ position:absolute; left:0; top:0; width:210mm; height:232mm; mix-blend-mode:multiply; pointer-events:none; }
+  .f-to{ top:30mm; }
   .f-to .to{ font-family:"Shippori Mincho B1",serif; font-weight:500; font-size:4.2mm; letter-spacing:.2em; margin:2.6mm 0 0; }
-  .f-title{ top:47mm; }
-  .wm{ font-family:"Klee One",serif; font-weight:600; font-size:12mm; letter-spacing:.04em; margin:0; line-height:1.2; }
+  .f-title{ top:60mm; }
+  .wm{ font-family:"Klee One",serif; font-weight:600; font-size:11.6mm; letter-spacing:.04em; margin:0; line-height:1.2; }
   .bv{ font-family:"Lora",serif; font-style:italic; font-weight:500; font-size:7mm; letter-spacing:.12em; margin:2mm 0 0; color:var(--soft); }
-  .f-head{ top:92mm; }
-  .h1{ font-size:8.2mm; letter-spacing:.08em; margin:0; line-height:1.4; }
-  .lead{ font-size:3.4mm; line-height:1.95; letter-spacing:.04em; margin:3.6mm auto 0; width:124mm; }
-  .points{ position:absolute; top:142mm; left:47mm; right:47mm; display:grid; grid-template-columns:repeat(3,1fr); gap:4mm; }
+  .f-head{ top:108mm; }
+  .h1{ font-size:8.6mm; letter-spacing:.08em; margin:0; line-height:1.4; }
+  .lead{ font-size:3.5mm; line-height:1.95; letter-spacing:.05em; margin:4mm auto 0; width:140mm; }
+  .points{ position:absolute; top:150mm; left:34mm; right:34mm; display:grid; grid-template-columns:repeat(3,1fr); gap:4mm; }
   .pt{ text-align:center; }
   .pt .mk{ display:block; width:3mm; height:3mm; border-radius:50%; margin:0 auto 2mm; }
   .pt:nth-child(1) .mk{ background:var(--pink); } .pt:nth-child(2) .mk{ background:var(--gold); } .pt:nth-child(3) .mk{ background:var(--sky); }
   .bw .pt .mk{ background:none; border:.35mm solid #111; }
-  .pt h3{ font-family:"Shippori Mincho B1",serif; font-weight:700; font-size:4mm; letter-spacing:.1em; margin:0; }
-  .pt p{ font-size:2.65mm; line-height:1.75; letter-spacing:.02em; margin:1.6mm 0 0; color:var(--soft); }
+  .pt h3{ font-family:"Shippori Mincho B1",serif; font-weight:700; font-size:4.3mm; letter-spacing:.1em; margin:0; }
+  .pt p{ font-size:2.9mm; line-height:1.75; letter-spacing:.02em; margin:1.6mm 0 0; color:var(--soft); }
   .rule{ position:absolute; height:0; border-top:.25mm solid var(--line); }
-  .cta{ position:absolute; top:236mm; left:30mm; right:30mm; display:flex; align-items:center; gap:7mm; }
+  .cta{ position:absolute; top:196mm; left:36mm; right:36mm; display:flex; align-items:center; gap:7mm; }
   .qr{ flex:0 0 auto; width:31mm; padding:2.4mm; background:#fff; border:.25mm solid var(--line); border-radius:2mm; text-align:center; }
   .qr img{ width:26mm; height:26mm; display:block; margin:0 auto; }
   .qr .u{ font-family:"Lora",serif; font-size:2.2mm; margin:1.3mm 0 0; color:var(--soft); }
@@ -60,40 +57,10 @@
   .cta .small{ font-size:2.9mm; line-height:1.8; letter-spacing:.02em; color:var(--soft); margin:1.5mm 0 0; }
   .cta .back{ font-family:"Lora",serif; font-style:italic; font-size:2.9mm; letter-spacing:.05em; color:var(--soft); margin:2mm 0 0; }
   .foot{ position:absolute; left:42mm; right:42mm; bottom:12mm; text-align:center; font-size:2.25mm; line-height:1.75; color:var(--soft); }
-  .ff{ display:flex; align-items:center; justify-content:center; gap:4mm; text-align:left; left:24mm; right:24mm; bottom:9.5mm; }
+  .ff{ display:flex; align-items:center; justify-content:center; gap:4mm; text-align:left; left:30mm; right:30mm; bottom:24mm; }
   .back-page .ff{ bottom:13mm; }
-  .flogo{ width:15mm; height:15mm; flex:0 0 auto; }
+  .flogo{ width:21mm; height:21mm; flex:0 0 auto; }
 
-  /* ── 線画の縁（2026-11-05）: 内側に収める ── */
-  .lf .f-to{ top:52mm; }
-  .lf .f-title{ top:68mm; }
-  .lf .wm{ font-size:11.4mm; }
-  .lf .f-head{ top:103mm; }
-  .lf .h1{ font-size:7.8mm; }
-  .lf .lead{ width:120mm; font-size:3.3mm; }
-  .lf .points{ top:150mm; left:46mm; right:46mm; }
-  .lf .cta{ top:180mm; left:44mm; right:40mm; gap:5mm; }
-  .lf .qr{ width:27mm; padding:2mm; } .lf .qr img{ width:23mm; height:23mm; }
-  .lf .cta .big{ font-size:4.4mm; } .lf .cta .small{ font-size:2.6mm; }
-  .lf .ff{ left:68mm; right:68mm; bottom:auto; top:214mm; gap:3mm; justify-content:center; }
-  .lf .ff div{ font-size:2.05mm; line-height:1.65; }
-  .lf .flogo{ width:12mm; height:12mm; }
-  /* B（花を控えめにした版）: 文字の場所を広く */
-  .lfb .f-to{ top:40mm; }
-  .lfb .f-title{ top:56mm; }
-  .lfb .wm{ font-size:13.2mm; }
-  .lfb .bv{ font-size:7.4mm; }
-  .lfb .f-head{ top:98mm; }
-  .lfb .h1{ font-size:8.8mm; }
-  .lfb .lead{ width:140mm; font-size:3.7mm; }
-  .lfb .points{ top:147mm; left:32mm; right:32mm; }
-  .lfb .pt h3{ font-size:4.6mm; } .lfb .pt p{ font-size:3.05mm; }
-  .lfb .cta{ top:182mm; left:34mm; right:30mm; gap:6mm; }
-  .lfb .qr{ width:32mm; padding:2.4mm; } .lfb .qr img{ width:27mm; height:27mm; }
-  .lfb .cta .big{ font-size:5.2mm; } .lfb .cta .small{ font-size:3mm; }
-  .lfb .ff{ left:52mm; right:52mm; top:228mm; gap:4mm; }
-  .lfb .ff div{ font-size:2.35mm; }
-  .lfb .flogo{ width:15mm; height:15mm; }
   /* ── 裏 ── */
   .b-head{ top:20mm; }
   .b-head h2{ font-size:5.9mm; letter-spacing:.1em; margin:2.2mm 0 0; }
@@ -143,11 +110,11 @@
     <p class="lead soft">赤ちゃん・未就学児・小学生のいるご家庭へ。<br>小平と、となりの市も含めた週末のおでかけ情報を、<br>毎週水曜の朝、LINEで無料でお届けしています。</p>
   </div>
   <div class="points">
-    <div class="pt"><span class="mk"></span><h3>年齢別に</h3><p>赤ちゃん・未就学・小学生<br>のページに分けて</p></div>
+    <div class="pt"><span class="mk"></span><h3>年齢別に</h3><p>赤ちゃん連れ・未就学の子・<br>小学生のページに分けて</p></div>
     <div class="pt"><span class="mk"></span><h3>公式で確かめて</h3><p>市や施設の公式ページで、<br>一件ずつ確かめています</p></div>
-    <div class="pt"><span class="mk"></span><h3>公園から講座まで</h3><p>公園・児童館・図書館。<br>季節のお祭りや講座も</p></div>
+    <div class="pt"><span class="mk"></span><h3>公園から講座まで</h3><p>公園・児童館・図書館・科学館。<br>季節のお祭りや講座も</p></div>
   </div>
-  
+  <div class="rule" style="top:187mm;left:48mm;right:48mm"></div>
   <div class="cta">
     <div class="qr"><img class="qrimg" src="../../homepage/assets/qr/f-hand.png" alt="ぼんぼやーじゅ通信のホームページのQRコード"><p class="u">bonvoya.nicomaru.tokyo</p></div>
     <div>
@@ -155,7 +122,7 @@
       <p class="small">QRからホームページを開き、「LINEで受け取る」を押すだけ。お名前やご住所の入力はいりません。合わなければ、いつでも解除できます。</p>
     </div>
   </div>
-  <div class="foot ff"><img class="flogo" src="../../homepage/assets/brand/logo-color.png" alt="ぼんぼやーじゅ通信のロゴ"><div>発行：ぼんぼやーじゅ通信の会（小平市・花小金井）<br>小平市民活動支援センター あすぴあ 登録団体（第254号）<br>書いているのは、花小金井に住む子育て中の親です<br>お問い合わせ tokyo.papa.home@gmail.com<br>イベント情報の掲載は無料です</div></div>
+  <div class="foot ff"><img class="flogo" src="../../homepage/assets/brand/logo-color.png" alt="ぼんぼやーじゅ通信のロゴ"><div>発行：ぼんぼやーじゅ通信の会（小平市・花小金井）<br>小平市民活動支援センター あすぴあ 登録団体（第254号）<br>書いているのは、花小金井に住む子育て中の親です<br>お問い合わせ tokyo.papa.home@gmail.com ／ イベント情報の掲載は無料です</div></div>
 </template>
 
 <template id="back">
@@ -288,11 +255,11 @@
   }
   let art = '';
   if (side === 'front' && q.get('frame') === 'vine') {
+    // 旧: つるの枠（2026-11-05 の案）。?frame=vine で出せる
     art += `<path d="${vine}Z" fill="none" stroke="${INK}" stroke-width=".32" stroke-linecap="round"/>`;
     const seq = ['fpink', 'stop', 'sright', 'fgold', 'slow', 'fbud', 'lbig', 'fsky', 'stop', 'slow', 'fpink', 'sright', 'fbud', 'lbig', 'fgold', 'stop', 'fsky', 'slow'];
-    const STEP = 17;
     let k = 0;
-    for (let d = 4; d < PER - 6; d += STEP, k++) {
+    for (let d = 4; d < PER - 6; d += 17, k++) {
       const name = seq[k % seq.length], [x, y, ang] = at(d), flower = name[0] === 'f';
       const side_ = (k % 2 ? 1 : -1);
       const nx = -Math.sin(ang * Math.PI / 180) * side_, ny = Math.cos(ang * Math.PI / 180) * side_;
@@ -302,39 +269,18 @@
       art += piece(name, x + nx * off, y + ny * off, rot, size);
     }
     art += balloon(143, 76, 26, 6);
-  } else if (side === 'front' && (q.get('frame') || 'lineA').startsWith('line')) {
-    // 2026-11-05 オーナーの参考画像（線画の野の花の縁）を写して縁にする。線は墨色、小さな花だけロゴの色で塗る
-    const L = q.get('frame') === 'lineB' ? window.FRAME_LINE_B : window.FRAME_LINE_A;
-    const s_ = 281 / L.h, ox = (210 - L.w * s_) / 2;
-    const lc = bw ? {} : { leaf: '#BFDDB1', pink: '#F6BFCB', gold: '#F5CF86', sky: '#BEDDEB' };
-    const lf = Object.entries(lc).map(([k, v]) => L[k] ? `<path d="${L[k]}" fill="${v}"/>` : '').join('');
-    const body = `${lf}<path d="${L.ink}" fill="${INK}"/>`;
-    if (q.get('frame') === 'lineB') {
-      // 2026-11-05 オーナー「Bをさらに花の量を控えめに。文字を書けるところを大きく」:
-      //   四隅の4つに分け、それぞれを角に寄せたまま縮める（花の形は変えない。辺のまん中が少し空く）
-      const k = Number(q.get('k') || 0.74), W = L.w, H = L.h, X0 = ox, Y0 = 8, X1 = ox + W * s_, Y1 = 8 + H * s_;
-      const quads = [
-        ['0,0 353,0 353,499 0,499', X0, Y0, 0, 0],
-        ['353,0 706,0 706,428 353,428', X1, Y0, -W, 0],
-        ['0,499 343,499 343,1024 0,1024', X0, Y1, 0, -H],
-        ['343,428 706,428 706,1024 343,1024', X1, Y1, -W, -H],
-      ];
-      let defs = '';
-      quads.forEach(([pts, ax, ay, tx, ty], i) => {
-        defs += `<clipPath id="q${i}"><polygon points="${pts}"/></clipPath>`;
-        art += `<g transform="translate(${ax.toFixed(2)} ${ay}) scale(${(s_ * k).toFixed(5)}) translate(${tx} ${ty})"><g clip-path="url(#q${i})">${body}</g></g>`;
-      });
-      art = `<defs>${defs}</defs>` + art;
-      page.classList.add('lfb');
-    } else {
-      art += `<g transform="translate(${ox.toFixed(2)} 8) scale(${s_.toFixed(5)})">${body}</g>`;
-    }
-    art += q.get('frame') === 'lineB' ? balloon(151, 69, 19, 6) : balloon(150, 82, 18, 6);
-    page.classList.add('lf');
   } else if (side === 'front') {
-    // 2026-11-05 オーナーの参考画像（水彩の野の花の縁）をそのまま縁に使う（「ダメ」で取りやめ。?frame=watercolor で出せる）
-    page.insertAdjacentHTML('afterbegin', `<img class="wframe" src="../../homepage/assets/brand/${bw ? 'frame-watercolor-bw.png' : 'frame-watercolor.jpg'}" alt="">`);
-    art += balloon(153, 62, 21, 6);
+    // 2026-11-05 オーナー: 参考のPDF（細い二重線の枠・左上と右下に小枝・残りの角に小さな星）に近づけ、
+    //   左上と右下だけ、ロゴの花束にする
+    const LC = bw ? '#555' : '#8C8478';
+    const rect = (m) => `<rect x="${m}" y="${m}" width="${210 - 2 * m}" height="${297 - 2 * m}" fill="none" stroke="${LC}" stroke-width=".3"/>`;
+    art += rect(10) + rect(11.6);
+    // 残りの2つの角に小さな星（PDFと同じ置き方）
+    const star = (x, y, r) => `<path d="M${x},${y - r} Q${x},${y} ${x + r},${y} Q${x},${y} ${x},${y + r} Q${x},${y} ${x - r},${y} Q${x},${y} ${x},${y - r}Z" fill="${LC}"/>`;
+    art += star(204.2, 6.2, 1.5) + star(5.8, 290.8, 1.5);
+    // 左上と右下: ロゴの花束（根もとを枠の角の内側に置き、花を右上へ）
+    art += bouquet(11, 47, 33, 50, false) + bouquet(169, 289, 30, 50, false);
+    art += balloon(143, 76, 26, 6);
   }
   page.insertAdjacentHTML('afterbegin', `<svg class="art" viewBox="0 0 210 297" xmlns="http://www.w3.org/2000/svg">${art}</svg>`);
   if (side === 'back') page.classList.add('back-page');
