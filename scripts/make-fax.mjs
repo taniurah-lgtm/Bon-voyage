@@ -3,7 +3,7 @@
  * 園へチラシをFAXするときの PDF（送信票＋いつものチラシの表と裏）を1つにまとめる。
  *   node scripts/make-fax.mjs --to まるやまこども園 --fax 042-341-7900 --date 2026年10月23日 --out <出力.pdf>
  *     --name  宛名（省略時: 園長先生）
- *     --flyer 送信票のあとに付けるPDF（カンマ区切り。省略時: いつものチラシ＝表の白黒版 flyer-a4-canva-bw.pdf ＋裏 flyer-a4-canva-back.pdf）
+ *     --flyer 送信票のあとに付けるPDF（カンマ区切り。省略時: いつものチラシ＝片面の白黒版 flyer-a4-bw.pdf。2026-11-05 から。旧チラシの表裏は flyer-a4-canva-bw.pdf,flyer-a4-canva-back.pdf）
  *             ★いつものチラシにする（2026-10-23 オーナー）。FAXで見せたものと、あとで届く紙が違うと「違うじゃん」になる。
  *               表はカラー版と配置が同じ白黒版を使う（カラーのままFAXすると帯や絵が灰色の塊になる）
  *
@@ -26,7 +26,7 @@ const { chromium } = await import('playwright').catch(async () => {
 const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i > 0 ? process.argv[i + 1] : d; };
 const to = arg('to'), fax = arg('fax'), out = arg('out');
 if (!to || !fax || !out) { console.error('使い方: node scripts/make-fax.mjs --to 園名 --fax FAX番号 --out 出力.pdf [--date 日付] [--name 宛名]'); process.exit(1); }
-const flyers = arg('flyer', 'docs/homepage/assets/flyer-a4-canva-bw.pdf,docs/homepage/assets/flyer-a4-canva-back.pdf').split(',').map((f) => resolve(f));
+const flyers = arg('flyer', 'docs/homepage/assets/flyer-a4-bw.pdf').split(',').map((f) => resolve(f));
 const pages = 1 + flyers.reduce((n, f) => n + Number(execFileSync('pdfinfo', [f], { encoding: 'utf8' }).match(/^Pages:\s+(\d+)/m)[1]), 0);
 const q = new URLSearchParams({ to, fax, name: arg('name', '園長先生'), pages: String(pages) });
 if (arg('date')) q.set('date', arg('date'));

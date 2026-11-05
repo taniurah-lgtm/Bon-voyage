@@ -218,7 +218,8 @@ Notion の「郵送・訪問の準備（夫）」の表に出る。**オーナ�
 
 ## FAXで送るとき（オーナー・奥さま）
 
-- 🆕 **奥さまが自分で送るとき（2026-11-04）は `docs/fax-howto-wife.md`**: 園名を入れない送信票＋チラシ表裏の **`docs/print/FAX用チラシ（3枚）.pdf`** をスマホに保存しておき、スマホでFAX45 から送る（3枚135円）
+- 🆕 **奥さまが自分で送るとき（2026-11-04）は `docs/fax-howto-wife.md`**: 園名を入れない送信票＋チラシの **`docs/print/FAX用チラシ（2枚）.pdf`** をスマホに保存しておき、スマホでFAX45 から送る（2枚90円）
+- 🔁 **2026-11-05 からチラシは片面の新しいもの**（`docs/homepage/assets/flyer-a4.pdf`・白黒 `flyer-a4-bw.pdf`）。`make-fax.mjs` の既定もこれ。**11/4 以前に古いチラシをFAXした園には、郵送も古いチラシ**（`flyer-a4-canva-html.pdf`＋`-back.pdf`）
 
 - `node scripts/make-fax.mjs --to 園名 --fax FAX番号 --date 2026年10月23日 --out 出力.pdf` で、**送信票（`docs/print/fax-cover.html`）＋いつものチラシの表（白黒版 `flyer-a4-canva-bw.pdf`）と裏**の3枚が1つのPDFになる（カラーの表はFAXで帯や絵が灰色の塊になるので、配置が同じ白黒版を使う）
 - **インターネットFAX**なら、そのPDFをアップロードして送る。1回だけなら**「スマホでFAX45」**（https://www.netfax.jp/smp ・NetReal株式会社）が手軽: 会員登録なし・初期費用と月額なし・**1枚45円**・クレジットカード払い・送れなければ決済は取り消し（2026-10-23 公式で確認）。**向こうの送付状（+5円）は付けない**（こちらの送信票が1枚目にある）。**コンビニ**は紙からしか送れないので、ネットプリントか家で刷ってから、マルチコピー機の「FAX」で（国内1枚50円・チラシは「高画質」）
@@ -234,7 +235,7 @@ Notion の「郵送・訪問の準備（夫）」の表に出る。**オーナ�
   - **Word 版**（使いまわし用・2026-10-25 オーナー）: `docs/print/envelope-label.docx`（花小金井・神明の2枚。差出人の住所はオーナーが Word で入れる。
     ほかの園はページを複製して書き換える）。作り直すときは `NODE_PATH=$(npm root -g) node docs/print/make-envelope-docx.js`
 - 手書きでよければ `docs/print/soufu-letter.pdf`（Word は `.docx`）の **4枚目**（宛名・部数・日付・担当を手書き）
-- チラシは**いつものチラシ**（表 `docs/homepage/assets/flyer-a4-canva-html.pdf`・裏 `flyer-a4-canva-back.pdf`）。
+- チラシは**いつものチラシ**（🔁 2026-11-05 から片面 `docs/homepage/assets/flyer-a4.pdf`。それより前に古いFAXを見た園は 表 `flyer-a4-canva-html.pdf`・裏 `flyer-a4-canva-back.pdf`）。
   🔴 **FAXで見せたものと、届く紙を同じにする**（2026-10-23 オーナー。違う紙が届くと「違うじゃん」になる）。
   QRは `/f/hand` なので、園から来た人は「手渡しのチラシ」と同じ数字に入る
 - 送ったら `docs/distribution.md` の設置の記録に1行（日・園・部数・「郵送」）

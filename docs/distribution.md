@@ -644,6 +644,21 @@ QRは300/150/100dpi で読み取り確認済み
 5. **書き出しの拡大（width/height指定）は有料機能。**既定サイズなら通る。
 6. 生成物の飾り（風船・太陽）は本文の上に平気で重なる。`position_element` で退かす。
 
+## 🌸 いつものチラシ（2026-11-05 から・片面）
+
+**ロゴの花束（左上と右下）＋細い二重線の枠。片面だけ。**オーナー決定（2026-11-05「今日から切り替えて」）。
+
+| 版 | ファイル |
+|---|---|
+| **いつもの（カラー）** | `docs/homepage/assets/flyer-a4.pdf`（QR = 手渡し `/f/hand`） |
+| **白黒**（FAX・リソ・白黒コピー） | `docs/homepage/assets/flyer-a4-bw.pdf` |
+| 配る場所ごとのQR違い | `docs/homepage/assets/flyer2/flyer-<code>.pdf`・`-bw.pdf`（`scripts/build-qr.py` の配布先と同じコード） |
+
+- 作り直し: `node scripts/build-flyer.mjs`（版下 `docs/print/flyer/flyer-frame.html`）
+- FAX: `docs/print/FAX用チラシ（2枚）.pdf`（送信票＋白黒）／園名入りは `node scripts/make-fax.mjs`（既定でこのチラシ）
+- 🔴 **11/4 までに古いチラシをFAXで見せた園**（まるやまこども園・小平なみき幼稚園）には、**郵送も古いチラシ**（下の Canva版の表裏）
+- 古いチラシ（下）はそのまま残す。棚に残っている分は無理に入れ替えない（次の補充から新しいものに）
+
 ## 📄 Canva版レイアウト（HTML版下・表裏そろい）★2026-09-16 完成
 
 **Canvaで作った版をHTMLに移したもの。Canva Proを買わずに同じ絵が出せる。**
