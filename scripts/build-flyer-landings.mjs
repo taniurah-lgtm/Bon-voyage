@@ -48,6 +48,8 @@ const VENUES = [
   { code: 'takenoko', label: 'たけのこ公園まつり（11/7）の当日プログラム' },
   // 2026-10-20: 田無のオプチャ（74人）。スレッドの中の返信なら通信のリンクを添えてよい（オーナー判断）。東村山（chat）と分けて数える
   { code: 'tanashi',  label: '田無のオプチャ（スレッド内の返信）' },
+  // 2026-11-05: お店のレジ横・入口に貼ってもらうステッカー（docs/print/sticker/）
+  { code: 'sticker',  label: 'お店に貼るステッカー' },
 ];
 
 const page = (v) => `<!doctype html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>お店に貼るステッカー｜ぼんぼやーじゅ通信</title>
+<!--
+  2026-11-05 オーナー「店に貼ってもらうステッカー」。チラシ（片面・花束＋二重線の枠）と同じ見た目。
+  90mm角。?sheet=1 で A4 に4枚（家で刷るとき・ラベル用紙に）。?mode=bw で白黒。
+  作り直し: node scripts/build-sticker.mjs
+-->
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@700&family=Zen+Kaku+Gothic+New:wght@500&family=Lora:ital,wght@1,500&family=Klee+One:wght@600&display=block" rel="stylesheet">
+<script src="../../homepage/assets/brand/frame-art.js"></script>
+<style>
+  @page { margin: 0; }
+  :root{ --paper:#FBFAF5; --ink:#2F3E48; --soft:#5B6870; --line:#8C8478; }
+  .bw{ --paper:#fff; --ink:#111; --soft:#333; --line:#555; }
+  html,body{ margin:0; padding:0; background:#fff; }
+  .st{ position:relative; width:90mm; height:90mm; background:var(--paper); color:var(--ink); border-radius:4mm; overflow:hidden; font-family:"Zen Kaku Gothic New",sans-serif; }
+  .art{ position:absolute; inset:0; width:90mm; height:90mm; }
+  .c{ position:absolute; left:0; right:0; text-align:center; }
+  .lbl{ top:10.5mm; font-family:"Shippori Mincho B1",serif; font-weight:700; font-size:3.1mm; letter-spacing:.14em; }
+  .wm{ top:15.5mm; font-family:"Klee One",serif; font-weight:600; font-size:6.8mm; letter-spacing:.03em; }
+  .bv{ top:25.5mm; font-family:"Lora",serif; font-style:italic; font-weight:500; font-size:3.4mm; letter-spacing:.12em; color:var(--soft); }
+  .qr{ top:32mm; }
+  .qr img{ width:31mm; height:31mm; background:#fff; padding:1.2mm; border-radius:1.5mm; }
+  .t1{ top:67.5mm; font-family:"Shippori Mincho B1",serif; font-weight:700; font-size:3.15mm; letter-spacing:.06em; }
+  .t2{ top:72.6mm; font-size:2.35mm; letter-spacing:.03em; color:var(--soft); }
+  .sheet{ width:210mm; height:297mm; display:grid; grid-template-columns:90mm 90mm; gap:10mm; justify-content:center; align-content:center; }
+  .sheet .st{ outline:.2mm dashed #bbb; outline-offset:0; }
+</style>
+</head>
+<body>
+<template id="one">
+  <div class="st">
+    <div class="c lbl">子連れの、週末のおでかけ情報</div>
+    <div class="c wm">ぼんぼやーじゅ通信</div>
+    <div class="c bv">Bon Voyage</div>
+    <div class="c qr"><img src="../../homepage/assets/qr/f-sticker.png" alt="QRコード"></div>
+    <div class="c t1">毎週水曜の朝、LINEで（無料）</div>
+    <div class="c t2">QRからホームページを開いて「LINEで受け取る」</div>
+  </div>
+</template>
+<div id="root"></div>
+<script>
+  const q = new URLSearchParams(location.search), bw = q.get('mode') === 'bw';
+  if (bw) document.body.classList.add('bw');
+  const one = document.getElementById('one').innerHTML;
+  document.getElementById('root').innerHTML = q.get('sheet') ? `<div class="sheet">${one.repeat(4)}</div>` : one;
+  const A = window.FRAME_ART, INK = bw ? '#111' : '#2F3E48', PAPER = bw ? '#fff' : '#FBFAF5', LC = bw ? '#555' : '#8C8478';
+  const COL = bw ? {} : { leaf: '#A3CC93', pink: '#F3A9B9', gold: '#F2BE62', sky: '#A6D2E6', red: '#EE7C64' };
+  const fills = (ks) => ks.map((k) => COL[k] ? `<path d="${A[k]}" fill="${COL[k]}"/>` : '').join('');
+  const bouquet = (x, y, rot, len) => {
+    const s = len / 616;
+    return `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s}) translate(-285 -897)"><path d="${A.bouquet}" fill="none" stroke="${PAPER}" stroke-width="16" stroke-linejoin="round"/>${fills(['leaf','pink','gold','sky'])}<path d="${A.bouquet}" fill="${INK}"/></g>`;
+  };
+  const rect = (m) => `<rect x="${m}" y="${m}" width="${90 - 2 * m}" height="${90 - 2 * m}" rx="1.5" fill="none" stroke="${LC}" stroke-width=".25"/>`;
+  const star = (x, y, r) => `<path d="M${x},${y - r} Q${x},${y} ${x + r},${y} Q${x},${y} ${x},${y + r} Q${x},${y} ${x - r},${y} Q${x},${y} ${x},${y - r}Z" fill="${LC}"/>`;
+  const art = rect(4) + rect(5.2) + star(86.6, 3.4, .9) + star(3.4, 86.6, .9) + bouquet(5, 24, 36, 19) + bouquet(75.5, 88.5, 30, 19);
+  document.querySelectorAll('.st').forEach((el) => el.insertAdjacentHTML('afterbegin', `<svg class="art" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">${art}</svg>`));
+</script>
+</body>
+</html>
