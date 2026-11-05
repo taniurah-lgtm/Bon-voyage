@@ -5073,6 +5073,45 @@
    "source": "events/2026-11.md"
   },
   {
+   "id": "E218",
+   "name": "NPO法人小平こども劇場「フラッグであそぼう」（12/11 の舞台の前のあそび）",
+   "dates": [
+    "2026-11-08"
+   ],
+   "span": null,
+   "when": "2026年11月8日(日) 14:00〜16:00。告知は「だれでも、いつでも！みんなであそぼう！」",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "14:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市中央公園 北遊具広場",
+   "mapq": "小平市中央公園 北遊具広場",
+   "summary": "フラッグ（旗）を使ったあそび。12/11 の舞台「フラッグ」を楽しみにするための、前のあそびの会（舞台の内容とは関係ないと告知に明記）",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "○"
+   },
+   "cost": "無料／申込: 不要",
+   "discount": "",
+   "target": "",
+   "url": "https://www.instagram.com/reel/DfWBKOnzIzo/",
+   "status": "候補",
+   "confidence": "主催のSNSで確認（2026-11-05）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
    "id": "E171",
    "name": "花小金井南児童館 乳幼児親子クラス（後期・登録制）",
    "dates": [
@@ -5439,6 +5478,49 @@
    "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3704&day=2026-11-21",
    "status": "候補",
    "confidence": "公式確認済み（2026-10-19）— 日時・場所・対象・定員・費用・抽選・締切・雨天時",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
+   "id": "E219",
+   "name": "西東京いこいの森公園「うちゅう・かがく・あそび」きらりんステンドグラスとびっくりコップ",
+   "dates": [
+    "2026-11-21"
+   ],
+   "span": null,
+   "when": "2026年11月21日(土) 10:00〜11:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "11:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "西東京いこいの森公園 セミナールーム1（西東京市緑町三丁目2番）",
+   "mapq": "西東京いこいの森公園 セミナールーム1",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": {
+    "tel": "042-467-2391",
+    "mail": "",
+    "who": ""
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "1人1,500円（材料費等・税込）。現金のみ・当日払い",
+   "discount": "",
+   "target": "4歳以上（未就学児は保護者同伴）。付き添いの保護者は2人まで",
+   "url": "https://www.instagram.com/p/DfUYbqHP_Et/",
+   "status": "候補",
+   "confidence": "主催のSNSで確認（2026-11-05）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
@@ -5892,6 +5974,45 @@
    "url": "https://www.threads.com/@onpunomahou/post/DfOUQGqk8AI",
    "status": "候補",
    "confidence": "主催のチラシで確認（2026-11-03）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-12.md"
+  },
+  {
+   "id": "E220",
+   "name": "小平こども劇場 設立10周年記念公演 ゼロコ『フラッグ』（ルネこだいら）",
+   "dates": [
+    "2026-12-11"
+   ],
+   "span": null,
+   "when": "2026年12月11日(金) 19:00開演（18:30開場・上演45分）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "19:00",
+   "end": null,
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "ルネこだいら 中ホール（西武新宿線 小平駅南口から徒歩3分）",
+   "mapq": "ルネこだいら",
+   "summary": "ゼロコ（作・演出・出演）の舞台「フラッグ」",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "○",
+    "elem": "◎"
+   },
+   "cost": "全席指定 こども（3歳〜17歳）1,500円・大人2,500円。🔴 3歳未満は入場できない",
+   "discount": "",
+   "target": "",
+   "url": "https://kodaira-kogeki.org/2026-12-11-flag/",
+   "status": "候補",
+   "confidence": "公式で確認（2026-11-05）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-12.md"
@@ -6358,7 +6479,8 @@
   "2026-11-08": [
    "E145",
    "E149",
-   "E208"
+   "E208",
+   "E218"
   ],
   "2026-11-14": [
    "E145",
@@ -6447,7 +6569,8 @@
   ],
   "2026-11-21": [
    "E174",
-   "E190"
+   "E190",
+   "E219"
   ],
   "2026-11-22": [
    "E118",
@@ -6473,6 +6596,9 @@
   ],
   "2026-12-06": [
    "E210"
+  ],
+  "2026-12-11": [
+   "E220"
   ],
   "2026-12-27": [
    "E216"
