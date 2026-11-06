@@ -25,6 +25,12 @@
   .catch.thick{ -webkit-text-stroke:.048em currentColor; }
   .page{ position:relative; width:210mm; height:297mm; overflow:hidden; background:#FFFDF7; }
 
+  /* ★2026-11-06 オーナー「刷ると上が0.5cmほど切れる」→ 上に5mmの余白を足した。
+       全体を 292/297 に縮めて5mm下げる（左右は中央に1.8mmずつ）。
+       ずらすだけだと下の安全帯8mmが削れてQRとフッターが重なるので、縮めて収めている。 */
+  html,body{ background:#fff; }
+  .page{ transform:translate(1.77mm, 5mm) scale(0.98316); transform-origin:0 0; }
+
   /* ── 上の帯 ── */
   .top{ position:absolute; inset:0 0 auto 0; height:37.5%; background:#469197;
         display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
