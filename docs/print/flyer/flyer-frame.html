@@ -21,9 +21,12 @@
     --pink:#F3A9B9; --gold:#F2BE62; --sky:#A6D2E6; --leaf:#A3CC93; --coral:#EE7C64;
   }
   .bw{ --paper:#FFFFFF; --ink:#111; --soft:#333; --line:#888; --wash:#F2F2F2; }
-  html,body{ margin:0; padding:0; background:#e9e6df; }
+  html,body{ margin:0; padding:0; background:#fff; }
   .page{ position:relative; width:210mm; height:297mm; margin:0 auto; overflow:hidden;
          background:var(--paper); color:var(--ink); font-family:"Zen Kaku Gothic New",sans-serif; }
+  /* ★2026-11-07 オーナー「刷ると上が切れる」→ 上に5mmの白い余白（綴じしろ）。
+       全体を 292/297 に縮めて5mm下げる（左右は中央に1.8mmずつ）。旧チラシ（Canva版）と同じやり方 */
+  .page{ transform:translate(1.77mm, 5mm) scale(0.98316); transform-origin:0 0; margin:0; }
   .art{ position:absolute; left:0; top:0; width:210mm; height:297mm; pointer-events:none; }
   .c{ position:absolute; left:0; right:0; text-align:center; }
   .mincho{ font-family:"Shippori Mincho B1",serif; font-weight:700; }
@@ -272,14 +275,15 @@
   } else if (side === 'front') {
     // 2026-11-05 オーナー: 参考のPDF（細い二重線の枠・左上と右下に小枝・残りの角に小さな星）に近づけ、
     //   左上と右下だけ、ロゴの花束にする
-    const LC = bw ? '#555' : '#8C8478';
-    const rect = (m) => `<rect x="${m}" y="${m}" width="${210 - 2 * m}" height="${297 - 2 * m}" fill="none" stroke="${LC}" stroke-width=".3"/>`;
-    art += rect(10) + rect(11.6);
+    // 2026-11-07 オーナー「刷ると目立たない」→ 二重線を太く濃く（外を太く・内を細く）、花束を大きく
+    const LC = bw ? '#222' : '#5E574C';
+    const rect = (m, w) => `<rect x="${m}" y="${m}" width="${210 - 2 * m}" height="${297 - 2 * m}" fill="none" stroke="${LC}" stroke-width="${w}"/>`;
+    art += rect(10, .8) + rect(12, .4);
     // 残りの2つの角に小さな星（PDFと同じ置き方）
     const star = (x, y, r) => `<path d="M${x},${y - r} Q${x},${y} ${x + r},${y} Q${x},${y} ${x},${y + r} Q${x},${y} ${x - r},${y} Q${x},${y} ${x},${y - r}Z" fill="${LC}"/>`;
-    art += star(204.2, 6.2, 1.5) + star(5.8, 290.8, 1.5);
+    art += star(203.6, 7.6, 1.8) + star(6.4, 289.4, 1.8);
     // 左上と右下: ロゴの花束（根もとを枠の角の内側に置き、花を右上へ）
-    art += bouquet(11, 47, 33, 50, false) + bouquet(169, 289, 30, 50, false);
+    art += bouquet(11, 55, 33, 60, false) + bouquet(163, 288, 30, 60, false);
     art += balloon(143, 76, 26, 6);
   }
   page.insertAdjacentHTML('afterbegin', `<svg class="art" viewBox="0 0 210 297" xmlns="http://www.w3.org/2000/svg">${art}</svg>`);
