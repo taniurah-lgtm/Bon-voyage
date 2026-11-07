@@ -228,6 +228,22 @@ E151 園庭開放</description>
 9/29 代表の森さんと会って口頭でOK。朝のお手伝いを少し引き受けた</description>
   </Placemark>
   <Placemark>
+    <name>小平花小金井幼稚園（こども園・さくらんぼ保育園）</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>小平市花小金井2-9-11</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>設置済</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-461-9226</value></Data>
+      <Data name="住所"><value>小平市花小金井2-9-11</value></Data>
+      <Data name="メモ"><value>9/25 遠足で不在→「来週かけて」。E151 hanahanaひろば</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市花小金井2-9-11
+電話: 042-461-9226
+9/25 遠足で不在→「来週かけて」。E151 hanahanaひろば</description>
+  </Placemark>
+  <Placemark>
     <name>こだいら観光まちづくり協会</name>
     <styleUrl>#設置済</styleUrl>
     <address>小平市学園東町1-16-1</address>
@@ -242,6 +258,86 @@ E151 園庭開放</description>
 住所: 小平市学園東町1-16-1
 電話: 042-312-3954
 https://kodaira-tourism.com/news/23007/ ／ ビアガーデン(E96)は天候不良で中止だった</description>
+  </Placemark>
+  <Placemark>
+    <name>弥生台幼稚園</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>小平市花小金井4-9-20</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>設置済</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-473-2525</value></Data>
+      <Data name="住所"><value>小平市花小金井4-9-20</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市花小金井4-9-20
+電話: 042-473-2525
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>ひめゆりこども園・小平姫百合幼稚園</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>小平市上水新町1-5-15</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>設置済</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-343-1832</value></Data>
+      <Data name="住所"><value>小平市上水新町1-5-15</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市上水新町1-5-15
+電話: 042-343-1832
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>小平神明こども園・小平神明幼稚園</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>小平市小川町1-2572</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>設置済</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-341-0938</value></Data>
+      <Data name="住所"><value>小平市小川町1-2572</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市小川町1-2572
+電話: 042-341-0938
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>白梅学園大学附属白梅幼稚園</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>小平市小川町1-830</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>設置済</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-343-1335</value></Data>
+      <Data name="住所"><value>小平市小川町1-830</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市小川町1-830
+電話: 042-343-1335
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>小平あおば幼稚園</name>
+    <styleUrl>#設置済</styleUrl>
+    <address>小平市上水南町2-8-15</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>設置済</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-323-2727</value></Data>
+      <Data name="住所"><value>小平市上水南町2-8-15</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市上水南町2-8-15
+電話: 042-323-2727
+市の公式一覧（認定こども園・私立幼稚園）</description>
   </Placemark>
   <Placemark>
     <name>りんどう幼稚園</name>
@@ -304,6 +400,38 @@ E150 にこにこクラブ。一園に偏らない書き方を理解済み</desc
 住所: 小平市小川西町中宿地域センター
 電話: 070-8683-9652
 お願いは10/14以降</description>
+  </Placemark>
+  <Placemark>
+    <name>まるやまこども園・丸山幼稚園</name>
+    <styleUrl>#交渉中</styleUrl>
+    <address>小平市小川東町1-29-21</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>交渉中</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-341-0935</value></Data>
+      <Data name="住所"><value>小平市小川東町1-29-21</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市小川東町1-29-21
+電話: 042-341-0935
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>小平なみき幼稚園</name>
+    <styleUrl>#交渉中</styleUrl>
+    <address>小平市仲町306-3</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>交渉中</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-341-3810</value></Data>
+      <Data name="住所"><value>小平市仲町306-3</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市仲町306-3
+電話: 042-341-3810
+市の公式一覧（認定こども園・私立幼稚園）</description>
   </Placemark>
   <Placemark>
     <name>料理教室なつやすみ（露崎さん）</name>
@@ -379,6 +507,54 @@ E133</description>
 協賛 L10</description>
   </Placemark>
   <Placemark>
+    <name>めぐみこども園・小平学園幼稚園</name>
+    <styleUrl>#断られた</styleUrl>
+    <address>小平市学園東町1-2-41</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>断られた</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-341-0228</value></Data>
+      <Data name="住所"><value>小平市学園東町1-2-41</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市学園東町1-2-41
+電話: 042-341-0228
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>たかのだい幼稚園</name>
+    <styleUrl>#断られた</styleUrl>
+    <address>小平市上水本町1-21-3</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>断られた</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-323-3232</value></Data>
+      <Data name="住所"><value>小平市上水本町1-21-3</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市上水本町1-21-3
+電話: 042-323-3232
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
+    <name>小平若竹幼稚園</name>
+    <styleUrl>#断られた</styleUrl>
+    <address>小平市回田町122-3</address>
+    <ExtendedData>
+      <Data name="ステータス"><value>断られた</value></Data>
+      <Data name="種別"><value>幼稚園・こども園</value></Data>
+      <Data name="電話"><value>042-321-4072</value></Data>
+      <Data name="住所"><value>小平市回田町122-3</value></Data>
+      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
+    </ExtendedData>
+    <description>種別: 幼稚園・こども園
+住所: 小平市回田町122-3
+電話: 042-321-4072
+市の公式一覧（認定こども園・私立幼稚園）</description>
+  </Placemark>
+  <Placemark>
     <name>都立小金井公園</name>
     <styleUrl>#断られた</styleUrl>
     <address>都立小金井公園</address>
@@ -438,22 +614,6 @@ E133</description>
     <description>種別: 公共
 住所: 未確認（名称で検索して配置）
 電話: 042-348-2112</description>
-  </Placemark>
-  <Placemark>
-    <name>小平花小金井幼稚園（こども園・さくらんぼ保育園）</name>
-    <styleUrl>#候補</styleUrl>
-    <address>小平市花小金井2-9-11</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>幼稚園・こども園</value></Data>
-      <Data name="電話"><value>042-461-9226</value></Data>
-      <Data name="住所"><value>小平市花小金井2-9-11</value></Data>
-      <Data name="メモ"><value>9/25 遠足で不在→「来週かけて」。E151 hanahanaひろば</value></Data>
-    </ExtendedData>
-    <description>種別: 幼稚園・こども園
-住所: 小平市花小金井2-9-11
-電話: 042-461-9226
-9/25 遠足で不在→「来週かけて」。E151 hanahanaひろば</description>
   </Placemark>
   <Placemark>
     <name>比留間医院（内科・小児科）</name>
@@ -1200,102 +1360,6 @@ yonemitsushika.com</description>
 住所: 小平市花小金井1-10-11付近</description>
   </Placemark>
   <Placemark>
-    <name>弥生台幼稚園</name>
-    <styleUrl>#候補</styleUrl>
-    <address>小平市花小金井4-9-20</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>幼稚園・こども園</value></Data>
-      <Data name="電話"><value>042-473-2525</value></Data>
-      <Data name="住所"><value>小平市花小金井4-9-20</value></Data>
-      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
-    </ExtendedData>
-    <description>種別: 幼稚園・こども園
-住所: 小平市花小金井4-9-20
-電話: 042-473-2525
-市の公式一覧（認定こども園・私立幼稚園）</description>
-  </Placemark>
-  <Placemark>
-    <name>ひめゆりこども園・小平姫百合幼稚園</name>
-    <styleUrl>#候補</styleUrl>
-    <address>小平市上水新町1-5-15</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>幼稚園・こども園</value></Data>
-      <Data name="電話"><value>042-343-1832</value></Data>
-      <Data name="住所"><value>小平市上水新町1-5-15</value></Data>
-      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
-    </ExtendedData>
-    <description>種別: 幼稚園・こども園
-住所: 小平市上水新町1-5-15
-電話: 042-343-1832
-市の公式一覧（認定こども園・私立幼稚園）</description>
-  </Placemark>
-  <Placemark>
-    <name>まるやまこども園・丸山幼稚園</name>
-    <styleUrl>#候補</styleUrl>
-    <address>小平市小川東町1-29-21</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>幼稚園・こども園</value></Data>
-      <Data name="電話"><value>042-341-0935</value></Data>
-      <Data name="住所"><value>小平市小川東町1-29-21</value></Data>
-      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
-    </ExtendedData>
-    <description>種別: 幼稚園・こども園
-住所: 小平市小川東町1-29-21
-電話: 042-341-0935
-市の公式一覧（認定こども園・私立幼稚園）</description>
-  </Placemark>
-  <Placemark>
-    <name>めぐみこども園・小平学園幼稚園</name>
-    <styleUrl>#候補</styleUrl>
-    <address>小平市学園東町1-2-41</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>幼稚園・こども園</value></Data>
-      <Data name="電話"><value>042-341-0228</value></Data>
-      <Data name="住所"><value>小平市学園東町1-2-41</value></Data>
-      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
-    </ExtendedData>
-    <description>種別: 幼稚園・こども園
-住所: 小平市学園東町1-2-41
-電話: 042-341-0228
-市の公式一覧（認定こども園・私立幼稚園）</description>
-  </Placemark>
-  <Placemark>
-    <name>小平神明こども園・小平神明幼稚園</name>
-    <styleUrl>#候補</styleUrl>
-    <address>小平市小川町1-2572</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>幼稚園・こども園</value></Data>
-      <Data name="電話"><value>042-341-0938</value></Data>
-      <Data name="住所"><value>小平市小川町1-2572</value></Data>
-      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
-    </ExtendedData>
-    <description>種別: 幼稚園・こども園
-住所: 小平市小川町1-2572
-電話: 042-341-0938
-市の公式一覧（認定こども園・私立幼稚園）</description>
-  </Placemark>
-  <Placemark>
-    <name>たかのだい幼稚園</name>
-    <styleUrl>#候補</styleUrl>
-    <address>小平市上水本町1-21-3</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>幼稚園・こども園</value></Data>
-      <Data name="電話"><value>042-323-3232</value></Data>
-      <Data name="住所"><value>小平市上水本町1-21-3</value></Data>
-      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
-    </ExtendedData>
-    <description>種別: 幼稚園・こども園
-住所: 小平市上水本町1-21-3
-電話: 042-323-3232
-市の公式一覧（認定こども園・私立幼稚園）</description>
-  </Placemark>
-  <Placemark>
     <name>なおび幼稚園</name>
     <styleUrl>#候補</styleUrl>
     <address>小平市上水本町4-21-1</address>
@@ -1312,22 +1376,6 @@ yonemitsushika.com</description>
 市の公式一覧（認定こども園・私立幼稚園）</description>
   </Placemark>
   <Placemark>
-    <name>小平あおば幼稚園</name>
-    <styleUrl>#候補</styleUrl>
-    <address>小平市上水南町2-8-15</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>幼稚園・こども園</value></Data>
-      <Data name="電話"><value>042-323-2727</value></Data>
-      <Data name="住所"><value>小平市上水南町2-8-15</value></Data>
-      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
-    </ExtendedData>
-    <description>種別: 幼稚園・こども園
-住所: 小平市上水南町2-8-15
-電話: 042-323-2727
-市の公式一覧（認定こども園・私立幼稚園）</description>
-  </Placemark>
-  <Placemark>
     <name>洗心幼稚園</name>
     <styleUrl>#候補</styleUrl>
     <address>小平市学園西町2-21-9</address>
@@ -1341,38 +1389,6 @@ yonemitsushika.com</description>
     <description>種別: 幼稚園・こども園
 住所: 小平市学園西町2-21-9
 電話: 042-341-3200
-市の公式一覧（認定こども園・私立幼稚園）</description>
-  </Placemark>
-  <Placemark>
-    <name>小平なみき幼稚園</name>
-    <styleUrl>#候補</styleUrl>
-    <address>小平市仲町306-3</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>幼稚園・こども園</value></Data>
-      <Data name="電話"><value>042-341-3810</value></Data>
-      <Data name="住所"><value>小平市仲町306-3</value></Data>
-      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
-    </ExtendedData>
-    <description>種別: 幼稚園・こども園
-住所: 小平市仲町306-3
-電話: 042-341-3810
-市の公式一覧（認定こども園・私立幼稚園）</description>
-  </Placemark>
-  <Placemark>
-    <name>小平若竹幼稚園</name>
-    <styleUrl>#候補</styleUrl>
-    <address>小平市回田町122-3</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>幼稚園・こども園</value></Data>
-      <Data name="電話"><value>042-321-4072</value></Data>
-      <Data name="住所"><value>小平市回田町122-3</value></Data>
-      <Data name="メモ"><value>市の公式一覧（認定こども園・私立幼稚園）</value></Data>
-    </ExtendedData>
-    <description>種別: 幼稚園・こども園
-住所: 小平市回田町122-3
-電話: 042-321-4072
 市の公式一覧（認定こども園・私立幼稚園）</description>
   </Placemark>
   <Placemark>
