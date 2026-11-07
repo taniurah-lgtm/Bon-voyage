@@ -17,14 +17,15 @@
 <style>
   @page { size: A4; margin: 0; }
   :root{
-    --paper:#FBFAF5; --ink:#2F3E48; --soft:#5B6870; --line:#CFC8B8; --wash:#F3EFE5;
+    --paper:#FBFAF5; --ink:#2F3E48; --soft:#3A464E; --line:#CFC8B8; --wash:#F3EFE5;
     --pink:#F3A9B9; --gold:#F2BE62; --sky:#A6D2E6; --leaf:#A3CC93; --coral:#EE7C64;
   }
-  .bw{ --paper:#FFFFFF; --ink:#111; --soft:#333; --line:#888; --wash:#F2F2F2; }
+  .bw{ --paper:#FFFFFF; --ink:#111; --soft:#222; --line:#888; --wash:#F2F2F2; }
   html,body{ margin:0; padding:0; background:#fff; }
   .page{ position:relative; width:210mm; height:297mm; margin:0 auto; overflow:hidden;
          background:var(--paper); color:var(--ink); font-family:"Zen Kaku Gothic New",sans-serif; }
-  /* ★2026-11-07 オーナー「刷ると上が切れる」→ 上に5mmの白い余白（綴じしろ）。
+  /* 2026-11-07 オーナー「薄いグレーの文字を濃く」→ --soft を #5B6870 から #3A464E に
+     ★2026-11-07 オーナー「刷ると上が切れる」→ 上に5mmの白い余白（綴じしろ）。
        全体を 292/297 に縮めて5mm下げる（左右は中央に1.8mmずつ）。旧チラシ（Canva版）と同じやり方 */
   .page{ transform:translate(1.77mm, 5mm) scale(0.98316); transform-origin:0 0; margin:0; }
   .art{ position:absolute; left:0; top:0; width:210mm; height:297mm; pointer-events:none; }
@@ -283,7 +284,8 @@
     const star = (x, y, r) => `<path d="M${x},${y - r} Q${x},${y} ${x + r},${y} Q${x},${y} ${x},${y + r} Q${x},${y} ${x - r},${y} Q${x},${y} ${x},${y - r}Z" fill="${LC}"/>`;
     art += star(203.6, 7.6, 1.8) + star(6.4, 289.4, 1.8);
     // 左上と右下: ロゴの花束（根もとを枠の角の内側に置き、花を右上へ）
-    art += bouquet(11, 55, 33, 60, false) + bouquet(163, 288, 30, 60, false);
+    // 2026-11-07 オーナー「右下は上下左右反転で左上と対称に」→ 左上の花束を紙の中心で180°回した位置（下の端で切れないよう2mmだけ上げた）
+    art += bouquet(11, 55, 33, 60, false) + bouquet(210 - 11, 297 - 57, 33 + 180, 60, false);
     art += balloon(143, 76, 26, 6);
   }
   page.insertAdjacentHTML('afterbegin', `<svg class="art" viewBox="0 0 210 297" xmlns="http://www.w3.org/2000/svg">${art}</svg>`);
