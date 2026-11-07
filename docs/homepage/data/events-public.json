@@ -5264,6 +5264,45 @@
    "cat": "other"
   },
   {
+   "id": "E221",
+   "name": "中央図書館「秋のおはなし工作会」（まつぼっくりツリー）",
+   "dates": [
+    "2026-11-28"
+   ],
+   "span": null,
+   "when": "2026年11月28日(土) 14:00〜15:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "14:00",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市立中央図書館",
+   "mapq": "小平市立中央図書館",
+   "summary": "おはなし会のあとに工作。おはなしや絵本にちなんで、まつぼっくりツリーを作る",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "◎",
+    "elem": "○"
+   },
+   "cost": "公式に記載なし（要確認）",
+   "discount": "",
+   "target": "4歳〜小学生／定員: 10人（定員を超えたら抽選）",
+   "url": "https://library.kodaira.ed.jp/viewer/info.html?id=400",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-11-12",
+    "raw": "11/5(木) 10:00〜11/12(木) 17:00、図書館の申込フォームから（申込多数は抽選）"
+   },
+   "cat": "public"
+  },
+  {
    "id": "E207",
    "name": "親子で楽しむおえかきワークショップ（津田図書館）",
    "dates": [
