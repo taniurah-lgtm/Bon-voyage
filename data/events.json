@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-08",
+ "generated": "2026-11-09",
  "events": [
   {
    "id": "E51",
@@ -5357,7 +5357,7 @@
    "target": "「小学生も幼児も保護者も！シニアの方まで遊びたい方はだれでも歓迎！」。幼児は保護者の同伴を（チラシ）",
    "url": "https://tanotsuku.wixstudio.com/kodomo",
    "status": "候補",
-   "confidence": "日時・会場・申込不要・無料・雨天決行・内容・パスタの整理券の時刻は、チラシの現物で確認（2026-11-01）",
+   "confidence": "日時・会場・申込不要・無料・雨天決行・内容・パスタの整理券の時刻は、チラシの現物で確認（2026-11-01）／2026-11-09 に再確認",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
@@ -5734,7 +5734,7 @@
    "target": "",
    "url": "https://kodaira-tourism.com/event/23085/",
    "status": "候補",
-   "confidence": "公式確認済み（2026-10-26）— 日時・場所・内容。料金は未記載",
+   "confidence": "公式確認済み（2026-11-09）— 日時・場所・内容。料金は未記載",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
