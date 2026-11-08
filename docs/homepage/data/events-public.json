@@ -5494,6 +5494,50 @@
    "cat": "public"
   },
   {
+   "id": "E223",
+   "name": "小平ふるさと村「お芝居ワークショップ ひみつきち vol.3」",
+   "dates": [
+    "2026-12-12",
+    "2026-12-13"
+   ],
+   "span": null,
+   "when": "2026年12月12日(土)・13日(日) 各 13:30〜15:30（全2回。1日だけでも参加できる）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "13:30",
+   "end": "15:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平ふるさと村",
+   "mapq": "小平ふるさと村",
+   "summary": "劇あそび・ショートシーンづくり。今回は「役」について考える回",
+   "kidsNote": "",
+   "caution": "",
+   "contact": {
+    "tel": "042-345-8155",
+    "who": ""
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "✕",
+    "elem": "◎"
+   },
+   "cost": "無料",
+   "discount": "",
+   "target": "小学生以上・お芝居に興味のある人（チラシに「小学校高学年〜中高生大歓迎」）／定員: 各回10人",
+   "url": "https://www.instagram.com/p/DfeNNkWtOdr/",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-12-09",
+    "raw": "Googleフォーム（チラシのQR）か、小平ふるさと村に電話（042-345-8155）。12/9(水)締切・応募多数は抽選"
+   },
+   "cat": "class"
+  },
+  {
    "id": "E195",
    "name": "中央図書館「休館日の図書館に親子をご招待」",
    "dates": [
@@ -5533,6 +5577,45 @@
    "cat": "public"
   },
   {
+   "id": "E224",
+   "name": "ガールスカウト東京都第76団「裂き織りでクリスマスコースターを作ろう！」クリスマス会（鈴木公民館）",
+   "dates": [
+    "2026-12-20"
+   ],
+   "span": null,
+   "when": "2026年12月20日(日) 13:30〜15:30（受付 13:15〜。裂き織りが 13:30〜14:30、そのあと 15:30 までクリスマス会）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "13:30",
+   "end": "15:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "鈴木公民館 講座室（小平市）",
+   "mapq": "鈴木公民館 講座室",
+   "summary": "使わなくなった布を細く裂いて織る「裂き織り」で、クリスマスのコースターを作る。作ったあとは団のみんなとクリスマス会",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "無料",
+   "discount": "",
+   "target": "3歳〜小学6年生（3年生以下は保護者と一緒に参加）／定員: 10家庭",
+   "url": "https://www.instagram.com/p/Dfe0nphOZwC/",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-12-06",
+    "raw": "団の申込フォーム（チラシのQR）https://forms.gle/AGrh3bpEXAykhpRu8 から。12/6(日)締切（定員の10家庭に達したら締め切る・兄弟姉妹も一緒に申し込める）"
+   },
+   "cat": "public"
+  },
+  {
    "id": "E216",
    "name": "年末のごほうびマーケット「わくわく冬色フェス」（田無アスタ）",
    "dates": [
@@ -5568,6 +5651,42 @@
    "tentative": false,
    "deadline": null,
    "cat": "fest"
+  },
+  {
+   "id": "E225",
+   "name": "ハイハイレース in 小金井（小金井府中ハウジングステージ）",
+   "dates": [
+    "2027-01-11"
+   ],
+   "span": null,
+   "when": "2027年1月11日(月・祝) 11:00〜16:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "11:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小金井府中ハウジングステージ（東京都小金井市前原町5丁目7・東八道路沿い、小金井南中西の交差点そば）",
+   "mapq": "小金井府中ハウジングステージ",
+   "summary": "赤ちゃんのハイハイレース。その日の最速タイム賞の赤ちゃんに記念の盾。事前予約の人には特典（チェキ・手形か足形。時間で異なる）",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "✕",
+    "elem": "✕"
+   },
+   "cost": "参加無料（予約優先）",
+   "discount": "",
+   "target": "ハイハイする赤ちゃん",
+   "url": "https://www.instagram.com/p/DfeDRTNGg2B/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "other"
   }
  ],
  "standing": [
