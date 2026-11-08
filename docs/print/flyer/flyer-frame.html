@@ -202,6 +202,15 @@
   const q = new URLSearchParams(location.search);
   const side = q.get('side') === 'back' ? 'back' : 'front';
   const bw = q.get('mode') === 'bw';
+  // 2026-11-08 オーナー「B5版も」→ ?size=b5（182×257mm）。A4の版をそのまま縮める（上5mmの白い余白は同じ）。
+  //   倍率0.84: 絵や線が紙の端から6mm前後の内側に収まる大きさ。いちばん小さい字（発行の欄）は約1.9mm
+  if (q.get('size') === 'b5') {
+    const W = 182, H = 257, k = 0.84;
+    const st = document.createElement('style');
+    st.textContent = `@page{ size:${W}mm ${H}mm; margin:0; } html,body{ width:${W}mm; height:${H}mm; overflow:hidden; }
+      .page{ transform:translate(${((W - 210 * k) / 2).toFixed(2)}mm, 5mm) scale(${k}); }`;
+    document.head.appendChild(st);
+  }
   if (bw) document.body.classList.add('bw');
   const page = document.getElementById('page');
   page.innerHTML = document.getElementById(side).innerHTML;
