@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>領収書・請求書（ニコマル）｜ぼんぼやーじゅ通信 協賛</title>
+<!--
+  2026-11-10 オーナー「領収書も作ってください。ニコマルの印鑑は持っています」。
+  協賛（紹介型・応援型）の領収書と請求書。発行はニコマル（経理の名義。/kyosan/ の「お支払い」と同じ）。
+  ?kind=receipt（領収書・上がお客さま用、下が控え）/ ?kind=invoice（請求書）
+  ?to=宛名 &amount=金額 &item=但し書き・品目 &no=番号 &date=発行日(YYYY-MM-DD) &due=支払期限 &addr=ニコマルの住所 &bank=振込先
+  🔒 住所と振込先はリポジトリに書かない。作るときだけ渡す（`node scripts/make-kyosan-doc.mjs`。PDFは作業場所に出す）。
+     渡さなければ空欄で出る（手書きで埋める）。印鑑は「印」の枠に押す。
+  消費税の上乗せなし・インボイス未登録なので、税額は書かない。5万円未満なので収入印紙は要らない。
+-->
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=block" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  html,body{ margin:0; padding:0; background:#fff; color:#222; font-family:"Zen Kaku Gothic New",sans-serif; }
+  .page{ position:relative; width:210mm; height:297mm; box-sizing:border-box; }
+  .half{ position:relative; height:148.5mm; box-sizing:border-box; padding:13mm 18mm 0; }
+  .half + .half{ border-top:.3mm dashed #999; }
+  .cut{ position:absolute; top:-2.4mm; left:50%; transform:translateX(-50%); background:#fff; padding:0 3mm; font-size:2.6mm; color:#888; }
+  .mincho{ font-family:"Shippori Mincho B1",serif; }
+  .head{ display:flex; justify-content:space-between; align-items:flex-start; }
+  .title{ font-family:"Shippori Mincho B1",serif; font-weight:700; font-size:9mm; letter-spacing:.6em; margin:0; }
+  .title small{ font-size:3.4mm; letter-spacing:.1em; margin-left:2mm; font-weight:500; }
+  .meta{ text-align:right; font-size:3.2mm; line-height:1.9; }
+  .to{ margin-top:7mm; font-family:"Shippori Mincho B1",serif; font-size:6mm; border-bottom:.3mm solid #222; padding-bottom:1mm; width:110mm; }
+  .to span{ font-size:4.4mm; margin-left:3mm; }
+  .amount{ margin-top:7mm; display:flex; align-items:center; gap:6mm; }
+  .amount .lbl{ font-size:3.6mm; letter-spacing:.3em; }
+  .amount .val{ font-family:"Shippori Mincho B1",serif; font-weight:700; font-size:9mm; letter-spacing:.06em; border:.4mm solid #222; padding:1.5mm 8mm; min-width:70mm; text-align:center; background:#f6f4ef; }
+  .tadashi{ margin-top:5mm; font-size:3.7mm; line-height:1.8; }
+  .tadashi b{ font-weight:500; letter-spacing:.2em; margin-right:3mm; }
+  .note{ font-size:3.5mm; margin-top:2mm; }
+  .issuer{ position:absolute; right:18mm; bottom:12mm; width:86mm; font-size:3.4mm; line-height:1.8; }
+  .issuer .name{ font-family:"Shippori Mincho B1",serif; font-weight:700; font-size:5.4mm; letter-spacing:.15em; }
+  .issuer .blank{ display:inline-block; border-bottom:.25mm solid #999; min-width:62mm; height:4.4mm; vertical-align:bottom; }
+  .seal{ position:absolute; right:0; top:0; width:17mm; height:17mm; border:.3mm dashed #aaa; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:3.4mm; }
+  .copy-tag{ display:inline-block; font-size:3mm; border:.25mm solid #666; padding:.3mm 2mm; margin-left:3mm; vertical-align:middle; letter-spacing:.1em; }
+  /* 請求書 */
+  .inv{ padding:16mm 18mm; }
+  .inv .lead{ margin-top:5mm; font-size:3.7mm; }
+  table.items{ width:100%; border-collapse:collapse; margin-top:7mm; font-size:3.5mm; }
+  table.items th, table.items td{ border:.25mm solid #444; padding:2.2mm 3mm; }
+  table.items th{ background:#f1eee7; font-weight:500; }
+  table.items td.num{ text-align:right; white-space:nowrap; }
+  table.items tr.total td{ font-weight:700; }
+  .box{ margin-top:7mm; border:.3mm solid #444; padding:3mm 4mm; font-size:3.5mm; line-height:1.9; }
+  .box .t{ font-weight:700; letter-spacing:.1em; }
+  .box .blank{ display:inline-block; border-bottom:.25mm solid #999; min-width:120mm; height:4.6mm; vertical-align:bottom; }
+  .remarks{ margin-top:5mm; font-size:3.2mm; line-height:1.85; color:#333; }
+  .inv .issuer{ position:static; margin:10mm 0 0 auto; position:relative; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  const q = new URLSearchParams(location.search);
+  const kind = q.get('kind') === 'invoice' ? 'invoice' : 'receipt';
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const yen = (n) => '¥' + Number(n || 0).toLocaleString('ja-JP') + '-';
+  const jdate = (iso) => {
+    if (!iso) return '<span style="display:inline-block;min-width:34mm"></span>年　　月　　日';
+    const [y, m, d] = iso.split('-').map(Number);   // 端末の時間帯に左右されないよう、文字のまま読む
+    return `${y}年${m}月${d}日`;
+  };
+  const to = q.get('to') || '', amount = q.get('amount') || '3000', item = q.get('item') || 'ぼんぼやーじゅ通信 協賛（紹介型）として';
+  const no = q.get('no') || '', date = q.get('date') || '', due = q.get('due') || '', addr = q.get('addr') || '', bank = q.get('bank') || '';
+  const issuer = `<div class="issuer"><div class="seal">印</div>
+      <div class="name">ニコマル</div>
+      <div>${addr ? esc(addr) : '<span class="blank"></span>'}</div>
+      <div>代表　谷裏 弘晃</div>
+      <div>tokyo.papa.home@gmail.com</div>
+    </div>`;
+  const receipt = (copy) => `<div class="half">
+      ${copy ? '<span class="cut">切り取り線（下は控え）</span>' : ''}
+      <div class="head"><p class="title">領収書${copy ? '<span class="copy-tag">控え</span>' : ''}</p>
+        <div class="meta">${no ? 'No. ' + esc(no) + '<br>' : ''}${jdate(date)}</div></div>
+      <div class="to">${esc(to) || '<span style="display:inline-block;min-width:80mm"></span>'}<span>様</span></div>
+      <div class="amount"><span class="lbl">金額</span><span class="val">${yen(amount)}</span></div>
+      <div class="tadashi"><b>但し</b>${esc(item)}</div>
+      <div class="note">上記の金額を、正に領収いたしました。</div>
+      ${issuer}
+    </div>`;
+  const invoice = () => `<div class="inv">
+      <div class="head"><p class="title">請求書</p><div class="meta">${no ? 'No. ' + esc(no) + '<br>' : ''}発行日　${jdate(date)}</div></div>
+      <div class="to">${esc(to) || '<span style="display:inline-block;min-width:80mm"></span>'}<span>様</span></div>
+      <p class="lead">下記のとおり、ご請求申し上げます。</p>
+      <div class="amount"><span class="lbl">ご請求金額</span><span class="val">${yen(amount)}</span></div>
+      <table class="items"><tr><th style="width:62%">品目</th><th>数量</th><th>単価</th><th>金額</th></tr>
+        <tr><td>${esc(item)}</td><td class="num">1</td><td class="num">${yen(amount).slice(0, -1)}</td><td class="num">${yen(amount).slice(0, -1)}</td></tr>
+        <tr class="total"><td colspan="3" style="text-align:right">合計</td><td class="num">${yen(amount).slice(0, -1)}</td></tr></table>
+      <div class="box"><div><span class="t">お支払い期限</span>　${due ? jdate(due) : '<span class="blank" style="min-width:60mm"></span>'}</div>
+        <div><span class="t">お振込先</span>　${bank ? esc(bank) : '<span class="blank"></span>'}</div></div>
+      <div class="remarks">・消費税の上乗せはありません（インボイス〔適格請求書〕の登録はしていません）。<br>
+        ・振込手数料は、ご負担をお願いいたします。お振込の控えを、領収書の代わりとさせてください（必要なときはお出しします）。<br>
+        ・ご不明な点は、メールでお問い合わせください。</div>
+      ${issuer}
+    </div>`;
+  document.getElementById('root').innerHTML = `<div class="page">${kind === 'invoice' ? invoice() : receipt(false) + receipt(true)}</div>`;
+</script>
+</body>
+</html>
