@@ -1526,7 +1526,7 @@
    "caution": "",
    "contact": null,
    "lastEntry": "",
-   "hours": "",
+   "hours": "公式確認済み— 館のサイトが 11/6 に再開。土・日・祝は 10:30〜11:05（館の上映スケジュール「11/25まで」。11/9・16・24は休館）",
    "ages": {
     "baby": "△",
     "pre": "◎",
@@ -1537,7 +1537,7 @@
    "target": "どなたでも",
    "url": "https://www.tamarokuto.or.jp/",
    "status": "候補",
-   "confidence": "公式確認済み（2026-09-15・会期/時間/対象/定員/料金/販売方法） / 投影時刻だけ未取得（日別のため）",
+   "confidence": "公式確認済み— 館のサイトが 11/6 に再開。土・日・祝は 10:30〜11:05（館の上映スケジュール「11/25まで」。11/9・16・24は休館）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-09.md"
@@ -2373,7 +2373,7 @@
    "target": "どなたでも。小学2年生以下は保護者と一緒に観覧（館の表記）",
    "url": "https://www.tamarokuto.or.jp/blog/press/2026/10/07/planetarium_voyager/",
    "status": "承認済",
-   "confidence": "公式確認済み（2026-10-08）。未取得: 1日の投影時刻・観覧券の売り方（日ごとに館のカレンダー）",
+   "confidence": "公式確認済み— 館のサイトが 11/6 に再開。土・日・祝の投影は 13:10〜13:55 と 15:50〜16:35（館の上映スケジュール「11/25まで」。11/9・16・24は休館）。平日は 15:50〜16:35（11/11(水)は 13:10〜も）。観覧券は当日、館のインフォメーションで（チケット販売システムの停止は、事前予約の催しだけ＝館のお知らせ 11/8）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
@@ -2910,7 +2910,7 @@
    "target": "どなたでも",
    "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3672&day=2026-10-10",
    "status": "候補（会期が長いので、雨の週の差し替え札に使う）",
-   "confidence": "一部確認（2026-11-05）— 入館料（大人520円／小人210円）・開館時間・休館の規定は公式の利用案内で確認。 ただし 11/7・8・14・15 の現況（中止・変更の告知の有無）と、11月の休館日カレンダーの実記載は取れていない。 内容（会期・時間枠・場所・申込不要・定員なし・対象）の裏は 2026-10-18 に公式で取ったものが最新",
+   "confidence": "公式確認済み（2026-11-10）— 館のサイト再開後、公式の詳細ページで 11/14(土)・15(日) の開催・4コマ（11:00／12:00／14:00／15:00 から各45分・随時入れ替え）・入館料のみ・自由参加・定員なしを確認。11/14・15 は開館（休館は 11/9・16・24＝館の上映スケジュール）。今週末が最後の2日",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-10.md"
@@ -5201,6 +5201,45 @@
    "source": "events/2026-10.md"
   },
   {
+   "id": "E232",
+   "name": "子ども家庭支援センター「0歳さんあつまれ」",
+   "dates": [
+    "2026-11-12"
+   ],
+   "span": null,
+   "when": "2026年11月12日(木) 10:00〜11:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "11:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市子ども家庭支援センター 子育て交流ひろば「おひさま」",
+   "mapq": "小平市子ども家庭支援センター 子育て交流ひろば「おひさま」",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "✕",
+    "elem": "✕"
+   },
+   "cost": "無料",
+   "discount": "",
+   "target": "0歳の子と保護者。妊娠中の方とご家族も。小平市在住の方（プログラムの対象）",
+   "url": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202611.pdf",
+   "status": "候補",
+   "confidence": "公式のおたよりで確認（2026-11-01）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
    "id": "E146",
    "name": "第36回 小平市産業まつり",
    "dates": [
@@ -5235,7 +5274,7 @@
    "target": "",
    "url": "https://www.jatm.or.jp/farming/advising/festival.php",
    "status": "候補",
-   "confidence": "公式確認済み— 共催の JA東京むさしの公式で、日時・会場・JA側の内容に変更なし。中止・変更の告知は出ていない",
+   "confidence": "公式確認済み— 市の公式ページと、共催の JA東京むさしの公式で、日時・会場・内容に変更なし。中止・変更の告知は出ていない（前回の再確認は 2026-11-06）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
@@ -5363,6 +5402,85 @@
    "source": "events/2026-11.md"
   },
   {
+   "id": "E229",
+   "name": "花小金井南児童館「ドッジボール練習会」",
+   "dates": [
+    "2026-11-14"
+   ],
+   "span": null,
+   "when": "2026年11月14日(土) 15:30〜16:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "15:30",
+   "end": "16:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "花小金井南児童館（小平市花小金井南町3-3-17）",
+   "mapq": "小平市花小金井南児童館",
+   "summary": "講師は永石 恒平さん。「投げ方やキャッチの仕方をプロのドッジボール選手におしえてもらおう。」（おたより）",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "✕",
+    "elem": "◎"
+   },
+   "cost": "児童館の利用は無料（この回の参加費は、おたよりに記載なし＝要確認）",
+   "discount": "",
+   "target": "小学生以上",
+   "url": "https://kodaji.ashita-ba.co.jp/news/article/933/",
+   "status": "候補",
+   "confidence": "公式のおたよりで確認（2026-11-10）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
+   "id": "E231",
+   "name": "小川町二丁目児童館 乳幼児の自由参加の日（14日「パパも！」・15日「おんがくであそぼ！」）",
+   "dates": [
+    "2026-11-14",
+    "2026-11-15"
+   ],
+   "span": null,
+   "when": "2026年11月14日(土) 10:00〜11:50 ／ 15日(日) 10:30〜11:10",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "10:00",
+   "end": "11:50",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小川町二丁目児童館（小平市小川町2-1154・第十五小学校の隣・地域センター2階。エレベーターあり・駐車場なし）",
+   "mapq": "小平市小川町二丁目児童館",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "○",
+    "elem": "✕"
+   },
+   "cost": "児童館の利用は無料",
+   "discount": "",
+   "target": "乳幼児親子（どちらも）。「パパも！」は定員なし",
+   "url": "https://kodaji.ashita-ba.co.jp/news/article/934/",
+   "status": "候補",
+   "confidence": "公式のおたよりで確認（2026-11-10）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
    "id": "E211",
    "name": "スポーツチャレンジキャラバン（都立狭山公園）",
    "dates": [
@@ -5397,6 +5515,45 @@
    "url": "https://sayamaparks.com/event/event-4083/",
    "status": "候補",
    "confidence": "公式と公園の掲示で確認（2026-11-03）／延期日は未発表",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
+   "id": "E230",
+   "name": "花小金井南児童館「トランポリンの日」",
+   "dates": [
+    "2026-11-15"
+   ],
+   "span": null,
+   "when": "2026年11月15日(日) 9:00〜14:50",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "09:00",
+   "end": "14:50",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "花小金井南児童館 遊戯室（小平市花小金井南町3-3-17）",
+   "mapq": "小平市花小金井南児童館 遊戯室",
+   "summary": "遊戯室にトランポリンが出る日（おたより「体験してみましょう♪」）",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "✕"
+   },
+   "cost": "児童館の利用は無料",
+   "discount": "",
+   "target": "乳幼児、園児年代の親子",
+   "url": "https://kodaji.ashita-ba.co.jp/news/article/933/",
+   "status": "候補",
+   "confidence": "公式のおたよりで確認（2026-11-10）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
@@ -5481,6 +5638,45 @@
    "url": "https://www.threads.com/@ns__hono/post/DfeoqU8AZZh",
    "status": "候補",
    "confidence": "主催のSNSで確認（2026-11-09）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
+   "id": "E233",
+   "name": "小川町二丁目児童館「ハーフバースデー」",
+   "dates": [
+    "2026-11-20"
+   ],
+   "span": null,
+   "when": "2026年11月20日(金) 10:30〜10:50",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:30",
+   "end": "10:50",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小川町二丁目児童館（小平市小川町2-1154・第十五小学校の隣・地域センター2階。エレベーターあり・駐車場なし）",
+   "mapq": "小平市小川町二丁目児童館",
+   "summary": "生後半年のお祝い。わらべうたのふれあいあそびと写真撮影（おたより）",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "✕",
+    "elem": "✕"
+   },
+   "cost": "児童館の利用は無料",
+   "discount": "",
+   "target": "6か月を迎える乳児",
+   "url": "https://kodaji.ashita-ba.co.jp/news/article/934/",
+   "status": "候補",
+   "confidence": "公式のおたよりで確認（2026-11-10）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
@@ -5782,6 +5978,48 @@
    "source": "events/2026-11.md"
   },
   {
+   "id": "E234",
+   "name": "小川町二丁目児童館「離乳食講座」",
+   "dates": [
+    "2026-11-26"
+   ],
+   "span": null,
+   "when": "2026年11月26日(木) 10:30〜11:20",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:30",
+   "end": "11:20",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小川町二丁目児童館（小平市小川町2-1154・第十五小学校の隣・地域センター2階。エレベーターあり・駐車場なし）",
+   "mapq": "小平市小川町二丁目児童館",
+   "summary": "離乳食アドバイザーによる講座（講師 東 千里氏）。離乳食についての質疑応答など",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "✕",
+    "elem": "✕"
+   },
+   "cost": "児童館の利用は無料（講座の参加費は、おたよりに記載なし＝要確認）",
+   "discount": "",
+   "target": "1歳までの乳児親子／定員: 先着10組",
+   "url": "https://kodaji.ashita-ba.co.jp/news/article/934/",
+   "status": "候補",
+   "confidence": "公式のおたよりで確認（2026-11-10）",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-11-12",
+    "raw": "11月12日(木) 10:00から、児童館へ（電話可）。先着10組"
+   },
+   "source": "events/2026-11.md"
+  },
+  {
    "id": "E200",
    "name": "萩山公園ライトアップ〜きらめく紅葉につつまれて〜",
    "dates": [
@@ -5992,6 +6230,48 @@
    "deadline": {
     "date": "2026-11-14",
     "raw": "11月14日(土) 10:00から、津田図書館カウンターへ（電話可・先着順／042-341-1245）"
+   },
+   "source": "events/2026-11.md"
+  },
+  {
+   "id": "E235",
+   "name": "児童館「NIHAドッジボール」",
+   "dates": [
+    "2026-11-29"
+   ],
+   "span": null,
+   "when": "2026年11月29日(日) 11:30〜15:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "11:30",
+   "end": "15:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小川町二丁目児童館 地域センター（昼食の会場）と、小平市立第十五小学校 体育館（ドッジボールの会場）",
+   "mapq": "小川町二丁目児童館 地域センター",
+   "summary": "参加者全員でお昼を食べてから、レクやドッジボール。各館から公共交通機関で、児童館の職員が引率する",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "✕",
+    "elem": "◎"
+   },
+   "cost": "おたよりに記載なし（要確認。昼食・交通費の扱いも児童館で）",
+   "discount": "",
+   "target": "小学生／定員: 先着30名（市内の児童館3館で10名ずつ）",
+   "url": "https://kodaji.ashita-ba.co.jp/news/article/933/",
+   "status": "候補",
+   "confidence": "公式のおたよりで確認（2026-11-10）",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-11-16",
+    "raw": "11月1日(日) 9:00〜11月16日(月)まで、市内の各児童館で（申込用紙に記入して出し、しおりを受け取る）"
    },
    "source": "events/2026-11.md"
   },
@@ -6749,13 +7029,17 @@
    "E146",
    "E194",
    "E198",
-   "E202"
+   "E202",
+   "E229",
+   "E231"
   ],
   "2026-11-15": [
    "E145",
    "E146",
    "E198",
-   "E211"
+   "E231",
+   "E211",
+   "E230"
   ],
   "2026-10-21": [
    "E100"
@@ -6829,11 +7113,15 @@
   "2026-11-25": [
    "E171"
   ],
+  "2026-11-12": [
+   "E232"
+  ],
   "2026-11-19": [
    "E228"
   ],
   "2026-11-20": [
-   "E226"
+   "E226",
+   "E233"
   ],
   "2026-11-21": [
    "E174",
@@ -6850,6 +7138,9 @@
   "2026-11-24": [
    "E199"
   ],
+  "2026-11-26": [
+   "E234"
+  ],
   "2026-11-28": [
    "E200",
    "E212",
@@ -6857,7 +7148,8 @@
    "E221"
   ],
   "2026-11-29": [
-   "E207"
+   "E207",
+   "E235"
   ],
   "2026-12-05": [
    "E204"

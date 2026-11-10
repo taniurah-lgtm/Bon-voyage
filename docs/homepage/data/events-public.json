@@ -356,7 +356,7 @@
    "cost": "",
    "discount": "",
    "target": "",
-   "url": "",
+   "url": "https://www.city.kodaira.tokyo.jp/event/127/127980.html",
    "tentative": false,
    "deadline": null,
    "cat": "fest"
@@ -1256,7 +1256,7 @@
    "cost": "無料",
    "discount": "",
    "target": "市内在住の小・中学生。保護者同伴なら未就学児も可",
-   "url": "",
+   "url": "https://www.city.kodaira.tokyo.jp/event/129/129131.html",
    "tentative": false,
    "deadline": null,
    "cat": "fest"
@@ -1328,7 +1328,7 @@
    "kidsNote": "35分・暗い。",
    "caution": "",
    "lastEntry": "",
-   "hours": "",
+   "hours": "公式確認済み— 館のサイトが 11/6 に再開。土・日・祝は 10:30〜11:05（館の上映スケジュール「11/25まで」。11/9・16・24は休館）",
    "ages": {
     "baby": "△",
     "pre": "◎",
@@ -1573,7 +1573,7 @@
    "cost": "無料 / 事前申込: 不要",
    "discount": "",
    "target": "市公式の対象欄に 「小学生以下・小学生・中高生・大人・高齢者・親子」 と明記",
-   "url": "",
+   "url": "https://www.city.kodaira.tokyo.jp/event/129/129344.html",
    "tentative": false,
    "deadline": null,
    "cat": "public"
@@ -2148,7 +2148,7 @@
    "cost": "無料 / 定員: 15人",
    "discount": "",
    "target": "市内在住・在勤・在学の子育て中の方",
-   "url": "",
+   "url": "https://www.city.kodaira.tokyo.jp/event/128/128376.html",
    "tentative": false,
    "deadline": {
     "date": "2026-09-04",
@@ -2797,7 +2797,7 @@
    "cost": "",
    "discount": "",
    "target": "市公式に「誰でも楽しめる」",
-   "url": "",
+   "url": "https://www.city.kodaira.tokyo.jp/kurashi/130/130559.html",
    "tentative": false,
    "deadline": null,
    "cat": "fest"
@@ -3018,7 +3018,7 @@
    "cost": "(要確認) 模擬店・物販は実費",
    "discount": "",
    "target": "",
-   "url": "",
+   "url": "https://www.city.kodaira.tokyo.jp/shihou/files/130782/130782/att_0000025.pdf",
    "tentative": false,
    "deadline": null,
    "cat": "fest"
@@ -3791,7 +3791,7 @@
    "cost": "無料（公式に明記）",
    "discount": "",
    "target": "小学生以下・小学生・中高生・大人・高齢者・親子（公式の表記）",
-   "url": "",
+   "url": "https://www.city.kodaira.tokyo.jp/event/129/129951.html",
    "tentative": false,
    "deadline": null,
    "cat": "fest"
@@ -3867,7 +3867,7 @@
    "cost": "500円（材料費）",
    "discount": "",
    "target": "市内在住・在学の小学生 ／ 定員10人（超えたら抽選）",
-   "url": "",
+   "url": "https://www.city.kodaira.tokyo.jp/event/files/129155/129155/att_0000008.pdf",
    "tentative": false,
    "deadline": {
     "date": "2026-10-23",
@@ -3990,7 +3990,7 @@
    "cost": "公式サイトでご確認ください",
    "discount": "",
    "target": "小平市民・在勤・在学の方",
-   "url": "",
+   "url": "https://www.city.kodaira.tokyo.jp/event/",
    "tentative": false,
    "deadline": {
     "date": "2026-10-16",
@@ -4720,12 +4720,48 @@
    "cost": "記載なし",
    "discount": "",
    "target": "",
-   "url": "",
+   "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
    "tentative": false,
    "deadline": {
     "date": "2026-10-23",
     "raw": "🔴 申込: 10/13(火)〜10/23(金)、児童館へ直接来館（電話不可）。先着各30組"
    },
+   "cat": "public"
+  },
+  {
+   "id": "E232",
+   "name": "子ども家庭支援センター「0歳さんあつまれ」",
+   "dates": [
+    "2026-11-12"
+   ],
+   "span": null,
+   "when": "2026年11月12日(木) 10:00〜11:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "11:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市子ども家庭支援センター 子育て交流ひろば「おひさま」",
+   "mapq": "小平市子ども家庭支援センター 子育て交流ひろば「おひさま」",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "✕",
+    "elem": "✕"
+   },
+   "cost": "無料",
+   "discount": "",
+   "target": "0歳の子と保護者。妊娠中の方とご家族も。小平市在住の方（プログラムの対象）",
+   "url": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202611.pdf",
+   "tentative": false,
+   "deadline": null,
    "cat": "public"
   },
   {
@@ -4879,6 +4915,79 @@
    "cat": "fest"
   },
   {
+   "id": "E229",
+   "name": "花小金井南児童館「ドッジボール練習会」",
+   "dates": [
+    "2026-11-14"
+   ],
+   "span": null,
+   "when": "2026年11月14日(土) 15:30〜16:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "15:30",
+   "end": "16:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "花小金井南児童館（小平市花小金井南町3-3-17）",
+   "mapq": "小平市花小金井南児童館",
+   "summary": "講師は永石 恒平さん。「投げ方やキャッチの仕方をプロのドッジボール選手におしえてもらおう。」（おたより）",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "✕",
+    "elem": "◎"
+   },
+   "cost": "児童館の利用は無料（この回の参加費は、おたよりに記載なし＝要確認）",
+   "discount": "",
+   "target": "小学生以上",
+   "url": "https://kodaji.ashita-ba.co.jp/news/article/933/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "public"
+  },
+  {
+   "id": "E231",
+   "name": "小川町二丁目児童館 乳幼児の自由参加の日（14日「パパも！」・15日「おんがくであそぼ！」）",
+   "dates": [
+    "2026-11-14",
+    "2026-11-15"
+   ],
+   "span": null,
+   "when": "2026年11月14日(土) 10:00〜11:50 ／ 15日(日) 10:30〜11:10",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "10:00",
+   "end": "11:50",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小川町二丁目児童館（小平市小川町2-1154・第十五小学校の隣・地域センター2階。エレベーターあり・駐車場なし）",
+   "mapq": "小平市小川町二丁目児童館",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "○",
+    "elem": "✕"
+   },
+   "cost": "児童館の利用は無料",
+   "discount": "",
+   "target": "乳幼児親子（どちらも）。「パパも！」は定員なし",
+   "url": "https://kodaji.ashita-ba.co.jp/news/article/934/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "public"
+  },
+  {
    "id": "E211",
    "name": "スポーツチャレンジキャラバン（都立狭山公園）",
    "dates": [
@@ -4913,6 +5022,42 @@
    "tentative": false,
    "deadline": null,
    "cat": "spot"
+  },
+  {
+   "id": "E230",
+   "name": "花小金井南児童館「トランポリンの日」",
+   "dates": [
+    "2026-11-15"
+   ],
+   "span": null,
+   "when": "2026年11月15日(日) 9:00〜14:50",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "09:00",
+   "end": "14:50",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "花小金井南児童館 遊戯室（小平市花小金井南町3-3-17）",
+   "mapq": "小平市花小金井南児童館 遊戯室",
+   "summary": "遊戯室にトランポリンが出る日（おたより「体験してみましょう♪」）",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "✕"
+   },
+   "cost": "児童館の利用は無料",
+   "discount": "",
+   "target": "乳幼児、園児年代の親子",
+   "url": "https://kodaji.ashita-ba.co.jp/news/article/933/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E228",
@@ -4991,6 +5136,42 @@
    "tentative": false,
    "deadline": null,
    "cat": "spot"
+  },
+  {
+   "id": "E233",
+   "name": "小川町二丁目児童館「ハーフバースデー」",
+   "dates": [
+    "2026-11-20"
+   ],
+   "span": null,
+   "when": "2026年11月20日(金) 10:30〜10:50",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:30",
+   "end": "10:50",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小川町二丁目児童館（小平市小川町2-1154・第十五小学校の隣・地域センター2階。エレベーターあり・駐車場なし）",
+   "mapq": "小平市小川町二丁目児童館",
+   "summary": "生後半年のお祝い。わらべうたのふれあいあそびと写真撮影（おたより）",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "✕",
+    "elem": "✕"
+   },
+   "cost": "児童館の利用は無料",
+   "discount": "",
+   "target": "6か月を迎える乳児",
+   "url": "https://kodaji.ashita-ba.co.jp/news/article/934/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E174",
@@ -5268,6 +5449,45 @@
    "cat": "spot"
   },
   {
+   "id": "E234",
+   "name": "小川町二丁目児童館「離乳食講座」",
+   "dates": [
+    "2026-11-26"
+   ],
+   "span": null,
+   "when": "2026年11月26日(木) 10:30〜11:20",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:30",
+   "end": "11:20",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小川町二丁目児童館（小平市小川町2-1154・第十五小学校の隣・地域センター2階。エレベーターあり・駐車場なし）",
+   "mapq": "小平市小川町二丁目児童館",
+   "summary": "離乳食アドバイザーによる講座（講師 東 千里氏）。離乳食についての質疑応答など",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "✕",
+    "elem": "✕"
+   },
+   "cost": "児童館の利用は無料（講座の参加費は、おたよりに記載なし＝要確認）",
+   "discount": "",
+   "target": "1歳までの乳児親子／定員: 先着10組",
+   "url": "https://kodaji.ashita-ba.co.jp/news/article/934/",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-11-12",
+    "raw": "11月12日(木) 10:00から、児童館へ（電話可）。先着10組"
+   },
+   "cat": "public"
+  },
+  {
    "id": "E200",
    "name": "萩山公園ライトアップ〜きらめく紅葉につつまれて〜",
    "dates": [
@@ -5463,6 +5683,45 @@
    "deadline": {
     "date": "2026-11-14",
     "raw": "11月14日(土) 10:00から、津田図書館カウンターへ（電話可・先着順／042-341-1245）"
+   },
+   "cat": "public"
+  },
+  {
+   "id": "E235",
+   "name": "児童館「NIHAドッジボール」",
+   "dates": [
+    "2026-11-29"
+   ],
+   "span": null,
+   "when": "2026年11月29日(日) 11:30〜15:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "11:30",
+   "end": "15:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小川町二丁目児童館 地域センター（昼食の会場）と、小平市立第十五小学校 体育館（ドッジボールの会場）",
+   "mapq": "小川町二丁目児童館 地域センター",
+   "summary": "参加者全員でお昼を食べてから、レクやドッジボール。各館から公共交通機関で、児童館の職員が引率する",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "✕",
+    "elem": "◎"
+   },
+   "cost": "おたよりに記載なし（要確認。昼食・交通費の扱いも児童館で）",
+   "discount": "",
+   "target": "小学生／定員: 先着30名（市内の児童館3館で10名ずつ）",
+   "url": "https://kodaji.ashita-ba.co.jp/news/article/933/",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-11-16",
+    "raw": "11月1日(日) 9:00〜11月16日(月)まで、市内の各児童館で（申込用紙に記入して出し、しおりを受け取る）"
    },
    "cat": "public"
   },
@@ -5820,7 +6079,7 @@
    },
    "cost": "",
    "discount": "",
-   "url": "",
+   "url": "https://www.city.kodaira.tokyo.jp/kurashi/113/113055.html",
    "cat": "spot"
   },
   {

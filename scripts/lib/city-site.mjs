@@ -2,7 +2,7 @@
 // 障害の間は、読者に見せるページ（カレンダー・年齢別ページ・AI用一覧・会員ページ・noteの下書き）に
 // 市のURLを出さない。「公式」ボタンを押すと開かないページに飛ぶため（2026-10-27、これからの催し7件がそうなっていた）。
 // 台帳のURLはそのまま残してある。市のサイトが戻ったら CITY_SITE_DOWN を false にするだけで元に戻る。
-export const CITY_SITE_DOWN = true;
+export const CITY_SITE_DOWN = false; // 2026-11-10 夜、市のサイトが戻った（催しのページ・施設案内とも 200。公開データに使っている市のURLを全部たたいて確かめた）
 
 const CITY_URL = /^https?:\/\/www\.city\.kodaira\.tokyo\.jp\//;
 
