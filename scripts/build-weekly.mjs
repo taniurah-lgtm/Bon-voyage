@@ -63,6 +63,8 @@ const sponsors = existsSync('data/sponsors.json') ? JSON.parse(readFileSync('dat
 // 公園の催しに添える「買い出しのお店」（2026-10-08 オーナー: チラシを置いてくれたお店。店主の了解済み）
 //   data/picnic.json: [{ parks: ["小金井公園"], name, spot, hours, instagram, closedWeekdays: [0..6] | null }]
 //   🔴 instagram が空・休みの曜日が分からない（null）あいだは出さない。催しの日に閉まっている店へ行かせない
+// 🆕 2026-11-11 子連れで入りやすいカフェ（「雨の日の寄り道」）。web の "cafes": ["id", …]（2軒まで）で出す。中身は data/cafes.json（公式に書いてあることだけ）
+const cafeData = existsSync('data/cafes.json') ? (JSON.parse(readFileSync('data/cafes.json', 'utf8')).cafes || []) : [];
 const picnic = existsSync('data/picnic.json') ? JSON.parse(readFileSync('data/picnic.json', 'utf8')) : [];
 // 📷 インスタの「その時の様子」（2026-10-10 オーナー指示）
 //   web/<日付>.json の item に "insta": [{ "url": "https://www.instagram.com/p/…/", "when": "2025-10", "by": "アカウント名" }]（2件まで）
@@ -376,6 +378,8 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
   .cm-hint { font-size: .68rem; line-height: 1.6; color: var(--w-soft); margin: .1rem .2rem 0; }
   .cm-hint textarea { width: 100%; box-sizing: border-box; margin-top: .3rem; font-size: .72rem; }
   /* 2026-10-10 オーナー: 余白を詰めて、縦に伸ばさない（1件1行のピル。2件なら横に並ぶ） */
+  .kidlist { margin: .45rem 0 0; padding-left: 1.15rem; font-size: .8rem; line-height: 1.75; color: var(--w-ink); }
+  .card.cafe h3 { margin-bottom: .35rem; }
   .photos { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: .35rem; margin: .5rem 0 0; }
   .photos img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: .5rem; }
   .insta { display: flex; flex-wrap: wrap; gap: .25rem; margin: .4rem 0 0; }
@@ -489,6 +493,43 @@ for (const f of files) {
       if (!ph || typeof ph.alt !== 'string' || !ph.alt.trim()) problems.push(`${date}: ${it.id} の写真に alt（写っているものの説明）が無い`);
     }
   }
+  // 🆕 2026-11-11 雨の日の寄り道（子連れで入りやすいカフェ）。公式に子連れ向けの席や設備の記載があるお店（pages: true）だけ・2軒まで
+  const cafes = [];
+  if (spec.cafes !== undefined) {
+    if (!Array.isArray(spec.cafes) || spec.cafes.length > 2) problems.push(`${date}: cafes は2軒までの配列（data/cafes.json の id）`);
+    else for (const id of spec.cafes) {
+      const c = cafeData.find((x) => x.id === id);
+      if (!c) problems.push(`${date}: カフェ "${id}" が data/cafes.json に無い`);
+      else if (c.pages !== true) problems.push(`${date}: カフェ「${c.name}」は、公式に子連れ向けの記載を確かめていないので年齢別ページには出せない（マップだけ）`);
+      else if (!(c.kids || []).length || !c.official || !c.checked) problems.push(`${date}: カフェ「${c.name}」に kids・official・checked のどれかが無い`);
+      else cafes.push(c);
+    }
+  }
+  const cafeCard = (c) => {
+    const [y, m, d] = c.checked.split('-').map(Number);
+    return `
+  <article class="card cafe">
+    <h3>${esc(c.name)}</h3>
+    <ul class="facts">
+      <li>${ICON.where}<span>${esc(c.where)}</span></li>
+      ${c.hours ? `<li>${ICON.when}<span>${esc(c.hours)}</span></li>` : ''}
+    </ul>
+    <ul class="kidlist">${c.kids.map((k) => `<li>${esc(k)}</li>`).join('')}</ul>
+    ${c.more ? `<p class="note">${esc(c.more)}</p>` : ''}
+    ${(c.unsure || []).length ? `<p class="fine">お店の案内に書いていないこと（要確認）: ${esc(c.unsure.join('・'))}</p>` : ''}
+    <div class="foot">
+      <div class="ages"></div>
+      <div class="acts">
+        <a class="btn ghost" href="${esc(c.official)}" target="_blank" rel="noopener" data-goatcounter-click="${esc('カフェ公式｜' + c.name)}">公式</a>
+        <a class="btn solid" href="${esc(mapUrl(c.mapq || c.name))}" target="_blank" rel="noopener" data-goatcounter-click="${esc('カフェ地図｜' + c.name)}">地図</a>
+      </div>
+    </div>
+    <p class="fine">お店の案内に書いてあることだけを載せています（${y}年${m}月${d}日に確認）。行く前に、営業日をお店でご確認ください。</p>
+  </article>`;
+  };
+  const cafeSec = cafes.length
+    ? `<div class="sec"><p class="kicker">RAINY DAY</p><h2>雨の日の寄り道（子連れカフェ）</h2></div>${cafes.map(cafeCard).join('')}`
+    : '';
   // 協賛（紹介型）: 1号に1件まで。一推しには置かない（docs/sponsor-plan.md §14「冒頭に置かない」）
   const prs = [...items, ...ahead].filter(({ it }) => it.pr !== undefined);
   for (const { it } of prs) {
@@ -546,8 +587,10 @@ for (const f of files) {
     const now = forAge(items, g.key);
     const next = forAge(ahead, g.key);
     return `<section class="panel" id="${g.key}" data-age="${g.key}">
+  ${spec.cafesTop ? cafeSec : ''}
   <div class="sec"><p class="kicker">THIS WEEK</p><h2>今週のおでかけ</h2></div>
   ${now.length ? now.map(({ it, ev }) => card(it, ev, { pick: it.id === spec.pick, age: g.key })).join('') : '<p class="empty">今週は、この年齢向けの催しが少なめです。ほかのタブもご覧ください。</p>'}
+  ${spec.cafesTop ? '' : cafeSec}
   ${next.length ? `<div class="sec"><p class="kicker">COMING UP</p><h2>先取り・申込の締切</h2></div>${next.map(({ it, ev }) => card(it, ev, { age: g.key })).join('')}` : ''}
   ${g.key !== 'elem' ? `<a class="entei" href="/entei.html" data-goatcounter-click="週｜園庭開放">🌱 <b>園庭開放・未就園児の会</b><span>入園前の子と、幼稚園の園庭で遊べる日。小平の幼稚園・こども園ごとに、これから2週間の日がわかります</span></a>` : ''}
   <a class="entei" href="/teirei.html" data-goatcounter-click="週｜定例">📚 <b>児童館・図書館・子育てひろばの定例</b><span>図書館のおはなし会や絵本のへや、児童館のこども広場など、毎月くり返す無料の会</span></a>
