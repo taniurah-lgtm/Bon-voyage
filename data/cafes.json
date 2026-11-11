@@ -41,13 +41,14 @@
       "official": "https://eggg.jp/park_about.html",
       "mapq": "eggg Park 小平市鈴木町1-466-23",
       "checked": "2026-11-11",
-      "pages": true
+      "pages": true,
+      "why": "Muse（11/11）の写し: お店の Instagram @eggg_park20230106 の投稿（2026-10-25 https://www.instagram.com/p/De61y1VmfiC/ ）に「お子様メニューを無料でご提供」（ハロウィン企画）＝子どもメニューがある。スクショで確かめたら kids に「お子様メニュー」を足す"
     },
     {
       "id": "flat",
       "name": "ふらっと花小金井",
       "where": "花小金井駅 南口から徒歩3分（小平市花小金井南町1-18-25 NR花小金井駅前1階）",
-      "hours": "平日10:00〜18:00・土曜10:00〜17:00・日曜11:00〜15:00・祝日は休み",
+      "hours": "",
       "kids": [],
       "unsure": [
         "子ども用の椅子・子どもメニュー",
@@ -57,7 +58,7 @@
       "mapq": "ふらっと花小金井 小平市花小金井南町1-18-25",
       "checked": "2026-11-11",
       "pages": false,
-      "why": "お店の公式ページに、子連れ向けの席や設備の記載が無い（場所と営業時間だけ）。Instagram @flat_hanakoganei に記載があれば、オーナーのスクショで確かめてから pages を true に"
+      "why": "公式サイトに子連れの記載が無い。Muse（11/11）の写しでは、Instagram @flat_hanakoganei のリール（2023-08-25 https://www.instagram.com/reel/CwWdx5zus1s/ ）に「お子様用の椅子のご用意が出来ました」「お子様カレーのご用意もございます」。プロフィールの営業時間は「10時〜20時・定休日 日曜、月曜、祝日」で、公式サイト（平日10-18・土10-17・日11-15・祝休）と食い違う。オーナーのスクショで確かめてから kids と hours を入れ、pages を true に"
     },
     {
       "id": "gruau",
@@ -73,7 +74,59 @@
       "mapq": "GRUAU 小平市花小金井1-14-5",
       "checked": "2026-11-11",
       "pages": false,
-      "why": "お店のホームページが無く、公式は Instagram だけ（こちらでは開けない）。場所は複数の案内サイトで一致するが、公式では未確認。キッズスペースは、家族が行って見ている。Instagram のプロフィールか投稿で確かめてから pages を true に。Instagram のアカウント名（@gruau_cafe）は、ほかの人の投稿に出ていたもので、こちらでは確かめていない。オーナーが確かめるまで、リンクは付けない"
+      "why": "Muse（11/11）の写しでは、@gruau_cafe はお店本人。プロフィール「OPEN 09:00／CLOSE 18:00(土曜、祝日は11時から)・金曜は21時まで・定休日：日」。投稿（2025-05-02 https://www.instagram.com/p/DJJhc58zRb6/ ）に「いつも賑やかなキッズスペース」「磁石の壁があったり絵本やコーヒーのおもちゃがあったり」、#キッズスペースのあるお店 は 2026-11-10 の投稿 https://www.instagram.com/p/DfifNDME1JK/ にも。オーナーのスクショで確かめてから kids・hours・official を入れ、pages を true に"
+    },
+    {
+      "id": "mammacafe",
+      "name": "MammaCafe（まんまカフェ）",
+      "where": "東久留米市幸町3-2-3",
+      "hours": "",
+      "kids": [],
+      "unsure": [],
+      "official": "",
+      "mapq": "東久留米市幸町3-2-3",
+      "checked": "",
+      "pages": false,
+      "why": "Muse（11/11）の写し: お店本人 @mammacafe_bunbun のリール（2025-07-16 https://www.instagram.com/reel/DMKo1CUT9nq/ ）に「保育園が運営する子連れカフェ」「お座敷席」「おもちゃ・お子さまイス・おむつ台完備」「キッズメニューは未就学児向けのものから小学生向けのプレートまで」、営業「平日11:00〜18:30・土曜11:00〜16:00・日曜・祝日（休み）」。住所は東久留米市の資料の BunBun保育園Ⅱ（幸町3-2-3）と一致。スクショで確かめたら最有力"
+    },
+    {
+      "id": "mogumogu",
+      "name": "もぐもぐの森",
+      "where": "田無駅から徒歩8〜10分（西東京市）",
+      "hours": "",
+      "kids": [],
+      "unsure": [],
+      "official": "",
+      "mapq": "",
+      "checked": "",
+      "pages": false,
+      "why": "Muse（11/11）の写し: お店本人 @mogu__cafe のプロフィールに「キッズコーナーもございます」、営業「11:30〜16:30・定休日 日、月、祝日」。住所は不明（検索でも見つからない）。スクショで住所と記載を確かめる"
+    },
+    {
+      "id": "yutaly",
+      "name": "Yutaly One's Cafe",
+      "where": "小金井市貫井北町1-23-33",
+      "hours": "",
+      "kids": [],
+      "unsure": [],
+      "official": "",
+      "mapq": "",
+      "checked": "",
+      "pages": false,
+      "why": "Muse（11/11）の写し: お店本人 @yutaly_ones_cafe の投稿（2026-05-30 https://www.instagram.com/p/DY8qKOTkpzU/ ）に「カフェのキッズスペース」「お子さま連れでもゆっくり過ごせる空間づくりを大切にしています」。営業日はお店の発信で未確認（予約サイトの「火〜土 11:00〜15:00」は利用者の投稿なので使わない）"
+    },
+    {
+      "id": "tokyocoffee-takiyama",
+      "name": "TOKYO COFFEE ロースタリーカフェ 滝山",
+      "where": "東久留米市滝山4-1-40",
+      "hours": "",
+      "kids": [],
+      "unsure": [],
+      "official": "",
+      "mapq": "",
+      "checked": "",
+      "pages": false,
+      "why": "Muse（11/11）: 2階のキッズルーム・ベビーカーで入れる土間は、お客さんの投稿（@coniconi_official）だけ。お店本人（@tokyocoffeejp）の記載が見つかるまで載せない"
     }
   ]
 }
