@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-11",
+ "generated": "2026-11-12",
  "events": [
   {
    "id": "E16",
@@ -3657,7 +3657,7 @@
    "timeUncertain": false,
    "place": "国営昭和記念公園（立川市）。夜の入退園は西立川口・立川口だけ",
    "mapq": "国営昭和記念公園",
-   "summary": "",
+   "summary": "公園を夜に開けて、紅葉・黄葉をライトアップする催し（公式「今年で7回目のライトアップイベント」）",
    "kidsNote": "",
    "caution": "",
    "lastEntry": "",
@@ -4814,7 +4814,7 @@
    "timeUncertain": false,
    "place": "西東京いこいの森公園（西東京市緑町三丁目2番）",
    "mapq": "西東京いこいの森公園",
-   "summary": "",
+   "summary": "市の公式ページで確認",
    "kidsNote": "屋外の市民まつり。子どもゾーン19テント・アスレチック・スポーツ体験あり。",
    "caution": "",
    "contact": {
