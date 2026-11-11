@@ -378,6 +378,9 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
   .cm-hint { font-size: .68rem; line-height: 1.6; color: var(--w-soft); margin: .1rem .2rem 0; }
   .cm-hint textarea { width: 100%; box-sizing: border-box; margin-top: .3rem; font-size: .72rem; }
   /* 2026-10-10 オーナー: 余白を詰めて、縦に伸ばさない（1件1行のピル。2件なら横に並ぶ） */
+  .more-cafes > summary { cursor: pointer; list-style: none; text-align: center; font-family: var(--w-maru); font-weight: 700; font-size: .82rem; color: var(--w-ink); border: 1px solid var(--w-line); border-radius: 999px; padding: .55rem 1rem; margin: .2rem 0 .8rem; background: #fff; }
+  .more-cafes > summary::-webkit-details-marker { display: none; }
+  .more-cafes[open] > summary { display: none; }
   .kidlist { margin: .45rem 0 0; padding-left: 1.15rem; font-size: .8rem; line-height: 1.75; color: var(--w-ink); }
   .card.cafe h3 { margin-bottom: .35rem; }
   .photos { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: .35rem; margin: .5rem 0 0; }
@@ -493,10 +496,11 @@ for (const f of files) {
       if (!ph || typeof ph.alt !== 'string' || !ph.alt.trim()) problems.push(`${date}: ${it.id} の写真に alt（写っているものの説明）が無い`);
     }
   }
-  // 🆕 2026-11-11 雨の日の寄り道（子連れで入りやすいカフェ）。公式に子連れ向けの席や設備の記載があるお店（pages: true）だけ・2軒まで
+  // 🆕 2026-11-11 子連れで入りやすいカフェ。お店の発信に子連れ向けの席や設備の記載があるお店（pages: true）だけ。
+  //    2026-11-12 オーナー「11/25号でまとめて出す。以降は一推しの近く・雨の週に。出し惜しみ不要」→ 8軒まで。3軒目からは「ほかの〇軒」をたたむ
   const cafes = [];
   if (spec.cafes !== undefined) {
-    if (!Array.isArray(spec.cafes) || spec.cafes.length > 2) problems.push(`${date}: cafes は2軒までの配列（data/cafes.json の id）`);
+    if (!Array.isArray(spec.cafes) || spec.cafes.length > 8) problems.push(`${date}: cafes は8軒までの配列（data/cafes.json の id）`);
     else for (const id of spec.cafes) {
       const c = cafeData.find((x) => x.id === id);
       if (!c) problems.push(`${date}: カフェ "${id}" が data/cafes.json に無い`);
@@ -528,7 +532,10 @@ for (const f of files) {
   </article>`;
   };
   const cafeSec = cafes.length
-    ? `<div class="sec"><p class="kicker">RAINY DAY</p><h2>雨の日の寄り道（子連れカフェ）</h2></div>${cafes.map(cafeCard).join('')}`
+    ? `<div class="sec"><p class="kicker">CAFE</p><h2>子連れで入りやすいカフェ</h2></div>${cafes.slice(0, 2).map(cafeCard).join('')}${
+      cafes.length > 2
+        ? `<details class="more-cafes"><summary data-goatcounter-click="カフェ｜ほかを見る">ほかの${cafes.length - 2}軒も見る</summary>${cafes.slice(2).map(cafeCard).join('')}</details>`
+        : ''}`
     : '';
   // 協賛（紹介型）: 1号に1件まで。一推しには置かない（docs/sponsor-plan.md §14「冒頭に置かない」）
   const prs = [...items, ...ahead].filter(({ it }) => it.pr !== undefined);
