@@ -436,6 +436,7 @@ if (internalLeaks.length) {
   const perDay = Math.ceil(7 / weekend.length);
   const wkList = weekend
     .flatMap((day) => pub
+      .filter((e) => !e.pr) // 協賛（紹介型）の催しは、トップの週末欄には出さない（出すのは年齢別ページとカレンダー）
       .filter((e) => (e.dates || []).filter((x) => weekend.includes(x)).sort()[0] === day)
       .map((e) => ({ e, day }))
       .sort((a, b) => bestCount(b.e) - bestCount(a.e) || sortKey(a).localeCompare(sortKey(b)))

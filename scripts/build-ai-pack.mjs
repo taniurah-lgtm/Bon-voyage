@@ -141,6 +141,7 @@ function eventBlock(e) {
   s += line('問い合わせ', publicTel(e.contact));
   s += line('確度', e.confidence + (e.tentative ? '（未確定・要確認）' : ''));
   s += line('公式サイト（ここで最新を確認してください）', publicUrl(e.url));
+  s += line('PR', e.pr ? `${e.pr}のご協賛で掲載しています` : '');
   s += partnerNote(e.name, e.place);
   return s;
 }
@@ -157,6 +158,7 @@ function standingBlock(e) {
   s += line('子連れメモ', e.kidsNote);
   s += line('確度', e.confidence);
   s += line('公式サイト（ここで最新を確認してください）', publicUrl(e.url));
+  s += line('PR', e.pr ? `${e.pr}のご協賛で掲載しています` : '');
   s += partnerNote(e.name, e.place);
   return s;
 }

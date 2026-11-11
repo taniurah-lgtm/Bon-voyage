@@ -209,8 +209,9 @@ function dateChip(ev) {
     const a = fmt(ds[0]);
     if (ds.length === 1) return `<div class="chip"><span class="md">${a.m}/${a.d}</span><span class="wd">${a.w}</span></div>`;
     const b = fmt(ds[ds.length - 1]);
-    const tail = b.m === a.m ? `–${b.d}` : `–${b.m}/${b.d}`;
-    return `<div class="chip"><span class="md">${a.m}/${a.d}<small>${tail}</small></span><span class="wd">${ds.length}DAYS</span></div>`;
+    // 月をまたぐとき（11/22–12/20）は札の幅に入らず、となりの題名に重なっていた。終わりの日を次の行に送る（2026-11-11）
+    const tail = b.m === a.m ? `<small>–${b.d}</small>` : `<small style="display:block">–${b.m}/${b.d}</small>`;
+    return `<div class="chip"><span class="md">${a.m}/${a.d}${tail}</span><span class="wd">${ds.length}DAYS</span></div>`;
   }
   return `<div class="chip"><span class="md">—</span><span class="wd">OPEN</span></div>`;
 }
@@ -241,6 +242,7 @@ function card(item, ev, { pick = false, age = '' } = {}) {
       </div>
     </div>
     ${note ? `<p class="note">${esc(note)}</p>` : ''}
+    ${Array.isArray(item.photos) && item.photos.length ? `<div class="photos">${item.photos.map((ph) => `<img src="${esc(ph.src)}" alt="${esc(ph.alt)}" loading="lazy" decoding="async">`).join('')}</div>` : ''}
     ${pic ? `<p class="picnic">🥐 お昼は、${esc(pic.spot)}の「${esc(pic.name)}」で買ってピクニックも（${esc(pic.hours)}）。予約はお店のInstagram（<a href="https://www.instagram.com/${esc(pic.instagram)}/" target="_blank" rel="noopener" data-goatcounter-click="${esc('ピクニック｜' + pic.name)}">@${esc(pic.instagram)}</a>）へ。<small>通信のチラシを置いてくださっているお店です。</small></p>` : ''}
     ${okInsta(item).length ? `<div class="insta">${okInsta(item).map((x) => `<a href="${esc(sceneHref(x))}" target="_blank" rel="noopener" data-goatcounter-click="${esc('様子｜' + ev.name)}"><span class="ig">📷 ${esc(instaLabel(x.when))}</span><small>${esc(sceneBy(x))}</small></a>`).join('')}</div>` : ''}
     <div class="foot">
@@ -374,6 +376,8 @@ const page = ({ title, desc, path, head, body }) => `<!doctype html>
   .cm-hint { font-size: .68rem; line-height: 1.6; color: var(--w-soft); margin: .1rem .2rem 0; }
   .cm-hint textarea { width: 100%; box-sizing: border-box; margin-top: .3rem; font-size: .72rem; }
   /* 2026-10-10 オーナー: 余白を詰めて、縦に伸ばさない（1件1行のピル。2件なら横に並ぶ） */
+  .photos { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: .35rem; margin: .5rem 0 0; }
+  .photos img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: .5rem; }
   .insta { display: flex; flex-wrap: wrap; gap: .25rem; margin: .4rem 0 0; }
   .insta a { display: inline-flex; align-items: center; gap: .35rem; max-width: 100%; padding: .2rem .6rem; border-radius: 999px; border: 1px solid var(--w-line); background: var(--w-card); color: var(--w-ink); text-decoration: none; line-height: 1.4; }
   .insta .ig { font-family: var(--w-maru); font-weight: 700; font-size: .68rem; color: var(--w-accent-ink); white-space: nowrap; }
@@ -474,6 +478,17 @@ for (const f of files) {
     }).filter(Boolean);
   const items = resolve(spec.items);
   const ahead = resolve(spec.ahead);
+  // 🆕 2026-11-11: 台帳に「協賛」と書いてある催しは、web の item に pr を書き忘れても、必ず「PR」を付ける（PRなしで出さない）
+  for (const { it, ev } of [...items, ...ahead]) if (ev.pr && it.pr === undefined) it.pr = ev.pr;
+  // 🆕 2026-11-11: カードの写真（協賛の催しで、お店から使ってよいと言われた写真だけ。2枚まで・docs/homepage/assets/ の下に置いたもの）
+  for (const { it } of [...items, ...ahead]) {
+    if (it.photos === undefined) continue;
+    if (!Array.isArray(it.photos) || it.photos.length > 2) { problems.push(`${date}: ${it.id} の photos は2枚までの配列`); continue; }
+    for (const ph of it.photos) {
+      if (!ph || typeof ph.src !== 'string' || !/^\/assets\/[\w./-]+\.(?:jpe?g|png|webp)$/.test(ph.src) || !existsSync('docs/homepage' + ph.src)) problems.push(`${date}: ${it.id} の写真 ${ph && ph.src} が docs/homepage/assets/ に無い`);
+      if (!ph || typeof ph.alt !== 'string' || !ph.alt.trim()) problems.push(`${date}: ${it.id} の写真に alt（写っているものの説明）が無い`);
+    }
+  }
   // 協賛（紹介型）: 1号に1件まで。一推しには置かない（docs/sponsor-plan.md §14「冒頭に置かない」）
   const prs = [...items, ...ahead].filter(({ it }) => it.pr !== undefined);
   for (const { it } of prs) {

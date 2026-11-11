@@ -323,3 +323,10 @@
   /* 「その日の予定」と見分けがつくように、こちらは落ち着かせる */
   background: var(--surface-2);
 }
+
+/* 協賛（紹介型）の催し（2026-11-11）。カードの頭に、周りと同じ大きさ・濃さで */
+.bvc-pr { margin: 0 0 .35rem; font-size: .86rem; color: var(--ink); }
+.bvc-pr span, .bvc-prtag {
+  display: inline-block; margin-right: .45rem; padding: .02rem .5rem; border-radius: .25rem;
+  background: var(--ink); color: #fff; font-weight: 700; font-size: .74rem; letter-spacing: .08em;
+}

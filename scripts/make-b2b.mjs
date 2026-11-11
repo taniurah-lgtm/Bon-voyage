@@ -28,7 +28,7 @@ const OUT = 'docs/b2b/sample';
 const month = process.argv[2] || readdirSync(SPEC_DIR).filter((f) => /^\d{4}-\d{2}\.json$/.test(f)).sort().pop().slice(0, 7);
 const spec = JSON.parse(readFileSync(`${SPEC_DIR}/${month}.json`, 'utf8'));
 const pub = JSON.parse(readFileSync('docs/homepage/data/events-public.json', 'utf8'));
-const byId = new Map(pub.events.map((e) => [e.id, e]));
+const byId = new Map(pub.events.filter((e) => !e.pr).map((e) => [e.id, e])); // 協賛（紹介型）の催しは名入れの原稿に入れない
 const places = JSON.parse(readFileSync('data/b2b-places.json', 'utf8'));
 const [Y, M] = month.split('-').map(Number);
 

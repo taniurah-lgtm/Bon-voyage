@@ -61,7 +61,7 @@ mkdirSync('social/drafts', { recursive: true });
 const LEDGER_AHEAD_DAYS = 21;
 function upcomingIds() {
   try {
-    const pub = JSON.parse(readFileSync('docs/homepage/data/events-public.json', 'utf8')).events || [];
+    const pub = (JSON.parse(readFileSync('docs/homepage/data/events-public.json', 'utf8')).events || []).filter((e) => !e.pr); // 協賛の催しは毎日の下書きに入れない（PRの投稿は別に1回・タイアップ表示つきで）
     const from = new Date(Date.parse(TODAY + 'T00:00:00Z') + 2 * 86400000).toISOString().slice(0, 10);
     const until = new Date(Date.parse(TODAY + 'T00:00:00Z') + LEDGER_AHEAD_DAYS * 86400000).toISOString().slice(0, 10);
     // 長い会期（10/29〜11/29 など）は dates が初日だけなので、span の終わりも見る
@@ -516,7 +516,7 @@ function searchBlock() {
   const base = [0, 1, 2].map((i) => BASE[(EPOCH_DAY * 3 + i) % BASE.length]);
   let names = [];
   try {
-    const pub = JSON.parse(readFileSync('docs/homepage/data/events-public.json', 'utf8')).events;
+    const pub = JSON.parse(readFileSync('docs/homepage/data/events-public.json', 'utf8')).events.filter((e) => !e.pr);
     const until = new Date(Date.parse(TODAY + 'T00:00:00Z') + 10 * 86400000).toISOString().slice(0, 10);
     // 号で選んだ催しを先に（いちばん新しい号の web の items 順）。足りなければ、これから10日の祭り・大きめの催し
     const byId = new Map(pub.map((e) => [e.id, e]));

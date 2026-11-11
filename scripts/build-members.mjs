@@ -32,6 +32,7 @@ import { publicUrl } from './lib/city-site.mjs';
 
 const OUT = 'docs/homepage/m/s7f2ka/index.html';
 const EVENTS = JSON.parse(readFileSync('data/events.json', 'utf8'));
+EVENTS.events = (EVENTS.events || []).filter((e) => !e.pr); // 協賛（紹介型）の催しは、年齢別ページとカレンダーにだけ「PR」つきで出す
 const POSTS = JSON.parse(readFileSync('data/map-posts.json', 'utf8'));
 const SPOTS = JSON.parse(readFileSync('data/map-spots.json', 'utf8'));
 

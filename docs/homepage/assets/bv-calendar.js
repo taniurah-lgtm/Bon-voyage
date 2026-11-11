@@ -21,6 +21,8 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
+  // 協賛（紹介型）の催しの名前の前に付ける札
+  function prTag(e) { return e && e.pr ? '<span class="bvc-prtag">PR</span>' : ''; }
   function iso(d) {
     return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
   }
@@ -369,6 +371,8 @@
     }
     return (
       '<article class="bvc-card' + (ev.tentative ? ' is-tentative' : '') + (past ? ' is-past' : '') + '">' +
+      // 協賛（紹介型）の催しは、カードの頭に「PR」と、どこの協賛かを書く（2026-11-11。周りと同じ大きさ・濃さで）
+      (ev.pr ? '<p class="bvc-pr"><span>PR</span>' + esc(ev.pr) + 'のご協賛で掲載</p>' : '') +
       (past ? '<p class="bvc-past-label">この日は終わりました</p>' : '') +
       '<p class="bvc-when">' + esc(when) + ' ' + multi +
       (t.exception ? '<span class="bvc-exc">この日だけ時間がちがいます</span>' : '') +
@@ -923,7 +927,7 @@
           }
           return '<div class="bvc-dlrow' + (compact ? ' is-compact' : '') + '"><span class="bvc-dldate">' + esc(fmtDay(e.deadline.date)) +
             (days === 0 ? '<b>今日</b>' : '<b>あと' + days + '日</b>') + '</span>' +
-            '<span class="bvc-dlname">' + esc(e.name) +
+            '<span class="bvc-dlname">' + prTag(e) + esc(e.name) +
             (how.length ? '<span class="bvc-dlhow">' + esc(how.join('／')) + '</span>' : '') +
             (tel ? '<span class="bvc-dlact">' + tel + '</span>' : '') +
             (safeURL(e.url)
@@ -974,7 +978,7 @@
                 '（' + ds.length + '日）'
               : '';
             return '<article class="bvc-card"><p class="bvc-when">' + span + '</p>' +
-              '<' + hName + ' class="bvc-name">' + esc(e.name) + '</' + hName + '>' +
+              '<' + hName + ' class="bvc-name">' + prTag(e) + esc(e.name) + '</' + hName + '>' +
               (e.place ? '<p class="bvc-place">' + esc(e.place) + '</p>' : '') +
               (e.summary ? '<p class="bvc-desc">' + esc(e.summary) + '</p>' : '') +
               (e.hours ? '<p class="bvc-hours">🕘 ' + esc(e.hours) + '</p>' : '') +
@@ -994,7 +998,7 @@
           spans.map(function (e) {
             var label = e.span.to ? esc(fmtDay(e.span.to)) + 'まで' : '会期中';
             return '<article class="bvc-card"><p class="bvc-when">' + label + '</p>' +
-              '<' + hName + ' class="bvc-name">' + esc(e.name) + '</' + hName + '>' +
+              '<' + hName + ' class="bvc-name">' + prTag(e) + esc(e.name) + '</' + hName + '>' +
               (e.place ? '<p class="bvc-place">' + esc(e.place) + '</p>' : '') +
               (e.summary ? '<p class="bvc-desc">' + esc(e.summary) + '</p>' : '') +
               (e.kidsNote && e.kidsNote !== e.summary ? '<p class="bvc-kids">' + esc(e.kidsNote) + '</p>' : '') +
@@ -1016,7 +1020,7 @@
           '<p class="bvc-tailnote">例年の時期から拾ったものです。日付はカレンダーのマス目には入れていません。公式で確認してからお出かけください。</p>' +
           tent.map(function (e) {
             return '<div class="bvc-tentrow"><span class="bvc-tentwhen">' + esc(e.when || '') + '</span>' +
-              '<span class="bvc-tentname">' + esc(e.name) + '</span>' +
+              '<span class="bvc-tentname">' + prTag(e) + esc(e.name) + '</span>' +
               // ★素の <a> だと 17x56px で、同じページのほかの公式リンク（44px以上）より
               //   ずっと押しにくかった。同じボタンの形に揃える。
               (e.mapq ? ' <a class="bvc-btn bvc-btn-sub" href="' + esc(mapURL(e.mapq)) +

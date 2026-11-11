@@ -33,6 +33,7 @@ const type = argOf('--type') || TYPE_BY_WD[WD];
 
 const SPOTS = JSON.parse(readFileSync('data/map-spots.json', 'utf8'));
 const LEDGER = JSON.parse(readFileSync('data/events.json', 'utf8'));
+LEDGER.events = (LEDGER.events || []).filter((e) => !e.pr); // 協賛（紹介型）の催しは記事の題材にしない（PRなしで出さない）
 
 // ---- すでに書いた題材 ---------------------------------------------------------
 mkdirSync(OUT_DIR, { recursive: true });

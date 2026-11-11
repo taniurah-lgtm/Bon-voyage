@@ -21,6 +21,9 @@ const OUT = 'data/events.json';   // ★docs/homepage の外＝公開されな�
 const BASE_YEAR = 2026;
 
 // ---- 台帳ファイルを集める（2026-07.md, 2026-08.md, ... 昇順）----
+// 協賛（紹介型）の「掲載開始」を見るための今日（JST）。見本を作るときだけ BV_TODAY=YYYY-MM-DD で先の日にできる
+const TODAY_JST = process.env.BV_TODAY || new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Tokyo' });
+
 const files = readdirSync('events')
   .filter((f) => /^\d{4}-\d{2}\.md$/.test(f))
   .sort()
@@ -618,6 +621,16 @@ for (const file of files) {
       continue;
     }
 
+    // 🆕 2026-11-11 協賛（紹介型）の催し: 台帳に「- 協賛: お店の名前」と「- 掲載開始: YYYY-MM-DD」を書く。
+    //    掲載開始の前は、カレンダーにもページにも一切出さない（お金をいただく催しを「PR」なしで先に出さない）。
+    //    出すときは pr（お店の名前）を持たせ、出す側（カレンダー・年齢別ページ・AI用一覧）が必ず「PR」を付ける。
+    const pr = (field(b.lines, ['協賛']) || '').replace(/[（(].*$/, '').replace(/\*/g, '').trim();
+    const prFrom = ((field(b.lines, ['掲載開始']) || '').match(/\d{4}-\d{2}-\d{2}/) || [])[0];
+    if (pr && (!prFrom || TODAY_JST < prFrom)) {
+      unresolved.push({ id: b.id, name: b.name, reason: prFrom ? `協賛の催し。掲載開始（${prFrom}）の前のため除外` : '協賛の催しなのに「掲載開始」の行が無いため除外', when });
+      continue;
+    }
+
     // 終了・見送りは載せない
     if (/終了|見送り/.test(status)) {
       unresolved.push({ id: b.id, name: b.name, reason: `ステータス「${status.split(/\s/)[0]}」のため除外`, when });
@@ -707,7 +720,8 @@ for (const file of files) {
       allDay: !start,
       timeUncertain: !!timeUncertain,
       place: readerText(place),
-      mapq: mapQuery(place, b.name),
+      // 台帳に「- 地図: 出さない」とあれば、地図のボタンを出さない（番地を公開していない教室など。2026-11-11）
+      mapq: /出さない/.test(field(b.lines, ['地図']) || '') ? '' : mapQuery(place, b.name),
       summary: readerText(field(b.lines, ['内容'])),   // ★子連れ欄で埋めない（kidsNoteと二重になる）
       kidsNote: kidsBody(field(b.lines, ['子連れ'])),
       caution: extractCaution(when),
@@ -718,6 +732,7 @@ for (const file of files) {
       cost: readerText(field(b.lines, ['料金', '費用', '参加費'])),
       discount: readerText(field(b.lines, ['割引'])),
       target: readerText(field(b.lines, ['対象'])),
+      ...(pr ? { pr } : {}),
       url: findURL(b.lines),
       status: status.split(/\s|\(/)[0] || '候補',
       confidence: readerText(confidence),
