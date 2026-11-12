@@ -6,7 +6,7 @@
 <title>送付状（はじめての園・お電話のあと・宛名入り）</title>
 <!-- soufu-letter.html の4枚目（はじめての園・お電話のあと）と同じ文面に、宛名・住所・部数を入れて刷る版。2026-10-24
      ?zip=187-0002&addr=東京都小平市花小金井2-9-11&to=小平花小金井幼稚園&name=園長先生&count=50
-     node scripts/make-soufu.mjs が入れる。日付と担当は手書き（ほかの送付状と同じ）。売り込みは書かない。 -->
+     node scripts/make-soufu.mjs が入れる。担当は手書き。日付は --date で入れられる（無ければ手書き・2026-11-12〜）。売り込みは書かない。 -->
 <style>
   @page { size: A4; margin: 0; }
   * { box-sizing: border-box; }
@@ -34,7 +34,7 @@
 </head>
 <body>
 <section class="page">
-  <div class="date">2026年　　月　　日</div>
+  <div class="date" id="date">2026年　　月　　日</div>
   <div class="to">
     <div class="addr">〒<span id="zip"></span>　<span id="addr"></span></div>
     <div class="name"><span id="to"></span><br><span id="name">園長先生</span></div>
@@ -62,8 +62,10 @@
   ホームページ：https://bonvoya.nicomaru.tokyo/</div>
 </section>
 <script>
-  // ?zip=郵便番号&addr=住所&to=園名&name=宛名&count=部数
+  // ?zip=郵便番号&addr=住所&to=園名&name=宛名&count=部数&date=YYYY-MM-DD（date が無ければ日付は手書き）
   var q = new URLSearchParams(location.search);
+  var dm = (q.get('date') || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (dm) document.getElementById('date').textContent = dm[1] + '年' + Number(dm[2]) + '月' + Number(dm[3]) + '日';
   ['zip', 'addr', 'to', 'name', 'count'].forEach(function (k) {
     if (q.get(k)) document.getElementById(k).textContent = q.get(k);
   });
