@@ -5890,6 +5890,45 @@
    "source": "events/2026-11.md"
   },
   {
+   "id": "E238",
+   "name": "PLAY! PARK（立川）秋の特別イベント「みんなでつくるもみじ山」「森ごとクレヨンをつくろう」",
+   "dates": [
+    "2026-11-23"
+   ],
+   "span": null,
+   "when": "2026年11月23日(月・祝)",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": null,
+   "end": null,
+   "allDay": true,
+   "timeUncertain": false,
+   "place": "PLAY! PARK（立川市緑町3-1 GREEN SPRINGS W3棟 3F／JR立川駅北口・多摩モノレール立川北駅から徒歩約10分。サンサンロード側から入る）",
+   "mapq": "PLAY! PARK",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "公式「営業時間/料金」 https://play2020.jp/park/visit/",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "もみじ山は無料／森ごとクレヨンは500円。どちらも別にPLAY! PARKの入場料（休日の1日券: 大人〔中学生以上〕1,500円・子ども〔3〜12歳〕2,500円・子ども〔1〜2歳〕2,000円／3時間券もあり／1歳未満は無料）",
+   "discount": "",
+   "target": "もみじ山は0〜12歳の子どもと保護者・定員なし（順番に案内）／森ごとクレヨンは3〜12歳の子ども（保護者の付き添い）・各回15名・先着",
+   "url": "https://play2020.jp/article/park_kikuchichiki/",
+   "status": "候補",
+   "confidence": "公式で確認（2026-11-12）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
    "id": "E199",
    "name": "小金井公園「秋の樹木観察会」",
    "dates": [
@@ -7130,7 +7169,8 @@
    "E192"
   ],
   "2026-11-23": [
-   "E209"
+   "E209",
+   "E238"
   ],
   "2026-11-24": [
    "E199"
