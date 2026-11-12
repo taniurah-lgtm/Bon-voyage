@@ -5798,11 +5798,11 @@
    "target": "1人歩きがしっかりできる子〜小学生。申込は出演者の Threads のプロフィールのリンクから",
    "url": "https://www.instagram.com/p/DfLutLokuk1/",
    "status": "候補",
-   "confidence": "公式（主催アカウント）で再確認済み（2026-11-08）／初出は 2026-09-11（主催アカウントの告知とチラシ画像。Threads @wakuwaclean）",
+   "confidence": "主催のSNSで確認（2026-11-12・Instagram 11/11 の投稿をオーナーのスクショで）。雨は「小雨決行・雨天中止」に決着",
    "tentative": false,
    "deadline": {
     "date": "2026-11-18",
-    "raw": "主催の申込フォームから・11/18(水)まで。保険の手続きのため、フォームで申し込んだ人だけが参加できる"
+    "raw": "各ラウンドに初心者向けコースがあり、小さなお子さんも参加できる。参加者全員に「わくわく賞（お菓子）」と、景品が当たる抽選券。事前応募制・締切 11/18(水)"
    },
    "source": "events/2026-11.md"
   },
@@ -6476,6 +6476,45 @@
     "raw": "Googleフォーム（チラシのQR）か、小平ふるさと村に電話（042-345-8155）。12/9(水)締切・応募多数は抽選"
    },
    "source": "events/2026-12.md"
+  },
+  {
+   "id": "E239",
+   "name": "ぽろんどんぐり「ぽろんひろばスペシャルDAY クリスマス親子コンサート」（西東京市南町）",
+   "dates": [
+    "2026-12-14"
+   ],
+   "span": null,
+   "when": "2026年12月14日(月) 10:30〜11:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:30",
+   "end": "11:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "ぽろんどんぐり（西東京市南町5-25-14 2F）",
+   "mapq": "ぽろんどんぐり",
+   "summary": "どんぐりバンドの歌とピアノの生演奏のクリスマス親子コンサート。「見て」「聴いて」「動いて」「歌って」。歌を聞いたり、楽器に触れたり、自由に踊ったり。参加した子にはサンタのマラカスのプレゼント（チラシ・投稿）",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "○",
+    "elem": "✕"
+   },
+   "cost": "500円",
+   "discount": "",
+   "target": "親子（10組）",
+   "url": "https://www.instagram.com/p/DfmcxCwTiuO/",
+   "status": "候補",
+   "confidence": "主催のSNSで確認（2026-11-12）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
   },
   {
    "id": "E195",
@@ -7218,6 +7257,9 @@
   ],
   "2026-12-13": [
    "E223"
+  ],
+  "2026-12-14": [
+   "E239"
   ],
   "2026-12-22": [
    "E227"
