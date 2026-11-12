@@ -5637,6 +5637,46 @@
    "source": "events/2026-11.md"
   },
   {
+   "id": "E240",
+   "name": "あそびっぐ（ASOBIG・東大和）「赤ちゃん集合DAY」",
+   "dates": [
+    "2026-11-20",
+    "2026-12-16"
+   ],
+   "span": null,
+   "when": "2026年11月20日(金)・12月16日(水)。各日 11:00〜16:00 のあいだにプログラム",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 2,
+   "start": "11:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "あそびっぐ（BIGBOX東大和 1階・東大和市桜が丘1-1330-19／西武拝島線 東大和市駅から徒歩1分）",
+   "mapq": "あそびっぐ",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "△",
+    "elem": "✕"
+   },
+   "cost": "入場料だけ（イベントの参加費はかからない）。平日の1日券は 赤ちゃん（6か月〜1歳11か月）500円・こども（2〜12歳）1,900円・おとな（中学生以上）600円（3時間券・15時以降券もあり）",
+   "discount": "",
+   "target": "0歳から（赤ちゃんと保護者）",
+   "url": "https://www.seibu-leisure.co.jp/page.jsp?id=51058",
+   "status": "候補",
+   "confidence": "公式で確認（2026-11-12）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
    "id": "E174",
    "name": "土曜こども広場友＆遊「わくわく科学工作 紙コップスピーカーワークショップ」",
    "dates": [
@@ -7196,7 +7236,11 @@
   ],
   "2026-11-20": [
    "E226",
-   "E233"
+   "E233",
+   "E240"
+  ],
+  "2026-12-16": [
+   "E240"
   ],
   "2026-11-21": [
    "E174",
