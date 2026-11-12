@@ -118,6 +118,12 @@
   .btn:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
   .btn-line { background: var(--line-green); color: #fff; box-shadow: var(--shadow); }
   .btn-line:hover { transform: translateY(-1px); }
+  /* 2026-11-12 「友だちに教える」（アンケートで「まわりの家庭に教えたい」の声）。LINEの緑ボタンより控えめに */
+  .share-btn { display: inline-flex; align-items: center; gap: .45rem; margin: 1.1rem auto 0; padding: .55rem 1.15rem; border-radius: 999px; border: 1px solid currentColor; background: transparent; color: inherit; font: inherit; font-family: var(--maru); font-weight: 700; font-size: .92rem; cursor: pointer; opacity: .85; }
+  .share-btn:hover { opacity: 1; }
+  .share-btn .ic { width: 1.05em; height: 1.05em; }
+  .share-note { margin: .5rem 0 0; font-size: .82rem; opacity: .8; }
+  .pc-qr .share-btn { margin-top: 4px; font-size: 13px; padding: 6px 14px; }
   .btn-ghost { background: var(--surface); color: var(--sky-deep); border-color: var(--line-strong); }
   .btn-ghost:hover { border-color: var(--sky); }
   .btn .ic { width: 1.15em; height: 1.15em; }
@@ -496,6 +502,20 @@
 <!-- PC（幅1180px以上）だけ丸ゴシック。スマホでは使わないので、字形のファイルは読み込まれない -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&amp;display=swap" media="(min-width: 73.75rem)">
 <script src="/assets/analytics.js" defer></script>
+<script>
+  // 2026-11-12 「友だちに教える」。スマホでは共有の画面（LINE・メッセージなど）を開き、使えないときはリンクをコピーする
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-share]');
+    if (!b) return;
+    var url = 'https://bonvoya.nicomaru.tokyo/f/share/';
+    var text = '小平の子連れの週末おでかけ情報。毎週水曜の朝、LINEで無料で届きます';
+    var note = b.parentNode.querySelector('.share-note');
+    if (navigator.share) { navigator.share({ title: 'ぼんぼやーじゅ通信', text: text, url: url }).catch(function () {}); return; }
+    var done = function () { if (note) note.hidden = false; };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text + ' ' + url).then(done, function () { window.prompt('このリンクをコピーしてください', url); });
+    else window.prompt('このリンクをコピーしてください', url);
+  });
+</script>
 </head>
 <body>
 <nav class="bvnav" aria-label="サイト内">
@@ -710,6 +730,11 @@
           <img class="qr" src="assets/line-qr.png" alt="ぼんぼやーじゅ通信 友だち追加QRコード" width="150" height="150">
           <p class="qr-cap">スマホ以外の方は、QRコードから追加できます</p>
         </div>
+        <button type="button" class="share-btn" data-share data-goatcounter-click="友だちに教える">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.8l7.4-4.3M8.3 13.2l7.4 4.3"/></svg>
+          <span>友だちに教える</span>
+        </button>
+        <p class="share-note" hidden>リンクをコピーしました。LINEやメッセージに貼ってください。</p>
 
       </div>
     </div>
@@ -758,6 +783,11 @@
     <h2 class="pc-h" id="qr-h">スマホで受け取る</h2>
     <img src="assets/line-qr.png" alt="LINEの友だち追加のQRコード" width="132" height="132" loading="lazy">
     <p>スマホのカメラで読み取ると、LINEの友だち追加の画面が開きます。</p>
+    <button type="button" class="share-btn" data-share data-goatcounter-click="友だちに教える">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.8l7.4-4.3M8.3 13.2l7.4 4.3"/></svg>
+      <span>友だちに教える</span>
+    </button>
+    <p class="share-note" hidden>リンクをコピーしました。LINEやメッセージに貼ってください。</p>
   </section>
 </aside>
 

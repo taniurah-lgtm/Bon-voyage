@@ -97,6 +97,7 @@
 - 11/25号の web json: `"cafes": ["flower", "flat", "gruau", "eggg-park", "mogumogu", "yutaly", "mammacafe"], "cafesTop": true`（近い順）
 - 11/25号の LINE: 本文の前に案内画像 `<!-- line-image: https://bonvoya.nicomaru.tokyo/assets/line/2026-11-25-cafe.jpg -->`（版下 `docs/print/line/cafe-2026-11-25.html`）。年齢別の前置きに「子連れで入りやすいカフェ7軒も」と触れてよい
 - **以降は、一推しの近く・雨の週に1〜2軒**（オーナー「出し惜しみ不要」）。同じ店が何度出てもよい
+- 🆕 **雨の週の決まり**（2026-11-12）: 週末のどちらかの降水確率が50%以上なら、`cafesTop: true` で1〜2軒をいちばん上に＋天気の行で屋内の行き先を1つ名指し（`docs/prompts/routine-wed.md` 手順4）
 - **11/18号の web json には `cafes` を書かない**
 
 - web の json に **`"cafes": ["flower", "eggg-park"]`**（8軒まで・`data/cafes.json` の id。**3軒目からは「ほかの〇軒も見る」にたたむ**）。3つのタブすべてに出る
