@@ -5513,6 +5513,42 @@
    "cat": "other"
   },
   {
+   "id": "E245",
+   "name": "子どもの居場所 ほしのま「絵本の会」（西東京市泉町・CAFÉ✳︎）",
+   "dates": [
+    "2026-11-23"
+   ],
+   "span": null,
+   "when": "2026年11月23日(月・祝) 11:00〜／13:00〜（各回 約30分）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "11:00",
+   "end": null,
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "CAFÉ✳︎（LIFE MEDICAL CARE いずみ 2F）（西東京市泉町3-6-9・元 泉小学校の跡地／西武新宿線 西武柳沢駅か西武池袋線 ひばりヶ丘駅からバスで5分）",
+   "mapq": "CAFÉ✳︎",
+   "summary": "絵本の読み聞かせ。「ぐりとぐら」「スイミー」「はらぺこあおむし」など、おなじみの絵本から、ちょっと楽しいお話まで。「小さなお子さんも、少し大きなお子さんも」。読み聞かせのあとは、カフェでランチやお茶も",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "○"
+   },
+   "cost": "読み聞かせは無料・こどもランチは無料（高校生以上はワンオーダー制で通常料金）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.instagram.com/p/DfKI3IIJ-HM/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "other"
+  },
+  {
    "id": "E199",
    "name": "小金井公園「秋の樹木観察会」",
    "dates": [
