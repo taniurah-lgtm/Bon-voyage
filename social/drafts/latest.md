@@ -1,37 +1,29 @@
-# 2026-11-15 SNSドラフト（承認待ち・まだ投稿していません）
+# 2026-11-16 SNSドラフト（承認待ち・まだ投稿していません）
 
 【Threads・紹介 1/2】
-今週末の11/21(土)、小平市ふれあい下水道館で学習講座が開かれます🎈
-10:00〜11:30、参加費は無料です。
+花小金井のおとなり、小平駅近くの美園地域センターで11/23(月・祝)にコダレンジャーのヒーローショーが開かれます🎈
+11:00〜12:00の開催です。
 
-小学生と保護者がいっしょに体験できるのですが、内容で気になったのが、
+乳幼児向けの「出張こども広場」で開かれる会ですが、子連れで助かるのが、
 
 【Threads・紹介 2/2】
-自然の材料を使ったクリスマスリースづくりと、身近なコケの観察が一度にできるところです。
+室内の広場で開催されるので、寒さやお天気を気にせず小さな子と一緒に見られるところです。
 
-小平市ふれあい下水道館「自然の材料でクリスマスリースをつくろう！＋コケを観察しよう！」
-日時：11/21(土) 10:00〜11:30
-場所：小平市ふれあい下水道館 地下1階 講座室（上水本町1-25-31・鷹の台駅）
-費用：無料（要事前申込・先着30人）
-https://kodaira-sewer.jp/events/2726
+美園地域センター 出張こども広場「コダレンジャーショー」
+日時：11/23(月・祝) 11:00〜12:00
+場所：美園地域センター（西武新宿線 小平駅南口など）
+費用：こども広場は無料（ショーの参加費は公式記載なし）
+https://www.instagram.com/p/DfLutLokuk1/
 
-対象は小学生で、保護者の方は1人まで同伴できます。申込締切は11/20(金)16:00まで、館への電話（042-326-7411）でも受け付けているそうです。定員になり次第終わってしまうので、気になる方は早めに問い合わせてみてくださいね。
+広場自体は赤ちゃんから使える地域の遊び場です。祝日の開催や設備などの詳細は、事前に美園地域センター（042-347-9188）へ確認しておくと安心です。今回のショーでもらえるシールは「グリーンロードグリーン」とのことですよ。
 
 くわしくは → https://bonvoya.nicomaru.tokyo/th
-#下水道館 #クリスマスリース #工作 #小平 #鷹の台 #子連れおでかけ
-
-【Threads・問いかけ】
-休日に子どもを連れて、多摩最大級という昭和記念公園に行ってみようと話しています。
-
-ただ、広すぎて目的を絞らないと回りきれそうにないのですが、
-はじめて行くなら、何時ごろに入園するのがちょうどいいですか🤔
+#コダレンジャー #小平 #美園地域センター #小平駅 #西武新宿線 #子連れおでかけ
 
 ---
-※自動生成（model: gemini-3.5-flash-lite）。投稿前に日付・事実・トーンを目視確認してください。
+※自動生成（model: gemini-flash-latest）。投稿前に日付・事実・トーンを目視確認してください。
 ※【紹介 1/2】を投稿し、その**返信として【紹介 2/2】**をぶら下げる。1/2にリンクを入れない。
-※【問いかけ】は「国営 昭和記念公園（立川）」について。**紹介とは別の対象**なので、同じ日でも重ならない。
-※【問いかけ】にリンクやハッシュタグを足さない（宣伝に見えると返事が来ない）。
-※返事が来たら「国営 昭和記念公園（立川）」の fromReader に入れる（手順は scripts/social/README.md）。
+※今日は【紹介】だけの日です（問いかけは隔日）。
 ※飛び先は https://bonvoya.nicomaru.tokyo/th に統一（【紹介】のみ）。
 
 
@@ -40,11 +32,11 @@ https://kodaira-sewer.jp/events/2726
 **よさそうな投稿があったら、その URL か本文を Claude に貼る** → 返信の案（ネタ帳の事実だけで）と、催しなら台帳への起票。
 
 いつもの言葉:
-- [西東京 子連れ](https://www.threads.com/search?q=%E8%A5%BF%E6%9D%B1%E4%BA%AC%20%E5%AD%90%E9%80%A3%E3%82%8C&serp_type=default&filter=recent)
-- [小平 イベント](https://www.threads.com/search?q=%E5%B0%8F%E5%B9%B3%20%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88&serp_type=default&filter=recent)
-- [東村山 子連れ](https://www.threads.com/search?q=%E6%9D%B1%E6%9D%91%E5%B1%B1%20%E5%AD%90%E9%80%A3%E3%82%8C&serp_type=default&filter=recent)
+- [小平 雨の日](https://www.threads.com/search?q=%E5%B0%8F%E5%B9%B3%20%E9%9B%A8%E3%81%AE%E6%97%A5&serp_type=default&filter=recent)
+- [小平 ママ](https://www.threads.com/search?q=%E5%B0%8F%E5%B9%B3%20%E3%83%9E%E3%83%9E&serp_type=default&filter=recent)
+- [小金井 子連れ](https://www.threads.com/search?q=%E5%B0%8F%E9%87%91%E4%BA%95%20%E5%AD%90%E9%80%A3%E3%82%8C&serp_type=default&filter=recent)
 
 これから10日の催し（ほかの人の感想・写真が出ていないか）:
-- [小平市産業まつり](https://www.threads.com/search?q=%E5%B0%8F%E5%B9%B3%E5%B8%82%E7%94%A3%E6%A5%AD%E3%81%BE%E3%81%A4%E3%82%8A&serp_type=default&filter=recent)
-- [西東京市民まつり](https://www.threads.com/search?q=%E8%A5%BF%E6%9D%B1%E4%BA%AC%E5%B8%82%E6%B0%91%E3%81%BE%E3%81%A4%E3%82%8A&serp_type=default&filter=recent)
-- [スポーツチャレンジキャラバン](https://www.threads.com/search?q=%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84%E3%83%81%E3%83%A3%E3%83%AC%E3%83%B3%E3%82%B8%E3%82%AD%E3%83%A3%E3%83%A9%E3%83%90%E3%83%B3&serp_type=default&filter=recent)
+- [ハーフバースデー](https://www.threads.com/search?q=%E3%83%8F%E3%83%BC%E3%83%95%E3%83%90%E3%83%BC%E3%82%B9%E3%83%87%E3%83%BC&serp_type=default&filter=recent)
+- [酉の市（熊手市）](https://www.threads.com/search?q=%E9%85%89%E3%81%AE%E5%B8%82%EF%BC%88%E7%86%8A%E6%89%8B%E5%B8%82%EF%BC%89&serp_type=default&filter=recent)
+- [玉川上水わくわくクリーンフェスティバル](https://www.threads.com/search?q=%E7%8E%89%E5%B7%9D%E4%B8%8A%E6%B0%B4%E3%82%8F%E3%81%8F%E3%82%8F%E3%81%8F%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%83%95%E3%82%A7%E3%82%B9%E3%83%86%E3%82%A3%E3%83%90%E3%83%AB&serp_type=default&filter=recent)
