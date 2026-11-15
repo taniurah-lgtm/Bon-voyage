@@ -36,7 +36,10 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    # 🔴 ubuntu-latest にしない（2026-11-15）。11/13 から ubuntu-latest が 26.04 になり、
+    #   Playwright 1.56.1 が chromium を入れられず（「does not support chromium on ubuntu26.04-x64」）、
+    #   ページの検査で止まってデプロイが2日止まった。Playwright が 26.04 に対応したら戻してよい
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
