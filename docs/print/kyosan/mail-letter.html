@@ -96,6 +96,11 @@ th { width: 26mm; color: #2f5e4e; font-weight: 700; white-space: nowrap; }
 .b5 .nums.n3 .n .v { font-size: 17pt; font-weight: 700; }
 .b5 .nums.n3 .n .v small { font-size: 9pt; }
 .b5 .nums.n3 .n .l { font-size: 7.4pt; }
+.nums.n4 { grid-template-columns: repeat(4, 1fr); }
+.b5 .nums.n4 .n { padding: 1.8mm .8mm 1.6mm; }
+.b5 .nums.n4 .n .v { font-size: 16pt; font-weight: 700; }
+.b5 .nums.n4 .n .v small { font-size: 8.5pt; }
+.b5 .nums.n4 .n .l { font-size: 6.9pt; }
 /* チラシのお願いは中身が短いので、字を大きく（待合室・お店の方が読みやすく） */
 .b5.roomy h1 { font-size: 14.5pt; margin: 10mm 0 7mm; }
 .b5.roomy .to { margin-top: 10mm; }
@@ -118,15 +123,16 @@ const md = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
 const jdate = (d) => { if (!d) return ''; const [y, m, dd] = d.split('-').map(Number); return `${y}年${m}月${dd}日`; };
 
 // いま言える数字（2026-11-16）。変えるときは docs/kyosan-mail.md の「数字」も。
-// 🆕 2026-11-16 営業の見直し: 数字は型ごとに「相手に近い3つ」だけ。アンケートは「答えた17人のうち」と母数をつける（「11/17」は日付に見えるのでやめた）
+// 🆕 2026-11-16 オーナー「強い数字だけで勝負したい」「17人だとアンケート少ねえとならないか」→ アンケートの数字は大きく出さない
+//   出どころ: LINE公式アカウントの分析（11/16 オーナーのスクショ）・Notion のチラシのアポリスト（置けた・郵送で継続のうち、届けたもの）
 const N = {
-  eki:   ['11', '人', 'アンケートに答えた17人のうち<br>「花小金井駅をよく使う」'],
-  narai: ['9', '人', 'アンケートに答えた17人のうち<br>「地元の習い事・体験教室を知りたい」'],
-  reach: ['226', '人', '11月11日号が届いた人数<br>（9月はじめの66人から3倍以上）'],
-  page:  ['14〜20', '%', '届いた人のうち<br>年齢別ページを開く人（毎号）'],
-  kan:   ['23', '館', 'チラシを置いている<br>市の地域センター・児童館など'],
+  reach: ['233', '人', '毎週水曜にLINEで<br>届いている人数（11月16日）'],
+  grow:  ['3.5', '倍', '9月はじめの66人から<br>2か月半で'],
+  open:  ['62.5', '%', 'LINEが届いた人のうち<br>開いた人（10月28日号）'],
+  click: ['32', '%', '開いた人のうち、ページを<br>見に行った人（10月28日号）'],
+  kan:   ['35', 'か所以上', 'チラシ設置：地域センター・<br>児童館・幼稚園・科学館など'],
 };
-const NUMS = { ouen: ['eki', 'reach', 'kan'], shokai: ['narai', 'page', 'reach'], chirashi: ['kan', 'reach', 'eki'] };
+const NUMS = { ouen: ['reach', 'grow', 'open', 'kan'], shokai: ['reach', 'open', 'click', 'grow'], chirashi: ['kan', 'reach', 'grow'] };
 
 // 見出しは「相手の得」から（送り手の「ご案内」から始めない）。送り先ごとに headline で差し替えられる
 const HEAD = {
@@ -170,7 +176,7 @@ function terms(t, d) {
       <tr><th>枠</th><td>同じ業種のお店は、ほかに載せません（協賛は全体で5社まで）</td></tr>
       <tr><th>表示</th><td>お金をいただいた掲載には、法律にしたがって「PR」と表示します</td></tr>
     </table>
-    <p class="note">LINEのメッセージそのものには載りません（LINEのきまりで、お金をいただいた宣伝は流せないため）。LINEは毎週ページを開く入口で、年齢別ページは、毎号、届いた人の14〜20%ほどが開いています（10〜11月）。</p>
+    <p class="note">LINEのメッセージそのものには載りません（LINEのきまりで、お金をいただいた宣伝は流せないため）。LINEは毎週ページを開く入口で、LINEを開いた人の3人に1人が、ページのリンクを押しています（10月28日号）。</p>
   </div>`;
 }
 
@@ -209,7 +215,7 @@ window.render = (d) => {
   document.title = `${head.replace(/\n/g, '')}（${d.to || ''}）`;
   // 🆕 2026-11-16 オーナー「チラシもB5に統一しているので、A4版は不要」→ どの型も B5
   document.getElementById('pagesize').textContent = '@page { size: 182mm 257mm; margin: 0; }';
-  const nums = `<div class="nums n3">${NUMS[t].map((k) => { const [v, sfx, l] = N[k]; return `<div class="n"><div class="v">${v}<small>${sfx}</small></div><div class="l">${l}</div></div>`; }).join('')}</div>`;
+  const nums = `<div class="nums n${NUMS[t].length}">${NUMS[t].map((k) => { const [v, sfx, l] = N[k]; return `<div class="n"><div class="v">${v}<small>${sfx}</small></div><div class="l">${l}</div></div>`; }).join('')}</div>`;
   const lead = `<div class="lead"><p><b>${md(d.opening || OPEN[t])}</b></p><p>${md(WHO)}</p>${(d.after ?? AFTER[t]) ? `<p>${md(d.after ?? AFTER[t])}</p>` : ''}</div>`;
   const why = reasons ? `<div class="box why"><h2>${esc(d.reasonsTitle || 'お便りした理由')}</h2><ul>${reasons}</ul></div>` : '';
   // 並び（上から、相手の関心の順）: 見出し → 相手への一文と自己紹介 → 相手に近い数字 → 理由 → 載せ方と掲載料 → 締め
