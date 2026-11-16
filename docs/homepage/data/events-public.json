@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-16",
+ "generated": "2026-11-17",
  "events": [
   {
    "id": "E16",
@@ -5362,6 +5362,44 @@
    "cat": "public"
   },
   {
+   "id": "E250",
+   "name": "みんなデパート（みんデパ）第22回「min'na de part 22th」東部公園",
+   "dates": [
+    "2026-11-21"
+   ],
+   "span": null,
+   "when": "2026年11月21日(土) 10:00〜16:00（雨天の場合は11/22に順延）",
+   "rainDates": [
+    "2026-11-22"
+   ],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "16:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市東部公園（花小金井6-13-1／西武新宿線 花小金井駅から徒歩7分）。駐車場はない（公共交通機関で）",
+   "mapq": "小平市東部公園",
+   "summary": "テーマ「スパンコールフィーバー」。ハンドメイド雑貨、グルメ（カレー・ラーメン・スイーツなど）、ステージ、体験型のワークショップ",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "入場無料。ワークショップ・飲食は別",
+   "discount": "",
+   "target": "",
+   "url": "https://www.instagram.com/p/Df0ACEPE1yp/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "fest"
+  },
+  {
    "id": "E118",
    "name": "玉川上水わくわくクリーンフェスティバル（第2回・WAKU WA CLEAN）",
    "dates": [
@@ -5903,6 +5941,42 @@
    "tentative": false,
    "deadline": null,
    "cat": "spot"
+  },
+  {
+   "id": "E251",
+   "name": "小平マルシェ vol.27（village green・天神町）",
+   "dates": [
+    "2026-11-29"
+   ],
+   "span": null,
+   "when": "2026年11月29日(日) 10:30〜15:30。雨天決行",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:30",
+   "end": "15:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "village green（ビレッジグリーンカフェ・小平市天神町3-7-1。E132 と同じ会場）",
+   "mapq": "小平市village green",
+   "summary": "子ども向けの出店: キッズネイルチップ（サイズを合わせて、好きなデザインを選ぶ）／フェイスペイント（クリスマスのデザイン・手へのペイントも）／いろいろな素材を組み合わせたオリジナルストラップづくり。おにぎりとスープの出店も",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "○",
+    "elem": "○"
+   },
+   "cost": "出店ごと（金額は（要確認））。入場料は投稿に記載なし（要確認）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.instagram.com/p/DfzOUjAH_4p/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E237",
