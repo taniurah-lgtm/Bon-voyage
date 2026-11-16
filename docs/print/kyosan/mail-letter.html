@@ -186,7 +186,7 @@ function ask(d) {
   <div class="box">
     <h2>お願いしたいこと</h2>
     <ul class="why">
-      ${(d.asks || [`同封のチラシ（${d.copies || 5}部）を、${d.place || '待合室や受付の一角'}に置いていただけないでしょうか。`]).map((a) => `<li>${md(a)}</li>`).join('')}
+      ${(d.asks || [`お届けしたチラシ（${d.copies || 5}部）を、${d.place || '待合室や受付の一角'}に置いていただけないでしょうか。`]).map((a) => `<li>${md(a)}</li>`).join('')}
       <li>なくなったら、メールかLINEでひとことお知らせください。<b>こちらから郵送で補充します</b>（送料はこちらで持ちます）。</li>
       <li>置けない場合は、チラシは破棄していただいて大丈夫です。お返事は要りません。</li>
     </ul>
@@ -238,7 +238,7 @@ window.render = (d) => {
       LINE：右のQRコードから（トークにどうぞ）<br>
       ${t === 'chirashi' ? 'ホームページ：https://bonvoya.nicomaru.tokyo/' : '資料と掲載イメージ：https://bonvoya.nicomaru.tokyo/kyosan/'}
       <div class="sign">谷裏 弘晃</div>
-      <div class="enc">同封：${esc(d.enclosed || (t === 'chirashi' ? `チラシ ${d.copies || 5}部` : '通信のチラシ 1部'))}</div>
+      <div class="enc">お届けしたもの：${esc(d.enclosed || (t === 'chirashi' ? `チラシ ${d.copies || 5}部` : '通信のチラシ 1部'))}</div>
     </div></div>
     <div class="qrs">${t === 'chirashi' ? '' : '<div class="qr"><img class="k" src="qr-kyosan.svg" alt="">掲載イメージ</div>'}<div class="qr"><img src="../../homepage/assets/line-qr.png" alt="">LINEでお返事</div></div>
   </div>
