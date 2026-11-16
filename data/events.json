@@ -5625,8 +5625,8 @@
    "discount": "",
    "target": "0歳〜3歳の子と家族／定員: 4組（チラシの一覧表では11/8時点で「残り1組」）",
    "url": "https://www.threads.com/@ns__hono/post/DfeoqU8AZZh",
-   "status": "候補",
-   "confidence": "主催のSNSで確認（2026-11-09）",
+   "status": "候補（空きの確認待ち）",
+   "confidence": "主催のSNSで確認— 日時・場所・料金・定員は確認済み。空き（満員かどうか）は取れなかった（要確認）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
@@ -6283,7 +6283,7 @@
    "caution": "",
    "contact": null,
    "lastEntry": "",
-   "hours": "5面 森の地図スタンプラリー・出張児童館（親子のふれあい遊び）・休館日の図書館に親子をご招待（E195）・ホッとHOTこだいらファミリーデイ・小平ふるさと村・ごみゼロフリーマーケット・ふれあい下水道館 11月の催し／ 6面 公民館の講座・イベント・小川公民館まつり・津田公民館まつり。本文（日付）は市のサイトが戻るまで取れない",
+   "hours": "",
    "ages": {
     "baby": "○",
     "pre": "◎",
@@ -6294,7 +6294,7 @@
    "target": "",
    "url": "https://kodaira-tourism.com/event/23085/",
    "status": "候補",
-   "confidence": "公式確認済み（2026-11-09）— 日時・場所・内容。料金は未記載",
+   "confidence": "公式確認済み（2026-11-17）— 日時・場所・内容は協会の公式で再取得し、台帳のとおり。料金・キッチンカー・ワークショップ・雨天時は、協会・市・市報のどこにも記載が無い（要確認）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
