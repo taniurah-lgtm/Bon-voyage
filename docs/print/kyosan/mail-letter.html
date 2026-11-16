@@ -44,6 +44,7 @@ th { width: 26mm; color: #2f5e4e; font-weight: 700; white-space: nowrap; }
 .foot { display: flex; gap: 4mm; justify-content: space-between; align-items: flex-end; font-size: 8.6pt; line-height: 1.5; border-top: .6pt solid #cfd8cf; padding-top: 2.4mm; }
 .foot b { font-size: 10.5pt; }
 .sign { font-size: 10pt; margin-top: 1mm; }
+.qrs { display: flex; gap: 3mm; }
 .qr { text-align: center; font-size: 7.5pt; color: #555; }
 .qr img { width: 20mm; height: 20mm; display: block; margin: 0 auto 1mm; }
 .enc { font-size: 8.3pt; color: #555; margin-top: 1mm; }
@@ -112,7 +113,7 @@ function body(t, d) {
     <h2>お願いしたいこと</h2>
     <ul class="why">
       <li>同封のチラシ（${esc(d.copies || 5)}部）を、${esc(d.place || '待合室や受付の一角')}に置いていただけないでしょうか。</li>
-      <li>なくなったら、メールでひとことお知らせください。<b>こちらから郵送で補充します</b>（送料はこちらで持ちます）。</li>
+      <li>なくなったら、メールかLINEでひとことお知らせください。<b>こちらから郵送で補充します</b>（送料はこちらで持ちます）。</li>
       <li>置いていただけない場合は、お手数ですがチラシは破棄してください。お返事は要りません。</li>
     </ul>
     <p class="note">通信もチラシも無料です。チラシのQRコードからLINEで友だち追加すると、毎週水曜の朝に届きます（お名前などの入力は要りません）。</p>
@@ -121,11 +122,11 @@ function body(t, d) {
 
 function next(t) {
   if (t === 'chirashi') return `
-  <div class="next"><b>置いていただける場合</b>は、よろしければメールで「置きました」とひとこといただけると、補充の目安にできて助かります。<br>
-  ご質問があれば、メールでお気軽にお知らせください。</div>`;
+  <div class="next"><b>置いていただける場合</b>は、よろしければメールかLINEで「置きました」とひとこといただけると、補充の目安にできて助かります。<br>
+  ご質問も、メールかLINE（右下のQRコードから友だち追加して、トークにどうぞ）でお気軽にお知らせください。</div>`;
   return `
-  <div class="next"><b>ご興味がございましたら、メールでひとことお知らせください。</b>ご都合のよい日時をうかがって、<b>詳しくご説明に伺います</b>（メールでのご説明もできます）。<br>
-  掲載イメージは、右のQRコードのページでもご覧いただけます。</div>`;
+  <div class="next"><b>ご興味がございましたら、メールかLINEでひとことお知らせください。</b>ご都合のよい日時をうかがって、<b>詳しくご説明に伺います</b>（メールやLINEでのご説明もできます）。<br>
+  LINEは右下の「LINEでお返事」のQRコードから友だち追加して、トークにどうぞ。掲載イメージは、その隣のQRコードのページでご覧いただけます。</div>`;
 }
 
 window.render = (d) => {
@@ -145,12 +146,12 @@ window.render = (d) => {
     <div>
       <b>ぼんぼやーじゅ通信の会</b>（小平市民活動支援センター あすぴあ 登録団体 第254号）<br>
       花小金井に住む親がつくっています<br>
-      メール：tokyo.papa.home@gmail.com<br>
+      メール：tokyo.papa.home@gmail.com　／　LINE：右のQRコードから（トークにどうぞ）<br>
       ${t === 'chirashi' ? 'ホームページ：https://bonvoya.nicomaru.tokyo/' : 'くわしい資料と掲載イメージ：https://bonvoya.nicomaru.tokyo/kyosan/'}
       <div class="sign">谷裏 弘晃</div>
       <div class="enc">同封：${esc(d.enclosed || (t === 'chirashi' ? `チラシ ${d.copies || 5}部` : '通信のチラシ 1部'))}</div>
     </div>
-    ${t === 'chirashi' ? '' : '<div class="qr"><img src="qr-kyosan.svg" alt="">協賛のご案内（くわしく）</div>'}
+    <div class="qrs">${t === 'chirashi' ? '' : '<div class="qr"><img src="qr-kyosan.svg" alt="">掲載イメージ</div>'}<div class="qr"><img src="../../homepage/assets/line-qr.png" alt="">LINEでお返事</div></div>
   </div>
 </div>`;
 };
