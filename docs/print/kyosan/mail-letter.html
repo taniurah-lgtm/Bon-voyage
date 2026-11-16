@@ -13,7 +13,6 @@
   数字は「いま言える数字」（docs/sponsor-script.md）と読者アンケートの最終集計（docs/reader-growth.md）から。盛らない。
 -->
 <style>
-@page { size: A4; margin: 0; }
 * { box-sizing: border-box; }
 body { margin: 0; font-family: "Noto Sans JP", sans-serif; color: #2b2b2b; background: #fff; }
 .page { width: 210mm; height: 297mm; padding: 11mm 15mm 8mm; position: relative; overflow: hidden; }
@@ -48,7 +47,39 @@ th { width: 26mm; color: #2f5e4e; font-weight: 700; white-space: nowrap; }
 .qr { text-align: center; font-size: 7.5pt; color: #555; }
 .qr img { width: 20mm; height: 20mm; display: block; margin: 0 auto 1mm; }
 .enc { font-size: 8.3pt; color: #555; margin-top: 1mm; }
+/* 🆕 2026-11-16 オーナー「協賛の手紙はB5に」。協賛（shokai・ouen）だけ B5（182×257mm）。三つ折りで長4封筒（90×205mm）にも入る。
+   チラシのお願い（chirashi）は A4 のまま。文字は8pt台を下回らないように詰める */
+.page.b5 { width: 182mm; height: 257mm; padding: 9mm 11mm 6.5mm; }
+.b5 .date { top: 9mm; right: 11mm; font-size: 8.5pt; }
+.b5 .to { font-size: 10.5pt; max-width: 130mm; }
+.b5 .to b { font-size: 12.5pt; }
+.b5 .to small { font-size: 8.5pt; }
+.b5 h1 { font-size: 14pt; margin: 2.4mm 0 1.6mm; }
+.b5 .lead { font-size: 8.5pt; line-height: 1.55; margin-bottom: 2mm; }
+.b5 .lead p { margin-bottom: .3mm; }
+.b5 .nums { gap: 2mm; margin-bottom: 2mm; }
+.b5 .n { padding: 1.4mm 1mm; }
+.b5 .n .v { font-size: 12.5pt; }
+.b5 .n .v small { font-size: 8pt; }
+.b5 .n .l { font-size: 7.1pt; line-height: 1.35; }
+.b5 .box { padding: 2mm 3.4mm; margin-bottom: 2mm; }
+.b5 .box h2 { font-size: 10pt; margin-bottom: 1.2mm; }
+.b5 .why li { font-size: 8.3pt; line-height: 1.48; margin-bottom: .3mm; }
+.b5 ul { padding-left: 4.2mm; }
+.b5 table { font-size: 8.2pt; }
+.b5 td, .b5 th { padding: .6mm 1.1mm; line-height: 1.48; }
+.b5 th { width: 18mm; }
+.b5 .note { font-size: 7.3pt; line-height: 1.45; margin-top: 1mm; }
+.b5 .next { font-size: 8.3pt; line-height: 1.5; padding: 1.9mm 3.4mm; margin-bottom: 2mm; }
+.b5 .foot { font-size: 7.8pt; line-height: 1.45; padding-top: 1.8mm; gap: 3mm; }
+.b5 .foot b { font-size: 9.3pt; }
+.b5 .sign { font-size: 9pt; margin-top: .6mm; }
+.b5 .qrs { gap: 2mm; }
+.b5 .qr { font-size: 6.8pt; }
+.b5 .qr img { width: 16mm; height: 16mm; }
+.b5 .enc { font-size: 7.4pt; margin-top: .6mm; }
 </style>
+<style id="pagesize">@page { size: A4; margin: 0; }</style>
 </head>
 <body>
 <div id="root"></div>
@@ -133,7 +164,9 @@ window.render = (d) => {
   const t = d.type || 'ouen';
   const reasons = (d.reasons || []).map((r) => `<li>${md(r)}</li>`).join('');
   document.title = `${TITLE[t]}（${d.to || ''}）`;
-  document.getElementById('root').innerHTML = `<div class="page">
+  const b5 = t !== 'chirashi';
+  document.getElementById('pagesize').textContent = b5 ? '@page { size: 182mm 257mm; margin: 0; }' : '@page { size: A4; margin: 0; }';
+  document.getElementById('root').innerHTML = `<div class="page${b5 ? ' b5' : ''}">
   <div class="date">${esc(jdate(d.date) || '2026年11月')}</div>
   <p class="to">${d.sub ? `<small>${esc(d.sub)}</small>` : ''}<b>${esc(d.to || '')}</b><span class="h">${esc(d.honor || '御中')}</span></p>
   <h1>${esc(TITLE[t])}</h1>
