@@ -77,6 +77,9 @@ th { width: 26mm; color: #2f5e4e; font-weight: 700; white-space: nowrap; }
 .b5 .qrs { gap: 2mm; }
 .b5 .qr { font-size: 6.8pt; }
 .b5 .qr img { width: 21mm; height: 21mm; }
+/* 掲載イメージのQR（SVG）は白い余白が広い（37マス中4マス×2）。LINEのQR（PNG・余白は1割弱）と黒い部分の大きさをそろえる
+   ＝ 21mm × (250/290) ÷ (29/37) ≒ 23.1mm に広げ、増えた分の白い余白を外側にはみ出させる（2026-11-16 オーナー「LINEのQRのほうが若干大きい」） */
+.b5 .qr img.k { width: 23.1mm; height: 23.1mm; margin: -1.05mm -1.05mm -.05mm; }
 .b5 .enc { font-size: 7.4pt; margin-top: .6mm; }
 /* 🆕 2026-11-16 オーナー「協賛の手紙の左下に、ロゴマーク」。丸いロゴ（docs/print/logo/logo-color-clear.png） */
 .fl { display: flex; align-items: flex-end; gap: 3mm; }
@@ -190,7 +193,7 @@ window.render = (d) => {
       <div class="sign">谷裏 弘晃</div>
       <div class="enc">同封：${esc(d.enclosed || (t === 'chirashi' ? `チラシ ${d.copies || 5}部` : '通信のチラシ 1部'))}</div>
     </div></div>
-    <div class="qrs">${t === 'chirashi' ? '' : '<div class="qr"><img src="qr-kyosan.svg" alt="">掲載イメージ</div>'}<div class="qr"><img src="../../homepage/assets/line-qr.png" alt="">LINEでお返事</div></div>
+    <div class="qrs">${t === 'chirashi' ? '' : '<div class="qr"><img class="k" src="qr-kyosan.svg" alt="">掲載イメージ</div>'}<div class="qr"><img src="../../homepage/assets/line-qr.png" alt="">LINEでお返事</div></div>
   </div>
 </div>`;
 };
