@@ -52,7 +52,7 @@ await mkdir(`${OUT}/img`, { recursive: true });
 const browser = await chromium.launch();
 
 // 見本の協賛（掲載イメージ・資料と同じ「〇〇」）
-const SUPPORTERS = ['〇〇小児科', '〇〇歯科', '〇〇不動産', '〇〇整体院', '〇〇保険'];
+const SUPPORTERS = ['〇〇小児科', '〇〇歯科', '〇〇不動産', '〇〇整体院', '〇〇保険', '〇〇写真館']; // 2026-11-16 応援型を6社までにした
 
 // ---- ③ チラシの裏面に協賛欄 ----
 {
@@ -101,7 +101,7 @@ const SUPPORTERS = ['〇〇小児科', '〇〇歯科', '〇〇不動産', '〇�
 {
   const page = await browser.newPage({ viewport: { width: 400, height: 900 }, deviceScaleFactor: 2 });
   // 地図のインスタンスを外から触れるようにして読み込む（このときだけ。本物のファイルは変えない）
-  await page.route('**/assets/bv-map.js', async (route) => {
+  await page.route('**/assets/bv-map.js*', async (route) => {
     const res = await route.fetch();
     const js = (await res.text()).replace('var map = L.map(canvas, {', 'var map = window.__bvm = L.map(canvas, {');
     await route.fulfill({ response: res, body: js });
