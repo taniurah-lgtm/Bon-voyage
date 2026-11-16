@@ -3,15 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
-<title>宛名ラベル（A4 12面）</title>
+<title>宛名ラベル（B5 12面）</title>
 <!--
   2026-11-16。長3封筒に貼る宛名ラベル。A4 12面（1枚 86.4×42.3mm・上下21.5mm・左右18.6mm・すき間なし）。
   市販の12面ラベル（例: エーワン 28721）にそのまま刷れる。ラベルが無ければ普通紙に刷って切り、のりで貼ってもよい。
   中身は scripts/make-kyosan-mail.mjs が window.render([宛先…]) で差し込む。
   差出人のラベル（封筒の裏用）は render の2つめの引数に文字を渡したときだけ作る。🔒 差出人の住所はリポジトリに書かない。
+  🆕 2026-11-16 オーナー「ラベルはB5サイズで」→ 既定は B5（182×257mm）に 2列×6段＝12面（1枚 86×40mm・左右5mm・上下8.5mm）。
+  普通の B5 の紙に刷って、薄い線で切ってのりで貼る。A4 の市販ラベル（エーワン 28721）に刷るときは render の3つめを 'a4'。
 -->
 <style>
-@page { size: A4; margin: 0; }
+@page { size: 182mm 257mm; margin: 0; }
 * { box-sizing: border-box; }
 body { margin: 0; font-family: "Noto Sans JP", sans-serif; color: #111; }
 .sheet { width: 210mm; height: 297mm; padding: 21.5mm 18.6mm; display: grid; grid-template-columns: 86.4mm 86.4mm; grid-auto-rows: 42.3mm; page-break-after: always; }
@@ -21,22 +23,27 @@ body { margin: 0; font-family: "Noto Sans JP", sans-serif; color: #111; }
 .to { font-size: 12.5pt; font-weight: 700; margin-top: auto; line-height: 1.35; }
 .to small { font-size: 9pt; font-weight: 400; display: block; }
 .to .h { font-size: 11pt; font-weight: 400; margin-left: 2mm; }
+.sheet.b5 { width: 182mm; height: 257mm; padding: 8.5mm 5mm; grid-template-columns: 86mm 86mm; grid-auto-rows: 40mm; }
+.sheet.b5 .l { outline: .2mm dashed #bbb; outline-offset: -.1mm; padding: 4mm 5mm 3mm 6mm; }
 .from { font-size: 9pt; line-height: 1.55; white-space: pre-line; padding-top: 6mm; }
 </style>
+<style id="pagesize"></style>
 </head>
 <body>
 <div id="root"></div>
 <script>
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-window.render = (list, from) => {
+window.render = (list, from, size = 'b5') => {
+  document.getElementById('pagesize').textContent = size === 'a4' ? '@page { size: A4; margin: 0; }' : '@page { size: 182mm 257mm; margin: 0; }';
+  const cls = size === 'a4' ? 'sheet' : 'sheet b5';
   const cells = list.map((r) => `<div class="l">
     <div class="zip">〒${esc(r.zip)}</div>
     <div class="addr">${esc(r.addr)}${r.addr2 ? `<br>${esc(r.addr2)}` : ''}</div>
     <div class="to">${r.sub ? `<small>${esc(r.sub)}</small>` : ''}${esc(r.to)}<span class="h">${esc(r.honor || '御中')}</span></div>
   </div>`);
   const sheets = [];
-  for (let i = 0; i < cells.length; i += 12) sheets.push(`<div class="sheet">${cells.slice(i, i + 12).join('')}</div>`);
-  if (from) sheets.push(`<div class="sheet">${Array.from({ length: 12 }, () => `<div class="l from">${esc(from)}</div>`).join('')}</div>`);
+  for (let i = 0; i < cells.length; i += 12) sheets.push(`<div class="${cls}">${cells.slice(i, i + 12).join('')}</div>`);
+  if (from) sheets.push(`<div class="${cls}">${Array.from({ length: 12 }, () => `<div class="l from">${esc(from)}</div>`).join('')}</div>`);
   document.getElementById('root').innerHTML = sheets.join('');
 };
 if (!location.search.includes('blank')) window.render([{ zip: '187-0002', addr: '東京都小平市花小金井1-1-1', to: '（見本）〇〇店' }]);

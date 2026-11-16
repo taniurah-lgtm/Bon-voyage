@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /*
  * 郵送の営業（協賛のご案内・チラシのお願い）を、送り先の一覧から一気に刷れる形にする。
- *   node scripts/make-kyosan-mail.mjs --list data/kyosan-mail/2026-11-16.json --out <出力フォルダ> [--from "封筒の裏の差出人"]
+ *   node scripts/make-kyosan-mail.mjs --list data/kyosan-mail/2026-11-16.json --out <出力フォルダ> [--from "封筒の裏の差出人"] [--label a4]
  *
  * 出力（出力フォルダに）:
  *   letters-b5.pdf … お手紙（B5・1人1枚・片面。2026-11-16 オーナー「協賛の手紙はB5に」「チラシもB5に統一」）。三つ折りで長4封筒へ
- *   labels.pdf    … 宛名ラベル（A4 12面）。--from を渡すと、差出人ラベルの1枚も足す
+ *   labels.pdf    … 宛名ラベル（B5 12面・2026-11-16 オーナー「ラベルはB5で」。--label a4 で A4 12面の市販ラベル用）。--from を渡すと、差出人ラベルの1枚も足す
  *   checklist.txt … 送り先ごとの型・同封物・切手の目安
  *
  * 一覧（JSON）: { "date": "YYYY-MM-DD", "items": [ { type, to, sub?, honor?, zip, addr, addr2?, reasonsTitle?, reasons[], ... } ] }
@@ -82,7 +82,7 @@ for (const [k, list] of Object.entries(pdfs)) {
 
 // 宛名ラベル
 await page.goto(pathToFileURL(resolve('docs/print/kyosan/mail-label.html')).href + '?blank', { waitUntil: 'networkidle' });
-await page.evaluate(([list, from]) => window.render(list, from), [items.map(({ zip, addr, addr2, to, sub, honor }) => ({ zip, addr, addr2, to, sub, honor })), opt.from || '']);
+await page.evaluate(([list, from, size]) => window.render(list, from, size), [items.map(({ zip, addr, addr2, to, sub, honor }) => ({ zip, addr, addr2, to, sub, honor })), opt.from || '', opt.label === 'a4' ? 'a4' : 'b5']);
 await page.evaluate(() => document.fonts.ready);
 await page.pdf({ path: join(outDir, 'labels.pdf'), preferCSSPageSize: true, printBackground: true });
 await browser.close();
