@@ -78,6 +78,9 @@ th { width: 26mm; color: #2f5e4e; font-weight: 700; white-space: nowrap; }
 .b5 .qr { font-size: 6.8pt; }
 .b5 .qr img { width: 16mm; height: 16mm; }
 .b5 .enc { font-size: 7.4pt; margin-top: .6mm; }
+/* 🆕 2026-11-16 オーナー「協賛の手紙の左下に、ロゴマーク」。丸いロゴ（docs/print/logo/logo-color-clear.png） */
+.fl { display: flex; align-items: flex-end; gap: 3mm; }
+.logo { width: 21mm; height: 21mm; flex: none; }
 </style>
 <style id="pagesize">@page { size: A4; margin: 0; }</style>
 </head>
@@ -164,7 +167,8 @@ window.render = (d) => {
   const t = d.type || 'ouen';
   const reasons = (d.reasons || []).map((r) => `<li>${md(r)}</li>`).join('');
   document.title = `${TITLE[t]}（${d.to || ''}）`;
-  const b5 = t !== 'chirashi';
+  // 🆕 2026-11-16 オーナー「チラシもB5に統一しているので、A4版は不要」→ どの型も B5
+  const b5 = true;
   document.getElementById('pagesize').textContent = b5 ? '@page { size: 182mm 257mm; margin: 0; }' : '@page { size: A4; margin: 0; }';
   document.getElementById('root').innerHTML = `<div class="page${b5 ? ' b5' : ''}">
   <div class="date">${esc(jdate(d.date) || '2026年11月')}</div>
@@ -176,14 +180,16 @@ window.render = (d) => {
   ${body(t, d)}
   ${next(t)}
   <div class="foot">
-    <div>
-      <b>ぼんぼやーじゅ通信の会</b>（小平市民活動支援センター あすぴあ 登録団体 第254号）<br>
+    <div class="fl">${t === 'chirashi' ? '' : '<img class="logo" src="../logo/logo-color-clear.png" alt="ぼんぼやーじゅ通信">'}<div>
+      <b>ぼんぼやーじゅ通信の会</b><br>
+      小平市民活動支援センター あすぴあ 登録団体 第254号<br>
       花小金井に住む親がつくっています<br>
-      メール：tokyo.papa.home@gmail.com　／　LINE：右のQRコードから（トークにどうぞ）<br>
-      ${t === 'chirashi' ? 'ホームページ：https://bonvoya.nicomaru.tokyo/' : 'くわしい資料と掲載イメージ：https://bonvoya.nicomaru.tokyo/kyosan/'}
+      メール：tokyo.papa.home@gmail.com<br>
+      LINE：右のQRコードから（トークにどうぞ）<br>
+      ${t === 'chirashi' ? 'ホームページ：https://bonvoya.nicomaru.tokyo/' : '資料と掲載イメージ：https://bonvoya.nicomaru.tokyo/kyosan/'}
       <div class="sign">谷裏 弘晃</div>
       <div class="enc">同封：${esc(d.enclosed || (t === 'chirashi' ? `チラシ ${d.copies || 5}部` : '通信のチラシ 1部'))}</div>
-    </div>
+    </div></div>
     <div class="qrs">${t === 'chirashi' ? '' : '<div class="qr"><img src="qr-kyosan.svg" alt="">掲載イメージ</div>'}<div class="qr"><img src="../../homepage/assets/line-qr.png" alt="">LINEでお返事</div></div>
   </div>
 </div>`;

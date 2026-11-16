@@ -4,8 +4,7 @@
  *   node scripts/make-kyosan-mail.mjs --list data/kyosan-mail/2026-11-16.json --out <出力フォルダ> [--from "封筒の裏の差出人"]
  *
  * 出力（出力フォルダに）:
- *   letters-b5.pdf … 協賛のお手紙（B5・1人1枚・片面。2026-11-16 オーナー「協賛の手紙はB5に」）
- *   letters-a4.pdf … チラシのお願い（A4・1人1枚・片面）。どちらも三つ折りにして封筒へ
+ *   letters-b5.pdf … お手紙（B5・1人1枚・片面。2026-11-16 オーナー「協賛の手紙はB5に」「チラシもB5に統一」）。三つ折りで長4封筒へ
  *   labels.pdf    … 宛名ラベル（A4 12面）。--from を渡すと、差出人ラベルの1枚も足す
  *   checklist.txt … 送り先ごとの型・同封物・切手の目安
  *
@@ -57,8 +56,8 @@ const tmp = mkdtempSync(join(tmpdir(), 'kyosan-mail-'));
 const browser = await chromium.launch();
 const page = await browser.newPage();
 
-// お手紙（協賛＝B5、チラシのお願い＝A4。紙の大きさが違うので、ファイルを分ける）
-const pdfs = { b5: [], a4: [] };
+// お手紙（2026-11-16 からどの型も B5。チラシも B5 に統一＝オーナー）
+const pdfs = { b5: [] };
 for (const [i, r] of items.entries()) {
   await page.goto(pathToFileURL(resolve('docs/print/kyosan/mail-letter.html')).href + '?blank', { waitUntil: 'networkidle' });
   await page.evaluate((d) => window.render(d), { date: data.date, ...r });
@@ -68,7 +67,7 @@ for (const [i, r] of items.entries()) {
   if (over > 2) { console.error(`🔴 ${r.to}: お手紙が1枚に収まらない（${over}px あふれ）。理由の行を減らす`); process.exit(1); }
   const p = join(tmp, `${String(i).padStart(3, '0')}.pdf`);
   await page.pdf({ path: p, preferCSSPageSize: true, printBackground: true });
-  pdfs[r.type === 'chirashi' ? 'a4' : 'b5'].push(p);
+  pdfs.b5.push(p);
 }
 const outFiles = [];
 for (const [k, list] of Object.entries(pdfs)) {
@@ -95,9 +94,8 @@ const lines = [
   ...items.map((r, i) => `${String(i + 1).padStart(2)}. [${TYPES[r.type]}] ${r.to}${r.sub ? `（${r.sub}）` : ''} ${r.honor || '御中'}　〒${r.zip} ${r.addr}${r.addr2 ? ' ' + r.addr2 : ''}\n     同封: お手紙1枚（三つ折り）＋${enc(r)}`),
   '',
   '■ 紙と封筒',
-  '  協賛のお手紙は B5（letters-b5.pdf・B5の紙に刷る）、チラシのお願いは A4（letters-a4.pdf）。',
-  '  B5を三つ折り＝約18×8.6cm → 長3封筒（12×23.5cm）にも長4封筒（9×20.5cm）にも入る。',
-  '  同封のチラシが A4 なら長3封筒。B5版のチラシ（flyer-b5.pdf）を三つ折りにすれば長4封筒でそろう。',
+  '  お手紙もチラシも B5（letters-b5.pdf・B5の紙に刷る）。',
+  '  B5を三つ折り＝約18×8.6cm → 長4封筒（9×20.5cm）に入る（長3封筒でもよい）。',
   '',
   '■ 切手',
   '  長3・長4封筒・50gまで＝定形 110円。お手紙1枚（約4g）＋チラシ5部（約20g）＋封筒（約5g）でも 30g ほど。',
