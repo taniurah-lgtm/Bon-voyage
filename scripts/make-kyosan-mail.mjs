@@ -43,10 +43,12 @@ for (const [i, r] of items.entries()) {
   if (r.zip && !/^\d{3}-\d{4}$/.test(r.zip)) bad.push(`${who}: 郵便番号は 123-4567 の形で`);
   const text = JSON.stringify(r);
   if (/0[789]0-?\d{4}-?\d{4}/.test(text)) bad.push(`${who}: 携帯番号らしきものが入っている`);
-  if (r.type === 'chirashi' && /協賛|広告|PR|料金|円/.test([r.lead, r.ask, ...(r.reasons || [])].join(' '))) {
+  // 🆕 2026-11-16 見出し・書き出しを送り先ごとに差し替えられるようにした（headline / kicker / opening / after / asks）。そこも見る
+  const words = [r.headline, r.kicker, r.opening, r.after, r.lead, r.ask, ...(r.asks || []), ...(r.reasons || [])].join(' ');
+  if (r.type === 'chirashi' && /協賛|広告|PR|料金|円/.test(words)) {
     bad.push(`${who}: チラシのお願いに、お金や協賛の話が入っている（医療機関には特に書かない）`);
   }
-  if (/おすすめ|子連れにやさしい|一番|No\.?1|必ず/.test((r.reasons || []).join(' '))) bad.push(`${who}: 評価の言葉が入っている`);
+  if (/おすすめ|子連れにやさしい|一番|No\.?1|必ず|絶対|今だけ|お得/.test(words)) bad.push(`${who}: 評価や煽りの言葉が入っている`);
 }
 if (bad.length) { console.error('🔴 止めました:\n  ' + bad.join('\n  ')); process.exit(1); }
 
