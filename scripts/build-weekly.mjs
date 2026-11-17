@@ -537,13 +537,18 @@ for (const f of files) {
         ? `<details class="more-cafes"><summary data-goatcounter-click="カフェ｜ほかを見る">ほかの${cafes.length - 2}軒も見る</summary>${cafes.slice(2).map(cafeCard).join('')}</details>`
         : ''}`
     : '';
-  // 協賛（紹介型）: 1号に1件まで。一推しには置かない（docs/sponsor-plan.md §14「冒頭に置かない」）
+  // 協賛（紹介型）: 1つのタブに1件まで（2026-11-17 までは1号に1件）。一推しには置かない（docs/sponsor-plan.md §14「冒頭に置かない」）
   const prs = [...items, ...ahead].filter(({ it }) => it.pr !== undefined);
   for (const { it } of prs) {
     if (typeof it.pr !== 'string' || !it.pr.trim()) problems.push(`${date}: ${it.id} の pr（協賛のお店の名前）が空`);
     if (it.id === spec.pick) problems.push(`${date}: ${it.id} は協賛（pr）なので、一推しにしない`);
   }
-  if (prs.length > 1) problems.push(`${date}: 協賛（pr）が${prs.length}件ある。紹介型は1号に1件まで`);
+  // 2026-11-17 オーナー: 紹介型は「1つのタブに1件まで」。タブが重ならなければ、1号に2件も可
+  //   （11/18号: ミュウテック＝🧒🎒、こむぎえん＝👶）。同じタブに2件あればビルドを止める
+  for (const [key, label] of [['baby', '👶'], ['pre', '🧒'], ['elem', '🎒']]) {
+    const inTab = prs.filter(({ ev }) => ['◎', '○'].includes(((ev && ev.ages) || {})[key]));
+    if (inTab.length > 1) problems.push(`${date}: ${label}のタブに協賛（pr）が${inTab.length}件ある（${inTab.map(({ it }) => it.id).join('・')}）。紹介型は1つのタブに1件まで`);
+  }
   // 🔴 協賛は LINE の本文に載せない（LINE公式アカウント利用規約 第18条(6)。2026-10-28 オーナー決定・docs/sponsor-plan.md §14）。
   //    PRなしで載せればステマ、PRつきなら規約違反。見るのはこれから送る号だけ（送ったあとの号は直せない）
   const lineMd = `reports/free/${date}.md`;
