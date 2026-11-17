@@ -5583,12 +5583,12 @@
    "discount": "",
    "target": "",
    "url": "https://www.lumine.ne.jp/tachikawa/topics/detail/?cd=004647",
-   "status": "候補",
-   "confidence": "公式で確認（2026-11-10）",
+   "status": "11/11",
+   "confidence": "公式で再確認（2026-11-18）— 応募期間・予約締切・購入条件・景品は取れた。参加費と対象年齢は記載なし／初回確認は 2026-11-10",
    "tentative": false,
    "deadline": {
     "date": "2026-11-18",
-    "raw": "ピカチュウのグリーティングは ONE LUMINE アプリから抽選に申し込む。11/18(水)締切"
+    "raw": "ピカチュウのグリーティングは ONE LUMINE アプリから抽選に申し込む。応募期間は公式表記で「11.9mon - 11.18wed」＝11/18(水)まで（当選した人だけ参加）"
    },
    "source": "events/2026-11.md"
   },
@@ -6120,7 +6120,11 @@
    "summary": "出張こども広場で、地域宣伝隊コダレンジャーのヒーローショー（シールは「グリーンロードグリーン」）",
    "kidsNote": "",
    "caution": "",
-   "contact": null,
+   "contact": {
+    "tel": "042-346-9812",
+    "mail": "",
+    "who": ""
+   },
    "lastEntry": "",
    "hours": "",
    "ages": {
@@ -6133,7 +6137,7 @@
    "target": "",
    "url": "https://www.instagram.com/p/DfLutLokuk1/",
    "status": "候補",
-   "confidence": "2026-11-10 再確認（参加費・祝日の開催・設備は取れず）／ショーの日時・場所はコダレンジャーの公式で確認（2026-11-02）",
+   "confidence": "2026-11-18 再確認（祝日に開くかの明記は、やはり取れず。参加費・定員・設備も記載なし）／ こども広場の場所・曜日・無料は小平市の公式で確認（2026-11-16）／ショーの日時・場所はコダレンジャーの公式で確認（2026-11-02）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
@@ -6337,7 +6341,7 @@
    "target": "1歳までの乳児親子／定員: 先着10組",
    "url": "https://kodaji.ashita-ba.co.jp/news/article/934/",
    "status": "候補",
-   "confidence": "公式のおたよりで確認（2026-11-10）",
+   "confidence": "2026-11-18 再確認（参加費・空き状況・設備は取れず）／日時・場所・対象・定員・受付開始は公式のおたよりで確認（2026-11-10）",
    "tentative": false,
    "deadline": {
     "date": "2026-11-12",
