@@ -139,3 +139,19 @@
   font-size: 22px !important; line-height: 40px !important;
 }
 .bvm-pop-jump { min-height: 44px; display: inline-flex; align-items: center; }
+
+/* ---- 協賛（紹介型）の「PR」のピン（2026-11-18）。見本は協賛の案内ページの④と同じ ----
+   「PR」は周りより小さくしない・薄くしない（消費者庁 運用基準 第3-1(2)オ〜キ。年齢別ページの .ribbon.pr と同じ考え） */
+.bvm-pr-pin { position: relative; }
+.bvm-pr-pin .bvm-pin { --pin: #5E5148; }
+.bvm-pr-tag {
+  position: absolute; left: 21px; top: -9px;
+  font: 800 11px/1 var(--maru, "Zen Maru Gothic", sans-serif); letter-spacing: .06em;
+  color: #fff; background: #5E5148; border: 2px solid #fff; border-radius: 999px;
+  padding: 3px 6px; box-shadow: 0 1px 4px rgba(0,0,0,.25); white-space: nowrap;
+}
+.bvm-pop-pr {
+  display: inline-flex; align-items: center; gap: .35rem; padding-right: 1.4rem;
+  font: 700 .76rem/1.4 var(--maru, "Zen Maru Gothic", sans-serif); color: #3B3530; margin-bottom: .15rem;
+}
+.bvm-pop-pr b { font-weight: 800; color: #fff; background: #5E5148; border-radius: 999px; padding: .08rem .5rem; letter-spacing: .08em; }

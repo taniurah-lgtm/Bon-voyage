@@ -483,7 +483,7 @@ const page = `<!doctype html>${buildStamp()}
 
 <script src="/assets/leaflet/leaflet.js"></script>
 <script src="/assets/bv-calendar.js"></script>
-<script src="/assets/bv-map.js?v=20261101"></script>
+<script src="/assets/bv-map.js?v=20261118"></script>
 <script>
 const BLOBS = ${JSON.stringify(BLOBS)};
 const ITER = ${ITER};

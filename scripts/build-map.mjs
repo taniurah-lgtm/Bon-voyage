@@ -20,7 +20,7 @@
  *   会員ページに置いていたものを全部こちらへ移し、誰でも全件見られる。
  */
 import { navSub } from './lib/nav.mjs';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { jsonInTag, esc } from './lib/gate.mjs';
 import { publicUrl } from './lib/city-site.mjs';
 import { spotSlug } from './lib/spot-slug.mjs';
@@ -38,6 +38,18 @@ const SPOTS = JSON.parse(readFileSync('data/map-spots.json', 'utf8'))
 for (const name of TEIREI.keys())
   if (!SPOTS.some((s) => s.name === name)) console.error(`🔴 定例の spots「${name}」がマップに無い（名前の書き方を合わせる）`);
 const POSTS = JSON.parse(readFileSync('data/map-posts.json', 'utf8'));
+// 🆕 2026-11-18 協賛（紹介型）の「PR」のピン（docs/sponsor-plan.md §14「マップのピンは、場所を公開しているお店だけ」）。
+//   台帳で「協賛」「掲載開始」のある催し（data/events.json に出ているもの＝掲載開始を過ぎたもの）のうち、
+//   data/map-pr.json に位置があるものを、催しの最終日まで出す。番地を公開していない教室は map-pr.json に書かない
+const TODAY = process.env.BV_TODAY || new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+const PR_POS = existsSync('data/map-pr.json') ? JSON.parse(readFileSync('data/map-pr.json', 'utf8')) : {};
+const lastDay = (e) => (e.dates && e.dates.length ? e.dates[e.dates.length - 1] : '') || (e.span && e.span.to) || '';
+const PRS = (existsSync('data/events.json') ? JSON.parse(readFileSync('data/events.json', 'utf8')).events : [])
+  .filter((e) => e.pr && PR_POS[e.id] && typeof PR_POS[e.id].lat === 'number' && lastDay(e) >= TODAY)
+  .map((e) => ({ name: e.name, pr: e.pr, when: e.when, target: e.target || '', url: e.url || '',
+                 q: PR_POS[e.id].q || '', lat: PR_POS[e.id].lat, lng: PR_POS[e.id].lng }));
+for (const id of Object.keys(PR_POS))
+  if (!/^E\d+$/.test(id)) console.error(`🔴 data/map-pr.json の「${id}」は台帳のIDの形になっていない`);
 const OUT = 'docs/homepage/map.html';
 const TEXT_LIMIT = 300;   // ひとことの字数。誰でも同じ
 const POST_URL = process.env.MAP_POST_URL || '';
@@ -126,7 +138,7 @@ const page = `<!doctype html>
 <meta property="og:locale" content="ja_JP">
 <link rel="stylesheet" href="/assets/bv-tokens.css">
 <link rel="stylesheet" href="/assets/leaflet/leaflet.css">
-<link rel="stylesheet" href="/assets/bv-map.css">
+<link rel="stylesheet" href="/assets/bv-map.css?v=20261118">
 <link rel="stylesheet" href="/assets/bv-post.css">
 <link rel="stylesheet" href="/assets/bv-nav.css">
 <style>
@@ -248,10 +260,11 @@ ${sections}
 </footer>
 
 <script src="/assets/leaflet/leaflet.js"></script>
-<script src="/assets/bv-map.js?v=20261101"></script>
+<script src="/assets/bv-map.js?v=20261118"></script>
 <script src="/assets/bv-post.js"></script>
 <script type="application/json" id="bv-spots">${jsonInTag(SPOTS)}</script>
 <script type="application/json" id="bv-posts">${jsonInTag(POSTS)}</script>
+<script type="application/json" id="bv-prs">${jsonInTag(PRS)}</script>
 <script>
 (function(){
   var spots = JSON.parse(document.getElementById('bv-spots').textContent);
@@ -260,6 +273,7 @@ ${sections}
   BVMap.mount(document.getElementById('mapbox'), {
     spots: spots,
     posts: posts,
+    prs: JSON.parse(document.getElementById('bv-prs').textContent),
     // 地図でしぼり込んだら、下の一覧も同じカテゴリだけにする
     onSelect: function(cat){
       document.querySelectorAll('.cat').forEach(function(sec){
@@ -283,4 +297,5 @@ ${sections}
 writeFileSync(OUT, page);
 console.log(`wrote ${OUT}`);
 console.log(`  スポット ${SPOTS.length}件（ピン ${pinned}件 / ピンなし ${SPOTS.length - pinned}件）/ 投稿 ${totalPosts}件`);
+console.log(`  PR のピン ${PRS.length}件${PRS.length ? `（${PRS.map((p) => p.pr).join('・')}）` : ''}`);
 console.log(`  投稿の送り先: ${POST_URL || '未設定（フォームは出るが、送信時にコピー案内に切り替わる）'}`);

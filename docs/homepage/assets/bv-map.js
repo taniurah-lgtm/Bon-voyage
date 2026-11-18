@@ -366,6 +366,42 @@
     map.on('zoomend', render);
     render();
 
+    // ---- 協賛（紹介型）の「PR」のピン（2026-11-18）-------------------------------
+    // 場所を公開しているお店だけ（data/map-pr.json に位置のあるもの）を、催しの最終日まで出す。
+    // まとめ表示にもカテゴリのしぼり込みにも入れない（別のレイヤー）。いつも見えて、いつも「PR」と分かる。
+    // 見た目は協賛の案内ページの見本（scripts/make-kyosan.mjs ④）と同じ。
+    (opts.prs || []).forEach(function (p) {
+      if (typeof p.lat !== 'number' || typeof p.lng !== 'number') return;
+      var label = 'PR ' + p.name;
+      var m = L.marker([p.lat, p.lng], {
+        icon: L.divIcon({
+          className: 'bvm-pin-wrap bvm-pr-pin',
+          html: '<span class="bvm-pin" aria-hidden="true"></span><span class="bvm-pr-tag" aria-hidden="true">PR</span>',
+          iconSize: [30, 38],
+          iconAnchor: [15, 34],
+          popupAnchor: [0, -32],
+        }),
+        title: label,
+        alt: label,
+        keyboard: true,
+        zIndexOffset: 1000,
+      });
+      m.bindPopup(
+        '<div class="bvm-pop"><div class="bvm-pop-one">' +
+        '<span class="bvm-pop-pr"><b>PR</b>' + esc(p.pr) + 'のご協賛で掲載</span>' +
+        '<b class="bvm-pop-nm">' + esc(p.name) + '</b>' +
+        (p.when ? '<span class="bvm-pop-acc">' + esc(p.when) + '</span>' : '') +
+        (p.target ? '<span class="bvm-pop-ages">' + esc(p.target) + '</span>' : '') +
+        '<a class="bvm-pop-gmap" href="' + esc(mapURL(p.q || p.name)) + '" target="_blank" rel="noopener">Googleマップで開く</a>' +
+        (p.url ? '<span class="bvm-pop-links"><a href="' + esc(p.url) + '" target="_blank" rel="noopener">🔗 公式</a></span>' : '') +
+        '</div></div>',
+        { maxWidth: 268, autoPanPadding: [16, 16], closeButton: true }
+      );
+      m.addTo(map);
+      var el1 = m.getElement();
+      if (el1) { el1.setAttribute('aria-label', label); el1.setAttribute('role', 'button'); }
+    });
+
     // ---- 操作 ---------------------------------------------------------------
     el.querySelector('.bvm-chips').addEventListener('click', function (e) {
       var chip = e.target.closest('.bvm-chip');

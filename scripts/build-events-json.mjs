@@ -721,7 +721,9 @@ for (const file of files) {
       timeUncertain: !!timeUncertain,
       place: readerText(place),
       // 台帳に「- 地図: 出さない」とあれば、地図のボタンを出さない（番地を公開していない教室など。2026-11-11）
-      mapq: /出さない/.test(field(b.lines, ['地図']) || '') ? '' : mapQuery(place, b.name),
+      // 🆕 2026-11-18 「- 地図: 住所」と書けば、その住所で地図を引く（「こむぎえん 園舎」では見つからないため）。括弧の中はメモ
+      mapq: /出さない/.test(field(b.lines, ['地図']) || '') ? ''
+        : ((field(b.lines, ['地図']) || '').replace(/[（(].*$/, '').replace(/\*/g, '').trim() || mapQuery(place, b.name)),
       summary: readerText(field(b.lines, ['内容'])),   // ★子連れ欄で埋めない（kidsNoteと二重になる）
       kidsNote: kidsBody(field(b.lines, ['子連れ'])),
       caution: extractCaution(when),
