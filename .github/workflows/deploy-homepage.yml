@@ -78,6 +78,15 @@ jobs:
       - name: 年齢別ページを組む
         run: node scripts/build-weekly.mjs
 
+      # おでかけマップ（2026-11-18 から毎回組む）。合言葉が無くて上で組み直さなかった日も、これは必ず組む。
+      #   ・Googleマップの下地: Variables の GMAPS_KEY（このホームページからしか使えない鍵。docs/gmaps-key.md）
+      #   ・協賛（紹介型）の「PR」のピン: 最終日を過ぎたものは外れる
+      - name: マップを組む
+        env:
+          MAP_POST_URL: ${{ vars.MAP_POST_URL }}
+          GMAPS_KEY: ${{ vars.GMAPS_KEY }}
+        run: node scripts/build-map.mjs
+
       # 検証用の合言葉で組まれたページを絶対に公開しない（最後の砦）。
       # ここで止まったら、Secrets に MEMBER_PASS を入れてから再実行する。
       - name: 検証用の合言葉で組まれていないか確かめる

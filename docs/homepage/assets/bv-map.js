@@ -112,7 +112,48 @@
         }
       }
     });
-    tiles.addTo(map);
+    // ---- 下地: Googleマップ（2026-11-18 オーナー「いまの地図は見づらい」）----------------
+    // 鍵（opts.gmapsKey）があれば Googleマップを下地にする（GoogleMutant＝Google公式のAPIで描いたものを Leaflet に敷く）。
+    // ピン・まとめ表示・しぼり込み・ふきだしは、これまでの Leaflet のまま。
+    // 鍵が無い・鍵のエラー・8秒たっても読み込めない → いままでの OpenStreetMap に戻す（地図が真っ白にならない）
+    function useOSM() { if (!map.hasLayer(tiles)) tiles.addTo(map); }
+    var gkey = opts.gmapsKey || '';
+    if (gkey && L.gridLayer && L.gridLayer.googleMutant) {
+      var gDone = false, gFailed = false;
+      var gLayer = L.gridLayer.googleMutant({
+        type: 'roadmap',
+        maxZoom: 18,
+        // お店・飲食店のアイコンは消す（通信のピンと見分けにくい。公園・学校・駅は残る）
+        styles: [{ featureType: 'poi.business', stylers: [{ visibility: 'off' }] }],
+      });
+      var gFallback = function () {
+        if (gFailed) return;
+        gFailed = true;
+        if (map.hasLayer(gLayer)) map.removeLayer(gLayer);
+        useOSM();
+      };
+      // 鍵が使えないとき、Google はこの名前の関数を呼ぶ（公式の決まり）
+      var prevAuth = global.gm_authFailure;
+      global.gm_authFailure = function () { gFallback(); if (typeof prevAuth === 'function') prevAuth(); };
+      if (!(global.google && global.google.maps && global.google.maps.Map) && !global.__bvmGmapsLoading) {
+        global.__bvmGmapsLoading = true;
+        global.__bvmGmapsReady = function () { gDone = true; };
+        var sc = document.createElement('script');
+        sc.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(gkey) +
+          '&language=ja&region=JP&loading=async&callback=__bvmGmapsReady';
+        sc.async = true;
+        sc.onerror = gFallback;
+        document.head.appendChild(sc);
+      } else {
+        gDone = true;
+      }
+      gLayer.addTo(map);
+      setTimeout(function () {
+        if (!gDone && !(global.google && global.google.maps && global.google.maps.Map)) gFallback();
+      }, 8000);
+    } else {
+      useOSM();
+    }
     // 指1本のスクロールでページが動かなくなるのを防ぐ
     map.once('focus', function () { map.scrollWheelZoom.enable(); });
 
@@ -370,8 +411,11 @@
     // 場所を公開しているお店だけ（data/map-pr.json に位置のあるもの）を、催しの最終日まで出す。
     // まとめ表示にもカテゴリのしぼり込みにも入れない（別のレイヤー）。いつも見えて、いつも「PR」と分かる。
     // 見た目は協賛の案内ページの見本（scripts/make-kyosan.mjs ④）と同じ。
+    // 最終日（p.until）を過ぎたら、ページを作り直していなくても出さない（日本時間の今日で見る）
+    var todayJST = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
     (opts.prs || []).forEach(function (p) {
       if (typeof p.lat !== 'number' || typeof p.lng !== 'number') return;
+      if (p.until && p.until < todayJST) return;
       var label = 'PR ' + p.name;
       var m = L.marker([p.lat, p.lng], {
         icon: L.divIcon({

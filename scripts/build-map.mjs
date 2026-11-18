@@ -46,13 +46,18 @@ const PR_POS = existsSync('data/map-pr.json') ? JSON.parse(readFileSync('data/ma
 const lastDay = (e) => (e.dates && e.dates.length ? e.dates[e.dates.length - 1] : '') || (e.span && e.span.to) || '';
 const PRS = (existsSync('data/events.json') ? JSON.parse(readFileSync('data/events.json', 'utf8')).events : [])
   .filter((e) => e.pr && PR_POS[e.id] && typeof PR_POS[e.id].lat === 'number' && lastDay(e) >= TODAY)
-  .map((e) => ({ name: e.name, pr: e.pr, when: e.when, target: e.target || '', url: e.url || '',
+  .map((e) => ({ name: e.name, pr: e.pr, when: e.when, target: e.target || '', url: e.url || '', until: lastDay(e),
                  q: PR_POS[e.id].q || '', lat: PR_POS[e.id].lat, lng: PR_POS[e.id].lng }));
 for (const id of Object.keys(PR_POS))
   if (!/^E\d+$/.test(id)) console.error(`🔴 data/map-pr.json の「${id}」は台帳のIDの形になっていない`);
 const OUT = 'docs/homepage/map.html';
 const TEXT_LIMIT = 300;   // ひとことの字数。誰でも同じ
 const POST_URL = process.env.MAP_POST_URL || '';
+// 🆕 2026-11-18 Googleマップの下地（オーナー「いまの地図は見づらい」）。鍵は GitHub の Variables の GMAPS_KEY から
+//   （deploy-homepage.yml の「マップを組む」で入る）。このホームページからしか使えない鍵（リファラー制限）。
+//   鍵が無いとき（手元で組んだとき）は、これまでの OpenStreetMap のまま。手順は docs/gmaps-key.md
+const GMAPS_KEY = (process.env.GMAPS_KEY || '').trim();
+if (GMAPS_KEY && !/^[A-Za-z0-9_-]{20,60}$/.test(GMAPS_KEY)) { console.error('🔴 GMAPS_KEY の形が違う（APIキーは英数字と - _ だけ）'); process.exit(1); }
 
 const mapQ = (name) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name)}`;
 
@@ -138,7 +143,7 @@ const page = `<!doctype html>
 <meta property="og:locale" content="ja_JP">
 <link rel="stylesheet" href="/assets/bv-tokens.css">
 <link rel="stylesheet" href="/assets/leaflet/leaflet.css">
-<link rel="stylesheet" href="/assets/bv-map.css?v=20261118">
+<link rel="stylesheet" href="/assets/bv-map.css?v=20261118b">
 <link rel="stylesheet" href="/assets/bv-post.css">
 <link rel="stylesheet" href="/assets/bv-nav.css">
 <style>
@@ -260,7 +265,8 @@ ${sections}
 </footer>
 
 <script src="/assets/leaflet/leaflet.js"></script>
-<script src="/assets/bv-map.js?v=20261118"></script>
+<script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></script>
+<script src="/assets/bv-map.js?v=20261118b"></script>
 <script src="/assets/bv-post.js"></script>
 <script type="application/json" id="bv-spots">${jsonInTag(SPOTS)}</script>
 <script type="application/json" id="bv-posts">${jsonInTag(POSTS)}</script>
@@ -274,6 +280,7 @@ ${sections}
     spots: spots,
     posts: posts,
     prs: JSON.parse(document.getElementById('bv-prs').textContent),
+    gmapsKey: ${JSON.stringify(GMAPS_KEY)},
     // 地図でしぼり込んだら、下の一覧も同じカテゴリだけにする
     onSelect: function(cat){
       document.querySelectorAll('.cat').forEach(function(sec){
@@ -297,5 +304,6 @@ ${sections}
 writeFileSync(OUT, page);
 console.log(`wrote ${OUT}`);
 console.log(`  スポット ${SPOTS.length}件（ピン ${pinned}件 / ピンなし ${SPOTS.length - pinned}件）/ 投稿 ${totalPosts}件`);
+console.log(`  地図の下地: ${GMAPS_KEY ? 'Googleマップ（読み込めなければ OpenStreetMap）' : 'OpenStreetMap（GMAPS_KEY が無い）'}`);
 console.log(`  PR のピン ${PRS.length}件${PRS.length ? `（${PRS.map((p) => p.pr).join('・')}）` : ''}`);
 console.log(`  投稿の送り先: ${POST_URL || '未設定（フォームは出るが、送信時にコピー案内に切り替わる）'}`);
