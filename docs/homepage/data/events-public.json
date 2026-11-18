@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-18",
+ "generated": "2026-11-19",
  "events": [
   {
    "id": "E16",
@@ -5909,88 +5909,6 @@
     "raw": "事前申込・抽選。Webフォームだけ（電話の受付なし）。申込期間 11/18(水) 11:00 〜 11/19(木) 正午"
    },
    "cat": "other"
-  },
-  {
-   "id": "E207",
-   "name": "親子で楽しむおえかきワークショップ（津田図書館）",
-   "dates": [
-    "2026-11-29"
-   ],
-   "span": null,
-   "when": "2026年11月29日(日) 10:00〜11:30（開場 9:45）",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": "10:00",
-   "end": "11:30",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "津田公民館 講座室（津田図書館の主催）",
-   "mapq": "津田図書館",
-   "summary": "小平市在住の絵本作家 かじりみな子さんが講師。絵本の読み聞かせ、絵本づくりの話、おえかきの実演、親子でおえかき",
-   "kidsNote": "",
-   "caution": "",
-   "contact": {
-    "tel": "042-341-1245",
-    "who": ""
-   },
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "✕",
-    "pre": "○",
-    "elem": "◎"
-   },
-   "cost": "ポスターにも図書館の公式にも記載が無い（要確認）",
-   "discount": "",
-   "target": "4歳から小学生と、その保護者",
-   "url": "https://library.kodaira.ed.jp/viewer/info.html?id=413",
-   "tentative": false,
-   "deadline": {
-    "date": "2026-11-14",
-    "raw": "11月14日(土) 10:00から、津田図書館カウンターへ（電話可・先着順／042-341-1245）"
-   },
-   "cat": "public"
-  },
-  {
-   "id": "E235",
-   "name": "児童館「NIHAドッジボール」",
-   "dates": [
-    "2026-11-29"
-   ],
-   "span": null,
-   "when": "2026年11月29日(日) 11:30〜15:30",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": "11:30",
-   "end": "15:30",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "小川町二丁目児童館 地域センター（昼食の会場）と、小平市立第十五小学校 体育館（ドッジボールの会場）",
-   "mapq": "小川町二丁目児童館 地域センター",
-   "summary": "参加者全員でお昼を食べてから、レクやドッジボール。各館から公共交通機関で、児童館の職員が引率する",
-   "kidsNote": "",
-   "caution": "",
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "✕",
-    "pre": "✕",
-    "elem": "◎"
-   },
-   "cost": "おたよりに記載なし（要確認。昼食・交通費の扱いも児童館で）",
-   "discount": "",
-   "target": "小学生／定員: 先着30名（市内の児童館3館で10名ずつ）",
-   "url": "https://kodaji.ashita-ba.co.jp/news/article/933/",
-   "tentative": false,
-   "deadline": {
-    "date": "2026-11-16",
-    "raw": "11月1日(日) 9:00〜11月16日(月)まで、市内の各児童館で（申込用紙に記入して出し、しおりを受け取る）"
-   },
-   "cat": "public"
   },
   {
    "id": "E243",
