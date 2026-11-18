@@ -616,22 +616,6 @@ E133</description>
 電話: 042-348-2112</description>
   </Placemark>
   <Placemark>
-    <name>比留間医院（内科・小児科）</name>
-    <styleUrl>#候補</styleUrl>
-    <address>小平市花小金井1-9-15</address>
-    <ExtendedData>
-      <Data name="ステータス"><value>候補</value></Data>
-      <Data name="種別"><value>小児科</value></Data>
-      <Data name="電話"><value>042-461-1636</value></Data>
-      <Data name="住所"><value>小平市花小金井1-9-15</value></Data>
-      <Data name="メモ"><value>docs/clinic-6-script.md</value></Data>
-    </ExtendedData>
-    <description>種別: 小児科
-住所: 小平市花小金井1-9-15
-電話: 042-461-1636
-docs/clinic-6-script.md</description>
-  </Placemark>
-  <Placemark>
     <name>花小金井駅前こどもクリニック</name>
     <styleUrl>#候補</styleUrl>
     <address>小平市花小金井1-10-11 875ビル201</address>
