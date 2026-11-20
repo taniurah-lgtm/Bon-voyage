@@ -1,4 +1,8 @@
-# 2026-11-20 SNSドラフト（承認待ち・まだ投稿していません）
+# 2026-11-21 SNSドラフト（⚠️投稿前に直すところがあります）
+
+> ⚠️ 生成が途中で終わり、ブロックが足りていません。欠けている分は手で書き足すか、Actions から「SNS drafts」を再実行してください。
+
+> 🔴 **直近と同じ紹介(2026-11-20.md)。**このまま投稿しないでください。別のイベントに差し替えるか、Actions から「SNS drafts」を再実行してください。
 
 【Threads・紹介 1/2】
 来週末の11/28(土)から、萩山公園で「紅葉のライトアップ」が始まります🎈
@@ -20,10 +24,20 @@ https://kodaira-tourism.com/event/23085/
 くわしくは → https://bonvoya.nicomaru.tokyo/th
 #小平 #萩山 #萩山公園 #紅葉 #ライトアップ #子連れおでかけ
 
+【Threads・問いかけ】
+雨の日でも楽しめる、吉祥寺や武蔵野エリアの大きな公園の室内の遊び場や施設が気になっています。
+
+ただ、天気が崩れた日に小さな子を連れて行って、
+うまく回りきれるのか少し不安で。
+
+雨の日に子どもと出かけるなら、どんな場所が助かりますか🤔
+
 ---
-※自動生成（model: gemini-flash-latest）。投稿前に日付・事実・トーンを目視確認してください。
+※自動生成（model: gemini-3.5-flash-lite）。投稿前に日付・事実・トーンを目視確認してください。
 ※【紹介 1/2】を投稿し、その**返信として【紹介 2/2】**をぶら下げる。1/2にリンクを入れない。
-※今日は【紹介】だけの日です（問いかけは隔日）。
+※【問いかけ】は「井の頭恩賜公園（武蔵野・吉祥寺）」について。**紹介とは別の対象**なので、同じ日でも重ならない。
+※【問いかけ】にリンクやハッシュタグを足さない（宣伝に見えると返事が来ない）。
+※返事が来たら「井の頭恩賜公園（武蔵野・吉祥寺）」の fromReader に入れる（手順は scripts/social/README.md）。
 ※飛び先は https://bonvoya.nicomaru.tokyo/th に統一（【紹介】のみ）。
 
 
@@ -32,9 +46,9 @@ https://kodaira-tourism.com/event/23085/
 **よさそうな投稿があったら、その URL か本文を Claude に貼る** → 返信の案（ネタ帳の事実だけで）と、催しなら台帳への起票。
 
 いつもの言葉:
-- [東村山 子連れ](https://www.threads.com/search?q=%E6%9D%B1%E6%9D%91%E5%B1%B1%20%E5%AD%90%E9%80%A3%E3%82%8C&serp_type=default&filter=recent)
-- [小平 雨の日](https://www.threads.com/search?q=%E5%B0%8F%E5%B9%B3%20%E9%9B%A8%E3%81%AE%E6%97%A5&serp_type=default&filter=recent)
-- [小平 ママ](https://www.threads.com/search?q=%E5%B0%8F%E5%B9%B3%20%E3%83%9E%E3%83%9E&serp_type=default&filter=recent)
+- [小金井 子連れ](https://www.threads.com/search?q=%E5%B0%8F%E9%87%91%E4%BA%95%20%E5%AD%90%E9%80%A3%E3%82%8C&serp_type=default&filter=recent)
+- [小平 子連れ](https://www.threads.com/search?q=%E5%B0%8F%E5%B9%B3%20%E5%AD%90%E9%80%A3%E3%82%8C&serp_type=default&filter=recent)
+- [花小金井](https://www.threads.com/search?q=%E8%8A%B1%E5%B0%8F%E9%87%91%E4%BA%95&serp_type=default&filter=recent)
 
 これから10日の催し（ほかの人の感想・写真が出ていないか）:
 - [min'na de part 22th](https://www.threads.com/search?q=min'na%20de%20part%2022th&serp_type=default&filter=recent)
