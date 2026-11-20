@@ -379,7 +379,8 @@ https://bonvoya.nicomaru.tokyo/
 
 > 「風船を渡す条件は、ぼんぼやーじゅ通信を登録しているかどうか。LINEのQRとホームページのQRどちらも。11/25からカフェ情報も。A3横の案内板」＋「アンケートのQRを、登録している方へ」（オーナー・2026-11-20）
 
-- 版: `docs/print/minnadepart/board-a3.pdf`（カラー）・`board-a3-bw.pdf`（白黒）。作り直しは `node scripts/make-board-minnadepart.mjs`
+- 版: 🆕 **B3横**（2026-11-20 オーナー「B3サイズにすることにしました」）`docs/print/minnadepart/board-b3.pdf`（カラー）・`board-b3-bw.pdf`（白黒）。A3と縦横の比率が同じなので、配置はそのまま全体を約1.23倍（文字も大きく）。A3横の `board-a3(-bw).pdf` も同じ版下から出している。版下 `board.html`、作り直しは `node scripts/make-board-minnadepart.mjs`
+- B3はコンビニのマルチコピーでは刷れない（A3まで）。プリントのお店で
 - QR は3つ（2026-11-20、刷り上がりの PDF から3つとも読めることを確認）
   - LINE の友だち追加（大きく）
   - ホームページのトップ（登録しない人向け「今週号をのぞく」）

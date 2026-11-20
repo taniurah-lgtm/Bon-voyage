@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>みんデパの案内板（A3横）｜ぼんぼやーじゅ通信</title>
+<title>みんデパの案内板（B3横）｜ぼんぼやーじゅ通信</title>
 <!--
   2026-11-20 オーナー「あしたは、ついにみんデパ本部でぼんぼやーじゅ通信の宣伝。風船を渡す条件は、登録しているかどうか。
   LINEのQRとホームページのQRどちらも。11/25からカフェ情報も配信。A3横の案内板」＋「アンケートのQRを、登録している方へ」
@@ -15,21 +15,26 @@
   ・アンケートは 11/30 まで（フォームの説明文はオーナーが直す）
   ・QR: LINE＝公式の友だち追加（assets/line-qr.png）／ホームページ＝トップ（みんデパは当日の友だちの増え方で数える。/f は作らない）／アンケート＝読者アンケートのフォーム
   ・?mode=bw で白黒
+  ★2026-11-20 オーナー「B3サイズにすることにしました。もっと盛りだくさんか文字を大きく」→ B3横（515×364mm）に。
+    B3とA3は縦横の比率が同じなので、配置はそのまま全体を 364/297 ＝約1.23倍（文字も1.23倍）。?size=a3 で A3横（420×297mm）
   作り直し: node scripts/make-board-minnadepart.mjs
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Lora:ital,wght@0,500;1,400;1,500&family=Klee+One:wght@600&display=block" rel="stylesheet">
 <style>
-  @page { size: 420mm 297mm; margin: 0; }
+  @page { size: 515mm 364mm; margin: 0; }
   :root{
     --paper:#FBFAF5; --ink:#2F3E48; --soft:#3A464E; --line:#CFC8B8; --wash:#F3EFE5; --card:#FFFFFF;
     --pink:#F3A9B9; --gold:#F2BE62; --sky:#A6D2E6; --leaf:#A3CC93; --coral:#EE7C64; --line-green:#06C755; --on-color:#FFFFFF;
   }
   .bw{ --paper:#FFFFFF; --ink:#111; --soft:#222; --line:#888; --wash:#F2F2F2; --coral:#111; --line-green:#111; }
   html,body{ margin:0; padding:0; background:#fff; }
-  .page{ position:relative; width:420mm; height:297mm; overflow:hidden; background:var(--paper); color:var(--ink);
-         font-family:"Zen Kaku Gothic New",sans-serif; }
+  /* 紙（B3横）。中の .page は A3横の寸法で組み、紙の大きさまで拡大する */
+  .sheet{ position:relative; width:515mm; height:364mm; overflow:hidden; background:var(--paper); }
+  .page{ position:absolute; left:0; top:0; width:420.2mm; height:297mm; overflow:hidden; background:var(--paper); color:var(--ink);
+         font-family:"Zen Kaku Gothic New",sans-serif; transform:scale(1.225589); transform-origin:0 0; }
+  .a3 .sheet{ width:420mm; height:297mm; } .a3 .page{ width:420mm; transform:none; }
   .page img{ max-width:none; }
   .frame{ position:absolute; inset:9mm; border:1.2mm solid var(--ink); border-radius:4mm; }
   .frame::after{ content:""; position:absolute; inset:2mm; border:.35mm solid var(--ink); border-radius:2.6mm; }
@@ -94,6 +99,7 @@
 </style>
 </head>
 <body>
+<div class="sheet" id="sheet">
 <div class="page" id="page">
   <div class="frame"></div>
 
@@ -156,8 +162,10 @@
 
   <p class="foot">発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）／書いているのは、花小金井に住む子育て中の親です</p>
 </div>
+</div>
 <script>
   var q = new URLSearchParams(location.search);
+  if (q.get('size') === 'a3') { document.body.classList.add('a3'); var st = document.createElement('style'); st.textContent = '@page{ size:420mm 297mm; margin:0; }'; document.head.appendChild(st); }
   if (q.get('mode') === 'bw') { document.body.classList.add('bw'); document.getElementById('logo').src = '../../homepage/assets/brand/logo-mono.png'; }
 </script>
 </body>
