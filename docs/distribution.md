@@ -670,7 +670,7 @@ QRは300/150/100dpi で読み取り確認済み
 | 版 | ファイル |
 |---|---|
 | **いつもの（カラー）** | `docs/homepage/assets/flyer-a4.pdf`（QR = 手渡し `/f/hand`） |
-| 🆕 **B5版**（2026-11-08） | `docs/homepage/assets/flyer-b5.pdf`（白黒 `flyer-b5-bw.pdf`・182×257mm・QR = 手渡し）。A4の版をそのまま0.84倍に縮めたもの（上5mmの白い余白は同じ）。印刷は**用紙B5・倍率100%** |
+| 🆕 **B5版**（2026-11-08） | `docs/homepage/assets/flyer-b5.pdf`（白黒 `flyer-b5-bw.pdf`・182×257mm・QR = 手渡し）。A4の版を縮めたもの。🆕 **2026-11-20 オーナー「うちのコピー機では上の余白がなく、下が1cmくらい空く」→ 上の白い余白を15mm・下を0mmに（倍率0.815）**。コピー機が上に寄せて刷るぶんを見込んだ配置。印刷は**用紙B5・倍率100%** |
 | **白黒**（FAX・リソ・白黒コピー） | `docs/homepage/assets/flyer-a4-bw.pdf` |
 | 配る場所ごとのQR違い | `docs/homepage/assets/flyer2/flyer-<code>.pdf`・`-bw.pdf`（`scripts/build-qr.py` の配布先と同じコード） |
 

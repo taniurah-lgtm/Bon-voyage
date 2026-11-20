@@ -203,12 +203,14 @@
   const side = q.get('side') === 'back' ? 'back' : 'front';
   const bw = q.get('mode') === 'bw';
   // 2026-11-08 オーナー「B5版も」→ ?size=b5（182×257mm）。A4の版をそのまま縮める（上5mmの白い余白は同じ）。
-  //   倍率0.84: 絵や線が紙の端から6mm前後の内側に収まる大きさ。いちばん小さい字（発行の欄）は約1.9mm
+  //   ★2026-11-20 オーナー「うちのコピー機では、上が余白がなく、下が1cmくらい余白になる。上に余白を増やして、下はぎりぎりに」
+  //     → コピー機が約7〜8mm上に寄せて刷る。上の白い余白を15mmに広げ、下は紙の端まで（余白0）。
+  //       寄せて刷ると、上下とも7mm前後の余白になる見込み。そのぶん倍率を 0.84 → 0.815 に（いちばん小さい字は約1.8mm）
   if (q.get('size') === 'b5') {
-    const W = 182, H = 257, k = 0.84;
+    const W = 182, H = 257, k = 0.815, top = H - 297 * k;   // top ≒ 14.9mm・下は0
     const st = document.createElement('style');
     st.textContent = `@page{ size:${W}mm ${H}mm; margin:0; } html,body{ width:${W}mm; height:${H}mm; overflow:hidden; }
-      .page{ transform:translate(${((W - 210 * k) / 2).toFixed(2)}mm, 5mm) scale(${k}); }`;
+      .page{ transform:translate(${((W - 210 * k) / 2).toFixed(2)}mm, ${top.toFixed(2)}mm) scale(${k}); }`;
     document.head.appendChild(st);
   }
   if (bw) document.body.classList.add('bw');

@@ -44,7 +44,8 @@ for (const code of (ONLY.length ? CODES.filter((c) => ONLY.includes(c)) : CODES)
   console.log('ok', code);
 }
 // B5版（2026-11-08 オーナー）: いつもの（QR = 手渡し）だけ。182×257mm
-for (const bw of (ONLY.length ? [] : [false, true])) {
+// 🆕 2026-11-20 `node scripts/build-flyer.mjs b5` で B5 だけ作る
+for (const bw of ((!ONLY.length || ONLY.includes('b5')) ? [false, true] : [])) {
   await p.goto(`${SRC}?side=front&size=b5&qr=f-hand.png${bw ? '&mode=bw' : ''}`, { waitUntil: 'networkidle' });
   await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(200);
   const out = `docs/homepage/assets/flyer-b5${bw ? '-bw' : ''}.pdf`;
