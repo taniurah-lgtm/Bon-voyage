@@ -2,13 +2,19 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>3cm角の両面ミニカード（折るシール）｜ぼんぼやーじゅ通信</title>
+<title>両面ミニカード（棒に巻く・折るシール）｜ぼんぼやーじゅ通信</title>
 <!--
   2026-11-05 オーナー「3cm角のシール版。表＝ぼんぼやーじゅ通信、裏＝QR。A4のシール台紙に一気に刷り、
   切って、6cmの長辺を真ん中で折れば3cm角の両面になるもの」。
-  1枚 = 横60×縦30mm（左半分が表、右半分が裏）。まん中の縦線で、のり面どうしを貼り合わせて折る。
+  ★2026-11-20 オーナー「棒に貼りつける。くくりつけるための余裕が中央に少しだけほしい。もう少し小さくして27枚以上に。
+    QRは大きく。QR側の文章は、ロゴ側に移すか、あきらめるか」→
+    ・1枚 = 横62×縦27mm（表27mm角 ＋ 巻きしろ8mm ＋ 裏27mm角）。巻きしろに棒を置いて、のり面どうしを貼り合わせて折る（旗の形）
+    ・A4に 3列×10段 = 30枚
+    ・裏はQRだけ（23mm。前の18mmより大きく）。巻きしろ側に少し余白を多めにとる（棒に巻いた分で、QRが曲がらないように）
+    ・QR側の2行（週末のおでかけ情報／毎週水曜・LINEで無料）は、表（ロゴ側）に移した
+    ・オーナーのコピー機は上に7〜8mm寄せて刷る（B5で分かった）ので、上の余白を多め・下を少なめに
   横向きに並べたので、裏も上下そのままで刷れる（折ってから左右にめくると、正しい向きで読める）。
-  A4に 3列×9段 = 27枚（縦向きの 6×4=24 より多い）。外側の余白に、切る線と折る線の目印。
+  外側の余白に、切る線（実線）と折る線（点線＝巻きしろのまん中）の目印。
   ?mode=bw で白黒。?one=1 で1枚だけ（見本）。作り直し: node scripts/build-sticker.mjs
 -->
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700&family=Lora:ital,wght@1,500&family=Klee+One:wght@600&display=block" rel="stylesheet">
@@ -19,22 +25,22 @@
   :root{ --paper:#FBFAF5; --ink:#2F3E48; --soft:#5B6870; }
   .bw{ --paper:#fff; --ink:#111; --soft:#333; }
   .sheet{ position:relative; width:210mm; height:297mm; }
-  .grid{ position:absolute; left:15mm; top:13.5mm; display:grid; grid-template-columns:repeat(3,60mm); grid-auto-rows:30mm; }
+  .grid{ position:absolute; left:12mm; top:16mm; display:grid; grid-template-columns:repeat(3,62mm); grid-auto-rows:27mm; }
   .one{ padding:4mm; }
-  .tag{ position:relative; width:60mm; height:30mm; background:var(--paper); color:var(--ink); overflow:hidden; }
-  .half{ position:absolute; top:0; width:30mm; height:30mm; }
+  .tag{ position:relative; width:62mm; height:27mm; background:var(--paper); color:var(--ink); overflow:hidden; }
+  .half{ position:absolute; top:0; width:27mm; height:27mm; }
   .front{ left:0; }
-  .back{ left:30mm; }
-  .art{ position:absolute; inset:0; width:30mm; height:30mm; }
-  .c{ position:absolute; left:0; right:0; text-align:center; font-family:"Zen Kaku Gothic New",sans-serif; }
-  .w1{ top:8.8mm; font-family:"Klee One",serif; font-weight:600; font-size:3.25mm; letter-spacing:.02em; }
-  .w2{ top:13.0mm; font-family:"Klee One",serif; font-weight:600; font-size:3.25mm; letter-spacing:.3em; padding-left:.3em; }
-  .bv{ top:17.8mm; font-family:"Lora",serif; font-style:italic; font-weight:500; font-size:1.9mm; letter-spacing:.1em; color:var(--soft); }
-  /* 裏: 3cm角でも読める大きさに（2026-11-05 オーナー「QRの上と下の文字が小さい」）。アドレスの行はやめて2行だけ */
-  .tg{ top:2.6mm; font-size:2.35mm; line-height:1; letter-spacing:.04em; }
-  .qr{ top:5.9mm; line-height:0; }
-  .qr img{ width:18mm; height:18mm; display:inline-block; background:#fff; }
-  .q1{ top:24.9mm; font-size:2.35mm; line-height:1; font-weight:700; letter-spacing:.02em; }
+  .back{ left:35mm; }
+  .art{ position:absolute; inset:0; width:27mm; height:27mm; }
+  .c{ position:absolute; left:0; right:0; text-align:center; font-family:"Zen Kaku Gothic New",sans-serif; white-space:nowrap; }
+  .w1{ top:7.0mm; font-family:"Klee One",serif; font-weight:600; font-size:2.9mm; letter-spacing:.02em; line-height:1.2; }
+  .w2{ top:10.5mm; font-family:"Klee One",serif; font-weight:600; font-size:2.9mm; letter-spacing:.3em; padding-left:.3em; line-height:1.2; }
+  .bv{ top:14.2mm; font-family:"Lora",serif; font-style:italic; font-weight:500; font-size:1.6mm; letter-spacing:.1em; color:var(--soft); line-height:1.2; }
+  /* QR側にあった2行を、表に（2026-11-20） */
+  .t1{ top:17.9mm; font-size:1.95mm; line-height:1; font-weight:500; letter-spacing:.02em; }
+  .t2{ top:20.8mm; font-size:1.95mm; line-height:1; font-weight:700; letter-spacing:.01em; }
+  /* 裏: QRだけ。巻きしろ側（左）を3mm、外側（右）を1mm あける */
+  .qr{ position:absolute; left:3mm; top:2mm; width:23mm; height:23mm; display:block; background:#fff; }
   .marks{ position:absolute; inset:0; width:210mm; height:297mm; pointer-events:none; }
 </style>
 </head>
@@ -42,15 +48,15 @@
 <template id="tag">
   <div class="tag">
     <div class="half front">
-      <svg class="art" viewBox="0 0 30 30"></svg>
+      <svg class="art" viewBox="0 0 27 27"></svg>
       <div class="c w1">ぼんぼやーじゅ</div>
       <div class="c w2">通信</div>
       <div class="c bv">Bon Voyage</div>
+      <div class="c t1">週末のおでかけ情報</div>
+      <div class="c t2">毎週水曜・LINEで無料</div>
     </div>
     <div class="half back">
-      <div class="c tg">週末のおでかけ情報</div>
-      <div class="c qr"><img src="../../homepage/assets/qr/f-tag.png" alt="QRコード"></div>
-      <div class="c q1">毎週水曜・LINEで無料</div>
+      <img class="qr" src="../../homepage/assets/qr/f-tag.png" alt="QRコード">
     </div>
   </div>
 </template>
@@ -62,12 +68,12 @@
   const root = document.getElementById('root');
   if (q.get('one')) root.innerHTML = `<div class="one">${t}</div>`;
   else {
-    // 外側の余白に、切る線（列・段の境目）と折る線（各段のまん中）の目印
-    const L = 15, T = 13.5, W = 60, H = 30, C = 3, R = 9, m = [];
-    for (let i = 0; i <= C; i++) { const x = L + i * W; m.push(`<line x1="${x}" y1="${T - 7}" x2="${x}" y2="${T - 2}"/><line x1="${x}" y1="${T + R * H + 2}" x2="${x}" y2="${T + R * H + 7}"/>`); }
+    // 外側の余白に、切る線（列・段の境目）と折る線（巻きしろのまん中）の目印
+    const L = 12, T = 16, W = 62, H = 27, C = 3, R = 10, FOLD = 27 + 8 / 2, m = [];
+    for (let i = 0; i <= C; i++) { const x = L + i * W; m.push(`<line x1="${x}" y1="${T - 6}" x2="${x}" y2="${T - 2}"/><line x1="${x}" y1="${T + R * H + 2}" x2="${x}" y2="${T + R * H + 6}"/>`); }
     for (let j = 0; j <= R; j++) { const y = T + j * H; m.push(`<line x1="${L - 7}" y1="${y}" x2="${L - 2}" y2="${y}"/><line x1="${L + C * W + 2}" y1="${y}" x2="${L + C * W + 7}" y2="${y}"/>`); }
     const f = [];
-    for (let i = 0; i < C; i++) { const x = L + i * W + W / 2; f.push(`<line x1="${x}" y1="${T - 7}" x2="${x}" y2="${T - 2}"/><line x1="${x}" y1="${T + R * H + 2}" x2="${x}" y2="${T + R * H + 7}"/>`); }
+    for (let i = 0; i < C; i++) { const x = L + i * W + FOLD; f.push(`<line x1="${x}" y1="${T - 6}" x2="${x}" y2="${T - 2}"/><line x1="${x}" y1="${T + R * H + 2}" x2="${x}" y2="${T + R * H + 6}"/>`); }
     root.innerHTML = `<div class="sheet"><div class="grid">${t.repeat(C * R)}</div>
       <svg class="marks" viewBox="0 0 210 297"><g stroke="#666" stroke-width=".2">${m.join('')}</g><g stroke="#666" stroke-width=".2" stroke-dasharray="1 .8">${f.join('')}</g></svg></div>`;
   }
@@ -76,8 +82,8 @@
   const fills = (ks) => ks.map((k) => COL[k] ? `<path d="${A[k]}" fill="${COL[k]}"/>` : '').join('');
   const bouquet = (x, y, rot, len) => `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${len / 616}) translate(-285 -897)"><path d="${A.bouquet}" fill="none" stroke="${PAPER}" stroke-width="16"/>${fills(['leaf','pink','gold','sky'])}<path d="${A.bouquet}" fill="${INK}"/></g>`;
   const balloon = (x, y, h, rot = 0) => `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${h / 340}) translate(-585 -105)">${fills(['red'])}<path d="${A.balloon}" fill="${INK}"/></g>`;
-  const rect = (mm) => `<rect x="${mm}" y="${mm}" width="${30 - 2 * mm}" height="${30 - 2 * mm}" rx=".6" fill="none" stroke="${LC}" stroke-width=".12"/>`;
-  const art = rect(1.5) + rect(2.05) + bouquet(1.6, 9.5, 33, 8.5) + bouquet(23.0, 28.5, 30, 8) + balloon(24.5, 15.0, 6.8, 6);
+  const rect = (mm) => `<rect x="${mm}" y="${mm}" width="${27 - 2 * mm}" height="${27 - 2 * mm}" rx=".55" fill="none" stroke="${LC}" stroke-width=".12"/>`;
+  const art = rect(1.3) + rect(1.8) + bouquet(1.45, 7.6, 33, 6.6) + balloon(22.5, 11.0, 5.0, 6);
   document.querySelectorAll('.front .art').forEach((s) => s.innerHTML = art);
 </script>
 </body>
