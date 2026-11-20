@@ -103,6 +103,8 @@
   const q = new URLSearchParams(location.search);
   if (q.get('mode') === 'bw') { document.body.classList.add('bw'); document.getElementById('logo').src = '../../homepage/assets/brand/logo-mono.png'; }
   if (q.get('qr')) document.getElementById('qr').src = '../../homepage/assets/qr/' + q.get('qr');
+  // 🆕 2026-11-20 ?oneside=1 で「裏面に…」の行を消す（片面だけ刷る先に渡す版。園長会の15園）
+  if (q.get('oneside')) { var bk = document.querySelector('.back'); if (bk) bk.remove(); }
 </script>
 </body>
 </html>

@@ -21,14 +21,20 @@ const OUT = 'docs/homepage/assets';
 mkdirSync(OUT, { recursive: true });
 const browser = await chromium.launch();
 let bad = false;
-for (const [mode, name] of [['color', 'flyer-a4-logo'], ['bw', 'flyer-a4-logo-bw']]) {
-  const url = SRC + (mode === 'bw' ? '?mode=bw' : '');
+// 🆕 2026-11-20 `node scripts/build-flyer-logo.mjs youchien` → 片面・QR違いの版を flyer2/flyer-logo-<code>(-bw).pdf に（裏面の案内の行なし）
+const CODE = process.argv[2] || '';
+const JOBS = CODE
+  ? [['color', `flyer2/flyer-logo-${CODE}`], ['bw', `flyer2/flyer-logo-${CODE}-bw`]]
+  : [['color', 'flyer-a4-logo'], ['bw', 'flyer-a4-logo-bw']];
+for (const [mode, name] of JOBS) {
+  const qs = [mode === 'bw' ? 'mode=bw' : '', CODE ? `qr=f-${CODE}.png&oneside=1` : ''].filter(Boolean).join('&');
+  const url = SRC + (qs ? '?' + qs : '');
   const p = await browser.newPage({ viewport: { width: 794, height: 1123 }, deviceScaleFactor: 2 });
   await p.goto(url, { waitUntil: 'networkidle' });
   await p.evaluate(() => document.fonts.ready);
   await p.waitForTimeout(300);
   await p.pdf({ path: `${OUT}/${name}.pdf`, width: '210mm', height: '297mm', printBackground: true, margin: { top: 0, right: 0, bottom: 0, left: 0 } });
-  await p.locator('#page').screenshot({ path: `${OUT}/${name}-preview.png` });
+  if (!CODE) await p.locator('#page').screenshot({ path: `${OUT}/${name}-preview.png` });
   const r = await p.evaluate(() => {
     const pg = document.querySelector('.page').getBoundingClientRect();
     const f = document.querySelector('.foot').getBoundingClientRect();

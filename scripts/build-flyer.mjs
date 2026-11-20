@@ -19,13 +19,15 @@ const { chromium } = await import('playwright').catch(async () => {
   const root = execSync('npm root -g', { encoding: 'utf8' }).trim();
   return import(pathToFileURL(root + '/playwright/index.mjs').href);
 });
-const CODES = ['hand', 'asupia', 'kodomo', 'rokuto', 'seibu', 'kominkan-n', 'kominkan-s', 'library', 'jidokan', 'hokenshi', 'clinic', 'en', 'poster', 'takenoko', 'tanashi'];
+const CODES = ['hand', 'asupia', 'kodomo', 'rokuto', 'seibu', 'kominkan-n', 'kominkan-s', 'library', 'jidokan', 'hokenshi', 'clinic', 'en', 'poster', 'takenoko', 'tanashi', 'youchien'];
+// 🆕 2026-11-20 `node scripts/build-flyer.mjs youchien` のようにコードを渡すと、そのコードの A4 だけ作る（B5 は作らない）
+const ONLY = process.argv.slice(2);
 const SRC = pathToFileURL(resolve('docs/print/flyer/flyer-frame.html')).href;
 mkdirSync('docs/homepage/assets/flyer2', { recursive: true });
 const b = await chromium.launch();
 const p = await b.newPage({ viewport: { width: 794, height: 1123 }, deviceScaleFactor: 2 });
 let bad = false;
-for (const code of CODES) {
+for (const code of (ONLY.length ? CODES.filter((c) => ONLY.includes(c)) : CODES)) {
   for (const bw of [false, true]) {
     await p.goto(`${SRC}?side=front&qr=f-${code}.png${bw ? '&mode=bw' : ''}`, { waitUntil: 'networkidle' });
     await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(200);
@@ -42,7 +44,7 @@ for (const code of CODES) {
   console.log('ok', code);
 }
 // B5版（2026-11-08 オーナー）: いつもの（QR = 手渡し）だけ。182×257mm
-for (const bw of [false, true]) {
+for (const bw of (ONLY.length ? [] : [false, true])) {
   await p.goto(`${SRC}?side=front&size=b5&qr=f-hand.png${bw ? '&mode=bw' : ''}`, { waitUntil: 'networkidle' });
   await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(200);
   const out = `docs/homepage/assets/flyer-b5${bw ? '-bw' : ''}.pdf`;
