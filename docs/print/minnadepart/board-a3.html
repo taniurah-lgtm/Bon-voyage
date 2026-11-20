@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>みんデパの案内板（A3横）｜ぼんぼやーじゅ通信</title>
+<!--
+  2026-11-20 オーナー「あしたは、ついにみんデパ本部でぼんぼやーじゅ通信の宣伝。風船を渡す条件は、登録しているかどうか。
+  LINEのQRとホームページのQRどちらも。11/25からカフェ情報も配信。A3横の案内板」＋「アンケートのQRを、登録している方へ」
+  ・QR: LINE＝公式の友だち追加（assets/line-qr.png）／ホームページ＝トップそのまま（みんデパは当日の友だちの増え方で数える。/f は作らない）／アンケート＝読者アンケートのフォーム
+  ・?mode=bw で白黒
+  作り直し: node scripts/make-board-minnadepart.mjs
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Lora:ital,wght@0,500;1,400;1,500&family=Klee+One:wght@600&display=block" rel="stylesheet">
+<style>
+  @page { size: 420mm 297mm; margin: 0; }
+  :root{
+    --paper:#FBFAF5; --ink:#2F3E48; --soft:#3A464E; --line:#CFC8B8; --wash:#F3EFE5;
+    --pink:#F3A9B9; --gold:#F2BE62; --sky:#A6D2E6; --leaf:#A3CC93; --coral:#EE7C64; --line-green:#06C755;
+  }
+  .bw{ --paper:#FFFFFF; --ink:#111; --soft:#222; --line:#888; --wash:#F2F2F2; --coral:#111; --line-green:#111; }
+  html,body{ margin:0; padding:0; background:#fff; }
+  .page{ position:relative; width:420mm; height:297mm; overflow:hidden; background:var(--paper); color:var(--ink);
+         font-family:"Zen Kaku Gothic New",sans-serif; }
+  .frame{ position:absolute; inset:9mm; border:1.2mm solid var(--ink); border-radius:4mm; }
+  .frame::after{ content:""; position:absolute; inset:2mm; border:.35mm solid var(--ink); border-radius:2.6mm; }
+  .mincho{ font-family:"Shippori Mincho B1",serif; font-weight:800; }
+
+  /* 左: 通信の紹介 */
+  .left{ position:absolute; left:24mm; top:22mm; width:218mm; }
+  .eyebrow{ font-family:"Lora",serif; font-style:italic; font-size:5mm; letter-spacing:.32em; color:var(--soft); margin:0; }
+  .to{ font-family:"Shippori Mincho B1",serif; font-weight:700; font-size:7mm; letter-spacing:.16em; margin:2.5mm 0 0; }
+  .brand{ display:flex; align-items:center; gap:8mm; margin-top:9mm; }
+  .brand img{ width:58mm; height:58mm; flex:0 0 auto; }
+  .wm{ white-space:nowrap; font-family:"Klee One",serif; font-weight:600; font-size:15mm; letter-spacing:.03em; margin:0; line-height:1.15; }
+  .bv{ font-family:"Lora",serif; font-style:italic; font-weight:500; font-size:9mm; letter-spacing:.12em; margin:1.5mm 0 0; color:var(--soft); }
+  .h1{ white-space:nowrap; font-size:13.4mm; letter-spacing:.04em; margin:13mm 0 0; line-height:1.3; }
+  .lead{ font-size:6.3mm; line-height:1.8; letter-spacing:.02em; margin:5mm 0 0; font-weight:500; }
+  .points{ display:grid; grid-template-columns:repeat(3,1fr); gap:5mm; margin-top:12mm; }
+  .pt{ border-top:.6mm solid var(--line); padding-top:3mm; }
+  .pt .mk{ display:inline-block; width:4mm; height:4mm; border-radius:50%; margin-right:2mm; vertical-align:.4mm; }
+  .pt:nth-child(1) .mk{ background:var(--pink); } .pt:nth-child(2) .mk{ background:var(--gold); } .pt:nth-child(3) .mk{ background:var(--sky); }
+  .bw .pt .mk{ background:none; border:.5mm solid #111; }
+  .pt h3{ font-family:"Shippori Mincho B1",serif; font-weight:800; font-size:7.4mm; letter-spacing:.06em; margin:0; }
+  .pt p{ font-size:4.7mm; line-height:1.6; margin:2mm 0 0; color:var(--soft); }
+  .cafe{ margin-top:13mm; display:flex; align-items:center; gap:5mm; background:#fff; border:.6mm solid var(--coral); border-radius:3mm; padding:5.5mm 6mm; }
+  .cafe .new{ flex:0 0 auto; font-family:"Lora",serif; font-weight:500; font-size:5mm; letter-spacing:.12em; color:#fff; background:var(--coral); border-radius:2mm; padding:1.2mm 3mm; }
+  .cafe b{ font-family:"Shippori Mincho B1",serif; font-weight:800; font-size:7.6mm; letter-spacing:.04em; display:block; line-height:1.35; }
+  .cafe span{ font-size:4.4mm; line-height:1.55; color:var(--soft); display:block; margin-top:1mm; }
+
+  /* 右: 風船と QR */
+  .right{ position:absolute; left:256mm; top:22mm; width:140mm; }
+  .balloon{ background:#fff; border:.8mm solid var(--ink); border-radius:4mm; padding:6mm 6mm 5mm; text-align:center; }
+  .balloon .q{ white-space:nowrap; font-family:"Shippori Mincho B1",serif; font-weight:800; font-size:10mm; line-height:1.3; letter-spacing:.04em; margin:0; }
+  .balloon .q em{ font-style:normal; color:var(--coral); }
+  .balloon .sub{ font-size:4.8mm; line-height:1.55; margin:2.5mm 0 0; font-weight:500; }
+  .lineqr{ display:flex; align-items:center; gap:5mm; margin-top:4mm; text-align:left; }
+  .lineqr img{ width:56mm; height:56mm; flex:0 0 auto; }
+  .lineqr .lab{ font-size:4.9mm; font-weight:700; line-height:1.45; }
+  .lineqr .lab i{ display:inline-block; font-style:normal; color:#fff; background:var(--line-green); border-radius:1.6mm; padding:.6mm 2.4mm; font-size:4.6mm; margin-bottom:2mm; }
+  .lineqr .lab small{ display:block; font-size:3.9mm; font-weight:400; color:var(--soft); margin-top:2mm; line-height:1.55; }
+  .two{ display:grid; grid-template-columns:1fr 1fr; gap:5mm; margin-top:7mm; }
+  .box{ background:#fff; border:.35mm solid var(--line); border-radius:3mm; padding:6mm 4mm; text-align:center; }
+  .box img{ width:52mm; height:52mm; display:block; margin:0 auto; }
+  .box b{ display:block; font-family:"Shippori Mincho B1",serif; font-weight:800; font-size:5.8mm; margin-top:2mm; line-height:1.35; }
+  .box span{ display:block; font-size:4.1mm; line-height:1.5; color:var(--soft); margin-top:1mm; }
+
+  .foot{ position:absolute; left:24mm; right:24mm; bottom:16mm; text-align:center; font-size:3.9mm; line-height:1.6; color:var(--soft); }
+</style>
+</head>
+<body>
+<div class="page" id="page">
+  <div class="frame"></div>
+
+  <div class="left">
+    <p class="eyebrow">WEEKLY LETTER FOR FAMILIES IN KODAIRA</p>
+    <p class="to">小平の、子育て中のご家庭へ</p>
+    <div class="brand">
+      <img id="logo" src="../../homepage/assets/brand/logo-color.png" alt="">
+      <div>
+        <p class="wm">ぼんぼやーじゅ通信</p>
+        <p class="bv">Bon Voyage</p>
+      </div>
+    </div>
+    <p class="h1 mincho">週末のおでかけを、水曜の朝に</p>
+    <p class="lead">赤ちゃん・未就学児・小学生のいるご家庭へ。となりの市も含めた週末のおでかけ情報を、毎週水曜の朝、LINEで無料でお届けしています。</p>
+    <div class="points">
+      <div class="pt"><h3><span class="mk"></span>年齢別に</h3><p>赤ちゃん連れ・未就学の子・<br>小学生のページに分けて</p></div>
+      <div class="pt"><h3><span class="mk"></span>公式で確かめて</h3><p>市や施設の公式ページで、<br>一件ずつ確かめています</p></div>
+      <div class="pt"><h3><span class="mk"></span>公園から講座まで</h3><p>公園・児童館・図書館・<br>科学館。季節のお祭りや講座も</p></div>
+    </div>
+    <div class="cafe">
+      <span class="new">NEW</span>
+      <div>
+        <b>11月25日の号から、子連れで入りやすいカフェも</b>
+        <span>キッズスペース・座敷・おむつ替えなど、お店の案内に書いてあることを載せます</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="balloon">
+      <p class="q">LINEで友だち登録すると<br><em>風船</em>をどうぞ 🎈</p>
+      <p class="sub">登録済みの方も、LINEの画面を見せてください</p>
+      <div class="lineqr">
+        <img src="../../homepage/assets/line-qr.png" alt="">
+        <div class="lab"><i>LINE</i><br>カメラで読むと、<br>友だち追加の画面が<br>開きます
+          <small>無料です。お名前やご住所の入力はいりません。合わなければ、いつでも解除できます。</small></div>
+      </div>
+    </div>
+    <div class="two">
+      <div class="box"><img src="qr-site.svg" alt=""><b>今週号をのぞく</b><span>登録しなくても、<br>ホームページで読めます</span></div>
+      <div class="box"><img src="qr-survey.svg" alt=""><b>登録している方へ</b><span>ご意見をお聞かせください<br>（匿名・3分ほど）</span></div>
+    </div>
+  </div>
+
+  <p class="foot">発行：ぼんぼやーじゅ通信の会（小平市・花小金井）／小平市民活動支援センター あすぴあ 登録団体（第254号）／書いているのは、花小金井に住む子育て中の親です</p>
+</div>
+<script>
+  var q = new URLSearchParams(location.search);
+  if (q.get('mode') === 'bw') { document.body.classList.add('bw'); document.getElementById('logo').src = '../../homepage/assets/brand/logo-mono.png'; }
+</script>
+</body>
+</html>
