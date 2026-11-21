@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-21",
+ "generated": "2026-11-22",
  "events": [
   {
    "id": "E16",
@@ -5458,7 +5458,7 @@
    "timeUncertain": false,
    "place": "八国山緑地 ころころ広場（東村山市。西武園線 西武園駅から徒歩5分）",
    "mapq": "八国山緑地 ころころ広場",
-   "summary": "",
+   "summary": "八国山緑地の雑木林で、一日かけての秋の自然あそび。秋の拾い物をして、昼食をはさみ、午後は Teens部スタッフによる「こども企画のあそび」",
    "kidsNote": "",
    "caution": "",
    "lastEntry": "",
@@ -6041,7 +6041,7 @@
    "timeUncertain": false,
    "place": "小平市中央公園（小平市津田町1-1-1）",
    "mapq": "小平市中央公園",
-   "summary": "",
+   "summary": "ウクライナのクリスマス公演2回、伝統の手づくりワークショップ4種、クリスマスマーケット（飲食と工芸の出店）、星を掲げる者たちの行列（内訳は下記・主催の公式ページ）",
    "kidsNote": "",
    "caution": "",
    "lastEntry": "",
@@ -6051,7 +6051,7 @@
     "pre": "○",
     "elem": "◎"
    },
-   "cost": "",
+   "cost": "星の行列は無料（要事前登録）／ワークショップ4種は各1,500円＋手数料38円。公演2回とマーケット入場は記載なし（要確認）",
    "discount": "",
    "target": "",
    "url": "https://www.ukrainehouse.jp/ja/event-details/ukrainian-christmas-in-kodaira-2026",
