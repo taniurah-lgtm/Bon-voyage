@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22",
+ "generated": "2026-11-23",
  "events": [
   {
    "id": "E51",
@@ -6626,12 +6626,12 @@
     "pre": "◎",
     "elem": "○"
    },
-   "cost": "公式に記載なし（ふだんのおはなし会は無料。この回の料金は要確認）",
+   "cost": "（要確認）公式のお知らせに参加料金の記載が無い",
    "discount": "",
    "target": "4歳から小学生とその保護者",
    "url": "https://library.kodaira.ed.jp/viewer/info.html?id=402",
    "status": "候補",
-   "confidence": "公式で確認（2026-11-12）",
+   "confidence": "2026-11-23 に公式で再確認（日程・各館の定員・受付開始日に変更なし。中止・満員の告知も無い）。中身の裏は公式のお知らせ（2026-11-12 掲載）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-12.md"
@@ -6709,7 +6709,7 @@
    "target": "",
    "url": "https://www.threads.com/@onpunomahou/post/DfOUQGqk8AI",
    "status": "候補",
-   "confidence": "2026-11-15 に中止・変更の有無を見直し済み（変更の告知なし）。中身の裏は主催のチラシ（2026-11-03）のまま",
+   "confidence": "2026-11-23 に中止・変更の有無を見直し済み（変更・満席・予約締切の告知なし）。中身の裏は主催のチラシ（2026-11-03）のまま",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-12.md"
@@ -6872,12 +6872,12 @@
     "pre": "○",
     "elem": "○"
    },
-   "cost": "（要確認。リニューアルの詳細は11月下旬に公開予定）",
+   "cost": "（要確認）リニューアル後の料金は公式に未発表",
    "discount": "",
    "target": "",
    "url": "https://www.ousama2603.com/news/680/",
    "status": "候補",
-   "confidence": "公式で確認（2026-11-15）。料金と新しい設備は、11月下旬の詳細を見てから",
+   "confidence": "2026-11-23 に公式を再確認（12/9(水) オープンに変更なし。リニューアルの詳細＝料金・新しい設備は、11/23 時点でまだ未公開）。日付・休館からの再開は公式のお知らせ（2026-11-13 掲載）で確認",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-12.md"
