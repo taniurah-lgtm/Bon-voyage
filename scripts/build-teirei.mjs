@@ -349,7 +349,7 @@ ${navSub('teirei')}
 
   <div class="nav-pills">
     <a href="/calendar.html">おでかけカレンダー</a>
-    <a href="/entei.html">小平 園だより（幼稚園・こども園）</a>
+    <a href="/entei.html">こだいら幼稚園だより（幼稚園・こども園）</a>
     <a href="/map.html">おでかけマップ</a>
     <a href="/issues.html">バックナンバー</a>
   </div>

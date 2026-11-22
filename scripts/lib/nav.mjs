@@ -1,9 +1,9 @@
 // 全ページ共通のナビの2段目（2026-11-05 オーナー「スマホだと園庭開放や児童館に行くのが大変。カレンダーやマップと同じく上でタップできるように」）
-// 1段目: 通信の名前・LINEで受け取る。2段目: カレンダー／マップ／園だより（もと園庭開放）／児童館・図書館（いつも見える。狭い画面では横に流せる）
+// 1段目: 通信の名前・LINEで受け取る。2段目: カレンダー／マップ／幼稚園だより（もと園庭開放）／児童館・図書館（いつも見える。狭い画面では横に流せる）
 const ITEMS = [
   { key: 'cal', href: '/calendar.html', icon: '📅', label: 'カレンダー' },
   { key: 'map', href: '/map.html', icon: '🗺️', label: 'マップ' },
-  { key: 'entei', href: '/entei.html', icon: '🏫', label: '園だより' }, // 2026-11-22「小平 園だより」に（もと園庭開放）
+  { key: 'entei', href: '/entei.html', icon: '🏫', label: '幼稚園だより' }, // 2026-11-22「こだいら幼稚園だより」に（もと園庭開放）
   { key: 'teirei', href: '/teirei.html', icon: '📚', label: '児童館・図書館' },
 ];
 export function navSub(current = '') {

@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /*
- * 「小平 園だより」のページを組む（もとは「園庭開放・未就園児の会」）。
+ * 「こだいら幼稚園だより」のページを組む（もとは「園庭開放・未就園児の会」）。
  *   node scripts/build-entei.mjs
  *
  *   data/entei.json → docs/homepage/entei.html（URL は前のまま。LINE・チラシからのリンクを切らない）
  *
  * 2026-10-05 オーナー提案で「園庭開放」のまとめとして作った。
  * 2026-11-22 オーナー「園庭開放ではなく、小平の私立園のページにする。小平をひとつの大きな四角形にして、
- *   中に各園を四角形で並べた園マップ。タップでその園のホームページへ。園庭開放以外の情報も。11/25 にもらうものを受け入れられるように」
+ *   中に各園を四角形で並べた幼稚園マップ。タップでその園のホームページへ。園庭開放以外の情報も。11/25 にもらうものを受け入れられるように」
  *   → 小平市内の私立幼稚園・こども園15園（全園）を同じ形で並べる。1園だけ目立たせない（園長会と約束した載せ方）。
  *
  * ★ここに書くのは、各園の公式ページで確かめた事実と、園からいただいたお知らせ（letters）だけ。
@@ -17,7 +17,7 @@
  * ★確かめた日（checked。お知らせを受けた月はその受け取り日）から45日を過ぎた園は、組むたびに🔴で知らせる。
  * ★お知らせ（letters の最新の月）に載っていない園は、組むたびに一覧で出す（届いていない園の見落としを防ぐ）。
  *
- * 園マップ: 小平市の外枠（map.bounds）を cols×rows のマスに分け、園と駅を実際の位置にいちばん近いマスへ置く。
+ * 幼稚園マップ: 小平市の外枠（map.bounds）を cols×rows のマスに分け、園と駅を実際の位置にいちばん近いマスへ置く。
  *   位置は住所から国土地理院の住所検索で取った緯度経度（geo）。重ならないように、ずれの合計が最小になる並べ方を選ぶ。
  */
 import { navSub } from './lib/nav.mjs';
@@ -27,7 +27,7 @@ const SRC = 'data/entei.json';
 const OUT = 'docs/homepage/entei.html';
 const SITE = 'https://bonvoya.nicomaru.tokyo';
 const STALE_DAYS = 45;
-const SOON_DAYS = 28; // 「これからの園だより」で最初に見せる日数。それより先は「もっと先まで」で開く
+const SOON_DAYS = 28; // 「これからの幼稚園だより」で最初に見せる日数。それより先は「もっと先まで」で開く
 
 const data = JSON.parse(readFileSync(SRC, 'utf8'));
 const todayJST = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
@@ -113,7 +113,7 @@ if (problems.length) {
 }
 data.places.sort((a, b) => townRank(a.town) - townRank(b.town) || a.name.localeCompare(b.name, 'ja'));
 
-// ── 園マップ（マスへの割り当て）──────────────────────────
+// ── 幼稚園マップ（マスへの割り当て）──────────────────────────
 // 園と駅を、実際の位置にいちばん近いマスへ。ずれの合計が小さくなるまで入れ替える（決まった結果になる）。
 const M = data.map;
 const C = M.cols, R = M.rows, B = M.bounds;
@@ -179,7 +179,7 @@ function tile(n) {
   const p = n.place;
   const weekly = p.programs.filter((g) => g.weekly).map((g) => g.weekly);
   const wk = weekly.length ? `毎週${[...new Set(weekly)].join('・')}` : '';
-  return `<a class="cell en-t" href="${esc(p.homepage)}" target="_blank" rel="noopener" data-dates="${upcomingDates(p).join(',')}" data-wk="${esc(wk)}" aria-label="${esc(p.name)}のホームページ（新しいタブで開きます）" data-goatcounter-click="園マップ｜${esc(p.label)}"><b>${tileLabel(p.label)}</b><small class="nx"></small></a>`;
+  return `<a class="cell en-t" href="${esc(p.homepage)}" target="_blank" rel="noopener" data-dates="${upcomingDates(p).join(',')}" data-wk="${esc(wk)}" aria-label="${esc(p.name)}のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜${esc(p.label)}"><b>${tileLabel(p.label)}</b><small class="nx"></small></a>`;
 }
 
 const mapHtml = `<div class="emap">
@@ -256,7 +256,7 @@ function place(p) {
     </article>`;
 }
 
-// 「これからの園だより」の材料（日付のあるもの。種類を問わず）
+// 「これからの幼稚園だより」の材料（日付のあるもの。種類を問わず）
 const soon = [];
 for (const p of data.places) {
   for (const g of p.programs) {
@@ -290,8 +290,8 @@ const weeklyRows = weekly
 const kindsUsed = Object.keys(KINDS).filter((k) => soon.some((x) => x.kind === k) || weekly.some((x) => x.kind === k));
 
 const n = data.places.length;
-const title = '小平 園だより（小平市の私立幼稚園・こども園）';
-const desc = `小平市内の私立幼稚園・こども園${n}園の、入園前の親子に開いている会。園庭開放・未就園児の会・説明会・行事を、園ごとにまとめています。園マップから各園のホームページへ。`;
+const title = 'こだいら幼稚園だより（小平市の私立幼稚園・こども園）';
+const desc = `小平市内の私立幼稚園・こども園${n}園の、入園前の親子に開いている会。園庭開放・未就園児の会・説明会・行事を、園ごとにまとめています。幼稚園マップから各園のホームページへ。`;
 
 const html = `<!doctype html>
 <html lang="ja">
@@ -339,7 +339,7 @@ const html = `<!doctype html>
   h2.sec { font-family: var(--maru); font-weight: 800; font-size: 1.12rem; margin: 1.6rem 0 .6rem; }
   h2.sec:first-child { margin-top: .4rem; }
 
-  /* 園マップ */
+  /* 幼稚園マップ */
   .emap { margin: 0 0 .5rem; }
   .nb { display: flex; justify-content: space-between; gap: .5rem; font-size: .68rem; color: var(--ink-faint); line-height: 1.4; }
   .nb-top { margin-bottom: .55rem; }
@@ -352,12 +352,13 @@ const html = `<!doctype html>
   .en-t:hover, .en-t:focus-visible { background: var(--sky-wash); }
   .en-t b { font-family: var(--maru); font-weight: 800; font-size: clamp(10px, 2.7vw, 14px); letter-spacing: -.02em; word-break: keep-all; }
   .en-t .nx { font-size: clamp(8.5px, 2.2vw, 11px); color: var(--marigold-ink); font-weight: 700; margin-top: 1px; min-height: 1.2em; }
-  .st { border: 1px dashed var(--ink-faint); color: var(--ink-soft); font-size: clamp(8.5px, 2.25vw, 11px); }
+  .st { border: 1px dashed var(--ink-faint); color: var(--ink-soft); font-size: clamp(8px, 2.1vw, 11px); letter-spacing: -.05em; white-space: nowrap; overflow: hidden; }
+  @media (max-width: 340px) { .st { white-space: normal; } }
   .st span::before { content: ""; display: block; width: 1.6em; height: 2px; margin: 0 auto 3px; background: var(--ink-faint); border-radius: 2px; }
   .mapcap { font-size: .78rem; color: var(--ink-soft); line-height: 1.7; margin-top: .45rem; }
   .mapcap b { color: var(--ink); }
 
-  /* これからの園だより */
+  /* これからの幼稚園だより */
   .soon { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); box-shadow: var(--shadow-soft); padding: .9rem 1rem; }
   .soon h3 { font-family: var(--maru); font-weight: 800; font-size: .92rem; margin: 0 0 .45rem; color: var(--sky-deep); }
   .filt { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0 0 .5rem; }
@@ -443,18 +444,18 @@ ${navSub('entei')}
 <header class="ghead">
   <div class="ghead-in">
     <div class="eyebrow">Bon Voyage,</div>
-    <h1>小平 園だより</h1>
+    <h1>こだいら幼稚園だより</h1>
     <p class="sub">小平市内の私立幼稚園・こども園${n}園の、入園前の親子に開いている会。園庭開放・未就園児の会・説明会・行事を、園ごとにまとめました。</p>
   </div>
 </header>
 
 <main class="wrap">
-  <h2 class="sec">園マップ</h2>
+  <h2 class="sec">幼稚園マップ</h2>
   ${mapHtml}
   <p class="mapcap">小平市をひとつの四角にして、${n}園と駅を、おおよその場所に並べました。<b>園の四角をタップすると、その園のホームページが開きます。</b>オレンジの字は、次に会がある日です。</p>
 
-  <h2 class="sec">これからの園だより</h2>
-  <section class="soon" aria-label="これからの園だより">
+  <h2 class="sec">これからの幼稚園だより</h2>
+  <section class="soon" aria-label="これからの幼稚園だより">
     <div class="filt" role="group" aria-label="種類でしぼる">
       <button type="button" data-f="all" aria-pressed="true">すべて</button>
       ${kindsUsed.map((k) => `<button type="button" data-f="${k}" aria-pressed="false">${KINDS[k].label}</button>`).join('\n      ')}
@@ -519,7 +520,7 @@ ${navSub('entei')}
   var WD = ['日', '月', '火', '水', '木', '金', '土'];
   function md(d) { return (+d.slice(5, 7)) + '/' + (+d.slice(8, 10)); }
 
-  /* 園マップ: 次に会がある日 */
+  /* 幼稚園マップ: 次に会がある日 */
   document.querySelectorAll('.en-t').forEach(function (a) {
     var ds = (a.getAttribute('data-dates') || '').split(',').filter(function (d) { return d && d >= t; });
     var nx = a.querySelector('.nx');
@@ -538,7 +539,7 @@ ${navSub('entei')}
     if (!left) { ul.hidden = true; if (!g.querySelector('.more:not(.done)')) done.hidden = false; }
   });
 
-  /* これからの園だより: 種類でしぼる・4週間より先は「もっと先まで」で開く */
+  /* これからの幼稚園だより: 種類でしぼる・4週間より先は「もっと先まで」で開く */
   var kind = 'all', all = false;
   var rows = [].slice.call(document.querySelectorAll('#soon li[data-d]'));
   var heads = [].slice.call(document.querySelectorAll('#soon li.mh'));
@@ -586,7 +587,7 @@ if (LEAK.test(html.replace(/<script[\s\S]*?<\/script>/g, ''))) {
 
 writeFileSync(OUT, html);
 console.log(`wrote ${OUT}（${n}園 / これからの日 ${soon.length}件・毎週 ${weekly.length}件 / お知らせ ${letters.length ? letters.map((l) => ymLabel(l.month)).join('・') : 'まだなし'}）`);
-// 園マップの並び（確かめ用）
+// 幼稚園マップの並び（確かめ用）
 for (let r = 0; r < R; r++) {
   console.log('  ' + [...Array(C).keys()].map((c) => { const x = byCell.get(r * C + c); return (x ? (x.place ? x.place.label : '🚉' + x.station.name.replace('駅', '')) : '・').padEnd(5, '　'); }).join(''));
 }
