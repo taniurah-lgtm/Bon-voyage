@@ -56,7 +56,6 @@
   .en-t { background: var(--surface); border: 1.5px solid var(--sky); box-shadow: 0 1px 0 var(--line-strong); text-decoration: none; color: var(--ink); }
   .en-t:hover, .en-t:focus-visible { background: var(--sky-wash); }
   .en-t b { font-family: var(--maru); font-weight: 800; font-size: clamp(10px, 2.7vw, 14px); letter-spacing: -.02em; word-break: keep-all; }
-  .en-t .nx { font-size: clamp(8.5px, 2.2vw, 11px); color: var(--marigold-ink); font-weight: 700; margin-top: 1px; min-height: 1.2em; }
   .st { border: 1px dashed var(--ink-faint); color: var(--ink-soft); font-size: clamp(8px, 2.1vw, 11px); letter-spacing: -.05em; white-space: nowrap; overflow: hidden; }
   @media (max-width: 340px) { .st { white-space: normal; } }
   .st span::before { content: ""; display: block; width: 1.6em; height: 2px; margin: 0 auto 3px; background: var(--ink-faint); border-radius: 2px; }
@@ -93,11 +92,20 @@
   .k-soudan { background: var(--soudan-wash); color: var(--soudan-ink); }
 
   /* 園ごと */
-  .en { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); box-shadow: var(--shadow-soft); padding: 1rem 1.05rem .8rem; margin-bottom: .9rem; scroll-margin-top: 96px; }
-  .en-h { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
-  .en h2 { font-family: var(--maru); font-weight: 800; font-size: 1.04rem; margin: 0; line-height: 1.4; }
+  .en { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); box-shadow: var(--shadow-soft); margin-bottom: .6rem; scroll-margin-top: 96px; }
+  .en-h { display: flex; align-items: center; gap: .6rem; padding: .85rem 1.05rem; cursor: pointer; list-style: none; border-radius: var(--radius-sm); }
+  .en-h::-webkit-details-marker { display: none; }
+  .en-h:focus-visible { outline: 2px solid var(--sky-deep); outline-offset: 2px; }
+  .en-n { flex: 1 1 auto; min-width: 0; display: flex; align-items: baseline; gap: .2rem .6rem; flex-wrap: wrap; }
+  .en h2 { font-family: var(--maru); font-weight: 800; font-size: 1.02rem; margin: 0; line-height: 1.45; }
+  .chev { flex: none; width: 30px; height: 30px; border-radius: 999px; border: 1px solid var(--line-strong); position: relative; }
+  .chev::before { content: ""; position: absolute; left: 50%; top: 45%; width: 8px; height: 8px; border-right: 2px solid var(--ink-soft); border-bottom: 2px solid var(--ink-soft); transform: translate(-50%, -50%) rotate(45deg); transition: transform .15s; }
+  .en[open] .chev::before { transform: translate(-50%, -25%) rotate(-135deg); }
+  .en[open] .en-h { border-bottom: 1px solid var(--line); border-radius: var(--radius-sm) var(--radius-sm) 0 0; }
+  .en-b { padding: .8rem 1.05rem .8rem; }
+  @media (prefers-reduced-motion: reduce) { .chev::before { transition: none; } }
   .town { font-size: .78rem; color: var(--ink-faint); }
-  .intro { font-size: .86rem; color: var(--ink-soft); margin-top: .35rem; line-height: 1.7; }
+  .intro { font-size: .86rem; color: var(--ink-soft); margin-bottom: .2rem; line-height: 1.7; }
   .none { font-size: .86rem; color: var(--ink-soft); margin-top: .5rem; line-height: 1.75; background: var(--surface-2); border-radius: 8px; padding: .5rem .7rem; }
   .prog { margin-top: .8rem; padding-top: .7rem; border-top: 1px solid var(--line); }
   .prog:first-of-type { border-top: 0; padding-top: 0; }
@@ -167,41 +175,41 @@
         <div class="grid" style="--cols:6">
           <span class="cell" aria-hidden="true"></span>
           <span class="cell" aria-hidden="true"></span>
-          <a class="cell en-t" href="https://maruyama-ac.jp/" target="_blank" rel="noopener" data-dates="" data-wk="" aria-label="まるやまこども園（丸山幼稚園）のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜丸山"><b>丸山</b><small class="nx"></small></a>
+          <a class="cell en-t" href="https://maruyama-ac.jp/" target="_blank" rel="noopener" aria-label="まるやまこども園（丸山幼稚園）のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜丸山"><b>丸山</b></a>
           <span class="cell st" aria-hidden="true"><span>小平駅</span></span>
-          <a class="cell en-t" href="https://www.yayoidai.jp/" target="_blank" rel="noopener" data-dates="" data-wk="" aria-label="弥生台幼稚園のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜弥生台"><b>弥生台</b><small class="nx"></small></a>
+          <a class="cell en-t" href="https://www.yayoidai.jp/" target="_blank" rel="noopener" aria-label="弥生台幼稚園のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜弥生台"><b>弥生台</b></a>
           <span class="cell" aria-hidden="true"></span>
           <span class="cell" aria-hidden="true"></span>
-          <a class="cell en-t" href="https://keyakinomori.org/shinmeikindergarten/" target="_blank" rel="noopener" data-dates="" data-wk="" aria-label="小平神明こども園（小平神明幼稚園）のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜神明"><b>神明</b><small class="nx"></small></a>
+          <a class="cell en-t" href="https://keyakinomori.org/shinmeikindergarten/" target="_blank" rel="noopener" aria-label="小平神明こども園（小平神明幼稚園）のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜神明"><b>神明</b></a>
           <span class="cell st" aria-hidden="true"><span>小川駅</span></span>
           <span class="cell st" aria-hidden="true"><span>新小平駅</span></span>
-          <a class="cell en-t" href="https://namikiyouchien.com/" target="_blank" rel="noopener" data-dates="" data-wk="" aria-label="小平なみき幼稚園のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜なみき"><b>なみき</b><small class="nx"></small></a>
-          <a class="cell en-t" href="https://hanakoganei.ed.jp/" target="_blank" rel="noopener" data-dates="2026-11-24,2026-11-25,2026-12-01,2026-12-10" data-wk="" aria-label="小平花小金井こども園（小平花小金井幼稚園）のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜花小金井"><b>花小金井</b><small class="nx"></small></a>
-          <a class="cell en-t" href="https://himeyuri.ed.jp/" target="_blank" rel="noopener" data-dates="" data-wk="毎週水" aria-label="ひめゆりこども園（小平姫百合幼稚園）のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜姫百合"><b>姫百合</b><small class="nx"></small></a>
-          <a class="cell en-t" href="https://kinder.shiraume.ac.jp/" target="_blank" rel="noopener" data-dates="2026-11-25,2026-12-02,2026-12-09,2027-01-13,2027-01-20,2027-01-27,2027-02-03,2027-02-17,2027-02-24,2027-03-03" data-wk="" aria-label="白梅幼稚園（白梅学園大学附属）のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜白梅"><b>白梅</b><small class="nx"></small></a>
-          <a class="cell en-t" href="https://sensin.ed.jp/" target="_blank" rel="noopener" data-dates="2026-12-07,2026-12-14,2027-01-18,2027-01-25,2027-02-08,2027-03-01" data-wk="" aria-label="洗心幼稚園のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜洗心"><b>洗心</b><small class="nx"></small></a>
+          <a class="cell en-t" href="https://namikiyouchien.com/" target="_blank" rel="noopener" aria-label="小平なみき幼稚園のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜なみき"><b>なみき</b></a>
+          <a class="cell en-t" href="https://hanakoganei.ed.jp/" target="_blank" rel="noopener" aria-label="小平花小金井こども園（小平花小金井幼稚園）のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜花小金井"><b>花小金井</b></a>
+          <a class="cell en-t" href="https://himeyuri.ed.jp/" target="_blank" rel="noopener" aria-label="ひめゆりこども園（小平姫百合幼稚園）のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜姫百合"><b>姫百合</b></a>
+          <a class="cell en-t" href="https://kinder.shiraume.ac.jp/" target="_blank" rel="noopener" aria-label="白梅幼稚園（白梅学園大学附属）のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜白梅"><b>白梅</b></a>
+          <a class="cell en-t" href="https://sensin.ed.jp/" target="_blank" rel="noopener" aria-label="洗心幼稚園のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜洗心"><b>洗心</b></a>
           <span class="cell st" aria-hidden="true"><span>一橋学園駅</span></span>
-          <a class="cell en-t" href="https://www.k-midori.com/" target="_blank" rel="noopener" data-dates="" data-wk="毎週水・月" aria-label="小平みどりこども園（小平みどり幼稚園）のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜みどり"><b>みどり</b><small class="nx"></small></a>
-          <a class="cell en-t" href="https://www.rindou.ed.jp/" target="_blank" rel="noopener" data-dates="2026-11-30,2026-12-09,2026-12-17,2027-02-12,2027-03-15,2027-03-18" data-wk="" aria-label="りんどう幼稚園のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜りんどう"><b>りんどう</b><small class="nx"></small></a>
+          <a class="cell en-t" href="https://www.k-midori.com/" target="_blank" rel="noopener" aria-label="小平みどりこども園（小平みどり幼稚園）のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜みどり"><b>みどり</b></a>
+          <a class="cell en-t" href="https://www.rindou.ed.jp/" target="_blank" rel="noopener" aria-label="りんどう幼稚園のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜りんどう"><b>りんどう</b></a>
           <span class="cell" aria-hidden="true"></span>
           <span class="cell st" aria-hidden="true"><span>鷹の台駅</span></span>
-          <a class="cell en-t" href="https://www.takanodai-youchien.com/" target="_blank" rel="noopener" data-dates="" data-wk="" aria-label="たかのだい幼稚園のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜たかのだい"><b>たかの<wbr>だい</b><small class="nx"></small></a>
-          <a class="cell en-t" href="https://kodairagakuenkindergarten.com/" target="_blank" rel="noopener" data-dates="2026-11-25,2027-01-13,2027-01-20,2027-01-28,2027-02-03,2027-02-10,2027-02-18,2027-02-24" data-wk="" aria-label="めぐみこども園（小平学園幼稚園）のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜小平学園"><b>小平学園</b><small class="nx"></small></a>
-          <a class="cell en-t" href="http://www.kodaira-wakatake.sakura.ne.jp/" target="_blank" rel="noopener" data-dates="" data-wk="" aria-label="小平若竹幼稚園のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜若竹"><b>若竹</b><small class="nx"></small></a>
+          <a class="cell en-t" href="https://www.takanodai-youchien.com/" target="_blank" rel="noopener" aria-label="たかのだい幼稚園のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜たかのだい"><b>たかの<wbr>だい</b></a>
+          <a class="cell en-t" href="https://kodairagakuenkindergarten.com/" target="_blank" rel="noopener" aria-label="めぐみこども園（小平学園幼稚園）のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜小平学園"><b>小平学園</b></a>
+          <a class="cell en-t" href="http://www.kodaira-wakatake.sakura.ne.jp/" target="_blank" rel="noopener" aria-label="小平若竹幼稚園のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜若竹"><b>若竹</b></a>
           <span class="cell st" aria-hidden="true"><span>花小金井駅</span></span>
           <span class="cell" aria-hidden="true"></span>
           <span class="cell" aria-hidden="true"></span>
-          <a class="cell en-t" href="https://www.naobi.net/" target="_blank" rel="noopener" data-dates="" data-wk="" aria-label="なおび幼稚園のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜なおび"><b>なおび</b><small class="nx"></small></a>
-          <a class="cell en-t" href="https://kodaira-aoba.info/" target="_blank" rel="noopener" data-dates="2026-11-25,2027-01-20,2027-01-27,2027-02-17,2027-02-24,2027-03-03,2027-03-10,2027-03-27" data-wk="" aria-label="小平あおば幼稚園のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜あおば"><b>あおば</b><small class="nx"></small></a>
+          <a class="cell en-t" href="https://www.naobi.net/" target="_blank" rel="noopener" aria-label="なおび幼稚園のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜なおび"><b>なおび</b></a>
+          <a class="cell en-t" href="https://kodaira-aoba.info/" target="_blank" rel="noopener" aria-label="小平あおば幼稚園のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜あおば"><b>あおば</b></a>
           <span class="cell" aria-hidden="true"></span>
           <span class="cell" aria-hidden="true"></span>
         </div>
       </div>
       <div class="nb nb-bot"><span>↓ 国分寺市・小金井市</span></div>
     </div>
-  <p class="mapcap">小平市をひとつの四角にして、15園と駅を、おおよその場所に並べました。<b>園の四角をタップすると、その園のホームページが開きます。</b>オレンジの字は、次に会がある日です。</p>
+  <p class="mapcap"><b>園の四角をタップすると、その園のホームページが開きます。</b></p>
   <aside class="kyo" aria-label="小平市私立幼稚園協会">
-    <p class="kyo-t"><b>小平市私立幼稚園協会</b>市内の私立幼稚園・認定こども園15園すべてが加盟している団体です。園選びの案内や、幼稚園の補助金・預かり保育のことは、協会のホームページにまとまっています。毎月の各園のお知らせは、協会を通じていただいています。</p>
+    <p class="kyo-t"><b>小平市私立幼稚園協会</b>市内の私立幼稚園・認定こども園15園すべてが加盟している団体です。園選びの案内や、幼稚園の補助金・預かり保育のことは、協会のホームページにまとまっています。ぼんぼやーじゅ通信は、毎月の各園のお知らせを、協会を通じていただいています。</p>
     <a class="lk" href="https://www.kodaira-kids.jp/" target="_blank" rel="noopener" data-goatcounter-click="幼稚園｜協会">協会のホームページ</a>
   </aside>
 
@@ -274,7 +282,7 @@
   </section>
 
   <h2 class="sec">園ごとの案内</h2>
-  <p class="lead">在園していなくても参加できる会を載せています。2歳児クラスのような入会制のプレ教室は、このページでは扱っていません。</p>
+  <p class="lead">在園していなくても参加できる会を載せています。2歳児クラスのような入会制のプレ教室は、このページでは扱っていません。<b>園の名前をタップすると、くわしい案内が開きます。</b></p>
   <nav class="idx" aria-label="園の一覧">
     <div><span class="it">小川町</span><span class="il"><a href="#shinmei">小平神明こども園</a><a href="#shiraume">白梅幼稚園</a></span></div>
     <div><span class="it">小川東町</span><span class="il"><a href="#maruyama">まるやまこども園</a></span></div>
@@ -288,11 +296,12 @@
     <div><span class="it">花小金井</span><span class="il"><a href="#rindou">りんどう幼稚園</a><a href="#hanakoganei">小平花小金井こども園</a><a href="#yayoidai">弥生台幼稚園</a></span></div>
     <div><span class="it">回田町</span><span class="il"><a href="#wakatake">小平若竹幼稚園</a></span></div>
   </nav>
-  <article class="en" id="shinmei">
-      <div class="en-h">
-        <h2>小平神明こども園（小平神明幼稚園）</h2>
-        <p class="town">こども園・小川町</p>
-      </div>
+  <details class="en" id="shinmei">
+      <summary class="en-h">
+        <span class="en-n"><h2>小平神明こども園（小平神明幼稚園）</h2><span class="town">こども園・小川町</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="en-b">
       
       <div class="prog" data-k="asobi">
         <p class="pk"><span class="kc k-asobi">園庭であそぶ</span><span class="tag ok">予約なしで行ける</span></p>
@@ -317,12 +326,14 @@
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E7%A5%9E%E6%98%8E%E3%81%93%E3%81%A9%E3%82%82%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%B0%8F%E5%B7%9D%E7%94%BA1-2572" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平神明こども園｜地図">地図</a>
         </span>
       </div>
-    </article>
-  <article class="en" id="shiraume">
-      <div class="en-h">
-        <h2>白梅幼稚園（白梅学園大学附属）</h2>
-        <p class="town">幼稚園・小川町</p>
       </div>
+    </details>
+  <details class="en" id="shiraume">
+      <summary class="en-h">
+        <span class="en-n"><h2>白梅幼稚園（白梅学園大学附属）</h2><span class="town">幼稚園・小川町</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="en-b">
       
       <div class="prog" data-k="asobi">
         <p class="pk"><span class="kc k-asobi">園庭であそぶ</span><span class="tag ok">予約なしで行ける</span></p>
@@ -357,16 +368,18 @@
       <div class="en-f">
         <span class="chk">2026年10月5日に、園の公式ページで確かめました</span>
         <span class="acts">
-          <a class="lk" href="https://kinder.shiraume.ac.jp/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜白梅幼稚園｜ホーム">ホームページ</a> <a class="lk" href="https://kinder.shiraume.ac.jp/toddler/playing/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜白梅幼稚園｜公式">会の案内ページ</a>
+          <a class="lk" href="https://kinder.shiraume.ac.jp/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜白梅幼稚園｜ホーム">ホームページ</a> <a class="lk" href="https://kinder.shiraume.ac.jp/toddler/playing/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜白梅幼稚園｜公式">会の案内ページ</a> <a class="lk" href="https://www.instagram.com/shiraumekinder_kodaira/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜白梅幼稚園｜sns">Instagram</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E7%99%BD%E6%A2%85%E5%B9%BC%E7%A8%9A%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%B0%8F%E5%B7%9D%E7%94%BA1-830" target="_blank" rel="noopener" data-goatcounter-click="園庭｜白梅幼稚園｜地図">地図</a>
         </span>
       </div>
-    </article>
-  <article class="en" id="maruyama">
-      <div class="en-h">
-        <h2>まるやまこども園（丸山幼稚園）</h2>
-        <p class="town">こども園・小川東町</p>
       </div>
+    </details>
+  <details class="en" id="maruyama">
+      <summary class="en-h">
+        <span class="en-n"><h2>まるやまこども園（丸山幼稚園）</h2><span class="town">こども園・小川東町</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="en-b">
       
       
       <p class="none">2歳児の未就園児クラブ「まるちゃんクラブ」（入会制）があります。今年度の詳しい案内は準備中とのことです。</p>
@@ -378,12 +391,14 @@
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E3%81%BE%E3%82%8B%E3%82%84%E3%81%BE%E3%81%93%E3%81%A9%E3%82%82%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%B0%8F%E5%B7%9D%E6%9D%B1%E7%94%BA1-29-21" target="_blank" rel="noopener" data-goatcounter-click="園庭｜まるやまこども園｜地図">地図</a>
         </span>
       </div>
-    </article>
-  <article class="en" id="sensin">
-      <div class="en-h">
-        <h2>洗心幼稚園</h2>
-        <p class="town">幼稚園・学園西町</p>
       </div>
+    </details>
+  <details class="en" id="sensin">
+      <summary class="en-h">
+        <span class="en-n"><h2>洗心幼稚園</h2><span class="town">幼稚園・学園西町</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="en-b">
       
       <div class="prog" data-k="asobi">
         <p class="pk"><span class="kc k-asobi">園庭であそぶ</span><span class="tag ok">予約なしで行ける</span></p>
@@ -422,12 +437,14 @@
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E6%B4%97%E5%BF%83%E5%B9%BC%E7%A8%9A%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%AD%A6%E5%9C%92%E8%A5%BF%E7%94%BA2-21-9" target="_blank" rel="noopener" data-goatcounter-click="園庭｜洗心幼稚園｜地図">地図</a>
         </span>
       </div>
-    </article>
-  <article class="en" id="megumi">
-      <div class="en-h">
-        <h2>めぐみこども園（小平学園幼稚園）</h2>
-        <p class="town">こども園・学園東町</p>
       </div>
+    </details>
+  <details class="en" id="megumi">
+      <summary class="en-h">
+        <span class="en-n"><h2>めぐみこども園（小平学園幼稚園）</h2><span class="town">こども園・学園東町</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="en-b">
       
       <div class="prog" data-k="asobi">
         <p class="pk"><span class="kc k-asobi">園庭であそぶ</span><span class="tag ok">予約なしで行ける</span></p>
@@ -466,12 +483,14 @@
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E3%82%81%E3%81%90%E3%81%BF%E3%81%93%E3%81%A9%E3%82%82%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%AD%A6%E5%9C%92%E6%9D%B1%E7%94%BA1-2-41" target="_blank" rel="noopener" data-goatcounter-click="園庭｜めぐみこども園｜地図">地図</a>
         </span>
       </div>
-    </article>
-  <article class="en" id="himeyuri">
-      <div class="en-h">
-        <h2>ひめゆりこども園（小平姫百合幼稚園）</h2>
-        <p class="town">こども園・上水新町</p>
       </div>
+    </details>
+  <details class="en" id="himeyuri">
+      <summary class="en-h">
+        <span class="en-n"><h2>ひめゆりこども園（小平姫百合幼稚園）</h2><span class="town">こども園・上水新町</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="en-b">
       
       <div class="prog" data-k="asobi">
         <p class="pk"><span class="kc k-asobi">園庭であそぶ</span><span class="tag ok">予約なしで行ける</span></p>
@@ -496,12 +515,14 @@
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E3%81%B2%E3%82%81%E3%82%86%E3%82%8A%E3%81%93%E3%81%A9%E3%82%82%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E4%B8%8A%E6%B0%B4%E6%96%B0%E7%94%BA1-5-15" target="_blank" rel="noopener" data-goatcounter-click="園庭｜ひめゆりこども園｜地図">地図</a>
         </span>
       </div>
-    </article>
-  <article class="en" id="takanodai">
-      <div class="en-h">
-        <h2>たかのだい幼稚園</h2>
-        <p class="town">幼稚園・上水本町</p>
       </div>
+    </details>
+  <details class="en" id="takanodai">
+      <summary class="en-h">
+        <span class="en-n"><h2>たかのだい幼稚園</h2><span class="town">幼稚園・上水本町</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="en-b">
       
       
       <p class="none">未就園児の親子教室があります。日程は園へお問い合わせを、とのことです。</p>
@@ -513,12 +534,14 @@
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E3%81%9F%E3%81%8B%E3%81%AE%E3%81%A0%E3%81%84%E5%B9%BC%E7%A8%9A%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E4%B8%8A%E6%B0%B4%E6%9C%AC%E7%94%BA1-21-3" target="_blank" rel="noopener" data-goatcounter-click="園庭｜たかのだい幼稚園｜地図">地図</a>
         </span>
       </div>
-    </article>
-  <article class="en" id="naobi">
-      <div class="en-h">
-        <h2>なおび幼稚園</h2>
-        <p class="town">幼稚園・上水本町</p>
       </div>
+    </details>
+  <details class="en" id="naobi">
+      <summary class="en-h">
+        <span class="en-n"><h2>なおび幼稚園</h2><span class="town">幼稚園・上水本町</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="en-b">
       
       <div class="prog" data-k="asobi">
         <p class="pk"><span class="kc k-asobi">園庭であそぶ</span><span class="tag ok">予約なしで行ける</span></p>
@@ -543,12 +566,14 @@
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E3%81%AA%E3%81%8A%E3%81%B3%E5%B9%BC%E7%A8%9A%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E4%B8%8A%E6%B0%B4%E6%9C%AC%E7%94%BA4-21-1" target="_blank" rel="noopener" data-goatcounter-click="園庭｜なおび幼稚園｜地図">地図</a>
         </span>
       </div>
-    </article>
-  <article class="en" id="aoba">
-      <div class="en-h">
-        <h2>小平あおば幼稚園</h2>
-        <p class="town">幼稚園・上水南町</p>
       </div>
+    </details>
+  <details class="en" id="aoba">
+      <summary class="en-h">
+        <span class="en-n"><h2>小平あおば幼稚園</h2><span class="town">幼稚園・上水南町</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="en-b">
       
       <div class="prog" data-k="asobi">
         <p class="pk"><span class="kc k-asobi">園庭であそぶ</span><span class="tag ok">予約なしで行ける</span></p>
@@ -597,16 +622,18 @@
       <div class="en-f">
         <span class="chk">2026年10月5日に、園の公式ページで確かめました</span>
         <span class="acts">
-          <a class="lk" href="https://kodaira-aoba.info/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平あおば幼稚園｜ホーム">ホームページ</a>
+          <a class="lk" href="https://kodaira-aoba.info/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平あおば幼稚園｜ホーム">ホームページ</a> <a class="lk" href="https://www.instagram.com/kodairaaoba/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平あおば幼稚園｜sns">Instagram</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E3%81%82%E3%81%8A%E3%81%B0%E5%B9%BC%E7%A8%9A%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E4%B8%8A%E6%B0%B4%E5%8D%97%E7%94%BA2-8-15" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平あおば幼稚園｜地図">地図</a>
         </span>
       </div>
-    </article>
-  <article class="en" id="midori">
-      <div class="en-h">
-        <h2>小平みどりこども園（小平みどり幼稚園）</h2>
-        <p class="town">こども園・鈴木町</p>
       </div>
+    </details>
+  <details class="en" id="midori">
+      <summary class="en-h">
+        <span class="en-n"><h2>小平みどりこども園（小平みどり幼稚園）</h2><span class="town">こども園・鈴木町</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="en-b">
       
       <div class="prog" data-k="asobi">
         <p class="pk"><span class="kc k-asobi">園庭であそぶ</span><span class="tag ok">予約なしで行ける</span></p>
@@ -641,16 +668,18 @@
       <div class="en-f">
         <span class="chk">2026年10月5日に、園の公式ページで確かめました</span>
         <span class="acts">
-          <a class="lk" href="https://www.k-midori.com/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平みどりこども園｜ホーム">ホームページ</a> <a class="lk" href="https://www.k-midori.com/preschool/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平みどりこども園｜公式">会の案内ページ</a>
+          <a class="lk" href="https://www.k-midori.com/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平みどりこども園｜ホーム">ホームページ</a> <a class="lk" href="https://www.k-midori.com/preschool/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平みどりこども園｜公式">会の案内ページ</a> <a class="lk" href="https://www.instagram.com/k_midori_y/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平みどりこども園｜sns">Instagram</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E3%81%BF%E3%81%A9%E3%82%8A%E3%81%93%E3%81%A9%E3%82%82%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E9%88%B4%E6%9C%A8%E7%94%BA1-341" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平みどりこども園｜地図">地図</a>
         </span>
       </div>
-    </article>
-  <article class="en" id="namiki">
-      <div class="en-h">
-        <h2>小平なみき幼稚園</h2>
-        <p class="town">幼稚園・仲町</p>
       </div>
+    </details>
+  <details class="en" id="namiki">
+      <summary class="en-h">
+        <span class="en-n"><h2>小平なみき幼稚園</h2><span class="town">幼稚園・仲町</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="en-b">
       
       
       <p class="none">未就園児向けの教室は、いま調整中とのことです。新しい案内は、園のホームページの新着情報で出ます。</p>
@@ -662,12 +691,14 @@
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E3%81%AA%E3%81%BF%E3%81%8D%E5%B9%BC%E7%A8%9A%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E4%BB%B2%E7%94%BA306-3" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平なみき幼稚園｜地図">地図</a>
         </span>
       </div>
-    </article>
-  <article class="en" id="rindou">
-      <div class="en-h">
-        <h2>りんどう幼稚園</h2>
-        <p class="town">幼稚園・花小金井</p>
       </div>
+    </details>
+  <details class="en" id="rindou">
+      <summary class="en-h">
+        <span class="en-n"><h2>りんどう幼稚園</h2><span class="town">幼稚園・花小金井</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="en-b">
       <p class="intro">「にこにこクラブ」として、地域にお住まいの保護者と未就園児に園を開いています。</p>
       <div class="prog" data-k="asobi">
         <p class="pk"><span class="kc k-asobi">園庭であそぶ</span><span class="tag ok">予約なしで行ける</span></p>
@@ -716,16 +747,18 @@
       <div class="en-f">
         <span class="chk">2026年10月5日に、園の公式ページで確かめました</span>
         <span class="acts">
-          <a class="lk" href="https://www.rindou.ed.jp/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜りんどう幼稚園｜ホーム">ホームページ</a> <a class="lk" href="https://www.rindou.ed.jp/support/nikoniko.php" target="_blank" rel="noopener" data-goatcounter-click="園庭｜りんどう幼稚園｜公式">会の案内ページ</a>
+          <a class="lk" href="https://www.rindou.ed.jp/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜りんどう幼稚園｜ホーム">ホームページ</a> <a class="lk" href="https://www.rindou.ed.jp/support/nikoniko.php" target="_blank" rel="noopener" data-goatcounter-click="園庭｜りんどう幼稚園｜公式">会の案内ページ</a> <a class="lk" href="https://www.instagram.com/rindouyouchien/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜りんどう幼稚園｜sns">Instagram</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E3%82%8A%E3%82%93%E3%81%A9%E3%81%86%E5%B9%BC%E7%A8%9A%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E8%8A%B1%E5%B0%8F%E9%87%91%E4%BA%951-26-34" target="_blank" rel="noopener" data-goatcounter-click="園庭｜りんどう幼稚園｜地図">地図</a>
         </span>
       </div>
-    </article>
-  <article class="en" id="hanakoganei">
-      <div class="en-h">
-        <h2>小平花小金井こども園（小平花小金井幼稚園）</h2>
-        <p class="town">こども園・花小金井</p>
       </div>
+    </details>
+  <details class="en" id="hanakoganei">
+      <summary class="en-h">
+        <span class="en-n"><h2>小平花小金井こども園（小平花小金井幼稚園）</h2><span class="town">こども園・花小金井</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="en-b">
       <p class="intro">「Hana🌸Hanaひろば」として、未就園の親子に園を開いています。対象は令和5年4月2日以降に生まれたお子さんと保護者で、ほかの園に通っている子も対象の年齢なら参加できます。費用は無料です。</p>
       <div class="prog" data-k="asobi">
         <p class="pk"><span class="kc k-asobi">園庭であそぶ</span><span class="tag ok">予約なしで行ける</span></p>
@@ -760,16 +793,18 @@
       <div class="en-f">
         <span class="chk">2026年10月5日に、園の公式ページで確かめました</span>
         <span class="acts">
-          <a class="lk" href="https://hanakoganei.ed.jp/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平花小金井こども園｜ホーム">ホームページ</a> <a class="lk" href="https://hanakoganei.ed.jp/support/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平花小金井こども園｜公式">会の案内ページ</a>
+          <a class="lk" href="https://hanakoganei.ed.jp/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平花小金井こども園｜ホーム">ホームページ</a> <a class="lk" href="https://hanakoganei.ed.jp/support/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平花小金井こども園｜公式">会の案内ページ</a> <a class="lk" href="https://www.instagram.com/k.hanakoganei_kodomoen/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平花小金井こども園｜sns">Instagram</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E8%8A%B1%E5%B0%8F%E9%87%91%E4%BA%95%E3%81%93%E3%81%A9%E3%82%82%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E8%8A%B1%E5%B0%8F%E9%87%91%E4%BA%952-9-11" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平花小金井こども園｜地図">地図</a>
         </span>
       </div>
-    </article>
-  <article class="en" id="yayoidai">
-      <div class="en-h">
-        <h2>弥生台幼稚園</h2>
-        <p class="town">幼稚園・花小金井</p>
       </div>
+    </details>
+  <details class="en" id="yayoidai">
+      <summary class="en-h">
+        <span class="en-n"><h2>弥生台幼稚園</h2><span class="town">幼稚園・花小金井</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="en-b">
       
       <div class="prog" data-k="asobi">
         <p class="pk"><span class="kc k-asobi">園庭であそぶ</span><span class="tag ok">予約なしで行ける</span></p>
@@ -794,12 +829,14 @@
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%BC%A5%E7%94%9F%E5%8F%B0%E5%B9%BC%E7%A8%9A%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E8%8A%B1%E5%B0%8F%E9%87%91%E4%BA%954-9-20" target="_blank" rel="noopener" data-goatcounter-click="園庭｜弥生台幼稚園｜地図">地図</a>
         </span>
       </div>
-    </article>
-  <article class="en" id="wakatake">
-      <div class="en-h">
-        <h2>小平若竹幼稚園</h2>
-        <p class="town">幼稚園・回田町</p>
       </div>
+    </details>
+  <details class="en" id="wakatake">
+      <summary class="en-h">
+        <span class="en-n"><h2>小平若竹幼稚園</h2><span class="town">幼稚園・回田町</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="en-b">
       
       <div class="prog" data-k="asobi">
         <p class="pk"><span class="kc k-asobi">園庭であそぶ</span><span class="tag ok">予約なしで行ける</span></p>
@@ -824,15 +861,15 @@
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E8%8B%A5%E7%AB%B9%E5%B9%BC%E7%A8%9A%E5%9C%92%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%9B%9E%E7%94%B0%E7%94%BA122-3" target="_blank" rel="noopener" data-goatcounter-click="園庭｜小平若竹幼稚園｜地図">地図</a>
         </span>
       </div>
-    </article>
+      </div>
+    </details>
 
   <h2 class="sec">行く前に</h2>
   <div class="tips">
     <ul>
-      <li>園は、在園の子どもたちが毎日すごしている場所です。飲食・おもちゃ・自転車など、各園のお願いを守って。</li>
+      <li>飲食・おもちゃ・自転車など、各園のお願いを守って。</li>
       <li>駐車場のない園がほとんどです。歩き・自転車・バスで。</li>
       <li>園庭では、在園の子どもたちも遊んでいることがあります。お子さんから目を離さずに。</li>
-      <li>入園を考えている園なら、ふだんの雰囲気を見られる機会にもなります。</li>
     </ul>
   </div>
 
@@ -860,16 +897,18 @@
   var DAY = 864e5, now = Date.now() + 9 * 3600e3;
   var t = new Date(now).toISOString().slice(0, 10);
   var lim = new Date(now + 27 * DAY).toISOString().slice(0, 10);
-  var WD = ['日', '月', '火', '水', '木', '金', '土'];
-  function md(d) { return (+d.slice(5, 7)) + '/' + (+d.slice(8, 10)); }
 
-  /* 幼稚園マップ: 次に会がある日 */
-  document.querySelectorAll('.en-t').forEach(function (a) {
-    var ds = (a.getAttribute('data-dates') || '').split(',').filter(function (d) { return d && d >= t; });
-    var nx = a.querySelector('.nx');
-    if (ds.length) nx.textContent = '次 ' + md(ds[0]);
-    else if (a.getAttribute('data-wk')) nx.textContent = a.getAttribute('data-wk');
+  /* 園ごと: 園の名前をタップで開く。一覧や目次のリンクから来たときは、その園を開いておく */
+  function openTo(id) {
+    var el = id && document.getElementById(id);
+    if (el && el.tagName === 'DETAILS') el.open = true;
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (a) openTo(decodeURIComponent(a.getAttribute('href').slice(1)));
   });
+  window.addEventListener('hashchange', function () { openTo(decodeURIComponent(location.hash.slice(1))); });
+  openTo(decodeURIComponent(location.hash.slice(1)));
 
   /* 園ごと: 過ぎた日を隠す */
   document.querySelectorAll('.dates li[data-d]').forEach(function (li) {

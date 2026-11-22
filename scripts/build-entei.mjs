@@ -69,6 +69,7 @@ for (const l of letters) {
 const K = data.kyokai;
 if (K && (!K.name || !/^https:\/\//.test(K.url || ''))) problems.push('kyokai: name と url（https）を書く');
 const NEED = ['key', 'name', 'label', 'type', 'town', 'addr', 'geo', 'homepage', 'url', 'checked'];
+for (const p of data.places) if (p.instagram && !/^[A-Za-z0-9_.]+$/.test(p.instagram)) problems.push(`${p.name}: instagram はアカウント名だけ（@やURLなし）`);
 const keys = new Set();
 for (const p of data.places) {
   for (const f of NEED) if (!p[f]) problems.push(`${p.name || p.key}: ${f} が無い`);
@@ -167,12 +168,6 @@ const byCell = new Map([...at].map(([id, c]) => [c, nodes.find((n) => n.id === i
 const mapUrl = (p) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(short(p.name) + ' ' + p.addr)}`;
 const kindChip = (k) => `<span class="kc ${KINDS[k].cls}">${KINDS[k].label}</span>`;
 
-function upcomingDates(p) {
-  const out = [];
-  for (const g of p.programs) for (const x of g.dates || []) { const d = dateOf(x); if (d >= todayJST) out.push(d); }
-  return [...new Set(out)].sort();
-}
-
 // 5文字以上の名前は、まん中で2行に分ける（「たかのだ／い」のように1文字だけ落ちないように）
 const tileLabel = (s) => (s.length >= 5 ? `${esc(s.slice(0, Math.ceil(s.length / 2)))}<wbr>${esc(s.slice(Math.ceil(s.length / 2)))}` : esc(s));
 
@@ -180,9 +175,7 @@ function tile(n) {
   if (!n) return '<span class="cell" aria-hidden="true"></span>';
   if (n.station) return `<span class="cell st" aria-hidden="true"><span>${esc(n.station.name)}</span></span>`;
   const p = n.place;
-  const weekly = p.programs.filter((g) => g.weekly).map((g) => g.weekly);
-  const wk = weekly.length ? `毎週${[...new Set(weekly)].join('・')}` : '';
-  return `<a class="cell en-t" href="${esc(p.homepage)}" target="_blank" rel="noopener" data-dates="${upcomingDates(p).join(',')}" data-wk="${esc(wk)}" aria-label="${esc(p.name)}のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜${esc(p.label)}"><b>${tileLabel(p.label)}</b><small class="nx"></small></a>`;
+  return `<a class="cell en-t" href="${esc(p.homepage)}" target="_blank" rel="noopener" aria-label="${esc(p.name)}のホームページ（新しいタブで開きます）" data-goatcounter-click="幼稚園マップ｜${esc(p.label)}"><b>${tileLabel(p.label)}</b></a>`;
 }
 
 const mapHtml = `<div class="emap">
@@ -236,15 +229,16 @@ function program(g) {
 }
 
 function place(p) {
-  const link2 = p.url2 ? ` <a class="lk" href="${esc(p.url2.href)}" target="_blank" rel="noopener" data-goatcounter-click="園庭｜${esc(short(p.name))}｜sns">${esc(p.url2.label)}</a>` : '';
+  const link2 = p.instagram ? ` <a class="lk" href="https://www.instagram.com/${esc(p.instagram)}/" target="_blank" rel="noopener" data-goatcounter-click="園庭｜${esc(short(p.name))}｜sns">Instagram</a>` : '';
   const page = p.url !== p.homepage ? `<a class="lk" href="${esc(p.url)}" target="_blank" rel="noopener" data-goatcounter-click="園庭｜${esc(short(p.name))}｜公式">会の案内ページ</a>` : '';
   const months = [...new Set(p.programs.map((g) => g.src).filter(Boolean))].sort();
   const fromLetter = months.map((m) => `${ymLabel(m)}の予定は、${fmtDay(letterByMonth.get(m).received)}に園からいただいたお知らせです`).join('。');
-  return `<article class="en" id="${p.key}">
-      <div class="en-h">
-        <h2>${esc(p.name)}</h2>
-        <p class="town">${esc(p.type)}・${esc(p.town)}</p>
-      </div>
+  return `<details class="en" id="${p.key}">
+      <summary class="en-h">
+        <span class="en-n"><h2>${esc(p.name)}</h2><span class="town">${esc(p.type)}・${esc(p.town)}</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="en-b">
       ${p.intro ? `<p class="intro">${esc(p.intro)}</p>` : ''}
       ${p.programs.map(program).join('\n      ')}
       ${!p.programs.length && p.note ? `<p class="none">${esc(p.note)}</p>` : ''}
@@ -256,7 +250,8 @@ function place(p) {
           <a class="lk" href="${mapUrl(p)}" target="_blank" rel="noopener" data-goatcounter-click="園庭｜${esc(short(p.name))}｜地図">地図</a>
         </span>
       </div>
-    </article>`;
+      </div>
+    </details>`;
 }
 
 // 「これからの幼稚園だより」の材料（日付のあるもの。種類を問わず）
@@ -354,7 +349,6 @@ const html = `<!doctype html>
   .en-t { background: var(--surface); border: 1.5px solid var(--sky); box-shadow: 0 1px 0 var(--line-strong); text-decoration: none; color: var(--ink); }
   .en-t:hover, .en-t:focus-visible { background: var(--sky-wash); }
   .en-t b { font-family: var(--maru); font-weight: 800; font-size: clamp(10px, 2.7vw, 14px); letter-spacing: -.02em; word-break: keep-all; }
-  .en-t .nx { font-size: clamp(8.5px, 2.2vw, 11px); color: var(--marigold-ink); font-weight: 700; margin-top: 1px; min-height: 1.2em; }
   .st { border: 1px dashed var(--ink-faint); color: var(--ink-soft); font-size: clamp(8px, 2.1vw, 11px); letter-spacing: -.05em; white-space: nowrap; overflow: hidden; }
   @media (max-width: 340px) { .st { white-space: normal; } }
   .st span::before { content: ""; display: block; width: 1.6em; height: 2px; margin: 0 auto 3px; background: var(--ink-faint); border-radius: 2px; }
@@ -391,11 +385,20 @@ const html = `<!doctype html>
   .k-soudan { background: var(--soudan-wash); color: var(--soudan-ink); }
 
   /* 園ごと */
-  .en { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); box-shadow: var(--shadow-soft); padding: 1rem 1.05rem .8rem; margin-bottom: .9rem; scroll-margin-top: 96px; }
-  .en-h { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
-  .en h2 { font-family: var(--maru); font-weight: 800; font-size: 1.04rem; margin: 0; line-height: 1.4; }
+  .en { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); box-shadow: var(--shadow-soft); margin-bottom: .6rem; scroll-margin-top: 96px; }
+  .en-h { display: flex; align-items: center; gap: .6rem; padding: .85rem 1.05rem; cursor: pointer; list-style: none; border-radius: var(--radius-sm); }
+  .en-h::-webkit-details-marker { display: none; }
+  .en-h:focus-visible { outline: 2px solid var(--sky-deep); outline-offset: 2px; }
+  .en-n { flex: 1 1 auto; min-width: 0; display: flex; align-items: baseline; gap: .2rem .6rem; flex-wrap: wrap; }
+  .en h2 { font-family: var(--maru); font-weight: 800; font-size: 1.02rem; margin: 0; line-height: 1.45; }
+  .chev { flex: none; width: 30px; height: 30px; border-radius: 999px; border: 1px solid var(--line-strong); position: relative; }
+  .chev::before { content: ""; position: absolute; left: 50%; top: 45%; width: 8px; height: 8px; border-right: 2px solid var(--ink-soft); border-bottom: 2px solid var(--ink-soft); transform: translate(-50%, -50%) rotate(45deg); transition: transform .15s; }
+  .en[open] .chev::before { transform: translate(-50%, -25%) rotate(-135deg); }
+  .en[open] .en-h { border-bottom: 1px solid var(--line); border-radius: var(--radius-sm) var(--radius-sm) 0 0; }
+  .en-b { padding: .8rem 1.05rem .8rem; }
+  @media (prefers-reduced-motion: reduce) { .chev::before { transition: none; } }
   .town { font-size: .78rem; color: var(--ink-faint); }
-  .intro { font-size: .86rem; color: var(--ink-soft); margin-top: .35rem; line-height: 1.7; }
+  .intro { font-size: .86rem; color: var(--ink-soft); margin-bottom: .2rem; line-height: 1.7; }
   .none { font-size: .86rem; color: var(--ink-soft); margin-top: .5rem; line-height: 1.75; background: var(--surface-2); border-radius: 8px; padding: .5rem .7rem; }
   .prog { margin-top: .8rem; padding-top: .7rem; border-top: 1px solid var(--line); }
   .prog:first-of-type { border-top: 0; padding-top: 0; }
@@ -459,9 +462,9 @@ ${navSub('entei')}
 <main class="wrap">
   <h2 class="sec">幼稚園マップ</h2>
   ${mapHtml}
-  <p class="mapcap">小平市をひとつの四角にして、${n}園と駅を、おおよその場所に並べました。<b>園の四角をタップすると、その園のホームページが開きます。</b>オレンジの字は、次に会がある日です。</p>
+  <p class="mapcap"><b>園の四角をタップすると、その園のホームページが開きます。</b></p>
   ${K ? `<aside class="kyo" aria-label="${esc(K.name)}">
-    <p class="kyo-t"><b>${esc(K.name)}</b>市内の私立幼稚園・認定こども園${n}園すべてが加盟している団体です。園選びの案内や、幼稚園の補助金・預かり保育のことは、協会のホームページにまとまっています。毎月の各園のお知らせは、協会を通じていただいています。</p>
+    <p class="kyo-t"><b>${esc(K.name)}</b>市内の私立幼稚園・認定こども園${n}園すべてが加盟している団体です。園選びの案内や、幼稚園の補助金・預かり保育のことは、協会のホームページにまとまっています。ぼんぼやーじゅ通信は、毎月の各園のお知らせを、協会を通じていただいています。</p>
     <a class="lk" href="${esc(K.url)}" target="_blank" rel="noopener" data-goatcounter-click="幼稚園｜協会">協会のホームページ</a>
   </aside>` : ''}
 
@@ -484,7 +487,7 @@ ${navSub('entei')}
   </section>
 
   <h2 class="sec">園ごとの案内</h2>
-  <p class="lead">在園していなくても参加できる会を載せています。2歳児クラスのような入会制のプレ教室は、このページでは扱っていません。</p>
+  <p class="lead">在園していなくても参加できる会を載せています。2歳児クラスのような入会制のプレ教室は、このページでは扱っていません。<b>園の名前をタップすると、くわしい案内が開きます。</b></p>
   <nav class="idx" aria-label="園の一覧">
     ${(() => {
       const by = new Map();
@@ -497,10 +500,9 @@ ${navSub('entei')}
   <h2 class="sec">行く前に</h2>
   <div class="tips">
     <ul>
-      <li>園は、在園の子どもたちが毎日すごしている場所です。飲食・おもちゃ・自転車など、各園のお願いを守って。</li>
+      <li>飲食・おもちゃ・自転車など、各園のお願いを守って。</li>
       <li>駐車場のない園がほとんどです。歩き・自転車・バスで。</li>
       <li>園庭では、在園の子どもたちも遊んでいることがあります。お子さんから目を離さずに。</li>
-      <li>入園を考えている園なら、ふだんの雰囲気を見られる機会にもなります。</li>
     </ul>
   </div>
 
@@ -528,16 +530,18 @@ ${navSub('entei')}
   var DAY = 864e5, now = Date.now() + 9 * 3600e3;
   var t = new Date(now).toISOString().slice(0, 10);
   var lim = new Date(now + ${SOON_DAYS - 1} * DAY).toISOString().slice(0, 10);
-  var WD = ['日', '月', '火', '水', '木', '金', '土'];
-  function md(d) { return (+d.slice(5, 7)) + '/' + (+d.slice(8, 10)); }
 
-  /* 幼稚園マップ: 次に会がある日 */
-  document.querySelectorAll('.en-t').forEach(function (a) {
-    var ds = (a.getAttribute('data-dates') || '').split(',').filter(function (d) { return d && d >= t; });
-    var nx = a.querySelector('.nx');
-    if (ds.length) nx.textContent = '次 ' + md(ds[0]);
-    else if (a.getAttribute('data-wk')) nx.textContent = a.getAttribute('data-wk');
+  /* 園ごと: 園の名前をタップで開く。一覧や目次のリンクから来たときは、その園を開いておく */
+  function openTo(id) {
+    var el = id && document.getElementById(id);
+    if (el && el.tagName === 'DETAILS') el.open = true;
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (a) openTo(decodeURIComponent(a.getAttribute('href').slice(1)));
   });
+  window.addEventListener('hashchange', function () { openTo(decodeURIComponent(location.hash.slice(1))); });
+  openTo(decodeURIComponent(location.hash.slice(1)));
 
   /* 園ごと: 過ぎた日を隠す */
   document.querySelectorAll('.dates li[data-d]').forEach(function (li) {

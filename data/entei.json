@@ -70,6 +70,7 @@
       },
       "homepage": "https://kodaira-aoba.info/",
       "url": "https://kodaira-aoba.info/",
+      "instagram": "kodairaaoba",
       "checked": "2026-10-05",
       "programs": [
         {
@@ -187,6 +188,7 @@
       },
       "homepage": "https://kinder.shiraume.ac.jp/",
       "url": "https://kinder.shiraume.ac.jp/toddler/playing/",
+      "instagram": "shiraumekinder_kodaira",
       "checked": "2026-10-05",
       "programs": [
         {
@@ -258,6 +260,7 @@
       },
       "homepage": "https://hanakoganei.ed.jp/",
       "url": "https://hanakoganei.ed.jp/support/",
+      "instagram": "k.hanakoganei_kodomoen",
       "checked": "2026-10-05",
       "intro": "「Hana🌸Hanaひろば」として、未就園の親子に園を開いています。対象は令和5年4月2日以降に生まれたお子さんと保護者で、ほかの園に通っている子も対象の年齢なら参加できます。費用は無料です。",
       "programs": [
@@ -503,6 +506,7 @@
       },
       "homepage": "https://www.k-midori.com/",
       "url": "https://www.k-midori.com/preschool/",
+      "instagram": "k_midori_y",
       "checked": "2026-10-05",
       "programs": [
         {
@@ -552,6 +556,7 @@
       },
       "homepage": "https://www.rindou.ed.jp/",
       "url": "https://www.rindou.ed.jp/support/nikoniko.php",
+      "instagram": "rindouyouchien",
       "checked": "2026-10-05",
       "intro": "「にこにこクラブ」として、地域にお住まいの保護者と未就園児に園を開いています。",
       "programs": [
@@ -695,10 +700,7 @@
       },
       "homepage": "https://www.yayoidai.jp/",
       "url": "https://www.yayoidai.jp/price",
-      "url2": {
-        "label": "Instagram",
-        "href": "https://www.instagram.com/yayoidai_1110/"
-      },
+      "instagram": "yayoidai_1110",
       "checked": "2026-10-05",
       "programs": [
         {
@@ -769,5 +771,6 @@
       "programs": [],
       "note": "2歳児の未就園児クラブ「まるちゃんクラブ」（入会制）があります。今年度の詳しい案内は準備中とのことです。"
     }
-  ]
+  ],
+  "_instagram": "places[].instagram は園の Instagram のアカウント名（@なし）。園のホームページにあるリンクで確かめたものだけ（2026-11-22: あおば・白梅・花小金井・みどり・りんどう・弥生台）。ほかの園は Muse に探してもらい、オーナーがプロフィールを確かめてから足す"
 }
