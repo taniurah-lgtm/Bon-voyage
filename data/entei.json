@@ -3,6 +3,11 @@
   "_kinds": "programs[].kind は asobi（園庭であそぶ：園庭開放・お部屋の開放）／oyako（親子の会：未就園児の会・おはなし会・ミニ運動会など）／setsumei（説明会・見学）／gyouji（行事：バザー・お祭り・お譲り会など地域に開いた行事）／soudan（子育て相談）のどれか",
   "_letters": "園からのお知らせ（月末の月曜にまとめて届く・最初は 2026-11-25）を足すときは、letters に {\"month\":\"2026-12\",\"received\":\"2026-11-25\"} を1行足し、その月の会の programs に \"src\": \"2026-12\" を付ける。手順は docs/en-outreach.md「幼稚園だよりの受け入れ」",
   "letters": [],
+  "kyokai": {
+    "name": "小平市私立幼稚園協会",
+    "url": "https://www.kodaira-kids.jp/",
+    "checked": "2026-11-22"
+  },
   "map": {
     "cols": 6,
     "rows": 5,

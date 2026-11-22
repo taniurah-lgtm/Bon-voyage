@@ -65,6 +65,9 @@ for (const l of letters) {
   if (!/^\d{4}-\d{2}$/.test(l.month)) problems.push(`letters: month の形がおかしい ${l.month}（YYYY-MM）`);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(l.received || '')) problems.push(`letters ${l.month}: received（受け取った日 YYYY-MM-DD）が無い`);
 }
+// 協会（2026-11-22 オーナー「協会のリンクを貼ってよい。許可は得ている。上から中盤に」）
+const K = data.kyokai;
+if (K && (!K.name || !/^https:\/\//.test(K.url || ''))) problems.push('kyokai: name と url（https）を書く');
 const NEED = ['key', 'name', 'label', 'type', 'town', 'addr', 'geo', 'homepage', 'url', 'checked'];
 const keys = new Set();
 for (const p of data.places) {
@@ -357,6 +360,10 @@ const html = `<!doctype html>
   .st span::before { content: ""; display: block; width: 1.6em; height: 2px; margin: 0 auto 3px; background: var(--ink-faint); border-radius: 2px; }
   .mapcap { font-size: .78rem; color: var(--ink-soft); line-height: 1.7; margin-top: .45rem; }
   .mapcap b { color: var(--ink); }
+  .kyo { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem .9rem; margin: 1rem 0 0; padding: .8rem 1rem; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--sky); border-radius: var(--radius-sm); box-shadow: var(--shadow-soft); }
+  .kyo-t { flex: 1 1 15rem; font-size: .84rem; color: var(--ink-soft); line-height: 1.75; }
+  .kyo-t b { display: block; font-family: var(--maru); font-weight: 800; font-size: .95rem; color: var(--ink); }
+  .kyo .lk { flex: none; }
 
   /* これからの幼稚園だより */
   .soon { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); box-shadow: var(--shadow-soft); padding: .9rem 1rem; }
@@ -453,6 +460,10 @@ ${navSub('entei')}
   <h2 class="sec">幼稚園マップ</h2>
   ${mapHtml}
   <p class="mapcap">小平市をひとつの四角にして、${n}園と駅を、おおよその場所に並べました。<b>園の四角をタップすると、その園のホームページが開きます。</b>オレンジの字は、次に会がある日です。</p>
+  ${K ? `<aside class="kyo" aria-label="${esc(K.name)}">
+    <p class="kyo-t"><b>${esc(K.name)}</b>市内の私立幼稚園・認定こども園${n}園すべてが加盟している団体です。園選びの案内や、幼稚園の補助金・預かり保育のことは、協会のホームページにまとまっています。${letters.length ? '毎月の各園のお知らせは、協会を通じていただいています。' : ''}</p>
+    <a class="lk" href="${esc(K.url)}" target="_blank" rel="noopener" data-goatcounter-click="幼稚園｜協会">協会のホームページ</a>
+  </aside>` : ''}
 
   <h2 class="sec">これからの幼稚園だより</h2>
   <section class="soon" aria-label="これからの幼稚園だより">
