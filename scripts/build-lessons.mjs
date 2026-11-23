@@ -69,7 +69,7 @@ function card(l) {
   const kv = (k, v) => (v ? `<div class="kv"><span class="k">${k}</span><span class="v">${esc(v)}</span></div>` : '');
   return `<details class="ls" id="${esc(l.id)}" data-ages="${esc(l.ages.join(' '))}">
       <summary class="ls-h">
-        <span class="ls-n"><span class="pr">PR</span><span class="pr-by">${esc(l.pr)}のご協賛で掲載</span><h3>${esc(l.name)}${badge}</h3><span class="ags">${ageChips(l)}</span></span>
+        <span class="ls-n"><span class="pr">PR</span><h3>${esc(l.name)}${badge}</h3><span class="ags">${ageChips(l)}</span></span>
         <span class="chev" aria-hidden="true"></span>
       </summary>
       <div class="ls-b">
@@ -123,8 +123,6 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .ghead-in { padding-top: 1.4rem; padding-bottom: 1.2rem; }
   .ghead h1 { font-size: clamp(1.45rem, 4.8vw, 2rem); margin-bottom: .35rem; }
   .ghead .sub { font-size: .92rem; line-height: 1.75; }
-  .notice { font-size: .82rem; color: var(--ink-soft); line-height: 1.75; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .7rem .9rem; margin-bottom: 1rem; }
-  .notice b { color: var(--ink); }
   h2.sec { font-family: var(--maru); font-weight: 800; font-size: 1.12rem; margin: 1.6rem 0 .6rem; scroll-margin-top: 96px; }
   .filt { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0 0 .5rem; }
   .filt button, .jump a { font: inherit; display: inline-flex; align-items: center; gap: .3rem; font-size: .78rem; font-weight: 700; min-height: 36px; padding: 0 .75rem; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink-soft); cursor: pointer; text-decoration: none; }
@@ -140,8 +138,8 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .ls-n { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: .1rem; }
   .ls h3 { font-family: var(--maru); font-weight: 800; font-size: 1.02rem; margin: 0; line-height: 1.45; }
   .org { font-size: .78rem; color: var(--ink-faint); }
-  .pr { align-self: flex-start; font-size: .82rem; font-weight: 800; letter-spacing: .06em; color: var(--pr-ink); background: var(--pr-bg); border-radius: 6px; padding: .05rem .5rem; }
-  .pr-by { font-size: .78rem; color: var(--pr-ink); }
+  .pr { align-self: flex-start; font-size: .78rem; font-weight: 700; letter-spacing: .06em; color: var(--ink); border: 1px solid var(--line-strong); border-radius: 5px; padding: 0 .4rem; line-height: 1.5; }
+  .ghead .disc { display: block; margin-top: .3rem; font-size: .78rem; color: var(--ink-soft); }
   .flag { display: inline-block; margin-left: .4rem; font-size: .68rem; font-weight: 700; color: var(--ink-soft); border: 1px dashed var(--ink-faint); border-radius: 6px; padding: 0 .35rem; vertical-align: 2px; }
   .ags { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .3rem; }
   .ag { font-size: .72rem; font-weight: 700; border-radius: 999px; padding: .05rem .55rem; background: var(--marigold-wash); color: var(--marigold-ink); }
@@ -185,13 +183,11 @@ ${navSub('lessons')}
   <div class="ghead-in">
     <div class="eyebrow">Bon Voyage,</div>
     <h1>習い事ガイド</h1>
-    <p class="sub">小平の子どもの習い事の教室を、年齢とジャンルで探せます。対象の年齢・曜日・費用・体験のしかたを、同じ形でそろえました。</p>
+    <p class="sub">小平の子どもの習い事の教室を、年齢とジャンルで探せます。対象の年齢・曜日・費用・体験のしかたを、同じ形でそろえました。<small class="disc">載せている教室からは、掲載料をいただいています。</small></p>
   </div>
 </header>
 
 <main class="wrap">
-  <p class="notice"><b>このページの教室は、すべて教室から掲載料をいただいて載せています（PR）。</b>書いてあるのは、教室からいただいた内容と、教室の案内にあることです。並びはジャンルごとの五十音順です。</p>
-
   <div class="filt" role="group" aria-label="年齢でしぼる">
     <button type="button" data-f="all" aria-pressed="true">すべての年齢</button>
     ${Object.entries(AGES).filter(([k]) => list.some((l) => l.ages.includes(k))).map(([k, v]) => `<button type="button" data-f="${k}" aria-pressed="false">${esc(v)}</button>`).join('\n    ')}
@@ -211,7 +207,7 @@ ${navSub('lessons')}
     習い事の教室のカードは、最初の3か月は無料、そのあと年5,000円です。3か月たったら、教室のページへのクリック数をお見せして、続けるかどうかをお聞きします。自動で請求はしません。<a href="/#contact">お問い合わせ</a>からご連絡ください。
   </div>
 
-  <p class="about">費用や曜日は変わることがあります。申し込む前に、それぞれの公式の案内でご確認ください。<br>
+  <p class="about">書いてあるのは、教室からいただいた内容と、教室の案内にあることです。並びはジャンルごとの五十音順です。費用や曜日は変わることがあります。申し込む前に、それぞれの公式の案内でご確認ください。<br>
   内容の誤りに気づいたら、<a href="/#contact">お問い合わせ</a>から教えてください。</p>
 
   <div class="nav-pills">
