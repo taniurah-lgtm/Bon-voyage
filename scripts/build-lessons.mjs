@@ -7,8 +7,10 @@
  *
  * 決まり（§16）:
  *   - 🔁 2026-11-23 オーナー「無料の教室（市主催）を紹介する義理はない。全部、民間の有料に」→ 載せるのは掲載料をいただいた教室だけ
- *   - 🔁 同日「スクールガイドにPRですって大きく書いていますか？」→ 広告だけのページなので、ページの見出しとジャンルの見出しに「PR」（雑誌の「広告」の隅書きと同じ）。
- *     カードごとには付けない。週の号のページ（編集と広告が混ざる）は、これまでどおり1件ずつ「PR」
+ *   - 🔁 同日「スクールガイドにPRですって大きく書いていますか？」→ 広告だけのページなので、ページの見出しに「PR」（雑誌の「広告」の隅書きと同じ）。
+ *     カードごと・ジャンルの見出しには付けない（同日オーナー「タイトルにPRとあるからいらない」）。「掲載料をいただいています」の1文はいちばん下。
+ *     🔴 教室に渡すリンクはページの先頭（#教室 で途中に飛ばすと、見出しの PR が見えない）。週の号のページ（編集と広告が混ざる）は、これまでどおり1件ずつ「PR」
+ *   - 「教室を載せたい方へ」には、お金の話を書かない（同日オーナー）。料金は協賛の案内（/kyosan/）とお問い合わせの返事で伝える
  *   - 公開は min_launch（5）教室そろってから（1〜2教室のページを読者に見せない）
  *   - 並びはジャンルごとに五十音（yomi）。払った額・時期で順番を変えない
  *   - 書くのは公式か、教室からいただいた事実だけ。「おすすめ」「No.1」など比べる言葉は書かない（止める）
@@ -140,12 +142,10 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .ls-n { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: .1rem; }
   .ls h3 { font-family: var(--maru); font-weight: 800; font-size: 1.02rem; margin: 0; line-height: 1.45; }
   .org { font-size: .78rem; color: var(--ink-faint); }
-  /* 広告だけのページなので、雑誌の「広告」の隅書きと同じく、ページの見出しとジャンルの見出しに PR（カードごとには付けない・2026-11-23 オーナー） */
+  /* 広告だけのページなので、雑誌の「広告」の隅書きと同じく、ページの見出しに PR（カードごと・ジャンルの見出しには付けない・2026-11-23 オーナー） */
   .pr-h { vertical-align: .35em; font-size: .9rem; }
-  h2.sec { display: flex; align-items: baseline; gap: .5rem; }
-  .pr-s { margin-left: auto; font-size: .72rem; }
   .pr { font-weight: 700; letter-spacing: .06em; color: var(--ink); border: 1px solid var(--line-strong); border-radius: 5px; padding: 0 .4rem; line-height: 1.5; }
-  .ghead .disc { display: block; margin-top: .3rem; font-size: .78rem; color: var(--ink-soft); }
+
   .flag { display: inline-block; margin-left: .4rem; font-size: .68rem; font-weight: 700; color: var(--ink-soft); border: 1px dashed var(--ink-faint); border-radius: 6px; padding: 0 .35rem; vertical-align: 2px; }
   .ags { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .3rem; }
   .ag { font-size: .72rem; font-weight: 700; border-radius: 999px; padding: .05rem .55rem; background: var(--marigold-wash); color: var(--marigold-ink); }
@@ -189,7 +189,7 @@ ${navSub('lessons')}
   <div class="ghead-in">
     <div class="eyebrow">Bon Voyage,</div>
     <h1>スクールガイド <span class="pr pr-h">PR</span></h1>
-    <p class="sub">小平の子どもの習い事の教室を、年齢とジャンルで探せます。対象の年齢・曜日・費用・体験のしかたを、同じ形でそろえました。<small class="disc">載せている教室からは、掲載料をいただいています。</small></p>
+    <p class="sub">小平の子どもの習い事の教室を、年齢とジャンルで探せます。対象の年齢・曜日・費用・体験のしかたを、同じ形でそろえました。</p>
   </div>
 </header>
 
@@ -204,16 +204,16 @@ ${navSub('lessons')}
   <p class="filt-none" id="filt-none" hidden>この年齢の教室は、まだ載っていません。</p>
 
   ${byGenre.map(({ g, items }) => `<section class="gs" data-genre="${g.key}">
-  <h2 class="sec" id="g-${g.key}">${esc(g.label)}<span class="pr pr-s">PR</span></h2>
+  <h2 class="sec" id="g-${g.key}">${esc(g.label)}</h2>
   ${items.map(card).join('\n  ')}
   </section>`).join('\n  ')}
 
   <div class="ask">
     <b>教室を載せたい方へ</b>
-    習い事の教室のカードは、最初の3か月は無料、そのあと年5,000円です。3か月たったら、教室のページへのクリック数をお見せして、続けるかどうかをお聞きします。自動で請求はしません。<a href="/#contact">お問い合わせ</a>からご連絡ください。
+    <a href="/#contact">お問い合わせ</a>からご連絡ください。
   </div>
 
-  <p class="about">書いてあるのは、教室からいただいた内容と、教室の案内にあることです。並びはジャンルごとの五十音順です。費用や曜日は変わることがあります。申し込む前に、それぞれの公式の案内でご確認ください。<br>
+  <p class="about">載せている教室からは、掲載料をいただいています。書いてあるのは、教室からいただいた内容と、教室の案内にあることです。並びはジャンルごとの五十音順です。費用や曜日は変わることがあります。申し込む前に、それぞれの公式の案内でご確認ください。<br>
   内容の誤りに気づいたら、<a href="/#contact">お問い合わせ</a>から教えてください。</p>
 
   <div class="nav-pills">
