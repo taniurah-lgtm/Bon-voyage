@@ -82,7 +82,7 @@ function tile(n) {
   if (!n) return '<span class="cell" aria-hidden="true"></span>';
   if (n.station) return `<span class="cell st" aria-hidden="true"><span>${esc(n.station.name)}</span></span>`;
   const c = n.cafe;
-  const long = c.label.replace('|', '').length >= 6 && !c.label.includes('|');
+  const long = c.label.includes('|') ? c.label.split('|').some((x) => x.length >= 5) : c.label.length >= 6;
   return `<a class="cell cf-t${long ? ' long' : ''}" href="#${esc(c.id)}" aria-label="${esc(c.name)}の案内を開く" data-goatcounter-click="カフェマップ｜${esc(c.name)}"><b>${tileLabel(c.label)}</b></a>`;
 }
 const mapHtml = `<div class="emap">
@@ -170,7 +170,7 @@ const html = `<!doctype html>
   .cf-t { background: var(--surface); border: 1.5px solid var(--marigold); box-shadow: 0 1px 0 var(--line-strong); text-decoration: none; color: var(--ink); }
   .cf-t:hover, .cf-t:focus-visible { background: var(--marigold-wash); }
   .cf-t b { font-family: var(--maru); font-weight: 800; font-size: clamp(10px, 2.7vw, 14px); letter-spacing: -.02em; word-break: keep-all; }
-  .cf-t.long b { font-size: clamp(9px, 2.35vw, 13px); }
+  .cf-t.long b { font-size: clamp(8.5px, 2.3vw, 13px); letter-spacing: -.04em; }
   .st { border: 1px dashed var(--ink-faint); color: var(--ink-soft); font-size: clamp(8px, 2.1vw, 11px); letter-spacing: -.05em; white-space: nowrap; overflow: hidden; }
   @media (max-width: 340px) { .st { white-space: normal; } }
   .st span::before { content: ""; display: block; width: 1.6em; height: 2px; margin: 0 auto 3px; background: var(--ink-faint); border-radius: 2px; }
