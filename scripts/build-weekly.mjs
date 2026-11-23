@@ -535,8 +535,10 @@ for (const f of files) {
     ? `<div class="sec"><p class="kicker">CAFE</p><h2>子連れで入りやすいカフェ</h2></div>${cafes.slice(0, 2).map(cafeCard).join('')}${
       cafes.length > 2
         ? `<details class="more-cafes"><summary data-goatcounter-click="カフェ｜ほかを見る">ほかの${cafes.length - 2}軒も見る</summary>${cafes.slice(2).map(cafeCard).join('')}</details>`
-        : ''}`
+        : ''}
+  <a class="entei" href="/cafe.html" data-goatcounter-click="週｜カフェ一覧">☕ <b>${cafeData.filter((c) => c.pages === true).length}軒すべてを、カフェマップで</b><span>花小金井のまわりの地図と、お店ごとの子連れのこと（キッズスペース・子ども用の椅子・おむつ替えなど）</span></a>`
     : '';
+  // 2026-11-23 カフェの欄がある号は、欄の終わりに常設ページ（/cafe.html）へのリンクを置き、ページの下の同じリンクは出さない
   // 協賛（紹介型）: 1つのタブに1件まで（2026-11-17 までは1号に1件）。一推しには置かない（docs/sponsor-plan.md §14「冒頭に置かない」）
   const prs = [...items, ...ahead].filter(({ it }) => it.pr !== undefined);
   for (const { it } of prs) {
@@ -605,7 +607,7 @@ for (const f of files) {
   ${spec.cafesTop ? '' : cafeSec}
   ${next.length ? `<div class="sec"><p class="kicker">COMING UP</p><h2>先取り・申込の締切</h2></div>${next.map(({ it, ev }) => card(it, ev, { age: g.key })).join('')}` : ''}
   ${g.key !== 'elem' ? `<a class="entei" href="/entei.html" data-goatcounter-click="週｜園庭開放">🏫 <b>こだいら幼稚園だより</b><span>幼稚園・こども園15園の、園庭開放・未就園児の会・説明会。幼稚園マップから各園のホームページへ</span></a>` : ''}
-  <a class="entei" href="/cafe.html" data-goatcounter-click="週｜カフェ">☕ <b>子連れで入りやすいカフェ</b><span>キッズスペースや子ども用の席があるお店。カフェマップと、お店ごとの子連れのこと</span></a>
+  ${cafes.length ? '' : `<a class="entei" href="/cafe.html" data-goatcounter-click="週｜カフェ">☕ <b>子連れで入りやすいカフェ</b><span>キッズスペースや子ども用の席があるお店。カフェマップと、お店ごとの子連れのこと</span></a>`}
   <a class="entei" href="/teirei.html" data-goatcounter-click="週｜定例">📚 <b>児童館・図書館・子育てひろばの定例</b><span>図書館のおはなし会や絵本のへや、児童館のこども広場など、毎月くり返す無料の会</span></a>
 </section>`;
   };
