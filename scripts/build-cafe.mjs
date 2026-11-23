@@ -37,6 +37,20 @@ const PRAISE = /おすすめ|オススメ|おいしい|美味しい|雰囲気|�
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const daysBetween = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5);
+// 設備のアイコン（2026-11-23 オーナー「キッズスペースありなら、遊びのアイコンみたいな」）
+// お店の案内（kids）に書いてあるものだけ tags に付ける。線のアイコンを、文字と同じ色で描く
+const TAGS = {
+  play: { label: 'キッズスペース・おもちゃ', svg: '<path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/>' },
+  seat: { label: '座敷・小上がり・個室', svg: '<rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M12 6v13M3 12.5h9"/>' },
+  chair: { label: '子ども用の椅子', svg: '<path d="M8 3v9h9"/><path d="M5 8h10"/><path d="M9 12l-2 9M16 12l2 9M8 17h9"/>' },
+  diaper: { label: 'おむつ替え', svg: '<path d="M3 7h18v3.5c0 5-4.5 8.5-9 8.5s-9-3.5-9-8.5z"/><path d="M3 10.5h18M9 19c.5-2.5 1.5-4 3-4s2.5 1.5 3 4"/>' },
+  nursing: { label: '授乳スペース', svg: '<path d="M10.5 3h3l.5 3h-4z"/><path d="M9 6h6v2.5H9z"/><path d="M9 8.5h6V20a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1z"/><path d="M11 12.5h2M11 15.5h2"/>' },
+  menu: { label: '子どもメニュー', svg: '<path d="M6 3v6a2 2 0 0 0 4 0V3M8 11v10"/><path d="M17 3c-1.7 0-3 2-3 4.5S15.3 12 17 12s3-2 3-4.5S18.7 3 17 3zM17 12v9"/>' },
+  stroller: { label: 'ベビーカーで入れる', svg: '<path d="M3 11h14"/><path d="M10 4a7 7 0 0 1 7 7"/><path d="M10 4v7"/><path d="M17 11l1.5-5H21"/><path d="M5 11c0 3 2 5 5 5h3c2 0 4-2 4-5"/><circle cx="7" cy="19.5" r="1.8"/><circle cx="15" cy="19.5" r="1.8"/>' },
+  parking: { label: '駐車場', svg: '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 16.5v-9h3a2.6 2.6 0 0 1 0 5.2h-3"/>' },
+};
+const icon = (k, cls = 'ic') => `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${TAGS[k].svg}</svg>`;
+
 const fmtDay = (iso) => `${+iso.slice(0, 4)}年${+iso.slice(5, 7)}月${+iso.slice(8, 10)}日`;
 const mapUrl = (q) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 
@@ -47,6 +61,8 @@ const cafes = (data.cafes || []).filter((c) => c.pages === true);
 for (const c of cafes) {
   for (const f of ['id', 'name', 'label', 'area', 'where', 'official', 'mapq', 'checked', 'geo']) if (!c[f]) problems.push(`${c.name || c.id}: ${f} が無い`);
   if (!(c.kids || []).length) problems.push(`${c.name}: kids（お店の案内に書いてある子連れのこと）が無い`);
+  if (!(c.tags || []).length) problems.push(`${c.name}: tags（アイコン）が無い。kids に書いてある設備から付ける`);
+  for (const t of c.tags || []) if (!TAGS[t]) problems.push(`${c.name}: tags「${t}」は無い（${Object.keys(TAGS).join('／')}）`);
   if (c.geo && (typeof c.geo.lat !== 'number' || typeof c.geo.lon !== 'number')) problems.push(`${c.name}: geo の lat/lon は数で`);
   if (c.checked && daysBetween(c.checked, todayJST) > STALE_DAYS) warn.push(`${c.name}: 確かめてから ${daysBetween(c.checked, todayJST)} 日。営業時間と休みを、お店の発信で見直す`);
   const shown = [c.name, c.area, c.where, c.hours, ...(c.kids || []), ...(c.unsure || []), c.more].filter(Boolean).join(' ');
@@ -83,7 +99,8 @@ function tile(n) {
   if (n.station) return `<span class="cell st" aria-hidden="true"><span>${esc(n.station.name)}</span></span>`;
   const c = n.cafe;
   const long = c.label.includes('|') ? c.label.split('|').some((x) => x.length >= 5) : c.label.length >= 6;
-  return `<a class="cell cf-t${long ? ' long' : ''}" href="#${esc(c.id)}" aria-label="${esc(c.name)}の案内を開く" data-goatcounter-click="カフェマップ｜${esc(c.name)}"><b>${tileLabel(c.label)}</b></a>`;
+  const play = (c.tags || []).includes('play');
+  return `<a class="cell cf-t${long ? ' long' : ''}" href="#${esc(c.id)}" data-tags="${esc((c.tags || []).join(' '))}" aria-label="${esc(c.name)}の案内を開く${play ? '（キッズスペース・おもちゃあり）' : ''}" data-goatcounter-click="カフェマップ｜${esc(c.name)}"><b>${tileLabel(c.label)}</b>${play ? icon('play', 'tic') : ''}</a>`;
 }
 const mapHtml = `<div class="emap">
       <div class="nb nb-top"><span>← ${esc(M.neighbors.w)}</span><span>↑ ${esc(M.neighbors.n)}</span><span>${esc(M.neighbors.e)} →</span></div>
@@ -99,9 +116,10 @@ const mapHtml = `<div class="emap">
 // ── お店ごと ──────────────────────────────────────────
 function cafe(c) {
   const isIg = /instagram\.com\//.test(c.official);
-  return `<details class="cf" id="${esc(c.id)}">
+  const tags = (c.tags || []).map((t) => `<span class="tg" title="${esc(TAGS[t].label)}">${icon(t)}</span>`).join('');
+  return `<details class="cf" id="${esc(c.id)}" data-tags="${esc((c.tags || []).join(' '))}">
       <summary class="cf-h">
-        <span class="cf-n"><h2>${esc(c.name)}</h2><span class="area">${esc(c.area)}</span></span>
+        <span class="cf-n"><h2>${esc(c.name)}</h2><span class="area">${esc(c.area)}</span><span class="tgs" role="img" aria-label="${esc((c.tags || []).map((t) => TAGS[t].label).join('、'))}">${tags}</span></span>
         <span class="chev" aria-hidden="true"></span>
       </summary>
       <div class="cf-b">
@@ -185,6 +203,19 @@ const html = `<!doctype html>
   .cf-n { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: .05rem; }
   .cf h2 { font-family: var(--maru); font-weight: 800; font-size: 1.02rem; margin: 0; line-height: 1.45; }
   .area { font-size: .78rem; color: var(--ink-faint); }
+  .tgs { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .3rem; }
+  .tg { display: inline-flex; width: 26px; height: 26px; align-items: center; justify-content: center; border-radius: 8px; background: var(--marigold-wash); color: var(--marigold-ink); }
+  .ic { width: 18px; height: 18px; flex: none; }
+  .tic { width: 14px; height: 14px; margin-top: 2px; color: var(--marigold-ink); }
+  .cf-t.dim { opacity: .28; }
+  .filt { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0 0 .8rem; }
+  .filt button { font: inherit; display: inline-flex; align-items: center; gap: .3rem; font-size: .76rem; font-weight: 700; min-height: 36px; padding: 0 .7rem; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink-soft); cursor: pointer; }
+  .filt button .ic { width: 16px; height: 16px; color: var(--marigold-ink); }
+  .filt button small { font-size: .7rem; color: var(--ink-faint); font-weight: 700; }
+  .filt button[aria-pressed="true"] { background: var(--sky-deep); border-color: var(--sky-deep); color: var(--on-sky); }
+  .filt button[aria-pressed="true"] .ic, .filt button[aria-pressed="true"] small { color: var(--on-sky); }
+  .filt button:focus-visible { outline: 2px solid var(--sky-deep); outline-offset: 2px; }
+  .filt-none { font-size: .86rem; color: var(--ink-soft); margin-bottom: .8rem; }
   .chev { flex: none; width: 30px; height: 30px; border-radius: 999px; border: 1px solid var(--line-strong); position: relative; }
   .chev::before { content: ""; position: absolute; left: 50%; top: 45%; width: 8px; height: 8px; border-right: 2px solid var(--ink-soft); border-bottom: 2px solid var(--ink-soft); transform: translate(-50%, -50%) rotate(45deg); transition: transform .15s; }
   .cf[open] .chev::before { transform: translate(-50%, -25%) rotate(-135deg); }
@@ -239,10 +270,15 @@ ${navSub('cafe')}
 <main class="wrap">
   <h2 class="sec">カフェマップ</h2>
   ${mapHtml}
-  <p class="mapcap"><b>お店の四角をタップすると、下の案内が開きます。</b></p>
+  <p class="mapcap"><b>お店の四角をタップすると、下の案内が開きます。</b>${icon('play', 'tic')} はキッズスペースやおもちゃのあるお店です。</p>
 
   <h2 class="sec">お店ごとの案内</h2>
-  <p class="lead">花小金井駅から近い順です。キッズスペース・子ども用の椅子・おむつ替えなど、お店の案内に書いてあることだけを載せ、書いていないことは「要確認」としています。<b>お店の名前をタップすると、くわしい案内が開きます。</b></p>
+  <p class="lead">花小金井駅から近い順です。キッズスペース・子ども用の椅子・おむつ替えなど、お店の案内に書いてあることだけを載せ、書いていないことは「要確認」としています。<b>お店の名前をタップすると、くわしい案内が開きます。</b>下のボタンで、設備のあるお店だけにしぼれます。</p>
+  <div class="filt" role="group" aria-label="設備でしぼる">
+    <button type="button" data-f="all" aria-pressed="true">すべて</button>
+    ${Object.keys(TAGS).filter((t) => cafes.some((c) => (c.tags || []).includes(t))).map((t) => `<button type="button" data-f="${t}" aria-pressed="false">${icon(t)}${esc(TAGS[t].label)}<small>${cafes.filter((c) => (c.tags || []).includes(t)).length}</small></button>`).join('\n    ')}
+  </div>
+  <p class="filt-none" id="filt-none" hidden>この設備のお店は、まだありません。</p>
   ${cafes.map(cafe).join('\n  ')}
 
   <div class="ask">
@@ -269,6 +305,22 @@ ${navSub('cafe')}
 </footer>
 
 <script>
+/* 設備でしぼる: 合わないお店のプルダウンを隠し、マップの四角を薄くする */
+(function () {
+  var btns = [].slice.call(document.querySelectorAll('.filt button'));
+  var cards = [].slice.call(document.querySelectorAll('details.cf'));
+  var tiles = [].slice.call(document.querySelectorAll('.cf-t'));
+  function has(el, f) { return f === 'all' || (' ' + (el.getAttribute('data-tags') || '') + ' ').indexOf(' ' + f + ' ') >= 0; }
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.getAttribute('data-f'), n = 0;
+      btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      cards.forEach(function (c) { var on = has(c, f); c.hidden = !on; if (on) n++; });
+      tiles.forEach(function (t) { t.classList.toggle('dim', !has(t, f)); });
+      document.getElementById('filt-none').hidden = n > 0;
+    });
+  });
+})();
 /* お店ごと: 名前をタップで開く。マップの四角から来たときは、そのお店を開いておく */
 (function () {
   function openTo(id) {

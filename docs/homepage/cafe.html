@@ -55,6 +55,19 @@
   .cf-n { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: .05rem; }
   .cf h2 { font-family: var(--maru); font-weight: 800; font-size: 1.02rem; margin: 0; line-height: 1.45; }
   .area { font-size: .78rem; color: var(--ink-faint); }
+  .tgs { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .3rem; }
+  .tg { display: inline-flex; width: 26px; height: 26px; align-items: center; justify-content: center; border-radius: 8px; background: var(--marigold-wash); color: var(--marigold-ink); }
+  .ic { width: 18px; height: 18px; flex: none; }
+  .tic { width: 14px; height: 14px; margin-top: 2px; color: var(--marigold-ink); }
+  .cf-t.dim { opacity: .28; }
+  .filt { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0 0 .8rem; }
+  .filt button { font: inherit; display: inline-flex; align-items: center; gap: .3rem; font-size: .76rem; font-weight: 700; min-height: 36px; padding: 0 .7rem; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink-soft); cursor: pointer; }
+  .filt button .ic { width: 16px; height: 16px; color: var(--marigold-ink); }
+  .filt button small { font-size: .7rem; color: var(--ink-faint); font-weight: 700; }
+  .filt button[aria-pressed="true"] { background: var(--sky-deep); border-color: var(--sky-deep); color: var(--on-sky); }
+  .filt button[aria-pressed="true"] .ic, .filt button[aria-pressed="true"] small { color: var(--on-sky); }
+  .filt button:focus-visible { outline: 2px solid var(--sky-deep); outline-offset: 2px; }
+  .filt-none { font-size: .86rem; color: var(--ink-soft); margin-bottom: .8rem; }
   .chev { flex: none; width: 30px; height: 30px; border-radius: 999px; border: 1px solid var(--line-strong); position: relative; }
   .chev::before { content: ""; position: absolute; left: 50%; top: 45%; width: 8px; height: 8px; border-right: 2px solid var(--ink-soft); border-bottom: 2px solid var(--ink-soft); transform: translate(-50%, -50%) rotate(45deg); transition: transform .15s; }
   .cf[open] .chev::before { transform: translate(-50%, -25%) rotate(-135deg); }
@@ -115,45 +128,57 @@
         <div class="grid" style="--cols:5">
           <span class="cell" aria-hidden="true"></span>
           <span class="cell" aria-hidden="true"></span>
-          <a class="cell cf-t long" href="#mammacafe" aria-label="MammaCafe（まんまカフェ）の案内を開く" data-goatcounter-click="カフェマップ｜MammaCafe（まんまカフェ）"><b>Mamma<wbr>Cafe</b></a>
+          <a class="cell cf-t long" href="#mammacafe" data-tags="play seat chair diaper menu parking" aria-label="MammaCafe（まんまカフェ）の案内を開く（キッズスペース・おもちゃあり）" data-goatcounter-click="カフェマップ｜MammaCafe（まんまカフェ）"><b>Mamma<wbr>Cafe</b><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg></a>
           <span class="cell st" aria-hidden="true"><span>東久留米駅</span></span>
-          <a class="cell cf-t" href="#matsuo" aria-label="松尾珈琲の案内を開く" data-goatcounter-click="カフェマップ｜松尾珈琲"><b>松尾珈琲</b></a>
+          <a class="cell cf-t" href="#matsuo" data-tags="chair stroller" aria-label="松尾珈琲の案内を開く" data-goatcounter-click="カフェマップ｜松尾珈琲"><b>松尾珈琲</b></a>
           <span class="cell" aria-hidden="true"></span>
-          <a class="cell cf-t long" href="#carpediem" aria-label="Carpe Diem Cafe（カルペディエムカフェ）の案内を開く" data-goatcounter-click="カフェマップ｜Carpe Diem Cafe（カルペディエムカフェ）"><b>Carpe Diem</b></a>
+          <a class="cell cf-t long" href="#carpediem" data-tags="play" aria-label="Carpe Diem Cafe（カルペディエムカフェ）の案内を開く（キッズスペース・おもちゃあり）" data-goatcounter-click="カフェマップ｜Carpe Diem Cafe（カルペディエムカフェ）"><b>Carpe Diem</b><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg></a>
           <span class="cell" aria-hidden="true"></span>
-          <a class="cell cf-t long" href="#ybf" aria-label="YOUR BIG FAMILY（ユアビッグファミリー）の案内を開く" data-goatcounter-click="カフェマップ｜YOUR BIG FAMILY（ユアビッグファミリー）"><b>ユアビッグ<wbr>ファミリー</b></a>
+          <a class="cell cf-t long" href="#ybf" data-tags="play seat" aria-label="YOUR BIG FAMILY（ユアビッグファミリー）の案内を開く（キッズスペース・おもちゃあり）" data-goatcounter-click="カフェマップ｜YOUR BIG FAMILY（ユアビッグファミリー）"><b>ユアビッグ<wbr>ファミリー</b><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg></a>
           <span class="cell st" aria-hidden="true"><span>ひばりヶ丘駅</span></span>
-          <a class="cell cf-t" href="#nikoto" aria-label="にことカフェの案内を開く" data-goatcounter-click="カフェマップ｜にことカフェ"><b>にこと<wbr>カフェ</b></a>
+          <a class="cell cf-t" href="#nikoto" data-tags="play chair" aria-label="にことカフェの案内を開く（キッズスペース・おもちゃあり）" data-goatcounter-click="カフェマップ｜にことカフェ"><b>にこと<wbr>カフェ</b><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg></a>
           <span class="cell" aria-hidden="true"></span>
-          <a class="cell cf-t" href="#gruau" aria-label="GRUAU（グリュオ）の案内を開く" data-goatcounter-click="カフェマップ｜GRUAU（グリュオ）"><b>GRUAU</b></a>
-          <a class="cell cf-t" href="#mogumogu" aria-label="もぐもぐの森の案内を開く" data-goatcounter-click="カフェマップ｜もぐもぐの森"><b>もぐもぐ<wbr>の森</b></a>
-          <a class="cell cf-t long" href="#natchanchi" aria-label="なっちゃんちの案内を開く" data-goatcounter-click="カフェマップ｜なっちゃんち"><b>なっちゃんち</b></a>
+          <a class="cell cf-t" href="#gruau" data-tags="play" aria-label="GRUAU（グリュオ）の案内を開く（キッズスペース・おもちゃあり）" data-goatcounter-click="カフェマップ｜GRUAU（グリュオ）"><b>GRUAU</b><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg></a>
+          <a class="cell cf-t" href="#mogumogu" data-tags="play seat menu" aria-label="もぐもぐの森の案内を開く（キッズスペース・おもちゃあり）" data-goatcounter-click="カフェマップ｜もぐもぐの森"><b>もぐもぐ<wbr>の森</b><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg></a>
+          <a class="cell cf-t long" href="#natchanchi" data-tags="seat diaper nursing" aria-label="なっちゃんちの案内を開く" data-goatcounter-click="カフェマップ｜なっちゃんち"><b>なっちゃんち</b></a>
           <span class="cell st" aria-hidden="true"><span>一橋学園駅</span></span>
-          <a class="cell cf-t long" href="#eggg-park" aria-label="eggg Park（えぐぅ〜 パーク）の案内を開く" data-goatcounter-click="カフェマップ｜eggg Park（えぐぅ〜 パーク）"><b>eggg Park</b></a>
+          <a class="cell cf-t long" href="#eggg-park" data-tags="seat menu parking" aria-label="eggg Park（えぐぅ〜 パーク）の案内を開く" data-goatcounter-click="カフェマップ｜eggg Park（えぐぅ〜 パーク）"><b>eggg Park</b></a>
           <span class="cell st" aria-hidden="true"><span>花小金井駅</span></span>
-          <a class="cell cf-t" href="#flower" aria-label="Flower Natural Food Cafe（フラワー）の案内を開く" data-goatcounter-click="カフェマップ｜Flower Natural Food Cafe（フラワー）"><b>フラワー</b></a>
+          <a class="cell cf-t" href="#flower" data-tags="menu chair" aria-label="Flower Natural Food Cafe（フラワー）の案内を開く" data-goatcounter-click="カフェマップ｜Flower Natural Food Cafe（フラワー）"><b>フラワー</b></a>
           <span class="cell st" aria-hidden="true"><span>田無駅</span></span>
           <span class="cell st" aria-hidden="true"><span>国分寺駅</span></span>
           <span class="cell" aria-hidden="true"></span>
-          <a class="cell cf-t" href="#flat" aria-label="ふらっと花小金井の案内を開く" data-goatcounter-click="カフェマップ｜ふらっと花小金井"><b>ふらっと</b></a>
+          <a class="cell cf-t" href="#flat" data-tags="chair menu" aria-label="ふらっと花小金井の案内を開く" data-goatcounter-click="カフェマップ｜ふらっと花小金井"><b>ふらっと</b></a>
           <span class="cell st" aria-hidden="true"><span>東小金井駅</span></span>
           <span class="cell" aria-hidden="true"></span>
-          <a class="cell cf-t" href="#cafeslow" aria-label="カフェスロー（Café Slow）の案内を開く" data-goatcounter-click="カフェマップ｜カフェスロー（Café Slow）"><b>カフェ<wbr>スロー</b></a>
-          <a class="cell cf-t long" href="#yutaly" aria-label="Yutaly One&#39;s Cafe（ユタリーワンズカフェ）の案内を開く" data-goatcounter-click="カフェマップ｜Yutaly One&#39;s Cafe（ユタリーワンズカフェ）"><b>Yutaly</b></a>
+          <a class="cell cf-t" href="#cafeslow" data-tags="play chair diaper stroller parking" aria-label="カフェスロー（Café Slow）の案内を開く（キッズスペース・おもちゃあり）" data-goatcounter-click="カフェマップ｜カフェスロー（Café Slow）"><b>カフェ<wbr>スロー</b><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg></a>
+          <a class="cell cf-t long" href="#yutaly" data-tags="play diaper" aria-label="Yutaly One&#39;s Cafe（ユタリーワンズカフェ）の案内を開く（キッズスペース・おもちゃあり）" data-goatcounter-click="カフェマップ｜Yutaly One&#39;s Cafe（ユタリーワンズカフェ）"><b>Yutaly</b><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg></a>
           <span class="cell st" aria-hidden="true"><span>武蔵小金井駅</span></span>
-          <a class="cell cf-t" href="#cercle" aria-label="Cafe&amp;bar セルクル（cercle）の案内を開く" data-goatcounter-click="カフェマップ｜Cafe&amp;bar セルクル（cercle）"><b>セルクル</b></a>
+          <a class="cell cf-t" href="#cercle" data-tags="seat diaper nursing" aria-label="Cafe&amp;bar セルクル（cercle）の案内を開く" data-goatcounter-click="カフェマップ｜Cafe&amp;bar セルクル（cercle）"><b>セルクル</b></a>
           <span class="cell" aria-hidden="true"></span>
         </div>
       </div>
       <div class="nb nb-bot"><span>↓ 小金井市・国分寺市</span></div>
     </div>
-  <p class="mapcap"><b>お店の四角をタップすると、下の案内が開きます。</b></p>
+  <p class="mapcap"><b>お店の四角をタップすると、下の案内が開きます。</b><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg> はキッズスペースやおもちゃのあるお店です。</p>
 
   <h2 class="sec">お店ごとの案内</h2>
-  <p class="lead">花小金井駅から近い順です。キッズスペース・子ども用の椅子・おむつ替えなど、お店の案内に書いてあることだけを載せ、書いていないことは「要確認」としています。<b>お店の名前をタップすると、くわしい案内が開きます。</b></p>
-  <details class="cf" id="flower">
+  <p class="lead">花小金井駅から近い順です。キッズスペース・子ども用の椅子・おむつ替えなど、お店の案内に書いてあることだけを載せ、書いていないことは「要確認」としています。<b>お店の名前をタップすると、くわしい案内が開きます。</b>下のボタンで、設備のあるお店だけにしぼれます。</p>
+  <div class="filt" role="group" aria-label="設備でしぼる">
+    <button type="button" data-f="all" aria-pressed="true">すべて</button>
+    <button type="button" data-f="play" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg>キッズスペース・おもちゃ<small>8</small></button>
+    <button type="button" data-f="seat" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M12 6v13M3 12.5h9"/></svg>座敷・小上がり・個室<small>6</small></button>
+    <button type="button" data-f="chair" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v9h9"/><path d="M5 8h10"/><path d="M9 12l-2 9M16 12l2 9M8 17h9"/></svg>子ども用の椅子<small>6</small></button>
+    <button type="button" data-f="diaper" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18v3.5c0 5-4.5 8.5-9 8.5s-9-3.5-9-8.5z"/><path d="M3 10.5h18M9 19c.5-2.5 1.5-4 3-4s2.5 1.5 3 4"/></svg>おむつ替え<small>5</small></button>
+    <button type="button" data-f="nursing" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 3h3l.5 3h-4z"/><path d="M9 6h6v2.5H9z"/><path d="M9 8.5h6V20a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1z"/><path d="M11 12.5h2M11 15.5h2"/></svg>授乳スペース<small>2</small></button>
+    <button type="button" data-f="menu" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a2 2 0 0 0 4 0V3M8 11v10"/><path d="M17 3c-1.7 0-3 2-3 4.5S15.3 12 17 12s3-2 3-4.5S18.7 3 17 3zM17 12v9"/></svg>子どもメニュー<small>5</small></button>
+    <button type="button" data-f="stroller" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h14"/><path d="M10 4a7 7 0 0 1 7 7"/><path d="M10 4v7"/><path d="M17 11l1.5-5H21"/><path d="M5 11c0 3 2 5 5 5h3c2 0 4-2 4-5"/><circle cx="7" cy="19.5" r="1.8"/><circle cx="15" cy="19.5" r="1.8"/></svg>ベビーカーで入れる<small>2</small></button>
+    <button type="button" data-f="parking" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 16.5v-9h3a2.6 2.6 0 0 1 0 5.2h-3"/></svg>駐車場<small>3</small></button>
+  </div>
+  <p class="filt-none" id="filt-none" hidden>この設備のお店は、まだありません。</p>
+  <details class="cf" id="flower" data-tags="menu chair">
       <summary class="cf-h">
-        <span class="cf-n"><h2>Flower Natural Food Cafe（フラワー）</h2><span class="area">花小金井駅 北口 徒歩1分</span></span>
+        <span class="cf-n"><h2>Flower Natural Food Cafe（フラワー）</h2><span class="area">花小金井駅 北口 徒歩1分</span><span class="tgs" role="img" aria-label="子どもメニュー、子ども用の椅子"><span class="tg" title="子どもメニュー"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a2 2 0 0 0 4 0V3M8 11v10"/><path d="M17 3c-1.7 0-3 2-3 4.5S15.3 12 17 12s3-2 3-4.5S18.7 3 17 3zM17 12v9"/></svg></span><span class="tg" title="子ども用の椅子"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v9h9"/><path d="M5 8h10"/><path d="M9 12l-2 9M16 12l2 9M8 17h9"/></svg></span></span></span>
         <span class="chev" aria-hidden="true"></span>
       </summary>
       <div class="cf-b">
@@ -174,9 +199,9 @@
         </div>
       </div>
     </details>
-  <details class="cf" id="flat">
+  <details class="cf" id="flat" data-tags="chair menu">
       <summary class="cf-h">
-        <span class="cf-n"><h2>ふらっと花小金井</h2><span class="area">花小金井駅 南口 徒歩3分</span></span>
+        <span class="cf-n"><h2>ふらっと花小金井</h2><span class="area">花小金井駅 南口 徒歩3分</span><span class="tgs" role="img" aria-label="子ども用の椅子、子どもメニュー"><span class="tg" title="子ども用の椅子"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v9h9"/><path d="M5 8h10"/><path d="M9 12l-2 9M16 12l2 9M8 17h9"/></svg></span><span class="tg" title="子どもメニュー"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a2 2 0 0 0 4 0V3M8 11v10"/><path d="M17 3c-1.7 0-3 2-3 4.5S15.3 12 17 12s3-2 3-4.5S18.7 3 17 3zM17 12v9"/></svg></span></span></span>
         <span class="chev" aria-hidden="true"></span>
       </summary>
       <div class="cf-b">
@@ -197,9 +222,9 @@
         </div>
       </div>
     </details>
-  <details class="cf" id="gruau">
+  <details class="cf" id="gruau" data-tags="play">
       <summary class="cf-h">
-        <span class="cf-n"><h2>GRUAU（グリュオ）</h2><span class="area">花小金井駅 徒歩3分</span></span>
+        <span class="cf-n"><h2>GRUAU（グリュオ）</h2><span class="area">花小金井駅 徒歩3分</span><span class="tgs" role="img" aria-label="キッズスペース・おもちゃ"><span class="tg" title="キッズスペース・おもちゃ"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg></span></span></span>
         <span class="chev" aria-hidden="true"></span>
       </summary>
       <div class="cf-b">
@@ -220,9 +245,9 @@
         </div>
       </div>
     </details>
-  <details class="cf" id="eggg-park">
+  <details class="cf" id="eggg-park" data-tags="seat menu parking">
       <summary class="cf-h">
-        <span class="cf-n"><h2>eggg Park（えぐぅ〜 パーク）</h2><span class="area">小平市鈴木町</span></span>
+        <span class="cf-n"><h2>eggg Park（えぐぅ〜 パーク）</h2><span class="area">小平市鈴木町</span><span class="tgs" role="img" aria-label="座敷・小上がり・個室、子どもメニュー、駐車場"><span class="tg" title="座敷・小上がり・個室"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M12 6v13M3 12.5h9"/></svg></span><span class="tg" title="子どもメニュー"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a2 2 0 0 0 4 0V3M8 11v10"/><path d="M17 3c-1.7 0-3 2-3 4.5S15.3 12 17 12s3-2 3-4.5S18.7 3 17 3zM17 12v9"/></svg></span><span class="tg" title="駐車場"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 16.5v-9h3a2.6 2.6 0 0 1 0 5.2h-3"/></svg></span></span></span>
         <span class="chev" aria-hidden="true"></span>
       </summary>
       <div class="cf-b">
@@ -243,9 +268,9 @@
         </div>
       </div>
     </details>
-  <details class="cf" id="mogumogu">
+  <details class="cf" id="mogumogu" data-tags="play seat menu">
       <summary class="cf-h">
-        <span class="cf-n"><h2>もぐもぐの森</h2><span class="area">田無駅 徒歩8〜10分</span></span>
+        <span class="cf-n"><h2>もぐもぐの森</h2><span class="area">田無駅 徒歩8〜10分</span><span class="tgs" role="img" aria-label="キッズスペース・おもちゃ、座敷・小上がり・個室、子どもメニュー"><span class="tg" title="キッズスペース・おもちゃ"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg></span><span class="tg" title="座敷・小上がり・個室"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M12 6v13M3 12.5h9"/></svg></span><span class="tg" title="子どもメニュー"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a2 2 0 0 0 4 0V3M8 11v10"/><path d="M17 3c-1.7 0-3 2-3 4.5S15.3 12 17 12s3-2 3-4.5S18.7 3 17 3zM17 12v9"/></svg></span></span></span>
         <span class="chev" aria-hidden="true"></span>
       </summary>
       <div class="cf-b">
@@ -266,9 +291,9 @@
         </div>
       </div>
     </details>
-  <details class="cf" id="carpediem">
+  <details class="cf" id="carpediem" data-tags="play">
       <summary class="cf-h">
-        <span class="cf-n"><h2>Carpe Diem Cafe（カルペディエムカフェ）</h2><span class="area">東久留米市滝山</span></span>
+        <span class="cf-n"><h2>Carpe Diem Cafe（カルペディエムカフェ）</h2><span class="area">東久留米市滝山</span><span class="tgs" role="img" aria-label="キッズスペース・おもちゃ"><span class="tg" title="キッズスペース・おもちゃ"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg></span></span></span>
         <span class="chev" aria-hidden="true"></span>
       </summary>
       <div class="cf-b">
@@ -289,9 +314,9 @@
         </div>
       </div>
     </details>
-  <details class="cf" id="natchanchi">
+  <details class="cf" id="natchanchi" data-tags="seat diaper nursing">
       <summary class="cf-h">
-        <span class="cf-n"><h2>なっちゃんち</h2><span class="area">田無神社の鳥居の向かい</span></span>
+        <span class="cf-n"><h2>なっちゃんち</h2><span class="area">田無神社の鳥居の向かい</span><span class="tgs" role="img" aria-label="座敷・小上がり・個室、おむつ替え、授乳スペース"><span class="tg" title="座敷・小上がり・個室"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M12 6v13M3 12.5h9"/></svg></span><span class="tg" title="おむつ替え"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18v3.5c0 5-4.5 8.5-9 8.5s-9-3.5-9-8.5z"/><path d="M3 10.5h18M9 19c.5-2.5 1.5-4 3-4s2.5 1.5 3 4"/></svg></span><span class="tg" title="授乳スペース"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 3h3l.5 3h-4z"/><path d="M9 6h6v2.5H9z"/><path d="M9 8.5h6V20a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1z"/><path d="M11 12.5h2M11 15.5h2"/></svg></span></span></span>
         <span class="chev" aria-hidden="true"></span>
       </summary>
       <div class="cf-b">
@@ -312,9 +337,9 @@
         </div>
       </div>
     </details>
-  <details class="cf" id="yutaly">
+  <details class="cf" id="yutaly" data-tags="play diaper">
       <summary class="cf-h">
-        <span class="cf-n"><h2>Yutaly One&#39;s Cafe（ユタリーワンズカフェ）</h2><span class="area">小金井市貫井北町</span></span>
+        <span class="cf-n"><h2>Yutaly One&#39;s Cafe（ユタリーワンズカフェ）</h2><span class="area">小金井市貫井北町</span><span class="tgs" role="img" aria-label="キッズスペース・おもちゃ、おむつ替え"><span class="tg" title="キッズスペース・おもちゃ"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg></span><span class="tg" title="おむつ替え"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18v3.5c0 5-4.5 8.5-9 8.5s-9-3.5-9-8.5z"/><path d="M3 10.5h18M9 19c.5-2.5 1.5-4 3-4s2.5 1.5 3 4"/></svg></span></span></span>
         <span class="chev" aria-hidden="true"></span>
       </summary>
       <div class="cf-b">
@@ -335,9 +360,9 @@
         </div>
       </div>
     </details>
-  <details class="cf" id="nikoto">
+  <details class="cf" id="nikoto" data-tags="play chair">
       <summary class="cf-h">
-        <span class="cf-n"><h2>にことカフェ</h2><span class="area">一橋学園駅 南口 徒歩1分</span></span>
+        <span class="cf-n"><h2>にことカフェ</h2><span class="area">一橋学園駅 南口 徒歩1分</span><span class="tgs" role="img" aria-label="キッズスペース・おもちゃ、子ども用の椅子"><span class="tg" title="キッズスペース・おもちゃ"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg></span><span class="tg" title="子ども用の椅子"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v9h9"/><path d="M5 8h10"/><path d="M9 12l-2 9M16 12l2 9M8 17h9"/></svg></span></span></span>
         <span class="chev" aria-hidden="true"></span>
       </summary>
       <div class="cf-b">
@@ -358,9 +383,9 @@
         </div>
       </div>
     </details>
-  <details class="cf" id="cercle">
+  <details class="cf" id="cercle" data-tags="seat diaper nursing">
       <summary class="cf-h">
-        <span class="cf-n"><h2>Cafe&amp;bar セルクル（cercle）</h2><span class="area">東小金井駅 徒歩7分</span></span>
+        <span class="cf-n"><h2>Cafe&amp;bar セルクル（cercle）</h2><span class="area">東小金井駅 徒歩7分</span><span class="tgs" role="img" aria-label="座敷・小上がり・個室、おむつ替え、授乳スペース"><span class="tg" title="座敷・小上がり・個室"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M12 6v13M3 12.5h9"/></svg></span><span class="tg" title="おむつ替え"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18v3.5c0 5-4.5 8.5-9 8.5s-9-3.5-9-8.5z"/><path d="M3 10.5h18M9 19c.5-2.5 1.5-4 3-4s2.5 1.5 3 4"/></svg></span><span class="tg" title="授乳スペース"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 3h3l.5 3h-4z"/><path d="M9 6h6v2.5H9z"/><path d="M9 8.5h6V20a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1z"/><path d="M11 12.5h2M11 15.5h2"/></svg></span></span></span>
         <span class="chev" aria-hidden="true"></span>
       </summary>
       <div class="cf-b">
@@ -381,9 +406,9 @@
         </div>
       </div>
     </details>
-  <details class="cf" id="ybf">
+  <details class="cf" id="ybf" data-tags="play seat">
       <summary class="cf-h">
-        <span class="cf-n"><h2>YOUR BIG FAMILY（ユアビッグファミリー）</h2><span class="area">東久留米市本町</span></span>
+        <span class="cf-n"><h2>YOUR BIG FAMILY（ユアビッグファミリー）</h2><span class="area">東久留米市本町</span><span class="tgs" role="img" aria-label="キッズスペース・おもちゃ、座敷・小上がり・個室"><span class="tg" title="キッズスペース・おもちゃ"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg></span><span class="tg" title="座敷・小上がり・個室"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M12 6v13M3 12.5h9"/></svg></span></span></span>
         <span class="chev" aria-hidden="true"></span>
       </summary>
       <div class="cf-b">
@@ -404,9 +429,9 @@
         </div>
       </div>
     </details>
-  <details class="cf" id="mammacafe">
+  <details class="cf" id="mammacafe" data-tags="play seat chair diaper menu parking">
       <summary class="cf-h">
-        <span class="cf-n"><h2>MammaCafe（まんまカフェ）</h2><span class="area">東久留米市幸町</span></span>
+        <span class="cf-n"><h2>MammaCafe（まんまカフェ）</h2><span class="area">東久留米市幸町</span><span class="tgs" role="img" aria-label="キッズスペース・おもちゃ、座敷・小上がり・個室、子ども用の椅子、おむつ替え、子どもメニュー、駐車場"><span class="tg" title="キッズスペース・おもちゃ"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg></span><span class="tg" title="座敷・小上がり・個室"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M12 6v13M3 12.5h9"/></svg></span><span class="tg" title="子ども用の椅子"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v9h9"/><path d="M5 8h10"/><path d="M9 12l-2 9M16 12l2 9M8 17h9"/></svg></span><span class="tg" title="おむつ替え"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18v3.5c0 5-4.5 8.5-9 8.5s-9-3.5-9-8.5z"/><path d="M3 10.5h18M9 19c.5-2.5 1.5-4 3-4s2.5 1.5 3 4"/></svg></span><span class="tg" title="子どもメニュー"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a2 2 0 0 0 4 0V3M8 11v10"/><path d="M17 3c-1.7 0-3 2-3 4.5S15.3 12 17 12s3-2 3-4.5S18.7 3 17 3zM17 12v9"/></svg></span><span class="tg" title="駐車場"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 16.5v-9h3a2.6 2.6 0 0 1 0 5.2h-3"/></svg></span></span></span>
         <span class="chev" aria-hidden="true"></span>
       </summary>
       <div class="cf-b">
@@ -427,9 +452,9 @@
         </div>
       </div>
     </details>
-  <details class="cf" id="matsuo">
+  <details class="cf" id="matsuo" data-tags="chair stroller">
       <summary class="cf-h">
-        <span class="cf-n"><h2>松尾珈琲</h2><span class="area">西東京市ひばりが丘北</span></span>
+        <span class="cf-n"><h2>松尾珈琲</h2><span class="area">西東京市ひばりが丘北</span><span class="tgs" role="img" aria-label="子ども用の椅子、ベビーカーで入れる"><span class="tg" title="子ども用の椅子"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v9h9"/><path d="M5 8h10"/><path d="M9 12l-2 9M16 12l2 9M8 17h9"/></svg></span><span class="tg" title="ベビーカーで入れる"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h14"/><path d="M10 4a7 7 0 0 1 7 7"/><path d="M10 4v7"/><path d="M17 11l1.5-5H21"/><path d="M5 11c0 3 2 5 5 5h3c2 0 4-2 4-5"/><circle cx="7" cy="19.5" r="1.8"/><circle cx="15" cy="19.5" r="1.8"/></svg></span></span></span>
         <span class="chev" aria-hidden="true"></span>
       </summary>
       <div class="cf-b">
@@ -450,9 +475,9 @@
         </div>
       </div>
     </details>
-  <details class="cf" id="cafeslow">
+  <details class="cf" id="cafeslow" data-tags="play chair diaper stroller parking">
       <summary class="cf-h">
-        <span class="cf-n"><h2>カフェスロー（Café Slow）</h2><span class="area">国分寺駅 南口 徒歩5分</span></span>
+        <span class="cf-n"><h2>カフェスロー（Café Slow）</h2><span class="area">国分寺駅 南口 徒歩5分</span><span class="tgs" role="img" aria-label="キッズスペース・おもちゃ、子ども用の椅子、おむつ替え、ベビーカーで入れる、駐車場"><span class="tg" title="キッズスペース・おもちゃ"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/></svg></span><span class="tg" title="子ども用の椅子"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v9h9"/><path d="M5 8h10"/><path d="M9 12l-2 9M16 12l2 9M8 17h9"/></svg></span><span class="tg" title="おむつ替え"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18v3.5c0 5-4.5 8.5-9 8.5s-9-3.5-9-8.5z"/><path d="M3 10.5h18M9 19c.5-2.5 1.5-4 3-4s2.5 1.5 3 4"/></svg></span><span class="tg" title="ベビーカーで入れる"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h14"/><path d="M10 4a7 7 0 0 1 7 7"/><path d="M10 4v7"/><path d="M17 11l1.5-5H21"/><path d="M5 11c0 3 2 5 5 5h3c2 0 4-2 4-5"/><circle cx="7" cy="19.5" r="1.8"/><circle cx="15" cy="19.5" r="1.8"/></svg></span><span class="tg" title="駐車場"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 16.5v-9h3a2.6 2.6 0 0 1 0 5.2h-3"/></svg></span></span></span>
         <span class="chev" aria-hidden="true"></span>
       </summary>
       <div class="cf-b">
@@ -498,6 +523,22 @@
 </footer>
 
 <script>
+/* 設備でしぼる: 合わないお店のプルダウンを隠し、マップの四角を薄くする */
+(function () {
+  var btns = [].slice.call(document.querySelectorAll('.filt button'));
+  var cards = [].slice.call(document.querySelectorAll('details.cf'));
+  var tiles = [].slice.call(document.querySelectorAll('.cf-t'));
+  function has(el, f) { return f === 'all' || (' ' + (el.getAttribute('data-tags') || '') + ' ').indexOf(' ' + f + ' ') >= 0; }
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.getAttribute('data-f'), n = 0;
+      btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      cards.forEach(function (c) { var on = has(c, f); c.hidden = !on; if (on) n++; });
+      tiles.forEach(function (t) { t.classList.toggle('dim', !has(t, f)); });
+      document.getElementById('filt-none').hidden = n > 0;
+    });
+  });
+})();
 /* お店ごと: 名前をタップで開く。マップの四角から来たときは、そのお店を開いておく */
 (function () {
   function openTo(id) {
