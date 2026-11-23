@@ -6302,7 +6302,7 @@
    "target": "公式に記載なし（要確認）",
    "url": "https://www.tokyo-park.or.jp/park/koganei/news/2026/11_24.html",
    "status": "候補（平日。11/18",
-   "confidence": "公式確認済み（2026-11-16）— 日時・集合・受付9:45・費用50円（当日現金）・申込不要・雨天（小雨決行／荒天中止は当日受付で知らせる）・主催・問い合わせ先",
+   "confidence": "公式確認済み（2026-11-24）— 日時・集合・受付9:45・費用50円（当日現金）・申込不要・雨天（小雨決行／荒天中止は当日受付で知らせる）・主催・問い合わせ先",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
@@ -6997,7 +6997,7 @@
    "target": "",
    "url": "https://kodaira-kogeki.org/2026-12-11-flag/",
    "status": "候補",
-   "confidence": "公式で確認（2026-11-05）",
+   "confidence": "公式で確認（2026-11-24）— 日時・開場18:30・上演45分・会場・料金・3歳未満は入場不可・駐車場なし・変わった申込方法（フォーム／メール／電話）",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-12.md"
@@ -7041,7 +7041,7 @@
    "target": "小学生以上・お芝居に興味のある人（チラシに「小学校高学年〜中高生大歓迎」）／定員: 各回10人",
    "url": "https://www.instagram.com/p/DfeNNkWtOdr/",
    "status": "候補",
-   "confidence": "主催のSNSで確認（2026-11-09）",
+   "confidence": "主催のSNSで確認（2026-11-09）／2026-11-24 に投稿を見直し、中止・変更の追記は無し",
    "tentative": false,
    "deadline": {
     "date": "2026-12-09",

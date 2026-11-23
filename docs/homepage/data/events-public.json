@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23",
+ "generated": "2026-11-24",
  "events": [
   {
    "id": "E16",
@@ -6094,6 +6094,42 @@
    "tentative": false,
    "deadline": null,
    "cat": "spot"
+  },
+  {
+   "id": "E259",
+   "name": "ガスミュージアム「みんデパ クリスマスマルシェ」（小平市大沼町）",
+   "dates": [
+    "2026-12-05"
+   ],
+   "span": null,
+   "when": "2026年12月5日(土) 10:00〜15:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "15:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "ガスミュージアム（小平市大沼町。お庭と館内のどこで開くかは記載なし）",
+   "mapq": "ガスミュージアム",
+   "summary": "「ハンドメイド雑貨やおいしいグルメのショップが集結するほか、楽しいパフォーマンスも予定されています。ぜひご家族皆様で遊びにいらしてくださいね」（会場の公式ブログ）。「昨年、大好評だった『みんデパ クリスマスマルシェ』がガスミュージアムに帰ってきます」（会場の公式 Instagram）",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "○",
+    "elem": "○"
+   },
+   "cost": "記載なし（要確認）。買い物・ワークショップは別",
+   "discount": "",
+   "target": "",
+   "url": "https://www.gasmuseum.jp/blog/20261118/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "fest"
   },
   {
    "id": "E210",
