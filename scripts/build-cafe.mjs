@@ -38,7 +38,7 @@ const PRAISE = /おすすめ|オススメ|おいしい|美味しい|雰囲気|�
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const daysBetween = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5);
 // 設備のアイコン（2026-11-23 オーナー「キッズスペースありなら、遊びのアイコンみたいな」）
-// お店の案内（kids）に書いてあるものだけ tags に付ける。線のアイコンを、文字と同じ色で描く
+// お店の案内（kids）と、家族で行って確かめたこと（visited・2026-11-23 オーナー）に書いてあるものだけ tags に付ける。線のアイコンを、文字と同じ色で描く
 const TAGS = {
   play: { label: 'キッズスペース・おもちゃ', svg: '<path d="M4 21V6M9 21V6M4 6h5M4 10.5h5M4 15h5"/><path d="M9 6c4.5 0 6 3.5 7.5 8S19 21 21 21"/>' },
   seat: { label: '座敷・小上がり・個室', svg: '<rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M12 6v13M3 12.5h9"/>' },
@@ -65,7 +65,8 @@ for (const c of cafes) {
   for (const t of c.tags || []) if (!TAGS[t]) problems.push(`${c.name}: tags「${t}」は無い（${Object.keys(TAGS).join('／')}）`);
   if (c.geo && (typeof c.geo.lat !== 'number' || typeof c.geo.lon !== 'number')) problems.push(`${c.name}: geo の lat/lon は数で`);
   if (c.checked && daysBetween(c.checked, todayJST) > STALE_DAYS) warn.push(`${c.name}: 確かめてから ${daysBetween(c.checked, todayJST)} 日。営業時間と休みを、お店の発信で見直す`);
-  const shown = [c.name, c.area, c.where, c.hours, ...(c.kids || []), ...(c.unsure || []), c.more].filter(Boolean).join(' ');
+  if (c.visited !== undefined && (!Array.isArray(c.visited) || !c.visited.length)) problems.push(`${c.name}: visited（家族で行って確かめたこと）は、文の配列で`);
+  const shown = [c.name, c.area, c.where, c.hours, ...(c.kids || []), ...(c.visited || []), ...(c.unsure || []), c.more].filter(Boolean).join(' ');
   const src = shown.match(/（[^）]*(お店の(投稿|案内|Instagram)|公式|ハイライト)[^）]*）/);
   if (src) problems.push(`${c.name}: 出どころの括弧書き「${src[0]}」は書かない（2026-11-23 オーナー）`);
   const m = shown.match(PRAISE);
@@ -124,6 +125,8 @@ const mapHtml = `<div class="emap">
 // ── お店ごと ──────────────────────────────────────────
 function cafe(c) {
   const isIg = /instagram\.com\//.test(c.official);
+  // アイコンは、どのお店も同じ順（TAGS の順）に並べる
+  c = { ...c, tags: Object.keys(TAGS).filter((t) => (c.tags || []).includes(t)) };
   const tags = (c.tags || []).map((t) => `<span class="tg" title="${esc(TAGS[t].label)}">${icon(t)}</span>`).join('');
   return `<details class="cf" id="${esc(c.id)}" data-tags="${esc((c.tags || []).join(' '))}">
       <summary class="cf-h">
@@ -137,6 +140,7 @@ function cafe(c) {
         </div>
         <p class="kh">お店の案内にある、子連れのこと</p>
         <ul class="kids">${c.kids.map((k) => `<li>${esc(k)}</li>`).join('')}</ul>
+        ${(c.visited || []).length ? `<p class="kh">最近、家族で行って確かめたこと</p><ul class="kids">${c.visited.map((k) => `<li>${esc(k)}</li>`).join('')}</ul>` : ''}
         ${c.more ? `<p class="more">${esc(c.more)}</p>` : ''}
         ${(c.unsure || []).length ? `<p class="uns"><b>お店の案内に書いていないこと（要確認）</b>${esc(c.unsure.join('・'))}</p>` : ''}
         <div class="cf-f">
@@ -152,7 +156,7 @@ function cafe(c) {
 
 const n = cafes.length;
 const title = '子連れで入りやすいカフェ（花小金井のまわり）';
-const desc = `花小金井から30分ほどの、キッズスペースや子ども用の席があるカフェ${n}軒。お店のホームページやInstagramに書いてある子連れのこと（キッズスペース・子ども用の椅子・おむつ替えなど）だけをまとめています。`;
+const desc = `花小金井から30分ほどの、キッズスペースや子ども用の席があるカフェ${n}軒。お店のホームページやInstagramに書いてある子連れのこと（キッズスペース・子ども用の椅子・おむつ替えなど）と、家族で行って確かめたことをまとめています。`;
 
 const html = `<!doctype html>
 <html lang="ja">
@@ -271,7 +275,7 @@ ${navSub('cafe')}
   <div class="ghead-in">
     <div class="eyebrow">Bon Voyage,</div>
     <h1>子連れで入りやすいカフェ</h1>
-    <p class="sub">花小金井から30分ほどの、キッズスペースや子ども用の席があるカフェ${n}軒。お店のホームページやInstagramに書いてある、子連れのことだけをまとめました。</p>
+    <p class="sub">花小金井から30分ほどの、キッズスペースや子ども用の席があるカフェ${n}軒。お店のホームページやInstagramに書いてある子連れのことと、家族で行って確かめたことをまとめました。</p>
   </div>
 </header>
 
@@ -281,7 +285,7 @@ ${navSub('cafe')}
   <p class="mapcap"><b>お店の四角をタップすると、下の案内が開きます。</b><br>${icon('play', 'tic')} はキッズスペースやおもちゃのあるお店です。</p>
 
   <h2 class="sec">お店ごとの案内</h2>
-  <p class="lead">花小金井駅から近い順です。キッズスペース・子ども用の椅子・おむつ替えなど、お店の案内に書いてあることだけを載せ、書いていないことは「要確認」としています。<b>お店の名前をタップすると、くわしい案内が開きます。</b><br>下のボタンで、設備のあるお店だけにしぼれます。</p>
+  <p class="lead">花小金井駅から近い順です。キッズスペース・子ども用の椅子・おむつ替えなど、お店の案内に書いてあることを載せ、書いていないことは「要確認」としています。家族で行って確かめたことは、分けて書いています。<b>お店の名前をタップすると、くわしい案内が開きます。</b><br>下のボタンで、設備のあるお店だけにしぼれます。</p>
   <div class="filt" role="group" aria-label="設備でしぼる">
     <button type="button" data-f="all" aria-pressed="true">すべて</button>
     ${Object.keys(TAGS).filter((t) => cafes.some((c) => (c.tags || []).includes(t))).map((t) => `<button type="button" data-f="${t}" aria-pressed="false">${icon(t)}${esc(TAGS[t].label)}<small>${cafes.filter((c) => (c.tags || []).includes(t)).length}</small></button>`).join('\n    ')}

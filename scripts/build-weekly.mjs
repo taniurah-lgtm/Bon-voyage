@@ -519,6 +519,7 @@ for (const f of files) {
       ${c.hours ? `<li>${ICON.when}<span>${esc(c.hours)}</span></li>` : ''}
     </ul>
     <ul class="kidlist">${c.kids.map((k) => `<li>${esc(k)}</li>`).join('')}</ul>
+    ${(c.visited || []).length ? `<p class="note">最近、家族で行って確かめたこと: ${esc(c.visited.join('・'))}</p>` : ''}
     ${c.more ? `<p class="note">${esc(c.more)}</p>` : ''}
     ${(c.unsure || []).length ? `<p class="fine">お店の案内に書いていないこと（要確認）: ${esc(c.unsure.join('・'))}</p>` : ''}
     <div class="foot">
@@ -528,7 +529,7 @@ for (const f of files) {
         <a class="btn solid" href="${esc(mapUrl(c.mapq || c.name))}" target="_blank" rel="noopener" data-goatcounter-click="${esc('カフェ地図｜' + c.name)}">地図</a>
       </div>
     </div>
-    <p class="fine">お店の案内に書いてあることだけを載せています（${y}年${m}月${d}日に確認）。行く前に、営業日をお店でご確認ください。</p>
+    <p class="fine">${(c.visited || []).length ? 'お店の案内に書いてあることと、家族で行って確かめたことを載せています' : 'お店の案内に書いてあることだけを載せています'}（${y}年${m}月${d}日に確認）。行く前に、営業日をお店でご確認ください。</p>
   </article>`;
   };
   const cafeSec = cafes.length
