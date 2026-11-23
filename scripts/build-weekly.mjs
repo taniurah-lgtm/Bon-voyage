@@ -605,6 +605,7 @@ for (const f of files) {
   ${spec.cafesTop ? '' : cafeSec}
   ${next.length ? `<div class="sec"><p class="kicker">COMING UP</p><h2>先取り・申込の締切</h2></div>${next.map(({ it, ev }) => card(it, ev, { age: g.key })).join('')}` : ''}
   ${g.key !== 'elem' ? `<a class="entei" href="/entei.html" data-goatcounter-click="週｜園庭開放">🏫 <b>こだいら幼稚園だより</b><span>幼稚園・こども園15園の、園庭開放・未就園児の会・説明会。幼稚園マップから各園のホームページへ</span></a>` : ''}
+  <a class="entei" href="/cafe.html" data-goatcounter-click="週｜カフェ">☕ <b>子連れで入りやすいカフェ</b><span>キッズスペースや子ども用の席があるお店。カフェマップと、お店ごとの子連れのこと</span></a>
   <a class="entei" href="/teirei.html" data-goatcounter-click="週｜定例">📚 <b>児童館・図書館・子育てひろばの定例</b><span>図書館のおはなし会や絵本のへや、児童館のこども広場など、毎月くり返す無料の会</span></a>
 </section>`;
   };

@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>子連れで入りやすいカフェ（花小金井のまわり）｜ぼんぼやーじゅ通信</title>
+<meta name="description" content="花小金井から30分ほどの、キッズスペースや子ども用の席があるカフェ8軒。お店のホームページやInstagramに書いてある子連れのこと（キッズスペース・子ども用の椅子・おむつ替えなど）だけをまとめています。">
+<link rel="canonical" href="https://bonvoya.nicomaru.tokyo/cafe.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://bonvoya.nicomaru.tokyo/cafe.html">
+<meta property="og:title" content="子連れで入りやすいカフェ（花小金井のまわり）">
+<meta property="og:description" content="花小金井から30分ほどの、キッズスペースや子ども用の席があるカフェ8軒。お店のホームページやInstagramに書いてある子連れのこと（キッズスペース・子ども用の椅子・おむつ替えなど）だけをまとめています。">
+<meta property="og:locale" content="ja_JP">
+<link rel="stylesheet" href="/assets/bv-tokens.css">
+<link rel="stylesheet" href="/assets/bv-nav.css">
+<script src="/assets/analytics.js" defer></script>
+<style>
+  :root { --map-ground:#F6F2EA; --kid-dot:#C98A3A; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --map-ground:#2A2620; --kid-dot:#F0AE5E; } }
+  :root[data-theme="dark"] { --map-ground:#2A2620; --kid-dot:#F0AE5E; }
+  main { padding: 1.2rem 0 1rem; }
+  .ghead-in { padding-top: 1.4rem; padding-bottom: 1.2rem; }
+  .ghead h1 { font-size: clamp(1.45rem, 4.8vw, 2rem); margin-bottom: .35rem; }
+  .ghead .sub { font-size: .92rem; line-height: 1.75; }
+  .lead { color: var(--ink-soft); font-size: .86rem; line-height: 1.75; margin-bottom: 1rem; }
+  .lead b { color: var(--ink); }
+  h2.sec { font-family: var(--maru); font-weight: 800; font-size: 1.12rem; margin: 1.6rem 0 .6rem; }
+  h2.sec:first-child { margin-top: .4rem; }
+
+  /* カフェマップ */
+  .emap { margin: 0 0 .5rem; }
+  .nb { display: flex; justify-content: space-between; gap: .5rem; font-size: .68rem; color: var(--ink-faint); line-height: 1.4; }
+  .nb-top { margin-bottom: .55rem; }
+  .nb-bot { justify-content: center; margin-top: .3rem; }
+  .frame { position: relative; border: 2px solid var(--line-strong); border-radius: 14px; background: var(--map-ground); padding: .55rem .4rem .45rem; }
+  .frame-l { position: absolute; top: -.75em; left: .8rem; background: var(--ground); padding: 0 .4rem; font-family: var(--maru); font-weight: 800; font-size: .76rem; color: var(--ink-soft); line-height: 1.4; }
+  .grid { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 5px; }
+  .cell { min-height: 46px; border-radius: 9px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 3px 2px; line-height: 1.2; }
+  .cf-t { background: var(--surface); border: 1.5px solid var(--marigold); box-shadow: 0 1px 0 var(--line-strong); text-decoration: none; color: var(--ink); }
+  .cf-t:hover, .cf-t:focus-visible { background: var(--marigold-wash); }
+  .cf-t b { font-family: var(--maru); font-weight: 800; font-size: clamp(10px, 2.7vw, 14px); letter-spacing: -.02em; word-break: keep-all; }
+  .cf-t.long b { font-size: clamp(9px, 2.35vw, 13px); }
+  .st { border: 1px dashed var(--ink-faint); color: var(--ink-soft); font-size: clamp(8px, 2.1vw, 11px); letter-spacing: -.05em; white-space: nowrap; overflow: hidden; }
+  @media (max-width: 340px) { .st { white-space: normal; } }
+  .st span::before { content: ""; display: block; width: 1.6em; height: 2px; margin: 0 auto 3px; background: var(--ink-faint); border-radius: 2px; }
+  .mapcap { font-size: .78rem; color: var(--ink-soft); line-height: 1.7; margin-top: .45rem; }
+  .mapcap b { color: var(--ink); }
+
+  /* お店ごと */
+  .cf { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); box-shadow: var(--shadow-soft); margin-bottom: .6rem; scroll-margin-top: 96px; }
+  .cf-h { display: flex; align-items: center; gap: .6rem; padding: .85rem 1.05rem; cursor: pointer; list-style: none; border-radius: var(--radius-sm); }
+  .cf-h::-webkit-details-marker { display: none; }
+  .cf-h:focus-visible { outline: 2px solid var(--sky-deep); outline-offset: 2px; }
+  .cf-n { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: .05rem; }
+  .cf h2 { font-family: var(--maru); font-weight: 800; font-size: 1.02rem; margin: 0; line-height: 1.45; }
+  .area { font-size: .78rem; color: var(--ink-faint); }
+  .chev { flex: none; width: 30px; height: 30px; border-radius: 999px; border: 1px solid var(--line-strong); position: relative; }
+  .chev::before { content: ""; position: absolute; left: 50%; top: 45%; width: 8px; height: 8px; border-right: 2px solid var(--ink-soft); border-bottom: 2px solid var(--ink-soft); transform: translate(-50%, -50%) rotate(45deg); transition: transform .15s; }
+  .cf[open] .chev::before { transform: translate(-50%, -25%) rotate(-135deg); }
+  .cf[open] .cf-h { border-bottom: 1px solid var(--line); border-radius: var(--radius-sm) var(--radius-sm) 0 0; }
+  .cf-b { padding: .8rem 1.05rem .8rem; }
+  @media (prefers-reduced-motion: reduce) { .chev::before { transition: none; } }
+  .kvs { display: grid; gap: .12rem; margin-bottom: .6rem; }
+  .kv { display: flex; gap: .6rem; font-size: .84rem; line-height: 1.6; }
+  .kv .k { flex: none; width: 3.2em; color: var(--ink-faint); font-size: .78rem; padding-top: .08rem; }
+  .kv .v { min-width: 0; }
+  .kh { font-family: var(--maru); font-weight: 800; font-size: .84rem; margin-bottom: .25rem; }
+  .kids { list-style: none; margin: 0 0 .55rem; padding: 0; display: grid; gap: .2rem; }
+  .kids li { position: relative; padding-left: 1rem; font-size: .88rem; line-height: 1.65; }
+  .kids li::before { content: ""; position: absolute; left: .15rem; top: .62em; width: 6px; height: 6px; border-radius: 999px; background: var(--kid-dot); }
+  .more { font-size: .82rem; color: var(--ink-soft); background: var(--surface-2); border-radius: 8px; padding: .4rem .65rem; margin-bottom: .45rem; line-height: 1.65; }
+  .uns { font-size: .8rem; color: var(--ink-soft); line-height: 1.65; margin-bottom: .2rem; }
+  .uns b { display: block; font-size: .74rem; color: var(--ink-faint); font-weight: 700; }
+  .cf-f { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .6rem; margin-top: .7rem; padding-top: .5rem; border-top: 1px solid var(--line); }
+  .chk { font-size: .72rem; color: var(--ink-faint); line-height: 1.6; }
+  .acts { margin-left: auto; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .35rem; }
+  .lk { display: inline-flex; align-items: center; min-height: 36px; font-size: .78rem; font-weight: 700; text-decoration: none; color: var(--link-ink); border: 1px solid var(--line-strong); border-radius: 999px; padding: 0 .75rem; background: var(--surface); white-space: nowrap; }
+
+  .ask { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem .9rem; margin-top: 1.2rem; padding: .85rem 1rem; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); }
+  .ask p { flex: 1 1 15rem; font-size: .86rem; line-height: 1.75; color: var(--ink-soft); }
+  .ask p b { display: block; font-family: var(--maru); font-weight: 800; color: var(--ink); font-size: .95rem; }
+  .ask .lk { flex: none; }
+  .about { font-size: .82rem; color: var(--ink-soft); line-height: 1.8; margin-top: 1.4rem; }
+  .nav-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.6rem 0 0; }
+  .nav-pills a { font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none; color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .4rem .9rem; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<nav class="bvnav" aria-label="サイト内">
+  <div class="bvnav-in">
+    <a class="bvnav-brand" href="/">ぼんぼやーじゅ通信</a>
+    <div class="bvnav-links">
+      <a href="/" class="bv-hide-sm">通信について</a>
+      <a class="bvnav-cta" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE<span class="bv-lg">で受け取る</span></a>
+    </div>
+  </div>
+  <div class="bvnav-sub"><div class="bvnav-sub-in"><a href="/calendar.html"><span aria-hidden="true">📅</span>カレンダー</a><a href="/map.html"><span aria-hidden="true">🗺️</span>マップ</a><a href="/entei.html"><span aria-hidden="true">🏫</span>幼稚園だより</a><a href="/cafe.html" aria-current="page"><span aria-hidden="true">☕</span>カフェ情報</a><a href="/teirei.html"><span aria-hidden="true">📚</span>児童館・図書館</a></div></div>
+</nav>
+<header class="ghead">
+  <div class="ghead-in">
+    <div class="eyebrow">Bon Voyage,</div>
+    <h1>子連れで入りやすいカフェ</h1>
+    <p class="sub">花小金井から30分ほどの、キッズスペースや子ども用の席があるカフェ8軒。お店のホームページやInstagramに書いてある、子連れのことだけをまとめました。</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <h2 class="sec">カフェマップ</h2>
+  <div class="emap">
+      <div class="nb nb-top"><span>← 小平市</span><span>↑ 東久留米市</span><span>西東京市 →</span></div>
+      <div class="frame">
+        <span class="frame-l">花小金井のまわり</span>
+        <div class="grid" style="--cols:5">
+          <span class="cell" aria-hidden="true"></span>
+          <span class="cell" aria-hidden="true"></span>
+          <a class="cell cf-t" href="#mammacafe" aria-label="MammaCafe（まんまカフェ）の案内を開く" data-goatcounter-click="カフェマップ｜MammaCafe（まんまカフェ）"><b>Mamma<wbr>Cafe</b></a>
+          <span class="cell st" aria-hidden="true"><span>東久留米駅</span></span>
+          <span class="cell" aria-hidden="true"></span>
+          <span class="cell" aria-hidden="true"></span>
+          <span class="cell" aria-hidden="true"></span>
+          <span class="cell" aria-hidden="true"></span>
+          <span class="cell" aria-hidden="true"></span>
+          <span class="cell" aria-hidden="true"></span>
+          <span class="cell" aria-hidden="true"></span>
+          <span class="cell st" aria-hidden="true"><span>花小金井駅</span></span>
+          <a class="cell cf-t" href="#gruau" aria-label="GRUAU（グリュオ）の案内を開く" data-goatcounter-click="カフェマップ｜GRUAU（グリュオ）"><b>GRUAU</b></a>
+          <a class="cell cf-t" href="#mogumogu" aria-label="もぐもぐの森の案内を開く" data-goatcounter-click="カフェマップ｜もぐもぐの森"><b>もぐもぐ<wbr>の森</b></a>
+          <a class="cell cf-t long" href="#natchanchi" aria-label="なっちゃんちの案内を開く" data-goatcounter-click="カフェマップ｜なっちゃんち"><b>なっちゃんち</b></a>
+          <a class="cell cf-t long" href="#eggg-park" aria-label="eggg Park（えぐぅ〜 パーク）の案内を開く" data-goatcounter-click="カフェマップ｜eggg Park（えぐぅ〜 パーク）"><b>eggg Park</b></a>
+          <a class="cell cf-t" href="#flat" aria-label="ふらっと花小金井の案内を開く" data-goatcounter-click="カフェマップ｜ふらっと花小金井"><b>ふらっと</b></a>
+          <a class="cell cf-t" href="#flower" aria-label="Flower Natural Food Cafe（フラワー）の案内を開く" data-goatcounter-click="カフェマップ｜Flower Natural Food Cafe（フラワー）"><b>フラワー</b></a>
+          <span class="cell" aria-hidden="true"></span>
+          <span class="cell st" aria-hidden="true"><span>田無駅</span></span>
+          <a class="cell cf-t long" href="#yutaly" aria-label="Yutaly One&#39;s Cafe（ユタリーワンズカフェ）の案内を開く" data-goatcounter-click="カフェマップ｜Yutaly One&#39;s Cafe（ユタリーワンズカフェ）"><b>Yutaly</b></a>
+          <span class="cell st" aria-hidden="true"><span>武蔵小金井駅</span></span>
+          <span class="cell st" aria-hidden="true"><span>東小金井駅</span></span>
+          <span class="cell" aria-hidden="true"></span>
+          <span class="cell" aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="nb nb-bot"><span>↓ 小金井市</span></div>
+    </div>
+  <p class="mapcap"><b>お店の四角をタップすると、下の案内が開きます。</b></p>
+
+  <h2 class="sec">お店ごとの案内</h2>
+  <p class="lead">花小金井駅から近い順です。キッズスペース・子ども用の椅子・おむつ替えなど、お店の案内に書いてあることだけを載せ、書いていないことは「要確認」としています。<b>お店の名前をタップすると、くわしい案内が開きます。</b></p>
+  <details class="cf" id="flower">
+      <summary class="cf-h">
+        <span class="cf-n"><h2>Flower Natural Food Cafe（フラワー）</h2><span class="area">花小金井駅 北口 徒歩1分</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="cf-b">
+        <div class="kvs">
+          <div class="kv"><span class="k">場所</span><span class="v">花小金井駅 北口から歩いて1分（小平市花小金井1-9-17）</span></div>
+          <div class="kv"><span class="k">営業</span><span class="v">10:00〜17:30・年中無休（年末年始を除く）</span></div>
+        </div>
+        <p class="kh">お店の案内にある、子連れのこと</p>
+        <ul class="kids"><li>小さなお子様連れ歓迎</li><li>お子さまメニュー（お子様おむすびプレート〔ドリンク・おもちゃ付き〕、お子様うどん）</li><li>ベビーチェア2台</li><li>アレルギーは相談できます</li></ul>
+        <p class="more">席の予約ができます（電話か、お店のInstagramのDM）。すぐ南東にコインパーキング。</p>
+        <p class="uns"><b>お店の案内に書いていないこと（要確認）</b>ベビーカーのまま入れるか・おむつ替えの場所</p>
+        <div class="cf-f">
+          <span class="chk">2026年11月11日に、お店の案内で確かめました</span>
+          <span class="acts">
+            <a class="lk" href="https://tomatodeer80.sakura.ne.jp/" target="_blank" rel="noopener" data-goatcounter-click="カフェ公式｜Flower Natural Food Cafe（フラワー）">お店のページ</a>
+            <a class="lk" href="https://www.google.com/maps/search/?api=1&amp;query=Flower%20Natural%20Food%20Cafe%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E8%8A%B1%E5%B0%8F%E9%87%91%E4%BA%951-9-17" target="_blank" rel="noopener" data-goatcounter-click="カフェ地図｜Flower Natural Food Cafe（フラワー）">地図</a>
+          </span>
+        </div>
+      </div>
+    </details>
+  <details class="cf" id="flat">
+      <summary class="cf-h">
+        <span class="cf-n"><h2>ふらっと花小金井</h2><span class="area">花小金井駅 南口 徒歩3分</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="cf-b">
+        <div class="kvs">
+          <div class="kv"><span class="k">場所</span><span class="v">花小金井駅 南口から徒歩3分（小平市花小金井南町1-18-25 1階）</span></div>
+          <div class="kv"><span class="k">営業</span><span class="v">10:00〜20:00（ラストオーダー19:30）・日曜・月曜・祝日は休み</span></div>
+        </div>
+        <p class="kh">お店の案内にある、子連れのこと</p>
+        <ul class="kids"><li>お子様用の椅子があります（お店の投稿）</li><li>お子様カレーがあります（お店の投稿）</li></ul>
+        
+        <p class="uns"><b>お店の案内に書いていないこと（要確認）</b>ベビーカーのまま入れるか・おむつ替えの場所</p>
+        <div class="cf-f">
+          <span class="chk">2026年11月12日に、お店の案内で確かめました</span>
+          <span class="acts">
+            <a class="lk" href="https://www.instagram.com/flat_hanakoganei/" target="_blank" rel="noopener" data-goatcounter-click="カフェ公式｜ふらっと花小金井">Instagram</a>
+            <a class="lk" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%B5%E3%82%89%E3%81%A3%E3%81%A8%E8%8A%B1%E5%B0%8F%E9%87%91%E4%BA%95%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E8%8A%B1%E5%B0%8F%E9%87%91%E4%BA%95%E5%8D%97%E7%94%BA1-18-25" target="_blank" rel="noopener" data-goatcounter-click="カフェ地図｜ふらっと花小金井">地図</a>
+          </span>
+        </div>
+      </div>
+    </details>
+  <details class="cf" id="gruau">
+      <summary class="cf-h">
+        <span class="cf-n"><h2>GRUAU（グリュオ）</h2><span class="area">花小金井駅 徒歩3分</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="cf-b">
+        <div class="kvs">
+          <div class="kv"><span class="k">場所</span><span class="v">花小金井駅から徒歩3分（お店の案内）</span></div>
+          <div class="kv"><span class="k">営業</span><span class="v">9:00〜18:00（土曜・祝日は11:00から、金曜は21:00まで）・日曜定休</span></div>
+        </div>
+        <p class="kh">お店の案内にある、子連れのこと</p>
+        <ul class="kids"><li>キッズスペースがあります（お店の投稿に「#キッズスペースのあるお店」）</li></ul>
+        
+        <p class="uns"><b>お店の案内に書いていないこと（要確認）</b>子ども用の椅子・ベビーカーのまま入れるか・おむつ替えの場所</p>
+        <div class="cf-f">
+          <span class="chk">2026年11月12日に、お店の案内で確かめました</span>
+          <span class="acts">
+            <a class="lk" href="https://www.instagram.com/gruau_cafe/" target="_blank" rel="noopener" data-goatcounter-click="カフェ公式｜GRUAU（グリュオ）">Instagram</a>
+            <a class="lk" href="https://www.google.com/maps/search/?api=1&amp;query=GRUAU%20%E3%82%B0%E3%83%AA%E3%83%A5%E3%82%AA%20%E8%8A%B1%E5%B0%8F%E9%87%91%E4%BA%95" target="_blank" rel="noopener" data-goatcounter-click="カフェ地図｜GRUAU（グリュオ）">地図</a>
+          </span>
+        </div>
+      </div>
+    </details>
+  <details class="cf" id="eggg-park">
+      <summary class="cf-h">
+        <span class="cf-n"><h2>eggg Park（えぐぅ〜 パーク）</h2><span class="area">小平市鈴木町</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="cf-b">
+        <div class="kvs">
+          <div class="kv"><span class="k">場所</span><span class="v">小平市鈴木町1-466-23</span></div>
+          <div class="kv"><span class="k">営業</span><span class="v">11:00〜21:00（ラストオーダー20:00）・木曜定休</span></div>
+        </div>
+        <p class="kh">お店の案内にある、子連れのこと</p>
+        <ul class="kids"><li>お子様連れにも安心な完全個室席（お店の案内）</li><li>お子様メニュー（お店の投稿）</li><li>約100席</li><li>駐車場あり（敷地内に16台、歩いて2分の第二駐車場に22台）・駐輪場あり</li></ul>
+        <p class="more">席はウェブで予約できます（お店のページから）。</p>
+        <p class="uns"><b>お店の案内に書いていないこと（要確認）</b>子ども用の椅子・おむつ替えの場所・個室の予約のしかた</p>
+        <div class="cf-f">
+          <span class="chk">2026年11月11日に、お店の案内で確かめました</span>
+          <span class="acts">
+            <a class="lk" href="https://eggg.jp/park_about.html" target="_blank" rel="noopener" data-goatcounter-click="カフェ公式｜eggg Park（えぐぅ〜 パーク）">お店のページ</a>
+            <a class="lk" href="https://www.google.com/maps/search/?api=1&amp;query=eggg%20Park%20%E5%B0%8F%E5%B9%B3%E5%B8%82%E9%88%B4%E6%9C%A8%E7%94%BA1-466-23" target="_blank" rel="noopener" data-goatcounter-click="カフェ地図｜eggg Park（えぐぅ〜 パーク）">地図</a>
+          </span>
+        </div>
+      </div>
+    </details>
+  <details class="cf" id="mogumogu">
+      <summary class="cf-h">
+        <span class="cf-n"><h2>もぐもぐの森</h2><span class="area">田無駅 徒歩8〜10分</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="cf-b">
+        <div class="kvs">
+          <div class="kv"><span class="k">場所</span><span class="v">田無駅から徒歩8〜10分（お店の案内）。西東京市障害者総合支援センター「フレンドリー」（田無町4-17-14）</span></div>
+          <div class="kv"><span class="k">営業</span><span class="v">11:30〜16:30（ラストオーダー16:00）・日曜・月曜・祝日は休み</span></div>
+        </div>
+        <p class="kh">お店の案内にある、子連れのこと</p>
+        <ul class="kids"><li>「お子様連れ、大歓迎」（お店の投稿）</li><li>キッズコーナー（お店の案内）</li><li>小上がり席（お子さんを寝かせながら食事ができる、とお店の投稿に）</li><li>キッズスペースのすぐ隣のソファ席</li><li>キッズメニュー（お店のInstagramのハイライト）</li></ul>
+        <p class="more">障害のある方と一緒にお店を運営しているカフェです（お店の案内）。団体での貸切予約もできます。</p>
+        <p class="uns"><b>お店の案内に書いていないこと（要確認）</b>おむつ替えの場所・ベビーカーのまま入れるか</p>
+        <div class="cf-f">
+          <span class="chk">2026年11月12日に、お店の案内で確かめました</span>
+          <span class="acts">
+            <a class="lk" href="https://www.instagram.com/mogu__cafe/" target="_blank" rel="noopener" data-goatcounter-click="カフェ公式｜もぐもぐの森">Instagram</a>
+            <a class="lk" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%82%E3%81%90%E3%82%82%E3%81%90%E3%81%AE%E6%A3%AE%20%E8%A5%BF%E6%9D%B1%E4%BA%AC%E5%B8%82%E7%94%B0%E7%84%A1%E7%94%BA4-17-14" target="_blank" rel="noopener" data-goatcounter-click="カフェ地図｜もぐもぐの森">地図</a>
+          </span>
+        </div>
+      </div>
+    </details>
+  <details class="cf" id="natchanchi">
+      <summary class="cf-h">
+        <span class="cf-n"><h2>なっちゃんち</h2><span class="area">田無神社の鳥居の向かい</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="cf-b">
+        <div class="kvs">
+          <div class="kv"><span class="k">場所</span><span class="v">田無神社の鳥居の向かい（西東京市。地図は田無神社）</span></div>
+          <div class="kv"><span class="k">営業</span><span class="v">10:00〜17:00（ラストオーダー 16:30）・金曜は 21:00 まで（ラストオーダー 20:30）。休みの日は月ごとの予定表（お店のInstagram）で</span></div>
+        </div>
+        <p class="kh">お店の案内にある、子連れのこと</p>
+        <ul class="kids"><li>授乳室・おむつ替え・フラット席（お店の案内）</li><li>駐輪場あり（お店の案内）</li><li>親子向けの催しを月ごとに開いています（親子DE DJ DAY、親子ヨガ、おさがりの服や絵本を持ち帰れる「おゆずり会」など）</li><li>毎週水曜 16:00〜18:00 は「放課後なっちゃんち」（放課後の子どもたちの居場所）</li></ul>
+        
+        <p class="uns"><b>お店の案内に書いていないこと（要確認）</b>ベビーカーのまま入れるか・駐車場</p>
+        <div class="cf-f">
+          <span class="chk">2026年11月12日に、お店の案内で確かめました</span>
+          <span class="acts">
+            <a class="lk" href="https://www.instagram.com/natchanchi_0424/" target="_blank" rel="noopener" data-goatcounter-click="カフェ公式｜なっちゃんち">Instagram</a>
+            <a class="lk" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%94%B0%E7%84%A1%E7%A5%9E%E7%A4%BE%20%E8%A5%BF%E6%9D%B1%E4%BA%AC%E5%B8%82%E7%94%B0%E7%84%A1%E7%94%BA3-7-4" target="_blank" rel="noopener" data-goatcounter-click="カフェ地図｜なっちゃんち">地図</a>
+          </span>
+        </div>
+      </div>
+    </details>
+  <details class="cf" id="yutaly">
+      <summary class="cf-h">
+        <span class="cf-n"><h2>Yutaly One&#39;s Cafe（ユタリーワンズカフェ）</h2><span class="area">小金井市貫井北町</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="cf-b">
+        <div class="kvs">
+          <div class="kv"><span class="k">場所</span><span class="v">小金井市貫井北町1-23-33</span></div>
+          
+        </div>
+        <p class="kh">お店の案内にある、子連れのこと</p>
+        <ul class="kids"><li>「子どもが泣いても、大丈夫。2組限定の小さなカフェ」（お店の案内）</li><li>キッズスペース（お店の投稿）</li><li>親子でゆっくり過ごせる最大3.5時間のランチ（焼きたてパンのおかわり・フリードリンク付き）</li><li>近くの駐車場の割引あり</li></ul>
+        <p class="more">1日2組までの予約制です。空席の確認と予約は、お店の公式LINEから（Instagramのプロフィールにリンクがあります）。</p>
+        <p class="uns"><b>お店の案内に書いていないこと（要確認）</b>営業日・時間・おむつ替えの場所</p>
+        <div class="cf-f">
+          <span class="chk">2026年11月12日に、お店の案内で確かめました</span>
+          <span class="acts">
+            <a class="lk" href="https://www.instagram.com/yutaly_ones_cafe/" target="_blank" rel="noopener" data-goatcounter-click="カフェ公式｜Yutaly One&#39;s Cafe（ユタリーワンズカフェ）">Instagram</a>
+            <a class="lk" href="https://www.google.com/maps/search/?api=1&amp;query=Yutaly%20One&#39;s%20Cafe%20%E5%B0%8F%E9%87%91%E4%BA%95%E5%B8%82%E8%B2%AB%E4%BA%95%E5%8C%97%E7%94%BA1-23-33" target="_blank" rel="noopener" data-goatcounter-click="カフェ地図｜Yutaly One&#39;s Cafe（ユタリーワンズカフェ）">地図</a>
+          </span>
+        </div>
+      </div>
+    </details>
+  <details class="cf" id="mammacafe">
+      <summary class="cf-h">
+        <span class="cf-n"><h2>MammaCafe（まんまカフェ）</h2><span class="area">東久留米市幸町</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="cf-b">
+        <div class="kvs">
+          <div class="kv"><span class="k">場所</span><span class="v">東久留米市幸町3-2-3（BunBun保育園Ⅱの駐車場内）</span></div>
+          <div class="kv"><span class="k">営業</span><span class="v">平日11:00〜18:30（ラストオーダー18:00）・土曜11:00〜16:00（ラストオーダー15:30）。日曜・祝日の営業はお店の案内にありません</span></div>
+        </div>
+        <p class="kh">お店の案内にある、子連れのこと</p>
+        <ul class="kids"><li>保育園が運営する子連れカフェ（お店の案内）</li><li>小さなお子さまがいても安心なお座敷席（貸切もできます）</li><li>お子さまイス</li><li>おもちゃ</li><li>おむつ台</li><li>子どもメニュー（未就学児向けのものから）</li><li>テラス席</li></ul>
+        <p class="more">駐車場は4台。予約と問い合わせは、お店のLINEから（Instagramのプロフィールにリンクがあります）。</p>
+        <p class="uns"><b>お店の案内に書いていないこと（要確認）</b>ベビーカーのまま入れるか</p>
+        <div class="cf-f">
+          <span class="chk">2026年11月12日に、お店の案内で確かめました</span>
+          <span class="acts">
+            <a class="lk" href="https://www.instagram.com/mammacafe_bunbun/" target="_blank" rel="noopener" data-goatcounter-click="カフェ公式｜MammaCafe（まんまカフェ）">Instagram</a>
+            <a class="lk" href="https://www.google.com/maps/search/?api=1&amp;query=MammaCafe%20%E3%81%BE%E3%82%93%E3%81%BE%E3%82%AB%E3%83%95%E3%82%A7%20%E6%9D%B1%E4%B9%85%E7%95%99%E7%B1%B3%E5%B8%82%E5%B9%B8%E7%94%BA3-2-3" target="_blank" rel="noopener" data-goatcounter-click="カフェ地図｜MammaCafe（まんまカフェ）">地図</a>
+          </span>
+        </div>
+      </div>
+    </details>
+
+  <div class="ask">
+    <p><b>ご存じのカフェを教えてください</b>子どもと入りやすかったお店があれば、LINEのトークで教えてください。お店の案内を確かめてから載せます。</p>
+    <a class="lk" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener" data-goatcounter-click="カフェ｜教えて">LINEで教える</a>
+  </div>
+
+  <p class="about">お店のホームページ・Instagramを、お店ごとに確かめた日を書いています。営業日や休みは変わることがあるので、出かける前にお店の案内でご確認ください。<br>
+  内容のまちがいに気づいたら、<a href="/#contact">お問い合わせ</a>から教えてください。</p>
+
+  <div class="nav-pills">
+    <a href="/calendar.html">おでかけカレンダー</a>
+    <a href="/map.html">おでかけマップ</a>
+    <a href="/entei.html">こだいら幼稚園だより</a>
+    <a href="/teirei.html">児童館・図書館・子育てひろばの定例</a>
+  </div>
+  <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>
+</main>
+
+<footer>
+  <div class="fmark">ぼんぼやーじゅ通信</div>
+  <a href="/tokushoho.html">免責事項・個人情報の取り扱い</a><br>
+  © 2026 ぼんぼやーじゅ通信
+</footer>
+
+<script>
+/* お店ごと: 名前をタップで開く。マップの四角から来たときは、そのお店を開いておく */
+(function () {
+  function openTo(id) {
+    var el = id && document.getElementById(id);
+    if (el && el.tagName === 'DETAILS') el.open = true;
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (a) openTo(decodeURIComponent(a.getAttribute('href').slice(1)));
+  });
+  window.addEventListener('hashchange', function () { openTo(decodeURIComponent(location.hash.slice(1))); });
+  openTo(decodeURIComponent(location.hash.slice(1)));
+})();
+</script>
+</body>
+</html>

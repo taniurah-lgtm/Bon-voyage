@@ -4,6 +4,7 @@ const ITEMS = [
   { key: 'cal', href: '/calendar.html', icon: '📅', label: 'カレンダー' },
   { key: 'map', href: '/map.html', icon: '🗺️', label: 'マップ' },
   { key: 'entei', href: '/entei.html', icon: '🏫', label: '幼稚園だより' }, // 2026-11-22「こだいら幼稚園だより」に（もと園庭開放）
+  { key: 'cafe', href: '/cafe.html', icon: '☕', label: 'カフェ情報' }, // 2026-11-23 オーナー「カフェも同じテンションでタブに」
   { key: 'teirei', href: '/teirei.html', icon: '📚', label: '児童館・図書館' },
 ];
 export function navSub(current = '') {

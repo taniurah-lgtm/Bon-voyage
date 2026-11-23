@@ -21,6 +21,7 @@
  *   位置は住所から国土地理院の住所検索で取った緯度経度（geo）。重ならないように、ずれの合計が最小になる並べ方を選ぶ。
  */
 import { navSub } from './lib/nav.mjs';
+import { layoutTiles } from './lib/tilemap.mjs';
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const SRC = 'data/entei.json';
@@ -120,49 +121,19 @@ data.places.sort((a, b) => townRank(a.town) - townRank(b.town) || a.name.localeC
 // ── 幼稚園マップ（マスへの割り当て）──────────────────────────
 // 園と駅を、実際の位置にいちばん近いマスへ。ずれの合計が小さくなるまで入れ替える（決まった結果になる）。
 const M = data.map;
-const C = M.cols, R = M.rows, B = M.bounds;
-const YS = 0.55; // 縦のずれを軽く見る（小平は東西に長い。マスは横長なので、縦の1マスは実際より短い）
-const norm = (lat, lon) => [(lon - B.w) / (B.e - B.w), (B.n - lat) / (B.n - B.s)];
+const C = M.cols, R = M.rows;
 const nodes = [
-  ...data.places.map((p) => ({ id: p.key, w: 1, pos: norm(p.geo.lat, p.geo.lon), place: p })),
-  ...M.stations.map((s, i) => ({ id: `st${i}`, w: 0.7, pos: norm(s.lat, s.lon), station: s })),
+  ...data.places.map((p) => ({ id: p.key, w: 1, lat: p.geo.lat, lon: p.geo.lon, place: p })),
+  ...M.stations.map((s, i) => ({ id: `st${i}`, w: 0.7, lat: s.lat, lon: s.lon, station: s })),
 ];
-for (const n of nodes) {
-  const [x, y] = n.pos;
-  if (x < 0 || x > 1 || y < 0 || y > 1) problems.push(`${n.place?.name || n.station.name}: 小平の外枠（map.bounds）の外にある`);
-}
-if (nodes.length > C * R) problems.push(`マスが足りない（${nodes.length} > ${C}×${R}）`);
+const lay = layoutTiles({ cols: C, rows: R, bounds: M.bounds, ys: 0.55, nodes });
+for (const id of lay.outside) { const n = nodes.find((x) => x.id === id); problems.push(`${n.place?.name || n.station.name}: 小平の外枠（map.bounds）の外にある`); }
+if (lay.tooMany) problems.push(`マスが足りない（${nodes.length} > ${C}×${R}）`);
 if (problems.length) {
   console.error('🔴 組めません:\n  ' + problems.join('\n  '));
   process.exit(1);
 }
-const cellCenter = (c) => [((c % C) + 0.5) / C, (Math.floor(c / C) + 0.5) / R];
-const cost = (n, c) => { const [x, y] = cellCenter(c); return n.w * ((n.pos[0] - x) ** 2 + ((n.pos[1] - y) * YS) ** 2); };
-const at = new Map(); // node.id → cell
-{
-  const free = new Set([...Array(C * R).keys()]);
-  const left = nodes.slice();
-  while (left.length) {
-    let best = null;
-    for (const n of left) for (const c of free) {
-      const v = cost(n, c);
-      if (!best || v < best.v - 1e-12 || (Math.abs(v - best.v) <= 1e-12 && (n.id + c) < (best.n.id + best.c))) best = { v, n, c };
-    }
-    at.set(best.n.id, best.c); free.delete(best.c); left.splice(left.indexOf(best.n), 1);
-  }
-  let improved = true;
-  while (improved) {
-    improved = false;
-    for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++) {
-      const a = nodes[i], b = nodes[j], ca = at.get(a.id), cb = at.get(b.id);
-      if (cost(a, cb) + cost(b, ca) < cost(a, ca) + cost(b, cb) - 1e-12) { at.set(a.id, cb); at.set(b.id, ca); improved = true; }
-    }
-    for (const n of nodes) for (const c of [...free]) {
-      if (cost(n, c) < cost(n, at.get(n.id)) - 1e-12) { free.add(at.get(n.id)); free.delete(c); at.set(n.id, c); improved = true; }
-    }
-  }
-}
-const byCell = new Map([...at].map(([id, c]) => [c, nodes.find((n) => n.id === id)]));
+const byCell = new Map([...lay.at].map(([id, c]) => [c, nodes.find((n) => n.id === id)]));
 
 // ── 部品 ──────────────────────────────────────────────
 const mapUrl = (p) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(short(p.name) + ' ' + p.addr)}`;

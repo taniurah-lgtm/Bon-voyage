@@ -27,6 +27,10 @@ echo "── 園庭開放・未就園児の会（園ごとのまとめ）"
 node scripts/build-entei.mjs
 
 echo
+echo "── 子連れで入りやすいカフェ（カフェ情報）"
+node scripts/build-cafe.mjs
+
+echo
 echo "── 児童館・図書館・子育てひろばの定例"
 node scripts/build-teirei.mjs
 

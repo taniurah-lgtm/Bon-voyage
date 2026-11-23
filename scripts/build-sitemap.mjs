@@ -20,6 +20,7 @@ const PAGES = {
   'calendar.html': { freq: 'weekly', pri: '0.9' },
   'map.html': { freq: 'weekly', pri: '0.9' },
   'entei.html': { freq: 'weekly', pri: '0.8' },
+  'cafe.html': { freq: 'weekly', pri: '0.8' },
   'teirei.html': { freq: 'weekly', pri: '0.8' },
   'issues.html': { freq: 'weekly', pri: '0.8' },
   'ai/index.html': { loc: '/ai/', freq: 'weekly', pri: '0.7' },
