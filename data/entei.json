@@ -345,6 +345,7 @@
       },
       "homepage": "https://himeyuri.ed.jp/",
       "url": "https://himeyuri.ed.jp/pre/hiyoko/",
+      "instagram": "himeyuri_kodomoen_kodaira",
       "checked": "2026-10-05",
       "programs": [
         {
@@ -442,6 +443,7 @@
       },
       "homepage": "https://sensin.ed.jp/",
       "url": "https://sensin.ed.jp/archives/info/event",
+      "instagram": "senshin_youchien_kodaira",
       "checked": "2026-10-05",
       "programs": [
         {
@@ -771,10 +773,11 @@
       },
       "homepage": "https://maruyama-ac.jp/",
       "url": "https://maruyama-ac.jp/support/",
+      "instagram": "maruyama.youchien",
       "checked": "2026-10-05",
       "programs": [],
       "note": "2歳児の未就園児クラブ「まるちゃんクラブ」（入会制）があります。今年度の詳しい案内は準備中とのことです。"
     }
   ],
-  "_instagram": "places[].instagram は園の Instagram のアカウント名（@なし）。確かめ方: 2026-11-22 園のホームページのリンク（あおば・白梅・花小金井・みどり・りんどう・弥生台）／2026-11-23 Muse の答えを Claude が確かめた（神明＝法人 keyakinomori.org のトップにリンク、なおび・たかのだい・なみき＝プロフィールの名前を開いて確認）。ひめゆり・洗心・まるやまは Muse の答えのみ（オーナーのスクショ待ち）。めぐみ（小平学園）・若竹は見つからず"
+  "_instagram": "places[].instagram は園の Instagram のアカウント名（@なし）。確かめ方: 2026-11-22 園のホームページのリンク（あおば・白梅・花小金井・みどり・りんどう・弥生台）／2026-11-23 Muse の答えを Claude が確かめた（神明＝法人 keyakinomori.org のトップにリンク、なおび・たかのだい・なみき＝プロフィールの名前を開いて確認）。ひめゆり・洗心・まるやま＝2026-11-23 オーナーのプロフィールのスクショで確認。めぐみ（小平学園）・若竹は見つからず"
 }

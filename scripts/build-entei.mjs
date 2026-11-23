@@ -27,7 +27,7 @@ const SRC = 'data/entei.json';
 const OUT = 'docs/homepage/entei.html';
 const SITE = 'https://bonvoya.nicomaru.tokyo';
 const STALE_DAYS = 45;
-const SOON_DAYS = 28; // 「これからの幼稚園だより」で最初に見せる日数。それより先は「もっと先まで」で開く
+const SOON_DAYS = 28; // 「今後の行事」で最初に見せる日数。それより先は「もっと先まで」で開く
 
 const data = JSON.parse(readFileSync(SRC, 'utf8'));
 const todayJST = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
@@ -254,7 +254,7 @@ function place(p) {
     </details>`;
 }
 
-// 「これからの幼稚園だより」の材料（日付のあるもの。種類を問わず）
+// 「今後の行事」の材料（日付のあるもの。種類を問わず）
 const soon = [];
 for (const p of data.places) {
   for (const g of p.programs) {
@@ -359,7 +359,7 @@ const html = `<!doctype html>
   .kyo-t b { display: block; font-family: var(--maru); font-weight: 800; font-size: .95rem; color: var(--ink); }
   .kyo .lk { flex: none; }
 
-  /* これからの幼稚園だより */
+  /* 今後の行事 */
   .soon { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); box-shadow: var(--shadow-soft); padding: .9rem 1rem; }
   .soon h3 { font-family: var(--maru); font-weight: 800; font-size: .92rem; margin: 0 0 .45rem; color: var(--sky-deep); }
   .filt { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0 0 .5rem; }
@@ -424,12 +424,6 @@ const html = `<!doctype html>
   .acts { margin-left: auto; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .35rem; }
   .lk { display: inline-flex; align-items: center; min-height: 36px; font-size: .78rem; font-weight: 700; text-decoration: none; color: var(--link-ink); border: 1px solid var(--line-strong); border-radius: 999px; padding: 0 .75rem; background: var(--surface); white-space: nowrap; }
 
-  /* 園の目次 */
-  .idx { display: grid; gap: .3rem; margin: 0 0 1.1rem; font-size: .84rem; }
-  .idx div { display: grid; grid-template-columns: 4.6em 1fr; align-items: baseline; gap: .7rem; }
-  .idx .it { font-size: .74rem; color: var(--ink-faint); }
-  .idx .il { display: flex; flex-wrap: wrap; gap: 0 .8rem; }
-  .idx a { font-weight: 700; color: var(--link-ink); text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
 
   .tips { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .9rem 1.1rem; }
   .tips ul { margin: 0; padding-left: 1.1rem; font-size: .86rem; line-height: 1.75; }
@@ -468,8 +462,8 @@ ${navSub('entei')}
     <a class="lk" href="${esc(K.url)}" target="_blank" rel="noopener" data-goatcounter-click="幼稚園｜協会">協会のホームページ</a>
   </aside>` : ''}
 
-  <h2 class="sec">これからの幼稚園だより</h2>
-  <section class="soon" aria-label="これからの幼稚園だより">
+  <h2 class="sec">今後の行事</h2>
+  <section class="soon" aria-label="今後の行事">
     <div class="filt" role="group" aria-label="種類でしぼる">
       <button type="button" data-f="all" aria-pressed="true">すべて</button>
       ${kindsUsed.map((k) => `<button type="button" data-f="${k}" aria-pressed="false">${KINDS[k].label}</button>`).join('\n      ')}
@@ -488,13 +482,6 @@ ${navSub('entei')}
 
   <h2 class="sec">園ごとの案内</h2>
   <p class="lead">在園していなくても参加できる会を載せています。2歳児クラスのような入会制のプレ教室は、このページでは扱っていません。<b>園の名前をタップすると、くわしい案内が開きます。</b></p>
-  <nav class="idx" aria-label="園の一覧">
-    ${(() => {
-      const by = new Map();
-      for (const p of data.places) by.set(p.town, [...(by.get(p.town) || []), p]);
-      return [...by].map(([t, ps]) => `<div><span class="it">${esc(t)}</span><span class="il">${ps.map((p) => `<a href="#${p.key}">${esc(short(p.name))}</a>`).join('')}</span></div>`).join('\n    ');
-    })()}
-  </nav>
   ${data.places.map(place).join('\n  ')}
 
   <h2 class="sec">行く前に</h2>
@@ -507,7 +494,7 @@ ${navSub('entei')}
   </div>
 
   <p class="about">各園の公式ページ（園のInstagramを含む）と、園からいただいたお知らせをもとに、園ごとに確かめた日を書いています。まとめサイトからの転載はしていません。<br>
-  内容のまちがいや、載っていない会に気づいたら、<a href="/#contact">お問い合わせ</a>から教えてください。園の方からのご連絡も歓迎です。</p>
+  内容のまちがいや、載っていない会に気づいたら、<a href="/#contact">お問い合わせ</a>から教えてください。</p>
 
   <div class="nav-pills">
     <a href="/calendar.html">おでかけカレンダー</a>
@@ -554,7 +541,7 @@ ${navSub('entei')}
     if (!left) { ul.hidden = true; if (!g.querySelector('.more:not(.done)')) done.hidden = false; }
   });
 
-  /* これからの幼稚園だより: 種類でしぼる・4週間より先は「もっと先まで」で開く */
+  /* 今後の行事: 種類でしぼる・4週間より先は「もっと先まで」で開く */
   var kind = 'all', all = false;
   var rows = [].slice.call(document.querySelectorAll('#soon li[data-d]'));
   var heads = [].slice.call(document.querySelectorAll('#soon li.mh'));
