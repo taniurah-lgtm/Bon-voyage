@@ -86,7 +86,15 @@ const nodes = [
   ...cafes.map((c) => ({ id: c.id, w: 1, lat: c.geo.lat, lon: c.geo.lon, cafe: c })),
   ...M.stations.map((s, i) => ({ id: `st${i}`, w: M.stationWeight ?? 0.7, lat: s.lat, lon: s.lon, station: s })),
 ];
-const lay = layoutTiles({ cols: C, rows: R, bounds: M.bounds, ys: M.ys ?? 0.9, nodes });
+// 決まったマス（map.pins: { お店のid か 駅の名前: [列, 段] }・0から数える）
+const fixed = {};
+for (const [k, [col, row]] of Object.entries(M.pins || {})) {
+  const n = nodes.find((x) => x.id === k || x.station?.name === k);
+  if (!n) problems.push(`map.pins「${k}」がお店にも駅にも無い`);
+  else if (col < 0 || col >= C || row < 0 || row >= R) problems.push(`map.pins「${k}」のマス [${col}, ${row}] が外にある`);
+  else fixed[n.id] = row * C + col;
+}
+const lay = layoutTiles({ cols: C, rows: R, bounds: M.bounds, ys: M.ys ?? 0.9, nodes, fixed });
 for (const id of lay.outside) { const n = nodes.find((x) => x.id === id); problems.push(`${n.cafe?.name || n.station.name}: マップの外枠（map.bounds）の外にある`); }
 if (lay.tooMany) problems.push(`マスが足りない（${nodes.length} > ${C}×${R}）`);
 if (problems.length) { console.error('🔴 組めません:\n  ' + problems.join('\n  ')); process.exit(1); }
