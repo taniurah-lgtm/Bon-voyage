@@ -1,91 +1,130 @@
 {
-  "_about": "習い事ガイド（2026-11-23 オーナー決定・docs/sponsor-plan.md §16）。公開ページ docs/homepage/lessons.html の元。node scripts/build-lessons.mjs で組む。launch が true になるまでホームページには書き出さない（--preview で確認用だけ作る）。kind: public＝市・公民館・体育館など（無料で載せる）／pr＝掲載料をいただいた教室（カードに PR）。verified が true のものだけ公開ページに出る。書くのは公式（施設・教室の案内）か、教室からいただいた事実だけ。「おすすめ」「No.1」など比べる言葉は書かない。並びはジャンルごとに五十音（yomi）。払った額・時期で順番を変えない。",
+  "_about": "習い事ガイド（2026-11-23 オーナー決定・docs/sponsor-plan.md §16）。公開ページ docs/homepage/lessons.html の元。node scripts/build-lessons.mjs で組む。🔁 2026-11-23 オーナー「無料の教室（市主催）を紹介する義理はない。全部、民間の有料にしましょう」→ 載せるのは掲載料をいただいた民間の教室だけ（すべて PR）。launch が true になるまでホームページには書き出さない（公開は5教室そろってから。最初の3か月の無料は公開した日から数える）。--preview で確認用だけ作る。verified が true のものだけ公開ページに出る。書くのは教室の公式の案内か、教室からいただいた事実だけ。「おすすめ」「No.1」など比べる言葉は書かない。並びはジャンルごとに五十音（yomi）。払った額・時期で順番を変えない。",
   "launch": false,
   "genres": [
-    { "key": "taiso", "label": "体操・運動" },
-    { "key": "dance", "label": "ダンス" },
-    { "key": "swim", "label": "水泳" },
-    { "key": "ball", "label": "球技" },
-    { "key": "budo", "label": "武道" },
-    { "key": "music", "label": "音楽" },
-    { "key": "english", "label": "英語" },
-    { "key": "art", "label": "工作・アート" },
-    { "key": "manabi", "label": "学び" }
+    {
+      "key": "taiso",
+      "label": "体操・運動"
+    },
+    {
+      "key": "dance",
+      "label": "ダンス"
+    },
+    {
+      "key": "swim",
+      "label": "水泳"
+    },
+    {
+      "key": "ball",
+      "label": "球技"
+    },
+    {
+      "key": "budo",
+      "label": "武道"
+    },
+    {
+      "key": "music",
+      "label": "音楽"
+    },
+    {
+      "key": "english",
+      "label": "英語"
+    },
+    {
+      "key": "art",
+      "label": "工作・アート"
+    },
+    {
+      "key": "manabi",
+      "label": "学び"
+    }
   ],
   "ages": {
     "baby": "0〜2歳",
     "pre": "年少〜年長",
     "elem": "小学生"
   },
-  "places": {
-    "gym": {
-      "name": "小平市民総合体育館",
-      "where": "小平市津田町1-1-1",
-      "mapq": "小平市民総合体育館",
-      "url": "https://sports-kodaira.jp/school",
-      "src": "体育施設の教室案内"
+  "lessons": [],
+  "min_launch": 5,
+  "_samples": "営業で見せる見本のカード（--preview と、のちの /kyosan/ の見本だけ）。公開ページには出さない",
+  "samples": [
+    {
+      "id": "sample-pr",
+      "kind": "pr",
+      "verified": true,
+      "sample": true,
+      "name": "〇〇こども英語教室",
+      "yomi": "まるまるこどもえいごきょうしつ",
+      "genre": "english",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "pr": "〇〇こども英語教室",
+      "who": "年少〜小学6年生",
+      "when": "月曜・水曜・金曜 15:30〜（学年ごとのクラス）",
+      "cost": "月謝 〇,〇〇〇円〜（教材費は別）",
+      "trial": "無料の体験レッスンあり（予約制）",
+      "book": "教室のホームページの体験申込みから",
+      "where": "花小金井駅から歩いて〇分",
+      "mapq": "花小金井駅",
+      "notes": [
+        "1クラス6人まで",
+        "見学は、体験レッスンの日に保護者の方もご一緒に"
+      ],
+      "url": "https://bonvoya.nicomaru.tokyo/",
+      "checked": "2026-11-23"
+    },
+    {
+      "id": "sample-swim",
+      "verified": true,
+      "sample": true,
+      "name": "〇〇スイミングクラブ",
+      "yomi": "まるまるすいみんぐくらぶ",
+      "genre": "swim",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "pr": "〇〇スイミングクラブ",
+      "who": "3歳〜小学6年生",
+      "when": "月曜〜土曜（学年・級ごとの時間）",
+      "cost": "月謝 〇,〇〇〇円〜（週1回）",
+      "trial": "体験レッスンあり（予約制）",
+      "book": "クラブの受付か、ホームページから",
+      "where": "〇〇駅から歩いて〇分",
+      "mapq": "小平駅",
+      "notes": [
+        "振替は月2回まで",
+        "送迎バスあり（ルートはクラブの案内で）"
+      ],
+      "url": "https://bonvoya.nicomaru.tokyo/",
+      "checked": "2026-11-23"
+    },
+    {
+      "id": "sample-piano",
+      "verified": true,
+      "sample": true,
+      "name": "〇〇ピアノ教室",
+      "yomi": "まるまるぴあのきょうしつ",
+      "genre": "music",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "pr": "〇〇ピアノ教室",
+      "who": "年少〜小学6年生",
+      "when": "火曜・木曜・土曜（個人レッスン・30分）",
+      "cost": "月謝 〇,〇〇〇円〜（月3回）",
+      "trial": "体験レッスン1回あり",
+      "book": "教室のInstagramのDMから",
+      "where": "花小金井駅から歩いて〇分（番地は申込みのあとにご案内）",
+      "mapq": "花小金井駅",
+      "notes": [
+        "発表会は年1回（参加は自由）"
+      ],
+      "url": "https://bonvoya.nicomaru.tokyo/",
+      "checked": "2026-11-23"
     }
-  },
-  "lessons": [
-    {
-      "id": "gym-yoji-taiso", "kind": "public", "place": "gym", "verified": false,
-      "name": "幼児体操", "yomi": "ようじたいそう", "genre": "taiso", "ages": ["pre"],
-      "who": "年中・年長", "when": "火曜・木曜 15:30〜16:20（どちらか）",
-      "cost": "1回1,270円×その月の回数（はじめの月だけ2か月分）", "trial": null, "book": "体育施設の教室申込みから。空きのある教室は随時受付",
-      "notes": ["マット・跳び箱・鉄棒などの基本の動きを、遊びながら身につける体操教室"],
-      "checked": null, "why": "2026-11-23 教室申込サイト（tac-sports.co.jp/kodaira・2025年度の一覧のまま）の A203・A403。今年度の曜日・料金は体育施設の教室案内（sports-kodaira.jp/school・こちらからは開けない）で確かめる＝オーナーのスクショ待ち"
-    },
-    {
-      "id": "gym-undo-noryoku", "kind": "public", "place": "gym", "verified": false,
-      "name": "運動能力向上プログラム", "yomi": "うんどうのうりょくこうじょうぷろぐらむ", "genre": "taiso", "ages": ["pre"],
-      "who": "年中・年長", "when": "水曜 15:30〜16:20",
-      "cost": "1回1,270円×その月の回数（はじめの月だけ2か月分）", "trial": null, "book": "体育施設の教室申込みから。空きのある教室は随時受付",
-      "notes": ["スラックラインやバランスストーンなどの道具で、体幹・バランス・瞬発力をきたえる"],
-      "checked": null, "why": "同上 A303"
-    },
-    {
-      "id": "gym-shogaku-taiso", "kind": "public", "place": "gym", "verified": false,
-      "name": "小学生体操・チャレンジ体操", "yomi": "しょうがくせいたいそう", "genre": "taiso", "ages": ["elem"],
-      "who": "小学生体操は小学1〜3年生、チャレンジ体操は小学生", "when": "小学生体操は火曜、チャレンジ体操は木曜。どちらも 16:30〜17:20",
-      "cost": "1回1,270円×その月の回数（はじめの月だけ2か月分）", "trial": null, "book": "体育施設の教室申込みから。空きのある教室は随時受付",
-      "notes": ["マット・跳び箱・鉄棒の基本の技から、新しい技への挑戦まで"],
-      "checked": null, "why": "同上 A204・A404"
-    },
-    {
-      "id": "gym-slackline", "kind": "public", "place": "gym", "verified": false,
-      "name": "スラックライン教室", "yomi": "すらっくらいんきょうしつ", "genre": "taiso", "ages": ["elem"],
-      "who": "小学生", "when": "水曜 16:30〜17:20",
-      "cost": "1回1,270円×その月の回数（はじめの月だけ2か月分）", "trial": null, "book": "体育施設の教室申込みから。空きのある教室は随時受付",
-      "notes": ["細いラインの上でバランスをとり、体幹と集中力をきたえる"],
-      "checked": null, "why": "同上 A304"
-    },
-    {
-      "id": "gym-rhythm-dance", "kind": "public", "place": "gym", "verified": false,
-      "name": "リズムダンス", "yomi": "りずむだんす", "genre": "dance", "ages": ["pre", "elem"],
-      "who": "年中〜小学2年生", "when": "金曜 15:30〜16:20",
-      "cost": "1回1,270円×その月の回数（はじめの月だけ2か月分）", "trial": null, "book": "体育施設の教室申込みから。空きのある教室は随時受付",
-      "notes": ["ダンスや習い事がはじめての子向け。ダンスの基礎とリズム感"],
-      "checked": null, "why": "同上 A503"
-    },
-    {
-      "id": "gym-hiphop-jazz", "kind": "public", "place": "gym", "verified": false,
-      "name": "HIP HOP・JAZZダンス（初中級）", "yomi": "ひっぷほっぷじゃずだんす", "genre": "dance", "ages": ["elem"],
-      "who": "小学生", "when": "金曜 16:30〜17:20",
-      "cost": "1回1,270円×その月の回数（はじめの月だけ2か月分）", "trial": null, "book": "体育施設の教室申込みから。空きのある教室は随時受付",
-      "notes": ["少しむずかしいダンスに挑戦したい子向け。基礎・柔軟・ダンスの技術"],
-      "checked": null, "why": "同上 A504"
-    }
-  ],
-  "sample": {
-    "_about": "営業で見せる見本のカード（--preview と、のちの /kyosan/ の見本だけ）。公開ページには出さない",
-    "id": "sample-pr", "kind": "pr", "verified": true, "sample": true,
-    "name": "〇〇こども英語教室", "yomi": "まるまるこどもえいごきょうしつ", "genre": "english", "ages": ["pre", "elem"],
-    "pr": "〇〇こども英語教室",
-    "who": "年少〜小学6年生", "when": "月曜・水曜・金曜 15:30〜（学年ごとのクラス）",
-    "cost": "月謝 〇,〇〇〇円〜（教材費は別）", "trial": "無料の体験レッスンあり（予約制）", "book": "教室のホームページの体験申込みから",
-    "where": "花小金井駅から歩いて〇分", "mapq": "花小金井駅",
-    "notes": ["1クラス6人まで", "見学は、体験レッスンの日に保護者の方もご一緒に"],
-    "url": "https://bonvoya.nicomaru.tokyo/",
-    "checked": "2026-11-23"
-  }
+  ]
 }

@@ -6,7 +6,8 @@
  *   node scripts/build-lessons.mjs --preview <出力> … 確認用。確認中の教室（「確認中」の札）と、営業の見本のPRカード（「見本」の札）も入れる
  *
  * 決まり（§16）:
- *   - 市・公民館・体育館の教室は無料で載せる（kind: public）。掲載料をいただいた教室は kind: pr → カードの頭に「PR」
+ *   - 🔁 2026-11-23 オーナー「無料の教室（市主催）を紹介する義理はない。全部、民間の有料に」→ 載せるのは掲載料をいただいた教室だけ。どのカードも頭に「PR」
+ *   - 公開は min_launch（5）教室そろってから（1〜2教室のページを読者に見せない）
  *   - 並びはジャンルごとに五十音（yomi）。払った額・時期で順番を変えない
  *   - 書くのは公式か、教室からいただいた事実だけ。「おすすめ」「No.1」など比べる言葉は書かない（止める）
  *   - LINE本文には載せない・リンクもしない（このページはホームページの中だけ）
@@ -40,46 +41,35 @@ const fmtDay = (iso) => `${+iso.slice(0, 4)}年${+iso.slice(5, 7)}月${+iso.slic
 const problems = [];
 const GENRES = data.genres || [];
 const AGES = data.ages || {};
-const PLACES = data.places || {};
+const MIN = data.min_launch ?? 5;
 
 let list = (data.lessons || []).slice();
-if (PREVIEW && data.sample) list.push(data.sample);
+if (PREVIEW) list.push(...(data.samples || []));
 const skipped = list.filter((l) => l.verified !== true);
 if (!PREVIEW) list = list.filter((l) => l.verified === true);
+if (!PREVIEW && list.length < MIN) { console.error(`🔴 公開は${MIN}教室そろってから（いま${list.length}教室）。data/lessons.json の launch を false に戻すか、教室を足す`); process.exit(1); }
 
 for (const l of list) {
   const nm = l.name || l.id;
-  for (const f of ['id', 'name', 'yomi', 'genre', 'who', 'when', 'cost', 'book']) if (!l[f]) problems.push(`${nm}: ${f} が無い`);
+  for (const f of ['id', 'name', 'yomi', 'genre', 'who', 'when', 'cost', 'book', 'pr', 'where', 'url']) if (!l[f]) problems.push(`${nm}: ${f} が無い`);
   if (!GENRES.some((g) => g.key === l.genre)) problems.push(`${nm}: ジャンル「${l.genre}」は genres に無い`);
   if (!(l.ages || []).length || l.ages.some((a) => !AGES[a])) problems.push(`${nm}: ages（${Object.keys(AGES).join('/')}）が無いか、違う`);
-  if (!['public', 'pr'].includes(l.kind)) problems.push(`${nm}: kind は public か pr`);
-  if (l.kind === 'pr' && !l.pr) problems.push(`${nm}: PR の教室は pr（教室の名前）を書く`);
-  if (l.kind === 'public' && l.pr) problems.push(`${nm}: 無料の教室に pr が付いている`);
-  if (l.place && !PLACES[l.place]) problems.push(`${nm}: place「${l.place}」は places に無い`);
-  if (!l.place && !(l.where && l.url)) problems.push(`${nm}: 場所（where）と公式（url）が無い`);
   if (!PREVIEW && !l.checked) problems.push(`${nm}: checked（公式を確かめた日）が無い`);
   const shown = [l.name, l.who, l.when, l.cost, l.trial, l.book, l.where, ...(l.notes || [])].filter(Boolean).join(' ');
   if (PRAISE.test(shown)) problems.push(`${nm}: 比べる言葉・評価の言葉が入っている（${shown.match(PRAISE)[0]}）`);
 }
 if (problems.length) { for (const p of problems) console.error('🔴 ' + p); process.exit(1); }
 
-const placeOf = (l) => (l.place ? PLACES[l.place] : null);
 const ageChips = (l) => l.ages.map((a) => `<span class="ag ag-${a}">${esc(AGES[a])}</span>`).join('');
 
 function card(l) {
-  const p = placeOf(l);
-  const where = l.where || (p && `${p.name}（${p.where}）`);
-  const url = l.url || (p && p.url);
-  const mq = l.mapq || (p && p.mapq) || l.name;
-  const org = l.kind === 'pr' ? '' : (p ? p.name : (l.org || ''));
+  const where = l.where, url = l.url, mq = l.mapq || l.name;
   const badge = l.sample ? '<span class="flag">見本</span>' : (l.verified !== true ? '<span class="flag">確認中</span>' : '');
-  const src = l.kind === 'pr'
-    ? `教室からいただいた内容です${l.checked ? `（${fmtDay(l.checked)}）` : ''}。`
-    : (l.checked ? `${fmtDay(l.checked)}に、${esc(p ? p.src : '公式の案内')}で確かめました。` : '公式の案内で確かめているところです。');
+  const src = `教室からいただいた内容と、教室の案内に書いてあることです${l.checked ? `（${fmtDay(l.checked)}）` : ''}。`;
   const kv = (k, v) => (v ? `<div class="kv"><span class="k">${k}</span><span class="v">${esc(v)}</span></div>` : '');
   return `<details class="ls" id="${esc(l.id)}" data-ages="${esc(l.ages.join(' '))}">
       <summary class="ls-h">
-        <span class="ls-n">${l.kind === 'pr' ? `<span class="pr">PR</span><span class="pr-by">${esc(l.pr)}のご協賛で掲載</span>` : ''}<h3>${esc(l.name)}${badge}</h3>${org ? `<span class="org">${esc(org)}</span>` : ''}<span class="ags">${ageChips(l)}</span></span>
+        <span class="ls-n"><span class="pr">PR</span><span class="pr-by">${esc(l.pr)}のご協賛で掲載</span><h3>${esc(l.name)}${badge}</h3><span class="ags">${ageChips(l)}</span></span>
         <span class="chev" aria-hidden="true"></span>
       </summary>
       <div class="ls-b">
@@ -95,7 +85,7 @@ function card(l) {
         <div class="ls-f">
           <span class="chk">${src}</span>
           <span class="acts">
-            ${url ? `<a class="lk" href="${esc(url)}" target="_blank" rel="noopener" data-goatcounter-click="${esc('習い事公式｜' + l.name)}">${l.kind === 'pr' ? '教室のページ' : '公式'}</a>` : ''}
+            ${url ? `<a class="lk" href="${esc(url)}" target="_blank" rel="noopener" data-goatcounter-click="${esc('習い事公式｜' + l.name)}">教室のページ</a>` : ''}
             <a class="lk" href="${esc(mapUrl(mq))}" target="_blank" rel="noopener" data-goatcounter-click="${esc('習い事地図｜' + l.name)}">地図</a>
           </span>
         </div>
@@ -106,7 +96,7 @@ function card(l) {
 const byGenre = GENRES.map((g) => ({ g, items: list.filter((l) => l.genre === g.key).sort((a, b) => a.yomi.localeCompare(b.yomi, 'ja')) })).filter((x) => x.items.length);
 const n = list.length;
 const title = '習い事ガイド（小平の子どもの習い事）';
-const desc = '小平の子育て家庭が、年齢とジャンルで習い事を探せるページ。市の体育館・公民館などの教室と、掲載料をいただいた教室（PR）を、公式の案内に書いてあることで並べています。';
+const desc = '小平の子どもの習い事の教室を、年齢とジャンルで探せるページ。載っているのは、掲載料をいただいた地域の教室（PR）です。';
 
 const html = `<!doctype html>
 <html lang="ja">
@@ -195,12 +185,12 @@ ${navSub('lessons')}
   <div class="ghead-in">
     <div class="eyebrow">Bon Voyage,</div>
     <h1>習い事ガイド</h1>
-    <p class="sub">小平の子どもの習い事を、年齢とジャンルで探せます。市の体育館や公民館の教室と、地域の教室を、それぞれの公式の案内に書いてあることで並べています。</p>
+    <p class="sub">小平の子どもの習い事の教室を、年齢とジャンルで探せます。対象の年齢・曜日・費用・体験のしかたを、同じ形でそろえました。</p>
   </div>
 </header>
 
 <main class="wrap">
-  <p class="notice"><b>「PR」とある教室は、教室から掲載料をいただいて載せています。</b>市の体育館・公民館などの教室は、無料で載せています。並びはジャンルごとの五十音順で、掲載料で順番は変えていません。</p>
+  <p class="notice"><b>このページの教室は、すべて教室から掲載料をいただいて載せています（PR）。</b>書いてあるのは、教室からいただいた内容と、教室の案内にあることです。並びはジャンルごとの五十音順です。</p>
 
   <div class="filt" role="group" aria-label="年齢でしぼる">
     <button type="button" data-f="all" aria-pressed="true">すべての年齢</button>
