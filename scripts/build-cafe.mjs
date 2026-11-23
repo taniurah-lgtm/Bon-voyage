@@ -278,10 +278,10 @@ ${navSub('cafe')}
 <main class="wrap">
   <h2 class="sec">カフェマップ</h2>
   ${mapHtml}
-  <p class="mapcap"><b>お店の四角をタップすると、下の案内が開きます。</b>${icon('play', 'tic')} はキッズスペースやおもちゃのあるお店です。</p>
+  <p class="mapcap"><b>お店の四角をタップすると、下の案内が開きます。</b><br>${icon('play', 'tic')} はキッズスペースやおもちゃのあるお店です。</p>
 
   <h2 class="sec">お店ごとの案内</h2>
-  <p class="lead">花小金井駅から近い順です。キッズスペース・子ども用の椅子・おむつ替えなど、お店の案内に書いてあることだけを載せ、書いていないことは「要確認」としています。<b>お店の名前をタップすると、くわしい案内が開きます。</b>下のボタンで、設備のあるお店だけにしぼれます。</p>
+  <p class="lead">花小金井駅から近い順です。キッズスペース・子ども用の椅子・おむつ替えなど、お店の案内に書いてあることだけを載せ、書いていないことは「要確認」としています。<b>お店の名前をタップすると、くわしい案内が開きます。</b><br>下のボタンで、設備のあるお店だけにしぼれます。</p>
   <div class="filt" role="group" aria-label="設備でしぼる">
     <button type="button" data-f="all" aria-pressed="true">すべて</button>
     ${Object.keys(TAGS).filter((t) => cafes.some((c) => (c.tags || []).includes(t))).map((t) => `<button type="button" data-f="${t}" aria-pressed="false">${icon(t)}${esc(TAGS[t].label)}<small>${cafes.filter((c) => (c.tags || []).includes(t)).length}</small></button>`).join('\n    ')}
