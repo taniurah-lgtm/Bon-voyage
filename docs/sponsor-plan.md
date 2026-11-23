@@ -718,4 +718,10 @@
 
 ### 作る順
 1. ページ（市・公民館の教室＋見本のカード1枚）を作る（`data/lessons.json` → `docs/homepage/lessons.html`）
-2. それをスマホで見せて営業
+   - ✅ **2026-11-23 作り（データ・`scripts/build-lessons.mjs`）ができた。まだ公開しない**（`launch: false` のあいだは `docs/homepage/` に書き出さない）。
+     確認用は `node scripts/build-lessons.mjs --preview <出力先>`（確認中の教室に「確認中」、営業の見本に「見本」の札）
+   - 中身: `kind: public`（市・体育館・公民館。無料）／`kind: pr`（掲載料。カードの頭に「PR　〇〇のご協賛で掲載」）。`verified: true` のものだけ公開ページに出る。ジャンルごとに五十音（`yomi`）。比べる言葉（おすすめ・No.1・必ず上達など）はビルドが止める
+   - 🔴 **体育館の子どもの教室（幼児体操・小学生体操・リズムダンスなど6件）は「確認中」**: 教室申込サイト（tac-sports.co.jp/kodaira）が2025年度の一覧のまま。今年度は体育施設の教室案内（sports-kodaira.jp/school）で確かめるが、**こちらからは開けない（403）→ オーナーのスクショ**
+   - まだ足りない: 公民館・児童館の子どもの教室やサークル、地域のスポーツクラブ（少年団）。公式で確かめられたものから足す
+2. 公開するとき: `launch: true` → ナビの6つ目（`scripts/lib/nav.mjs`）・`build-site.sh`・`build-sitemap`・`check-pages`・年齢別ページの下のリンク・`/kyosan/` に習い事ガイドの欄（料金・約束）
+3. それをスマホで見せて営業（配り方は上の「配り方」）
