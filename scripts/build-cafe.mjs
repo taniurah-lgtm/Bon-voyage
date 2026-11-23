@@ -50,6 +50,8 @@ for (const c of cafes) {
   if (c.geo && (typeof c.geo.lat !== 'number' || typeof c.geo.lon !== 'number')) problems.push(`${c.name}: geo の lat/lon は数で`);
   if (c.checked && daysBetween(c.checked, todayJST) > STALE_DAYS) warn.push(`${c.name}: 確かめてから ${daysBetween(c.checked, todayJST)} 日。営業時間と休みを、お店の発信で見直す`);
   const shown = [c.name, c.area, c.where, c.hours, ...(c.kids || []), ...(c.unsure || []), c.more].filter(Boolean).join(' ');
+  const src = shown.match(/（[^）]*(お店の(投稿|案内|Instagram)|公式|ハイライト)[^）]*）/);
+  if (src) problems.push(`${c.name}: 出どころの括弧書き「${src[0]}」は書かない（2026-11-23 オーナー）`);
   const m = shown.match(PRAISE);
   if (m) problems.push(`${c.name}: 評価の言葉「${m[0]}」は書かない（子連れの条件だけ）`);
 }
@@ -249,7 +251,7 @@ ${navSub('cafe')}
   </div>
 
   <p class="about">お店のホームページ・Instagramを、お店ごとに確かめた日を書いています。営業日や休みは変わることがあるので、出かける前にお店の案内でご確認ください。<br>
-  内容のまちがいに気づいたら、<a href="/#contact">お問い合わせ</a>から教えてください。</p>
+  内容の誤りに気づいたら、<a href="/#contact">お問い合わせ</a>から教えてください。</p>
 
   <div class="nav-pills">
     <a href="/calendar.html">おでかけカレンダー</a>
