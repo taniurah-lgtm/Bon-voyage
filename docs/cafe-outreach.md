@@ -17,20 +17,20 @@
 
 | お店 | 送った日 | 返事 | 反映 |
 |---|---|---|---|
-| Flower Natural Food Cafe | | | |
-| ふらっと花小金井 | | | |
-| GRUAU | | | |
-| eggg Park | | | |
-| もぐもぐの森 | | | |
-| Carpe Diem Cafe | | | |
-| なっちゃんち | | | |
-| Yutaly One's Cafe | | | |
-| にことカフェ | | | |
-| Cafe&bar セルクル | | | |
-| YOUR BIG FAMILY | | | |
-| MammaCafe | | | |
-| 松尾珈琲 | | | |
-| カフェスロー | | | |
+| Flower Natural Food Cafe | 2026-11-23（DM） | | |
+| ふらっと花小金井 | 2026-11-23（DM） | | |
+| GRUAU | 2026-11-23（DM） | | |
+| eggg Park | 2026-11-23（DM） | | |
+| もぐもぐの森 | 2026-11-23（DM） | | |
+| Carpe Diem Cafe | 2026-11-23（DM） | | |
+| なっちゃんち | 2026-11-23（DM） | | |
+| Yutaly One's Cafe | 2026-11-23（DM） | | |
+| にことカフェ | 2026-11-23（DM） | | |
+| Cafe&bar セルクル | 2026-11-23（DM） | | |
+| YOUR BIG FAMILY | 2026-11-23（DM） | | |
+| MammaCafe | 2026-11-23（DM） | | |
+| 松尾珈琲 | 2026-11-23（DM） | | |
+| カフェスロー | — DMは相互フォローが必要で送れず → お問い合わせフォームから | | |
 
 ## Flower Natural Food Cafe（@flower_naturalfoodcafe）
 
@@ -296,7 +296,9 @@ https://lin.ee/YtcfjnX
 ぼんぼやーじゅ通信
 ```
 
-## カフェスロー（@cafeslow_9）
+## カフェスロー（お店のホームページの「その他のお問合せ」フォーム）
+
+InstagramのDMは相互フォローが必要で送れなかった（2026-11-23）。お店の「ご予約・お問合せ」のページ（https://cafeslow.farm/contact-us/）の「その他のお問合せ」（雑誌・撮影などの依頼もここ）から送る
 
 ```
 カフェスロー さま
