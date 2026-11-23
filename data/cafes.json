@@ -70,14 +70,15 @@
         "おむつ替えの場所"
       ],
       "more": "電話か、お店のInstagramのDMで、席の予約ができます。すぐ南東にコインパーキング。",
-      "official": "https://tomatodeer80.sakura.ne.jp/",
+      "official": "https://www.instagram.com/flower_naturalfoodcafe/",
       "mapq": "Flower Natural Food Cafe 小平市花小金井1-9-17",
       "geo": {
         "lat": 35.726509,
         "lon": 139.514267
       },
-      "checked": "2026-11-11",
-      "pages": true
+      "checked": "2026-11-23",
+      "pages": true,
+      "why": "2026-11-23 オーナーのスクショ: ホームページ（tomatodeer80.sakura.ne.jp）がオーナーの端末でも開かず、こちらからも403。お店本人の Instagram @flower_naturalfoodcafe のプロフィール「西武新宿線 花小金井駅前」「営業時間→10時〜17時半 定休日なし」「小さなお子様も大歓迎」で確認し、ボタンを Instagram に替えた"
     },
     {
       "id": "eggg-park",
