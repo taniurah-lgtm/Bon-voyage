@@ -30,7 +30,7 @@
 | YOUR BIG FAMILY | 2026-11-23（DM） | | |
 | MammaCafe | 2026-11-23（DM） | | |
 | 松尾珈琲 | 2026-11-23（DM） | | |
-| カフェスロー | — DMは相互フォローが必要で送れず → お問い合わせフォームから | | |
+| カフェスロー | 2026-11-23（お問い合わせフォーム。DMは相互フォローが必要で送れず） | | |
 
 ## Flower Natural Food Cafe（@flower_naturalfoodcafe）
 
