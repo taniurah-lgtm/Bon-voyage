@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /*
- * 習い事ガイド（2026-11-23 オーナー決定・docs/sponsor-plan.md §16）を data/lessons.json から組む。
+ * スクールガイド（2026-11-23 オーナー決定・docs/sponsor-plan.md §16。はじめの名前は「習い事ガイド」）を data/lessons.json から組む。
  *
- *   node scripts/build-lessons.mjs                 … launch が true のときだけ docs/homepage/lessons.html を書く（確かめた教室だけ）
+ *   node scripts/build-lessons.mjs                 … launch が true のときだけ docs/homepage/school.html を書く（確かめた教室だけ）
  *   node scripts/build-lessons.mjs --preview <出力> … 確認用。確認中の教室（「確認中」の札）と、営業の見本のPRカード（「見本」の札）も入れる
  *
  * 決まり（§16）:
@@ -18,7 +18,7 @@ import { navSub } from './lib/nav.mjs';
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const SRC = 'data/lessons.json';
-const OUT = 'docs/homepage/lessons.html';
+const OUT = 'docs/homepage/school.html';
 const SITE = 'https://bonvoya.nicomaru.tokyo';
 const LINE_URL = 'https://lin.ee/YtcfjnX';
 
@@ -29,7 +29,7 @@ if (pi >= 0 && !PREVIEW) { console.error('--preview のあとに出力先を書�
 
 const data = JSON.parse(readFileSync(SRC, 'utf8'));
 if (!PREVIEW && data.launch !== true) {
-  console.log('習い事ガイド: まだ公開しない（data/lessons.json の launch が true になっていない）。確認用は --preview <出力先>');
+  console.log('スクールガイド: まだ公開しない（data/lessons.json の launch が true になっていない）。確認用は --preview <出力先>');
   process.exit(0);
 }
 
@@ -87,8 +87,8 @@ function card(l) {
         <div class="ls-f">
           <span class="chk">${src}</span>
           <span class="acts">
-            ${url ? `<a class="lk" href="${esc(url)}" target="_blank" rel="noopener" data-goatcounter-click="${esc('習い事公式｜' + l.name)}">教室のページ</a>` : ''}
-            <a class="lk" href="${esc(mapUrl(mq))}" target="_blank" rel="noopener" data-goatcounter-click="${esc('習い事地図｜' + l.name)}">地図</a>
+            ${url ? `<a class="lk" href="${esc(url)}" target="_blank" rel="noopener" data-goatcounter-click="${esc('スクール公式｜' + l.name)}">教室のページ</a>` : ''}
+            <a class="lk" href="${esc(mapUrl(mq))}" target="_blank" rel="noopener" data-goatcounter-click="${esc('スクール地図｜' + l.name)}">地図</a>
           </span>
         </div>
       </div>
@@ -97,7 +97,7 @@ function card(l) {
 
 const byGenre = GENRES.map((g) => ({ g, items: list.filter((l) => l.genre === g.key).sort((a, b) => a.yomi.localeCompare(b.yomi, 'ja')) })).filter((x) => x.items.length);
 const n = list.length;
-const title = '習い事ガイド（小平の子どもの習い事）';
+const title = 'スクールガイド（小平の子どもの習い事）';
 const desc = '小平の子どもの習い事の教室を、年齢とジャンルで探せるページ。載っているのは、掲載料をいただいた地域の教室（PR）です。';
 
 const html = `<!doctype html>
@@ -108,9 +108,9 @@ const html = `<!doctype html>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <title>${title}｜ぼんぼやーじゅ通信</title>
 <meta name="description" content="${esc(desc)}">
-<link rel="canonical" href="${SITE}/lessons.html">
+<link rel="canonical" href="${SITE}/school.html">
 <meta property="og:type" content="article">
-<meta property="og:url" content="${SITE}/lessons.html">
+<meta property="og:url" content="${SITE}/school.html">
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:locale" content="ja_JP">
@@ -188,7 +188,7 @@ ${navSub('lessons')}
 <header class="ghead">
   <div class="ghead-in">
     <div class="eyebrow">Bon Voyage,</div>
-    <h1>習い事ガイド <span class="pr pr-h">PR</span></h1>
+    <h1>スクールガイド <span class="pr pr-h">PR</span></h1>
     <p class="sub">小平の子どもの習い事の教室を、年齢とジャンルで探せます。対象の年齢・曜日・費用・体験のしかたを、同じ形でそろえました。<small class="disc">載せている教室からは、掲載料をいただいています。</small></p>
   </div>
 </header>
