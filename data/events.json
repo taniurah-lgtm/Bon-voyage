@@ -6308,6 +6308,45 @@
    "source": "events/2026-11.md"
   },
   {
+   "id": "E260",
+   "name": "上宿図書館「絵本のへや」",
+   "dates": [
+    "2026-11-25"
+   ],
+   "span": null,
+   "when": "2026年11月25日(水) 11:00〜11:20",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "11:00",
+   "end": "11:20",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市立上宿図書館 2階おはなし室",
+   "mapq": "小平市立上宿図書館おはなし室",
+   "summary": "絵本の読み聞かせと手遊び。保護者も参加でき、出入り自由",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "✕",
+    "elem": "✕"
+   },
+   "cost": "無料／受付: 予約なし（直接おはなし室へ）",
+   "discount": "",
+   "target": "0〜3歳の子と保護者／定員: 10組程度",
+   "url": "https://library.kodaira.ed.jp/viewer/info.html?id=317",
+   "status": "候補",
+   "confidence": "図書館の公式の年間日程で確認（2026-10-06）。11/24 に中止の知らせは確かめていない（図書館のお知らせで中止・変更が出ることがある）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-11.md"
+  },
+  {
    "id": "E234",
    "name": "小川町二丁目児童館「離乳食講座」",
    "dates": [
@@ -6347,6 +6386,45 @@
     "date": "2026-11-12",
     "raw": "11月12日(木) 10:00から、児童館へ（電話可）。先着10組"
    },
+   "source": "events/2026-11.md"
+  },
+  {
+   "id": "E261",
+   "name": "子ども家庭支援センターの出張ひろば「0歳さんあつまれ」（鈴木公民館）",
+   "dates": [
+    "2026-11-27"
+   ],
+   "span": null,
+   "when": "2026年11月27日(金) 10:00〜11:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "11:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "鈴木公民館 和室",
+   "mapq": "子ども家庭支援センターの出張ひろば「0歳さんあつまれ」",
+   "summary": "手遊びやわらべうたを楽しみながら、親子で交流する（おたより）",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "✕",
+    "elem": "✕"
+   },
+   "cost": "無料／受付: 予約なし（当日、直接）",
+   "discount": "",
+   "target": "0歳の子と保護者。小平市在住の方（プログラムの対象）",
+   "url": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202611.pdf",
+   "status": "候補",
+   "confidence": "公式のおたよりで確認（2026-11-24）",
+   "tentative": false,
+   "deadline": null,
    "source": "events/2026-11.md"
   },
   {
@@ -6473,6 +6551,45 @@
     "date": "2026-11-19",
     "raw": "事前申込・抽選。Webフォームだけ（電話の受付なし）。申込期間 11/18(水) 11:00 〜 11/19(木) 正午 → 受付は終了"
    },
+   "source": "events/2026-11.md"
+  },
+  {
+   "id": "E262",
+   "name": "子ども家庭支援センター「おとうさんの会」",
+   "dates": [
+    "2026-11-28"
+   ],
+   "span": null,
+   "when": "2026年11月28日(土) 10:30〜11:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:30",
+   "end": "11:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市子ども家庭支援センター 子育て交流ひろば「おひさま」（小平元気村おがわ東の2階・西武拝島線 萩山駅から徒歩約5分）",
+   "mapq": "小平市子ども家庭支援センター 子育て交流ひろば「おひさま」",
+   "summary": "0歳・1歳の第一子のお父さんと子が集まって、お父さん同士で話す交流会（おたより）",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "✕",
+    "elem": "✕"
+   },
+   "cost": "無料／受付: 予約なし（当日、会場へ直接）",
+   "discount": "",
+   "target": "第一子の0歳・1歳の子と、お父さん。小平市在住の方（プログラムの対象）",
+   "url": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202611.pdf",
+   "status": "候補",
+   "confidence": "公式のおたよりで確認（2026-11-24）",
+   "tentative": false,
+   "deadline": null,
    "source": "events/2026-11.md"
   },
   {
@@ -6632,6 +6749,45 @@
    "url": "https://library.kodaira.ed.jp/viewer/info.html?id=402",
    "status": "候補",
    "confidence": "2026-11-23 に公式で再確認（日程・各館の定員・受付開始日に変更なし。中止・満員の告知も無い）。中身の裏は公式のお知らせ（2026-11-12 掲載）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-12.md"
+  },
+  {
+   "id": "E263",
+   "name": "中央図書館「絵本のへや」",
+   "dates": [
+    "2026-12-01"
+   ],
+   "span": null,
+   "when": "2026年12月1日(火) 11:00〜11:20",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "11:00",
+   "end": "11:20",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市立中央図書館 2階おはなし室（小川町）",
+   "mapq": "小平市立中央図書館おはなし室",
+   "summary": "絵本の読み聞かせ、手遊び、わらべうた。終わったあと正午まで、おはなし室が開いている",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "✕",
+    "elem": "✕"
+   },
+   "cost": "無料／受付: 予約なし（当日受付）",
+   "discount": "",
+   "target": "0〜3歳の子と保護者／定員: 12組（先着。受付の時点で多いときは抽選）",
+   "url": "https://library.kodaira.ed.jp/viewer/info.html?id=326",
+   "status": "候補",
+   "confidence": "図書館の公式の年間日程で確認（2026-10-06）。11/24 に中止の知らせは確かめていない",
    "tentative": false,
    "deadline": null,
    "source": "events/2026-12.md"
@@ -7888,7 +8044,8 @@
    "E242"
   ],
   "2026-11-25": [
-   "E171"
+   "E171",
+   "E260"
   ],
   "2026-11-12": [
    "E232"
@@ -7951,13 +8108,18 @@
   "2026-11-26": [
    "E234"
   ],
+  "2026-11-27": [
+   "E261"
+  ],
   "2026-11-28": [
    "E200",
    "E212",
-   "E217"
+   "E217",
+   "E262"
   ],
   "2026-12-01": [
-   "E237"
+   "E237",
+   "E263"
   ],
   "2026-12-02": [
    "E237"

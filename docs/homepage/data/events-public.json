@@ -5755,6 +5755,42 @@
    "cat": "spot"
   },
   {
+   "id": "E260",
+   "name": "上宿図書館「絵本のへや」",
+   "dates": [
+    "2026-11-25"
+   ],
+   "span": null,
+   "when": "2026年11月25日(水) 11:00〜11:20",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "11:00",
+   "end": "11:20",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市立上宿図書館 2階おはなし室",
+   "mapq": "小平市立上宿図書館おはなし室",
+   "summary": "絵本の読み聞かせと手遊び。保護者も参加でき、出入り自由",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "✕",
+    "elem": "✕"
+   },
+   "cost": "無料／受付: 予約なし（直接おはなし室へ）",
+   "discount": "",
+   "target": "0〜3歳の子と保護者／定員: 10組程度",
+   "url": "https://library.kodaira.ed.jp/viewer/info.html?id=317",
+   "tentative": false,
+   "deadline": null,
+   "cat": "public"
+  },
+  {
    "id": "E234",
    "name": "小川町二丁目児童館「離乳食講座」",
    "dates": [
@@ -5791,6 +5827,42 @@
     "date": "2026-11-12",
     "raw": "11月12日(木) 10:00から、児童館へ（電話可）。先着10組"
    },
+   "cat": "public"
+  },
+  {
+   "id": "E261",
+   "name": "子ども家庭支援センターの出張ひろば「0歳さんあつまれ」（鈴木公民館）",
+   "dates": [
+    "2026-11-27"
+   ],
+   "span": null,
+   "when": "2026年11月27日(金) 10:00〜11:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "11:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "鈴木公民館 和室",
+   "mapq": "子ども家庭支援センターの出張ひろば「0歳さんあつまれ」",
+   "summary": "手遊びやわらべうたを楽しみながら、親子で交流する（おたより）",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "✕",
+    "elem": "✕"
+   },
+   "cost": "無料／受付: 予約なし（当日、直接）",
+   "discount": "",
+   "target": "0歳の子と保護者。小平市在住の方（プログラムの対象）",
+   "url": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202611.pdf",
+   "tentative": false,
+   "deadline": null,
    "cat": "public"
   },
   {
@@ -5909,6 +5981,42 @@
     "raw": "事前申込・抽選。Webフォームだけ（電話の受付なし）。申込期間 11/18(水) 11:00 〜 11/19(木) 正午 → 受付は終了"
    },
    "cat": "other"
+  },
+  {
+   "id": "E262",
+   "name": "子ども家庭支援センター「おとうさんの会」",
+   "dates": [
+    "2026-11-28"
+   ],
+   "span": null,
+   "when": "2026年11月28日(土) 10:30〜11:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:30",
+   "end": "11:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市子ども家庭支援センター 子育て交流ひろば「おひさま」（小平元気村おがわ東の2階・西武拝島線 萩山駅から徒歩約5分）",
+   "mapq": "小平市子ども家庭支援センター 子育て交流ひろば「おひさま」",
+   "summary": "0歳・1歳の第一子のお父さんと子が集まって、お父さん同士で話す交流会（おたより）",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "✕",
+    "elem": "✕"
+   },
+   "cost": "無料／受付: 予約なし（当日、会場へ直接）",
+   "discount": "",
+   "target": "第一子の0歳・1歳の子と、お父さん。小平市在住の方（プログラムの対象）",
+   "url": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202611.pdf",
+   "tentative": false,
+   "deadline": null,
+   "cat": "public"
   },
   {
    "id": "E243",
@@ -6055,6 +6163,42 @@
    "discount": "",
    "target": "4歳から小学生とその保護者",
    "url": "https://library.kodaira.ed.jp/viewer/info.html?id=402",
+   "tentative": false,
+   "deadline": null,
+   "cat": "public"
+  },
+  {
+   "id": "E263",
+   "name": "中央図書館「絵本のへや」",
+   "dates": [
+    "2026-12-01"
+   ],
+   "span": null,
+   "when": "2026年12月1日(火) 11:00〜11:20",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "11:00",
+   "end": "11:20",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平市立中央図書館 2階おはなし室（小川町）",
+   "mapq": "小平市立中央図書館おはなし室",
+   "summary": "絵本の読み聞かせ、手遊び、わらべうた。終わったあと正午まで、おはなし室が開いている",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "✕",
+    "elem": "✕"
+   },
+   "cost": "無料／受付: 予約なし（当日受付）",
+   "discount": "",
+   "target": "0〜3歳の子と保護者／定員: 12組（先着。受付の時点で多いときは抽選）",
+   "url": "https://library.kodaira.ed.jp/viewer/info.html?id=326",
    "tentative": false,
    "deadline": null,
    "cat": "public"
