@@ -6831,45 +6831,6 @@
    "source": "events/2026-11.md"
   },
   {
-   "id": "E268",
-   "name": "都立武蔵国分寺公園「Sunday Park Cafe 2026秋」",
-   "dates": [
-    "2026-11-29"
-   ],
-   "span": null,
-   "when": "2026年11月29日(日) 11:00〜15:00。雨天中止",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": "11:00",
-   "end": "15:00",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "都立武蔵国分寺公園 こもれび広場（国分寺市）",
-   "mapq": "都立武蔵国分寺公園 こもれび広場",
-   "summary": "芝生の青空カフェ（「こくべジ号」のスープカレーやドリンク、「パンピク号」のパン、「喫茶ソラクラゲ」の自家焙煎珈琲と焼き菓子）／葉っぱや枝、秋の実を使うネイチャークラフト作り／絵本やおもちゃを親子で楽しめる無料のキッズコーナー。同じ日に「てのわ森の中美術館2026」",
-   "kidsNote": "",
-   "caution": "",
-   "contact": null,
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "○",
-    "pre": "◎",
-    "elem": "○"
-   },
-   "cost": "キッズコーナーは無料。ほかは店舗ごと（チラシのプログラム紹介）",
-   "discount": "",
-   "target": "",
-   "url": "https://musashinoparks.com/event/event-7156/",
-   "status": "候補",
-   "confidence": "公式確認済み（2026-11-24）",
-   "tentative": false,
-   "deadline": null,
-   "source": "events/2026-11.md"
-  },
-  {
    "id": "E237",
    "name": "小平市立図書館「スペシャルおはなし会」（8館）",
    "dates": [
@@ -8236,8 +8197,7 @@
    "E243",
    "E251",
    "E264",
-   "E267",
-   "E268"
+   "E267"
   ],
   "2026-12-06": [
    "E236",
@@ -8766,6 +8726,12 @@
    "name": "Rowans Coffee「Christmas market 2026」のキャンドルすくい（三鷹）",
    "reason": "ステータス「見送り（2026-11-24」のため除外",
    "when": "2026年11月29日(日) 12:00〜15:00"
+  },
+  {
+   "id": "E268",
+   "name": "都立武蔵国分寺公園「Sunday Park Cafe 2026秋」",
+   "reason": "ステータス「見送り（2026-11-24」のため除外",
+   "when": "2026年11月29日(日) 11:00〜15:00。雨天中止"
   },
   {
    "id": "E65",
