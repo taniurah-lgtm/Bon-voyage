@@ -6163,42 +6163,6 @@
    "cat": "fest"
   },
   {
-   "id": "E257",
-   "name": "Rowans Coffee「Christmas market 2026」のキャンドルすくい（三鷹）",
-   "dates": [
-    "2026-11-29"
-   ],
-   "span": null,
-   "when": "2026年11月29日(日) 12:00〜15:00",
-   "rainDates": [],
-   "exceptions": null,
-   "programs": null,
-   "totalDates": 1,
-   "start": "12:00",
-   "end": "15:00",
-   "allDay": false,
-   "timeUncertain": false,
-   "place": "Rowans Coffee（三鷹駅の北口のほう・武蔵野市西久保）",
-   "mapq": "Rowans Coffee",
-   "summary": "キャンドル作家（@guarigione_candle）のキャンドルすくい。3回すくって、すくえても、すくえなくても5つ持ち帰れる（大きめ1つ＝スノー／エンジェル／フラワー、小さめ4つ＝ツリー／スノー／ジンジャーマン／スター）",
-   "kidsNote": "",
-   "caution": "",
-   "lastEntry": "",
-   "hours": "",
-   "ages": {
-    "baby": "△",
-    "pre": "◎",
-    "elem": "○"
-   },
-   "cost": "記載なし（要確認）",
-   "discount": "",
-   "target": "子ども連れの方だけ（「お子様連れの方のみご参加いただけます」・動画に「お子様連れ限定」）",
-   "url": "https://www.instagram.com/reel/Df_ZhsSRpsJ/",
-   "tentative": false,
-   "deadline": null,
-   "cat": "other"
-  },
-  {
    "id": "E264",
    "name": "劇団どろんこ座のクリスマス紙芝居とオーナメント作り（西東京市・エクラアニマル だるま堂）",
    "dates": [
