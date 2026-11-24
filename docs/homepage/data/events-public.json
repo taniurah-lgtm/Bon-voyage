@@ -6127,6 +6127,42 @@
    "cat": "other"
   },
   {
+   "id": "E264",
+   "name": "劇団どろんこ座のクリスマス紙芝居とオーナメント作り（西東京市・エクラアニマル だるま堂）",
+   "dates": [
+    "2026-11-29"
+   ],
+   "span": null,
+   "when": "2026年11月29日(日) 13:30〜15:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "13:30",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "エクラアニマル だるま堂（西東京市。アニメ制作会社エクラアニマルの敷地の中。番地は投稿に無い（要確認））",
+   "mapq": "エクラアニマル だるま堂",
+   "summary": "紙芝居劇団どろんこ座の「ミュージカル3D紙芝居」で、クリスマスの紙芝居「セーターを来たロバのクリスマス」（こそだてフェスタでも演じたことのない演目）を見て、クリスマスのオーナメントを作る",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "△",
+    "pre": "◎",
+    "elem": "○"
+   },
+   "cost": "親子で800円（きょうだい1人ごとに材料費200円を足す）",
+   "discount": "",
+   "target": "投稿に年齢の記載なし（親子向け）",
+   "url": "https://www.instagram.com/p/Df9ObiYvSpQ/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "other"
+  },
+  {
    "id": "E237",
    "name": "小平市立図書館「スペシャルおはなし会」（8館）",
    "dates": [
