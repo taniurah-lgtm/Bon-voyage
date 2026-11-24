@@ -6239,6 +6239,42 @@
    "cat": "public"
   },
   {
+   "id": "E269",
+   "name": "小金井市「子どもの権利の日のつどい」と「じどうかんフェスティバル2026」（小金井 宮地楽器ホール）",
+   "dates": [
+    "2026-11-29"
+   ],
+   "span": null,
+   "when": "2026年11月29日(日) 10:30〜17:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:30",
+   "end": "17:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小金井 宮地楽器ホール（小金井市）。番地・最寄り駅はこのページに無い（要確認）",
+   "mapq": "小金井 宮地楽器ホール",
+   "summary": "子どもの権利の日（11月20日・今年制定）の記念イベント。児童館60周年の「じどうかんフェスティバル2026」と同時開催",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "記載なし（要確認）",
+   "discount": "",
+   "target": "",
+   "url": "https://www.city.koganei.lg.jp/kosodatekyoiku/kenri/kenrinohi2026.html",
+   "tentative": false,
+   "deadline": null,
+   "cat": "fest"
+  },
+  {
    "id": "E237",
    "name": "小平市立図書館「スペシャルおはなし会」（8館）",
    "dates": [
