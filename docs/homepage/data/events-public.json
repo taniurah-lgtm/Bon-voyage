@@ -6019,6 +6019,78 @@
    "cat": "public"
   },
   {
+   "id": "E265",
+   "name": "多摩六都科学館 ろくとほんとのワークショップ「洋服を観察しよう～布はどうやってできている？」",
+   "dates": [
+    "2026-11-28"
+   ],
+   "span": null,
+   "when": "2026年11月28日(土) ①12:30〜13:00 ②13:30〜14:00 ③14:30〜15:00",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "12:30",
+   "end": "13:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "多摩六都科学館 自然の部屋（展示室4 くつろぎ広場・西東京市芝久保町5-10-64）",
+   "mapq": "多摩六都科学館 自然の部屋",
+   "summary": "自分が着ている服を虫めがねで観察して、布のしくみと特ちょうを確かめる（織る・編むなど、布のいろいろな作り方）。講師: 科学の本の読み聞かせの会「ほんとほんと」",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "入館料のみ",
+   "discount": "",
+   "target": "4歳〜大人（小3以下は保護者同伴）／定員: 各回8人",
+   "url": "https://www.tamarokuto.or.jp/event/index.html?c=event&info=3707&day=2026-11-28",
+   "tentative": false,
+   "deadline": null,
+   "cat": "class"
+  },
+  {
+   "id": "E266",
+   "name": "小金井市立図書館 緑分室「おはなし会」",
+   "dates": [
+    "2026-11-28"
+   ],
+   "span": null,
+   "when": "2026年11月28日(土) 11:00から30分程度",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "11:00",
+   "end": null,
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小金井市公民館 緑分館 1階 視聴覚室（番地は案内に無い（要確認））",
+   "mapq": "小金井市立図書館 緑分室「おはなし会」",
+   "summary": "絵本や紙芝居の読み聞かせなど",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "✕",
+    "pre": "◎",
+    "elem": "○"
+   },
+   "cost": "記載なし（要確認）／申込: 不要（直接会場へ）",
+   "discount": "",
+   "target": "3歳から小学校3年生程度（保護者同伴可）",
+   "url": "https://www.library.koganei.tokyo.jp/viewer/calendar-daily.html?date=2026/11/28",
+   "tentative": false,
+   "deadline": null,
+   "cat": "public"
+  },
+  {
    "id": "E243",
    "name": "こだいら自由遊びの会「プレーパーク（冒険遊び場）」小平中央公園の雑木林",
    "dates": [
@@ -6161,6 +6233,82 @@
    "tentative": false,
    "deadline": null,
    "cat": "other"
+  },
+  {
+   "id": "E267",
+   "name": "ミュージカル「白雪姫」（東久留米市立生涯学習センター まろにえホール）",
+   "dates": [
+    "2026-11-29"
+   ],
+   "span": null,
+   "when": "2026年11月29日(日) 開場14:00・開演14:30。終演の時刻は案内に無い（要確認）",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "14:00",
+   "end": null,
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "東久留米市立生涯学習センター ホール（まろにえホール）（東久留米市中央町2-6-23）",
+   "mapq": "東久留米市立生涯学習センター ホール",
+   "summary": "子どもから大人まで楽しめる創作ミュージカル。美しい音楽と本格的なバレエ（公式の紹介）。企画・制作は劇団東少",
+   "kidsNote": "",
+   "caution": "",
+   "contact": {
+    "tel": "042-473-7811",
+    "who": ""
+   },
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "◎"
+   },
+   "cost": "大人2,800円・子供1,300円。0歳から入れる。0〜2歳は膝の上で見るなら無料",
+   "discount": "",
+   "target": "",
+   "url": "https://www.higashikurume-lll.jp/event/17/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "public"
+  },
+  {
+   "id": "E268",
+   "name": "都立武蔵国分寺公園「Sunday Park Cafe 2026秋」",
+   "dates": [
+    "2026-11-29"
+   ],
+   "span": null,
+   "when": "2026年11月29日(日) 11:00〜15:00。雨天中止",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "11:00",
+   "end": "15:00",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "都立武蔵国分寺公園 こもれび広場（国分寺市）",
+   "mapq": "都立武蔵国分寺公園 こもれび広場",
+   "summary": "芝生の青空カフェ（「こくべジ号」のスープカレーやドリンク、「パンピク号」のパン、「喫茶ソラクラゲ」の自家焙煎珈琲と焼き菓子）／葉っぱや枝、秋の実を使うネイチャークラフト作り／絵本やおもちゃを親子で楽しめる無料のキッズコーナー。同じ日に「てのわ森の中美術館2026」",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "○"
+   },
+   "cost": "キッズコーナーは無料。ほかは店舗ごと（チラシのプログラム紹介）",
+   "discount": "",
+   "target": "",
+   "url": "https://musashinoparks.com/event/event-7156/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "spot"
   },
   {
    "id": "E237",
