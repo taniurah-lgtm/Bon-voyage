@@ -168,6 +168,18 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs/homepage
+      # 🔴 2026-11-24 夜: 上げた直後の荷物を deploy-pages が見つけられず（「Found 0 artifact(s)」）、
+      #   GitHub の状態ページは正常なのに何度も失敗した。少し待ってから出し、失敗したらもう一度だけ出す
+      - name: 荷物が見えるまで少し待つ
+        run: sleep 20
       - name: Deploy to GitHub Pages
         id: deployment
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+      - name: 失敗したら、もう少し待つ
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 60
+      - name: Deploy to GitHub Pages（もう一度）
+        id: deployment_retry
+        if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v4
