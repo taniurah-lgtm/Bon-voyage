@@ -1,35 +1,28 @@
-# 2026-11-25 SNSドラフト（承認待ち・まだ投稿していません）
+# 2026-11-26 SNSドラフト（承認待ち・まだ投稿していません）
 
 【Threads・紹介 1/2】
-今週末の11/29(日)、小平市立中央公園の雑木林で今年最後のプレーパークが開かれます🎈
-10:00ごろから日没まで、申込不要で参加できる外遊びの場ですが、行くときに知っておきたいのが、
+今週末の11/29(日)、花小金井のそばの天神町で「小平マルシェ」が開かれます🎈
+10:30〜15:30、雨天決行の催しです。
+
+いろいろなお店が並ぶにぎやかなマルシェですが、子どもと一緒に行って楽しめそうなのが、
 
 【Threads・紹介 2/2】
-受付で保険の名簿に記入し、ひとり100円のカンパ（保険代）が必要なところです。
+クリスマスデザインのフェイスペイントやキッズネイル、素材を選んで作るストラップなど、子ども向けの体験ブースが集まっているところです。
 
-小平プレーパーク
-日時：11/29(日) 10:00ごろ〜日没（小雨決行）
-場所：小平市立中央公園 雑木林（東側・鷹の台駅から徒歩2分。雑木林の南側の砂利公園側の出入り口）
-費用：ひとり100円（保険代・当日受付）
-https://www.kodairaplaypark.com/
+小平マルシェ vol.27
+日時：11/29(日) 10:30〜15:30（雨天決行）
+場所：village green（小平市天神町3-7-1）
+費用：出店ごとに実費
 
-土や水、火を使ったハンモックや木工作などの冒険遊びができます。汚れてもよい服と着替え、タオルがあると安心です。靴や軍手も用意して、のびのびお出かけくださいね。
+おにぎりや温かいスープの出店もあり、お散歩ついでにふらっと立ち寄りやすいですよ。
 
 くわしくは → https://bonvoya.nicomaru.tokyo/th
-#小平 #中央公園 #鷹の台 #プレーパーク #冒険遊び場 #子連れおでかけ
-
-【Threads・問いかけ】
-学園西町地域センターの出張こども広場、気になっています。
-
-ただ、まだはじめてで勝手が分からないのですが、
-何時ごろに行くと、比較的ゆっくり過ごせますか🤔
+#小平マルシェ #小平 #花小金井 #天神町 #マルシェ #子連れおでかけ
 
 ---
-※自動生成（model: gemini-flash-lite-latest）。投稿前に日付・事実・トーンを目視確認してください。
+※自動生成（model: gemini-3.5-flash-lite）。投稿前に日付・事実・トーンを目視確認してください。
 ※【紹介 1/2】を投稿し、その**返信として【紹介 2/2】**をぶら下げる。1/2にリンクを入れない。
-※【問いかけ】は「学園西町地域センター 出張こども広場」について。**紹介とは別の対象**なので、同じ日でも重ならない。
-※【問いかけ】にリンクやハッシュタグを足さない（宣伝に見えると返事が来ない）。
-※返事が来たら「学園西町地域センター 出張こども広場」の fromReader に入れる（手順は scripts/social/README.md）。
+※今日は【紹介】だけの日です（問いかけは隔日）。
 ※飛び先は https://bonvoya.nicomaru.tokyo/th に統一（【紹介】のみ）。
 
 
@@ -38,10 +31,11 @@ https://www.kodairaplaypark.com/
 **よさそうな投稿があったら、その URL か本文を Claude に貼る** → 返信の案（ネタ帳の事実だけで）と、催しなら台帳への起票。
 
 いつもの言葉:
-- [小平 ママ](https://www.threads.com/search?q=%E5%B0%8F%E5%B9%B3%20%E3%83%9E%E3%83%9E&serp_type=default&filter=recent)
-- [小金井 子連れ](https://www.threads.com/search?q=%E5%B0%8F%E9%87%91%E4%BA%95%20%E5%AD%90%E9%80%A3%E3%82%8C&serp_type=default&filter=recent)
-- [小平 子連れ](https://www.threads.com/search?q=%E5%B0%8F%E5%B9%B3%20%E5%AD%90%E9%80%A3%E3%82%8C&serp_type=default&filter=recent)
+- [花小金井](https://www.threads.com/search?q=%E8%8A%B1%E5%B0%8F%E9%87%91%E4%BA%95&serp_type=default&filter=recent)
+- [小平 子育て](https://www.threads.com/search?q=%E5%B0%8F%E5%B9%B3%20%E5%AD%90%E8%82%B2%E3%81%A6&serp_type=default&filter=recent)
+- [小平 おでかけ](https://www.threads.com/search?q=%E5%B0%8F%E5%B9%B3%20%E3%81%8A%E3%81%A7%E3%81%8B%E3%81%91&serp_type=default&filter=recent)
 
 これから10日の催し（ほかの人の感想・写真が出ていないか）:
+- [プレーパーク（冒険遊び場）](https://www.threads.com/search?q=%E3%83%97%E3%83%AC%E3%83%BC%E3%83%91%E3%83%BC%E3%82%AF%EF%BC%88%E5%86%92%E9%99%BA%E9%81%8A%E3%81%B3%E5%A0%B4%EF%BC%89&serp_type=default&filter=recent)
 - [小平マルシェ vol.27](https://www.threads.com/search?q=%E5%B0%8F%E5%B9%B3%E3%83%9E%E3%83%AB%E3%82%B7%E3%82%A7%20vol.27&serp_type=default&filter=recent)
-- [みんデパ クリスマスマルシェ](https://www.threads.com/search?q=%E3%81%BF%E3%82%93%E3%83%87%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%9E%E3%82%B9%E3%83%9E%E3%83%AB%E3%82%B7%E3%82%A7&serp_type=default&filter=recent)
+- [おはなし会](https://www.threads.com/search?q=%E3%81%8A%E3%81%AF%E3%81%AA%E3%81%97%E4%BC%9A&serp_type=default&filter=recent)
