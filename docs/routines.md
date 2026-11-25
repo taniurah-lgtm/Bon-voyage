@@ -37,6 +37,9 @@ claude.ai/code の環境 `env_01WC6c8w1uivbK9U9HSb9KYU` の **sources に
 
 ## 🗓 1週間の流れ（2026-11-26〜。AIの答えをシート「AIのさがしもの」に集める形にした）
 
+🔴 **主役は Claude の全力の巡回**（`CLAUDE.md`「定期巡回の手順」）。Grok・Gemini・Muse は**取りこぼしの補い**で、期待しすぎない（2026-11-26 オーナー「grok も gemini も Muse もリサーチにはあまり期待していません。いままでどおり、あなたの全力リサーチを頼りにしている」）。
+毎週の下書きの最後に「巡回で見つけた数／AIの答えから足せた数」を記録し、AIを続ける価値があるかを見る。
+
 | いつ | だれが | 何を |
 |---|---|---|
 | 毎朝 6:30 | Muse | Instagram・Threads をさがし、シートに自分で書く（`docs/prompts/meta-ai-weekly.md`） |
@@ -44,7 +47,7 @@ claude.ai/code の環境 `env_01WC6c8w1uivbK9U9HSb9KYU` の **sources に
 | 毎朝 7:30 | Claude（Routine） | 台帳の裏取り 5件（`docs/prompts/routine-freshness.md`） |
 | 日曜の日中 | Gemini | 市や施設の公式ページをさがし、シートに書く（`docs/prompts/gemini-weekly-research.md`） |
 | 月曜 10:00 まで | Gemini | YouTube の「昨年の様子」、シートに書く（`docs/prompts/gemini-youtube-scenes.md`） |
-| **月曜 19:44（20時の少し前）** | **Claude（対話）** | **号の下書き**: シートとフォルダを読む → 公式で確かめて起票 → 号と web の下書き（ready なし）→ オーナーに見せる |
+| **月曜 19:44（20時の少し前）** | **Claude（対話）** | **号の下書き**: ①**Claude の全力の巡回（主役）** ②AIの答え（シート・フォルダ）で取りこぼしを補う → 公式で確かめて起票 → 号と web の下書き（ready なし）→ オーナーに見せる |
 | 火曜の日中 | オーナー | 下書きを見て直しを言う。📷 様子のリンク |
 | 火曜 18:00〜水曜 9:30 | — | 重い作業をしない（下の節） |
 | 水曜 06:55 | Claude（Routine） | 天気を取り直し、ready を付けてページ公開 |
