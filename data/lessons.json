@@ -37,6 +37,10 @@
     {
       "key": "manabi",
       "label": "学び"
+    },
+    {
+      "key": "other",
+      "label": "そのほか"
     }
   ],
   "ages": {
@@ -125,6 +129,1409 @@
       ],
       "url": "https://bonvoya.nicomaru.tokyo/",
       "checked": "2026-11-23"
+    }
+  ],
+  "_facts": "🔁 2026-11-27 オーナー「事実は無料で全部載せ、PRカードは有料」の準備。教室しらべ（シート「AIのさがしもの」のタブ「教室しらべ」・docs/research/kodaira-lessons-plan.md）のうち、公式か教室の案内で確かめた83教室の事実だけ（名前・ジャンル・対象・場所の町名・体験の有無・公式リンク）。verified は公式で確認したもの（一部確認は確認中＝公開前にもう一度確かめる）。公開するかは 12/2 の打合せのあと決める（launch は false のまま）",
+  "facts": [
+    {
+      "id": "f-1",
+      "kind": "fact",
+      "verified": false,
+      "name": "ロボ団 Knock小平校",
+      "yomi": "ろぼだんのっくこだいらこう",
+      "genre": "manabi",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "年長〜小6",
+      "where": "喜平町（一橋学園駅）",
+      "trial": "体験あり",
+      "url": "https://robo-done.com/school/knock_kodaira/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-2",
+      "kind": "fact",
+      "verified": true,
+      "name": "ハッピーコンピューティング",
+      "yomi": "はっぴーこんぴゅーてぃんぐ",
+      "genre": "manabi",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "主に小学生〜大学生（幼稚園児も可）",
+      "where": "天神町（小平駅 徒歩14分）",
+      "trial": "無料の体験あり",
+      "url": "https://happycomputing.jp/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-3",
+      "kind": "fact",
+      "verified": false,
+      "name": "プログラミング教室ことらぼ 小平校",
+      "yomi": "ぷろぐらみんぐきょうしつことらぼこだいらこう",
+      "genre": "manabi",
+      "ages": [
+        "elem"
+      ],
+      "who": "小1〜高校生",
+      "where": "花小金井南町（貸しスペースなごみ・花小金井駅5分）",
+      "trial": "無料の体験あり",
+      "url": "https://labo.cototsumugi.com/cotolabo_info/school_introduction/school_kodaira/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-4",
+      "kind": "fact",
+      "verified": true,
+      "name": "JPCスポーツ教室 小平店",
+      "yomi": "じぇいぴーしーすぽーつきょうしつ",
+      "genre": "taiso",
+      "ages": [
+        "baby",
+        "pre",
+        "elem"
+      ],
+      "who": "未就園児〜小学生（大人クラスも）",
+      "where": "上水南町",
+      "trial": "無料の体験あり",
+      "url": "https://jpc-sports.com/kodaira/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-5",
+      "kind": "fact",
+      "verified": false,
+      "name": "小平GYMクラブ",
+      "yomi": "こだいらGYMくらぶ",
+      "genre": "taiso",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "年中〜小6",
+      "where": "津田町・市民総合体育館（鷹の台駅）",
+      "trial": "無料の体験あり",
+      "url": "https://www.instagram.com/kodaira.gym/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-6",
+      "kind": "fact",
+      "verified": true,
+      "name": "家庭料理教室 なつやすみ（親子＆キッズ）",
+      "yomi": "かていりょうりきょうしつなつやすみ",
+      "genre": "other",
+      "ages": [
+        "baby",
+        "pre",
+        "elem"
+      ],
+      "who": "2歳〜小中学生",
+      "where": "鈴木町（花小金井駅15分）",
+      "trial": "体験あり",
+      "url": "https://www.72yasumi.net/kids.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-7",
+      "kind": "fact",
+      "verified": true,
+      "name": "ミュウテック工房 花小金井教室",
+      "yomi": "みゅうてっくこうぼうはなこがねいきょうしつ",
+      "genre": "art",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "年少〜小6・中学生",
+      "where": "花小金井南町（花小金井駅9分）",
+      "trial": "",
+      "url": "https://lp1.kodomokousaku.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-8",
+      "kind": "fact",
+      "verified": false,
+      "name": "カルチャースタジオ花",
+      "yomi": "かるちゃーすたじおはな",
+      "genre": "dance",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "クラスにより幼児〜小学生",
+      "where": "花小金井南町（花小金井駅）",
+      "trial": "体験あり",
+      "url": "https://www.kodaira-net.jp/units/36239/kd1134338/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-9",
+      "kind": "fact",
+      "verified": false,
+      "name": "東進こども英語塾 小平天神町教室",
+      "yomi": "とうしんこどもえいごじゅくこだいらてんじんまちきょうしつ",
+      "genre": "english",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "幼児・小学生",
+      "where": "天神町",
+      "trial": "無料の体験あり",
+      "url": "https://www.toshin.com/kodomo/moushikomi/detail.php?id=514bef353831f&type=lesson",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-10",
+      "kind": "fact",
+      "verified": true,
+      "name": "English Garden",
+      "yomi": "いんぐりっしゅがーでん",
+      "genre": "english",
+      "ages": [
+        "baby",
+        "pre",
+        "elem"
+      ],
+      "who": "赤ちゃん〜大人（会話クラスは年少〜）",
+      "where": "仲町",
+      "trial": "",
+      "url": "https://www.englishgardenkodaira.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-11",
+      "kind": "fact",
+      "verified": true,
+      "name": "田中書道教室",
+      "yomi": "たなかしょどうきょうしつ",
+      "genre": "manabi",
+      "ages": [
+        "elem"
+      ],
+      "who": "小・中学生〜大人",
+      "where": "花小金井南町",
+      "trial": "無料の体験あり",
+      "url": "https://tanakashodou.wixsite.com/home",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-12",
+      "kind": "fact",
+      "verified": true,
+      "name": "むさしのカルチャー教室（書道）",
+      "yomi": "むさしのかるちゃーきょうしつ",
+      "genre": "manabi",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "幼児・小学生・中学生（毛筆は年少から）",
+      "where": "美園町（小平駅1〜2分）",
+      "trial": "",
+      "url": "https://koizumi-shodo.jimdofree.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-13",
+      "kind": "fact",
+      "verified": false,
+      "name": "学研アクロスプラザ小平教室",
+      "yomi": "がっけんあくろすぷらざこだいらきょうしつ",
+      "genre": "manabi",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "幼児・小学生",
+      "where": "上水本町（アクロスプラザ小平1階）",
+      "trial": "無料の体験あり",
+      "url": "https://www.889100.com/gakken-square/classrooms/classrooms62.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-14",
+      "kind": "fact",
+      "verified": true,
+      "name": "そろばん式暗算STUDIO Soroban11111",
+      "yomi": "そろばんしきあんざんSTUDIOSoroban11111",
+      "genre": "manabi",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "年長ごろ〜（目安）",
+      "where": "天神町",
+      "trial": "無料の体験あり",
+      "url": "https://soroban11111.com/cnt_system1.php",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-15",
+      "kind": "fact",
+      "verified": true,
+      "name": "studio es Art Class",
+      "yomi": "すたじおえすあーとくらす",
+      "genre": "art",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "年中〜小学生",
+      "where": "学園西町（一橋学園駅6分）",
+      "trial": "体験あり（有料・1,500円）",
+      "url": "https://www.art-studioes.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-16",
+      "kind": "fact",
+      "verified": true,
+      "name": "えとうピアノレッスン",
+      "yomi": "えとうぴあのれっすん",
+      "genre": "music",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "幼児〜高校生・大人",
+      "where": "花小金井",
+      "trial": "体験あり（有料）",
+      "url": "https://eto-pianolesson.jimdofree.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-17",
+      "kind": "fact",
+      "verified": true,
+      "name": "Musica Sonovie ピアノ教室",
+      "yomi": "むじかそのゔぃえぴあのきょうしつ",
+      "genre": "music",
+      "ages": [
+        "baby",
+        "pre",
+        "elem"
+      ],
+      "who": "2歳〜",
+      "where": "喜平町（一橋学園駅11分）",
+      "trial": "体験あり（有料・3,000円）",
+      "url": "https://www.sonovie-piano.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-18",
+      "kind": "fact",
+      "verified": true,
+      "name": "クローバーピアノ教室",
+      "yomi": "くろーばーぴあのきょうしつ",
+      "genre": "music",
+      "ages": [
+        "baby",
+        "pre",
+        "elem"
+      ],
+      "who": "1歳ごろ〜",
+      "where": "学園西町（一橋学園駅5分）",
+      "trial": "体験あり（有料・2,000円）",
+      "url": "https://www.clover-piano.jp/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-19",
+      "kind": "fact",
+      "verified": true,
+      "name": "Colorato／小平市リトミック リズムジカ",
+      "yomi": "ころらーと",
+      "genre": "music",
+      "ages": [
+        "baby",
+        "pre"
+      ],
+      "who": "6か月ごろ〜年長（ピアノは年中〜）",
+      "where": "大沼公民館・中央公民館",
+      "trial": "体験あり（有料・1,000円）",
+      "url": "https://colorato-music.com/rhythmic/kodairarhythmusica/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-20",
+      "kind": "fact",
+      "verified": true,
+      "name": "かよバレエスタジオ",
+      "yomi": "かよばれえすたじお",
+      "genre": "dance",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "3才〜",
+      "where": "花小金井（花小金井駅北口1分）",
+      "trial": "無料の体験あり",
+      "url": "http://www.kayoballet.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-21",
+      "kind": "fact",
+      "verified": true,
+      "name": "バレエスタジオ クロレ",
+      "yomi": "ばれえすたじおくろれ",
+      "genre": "dance",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "満3才〜",
+      "where": "花小金井（花小金井駅4分）",
+      "trial": "無料の体験あり",
+      "url": "https://colorerballet.wixsite.com/-site/price",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-22",
+      "kind": "fact",
+      "verified": true,
+      "name": "みのりDance Studio",
+      "yomi": "みのりDanceStudio",
+      "genre": "dance",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "未就学児〜小6",
+      "where": "学園東町（一橋学園駅10分）",
+      "trial": "体験あり（有料・1,000円）",
+      "url": "https://www.minoridance.com/blank-3",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-23",
+      "kind": "fact",
+      "verified": false,
+      "name": "リトミック わくわく音楽ランド",
+      "yomi": "りとみっくわくわくおんがくらんど",
+      "genre": "music",
+      "ages": [
+        "baby",
+        "pre"
+      ],
+      "who": "0〜3歳",
+      "where": "中央公民館（小川町）",
+      "trial": "",
+      "url": "http://2011wakuwaku.blog.fc2.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-24",
+      "kind": "fact",
+      "verified": true,
+      "name": "BE studio 上水南町3丁目教室",
+      "yomi": "びーいーすたじおじょうすいみなみちょう",
+      "genre": "english",
+      "ages": [
+        "baby",
+        "pre",
+        "elem"
+      ],
+      "who": "0歳〜中学生",
+      "where": "上水南町",
+      "trial": "無料の体験あり",
+      "url": "https://school.benesse-bestudio.com/bbs/spot/detail?code=EG2184BW",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-25",
+      "kind": "fact",
+      "verified": true,
+      "name": "BE studio 小川西町4丁目教室",
+      "yomi": "びーいーすたじおおがわにしまち",
+      "genre": "english",
+      "ages": [
+        "baby",
+        "pre",
+        "elem"
+      ],
+      "who": "9か月〜",
+      "where": "小川西町（小川駅2分）",
+      "trial": "無料の体験あり",
+      "url": "https://ameblo.jp/english-grimm/entry-12984117096.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-26",
+      "kind": "fact",
+      "verified": true,
+      "name": "マミー＆ミーピアノ",
+      "yomi": "まみー＆みーぴあの",
+      "genre": "music",
+      "ages": [
+        "baby",
+        "pre",
+        "elem"
+      ],
+      "who": "2歳〜",
+      "where": "上水本町（一橋学園駅10分）",
+      "trial": "体験あり（有料・1,000円）",
+      "url": "https://kodaira-piano.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-27",
+      "kind": "fact",
+      "verified": true,
+      "name": "まゆみピアノ教室",
+      "yomi": "まゆみぴあのきょうしつ",
+      "genre": "music",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "4才〜小6",
+      "where": "小川西町（小川駅10分）",
+      "trial": "無料の体験あり",
+      "url": "https://www.mayumi-piano-lesson.com/child_lesson/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-28",
+      "kind": "fact",
+      "verified": true,
+      "name": "一橋学園ピアノ教室",
+      "yomi": "ひとつばしがくえんぴあのきょうしつ",
+      "genre": "music",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "子ども〜大人（小さな子は5歳以上を推奨・相談可）。親子で楽しくピアノコースあり",
+      "where": "学園東町（一橋学園駅北口 徒歩5分）",
+      "trial": "体験あり（有料・1,000円）",
+      "url": "https://pianolesson.iinaa.net/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-29",
+      "kind": "fact",
+      "verified": true,
+      "name": "ピアノの森音楽教室",
+      "yomi": "ぴあののもりおんがくきょうしつ",
+      "genre": "music",
+      "ages": [
+        "baby",
+        "pre",
+        "elem"
+      ],
+      "who": "1〜2歳ベビーリトミック、2〜3歳プレピアノ、4歳〜ピアノ（大人は女性のみ）",
+      "where": "上水本町（恋ヶ窪駅 徒歩10〜11分・一橋学園駅／鷹の台駅 徒歩15分）",
+      "trial": "体験あり（有料・2,000円）",
+      "url": "https://pf-forest.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-30",
+      "kind": "fact",
+      "verified": true,
+      "name": "大竹香奈美ピアノ教室",
+      "yomi": "おおたけかなみぴあのきょうしつ",
+      "genre": "music",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "年齢・経験を問わず（成人男性は紹介のみ）",
+      "where": "花小金井（花小金井駅 徒歩10分）",
+      "trial": "体験あり（有料・1,000円）",
+      "url": "http://ohtake1piano.amebaownd.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-31",
+      "kind": "fact",
+      "verified": true,
+      "name": "カワベミュージックアトリエ",
+      "yomi": "かわべみゅーじっくあとりえ",
+      "genre": "music",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "4歳〜（ピティナの掲載）。大人の個人レッスンは女性のみ",
+      "where": "上水新町（立川バス若葉町団地 徒歩2分、鷹の台駅 徒歩15〜17分）",
+      "trial": "体験あり（有料・1,000円）",
+      "url": "https://www.kawabemusicatelier.com/piano",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-32",
+      "kind": "fact",
+      "verified": false,
+      "name": "フェリーチェピアノ教室",
+      "yomi": "ふぇりーちぇぴあのきょうしつ",
+      "genre": "music",
+      "ages": [
+        "elem"
+      ],
+      "who": "子ども〜大人（年齢の記載なし）",
+      "where": "花小金井（花小金井駅 徒歩15分。花小金井・武蔵小金井・清瀬・東久留米駅からバスあり）",
+      "trial": "無料の体験あり",
+      "url": "https://www.piano-k.net/profile/profile0000004624.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-33",
+      "kind": "fact",
+      "verified": false,
+      "name": "ピアノ教室klavier",
+      "yomi": "ぴあのきょうしつklavier",
+      "genre": "music",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "幼児〜大人",
+      "where": "小川町（武蔵野美大バス停 徒歩1分、鷹の台駅 徒歩18分）",
+      "trial": "無料の体験あり",
+      "url": "https://www.piano-k.net/profile/profile0000004730.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-34",
+      "kind": "fact",
+      "verified": false,
+      "name": "伊藤ピアノ教室",
+      "yomi": "いとうぴあのきょうしつ",
+      "genre": "music",
+      "ages": [
+        "elem"
+      ],
+      "who": "子ども〜大人",
+      "where": "一橋学園駅北口 徒歩1分（町名の記載なし）",
+      "trial": "体験あり（有料・1,000円）",
+      "url": "https://www.piano-k.net/profile/profile0000000047.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-35",
+      "kind": "fact",
+      "verified": true,
+      "name": "小平駅南口 トリスタンピアノ教室",
+      "yomi": "こだいらえきみなみぐちとりすたんぴあのきょうしつ",
+      "genre": "music",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "3歳頃〜大人（成人は女性のみ）",
+      "where": "美園町（小平駅南口 徒歩4分）",
+      "trial": "体験あり（有料・1,000円）",
+      "url": "https://tristan-piano.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-36",
+      "kind": "fact",
+      "verified": false,
+      "name": "望月理恵ピアノ教室",
+      "yomi": "もちづきりえぴあのきょうしつ",
+      "genre": "music",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "子ども中心（ピティナは4歳〜）。大人は現在受け付けていない",
+      "where": "学園西町（一橋学園駅南口 徒歩7分、マンションの一室）",
+      "trial": "無料の体験あり",
+      "url": "https://www.piano-k.net/profile/profile0000004100.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-37",
+      "kind": "fact",
+      "verified": true,
+      "name": "ピアノ教室 はみんぐばーど",
+      "yomi": "ぴあのきょうしつはみんぐばーど",
+      "genre": "music",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "3歳〜大人",
+      "where": "小川駅西口 徒歩3分",
+      "trial": "無料の体験あり",
+      "url": "https://hummingbird-piano.jp/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-38",
+      "kind": "fact",
+      "verified": true,
+      "name": "ポンテムジカ音楽教室",
+      "yomi": "ぽんてむじかおんがくきょうしつ",
+      "genre": "music",
+      "ages": [
+        "baby",
+        "pre",
+        "elem"
+      ],
+      "who": "ピアノ4歳〜大人、リトミックは歩き始め〜3歳ごろ",
+      "where": "栄町（小平教室。ぶるべー号「野火止公園」「けやき通り」下車すぐ）",
+      "trial": "無料の体験あり",
+      "url": "https://pontemusica2012.com/pianoclass/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-39",
+      "kind": "fact",
+      "verified": true,
+      "name": "かとうピアノ教室",
+      "yomi": "かとうぴあのきょうしつ",
+      "genre": "music",
+      "ages": [
+        "baby",
+        "pre",
+        "elem"
+      ],
+      "who": "0歳〜（親子リズム教室ずむずむは0〜3歳）。大人は女性のみ",
+      "where": "小川東町（青梅街道駅 徒歩5〜6分、新小平駅 徒歩14分）",
+      "trial": "",
+      "url": "https://www.katopianoschool.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-40",
+      "kind": "fact",
+      "verified": false,
+      "name": "ぽこあぽこ音楽教室",
+      "yomi": "ぽこあぽこおんがくきょうしつ",
+      "genre": "music",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "幼児〜大人（ページに年齢の記載なし）",
+      "where": "小川西町（小川駅 徒歩12分）",
+      "trial": "体験あり（有料）",
+      "url": "https://teacher.piano.or.jp/126103",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-41",
+      "kind": "fact",
+      "verified": true,
+      "name": "たむらおうちでピアノ",
+      "yomi": "たむらおうちでぴあの",
+      "genre": "music",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "3歳〜（ピティナ）。大人は親子以外は女性のみ",
+      "where": "上水南町（一橋学園駅 徒歩12分）",
+      "trial": "体験あり（有料）",
+      "url": "https://piano-workshop.net/myj/tamura/school",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-42",
+      "kind": "fact",
+      "verified": false,
+      "name": "西蔭和枝音楽教室",
+      "yomi": "にしいんかずえおんがくきょうしつ",
+      "genre": "music",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "3歳〜大人",
+      "where": "小川町（新小平駅 徒歩7分）",
+      "trial": "",
+      "url": "https://teacher.piano.or.jp/270600",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-43",
+      "kind": "fact",
+      "verified": true,
+      "name": "彩幸書道教室",
+      "yomi": "さいさちしょどうきょうしつ",
+      "genre": "manabi",
+      "ages": [
+        "elem"
+      ],
+      "who": "小中学生・高校生",
+      "where": "花小金井（西武バス弥生台バス停の近く）",
+      "trial": "",
+      "url": "https://www.saikohshodo.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-44",
+      "kind": "fact",
+      "verified": true,
+      "name": "もじの会",
+      "yomi": "もじのかい",
+      "genre": "manabi",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "幼稚園児〜大人",
+      "where": "仲町（小平第十四小学校の学区内）",
+      "trial": "無料の体験あり",
+      "url": "https://ameblo.jp/mojino-kai/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-45",
+      "kind": "fact",
+      "verified": true,
+      "name": "玉川習字教室 小平（仲町）教室",
+      "yomi": "たまがわしゅうじきょうしつこだいらきょうしつ",
+      "genre": "manabi",
+      "ages": [
+        "elem"
+      ],
+      "who": "小学生〜成人",
+      "where": "仲町",
+      "trial": "無料の体験あり",
+      "url": "https://tamagawa-shuji.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-46",
+      "kind": "fact",
+      "verified": true,
+      "name": "雄山書道教室",
+      "yomi": "おやましょどうきょうしつ",
+      "genre": "manabi",
+      "ages": [
+        "elem"
+      ],
+      "who": "小学生〜（学生部は小・中・高）",
+      "where": "たかの台（鷹の台教室・鷹の台駅 徒歩4分）／小川町（小川町教室・鷹の台駅 徒歩15分）",
+      "trial": "",
+      "url": "https://yuzan-kabasawa.com/kyoshitsu.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-47",
+      "kind": "fact",
+      "verified": true,
+      "name": "イングリッシュ・エクスプローラーズ（English Explorers）",
+      "yomi": "いんぐりっしゅ・えくすぷろーらーず",
+      "genre": "english",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "小学1〜6年生（園児クラスPre-L1あり・条件あり）",
+      "where": "学園西町（一橋学園駅 徒歩10分）",
+      "trial": "",
+      "url": "https://www.english-explorers.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-48",
+      "kind": "fact",
+      "verified": true,
+      "name": "アルクKiddy CAT英語教室 PREP小平校",
+      "yomi": "あるくきでぃきゃっと",
+      "genre": "english",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "4歳（年中）〜中学生",
+      "where": "仲町（小平駅 徒歩15分）",
+      "trial": "無料の体験あり",
+      "url": "https://www.kcprepkodaira.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-49",
+      "kind": "fact",
+      "verified": true,
+      "name": "高橋ハイテクそろばん塾 花小金井本部教室",
+      "yomi": "たかはしはいてくそろばんじゅくはなこがねいほんぶきょうしつ",
+      "genre": "manabi",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "年長〜（個人差で様子を見て決定）",
+      "where": "花小金井",
+      "trial": "",
+      "url": "https://www.t-soroban.com/page3.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-50",
+      "kind": "fact",
+      "verified": true,
+      "name": "エリコバレエ",
+      "yomi": "えりこばれえ",
+      "genre": "dance",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "3歳〜大人",
+      "where": "花小金井（花小金井駅から北へ徒歩12分）",
+      "trial": "無料の体験あり",
+      "url": "https://erikoballet.web.fc2.com/guidance.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-51",
+      "kind": "fact",
+      "verified": true,
+      "name": "フィットネス＆ダンススタジオ ゆいベリ",
+      "yomi": "ふぃっとねす＆だんすすたじおゆいべり",
+      "genre": "dance",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "リトル3〜6歳・小学生〜大人",
+      "where": "学園東町（一橋学園駅北口2分）",
+      "trial": "体験あり（有料・1,100円）",
+      "url": "https://noborderpark-yuie.com/little-class-preschool/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-52",
+      "kind": "fact",
+      "verified": false,
+      "name": "修気道 花小金井キッズ空手クラス",
+      "yomi": "おさむきどうはなこがねいきっずからてくらす",
+      "genre": "budo",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "小学生以上（園児は応相談）",
+      "where": "花小金井南町（花小金井駅15分）",
+      "trial": "無料の体験あり",
+      "url": "https://shukidokarate.com/kids",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-53",
+      "kind": "fact",
+      "verified": true,
+      "name": "日本少林拳同盟会 小平本部 少年班",
+      "yomi": "にっぽんしょうりんこぶしどうめいかいこだいらほんぶしょうねんはん",
+      "genre": "budo",
+      "ages": [
+        "elem"
+      ],
+      "who": "小学生・中学生",
+      "where": "津田町（市民総合体育館・鷹の台駅5分）",
+      "trial": "",
+      "url": "https://shaolin-net.com/tongmeng/banji.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-54",
+      "kind": "fact",
+      "verified": true,
+      "name": "日本少林拳同盟会 花小金井分会「純風会」",
+      "yomi": "にっぽんしょうりんこぶしどうめいかいはなこがねいぶんかい「じゅんかぜかい」",
+      "genre": "budo",
+      "ages": [
+        "elem"
+      ],
+      "who": "小学生〜中学生（子どもクラス）",
+      "where": "花小金井（花小金井公民館ほか）",
+      "trial": "",
+      "url": "https://shaolin-net.com/tongmeng/banji.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-55",
+      "kind": "fact",
+      "verified": true,
+      "name": "I'z CheerDance Class 小平校",
+      "yomi": "あいずちあだんす",
+      "genre": "dance",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "年中〜小6",
+      "where": "小川町（レンタルスタジオ）",
+      "trial": "体験あり（有料・500円）",
+      "url": "https://iz-cheerdance.amebaownd.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-56",
+      "kind": "fact",
+      "verified": true,
+      "name": "森と海、山と河、そして太陽と月の美学校（造形）",
+      "yomi": "もりとうみ、やまとかわ、そしてたいようとがつのびがくこう",
+      "genre": "art",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "5歳〜小6",
+      "where": "花小金井南町（なごみ2階・花小金井駅5〜7分）",
+      "trial": "体験あり（有料・500円）",
+      "url": "https://pangaea-nagomi.jimdofree.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-57",
+      "kind": "fact",
+      "verified": true,
+      "name": "護身創心会（空手・合気術）",
+      "yomi": "ごしんそうしんかい",
+      "genre": "budo",
+      "ages": [
+        "elem"
+      ],
+      "who": "子どもの部あり",
+      "where": "大沼町（集会所）",
+      "trial": "無料の体験あり",
+      "url": "https://goshinsoushinkai.jimdofree.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-58",
+      "kind": "fact",
+      "verified": false,
+      "name": "小平ジュニア新体操クラブ",
+      "yomi": "こだいらじゅにあしんたいそうくらぶ",
+      "genre": "taiso",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "年中〜中学生",
+      "where": "小平元気村ほか",
+      "trial": "",
+      "url": "https://kodairajunior-rg.jimdofree.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-59",
+      "kind": "fact",
+      "verified": false,
+      "name": "Dance Lab REGULUS",
+      "yomi": "だんすらぼれぐるす",
+      "genre": "dance",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "4歳ごろ〜中学生",
+      "where": "美園町（美園地域センター）",
+      "trial": "無料の体験あり",
+      "url": "https://dancelabregulus.jimdofree.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-60",
+      "kind": "fact",
+      "verified": true,
+      "name": "絵画造形教室 お絵描きぽけっと",
+      "yomi": "かいがぞうけいきょうしつおえかきぽけっと",
+      "genre": "art",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "3歳〜大人",
+      "where": "小川西町（小川駅・八坂駅）",
+      "trial": "体験あり（有料・1,500円）",
+      "url": "https://oekaki.tokyo/class/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-61",
+      "kind": "fact",
+      "verified": false,
+      "name": "千田バレエ",
+      "yomi": "ちだばれえ",
+      "genre": "dance",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "年少〜",
+      "where": "花小金井（花小金井駅北口2分）",
+      "trial": "",
+      "url": "https://r.goope.jp/sendaballet/menu",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-62",
+      "kind": "fact",
+      "verified": true,
+      "name": "小椋康子バレエ Angelina",
+      "yomi": "おぐらやすこばれえAngelina",
+      "genre": "dance",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "3才〜大人",
+      "where": "小川町（小平神明幼稚園）／津田町（市民総合体育館）",
+      "trial": "無料の体験あり",
+      "url": "https://ballet-angelina.com/class/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-63",
+      "kind": "fact",
+      "verified": true,
+      "name": "伊藤バレエアカデミー 奈那class",
+      "yomi": "いとうばれえあかでみーななclass",
+      "genre": "dance",
+      "ages": [
+        "baby",
+        "pre",
+        "elem"
+      ],
+      "who": "歩けるようになったら〜大人",
+      "where": "学園西町（一橋学園駅南口2分）",
+      "trial": "体験あり（有料・1,000円）",
+      "url": "https://itoballet-academy-nana.com/price.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-64",
+      "kind": "fact",
+      "verified": true,
+      "name": "yバレエ・カラー",
+      "yomi": "わいばれえからー",
+      "genre": "dance",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "3歳〜",
+      "where": "たかの台（中央公園体育館・鷹の台駅1分）",
+      "trial": "",
+      "url": "https://y-ballet.naraigoto.net/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-65",
+      "kind": "fact",
+      "verified": true,
+      "name": "絵画・造形教室 アトリエ・パンセ",
+      "yomi": "かいが・ぞうけいきょうしつあとりえ・ぱんせ",
+      "genre": "art",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "3歳くらい〜大人",
+      "where": "上水本町（玉川上水沿い）",
+      "trial": "見学できます",
+      "url": "https://npo-pensee.org/kurasuannai/kodomo.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-66",
+      "kind": "fact",
+      "verified": true,
+      "name": "こどもアート エンガアート",
+      "yomi": "こどもあーとえんがあーと",
+      "genre": "art",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "年中〜小学生",
+      "where": "鈴木町（鈴の木台バス停1分）",
+      "trial": "",
+      "url": "https://engart.org/information.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-67",
+      "kind": "fact",
+      "verified": false,
+      "name": "遠志館道場（空手）",
+      "yomi": "えんこころざしかんどうじょう",
+      "genre": "budo",
+      "ages": [
+        "elem"
+      ],
+      "who": "少年部あり",
+      "where": "小川町",
+      "trial": "",
+      "url": "https://dojokai.jp/onshikandojo.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-68",
+      "kind": "fact",
+      "verified": true,
+      "name": "宮野道場 東京統括支部（空手）",
+      "yomi": "みやのどうじょうとうきょうとうかつしぶ",
+      "genre": "budo",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "原則5歳以上",
+      "where": "学園東町（一橋学園駅1分）",
+      "trial": "無料の体験あり",
+      "url": "https://miyanodojo-tokyo.jimdofree.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-69",
+      "kind": "fact",
+      "verified": true,
+      "name": "M.Y. Dance Club",
+      "yomi": "えむわいだんすくらぶ",
+      "genre": "dance",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "4歳〜中学生",
+      "where": "津田町（市民総合体育館）",
+      "trial": "体験あり（有料）",
+      "url": "https://www.kodairahiphopdance.com/blank",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-70",
+      "kind": "fact",
+      "verified": true,
+      "name": "KS LEONE（少年サッカー）",
+      "yomi": "けーえすれおね",
+      "genre": "ball",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "年長〜小6",
+      "where": "小平第三小学校ほか",
+      "trial": "無料の体験あり",
+      "url": "https://ksleone.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-71",
+      "kind": "fact",
+      "verified": true,
+      "name": "YT TENNIS SCHOOL",
+      "yomi": "わいてぃーてにすすくーる",
+      "genre": "ball",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "満4歳〜小6",
+      "where": "鈴木町（花小金井）",
+      "trial": "",
+      "url": "https://yt-tennis.com/class/kids.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-72",
+      "kind": "fact",
+      "verified": true,
+      "name": "吼陽館 鈴木道場（柔道と勉強）",
+      "yomi": "こうようかんすずきどうじょう",
+      "genre": "budo",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "5歳以上",
+      "where": "上水南町",
+      "trial": "無料の体験あり",
+      "url": "https://koyokan.wixsite.com/koyokan/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-73",
+      "kind": "fact",
+      "verified": true,
+      "name": "Kids Kpopダンスサークル KDC",
+      "yomi": "きっずけーぽっぷだんすさーくる",
+      "genre": "dance",
+      "ages": [
+        "elem"
+      ],
+      "who": "小1〜中学生",
+      "where": "津田町（市民総合体育館）",
+      "trial": "体験あり（有料・1,000円）",
+      "url": "https://kdancecreation.amebaownd.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-74",
+      "kind": "fact",
+      "verified": true,
+      "name": "アトリエ ぽっけ",
+      "yomi": "あとりえぽっけ",
+      "genre": "art",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "3歳〜12歳くらい",
+      "where": "喜平町（一橋学園駅8分）",
+      "trial": "体験あり（有料・1,000円）",
+      "url": "https://atelier-pokke.com/class/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-75",
+      "kind": "fact",
+      "verified": true,
+      "name": "よつばピアノ教室",
+      "yomi": "よつばぴあのきょうしつ",
+      "genre": "music",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "子ども〜大人（大人の対面は女性のみ）",
+      "where": "小平駅南口 徒歩3分",
+      "trial": "体験あり（有料・1,000円）",
+      "url": "https://yotsuba-piano.com/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-76",
+      "kind": "fact",
+      "verified": false,
+      "name": "杉野ピアノ教室",
+      "yomi": "すぎのぴあのきょうしつ",
+      "genre": "music",
+      "ages": [],
+      "who": "",
+      "where": "上水南町",
+      "trial": "体験あり",
+      "url": "https://piadoor.com/jp/school/13/area/?an[]=%E5%B0%8F%E5%B9%B3%E5%B8%82&p=4",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-77",
+      "kind": "fact",
+      "verified": false,
+      "name": "Wasabiイングリッシュ",
+      "yomi": "わさびいんぐりっしゅ",
+      "genre": "english",
+      "ages": [
+        "elem"
+      ],
+      "who": "小学生〜中学生（帰国子女クラスあり）",
+      "where": "小川東町（小川駅 徒歩6分）",
+      "trial": "体験あり",
+      "url": "http://www.wasabi-english.jp/service",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-78",
+      "kind": "fact",
+      "verified": false,
+      "name": "じゅん美文字教室〜美楽〜 小川教室",
+      "yomi": "じゅんびぶんじきょうしつ〜びらく〜おがわきょうしつ",
+      "genre": "manabi",
+      "ages": [
+        "elem"
+      ],
+      "who": "子ども〜大人",
+      "where": "小川西町（小川駅）",
+      "trial": "",
+      "url": "https://bimoji-js.jp/menu/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-79",
+      "kind": "fact",
+      "verified": false,
+      "name": "そろばん塾・仁",
+      "yomi": "そろばんじゅく・ひとし",
+      "genre": "manabi",
+      "ages": [],
+      "who": "",
+      "where": "学園東町",
+      "trial": "",
+      "url": "https://www.soroban.or.jp/area/tokyo_025/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-80",
+      "kind": "fact",
+      "verified": true,
+      "name": "公文式 小川駅北教室",
+      "yomi": "くもんしきおがわえききたきょうしつ",
+      "genre": "manabi",
+      "ages": [
+        "pre",
+        "elem"
+      ],
+      "who": "幼児〜",
+      "where": "小川東町（小川駅）",
+      "trial": "無料の体験あり",
+      "url": "https://www.kumon.ne.jp/enter/search/classroom/2003150031/index.html",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-81",
+      "kind": "fact",
+      "verified": false,
+      "name": "アトリエ木のね",
+      "yomi": "あとりえきのね",
+      "genre": "art",
+      "ages": [
+        "baby",
+        "pre",
+        "elem"
+      ],
+      "who": "2才〜中学生・大人",
+      "where": "不明（鷹の台駅 徒歩9分）",
+      "trial": "体験あり",
+      "url": "https://kinone.mods.jp/",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-82",
+      "kind": "fact",
+      "verified": false,
+      "name": "学園坂スタジオ リトミック教室",
+      "yomi": "がくえんさかすたじおりとみっくきょうしつ",
+      "genre": "music",
+      "ages": [
+        "baby"
+      ],
+      "who": "赤ちゃん・親子",
+      "where": "学園東町（一橋学園駅 徒歩1分）",
+      "trial": "",
+      "url": "https://www.gakuenzaka.com/eurhythmics-baby",
+      "checked": "2026-11-26"
+    },
+    {
+      "id": "f-83",
+      "kind": "fact",
+      "verified": false,
+      "name": "学習将棋教室（将棋普及指導員の自宅教室）",
+      "yomi": "がくしゅうしょうぎきょうしつ",
+      "genre": "other",
+      "ages": [],
+      "who": "",
+      "where": "不明",
+      "trial": "",
+      "url": "https://www.shogi.or.jp/school/kanto/1436/",
+      "checked": "2026-11-26"
     }
   ]
 }
