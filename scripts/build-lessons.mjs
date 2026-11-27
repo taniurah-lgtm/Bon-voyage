@@ -92,7 +92,8 @@ function stationsOf(l) {
   const m = (l.where || '').match(STATION_RE);
   if (m) return [STATIONS.includes(m[1]) ? m[1] : 'other'];
   const town = (l.where || '').split(/[（(／・、\s]/)[0];
-  return NEAR[town] ? [NEAR[town]] : [];
+  const near = NEAR[town];
+  return near ? [].concat(near) : ['other'];
 }
 // 体験: free（無料）／yes（あり・有料）／look（見学）／''（書いていない）
 function trialKind(t) { if (!t) return ''; if (/無料/.test(t)) return 'free'; if (/体験/.test(t)) return 'yes'; if (/見学/.test(t)) return 'look'; return 'yes'; }
@@ -109,14 +110,19 @@ function trialLabel(t) {
 for (const l of list) { l._st = stationsOf(l); l._stx = STATION_RE.test(l.where || ''); l._tr = trialKind(l.trial); }
 // 折り返し（2026-11-27 評価役「語の途中で折れる」）: ページの文字は word-break: keep-all にして、
 // 改行してよいところに <wbr> を入れる。区切りは Node の Intl.Segmenter（日本語の単語）で、
-// 「ひらがなで終わる語」のあとに漢字・カタカナで始まる語が来るところだけ（助詞のあと＝文節の切れ目に近い）
+// 助詞だけの語（の・は・を…）のあとに、漢字・カタカナで始まる語が来るところだけ（文節の切れ目。「ご｜一緒に」「歩き｜始め」のような語の中には入れない）
 const SEG = typeof Intl !== 'undefined' && Intl.Segmenter ? new Intl.Segmenter('ja', { granularity: 'word' }) : null;
-const HIRA_END = /[\u3041-\u309F]$/, CONTENT_START = /^[\u4E00-\u9FFF々〆\u30A1-\u30FA]/;
+const PARTICLE = new Set(['の', 'は', 'が', 'を', 'に', 'で', 'と', 'も', 'へ', 'や', 'か', 'から', 'より', 'まで', 'により']);
+const CONTENT_START = /^[\u4E00-\u9FFF々〆\u30A1-\u30FA]/;
 function jp(v) {
   const s = String(v ?? '');
   if (!SEG) return esc(s);
-  let out = '', prev = '';
-  for (const { segment: x } of SEG.segment(s)) { if (prev && HIRA_END.test(prev) && CONTENT_START.test(x)) out += '<wbr>'; out += esc(x); prev = x; }
+  let out = '', prev = '', prev2 = '';
+  for (const { segment: x } of SEG.segment(s)) {
+    // 1字の漢字＋「の」は地名の中（鈴の木台）なので入れない
+    if (prev && PARTICLE.has(prev) && CONTENT_START.test(x) && !(prev === 'の' && /^[\u4E00-\u9FFF]$/.test(prev2))) out += '<wbr>';
+    out += esc(x); prev2 = prev; prev = x;
+  }
   return out;
 }
 // かっこ書きの短いまとまりと、数字＋単位は途中で折らない（「（11/月20日時点）」「5〜/7分」にしない）
@@ -173,15 +179,19 @@ const photoSvg = (p, label) => `<svg viewBox="0 0 320 200" role="img" aria-label
 
 // ── 無料の欄（事実だけ）。1教室4段（名前／年齢／場所／体験）でそろえる。行ぜんたいが教室のページへのリンク。地図は付けない ──
 const whoText = (l) => l.who || l.ages.map((a) => AGES[a]).join('・') || '年齢の記載なし';
-const areaTag = (l) => (!l._stx && l._st.length && !l._st.includes('other') && !l._st.some((x) => (l.where || '').startsWith(x))
-  ? `<span class="nw">（${l._st.map((x) => esc(x)).join('・')}駅エリア）</span>` : '');
+function whereHtml(l) {
+  const w = l.where || '';
+  if (l._stx || !l._st.length || l._st.includes('other') || l._st.some((x) => w.includes(x))) return nb(w);
+  const area = `${l._st.join('・')}駅エリア`;
+  return nb(/）$/.test(w) ? w.replace(/）$/, `・${area}）`) : `${w}（${area}）`);
+}
 function factRow(l) {
   const flag = l.verified !== true ? '<span class="flag">確認中</span>' : '';
   const tl = trialLabel(l.trial);
   return `<a class="row" data-item id="${esc(l.id)}" href="${esc(l.url)}" target="_blank" rel="noopener" data-genre="${esc(l.genre)}" data-ages="${esc(l.ages.join(' '))}" data-st="${esc(l._st.join(' '))}" data-trial="${l._tr}" data-goatcounter-click="${esc('スクール公式｜' + l.name)}">
       <span class="row-b">
         <span class="row-n">${esc(l.name)}${flag}</span>
-        <span class="row-m"><span class="mt">${SVG.who}<span>${nb(whoText(l))}</span></span><span class="mt">${SVG.where}<span>${nb(l.where)}${areaTag(l)}</span></span></span>
+        <span class="row-m"><span class="mt">${SVG.who}<span>${nb(whoText(l))}</span></span><span class="mt">${SVG.where}<span>${whereHtml(l)}</span></span></span>
         ${tl ? `<span class="tr tr-${l._tr}">${esc(tl)}</span>` : '<span class="tr tr-none">体験の記載なし</span>'}
       </span>
       ${SVG.out}
@@ -196,9 +206,9 @@ function prCard(l) {
   const src = l.sample ? '見本です（教室名・写真・中身は例）。' : `教室からいただいた内容です${l.checked ? `（${fmtDay(l.checked)}）` : ''}。`;
   return `<article class="prc" data-item id="${esc(l.id)}" data-genre="${esc(l.genre)}" data-ages="${esc(l.ages.join(' '))}" data-st="${esc(l._st.join(' '))}" data-trial="${l._tr}">
       <div class="prc-h">
-        <div class="prc-top"><a class="prt" href="#about">PR</a>${flag}</div>
+        <div class="prc-top"><a class="prt" href="#about" aria-label="PRについて（ページ下の説明へ）">PR</a>${flag}</div>
         <h3 class="prc-n">${esc(l.name)}</h3>
-        <span class="row-m"><span class="mt">${SVG.who}<span>${nb(l.who)}</span></span><span class="mt">${SVG.where}<span>${nb(l.where)}${areaTag(l)}</span></span></span>
+        <span class="row-m"><span class="mt">${SVG.who}<span>${nb(l.who)}</span></span><span class="mt">${SVG.where}<span>${whereHtml(l)}</span></span></span>
         ${l.seats ? `<p class="seat"><b>空き</b><span>${nb(l.seats)}</span></p>` : ''}
       </div>
       ${photos.length ? `<div class="ph" tabindex="0" aria-label="教室の写真（横に流せます）">${photos.map((p, i) => `<figure>${photoSvg(p, `${l.name}の写真のイメージ ${i + 1}`)}</figure>`).join('')}</div>
@@ -324,7 +334,7 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .tog input { width: 1.35rem; height: 1.35rem; accent-color: var(--sky-deep); margin: 0; flex: none; }
   .f-res { display: grid; gap: .35rem; }
   .cond { display: flex; flex-wrap: wrap; gap: .35rem; }
-  .cc { font: inherit; display: inline-flex; align-items: center; gap: .35rem; min-height: 44px; padding: 0 .55rem 0 .8rem; border-radius: 999px; border: 1px solid var(--sky-deep); background: var(--sky-wash); color: var(--sky-deep); font-size: .82rem; font-weight: 800; cursor: pointer; }
+  .cc { font: inherit; display: inline-flex; align-items: center; gap: .35rem; min-height: 44px; padding: 0 .55rem 0 .8rem; border-radius: 999px; border: 1px solid var(--sky-deep); background: var(--sky-wash); color: var(--link-ink); font-size: .82rem; font-weight: 800; cursor: pointer; }
   .cc span { font-size: 1rem; line-height: 1; }
   .res-row { display: flex; gap: .4rem; }
   .see { flex: 1 1 auto; display: inline-flex; align-items: center; justify-content: center; gap: .3rem; min-height: 50px; border-radius: 999px; background: var(--sky-deep); color: var(--on-sky); text-decoration: none; font-family: var(--maru); font-weight: 800; font-size: .98rem; }
@@ -360,7 +370,8 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .prc { background: var(--pr-bg); border: 1.5px solid var(--pr-line); border-radius: var(--radius-sm); margin: .7rem 0; overflow: hidden; box-shadow: 0 2px 14px rgba(138,90,18,.08); scroll-margin-top: 104px; }
   .prc-h { padding: .7rem .9rem .2rem; display: flex; flex-direction: column; gap: .25rem; }
   .prc-top { display: flex; align-items: center; gap: .4rem; }
-  .prt { font-weight: 800; font-size: .74rem; letter-spacing: .08em; color: var(--pr-tag); background: var(--pr-tag-bg); border-radius: 5px; padding: .05rem .45rem; text-decoration: none; }
+  .prt { position: relative; font-weight: 800; font-size: .74rem; letter-spacing: .08em; color: var(--pr-tag); background: var(--pr-tag-bg); border-radius: 5px; padding: .05rem .45rem; text-decoration: none; }
+  .prt::after { content: ""; position: absolute; inset: -9px -6px; }
   .prc-top .flag { margin-left: 0; }
   .prc-n { font-family: var(--maru); font-weight: 800; font-size: 1.16rem; line-height: 1.4; margin: 0; }
   .seat { display: flex; align-items: flex-start; gap: .45rem; margin: .15rem 0 0; padding: .35rem .55rem; border-radius: 8px; background: var(--free-bg); color: var(--free-ink); font-size: .84rem; font-weight: 700; line-height: 1.5; }
@@ -392,7 +403,7 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .ask { margin-top: 1.6rem; padding: .85rem 1rem; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); font-size: .84rem; line-height: 1.8; color: var(--ink-soft); }
   .ask b { display: block; font-family: var(--maru); font-weight: 800; color: var(--ink); font-size: .95rem; margin-bottom: .2rem; }
   .about { font-size: .74rem; color: var(--ink-soft); line-height: 1.8; margin-top: 1.1rem; scroll-margin-top: 104px; }
-  .about a, .ask a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; }
+  .about a, .ask a { font-weight: 700; padding-block: .7em; margin-block: -.7em; }
   .nav-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.6rem 0 0; }
   .nav-pills a { font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none; color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .4rem .9rem; }
 
@@ -467,7 +478,7 @@ ${navSub('lessons')}
     内容の直し、載せてほしくないとき（すぐに外します）、曜日や体験の日までくわしく載せたいときは、<a href="/#contact">お問い合わせ</a>からご連絡ください。
   </div>
 
-  <p class="about" id="about">「PR」の付いた教室からは、掲載料をいただいています。PRの付いていない教室は、教室の案内に書いてあることを無料で載せています。並びは、PRかどうかに関係なく、ジャンルごとの五十音順です。教室の案内に書いてあることを、同じ形でそろえています${lastChecked ? `（${lastChecked}に確認）` : ''}。駅が書いていない教室は、町の位置から近い駅の「エリア」に入れています。費用や曜日は変わることがあります。申し込む前に、それぞれの公式の案内でご確認ください。<br>
+  <p class="about" id="about">「PR」の付いた教室からは、掲載料をいただいています。PRの付いていない教室は、教室の案内に書いてあることを無料で載せています。並びは、PRかどうかに関係なく、習い事ごとの五十音順です。教室の案内に書いてあることを、同じ形でそろえています${lastChecked ? `（${lastChecked}に確認）` : ''}。駅が書いていない教室は、町の位置から近い駅の「エリア」に入れています。費用や曜日は変わることがあります。申し込む前に、それぞれの公式の案内でご確認ください。<br>
   内容の誤りに気づいたら、<a href="/#contact">お問い合わせ</a>から教えてください。</p>
 
   <div class="nav-pills">
