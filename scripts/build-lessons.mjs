@@ -127,7 +127,7 @@ function jp(v) {
 }
 // かっこ書きの短いまとまりと、数字＋単位は途中で折らない（「（11/月20日時点）」「5〜/7分」にしない）
 const nb = (v) => {
-  const s = String(v ?? ''), re = /（[^（）]{1,14}）|\d+(?:[〜～-]\d+)?(?:分|歳|人|回|階|円|か月|年生|組)/g;
+  const s = String(v ?? ''), re = /（[^（）]{1,14}）|[^\s、。（）・／]{1,6}[〜～][^\s、。（）・／]{1,6}|\d+(?:[〜～-]\d+)?(?:分|歳|人|回|階|円|か月|年生|組)/g;
   let out = '', i = 0, m;
   while ((m = re.exec(s))) { out += jp(s.slice(i, m.index)) + `<span class="nw">${esc(m[0])}</span>`; i = m.index + m[0].length; }
   return out + jp(s.slice(i));
@@ -180,9 +180,21 @@ const photoSvg = (p, label) => `<svg viewBox="0 0 320 200" role="img" aria-label
 
 // ── 無料の欄（事実だけ）。1教室4段（名前／年齢／場所／体験）でそろえる。行ぜんたいが教室のページへのリンク。地図は付けない ──
 const whoText = (l) => l.who || l.ages.map((a) => AGES[a]).join('・') || '年齢の記載なし';
+// 始まりの年齢（年齢でしぼったときだけ、行の頭に出す）。案内に書いてある年齢の言い直しだけ。決まらないものは出さない
+function fromLabel(who) {
+  const w = String(who || '').replace(/\s/g, '');
+  let m;
+  if ((m = w.match(/^(?:満)?(\d{1,2})(?:か月|ヶ月|カ月)/))) return `${m[1]}か月から`;
+  if ((m = w.match(/^(?:満)?(\d{1,2})(?:歳|才)/))) return `${m[1]}歳から`;
+  if ((m = w.match(/^(年少|年中|年長)/))) return `${m[1]}から`;
+  if ((m = w.match(/^(?:小学?|小学校)(\d)/))) return `小${m[1]}から`;
+  if (/^小学生/.test(w)) return '小1から';
+  if (/^(?:0歳|０歳|赤ちゃん|乳児)/.test(w)) return '0歳から';
+  return '';
+}
 function whereHtml(l) {
   const w = l.where || '';
-  if (l._stx || !l._st.length || l._st.includes('other') || l._st.some((x) => w.includes(x))) return nb(w);
+  if (l._stx || !l._st.length || l._st.includes('other') || l._st.some((x) => new RegExp(x + '(?!町)').test(w))) return nb(w);
   const area = `${l._st.join('・')}駅エリア`;
   return nb(/）$/.test(w) ? w.replace(/）$/, `・${area}）`) : `${w}（${area}）`);
 }
@@ -192,7 +204,7 @@ function factRow(l) {
   return `<a class="row" data-item id="${esc(l.id)}" href="${esc(l.url)}" target="_blank" rel="noopener" data-genre="${esc(l.genre)}" data-ages="${esc(l.ages.length ? l.ages.join(' ') : '?')}" data-st="${esc(l._st.join(' '))}" data-trial="${l._tr}" data-goatcounter-click="${esc('スクール公式｜' + l.name)}">
       <span class="row-b">
         <span class="row-n">${esc(l.name)}${flag}</span>
-        <span class="row-m"><span class="mt">${SVG.who}<span>${nb(whoText(l))}</span></span><span class="mt">${SVG.where}<span>${whereHtml(l)}</span></span></span>
+        <span class="row-m"><span class="mt">${SVG.who}<span>${fromLabel(whoText(l)) ? `<span class="from">${fromLabel(whoText(l))}</span>` : ''}${nb(whoText(l))}</span></span><span class="mt">${SVG.where}<span>${whereHtml(l)}</span></span></span>
         ${tl ? `<span class="tr tr-${l._tr}">${esc(tl)}</span>` : '<span class="tr tr-none">体験の記載なし</span>'}
       </span>
       ${SVG.out}
@@ -203,7 +215,9 @@ function factRow(l) {
 function prCard(l) {
   const flag = l.sample ? '<span class="flag">見本</span>' : (l.verified !== true ? '<span class="flag">確認中</span>' : '');
   const photos = l.sample && PHOTO[l.photo] ? PHOTO[l.photo] : [];
-  const kv = (k, v) => (v ? `<div class="kv"><dt>${k}</dt><dd>${Array.isArray(v) ? v.map(nb).join('<br>') : nb(v)}</dd></div>` : '');
+  // 配列は1行ずつ。「クラス名　時刻」（全角の空白で区切る）は、クラス名の行と時刻の行に分ける
+  const line = (x) => { const i = String(x).indexOf('　'); return i > 0 ? `<span class="cls">${esc(x.slice(0, i))}</span><span class="tm">${nb(x.slice(i + 1))}</span>` : `<span class="tm">${nb(x)}</span>`; };
+  const kv = (k, v) => (v ? `<div class="kv"><dt>${k}</dt><dd>${Array.isArray(v) ? `<span class="lines">${v.map(line).join('')}</span>` : nb(v)}</dd></div>` : '');
   const src = l.sample ? '見本です（教室名・写真・中身は例）。' : `教室からいただいた内容です${l.checked ? `（${fmtDay(l.checked)}）` : ''}。`;
   return `<article class="prc" data-item id="${esc(l.id)}" data-genre="${esc(l.genre)}" data-ages="${esc(l.ages.length ? l.ages.join(' ') : '?')}" data-st="${esc(l._st.join(' '))}" data-trial="${l._tr}">
       <div class="prc-h">
@@ -220,7 +234,7 @@ function prCard(l) {
           ${kv('曜日・時間', l.when)}
           ${kv('費用', l.cost)}
           ${kv('体験', l.trial)}
-          ${(l.trialDays || []).length ? `<div class="kv"><dt>体験の日</dt><dd class="days">${l.trialDays.map((d) => `<span class="day">${esc(d)}</span>`).join('')}</dd></div>` : ''}
+          ${(l.trialDays || []).length ? `<div class="kv"><dt>体験の日</dt><dd>${l.trialDays.map((d) => `<span class="nw">${esc(d)}</span>`).join('・')}</dd></div>` : ''}
           ${kv('申込み', l.book)}
         </dl>
         ${l.perk ? `<p class="perk">${SVG.gift}<span><b>通信を見た方へ</b>${nb(l.perk.replace(/^「ぼんぼやーじゅ通信を見た」で、?/, '「通信を見た」で、'))}</span></p>` : ''}
@@ -381,10 +395,14 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .prt::after { content: ""; position: absolute; inset: -9px -6px; }
   .prt .ii { width: 12px; height: 12px; margin-left: 3px; vertical-align: -1px; }
   .ii { fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
-  .howto { justify-self: end; display: inline-flex; align-items: center; gap: .3rem; min-height: 40px; font-size: .76rem; font-weight: 700; color: var(--link-ink); text-decoration: none; }
+  .howto { justify-self: end; display: inline-flex; align-items: center; gap: .3rem; min-height: 44px; font-size: .76rem; font-weight: 700; color: var(--link-ink); text-decoration: none; }
   .howto .ii { width: 15px; height: 15px; }
-  .days { display: flex; flex-wrap: wrap; gap: .3rem; }
-  .day { font-size: .8rem; font-weight: 700; background: var(--sky-wash); color: var(--link-ink); border-radius: 6px; padding: .05rem .45rem; font-variant-numeric: tabular-nums; }
+  .lines { display: grid; gap: .05rem; }
+  .lines .cls { display: block; font-size: .76rem; font-weight: 700; color: var(--ink-soft); margin-top: .2rem; }
+  .lines .cls:first-child { margin-top: 0; }
+  .lines .tm { display: block; }
+  .from { display: none; font-size: .7rem; font-weight: 800; color: var(--ink); background: var(--surface-2); border-radius: 5px; padding: 0 .35rem; margin-right: .35rem; white-space: nowrap; }
+  .age-on .from { display: inline-block; }
   .prc-top .flag { margin-left: 0; }
   .prc-n { font-family: var(--maru); font-weight: 800; font-size: 1.16rem; line-height: 1.4; margin: 0; }
   .seat { display: flex; align-items: flex-start; gap: .45rem; margin: .15rem 0 0; padding: .35rem .55rem; border-radius: 8px; background: var(--free-bg); color: var(--free-ink); font-size: .84rem; font-weight: 700; line-height: 1.5; }
@@ -415,8 +433,13 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .none button { font: inherit; font-weight: 800; color: var(--link-ink); background: none; border: 0; text-decoration: underline; cursor: pointer; min-height: 44px; }
   .ask { margin-top: 1.6rem; padding: .85rem 1rem; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); font-size: .84rem; line-height: 1.8; color: var(--ink-soft); }
   .ask b { display: block; font-family: var(--maru); font-weight: 800; color: var(--ink); font-size: .95rem; margin-bottom: .2rem; }
-  .about { font-size: .74rem; color: var(--ink-soft); line-height: 1.8; margin-top: 1.1rem; scroll-margin-top: 104px; }
-  .about a, .ask a { font-weight: 700; padding-block: .7em; margin-block: -.7em; }
+  .about { margin-top: 1.4rem; scroll-margin-top: 104px; padding: .9rem 1rem; background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); }
+  .about h2 { font-family: var(--maru); font-weight: 800; font-size: 1rem; margin: 0 0 .5rem; }
+  .about ul { list-style: none; margin: 0 0 .6rem; padding: 0; display: grid; gap: .45rem; }
+  .about li { font-size: .84rem; line-height: 1.7; color: var(--ink-soft); word-break: keep-all; overflow-wrap: anywhere; }
+  .about li b { display: block; color: var(--ink); font-size: .86rem; }
+  .about p { font-size: .82rem; color: var(--ink-soft); line-height: 1.8; }
+  .about a, .ask a { font-weight: 700; padding-block: 12px; margin-block: -12px; }
   .nav-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.6rem 0 0; }
   .nav-pills a { font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none; color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .4rem .9rem; }
 
@@ -492,8 +515,17 @@ ${navSub('lessons')}
     内容の直し、載せてほしくないとき（すぐに外します）、曜日や体験の日までくわしく載せたいときは、<a href="/#contact">お問い合わせ</a>からご連絡ください。
   </div>
 
-  <p class="about" id="about">「PR」の付いた教室からは、掲載料をいただいています。PRの付いていない教室は、教室の案内に書いてあることを無料で載せています。並びは、PRかどうかに関係なく、習い事ごとの五十音順です。教室の案内に書いてあることを、同じ形でそろえています${lastChecked ? `（${lastChecked}に確認）` : ''}。駅が書いていない教室は、町の位置から近い駅の「エリア」に入れています。費用や曜日は変わることがあります。申し込む前に、それぞれの公式の案内でご確認ください。<br>
-  内容の誤りに気づいたら、<a href="/#contact">お問い合わせ</a>から教えてください。</p>
+  <section class="about" id="about">
+    <h2>載せ方について</h2>
+    <ul>
+      <li><b>並び順</b>習い事ごとの五十音順です。PRかどうかで順番は変えません</li>
+      <li><b>PR</b>掲載料をいただいた教室です。写真・曜日・費用・空き・体験の日を載せています</li>
+      <li><b>PRのない教室</b>教室の案内に書いてあることだけを、無料で載せています${lastChecked ? `（${lastChecked}に確認）` : ''}</li>
+      <li><b>駅エリア</b>駅の書いていない教室は、町の位置から近い駅のエリアに入れています</li>
+      <li><b>申し込む前に</b>費用や曜日は変わることがあります。教室の案内でご確認ください</li>
+    </ul>
+    <p>内容の誤りに気づいたら、<a href="/#contact">お問い合わせ</a>から教えてください。</p>
+  </section>
 
   <div class="nav-pills">
     <a href="/calendar.html">おでかけカレンダー</a>
@@ -550,10 +582,11 @@ ${navSub('lessons')}
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
     $('free-only').checked = st.free;
+    document.body.classList.toggle('age-on', st.age !== 'all');
     var cond = [];
     if (st.age !== 'all') cond.push(['age', AGE[st.age]]);
     if (st.g) cond.push(['g', document.querySelector('.gt button[data-g="' + st.g + '"]').getAttribute('aria-label')]);
-    st.st.forEach(function (s) { cond.push(['st:' + s, s === 'other' ? 'そのほかの駅' : s + '駅']); });
+    st.st.forEach(function (s) { cond.push(['st:' + s, s === 'other' ? 'そのほか・駅の記載なし' : s + '駅']); });
     if (st.free) cond.push(['free', '無料体験あり']);
     $('cnt').textContent = n; $('fabn').textContent = n;
     $('cond').innerHTML = cond.map(function (c) { return '<button type="button" class="cc" data-k="' + c[0] + '" aria-label="' + c[1] + 'の条件を外す">' + c[1] + '<span aria-hidden="true">×</span></button>'; }).join('');
