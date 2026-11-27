@@ -18,6 +18,9 @@
  *   - PRカードは開いた形で、写真（3枚まで）・教室のひとこと・曜日・費用・体験・空き・通信の読者への特典・申込みのボタン
  *   - 見本の写真は絵（写真のイメージ）。本番は教室からいただいた写真だけ
  *   - 口コミ・星・ランキングは載せない（ないものを作らない。比べる言葉は止める）
+ *   - 🔁 同日オーナー「掲載料をいただいている教室です、とか書かないで。まじめにやりすぎ」→ カードには「PR」の札だけ。
+ *     消費者庁のステマの運用基準（令和5年3月28日）は「広告」「宣伝」「プロモーション」「PR」の文言で事業者の表示と明瞭になる、としている。
+ *     掲載料の一文は、いちばん下の小さな「このページについて」にだけ残す
  *
  * 決まり（§16・11/23。11/27 の形では「載せるのは掲載料をいただいた教室だけ」「見出しに PR」が変わる）:
  *   - 書くのは公式か、教室からいただいた事実だけ。「おすすめ」「No.1」など比べる言葉は書かない（止める）
@@ -170,7 +173,7 @@ function prCard(l) {
     ? '内容は見本です。本番は、教室からいただいた内容と、教室の案内に書いてあることだけを載せます。'
     : `教室からいただいた内容と、教室の案内に書いてあることです${l.checked ? `（${fmtDay(l.checked)}）` : ''}。`;
   return `<article class="prc" data-item id="${esc(l.id)}" data-genre="${esc(l.genre)}" data-ages="${esc(l.ages.join(' '))}" data-st="${esc(l._st)}" data-trial="${l._tr}">
-      <div class="prc-top"><span class="prt">PR</span><span class="prn">掲載料をいただいている教室です</span>${flag}</div>
+      <div class="prc-top"><span class="prt">PR</span>${flag}</div>
       ${photos.length ? `<div class="ph" tabindex="0" aria-label="教室の写真（横に流せます）">${photos.map((p, i) => `<figure>${photoSvg(p, `${l.name}の写真のイメージ ${i + 1}`)}</figure>`).join('')}</div>
       <p class="ph-cap">${l.sample ? '写真のイメージです。教室の写真が3枚まで入ります。' : ''}</p>` : ''}
       <div class="prc-b">
@@ -322,7 +325,6 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .prc { background: var(--pr-bg); border: 1.5px solid var(--pr-line); border-radius: var(--radius-sm); margin: .7rem 0; overflow: hidden; box-shadow: var(--shadow-soft); scroll-margin-top: 104px; }
   .prc-top { display: flex; align-items: center; gap: .45rem; padding: .5rem .85rem; border-bottom: 1px solid var(--pr-line); }
   .prt { font-weight: 800; font-size: .74rem; letter-spacing: .08em; color: var(--pr-tag); background: var(--pr-tag-bg); border-radius: 5px; padding: .05rem .45rem; }
-  .prn { font-size: .72rem; color: var(--ink-soft); }
   .prc-top .flag { margin-left: auto; }
   .ph { display: flex; gap: .4rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: .7rem .85rem 0; -webkit-overflow-scrolling: touch; }
   .ph::-webkit-scrollbar { display: none; }
