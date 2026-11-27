@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-27",
+ "generated": "2026-11-28",
  "events": [
   {
    "id": "E16",
@@ -5181,7 +5181,7 @@
    "timeUncertain": false,
    "place": "あそびっぐ（BIGBOX東大和 1階・東大和市桜が丘1-1330-19／西武拝島線 東大和市駅から徒歩1分）",
    "mapq": "あそびっぐ",
-   "summary": "",
+   "summary": "赤ちゃんと保護者むけの月1回の催し。入場料だけで、その日のプログラムに参加できる。12/16(水) は 11:00・16:00 クリスマスワークショップ（各20組）／12:00・14:00 ハイハイ＆よちよちレース（賞状つき・各20組）／13:00 手形アート＆身体測定（成長記録カード）／15:00 寝相アート。受付は各回の30分前〜15分前に、入退場ゲートの受付で。定員を超えたら抽選、空きがあれば開始時刻まで受け付ける",
    "kidsNote": "",
    "caution": "",
    "lastEntry": "",
@@ -6428,6 +6428,42 @@
    "cat": "fest"
   },
   {
+   "id": "E270",
+   "name": "小平神明こども園「けやきまつり」",
+   "dates": [
+    "2026-12-05"
+   ],
+   "span": null,
+   "when": "2026年12月5日(土) 9:00〜12:30。雨天でも行う",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "09:00",
+   "end": "12:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "小平神明こども園（小平神明幼稚園）の園庭・ホール（小平市小川町1-2572）",
+   "mapq": "小平神明こども園",
+   "summary": "",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "○",
+    "pre": "◎",
+    "elem": "○"
+   },
+   "cost": "記載なし（要確認）／申込: 記載なし（要確認）",
+   "discount": "",
+   "target": "在園児と地域の方。どなたでも",
+   "url": "https://www.instagram.com/p/DeI7EK7H2B_/",
+   "tentative": false,
+   "deadline": null,
+   "cat": "fest"
+  },
+  {
    "id": "E210",
    "name": "おんぷコンサート vol.2「クリスマスの音楽」（新小金井駅前 シェアリウム）",
    "dates": [
@@ -6808,6 +6844,45 @@
    "url": "https://www.city.nishitokyo.lg.jp/siseizyoho/npo_kyodo/kikakuteian/R8/R8porondonguri.html",
    "tentative": false,
    "deadline": null,
+   "cat": "other"
+  },
+  {
+   "id": "E271",
+   "name": "りんどう幼稚園 にこにこクラブ「にこカフェ〜たらい船に乗って遊ぼう〜」",
+   "dates": [
+    "2026-12-17"
+   ],
+   "span": null,
+   "when": "2026年12月17日(木) 10:00〜11:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "11:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "りんどう幼稚園 おひさまクラス（小平市花小金井1-26-34）",
+   "mapq": "小平市りんどう幼稚園 おひさまクラス",
+   "summary": "たくさんのスーパーボールの上にたらいを乗せて転がる、不思議な感覚あそび",
+   "kidsNote": "",
+   "caution": "",
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "△",
+    "elem": "✕"
+   },
+   "cost": "記載なし（要確認）",
+   "discount": "",
+   "target": "未就園児の親子／定員: 先着10組",
+   "url": "https://www.rindou.ed.jp/news/detail.php?tn=82&ct=20",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-12-08",
+    "raw": "12月8日(火) 9時から、園のホームページの申込フォームで（先着）"
+   },
    "cat": "other"
   },
   {
