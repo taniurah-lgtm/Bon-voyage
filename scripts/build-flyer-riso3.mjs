@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 /*
- * 🆕 2026-11-27 オーナー「黒とプラス2色の計3色版」。いつものチラシ（花の枠・表）を、リソグラフ3色に分けた版下。
+ * 🆕 2026-11-27 オーナー「黒とプラス2色の計3色版」。リソグラフ3色の版下（片面・A4）。
+ *   同日「もっと色を使いたい。帯にしてもいい」「棚では上の1/3しか見えないので、上が目立つ方がいい」→ 専用の版下に作り直した。
  *   node scripts/build-flyer-riso3.mjs            （QR = 手渡し /f/hand）
  *   node scripts/build-flyer-riso3.mjs asupia     （QR を配布先コードに。scripts/build-qr.py の配布先と同じ）
- * 版下: docs/print/flyer/flyer-frame.html?side=front&mode=riso3&plate=k|c1|c2
+ * 版下: docs/print/flyer/flyer-riso3.html?plate=k|c1|c2
  * 出力:
  *   docs/homepage/assets/flyer-a4-riso3[-<code>].pdf      3ページ。[1] 黒版 [2] 色版1（暖色） [3] 色版2（寒色）。どれも黒1色で出す
  *   docs/homepage/assets/flyer-a4-riso3[-<code>]-preview.png         刷り上がりの見本（赤＋青のインクで重ねたもの）
  *   docs/homepage/assets/flyer-a4-riso3[-<code>]-preview-green.png   同じ版を、赤＋緑のインクで重ねた見本
  * 刷る順は 色版1 → 色版2 → 黒版（黒をいちばん上に）。淡い色は網点を入れてあるので、原稿は「文字」モードでよい。
- * 黒版で、はみ出し・文字の重なりがあれば止まる。
+ * はみ出し・文字の重なり（版ごと、と3つの版を重ねたとき）があれば止まる。
  */
 import { mkdirSync, readFileSync, rmSync } from 'node:fs';
 import { execSync, execFileSync } from 'node:child_process';
@@ -25,7 +26,7 @@ const { chromium } = await import('playwright').catch(async () => {
 const code = process.argv[2] || '';
 const suffix = code ? '-' + code : '';
 const OUT = 'docs/homepage/assets';
-const SRC = pathToFileURL(resolve('docs/print/flyer/flyer-frame.html')).href;
+const SRC = pathToFileURL(resolve('docs/print/flyer/flyer-riso3.html')).href;
 const PLATES = [['k', '黒版'], ['c1', '色版1（暖色）'], ['c2', '色版2（寒色）']];
 // 見本の色（理想科学のインクの色に近いもの）。版は色に関係なく同じ
 const INKS = {
@@ -41,7 +42,7 @@ const p = await b.newPage({ viewport: { width: 794, height: 1123 }, deviceScaleF
 let bad = false;
 const pdfs = [], pngs = {};
 for (const [plate, label] of PLATES) {
-  const url = `${SRC}?side=front&mode=riso3&plate=${plate}${code ? `&qr=f-${code}.png` : ''}`;
+  const url = `${SRC}?plate=${plate}${code ? `&qr=f-${code}.png` : ''}`;
   await p.goto(url, { waitUntil: 'networkidle' });
   await p.evaluate(() => document.fonts.ready);
   await p.waitForTimeout(300);
@@ -49,7 +50,7 @@ for (const [plate, label] of PLATES) {
   await p.pdf({ path: f, width: '210mm', height: '297mm', printBackground: true, margin: { top: 0, right: 0, bottom: 0, left: 0 } });
   pdfs.push(f);
   pngs[plate] = (await p.screenshot({ clip: { x: 0, y: 0, width: 794, height: 1123 } })).toString('base64');
-  if (plate === 'k') {
+  {
     const r = await p.evaluate(() => {
       const pg = document.querySelector('.page').getBoundingClientRect();
       const f = document.querySelector('.foot').getBoundingClientRect();
@@ -60,6 +61,13 @@ for (const [plate, label] of PLATES) {
     const gapMm = (r.gap / 794 * 210).toFixed(1);
     console.log(`${label}: はみ出し ${r.out}件 / 下端まで ${gapMm}mm / 文字の重なり ${hits.length}件（${checked}箇所）`);
     if (r.out || Number(gapMm) < 7 || hits.length) { bad = true; hits.forEach((h) => console.error('   ' + h)); }
+  }
+  if (plate === 'k') {
+    // 3つの版を重ねたとき（ほかの版の文字とも重ならないか）
+    await p.addStyleTag({ content: '.page *{ visibility:visible !important; }' });
+    const { hits, checked } = await checkTextOverlap(p);
+    console.log(`3つの版を重ねて: 文字の重なり ${hits.length}件（${checked}箇所）`);
+    if (hits.length) { bad = true; hits.forEach((h) => console.error('   ' + h)); }
   }
 }
 const outPdf = `${OUT}/flyer-a4-riso3${suffix}.pdf`;

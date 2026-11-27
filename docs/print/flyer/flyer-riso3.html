@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>A4チラシ（3色版）｜ぼんぼやーじゅ通信</title>
+<!--
+  2026-11-27 オーナー「黒とプラス2色の計3色版」「インクの量はあすぴあでは関係ないので、もっと色を使いたい。帯にしてもいい」
+  「陳列棚では上の1/3しか見えないので、上が目立つ方がいい」→ 上の1/3（約99mm）に、宛先の帯・名前・何が届くかの帯を入れた。
+  ・?plate=k（黒版）／c1（色版1＝暖色: 何が届くかの帯・風船・ピンクと黄色の花・Bon Voyage・1つ目と3つ目の札）
+    ／c2（色版2＝寒色: 宛先の帯・水色の花・葉・2つ目の札・QRのまわりの面・いちばん下の帯）
+  ・どの版も黒1色で出す（色はリソグラフのドラムが乗せる）。淡い色は網点を図形で描く（灰色にしない）
+  ・文字は黒版か、色の帯からの白抜き（1つの版だけで完結）。版が1mmずれても読めるように、2つの版にまたがる細かい文字は置かない
+  ・?qr=ファイル名 でQRを差し替え（assets/qr/）
+  作り直し: node scripts/build-flyer-riso3.mjs
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Lora:ital,wght@1,500&family=Klee+One:wght@600&display=block" rel="stylesheet">
+<script src="../../homepage/assets/brand/frame-art.js"></script>
+<style>
+  @page { size: A4; margin: 0; }
+  html,body{ margin:0; padding:0; background:#fff; }
+  .page{ position:relative; width:210mm; height:297mm; margin:0 auto; overflow:hidden; background:#fff; color:#000;
+         font-family:"Zen Kaku Gothic New",sans-serif; }
+  .art{ position:absolute; left:0; top:0; width:210mm; height:297mm; pointer-events:none; }
+  .c{ position:absolute; left:0; right:0; text-align:center; margin:0; }
+  .mincho{ font-family:"Shippori Mincho B1",serif; font-weight:700; }
+
+  /* 版ごとに見せるもの（.k 黒版／.c1 色版1／.c2 色版2）。入れ子にしてもよい */
+  .plate-k .c1, .plate-k .c2, .plate-c1 .k, .plate-c1 .c2, .plate-c2 .k, .plate-c2 .c1{ visibility:hidden; }
+  .plate-k .k, .plate-c1 .c1, .plate-c2 .c2{ visibility:visible; }
+
+  /* ── 上の1/3（棚で見えるところ）── */
+  .band-a{ top:10.6mm; font-size:4.7mm; font-weight:700; letter-spacing:.1em; color:#fff; }
+  .eyebrow{ top:27mm; font-family:"Lora",serif; font-style:italic; font-size:3.1mm; letter-spacing:.3em; }
+  .title{ top:34mm; font-family:"Klee One",serif; font-weight:600; font-size:13mm; letter-spacing:.04em; line-height:1.2; }
+  .bv{ top:53mm; font-family:"Lora",serif; font-style:italic; font-weight:500; font-size:7.4mm; letter-spacing:.12em; }
+  .band-b{ top:76.2mm; display:flex; justify-content:center; align-items:center; gap:5mm; }
+  .band-b .t{ font-family:"Shippori Mincho B1",serif; font-weight:700; font-size:7.4mm; letter-spacing:.08em; color:#fff; }
+  .band-b .pill{ background:#fff; color:#000; font-weight:700; font-size:4.6mm; letter-spacing:.06em; padding:1.4mm 4mm; border-radius:10mm; }
+
+  /* ── その下（手に取ってから読むところ）── */
+  .lead{ top:102mm; font-size:3.7mm; line-height:1.95; letter-spacing:.05em; }
+  .points{ position:absolute; top:127mm; left:22mm; right:22mm; display:grid; grid-template-columns:repeat(3,1fr); gap:4mm; text-align:center; }
+  .tag{ display:inline-block; background:#000; color:#fff; font-weight:700; font-size:4.3mm; letter-spacing:.08em; padding:1.6mm 4.4mm; border-radius:10mm; }
+  .pt p{ font-size:3mm; line-height:1.75; letter-spacing:.02em; margin:2.6mm 0 0; }
+  .cta{ position:absolute; top:183mm; left:25mm; right:25mm; display:flex; align-items:stretch; gap:5mm; }
+  .cta .txt{ flex:1 1 auto; background:#fff; border-radius:2mm; padding:3.6mm 4.6mm; display:flex; flex-direction:column; justify-content:center; }
+  .qr{ flex:0 0 auto; width:31mm; padding:2.4mm; background:#fff; border:.3mm solid #000; border-radius:2mm; text-align:center; }
+  .qr img{ width:26mm; height:26mm; display:block; margin:0 auto; }
+  .qr .u{ font-family:"Lora",serif; font-size:2.2mm; margin:1.3mm 0 0; }
+  .cta .big{ font-family:"Shippori Mincho B1",serif; font-weight:700; font-size:5mm; letter-spacing:.08em; margin:0; line-height:1.5; }
+  .cta .small{ font-size:2.9mm; line-height:1.8; letter-spacing:.02em; margin:1.5mm 0 0; }
+  .foot{ position:absolute; left:40mm; right:40mm; bottom:20mm; text-align:center; font-size:2.3mm; line-height:1.75; }
+</style>
+</head>
+<body>
+<div class="page" id="page">
+  <p class="c band-a c2">小平の、赤ちゃん・未就学児・小学生のいるご家庭へ</p>
+  <p class="c eyebrow k">WEEKLY LETTER FOR FAMILIES</p>
+  <p class="c title k">ぼんぼやーじゅ通信</p>
+  <p class="c bv c1">Bon Voyage</p>
+  <div class="c band-b c1"><span class="t">週末のおでかけを、水曜の朝に</span><span class="pill">LINEで無料</span></div>
+
+  <p class="c lead k">小平と、となりの市も含めた週末のおでかけ情報を、<br>毎週水曜の朝、LINEで無料でお届けしています。</p>
+  <div class="points">
+    <div class="pt"><span class="tag c1">年齢別に</span><p class="k">赤ちゃん連れ・未就学の子・<br>小学生のページに分けて</p></div>
+    <div class="pt"><span class="tag c2">公式で確かめて</span><p class="k">市や施設の公式ページで、<br>一件ずつ確かめています</p></div>
+    <div class="pt"><span class="tag c1">公園から講座まで</span><p class="k">公園・児童館・図書館・科学館。<br>季節のお祭りや講座も</p></div>
+  </div>
+  <div class="cta">
+    <div class="qr k ko"><img class="qrimg" src="../../homepage/assets/qr/f-hand.png" alt="ぼんぼやーじゅ通信のホームページのQRコード"><p class="u">bonvoya.nicomaru.tokyo</p></div>
+    <div class="txt k ko">
+      <p class="big">LINEで友だち追加すると、<br>毎週水曜の朝に届きます</p>
+      <p class="small">QRからホームページを開き、「LINEで受け取る」を押すだけ。お名前やご住所の入力はいりません。合わなければ、いつでも解除できます。</p>
+    </div>
+  </div>
+  <div class="foot k">発行：ぼんぼやーじゅ通信の会（小平市・花小金井）<br>小平市民活動支援センター あすぴあ 登録団体（第254号）<br>書いているのは、花小金井に住む子育て中の親です<br>お問い合わせ tokyo.papa.home@gmail.com ／ イベント情報の掲載は無料です</div>
+</div>
+
+<script>
+  const q = new URLSearchParams(location.search);
+  const plate = ['k', 'c1', 'c2'].includes(q.get('plate')) ? q.get('plate') : 'k';
+  document.body.classList.add('plate-' + plate);
+  const page = document.getElementById('page');
+  if (q.get('qr')) page.querySelectorAll('.qrimg').forEach((i) => i.src = '../../homepage/assets/qr/' + q.get('qr'));
+
+  // ── 絵と色の面（mm）──
+  const A = window.FRAME_ART;
+  const bqT = (x, y, rot, len, mirror) => { const s = len / 616; return `translate(${x} ${y}) rotate(${rot}) scale(${mirror ? -s : s} ${s}) translate(-285 -897)`; };
+  const blT = (x, y, h, rot = 0) => `translate(${x} ${y}) rotate(${rot}) scale(${h / 340}) translate(-585 -105)`;
+  // 花束（左上＝根もとが左、右下＝左右反転で、いちばん下の帯から生える）と風船
+  const BQ = [[7, 71, 24, 40, false], [166, 288, 42, 56, true]], BL = [186, 27, 31, 8];
+  // 色の面: [版, x, y, 幅, 高さ, 角の丸み, 濃さ(1=ベタ)]
+  const BANDS = [
+    ['c2', 8, 8, 194, 14, 2.5, 1],      // 宛先の帯
+    ['c1', 8, 73, 194, 18, 2.5, 1],     // 何が届くかの帯
+    ['c2', 16, 175, 178, 52, 4, .3],    // QRのまわりの面（文字は白い箱の上に置く）
+    ['c2', 8, 284, 194, 5, 1.5, 1],     // いちばん下の帯
+  ];
+  // 花と風船の色: 版ごとの濃さ
+  const FILL = { c1: { pink: .4, gold: 1, red: 1 }, c2: { sky: .55, leaf: .3 } };
+  const CELL = .7, ANG = { c1: 15, c2: 75 };   // 網点の間隔（mm）と角度（版ごとに変えて、重なりの模様を避ける）
+
+  const bqShape = (k, a) => `<path transform="${bqT(...a)}" d="${A[k]}"/>`;
+  let art = '';
+  if (plate === 'k') {
+    art += BQ.map((a) => bqShape('bouquet', a)).join('') + `<path transform="${blT(...BL)}" d="${A.balloon}"/>`;
+    art = `<g fill="#000">${art}</g>`;
+  } else {
+    for (const [p, x, y, w, h, r, t] of BANDS) if (p === plate) {
+      const rect = `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}"/>`;
+      art += t >= 1 ? `<g fill="#000">${rect}</g>` : `<g class="tint" data-t="${t}">${rect}</g>`;
+    }
+    // 花束と風船の下は、どちらの色版でも白く抜く（色が重なって濁らないように）
+    art += '<g class="knock" fill="#fff">'
+         + BQ.map((a) => `<g transform="${bqT(...a)}"><path d="${A.bouquet}" stroke="#fff" stroke-width="14" stroke-linejoin="round"/>${['leaf', 'pink', 'gold', 'sky'].map((k) => `<path d="${A[k]}"/>`).join('')}</g>`).join('')
+         + `<g transform="${blT(...BL)}"><path d="${A.balloon}" stroke="#fff" stroke-width="10" stroke-linejoin="round"/><path d="${A.red}"/></g></g>`;
+    for (const [k, t] of Object.entries(FILL[plate])) {
+      const shapes = k === 'red' ? [`<path transform="${blT(...BL)}" d="${A.red}"/>`] : BQ.map((a) => bqShape(k, a));
+      for (const sh of shapes) art += t >= 1 ? `<g fill="#000">${sh}</g>` : `<g class="tint" data-t="${t}">${sh}</g>`;
+    }
+  }
+  page.insertAdjacentHTML('afterbegin', `<svg class="art" viewBox="0 0 210 297" xmlns="http://www.w3.org/2000/svg">${art}</svg>`);
+  const svg = page.querySelector('svg.art');
+
+  // QRの箱（.ko）は、色版で白く抜く
+  if (plate !== 'k') {
+    const pr = page.getBoundingClientRect(), k = 210 / pr.width;
+    page.querySelectorAll('.ko').forEach((el) => {
+      const r = el.getBoundingClientRect();
+      svg.insertAdjacentHTML('beforeend', `<rect x="${((r.left - pr.left) * k).toFixed(2)}" y="${((r.top - pr.top) * k).toFixed(2)}" width="${(r.width * k).toFixed(2)}" height="${(r.height * k).toFixed(2)}" rx="2" fill="#fff"/>`);
+    });
+  }
+  // 網点: 形の範囲に、角度をつけた格子で黒い点を並べ、形で切り抜く（<pattern> だとPDFで灰色の画像になる）
+  let n_ = 0;
+  svg.querySelectorAll('g.tint').forEach((g) => {
+    const t = +g.dataset.t, a = ANG[plate] * Math.PI / 180, bb = g.getBBox(), r = Math.sqrt(t * CELL * CELL / Math.PI);
+    const cx = bb.x + bb.width / 2, cy = bb.y + bb.height / 2, n = Math.ceil(Math.hypot(bb.width, bb.height) / 2 / CELL) + 1;
+    const ca = Math.cos(a), sa = Math.sin(a), R = r.toFixed(3), D = (2 * r).toFixed(3);
+    let d = '';
+    for (let i = -n; i <= n; i++) for (let j = -n; j <= n; j++) {
+      const x = cx + (i * ca - j * sa) * CELL, y = cy + (i * sa + j * ca) * CELL;
+      if (x < bb.x - r || x > bb.x + bb.width + r || y < bb.y - r || y > bb.y + bb.height + r) continue;
+      d += `M${(x - r).toFixed(2)},${y.toFixed(2)}a${R},${R} 0 1,0 ${D},0a${R},${R} 0 1,0 -${D},0`;
+    }
+    const id = 'clip' + (n_++);
+    g.outerHTML = `<clipPath id="${id}" clipPathUnits="userSpaceOnUse">${g.innerHTML}</clipPath><path d="${d}" fill="#000" clip-path="url(#${id})"/>`;
+  });
+</script>
+</body>
+</html>

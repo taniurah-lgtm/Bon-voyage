@@ -6,9 +6,6 @@
 <!--
   2026-11-04 オーナー「ロゴそのままではなく、花はフレーム枠のように。ロゴのテイストで表裏とも作り直す」。
   ・?side=front（表）／?side=back（裏）。?mode=bw で白黒（FAX・リソ・白黒コピー用）。?qr=ファイル名 でQRを差し替え
-  ・🆕 2026-11-27 オーナー「黒とプラス2色の計3色版」→ ?mode=riso3&plate=k|c1|c2（表だけ）。版ごとに黒1色で出す（色はドラムが乗せる）。
-    k＝文字・線画・QR／c1＝暖色（ピンクと黄色の花・風船）／c2＝寒色（水色の花・葉・枠の二重線・星・Bon Voyage）。
-    淡い色は網点（こちらで入れてある）。作り直し: node scripts/build-flyer-riso3.mjs
   ・花と風船の線画は assets/brand/frame-art.js（ロゴの花束を写したもの）
   ・下端8mmは安全帯
   作り直し: node scripts/build-flyer-frame.mjs
@@ -24,12 +21,6 @@
     --pink:#F3A9B9; --gold:#F2BE62; --sky:#A6D2E6; --leaf:#A3CC93; --coral:#EE7C64;
   }
   .bw{ --paper:#FFFFFF; --ink:#111; --soft:#222; --line:#888; --wash:#F2F2F2; }
-  /* 3色版（リソ）: どの版も黒1色。色版では、その版に乗せるもの（.on-c1／.on-c2）だけを出す。位置はどの版も同じ */
-  .riso{ --paper:#FFFFFF; --ink:#000; --soft:#000; --line:#000; --wash:#FFFFFF; }
-  .riso .page .pt .mk{ background:#000; }
-  .riso.plate-c1 .page > :not(svg), .riso.plate-c2 .page > :not(svg){ visibility:hidden; }
-  .riso.plate-c1 .page .on-c1, .riso.plate-c2 .page .on-c2{ visibility:visible; }
-  .riso.plate-k .on-c1, .riso.plate-k .on-c2{ visibility:hidden; }
   html,body{ margin:0; padding:0; background:#fff; }
   .page{ position:relative; width:210mm; height:297mm; margin:0 auto; overflow:hidden;
          background:var(--paper); color:var(--ink); font-family:"Zen Kaku Gothic New",sans-serif; }
@@ -211,7 +202,6 @@
   const q = new URLSearchParams(location.search);
   const side = q.get('side') === 'back' ? 'back' : 'front';
   const bw = q.get('mode') === 'bw';
-  const riso = q.get('mode') === 'riso3', plate = ['k', 'c1', 'c2'].includes(q.get('plate')) ? q.get('plate') : 'k';
   // 2026-11-08 オーナー「B5版も」→ ?size=b5（182×257mm）。A4の版をそのまま縮める（上5mmの白い余白は同じ）。
   //   ★2026-11-20 オーナー「うちのコピー機では、上が余白がなく、下が1cmくらい余白になる。上に余白を増やして、下はぎりぎりに」
   //     → コピー機が約7〜8mm上に寄せて刷る。上の白い余白を15mmに広げ、下は紙の端まで（余白0）。
@@ -224,36 +214,25 @@
     document.head.appendChild(st);
   }
   if (bw) document.body.classList.add('bw');
-  if (riso) document.body.classList.add('riso', 'plate-' + plate);
   const page = document.getElementById('page');
   page.innerHTML = document.getElementById(side).innerHTML;
   if (bw) page.querySelectorAll('.flogo').forEach((i) => i.src = '../../homepage/assets/brand/logo-mono.png');
   if (q.get('qr')) page.querySelectorAll('.qrimg').forEach((i) => i.src = '../../homepage/assets/qr/' + q.get('qr'));
-  if (riso) {
-    // 色版に乗せる文字や印。3つの点は 色1・色2・色1（2色を重ねると黒に近く見えたのでやめた）
-    page.querySelector('.bv')?.classList.add('on-c2');
-    const mk = page.querySelectorAll('.pt .mk');
-    mk[0]?.classList.add('on-c1'); mk[1]?.classList.add('on-c2'); mk[2]?.classList.add('on-c1');
-    page.querySelectorAll('.rule').forEach((r) => r.classList.add('on-c2'));
-  }
 
   // ── 花の枠（ロゴの花束を四隅に）──
-  const A = window.FRAME_ART, INK = riso ? '#000' : bw ? '#111' : '#2F3E48', PAPER = (bw || riso) ? '#fff' : '#FBFAF5';
+  const A = window.FRAME_ART, INK = bw ? '#111' : '#2F3E48', PAPER = bw ? '#fff' : '#FBFAF5';
   const COL = bw ? { leaf: 'none', pink: 'none', gold: 'none', sky: 'none', red: 'none' }
                  : { leaf: '#A3CC93', pink: '#F3A9B9', gold: '#F2BE62', sky: '#A6D2E6', red: '#EE7C64' };
   const fills = (keys) => keys.map((k) => COL[k] === 'none' ? '' : `<path d="${A[k]}" fill="${COL[k]}"/>`).join('');
   // 花束の根もと（茎の下端）を角に置き、花が内側へ広がるように回す。sx<0 で左右反転
-  const bqT = (x, y, rot, len, mirror) => {
-    const s = len / 616, sx = mirror ? -s : s;
-    return `translate(${x} ${y}) rotate(${rot}) scale(${sx} ${s}) translate(-285 -897)`;
-  };
-  const blT = (x, y, h, rot = 0) => `translate(${x} ${y}) rotate(${rot}) scale(${h / 340}) translate(-585 -105)`; // 風船＋ひもの高さ（元の絵で約340）
   const bouquet = (x, y, rot, len, mirror) => {
-    const t = bqT(x, y, rot, len, mirror);
+    const s = len / 616, sx = mirror ? -s : s;
+    const t = `translate(${x} ${y}) rotate(${rot}) scale(${sx} ${s}) translate(-285 -897)`;
     return `<g transform="${t}"><path d="${A.bouquet}" fill="none" stroke="${PAPER}" stroke-width="16" stroke-linejoin="round"/>${fills(['leaf','pink','gold','sky'])}<path d="${A.bouquet}" fill="${INK}"/></g>`;
   };
   const balloon = (x, y, h, rot = 0) => {
-    const t = blT(x, y, h, rot);
+    const s = h / 340; // 風船＋ひもの高さ（元の絵で約340）
+    const t = `translate(${x} ${y}) rotate(${rot}) scale(${s}) translate(-585 -105)`;
     return `<g transform="${t}">${fills(['red'])}<path d="${A.balloon}" fill="${INK}"/></g>`;
   };
   // ── 花の枠（ロゴの花と葉を、細いつるに沿って並べる）──
@@ -309,56 +288,18 @@
     // 2026-11-05 オーナー: 参考のPDF（細い二重線の枠・左上と右下に小枝・残りの角に小さな星）に近づけ、
     //   左上と右下だけ、ロゴの花束にする
     // 2026-11-07 オーナー「刷ると目立たない」→ 二重線を太く濃く（外を太く・内を細く）、花束を大きく
-    const LC = riso ? '#000' : bw ? '#222' : '#5E574C';
+    const LC = bw ? '#222' : '#5E574C';
     const rect = (m, w) => `<rect x="${m}" y="${m}" width="${210 - 2 * m}" height="${297 - 2 * m}" fill="none" stroke="${LC}" stroke-width="${w}"/>`;
+    art += rect(10, .8) + rect(12, .4);
     // 残りの2つの角に小さな星（PDFと同じ置き方）
     const star = (x, y, r) => `<path d="M${x},${y - r} Q${x},${y} ${x + r},${y} Q${x},${y} ${x},${y + r} Q${x},${y} ${x - r},${y} Q${x},${y} ${x},${y - r}Z" fill="${LC}"/>`;
-    const frame = rect(10, .8) + rect(12, .4) + star(203.6, 7.6, 1.8) + star(6.4, 289.4, 1.8);
+    art += star(203.6, 7.6, 1.8) + star(6.4, 289.4, 1.8);
     // 左上と右下: ロゴの花束（根もとを枠の角の内側に置き、花を右上へ）
     // 2026-11-07 オーナー（赤ペンで位置を指定）: 右下は左上の左右反転。根もとを下の枠の上（角の左）に置き、花は右上へ・右の枠にかかる
-    const BQ = [[11, 55, 33, 60, false], [162, 290, 45, 60, true]], BL = [143, 76, 26, 6];
-    if (!riso) {
-      art += frame + BQ.map((a) => bouquet(...a)).join('') + balloon(...BL);
-    } else if (plate === 'k') {
-      // 黒版: 花束と風船の線画だけ（枠は色版2）
-      art += BQ.map((a) => `<g transform="${bqT(...a)}"><path d="${A.bouquet}" fill="#000"/></g>`).join('')
-           + `<g transform="${blT(...BL)}"><path d="${A.balloon}" fill="#000"/></g>`;
-    } else {
-      // 色版: 色ごとの濃さ（1＝ベタ、1未満＝網点）。網点の角度は版ごとに変えて、重なりの模様（モアレ）を避ける
-      const TINT = { c1: { pink: .4, gold: 1, red: 1 }, c2: { sky: .55, leaf: .3 } }[plate];
-      const ANG = plate === 'c1' ? 15 : 75, CELL = .62; // 網点の間隔 mm
-      // 網点は clipPath で切り抜く（mask だとPDFで縁にうすい線が出た）
-      const shape = (k) => k === 'red' ? [`<path transform="${blT(...BL)}" d="${A.red}"/>`]
-                                       : BQ.map((a) => `<path transform="${bqT(...a)}" d="${A[k]}"/>`);
-      if (plate === 'c2') {
-        // 枠の二重線と星。花束の下は白く抜く（カラー版と同じく、花束が枠の上に乗って見えるように）
-        art += frame + BQ.map((a) => `<g transform="${bqT(...a)}" fill="#fff"><path d="${A.bouquet}" stroke="#fff" stroke-width="16" stroke-linejoin="round"/>${['leaf', 'pink', 'gold', 'sky'].map((k) => `<path d="${A[k]}"/>`).join('')}</g>`).join('');
-      }
-      const byTint = {};
-      for (const [k, t] of Object.entries(TINT)) (byTint[t] ||= []).push(...shape(k));
-      for (const [t, shapes] of Object.entries(byTint)) {
-        if (Number(t) >= 1) { art += `<g fill="#000">${shapes.join('')}</g>`; continue; }
-        // 網点は、下で点を1つずつ描いて、形で切り抜く（<pattern> だとPDFで灰色の画像になり、刷ると濃さが変わる）
-        // 花束ごとに分ける（2つの花束をまとめると範囲がページ全体になり、点が多すぎてPDFが重くなる）
-        shapes.forEach((sh, i) => { art += `<g class="tint" data-id="${plate}-${Math.round(t * 100)}-${i}" data-t="${t}" data-ang="${ANG}" data-cell="${CELL}">${sh}</g>`; });
-      }
-    }
+    art += bouquet(11, 55, 33, 60, false) + bouquet(162, 290, 45, 60, true);
+    art += balloon(143, 76, 26, 6);
   }
   page.insertAdjacentHTML('afterbegin', `<svg class="art" viewBox="0 0 210 297" xmlns="http://www.w3.org/2000/svg">${art}</svg>`);
-  // 3色版の網点: 形の範囲に、角度をつけた格子で黒い点を並べ、形で切り抜く
-  page.querySelectorAll('svg.art g.tint').forEach((g) => {
-    const { id } = g.dataset, t = +g.dataset.t, cell = +g.dataset.cell, a = +g.dataset.ang * Math.PI / 180;
-    const bb = g.getBBox(), r = Math.sqrt(t * cell * cell / Math.PI);
-    const cx = bb.x + bb.width / 2, cy = bb.y + bb.height / 2, n = Math.ceil(Math.hypot(bb.width, bb.height) / 2 / cell) + 1;
-    const ca = Math.cos(a), sa = Math.sin(a);
-    let d = '';
-    for (let i = -n; i <= n; i++) for (let j = -n; j <= n; j++) {
-      const x = cx + (i * ca - j * sa) * cell, y = cy + (i * sa + j * ca) * cell;
-      if (x < bb.x - r || x > bb.x + bb.width + r || y < bb.y - r || y > bb.y + bb.height + r) continue;
-      const R = r.toFixed(3); d += `M${(x - r).toFixed(2)},${y.toFixed(2)}a${R},${R} 0 1,0 ${(2 * r).toFixed(3)},0a${R},${R} 0 1,0 ${(-2 * r).toFixed(3)},0`;
-    }
-    g.outerHTML = `<clipPath id="c${id}" clipPathUnits="userSpaceOnUse">${g.innerHTML}</clipPath><path d="${d}" fill="#000" clip-path="url(#c${id})"/>`;
-  });
   if (side === 'back') page.classList.add('back-page');
 </script>
 </body>
