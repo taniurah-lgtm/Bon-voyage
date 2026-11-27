@@ -107,8 +107,25 @@ function trialLabel(t) {
   return t;
 }
 for (const l of list) { l._st = stationsOf(l); l._stx = STATION_RE.test(l.where || ''); l._tr = trialKind(l.trial); }
-// かっこ書きの短いまとまりは、途中で折り返さない（「（11月20日時点）」が「（11/月20日時点）」にならないように）
-const nb = (v) => esc(v).replace(/（[^（）]{1,14}）/g, (m) => `<span class="nw">${m}</span>`);
+// 折り返し（2026-11-27 評価役「語の途中で折れる」）: ページの文字は word-break: keep-all にして、
+// 改行してよいところに <wbr> を入れる。区切りは Node の Intl.Segmenter（日本語の単語）で、
+// 「ひらがなで終わる語」のあとに漢字・カタカナで始まる語が来るところだけ（助詞のあと＝文節の切れ目に近い）
+const SEG = typeof Intl !== 'undefined' && Intl.Segmenter ? new Intl.Segmenter('ja', { granularity: 'word' }) : null;
+const HIRA_END = /[\u3041-\u309F]$/, CONTENT_START = /^[\u4E00-\u9FFF々〆\u30A1-\u30FA]/;
+function jp(v) {
+  const s = String(v ?? '');
+  if (!SEG) return esc(s);
+  let out = '', prev = '';
+  for (const { segment: x } of SEG.segment(s)) { if (prev && HIRA_END.test(prev) && CONTENT_START.test(x)) out += '<wbr>'; out += esc(x); prev = x; }
+  return out;
+}
+// かっこ書きの短いまとまりと、数字＋単位は途中で折らない（「（11/月20日時点）」「5〜/7分」にしない）
+const nb = (v) => {
+  const s = String(v ?? ''), re = /（[^（）]{1,14}）|\d+(?:[〜～-]\d+)?(?:分|歳|人|回|階|円|か月|年生|組)/g;
+  let out = '', i = 0, m;
+  while ((m = re.exec(s))) { out += jp(s.slice(i, m.index)) + `<span class="nw">${esc(m[0])}</span>`; i = m.index + m[0].length; }
+  return out + jp(s.slice(i));
+};
 
 // ── 絵（ジャンルのしるし）。線だけの小さな絵。色はジャンルごと ──
 const ICON = {
@@ -156,7 +173,8 @@ const photoSvg = (p, label) => `<svg viewBox="0 0 320 200" role="img" aria-label
 
 // ── 無料の欄（事実だけ）。1教室4段（名前／年齢／場所／体験）でそろえる。行ぜんたいが教室のページへのリンク。地図は付けない ──
 const whoText = (l) => l.who || l.ages.map((a) => AGES[a]).join('・') || '年齢の記載なし';
-const areaTag = (l) => (!l._stx && l._st.length && !l._st.includes('other') ? `<span class="area">${l._st.map((x) => esc(x) + '駅').join('・')}エリア</span>` : '');
+const areaTag = (l) => (!l._stx && l._st.length && !l._st.includes('other') && !l._st.some((x) => (l.where || '').startsWith(x))
+  ? `<span class="nw">（${l._st.map((x) => esc(x)).join('・')}駅エリア）</span>` : '');
 function factRow(l) {
   const flag = l.verified !== true ? '<span class="flag">確認中</span>' : '';
   const tl = trialLabel(l.trial);
@@ -174,11 +192,11 @@ function factRow(l) {
 function prCard(l) {
   const flag = l.sample ? '<span class="flag">見本</span>' : (l.verified !== true ? '<span class="flag">確認中</span>' : '');
   const photos = l.sample && PHOTO[l.photo] ? PHOTO[l.photo] : [];
-  const kv = (k, v) => (v ? `<div class="kv"><dt>${k}</dt><dd>${nb(v)}</dd></div>` : '');
+  const kv = (k, v) => (v ? `<div class="kv"><dt>${k}</dt><dd>${Array.isArray(v) ? v.map(nb).join('<br>') : nb(v)}</dd></div>` : '');
   const src = l.sample ? '見本です（教室名・写真・中身は例）。' : `教室からいただいた内容です${l.checked ? `（${fmtDay(l.checked)}）` : ''}。`;
   return `<article class="prc" data-item id="${esc(l.id)}" data-genre="${esc(l.genre)}" data-ages="${esc(l.ages.join(' '))}" data-st="${esc(l._st.join(' '))}" data-trial="${l._tr}">
       <div class="prc-h">
-        <div class="prc-top"><span class="prt">PR</span>${flag}</div>
+        <div class="prc-top"><a class="prt" href="#about">PR</a>${flag}</div>
         <h3 class="prc-n">${esc(l.name)}</h3>
         <span class="row-m"><span class="mt">${SVG.who}<span>${nb(l.who)}</span></span><span class="mt">${SVG.where}<span>${nb(l.where)}${areaTag(l)}</span></span></span>
         ${l.seats ? `<p class="seat"><b>空き</b><span>${nb(l.seats)}</span></p>` : ''}
@@ -212,7 +230,7 @@ function section(g, items) {
   for (const l of items) { if (l.kind === 'fact') buf.push(factRow(l)); else { flush(); html += prCard(l); } }
   flush();
   return `<section class="gs" data-genre="${g.key}" id="g-${g.key}">
-    <h2 class="sec">${icon(g.key)}<span>${esc(g.label)}</span><small class="sec-c" data-sec-count>${items.length}</small></h2>
+    <h2 class="sec">${icon(g.key)}<span>${esc(g.short || g.label)}</span><small class="sec-c" data-sec-count>${items.length}</small></h2>
     ${html}
   </section>`;
 }
@@ -278,7 +296,7 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .nw { white-space: nowrap; }
 
   /* ── さがす ── */
-  .finder { background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); box-shadow: 0 2px 14px rgba(52,67,76,.07); padding: .85rem .8rem .9rem; display: grid; grid-template-columns: minmax(0, 1fr); gap: .8rem; scroll-margin-top: 104px; }
+  .finder { background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); box-shadow: 0 2px 14px rgba(52,67,76,.07); padding: .8rem .75rem .85rem; display: grid; grid-template-columns: minmax(0, 1fr); gap: .65rem; scroll-margin-top: 104px; }
   .finder > * { min-width: 0; }
   .f-lab { display: block; font-family: var(--maru); font-weight: 800; font-size: .8rem; color: var(--ink-soft); margin-bottom: .3rem; letter-spacing: .04em; }
   .seg { display: grid; grid-template-columns: .8fr 1fr 1.3fr 1fr; border: 1px solid var(--line-strong); border-radius: 12px; overflow: hidden; }
@@ -286,21 +304,28 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .seg button:first-child { border-left: 0; }
   .seg button[aria-pressed="true"] { background: var(--sky-deep); color: var(--on-sky); }
   .gt { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .35rem; }
-  .gt button { font: inherit; display: flex; flex-direction: column; align-items: center; gap: .2rem; padding: .45rem .1rem .4rem; min-height: 66px; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--surface); color: var(--ink); cursor: pointer; }
+  .gt button { font: inherit; display: flex; flex-direction: column; align-items: center; gap: .2rem; padding: .4rem .1rem .35rem; min-height: 58px; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--surface); color: var(--ink); cursor: pointer; }
   .gt button .gi { width: 30px; height: 30px; padding: 5px; border-radius: 999px; background: var(--surface-2); }
   .gt button .gl { font-size: .72rem; font-weight: 800; line-height: 1.2; white-space: nowrap; }
   .gt button .c { font-size: .66rem; color: var(--ink-soft); line-height: 1; margin-top: auto; font-variant-numeric: tabular-nums; }
-  .gt button[aria-pressed="true"] { border-color: currentColor; box-shadow: inset 0 0 0 1.5px currentColor; background: var(--surface-2); }
+  .gt button { position: relative; }
+  .gt button[data-g][aria-pressed="true"] { color: #FFFFFF; }
+  .gt button[aria-pressed="true"] .gi { background: rgba(255,255,255,.2); }
+  .gt button[aria-pressed="true"] .c { color: #FFFFFF; }
+  .gt button[aria-pressed="true"]::after { content: "✓"; position: absolute; top: 3px; right: 6px; font-size: .72rem; font-weight: 900; }
+  ${GENRES.map((g) => `.gt button[data-g="${g.key}"][aria-pressed="true"] { background: var(--g-${g.key}); border-color: var(--g-${g.key}); }`).join('\n  ')}
   .gt button:disabled, .sc button:disabled { opacity: .35; cursor: default; }
   .sc { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .35rem; }
-  .sc button { font: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .15rem; min-height: 48px; padding: .25rem .1rem; font-size: .8rem; font-weight: 700; border-radius: 12px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); cursor: pointer; white-space: nowrap; line-height: 1.2; }
+  .sc button { font: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .15rem; min-height: 46px; padding: .2rem .1rem; font-size: .8rem; font-weight: 700; border-radius: 12px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); cursor: pointer; white-space: nowrap; line-height: 1.2; }
   .sc button .c { font-size: .66rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; line-height: 1; }
   .sc button[aria-pressed="true"] { background: var(--sky-deep); border-color: var(--sky-deep); color: var(--on-sky); }
   .sc button[aria-pressed="true"] .c { color: inherit; }
   .tog { display: flex; align-items: center; gap: .55rem; min-height: 44px; font-size: .88rem; font-weight: 700; cursor: pointer; }
   .tog input { width: 1.35rem; height: 1.35rem; accent-color: var(--sky-deep); margin: 0; flex: none; }
   .f-res { display: grid; gap: .35rem; }
-  .cond { font-size: .78rem; font-weight: 700; color: var(--ink-soft); }
+  .cond { display: flex; flex-wrap: wrap; gap: .35rem; }
+  .cc { font: inherit; display: inline-flex; align-items: center; gap: .35rem; min-height: 44px; padding: 0 .55rem 0 .8rem; border-radius: 999px; border: 1px solid var(--sky-deep); background: var(--sky-wash); color: var(--sky-deep); font-size: .82rem; font-weight: 800; cursor: pointer; }
+  .cc span { font-size: 1rem; line-height: 1; }
   .res-row { display: flex; gap: .4rem; }
   .see { flex: 1 1 auto; display: inline-flex; align-items: center; justify-content: center; gap: .3rem; min-height: 50px; border-radius: 999px; background: var(--sky-deep); color: var(--on-sky); text-decoration: none; font-family: var(--maru); font-weight: 800; font-size: .98rem; }
   .see b { font-size: 1.25rem; font-variant-numeric: tabular-nums; }
@@ -320,11 +345,11 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .list > .row:first-child { border-top: 0; }
   @media (hover: hover) { .row:hover { background: var(--surface-2); } }
   .row-b { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: .22rem; }
-  .row-n { font-family: var(--maru); font-weight: 800; font-size: .98rem; line-height: 1.45; text-wrap: balance; }
+  .row-n { font-family: var(--maru); font-weight: 800; font-size: .98rem; line-height: 1.45; }
+  .row-n, .prc-n, .row-m, .kv dd, .perk, .seat, .catch, .nt li, .chk { word-break: keep-all; overflow-wrap: anywhere; line-break: strict; }
   .row-m { display: flex; flex-direction: column; gap: .08rem; font-size: .8rem; line-height: 1.55; color: var(--ink-soft); }
   .mt { display: flex; align-items: flex-start; gap: .25rem; min-width: 0; }
   .mi { width: 14px; height: 14px; flex: none; margin-top: .2rem; color: var(--ink-soft); }
-  .area { display: inline-block; margin-left: .35rem; font-size: .7rem; font-weight: 700; color: var(--sky-deep); background: var(--sky-wash); border-radius: 5px; padding: 0 .3rem; white-space: nowrap; }
   .oi { width: 18px; height: 18px; flex: none; color: var(--ink-soft); }
   .tr { align-self: flex-start; font-size: .72rem; font-weight: 700; border-radius: 6px; padding: .05rem .45rem; background: var(--tr-bg); color: var(--tr-ink); }
   .tr-free { background: var(--free-bg); color: var(--free-ink); }
@@ -335,9 +360,9 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .prc { background: var(--pr-bg); border: 1.5px solid var(--pr-line); border-radius: var(--radius-sm); margin: .7rem 0; overflow: hidden; box-shadow: 0 2px 14px rgba(138,90,18,.08); scroll-margin-top: 104px; }
   .prc-h { padding: .7rem .9rem .2rem; display: flex; flex-direction: column; gap: .25rem; }
   .prc-top { display: flex; align-items: center; gap: .4rem; }
-  .prt { font-weight: 800; font-size: .74rem; letter-spacing: .08em; color: var(--pr-tag); background: var(--pr-tag-bg); border-radius: 5px; padding: .05rem .45rem; }
+  .prt { font-weight: 800; font-size: .74rem; letter-spacing: .08em; color: var(--pr-tag); background: var(--pr-tag-bg); border-radius: 5px; padding: .05rem .45rem; text-decoration: none; }
   .prc-top .flag { margin-left: 0; }
-  .prc-n { font-family: var(--maru); font-weight: 800; font-size: 1.16rem; line-height: 1.4; margin: 0; text-wrap: balance; }
+  .prc-n { font-family: var(--maru); font-weight: 800; font-size: 1.16rem; line-height: 1.4; margin: 0; }
   .seat { display: flex; align-items: flex-start; gap: .45rem; margin: .15rem 0 0; padding: .35rem .55rem; border-radius: 8px; background: var(--free-bg); color: var(--free-ink); font-size: .84rem; font-weight: 700; line-height: 1.5; }
   .seat b { flex: none; font-size: .72rem; background: var(--free-ink); color: #fff; border-radius: 4px; padding: .05rem .35rem; margin-top: .12rem; }
   .ph { display: flex; gap: .4rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: .55rem .9rem 0; -webkit-overflow-scrolling: touch; }
@@ -366,7 +391,8 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .none button { font: inherit; font-weight: 800; color: var(--link-ink); background: none; border: 0; text-decoration: underline; cursor: pointer; min-height: 44px; }
   .ask { margin-top: 1.6rem; padding: .85rem 1rem; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); font-size: .84rem; line-height: 1.8; color: var(--ink-soft); }
   .ask b { display: block; font-family: var(--maru); font-weight: 800; color: var(--ink); font-size: .95rem; margin-bottom: .2rem; }
-  .about { font-size: .74rem; color: var(--ink-soft); line-height: 1.8; margin-top: 1.1rem; }
+  .about { font-size: .74rem; color: var(--ink-soft); line-height: 1.8; margin-top: 1.1rem; scroll-margin-top: 104px; }
+  .about a, .ask a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; }
   .nav-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.6rem 0 0; }
   .nav-pills a { font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none; color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .4rem .9rem; }
 
@@ -408,9 +434,9 @@ ${navSub('lessons')}
       </div>
     </div>
     <div>
-      <span class="f-lab" id="lab-g">ジャンル</span>
+      <span class="f-lab" id="lab-g">習い事</span>
       <div class="gt" role="group" aria-labelledby="lab-g">
-        ${byGenre.map(({ g, items }) => `<button type="button" data-g="${g.key}" aria-pressed="false" aria-label="${esc(g.label)}">${icon(g.key)}<span class="gl">${esc(g.short || g.label)}</span><span class="c">${items.length}</span></button>`).join('\n        ')}
+        ${byGenre.map(({ g, items }) => `<button type="button" data-g="${g.key}" aria-pressed="false" aria-label="${esc(g.short || g.label)}">${icon(g.key)}<span class="gl">${esc(g.short || g.label)}</span><span class="c">${items.length}</span></button>`).join('\n        ')}
       </div>
     </div>
     <div>
@@ -423,7 +449,7 @@ ${navSub('lessons')}
     </div>
     <label class="tog"><input type="checkbox" id="free-only">無料体験がある教室だけ</label>
     <div class="f-res">
-      <p class="cond" id="cond" hidden></p>
+      <div class="cond" id="cond" hidden></div>
       <div class="res-row">
         <a class="see" id="see" href="#results"><b id="cnt">${n}</b>教室を見る${SVG.down}</a>
         <button type="button" class="rs" id="reset" hidden>条件をもどす</button>
@@ -441,7 +467,7 @@ ${navSub('lessons')}
     内容の直し、載せてほしくないとき（すぐに外します）、曜日や体験の日までくわしく載せたいときは、<a href="/#contact">お問い合わせ</a>からご連絡ください。
   </div>
 
-  <p class="about">「PR」の付いた教室からは、掲載料をいただいています。PRの付いていない教室は、教室の案内に書いてあることを無料で載せています。並びは、PRかどうかに関係なく、ジャンルごとの五十音順です。教室の案内に書いてあることを、同じ形でそろえています${lastChecked ? `（${lastChecked}に確認）` : ''}。駅が書いていない教室は、町の位置から近い駅の「エリア」に入れています。費用や曜日は変わることがあります。申し込む前に、それぞれの公式の案内でご確認ください。<br>
+  <p class="about" id="about">「PR」の付いた教室からは、掲載料をいただいています。PRの付いていない教室は、教室の案内に書いてあることを無料で載せています。並びは、PRかどうかに関係なく、ジャンルごとの五十音順です。教室の案内に書いてあることを、同じ形でそろえています${lastChecked ? `（${lastChecked}に確認）` : ''}。駅が書いていない教室は、町の位置から近い駅の「エリア」に入れています。費用や曜日は変わることがあります。申し込む前に、それぞれの公式の案内でご確認ください。<br>
   内容の誤りに気づいたら、<a href="/#contact">お問い合わせ</a>から教えてください。</p>
 
   <div class="nav-pills">
@@ -499,12 +525,13 @@ ${navSub('lessons')}
     });
     $('free-only').checked = st.free;
     var cond = [];
-    if (st.age !== 'all') cond.push(AGE[st.age]);
-    if (st.g) cond.push(document.querySelector('.gt button[data-g="' + st.g + '"]').getAttribute('aria-label'));
-    if (st.st) cond.push(st.st === 'other' ? 'そのほかの駅' : st.st + '駅');
-    if (st.free) cond.push('無料体験あり');
+    if (st.age !== 'all') cond.push(['age', AGE[st.age]]);
+    if (st.g) cond.push(['g', document.querySelector('.gt button[data-g="' + st.g + '"]').getAttribute('aria-label')]);
+    if (st.st) cond.push(['st', st.st === 'other' ? 'そのほかの駅' : st.st + '駅']);
+    if (st.free) cond.push(['free', '無料体験あり']);
     $('cnt').textContent = n; $('fabn').textContent = n;
-    $('cond').textContent = cond.join('・'); $('cond').hidden = !cond.length;
+    $('cond').innerHTML = cond.map(function (c) { return '<button type="button" class="cc" data-k="' + c[0] + '" aria-label="' + c[1] + 'の条件を外す">' + c[1] + '<span aria-hidden="true">×</span></button>'; }).join('');
+    $('cond').hidden = !cond.length;
     $('reset').hidden = !cond.length;
     $('none').hidden = n > 0;
     $('see').hidden = !n;
@@ -514,6 +541,10 @@ ${navSub('lessons')}
   document.querySelectorAll('.sc button').forEach(function (b) { b.addEventListener('click', function () { st.st = b.getAttribute('data-st'); apply(); }); });
   $('free-only').addEventListener('change', function (e) { st.free = e.target.checked; apply(); });
   function reset() { st = { age: 'all', g: '', st: '', free: false }; apply(); }
+  $('cond').addEventListener('click', function (e) {
+    var b = e.target.closest('.cc'); if (!b) return;
+    var k = b.getAttribute('data-k'); if (k === 'age') st.age = 'all'; else if (k === 'free') st.free = false; else st[k] = ''; apply();
+  });
   $('reset').addEventListener('click', reset); $('reset2').addEventListener('click', reset);
   /* 「〇教室を見る」: いちばん上に出ている教室のジャンルへ */
   $('see').addEventListener('click', function (e) {
