@@ -51,6 +51,10 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '
 const mapUrl = (q) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 const fmtDay = (iso) => `${+iso.slice(0, 4)}年${+iso.slice(5, 7)}月${+iso.slice(8, 10)}日`;
 
+// 白いページに固定するため、サイト共通の色の「明るいほう」（bv-tokens.css の最初の :root）をそのまま使う
+const LIGHT = (readFileSync('docs/homepage/assets/bv-tokens.css', 'utf8').match(/:root\s*\{([\s\S]*?)\}/) || [, ''])[1].replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').trim();
+if (!/--ground:/.test(LIGHT)) { console.error('🔴 bv-tokens.css の明るい色が読めない'); process.exit(1); }
+
 const problems = [];
 const GENRES = data.genres || [];
 const AGES = data.ages || {};
@@ -239,29 +243,26 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
     --g-music:#7A4FAA; --g-english:#1F6F8C; --g-art:#BB5530; --g-manabi:#2F7D71; --g-other:#66737B;
     --fab-bg:#2C3A42; --fab-ink:#FFFFFF;
   }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-    --pr-line:#9A7434; --pr-bg:#1F2B2F; --pr-tag:#F3CF8A; --pr-tag-bg:#3D321D;
-    --perk-bg:#3A2630; --perk-ink:#F2B3C4;
-    --free-bg:#203A27; --free-ink:#9FD69A;
-    --g-taiso:#8FD09A; --g-dance:#F09AB9; --g-swim:#86CBEA; --g-ball:#F2B66A; --g-budo:#A9B6F0;
-    --g-music:#C9A8EE; --g-english:#8FD0EA; --g-art:#F4A285; --g-manabi:#86D2C4; --g-other:#B3C0C7;
-    --fab-bg:#E8EEF0; --fab-ink:#132028;
-  } }
-  :root[data-theme="dark"] {
-    --pr-line:#9A7434; --pr-bg:#1F2B2F; --pr-tag:#F3CF8A; --pr-tag-bg:#3D321D;
-    --perk-bg:#3A2630; --perk-ink:#F2B3C4;
-    --free-bg:#203A27; --free-ink:#9FD69A;
-    --g-taiso:#8FD09A; --g-dance:#F09AB9; --g-swim:#86CBEA; --g-ball:#F2B66A; --g-budo:#A9B6F0;
-    --g-music:#C9A8EE; --g-english:#8FD0EA; --g-art:#F4A285; --g-manabi:#86D2C4; --g-other:#B3C0C7;
-    --fab-bg:#E8EEF0; --fab-ink:#132028;
+  /* 白いページに固定（2026-11-27 オーナー「スマホ設定の色にしないで。ホワイトページで見たい」）。
+     サイト共通の色（明るいほう）を、端末が暗い設定のときにも当てる。地は白 */
+  :root, :root[data-theme="dark"] { ${LIGHT} --ground:#FFFFFF; color-scheme: light; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { ${LIGHT} --ground:#FFFFFF; color-scheme: light; }
+    .bvnav { background: rgba(255,255,255,.94); border-bottom-color: #E6E0D4; }
+    .bvnav-links a { color: #44555F; }
+    .bvnav-cal { background: #EAF4F8; color: #2C7C9E !important; }
+    .bvnav-links a:hover, .bvnav-links a[aria-current="page"] { background: #EAF4F8; color: #2C7C9E; }
+    .bvnav-sub { border-top-color: #EFEAE0; }
+    .bvnav-sub a { background: #EAF4F8; color: #2C7C9E; }
+    .bvnav-sub a[aria-current="page"] { background: #2C7C9E; color: #fff; }
   }
+  .bvnav { background: rgba(255,255,255,.94); }
   main { padding: 1rem 0 5rem; }
-  .ghead-in { padding-top: .9rem; padding-bottom: .9rem; }
-  .ghead .eyebrow { display: none; }
-  .ghead h1 { font-size: clamp(1.5rem, 5vw, 2rem); margin-bottom: .2rem; }
-  .ghead .sub { font-size: .98rem; line-height: 1.7; font-weight: 700; }
-  .ghead .trust { font-size: .8rem; line-height: 1.75; color: var(--ink-soft); margin-top: .45rem; max-width: 34rem; }
-  .ghead .trust b { color: var(--pr-tag); background: var(--pr-tag-bg); border-radius: 4px; padding: 0 .3rem; font-size: .74rem; letter-spacing: .06em; }
+  .ghead { background: var(--ground); border-bottom: 0; }
+  .ghead-in { padding-top: 1rem; padding-bottom: .2rem; display: flex; align-items: baseline; flex-wrap: wrap; gap: .2rem .8rem; }
+  .ghead h1 { font-size: clamp(1.6rem, 6vw, 2rem); margin: 0; }
+  .count { font-size: .86rem; font-weight: 700; color: var(--ink-soft); }
+  .count b { font-family: var(--maru); font-weight: 800; font-size: 1.35rem; color: var(--sky-deep); margin: 0 .15rem; font-variant-numeric: tabular-nums; }
 
   /* ── さがす ── */
   .finder { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); box-shadow: var(--shadow-soft); padding: .9rem .85rem 1rem; display: grid; grid-template-columns: minmax(0, 1fr); gap: .85rem; scroll-margin-top: 104px; }
@@ -279,9 +280,10 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .gt button[aria-pressed="true"] { border-color: currentColor; box-shadow: inset 0 0 0 1.5px currentColor; }
   .gt button[aria-pressed="true"] .gl { color: inherit; }
   .gt button:disabled { opacity: .38; cursor: default; }
-  .sc { display: flex; flex-wrap: wrap; gap: .35rem; }
-  .sc button { font: inherit; flex: none; display: inline-flex; align-items: center; gap: .3rem; min-height: 40px; padding: 0 .8rem; font-size: .8rem; font-weight: 700; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink-soft); cursor: pointer; }
-  .sc button .c { font-size: .7rem; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+  .sc { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .35rem; }
+  .sc button { font: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .1rem; min-height: 48px; padding: .25rem .1rem; font-size: .78rem; font-weight: 700; border-radius: 12px; white-space: nowrap; line-height: 1.2; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink-soft); cursor: pointer; }
+  .sc button .c { font-size: .64rem; color: var(--ink-faint); font-variant-numeric: tabular-nums; line-height: 1; }
+  .sc button[data-st=""] { font-size: .82rem; }
   .sc button[aria-pressed="true"] { background: var(--sky-deep); border-color: var(--sky-deep); color: var(--on-sky); }
   .sc button[aria-pressed="true"] .c { color: inherit; opacity: .8; }
   .sc button:disabled { opacity: .4; cursor: default; }
@@ -377,10 +379,8 @@ ${navSub('lessons')}
 </nav>
 <header class="ghead">
   <div class="ghead-in">
-    <div class="eyebrow">Bon Voyage,</div>
     <h1>スクールガイド</h1>
-    <p class="sub">小平の子どもの習い事 ${n}教室を、年齢・ジャンル・駅でさがせます。</p>
-    <p class="trust">教室の案内に書いてあることを、同じ形でそろえました${lastChecked ? `（${lastChecked.replace(/^\d+年/, '')}に確認）` : ''}。<b>PR</b> は掲載料をいただいた教室です。</p>
+    <p class="count">掲載数<b>${n}</b>教室</p>
   </div>
 </header>
 
@@ -402,11 +402,10 @@ ${navSub('lessons')}
     <div>
       <span class="f-lab" id="lab-st">駅</span>
       <div class="sc" role="group" aria-labelledby="lab-st">
-        <button type="button" data-st="" aria-pressed="true">すべての駅</button>
+        <button type="button" data-st="" aria-pressed="true">すべて</button>
         ${STATIONS.filter((s) => stCount(s)).map((s) => `<button type="button" data-st="${esc(s)}" aria-pressed="false">${esc(s)}<span class="c">${stCount(s)}</span></button>`).join('\n        ')}
-        ${stCount('other') ? `<button type="button" data-st="other" aria-pressed="false">そのほかの駅<span class="c">${stCount('other')}</span></button>` : ''}
+        ${stCount('other') ? `<button type="button" data-st="other" aria-pressed="false">そのほか<span class="c">${stCount('other')}</span></button>` : ''}
       </div>
-      <p class="f-note">駅が書いていない教室は、町の位置から近い駅に入れています。</p>
     </div>
     <label class="tog"><input type="checkbox" id="free-only">無料体験がある教室だけ</label>
     <div class="f-res" aria-live="polite"><span class="num" id="cnt">${n}</span><span class="unit">教室</span><span class="cond" id="cond"></span><button type="button" class="rs" id="reset" hidden>条件をもどす</button></div>
@@ -421,7 +420,7 @@ ${navSub('lessons')}
     内容の直し、載せてほしくないとき（すぐに外します）、曜日や体験の日までくわしく載せたいときは、<a href="/#contact">お問い合わせ</a>からご連絡ください。
   </div>
 
-  <p class="about">「PR」の付いた教室からは、掲載料をいただいています。PRの付いていない教室は、教室の案内に書いてあることを無料で載せています。並びは、PRかどうかに関係なく、ジャンルごとの五十音順です。費用や曜日は変わることがあります。申し込む前に、それぞれの公式の案内でご確認ください。<br>
+  <p class="about">「PR」の付いた教室からは、掲載料をいただいています。PRの付いていない教室は、教室の案内に書いてあることを無料で載せています。並びは、PRかどうかに関係なく、ジャンルごとの五十音順です。教室の案内に書いてあることを、同じ形でそろえています${lastChecked ? `（${lastChecked}に確認）` : ''}。駅が書いていない教室は、町の位置から近い駅でしぼれるようにしています。費用や曜日は変わることがあります。申し込む前に、それぞれの公式の案内でご確認ください。<br>
   内容の誤りに気づいたら、<a href="/#contact">お問い合わせ</a>から教えてください。</p>
 
   <div class="nav-pills">
