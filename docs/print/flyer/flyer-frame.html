@@ -40,8 +40,7 @@
   .riso.plate-ov .page > :not(svg){ visibility:hidden; }
   .riso.plate-ov .page .on-ov{ visibility:visible; }
   .riso.plate-ov .page .pt .mk.on-ov{ background:var(--ov); }
-  .riso.plate-ov .hl{ color:transparent; background:linear-gradient(transparent 58%, var(--ov) 58%, var(--ov) 96%, transparent 96%);
-                     -webkit-box-decoration-break:clone; box-decoration-break:clone; }
+  /* 見出しの蛍光ペンは、下の script で文字の位置を測って、SVG の四角で描く（CSS のグラデーションは、PDF でふちに黒い線が出て、ビューアによって色が化けた） */
   html,body{ margin:0; padding:0; background:#fff; }
   .page{ position:relative; width:210mm; height:297mm; margin:0 auto; overflow:hidden;
          background:var(--paper); color:var(--ink); font-family:"Zen Kaku Gothic New",sans-serif; }
@@ -248,10 +247,8 @@
     mk[0]?.classList.add('on-c1'); mk[1]?.classList.add('on-c2'); mk[2]?.classList.add('on-c1');
     page.querySelectorAll('.rule').forEach((r) => r.classList.add('on-c2'));
     if (plate === 'ov') {
-      // 見出しに蛍光ペン（文字は黒版にあるので、ここでは字を透明にして、下半分に色の帯だけ）
-      const hl = (el, c) => { if (el) el.innerHTML = `<span class="hl on-ov" style="--ov:${c}">${el.innerHTML}</span>`; };
-      hl(page.querySelector('.h1'), '#FFE14D');
-      hl(page.querySelector('.cta .big'), '#AEEBA6');
+      // 見出しに蛍光ペン（文字の下だけに細い帯。位置は下で、字形を測ってから描く）
+      window.HL = [[page.querySelector('.h1'), '#FFE14D'], [page.querySelector('.cta .big'), '#AEEBA6']];
       // 3つの点: 左はピンク、右は水色（真ん中は黒版で黒）
       mk[0]?.classList.add('on-ov'); mk[0]?.style.setProperty('--ov', '#FF6F98');
       mk[2]?.classList.add('on-ov'); mk[2]?.style.setProperty('--ov', '#3FB0EE');
@@ -388,6 +385,31 @@
     }
   }
   page.insertAdjacentHTML('afterbegin', `<svg class="art" viewBox="0 0 210 297" xmlns="http://www.w3.org/2000/svg">${art}</svg>`);
+  // 家で重ねる版の蛍光ペン: 1行ずつ、字の並びの下端に細い帯を置く（字体が読み込まれてから測る）
+  if (riso && plate === 'ov' && window.HL) document.fonts.ready.then(() => {
+    const svg = page.querySelector('svg.art'), inv = svg.getScreenCTM().inverse();
+    const pt = (x, y) => { const p = svg.createSVGPoint(); p.x = x; p.y = y; return p.matrixTransform(inv); };
+    let out = '';
+    for (const [el, color] of window.HL) {
+      if (!el) continue;
+      const fs = parseFloat(getComputedStyle(el).fontSize);                 // px
+      const r = document.createRange(); r.selectNodeContents(el);
+      // 行ごとにまとめる（同じ高さの四角は1行）
+      const lines = [];
+      for (const b of r.getClientRects()) {
+        if (b.width < 2) continue;
+        const L = lines.find((l) => Math.abs(l.top - b.top) < fs * .3);
+        if (L) { L.left = Math.min(L.left, b.left); L.right = Math.max(L.right, b.right); } else lines.push({ top: b.top, bottom: b.bottom, left: b.left, right: b.right });
+      }
+      for (const l of lines) {
+        // 和文の字の下端は、行の箱の中ほどから下へ 0.5em ほど。帯はそこから 0.16em 下まで（文字の下だけの細い帯）
+        const mid = (l.top + l.bottom) / 2, y0 = mid + fs * .40, y1 = mid + fs * .58;
+        const a = pt(l.left - fs * .05, y0), b = pt(l.right - fs * .02, y1);
+        out += `<rect x="${a.x.toFixed(2)}" y="${a.y.toFixed(2)}" width="${(b.x - a.x).toFixed(2)}" height="${(b.y - a.y).toFixed(2)}" rx=".3" fill="${color}"/>`;
+      }
+    }
+    svg.insertAdjacentHTML('afterbegin', out);
+  });
   // 3色版の網点: 形の範囲に、角度をつけた格子で黒い点を並べ、形で切り抜く
   page.querySelectorAll('svg.art g.tint').forEach((g) => {
     const { id } = g.dataset, t = +g.dataset.t, cell = +g.dataset.cell, a = +g.dataset.ang * Math.PI / 180;
