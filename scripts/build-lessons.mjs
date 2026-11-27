@@ -154,6 +154,7 @@ const SVG = {
   gift: '<svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5h16v3H4zM5.5 13.5h13v7h-13zM12 10.5v10M12 10.5c-1.5-3.5-5.5-4.5-5.5-2s3.5 2 5.5 2c2 0 5.5.5 5.5-2s-4-1.5-5.5 2z"/></svg>',
   up: '<svg class="ui" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6"/></svg>',
   down: '<svg class="ui" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 10l6 6 6-6"/></svg>',
+  info: '<svg class="ii" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.4v.2"/></svg>',
 };
 
 // ── PRカードの写真のイメージ（見本だけ。本番は教室からいただいた写真）。四角・丸・線だけの絵 ──
@@ -188,7 +189,7 @@ function whereHtml(l) {
 function factRow(l) {
   const flag = l.verified !== true ? '<span class="flag">確認中</span>' : '';
   const tl = trialLabel(l.trial);
-  return `<a class="row" data-item id="${esc(l.id)}" href="${esc(l.url)}" target="_blank" rel="noopener" data-genre="${esc(l.genre)}" data-ages="${esc(l.ages.join(' '))}" data-st="${esc(l._st.join(' '))}" data-trial="${l._tr}" data-goatcounter-click="${esc('スクール公式｜' + l.name)}">
+  return `<a class="row" data-item id="${esc(l.id)}" href="${esc(l.url)}" target="_blank" rel="noopener" data-genre="${esc(l.genre)}" data-ages="${esc(l.ages.length ? l.ages.join(' ') : '?')}" data-st="${esc(l._st.join(' '))}" data-trial="${l._tr}" data-goatcounter-click="${esc('スクール公式｜' + l.name)}">
       <span class="row-b">
         <span class="row-n">${esc(l.name)}${flag}</span>
         <span class="row-m"><span class="mt">${SVG.who}<span>${nb(whoText(l))}</span></span><span class="mt">${SVG.where}<span>${whereHtml(l)}</span></span></span>
@@ -204,9 +205,9 @@ function prCard(l) {
   const photos = l.sample && PHOTO[l.photo] ? PHOTO[l.photo] : [];
   const kv = (k, v) => (v ? `<div class="kv"><dt>${k}</dt><dd>${Array.isArray(v) ? v.map(nb).join('<br>') : nb(v)}</dd></div>` : '');
   const src = l.sample ? '見本です（教室名・写真・中身は例）。' : `教室からいただいた内容です${l.checked ? `（${fmtDay(l.checked)}）` : ''}。`;
-  return `<article class="prc" data-item id="${esc(l.id)}" data-genre="${esc(l.genre)}" data-ages="${esc(l.ages.join(' '))}" data-st="${esc(l._st.join(' '))}" data-trial="${l._tr}">
+  return `<article class="prc" data-item id="${esc(l.id)}" data-genre="${esc(l.genre)}" data-ages="${esc(l.ages.length ? l.ages.join(' ') : '?')}" data-st="${esc(l._st.join(' '))}" data-trial="${l._tr}">
       <div class="prc-h">
-        <div class="prc-top"><a class="prt" href="#about" aria-label="PRについて（ページ下の説明へ）">PR</a>${flag}</div>
+        <div class="prc-top"><a class="prt" href="#about" aria-label="PRについて（ページ下の説明へ）">PR${SVG.info}</a>${flag}</div>
         <h3 class="prc-n">${esc(l.name)}</h3>
         <span class="row-m"><span class="mt">${SVG.who}<span>${nb(l.who)}</span></span><span class="mt">${SVG.where}<span>${whereHtml(l)}</span></span></span>
         ${l.seats ? `<p class="seat"><b>空き</b><span>${nb(l.seats)}</span></p>` : ''}
@@ -219,6 +220,7 @@ function prCard(l) {
           ${kv('曜日・時間', l.when)}
           ${kv('費用', l.cost)}
           ${kv('体験', l.trial)}
+          ${(l.trialDays || []).length ? `<div class="kv"><dt>体験の日</dt><dd class="days">${l.trialDays.map((d) => `<span class="day">${esc(d)}</span>`).join('')}</dd></div>` : ''}
           ${kv('申込み', l.book)}
         </dl>
         ${l.perk ? `<p class="perk">${SVG.gift}<span><b>通信を見た方へ</b>${nb(l.perk.replace(/^「ぼんぼやーじゅ通信を見た」で、?/, '「通信を見た」で、'))}</span></p>` : ''}
@@ -294,6 +296,11 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
     .bvnav-sub a { background: #EAF4F8; color: #2C7C9E; }
     .bvnav-sub a[aria-current="page"] { background: #2C7C9E; color: #fff; }
   }
+  /* 上のナビ: 1段目だけが場所をとり、2段目はその下に重ねる（下へ読み進めるあいだは隠す。ページの見出しは2段目のぶん下げる） */
+  .bvnav-sub { position: absolute; left: 0; right: 0; top: 100%; background: #FFFFFF; border-bottom: 1px solid #E6E0D4; transition: opacity .18s, visibility .18s; }
+  .bvnav.sub-off .bvnav-sub { opacity: 0; visibility: hidden; }
+  .ghead { margin-top: var(--subh, 46px); }
+  @media (prefers-reduced-motion: reduce) { .bvnav-sub { transition: none; } }
   /* 固定のナビは不透明に（下の文字が透けてにじむ） */
   .bvnav, .bvnav { background: #FFFFFF; -webkit-backdrop-filter: none; backdrop-filter: none; }
 
@@ -306,7 +313,7 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .nw { white-space: nowrap; }
 
   /* ── さがす ── */
-  .finder { background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); box-shadow: 0 2px 14px rgba(52,67,76,.07); padding: .8rem .75rem .85rem; display: grid; grid-template-columns: minmax(0, 1fr); gap: .65rem; scroll-margin-top: 104px; }
+  .finder { background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); box-shadow: 0 2px 14px rgba(52,67,76,.07); padding: .75rem .75rem .8rem; display: grid; grid-template-columns: minmax(0, 1fr); gap: .55rem; scroll-margin-top: 104px; }
   .finder > * { min-width: 0; }
   .f-lab { display: block; font-family: var(--maru); font-weight: 800; font-size: .8rem; color: var(--ink-soft); margin-bottom: .3rem; letter-spacing: .04em; }
   .seg { display: grid; grid-template-columns: .8fr 1fr 1.3fr 1fr; border: 1px solid var(--line-strong); border-radius: 12px; overflow: hidden; }
@@ -314,7 +321,7 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .seg button:first-child { border-left: 0; }
   .seg button[aria-pressed="true"] { background: var(--sky-deep); color: var(--on-sky); }
   .gt { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .35rem; }
-  .gt button { font: inherit; display: flex; flex-direction: column; align-items: center; gap: .2rem; padding: .4rem .1rem .35rem; min-height: 58px; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--surface); color: var(--ink); cursor: pointer; }
+  .gt button { font: inherit; display: flex; flex-direction: column; align-items: center; gap: .2rem; padding: .35rem .1rem .3rem; min-height: 54px; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--surface); color: var(--ink); cursor: pointer; }
   .gt button .gi { width: 30px; height: 30px; padding: 5px; border-radius: 999px; background: var(--surface-2); }
   .gt button .gl { font-size: .72rem; font-weight: 800; line-height: 1.2; white-space: nowrap; }
   .gt button .c { font-size: .66rem; color: var(--ink-soft); line-height: 1; margin-top: auto; font-variant-numeric: tabular-nums; }
@@ -326,7 +333,7 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   ${GENRES.map((g) => `.gt button[data-g="${g.key}"][aria-pressed="true"] { background: var(--g-${g.key}); border-color: var(--g-${g.key}); }`).join('\n  ')}
   .gt button:disabled, .sc button:disabled { opacity: .35; cursor: default; }
   .sc { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .35rem; }
-  .sc button { font: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .15rem; min-height: 46px; padding: .2rem .1rem; font-size: .8rem; font-weight: 700; border-radius: 12px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); cursor: pointer; white-space: nowrap; line-height: 1.2; }
+  .sc button { font: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .1rem; min-height: 44px; padding: .2rem .1rem; font-size: .8rem; font-weight: 700; border-radius: 12px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); cursor: pointer; white-space: nowrap; line-height: 1.2; }
   .sc button .c { font-size: .66rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; line-height: 1; }
   .sc button[aria-pressed="true"] { background: var(--sky-deep); border-color: var(--sky-deep); color: var(--on-sky); }
   .sc button[aria-pressed="true"] .c { color: inherit; }
@@ -345,7 +352,7 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
 
   /* ── 一覧 ── */
   .gs { scroll-margin-top: 104px; }
-  h2.sec { display: flex; align-items: center; gap: .5rem; font-family: var(--maru); font-weight: 800; font-size: 1.1rem; margin: 1.5rem 0 .5rem; }
+  h2.sec { display: flex; align-items: center; gap: .5rem; font-family: var(--maru); font-weight: 800; font-size: 1.1rem; margin: 1.1rem 0 .45rem; }
   h2.sec .gi { width: 32px; height: 32px; padding: 6px; border-radius: 999px; background: var(--surface-2); flex: none; }
   .sec-c { font-size: .78rem; color: var(--ink-soft); font-weight: 700; font-variant-numeric: tabular-nums; }
   .gi, .mi, .oi, .pi, .ui { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
@@ -372,6 +379,12 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .prc-top { display: flex; align-items: center; gap: .4rem; }
   .prt { position: relative; font-weight: 800; font-size: .74rem; letter-spacing: .08em; color: var(--pr-tag); background: var(--pr-tag-bg); border-radius: 5px; padding: .05rem .45rem; text-decoration: none; }
   .prt::after { content: ""; position: absolute; inset: -9px -6px; }
+  .prt .ii { width: 12px; height: 12px; margin-left: 3px; vertical-align: -1px; }
+  .ii { fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+  .howto { justify-self: end; display: inline-flex; align-items: center; gap: .3rem; min-height: 40px; font-size: .76rem; font-weight: 700; color: var(--link-ink); text-decoration: none; }
+  .howto .ii { width: 15px; height: 15px; }
+  .days { display: flex; flex-wrap: wrap; gap: .3rem; }
+  .day { font-size: .8rem; font-weight: 700; background: var(--sky-wash); color: var(--link-ink); border-radius: 6px; padding: .05rem .45rem; font-variant-numeric: tabular-nums; }
   .prc-top .flag { margin-left: 0; }
   .prc-n { font-family: var(--maru); font-weight: 800; font-size: 1.16rem; line-height: 1.4; margin: 0; }
   .seat { display: flex; align-items: flex-start; gap: .45rem; margin: .15rem 0 0; padding: .35rem .55rem; border-radius: 8px; background: var(--free-bg); color: var(--free-ink); font-size: .84rem; font-weight: 700; line-height: 1.5; }
@@ -465,6 +478,7 @@ ${navSub('lessons')}
         <a class="see" id="see" href="#results"><b id="cnt">${n}</b>教室を見る${SVG.down}</a>
         <button type="button" class="rs" id="reset" hidden>条件をもどす</button>
       </div>
+      <a class="howto" href="#about">${SVG.info}載せ方について</a>
     </div>
   </section>
 
@@ -501,7 +515,7 @@ ${navSub('lessons')}
 <script>
 /* さがす: 年齢・ジャンル・駅・無料体験を組み合わせてしぼる。ボタンの数は、ほかの条件に合う教室の数 */
 (function () {
-  var st = { age: 'all', g: '', st: '', free: false };
+  var st = { age: 'all', g: '', st: [], free: false };
   var AGE = ${JSON.stringify(AGES)};
   var items = [].slice.call(document.querySelectorAll('[data-item]'));
   var secs = [].slice.call(document.querySelectorAll('.gs'));
@@ -509,9 +523,9 @@ ${navSub('lessons')}
   var $ = function (id) { return document.getElementById(id); };
   var has = function (el, attr, v) { return (' ' + el.getAttribute(attr) + ' ').indexOf(' ' + v + ' ') >= 0; };
   function ok(el, skip) {
-    if (skip !== 'age' && st.age !== 'all' && !has(el, 'data-ages', st.age)) return false;
+    if (skip !== 'age' && st.age !== 'all' && el.getAttribute('data-ages') !== '?' && !has(el, 'data-ages', st.age)) return false;
     if (skip !== 'g' && st.g && el.getAttribute('data-genre') !== st.g) return false;
-    if (skip !== 'st' && st.st && !has(el, 'data-st', st.st)) return false;
+    if (skip !== 'st' && st.st.length && !st.st.some(function (s) { return has(el, 'data-st', s); })) return false;
     if (skip !== 'free' && st.free && el.getAttribute('data-trial') !== 'free') return false;
     return true;
   }
@@ -531,14 +545,15 @@ ${navSub('lessons')}
     });
     document.querySelectorAll('.sc button').forEach(function (b) {
       var s = b.getAttribute('data-st'), cc = b.querySelector('.c');
-      if (s) { var c = count(function (el) { return has(el, 'data-st', s); }, 'st'); cc.textContent = c; b.disabled = !c && st.st !== s; }
-      b.setAttribute('aria-pressed', st.st === s ? 'true' : 'false');
+      var on = s ? st.st.indexOf(s) >= 0 : !st.st.length;
+      if (s) { var c = count(function (el) { return has(el, 'data-st', s); }, 'st'); cc.textContent = c; b.disabled = !c && !on; }
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
     $('free-only').checked = st.free;
     var cond = [];
     if (st.age !== 'all') cond.push(['age', AGE[st.age]]);
     if (st.g) cond.push(['g', document.querySelector('.gt button[data-g="' + st.g + '"]').getAttribute('aria-label')]);
-    if (st.st) cond.push(['st', st.st === 'other' ? 'そのほかの駅' : st.st + '駅']);
+    st.st.forEach(function (s) { cond.push(['st:' + s, s === 'other' ? 'そのほかの駅' : s + '駅']); });
     if (st.free) cond.push(['free', '無料体験あり']);
     $('cnt').textContent = n; $('fabn').textContent = n;
     $('cond').innerHTML = cond.map(function (c) { return '<button type="button" class="cc" data-k="' + c[0] + '" aria-label="' + c[1] + 'の条件を外す">' + c[1] + '<span aria-hidden="true">×</span></button>'; }).join('');
@@ -549,12 +564,18 @@ ${navSub('lessons')}
   }
   document.querySelectorAll('.seg button').forEach(function (b) { b.addEventListener('click', function () { st.age = b.getAttribute('data-age'); apply(); }); });
   document.querySelectorAll('.gt button').forEach(function (b) { b.addEventListener('click', function () { var g = b.getAttribute('data-g'); st.g = st.g === g ? '' : g; apply(); }); });
-  document.querySelectorAll('.sc button').forEach(function (b) { b.addEventListener('click', function () { st.st = b.getAttribute('data-st'); apply(); }); });
+  document.querySelectorAll('.sc button').forEach(function (b) { b.addEventListener('click', function () {
+    var s = b.getAttribute('data-st'), i = st.st.indexOf(s);
+    if (!s) st.st = []; else if (i >= 0) st.st.splice(i, 1); else st.st.push(s);
+    apply();
+  }); });
   $('free-only').addEventListener('change', function (e) { st.free = e.target.checked; apply(); });
-  function reset() { st = { age: 'all', g: '', st: '', free: false }; apply(); }
+  function reset() { st = { age: 'all', g: '', st: [], free: false }; apply(); }
   $('cond').addEventListener('click', function (e) {
     var b = e.target.closest('.cc'); if (!b) return;
-    var k = b.getAttribute('data-k'); if (k === 'age') st.age = 'all'; else if (k === 'free') st.free = false; else st[k] = ''; apply();
+    var k = b.getAttribute('data-k');
+    if (k === 'age') st.age = 'all'; else if (k === 'free') st.free = false; else if (k.indexOf('st:') === 0) st.st.splice(st.st.indexOf(k.slice(3)), 1); else st[k] = '';
+    apply();
   });
   $('reset').addEventListener('click', reset); $('reset2').addEventListener('click', reset);
   /* 「〇教室を見る」: いちばん上に出ている教室のジャンルへ */
@@ -562,11 +583,14 @@ ${navSub('lessons')}
     var first = document.querySelector('.gs:not([hidden])'); if (!first) return;
     e.preventDefault(); first.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
-  /* 下に浮かぶ「条件を変える」: さがすの枠が上に外れていて、上へ戻しているあいだだけ出す */
-  var fab = $('fab'), finder = $('finder'), lastY = window.scrollY;
+  /* 下に浮かぶ「条件を変える」: さがすの枠が上に外れていて、上へ戻しているあいだだけ出す。
+     上のナビの2段目も、下へ読み進めるあいだは隠す（読む画面を広く。上へ戻すと出る） */
+  var fab = $('fab'), finder = $('finder'), nav = document.querySelector('.bvnav'), sub = document.querySelector('.bvnav-sub'), lastY = window.scrollY;
+  if (sub) document.documentElement.style.setProperty('--subh', sub.offsetHeight + 'px');
   window.addEventListener('scroll', function () {
     var y = window.scrollY, past = finder.getBoundingClientRect().bottom < 0;
     if (!past || y > lastY + 6) fab.hidden = true; else if (y < lastY - 6) fab.hidden = false;
+    if (nav) { if (y > 140 && y > lastY + 6) nav.classList.add('sub-off'); else if (y < 140 || y < lastY - 6) nav.classList.remove('sub-off'); }
     lastY = y;
   }, { passive: true });
   apply();
