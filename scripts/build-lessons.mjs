@@ -251,7 +251,7 @@ function roomRow(c, r) {
   const fl = fromLabel(r.who);
   return `<li data-item data-genre="${esc(r.genre)}" data-ages="${esc(r.ages.join(' '))}" data-st="${esc(r._st.join(' '))}" data-trial="${r._tr}">
           <a href="${esc(r.url)}" target="_blank" rel="noopener" data-goatcounter-click="${esc('スクール公式｜' + c.name + ' ' + r.name)}">
-            <span class="rb"><span class="rn">${esc(r.name)}</span><span class="rm"><span class="rw">${whereHtml(r)}</span><span class="ra">${fl ? `<span class="from">${fl}</span>` : ''}${nb(r.who)}</span></span></span>
+            <span class="rb"><span class="rn">${esc(r.name)}</span><span class="rm"><span class="ra">${fl ? `<span class="from">${fl}</span>` : ''}${nb(r.who)}</span><span class="rw">${whereHtml(r)}</span></span></span>
             ${SVG.out}
           </a>
         </li>`;
@@ -320,7 +320,7 @@ function section(g, items) {
   for (const l of items) { if (l.kind === 'fact') buf.push(factRow(l)); else if (l.kind === 'chain') buf.push(chainRow(l)); else { flush(); html += prCard(l); } }
   flush();
   return `<section class="gs" data-genre="${g.key}" id="g-${g.key}">
-    <h2 class="sec">${icon(g.key)}<span>${esc(g.short || g.label)}</span><small class="sec-c" data-sec-count>${items.reduce((a, l) => a + sizeOf(l), 0)}</small></h2>
+    <h2 class="sec">${icon(g.key)}<span>${esc(g.short || g.label)}</span><small class="sec-c"><span data-sec-count>${items.reduce((a, l) => a + sizeOf(l), 0)}</span>教室</small></h2>
     ${html}
   </section>`;
 }
@@ -635,6 +635,7 @@ ${navSub('lessons')}
   var items = [].slice.call(document.querySelectorAll('[data-item]'));
   var secs = [].slice.call(document.querySelectorAll('.gs'));
   var chains = [].slice.call(document.querySelectorAll('[data-chain]'));
+  chains.forEach(function (c) { c.querySelector('summary').addEventListener('click', function () { c.setAttribute('data-user', ''); c.removeAttribute('data-auto'); }); });
   var lists = [].slice.call(document.querySelectorAll('.list'));
   var $ = function (id) { return document.getElementById(id); };
   var has = function (el, attr, v) { return (' ' + el.getAttribute(attr) + ' ').indexOf(' ' + v + ' ') >= 0; };
@@ -654,6 +655,11 @@ ${navSub('lessons')}
       rs.forEach(function (r) { if (!r.hidden) v++; });
       c.hidden = !v; c.querySelector('.cn').textContent = v;
       c.querySelector('.cn-a').hidden = v < rs.length; c.querySelector('.cn-f').hidden = v === rs.length;
+      var narrow = st.st.length || st.age !== 'all';
+      if (!narrow) c.removeAttribute('data-user');
+      if (c.hasAttribute('data-user')) return;
+      if (narrow && v && v <= 8) { if (!c.open) { c.open = true; c.setAttribute('data-auto', ''); } }
+      else if (c.hasAttribute('data-auto')) { c.open = false; c.removeAttribute('data-auto'); }
     });
     lists.forEach(function (l) {
       var vis = [].slice.call(l.querySelectorAll('.row')).filter(function (r) { return !r.hidden; });
