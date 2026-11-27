@@ -132,6 +132,34 @@ function trialLabel(t) {
 }
 for (const l of units) { l._st = stationsOf(l); l._stx = STATION_RE.test(l.where || ''); l._tr = trialKind(l.trial); }
 for (const c of chains) c._tr = trialKind(c.trial);
+
+// ── 地図（2026-11-27 オーナー「〇教室を見るの下に、一覧になる前にスクールだけのマップを」）──
+// 無料の欄は町名まで（自宅の教室が多い）なので、教室ごとのピンは立てない。町ごとの教室の数を丸で出し、押すとその町の教室だけになる。
+// 置き場所: mapAt（配列）→ where の町名 → where の駅（「〇〇駅のまわり」）→ 無ければ地図に出ない（一覧には出る）
+// 下地はおでかけマップと同じ: GMAPS_KEY（GitHub の Variables）があれば Googleマップ、無い・読めないときは OpenStreetMap
+const GMAPS_KEY = (process.env.GMAPS_KEY || '').trim();
+if (GMAPS_KEY && !/^[A-Za-z0-9_-]{20,60}$/.test(GMAPS_KEY)) { console.error('🔴 GMAPS_KEY の形が違う（APIキーは英数字と - _ だけ）'); process.exit(1); }
+const MAP = data.map || { towns: {}, stations: {} };
+const TOWN_NAMES = Object.keys(MAP.towns).filter((k) => !/丁目$/.test(k)).sort((a, b) => b.length - a.length);
+const TOWN_RE = new RegExp(`(${TOWN_NAMES.join('|')})(?!駅)`, 'g');
+const placeLabel = (k) => (k.startsWith('駅:') ? `${k.slice(2)}駅のまわり` : k.replace(/(\d)丁目$/, '（$1丁目）'));
+function placesOf(l) {
+  if (Array.isArray(l.mapAt)) return l.mapAt;
+  const w = l.where || '';
+  const ts = [...new Set([...w.matchAll(TOWN_RE)].map((m) => m[1]))];
+  if (ts.length) return ts;
+  const m = w.match(STATION_RE);
+  return m && MAP.stations[m[1]] ? ['駅:' + m[1]] : [];
+}
+for (const l of units) {
+  if (!Array.isArray(l.mapAt) && /小川町/.test(l.where || '')) problems.push(`${l.name}: 小川町は東西に長いので、mapAt に「小川町1丁目」か「小川町2丁目」を書く（公式の住所・最寄りの駅から）`);
+  l._pl = placesOf(l);
+  for (const k of l._pl) if (!(k.startsWith('駅:') ? MAP.stations[k.slice(2)] : MAP.towns[k])) problems.push(`${l.name}: mapAt の「${k}」は data の map に無い`);
+}
+if (problems.length) { for (const p of problems) console.error('🔴 ' + p); process.exit(1); }
+const PLACES = {};
+for (const l of units) for (const k of l._pl) if (!PLACES[k]) { const [lat, lng] = k.startsWith('駅:') ? MAP.stations[k.slice(2)] : MAP.towns[k]; PLACES[k] = { label: placeLabel(k), lat, lng, st: k.startsWith('駅:') ? 1 : 0 }; }
+const offMap = units.filter((l) => !l._pl.length);
 // 折り返し（2026-11-27 評価役「語の途中で折れる」）: ページの文字は word-break: keep-all にして、
 // 改行してよいところに <wbr> を入れる。区切りは Node の Intl.Segmenter（日本語の単語）で、
 // 助詞だけの語（の・は・を…）のあとに、漢字・カタカナで始まる語が来るところだけ（文節の切れ目。「ご｜一緒に」「歩き｜始め」のような語の中には入れない）
@@ -235,7 +263,7 @@ function whereHtml(l) {
 function factRow(l) {
   const flag = l.verified !== true ? '<span class="flag">確認中</span>' : '';
   const tl = trialLabel(l.trial);
-  return `<a class="row" data-item id="${esc(l.id)}" href="${esc(l.url)}" target="_blank" rel="noopener" data-genre="${esc(l.genre)}" data-ages="${esc(l.ages.length ? l.ages.join(' ') : '?')}" data-st="${esc(l._st.join(' '))}" data-trial="${l._tr}" data-goatcounter-click="${esc('スクール公式｜' + l.name)}">
+  return `<a class="row" data-item id="${esc(l.id)}" href="${esc(l.url)}" target="_blank" rel="noopener" data-genre="${esc(l.genre)}" data-ages="${esc(l.ages.length ? l.ages.join(' ') : '?')}" data-st="${esc(l._st.join(' '))}" data-place="${esc(l._pl.join(' '))}" data-trial="${l._tr}" data-goatcounter-click="${esc('スクール公式｜' + l.name)}">
       <span class="row-b">
         <span class="row-n">${esc(l.name)}${flag}</span>
         <span class="row-m"><span class="mt">${SVG.who}<span>${fromLabel(whoText(l)) ? `<span class="from">${fromLabel(whoText(l))}</span>` : ''}${nb(whoText(l))}</span></span><span class="mt">${SVG.where}<span>${whereHtml(l)}</span></span></span>
@@ -249,7 +277,7 @@ function factRow(l) {
 const sizeOf = (l) => (l.kind === 'chain' ? l.rooms.length : 1);
 function roomRow(c, r) {
   const fl = fromLabel(r.who);
-  return `<li data-item data-genre="${esc(r.genre)}" data-ages="${esc(r.ages.join(' '))}" data-st="${esc(r._st.join(' '))}" data-trial="${r._tr}">
+  return `<li data-item data-genre="${esc(r.genre)}" data-ages="${esc(r.ages.join(' '))}" data-st="${esc(r._st.join(' '))}" data-place="${esc(r._pl.join(' '))}" data-trial="${r._tr}">
           <a href="${esc(r.url)}" target="_blank" rel="noopener" data-goatcounter-click="${esc('スクール公式｜' + c.name + ' ' + r.name)}">
             <span class="rb"><span class="rn">${esc(r.name)}</span><span class="rm"><span class="ra">${fl ? `<span class="from">${fl}</span>` : ''}${nb(r.who)}</span><span class="rw">${whereHtml(r)}</span></span></span>
             ${SVG.out}
@@ -283,7 +311,7 @@ function prCard(l) {
   const line = (x) => { const i = String(x).indexOf('　'); return i > 0 ? `<span class="cls">${esc(x.slice(0, i))}</span><span class="tm">${nb(x.slice(i + 1))}</span>` : `<span class="tm">${nb(x)}</span>`; };
   const kv = (k, v) => (v ? `<div class="kv"><dt>${k}</dt><dd>${Array.isArray(v) ? `<span class="lines">${v.map(line).join('')}</span>` : nb(v)}</dd></div>` : '');
   const src = l.sample ? '見本です（教室名・写真・中身は例）。' : `教室からいただいた内容です${l.checked ? `（${fmtDay(l.checked)}）` : ''}。`;
-  return `<article class="prc" data-item id="${esc(l.id)}" data-genre="${esc(l.genre)}" data-ages="${esc(l.ages.length ? l.ages.join(' ') : '?')}" data-st="${esc(l._st.join(' '))}" data-trial="${l._tr}">
+  return `<article class="prc" data-item id="${esc(l.id)}" data-genre="${esc(l.genre)}" data-ages="${esc(l.ages.length ? l.ages.join(' ') : '?')}" data-st="${esc(l._st.join(' '))}" data-place="${esc(l._pl.join(' '))}" data-trial="${l._tr}">
       <div class="prc-h">
         <div class="prc-top"><a class="prt" href="#about" aria-label="PRについて（ページ下の説明へ）">PR${SVG.info}</a>${flag}</div>
         <h3 class="prc-n">${esc(l.name)}</h3>
@@ -350,6 +378,7 @@ const html = `<!doctype html>
 <meta property="og:locale" content="ja_JP">
 ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="stylesheet" href="/assets/bv-tokens.css">
 <link rel="stylesheet" href="/assets/bv-nav.css">
+<link rel="stylesheet" href="/assets/leaflet/leaflet.css">
 <script src="/assets/analytics.js" defer></script>
 <style>
   /* 白いページ。上に「さがす」（年齢・ジャンル・駅・無料体験）→ ジャンルごとの一覧（無料の行と、PRのカード）。
@@ -469,6 +498,27 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .rn, .rm { word-break: keep-all; overflow-wrap: anywhere; line-break: strict; }
   .flag { display: inline-block; margin-left: .4rem; font-family: var(--body); font-size: .64rem; font-weight: 700; color: var(--ink-soft); border: 1px dashed var(--ink-soft); border-radius: 5px; padding: 0 .3rem; vertical-align: 2px; letter-spacing: 0; white-space: nowrap; }
 
+  /* ── 地図（町ごとの数）── */
+  .smap { margin: 1.1rem 0 .2rem; }
+  .smap-top { display: flex; align-items: baseline; justify-content: space-between; gap: .2rem .6rem; flex-wrap: wrap; }
+  .smap-top h2 { font-family: var(--maru); font-weight: 800; font-size: 1.02rem; margin: 0; }
+  .smap-top p { margin: 0; font-size: .74rem; color: var(--ink-soft); }
+  .smap-c { position: relative; z-index: 0; height: 270px; margin-top: .45rem; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); overflow: hidden; background: #EEF2EE; }
+  .smap-c.plain { background: #F3F5F1 linear-gradient(rgba(52,67,76,.05) 1px, transparent 1px) 0 0 / 100% 32px; }
+  .smap-b { display: grid !important; place-items: center; border-radius: 999px; background: #1F6F8C; color: #fff; border: 2px solid #fff; box-shadow: 0 1px 5px rgba(0,0,0,.28); font-weight: 800; font-size: .74rem; font-variant-numeric: tabular-nums; cursor: pointer; }
+  .smap-b.grp { background: #2C86A8; box-shadow: 0 0 0 4px rgba(44,134,168,.32), 0 1px 5px rgba(0,0,0,.28); }
+  .smap-b.sta { background: #5E6B73; }
+  .smap-b.on { background: #34434C; border-color: #FBEBC8; box-shadow: 0 0 0 3px #34434C, 0 2px 8px rgba(0,0,0,.3); }
+  .smap-b:focus-visible { outline: 3px solid #E6B45E; outline-offset: 2px; }
+  .smap-st { pointer-events: none; }
+  .smap-st i { position: absolute; left: -5px; top: -5px; width: 10px; height: 10px; box-sizing: border-box; background: #fff; border: 2.5px solid #34434C; border-radius: 3px; }
+  .smap-st span { position: absolute; left: 8px; top: -9px; white-space: nowrap; font-size: .68rem; font-weight: 800; color: #34434C; text-shadow: 0 0 2px #fff, 0 0 2px #fff, 0 0 4px #fff; }
+  .smap-cap { display: flex; align-items: center; gap: .3rem .6rem; flex-wrap: wrap; min-height: 44px; margin: .2rem 0 0; font-size: .78rem; color: var(--ink-soft); }
+  .smap-cap b { color: var(--ink); }
+  .smap-cap a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; color: var(--link-ink); }
+  .smap-cap button { min-height: 44px; padding: 0 .2rem; border: 0; background: none; font: inherit; font-weight: 700; color: var(--ink-soft); text-decoration: underline; cursor: pointer; }
+  .leaflet-container { font-family: inherit; }
+
   /* ── PRカード ── */
   .prc { background: var(--pr-bg); border: 1.5px solid var(--pr-line); border-radius: var(--radius-sm); margin: .7rem 0; overflow: hidden; box-shadow: 0 2px 14px rgba(138,90,18,.08); scroll-margin-top: 104px; }
   .prc-h { padding: .7rem .9rem .2rem; display: flex; flex-direction: column; gap: .25rem; }
@@ -587,6 +637,12 @@ ${navSub('lessons')}
     </div>
   </section>
 
+  <section class="smap" id="smap" aria-labelledby="smap-h">
+    <div class="smap-top"><h2 id="smap-h">地図で見る</h2><p>丸の数字は、町ごとの教室の数</p></div>
+    <div class="smap-c" id="smap-c" role="application" aria-label="町ごとの教室の数の地図"></div>
+    <p class="smap-cap" id="smap-cap">丸を押すと、その町の教室だけになります</p>
+  </section>
+
   <div id="results"></div>
   ${byGenre.map(({ g, items }) => section(g, items)).join('\n  ')}
 
@@ -627,10 +683,11 @@ ${navSub('lessons')}
   © 2026 ぼんぼやーじゅ通信
 </footer>
 
-<script>
+<script src="/assets/leaflet/leaflet.js"></script>
+${GMAPS_KEY ? '<script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></script>\n' : ''}<script>
 /* さがす: 年齢・ジャンル・駅・無料体験を組み合わせてしぼる。ボタンの数は、ほかの条件に合う教室の数 */
 (function () {
-  var st = { age: 'all', g: '', st: [], free: false };
+  var st = { age: 'all', g: '', st: [], free: false, place: '' };
   var AGE = ${JSON.stringify(AGES)};
   var items = [].slice.call(document.querySelectorAll('[data-item]'));
   var secs = [].slice.call(document.querySelectorAll('.gs'));
@@ -644,8 +701,118 @@ ${navSub('lessons')}
     if (skip !== 'g' && st.g && el.getAttribute('data-genre') !== st.g) return false;
     if (skip !== 'st' && st.st.length && !st.st.some(function (s) { return has(el, 'data-st', s); })) return false;
     if (skip !== 'free' && st.free && el.getAttribute('data-trial') !== 'free') return false;
+    if (skip !== 'place' && st.place && !has(el, 'data-place', st.place)) return false;
     return true;
   }
+  /* 地図: 町ごとの教室の数の丸。押すと、その町の教室だけ（もう一度押すと外れる）。ほかの条件で数が変わる */
+  var PL = ${JSON.stringify(PLACES)};
+  var STN = ${JSON.stringify(MAP.stations)};
+  var GKEY = ${JSON.stringify(GMAPS_KEY)};
+  var smap = null, marks = {}, z0 = 0, clus = null, cnt = {};
+  function rad(c) { return (c >= 20 ? 34 : c >= 10 ? 30 : c >= 5 ? 26 : 23) / 2; }
+  function bubble(k, c, on) {
+    var d = rad(c) * 2;
+    return L.divIcon({ className: 'smap-b' + (PL[k].st ? ' sta' : '') + (on ? ' on' : ''), html: '<b>' + c + '</b>', iconSize: [d, d] });
+  }
+  function aria(m, label, pressed) {
+    var e = m.getElement(); if (!e) return;
+    e.setAttribute('role', 'button'); e.setAttribute('aria-label', label); e.title = label;
+    if (pressed != null) e.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+  }
+  /* 重なる丸は「まとめた数」で出す（おでかけマップと同じ考え方。まとめた丸はどこか1つの町を指さない）。押すと寄る */
+  function render() {
+    if (!smap) return;
+    clus.clearLayers();
+    var vis = [];
+    Object.keys(marks).forEach(function (k) {
+      var c = cnt[k] || 0, on = st.place === k;
+      if (!c && !on) { if (smap.hasLayer(marks[k])) smap.removeLayer(marks[k]); return; }
+      vis.push({ k: k, c: c, on: on, pt: smap.latLngToContainerPoint([PL[k].lat, PL[k].lng]) });
+    });
+    vis.sort(function (a, b) { return (b.on - a.on) || (b.c - a.c); });
+    var groups = [];
+    vis.forEach(function (v) {
+      var g = null;
+      if (!v.on) for (var i = 0; i < groups.length && !g; i++) { var q = groups[i]; if (!q.on && q.pt.distanceTo(v.pt) < rad(q.c) + rad(v.c) - 2) g = q; }
+      if (!g) { groups.push({ m: [v], c: v.c, pt: v.pt, on: v.on }); return; }
+      g.m.push(v); g.c += v.c;
+      var sx = 0, sy = 0; g.m.forEach(function (x) { sx += x.pt.x * x.c; sy += x.pt.y * x.c; }); g.pt = L.point(sx / g.c, sy / g.c);
+    });
+    groups.forEach(function (g) {
+      if (g.m.length === 1) {
+        var v = g.m[0], m = marks[v.k];
+        m.setIcon(bubble(v.k, v.c, v.on)); if (!smap.hasLayer(m)) m.addTo(smap);
+        m.setZIndexOffset(v.on ? 1000 : v.c);
+        aria(m, PL[v.k].label + '　' + v.c + '教室', v.on);
+        return;
+      }
+      g.m.forEach(function (v) { if (smap.hasLayer(marks[v.k])) smap.removeLayer(marks[v.k]); });
+      var d = rad(g.c) * 2 + 6, names = g.m.map(function (v) { return PL[v.k].label; });
+      var cm = L.marker(smap.containerPointToLatLng(g.pt), { icon: L.divIcon({ className: 'smap-b grp', html: '<b>' + g.c + '</b>', iconSize: [d, d] }), keyboard: true, zIndexOffset: g.c });
+      cm.on('click', function () { smap.flyToBounds(L.latLngBounds(g.m.map(function (v) { return [PL[v.k].lat, PL[v.k].lng]; })), { padding: [70, 70], maxZoom: z0 + 2.5, duration: 0.5 }); });
+      clus.addLayer(cm);
+      aria(cm, names.join('・') + '　あわせて' + g.c + '教室（押すと寄ります）');
+    });
+  }
+  function baseLayer(map, el) {
+    // 見本（アーティファクト）は外の地図の画像が読めない。撮っておいた地図の絵（1枚）を敷くか、無ければ絵なし（丸と駅だけ）
+    if (window.SMAP_IMAGE) { L.imageOverlay(window.SMAP_IMAGE.url, window.SMAP_IMAGE.bounds).addTo(map); map.attributionControl.addAttribution('&copy; OpenStreetMap contributors'); return; }
+    if (window.SMAP_PLAIN) { el.classList.add('plain'); return; }
+    var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors' });
+    var loaded = 0, fails = 0;
+    osm.on('tileload', function () { loaded++; });
+    osm.on('tileerror', function () { if (++fails === 6 && !loaded) el.classList.add('plain'); });
+    function useOSM() { if (!map.hasLayer(osm)) osm.addTo(map); }
+    if (!(GKEY && L.gridLayer && L.gridLayer.googleMutant)) { useOSM(); return; }
+    // Googleマップ（おでかけマップと同じ。鍵のエラー・8秒たっても読めない → OpenStreetMap に戻す）
+    var gDone = false, gFailed = false;
+    var g = L.gridLayer.googleMutant({ type: 'roadmap', maxZoom: 18, styles: [{ featureType: 'poi.business', stylers: [{ visibility: 'off' }] }] });
+    function back() { if (gFailed) return; gFailed = true; if (map.hasLayer(g)) map.removeLayer(g); useOSM(); }
+    var prev = window.gm_authFailure;
+    window.gm_authFailure = function () { back(); if (typeof prev === 'function') prev(); };
+    if (!(window.google && window.google.maps && window.google.maps.Map)) {
+      window.__smapReady = function () { gDone = true; };
+      var sc = document.createElement('script');
+      sc.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(GKEY) + '&language=ja&region=JP&loading=async&callback=__smapReady';
+      sc.async = true; sc.onerror = back; document.head.appendChild(sc);
+    } else gDone = true;
+    g.addTo(map);
+    setTimeout(function () { if (!gDone && !(window.google && window.google.maps && window.google.maps.Map)) back(); }, 8000);
+  }
+  function mapInit() {
+    var el = $('smap-c');
+    if (!el || !window.L || !Object.keys(PL).length) { $('smap').hidden = true; return; }
+    // スマホでは、ひろげるまで指1本で地図が動かない（ページを上下に読むじゃまをしない）
+    var map = L.map(el, { scrollWheelZoom: false, zoomControl: false, zoomSnap: 0.25, dragging: !L.Browser.mobile, tap: false });
+    L.control.zoom({ position: 'bottomright', zoomInTitle: '拡大', zoomOutTitle: '縮小' }).addTo(map);
+    baseLayer(map, el);
+    Object.keys(STN).forEach(function (s) {
+      L.marker(STN[s], { icon: L.divIcon({ className: 'smap-st', html: '<i></i><span>' + s + '駅</span>', iconSize: [0, 0] }), interactive: false, keyboard: false, zIndexOffset: -1000 }).addTo(map);
+    });
+    Object.keys(PL).forEach(function (k) {
+      var m = L.marker([PL[k].lat, PL[k].lng], { icon: bubble(k, 0, false), keyboard: true, riseOnHover: true });
+      m.on('click', function () { st.place = st.place === k ? '' : k; apply(); });
+      marks[k] = m;
+    });
+    clus = L.layerGroup().addTo(map);
+    map.fitBounds(L.latLngBounds(Object.keys(PL).map(function (k) { return [PL[k].lat, PL[k].lng]; })), { paddingTopLeft: [26, 26], paddingBottomRight: [30, 34] });
+    z0 = map.getZoom();
+    map.on('zoomend', render);
+    if (L.Browser.mobile) map.on('zoomend', function () { if (map.getZoom() > z0 + 0.1) map.dragging.enable(); else map.dragging.disable(); });
+    smap = map; el._smap = map;
+  }
+  function mapUpdate(n) {
+    if (!smap) return;
+    Object.keys(marks).forEach(function (k) { cnt[k] = count(function (el) { return has(el, 'data-place', k); }, 'place'); });
+    render();
+    $('smap-cap').innerHTML = st.place
+      ? '<span><b>' + PL[st.place].label + '</b>の教室 <b>' + n + '</b></span><a href="#results" id="smap-go">一覧を見る</a><button type="button" id="smap-off">町を外す</button>'
+      : '丸を押すと、その町の教室だけになります';
+  }
+  $('smap-cap').addEventListener('click', function (e) {
+    if (e.target.id === 'smap-off') { st.place = ''; apply(); }
+    if (e.target.id === 'smap-go') { var first = document.querySelector('.gs:not([hidden])'); if (first) { e.preventDefault(); first.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }
+  });
   function count(test, skip) { var c = 0; items.forEach(function (el) { if (test(el) && ok(el, skip)) c++; }); return c; }
   function apply() {
     var n = 0;
@@ -655,7 +822,7 @@ ${navSub('lessons')}
       rs.forEach(function (r) { if (!r.hidden) v++; });
       c.hidden = !v; c.querySelector('.cn').textContent = v;
       c.querySelector('.cn-a').hidden = v < rs.length; c.querySelector('.cn-f').hidden = v === rs.length;
-      var narrow = st.st.length || st.age !== 'all';
+      var narrow = st.st.length || st.age !== 'all' || st.place;
       if (!narrow) c.removeAttribute('data-user');
       if (c.hasAttribute('data-user')) return;
       if (narrow && v && v <= 8) { if (!c.open) { c.open = true; c.setAttribute('data-auto', ''); } }
@@ -684,12 +851,14 @@ ${navSub('lessons')}
     if (st.g) cond.push(['g', document.querySelector('.gt button[data-g="' + st.g + '"]').getAttribute('aria-label')]);
     st.st.forEach(function (s) { cond.push(['st:' + s, s === 'other' ? 'そのほか・駅の記載なし' : s + '駅']); });
     if (st.free) cond.push(['free', '無料体験あり']);
+    if (st.place) cond.push(['place', PL[st.place].label + '（地図）']);
     $('cnt').textContent = n; $('fabn').textContent = n;
     $('cond').innerHTML = cond.map(function (c) { return '<button type="button" class="cc" data-k="' + c[0] + '" aria-label="' + c[1] + 'の条件を外す">' + c[1] + '<span aria-hidden="true">×</span></button>'; }).join('');
     $('cond').hidden = !cond.length;
     $('reset').hidden = !cond.length;
     $('none').hidden = n > 0;
     $('see').hidden = !n;
+    mapUpdate(n);
   }
   document.querySelectorAll('.seg button').forEach(function (b) { b.addEventListener('click', function () { st.age = b.getAttribute('data-age'); apply(); }); });
   document.querySelectorAll('.gt button').forEach(function (b) { b.addEventListener('click', function () { var g = b.getAttribute('data-g'); st.g = st.g === g ? '' : g; apply(); }); });
@@ -699,7 +868,7 @@ ${navSub('lessons')}
     apply();
   }); });
   $('free-only').addEventListener('change', function (e) { st.free = e.target.checked; apply(); });
-  function reset() { st = { age: 'all', g: '', st: [], free: false }; apply(); }
+  function reset() { st = { age: 'all', g: '', st: [], free: false, place: '' }; apply(); }
   $('cond').addEventListener('click', function (e) {
     var b = e.target.closest('.cc'); if (!b) return;
     var k = b.getAttribute('data-k');
@@ -722,6 +891,7 @@ ${navSub('lessons')}
     if (nav) { if (y > 140 && y > lastY + 6) nav.classList.add('sub-off'); else if (y < 140 || y < lastY - 6) nav.classList.remove('sub-off'); }
     lastY = y;
   }, { passive: true });
+  mapInit();
   apply();
 })();
 </script>
@@ -737,4 +907,5 @@ if (CONTACT.test(visible.replace(/https?:\/\/\S+/g, ''))) { console.error('🔴 
 const out = PREVIEW || OUT;
 writeFileSync(out, html);
 console.log(`wrote ${out}（${n}件 / ${byGenre.map(({ g, size }) => `${g.label}${size}`).join('・')} / 駅: ${STATIONS.map((s) => `${s}${stCount(s)}`).join('・')}・そのほか${stCount('other')}・駅なし${stCount('')}）`);
+console.log(`  地図: 町と駅 ${Object.keys(PLACES).length}か所${offMap.length ? `・地図に出ない ${offMap.map((l) => l.name).join('・')}` : ''}／下地 ${GMAPS_KEY ? 'Googleマップ（読めなければ OpenStreetMap）' : 'OpenStreetMap（GMAPS_KEY が無い）'}`);
 if (skipped.length) console.log(`  ${PREVIEW ? '確認中で入れたもの' : '確認中で外したもの'}: ${skipped.map((l) => l.name).join('・')}`);
