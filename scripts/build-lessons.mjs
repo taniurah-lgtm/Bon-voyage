@@ -181,22 +181,32 @@ const photoSvg = (p, label) => `<svg viewBox="0 0 320 200" role="img" aria-label
 // ── 無料の欄（事実だけ）。1教室4段（名前／年齢／場所／体験）でそろえる。行ぜんたいが教室のページへのリンク。地図は付けない ──
 const whoText = (l) => l.who || l.ages.map((a) => AGES[a]).join('・') || '年齢の記載なし';
 // 始まりの年齢（年齢でしぼったときだけ、行の頭に出す）。案内に書いてある年齢の言い直しだけ。決まらないものは出さない
+// 🆕 評価5回目: 小さい子の受け入れ（園児・応相談 など）が書いてあるのに「小1から」と出すと、年少の親が「うちは無理」と読む。そういう行は札を出さない
 function fromLabel(who) {
   const w = String(who || '').replace(/\s/g, '');
-  let m;
-  if ((m = w.match(/^(?:満)?(\d{1,2})(?:か月|ヶ月|カ月)/))) return `${m[1]}か月から`;
-  if ((m = w.match(/^(?:満)?(\d{1,2})(?:歳|才)/))) return `${m[1]}歳から`;
-  if ((m = w.match(/^(年少|年中|年長)/))) return `${m[1]}から`;
-  if ((m = w.match(/^(?:小学?|小学校)(\d)/))) return `小${m[1]}から`;
-  if (/^小学生/.test(w)) return '小1から';
-  if (/^(?:0歳|０歳|赤ちゃん|乳児)/.test(w)) return '0歳から';
-  return '';
+  if (/相談/.test(w)) return '';
+  let m, r = '';
+  if ((m = w.match(/^(?:満)?(\d{1,2})(?:か月|ヶ月|カ月)/))) r = `${m[1]}か月から`;
+  else if ((m = w.match(/^(?:満|原則)?(\d{1,2})(?:[〜～-]\d{1,2})?(?:歳|才)/))) r = `${m[1]}歳から`;
+  else if ((m = w.match(/^(年少|年中|年長)/))) r = `${m[1]}から`;
+  else if ((m = w.match(/^(?:小学?|小学校)(\d)/))) r = `小${m[1]}から`;
+  else if (/^小(?:学生|[・･]?中)/.test(w)) r = '小1から';
+  else if (/^(?:0歳|０歳|赤ちゃん|乳児)/.test(w)) r = '0歳から';
+  else {
+    // 「リトル3〜6歳・…」「子ども中心（4歳〜）」: 頭の近くの年齢が、書いてある中でいちばん小さく、もっと小さい子の言葉が無いときだけ
+    const ns = [...w.matchAll(/(\d{1,2})(?:[〜～-]\d{1,2})?(?:歳|才)/g)];
+    if (ns.length && ns[0].index <= 8 && +ns[0][1] === Math.min(...ns.map((x) => +x[1])) && !/歩き|赤ちゃん|乳児|ベビー|未就園|未就学|幼児|園児|年少|年中|年長|か月|ヶ月|カ月/.test(w)) r = `${ns[0][1]}歳から`;
+  }
+  if (/^小/.test(r) && /園児|幼児|年少|年中|年長|未就学|プレ/.test(w)) return '';
+  return r;
 }
+// 駅エリアは「／」で場所の名前と分け、駅ごとに「駅」を付ける（評価5回目: 「・小川・」が場所の名前に読めた）
 function whereHtml(l) {
   const w = l.where || '';
   if (l._stx || !l._st.length || l._st.includes('other') || l._st.some((x) => new RegExp(x + '(?!町)').test(w))) return nb(w);
-  const area = `${l._st.join('・')}駅エリア`;
-  return nb(/）$/.test(w) ? w.replace(/）$/, `・${area}）`) : `${w}（${area}）`);
+  const area = `${l._st.map((x) => x + '駅').join('・')}エリア`;
+  if ((w.match(/（/g) || []).length > 1 || w.includes('／')) return nb(`${w}／${area}`);
+  return nb(/）$/.test(w) ? w.replace(/）$/, `／${area}）`) : `${w}（${area}）`);
 }
 function factRow(l) {
   const flag = l.verified !== true ? '<span class="flag">確認中</span>' : '';
