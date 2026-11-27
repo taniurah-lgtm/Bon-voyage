@@ -69,7 +69,14 @@ let list = [...(data.lessons || []), ...(data.facts || [])];
 if (PREVIEW) list.push(...(data.samples || []));
 const skipped = list.filter((l) => l.verified !== true);
 if (!PREVIEW) list = list.filter((l) => l.verified === true);
-if (!PREVIEW && list.length < MIN) { console.error(`🔴 公開は${MIN}教室そろってから（いま${list.length}教室）。data/lessons.json の launch を false に戻すか、教室を足す`); process.exit(1); }
+// 🆕 チェーン教室（2026-11-27 オーナー「チェーンだけ外すのはおかしい。読者が公平に選べるように」）。
+// 公式の教室検索で小平市内を1つずつ確かめたもの。1つのチェーンを1行にまとめ、開くと各教室。数えるのは教室ごと
+let chains = data.chains || [];
+if (!PREVIEW) chains = chains.filter((c) => c.verified === true);
+for (const c of chains) for (const r of c.rooms || []) Object.assign(r, { kind: 'room', genre: c.genre, trial: r.trial || c.trial, ages: r.ages || [] });
+const rooms = chains.flatMap((c) => c.rooms || []);
+const units = [...list, ...rooms];
+if (!PREVIEW && units.length < MIN) { console.error(`🔴 公開は${MIN}教室そろってから（いま${units.length}教室）。data/lessons.json の launch を false に戻すか、教室を足す`); process.exit(1); }
 
 for (const l of list) {
   const nm = l.name || l.id;
@@ -83,13 +90,29 @@ for (const l of list) {
   const shown = [l.name, l.who, l.when, l.cost, l.trial, l.book, l.where, l.catch, l.seats, l.perk, ...(l.notes || [])].filter(Boolean).join(' ');
   if (PRAISE.test(shown)) problems.push(`${nm}: 比べる言葉・評価の言葉が入っている（${shown.match(PRAISE)[0]}）`);
 }
+for (const c of chains) {
+  const nm = c.name || c.id;
+  for (const f of ['id', 'name', 'yomi', 'genre', 'who', 'url']) if (!c[f]) problems.push(`${nm}: ${f} が無い`);
+  if (!(c.rooms || []).length) problems.push(`${nm}: rooms（教室）が無い`);
+  if (!GENRES.some((g) => g.key === c.genre)) problems.push(`${nm}: ジャンル「${c.genre}」は genres に無い`);
+  if (!PREVIEW && !c.checked) problems.push(`${nm}: checked（公式を確かめた日）が無い`);
+  for (const r of c.rooms || []) {
+    for (const f of ['name', 'who', 'where', 'url']) if (!r[f]) problems.push(`${nm} ${r.name || '?'}: ${f} が無い`);
+    if (!r.ages.length || r.ages.some((a) => !AGES[a])) problems.push(`${nm} ${r.name}: ages（${Object.keys(AGES).join('/')}）が無いか、違う`);
+    // 場所は町名まで（チェーンの教室の多くは自宅）。番地・部屋番号は書かない
+    if (/\d+\s*[-－‐ー]\s*\d+|番地|号室|丁目\d/.test(r.where)) problems.push(`${nm} ${r.name}: 場所に番地・部屋番号らしきもの（${r.where}）。町名と駅までにする`);
+  }
+  const shown = [c.name, c.who, c.trial, ...(c.rooms || []).flatMap((r) => [r.name, r.who, r.where])].filter(Boolean).join(' ');
+  if (PRAISE.test(shown)) problems.push(`${nm}: 比べる言葉・評価の言葉が入っている（${shown.match(PRAISE)[0]}）`);
+}
 if (problems.length) { for (const p of problems) console.error('🔴 ' + p); process.exit(1); }
 
 // ── 駅（しぼりこみ用）: where に書いてある駅。無ければ町名から近い駅（data の near）。どちらも無ければ空 ──
 const STATION_RE = /(花小金井|新小平|小平|一橋学園|鷹の台|小川|青梅街道|八坂|恋ヶ窪|東久留米)駅/;
 function stationsOf(l) {
   if (Array.isArray(l.st) && l.st.length) return l.st;
-  const m = (l.where || '').match(STATION_RE);
+  // チェーンの教室は、教室名の「〇〇駅前教室」も手がかりにする
+  const m = (l.where || '').match(STATION_RE) || (l.kind === 'room' ? (l.name || '').match(STATION_RE) : null);
   if (m) return [STATIONS.includes(m[1]) ? m[1] : 'other'];
   const town = (l.where || '').split(/[（(／・、\s]/)[0];
   const near = NEAR[town];
@@ -107,7 +130,8 @@ function trialLabel(t) {
   if (/見学/.test(t)) return '見学できます';
   return t;
 }
-for (const l of list) { l._st = stationsOf(l); l._stx = STATION_RE.test(l.where || ''); l._tr = trialKind(l.trial); }
+for (const l of units) { l._st = stationsOf(l); l._stx = STATION_RE.test(l.where || ''); l._tr = trialKind(l.trial); }
+for (const c of chains) c._tr = trialKind(c.trial);
 // 折り返し（2026-11-27 評価役「語の途中で折れる」）: ページの文字は word-break: keep-all にして、
 // 改行してよいところに <wbr> を入れる。区切りは Node の Intl.Segmenter（日本語の単語）で、
 // 助詞だけの語（の・は・を…）のあとに、漢字・カタカナで始まる語が来るところだけ（文節の切れ目。「ご｜一緒に」「歩き｜始め」のような語の中には入れない）
@@ -221,6 +245,36 @@ function factRow(l) {
     </a>`;
 }
 
+// ── チェーン（1行にまとめる）。押すと小平の教室が1つずつ出る。しぼりこみは教室ごと（その条件に合う教室だけ出て、数も変わる） ──
+const sizeOf = (l) => (l.kind === 'chain' ? l.rooms.length : 1);
+function roomRow(c, r) {
+  const fl = fromLabel(r.who);
+  return `<li data-item data-genre="${esc(r.genre)}" data-ages="${esc(r.ages.join(' '))}" data-st="${esc(r._st.join(' '))}" data-trial="${r._tr}">
+          <a href="${esc(r.url)}" target="_blank" rel="noopener" data-goatcounter-click="${esc('スクール公式｜' + c.name + ' ' + r.name)}">
+            <span class="rb"><span class="rn">${esc(r.name)}</span><span class="rm"><span class="rw">${whereHtml(r)}</span><span class="ra">${fl ? `<span class="from">${fl}</span>` : ''}${nb(r.who)}</span></span></span>
+            ${SVG.out}
+          </a>
+        </li>`;
+}
+function chainRow(c) {
+  const tl = trialLabel(c.trial), all = c.rooms.length;
+  const order = (r) => { const i = STATIONS.indexOf(r._st[0]); return i < 0 ? 99 : i; };
+  const rs = [...c.rooms].sort((a, b) => order(a) - order(b) || a.name.localeCompare(b.name, 'ja'));
+  return `<details class="row chain" data-chain id="${esc(c.id)}" data-genre="${esc(c.genre)}">
+      <summary>
+        <span class="row-b">
+          <span class="row-n">${esc(c.name)}</span>
+          <span class="row-m"><span class="mt">${SVG.who}<span>${nb(c.who)}</span></span><span class="mt">${SVG.where}<span><span class="cn-a">小平に<b>${all}</b>教室</span><span class="cn-f" hidden>条件に合う<b class="cn">${all}</b>教室（小平に${all}教室）</span></span></span></span>
+          ${tl ? `<span class="tr tr-${c._tr}">${esc(tl)}</span>` : '<span class="tr tr-none">体験の記載なし</span>'}
+        </span>
+        <span class="chev" aria-hidden="true">${SVG.down}</span>
+      </summary>
+      <ul class="rooms">
+        ${rs.map((r) => roomRow(c, r)).join('\n        ')}
+      </ul>
+    </details>`;
+}
+
 // ── PRカード（掲載料をいただいた教室）。名前から読めるように、名前・年齢・場所・空き → 写真 → ひとこと・中身・特典 → 申込み ──
 function prCard(l) {
   const flag = l.sample ? '<span class="flag">見本</span>' : (l.verified !== true ? '<span class="flag">確認中</span>' : '');
@@ -263,19 +317,20 @@ function prCard(l) {
 function section(g, items) {
   let html = '', buf = [];
   const flush = () => { if (buf.length) { html += `<div class="list">${buf.join('')}</div>`; buf = []; } };
-  for (const l of items) { if (l.kind === 'fact') buf.push(factRow(l)); else { flush(); html += prCard(l); } }
+  for (const l of items) { if (l.kind === 'fact') buf.push(factRow(l)); else if (l.kind === 'chain') buf.push(chainRow(l)); else { flush(); html += prCard(l); } }
   flush();
   return `<section class="gs" data-genre="${g.key}" id="g-${g.key}">
-    <h2 class="sec">${icon(g.key)}<span>${esc(g.short || g.label)}</span><small class="sec-c" data-sec-count>${items.length}</small></h2>
+    <h2 class="sec">${icon(g.key)}<span>${esc(g.short || g.label)}</span><small class="sec-c" data-sec-count>${items.reduce((a, l) => a + sizeOf(l), 0)}</small></h2>
     ${html}
   </section>`;
 }
 
-const byGenre = GENRES.map((g) => ({ g, items: list.filter((l) => l.genre === g.key).sort((a, b) => a.yomi.localeCompare(b.yomi, 'ja')) })).filter((x) => x.items.length);
-const n = list.length;
-const checkedDays = [...new Set(list.filter((l) => l.kind === 'fact').map((l) => l.checked).filter(Boolean))].sort();
+const byGenre = GENRES.map((g) => ({ g, items: [...list, ...chains].filter((l) => l.genre === g.key).sort((a, b) => a.yomi.localeCompare(b.yomi, 'ja')) })).filter((x) => x.items.length);
+for (const x of byGenre) x.size = x.items.reduce((a, l) => a + sizeOf(l), 0);
+const n = units.length;
+const checkedDays = [...new Set([...list.filter((l) => l.kind === 'fact'), ...chains].map((l) => l.checked).filter(Boolean))].sort();
 const lastChecked = checkedDays.length ? fmtDay(checkedDays[checkedDays.length - 1]) : '';
-const stCount = (s) => list.filter((l) => (s ? l._st.includes(s) : !l._st.length)).length;
+const stCount = (s) => units.filter((l) => (s ? l._st.includes(s) : !l._st.length)).length;
 const title = 'スクールガイド（小平の子どもの習い事）';
 const desc = '小平の子どもの習い事の教室を、年齢・ジャンル・駅でしぼって探せるページ。';
 
@@ -395,6 +450,23 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .tr { align-self: flex-start; font-size: .72rem; font-weight: 700; border-radius: 6px; padding: .05rem .45rem; background: var(--tr-bg); color: var(--tr-ink); }
   .tr-free { background: var(--free-bg); color: var(--free-ink); }
   .tr-none { background: none; color: var(--ink-soft); font-weight: 500; padding-left: 0; }
+  /* チェーン: 1行にまとめ、押すと教室が出る */
+  .chain { display: block; padding: 0; }
+  .chain > summary { display: flex; align-items: center; gap: .6rem; padding: .7rem .8rem .75rem .9rem; cursor: pointer; list-style: none; }
+  .chain > summary::-webkit-details-marker { display: none; }
+  @media (hover: hover) { .chain:hover { background: none; } .chain > summary:hover { background: var(--surface-2); } }
+  .chev { flex: none; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 999px; background: var(--surface-2); color: var(--ink-soft); transition: transform .15s; }
+  .chev .ui { width: 18px; height: 18px; }
+  .chain[open] .chev { transform: rotate(180deg); }
+  .cn-a b, .cn-f b { color: var(--ink); font-weight: 800; }
+  .rooms { list-style: none; margin: 0 .8rem .6rem .9rem; padding: 0; border-top: 1px dashed var(--line-strong); }
+  .rooms li { border-bottom: 1px dashed var(--line); }
+  .rooms li:last-child { border-bottom: 0; }
+  .rooms a { display: flex; align-items: center; gap: .5rem; min-height: 44px; padding: .5rem 0; text-decoration: none; color: var(--ink); }
+  .rb { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: .02rem; }
+  .rn { font-weight: 700; font-size: .88rem; line-height: 1.45; }
+  .rm { font-size: .76rem; line-height: 1.5; color: var(--ink-soft); display: flex; flex-wrap: wrap; column-gap: .8em; }
+  .rn, .rm { word-break: keep-all; overflow-wrap: anywhere; line-break: strict; }
   .flag { display: inline-block; margin-left: .4rem; font-family: var(--body); font-size: .64rem; font-weight: 700; color: var(--ink-soft); border: 1px dashed var(--ink-soft); border-radius: 5px; padding: 0 .3rem; vertical-align: 2px; letter-spacing: 0; white-space: nowrap; }
 
   /* ── PRカード ── */
@@ -493,7 +565,7 @@ ${navSub('lessons')}
     <div>
       <span class="f-lab" id="lab-g">習い事</span>
       <div class="gt" role="group" aria-labelledby="lab-g">
-        ${byGenre.map(({ g, items }) => `<button type="button" data-g="${g.key}" aria-pressed="false" aria-label="${esc(g.short || g.label)}">${icon(g.key)}<span class="gl">${esc(g.short || g.label)}</span><span class="c">${items.length}</span></button>`).join('\n        ')}
+        ${byGenre.map(({ g, size }) => `<button type="button" data-g="${g.key}" aria-pressed="false" aria-label="${esc(g.short || g.label)}">${icon(g.key)}<span class="gl">${esc(g.short || g.label)}</span><span class="c">${size}</span></button>`).join('\n        ')}
       </div>
     </div>
     <div>
@@ -531,6 +603,7 @@ ${navSub('lessons')}
       <li><b>並び順</b>習い事ごとの五十音順です。PRかどうかで順番は変えません</li>
       <li><b>PR</b>掲載料をいただいた教室です。写真・曜日・費用・空き・体験の日を載せています</li>
       <li><b>PRのない教室</b>教室の案内に書いてあることだけを、無料で載せています${lastChecked ? `（${lastChecked}に確認）` : ''}</li>
+      <li><b>チェーンの教室</b>小平にある教室を1行にまとめています。押すと、教室ごとに出ます</li>
       <li><b>駅エリア</b>駅の書いていない教室は、町の位置から近い駅のエリアに入れています</li>
       <li><b>申し込む前に</b>費用や曜日は変わることがあります。教室の案内でご確認ください</li>
     </ul>
@@ -561,6 +634,7 @@ ${navSub('lessons')}
   var AGE = ${JSON.stringify(AGES)};
   var items = [].slice.call(document.querySelectorAll('[data-item]'));
   var secs = [].slice.call(document.querySelectorAll('.gs'));
+  var chains = [].slice.call(document.querySelectorAll('[data-chain]'));
   var lists = [].slice.call(document.querySelectorAll('.list'));
   var $ = function (id) { return document.getElementById(id); };
   var has = function (el, attr, v) { return (' ' + el.getAttribute(attr) + ' ').indexOf(' ' + v + ' ') >= 0; };
@@ -575,6 +649,12 @@ ${navSub('lessons')}
   function apply() {
     var n = 0;
     items.forEach(function (el) { var on = ok(el); el.hidden = !on; if (on) n++; });
+    chains.forEach(function (c) {
+      var rs = c.querySelectorAll('[data-item]'), v = 0;
+      rs.forEach(function (r) { if (!r.hidden) v++; });
+      c.hidden = !v; c.querySelector('.cn').textContent = v;
+      c.querySelector('.cn-a').hidden = v < rs.length; c.querySelector('.cn-f').hidden = v === rs.length;
+    });
     lists.forEach(function (l) {
       var vis = [].slice.call(l.querySelectorAll('.row')).filter(function (r) { return !r.hidden; });
       l.hidden = !vis.length; vis.forEach(function (r, i) { r.style.borderTopWidth = i ? '' : '0'; });
@@ -650,5 +730,5 @@ if (CONTACT.test(visible.replace(/https?:\/\/\S+/g, ''))) { console.error('🔴 
 
 const out = PREVIEW || OUT;
 writeFileSync(out, html);
-console.log(`wrote ${out}（${n}件 / ${byGenre.map(({ g, items }) => `${g.label}${items.length}`).join('・')} / 駅: ${STATIONS.map((s) => `${s}${stCount(s)}`).join('・')}・そのほか${stCount('other')}・駅なし${stCount('')}）`);
+console.log(`wrote ${out}（${n}件 / ${byGenre.map(({ g, size }) => `${g.label}${size}`).join('・')} / 駅: ${STATIONS.map((s) => `${s}${stCount(s)}`).join('・')}・そのほか${stCount('other')}・駅なし${stCount('')}）`);
 if (skipped.length) console.log(`  ${PREVIEW ? '確認中で入れたもの' : '確認中で外したもの'}: ${skipped.map((l) => l.name).join('・')}`);

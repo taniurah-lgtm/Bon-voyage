@@ -570,42 +570,6 @@
       ]
     },
     {
-      "id": "f-24",
-      "kind": "fact",
-      "verified": true,
-      "name": "BE studio 上水南町3丁目教室",
-      "yomi": "びーいーすたじおじょうすいみなみちょう",
-      "genre": "english",
-      "ages": [
-        "baby",
-        "pre",
-        "elem"
-      ],
-      "who": "0歳〜中学生",
-      "where": "上水南町",
-      "trial": "無料の体験あり",
-      "url": "https://school.benesse-bestudio.com/bbs/spot/detail?code=EG2184BW",
-      "checked": "2026-11-26"
-    },
-    {
-      "id": "f-25",
-      "kind": "fact",
-      "verified": true,
-      "name": "BE studio 小川西町4丁目教室",
-      "yomi": "びーいーすたじおおがわにしまち",
-      "genre": "english",
-      "ages": [
-        "baby",
-        "pre",
-        "elem"
-      ],
-      "who": "9か月〜",
-      "where": "小川西町（小川駅2分）",
-      "trial": "無料の体験あり",
-      "url": "https://ameblo.jp/english-grimm/entry-12984117096.html",
-      "checked": "2026-11-26"
-    },
-    {
       "id": "f-26",
       "kind": "fact",
       "verified": true,
@@ -1518,23 +1482,6 @@
       "checked": "2026-11-26"
     },
     {
-      "id": "f-80",
-      "kind": "fact",
-      "verified": true,
-      "name": "公文式 小川駅北教室",
-      "yomi": "くもんしきおがわえききたきょうしつ",
-      "genre": "manabi",
-      "ages": [
-        "pre",
-        "elem"
-      ],
-      "who": "幼児〜",
-      "where": "小川東町（小川駅）",
-      "trial": "無料の体験あり",
-      "url": "https://www.kumon.ne.jp/enter/search/classroom/2003150031/index.html",
-      "checked": "2026-11-26"
-    },
-    {
       "id": "f-81",
       "kind": "fact",
       "verified": false,
@@ -1581,6 +1528,24 @@
       "trial": "",
       "url": "https://www.shogi.or.jp/school/kanto/1436/",
       "checked": "2026-11-26"
+    },
+    {
+      "id": "f-84",
+      "kind": "fact",
+      "verified": true,
+      "name": "ペッピーキッズクラブ イオンフードスタイル小平教室",
+      "yomi": "ぺっぴーきっずくらぶいおんふーどすたいるこだいら",
+      "genre": "english",
+      "ages": [
+        "baby",
+        "pre",
+        "elem"
+      ],
+      "who": "1歳〜高校生（1・2歳は親子コース）",
+      "where": "小川東町（イオンフードスタイル小平2階・八坂駅 徒歩3分）",
+      "trial": "無料の体験あり（ホームページから申し込み）",
+      "url": "https://www.peppy-kids.com/classroom/tokyo/1384/",
+      "checked": "2026-11-27"
     }
   ],
   "_near": "🆕 2026-11-27 スクールガイドの「駅でしぼる」用。where に駅が書いていない教室は、町名の中心（国土地理院の住所検索）から直線でいちばん近い駅に入れる。カードには出さない（カードは where のまま）。町名が分からない・複数の場所の教室は入れない（駅を選ばないときだけ出る） ／ facts[].st があれば、それを使う（複数の場所で教えている教室は、どの駅でも出る） ／ 小川町は町域が広い（1丁目は小川駅、2丁目は新小平駅のほう）ので、両方の駅に入れる（2026-11-27）。町名で決まらない教室は「そのほか」",
@@ -1600,7 +1565,15 @@
     "小川町": [
       "小川",
       "新小平"
-    ]
+    ],
+    "学園西町": "一橋学園",
+    "たかの台": "鷹の台",
+    "小川西町": "小川",
+    "小川東町": [
+      "小川",
+      "新小平"
+    ],
+    "御幸町": "花小金井"
   },
   "stations": [
     "花小金井",
@@ -1611,5 +1584,437 @@
     "新小平"
   ],
   "_facts_clean": "2026-11-27 スクールガイドの評価で「親に要らない注記」と言われたものを外した（大人の受け付けの条件・ピティナの掲載・記載なしの注記）。年齢と場所の事実は変えていない。st は where に駅が無く、町名からも決められない教室の近い駅（施設の住所から）",
-  "_genres_short": "genres[].short はスクールガイドの「さがす」のボタンに出す短い名前（2026-11-27 評価で「2行になると数の高さがそろわない」）。見出しは label のまま"
+  "_genres_short": "genres[].short はスクールガイドの「さがす」のボタンに出す短い名前（2026-11-27 評価で「2行になると数の高さがそろわない」）。見出しは label のまま",
+  "_chains": "🆕 2026-11-27 オーナー「チェーンだけ外すのはおかしい。読者が公平に選べるようにするべき」。チェーンも個人と同じルール（名前・年齢・場所・体験・公式リンクだけ）。各チェーンの公式の教室検索で小平市内の教室を1つずつ確かめる（ポータルは手がかりだけ）。1つのチェーンは1行にまとめ、開くと各教室。数えるのは教室ごと。場所は町名まで（教室の多くは自宅。建物名・部屋番号・番地・先生の名前は書かない。商業施設の名前はよい）。曜日・月謝は出さない。rooms[].st があればその駅、無ければ where か教室名の「〇〇駅」、それも無ければ near（町名）。公文式は 2026-11-27 に公式の「小平市の教室を探す」から22教室。BE studio は同日、公式の小平市の教室一覧から5教室（最寄駅は各教室のページ） ／ QUREO は同日、公式の小平市の教室一覧から8教室（どれも個別指導塾の中の教室。対象学年・最寄駅は一覧のまま）。ヒューマンアカデミージュニアは同日、公式の教室検索で小平市2教室（ロボット教室。年齢は公式のよくある質問「満5歳〜小学6年生（教室によって異なる）」）。ペッピーキッズクラブは小平市1教室なので facts（f-84）",
+  "chains": [
+    {
+      "id": "c-kumon",
+      "kind": "chain",
+      "verified": true,
+      "name": "公文式",
+      "yomi": "くもんしき",
+      "genre": "manabi",
+      "who": "0歳〜高校生（教室により2歳・3歳から）",
+      "trial": "教室ごとに見学の予約ができます",
+      "url": "https://www.kumon.ne.jp/enter/search/search_town.php?code=13211",
+      "checked": "2026-11-27",
+      "rooms": [
+        {
+          "name": "小平駅前教室",
+          "who": "0歳〜高校生",
+          "ages": [
+            "baby",
+            "pre",
+            "elem"
+          ],
+          "where": "美園町",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1587590041/index.html"
+        },
+        {
+          "name": "小平仲町教室",
+          "who": "0歳〜高校生",
+          "ages": [
+            "baby",
+            "pre",
+            "elem"
+          ],
+          "where": "仲町",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1812110042/index.html"
+        },
+        {
+          "name": "天神町4丁目教室",
+          "who": "3歳〜高校生",
+          "ages": [
+            "pre",
+            "elem"
+          ],
+          "where": "天神町",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/2000060004/index.html"
+        },
+        {
+          "name": "学園東町3丁目教室",
+          "who": "3歳〜高校生",
+          "ages": [
+            "pre",
+            "elem"
+          ],
+          "where": "学園東町",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1642130043/index.html"
+        },
+        {
+          "name": "弥生台教室",
+          "who": "3歳〜高校生",
+          "ages": [
+            "pre",
+            "elem"
+          ],
+          "where": "花小金井",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1893740002/index.html"
+        },
+        {
+          "name": "花小金井6丁目教室",
+          "who": "3歳〜高校生",
+          "ages": [
+            "pre",
+            "elem"
+          ],
+          "where": "花小金井",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1723340002/index.html"
+        },
+        {
+          "name": "一橋学園駅前教室",
+          "who": "0歳〜高校生",
+          "ages": [
+            "baby",
+            "pre",
+            "elem"
+          ],
+          "where": "学園東町",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1393190043/index.html"
+        },
+        {
+          "name": "小平五小南教室",
+          "who": "0歳〜高校生",
+          "ages": [
+            "baby",
+            "pre",
+            "elem"
+          ],
+          "where": "花小金井",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1162850002/index.html"
+        },
+        {
+          "name": "花小金井中央教室",
+          "who": "3歳〜高校生",
+          "ages": [
+            "pre",
+            "elem"
+          ],
+          "where": "花小金井",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1937420002/index.html"
+        },
+        {
+          "name": "新小平駅東教室",
+          "who": "3歳〜高校生",
+          "ages": [
+            "pre",
+            "elem"
+          ],
+          "where": "小川町",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1712060032/index.html"
+        },
+        {
+          "name": "花小金井駅南教室",
+          "who": "3歳〜高校生",
+          "ages": [
+            "pre",
+            "elem"
+          ],
+          "where": "花小金井南町",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1824050003/index.html"
+        },
+        {
+          "name": "花小金井駅北口教室",
+          "who": "2歳〜高校生",
+          "ages": [
+            "baby",
+            "pre",
+            "elem"
+          ],
+          "where": "花小金井",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1873220002/index.html"
+        },
+        {
+          "name": "小金井公園北教室",
+          "who": "3歳〜高校生",
+          "ages": [
+            "pre",
+            "elem"
+          ],
+          "where": "鈴木町",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1913270011/index.html"
+        },
+        {
+          "name": "学園西町教室",
+          "who": "3歳〜高校生",
+          "ages": [
+            "pre",
+            "elem"
+          ],
+          "where": "学園西町",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1838540045/index.html"
+        },
+        {
+          "name": "小平神明宮前教室",
+          "who": "3歳〜高校生",
+          "ages": [
+            "pre",
+            "elem"
+          ],
+          "where": "小川町",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1928360032/index.html"
+        },
+        {
+          "name": "鷹の台教室",
+          "who": "3歳〜高校生",
+          "ages": [
+            "pre",
+            "elem"
+          ],
+          "where": "たかの台",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1997690024/index.html"
+        },
+        {
+          "name": "小川中宿通り教室",
+          "who": "0歳〜高校生",
+          "ages": [
+            "baby",
+            "pre",
+            "elem"
+          ],
+          "where": "小川西町",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1674890035/index.html"
+        },
+        {
+          "name": "小川駅北教室",
+          "who": "2歳〜高校生",
+          "ages": [
+            "baby",
+            "pre",
+            "elem"
+          ],
+          "where": "小川東町",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/2003150031/index.html"
+        },
+        {
+          "name": "小平6小前教室",
+          "who": "3歳〜高校生",
+          "ages": [
+            "pre",
+            "elem"
+          ],
+          "where": "小川東町",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1363310031/index.html"
+        },
+        {
+          "name": "小平十小前教室",
+          "who": "3歳〜高校生",
+          "ages": [
+            "pre",
+            "elem"
+          ],
+          "where": "上水本町",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1828160022/index.html"
+        },
+        {
+          "name": "上水南町西教室",
+          "who": "3歳〜高校生",
+          "ages": [
+            "pre",
+            "elem"
+          ],
+          "where": "上水南町",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1874150021/index.html"
+        },
+        {
+          "name": "貫井橋教室",
+          "who": "3歳〜高校生",
+          "ages": [
+            "pre",
+            "elem"
+          ],
+          "where": "御幸町",
+          "url": "https://www.kumon.ne.jp/enter/search/classroom/1912220012/index.html"
+        }
+      ]
+    },
+    {
+      "id": "c-bestudio",
+      "kind": "chain",
+      "verified": true,
+      "name": "BE studio（ベネッセの英語教室）",
+      "yomi": "びーすたじお",
+      "genre": "english",
+      "who": "0歳〜（どこまでかは教室により）",
+      "trial": "無料の体験あり",
+      "url": "https://school.benesse-bestudio.com/bbs/spot/list?search=address&address=13211",
+      "checked": "2026-11-27",
+      "rooms": [
+        {
+          "name": "学園東町2丁目教室",
+          "who": "3〜5歳（0〜2歳は相談）",
+          "ages": [
+            "baby",
+            "pre"
+          ],
+          "where": "学園東町（一橋学園駅 徒歩3分）",
+          "url": "https://school.benesse-bestudio.com/bbs/spot/detail?code=EG2224BL"
+        },
+        {
+          "name": "上水南町3丁目教室",
+          "who": "0歳〜中学生",
+          "ages": [
+            "baby",
+            "pre",
+            "elem"
+          ],
+          "where": "上水南町（喜平橋バス停 徒歩5分）",
+          "url": "https://school.benesse-bestudio.com/bbs/spot/detail?code=EG2184BW"
+        },
+        {
+          "name": "小川西町4丁目教室",
+          "who": "0歳〜高校生",
+          "ages": [
+            "baby",
+            "pre",
+            "elem"
+          ],
+          "where": "小川西町（小川駅 徒歩2分）",
+          "url": "https://school.benesse-bestudio.com/bbs/spot/detail?code=EG216WBG"
+        },
+        {
+          "name": "アクロスプラザ小平プラザ",
+          "who": "0歳〜小学生",
+          "ages": [
+            "baby",
+            "pre",
+            "elem"
+          ],
+          "where": "上水本町（アクロスプラザ小平2階・一橋学園駅 徒歩11分）",
+          "url": "https://school.benesse-bestudio.com/bbs/spot/detail?code=EM381901"
+        },
+        {
+          "name": "FLAT小平プラザ",
+          "who": "0歳〜小学生",
+          "ages": [
+            "baby",
+            "pre",
+            "elem"
+          ],
+          "where": "小川東町（小川駅 徒歩9分）",
+          "url": "https://school.benesse-bestudio.com/bbs/spot/detail?code=EM401201"
+        }
+      ]
+    },
+    {
+      "id": "c-qureo",
+      "kind": "chain",
+      "verified": true,
+      "name": "QUREOプログラミング教室",
+      "yomi": "きゅれおぷろぐらみんぐ",
+      "genre": "manabi",
+      "who": "小2〜（どこまでかは教室により）",
+      "trial": "無料の体験あり",
+      "url": "https://qureo.jp/class/tokyo/kodaira",
+      "checked": "2026-11-27",
+      "rooms": [
+        {
+          "name": "個別指導WAM一橋学園校",
+          "who": "小2〜中3",
+          "ages": [
+            "elem"
+          ],
+          "where": "上水南町（一橋学園駅 徒歩7分）",
+          "url": "https://qureo.jp/class/kobetsushidowam_hitotsubashigakuen"
+        },
+        {
+          "name": "城南コベッツ花小金井教室",
+          "who": "小2〜小6",
+          "ages": [
+            "elem"
+          ],
+          "where": "花小金井（花小金井駅 徒歩8分）",
+          "url": "https://qureo.jp/class/jonankobettsu_hanakoganei"
+        },
+        {
+          "name": "ベスト個別指導塾小平教室",
+          "who": "小2〜高3",
+          "ages": [
+            "elem"
+          ],
+          "where": "天神町（小平駅 徒歩7分）",
+          "url": "https://qureo.jp/class/bestkobetsushidojuku_kodaira"
+        },
+        {
+          "name": "明光義塾小川教室",
+          "who": "小2〜小6",
+          "ages": [
+            "elem"
+          ],
+          "where": "小川西町（小川駅 西口 徒歩5分）",
+          "url": "https://qureo.jp/class/meikogijuku_ogawa"
+        },
+        {
+          "name": "明光義塾小平北口教室",
+          "who": "小2〜小6",
+          "ages": [
+            "elem"
+          ],
+          "where": "美園町（小平駅 北口 徒歩1分）",
+          "url": "https://qureo.jp/class/meikogijuku_kodairakitaguchi"
+        },
+        {
+          "name": "明光義塾小平鈴木街道教室",
+          "who": "小2〜小6",
+          "ages": [
+            "elem"
+          ],
+          "where": "鈴木町（花小金井駅 徒歩30分）",
+          "url": "https://qureo.jp/class/meikogijuku_kodairasuzukikaido"
+        },
+        {
+          "name": "明光義塾一橋学園教室",
+          "who": "小2〜小6",
+          "ages": [
+            "elem"
+          ],
+          "where": "学園東町（一橋学園駅 北口 徒歩2分）",
+          "url": "https://qureo.jp/class/meikogijuku_hitotsubashigakuen"
+        },
+        {
+          "name": "森塾小平校",
+          "who": "小2〜高3",
+          "ages": [
+            "elem"
+          ],
+          "where": "美園町（小平駅 徒歩1分）",
+          "url": "https://qureo.jp/class/morijuku_kodaira"
+        }
+      ]
+    },
+    {
+      "id": "c-humanacademy",
+      "kind": "chain",
+      "verified": true,
+      "name": "ヒューマンアカデミージュニア ロボット教室",
+      "yomi": "ひゅーまんあかでみーじゅにあろぼっと",
+      "genre": "manabi",
+      "who": "満5歳〜小学6年生（教室により）",
+      "trial": "体験会あり",
+      "url": "https://kids.athuman.com/search/map/pref/tokyo/%E5%B0%8F%E5%B9%B3%E5%B8%82/?code=140000",
+      "checked": "2026-11-27",
+      "rooms": [
+        {
+          "name": "小平小川教室",
+          "who": "満5歳〜小学6年生（教室により）",
+          "ages": [
+            "pre",
+            "elem"
+          ],
+          "where": "小川西町（小川駅前）",
+          "url": "https://kids.athuman.com/search/detail/?store_id=862&code=140000"
+        },
+        {
+          "name": "一橋学園駅前教室",
+          "who": "5・6歳〜小学生",
+          "ages": [
+            "pre",
+            "elem"
+          ],
+          "where": "学園東町（一橋学園駅前）",
+          "url": "https://kids.athuman.com/search/detail/?store_id=1654&code=140000"
+        }
+      ]
+    }
+  ]
 }
