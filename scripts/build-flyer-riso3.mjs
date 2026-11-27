@@ -11,6 +11,10 @@
  *   docs/homepage/assets/flyer-a4-riso3[-<code>].pdf   3色版。[1] 黒版 [2] 色版1（暖色） [3] 色版2（寒色）
  *   docs/homepage/assets/flyer-a4-riso2[-<code>].pdf   2色版。[1] 黒版（3色版の黒版と色版2を1枚にまとめたもの） [2] 赤版（3色版の色版1と同じ）
  *   ...-preview.png（3色: 赤＋青）／-preview-green.png（3色: 赤＋緑）／flyer-a4-riso2-preview.png（2色: 黒＋赤）
+ *   🆕 docs/homepage/assets/flyer-a4-riso2-overlay.pdf        家のプリンターで、あすぴあで刷った黒（2色版の1ページ目）に重ねるカラーの版
+ *      flyer-a4-riso2-overlay-check.pdf  同じものに、枠の線を赤紫の細い線で足した位置合わせ用
+ *      flyer-a4-riso2-overlay-preview.png  黒に重ねた見本
+ *      ずれを直すとき: node scripts/build-flyer-riso3.mjs --dx=1.5 --dy=-1（mm。右・下がプラス）
  *   どの版も黒1色で出す（色はドラムが乗せる）。
  * 刷る順は 色の版 → 黒版（黒をいちばん上に）。淡い色は網点を入れてあるので、原稿は「文字」モードでよい。
  * はみ出し・文字の重なり（版ごと、と全部の版を重ねたとき）があれば止まる。
@@ -29,6 +33,8 @@ const { chromium } = await import('playwright').catch(async () => {
 const args = process.argv.slice(2);
 const bold = args.includes('--bold');
 const code = args.find((a) => !a.startsWith('--')) || '';
+const num = (k) => parseFloat((args.find((a) => a.startsWith(`--${k}=`)) || '').split('=')[1]) || 0;
+const dx = num('dx'), dy = num('dy');
 const suffix = (code ? '-' + code : '') + (bold ? '-bold' : '');
 const OUT = 'docs/homepage/assets';
 const SRC = bold ? pathToFileURL(resolve('docs/print/flyer/flyer-riso3.html')).href + '?x=1'
@@ -102,6 +108,30 @@ for (const set of SETS) {
     await p.locator('.s').screenshot({ path: f });
     console.log('見本:', f);
   }
+}
+// 家で重ねるカラーの版（2色版の黒に重ねる）
+if (!bold) {
+  const ovUrl = (check) => `${SRC}&plate=ov${code ? `&qr=f-${code}.png` : ''}${dx ? `&dx=${dx}` : ''}${dy ? `&dy=${dy}` : ''}${check ? '&check=1' : ''}`;
+  for (const [check, name] of [[false, 'overlay'], [true, 'overlay-check']]) {
+    await p.goto(ovUrl(check), { waitUntil: 'networkidle' });
+    await p.evaluate(() => document.fonts.ready);
+    await p.waitForTimeout(300);
+    const f = `${OUT}/flyer-a4-riso2${suffix}-${name}.pdf`;
+    await p.pdf({ path: f, width: '210mm', height: '297mm', printBackground: true, margin: { top: 0, right: 0, bottom: 0, left: 0 } });
+    console.log('書き出し:', f, dx || dy ? `（ずらし 右${dx}mm・下${dy}mm）` : '');
+    if (!check) pngs.ov = (await p.screenshot({ clip: { x: 0, y: 0, width: 794, height: 1123 } })).toString('base64');
+  }
+  await p.setContent(`<!doctype html><style>
+    html,body{margin:0;background:#fff}
+    .s{position:relative;width:794px;height:1123px;background:#FDFCF8;isolation:isolate}
+    .l{position:absolute;inset:0;mix-blend-mode:multiply}
+    .l img{width:794px;height:1123px;display:block}
+    .k img{mix-blend-mode:screen}
+  </style><div class="s"><div class="l"><img src="data:image/png;base64,${pngs.ov}"></div><div class="l k" style="background:${K}"><img src="data:image/png;base64,${pngs.k2}"></div></div>`);
+  await p.waitForTimeout(200);
+  const f = `${OUT}/flyer-a4-riso2${suffix}-overlay-preview.png`;
+  await p.locator('.s').screenshot({ path: f });
+  console.log('見本:', f);
 }
 await b.close();
 rmSync(tmp, { recursive: true, force: true });

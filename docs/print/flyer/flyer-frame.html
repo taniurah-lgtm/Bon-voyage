@@ -11,6 +11,9 @@
     淡い色は網点（こちらで入れてある）。作り直し: node scripts/build-flyer-riso3.mjs
   ・🆕 同日 オーナー「やっぱりこれがいい（花の枠の3色版）。2色版も。1枚目と3枚目を黒、2枚目を赤で刷る」→ ?plate=k2 が2色版の黒版
     （黒版と色版2を1枚にまとめたもの。黒で2回通すと黒どうしがずれるので、1回で刷れるようにした）。赤は c1 をそのまま使う
+  ・🆕 同日 オーナー「あすぴあは白黒1色しかできなくなった。2色版の黒（k2）だけ500枚刷った。家で重ね刷りするので何色でもよい。この黒を鮮やかに」
+    → ?plate=ov が家のプリンターで重ねるカラーの版（黒は入れない。花・葉・風船の色、左右の点、見出しの蛍光ペン）。
+      ?dx=・?dy=（mm）で位置をずらせる。?check=1 で枠の線を赤紫の細い線で足す（重ねて、ずれを測る用）
   ・花と風船の線画は assets/brand/frame-art.js（ロゴの花束を写したもの）
   ・下端8mmは安全帯
   作り直し: node scripts/build-flyer-frame.mjs
@@ -33,6 +36,12 @@
   .riso.plate-c1 .page .on-c1, .riso.plate-c2 .page .on-c2{ visibility:visible; }
   .riso.plate-k .on-c1, .riso.plate-k .on-c2{ visibility:hidden; }
   .riso.plate-k2 .page .on-c1:not(.on-c2){ visibility:hidden; }   /* 2色版の黒版＝黒版＋色版2 */
+  /* 家で重ねるカラーの版（ov）: 黒は出さない。.on-ov だけ */
+  .riso.plate-ov .page > :not(svg){ visibility:hidden; }
+  .riso.plate-ov .page .on-ov{ visibility:visible; }
+  .riso.plate-ov .page .pt .mk.on-ov{ background:var(--ov); }
+  .riso.plate-ov .hl{ color:transparent; background:linear-gradient(transparent 58%, var(--ov) 58%, var(--ov) 96%, transparent 96%);
+                     -webkit-box-decoration-break:clone; box-decoration-break:clone; }
   html,body{ margin:0; padding:0; background:#fff; }
   .page{ position:relative; width:210mm; height:297mm; margin:0 auto; overflow:hidden;
          background:var(--paper); color:var(--ink); font-family:"Zen Kaku Gothic New",sans-serif; }
@@ -214,7 +223,7 @@
   const q = new URLSearchParams(location.search);
   const side = q.get('side') === 'back' ? 'back' : 'front';
   const bw = q.get('mode') === 'bw';
-  const riso = q.get('mode') === 'riso3', plate = ['k', 'c1', 'c2', 'k2'].includes(q.get('plate')) ? q.get('plate') : 'k';
+  const riso = q.get('mode') === 'riso3', plate = ['k', 'c1', 'c2', 'k2', 'ov'].includes(q.get('plate')) ? q.get('plate') : 'k';
   // 2026-11-08 オーナー「B5版も」→ ?size=b5（182×257mm）。A4の版をそのまま縮める（上5mmの白い余白は同じ）。
   //   ★2026-11-20 オーナー「うちのコピー機では、上が余白がなく、下が1cmくらい余白になる。上に余白を増やして、下はぎりぎりに」
   //     → コピー機が約7〜8mm上に寄せて刷る。上の白い余白を15mmに広げ、下は紙の端まで（余白0）。
@@ -238,6 +247,22 @@
     const mk = page.querySelectorAll('.pt .mk');
     mk[0]?.classList.add('on-c1'); mk[1]?.classList.add('on-c2'); mk[2]?.classList.add('on-c1');
     page.querySelectorAll('.rule').forEach((r) => r.classList.add('on-c2'));
+    if (plate === 'ov') {
+      // 見出しに蛍光ペン（文字は黒版にあるので、ここでは字を透明にして、下半分に色の帯だけ）
+      const hl = (el, c) => { if (el) el.innerHTML = `<span class="hl on-ov" style="--ov:${c}">${el.innerHTML}</span>`; };
+      hl(page.querySelector('.h1'), '#FFE14D');
+      hl(page.querySelector('.cta .big'), '#AEEBA6');
+      // 3つの点: 左はピンク、右は水色（真ん中は黒版で黒）
+      mk[0]?.classList.add('on-ov'); mk[0]?.style.setProperty('--ov', '#FF6F98');
+      mk[2]?.classList.add('on-ov'); mk[2]?.style.setProperty('--ov', '#3FB0EE');
+      // 位置合わせ（mm）。家のプリンターと、あすぴあで刷った黒のずれを直す
+      const dx = parseFloat(q.get('dx')) || 0, dy = parseFloat(q.get('dy')) || 0;
+      if (dx || dy) {
+        const st = document.createElement('style');
+        st.textContent = `.page{ transform:translate(${(1.77 + dx).toFixed(2)}mm, ${(5 + dy).toFixed(2)}mm) scale(0.98316); }`;
+        document.head.appendChild(st);
+      }
+    }
   }
 
   // ── 花の枠（ロゴの花束を四隅に）──
@@ -349,7 +374,17 @@
         return out;
       };
       // k2（2色版の黒版）は、色版2の上に黒版の線画を重ねる（線画は最後に。白抜きで消さないように）
-      art += plate === 'k' ? inkArt() : plate === 'k2' ? colorArt('c2') + inkArt() : colorArt(plate);
+      // 家で重ねるカラーの版: 花・葉・風船を鮮やかな色で。黒の線から少しはみ出すように 0.45mm 太らせる（多少ずれても白いすき間が出ない）
+      const ovArt = () => {
+        const OV = { leaf: '#58C26A', sky: '#3FB0EE', pink: '#FF6F98', gold: '#FFC21A', red: '#FF5A3C' };
+        const sp = (scale) => (0.45 / scale).toFixed(1);
+        let out = BQ.map((a) => `<g transform="${bqT(...a)}">${['leaf', 'sky', 'pink', 'gold'].map((k) => `<path d="${A[k]}" fill="${OV[k]}" stroke="${OV[k]}" stroke-width="${sp(a[3] / 616)}" stroke-linejoin="round"/>`).join('')}</g>`).join('')
+          + `<g transform="${blT(...BL)}"><path d="${A.red}" fill="${OV.red}" stroke="${OV.red}" stroke-width="${sp(BL[2] / 340)}" stroke-linejoin="round"/></g>`;
+        // 位置合わせ用: 枠の二重線を赤紫の細い線で（黒の線にぴったり重なれば、ずれていない）
+        if (q.get('check')) out += `<g fill="none" stroke="#E0009A" stroke-width=".25"><rect x="10" y="10" width="190" height="277"/><rect x="12" y="12" width="186" height="273"/></g>`;
+        return out;
+      };
+      art += plate === 'k' ? inkArt() : plate === 'k2' ? colorArt('c2') + inkArt() : plate === 'ov' ? ovArt() : colorArt(plate);
     }
   }
   page.insertAdjacentHTML('afterbegin', `<svg class="art" viewBox="0 0 210 297" xmlns="http://www.w3.org/2000/svg">${art}</svg>`);
