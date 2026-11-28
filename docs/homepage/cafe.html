@@ -98,6 +98,20 @@
   .nav-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.6rem 0 0; }
   .nav-pills a { font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none; color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .4rem .9rem; }
   [hidden] { display: none !important; }
+
+  .lv-slim { display: flex; flex-wrap: wrap; align-items: center; gap: .1rem .6rem; margin: .6rem 0 0; padding: .55rem .8rem; border-radius: 12px;
+    background: var(--surface-2); border: 1px solid var(--line); font-size: .82rem; line-height: 1.6; color: var(--ink-soft); }
+  .lv-slim a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 800; color: #057A39; text-decoration: underline; text-underline-offset: 3px; }
+  .lv-card { margin: 1.4rem 0; padding: 1.1rem 1.1rem 1rem; border-radius: 16px; background: var(--surface-2); border: 1px solid rgba(6,199,85,.35); }
+  .lv-card h2, .lv-card .lv-h { font-family: var(--maru); font-weight: 800; font-size: 1.02rem; line-height: 1.45; margin: 0 0 .4rem; }
+  .lv-card p { margin: 0 0 .75rem; font-size: .88rem; line-height: 1.75; color: var(--ink-soft); }
+  .lv-bs { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .9rem; }
+  .lv-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: .4rem 1.4rem; border-radius: 999px; background: #06C755; color: #fff !important;
+    font-weight: 800; font-size: .95rem; text-decoration: none; box-shadow: 0 4px 14px rgba(6,199,85,.25); }
+  .lv-peek { display: inline-flex; align-items: center; min-height: 44px; font-weight: 800; font-size: .86rem; color: var(--sky-deep); }
+  .lv-note { display: block; margin-top: .55rem; font-size: .74rem; color: var(--ink-soft); }
+  @media (max-width: 480px) { .lv-btn { width: 100%; } }
+
 </style>
 </head>
 <body>
@@ -120,6 +134,7 @@
 </header>
 
 <main class="wrap">
+  <p class="lv-slim"><span>📮 週末のおでかけ情報を、毎週水曜の朝にLINEで。</span><a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener" data-pos="ページの上">LINEで受け取る（無料）</a></p>
   <h2 class="sec">カフェマップ</h2>
   <div class="emap">
       <div class="nb nb-top"><span>← 小平市</span><span>↑ 東久留米市</span><span>西東京市 →</span></div>
@@ -325,6 +340,12 @@
         </div>
       </div>
     </details>
+  <aside class="lv-card" aria-label="LINEの通信のご案内">
+    <p class="lv-h">雨の日のおでかけ先も、毎週LINEで</p>
+    <p>児童館・図書館・科学館や、季節のお祭り、申込のいる講座まで。年齢別（赤ちゃん・未就学・小学生）にまとめて、毎週水曜の朝にLINEでおとどけしています。</p>
+    <div class="lv-bs"><a class="lv-btn" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener" data-pos="一覧のとちゅう">LINEで受け取る（無料）</a><a class="lv-peek" href="/week/2026-11-25/pre/" data-goatcounter-click="通信の見本｜一覧のとちゅう">今週の号をのぞいてみる →</a></div>
+    <span class="lv-note">友だち追加だけで届きます。お名前などの入力はいりません。</span>
+  </aside>
   <details class="cf" id="natchanchi" data-tags="chair diaper nursing stroller">
       <summary class="cf-h">
         <span class="cf-n"><h2>なっちゃんち</h2><span class="area">田無神社の鳥居の向かい</span><span class="tgs" role="img" aria-label="子ども用の椅子、おむつ替え、授乳スペース、ベビーカーで入れる"><span class="tg" title="子ども用の椅子"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v9h9"/><path d="M5 8h10"/><path d="M9 12l-2 9M16 12l2 9M8 17h9"/></svg></span><span class="tg" title="おむつ替え"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18v3.5c0 5-4.5 8.5-9 8.5s-9-3.5-9-8.5z"/><path d="M3 10.5h18M9 19c.5-2.5 1.5-4 3-4s2.5 1.5 3 4"/></svg></span><span class="tg" title="授乳スペース"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 3h3l.5 3h-4z"/><path d="M9 6h6v2.5H9z"/><path d="M9 8.5h6V20a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1z"/><path d="M11 12.5h2M11 15.5h2"/></svg></span><span class="tg" title="ベビーカーで入れる"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h14"/><path d="M10 4a7 7 0 0 1 7 7"/><path d="M10 4v7"/><path d="M17 11l1.5-5H21"/><path d="M5 11c0 3 2 5 5 5h3c2 0 4-2 4-5"/><circle cx="7" cy="19.5" r="1.8"/><circle cx="15" cy="19.5" r="1.8"/></svg></span></span></span>
@@ -522,6 +543,13 @@
     <p><b>ご存じのカフェを教えてください</b>子どもと入りやすかったお店があれば、LINEのトークで教えてください。お店の案内を確かめてから載せます。</p>
     <a class="lk" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener" data-goatcounter-click="カフェ｜教えて">LINEで教える</a>
   </div>
+
+  <aside class="lv-card" aria-label="LINEの通信のご案内">
+    <p class="lv-h">週末どこへ行くかは、毎週水曜の朝にLINEで</p>
+    <p>公園・児童館・図書館・科学館。季節のお祭りや、申込のいる講座も。このページのカフェも、号の中でご紹介しています。</p>
+    <div class="lv-bs"><a class="lv-btn" href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener" data-pos="ページの下">LINEで受け取る（無料）</a><a class="lv-peek" href="/week/2026-11-25/pre/" data-goatcounter-click="通信の見本｜ページの下">今週の号をのぞいてみる →</a></div>
+    <span class="lv-note">友だち追加だけで届きます。お名前などの入力はいりません。</span>
+  </aside>
 
   <p class="about">お店のホームページ・Instagramを、お店ごとに確かめた日を書いています。営業日や休みは変わることがあるので、出かける前にお店の案内でご確認ください。<br>
   内容の誤りに気づいたら、<a href="/#contact">お問い合わせ</a>から教えてください。</p>

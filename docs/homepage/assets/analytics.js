@@ -26,7 +26,9 @@
     } catch (err) {}
     // 2026-10-17: どのボタンが押されたかも足す（上のバー／最初の画面／ページの下 など）
     var sec = a.closest('section[id]');
-    var pos = a.classList.contains('bvnav-cta') ? '上のバー'
+    // 2026-11-28 案内に data-pos があれば、それを使う（スクールガイド・カフェの「ページの上／一覧のとちゅう／ページの下」）
+    var pos = a.getAttribute('data-pos') ? a.getAttribute('data-pos')
+      : a.classList.contains('bvnav-cta') ? '上のバー'
       : a.closest('.hero') ? '最初の画面'
       : a.classList.contains('bvc-invite-btn') ? 'カレンダーの案内'
       : sec ? ({ tomodachi: 'ページの下' }[sec.id] || sec.id) : 'ほか';

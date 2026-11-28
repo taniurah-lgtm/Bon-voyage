@@ -29,6 +29,7 @@
  *   - LINE本文には載せない・リンクもしない（このページはホームページの中だけ）
  */
 import { navSub } from './lib/nav.mjs';
+import { INVITE_CSS, inviteSlim, inviteCard, latestIssue } from './lib/line-invite.mjs';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
 const SRC = 'data/lessons.json';
@@ -634,6 +635,8 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   @media (min-width: 40rem) { .gt { grid-template-columns: repeat(10, minmax(0, 1fr)); } .sc { grid-template-columns: repeat(8, minmax(0, 1fr)); } .ph figure { flex-basis: 46%; } }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   [hidden] { display: none !important; }
+${INVITE_CSS}
+  .ghead-in .lv-slim { flex-basis: 100%; }
 </style>
 </head>
 <body>
@@ -651,6 +654,7 @@ ${navSub('lessons')}
   <div class="ghead-in">
     <h1>スクールガイド</h1>
     <p class="count">掲載数<b>${n}</b>教室</p>
+    ${inviteSlim({ text: '週末のおでかけ情報も、毎週水曜の朝にLINEで。', pos: 'ページの上' })}
   </div>
 </header>
 
@@ -713,11 +717,15 @@ ${navSub('lessons')}
 
   <div class="mainlist">
   <div id="results"></div>
-  ${byGenre.map(({ g, items }) => section(g, items)).join('\n  ')}
+  ${byGenre.slice(0, 2).map(({ g, items }) => section(g, items)).join('\n  ')}
+  ${inviteCard({ head: '習い事のほかに、週末のおでかけも', body: '公園・児童館・図書館・科学館。季節のお祭りや、申込のいる講座も。年齢別（赤ちゃん・未就学・小学生）にまとめて、毎週水曜の朝にLINEでおとどけしています。', pos: '一覧のとちゅう', issue: latestIssue() })}
+  ${byGenre.slice(2).map(({ g, items }) => section(g, items)).join('\n  ')}
 
   <div class="none" id="none" hidden>この条件に合う教室は、まだ載っていません。<br><button type="button" id="reset2">条件をもどす</button></div>
   </div>
   </div>
+
+  ${inviteCard({ head: '小平の子育て家庭に、毎週水曜の朝にLINEで', body: '週末のおでかけ先や、子ども向けの催し・講座を、年齢別にまとめておとどけしています。どなたでも無料でお読みいただけます。', pos: 'ページの下', issue: latestIssue() })}
 
   <div class="ask">
     <b>教室の方へ</b>

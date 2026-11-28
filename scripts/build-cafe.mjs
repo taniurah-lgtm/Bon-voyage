@@ -16,6 +16,7 @@
  * ★確かめた日（checked）から60日を過ぎたお店は、組むたびに🔴で知らせる（営業時間・休みが変わりやすい）。
  */
 import { navSub } from './lib/nav.mjs';
+import { INVITE_CSS, inviteSlim, inviteCard, latestIssue } from './lib/line-invite.mjs';
 import { layoutTiles } from './lib/tilemap.mjs';
 import { readFileSync, writeFileSync } from 'node:fs';
 
@@ -258,6 +259,7 @@ const html = `<!doctype html>
   .nav-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.6rem 0 0; }
   .nav-pills a { font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none; color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .4rem .9rem; }
   [hidden] { display: none !important; }
+${INVITE_CSS}
 </style>
 </head>
 <body>
@@ -280,6 +282,7 @@ ${navSub('cafe')}
 </header>
 
 <main class="wrap">
+  ${inviteSlim({ text: '週末のおでかけ情報を、毎週水曜の朝にLINEで。', pos: 'ページの上' })}
   <h2 class="sec">カフェマップ</h2>
   ${mapHtml}
   <p class="mapcap"><b>お店の四角をタップすると、下の案内が開きます。</b><br>${icon('play', 'tic')} はキッズスペースやおもちゃのあるお店です。</p>
@@ -291,12 +294,16 @@ ${navSub('cafe')}
     ${Object.keys(TAGS).filter((t) => cafes.some((c) => (c.tags || []).includes(t))).map((t) => `<button type="button" data-f="${t}" aria-pressed="false">${icon(t)}${esc(TAGS[t].label)}<small>${cafes.filter((c) => (c.tags || []).includes(t)).length}</small></button>`).join('\n    ')}
   </div>
   <p class="filt-none" id="filt-none" hidden>この設備のお店は、まだありません。</p>
-  ${cafes.map(cafe).join('\n  ')}
+  ${cafes.slice(0, 6).map(cafe).join('\n  ')}
+  ${cafes.length > 8 ? inviteCard({ head: '雨の日のおでかけ先も、毎週LINEで', body: '児童館・図書館・科学館や、季節のお祭り、申込のいる講座まで。年齢別（赤ちゃん・未就学・小学生）にまとめて、毎週水曜の朝にLINEでおとどけしています。', pos: '一覧のとちゅう', issue: latestIssue() }) : ''}
+  ${cafes.slice(6).map(cafe).join('\n  ')}
 
   <div class="ask">
     <p><b>ご存じのカフェを教えてください</b>子どもと入りやすかったお店があれば、LINEのトークで教えてください。お店の案内を確かめてから載せます。</p>
     <a class="lk" href="${LINE_URL}" target="_blank" rel="noopener" data-goatcounter-click="カフェ｜教えて">LINEで教える</a>
   </div>
+
+  ${inviteCard({ head: '週末どこへ行くかは、毎週水曜の朝にLINEで', body: '公園・児童館・図書館・科学館。季節のお祭りや、申込のいる講座も。このページのカフェも、号の中でご紹介しています。', pos: 'ページの下', issue: latestIssue() })}
 
   <p class="about">お店のホームページ・Instagramを、お店ごとに確かめた日を書いています。営業日や休みは変わることがあるので、出かける前にお店の案内でご確認ください。<br>
   内容の誤りに気づいたら、<a href="/#contact">お問い合わせ</a>から教えてください。</p>
