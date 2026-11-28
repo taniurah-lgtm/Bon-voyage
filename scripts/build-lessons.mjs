@@ -766,7 +766,9 @@ ${GMAPS_KEY ? '<script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></
     if (!(GKEY && L.gridLayer && L.gridLayer.googleMutant)) { useOSM(); return; }
     // Googleマップ（おでかけマップと同じ。鍵のエラー・8秒たっても読めない → OpenStreetMap に戻す）
     var gDone = false, gFailed = false;
-    var g = L.gridLayer.googleMutant({ type: 'roadmap', maxZoom: 18, styles: [{ featureType: 'poi.business', stylers: [{ visibility: 'off' }] }] });
+    // 下地のアイコン（お店・名所・寺社・学校・病院・役所・バス停）と駅の名前は消す（駅はこの地図が自分で出す。教室の丸と見間違えないように）
+    var off = function (t, el) { return { featureType: t, elementType: el || 'labels.icon', stylers: [{ visibility: 'off' }] }; };
+    var g = L.gridLayer.googleMutant({ type: 'roadmap', maxZoom: 18, styles: [{ featureType: 'poi.business', stylers: [{ visibility: 'off' }] }, off('poi.attraction'), off('poi.place_of_worship'), off('poi.school'), off('poi.medical'), off('poi.government'), off('poi.sports_complex'), off('transit.station.bus'), off('transit.station.rail', 'labels')] });
     function back() { if (gFailed) return; gFailed = true; if (map.hasLayer(g)) map.removeLayer(g); useOSM(); }
     var prev = window.gm_authFailure;
     window.gm_authFailure = function () { back(); if (typeof prev === 'function') prev(); };

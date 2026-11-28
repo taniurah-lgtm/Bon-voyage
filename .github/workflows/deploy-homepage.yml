@@ -92,6 +92,13 @@ jobs:
           GMAPS_KEY: ${{ vars.GMAPS_KEY }}
         run: node scripts/build-map.mjs
 
+      # 🆕 2026-11-28 スクールガイド（school.html）。data/lessons.json の launch が true のときだけ書く
+      #   （false のあいだは「まだ公開しない」と出して何もしない）。下地はおでかけマップと同じ GMAPS_KEY の Googleマップ
+      - name: スクールガイドを組む（公開してよいときだけ）
+        env:
+          GMAPS_KEY: ${{ vars.GMAPS_KEY }}
+        run: node scripts/build-lessons.mjs
+
       # 検証用の合言葉で組まれたページを絶対に公開しない（最後の砦）。
       # ここで止まったら、Secrets に MEMBER_PASS を入れてから再実行する。
       - name: 検証用の合言葉で組まれていないか確かめる
