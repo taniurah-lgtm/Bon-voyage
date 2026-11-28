@@ -128,20 +128,28 @@ const tLabel = (s) => (s.length >= 5 ? `${esc(s.slice(0, Math.ceil(s.length / 2)
 // きょう開く日か（曜日の決まり）: 図書館などはおでかけマップと同じ決まり（open）。出張こども広場は「毎週月曜」「水曜と第1日曜」から
 const DOWS = '日月火水木金土';
 function openRule(p, sp) {
-  if (sp && sp.open && sp.open.dows) return { dows: sp.open.dows, nth: sp.open.nth || [], closedNth: sp.open.closedNth || [] };
+  if (sp && sp.open && sp.open.dows) return { dows: sp.open.dows, nth: sp.open.nth || [], closedNth: sp.open.closedNth || p.closedNth || [] };
   const w = (p.programs.find((g) => g.when) || {}).when || '';
+  if (/^毎日/.test(w)) return { dows: [0, 1, 2, 3, 4, 5, 6], nth: [], closedNth: p.closedNth || [] };
   const m = w.match(/([月火水木金土日])(?:〜([月火水木金土日]))?曜(?:と第(\d)([月火水木金土日])曜)?/);
   if (!m) return null;
   const a = DOWS.indexOf(m[1]), b = DOWS.indexOf(m[2] || m[1]), dows = [];
   for (let i = a; ; i = (i + 1) % 7) { dows.push(i); if (i === b) break; }
-  return { dows, nth: m[3] ? [[DOWS.indexOf(m[4]), +m[3]]] : [], closedNth: [] };
+  return { dows, nth: m[3] ? [[DOWS.indexOf(m[4]), +m[3]]] : [], closedNth: p.closedNth || [] };
+}
+// きょう開いているときに出す時間（毎日の会・決まった曜日の会の時間）
+function openTime(p, sp) {
+  const g = p.programs.find((x) => x.open === true && x.when && /\d{1,2}:\d{2}〜\d{1,2}:\d{2}/.test(x.when));
+  const m = g && g.when.match(/\d{1,2}:\d{2}〜\d{1,2}:\d{2}/);
+  if (m) return (p._kind === 'jidokan' ? 'こども広場 ' : '') + m[0];
+  return (sp && sp.open && !sp.open.byDow && sp.open.time) || '';
 }
 function tileHtml(n) {
   if (!n) return '<span class="cell" aria-hidden="true"></span>';
-  if (n.station) return `<span class="cell st" aria-hidden="true"><span>${esc(n.station.name)}</span></span>`;
-  const p = n.place, k = KIND[p._kind], rule = openRule(p, spotOf(p));
-  const dates = p.programs.filter((g) => g.open === true).flatMap((g) => (g.dates || []).map((x) => asItem(x).d)).filter((d) => d >= todayJST).slice(0, 40);
-  return `<a class="cell tt ${k.cls}" href="#${p.key}" data-k="${p._kind}" data-ages="${[...new Set(p.programs.flatMap((g) => agesOf(g.age)))].join(' ')}"${rule ? ` data-rule="${esc(JSON.stringify(rule))}"` : ''}${dates.length ? ` data-dates="${dates.join(' ')}"` : ''} aria-label="${esc(k.label)}：${esc(p.name)}" data-goatcounter-click="定例マップ｜${esc(p.tile)}"><i aria-hidden="true">${k.icon}</i><b>${tLabel(p.tile)}</b></a>`;
+  if (n.station) return `<span class="cell st" aria-hidden="true"><span>${tLabel(n.station.name.replace(/駅$/, ''))}<wbr>駅</span></span>`;
+  const p = n.place, k = KIND[p._kind], rule = openRule(p, spotOf(p)), otime = openTime(p, spotOf(p));
+  const dates = [...new Set(p.programs.filter((g) => g.open === true).flatMap((g) => (g.dates || []).map((x) => asItem(x).d)).filter((d) => d >= todayJST))].sort().slice(0, 40);
+  return `<a class="cell tt ${k.cls}" href="#${p.key}" data-k="${p._kind}" data-ages="${[...new Set(p.programs.flatMap((g) => agesOf(g.age)))].join(' ')}"${rule ? ` data-rule="${esc(JSON.stringify(rule))}"` : ''}${dates.length ? ` data-dates="${dates.join(' ')}"` : ''}${otime ? ` data-time="${esc(otime)}"` : ''} data-name="${esc(p.tile)}" aria-label="${esc(k.label)}：${esc(p.name)}" data-goatcounter-click="定例マップ｜${esc(p.tile)}"><i aria-hidden="true">${k.icon}</i><b>${tLabel(p.tile)}</b></a>`;
 }
 const tmapHtml = `<div class="tmap">
       <div class="nb nb-top"><span>← ${esc(ENTEI.neighbors.w)}</span><span>↑ ${esc(ENTEI.neighbors.n)}</span><span>${esc(ENTEI.neighbors.e)} →</span></div>
@@ -231,7 +239,7 @@ for (const p of places) {
     for (const x of (g.dates || []).map(asItem)) {
       if (x.d < todayJST) continue;
       const tm = (g.timeByDow && g.timeByDow[dow(x.d)]) || g.time || '';
-      soon.push({ d: x.d, key: p.key, pl: shortOf(p), t: x.t || g.title, time: x.t && /\d{1,2}:\d{2}/.test(x.t) ? '' : tm, age: agesOf(g.age).join(' '), k: p._kind });
+      soon.push({ d: x.d, key: p.key, pl: p._kind === 'chiiki' && p.tile && !p.short ? `出張こども広場・${p.tile}` : shortOf(p), t: x.t || g.title, time: x.t && /\d{1,2}:\d{2}/.test(x.t) ? '' : tm, age: agesOf(g.age).join(' '), k: p._kind });
     }
   }
 }
@@ -259,13 +267,13 @@ const otaPlaces = places.filter((p) => p._ota && p._ota.cur && !otaSeen.has(p._o
 const nextSeen = new Set();
 const nextPlaces = places.filter((p) => p._ota && p._ota.next && !nextSeen.has(p._ota.next.url) && nextSeen.add(p._ota.next.url));
 // おたよりは1行ずつ: 「はなみん ［11月号］［12月号］」（月末は来月号も並ぶ）
-const otaRow = (p) => `<li><span class="on">${esc(p.tile || p.short || short(p.name))}</span>${[p._ota.cur, p._ota.next].filter(Boolean)
+const otaRow = (p) => `<li><span class="on"><i aria-hidden="true">${KIND[p._kind].icon}</i>${esc(p.otaName || p.tile || p.short || short(p.name))}</span>${[p._ota.cur, p._ota.next].filter(Boolean)
   .map((o, i) => `<a href="${esc(o.url)}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜${i ? '来月のおたより' : 'おたより'}（上）"${i ? ' class="nx"' : ''}>${esc((o.label.match(/\d{1,2}月号/) || [o.label])[0])}${i ? '<small>来月</small>' : ''}</a>`).join('')}</li>`;
 const otaStrip = otaPlaces.length
-  ? `<section class="otas" aria-labelledby="otas-h">
-    <h2 id="otas-h">📄 おたより</h2>
+  ? `<details class="otas" id="otas">
+    <summary><h2 id="otas-h">📄 各館のおたより<small>${otaPlaces.length}か所${nextPlaces.length ? '・来月号も' : ''}</small></h2><span class="chev" aria-hidden="true"></span></summary>
     <ul>${otaPlaces.map(otaRow).join('')}</ul>
-  </section>`
+  </details>`
   : '';
 
 const html = `<!doctype html>
@@ -287,7 +295,7 @@ const html = `<!doctype html>
 <script src="/assets/analytics.js" defer></script>
 <style>
   main { padding: 1.2rem 0 1rem; }
-  .ghead-in { padding-top: 1.4rem; padding-bottom: 1.2rem; }
+  .ghead-in { padding-top: 1.1rem; padding-bottom: .9rem; }
   .ghead h1 { font-size: clamp(1.45rem, 4.8vw, 2rem); margin-bottom: .35rem; }
   .ghead .sub { font-size: .92rem; line-height: 1.75; }
   .lead { color: var(--ink-soft); font-size: .86rem; line-height: 1.75; margin-bottom: 1rem; }
@@ -295,8 +303,8 @@ const html = `<!doctype html>
   .sec-lead { color: var(--ink-soft); font-size: .84rem; line-height: 1.7; margin-bottom: .8rem; }
 
   /* 年齢でしぼる */
-  .agef { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 .9rem; }
-  .agef button { font-family: var(--maru); font-weight: 700; font-size: .8rem; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); border-radius: 999px; padding: .4rem .85rem; min-height: 36px; cursor: pointer; }
+  .agef { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .3rem; margin: 0 0 .45rem; }
+  .agef button { font-family: var(--maru); font-weight: 700; font-size: .8rem; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); border-radius: 999px; padding: .2rem .3rem; min-height: 36px; cursor: pointer; white-space: nowrap; }
   .agef button[aria-pressed="true"] { background: var(--sky-deep); border-color: var(--sky-deep); color: var(--on-sky); }
 
   /* これから2週間 */
@@ -319,6 +327,9 @@ const html = `<!doctype html>
   .soon .sd { padding-top: .45rem; }
   .soon small { display: block; color: var(--ink-faint); font-size: .74rem; }
   .soon .empty, .soon .wk { color: var(--ink-faint); font-size: .78rem; }
+  .soon .tdy .sd { color: #C2410C; }
+  .soon .tdy li a b { white-space: normal; }
+  .soon .tdy .nm { display: inline; }
 
   /* 今月のおたより */
   .otas { margin: 0 0 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .9rem 1rem; }
@@ -395,7 +406,7 @@ const html = `<!doctype html>
   .cell { min-height: 50px; border-radius: 9px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 3px 2px; line-height: 1.15; position: relative; }
   .tt { --c: var(--sky); background: var(--surface); border: 2px solid var(--c); box-shadow: 0 1px 0 var(--line-strong); text-decoration: none; color: var(--ink); }
   .tt i { font-style: normal; font-size: 15px; line-height: 1; }
-  .tt b { font-family: var(--maru); font-weight: 800; font-size: clamp(9.5px, 2.6vw, 13px); letter-spacing: -.03em; word-break: keep-all; margin-top: 2px; }
+  .tt b { font-family: var(--maru); font-weight: 800; font-size: clamp(11.5px, 3.2vw, 13.5px); letter-spacing: -.03em; word-break: keep-all; margin-top: 2px; }
   .tt:hover, .tt:focus-visible { background: var(--sky-wash); }
   .tt.off { opacity: .45; }
   .tt.today::after { content: "きょう"; position: absolute; top: -7px; right: -3px; font: 800 9px/1 var(--body); color: #fff; background: #C2410C; border-radius: 999px; padding: 2px 4px; }
@@ -403,7 +414,7 @@ const html = `<!doctype html>
   .k-lib { --c: #2563EB; } .k-ji { --c: #BE185D; } .k-ko { --c: #2F7D3A; } .k-sh { --c: #2F7D3A; border-style: dashed !important; } .k-hi { --c: #C2410C; }
   .kf button.k-lib, .kf button.k-ji, .kf button.k-ko, .kf button.k-sh, .kf button.k-hi { border-color: var(--c); }
   .kf button.k-sh { border-style: dashed; }
-  .st { border: 1px dashed var(--ink-faint); color: var(--ink-soft); font-size: clamp(8px, 2.1vw, 11px); letter-spacing: -.05em; white-space: nowrap; overflow: hidden; }
+  .st { border: 1px dashed var(--ink-faint); color: var(--ink-soft); font-size: clamp(10px, 2.9vw, 11.5px); letter-spacing: -.05em; line-height: 1.1; word-break: keep-all; overflow: hidden; }
   .tleg { font-size: .72rem; color: var(--ink-soft); margin: .45rem 0 0; }
   .lg-today { font-weight: 800; color: #fff; background: #C2410C; border-radius: 999px; padding: 1px 5px; font-size: .66rem; }
   .lg-off { opacity: .5; font-weight: 700; border: 1px solid var(--line-strong); border-radius: 4px; padding: 0 4px; }
@@ -424,11 +435,18 @@ const html = `<!doctype html>
   .lk.up { color: var(--ink-soft); }
   .agef button, .lk { min-height: 44px !important; }
   .morebtn { min-height: 44px !important; }
-  .otas h2 { font-family: var(--maru); font-weight: 800; font-size: .92rem; margin: 0 0 .4rem; color: var(--sky-deep); }
+  .otas h2 { font-family: var(--maru); font-weight: 800; font-size: .92rem; margin: 0; color: var(--sky-deep); flex: 1 1 auto; }
+  .otas h2 small { margin-left: .5rem; font-size: .74rem; font-weight: 700; color: var(--ink-soft); }
+  .otas summary { display: flex; align-items: center; gap: .5rem; min-height: 44px; cursor: pointer; list-style: none; }
+  .otas summary::-webkit-details-marker { display: none; }
+  .otas[open] summary { margin-bottom: .3rem; }
+  details.otas[open] > summary .chev { transform: rotate(225deg); margin-top: 4px; }
   .otas ul { display: block !important; }
   .otas li { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .4rem; padding: .25rem 0; border-top: 1px dashed var(--line); }
   .otas li:first-child { border-top: 0; }
-  .otas .on { flex: 0 0 5.5em; font-weight: 800; font-size: .84rem; }
+  .otas .on { flex: 0 0 7.4em; font-weight: 800; font-size: .8rem; line-height: 1.35; }
+  .otas .on i { font-style: normal; margin-right: .2rem; }
+  @media (min-width: 480px) { .otas .on { flex: 0 0 9em; } }
   .otas li a { display: inline-flex !important; flex-direction: row !important; align-items: center; gap: .25rem; min-height: 44px !important; padding: .2rem .7rem !important; border-radius: 999px !important; font-size: .8rem !important; }
   .otas li a.nx { border-style: dashed !important; color: var(--marigold-ink); }
   .otas li a small { font-size: .66rem; font-weight: 800; }
@@ -455,21 +473,22 @@ ${navSub('teirei')}
 <main class="wrap">
   <section class="tsec" aria-labelledby="tmap-h">
     <h2 class="vh" id="tmap-h">地図</h2>
+    <div class="agef" role="group" aria-label="年齢でしぼる">
+      <button type="button" data-f="" aria-pressed="true">全年齢</button>
+      <button type="button" data-f="baby" aria-pressed="false">👶 0〜3歳</button>
+      <button type="button" data-f="pre" aria-pressed="false">🧒 4〜6歳</button>
+      <button type="button" data-f="elem" aria-pressed="false">🎒 小学生</button>
+    </div>
     ${kindChips}
     ${tmapHtml}
     <p class="tleg"><span class="lg-today">きょう</span>＝きょう会がある　<span class="lg-off">うすい</span>＝きょうはお休みの日</p>
   </section>
 
-  <div class="agef" role="group" aria-label="年齢でしぼる">
-    <button type="button" data-f="" aria-pressed="true">すべて</button>
-    <button type="button" data-f="baby" aria-pressed="false">👶 0〜3歳</button>
-    <button type="button" data-f="pre" aria-pressed="false">🧒 4〜6歳</button>
-    <button type="button" data-f="elem" aria-pressed="false">🎒 小学生</button>
-  </div>
 
   <section class="soon" aria-labelledby="soon-h">
     <h3 id="soon-h">📅 予約なしで行ける会</h3>
     <ul id="soon">
+        <li class="day tdy" id="today-row" hidden><span class="sd" id="today-d">きょう</span><ul id="today-ul"></ul></li>
         ${soonHtml}
     </ul>
     <button type="button" class="morebtn" id="soon-more" hidden>2週間ぶんを見る</button>
@@ -558,16 +577,45 @@ ${navSub('teirei')}
       } catch (e) { /* なし */ }
     }
   });
-  // たたんだ欄の1行目: 次の会（予約なしで行ける日）。無ければ決まった曜日
+  // きょう開いている所（種類ごとに1行。会のある日付つきの行は、この下に続く）
   var WDJ = ['日', '月', '火', '水', '木', '金', '土'];
+  var KN = { lib: ['📚', '図書館', 'k-lib'], jidokan: ['🏠', '児童館', 'k-ji'], kodomo: ['🧸', 'こども広場', 'k-ko'], chiiki: ['🚶', '出張こども広場', 'k-sh'], hiroba: ['☀️', '子育てひろば', 'k-hi'] };
+  var openNow = {};
+  (function () {
+    var by = {};
+    document.querySelectorAll('.tt[data-rule]').forEach(function (a) {
+      if (a.classList.contains('off')) return;
+      openNow[a.getAttribute('href').slice(1)] = a.getAttribute('data-time') || '';
+      var k = a.getAttribute('data-k'); (by[k] = by[k] || []).push(a);
+    });
+    var ul = document.getElementById('today-ul'), html = '';
+    ['jidokan', 'kodomo', 'chiiki', 'hiroba', 'lib'].forEach(function (k) {
+      var xs = by[k]; if (!xs || !xs.length) return;
+      var times = xs.map(function (a) { return a.getAttribute('data-time') || ''; }), cnt = {};
+      times.forEach(function (x) { if (x) cnt[x] = (cnt[x] || 0) + 1; });
+      var top = Object.keys(cnt).sort(function (a, b) { return cnt[b] - cnt[a]; })[0] || '';
+      var same = top && times.every(function (x) { return x; }) ? top + xs.filter(function (a, i) { return times[i] !== top; }).map(function (a, i, arr) { return (i ? '' : '（') + a.getAttribute('data-name') + 'は ' + a.getAttribute('data-time') + (i === arr.length - 1 ? '）' : '、'); }).join('') : '';
+      html += '<li data-age="' + (k === 'lib' || k === 'kodomo' || k === 'chiiki' ? 'baby pre elem' : (k === 'jidokan' ? 'baby pre elem' : 'baby')) + '" data-k="' + k + '"><a href="' + xs[0].getAttribute('href') + '"><i class="sk ' + KN[k][2] + '" aria-hidden="true">' + KN[k][0] + '</i><span><b>' + KN[k][1] + '</b> ' +
+        xs.map(function (a) { return a.getAttribute('data-name'); }).join('・') + '<small>ひらいています' + (same ? '　' + same : '（時間は四角を押して）') + '</small></span></a></li>';
+    });
+    if (html) {
+      ul.innerHTML = html;
+      document.getElementById('today-d').textContent = 'きょう ' + (+t.slice(5, 7)) + '/' + (+t.slice(8)) + '(' + WDJ[dw] + ')';
+      document.getElementById('today-row').setAttribute('data-d', t);
+    }
+  })();
+  // たたんだ欄の1行目: きょう開いていれば、きょうの時間。続けて次の会（予約なしで行ける日）
   document.querySelectorAll('details.pl').forEach(function (d) {
     var li = [].slice.call(d.querySelectorAll('.prog .dates li[data-d]')).filter(function (x) { return x.getAttribute('data-d') >= t && !x.closest('.prog').querySelector('.tag.bk'); })
       .sort(function (a, b) { return a.getAttribute('data-d').localeCompare(b.getAttribute('data-d')); })[0];
-    var sm = d.querySelector('.pl-next'); if (!sm || !li) return;
+    var sm = d.querySelector('.pl-next'); if (!sm) return;
+    var on = Object.prototype.hasOwnProperty.call(openNow, d.id), ot = on ? openNow[d.id] : '';
+    if (!li) { if (on) { sm.textContent = 'きょう ひらいています' + (ot ? ' ' + ot : ''); sm.classList.add('td'); } return; }
     var iso = li.getAttribute('data-d'), dd = new Date(iso + 'T00:00:00Z');
     var what = (li.querySelector('span') || {}).textContent || li.closest('.prog').querySelector('h3').firstChild.textContent;
-    sm.textContent = (iso === t ? 'きょう ' : '次は ') + (+iso.slice(5, 7)) + '/' + (+iso.slice(8)) + '(' + WDJ[dd.getUTCDay()] + ') ' + what.trim().replace(/\s*[（(].*$/, '').slice(0, 24);
-    if (iso === t) sm.classList.add('td');
+    var nx = (+iso.slice(5, 7)) + '/' + (+iso.slice(8)) + '(' + WDJ[dd.getUTCDay()] + ') ' + what.trim().replace(/\s*[（(].*$/, '').slice(0, 24);
+    sm.textContent = iso === t ? 'きょう ' + nx.replace(/^\S+ /, '') : (on ? 'きょう ひらいています' + (ot ? ' ' + ot : '') + '・次は ' + nx : '次は ' + nx);
+    if (iso === t || on) sm.classList.add('td');
   });
   // 地図のマスを押したら、その欄を開く
   function openHash() {

@@ -17,7 +17,7 @@
 <script src="/assets/analytics.js" defer></script>
 <style>
   main { padding: 1.2rem 0 1rem; }
-  .ghead-in { padding-top: 1.4rem; padding-bottom: 1.2rem; }
+  .ghead-in { padding-top: 1.1rem; padding-bottom: .9rem; }
   .ghead h1 { font-size: clamp(1.45rem, 4.8vw, 2rem); margin-bottom: .35rem; }
   .ghead .sub { font-size: .92rem; line-height: 1.75; }
   .lead { color: var(--ink-soft); font-size: .86rem; line-height: 1.75; margin-bottom: 1rem; }
@@ -25,8 +25,8 @@
   .sec-lead { color: var(--ink-soft); font-size: .84rem; line-height: 1.7; margin-bottom: .8rem; }
 
   /* 年齢でしぼる */
-  .agef { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 .9rem; }
-  .agef button { font-family: var(--maru); font-weight: 700; font-size: .8rem; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); border-radius: 999px; padding: .4rem .85rem; min-height: 36px; cursor: pointer; }
+  .agef { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .3rem; margin: 0 0 .45rem; }
+  .agef button { font-family: var(--maru); font-weight: 700; font-size: .8rem; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); border-radius: 999px; padding: .2rem .3rem; min-height: 36px; cursor: pointer; white-space: nowrap; }
   .agef button[aria-pressed="true"] { background: var(--sky-deep); border-color: var(--sky-deep); color: var(--on-sky); }
 
   /* これから2週間 */
@@ -49,6 +49,9 @@
   .soon .sd { padding-top: .45rem; }
   .soon small { display: block; color: var(--ink-faint); font-size: .74rem; }
   .soon .empty, .soon .wk { color: var(--ink-faint); font-size: .78rem; }
+  .soon .tdy .sd { color: #C2410C; }
+  .soon .tdy li a b { white-space: normal; }
+  .soon .tdy .nm { display: inline; }
 
   /* 今月のおたより */
   .otas { margin: 0 0 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .9rem 1rem; }
@@ -125,7 +128,7 @@
   .cell { min-height: 50px; border-radius: 9px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 3px 2px; line-height: 1.15; position: relative; }
   .tt { --c: var(--sky); background: var(--surface); border: 2px solid var(--c); box-shadow: 0 1px 0 var(--line-strong); text-decoration: none; color: var(--ink); }
   .tt i { font-style: normal; font-size: 15px; line-height: 1; }
-  .tt b { font-family: var(--maru); font-weight: 800; font-size: clamp(9.5px, 2.6vw, 13px); letter-spacing: -.03em; word-break: keep-all; margin-top: 2px; }
+  .tt b { font-family: var(--maru); font-weight: 800; font-size: clamp(11.5px, 3.2vw, 13.5px); letter-spacing: -.03em; word-break: keep-all; margin-top: 2px; }
   .tt:hover, .tt:focus-visible { background: var(--sky-wash); }
   .tt.off { opacity: .45; }
   .tt.today::after { content: "きょう"; position: absolute; top: -7px; right: -3px; font: 800 9px/1 var(--body); color: #fff; background: #C2410C; border-radius: 999px; padding: 2px 4px; }
@@ -133,7 +136,7 @@
   .k-lib { --c: #2563EB; } .k-ji { --c: #BE185D; } .k-ko { --c: #2F7D3A; } .k-sh { --c: #2F7D3A; border-style: dashed !important; } .k-hi { --c: #C2410C; }
   .kf button.k-lib, .kf button.k-ji, .kf button.k-ko, .kf button.k-sh, .kf button.k-hi { border-color: var(--c); }
   .kf button.k-sh { border-style: dashed; }
-  .st { border: 1px dashed var(--ink-faint); color: var(--ink-soft); font-size: clamp(8px, 2.1vw, 11px); letter-spacing: -.05em; white-space: nowrap; overflow: hidden; }
+  .st { border: 1px dashed var(--ink-faint); color: var(--ink-soft); font-size: clamp(10px, 2.9vw, 11.5px); letter-spacing: -.05em; line-height: 1.1; word-break: keep-all; overflow: hidden; }
   .tleg { font-size: .72rem; color: var(--ink-soft); margin: .45rem 0 0; }
   .lg-today { font-weight: 800; color: #fff; background: #C2410C; border-radius: 999px; padding: 1px 5px; font-size: .66rem; }
   .lg-off { opacity: .5; font-weight: 700; border: 1px solid var(--line-strong); border-radius: 4px; padding: 0 4px; }
@@ -154,11 +157,18 @@
   .lk.up { color: var(--ink-soft); }
   .agef button, .lk { min-height: 44px !important; }
   .morebtn { min-height: 44px !important; }
-  .otas h2 { font-family: var(--maru); font-weight: 800; font-size: .92rem; margin: 0 0 .4rem; color: var(--sky-deep); }
+  .otas h2 { font-family: var(--maru); font-weight: 800; font-size: .92rem; margin: 0; color: var(--sky-deep); flex: 1 1 auto; }
+  .otas h2 small { margin-left: .5rem; font-size: .74rem; font-weight: 700; color: var(--ink-soft); }
+  .otas summary { display: flex; align-items: center; gap: .5rem; min-height: 44px; cursor: pointer; list-style: none; }
+  .otas summary::-webkit-details-marker { display: none; }
+  .otas[open] summary { margin-bottom: .3rem; }
+  details.otas[open] > summary .chev { transform: rotate(225deg); margin-top: 4px; }
   .otas ul { display: block !important; }
   .otas li { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .4rem; padding: .25rem 0; border-top: 1px dashed var(--line); }
   .otas li:first-child { border-top: 0; }
-  .otas .on { flex: 0 0 5.5em; font-weight: 800; font-size: .84rem; }
+  .otas .on { flex: 0 0 7.4em; font-weight: 800; font-size: .8rem; line-height: 1.35; }
+  .otas .on i { font-style: normal; margin-right: .2rem; }
+  @media (min-width: 480px) { .otas .on { flex: 0 0 9em; } }
   .otas li a { display: inline-flex !important; flex-direction: row !important; align-items: center; gap: .25rem; min-height: 44px !important; padding: .2rem .7rem !important; border-radius: 999px !important; font-size: .8rem !important; }
   .otas li a.nx { border-style: dashed !important; color: var(--marigold-ink); }
   .otas li a small { font-size: .66rem; font-weight: 800; }
@@ -185,6 +195,12 @@
 <main class="wrap">
   <section class="tsec" aria-labelledby="tmap-h">
     <h2 class="vh" id="tmap-h">地図</h2>
+    <div class="agef" role="group" aria-label="年齢でしぼる">
+      <button type="button" data-f="" aria-pressed="true">全年齢</button>
+      <button type="button" data-f="baby" aria-pressed="false">👶 0〜3歳</button>
+      <button type="button" data-f="pre" aria-pressed="false">🧒 4〜6歳</button>
+      <button type="button" data-f="elem" aria-pressed="false">🎒 小学生</button>
+    </div>
     <div class="kf" role="group" aria-label="種類でしぼる"><button type="button" data-k="" aria-pressed="true">すべて</button><button type="button" data-k="lib" aria-pressed="false" class="k-lib" aria-label="図書館"><i aria-hidden="true">📚</i>図書館</button><button type="button" data-k="jidokan" aria-pressed="false" class="k-ji" aria-label="児童館"><i aria-hidden="true">🏠</i>児童館</button><button type="button" data-k="kodomo" aria-pressed="false" class="k-ko" aria-label="こども広場"><i aria-hidden="true">🧸</i>こども広場</button><button type="button" data-k="chiiki" aria-pressed="false" class="k-sh" aria-label="出張こども広場"><i aria-hidden="true">🚶</i>出張</button><button type="button" data-k="hiroba" aria-pressed="false" class="k-hi" aria-label="子育てひろば"><i aria-hidden="true">☀️</i>ひろば</button></div>
     <div class="tmap">
       <div class="nb nb-top"><span>← 東大和市・立川市</span><span>↑ 東村山市</span><span>西東京市 →</span></div>
@@ -192,46 +208,46 @@
         <span class="frame-l">小平市</span>
         <div class="grid" style="--cols:6">
           <span class="cell" aria-hidden="true"></span>
-          <a class="cell tt k-sh" href="#nakajuku" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[3],&quot;nth&quot;:[[0,1]],&quot;closedNth&quot;:[]}" aria-label="出張こども広場：出張こども広場（小川西町中宿地域センター）" data-goatcounter-click="定例マップ｜中宿"><i aria-hidden="true">🚶</i><b>中宿</b></a>
-          <a class="cell tt k-lib" href="#ogawanishi" data-k="lib" data-ages="pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" aria-label="図書館：小川西町図書館" data-goatcounter-click="定例マップ｜小川西町"><i aria-hidden="true">📚</i><b>小川西町</b></a>
-          <a class="cell tt k-hi" href="#ohisama" data-k="hiroba" data-ages="baby" data-rule="{&quot;dows&quot;:[2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" data-dates="2026-12-10 2026-12-22 2026-12-23 2026-12-25 2026-12-26" aria-label="子育てひろば：子ども家庭支援センター 子育て交流ひろば「おひさま」" data-goatcounter-click="定例マップ｜おひさま"><i aria-hidden="true">☀️</i><b>おひさま</b></a>
-          <a class="cell tt k-ko" href="#oonuma-k" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" aria-label="こども広場：大沼地域センター こども広場" data-goatcounter-click="定例マップ｜大沼"><i aria-hidden="true">🧸</i><b>大沼</b></a>
+          <a class="cell tt k-sh" href="#nakajuku" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[3],&quot;nth&quot;:[[0,1]],&quot;closedNth&quot;:[]}" data-dates="2026-12-02 2026-12-16" data-time="10:00〜18:00" data-name="中宿" aria-label="出張こども広場：出張こども広場（小川西町中宿地域センター）" data-goatcounter-click="定例マップ｜中宿"><i aria-hidden="true">🚶</i><b>中宿</b></a>
+          <a class="cell tt k-lib" href="#ogawanishi" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-time="9:00〜22:00" data-name="小川西町" aria-label="図書館：小川西町図書館" data-goatcounter-click="定例マップ｜小川西町"><i aria-hidden="true">📚</i><b>小川西町</b></a>
+          <a class="cell tt k-hi" href="#ohisama" data-k="hiroba" data-ages="baby" data-rule="{&quot;dows&quot;:[2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" data-dates="2026-12-10 2026-12-22 2026-12-23 2026-12-25 2026-12-26" data-time="10:00〜18:00" data-name="おひさま" aria-label="子育てひろば：子ども家庭支援センター 子育て交流ひろば「おひさま」" data-goatcounter-click="定例マップ｜おひさま"><i aria-hidden="true">☀️</i><b>おひさま</b></a>
+          <a class="cell tt k-ko" href="#oonuma-k" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]]}" data-time="10:00〜18:00" data-name="大沼" aria-label="こども広場：大沼地域センター こども広場" data-goatcounter-click="定例マップ｜大沼"><i aria-hidden="true">🧸</i><b>大沼</b></a>
           <span class="cell" aria-hidden="true"></span>
           <span class="cell" aria-hidden="true"></span>
-          <span class="cell st" aria-hidden="true"><span>小川駅</span></span>
-          <a class="cell tt k-ko" href="#ogawahigashi" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" aria-label="こども広場：小川東町地域センター こども広場" data-goatcounter-click="定例マップ｜小川東町"><i aria-hidden="true">🧸</i><b>小川東町</b></a>
-          <span class="cell st" aria-hidden="true"><span>小平駅</span></span>
-          <a class="cell tt k-sh" href="#misono" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" aria-label="出張こども広場：出張こども広場（美園地域センター）" data-goatcounter-click="定例マップ｜美園"><i aria-hidden="true">🚶</i><b>美園</b></a>
-          <a class="cell tt k-ko" href="#sawayaka" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" aria-label="こども広場：さわやか館 こども広場" data-goatcounter-click="定例マップ｜さわやか館"><i aria-hidden="true">🧸</i><b>さわや<wbr>か館</b></a>
-          <a class="cell tt k-lib" href="#kamijuku" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-23 2027-01-27 2027-02-24 2027-03-24" aria-label="図書館：上宿図書館" data-goatcounter-click="定例マップ｜上宿"><i aria-hidden="true">📚</i><b>上宿</b></a>
-          <a class="cell tt k-sh" href="#ogawanishi-s" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[5],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" aria-label="出張こども広場：出張こども広場（小川西町地域センター）" data-goatcounter-click="定例マップ｜小川西町"><i aria-hidden="true">🚶</i><b>小川西町</b></a>
-          <a class="cell tt k-sh" href="#ogawahigashi2" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[4],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" aria-label="出張こども広場：出張こども広場（小川東第二地域センター）" data-goatcounter-click="定例マップ｜小川東第二"><i aria-hidden="true">🚶</i><b>小川東<wbr>第二</b></a>
-          <a class="cell tt k-lib" href="#nakamachi" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-03 2027-01-07 2027-02-04 2027-03-04 2026-12-13 2026-12-20 2027-01-10 2027-01-17 2027-02-14 2027-02-21 2027-03-14 2027-03-21" aria-label="図書館：仲町図書館（なかまちテラス）" data-goatcounter-click="定例マップ｜仲町"><i aria-hidden="true">📚</i><b>仲町</b></a>
-          <a class="cell tt k-lib" href="#oonuma" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-09 2027-01-13 2027-02-10 2027-03-10 2026-12-24 2027-01-13 2027-01-28 2027-02-10 2027-02-25 2027-03-10 2027-03-25" aria-label="図書館：大沼図書館" data-goatcounter-click="定例マップ｜大沼"><i aria-hidden="true">📚</i><b>大沼</b></a>
-          <a class="cell tt k-lib" href="#hanakoganei" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" aria-label="図書館：花小金井図書館" data-goatcounter-click="定例マップ｜花小金井"><i aria-hidden="true">📚</i><b>花小金井</b></a>
-          <a class="cell tt k-ko" href="#nakajima" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" aria-label="こども広場：中島地域センター こども広場" data-goatcounter-click="定例マップ｜中島"><i aria-hidden="true">🧸</i><b>中島</b></a>
-          <a class="cell tt k-ji" href="#ogaichi" data-k="jidokan" data-ages="baby elem pre" data-dates="2026-12-02 2026-12-18 2026-12-02 2026-12-09 2026-12-16 2026-12-23 2026-12-05 2026-12-07 2026-12-08 2026-12-09 2026-12-06 2026-12-13 2026-12-17 2026-12-19 2026-12-20 2026-12-07 2026-12-10 2026-12-21" aria-label="児童館：小川町一丁目児童館（おがいち）" data-goatcounter-click="定例マップ｜おがいち"><i aria-hidden="true">🏠</i><b>おがいち</b></a>
-          <span class="cell st" aria-hidden="true"><span>新小平駅</span></span>
-          <a class="cell tt k-lib" href="#chuo" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-01 2027-01-12 2027-02-02 2027-03-02 2026-12-12 2026-12-15 2026-12-22 2027-01-09 2027-01-12 2027-01-19 2027-01-26 2027-02-02 2027-02-09 2027-02-13 2027-02-16 2027-03-02 2027-03-13 2027-03-16 2027-03-23" aria-label="図書館：中央図書館" data-goatcounter-click="定例マップ｜中央"><i aria-hidden="true">📚</i><b>中央</b></a>
-          <a class="cell tt k-ko" href="#tenjin" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" aria-label="こども広場：天神地域センター こども広場" data-goatcounter-click="定例マップ｜天神"><i aria-hidden="true">🧸</i><b>天神</b></a>
-          <span class="cell st" aria-hidden="true"><span>花小金井駅</span></span>
+          <span class="cell st" aria-hidden="true"><span>小川<wbr>駅</span></span>
+          <a class="cell tt k-ko" href="#ogawahigashi" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]]}" data-time="10:00〜18:00" data-name="小川東町" aria-label="こども広場：小川東町地域センター こども広場" data-goatcounter-click="定例マップ｜小川東町"><i aria-hidden="true">🧸</i><b>小川東町</b></a>
+          <span class="cell st" aria-hidden="true"><span>小平<wbr>駅</span></span>
+          <a class="cell tt k-sh" href="#misono" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" data-dates="2026-12-07 2026-12-14" data-time="10:00〜18:00" data-name="美園" aria-label="出張こども広場：出張こども広場（美園地域センター）" data-goatcounter-click="定例マップ｜美園"><i aria-hidden="true">🚶</i><b>美園</b></a>
+          <a class="cell tt k-ko" href="#sawayaka" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" data-time="10:00〜17:00" data-name="さわやか館" aria-label="こども広場：さわやか館 こども広場" data-goatcounter-click="定例マップ｜さわやか館"><i aria-hidden="true">🧸</i><b>さわや<wbr>か館</b></a>
+          <a class="cell tt k-lib" href="#kamijuku" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-23 2027-01-27 2027-02-24 2027-03-24" data-name="上宿" aria-label="図書館：上宿図書館" data-goatcounter-click="定例マップ｜上宿"><i aria-hidden="true">📚</i><b>上宿</b></a>
+          <a class="cell tt k-sh" href="#ogawanishi-s" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[5],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" data-dates="2026-12-04 2026-12-11" data-time="10:00〜18:00" data-name="小川西町" aria-label="出張こども広場：出張こども広場（小川西町地域センター）" data-goatcounter-click="定例マップ｜小川西町"><i aria-hidden="true">🚶</i><b>小川西町</b></a>
+          <a class="cell tt k-sh" href="#ogawahigashi2" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[4],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" data-dates="2026-12-03 2026-12-17" data-time="10:00〜18:00" data-name="小川東第二" aria-label="出張こども広場：出張こども広場（小川東第二地域センター）" data-goatcounter-click="定例マップ｜小川東第二"><i aria-hidden="true">🚶</i><b>小川東<wbr>第二</b></a>
+          <a class="cell tt k-lib" href="#nakamachi" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-03 2026-12-13 2026-12-20 2027-01-07 2027-01-10 2027-01-17 2027-02-04 2027-02-14 2027-02-21 2027-03-04 2027-03-14 2027-03-21" data-name="仲町" aria-label="図書館：仲町図書館（なかまちテラス）" data-goatcounter-click="定例マップ｜仲町"><i aria-hidden="true">📚</i><b>仲町</b></a>
+          <a class="cell tt k-lib" href="#oonuma" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-09 2026-12-24 2027-01-13 2027-01-28 2027-02-10 2027-02-25 2027-03-10 2027-03-25" data-name="大沼" aria-label="図書館：大沼図書館" data-goatcounter-click="定例マップ｜大沼"><i aria-hidden="true">📚</i><b>大沼</b></a>
+          <a class="cell tt k-lib" href="#hanakoganei" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-name="花小金井" aria-label="図書館：花小金井図書館" data-goatcounter-click="定例マップ｜花小金井"><i aria-hidden="true">📚</i><b>花小金井</b></a>
+          <a class="cell tt k-ko" href="#nakajima" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]]}" data-time="10:00〜18:00" data-name="中島" aria-label="こども広場：中島地域センター こども広場" data-goatcounter-click="定例マップ｜中島"><i aria-hidden="true">🧸</i><b>中島</b></a>
+          <a class="cell tt k-ji" href="#ogaichi" data-k="jidokan" data-ages="baby elem pre" data-rule="{&quot;dows&quot;:[0,1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]]}" data-dates="2026-12-02 2026-12-05 2026-12-06 2026-12-07 2026-12-08 2026-12-09 2026-12-10 2026-12-13 2026-12-16 2026-12-17 2026-12-18 2026-12-19 2026-12-20 2026-12-21 2026-12-23" data-time="こども広場 9:00〜14:00" data-name="おがいち" aria-label="児童館：小川町一丁目児童館（おがいち）" data-goatcounter-click="定例マップ｜おがいち"><i aria-hidden="true">🏠</i><b>おがいち</b></a>
+          <span class="cell st" aria-hidden="true"><span>新小平<wbr>駅</span></span>
+          <a class="cell tt k-lib" href="#chuo" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-01 2026-12-12 2026-12-15 2026-12-22 2027-01-09 2027-01-12 2027-01-19 2027-01-26 2027-02-02 2027-02-09 2027-02-13 2027-02-16 2027-03-02 2027-03-13 2027-03-16 2027-03-23" data-name="中央" aria-label="図書館：中央図書館" data-goatcounter-click="定例マップ｜中央"><i aria-hidden="true">📚</i><b>中央</b></a>
+          <a class="cell tt k-ko" href="#tenjin" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]]}" data-time="10:00〜18:00" data-name="天神" aria-label="こども広場：天神地域センター こども広場" data-goatcounter-click="定例マップ｜天神"><i aria-hidden="true">🧸</i><b>天神</b></a>
+          <span class="cell st" aria-hidden="true"><span>花小金井<wbr>駅</span></span>
           <span class="cell" aria-hidden="true"></span>
-          <a class="cell tt k-ji" href="#oganin" data-k="jidokan" data-ages="baby pre elem" data-dates="2026-12-08 2026-12-22 2026-12-03 2026-12-04 2026-12-12 2026-12-18 2026-12-20 2026-12-21 2026-12-23 2026-12-25 2026-12-26 2026-12-06 2026-12-19" aria-label="児童館：小川町二丁目児童館（おがにん）" data-goatcounter-click="定例マップ｜おがにん"><i aria-hidden="true">🏠</i><b>おがにん</b></a>
-          <a class="cell tt k-sh" href="#gakuennishi" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" aria-label="出張こども広場：出張こども広場（学園西町地域センター）" data-goatcounter-click="定例マップ｜学園西町"><i aria-hidden="true">🚶</i><b>学園西町</b></a>
-          <a class="cell tt k-sh" href="#gakuenhigashi" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[4],&quot;nth&quot;:[[0,2]],&quot;closedNth&quot;:[]}" aria-label="出張こども広場：出張こども広場（学園東町地域センター）" data-goatcounter-click="定例マップ｜学園東町"><i aria-hidden="true">🚶</i><b>学園東町</b></a>
-          <a class="cell tt k-sh" href="#suzuki" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[3],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" aria-label="出張こども広場：出張こども広場（鈴木地域センター）" data-goatcounter-click="定例マップ｜鈴木"><i aria-hidden="true">🚶</i><b>鈴木</b></a>
-          <a class="cell tt k-ji" href="#hanamin" data-k="jidokan" data-ages="baby elem pre" data-dates="2026-12-02 2026-12-16 2026-12-06 2026-12-10 2026-12-12 2026-12-13 2026-12-14 2026-12-17 2026-12-20 2026-12-21 2026-12-25 2026-12-02 2026-12-03 2026-12-04 2026-12-05 2026-12-05 2026-12-23 2026-12-09" aria-label="児童館：花小金井南児童館（はなみん）" data-goatcounter-click="定例マップ｜はなみん"><i aria-hidden="true">🏠</i><b>はなみん</b></a>
+          <a class="cell tt k-ji" href="#oganin" data-k="jidokan" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]]}" data-dates="2026-12-03 2026-12-04 2026-12-06 2026-12-08 2026-12-12 2026-12-18 2026-12-19 2026-12-20 2026-12-21 2026-12-22 2026-12-23 2026-12-25 2026-12-26" data-time="こども広場 9:00〜14:00" data-name="おがにん" aria-label="児童館：小川町二丁目児童館（おがにん）" data-goatcounter-click="定例マップ｜おがにん"><i aria-hidden="true">🏠</i><b>おがにん</b></a>
+          <a class="cell tt k-sh" href="#gakuennishi" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" data-dates="2026-12-07 2026-12-14" data-time="10:00〜18:00" data-name="学園西町" aria-label="出張こども広場：出張こども広場（学園西町地域センター）" data-goatcounter-click="定例マップ｜学園西町"><i aria-hidden="true">🚶</i><b>学園西町</b></a>
+          <a class="cell tt k-sh" href="#gakuenhigashi" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[4],&quot;nth&quot;:[[0,2]],&quot;closedNth&quot;:[]}" data-dates="2026-12-03 2026-12-24" data-time="10:00〜18:00" data-name="学園東町" aria-label="出張こども広場：出張こども広場（学園東町地域センター）" data-goatcounter-click="定例マップ｜学園東町"><i aria-hidden="true">🚶</i><b>学園東町</b></a>
+          <a class="cell tt k-sh" href="#suzuki" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[3],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" data-dates="2026-12-02 2026-12-16" data-time="10:00〜18:00" data-name="鈴木" aria-label="出張こども広場：出張こども広場（鈴木地域センター）" data-goatcounter-click="定例マップ｜鈴木"><i aria-hidden="true">🚶</i><b>鈴木</b></a>
+          <a class="cell tt k-ji" href="#hanamin" data-k="jidokan" data-ages="baby elem pre" data-rule="{&quot;dows&quot;:[0,1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]]}" data-dates="2026-12-02 2026-12-03 2026-12-04 2026-12-05 2026-12-06 2026-12-09 2026-12-10 2026-12-12 2026-12-13 2026-12-14 2026-12-16 2026-12-17 2026-12-20 2026-12-21 2026-12-23 2026-12-25" data-time="こども広場 9:00〜14:00" data-name="はなみん" aria-label="児童館：花小金井南児童館（はなみん）" data-goatcounter-click="定例マップ｜はなみん"><i aria-hidden="true">🏠</i><b>はなみん</b></a>
           <span class="cell" aria-hidden="true"></span>
-          <span class="cell st" aria-hidden="true"><span>鷹の台駅</span></span>
-          <a class="cell tt k-lib" href="#tsuda" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-16 2027-01-20 2027-02-17 2027-03-17 2026-12-06 2026-12-16 2027-01-10 2027-01-20 2027-02-07 2027-02-17 2027-03-07 2027-03-17" aria-label="図書館：津田図書館" data-goatcounter-click="定例マップ｜津田"><i aria-hidden="true">📚</i><b>津田</b></a>
-          <span class="cell st" aria-hidden="true"><span>一橋学園駅</span></span>
-          <a class="cell tt k-lib" href="#kihei" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-09 2027-01-13 2027-02-10 2027-03-10 2026-12-24 2027-01-13 2027-01-28 2027-02-10 2027-02-25 2027-03-10 2027-03-25" aria-label="図書館：喜平図書館" data-goatcounter-click="定例マップ｜喜平"><i aria-hidden="true">📚</i><b>喜平</b></a>
+          <span class="cell st" aria-hidden="true"><span>鷹の台<wbr>駅</span></span>
+          <a class="cell tt k-lib" href="#tsuda" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-06 2026-12-16 2027-01-10 2027-01-20 2027-02-07 2027-02-17 2027-03-07 2027-03-17" data-name="津田" aria-label="図書館：津田図書館" data-goatcounter-click="定例マップ｜津田"><i aria-hidden="true">📚</i><b>津田</b></a>
+          <span class="cell st" aria-hidden="true"><span>一橋学園<wbr>駅</span></span>
+          <a class="cell tt k-lib" href="#kihei" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-09 2026-12-24 2027-01-13 2027-01-28 2027-02-10 2027-02-25 2027-03-10 2027-03-25" data-name="喜平" aria-label="図書館：喜平図書館" data-goatcounter-click="定例マップ｜喜平"><i aria-hidden="true">📚</i><b>喜平</b></a>
           <span class="cell" aria-hidden="true"></span>
           <span class="cell" aria-hidden="true"></span>
           <span class="cell" aria-hidden="true"></span>
-          <a class="cell tt k-ko" href="#josuihoncho" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" aria-label="こども広場：上水本町地域センター こども広場" data-goatcounter-click="定例マップ｜上水本町"><i aria-hidden="true">🧸</i><b>上水本町</b></a>
-          <a class="cell tt k-sh" href="#kihei-s" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[4],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" aria-label="出張こども広場：出張こども広場（喜平地域センター）" data-goatcounter-click="定例マップ｜喜平"><i aria-hidden="true">🚶</i><b>喜平</b></a>
-          <a class="cell tt k-sh" href="#miyuki" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[5],&quot;nth&quot;:[[0,3]],&quot;closedNth&quot;:[]}" aria-label="出張こども広場：出張こども広場（御幸地域センター）" data-goatcounter-click="定例マップ｜御幸"><i aria-hidden="true">🚶</i><b>御幸</b></a>
+          <a class="cell tt k-ko" href="#josuihoncho" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]]}" data-time="10:00〜18:00" data-name="上水本町" aria-label="こども広場：上水本町地域センター こども広場" data-goatcounter-click="定例マップ｜上水本町"><i aria-hidden="true">🧸</i><b>上水本町</b></a>
+          <a class="cell tt k-sh" href="#kihei-s" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[4],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" data-dates="2026-12-03 2026-12-24" data-time="10:00〜18:00" data-name="喜平" aria-label="出張こども広場：出張こども広場（喜平地域センター）" data-goatcounter-click="定例マップ｜喜平"><i aria-hidden="true">🚶</i><b>喜平</b></a>
+          <a class="cell tt k-sh" href="#miyuki" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[5],&quot;nth&quot;:[[0,3]],&quot;closedNth&quot;:[]}" data-dates="2026-12-04 2026-12-25" data-time="10:00〜18:00" data-name="御幸" aria-label="出張こども広場：出張こども広場（御幸地域センター）" data-goatcounter-click="定例マップ｜御幸"><i aria-hidden="true">🚶</i><b>御幸</b></a>
           <span class="cell" aria-hidden="true"></span>
         </div>
       </div>
@@ -240,40 +256,36 @@
     <p class="tleg"><span class="lg-today">きょう</span>＝きょう会がある　<span class="lg-off">うすい</span>＝きょうはお休みの日</p>
   </section>
 
-  <div class="agef" role="group" aria-label="年齢でしぼる">
-    <button type="button" data-f="" aria-pressed="true">すべて</button>
-    <button type="button" data-f="baby" aria-pressed="false">👶 0〜3歳</button>
-    <button type="button" data-f="pre" aria-pressed="false">🧒 4〜6歳</button>
-    <button type="button" data-f="elem" aria-pressed="false">🎒 小学生</button>
-  </div>
 
   <section class="soon" aria-labelledby="soon-h">
     <h3 id="soon-h">📅 予約なしで行ける会</h3>
     <ul id="soon">
+        <li class="day tdy" id="today-row" hidden><span class="sd" id="today-d">きょう</span><ul id="today-ul"></ul></li>
         <li class="day" data-d="2026-12-01"><span class="sd">12/1(火)</span><ul><li data-age="baby" data-k="lib"><a href="#chuo"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>中央図書館</b> 絵本のへや<small>11:00〜11:20（受付 10:40〜、1階児童コーナー）</small></span></a></li></ul></li>
-        <li class="day" data-d="2026-12-02"><span class="sd">12/2(水)</span><ul><li data-age="elem" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> ドッジビー 16:00〜</span></a></li><li data-age="elem" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> 自由工作 13:00〜16:20</span></a></li><li data-age="baby" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> いっしょにおはなし（絵本の読み聞かせ）<small>10:45〜11:05</small></span></a></li><li data-age="elem" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> めちゃやるタイム（みんなでドッジボール）<small>低学年 15:30〜16:00／高学年 16:00〜16:30</small></span></a></li></ul></li>
-        <li class="day" data-d="2026-12-03"><span class="sd">12/3(木)</span><ul><li data-age="elem" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> 自由工作 13:00〜16:20</span></a></li><li data-age="baby" data-k="jidokan"><a href="#oganin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町二丁目児童館</b> 思い出ぺったん（手形・足形）13:00〜14:00</span></a></li><li data-age="baby" data-k="lib"><a href="#nakamachi"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>仲町図書館</b> 絵本のへや<small>11:00〜11:20（11時までに直接どうぞ）</small></span></a></li></ul></li>
-        <li class="day" data-d="2026-12-04"><span class="sd">12/4(金)</span><ul><li data-age="elem" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> 自由工作 13:00〜16:20</span></a></li><li data-age="baby" data-k="jidokan"><a href="#oganin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町二丁目児童館</b> パンダ（ねんねの赤ちゃんの寝相アート）10:00〜11:00</span></a></li></ul></li>
+        <li class="day" data-d="2026-12-02"><span class="sd">12/2(水)</span><ul><li data-age="elem" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> ドッジビー 16:00〜</span></a></li><li data-age="elem" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> 自由工作 13:00〜16:20</span></a></li><li data-age="baby" data-k="chiiki"><a href="#nakajuku"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・中宿</b> お誕生会（12月生まれ）11:00〜</span></a></li><li data-age="baby" data-k="chiiki"><a href="#suzuki"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・鈴木</b> お誕生会（12月生まれ）11:00〜</span></a></li><li data-age="baby" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> いっしょにおはなし（絵本の読み聞かせ）<small>10:45〜11:05</small></span></a></li><li data-age="elem" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> めちゃやるタイム（みんなでドッジボール）<small>低学年 15:30〜16:00／高学年 16:00〜16:30</small></span></a></li></ul></li>
+        <li class="day" data-d="2026-12-03"><span class="sd">12/3(木)</span><ul><li data-age="elem" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> 自由工作 13:00〜16:20</span></a></li><li data-age="baby" data-k="chiiki"><a href="#gakuenhigashi"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・学園東町</b> お誕生会（12月生まれ）11:00〜</span></a></li><li data-age="baby" data-k="chiiki"><a href="#kihei-s"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・喜平</b> お誕生会（12月生まれ）11:00〜</span></a></li><li data-age="baby" data-k="chiiki"><a href="#ogawahigashi2"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・小川東第二</b> お誕生会（12月生まれ）11:00〜</span></a></li><li data-age="baby" data-k="jidokan"><a href="#oganin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町二丁目児童館</b> 思い出ぺったん（手形・足形）13:00〜14:00</span></a></li><li data-age="baby" data-k="lib"><a href="#nakamachi"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>仲町図書館</b> 絵本のへや<small>11:00〜11:20（11時までに直接どうぞ）</small></span></a></li></ul></li>
+        <li class="day" data-d="2026-12-04"><span class="sd">12/4(金)</span><ul><li data-age="elem" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> 自由工作 13:00〜16:20</span></a></li><li data-age="baby" data-k="chiiki"><a href="#miyuki"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・御幸</b> お誕生会（12月生まれ）11:00〜</span></a></li><li data-age="baby" data-k="chiiki"><a href="#ogawanishi-s"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・小川西町</b> お誕生会（12月生まれ）11:00〜</span></a></li><li data-age="baby" data-k="jidokan"><a href="#oganin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町二丁目児童館</b> パンダ（ねんねの赤ちゃんの寝相アート）10:00〜11:00</span></a></li></ul></li>
         <li class="day" data-d="2026-12-05"><span class="sd">12/5(土)</span><ul><li data-age="elem" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> 自由工作 13:00〜16:20</span></a></li><li data-age="elem" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> クライミング 15:00〜15:30</span></a></li><li data-age="baby pre" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> パパもいっしょ！（遊具）10:00〜12:00</span></a></li></ul></li>
         <li class="day" data-d="2026-12-06"><span class="sd">12/6(日)</span><ul><li data-age="baby pre" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> プラレールの日 13:00〜14:50</span></a></li><li data-age="baby pre elem" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> プラレールの日 10:30〜12:30</span></a></li><li data-age="baby pre elem" data-k="jidokan"><a href="#oganin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町二丁目児童館</b> アートであそぼう 10:30〜11:30</span></a></li><li data-age="pre elem" data-k="lib"><a href="#tsuda"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>津田図書館</b> おはなし会<small>11:00〜11:30</small></span></a></li></ul></li>
-        <li class="day" data-d="2026-12-07"><span class="sd">12/7(月)</span><ul><li data-age="baby pre" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> すく★ぺた（手形・足形、身長・体重）9:00〜14:00</span></a></li><li data-age="elem" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> 工作教室「フェルトのサンタクロース」15:30〜16:30（当日申込・15名）</span></a></li></ul></li>
+        <li class="day" data-d="2026-12-07"><span class="sd">12/7(月)</span><ul><li data-age="baby" data-k="chiiki"><a href="#gakuennishi"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・学園西町</b> お誕生会（12月生まれ）11:00〜</span></a></li><li data-age="baby" data-k="chiiki"><a href="#misono"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・美園</b> お誕生会（12月生まれ）11:00〜</span></a></li><li data-age="baby pre" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> すく★ぺた（手形・足形、身長・体重）9:00〜14:00</span></a></li><li data-age="elem" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> 工作教室「フェルトのサンタクロース」15:30〜16:30（当日申込・15名）</span></a></li></ul></li>
         <li class="day" data-d="2026-12-08"><span class="sd">12/8(火)</span><ul><li data-age="baby" data-k="chiiki"><a href="#shutchohiroba"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張ひろば</b> 東部市民センター 和室：0歳（ハイハイ前）さんとプレママパパあつまれ</span></a></li><li data-age="baby pre" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> すく★ぺた（手形・足形、身長・体重）9:00〜14:00</span></a></li><li data-age="baby" data-k="jidokan"><a href="#oganin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町二丁目児童館</b> うさぎ（ハイハイまで）<small>10:30〜11:10</small></span></a></li></ul></li>
         <li class="day" data-d="2026-12-09"><span class="sd">12/9(水)</span><ul><li data-age="pre elem" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> おもちつき会（地域交流）<small>14:30〜／15:00〜／15:30〜（各回 先着80名）</small></span></a></li><li data-age="baby" data-k="lib"><a href="#kihei"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>喜平図書館</b> 絵本のへや<small>11:00〜11:20</small></span></a></li><li data-age="elem" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> めちゃやるタイム（みんなでドッジボール）<small>低学年 15:30〜16:00／高学年 16:00〜16:30</small></span></a></li><li data-age="baby pre" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> すく★ぺた（手形・足形、身長・体重）9:00〜14:00</span></a></li><li data-age="baby" data-k="lib"><a href="#oonuma"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>大沼図書館</b> 絵本のへや<small>11:00〜11:20</small></span></a></li></ul></li>
         <li class="day" data-d="2026-12-10"><span class="sd">12/10(木)</span><ul><li data-age="baby" data-k="hiroba"><a href="#ohisama"><i class="sk k-hi" aria-hidden="true">☀️</i><span><b>おひさまひろば</b> 0歳さんあつまれ 10:00〜11:30</span></a></li><li data-age="baby pre" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> トランポリンの日 9:00〜14:50</span></a></li><li data-age="elem" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> スポーツで元気 15:30〜16:30（当日申込）</span></a></li></ul></li>
+        <li class="day" data-d="2026-12-11"><span class="sd">12/11(金)</span><ul><li data-age="baby" data-k="chiiki"><a href="#ogawanishi-s"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・小川西町</b> クリスマスパネルシアター 11:00〜11:30</span></a></li></ul></li>
         <li class="day" data-d="2026-12-12"><span class="sd">12/12(土)</span><ul><li data-age="baby pre" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> すくすくタイム（身長・体重）9:00〜11:00</span></a></li><li data-age="baby" data-k="jidokan"><a href="#oganin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町二丁目児童館</b> スポーツで元気 10:30〜11:15</span></a></li><li data-age="pre elem" data-k="lib"><a href="#chuo"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>中央図書館</b> おはなし会<small>14:00〜14:30</small></span></a></li></ul></li>
         <li class="day" data-d="2026-12-13"><span class="sd">12/13(日)</span><ul><li data-age="baby pre" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> すくすくタイム（身長・体重）9:00〜11:00</span></a></li><li data-age="baby pre elem" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> トランポリンの日 13:30〜14:30</span></a></li><li data-age="pre elem" data-k="lib"><a href="#nakamachi"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>仲町図書館</b> おはなし会<small>11:00〜11:30</small></span></a></li></ul></li>
-        <li class="day" data-d="2026-12-14"><span class="sd">12/14(月)</span><ul><li data-age="baby pre" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> すくすくタイム（身長・体重）9:00〜11:00</span></a></li></ul></li>
+        <li class="day" data-d="2026-12-14"><span class="sd">12/14(月)</span><ul><li data-age="baby pre" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> すくすくタイム（身長・体重）9:00〜11:00</span></a></li><li data-age="baby" data-k="chiiki"><a href="#gakuennishi"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・学園西町</b> あやつり人形劇の公演 11:00〜11:40（先着20組）</span></a></li><li data-age="baby" data-k="chiiki"><a href="#misono"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・美園</b> 赤ちゃんあつまれ（0歳）13:30〜14:00</span></a></li></ul></li>
         <li class="day" data-d="2026-12-15"><span class="sd">12/15(火)</span><ul><li data-age="pre elem" data-k="lib"><a href="#chuo"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>中央図書館</b> おはなし会<small>15:30〜16:00</small></span></a></li></ul></li>
-        <li class="day" data-d="2026-12-16"><span class="sd">12/16(水)</span><ul><li data-age="elem" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> ドッジボール 16:00〜</span></a></li><li data-age="elem" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> めちゃやるタイム（みんなでドッジボール）<small>低学年 15:30〜16:00／高学年 16:00〜16:30</small></span></a></li><li data-age="baby" data-k="lib"><a href="#tsuda"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>津田図書館</b> 絵本のへや<small>11:00〜11:20</small></span></a></li><li data-age="pre elem" data-k="lib"><a href="#tsuda"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>津田図書館</b> おはなし会<small>15:30〜16:00</small></span></a></li></ul></li>
-        <li class="day" data-d="2026-12-17"><span class="sd">12/17(木)</span><ul><li data-age="baby pre" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> プラレールの日 13:00〜14:50</span></a></li><li data-age="baby pre elem" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> おりっこクラブ（折り紙）15:30〜16:30</span></a></li></ul></li>
+        <li class="day" data-d="2026-12-16"><span class="sd">12/16(水)</span><ul><li data-age="elem" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> ドッジボール 16:00〜</span></a></li><li data-age="baby" data-k="chiiki"><a href="#nakajuku"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・中宿</b> KEIちゃんとお歌であそぼう 11:00〜11:30</span></a></li><li data-age="baby" data-k="chiiki"><a href="#suzuki"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・鈴木</b> ミニクリスマス会 11:00〜11:30</span></a></li><li data-age="elem" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> めちゃやるタイム（みんなでドッジボール）<small>低学年 15:30〜16:00／高学年 16:00〜16:30</small></span></a></li><li data-age="baby" data-k="lib"><a href="#tsuda"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>津田図書館</b> 絵本のへや<small>11:00〜11:20</small></span></a></li><li data-age="pre elem" data-k="lib"><a href="#tsuda"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>津田図書館</b> おはなし会<small>15:30〜16:00</small></span></a></li></ul></li>
+        <li class="day" data-d="2026-12-17"><span class="sd">12/17(木)</span><ul><li data-age="baby pre" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> プラレールの日 13:00〜14:50</span></a></li><li data-age="baby" data-k="chiiki"><a href="#ogawahigashi2"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・小川東第二</b> おはなしびっくり箱 11:00〜</span></a></li><li data-age="baby pre elem" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> おりっこクラブ（折り紙）15:30〜16:30</span></a></li></ul></li>
         <li class="day" data-d="2026-12-18"><span class="sd">12/18(金)</span><ul><li data-age="baby" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> いっしょにおはなし（絵本の読み聞かせ）<small>10:45〜11:05</small></span></a></li><li data-age="baby" data-k="jidokan"><a href="#oganin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町二丁目児童館</b> ハーフバースデー 10:30〜10:50</span></a></li></ul></li>
         <li class="day" data-d="2026-12-19"><span class="sd">12/19(土)</span><ul><li data-age="baby pre elem" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> ストリートピアノDAY 14:00〜16:00</span></a></li><li data-age="baby pre elem" data-k="jidokan"><a href="#oganin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町二丁目児童館</b> プラレールの日 乳幼児 10:00〜11:50／園児・小学生 13:00〜14:30</span></a></li></ul></li>
         <li class="day" data-d="2026-12-20"><span class="sd">12/20(日)</span><ul><li data-age="baby pre" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> トランポリンの日 9:00〜14:50</span></a></li><li data-age="baby pre elem" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> ボルダリングの日 13:30〜14:30</span></a></li><li data-age="baby" data-k="jidokan"><a href="#oganin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町二丁目児童館</b> おんがくであそぼ 10:30〜11:10</span></a></li><li data-age="pre elem" data-k="lib"><a href="#nakamachi"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>仲町図書館</b> おはなし会<small>11:00〜11:30</small></span></a></li></ul></li>
         <li class="day" data-d="2026-12-21"><span class="sd">12/21(月)</span><ul><li data-age="baby pre" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> かみしばい 10:30〜</span></a></li><li data-age="elem" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> そとっこタイム 16:00〜（当日申込・きつねっぱら公園）</span></a></li><li data-age="baby" data-k="jidokan"><a href="#oganin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町二丁目児童館</b> お誕生日会 11:00〜</span></a></li></ul></li>
         <li class="day" data-d="2026-12-22"><span class="sd">12/22(火)</span><ul><li data-age="baby" data-k="hiroba"><a href="#ohisama"><i class="sk k-hi" aria-hidden="true">☀️</i><span><b>おひさまひろば</b> 助産師さんの相談会「りぼんの会」10:00〜11:30</span></a></li><li data-age="baby" data-k="jidokan"><a href="#oganin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町二丁目児童館</b> コアラ（歩ける〜）<small>10:30〜11:10</small></span></a></li><li data-age="pre elem" data-k="lib"><a href="#chuo"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>中央図書館</b> おはなし会<small>15:30〜16:00</small></span></a></li></ul></li>
         <li class="day" data-d="2026-12-23"><span class="sd">12/23(水)</span><ul><li data-age="baby" data-k="hiroba"><a href="#ohisama"><i class="sk k-hi" aria-hidden="true">☀️</i><span><b>おひさまひろば</b> のんきみちさんのお話会 10:30〜11:00</span></a></li><li data-age="elem" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> けん玉タイム 15:50〜16:30</span></a></li><li data-age="elem" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> めちゃやるタイム（みんなでドッジボール）<small>低学年 15:30〜16:00／高学年 16:00〜16:30</small></span></a></li><li data-age="baby" data-k="jidokan"><a href="#oganin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町二丁目児童館</b> タッチケア（ハイハイまで）10:00〜10:45</span></a></li><li data-age="baby" data-k="lib"><a href="#kamijuku"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>上宿図書館</b> 絵本のへや<small>11:00〜11:20</small></span></a></li></ul></li>
-        <li class="day" data-d="2026-12-24"><span class="sd">12/24(木)</span><ul><li data-age="pre elem" data-k="lib"><a href="#kihei"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>喜平図書館</b> おはなし会<small>15:30〜16:00</small></span></a></li><li data-age="pre elem" data-k="lib"><a href="#oonuma"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>大沼図書館</b> おはなし会<small>16:00〜16:30</small></span></a></li></ul></li>
-        <li class="day" data-d="2026-12-25"><span class="sd">12/25(金)</span><ul><li data-age="baby" data-k="hiroba"><a href="#ohisama"><i class="sk k-hi" aria-hidden="true">☀️</i><span><b>おひさまひろば</b> 心理士さんとお話をする会「すくすくの会」14:00〜14:30（未就学の子と保護者）</span></a></li><li data-age="baby pre" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> お誕生日会 11:00〜</span></a></li><li data-age="baby" data-k="chiiki"><a href="#shutchohiroba"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張ひろば</b> 鈴木公民館 和室：0歳さんあつまれ</span></a></li><li data-age="baby" data-k="jidokan"><a href="#oganin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町二丁目児童館</b> バイオリン ミニサロン 11:20〜11:50</span></a></li></ul></li>
+        <li class="day" data-d="2026-12-24"><span class="sd">12/24(木)</span><ul><li data-age="pre elem" data-k="lib"><a href="#kihei"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>喜平図書館</b> おはなし会<small>15:30〜16:00</small></span></a></li><li data-age="baby" data-k="chiiki"><a href="#gakuenhigashi"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・学園東町</b> KEIちゃんとお歌であそぼう 11:00〜</span></a></li><li data-age="baby" data-k="chiiki"><a href="#kihei-s"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・喜平</b> バイオリンコンサート 11:00〜</span></a></li><li data-age="pre elem" data-k="lib"><a href="#oonuma"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>大沼図書館</b> おはなし会<small>16:00〜16:30</small></span></a></li></ul></li>
+        <li class="day" data-d="2026-12-25"><span class="sd">12/25(金)</span><ul><li data-age="baby" data-k="hiroba"><a href="#ohisama"><i class="sk k-hi" aria-hidden="true">☀️</i><span><b>おひさまひろば</b> 心理士さんとお話をする会「すくすくの会」14:00〜14:30（未就学の子と保護者）</span></a></li><li data-age="baby pre" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> お誕生日会 11:00〜</span></a></li><li data-age="baby" data-k="chiiki"><a href="#miyuki"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・御幸</b> クリスマスふれあいデー 11:00〜</span></a></li><li data-age="baby" data-k="chiiki"><a href="#shutchohiroba"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張ひろば</b> 鈴木公民館 和室：0歳さんあつまれ</span></a></li><li data-age="baby" data-k="jidokan"><a href="#oganin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町二丁目児童館</b> バイオリン ミニサロン 11:20〜11:50</span></a></li></ul></li>
         <li class="day" data-d="2026-12-26"><span class="sd">12/26(土)</span><ul><li data-age="baby" data-k="hiroba"><a href="#ohisama"><i class="sk k-hi" aria-hidden="true">☀️</i><span><b>おひさまひろば</b> おとうさんタイム 10:30〜11:30</span></a></li><li data-age="baby" data-k="jidokan"><a href="#oganin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町二丁目児童館</b> パパも！（大型遊具）10:00〜11:50</span></a></li></ul></li>
         <li class="day" data-d="2027-01-07"><span class="sd">1/7(木)</span><ul><li data-age="baby" data-k="lib"><a href="#nakamachi"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>仲町図書館</b> 絵本のへや<small>11:00〜11:20（11時までに直接どうぞ）</small></span></a></li></ul></li>
         <li class="day" data-d="2027-01-09"><span class="sd">1/9(土)</span><ul><li data-age="pre elem" data-k="lib"><a href="#chuo"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>中央図書館</b> おはなし会<small>14:00〜14:30</small></span></a></li></ul></li>
@@ -315,10 +327,10 @@
     <p class="empty" id="soon-empty" hidden>この2週間に、この条件の日付つきの会は見つかっていません。地図の四角から、決まった曜日にひらく所をご覧ください。</p>
   </section>
 
-  <section class="otas" aria-labelledby="otas-h">
-    <h2 id="otas-h">📄 おたより</h2>
-    <ul><li><span class="on">はなみん</span><a href="https://kodaji.ashita-ba.co.jp/news/article/933/" target="_blank" rel="noopener" data-goatcounter-click="定例｜花小金井南児童館｜おたより（上）">11月号</a><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83769/083769/att_0000256.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜花小金井南児童館｜来月のおたより（上）" class="nx">12月号<small>来月</small></a></li><li><span class="on">おがにん</span><a href="https://kodaji.ashita-ba.co.jp/news/article/934/" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川町二丁目児童館｜おたより（上）">11月号</a><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83769/083769/att_0000254.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川町二丁目児童館｜来月のおたより（上）" class="nx">12月号<small>来月</small></a></li><li><span class="on">おがいち</span><a href="https://kodaji.ashita-ba.co.jp/news/article/935/" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川町一丁目児童館｜おたより（上）">11月号</a><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83769/083769/att_0000255.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川町一丁目児童館｜来月のおたより（上）" class="nx">12月号<small>来月</small></a></li><li><span class="on">おひさま</span><a href="https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202611.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜子ども家庭支援センター 子育て交流ひろば「おひさま」｜おたより（上）">11月号</a><a href="https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202612.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜子ども家庭支援センター 子育て交流ひろば「おひさま」｜来月のおたより（上）" class="nx">12月号<small>来月</small></a></li></ul>
-  </section>
+  <details class="otas" id="otas">
+    <summary><h2 id="otas-h">📄 各館のおたより<small>11か所・来月号も</small></h2><span class="chev" aria-hidden="true"></span></summary>
+    <ul><li><span class="on"><i aria-hidden="true">🏠</i>はなみん</span><a href="https://kodaji.ashita-ba.co.jp/news/article/933/" target="_blank" rel="noopener" data-goatcounter-click="定例｜花小金井南児童館｜おたより（上）">11月号</a><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83769/083769/att_0000256.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜花小金井南児童館｜来月のおたより（上）" class="nx">12月号<small>来月</small></a></li><li><span class="on"><i aria-hidden="true">🏠</i>おがにん</span><a href="https://kodaji.ashita-ba.co.jp/news/article/934/" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川町二丁目児童館｜おたより（上）">11月号</a><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83769/083769/att_0000254.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川町二丁目児童館｜来月のおたより（上）" class="nx">12月号<small>来月</small></a></li><li><span class="on"><i aria-hidden="true">🏠</i>おがいち</span><a href="https://kodaji.ashita-ba.co.jp/news/article/935/" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川町一丁目児童館｜おたより（上）">11月号</a><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83769/083769/att_0000255.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川町一丁目児童館｜来月のおたより（上）" class="nx">12月号<small>来月</small></a></li><li><span class="on"><i aria-hidden="true">🧸</i>中島</span><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000477.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜中島地域センター こども広場｜おたより（上）">11月号</a><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000484.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜中島地域センター こども広場｜来月のおたより（上）" class="nx">12月号<small>来月</small></a></li><li><span class="on"><i aria-hidden="true">🧸</i>上水本町</span><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000475.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜上水本町地域センター こども広場｜おたより（上）">11月号</a><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000482.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜上水本町地域センター こども広場｜来月のおたより（上）" class="nx">12月号<small>来月</small></a></li><li><span class="on"><i aria-hidden="true">🧸</i>小川東町</span><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000474.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川東町地域センター こども広場｜おたより（上）">11月号</a><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000481.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川東町地域センター こども広場｜来月のおたより（上）" class="nx">12月号<small>来月</small></a></li><li><span class="on"><i aria-hidden="true">🧸</i>天神</span><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000471.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜天神地域センター こども広場｜おたより（上）">11月号</a><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000485.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜天神地域センター こども広場｜来月のおたより（上）" class="nx">12月号<small>来月</small></a></li><li><span class="on"><i aria-hidden="true">🧸</i>大沼</span><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000476.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜大沼地域センター こども広場｜おたより（上）">11月号</a><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000483.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜大沼地域センター こども広場｜来月のおたより（上）" class="nx">12月号<small>来月</small></a></li><li><span class="on"><i aria-hidden="true">🧸</i>さわやか館</span><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000472.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜さわやか館 こども広場｜おたより（上）">11月号</a><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000479.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜さわやか館 こども広場｜来月のおたより（上）" class="nx">12月号<small>来月</small></a></li><li><span class="on"><i aria-hidden="true">☀️</i>おひさま</span><a href="https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202611.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜子ども家庭支援センター 子育て交流ひろば「おひさま」｜おたより（上）">11月号</a><a href="https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202612.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜子ども家庭支援センター 子育て交流ひろば「おひさま」｜来月のおたより（上）" class="nx">12月号<small>来月</small></a></li><li><span class="on"><i aria-hidden="true">🚶</i>出張こども広場</span><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜おたより（上）">11月号</a><a href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜来月のおたより（上）" class="nx">12月号<small>来月</small></a></li></ul>
+  </details>
 
   <div class="secw" data-k="lib"><h2 class="sec" id="sec-lib"><i aria-hidden="true">📚</i>図書館の「絵本のへや」と「おはなし会」</h2>
   <p class="sec-lead">小平市立図書館。0〜3歳は「絵本のへや」、4歳から小学生は「おはなし会」。どちらも無料です。</p>
@@ -826,14 +838,31 @@
       </div>
       </div>
     </details>
-  <details class="pl" id="ogawanishi" data-ages="pre elem" data-k="lib">
-      <summary class="pl-s"><span class="pl-i k-lib" aria-hidden="true">📚</span><span class="pl-n"><b>小川西町図書館</b><small class="pl-next" data-wh="">小川西町</small></span><span class="chev" aria-hidden="true"></span></summary>
+  <details class="pl" id="ogawanishi" data-ages="baby pre elem" data-k="lib">
+      <summary class="pl-s"><span class="pl-i k-lib" aria-hidden="true">📚</span><span class="pl-n"><b>小川西町図書館</b><small class="pl-next" data-wh="毎日 9:00〜22:00（第3木曜は休館）">毎日 9:00〜22:00（第3木曜は休館）</small></span><span class="chev" aria-hidden="true"></span></summary>
       <div class="pl-b">
       <p class="town">小川西町</p>
       
       
       
       <p class="more">2026年11月に、小川駅西口の新しいビルの4・5階へ移りました（児童書は4階。ベビールームあり）。開館 9:00〜22:00、休館は第3木曜と12/28〜1/4。ふだんのおはなし会・絵本のへやの日程は、図書館の案内でご確認ください。</p>
+      <div class="prog" data-age="baby pre elem">
+        <h3>児童書のフロア（4階） <span class="agetag">👶🧒🎒 だれでも</span> <span class="tag ok">予約なし</span></h3>
+        <p class="when">毎日 9:00〜22:00（第3木曜は休館）</p>
+        
+        
+        
+        <div class="kvs">
+          
+          
+          <div class="kv"><span class="k">対象</span><span class="v">だれでも</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>ベビールームがあります</li></ul>
+        
+      </div>
       <div class="prog" data-age="pre elem">
         <h3>スペシャルおはなし会 <span class="agetag">🧒🎒 4歳〜小学生</span> <span class="tag bk">申込み・登録</span></h3>
         
@@ -1148,7 +1177,7 @@
       </div>
     </details>
   <details class="pl" id="ogaichi" data-ages="baby elem pre" data-k="jidokan">
-      <summary class="pl-s"><span class="pl-i k-ji" aria-hidden="true">🏠</span><span class="pl-n"><b>小川町一丁目児童館（おがいち）</b><small class="pl-next" data-wh="9:00〜14:00">9:00〜14:00</small></span><span class="chev" aria-hidden="true"></span></summary>
+      <summary class="pl-s"><span class="pl-i k-ji" aria-hidden="true">🏠</span><span class="pl-n"><b>小川町一丁目児童館（おがいち）</b><small class="pl-next" data-wh="毎日 9:00〜14:00">毎日 9:00〜14:00</small></span><span class="chev" aria-hidden="true"></span></summary>
       <div class="pl-b">
       <p class="town">小川町</p>
       <p class="intro">開館 月〜土 9:00〜19:00、日・祝 9:00〜18:00（乳幼児・小学生は18時まで）。休館は第1・3火曜（祝日のときは翌日以降の平日）と年末年始（12/28〜1/4）。無料。</p>
@@ -1157,7 +1186,7 @@
       
       <div class="prog" data-age="baby">
         <h3>こども広場（子育て親子の交流の場） <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
-        <p class="when">9:00〜14:00</p>
+        <p class="when">毎日 9:00〜14:00</p>
         
         
         
@@ -1325,35 +1354,35 @@
   <div class="secw" data-k="kodomo"><h2 class="sec" id="sec-kodomo"><i aria-hidden="true">🧸</i>こども広場（地域センター）</h2>
   <p class="sec-lead">乳幼児と保護者・小中学生の、無料のひろば。予約なしで入れます。</p>
   <details class="pl" id="nakajima" data-ages="baby pre elem" data-k="kodomo">
-      <summary class="pl-s"><span class="pl-i k-ko" aria-hidden="true">🧸</span><span class="pl-n"><b>中島地域センター こども広場</b><small class="pl-next" data-wh="月〜土曜 10:00〜18:00">月〜土曜 10:00〜18:00</small></span><span class="chev" aria-hidden="true"></span></summary>
+      <summary class="pl-s"><span class="pl-i k-ko" aria-hidden="true">🧸</span><span class="pl-n"><b>中島地域センター こども広場</b><small class="pl-next" data-wh="月〜土曜 10:00〜18:00（第1・3火曜は休み）">月〜土曜 10:00〜18:00（第1・3火曜は休み）</small></span><span class="chev" aria-hidden="true"></span></summary>
       <div class="pl-b">
       <p class="town">中島町</p>
       <p class="intro">乳幼児と保護者・小中学生向けの、無料のひろば。子育ての相談ができる「子育てコンシェルジュ」がいます。</p>
-      
-      
+      <a class="ota" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000477.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜中島地域センター こども広場｜おたより">📄 中島地域センター ひろばだより 11月号<span>月ごとの催しは、ここに出ます</span></a>
+      <a class="ota nx" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000484.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜中島地域センター こども広場｜来月のおたより">📄 中島地域センター ひろばだより 12月号<span>来月号も出ています</span></a>
       
       <div class="prog" data-age="baby pre elem">
         <h3>こども広場 <span class="agetag">👶🧒🎒 だれでも</span> <span class="tag ok">予約なし</span></h3>
-        <p class="when">月〜土曜 10:00〜18:00</p>
+        <p class="when">月〜土曜 10:00〜18:00（第1・3火曜は休み）</p>
         
         
         
         <div class="kvs">
           
           
-          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者・小中学生</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児（保護者と）・小学生・中学生</span></div>
           
           <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
           <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
         </div>
-        <ul class="notes"><li>祝日・年末年始は、施設の案内でご確認ください</li></ul>
+        <ul class="notes"><li>休みは第1・3火曜（祝日のときは翌平日）・日曜・年末年始（12/29〜1/3）</li></ul>
         
       </div>
-      
+      <p class="fn">月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。</p>
       <div class="pl-f">
-        <span class="chk">2026年11月28日に、公式で確かめました</span>
+        <span class="chk">2026年11月29日に、公式で確かめました</span>
         <span class="acts">
-          
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜中島地域センター こども広場｜これまでのおたより">これまでのおたより</a>
           <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜中島地域センター こども広場｜公式">公式</a>
           <a class="lk" href="/map.html#s-e4b8ade5b3b6e59cb0e59f9fe382bbe383b3e382bfe383bc20e38193e381a9e38282e5ba83e5a0b4" data-goatcounter-click="定例｜中島地域センター こども広場｜マップ">おでかけマップ</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E4%B8%AD%E5%B3%B6%E5%9C%B0%E5%9F%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜中島地域センター こども広場｜地図">Googleマップ</a>
@@ -1363,35 +1392,35 @@
       </div>
     </details>
   <details class="pl" id="josuihoncho" data-ages="baby pre elem" data-k="kodomo">
-      <summary class="pl-s"><span class="pl-i k-ko" aria-hidden="true">🧸</span><span class="pl-n"><b>上水本町地域センター こども広場</b><small class="pl-next" data-wh="月〜土曜 10:00〜18:00">月〜土曜 10:00〜18:00</small></span><span class="chev" aria-hidden="true"></span></summary>
+      <summary class="pl-s"><span class="pl-i k-ko" aria-hidden="true">🧸</span><span class="pl-n"><b>上水本町地域センター こども広場</b><small class="pl-next" data-wh="月〜土曜 10:00〜18:00（第1・3火曜は休み）">月〜土曜 10:00〜18:00（第1・3火曜は休み）</small></span><span class="chev" aria-hidden="true"></span></summary>
       <div class="pl-b">
       <p class="town">上水本町</p>
       <p class="intro">乳幼児と保護者・小中学生向けの、無料のひろば。子育ての相談ができる「子育てコンシェルジュ」がいます。</p>
-      
-      
+      <a class="ota" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000475.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜上水本町地域センター こども広場｜おたより">📄 上水本町地域センター ひろばだより 11月号<span>月ごとの催しは、ここに出ます</span></a>
+      <a class="ota nx" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000482.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜上水本町地域センター こども広場｜来月のおたより">📄 上水本町地域センター ひろばだより 12月号<span>来月号も出ています</span></a>
       
       <div class="prog" data-age="baby pre elem">
         <h3>こども広場 <span class="agetag">👶🧒🎒 だれでも</span> <span class="tag ok">予約なし</span></h3>
-        <p class="when">月〜土曜 10:00〜18:00</p>
+        <p class="when">月〜土曜 10:00〜18:00（第1・3火曜は休み）</p>
         
         
         
         <div class="kvs">
           
           
-          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者・小中学生</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児（保護者と）・小学生・中学生</span></div>
           
           <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
           <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
         </div>
-        <ul class="notes"><li>祝日・年末年始は、施設の案内でご確認ください</li></ul>
+        <ul class="notes"><li>休みは第1・3火曜（祝日のときは翌平日）・日曜・年末年始（12/29〜1/3）</li></ul>
         
       </div>
-      
+      <p class="fn">月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。</p>
       <div class="pl-f">
-        <span class="chk">2026年11月28日に、公式で確かめました</span>
+        <span class="chk">2026年11月29日に、公式で確かめました</span>
         <span class="acts">
-          
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜上水本町地域センター こども広場｜これまでのおたより">これまでのおたより</a>
           <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜上水本町地域センター こども広場｜公式">公式</a>
           <a class="lk" href="/map.html#s-e4b88ae6b0b4e69cace794bae59cb0e59f9fe382bbe383b3e382bfe383bc20e38193e381a9e38282e5ba83e5a0b4" data-goatcounter-click="定例｜上水本町地域センター こども広場｜マップ">おでかけマップ</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E4%B8%8A%E6%B0%B4%E6%9C%AC%E7%94%BA%E5%9C%B0%E5%9F%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜上水本町地域センター こども広場｜地図">Googleマップ</a>
@@ -1401,35 +1430,35 @@
       </div>
     </details>
   <details class="pl" id="ogawahigashi" data-ages="baby pre elem" data-k="kodomo">
-      <summary class="pl-s"><span class="pl-i k-ko" aria-hidden="true">🧸</span><span class="pl-n"><b>小川東町地域センター こども広場</b><small class="pl-next" data-wh="月〜土曜 10:00〜18:00">月〜土曜 10:00〜18:00</small></span><span class="chev" aria-hidden="true"></span></summary>
+      <summary class="pl-s"><span class="pl-i k-ko" aria-hidden="true">🧸</span><span class="pl-n"><b>小川東町地域センター こども広場</b><small class="pl-next" data-wh="月〜土曜 10:00〜18:00（第1・3火曜は休み）">月〜土曜 10:00〜18:00（第1・3火曜は休み）</small></span><span class="chev" aria-hidden="true"></span></summary>
       <div class="pl-b">
       <p class="town">小川東町</p>
       <p class="intro">乳幼児と保護者・小中学生向けの、無料のひろば。子育ての相談ができる「子育てコンシェルジュ」がいます。</p>
-      
-      
+      <a class="ota" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000474.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川東町地域センター こども広場｜おたより">📄 小川東町地域センター ひろばだより 11月号<span>月ごとの催しは、ここに出ます</span></a>
+      <a class="ota nx" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000481.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川東町地域センター こども広場｜来月のおたより">📄 小川東町地域センター ひろばだより 12月号<span>来月号も出ています</span></a>
       
       <div class="prog" data-age="baby pre elem">
         <h3>こども広場 <span class="agetag">👶🧒🎒 だれでも</span> <span class="tag ok">予約なし</span></h3>
-        <p class="when">月〜土曜 10:00〜18:00</p>
+        <p class="when">月〜土曜 10:00〜18:00（第1・3火曜は休み）</p>
         
         
         
         <div class="kvs">
           
           
-          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者・小中学生</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児（保護者と）・小学生・中学生</span></div>
           
           <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
           <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
         </div>
-        <ul class="notes"><li>祝日・年末年始は、施設の案内でご確認ください</li></ul>
+        <ul class="notes"><li>休みは第1・3火曜（祝日のときは翌平日）・日曜・年末年始（12/29〜1/3）</li></ul>
         
       </div>
-      
+      <p class="fn">月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。</p>
       <div class="pl-f">
-        <span class="chk">2026年11月28日に、公式で確かめました</span>
+        <span class="chk">2026年11月29日に、公式で確かめました</span>
         <span class="acts">
-          
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川東町地域センター こども広場｜これまでのおたより">これまでのおたより</a>
           <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川東町地域センター こども広場｜公式">公式</a>
           <a class="lk" href="/map.html#s-e5b08fe5b79de69db1e794bae59cb0e59f9fe382bbe383b3e382bfe383bc20e38193e381a9e38282e5ba83e5a0b4" data-goatcounter-click="定例｜小川東町地域センター こども広場｜マップ">おでかけマップ</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%B0%8F%E5%B7%9D%E6%9D%B1%E7%94%BA%E5%9C%B0%E5%9F%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜小川東町地域センター こども広場｜地図">Googleマップ</a>
@@ -1439,35 +1468,35 @@
       </div>
     </details>
   <details class="pl" id="tenjin" data-ages="baby pre elem" data-k="kodomo">
-      <summary class="pl-s"><span class="pl-i k-ko" aria-hidden="true">🧸</span><span class="pl-n"><b>天神地域センター こども広場</b><small class="pl-next" data-wh="月〜土曜 10:00〜18:00">月〜土曜 10:00〜18:00</small></span><span class="chev" aria-hidden="true"></span></summary>
+      <summary class="pl-s"><span class="pl-i k-ko" aria-hidden="true">🧸</span><span class="pl-n"><b>天神地域センター こども広場</b><small class="pl-next" data-wh="月〜土曜 10:00〜18:00（第1・3火曜は休み）">月〜土曜 10:00〜18:00（第1・3火曜は休み）</small></span><span class="chev" aria-hidden="true"></span></summary>
       <div class="pl-b">
       <p class="town">天神町</p>
       <p class="intro">乳幼児と保護者・小中学生向けの、無料のひろば。子育ての相談ができる「子育てコンシェルジュ」がいます。</p>
-      
-      
+      <a class="ota" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000471.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜天神地域センター こども広場｜おたより">📄 天神地域センター ひろばだより 11月号<span>月ごとの催しは、ここに出ます</span></a>
+      <a class="ota nx" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000485.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜天神地域センター こども広場｜来月のおたより">📄 天神地域センター ひろばだより 12月号<span>来月号も出ています</span></a>
       
       <div class="prog" data-age="baby pre elem">
         <h3>こども広場 <span class="agetag">👶🧒🎒 だれでも</span> <span class="tag ok">予約なし</span></h3>
-        <p class="when">月〜土曜 10:00〜18:00</p>
+        <p class="when">月〜土曜 10:00〜18:00（第1・3火曜は休み）</p>
         
         
         
         <div class="kvs">
           
           
-          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者・小中学生</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児（保護者と）・小学生・中学生</span></div>
           
           <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
           <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
         </div>
-        <ul class="notes"><li>祝日・年末年始は、施設の案内でご確認ください</li></ul>
+        <ul class="notes"><li>休みは第1・3火曜（祝日のときは翌平日）・日曜・年末年始（12/29〜1/3）</li></ul>
         
       </div>
-      
+      <p class="fn">月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。</p>
       <div class="pl-f">
-        <span class="chk">2026年11月28日に、公式で確かめました</span>
+        <span class="chk">2026年11月29日に、公式で確かめました</span>
         <span class="acts">
-          
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜天神地域センター こども広場｜これまでのおたより">これまでのおたより</a>
           <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜天神地域センター こども広場｜公式">公式</a>
           <a class="lk" href="/map.html#s-e5a4a9e7a59ee59cb0e59f9fe382bbe383b3e382bfe383bc20e38193e381a9e38282e5ba83e5a0b4" data-goatcounter-click="定例｜天神地域センター こども広場｜マップ">おでかけマップ</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%A4%A9%E7%A5%9E%E5%9C%B0%E5%9F%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜天神地域センター こども広場｜地図">Googleマップ</a>
@@ -1477,35 +1506,35 @@
       </div>
     </details>
   <details class="pl" id="oonuma-k" data-ages="baby pre elem" data-k="kodomo">
-      <summary class="pl-s"><span class="pl-i k-ko" aria-hidden="true">🧸</span><span class="pl-n"><b>大沼地域センター こども広場</b><small class="pl-next" data-wh="月〜土曜 10:00〜18:00">月〜土曜 10:00〜18:00</small></span><span class="chev" aria-hidden="true"></span></summary>
+      <summary class="pl-s"><span class="pl-i k-ko" aria-hidden="true">🧸</span><span class="pl-n"><b>大沼地域センター こども広場</b><small class="pl-next" data-wh="月〜土曜 10:00〜18:00（第1・3火曜は休み）">月〜土曜 10:00〜18:00（第1・3火曜は休み）</small></span><span class="chev" aria-hidden="true"></span></summary>
       <div class="pl-b">
       <p class="town">大沼町</p>
       <p class="intro">乳幼児と保護者・小中学生向けの、無料のひろば。子育ての相談ができる「子育てコンシェルジュ」がいます。</p>
-      
-      
+      <a class="ota" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000476.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜大沼地域センター こども広場｜おたより">📄 大沼地域センター ひろばだより 11月号<span>月ごとの催しは、ここに出ます</span></a>
+      <a class="ota nx" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000483.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜大沼地域センター こども広場｜来月のおたより">📄 大沼地域センター ひろばだより 12月号<span>来月号も出ています</span></a>
       
       <div class="prog" data-age="baby pre elem">
         <h3>こども広場 <span class="agetag">👶🧒🎒 だれでも</span> <span class="tag ok">予約なし</span></h3>
-        <p class="when">月〜土曜 10:00〜18:00</p>
+        <p class="when">月〜土曜 10:00〜18:00（第1・3火曜は休み）</p>
         
         
         
         <div class="kvs">
           
           
-          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者・小中学生</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児（保護者と）・小学生・中学生</span></div>
           
           <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
           <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
         </div>
-        <ul class="notes"><li>祝日・年末年始は、施設の案内でご確認ください</li></ul>
+        <ul class="notes"><li>休みは第1・3火曜（祝日のときは翌平日）・日曜・年末年始（12/29〜1/3）</li></ul>
         
       </div>
-      
+      <p class="fn">月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。</p>
       <div class="pl-f">
-        <span class="chk">2026年11月28日に、公式で確かめました</span>
+        <span class="chk">2026年11月29日に、公式で確かめました</span>
         <span class="acts">
-          
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜大沼地域センター こども広場｜これまでのおたより">これまでのおたより</a>
           <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜大沼地域センター こども広場｜公式">公式</a>
           <a class="lk" href="/map.html#s-e5a4a7e6b2bce59cb0e59f9fe382bbe383b3e382bfe383bc20e38193e381a9e38282e5ba83e5a0b4" data-goatcounter-click="定例｜大沼地域センター こども広場｜マップ">おでかけマップ</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%A4%A7%E6%B2%BC%E5%9C%B0%E5%9F%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜大沼地域センター こども広場｜地図">Googleマップ</a>
@@ -1519,8 +1548,8 @@
       <div class="pl-b">
       <p class="town">花小金井</p>
       <p class="intro">乳幼児と保護者・小中学生向けの、無料のひろば。子育ての相談ができる「子育てコンシェルジュ」がいます。</p>
-      
-      
+      <a class="ota" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000472.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜さわやか館 こども広場｜おたより">📄 さわやか館 ひろばだより 11月号<span>月ごとの催しは、ここに出ます</span></a>
+      <a class="ota nx" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000479.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜さわやか館 こども広場｜来月のおたより">📄 さわやか館 ひろばだより 12月号<span>来月号も出ています</span></a>
       
       <div class="prog" data-age="baby pre elem">
         <h3>こども広場 <span class="agetag">👶🧒🎒 だれでも</span> <span class="tag ok">予約なし</span></h3>
@@ -1531,19 +1560,19 @@
         <div class="kvs">
           
           
-          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者・小中学生</span></div>
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児（保護者と）・小学生・中学生</span></div>
           
           <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
           <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
         </div>
-        <ul class="notes"><li>祝日・年末年始は、施設の案内でご確認ください</li></ul>
+        <ul class="notes"><li>休みは日曜・祝日・年末年始（12/28〜1/4）</li></ul>
         
       </div>
-      
+      <p class="fn">月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。</p>
       <div class="pl-f">
-        <span class="chk">2026年11月28日に、公式で確かめました</span>
+        <span class="chk">2026年11月29日に、公式で確かめました</span>
         <span class="acts">
-          
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜さわやか館 こども広場｜これまでのおたより">これまでのおたより</a>
           <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜さわやか館 こども広場｜公式">公式</a>
           <a class="lk" href="/map.html#s-e38195e3828fe38284e3818be9a4a820e38193e381a9e38282e5ba83e5a0b4" data-goatcounter-click="定例｜さわやか館 こども広場｜マップ">おでかけマップ</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E3%81%95%E3%82%8F%E3%82%84%E3%81%8B%E9%A4%A8" target="_blank" rel="noopener" data-goatcounter-click="定例｜さわやか館 こども広場｜地図">Googleマップ</a>
@@ -1618,8 +1647,8 @@
       <div class="pl-b">
       <p class="town">御幸町</p>
       
-      
-      
+      <a class="ota" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜おたより">📄 出張ひろばだより 11月号<span>月ごとの催しは、ここに出ます</span></a>
+      <a class="ota nx" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜来月のおたより">📄 出張ひろばだより 12月号<span>来月号も出ています</span></a>
       
       <div class="prog" data-age="baby pre elem">
         <h3>出張こども広場（花小金井南児童館の出張） <span class="agetag">👶🧒🎒 だれでも</span> <span class="tag ok">予約なし</span></h3>
@@ -1638,12 +1667,29 @@
         <ul class="notes"><li>くわしくは花小金井南児童館へ</li></ul>
         
       </div>
-      
+      <div class="prog" data-age="baby">
+        <h3>12月の会（申込みなし） <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates long"><li data-d="2026-12-04"><b>12/4(金)</b><span>お誕生会（12月生まれ）11:00〜</span></li><li data-d="2026-12-25"><b>12/25(金)</b><span>クリスマスふれあいデー 11:00〜</span></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          
+          
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>お誕生会は、お誕生日カードの準備のため15分前に</li></ul>
+        
+      </div>
+      <p class="fn">お誕生会や講座などは「出張ひろばだより」に出ます。</p>
       <div class="pl-f">
         <span class="chk">2026年11月29日に、公式で確かめました</span>
         <span class="acts">
-          
-          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜これまでのおたより">これまでのおたより</a>
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
           <a class="lk" href="/map.html#s-e5bea1e5b9b8e59cb0e59f9fe382bbe383b3e382bfe383bc20e587bae5bcb5e38193e381a9e38282e5ba83e5a0b4" data-goatcounter-click="定例｜出張こども広場｜マップ">おでかけマップ</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%BE%A1%E5%B9%B8%E5%9C%B0%E5%9F%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜地図">Googleマップ</a>
           <a class="lk up" href="#tmap-h">↑ 地図へ</a>
@@ -1656,8 +1702,8 @@
       <div class="pl-b">
       <p class="town">学園東町</p>
       
-      
-      
+      <a class="ota" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜おたより">📄 出張ひろばだより 11月号<span>月ごとの催しは、ここに出ます</span></a>
+      <a class="ota nx" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜来月のおたより">📄 出張ひろばだより 12月号<span>来月号も出ています</span></a>
       
       <div class="prog" data-age="baby pre elem">
         <h3>出張こども広場（小川町二丁目児童館の出張） <span class="agetag">👶🧒🎒 だれでも</span> <span class="tag ok">予約なし</span></h3>
@@ -1676,12 +1722,29 @@
         <ul class="notes"><li>催しは「出張こども広場だより」で</li></ul>
         
       </div>
-      
+      <div class="prog" data-age="baby">
+        <h3>12月の会（申込みなし） <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates long"><li data-d="2026-12-03"><b>12/3(木)</b><span>お誕生会（12月生まれ）11:00〜</span></li><li data-d="2026-12-24"><b>12/24(木)</b><span>KEIちゃんとお歌であそぼう 11:00〜</span></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          
+          
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>お誕生会は、お誕生日カードの準備のため15分前に</li></ul>
+        
+      </div>
+      <p class="fn">お誕生会や講座などは「出張ひろばだより」に出ます。</p>
       <div class="pl-f">
         <span class="chk">2026年11月29日に、公式で確かめました</span>
         <span class="acts">
-          
-          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜これまでのおたより">これまでのおたより</a>
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
           <a class="lk" href="/map.html#s-e5ada6e59c92e69db1e794bae59cb0e59f9fe382bbe383b3e382bfe383bc20e587bae5bcb5e38193e381a9e38282e5ba83e5a0b4" data-goatcounter-click="定例｜出張こども広場｜マップ">おでかけマップ</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%AD%A6%E5%9C%92%E6%9D%B1%E7%94%BA%E5%9C%B0%E5%9F%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜地図">Googleマップ</a>
           <a class="lk up" href="#tmap-h">↑ 地図へ</a>
@@ -1694,8 +1757,8 @@
       <div class="pl-b">
       <p class="town">小川西町</p>
       
-      
-      
+      <a class="ota" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜おたより">📄 出張ひろばだより 11月号<span>月ごとの催しは、ここに出ます</span></a>
+      <a class="ota nx" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜来月のおたより">📄 出張ひろばだより 12月号<span>来月号も出ています</span></a>
       
       <div class="prog" data-age="baby pre elem">
         <h3>出張こども広場（小川町一丁目児童館の出張） <span class="agetag">👶🧒🎒 だれでも</span> <span class="tag ok">予約なし</span></h3>
@@ -1714,12 +1777,29 @@
         <ul class="notes"><li>催しは「出張ひろばだより」で</li></ul>
         
       </div>
-      
+      <div class="prog" data-age="baby">
+        <h3>12月の会（申込みなし） <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates long"><li data-d="2026-12-02"><b>12/2(水)</b><span>お誕生会（12月生まれ）11:00〜</span></li><li data-d="2026-12-16"><b>12/16(水)</b><span>KEIちゃんとお歌であそぼう 11:00〜11:30</span></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
+          
+          
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>お誕生会は、お誕生日カードの準備のため15分前に</li></ul>
+        
+      </div>
+      <p class="fn">お誕生会や講座などは「出張ひろばだより」に出ます。</p>
       <div class="pl-f">
         <span class="chk">2026年11月29日に、公式で確かめました</span>
         <span class="acts">
-          
-          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜これまでのおたより">これまでのおたより</a>
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
           <a class="lk" href="/map.html#s-e5b08fe5b79de8a5bfe794bae4b8ade5aebfe59cb0e59f9fe382bbe383b3e382bfe383bc20e587bae5bcb5e38193e381a9e38282e5ba83e5a0b4" data-goatcounter-click="定例｜出張こども広場｜マップ">おでかけマップ</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%B0%8F%E5%B7%9D%E8%A5%BF%E7%94%BA%E4%B8%AD%E5%AE%BF%E5%9C%B0%E5%9F%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜地図">Googleマップ</a>
           <a class="lk up" href="#tmap-h">↑ 地図へ</a>
@@ -1770,8 +1850,8 @@
       <div class="pl-b">
       <p class="town">美園町</p>
       
-      
-      
+      <a class="ota" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜おたより">📄 出張ひろばだより 11月号<span>月ごとの催しは、ここに出ます</span></a>
+      <a class="ota nx" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜来月のおたより">📄 出張ひろばだより 12月号<span>来月号も出ています</span></a>
       
       <div class="prog" data-age="baby pre elem">
         <h3>出張こども広場 <span class="agetag">👶🧒🎒 だれでも</span> <span class="tag ok">予約なし</span></h3>
@@ -1790,12 +1870,29 @@
         <ul class="notes"><li>決まった曜日だけ開きます。祝日などは施設の案内でご確認ください</li></ul>
         
       </div>
-      
-      <div class="pl-f">
-        <span class="chk">2026年11月28日に、公式で確かめました</span>
-        <span class="acts">
+      <div class="prog" data-age="baby">
+        <h3>12月の会（申込みなし） <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates long"><li data-d="2026-12-07"><b>12/7(月)</b><span>お誕生会（12月生まれ）11:00〜</span></li><li data-d="2026-12-14"><b>12/14(月)</b><span>赤ちゃんあつまれ（0歳）13:30〜14:00</span></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
           
-          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
+          
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>お誕生会は、お誕生日カードの準備のため15分前に</li></ul>
+        
+      </div>
+      <p class="fn">お誕生会や講座などは「出張ひろばだより」に出ます。</p>
+      <div class="pl-f">
+        <span class="chk">2026年11月29日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜これまでのおたより">これまでのおたより</a>
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
           <a class="lk" href="/map.html#s-e7be8ee59c92e59cb0e59f9fe382bbe383b3e382bfe383bc20e587bae5bcb5e38193e381a9e38282e5ba83e5a0b4" data-goatcounter-click="定例｜出張こども広場｜マップ">おでかけマップ</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E7%BE%8E%E5%9C%92%E5%9C%B0%E5%9F%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜地図">Googleマップ</a>
           <a class="lk up" href="#tmap-h">↑ 地図へ</a>
@@ -1808,8 +1905,8 @@
       <div class="pl-b">
       <p class="town">学園西町</p>
       
-      
-      
+      <a class="ota" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜おたより">📄 出張ひろばだより 11月号<span>月ごとの催しは、ここに出ます</span></a>
+      <a class="ota nx" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜来月のおたより">📄 出張ひろばだより 12月号<span>来月号も出ています</span></a>
       
       <div class="prog" data-age="baby pre elem">
         <h3>出張こども広場 <span class="agetag">👶🧒🎒 だれでも</span> <span class="tag ok">予約なし</span></h3>
@@ -1828,12 +1925,29 @@
         <ul class="notes"><li>決まった曜日だけ開きます。祝日などは施設の案内でご確認ください</li></ul>
         
       </div>
-      
-      <div class="pl-f">
-        <span class="chk">2026年11月28日に、公式で確かめました</span>
-        <span class="acts">
+      <div class="prog" data-age="baby">
+        <h3>12月の会（申込みなし） <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates long"><li data-d="2026-12-07"><b>12/7(月)</b><span>お誕生会（12月生まれ）11:00〜</span></li><li data-d="2026-12-14"><b>12/14(月)</b><span>あやつり人形劇の公演 11:00〜11:40（先着20組）</span></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
           
-          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
+          
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>お誕生会は、お誕生日カードの準備のため15分前に</li></ul>
+        
+      </div>
+      <p class="fn">お誕生会や講座などは「出張ひろばだより」に出ます。</p>
+      <div class="pl-f">
+        <span class="chk">2026年11月29日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜これまでのおたより">これまでのおたより</a>
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
           <a class="lk" href="/map.html#s-e5ada6e59c92e8a5bfe794bae59cb0e59f9fe382bbe383b3e382bfe383bc20e587bae5bcb5e38193e381a9e38282e5ba83e5a0b4" data-goatcounter-click="定例｜出張こども広場｜マップ">おでかけマップ</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%AD%A6%E5%9C%92%E8%A5%BF%E7%94%BA%E5%9C%B0%E5%9F%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜地図">Googleマップ</a>
           <a class="lk up" href="#tmap-h">↑ 地図へ</a>
@@ -1846,8 +1960,8 @@
       <div class="pl-b">
       <p class="town">鈴木町</p>
       
-      
-      
+      <a class="ota" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜おたより">📄 出張ひろばだより 11月号<span>月ごとの催しは、ここに出ます</span></a>
+      <a class="ota nx" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜来月のおたより">📄 出張ひろばだより 12月号<span>来月号も出ています</span></a>
       
       <div class="prog" data-age="baby pre elem">
         <h3>出張こども広場 <span class="agetag">👶🧒🎒 だれでも</span> <span class="tag ok">予約なし</span></h3>
@@ -1866,12 +1980,29 @@
         <ul class="notes"><li>決まった曜日だけ開きます。祝日などは施設の案内でご確認ください</li></ul>
         
       </div>
-      
-      <div class="pl-f">
-        <span class="chk">2026年11月28日に、公式で確かめました</span>
-        <span class="acts">
+      <div class="prog" data-age="baby">
+        <h3>12月の会（申込みなし） <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates long"><li data-d="2026-12-02"><b>12/2(水)</b><span>お誕生会（12月生まれ）11:00〜</span></li><li data-d="2026-12-16"><b>12/16(水)</b><span>ミニクリスマス会 11:00〜11:30</span></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
           
-          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
+          
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>お誕生会は、お誕生日カードの準備のため15分前に</li></ul>
+        
+      </div>
+      <p class="fn">お誕生会や講座などは「出張ひろばだより」に出ます。</p>
+      <div class="pl-f">
+        <span class="chk">2026年11月29日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜これまでのおたより">これまでのおたより</a>
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
           <a class="lk" href="/map.html#s-e988b4e69ca8e59cb0e59f9fe382bbe383b3e382bfe383bc20e587bae5bcb5e38193e381a9e38282e5ba83e5a0b4" data-goatcounter-click="定例｜出張こども広場｜マップ">おでかけマップ</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E9%88%B4%E6%9C%A8%E5%9C%B0%E5%9F%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜地図">Googleマップ</a>
           <a class="lk up" href="#tmap-h">↑ 地図へ</a>
@@ -1884,8 +2015,8 @@
       <div class="pl-b">
       <p class="town">小川東町</p>
       
-      
-      
+      <a class="ota" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜おたより">📄 出張ひろばだより 11月号<span>月ごとの催しは、ここに出ます</span></a>
+      <a class="ota nx" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜来月のおたより">📄 出張ひろばだより 12月号<span>来月号も出ています</span></a>
       
       <div class="prog" data-age="baby pre elem">
         <h3>出張こども広場 <span class="agetag">👶🧒🎒 だれでも</span> <span class="tag ok">予約なし</span></h3>
@@ -1904,12 +2035,29 @@
         <ul class="notes"><li>決まった曜日だけ開きます。祝日などは施設の案内でご確認ください</li></ul>
         
       </div>
-      
-      <div class="pl-f">
-        <span class="chk">2026年11月28日に、公式で確かめました</span>
-        <span class="acts">
+      <div class="prog" data-age="baby">
+        <h3>12月の会（申込みなし） <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates long"><li data-d="2026-12-03"><b>12/3(木)</b><span>お誕生会（12月生まれ）11:00〜</span></li><li data-d="2026-12-17"><b>12/17(木)</b><span>おはなしびっくり箱 11:00〜</span></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
           
-          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
+          
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>お誕生会は、お誕生日カードの準備のため15分前に</li></ul>
+        
+      </div>
+      <p class="fn">お誕生会や講座などは「出張ひろばだより」に出ます。</p>
+      <div class="pl-f">
+        <span class="chk">2026年11月29日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜これまでのおたより">これまでのおたより</a>
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
           <a class="lk" href="/map.html#s-e5b08fe5b79de69db1e7acace4ba8ce59cb0e59f9fe382bbe383b3e382bfe383bc20e587bae5bcb5e38193e381a9e38282e5ba83e5a0b4" data-goatcounter-click="定例｜出張こども広場｜マップ">おでかけマップ</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%B0%8F%E5%B7%9D%E6%9D%B1%E7%AC%AC%E4%BA%8C%E5%9C%B0%E5%9F%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜地図">Googleマップ</a>
           <a class="lk up" href="#tmap-h">↑ 地図へ</a>
@@ -1922,8 +2070,8 @@
       <div class="pl-b">
       <p class="town">喜平町</p>
       
-      
-      
+      <a class="ota" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜おたより">📄 出張ひろばだより 11月号<span>月ごとの催しは、ここに出ます</span></a>
+      <a class="ota nx" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜来月のおたより">📄 出張ひろばだより 12月号<span>来月号も出ています</span></a>
       
       <div class="prog" data-age="baby pre elem">
         <h3>出張こども広場 <span class="agetag">👶🧒🎒 だれでも</span> <span class="tag ok">予約なし</span></h3>
@@ -1942,12 +2090,29 @@
         <ul class="notes"><li>決まった曜日だけ開きます。祝日などは施設の案内でご確認ください</li></ul>
         
       </div>
-      
-      <div class="pl-f">
-        <span class="chk">2026年11月28日に、公式で確かめました</span>
-        <span class="acts">
+      <div class="prog" data-age="baby">
+        <h3>12月の会（申込みなし） <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates long"><li data-d="2026-12-03"><b>12/3(木)</b><span>お誕生会（12月生まれ）11:00〜</span></li><li data-d="2026-12-24"><b>12/24(木)</b><span>バイオリンコンサート 11:00〜</span></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
           
-          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
+          
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>お誕生会は、お誕生日カードの準備のため15分前に</li></ul>
+        
+      </div>
+      <p class="fn">お誕生会や講座などは「出張ひろばだより」に出ます。</p>
+      <div class="pl-f">
+        <span class="chk">2026年11月29日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜これまでのおたより">これまでのおたより</a>
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
           <a class="lk" href="/map.html#s-e5969ce5b9b3e59cb0e59f9fe382bbe383b3e382bfe383bc20e587bae5bcb5e38193e381a9e38282e5ba83e5a0b4" data-goatcounter-click="定例｜出張こども広場｜マップ">おでかけマップ</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%96%9C%E5%B9%B3%E5%9C%B0%E5%9F%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜地図">Googleマップ</a>
           <a class="lk up" href="#tmap-h">↑ 地図へ</a>
@@ -1960,8 +2125,8 @@
       <div class="pl-b">
       <p class="town">小川西町</p>
       
-      
-      
+      <a class="ota" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜おたより">📄 出張ひろばだより 11月号<span>月ごとの催しは、ここに出ます</span></a>
+      <a class="ota nx" href="https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜来月のおたより">📄 出張ひろばだより 12月号<span>来月号も出ています</span></a>
       
       <div class="prog" data-age="baby pre elem">
         <h3>出張こども広場 <span class="agetag">👶🧒🎒 だれでも</span> <span class="tag ok">予約なし</span></h3>
@@ -1980,12 +2145,29 @@
         <ul class="notes"><li>決まった曜日だけ開きます。祝日などは施設の案内でご確認ください</li></ul>
         
       </div>
-      
-      <div class="pl-f">
-        <span class="chk">2026年11月28日に、公式で確かめました</span>
-        <span class="acts">
+      <div class="prog" data-age="baby">
+        <h3>12月の会（申込みなし） <span class="agetag">👶 0〜3歳</span> <span class="tag ok">予約なし</span></h3>
+        
+        <ul class="dates long"><li data-d="2026-12-04"><b>12/4(金)</b><span>お誕生会（12月生まれ）11:00〜</span></li><li data-d="2026-12-11"><b>12/11(金)</b><span>クリスマスパネルシアター 11:00〜11:30</span></li></ul>
+        
+        <p class="more done" hidden>ここに出ている日は終わりました。次の日程は公式で。</p>
+        <div class="kvs">
           
-          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
+          
+          <div class="kv"><span class="k">対象</span><span class="v">乳幼児と保護者</span></div>
+          
+          <div class="kv"><span class="k">費用</span><span class="v">無料</span></div>
+          <div class="kv"><span class="k">予約</span><span class="v">予約なし</span></div>
+        </div>
+        <ul class="notes"><li>お誕生会は、お誕生日カードの準備のため15分前に</li></ul>
+        
+      </div>
+      <p class="fn">お誕生会や講座などは「出張ひろばだより」に出ます。</p>
+      <div class="pl-f">
+        <span class="chk">2026年11月29日に、公式で確かめました</span>
+        <span class="acts">
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜これまでのおたより">これまでのおたより</a>
+          <a class="lk" href="https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜公式">公式</a>
           <a class="lk" href="/map.html#s-e5b08fe5b79de8a5bfe794bae59cb0e59f9fe382bbe383b3e382bfe383bc20e587bae5bcb5e38193e381a9e38282e5ba83e5a0b4" data-goatcounter-click="定例｜出張こども広場｜マップ">おでかけマップ</a>
           <a class="lk" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E5%B9%B3%E5%B8%82%E5%B0%8F%E5%B7%9D%E8%A5%BF%E7%94%BA%E5%9C%B0%E5%9F%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" data-goatcounter-click="定例｜出張こども広場｜地図">Googleマップ</a>
           <a class="lk up" href="#tmap-h">↑ 地図へ</a>
@@ -2068,16 +2250,45 @@
       } catch (e) { /* なし */ }
     }
   });
-  // たたんだ欄の1行目: 次の会（予約なしで行ける日）。無ければ決まった曜日
+  // きょう開いている所（種類ごとに1行。会のある日付つきの行は、この下に続く）
   var WDJ = ['日', '月', '火', '水', '木', '金', '土'];
+  var KN = { lib: ['📚', '図書館', 'k-lib'], jidokan: ['🏠', '児童館', 'k-ji'], kodomo: ['🧸', 'こども広場', 'k-ko'], chiiki: ['🚶', '出張こども広場', 'k-sh'], hiroba: ['☀️', '子育てひろば', 'k-hi'] };
+  var openNow = {};
+  (function () {
+    var by = {};
+    document.querySelectorAll('.tt[data-rule]').forEach(function (a) {
+      if (a.classList.contains('off')) return;
+      openNow[a.getAttribute('href').slice(1)] = a.getAttribute('data-time') || '';
+      var k = a.getAttribute('data-k'); (by[k] = by[k] || []).push(a);
+    });
+    var ul = document.getElementById('today-ul'), html = '';
+    ['jidokan', 'kodomo', 'chiiki', 'hiroba', 'lib'].forEach(function (k) {
+      var xs = by[k]; if (!xs || !xs.length) return;
+      var times = xs.map(function (a) { return a.getAttribute('data-time') || ''; }), cnt = {};
+      times.forEach(function (x) { if (x) cnt[x] = (cnt[x] || 0) + 1; });
+      var top = Object.keys(cnt).sort(function (a, b) { return cnt[b] - cnt[a]; })[0] || '';
+      var same = top && times.every(function (x) { return x; }) ? top + xs.filter(function (a, i) { return times[i] !== top; }).map(function (a, i, arr) { return (i ? '' : '（') + a.getAttribute('data-name') + 'は ' + a.getAttribute('data-time') + (i === arr.length - 1 ? '）' : '、'); }).join('') : '';
+      html += '<li data-age="' + (k === 'lib' || k === 'kodomo' || k === 'chiiki' ? 'baby pre elem' : (k === 'jidokan' ? 'baby pre elem' : 'baby')) + '" data-k="' + k + '"><a href="' + xs[0].getAttribute('href') + '"><i class="sk ' + KN[k][2] + '" aria-hidden="true">' + KN[k][0] + '</i><span><b>' + KN[k][1] + '</b> ' +
+        xs.map(function (a) { return a.getAttribute('data-name'); }).join('・') + '<small>ひらいています' + (same ? '　' + same : '（時間は四角を押して）') + '</small></span></a></li>';
+    });
+    if (html) {
+      ul.innerHTML = html;
+      document.getElementById('today-d').textContent = 'きょう ' + (+t.slice(5, 7)) + '/' + (+t.slice(8)) + '(' + WDJ[dw] + ')';
+      document.getElementById('today-row').setAttribute('data-d', t);
+    }
+  })();
+  // たたんだ欄の1行目: きょう開いていれば、きょうの時間。続けて次の会（予約なしで行ける日）
   document.querySelectorAll('details.pl').forEach(function (d) {
     var li = [].slice.call(d.querySelectorAll('.prog .dates li[data-d]')).filter(function (x) { return x.getAttribute('data-d') >= t && !x.closest('.prog').querySelector('.tag.bk'); })
       .sort(function (a, b) { return a.getAttribute('data-d').localeCompare(b.getAttribute('data-d')); })[0];
-    var sm = d.querySelector('.pl-next'); if (!sm || !li) return;
+    var sm = d.querySelector('.pl-next'); if (!sm) return;
+    var on = Object.prototype.hasOwnProperty.call(openNow, d.id), ot = on ? openNow[d.id] : '';
+    if (!li) { if (on) { sm.textContent = 'きょう ひらいています' + (ot ? ' ' + ot : ''); sm.classList.add('td'); } return; }
     var iso = li.getAttribute('data-d'), dd = new Date(iso + 'T00:00:00Z');
     var what = (li.querySelector('span') || {}).textContent || li.closest('.prog').querySelector('h3').firstChild.textContent;
-    sm.textContent = (iso === t ? 'きょう ' : '次は ') + (+iso.slice(5, 7)) + '/' + (+iso.slice(8)) + '(' + WDJ[dd.getUTCDay()] + ') ' + what.trim().replace(/s*[（(].*$/, '').slice(0, 24);
-    if (iso === t) sm.classList.add('td');
+    var nx = (+iso.slice(5, 7)) + '/' + (+iso.slice(8)) + '(' + WDJ[dd.getUTCDay()] + ') ' + what.trim().replace(/s*[（(].*$/, '').slice(0, 24);
+    sm.textContent = iso === t ? 'きょう ' + nx.replace(/^S+ /, '') : (on ? 'きょう ひらいています' + (ot ? ' ' + ot : '') + '・次は ' + nx : '次は ' + nx);
+    if (iso === t || on) sm.classList.add('td');
   });
   // 地図のマスを押したら、その欄を開く
   function openHash() {

@@ -627,6 +627,20 @@
      "note": "2026年11月に、小川駅西口の新しいビルの4・5階へ移りました（児童書は4階。ベビールームあり）。開館 9:00〜22:00、休館は第3木曜と12/28〜1/4。ふだんのおはなし会・絵本のへやの日程は、図書館の案内でご確認ください。",
      "programs": [
       {
+       "title": "児童書のフロア（4階）",
+       "age": "all",
+       "open": true,
+       "when": "毎日 9:00〜22:00（第3木曜は休館）",
+       "dates": [],
+       "who": "だれでも",
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "ベビールームがあります"
+       ],
+       "src": "https://library.kodaira.ed.jp/viewer/info.html?id=35"
+      },
+      {
        "title": "スペシャルおはなし会",
        "age": "kids",
        "open": false,
@@ -899,7 +913,17 @@
       "label": "はなみんだより 12月号",
       "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83769/083769/att_0000256.pdf",
       "month": "2026-12"
-     }
+     },
+     "closedNth": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       3
+      ]
+     ]
     },
     {
      "key": "oganin",
@@ -1084,7 +1108,17 @@
       "label": "おがにんだより 12月号",
       "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83769/083769/att_0000254.pdf",
       "month": "2026-12"
-     }
+     },
+     "closedNth": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       3
+      ]
+     ]
     },
     {
      "key": "ogaichi",
@@ -1099,7 +1133,7 @@
        "title": "こども広場（子育て親子の交流の場）",
        "age": "baby",
        "open": true,
-       "when": "9:00〜14:00",
+       "when": "毎日 9:00〜14:00",
        "dates": [],
        "who": "乳幼児と保護者",
        "cost": "無料",
@@ -1107,7 +1141,8 @@
        "notes": [
         "平日の10:30から、手遊びや体操（アンパンマン体操）",
         "子育ての相談（ひろば相談）も"
-       ]
+       ],
+       "daily": true
       },
       {
        "title": "いっしょにおはなし（絵本の読み聞かせ）",
@@ -1315,7 +1350,17 @@
       "label": "おがいちだより 12月号",
       "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83769/083769/att_0000255.pdf",
       "month": "2026-12"
-     }
+     },
+     "closedNth": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       3
+      ]
+     ]
     }
    ]
   },
@@ -1330,7 +1375,7 @@
      "town": "中島町",
      "mapq": "小平市中島地域センター",
      "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
-     "checked": "2026-11-28",
+     "checked": "2026-11-29",
      "tile": "中島",
      "spots": [
       "中島地域センター こども広場"
@@ -1341,16 +1386,38 @@
        "title": "こども広場",
        "age": "all",
        "open": true,
-       "when": "月〜土曜 10:00〜18:00",
+       "when": "月〜土曜 10:00〜18:00（第1・3火曜は休み）",
        "dates": [],
-       "who": "乳幼児と保護者・小中学生",
+       "who": "乳幼児（保護者と）・小学生・中学生",
        "cost": "無料",
        "book": "予約なし",
        "notes": [
-        "祝日・年末年始は、施設の案内でご確認ください"
+        "休みは第1・3火曜（祝日のときは翌平日）・日曜・年末年始（12/29〜1/3）"
        ]
       }
-     ]
+     ],
+     "otayori": {
+      "label": "中島地域センター ひろばだより 11月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000477.pdf",
+      "month": "2026-11"
+     },
+     "otayoriNext": {
+      "label": "中島地域センター ひろばだより 12月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000484.pdf",
+      "month": "2026-12"
+     },
+     "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "closedNth": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       3
+      ]
+     ],
+     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。"
     },
     {
      "key": "josuihoncho",
@@ -1358,7 +1425,7 @@
      "town": "上水本町",
      "mapq": "小平市上水本町地域センター",
      "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
-     "checked": "2026-11-28",
+     "checked": "2026-11-29",
      "tile": "上水本町",
      "spots": [
       "上水本町地域センター こども広場"
@@ -1369,16 +1436,38 @@
        "title": "こども広場",
        "age": "all",
        "open": true,
-       "when": "月〜土曜 10:00〜18:00",
+       "when": "月〜土曜 10:00〜18:00（第1・3火曜は休み）",
        "dates": [],
-       "who": "乳幼児と保護者・小中学生",
+       "who": "乳幼児（保護者と）・小学生・中学生",
        "cost": "無料",
        "book": "予約なし",
        "notes": [
-        "祝日・年末年始は、施設の案内でご確認ください"
+        "休みは第1・3火曜（祝日のときは翌平日）・日曜・年末年始（12/29〜1/3）"
        ]
       }
-     ]
+     ],
+     "otayori": {
+      "label": "上水本町地域センター ひろばだより 11月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000475.pdf",
+      "month": "2026-11"
+     },
+     "otayoriNext": {
+      "label": "上水本町地域センター ひろばだより 12月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000482.pdf",
+      "month": "2026-12"
+     },
+     "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "closedNth": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       3
+      ]
+     ],
+     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。"
     },
     {
      "key": "ogawahigashi",
@@ -1386,7 +1475,7 @@
      "town": "小川東町",
      "mapq": "小平市小川東町地域センター",
      "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
-     "checked": "2026-11-28",
+     "checked": "2026-11-29",
      "tile": "小川東町",
      "spots": [
       "小川東町地域センター こども広場"
@@ -1397,16 +1486,38 @@
        "title": "こども広場",
        "age": "all",
        "open": true,
-       "when": "月〜土曜 10:00〜18:00",
+       "when": "月〜土曜 10:00〜18:00（第1・3火曜は休み）",
        "dates": [],
-       "who": "乳幼児と保護者・小中学生",
+       "who": "乳幼児（保護者と）・小学生・中学生",
        "cost": "無料",
        "book": "予約なし",
        "notes": [
-        "祝日・年末年始は、施設の案内でご確認ください"
+        "休みは第1・3火曜（祝日のときは翌平日）・日曜・年末年始（12/29〜1/3）"
        ]
       }
-     ]
+     ],
+     "otayori": {
+      "label": "小川東町地域センター ひろばだより 11月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000474.pdf",
+      "month": "2026-11"
+     },
+     "otayoriNext": {
+      "label": "小川東町地域センター ひろばだより 12月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000481.pdf",
+      "month": "2026-12"
+     },
+     "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "closedNth": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       3
+      ]
+     ],
+     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。"
     },
     {
      "key": "tenjin",
@@ -1414,7 +1525,7 @@
      "town": "天神町",
      "mapq": "小平市天神地域センター",
      "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
-     "checked": "2026-11-28",
+     "checked": "2026-11-29",
      "tile": "天神",
      "spots": [
       "天神地域センター こども広場"
@@ -1425,16 +1536,38 @@
        "title": "こども広場",
        "age": "all",
        "open": true,
-       "when": "月〜土曜 10:00〜18:00",
+       "when": "月〜土曜 10:00〜18:00（第1・3火曜は休み）",
        "dates": [],
-       "who": "乳幼児と保護者・小中学生",
+       "who": "乳幼児（保護者と）・小学生・中学生",
        "cost": "無料",
        "book": "予約なし",
        "notes": [
-        "祝日・年末年始は、施設の案内でご確認ください"
+        "休みは第1・3火曜（祝日のときは翌平日）・日曜・年末年始（12/29〜1/3）"
        ]
       }
-     ]
+     ],
+     "otayori": {
+      "label": "天神地域センター ひろばだより 11月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000471.pdf",
+      "month": "2026-11"
+     },
+     "otayoriNext": {
+      "label": "天神地域センター ひろばだより 12月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000485.pdf",
+      "month": "2026-12"
+     },
+     "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "closedNth": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       3
+      ]
+     ],
+     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。"
     },
     {
      "key": "oonuma-k",
@@ -1442,7 +1575,7 @@
      "town": "大沼町",
      "mapq": "小平市大沼地域センター",
      "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
-     "checked": "2026-11-28",
+     "checked": "2026-11-29",
      "tile": "大沼",
      "spots": [
       "大沼地域センター こども広場"
@@ -1453,16 +1586,38 @@
        "title": "こども広場",
        "age": "all",
        "open": true,
-       "when": "月〜土曜 10:00〜18:00",
+       "when": "月〜土曜 10:00〜18:00（第1・3火曜は休み）",
        "dates": [],
-       "who": "乳幼児と保護者・小中学生",
+       "who": "乳幼児（保護者と）・小学生・中学生",
        "cost": "無料",
        "book": "予約なし",
        "notes": [
-        "祝日・年末年始は、施設の案内でご確認ください"
+        "休みは第1・3火曜（祝日のときは翌平日）・日曜・年末年始（12/29〜1/3）"
        ]
       }
-     ]
+     ],
+     "otayori": {
+      "label": "大沼地域センター ひろばだより 11月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000476.pdf",
+      "month": "2026-11"
+     },
+     "otayoriNext": {
+      "label": "大沼地域センター ひろばだより 12月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000483.pdf",
+      "month": "2026-12"
+     },
+     "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "closedNth": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       3
+      ]
+     ],
+     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。"
     },
     {
      "key": "sawayaka",
@@ -1470,7 +1625,7 @@
      "town": "花小金井",
      "mapq": "小平市さわやか館",
      "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
-     "checked": "2026-11-28",
+     "checked": "2026-11-29",
      "tile": "さわやか館",
      "spots": [
       "さわやか館 こども広場"
@@ -1483,14 +1638,26 @@
        "open": true,
        "when": "月〜土曜 10:00〜17:00",
        "dates": [],
-       "who": "乳幼児と保護者・小中学生",
+       "who": "乳幼児（保護者と）・小学生・中学生",
        "cost": "無料",
        "book": "予約なし",
        "notes": [
-        "祝日・年末年始は、施設の案内でご確認ください"
+        "休みは日曜・祝日・年末年始（12/28〜1/4）"
        ]
       }
-     ]
+     ],
+     "otayori": {
+      "label": "さわやか館 ひろばだより 11月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000472.pdf",
+      "month": "2026-11"
+     },
+     "otayoriNext": {
+      "label": "さわやか館 ひろばだより 12月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000479.pdf",
+      "month": "2026-12"
+     },
+     "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。"
     }
    ]
   },
@@ -1598,7 +1765,7 @@
      "name": "出張こども広場（御幸地域センター）",
      "town": "御幸町",
      "mapq": "小平市御幸地域センター",
-     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
      "checked": "2026-11-29",
      "programs": [
       {
@@ -1613,19 +1780,55 @@
        "notes": [
         "くわしくは花小金井南児童館へ"
        ]
+      },
+      {
+       "title": "12月の会（申込みなし）",
+       "age": [
+        "baby"
+       ],
+       "open": true,
+       "dates": [
+        {
+         "d": "2026-12-04",
+         "t": "お誕生会（12月生まれ）11:00〜"
+        },
+        {
+         "d": "2026-12-25",
+         "t": "クリスマスふれあいデー 11:00〜"
+        }
+       ],
+       "who": "乳幼児と保護者",
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "お誕生会は、お誕生日カードの準備のため15分前に"
+       ]
       }
      ],
      "tile": "御幸",
      "spots": [
       "御幸地域センター 出張こども広場"
-     ]
+     ],
+     "otayori": {
+      "label": "出張ひろばだより 11月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf",
+      "month": "2026-11"
+     },
+     "otayoriNext": {
+      "label": "出張ひろばだより 12月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf",
+      "month": "2026-12"
+     },
+     "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "otaName": "出張こども広場",
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
     },
     {
      "key": "gakuenhigashi",
      "name": "出張こども広場（学園東町地域センター）",
      "town": "学園東町",
      "mapq": "小平市学園東町地域センター",
-     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
      "checked": "2026-11-29",
      "programs": [
       {
@@ -1640,19 +1843,55 @@
        "notes": [
         "催しは「出張こども広場だより」で"
        ]
+      },
+      {
+       "title": "12月の会（申込みなし）",
+       "age": [
+        "baby"
+       ],
+       "open": true,
+       "dates": [
+        {
+         "d": "2026-12-03",
+         "t": "お誕生会（12月生まれ）11:00〜"
+        },
+        {
+         "d": "2026-12-24",
+         "t": "KEIちゃんとお歌であそぼう 11:00〜"
+        }
+       ],
+       "who": "乳幼児と保護者",
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "お誕生会は、お誕生日カードの準備のため15分前に"
+       ]
       }
      ],
      "tile": "学園東町",
      "spots": [
       "学園東町地域センター 出張こども広場"
-     ]
+     ],
+     "otayori": {
+      "label": "出張ひろばだより 11月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf",
+      "month": "2026-11"
+     },
+     "otayoriNext": {
+      "label": "出張ひろばだより 12月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf",
+      "month": "2026-12"
+     },
+     "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "otaName": "出張こども広場",
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
     },
     {
      "key": "nakajuku",
      "name": "出張こども広場（小川西町中宿地域センター）",
      "town": "小川西町",
      "mapq": "小平市小川西町中宿地域センター",
-     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
      "checked": "2026-11-29",
      "programs": [
       {
@@ -1667,12 +1906,48 @@
        "notes": [
         "催しは「出張ひろばだより」で"
        ]
+      },
+      {
+       "title": "12月の会（申込みなし）",
+       "age": [
+        "baby"
+       ],
+       "open": true,
+       "dates": [
+        {
+         "d": "2026-12-02",
+         "t": "お誕生会（12月生まれ）11:00〜"
+        },
+        {
+         "d": "2026-12-16",
+         "t": "KEIちゃんとお歌であそぼう 11:00〜11:30"
+        }
+       ],
+       "who": "乳幼児と保護者",
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "お誕生会は、お誕生日カードの準備のため15分前に"
+       ]
       }
      ],
      "tile": "中宿",
      "spots": [
       "小川西町中宿地域センター 出張こども広場"
-     ]
+     ],
+     "otayori": {
+      "label": "出張ひろばだより 11月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf",
+      "month": "2026-11"
+     },
+     "otayoriNext": {
+      "label": "出張ひろばだより 12月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf",
+      "month": "2026-12"
+     },
+     "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "otaName": "出張こども広場",
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
     },
     {
      "key": "shutchohiroba",
@@ -1723,8 +1998,8 @@
      "name": "出張こども広場（美園地域センター）",
      "town": "美園町",
      "mapq": "小平市美園地域センター",
-     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
-     "checked": "2026-11-28",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "checked": "2026-11-29",
      "tile": "美園",
      "spots": [
       "美園地域センター 出張こども広場"
@@ -1742,16 +2017,52 @@
        "notes": [
         "決まった曜日だけ開きます。祝日などは施設の案内でご確認ください"
        ]
+      },
+      {
+       "title": "12月の会（申込みなし）",
+       "age": [
+        "baby"
+       ],
+       "open": true,
+       "dates": [
+        {
+         "d": "2026-12-07",
+         "t": "お誕生会（12月生まれ）11:00〜"
+        },
+        {
+         "d": "2026-12-14",
+         "t": "赤ちゃんあつまれ（0歳）13:30〜14:00"
+        }
+       ],
+       "who": "乳幼児と保護者",
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "お誕生会は、お誕生日カードの準備のため15分前に"
+       ]
       }
-     ]
+     ],
+     "otayori": {
+      "label": "出張ひろばだより 11月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf",
+      "month": "2026-11"
+     },
+     "otayoriNext": {
+      "label": "出張ひろばだより 12月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf",
+      "month": "2026-12"
+     },
+     "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "otaName": "出張こども広場",
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
     },
     {
      "key": "gakuennishi",
      "name": "出張こども広場（学園西町地域センター）",
      "town": "学園西町",
      "mapq": "小平市学園西町地域センター",
-     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
-     "checked": "2026-11-28",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "checked": "2026-11-29",
      "tile": "学園西町",
      "spots": [
       "学園西町地域センター 出張こども広場"
@@ -1769,16 +2080,52 @@
        "notes": [
         "決まった曜日だけ開きます。祝日などは施設の案内でご確認ください"
        ]
+      },
+      {
+       "title": "12月の会（申込みなし）",
+       "age": [
+        "baby"
+       ],
+       "open": true,
+       "dates": [
+        {
+         "d": "2026-12-07",
+         "t": "お誕生会（12月生まれ）11:00〜"
+        },
+        {
+         "d": "2026-12-14",
+         "t": "あやつり人形劇の公演 11:00〜11:40（先着20組）"
+        }
+       ],
+       "who": "乳幼児と保護者",
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "お誕生会は、お誕生日カードの準備のため15分前に"
+       ]
       }
-     ]
+     ],
+     "otayori": {
+      "label": "出張ひろばだより 11月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf",
+      "month": "2026-11"
+     },
+     "otayoriNext": {
+      "label": "出張ひろばだより 12月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf",
+      "month": "2026-12"
+     },
+     "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "otaName": "出張こども広場",
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
     },
     {
      "key": "suzuki",
      "name": "出張こども広場（鈴木地域センター）",
      "town": "鈴木町",
      "mapq": "小平市鈴木地域センター",
-     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
-     "checked": "2026-11-28",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "checked": "2026-11-29",
      "tile": "鈴木",
      "spots": [
       "鈴木地域センター 出張こども広場"
@@ -1796,16 +2143,52 @@
        "notes": [
         "決まった曜日だけ開きます。祝日などは施設の案内でご確認ください"
        ]
+      },
+      {
+       "title": "12月の会（申込みなし）",
+       "age": [
+        "baby"
+       ],
+       "open": true,
+       "dates": [
+        {
+         "d": "2026-12-02",
+         "t": "お誕生会（12月生まれ）11:00〜"
+        },
+        {
+         "d": "2026-12-16",
+         "t": "ミニクリスマス会 11:00〜11:30"
+        }
+       ],
+       "who": "乳幼児と保護者",
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "お誕生会は、お誕生日カードの準備のため15分前に"
+       ]
       }
-     ]
+     ],
+     "otayori": {
+      "label": "出張ひろばだより 11月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf",
+      "month": "2026-11"
+     },
+     "otayoriNext": {
+      "label": "出張ひろばだより 12月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf",
+      "month": "2026-12"
+     },
+     "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "otaName": "出張こども広場",
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
     },
     {
      "key": "ogawahigashi2",
      "name": "出張こども広場（小川東第二地域センター）",
      "town": "小川東町",
      "mapq": "小平市小川東第二地域センター",
-     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
-     "checked": "2026-11-28",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "checked": "2026-11-29",
      "tile": "小川東第二",
      "spots": [
       "小川東第二地域センター 出張こども広場"
@@ -1823,16 +2206,52 @@
        "notes": [
         "決まった曜日だけ開きます。祝日などは施設の案内でご確認ください"
        ]
+      },
+      {
+       "title": "12月の会（申込みなし）",
+       "age": [
+        "baby"
+       ],
+       "open": true,
+       "dates": [
+        {
+         "d": "2026-12-03",
+         "t": "お誕生会（12月生まれ）11:00〜"
+        },
+        {
+         "d": "2026-12-17",
+         "t": "おはなしびっくり箱 11:00〜"
+        }
+       ],
+       "who": "乳幼児と保護者",
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "お誕生会は、お誕生日カードの準備のため15分前に"
+       ]
       }
-     ]
+     ],
+     "otayori": {
+      "label": "出張ひろばだより 11月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf",
+      "month": "2026-11"
+     },
+     "otayoriNext": {
+      "label": "出張ひろばだより 12月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf",
+      "month": "2026-12"
+     },
+     "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "otaName": "出張こども広場",
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
     },
     {
      "key": "kihei-s",
      "name": "出張こども広場（喜平地域センター）",
      "town": "喜平町",
      "mapq": "小平市喜平地域センター",
-     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
-     "checked": "2026-11-28",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "checked": "2026-11-29",
      "tile": "喜平",
      "spots": [
       "喜平地域センター 出張こども広場"
@@ -1850,16 +2269,52 @@
        "notes": [
         "決まった曜日だけ開きます。祝日などは施設の案内でご確認ください"
        ]
+      },
+      {
+       "title": "12月の会（申込みなし）",
+       "age": [
+        "baby"
+       ],
+       "open": true,
+       "dates": [
+        {
+         "d": "2026-12-03",
+         "t": "お誕生会（12月生まれ）11:00〜"
+        },
+        {
+         "d": "2026-12-24",
+         "t": "バイオリンコンサート 11:00〜"
+        }
+       ],
+       "who": "乳幼児と保護者",
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "お誕生会は、お誕生日カードの準備のため15分前に"
+       ]
       }
-     ]
+     ],
+     "otayori": {
+      "label": "出張ひろばだより 11月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf",
+      "month": "2026-11"
+     },
+     "otayoriNext": {
+      "label": "出張ひろばだより 12月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf",
+      "month": "2026-12"
+     },
+     "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "otaName": "出張こども広場",
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
     },
     {
      "key": "ogawanishi-s",
      "name": "出張こども広場（小川西町地域センター）",
      "town": "小川西町",
      "mapq": "小平市小川西町地域センター",
-     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
-     "checked": "2026-11-28",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "checked": "2026-11-29",
      "tile": "小川西町",
      "spots": [
       "小川西町地域センター 出張こども広場"
@@ -1877,8 +2332,44 @@
        "notes": [
         "決まった曜日だけ開きます。祝日などは施設の案内でご確認ください"
        ]
+      },
+      {
+       "title": "12月の会（申込みなし）",
+       "age": [
+        "baby"
+       ],
+       "open": true,
+       "dates": [
+        {
+         "d": "2026-12-04",
+         "t": "お誕生会（12月生まれ）11:00〜"
+        },
+        {
+         "d": "2026-12-11",
+         "t": "クリスマスパネルシアター 11:00〜11:30"
+        }
+       ],
+       "who": "乳幼児と保護者",
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "お誕生会は、お誕生日カードの準備のため15分前に"
+       ]
       }
-     ]
+     ],
+     "otayori": {
+      "label": "出張ひろばだより 11月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000473.pdf",
+      "month": "2026-11"
+     },
+     "otayoriNext": {
+      "label": "出張ひろばだより 12月号",
+      "url": "https://www.city.kodaira.tokyo.jp/kurashi/files/83904/083904/att_0000480.pdf",
+      "month": "2026-12"
+     },
+     "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "otaName": "出張こども広場",
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
     }
    ]
   }
