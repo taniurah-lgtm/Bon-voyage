@@ -33,7 +33,7 @@
     return 2 * 6371 * Math.asin(Math.sqrt(x));
   }
   function fmtKm(d) { return d < 1 ? Math.round(d * 10) * 100 + 'm' : (Math.round(d * 10) / 10) + 'km'; }
-  function md(iso) { var p = iso.split('-'), d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); return (+p[1]) + '/' + (+p[2]) + '(' + WD[d.getUTCDay()] + ')'; }
+  function md(iso) { if (!iso) return ''; var p = iso.split('-'), d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); return (+p[1]) + '/' + (+p[2]) + '(' + WD[d.getUTCDay()] + ')'; }
   function dayDiff(a, b) { return Math.round((Date.parse(b + 'T00:00:00Z') - Date.parse(a + 'T00:00:00Z')) / 864e5); }
 
   function mount(opts) {
@@ -43,7 +43,7 @@
     var hm = global.OM_TIME || now.toISOString().slice(11, 16), mmdd = today.slice(5);
     var yesterday = new Date(now.getTime() - 864e5).toISOString().slice(0, 10), holY = HOL.indexOf(yesterday) >= 0;
     var tomorrow = new Date(now.getTime() + 864e5).toISOString().slice(0, 10);
-    var weekEnd = new Date(now.getTime() + ((6 - dow + 7) % 7 + (dow === 0 ? 0 : 1)) * 864e5).toISOString().slice(0, 10);   // この週末（日曜）まで
+    var weekEnd = new Date(now.getTime() + ((7 - dow) % 7) * 864e5).toISOString().slice(0, 10);   // この週末（日曜）まで。日曜はきょうまで
     (opts.groups || []).forEach(function (g) { G[g.key] = g; });
     // 終わった催しは、ページを組み直す前でも出さない
     var items = (opts.items || []).filter(function (it) { return it.k !== 'event' || (it.last || '9999') >= today; });
@@ -51,13 +51,14 @@
       if (it.k === 'event') {
         // 期間のある催し（ライトアップなど）は、始まっていれば「開催中」
         if (it.span && it.span.from <= today) { it.next = ''; it.until = it.span.to; }
-        else it.next = (it.dates || []).filter(function (d) { return d >= today; })[0] || (it.span && it.span.from) || '';
+        else { it.next = (it.dates || []).filter(function (d) { return d >= today; })[0] || (it.span && it.span.from) || ''; if (!it.next) it.gone = true; }   // 載せた日付が過ぎたもの（組み直す前）は出さない
         it.soon = !!it.next && it.next <= tomorrow;   // きょう・あした（期間中の催しは「開催中」と出す）
       } else if (it.next) it.next = it.next.filter(function (x) { return x.d >= today; });
       it.today = todayState(it);
       it.isNew = !!it.added && dayDiff(it.added, today) <= NEW_DAYS && dayDiff(it.added, today) >= 0;
       it.order = it.k !== 'event' ? '' : it.next ? it.next : weekEnd + 'z';   // 開催中は「この週末まで」のあと、「もっと先」の前
     });
+    items = items.filter(function (it) { return !it.gone; });
     var byId = {}; items.forEach(function (it) { byId[it.id] = it; (it.alias || []).forEach(function (a) { byId[a] = it; }); });
     var HOME = opts.home || [35.7261822, 139.5132235];
     var st = { g: '', age: '', rain: false, now: false, base: HOME, baseName: '花小金井駅', sel: '', shown: PAGE };
@@ -72,20 +73,24 @@
     function inRange(r) { return r[0] <= r[1] ? mmdd >= r[0] && mmdd <= r[1] : mmdd >= r[0] || mmdd <= r[1]; }
     function todayState(it) {
       var W = 'きょう（' + WD[dow] + '）';
-      if (it.open) {
+      if (it.open && !(it.open.validUntil && today > it.open.validUntil)) {   // validUntil を過ぎた決まりは使わない（季節で変わる所）
         var o = it.open, on = o.dows.indexOf(dow) >= 0 || (o.nth || []).some(function (x) { return x[0] === dow && x[1] === nth; });
         if ((o.closedNth || []).some(function (x) { return x[0] === dow && x[1] === nth; }) && !(hol && o.nthHolOpen)) on = false;
         if (hol && o.hol) on = false;
-        if (o.monHolShift) { if (dow === 1) on = hol; else if (dow === 2 && holY) on = false; }
+        if (hol && o.holOpen) on = true;
+        var sh = o.monHolShift ? 1 : o.holShift;   // 休みの曜日が祝日なら開き、その翌日が休み
+        if (typeof sh === 'number') { if (dow === sh) on = hol; else if (dow === (sh + 1) % 7 && holY) on = false; }
         if (o.afterHol && holY) on = false;
         if ((o.closedRange || []).some(inRange)) on = false;
+        if ((o.closedDates || []).indexOf(today) >= 0) on = false;
+        if (o.calendar) return on ? { on: true, text: W + 'は営業日（時間は公式のカレンダーで）' } : { on: false, text: W + 'は休み（公式のカレンダーより）' };
         var days = o.dows.length === 7 ? '毎日' : (o.dows.length === 6 && o.dows.indexOf(0) < 0 ? '月〜土曜' : o.dows.map(function (d) { return WD[d]; }).join('・') + '曜') +
           ((o.nth || []).length ? 'と第' + o.nth[0][1] + WD[o.nth[0][0]] + '曜' : '');
         if (!on) return { on: false, text: W + 'は休み' + (o.dows.length < 5 ? '・開くのは' + days : '') };
         var t = (hol && o.holTime) || (o.byDow && o.byDow[dow]) || o.time || '';
         var m = t.match(/(\d{1,2}:\d{2})〜(\d{1,2}:\d{2})/);
         if (m && hm >= pad(m[2])) return { on: false, text: W + 'は終わりました（' + t + '）', late: true };
-        if (m && hm < pad(m[1])) return { on: true, text: W + m[1] + 'から（' + t + '）' };
+        if (m && hm < pad(m[1])) return { on: true, text: W + m[1] + 'から（' + t + '）', from: m[1] };
         return { on: true, text: W + t };
       }
       if (it.closed) {
@@ -125,7 +130,8 @@
       layer = L.layerGroup().addTo(map);
       map.on('zoomend', drawPins);
       map.on('click', function () { select(''); });
-      homeMark = L.marker(HOME, { icon: L.divIcon({ className: 'om-home', html: '<i></i><span>花小金井駅</span>', iconSize: [0, 0] }), interactive: false, keyboard: false, zIndexOffset: -500 }).addTo(map);
+      // 駅の印はピンより手前に（押せない印なので、下のピンはそのまま押せる）
+      homeMark = L.marker(HOME, { icon: L.divIcon({ className: 'om-home', html: '<i></i><span>花小金井駅</span>', iconSize: [0, 0] }), interactive: false, keyboard: false, zIndexOffset: 3000 }).addTo(map);
       if (phone) twoFingerHint();
     } else if (mapEl) {
       mapEl.innerHTML = '<p class="om-fail">地図を読み込めませんでした。下の一覧からお探しください。</p>';
@@ -239,7 +245,9 @@
       var ll = pts.map(function (it) { return [it.lat, it.lng]; });
       ll.push(st.base);
       if (ll.length < 2) { map.setView(st.base, 14); return; }
+      map._omFitting = true;
       map.fitBounds(L.latLngBounds(ll), { paddingTopLeft: [16, 52], paddingBottomRight: [48, 30], maxZoom: 15 });
+      map._omFitting = false;
       outside();
     }
     // 画面の外にあるものの数（立川・吉祥寺・所沢など）
@@ -269,26 +277,27 @@
       if (it.k === 'event') {
         body += '<p class="om-when"><b>' + esc(it.next ? (it.next === today ? 'きょう ' : it.next === tomorrow ? 'あした ' : '') + md(it.next) : '開催中（〜' + md(it.until) + '）') + '</b>' + (it.when ? '<br>' + esc(it.when) : '') + '</p>';
         if (it.place) body += '<p class="om-acc">📍 ' + esc(it.place) + '</p>';
+        body += '<div class="om-bs">' + btn(it.off, '公式の案内', 'main', true) + btn(it.week, '今週の号で読む') + btn(it.map, 'Googleマップ', '', true) + btn('/calendar.html', 'カレンダー') + '</div>';
+        if (it.pr) body += '<p class="om-prn">PR：' + esc(it.pr) + 'のご協賛で掲載しています</p>';
         body += ages(it);
-        if (it.desc) body += '<p class="om-desc">' + esc(it.desc) + '</p>';
+        if (it.desc) body += '<p class="om-desc clamp">' + esc(it.desc) + '</p><button type="button" class="om-more-t">続きを読む</button>';
         if (it.note) body += '<p class="om-note">' + esc(it.note) + '</p>';
         if (it.cost) body += '<p class="om-cost">費用: ' + esc(it.cost) + '</p>';
-        if (it.pr) body += '<p class="om-prn">PR：' + esc(it.pr) + 'のご協賛で掲載しています</p>';
-        body += '<div class="om-bs">' + btn(it.off, '公式の案内', 'main', true) + btn(it.week, '今週の号で読む') + btn(it.map, 'Googleマップ', '', true) + btn('/calendar.html', 'カレンダー') + '</div>';
       } else {
         if (it.season) body += '<p class="om-season-tag">' + esc(it.season) + '</p>';
         if (it.acc) body += '<p class="om-acc">📍 ' + esc(it.acc) + '</p>';
+        // 押すボタンは上に（行き方・公式）。読みものはその下
+        body += '<div class="om-bs">' + btn(it.map, 'Googleマップで開く', 'main', true) + btn(it.more, 'カフェのくわしい情報') + btn(it.week, '今週の号で読む') + btn(it.otayori && it.otayori.url, '今月のおたより', '', true) + btn(it.teirei, '定例の日程') + btn(it.off, '公式', '', true) + '</div>';
         body += ages(it);
-        if (it.reader) body += '<div class="om-reader"><b>💬 読者の方から</b>' + esc(it.reader) + '</div>';
-        if (it.visited && it.visited.length) body += '<div class="om-reader"><b>👣 家族で行って確かめたこと</b>' + esc(it.visited.join('／')) + '</div>';
         if (it.tags && it.tags.length) body += '<ul class="om-tags" aria-label="お店の設備">' + it.tags.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
-        if (it.desc) body += '<p class="om-desc">' + esc(it.desc) + '</p>';
-        if (it.hours) body += '<p class="om-cost">営業: ' + esc(it.hours) + '</p>';
         if (it.next && it.next.length) body += '<div class="om-sub"><b>🗓 次の定例</b><ul>' + it.next.slice(0, 3).map(function (x) { return '<li>' + md(x.d) + ' ' + esc(x.t) + (x.time ? ' <small>' + esc(x.time) + '</small>' : '') + '</li>'; }).join('') + '</ul></div>';
         var ev = nearEvents(it);
         if (ev.length) body += '<div class="om-sub"><b>📅 ここで開かれる催し</b><ul>' + ev.slice(0, 4).map(function (e) { return '<li><button type="button" data-id="' + esc(e.id) + '">' + esc(e.next ? md(e.next) : '開催中') + ' ' + esc(e.name) + '</button></li>'; }).join('') + '</ul></div>';
+        if (it.desc) body += '<p class="om-desc clamp">' + esc(it.desc) + '</p><button type="button" class="om-more-t">続きを読む</button>';
+        if (it.reader) body += '<div class="om-reader"><b>💬 読者の方から</b>' + esc(it.reader) + '</div>';
+        if (it.visited && it.visited.length) body += '<div class="om-reader"><b>👣 家族で行って確かめたこと</b>' + esc(it.visited.join('／')) + '</div>';
+        if (it.hours) body += '<p class="om-cost">営業: ' + esc(it.hours) + '</p>';
         if (it.approx) body += '<p class="om-approx">※ピンはおよその位置です</p>';
-        body += '<div class="om-bs">' + btn(it.map, 'Googleマップで開く', 'main', true) + btn(it.more, 'カフェのくわしい情報') + btn(it.otayori && it.otayori.url, '今月のおたより', '', true) + btn(it.teirei, '定例の日程') + btn(it.off, '公式', '', true) + '</div>';
         if (it.voices && it.voices.length) body += '<div class="om-voices">' + it.voices.map(function (v) { return '<p>「' + esc(v.text) + '」<small>— ' + esc(v.who || 'ご近所の方') + (v.date ? '・' + esc(v.date) : '') + '</small></p>'; }).join('') + '</div>';
       }
       var share = 'https://line.me/R/share?text=' + encodeURIComponent(it.name + '\n' + location.origin + location.pathname + '#' + it.id);
@@ -304,7 +313,7 @@
     }
     function select(id, fromMap) {
       st.sel = id;
-      var hint = $('om-hint'); if (hint && id) hint.classList.add('gone');
+      if (id) hideHint();
       var it = byId[id];
       if (!it) { card.hidden = true; card.innerHTML = ''; drawPins(); markRows(); if (history.replaceState && location.hash) history.replaceState(null, '', location.pathname + location.search); return; }
       card.hidden = false; card.innerHTML = cardHTML(it); card.scrollTop = 0;
@@ -337,6 +346,8 @@
     }
     card.addEventListener('click', function (e) {
       if (e.target.closest('.om-x')) { select(''); return; }
+      var mt = e.target.closest('.om-more-t');
+      if (mt) { var d = mt.previousElementSibling; if (d) d.classList.remove('clamp'); mt.remove(); return; }
       var b = e.target.closest('button[data-id]');
       if (b) select(b.getAttribute('data-id'), true);
     });
@@ -346,10 +357,17 @@
     function rowHTML(it) {
       var g = G[it.g] || {}, d = dist(it);
       var sub = it.k === 'event' ? (it.next ? md(it.next) : '開催中〜' + md(it.until)) + (it.place ? '・' + it.place.replace(/[（(].*$/, '').replace(/。.*$/, '') : '') : (it.acc || '').split('／')[0];
-      var tag = it.today ? '<i class="om-tg ' + (it.today.on ? 'on' : 'off') + '">' + (it.today.on ? 'きょう開いています' : esc(it.today.text.replace(/・.*$/, ''))) + '</i>' : '';
+      var tag = it.today ? '<i class="om-tg ' + (it.today.on ? 'on' : 'off') + '">' + (it.today.on ? (it.today.from ? 'きょう ' + it.today.from + 'から' : 'きょう開いています') : esc(it.today.text.replace(/・.*$/, '').replace(/（.*$/, ''))) + '</i>' : '';
+      if (st.now && !it.today && it.k === 'spot' && it.g !== 'park' && it.g !== 'train') tag += '<i class="om-tg na">休みの日は未確認</i>';
       if (it.k === 'event') tag = it.soon ? '<i class="om-tg ev">' + (it.next === today ? 'きょう' : 'あした') + '</i>' : !it.next ? '<i class="om-tg on">開催中</i>' : '';
       if (it.isNew) tag += '<i class="om-tg nw">新しく載せました</i>';
-      if (st.age && !it.ages) tag += '<i class="om-tg na">年齢の目安なし（設備で選んで）</i>';
+      else if (it.fresh) tag += '<i class="om-tg nw">前に見てから新しく</i>';
+      if (st.age && !it.ages) {
+        // カフェは年齢の目安を付けない（お店の設備だけを書く）。選んだ年齢に関係する設備を出す
+        var want = { baby: ['おむつ替え', '授乳スペース', '子ども用の椅子', 'ベビーカーで入れる'], pre: ['キッズスペース・おもちゃ', '子どもメニュー', '座敷・小上がり・個室'], elem: ['キッズスペース・おもちゃ', '子どもメニュー'] }[st.age];
+        var has = (it.tags || []).filter(function (t) { return want.indexOf(t) >= 0; });
+        tag += '<i class="om-tg na">' + (has.length ? esc(has.join('・')) + 'あり' : '年齢の目安なし（設備で選んで）') + '</i>';
+      }
       return '<li><button type="button" class="om-row' + (st.sel === it.id ? ' on' : '') + (it.today && !it.today.on ? ' dim' : '') + '" data-id="' + esc(it.id) + '" id="r-' + esc(it.id) + '">' +
         '<span class="om-ci" style="--c:' + g.color + '" aria-hidden="true">' + g.icon + '</span>' +
         '<span class="om-rb"><b>' + esc(it.name) + (it.pr ? ' <i class="om-pr">PR</i>' : '') + '</b><small>' + esc(sub) + '</small>' + (tag ? '<span class="om-tgs">' + tag + '</span>' : '') + '</span>' +
@@ -361,6 +379,8 @@
       vis.sort(function (a, b) { return evMode ? a.order.localeCompare(b.order) || dist(a) - dist(b) : dist(a) - dist(b); });
       $('om-lt').textContent = evMode ? '日付の近い順' : st.baseName + 'から近い順';
       $('om-ln').textContent = vis.length;
+      var longN = st.g ? 0 : items.filter(function (it) { return it.k === 'event' && !evBrief(it) && ok(it, 'g'); }).length;
+      var ln = $('om-long'); if (ln) { ln.hidden = !longN; ln.textContent = longN ? 'ほかに、長く続く催しが' + longN + '件（「催し」で出ます）' : ''; }
       var last = '', html = '';
       vis.slice(0, st.shown).forEach(function (it) {
         if (evMode) {
@@ -437,6 +457,28 @@
       new IntersectionObserver(function (es) { es.forEach(function (e) { back.hidden = e.isIntersecting || e.boundingClientRect.top > 0; }); }).observe(mapEl);
       back.addEventListener('click', function () { mapEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
     }
+
+    function hideHint() { var h = $('om-hint'); if (h) h.classList.add('gone'); }
+    setTimeout(hideHint, 5000);
+    if (map) map.on('movestart', function () { if (map._loaded && !map._omFitting) hideHint(); });
+    window.addEventListener('scroll', function () { if (window.scrollY > 60) hideHint(); }, { passive: true });
+
+    // ---- 前に見てからふえたもの（読む人のブラウザにだけ覚える。消えていても困らない）------------------
+    var seenLine = $('om-seen');
+    try {
+      var key = 'om-seen-v1', prev = JSON.parse(localStorage.getItem(key) || 'null'), ids = items.map(function (it) { return it.id; });
+      if (prev && prev.ids && prev.d < today) {
+        var old = {}; prev.ids.forEach(function (x) { old[x] = 1; });
+        var fresh = items.filter(function (it) { return !old[it.id]; });
+        fresh.forEach(function (it) { it.fresh = true; });
+        if (seenLine && fresh.length) {
+          var ne = fresh.filter(function (it) { return it.k === 'event'; }).length;
+          seenLine.innerHTML = '<b>前に見た日（' + md(prev.d) + '）から ' + fresh.length + '件ふえました</b>' + (ne ? '（催し' + ne + '・場所' + (fresh.length - ne) + '）' : '');
+          seenLine.hidden = false;
+        }
+      }
+      if (!prev || prev.d < today) localStorage.setItem(key, JSON.stringify({ d: today, ids: ids }));
+    } catch (e) { /* ブラウザが覚えられないときは出さない */ }
 
     // ---- はじめ ---------------------------------------------------------------
     counts(); drawList();

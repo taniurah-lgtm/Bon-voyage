@@ -47,7 +47,7 @@ const problems = [];
 // ---- 種類（地図の上のボタン）。言葉は短く、絵と色で見分ける ---------------------------
 const GROUPS = [
   { key: 'event', icon: '📅', label: 'これからの催し', chip: '催し', color: '#C2410C' },
-  { key: 'park', icon: '🌳', label: '公園・動物', chip: '公園', color: '#2F7D3A' },
+  { key: 'park', icon: '🌳', label: '公園', chip: '公園', color: '#2F7D3A' },
   { key: 'jidokan', icon: '🏠', label: '児童館・こども広場', chip: '児童館', color: '#BE185D' },
   { key: 'library', icon: '📚', label: '図書館', chip: '図書館', color: '#2563EB' },
   { key: 'indoor', icon: '🧸', label: '室内あそび', chip: '室内', color: '#7C3AED' },
@@ -154,6 +154,12 @@ for (const hub of spotItems.slice()) {
   spotItems.splice(spotItems.indexOf(sub), 1);
 }
 
+// 最新の号（LINEで送った号＝sent.log）の年齢別ページに載っている催しは、そのページへつなぐ
+const SENT = existsSync('reports/free/sent.log') ? readFileSync('reports/free/sent.log', 'utf8').trim().split('\n').map((l) => l.split('\t')[0]).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d) && d <= TODAY) : [];
+const ISSUE = SENT.length ? SENT[SENT.length - 1] : '';
+const ISSUE_CAFES = new Set(ISSUE && existsSync(`reports/free/web/${ISSUE}.json`) ? (read(`reports/free/web/${ISSUE}.json`, {}).cafes || []) : []);
+const ISSUE_IDS = new Set(ISSUE && existsSync(`reports/free/web/${ISSUE}.json`) ? (read(`reports/free/web/${ISSUE}.json`, {}).items || []).map((x) => x.id) : []);
+const weekTab = (ages) => { if (!ages) return 'pre'; for (const k of ['pre', 'baby', 'elem']) if (ages[k] === '◎') return k; for (const k of ['pre', 'baby', 'elem']) if (ages[k] === '○') return k; return 'pre'; };
 // ---- カフェ（カフェのページと同じ pages:true だけ） ---------------------------------
 const CAFE = read('data/cafes.json', { cafes: [] });
 const TAG = { play: 'キッズスペース・おもちゃ', seat: '座敷・小上がり・個室', chair: '子ども用の椅子', diaper: 'おむつ替え', nursing: '授乳スペース', menu: '子どもメニュー', stroller: 'ベビーカーで入れる', parking: '駐車場' };
@@ -169,6 +175,7 @@ for (const c of (CAFE.cafes || []).filter((c) => c.pages === true)) {
     indoor: true, map: mapQ(c.mapq || c.name), off: c.official || '', more: `/cafe.html#${c.id}`,
     reader: old && old.fromReader ? old.fromReader : '', voices: voices(c.name),
     closed: closedOf(c.hours), added: c.added || '',
+    week: ISSUE_CAFES.has(c.id) ? `/week/${ISSUE}/pre/` : '',
   });
 }
 for (const name of cafeSpot.keys()) if (!cafeItems.some((c) => c.name === name)) problems.push(`マップの☕「${name}」が、カフェのページ（data/cafes.json の pages:true）に無い。名前を合わせるか、マップから外す`);
@@ -184,11 +191,6 @@ const PR_POS = read('data/map-pr.json', {});
 for (const id of Object.keys(PR_POS)) if (!/^E\d+$/.test(id)) problems.push(`data/map-pr.json の「${id}」は台帳のIDの形になっていない`);
 const lastDay = (e) => (e.span && e.span.to) || (e.dates && e.dates.length ? e.dates[e.dates.length - 1] : '') || '';
 const EV_INDOOR = /(科学館|図書館|児童館|公民館|ホール|下水道館|地域センター|生涯学習センター|交流館|ルミエール|まろにえ|ハウジングステージ|おふろ)/;
-// 最新の号（LINEで送った号＝sent.log）の年齢別ページに載っている催しは、そのページへつなぐ
-const SENT = existsSync('reports/free/sent.log') ? readFileSync('reports/free/sent.log', 'utf8').trim().split('\n').map((l) => l.split('\t')[0]).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d) && d <= TODAY) : [];
-const ISSUE = SENT.length ? SENT[SENT.length - 1] : '';
-const ISSUE_IDS = new Set(ISSUE && existsSync(`reports/free/web/${ISSUE}.json`) ? (read(`reports/free/web/${ISSUE}.json`, {}).items || []).map((x) => x.id) : []);
-const weekTab = (ages) => { if (!ages) return 'pre'; for (const k of ['pre', 'baby', 'elem']) if (ages[k] === '◎') return k; for (const k of ['pre', 'baby', 'elem']) if (ages[k] === '○') return k; return 'pre'; };
 // 日時の欄の頭の日付（カードでは別に「11/29(日)」と出すので、二重にしない）。時刻などが残らなければ空
 function whenRest(w) {
   let r = String(w || ''), prev;
@@ -389,7 +391,7 @@ const page = `<!doctype html>
   .om-sub ul { list-style: none; margin: 0; padding: 0; }
   .om-sub li { padding: .15rem 0; }
   .om-sub li small { color: var(--ink-soft); }
-  .om-sub button { border: 0; background: none; padding: .2rem 0; min-height: 36px; text-align: left; font: 700 .86rem/1.4 var(--body); color: var(--sky-deep); text-decoration: underline; cursor: pointer; }
+  .om-sub button { border: 0; background: none; padding: .2rem 0; min-height: 44px; text-align: left; font: 700 .86rem/1.4 var(--body); color: var(--sky-deep); text-decoration: underline; cursor: pointer; }
   .om-tgs { display: flex; flex-wrap: wrap; gap: .25rem; margin-top: .15rem; }
   .om-tg { font: 700 .68rem/1.2 var(--body); font-style: normal; border-radius: 999px; padding: .12rem .45rem; }
   .om-tg.on { color: #1F5F2E; background: #DCF0DF; } .om-tg.off { color: #7C2D12; background: #F6E3D6; }
@@ -399,6 +401,9 @@ const page = `<!doctype html>
     background: var(--sky-deep); color: var(--on-sky); font: 800 .88rem/1.2 var(--body); box-shadow: 0 4px 14px rgba(0,0,0,.25); cursor: pointer; }
   .om-top[hidden] { display: none; }
   .om-gl button small { color: var(--ink-soft); font-weight: 700; }
+  .om-desc.clamp { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 0 !important; }
+  .om-more-t { min-height: 44px; border: 0; background: none; padding: 0; font: 800 .82rem/1.2 var(--body); color: var(--sky-deep); text-decoration: underline; cursor: pointer; margin-bottom: .3rem; }
+  .om-long { margin: 0 0 .3rem; font-size: .78rem; color: var(--ink-soft); }
   .om-lb { padding: .7rem .2rem .25rem; font: 800 .8rem/1.2 var(--body); color: #B33A0B; border-bottom: 1px solid var(--line); }
   .om-tg.na { color: var(--ink-soft); background: var(--surface-2); }
   .om-newline { margin: .5rem 0 0; font-size: .82rem; color: var(--ink-soft); }
@@ -476,7 +481,9 @@ ${navSub('map')}
   </div>
 
   ${newLine}
+  <p class="om-newline" id="om-seen" hidden></p>
   <div class="om-lh"><h2 id="om-lt">花小金井駅から近い順</h2><span><b id="om-ln">0</b>件・距離は直線</span></div>
+  <p class="om-long" id="om-long" hidden></p>
   <ul class="om-list" id="om-list" aria-labelledby="om-lt"></ul>
   <button type="button" class="om-more" id="om-more" hidden>もっと見る</button>
   <button type="button" class="om-top" id="om-top" hidden>↑ 地図へ</button>
@@ -509,7 +516,7 @@ ${navSub('map')}
 
 <script src="/assets/leaflet/leaflet.js"></script>
 <script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></script>
-<script src="/assets/bv-odekake.js?v=20261128b"></script>
+<script src="/assets/bv-odekake.js?v=20261128c"></script>
 <script src="/assets/bv-post.js"></script>
 <script type="application/json" id="om-items">${jsonInTag(ITEMS)}</script>
 <script type="application/json" id="om-groups">${jsonInTag(used)}</script>
