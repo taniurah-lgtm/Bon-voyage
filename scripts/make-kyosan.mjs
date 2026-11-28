@@ -101,14 +101,17 @@ const SUPPORTERS = ['〇〇小児科', '〇〇歯科', '〇〇不動産', '〇�
 {
   const page = await browser.newPage({ viewport: { width: 400, height: 900 }, deviceScaleFactor: 2 });
   // 地図のインスタンスを外から触れるようにして読み込む（このときだけ。本物のファイルは変えない）
-  await page.route('**/assets/bv-map.js*', async (route) => {
+  // 2026-11-28 おでかけマップを作り直した（assets/bv-odekake.js）。見本のピンと吹き出しの見た目は、これまでの bv-map.css を足して使う
+  await page.route('**/assets/bv-odekake.js*', async (route) => {
     const res = await route.fetch();
-    const js = (await res.text()).replace('var map = L.map(canvas, {', 'var map = window.__bvm = L.map(canvas, {');
+    const js = (await res.text()).replace('map = L.map(mapEl, {', 'map = window.__bvm = L.map(mapEl, {');
     await route.fulfill({ response: res, body: js });
   });
   await page.goto(`${base}/map.html`, { waitUntil: 'networkidle' });
+  await page.addStyleTag({ url: '/assets/bv-map.css' });
   await page.addStyleTag({ content: `
-    .bvm-canvas { height: 520px !important; }
+    #om-map { height: 520px !important; }
+    .om-card, .om-ctl, .om-out { display: none !important; }
     .kyo-pin .bvm-pin { --pin: #5E5148; }
     .kyo-pin .pr { position: absolute; left: 21px; top: -9px; font: 800 11px/1 "Zen Maru Gothic", sans-serif; letter-spacing: .06em;
                    color: #fff; background: #5E5148; border: 2px solid #fff; border-radius: 999px; padding: 3px 6px; box-shadow: 0 1px 4px rgba(0,0,0,.25); }
@@ -138,7 +141,7 @@ const SUPPORTERS = ['〇〇小児科', '〇〇歯科', '〇〇不動産', '〇�
     m.openPopup();
   });
   await page.waitForTimeout(2500); // タイル
-  const canvas = page.locator('.bvm-canvas');
+  const canvas = page.locator('#om-map');
   await canvas.scrollIntoViewIfNeeded();
   await page.waitForTimeout(600);
   await canvas.screenshot({ path: `${OUT}/img/map-pr.jpg`, type: 'jpeg', quality: 80 });

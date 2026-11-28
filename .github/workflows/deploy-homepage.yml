@@ -81,6 +81,11 @@ jobs:
       # おでかけマップ（2026-11-18 から毎回組む）。合言葉が無くて上で組み直さなかった日も、これは必ず組む。
       #   ・Googleマップの下地: Variables の GMAPS_KEY（このホームページからしか使えない鍵。docs/gmaps-key.md）
       #   ・協賛（紹介型）の「PR」のピン: 最終日を過ぎたものは外れる
+      # 🆕 2026-11-28 これからの催しのピンの位置（data/event-geo.json に貯めてある分＋新しい催しだけ住所から求める）。
+      #   住所検索につながらなくても、マップは貯めてある分で組む（ここで止めない）
+      - name: 催しの位置を求める
+        run: node scripts/geocode-events.mjs || echo "::warning::催しの位置を求められなかった（貯めてある分で組む）"
+
       - name: マップを組む
         env:
           MAP_POST_URL: ${{ vars.MAP_POST_URL }}

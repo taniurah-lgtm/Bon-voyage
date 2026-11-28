@@ -28,9 +28,10 @@ const TARGETS = [
   { page: '/calendar.html', sel: '.bvc-window', name: '「公開ぶんは…まで」' },
   { page: '/calendar.html', sel: '.bvc-kids', name: '子連れメモ' },
   { page: '/calendar.html', sel: '.bvc-dltel', name: '締切の申込先' },
-  { page: '/map.html', sel: '.bvm-chip.is-on', name: '選んだチップ' },
-  { page: '/map.html', sel: '.spot .ages', name: 'スポットの年齢目安' },
-  { page: '/map.html', sel: '.bvm-note', name: '地図の注記' },
+  { page: '/map.html', sel: '.om-chip[aria-pressed="true"]', name: '選んだ種類のボタン' },
+  { page: '/map.html', sel: '.om-row small', name: '一覧の場所・日付' },
+  { page: '/map.html', sel: '.om-tg', name: '一覧の札（きょう・開催中など）' },
+  { page: '/map.html', sel: '.om-legal', name: '地図の注記' },
   { page: '/m/s7f2ka/', sel: '#go', name: '会員ゲートの「ひらく」', gate: false },
   { page: '/m/s7f2ka/', sel: '.gate .join', name: '会員ゲートのCTA', gate: false },
   { page: '/m/s7f2ka/', sel: '.gate .hint', name: '会員ゲートの案内', gate: false },
@@ -70,7 +71,7 @@ for (const scheme of ['light', 'dark']) {
         } catch (e) { /* ゲートが無い頁 */ }
       }
       if (t.page === '/map.html') {
-        await page.waitForSelector('.bvm-chip', { timeout: 8000 }).catch(() => {});
+        await page.waitForSelector('.om-row', { timeout: 8000 }).catch(() => {});
       }
     }
     if (t.gate) {

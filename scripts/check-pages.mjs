@@ -49,7 +49,7 @@ const base = `http://127.0.0.1:${server.address().port}`;
 const PAGES = [
   ['/', ['#tools', '#contact', '.tool']],
   ['/calendar.html', ['.bvc-grid, .bvc table, #cal table']],
-  ['/map.html', ['.spot']],
+  ['/map.html', ['.om-chip', '.om-row', '.leaflet-marker-icon']],
   ['/issues.html', ['.issue']],
   ['/ai/', ['#copy', '.q']],
   ['/entei.html', ['.en', '#soon']],

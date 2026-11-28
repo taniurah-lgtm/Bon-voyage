@@ -87,6 +87,9 @@
         "土": "14:00〜14:30"
        }
       }
+     ],
+     "spots": [
+      "中央図書館"
      ]
     },
     {
@@ -150,6 +153,9 @@
        ],
        "src": "https://library.kodaira.ed.jp/viewer/info.html?id=325"
       }
+     ],
+     "spots": [
+      "仲町図書館（なかまちテラス）"
      ]
     },
     {
@@ -217,6 +223,9 @@
        ],
        "src": "https://library.kodaira.ed.jp/viewer/info.html?id=335"
       }
+     ],
+     "spots": [
+      "喜平図書館"
      ]
     },
     {
@@ -280,6 +289,9 @@
        ],
        "src": "https://library.kodaira.ed.jp/viewer/info.html?id=298"
       }
+     ],
+     "spots": [
+      "花小金井図書館"
      ]
     },
     {
@@ -344,6 +356,9 @@
        ],
        "src": "https://library.kodaira.ed.jp/viewer/info.html?id=317"
       }
+     ],
+     "spots": [
+      "上宿図書館"
      ]
     },
     {
@@ -415,6 +430,9 @@
         "木": "16:00〜16:30"
        }
       }
+     ],
+     "spots": [
+      "大沼図書館"
      ]
     },
     {
@@ -486,6 +504,9 @@
         "水": "15:30〜16:00"
        }
       }
+     ],
+     "spots": [
+      "津田図書館"
      ]
     },
     {
@@ -496,7 +517,10 @@
      "url": "https://library.kodaira.ed.jp/viewer/info.html?id=287",
      "checked": "2026-10-06",
      "note": "新しい建物への移転準備のため、8月から10月は休館しています。おはなし会・絵本のへやもお休みで、11月からの日程は決まりしだい図書館から案内されます。",
-     "programs": []
+     "programs": [],
+     "spots": [
+      "小川西町図書館"
+     ]
     }
    ]
   },
@@ -793,7 +817,10 @@
       "label": "子ども家庭支援センターだより 11月号（PDF）",
       "url": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202611.pdf",
       "month": "2026-11"
-     }
+     },
+     "spots": [
+      "子ども家庭支援センター 子育て交流ひろば「おひさま」"
+     ]
     }
    ]
   },

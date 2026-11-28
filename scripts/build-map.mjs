@@ -1,23 +1,27 @@
 #!/usr/bin/env node
 /*
  * みんなのおでかけマップを生成する。
- *   MAP_POST_URL=https://script.google.com/macros/s/.../exec node scripts/build-map.mjs
+ *   MAP_POST_URL=https://script.google.com/macros/s/.../exec GMAPS_KEY=... node scripts/build-map.mjs
  *
  * 入力:
- *   data/map-spots.json … ぼんぼやーじゅが選んだスポット（種）。lat/lng は
- *                         scripts/geocode-spots.mjs が入れる（取れなかったものはピンなし）
+ *   data/map-spots.json … ぼんぼやーじゅが選んだスポット。lat/lng は scripts/geocode-spots.mjs が入れる
+ *                         months（例 [6,7,8,9]）があるものは、その月だけ出す（夏だけの水あそび）
+ *   data/cafes.json     … 子連れで入りやすいカフェ（pages:true のものだけ＝カフェのページと同じ）
+ *   docs/homepage/data/events-public.json … これからの催し（3週間）。カレンダーと同じ公開データ（build-calendar.mjs が先に作る）
+ *                         位置は data/event-geo.json（scripts/geocode-events.mjs）。協賛かどうかだけ data/events.json から
  *   data/map-posts.json … 承認済みのみんなの投稿
+ *   data/map-pr.json    … 協賛（紹介型）の催しの位置。番地を公開している所だけ
+ *   data/teirei.json    … 児童館などの、おたよりと定例の日程へのリンク
  * 出力:
- *   docs/homepage/map.html … 公開マップ（誰でも見られる）
+ *   docs/homepage/map.html
  *
- * 環境変数:
- *   MAP_POST_URL … 投稿の送り先（Apps Script のウェブアプリURL）。
- *                  未設定でもフォームは出る。送信時に「まだ設定されていません」と出て、
- *                  書いた文章はコピーできる状態で残る（書いたものを捨てない）。
- *
- * ★2026-09-04: 月額制度の廃止にともない、公開側の出し惜しみをやめた
- *   （`docs/strategy-2026-09.md`）。スポットも、みんなの投稿も、写真つきも、
- *   会員ページに置いていたものを全部こちらへ移し、誰でも全件見られる。
+ * 🆕 2026-11-28 作り直し（オーナー「寒い季節なのにじゃぶじゃぶ池。カフェ情報が全部プロットされていない。見づらい」）:
+ *   - 地図を先に。種類は8つの短い言葉（＋年齢・雨でもOK）。ピンは種類の絵の丸、重なれば数の丸
+ *   - 夏だけの水あそびは、季節の外では出さない（下に「いまは出していません」と書く）
+ *   - カフェはカフェのページと同じ14軒を、そのまま出す（マップ側の8軒の写しはやめた）
+ *   - これからの催し（3週間・位置が決まったもの）も、日付つきのピンにする
+ *   - 地図の下は、しぼった中身を花小金井駅から近い順に（大きなカードを全部並べるのはやめた）
+ *   一覧の id は、これまでと同じ spotSlug(名前)。定例のページから /map.html#s-… で飛んでくる
  */
 import { navSub } from './lib/nav.mjs';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
@@ -25,107 +29,184 @@ import { jsonInTag, esc } from './lib/gate.mjs';
 import { publicUrl } from './lib/city-site.mjs';
 import { spotSlug } from './lib/spot-slug.mjs';
 
-// 🆕 2026-11-01 こども若者みらい課の提案:「各館のおたよりのリンクを、マップと組み合わせて」。
-//    おたよりのリンクは data/teirei.json の1か所にだけ書き、マップはそこから読む（毎月の差し替えも1か所）
-const TEIREI = new Map();
-for (const sec of JSON.parse(readFileSync('data/teirei.json', 'utf8')).sections)
-  for (const p of sec.places)
-    for (const name of p.spots || []) TEIREI.set(name, { otayori: p.otayori || null, teirei: `/teirei.html#${p.key}` });
-
-// 市のサイトの障害の間は、開かない「公式」リンクを出さない（lib/city-site.mjs）
-const SPOTS = JSON.parse(readFileSync('data/map-spots.json', 'utf8'))
-  .map((s) => ({ ...s, official: publicUrl(s.official), ...(TEIREI.get(s.name) || {}) }));
-for (const name of TEIREI.keys())
-  if (!SPOTS.some((s) => s.name === name)) console.error(`🔴 定例の spots「${name}」がマップに無い（名前の書き方を合わせる）`);
-const POSTS = JSON.parse(readFileSync('data/map-posts.json', 'utf8'));
-// 🆕 2026-11-18 協賛（紹介型）の「PR」のピン（docs/sponsor-plan.md §14「マップのピンは、場所を公開しているお店だけ」）。
-//   台帳で「協賛」「掲載開始」のある催し（data/events.json に出ているもの＝掲載開始を過ぎたもの）のうち、
-//   data/map-pr.json に位置があるものを、催しの最終日まで出す。番地を公開していない教室は map-pr.json に書かない
+const read = (p, d) => (existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : d);
 const TODAY = process.env.BV_TODAY || new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
-const PR_POS = existsSync('data/map-pr.json') ? JSON.parse(readFileSync('data/map-pr.json', 'utf8')) : {};
-const lastDay = (e) => (e.dates && e.dates.length ? e.dates[e.dates.length - 1] : '') || (e.span && e.span.to) || '';
-const PRS = (existsSync('data/events.json') ? JSON.parse(readFileSync('data/events.json', 'utf8')).events : [])
-  .filter((e) => e.pr && PR_POS[e.id] && typeof PR_POS[e.id].lat === 'number' && lastDay(e) >= TODAY)
-  .map((e) => ({ name: e.name, pr: e.pr, when: e.when, target: e.target || '', url: e.url || '', until: lastDay(e),
-                 q: PR_POS[e.id].q || '', lat: PR_POS[e.id].lat, lng: PR_POS[e.id].lng }));
-for (const id of Object.keys(PR_POS))
-  if (!/^E\d+$/.test(id)) console.error(`🔴 data/map-pr.json の「${id}」は台帳のIDの形になっていない`);
+const MONTH = +TODAY.slice(5, 7);
+const addDays = (iso, n) => new Date(Date.parse(iso + 'T00:00:00Z') + n * 864e5).toISOString().slice(0, 10);
+const UNTIL = addDays(TODAY, 21);
 const OUT = 'docs/homepage/map.html';
-const TEXT_LIMIT = 300;   // ひとことの字数。誰でも同じ
+const TEXT_LIMIT = 300;
 const POST_URL = process.env.MAP_POST_URL || '';
-// 🆕 2026-11-18 Googleマップの下地（オーナー「いまの地図は見づらい」）。鍵は GitHub の Variables の GMAPS_KEY から
-//   （deploy-homepage.yml の「マップを組む」で入る）。このホームページからしか使えない鍵（リファラー制限）。
-//   鍵が無いとき（手元で組んだとき）は、これまでの OpenStreetMap のまま。手順は docs/gmaps-key.md
+// Googleマップの下地。鍵は GitHub の Variables の GMAPS_KEY（deploy-homepage.yml の「マップを組む」で入る）。
+// このホームページからしか使えない鍵（リファラー制限）。無いとき（手元）は OpenStreetMap。手順は docs/gmaps-key.md
 const GMAPS_KEY = (process.env.GMAPS_KEY || '').trim();
 if (GMAPS_KEY && !/^[A-Za-z0-9_-]{20,60}$/.test(GMAPS_KEY)) { console.error('🔴 GMAPS_KEY の形が違う（APIキーは英数字と - _ だけ）'); process.exit(1); }
+const mapQ = (q) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+const problems = [];
 
-const mapQ = (name) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name)}`;
+// ---- 種類（地図の上のボタン）。言葉は短く、絵と色で見分ける ---------------------------
+const GROUPS = [
+  { key: 'event', icon: '📅', label: 'これからの催し', chip: '催し', color: '#C2410C' },
+  { key: 'park', icon: '🌳', label: '公園・動物', chip: '公園', color: '#2F7D3A' },
+  { key: 'jidokan', icon: '🏠', label: '児童館・こども広場', chip: '児童館', color: '#BE185D' },
+  { key: 'library', icon: '📚', label: '図書館', chip: '図書館', color: '#2563EB' },
+  { key: 'indoor', icon: '🧸', label: '室内あそび', chip: '室内', color: '#7C3AED' },
+  { key: 'cafe', icon: '☕', label: '子連れで入りやすいカフェ', chip: 'カフェ', color: '#8A5A12' },
+  { key: 'train', icon: '🚃', label: '電車でおでかけ', chip: '電車で', color: '#0F766E' },
+  { key: 'water', icon: '💧', label: '水あそび・プール', chip: '水あそび', color: '#0E7490' },
+];
+// 動物は公園に、ものづくりは室内に。夏（6〜9月）のほかは、水あそびの種類を出さない
+//（夏だけの所は外し、屋内ドームのプールは「室内」に入れる）
+const SUMMER = [6, 7, 8, 9].includes(MONTH);
+const CAT2G = [['🌳', 'park'], ['🦒', 'park'], ['💧', 'water'], ['🏊', 'water'], ['☔', 'indoor'], ['🎨', 'indoor'], ['🚃', 'train'], ['🏠', 'jidokan'], ['📚', 'library'], ['☕', 'cafe']];
+const groupOf = (cat) => (CAT2G.find(([p]) => cat.startsWith(p)) || [])[1];
 
-// 投稿をスポット名で束ねる
+// ---- 開いている曜日（「月〜土曜 10:00〜18:00」「水曜と第1日曜 10:00〜18:00」）と、カフェの定休日 -----------------
+const DOW = '日月火水木金土';
+const dowRange = (a, b) => { const out = []; let i = DOW.indexOf(a); const j = DOW.indexOf(b || a); for (;;) { out.push(i); if (i === j) break; i = (i + 1) % 7; } return out; };
+function openOf(access) {
+  for (const seg of String(access || '').split('／')) {
+    const m = seg.match(/^([月火水木金土日])(?:〜([月火水木金土日]))?曜(?:と第(\d)([月火水木金土日])曜)?\s*(\d{1,2}:\d{2}〜\d{1,2}:\d{2})/);
+    if (m) return { dows: dowRange(m[1], m[2]), nth: m[3] ? [[DOW.indexOf(m[4]), +m[3]]] : [], time: m[5], hol: /祝[^）]*休/.test(seg) };
+  }
+  return null;
+}
+function closedOf(hours) {
+  const h = String(hours || ''), out = new Set();
+  for (const m of h.matchAll(/([月火水木金土日])曜(?:日)?定休/g)) out.add(DOW.indexOf(m[1]));
+  for (const m of h.matchAll(/((?:[月火水木金土日]曜(?:日)?[・と])*[月火水木金土日]曜(?:日)?)(?:・祝日)?は(?:お)?休み/g))
+    for (const d of m[1].match(/[月火水木金土日](?=曜)/g)) out.add(DOW.indexOf(d));
+  // 「火・水・金・土・日の11:00〜」「冬は水・土・日の12:00〜」＝書いていない曜日は休み
+  const only = h.match(/^(?:冬は)?((?:[月火水木金土日]・)+[月火水木金土日])の\d/);
+  if (only) { const on = only[1].split('・').map((d) => DOW.indexOf(d)); for (let i = 0; i < 7; i++) if (!on.includes(i)) out.add(i); }
+  return out.size ? { dows: [...out].sort(), hol: /祝日[^。]*休/.test(h) } : null;
+}
+// 定例（児童館・図書館・ひろば）の、これからの日程（30日先まで）
+function teireiNext(place) {
+  const out = [], until = addDays(TODAY, 30);
+  for (const pr of place.programs || []) for (const d of pr.dates || []) {
+    const iso = typeof d === 'string' ? d : d.d;
+    if (!iso || iso < TODAY || iso > until) continue;
+    const dow = DOW[new Date(iso + 'T00:00:00Z').getUTCDay()];
+    const time = (pr.timeByDow && pr.timeByDow[dow]) || (pr.time && !/[／]/.test(pr.time) ? pr.time.replace(/（.*$/, '') : '');
+    out.push({ d: iso, t: (typeof d === 'object' && d.t ? d.t.replace(/\s.*$/, '') : pr.title).replace(/（.*$/, ''), time });
+  }
+  return out.sort((a, b) => a.d.localeCompare(b.d)).slice(0, 4);
+}
+const AGE_KEYS = { '👶': 'baby', '🧒': 'pre', '🎒': 'elem' };
+function parseAges(s) {
+  const o = {};
+  for (const m of String(s || '').matchAll(/(👶|🧒|🎒)\s*([◎○△✕×])/g)) o[AGE_KEYS[m[1]]] = m[2];
+  return Object.keys(o).length ? o : null;
+}
+const INDOOR_RE = /(屋内|室内|全天候|ドーム|アリーナ|ミュージアム)/;
+
+// ---- 投稿・おたより・定例 ---------------------------------------------------------
+const TEIREI = new Map();
+for (const sec of read('data/teirei.json', { sections: [] }).sections)
+  for (const p of sec.places)
+    for (const name of p.spots || []) TEIREI.set(name, { otayori: p.otayori || null, teirei: `/teirei.html#${p.key}`, next: teireiNext(p) });
+const POSTS = read('data/map-posts.json', []);
 const bySpot = new Map();
-for (const p of POSTS) {
-  if (!bySpot.has(p.spot)) bySpot.set(p.spot, []);
-  bySpot.get(p.spot).push(p);
+for (const p of POSTS) { if (!bySpot.has(p.spot)) bySpot.set(p.spot, []); bySpot.get(p.spot).push(p); }
+for (const l of bySpot.values()) l.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+const voices = (name) => (bySpot.get(name) || []).map((p) => ({ text: p.text, who: p.who || '', date: p.date || '' }));
+
+// ---- スポット --------------------------------------------------------------------
+const RAW = read('data/map-spots.json', []);
+for (const name of TEIREI.keys()) if (!RAW.some((s) => s.name === name)) problems.push(`定例の spots「${name}」がマップに無い（名前の書き方を合わせる）`);
+const offSeason = [];
+const spotItems = [];
+for (const s of RAW) {
+  let g = groupOf(s.cat);
+  if (g === 'water' && !SUMMER && !s.months) g = 'indoor';   // 屋内ドームのプール（サマーランド）は、冬は「室内」に
+  if (!g) { problems.push(`スポット「${s.name}」の種類「${s.cat}」が、どの種類にも当たらない`); continue; }
+  if (g === 'cafe') continue;                                   // カフェは data/cafes.json から（下）
+  if (s.geoSkip || typeof s.lat !== 'number') continue;          // 行き先ではないもの（「新宿・都心方面へ一本」）
+  if (Array.isArray(s.months) && !s.months.includes(MONTH)) { offSeason.push(s); continue; }
+  const t = TEIREI.get(s.name) || {};
+  const ages = parseAges(s.ages);
+  if (!ages) problems.push(`スポット「${s.name}」に年齢の目安（👶 ○ 🧒 ◎ 🎒 ◎）が無い`);
+  spotItems.push({
+    id: spotSlug(s.name), k: 'spot', g, name: s.name, lat: s.lat, lng: s.lng,
+    acc: s.access || '', desc: s.desc || '', ages,
+    indoor: g === 'indoor' || g === 'jidokan' || (INDOOR_RE.test(`${s.name} ${s.desc}`) && g !== 'park'),
+    map: s.map || mapQ(s.name), off: publicUrl(s.official) || '',
+    otayori: t.otayori || null, teirei: t.teirei || '',
+    reader: s.fromReader || '', voices: voices(s.name),
+    season: s.seasonNote || '', approx: s.geoSource === 'manual-approx',
+    open: openOf(s.access), next: t.next && t.next.length ? t.next : undefined, added: s.added || '',
+  });
 }
-for (const list of bySpot.values()) list.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+// 「雨でもOK」: 室内あそび・児童館・カフェと、説明に屋内とあるもの。公園は「ふわふわドーム」などがあっても入れない
 
-const postHTML = (p) =>
-  `<div class="voice"><div class="vtxt">${esc(p.text)}</div>` +
-  `<div class="vwho">— ${esc(p.who || 'ご近所の方')}${p.date ? `・${esc(p.date)}` : ''}${
-    p.photo ? ' <span class="vph">📷 写真つき</span>' : ''
-  }</div></div>`;
+// ---- カフェ（カフェのページと同じ pages:true だけ） ---------------------------------
+const CAFE = read('data/cafes.json', { cafes: [] });
+const TAG = { play: 'キッズスペース・おもちゃ', seat: '座敷・小上がり・個室', chair: '子ども用の椅子', diaper: 'おむつ替え', nursing: '授乳スペース', menu: '子どもメニュー', stroller: 'ベビーカーで入れる', parking: '駐車場' };
+const cafeSpot = new Map(RAW.filter((s) => groupOf(s.cat) === 'cafe').map((s) => [s.name, s]));
+const cafeItems = [];
+for (const c of (CAFE.cafes || []).filter((c) => c.pages === true)) {
+  if (!c.geo || typeof c.geo.lat !== 'number') { problems.push(`カフェ「${c.name}」に位置（geo）が無い`); continue; }
+  const old = cafeSpot.get(c.name);
+  cafeItems.push({
+    id: old ? spotSlug(c.name) : `cafe-${c.id}`, k: 'cafe', g: 'cafe', name: c.name, lat: c.geo.lat, lng: c.geo.lon,
+    acc: c.area || '', tags: (c.tags || []).map((t) => TAG[t]).filter(Boolean),
+    kids: c.kids || [], hours: c.hours || '', visited: c.visited || [],
+    indoor: true, map: mapQ(c.mapq || c.name), off: c.official || '', more: `/cafe.html#${c.id}`,
+    reader: old && old.fromReader ? old.fromReader : '', voices: voices(c.name),
+    closed: closedOf(c.hours), added: c.added || '',
+  });
+}
+for (const name of cafeSpot.keys()) if (!cafeItems.some((c) => c.name === name)) problems.push(`マップの☕「${name}」が、カフェのページ（data/cafes.json の pages:true）に無い。名前を合わせるか、マップから外す`);
 
-function slug(name) {
-  return spotSlug(name);
+// ---- これからの催し（3週間） ---------------------------------------------------------
+// 🔒 中身は公開用のデータ（docs/homepage/data/events-public.json＝カレンダーと同じ）からだけ取る。
+//    data/events.json は公開しない全件版（連絡先・確度・出典などを持つ）。そこからは「協賛（PR）か」と「状態」だけを見る
+const PUB = read('docs/homepage/data/events-public.json', { events: [] }).events;
+const INNER = new Map(read('data/events.json', { events: [] }).events.map((e) => [e.id, e]));
+const EVENTS = PUB.map((e) => ({ ...e, pr: (INNER.get(e.id) || {}).pr || '', status: (INNER.get(e.id) || {}).status || '' }));
+const GEO = read('data/event-geo.json', {});
+const PR_POS = read('data/map-pr.json', {});
+for (const id of Object.keys(PR_POS)) if (!/^E\d+$/.test(id)) problems.push(`data/map-pr.json の「${id}」は台帳のIDの形になっていない`);
+const lastDay = (e) => (e.span && e.span.to) || (e.dates && e.dates.length ? e.dates[e.dates.length - 1] : '') || '';
+const EV_INDOOR = /(科学館|図書館|児童館|公民館|ホール|下水道館|地域センター|生涯学習センター|交流館|ルミエール|まろにえ|ハウジングステージ|おふろ)/;
+const evItems = [];
+let evNoPos = 0;
+for (const e of EVENTS) {
+  if (e.status && /終了|見送り|中止/.test(e.status)) continue;
+  const future = (e.dates || []).filter((d) => d >= TODAY && d <= UNTIL);
+  const spanOn = e.span && e.span.from && e.span.to && e.span.from <= UNTIL && e.span.to >= TODAY;
+  if (!future.length && !spanOn) continue;
+  // 協賛（紹介型）の催しは、番地を公開している所（map-pr.json）にだけピンを立てる
+  const pos = e.pr ? PR_POS[e.id] : GEO[e.id];
+  if (!pos || typeof pos.lat !== 'number') { evNoPos++; continue; }
+  const ages = e.ages && (e.ages.baby || e.ages.pre || e.ages.elem) ? { baby: e.ages.baby || '', pre: e.ages.pre || '', elem: e.ages.elem || '' } : null;
+  evItems.push({
+    id: 'ev-' + Buffer.from(e.id).toString('hex'), k: 'event', g: 'event', name: e.name, lat: pos.lat, lng: pos.lng,
+    dates: future, span: spanOn ? { from: e.span.from, to: e.span.to } : null, last: lastDay(e),
+    when: e.when || '', place: e.place || '', desc: e.summary || '', note: e.kidsNote || '', ages, cost: e.cost || '',
+    indoor: EV_INDOOR.test(e.place || '') && !/(公園|広場|屋外|園庭)/.test(e.place || ''),
+    off: e.url || '', map: mapQ(e.mapq || e.place || e.name), pr: e.pr || '',
+  });
 }
 
-const spotHTML = (s) => {
-  const shown = bySpot.get(s.name) || [];   // 全件出す（2026-09-04 以降、件数の制限なし）
-  let links = `<a class="lk map" href="${esc(s.map || mapQ(s.name))}" target="_blank" rel="noopener">📍 地図</a>`;
-  if (s.otayori) links += `<a class="lk off" href="${esc(s.otayori.url)}" target="_blank" rel="noopener">📄 ${esc(s.otayori.label)}</a>`;
-  if (s.teirei) links += `<a class="lk off" href="${esc(s.teirei)}">📚 定例の日程</a>`;
-  if (s.official) links += `<a class="lk off" href="${esc(s.official)}" target="_blank" rel="noopener">🔗 公式</a>`;
-  return `      <div class="spot" id="${esc(slug(s.name))}" data-cat="${esc(s.cat)}">
-        <div class="nm">${esc(s.name)}${
-          s.lat ? '' : ` <span class="nopin" title="${esc(s.geoNote || '地図上の位置が確認できていません')}">ピンなし</span>`
-        }</div>
-        ${s.access ? `<div class="acc">${esc(s.access)}</div>` : ''}
-        <div class="desc">${esc(s.desc)}</div>
-        ${
-          // 読者が寄せてくださった体験。公式で裏を取った事実（desc）とは分けて見せる。
-          // ★名前・イニシャルは出さない。狭い地域では特定されうるうえ、
-          //   本人の同意は「内容の掲載」までで、「名乗ること」は別の同意だから。
-          //   ラベルを非特定にしておけば、次に送る人がためらわない。
-          s.fromReader
-            ? `<div class="reader"><div class="reader-h">💬 読者の方から</div>` +
-              `<p>${esc(s.fromReader)}</p></div>`
-            : ''
-        }
-        ${s.ages ? `<div class="ages">${esc(s.ages)}</div>` : ''}
-        <div class="links">${links}</div>
-        ${
-          shown.length
-            ? `<div class="voices">${shown.map(postHTML).join('')}</div>`
-            : ''
-        }
-      </div>`;
-};
+const ITEMS = [...evItems, ...spotItems, ...cafeItems];
+const ids = new Set();
+for (const it of ITEMS) { if (ids.has(it.id)) problems.push(`id がぶつかった: ${it.name}`); ids.add(it.id); }
+const used = GROUPS.filter((g) => ITEMS.some((it) => it.g === g.key));
+const nSpot = spotItems.length, nCafe = cafeItems.length, nEv = evItems.length;
 
-const cats = [...new Set(SPOTS.map((s) => s.cat))];
-const sections = cats
-  .map(
-    (cat) => `
-    <section class="cat" data-cat="${esc(cat)}">
-      <h2>${esc(cat)}</h2>
-      <div class="spots">
-${SPOTS.filter((s) => s.cat === cat).map(spotHTML).join('\n')}
-      </div>
-    </section>`
-  )
-  .join('\n');
+if (problems.length) { for (const p of problems) console.error('🔴 ' + p); process.exit(1); }
 
-const totalPosts = POSTS.length;
-const pinned = SPOTS.filter((s) => typeof s.lat === 'number').length;
+// ---- ページ ----------------------------------------------------------------------
+const chips = [`<button type="button" class="om-chip" data-g="" aria-pressed="true">すべて<span class="c">${ITEMS.length}</span></button>`]
+  .concat(used.map((g) => `<button type="button" class="om-chip" data-g="${g.key}" aria-pressed="false" style="--c:${g.color}"><span aria-hidden="true">${g.icon}</span>${esc(g.chip)}<span class="c">0</span></button>`))
+  .join('');
+const seasonNote = offSeason.length
+  ? `<p class="om-season">❄️ いまの季節は、夏だけの水あそび（${offSeason.map((s) => esc(s.name.replace(/\s*噴水広場$/, 'の噴水').replace(/公園$/, '公園のじゃぶじゃぶ池'))).join('・')}）を地図から外しています。例年、夏になったら戻します。</p>`
+  : '';
+// スポット名（投稿フォームの候補）
+const postSpots = [...spotItems, ...cafeItems].map((s) => ({ name: s.name }));
 
 const page = `<!doctype html>
 <html lang="ja">
@@ -134,68 +215,174 @@ const page = `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <title>みんなのおでかけマップ｜ぼんぼやーじゅ通信</title>
-<meta name="description" content="花小金井まわり（小平・西東京・東久留米・立川・吉祥寺）の、子連れで行ってよかったおでかけ先を地図にまとめています。地元の家庭の声つき。">
+<meta name="description" content="小平・花小金井のまわりの、公園・児童館・室内あそび・子連れで入りやすいカフェ、これからの親子の催しを地図に。花小金井駅から近い順に探せます。">
 <link rel="canonical" href="https://bonvoya.nicomaru.tokyo/map.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bonvoya.nicomaru.tokyo/map.html">
 <meta property="og:title" content="みんなのおでかけマップ｜ぼんぼやーじゅ通信">
-<meta property="og:description" content="花小金井まわりの子連れおでかけ先を、地元の家庭の声とあわせて地図に。">
+<meta property="og:description" content="公園・児童館・室内あそび・子連れで入りやすいカフェ・これからの催しを、1枚の地図に。">
 <meta property="og:locale" content="ja_JP">
 <link rel="stylesheet" href="/assets/bv-tokens.css">
 <link rel="stylesheet" href="/assets/leaflet/leaflet.css">
-<link rel="stylesheet" href="/assets/bv-map.css?v=20261118b">
 <link rel="stylesheet" href="/assets/bv-post.css">
 <link rel="stylesheet" href="/assets/bv-nav.css">
 <style>
-  main { padding: 2rem 0 1rem; }
-  .count { margin-top: 1rem; font-size: .88rem; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .45rem .95rem; display: inline-block; }
-  .bvc-invite {
-    margin: 1.8rem 0 .4rem; padding: 1.2rem 1.1rem; border-radius: 16px;
-    background: var(--surface-2, #F3F7F9); border: 1px solid rgba(44,124,158,.22);
-    text-align: center;
+  .om-head { padding: .7rem 0 0; }
+  .om-head h1 { font-size: clamp(1.2rem, 4.6vw, 1.7rem); margin: 0 0 .1rem; line-height: 1.3; }
+  .om-lead { margin: 0; font-size: .8rem; color: var(--ink-soft); line-height: 1.5; }
+  .om-lead b { color: var(--ink); }
+
+  /* 種類のボタン。折り返して全部見せる（横に流すと、右のほうがあることに気づかない） */
+  /* 4つずつ2段。横に流すと、右のほうがあることに気づかない */
+  .om-chips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .3rem; margin: .55rem 0 .35rem; }
+  @media (min-width: 720px) { .om-chips { grid-template-columns: repeat(8, auto); justify-content: start; } }
+  .om-chip { --c: var(--sky-deep); display: inline-flex; align-items: center; justify-content: center; gap: .1rem; min-height: 40px; padding: .2rem .25rem; white-space: nowrap;
+    font: 700 .8rem/1.1 var(--body); color: var(--ink); background: var(--surface); border: 1.5px solid var(--line-strong); border-radius: 999px; cursor: pointer; }
+  .om-chip .c { font-weight: 700; font-size: .7rem; color: var(--ink-soft); margin-left: .1rem; }
+  .om-chip[aria-pressed="true"] { background: var(--c); border-color: var(--c); color: #fff; }
+  .om-chip[data-g=""][aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--ground); }
+  .om-chip[aria-pressed="true"] .c { color: inherit; opacity: .9; }
+  .om-chip:disabled { opacity: .4; cursor: default; }
+  .om-chip:focus-visible, .om-age button:focus-visible, .om-rain:focus-visible, .om-ctl button:focus-visible, .om-row:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+
+  .om-filters { display: flex; flex-wrap: nowrap; align-items: center; gap: .3rem; margin: 0 0 .5rem; }
+  .om-age { display: inline-flex; flex: 1 1 auto; min-width: 0; border: 1.5px solid var(--line-strong); border-radius: 999px; overflow: hidden; background: var(--surface); }
+  .om-age button { flex: 1 1 auto; min-height: 38px; padding: .2rem .3rem; border: 0; background: none; font: 700 .74rem/1.15 var(--body); color: var(--ink-soft); cursor: pointer; white-space: nowrap; }
+  .om-age button + button { border-left: 1px solid var(--line); }
+  .om-age button[aria-pressed="true"] { background: var(--sky-deep); color: var(--on-sky); }
+  .om-rain { flex: 0 0 auto; min-height: 38px; padding: .2rem .55rem; white-space: nowrap; border: 1.5px solid var(--line-strong); border-radius: 999px; background: var(--surface);
+    font: 700 .74rem/1.15 var(--body); color: var(--ink-soft); cursor: pointer; }
+  .om-rain[aria-pressed="true"] { background: var(--sky-deep); border-color: var(--sky-deep); color: var(--on-sky); }
+
+  /* 地図 */
+  .om-stage { position: relative; }
+  #om-map { height: min(56vh, 520px); min-height: 320px; border-radius: 16px; border: 1px solid var(--line-strong); background: var(--surface-2); overflow: hidden; z-index: 0; }
+  .om-ctl { position: absolute; top: 8px; left: 8px; right: 8px; z-index: 500; display: flex; flex-wrap: nowrap; gap: .3rem; pointer-events: none; }
+  .om-ctl button { pointer-events: auto; min-height: 36px; padding: .2rem .6rem; font: 700 .76rem/1.15 var(--body); white-space: nowrap; color: #1d2a31; background: rgba(255,255,255,.96);
+    border: 1px solid rgba(0,0,0,.15); border-radius: 999px; box-shadow: 0 1px 5px rgba(0,0,0,.18); cursor: pointer; }
+  .om-fail { padding: 1.2rem; font-size: .9rem; color: var(--ink-soft); }
+
+  .om-pin-w { background: none; border: 0; }
+  .om-pin { box-sizing: border-box; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; margin: 2px; border-radius: 50%; font-size: 15px; line-height: 1;
+    background: #fff; border: 3px solid var(--c); box-shadow: 0 1px 4px rgba(0,0,0,.35); cursor: pointer; transition: transform .12s; }
+  .om-pin.on { transform: scale(1.3); box-shadow: 0 0 0 4px rgba(255,255,255,.9), 0 2px 8px rgba(0,0,0,.45); }
+  .om-pin.off, .om-ev.off { opacity: .5; filter: grayscale(.6); }
+  .om-ev.soon { outline: 3px solid #FDE68A; }
+  .om-nm { position: absolute; left: 38px; top: 9px; white-space: nowrap; font: 800 11px/1 var(--body); font-style: normal; color: #1d2a31;
+    background: rgba(255,255,255,.92); padding: 3px 5px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.2); pointer-events: none; }
+  .om-ev + .om-nm { left: 56px; top: 8px; }
+  .om-tip { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 700; padding: .6rem 1rem; border-radius: 12px;
+    background: rgba(20,28,33,.82); color: #fff; font: 800 .9rem/1.3 var(--body); pointer-events: none; }
+  .om-tip[hidden] { display: none; }
+  .om-out { position: absolute; left: 10px; bottom: 34px; z-index: 500; font: 700 .74rem/1.2 var(--body); color: #1d2a31; background: rgba(255,255,255,.92);
+    border-radius: 999px; padding: .3rem .6rem; box-shadow: 0 1px 4px rgba(0,0,0,.18); pointer-events: none; }
+  .om-out[hidden] { display: none; }
+  .om-ev { box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 28px; min-width: 50px; margin: 2px; padding: 0 5px;
+    border-radius: 8px; background: var(--c); color: #fff; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.4); cursor: pointer; white-space: nowrap; }
+  .om-ev b { font: 800 12px/1 var(--body); }
+  .om-ev::before { content: "📅"; font-size: 10px; line-height: 1; margin-bottom: 1px; display: none; }
+  .om-ev.pr { background: #5E5148; }
+  .om-ev.on { transform: scale(1.2); box-shadow: 0 0 0 3px rgba(255,255,255,.9), 0 2px 8px rgba(0,0,0,.45); }
+  .om-cl { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; margin: 2px; box-sizing: border-box; border-radius: 50%; background: #1d2a31; color: #fff;
+    font: 800 14px/1 var(--body); border: 3px solid #fff; box-shadow: 0 1px 5px rgba(0,0,0,.4); cursor: pointer; }
+  .om-home { background: none; border: 0; }
+  .om-home i { position: absolute; left: -7px; top: -7px; width: 14px; height: 14px; border-radius: 50%; background: #E0393E; border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(224,57,62,.35); }
+  .om-home span { position: absolute; left: 10px; top: -10px; white-space: nowrap; font: 800 11px/1 var(--body); color: #1d2a31; background: rgba(255,255,255,.92); padding: 3px 5px; border-radius: 6px; }
+
+  /* カード（ピンを押したとき）。広い画面は地図の左下に重ね、スマホは画面の下から */
+  /* 広い画面は地図の右上に重ねる（左下の Google のロゴを隠さない）。スマホは画面の下から */
+  .om-card { position: absolute; right: 10px; top: 54px; z-index: 600; width: min(370px, calc(100% - 20px)); max-height: calc(100% - 140px); overflow: auto;
+    background: var(--surface); color: var(--ink); border-radius: 14px; box-shadow: 0 6px 28px rgba(0,0,0,.28); border: 1px solid var(--line-strong); }
+  .om-card[hidden] { display: none; }
+  @media (max-width: 720px) {
+    /* カードを開いても、地図の全体（下の端のロゴまで）がカードの上に見える高さ。上のナビ（約100px）とカード（40vh）を引いた残り */
+    #om-map { height: max(280px, calc(60vh - 106px)); min-height: 0; }
+    .om-card { position: fixed; left: 0; right: 0; top: auto; bottom: 0; width: auto; max-height: 40vh; border-radius: 16px 16px 0 0; border-bottom: 0;
+      padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 -4px 24px rgba(0,0,0,.25); }
   }
+  .om-ch { position: sticky; top: 0; display: flex; align-items: flex-start; gap: .6rem; padding: .8rem .8rem .55rem .9rem; background: var(--surface); border-bottom: 1px solid var(--line); }
+  .om-ci { --c: var(--sky-deep); flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%;
+    background: var(--surface); border: 3px solid var(--c); font-size: 17px; line-height: 1; }
+  .om-ci.sm { width: 28px; height: 28px; font-size: 14px; border-width: 2px; }
+  .om-cn { flex: 1 1 auto; min-width: 0; }
+  .om-cn b { display: block; font-family: var(--maru); font-weight: 800; font-size: 1.02rem; line-height: 1.35; }
+  .om-cm { display: block; font-size: .76rem; color: var(--ink-soft); margin-top: .1rem; }
+  .om-x { flex: 0 0 auto; width: 40px; height: 40px; margin: -6px -4px 0 0; border: 0; border-radius: 50%; background: var(--surface-2); color: var(--ink); font-size: 1.3rem; line-height: 1; cursor: pointer; }
+  .om-cb { padding: .6rem .9rem .9rem; font-size: .9rem; line-height: 1.65; }
+  .om-cb p { margin: 0 0 .45rem; }
+  .om-when b { color: #B33A0B; }
+  .om-acc { color: var(--sky-deep); font-weight: 700; font-size: .84rem; }
+  .om-desc { color: var(--ink-soft); }
+  .om-note { font-size: .84rem; background: var(--surface-2); border-radius: 10px; padding: .45rem .65rem; }
+  .om-cost, .om-prn, .om-approx { font-size: .8rem; color: var(--ink-soft); }
+  .om-season-tag { display: inline-block; font-size: .78rem; font-weight: 700; color: var(--marigold-ink); background: var(--marigold-wash); border-radius: 999px; padding: .1rem .6rem; }
+  .om-tags { list-style: none; display: flex; flex-wrap: wrap; gap: .3rem; padding: 0; margin: 0 0 .5rem; }
+  .om-tags li { font-size: .76rem; font-weight: 700; color: var(--ink); background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: 999px; padding: .12rem .55rem; }
+  .om-kids { margin: 0 0 .5rem; padding-left: 1.1rem; font-size: .84rem; color: var(--ink-soft); }
+  .om-reader { margin: .2rem 0 .55rem; padding: .5rem .7rem; background: var(--sky-wash); border-left: 3px solid var(--sky-deep); border-radius: 0 10px 10px 0; font-size: .86rem; }
+  .om-reader b { display: block; font-size: .74rem; color: var(--sky-deep); margin-bottom: .15rem; }
+  .om-ages { display: flex; gap: .3rem; margin: .1rem 0 .6rem; }
+  .om-age-c { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; padding: .3rem .2rem; border-radius: 10px; background: var(--surface-2); font-size: .95rem; line-height: 1.2; }
+  .om-age-c b { font-size: .95rem; }
+  .om-age-c small { font-size: .68rem; color: var(--ink-soft); }
+  .om-age-c.m1 { background: #E3F2E1; } .om-age-c.m2 { background: #EEF5E2; } .om-age-c.m0 { opacity: .55; }
+  .om-bs { display: flex; flex-wrap: wrap; gap: .4rem; margin: .2rem 0 .3rem; }
+  .om-b { display: inline-flex; align-items: center; min-height: 40px; padding: .3rem .8rem; border-radius: 999px; border: 1.5px solid var(--sky-deep); color: var(--sky-deep);
+    font-weight: 800; font-size: .84rem; text-decoration: none; background: var(--surface); }
+  .om-b.main { background: var(--sky-deep); color: var(--on-sky); }
+  .om-voices p { font-size: .86rem; background: var(--surface-2); border-radius: 10px; padding: .45rem .65rem; }
+  .om-voices small { display: block; color: var(--ink-soft); font-size: .74rem; }
+  .om-share { font-size: .8rem; margin-top: .4rem !important; }
+  .om-share a { color: #06A04A; font-weight: 800; }
+  .om-pr { display: inline-block; margin-left: .3rem; font: 800 .66rem/1 var(--body); font-style: normal; letter-spacing: .06em; color: #fff; background: #5E5148; border-radius: 999px; padding: .2rem .45rem; vertical-align: .15em; }
+  .om-gl { list-style: none; margin: 0; padding: .3rem .5rem .6rem; }
+  .om-today { font-weight: 800; font-size: .84rem; }
+  .om-today.on { color: #1F7A3A; } .om-today.off { color: #9A3412; }
+  .om-new { display: inline-block; margin-left: .3rem; font: 800 .66rem/1 var(--body); color: #7C2D12; background: #FDE68A; border-radius: 999px; padding: .2rem .45rem; vertical-align: .15em; }
+  .om-agekey { font-size: .7rem !important; color: var(--ink-soft); margin: -.35rem 0 .5rem !important; }
+  .om-sub { margin: .2rem 0 .6rem; padding: .5rem .7rem; background: var(--surface-2); border-radius: 10px; font-size: .86rem; }
+  .om-sub b { display: block; font-size: .76rem; margin-bottom: .2rem; }
+  .om-sub ul { list-style: none; margin: 0; padding: 0; }
+  .om-sub li { padding: .15rem 0; }
+  .om-sub li small { color: var(--ink-soft); }
+  .om-sub button { border: 0; background: none; padding: .2rem 0; min-height: 36px; text-align: left; font: 700 .86rem/1.4 var(--body); color: var(--sky-deep); text-decoration: underline; cursor: pointer; }
+  .om-tgs { display: flex; flex-wrap: wrap; gap: .25rem; margin-top: .15rem; }
+  .om-tg { font: 700 .68rem/1.2 var(--body); font-style: normal; border-radius: 999px; padding: .12rem .45rem; }
+  .om-tg.on { color: #1F5F2E; background: #DCF0DF; } .om-tg.off { color: #7C2D12; background: #F6E3D6; }
+  .om-tg.ev { color: #7C2D12; background: #FDE68A; } .om-tg.nw { color: #7C2D12; background: #FEF3C7; border: 1px solid #FCD34D; }
+  .om-row.dim .om-ci, .om-row.dim .om-rb b { opacity: .6; }
+  .om-top { position: fixed; right: 14px; bottom: 16px; z-index: 650; min-height: 46px; padding: .4rem 1rem; border-radius: 999px; border: 0;
+    background: var(--sky-deep); color: var(--on-sky); font: 800 .88rem/1.2 var(--body); box-shadow: 0 4px 14px rgba(0,0,0,.25); cursor: pointer; }
+  .om-top[hidden] { display: none; }
+  .om-gl button small { color: var(--ink-soft); font-weight: 700; }
+  .om-gl button { display: flex; align-items: center; gap: .5rem; width: 100%; min-height: 44px; padding: .3rem .4rem; border: 0; border-bottom: 1px solid var(--line); background: none; text-align: left; font: 700 .9rem/1.35 var(--body); color: var(--ink); cursor: pointer; }
+
+  /* 地図の下の一覧 */
+  .om-lh { display: flex; align-items: baseline; justify-content: space-between; gap: .5rem; margin: 1.1rem 0 .4rem; }
+  .om-lh h2 { font-family: var(--maru); font-weight: 800; font-size: 1.05rem; margin: 0; }
+  .om-lh span { font-size: .8rem; color: var(--ink-soft); }
+  .om-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .om-row { display: flex; align-items: center; gap: .65rem; width: 100%; min-height: 56px; padding: .5rem .2rem; border: 0; border-bottom: 1px solid var(--line);
+    background: none; text-align: left; color: var(--ink); cursor: pointer; font: inherit; }
+  .om-row.on { background: var(--sky-wash); }
+  .om-rb { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+  .om-rb b { font-family: var(--maru); font-weight: 800; font-size: .95rem; line-height: 1.35; }
+  .om-rb small { font-size: .78rem; color: var(--ink-soft); line-height: 1.45; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .om-rd { flex: 0 0 auto; font-size: .78rem; font-weight: 700; color: var(--ink-soft); }
+  .om-none { padding: 1rem .2rem; color: var(--ink-soft); font-size: .9rem; }
+  .om-more { display: block; width: 100%; min-height: 46px; margin: .6rem 0 0; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--surface); font: 800 .9rem/1.2 var(--body); color: var(--sky-deep); cursor: pointer; }
+  .om-more[hidden] { display: none; }
+  .om-season, .om-evnote { font-size: .82rem; color: var(--ink-soft); line-height: 1.7; margin: .9rem 0 0; }
+  .om-legal { font-size: .76rem; color: var(--ink-soft); margin: .5rem 0 0; }
+
+  .bvc-invite { margin: 1.8rem 0 .4rem; padding: 1.2rem 1.1rem; border-radius: 16px; background: var(--surface-2, #F3F7F9); border: 1px solid rgba(44,124,158,.22); text-align: center; }
   .bvc-invite-h { font-family: var(--maru); font-weight: 800; font-size: 1.05rem; margin: 0 0 .5rem; }
   .bvc-invite-b { font-size: .88rem; line-height: 1.7; color: var(--ink-soft, #63727B); margin: 0 0 .9rem; }
-  .bvc-invite-btn {
-    display: inline-block; background: #06C755; color: #fff; text-decoration: none;
-    font-weight: 800; font-size: 1rem; border-radius: 999px; padding: .85rem 1.8rem;
-    box-shadow: 0 6px 18px rgba(6,199,85,.28); min-height: 44px;
-  }
+  .bvc-invite-btn { display: inline-block; background: #06C755; color: #fff; text-decoration: none; font-weight: 800; font-size: 1rem; border-radius: 999px; padding: .85rem 1.8rem; box-shadow: 0 6px 18px rgba(6,199,85,.28); min-height: 44px; }
   @media (max-width: 480px) { .bvc-invite-btn { display: block; } }
-  .nav-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 0; }
-  .nav-pills a { font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none; color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .4rem .9rem; }
-
-  .mapbox { margin-bottom: 2rem; }
-  .reader { margin: .7rem 0 0; padding: .7rem .85rem; background: var(--sky-wash);
-    border-left: 3px solid var(--sky-deep); border-radius: 0 10px 10px 0; }
-  .reader-h { font-size: .78rem; font-weight: 800; color: var(--sky-deep); margin-bottom: .3rem; }
-  .reader p { margin: 0; font-size: .9rem; line-height: 1.7; }
-  .cat { margin-bottom: 2.2rem; }
-  .cat[hidden] { display: none; }
-  .cat > h2 { font-family: var(--maru); font-weight: 800; font-size: 1.3rem; margin: 0 0 1rem; }
-  .spots { display: flex; flex-direction: column; gap: .8rem; }
-  .spot { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 1.05rem 1.15rem; box-shadow: var(--shadow-soft); scroll-margin-top: 1.5rem; }
-  .spot .nm { font-family: var(--maru); font-weight: 800; font-size: 1.06rem; }
-  .nopin { font-family: var(--body); font-weight: 700; font-size: .68rem; color: var(--ink-faint); background: var(--surface-2); border-radius: 999px; padding: .05rem .45rem; vertical-align: .12em; }
-  .spot .acc { font-size: .85rem; color: var(--sky-deep); margin-top: .1rem; }
-  .spot .desc { font-size: .95rem; color: var(--ink-soft); margin-top: .35rem; }
-  /* 親がいちばん見る行。--ink-faint は白地 2.6:1 で本文には足りない */
-  .spot .ages { margin-top: .45rem; font-family: var(--maru); font-weight: 700; font-size: .86rem; color: var(--ink); }
-  .links { margin-top: .35rem; display: flex; flex-wrap: wrap; gap: .6rem; }
-  /* ピンなしスポットの唯一の出口なので、指で押せる大きさを確保する */
-  .lk { font-size: .82rem; font-weight: 700; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
-  .lk.map { color: var(--sky-deep); }
-  .lk.off { color: var(--marigold-ink); }
-  .lk:hover { text-decoration: underline; }
-
-  .voices { margin-top: .8rem; border-top: 1px dashed var(--line-strong); padding-top: .7rem; display: flex; flex-direction: column; gap: .6rem; }
-  .voice { background: var(--surface-2); border-radius: 12px; padding: .6rem .8rem; }
-  .vtxt { font-size: .93rem; line-height: 1.7; }
-  .vwho { font-size: .8rem; color: var(--ink-soft); margin-top: .2rem; }
-  .vph { color: var(--marigold-ink); font-weight: 700; }
-  .more { font-size: .84rem; color: var(--ink-soft); }
-
-  #post { margin: 2.6rem 0 0; scroll-margin-top: 1.5rem; }
+  #post { margin: 2.2rem 0 0; scroll-margin-top: 1.5rem; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .om-age-c.m1 { background: #22402a; } :root:not([data-theme="light"]) .om-age-c.m2 { background: #2b3a25; } :root:not([data-theme="light"]) .om-when b { color: #F49A6B; } }
+  :root[data-theme="dark"] .om-age-c.m1 { background: #22402a; } :root[data-theme="dark"] .om-age-c.m2 { background: #2b3a25; } :root[data-theme="dark"] .om-when b { color: #F49A6B; }
 </style>
 </head>
 <script src="/assets/analytics.js" defer></script>
@@ -210,42 +397,44 @@ const page = `<!doctype html>
   </div>
 ${navSub('map')}
 </nav>
-<header class="ghead">
-  <div class="ghead-in">
-    <div class="eyebrow">Bon Voyage,</div>
-    <h1>みんなの<br>おでかけマップ</h1>
-    <p class="sub">花小金井まわりで「行ってよかった」場所を、地元の家庭の声とあわせて集めています。地図のピンをタップすると、その場所を地図で開けます。</p>
-    <div class="count">掲載スポット ${SPOTS.length}件（地図のピン ${pinned}件）${
-      totalPosts ? ` ／ みんなの声 ${totalPosts}件` : ''
-    }</div>
-    <div class="nav-pills">
-      <a href="/">通信について</a>
-      <a href="/calendar.html">おでかけカレンダー</a>
-      <a href="/issues.html">バックナンバー</a>
-      <a href="/#contact">お問い合わせ</a>
-      <a href="#post">${POST_URL ? 'この地図に書き込む' : 'この地図にひとことを寄せる'}</a>
-    </div>
-  </div>
-</header>
 
 <main class="wrap">
+  <header class="om-head">
+    <h1>みんなのおでかけマップ</h1>
+    <p class="om-lead">小平と となりの市の、公園・児童館・図書館・カフェと<b>これからの催し</b>。</p>
+  </header>
 
-  <div class="mapbox" id="mapbox">
-    <noscript><p class="bvm-fail">地図の表示にはJavaScriptを使っています。切っている場合は、下の一覧からお探しください。各スポットの「📍 地図」から場所を開けます。<br>
-      投稿フォームもJavaScriptを使っています。切っている方は、お手数ですが
-      <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a>でお知らせください。</p></noscript>
+  <div class="om-chips" role="group" aria-label="種類でしぼる">${chips}</div>
+  <div class="om-filters">
+    <div class="om-age" role="group" aria-label="年齢でしぼる">
+      <button type="button" data-age="" aria-pressed="true">全年齢</button><button type="button" data-age="baby" aria-pressed="false" aria-label="赤ちゃん（0〜2歳）">👶赤ちゃん</button><button type="button" data-age="pre" aria-pressed="false" aria-label="未就学（年少〜年長）">🧒未就学</button><button type="button" data-age="elem" aria-pressed="false">🎒小学生</button>
+    </div>
+    <button type="button" class="om-rain" id="om-rain" aria-pressed="false" aria-label="雨でもOK（屋内）だけ">☔雨OK</button>
   </div>
 
-${sections}
+  <div class="om-stage">
+    <div id="om-map" role="region" aria-label="おでかけマップ"><noscript><p class="om-fail">地図の表示にはJavaScriptを使っています。切っている場合は、<a href="/cafe.html">カフェのページ</a>や<a href="/calendar.html">おでかけカレンダー</a>からお探しください。</p></noscript></div>
+    <div class="om-ctl" role="group" aria-label="見る範囲">
+      <button type="button" data-v="home">花小金井駅のまわり</button><button type="button" data-v="all">ぜんぶ</button><button type="button" data-v="geo">📍いまいる場所</button>
+    </div>
+    <div class="om-out" id="om-out" hidden></div>
+    <div class="om-card" id="om-card" hidden aria-live="polite"></div>
+  </div>
+
+  <div class="om-lh"><h2 id="om-lt">花小金井駅から近い順</h2><span><b id="om-ln">0</b>件・距離は直線</span></div>
+  <ul class="om-list" id="om-list" aria-labelledby="om-lt"></ul>
+  <button type="button" class="om-more" id="om-more" hidden>もっと見る</button>
+  <button type="button" class="om-top" id="om-top" hidden>↑ 地図へ</button>
+
+  <p class="om-evnote">📅 催しは、場所が地図に落とせたものだけです。ほかの催しや、もっと先の予定は <a href="/calendar.html">おでかけカレンダー</a> に。</p>
+  ${seasonNote}
+  <p class="om-legal">場所の説明は、市や施設の公式ページで確かめたことを書いています。「💬 読者の方から」は、地元の家庭に教えていただいたことです。営業時間・料金・設備は変わることがあるので、おでかけ前に公式でご確認ください。</p>
 
   <section id="post">
-    <noscript><p class="bvm-fail">投稿フォームの表示にJavaScriptを使っています。切っている方は
+    <noscript><p class="om-fail">投稿フォームの表示にJavaScriptを使っています。切っている方は
       <a href="https://lin.ee/YtcfjnX" target="_blank" rel="noopener">LINE</a>でお知らせいただければ、こちらで載せます。</p></noscript>
   </section>
 
-  <!-- ★地図を見終わった直後。Threadsの問いかけに答えてくれた人が来るのも、ここ。
-       ここに案内が無く、LINEへの道が noscript の中と上のナビだけだった
-       （2026-09-21。カレンダーと同じ穴が空いていた） -->
   <aside class="bvc-invite">
     <p class="bvc-invite-h">この地図、毎週すこしずつ増えています。</p>
     <p class="bvc-invite-b">地元の方に教えていただいた場所を足しています。<br>今週どこへ行くかは、毎週水曜の朝にLINEでおとどけしています。<br>友だち追加だけで届きます。個人情報の入力は不要です。</p>
@@ -253,7 +442,6 @@ ${sections}
   </aside>
 
   <p class="support-line">この地図は、どなたでも無料でお使いいただけます。</p>
-
   <a class="back" href="/">← ぼんぼやーじゅ通信のトップへ</a>
 </main>
 
@@ -266,32 +454,17 @@ ${sections}
 
 <script src="/assets/leaflet/leaflet.js"></script>
 <script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></script>
-<script src="/assets/bv-map.js?v=20261118b"></script>
+<script src="/assets/bv-odekake.js?v=20261128b"></script>
 <script src="/assets/bv-post.js"></script>
-<script type="application/json" id="bv-spots">${jsonInTag(SPOTS)}</script>
-<script type="application/json" id="bv-posts">${jsonInTag(POSTS)}</script>
-<script type="application/json" id="bv-prs">${jsonInTag(PRS)}</script>
+<script type="application/json" id="om-items">${jsonInTag(ITEMS)}</script>
+<script type="application/json" id="om-groups">${jsonInTag(used)}</script>
 <script>
 (function(){
-  var spots = JSON.parse(document.getElementById('bv-spots').textContent);
-  var posts = JSON.parse(document.getElementById('bv-posts').textContent);
-
-  BVMap.mount(document.getElementById('mapbox'), {
-    spots: spots,
-    posts: posts,
-    prs: JSON.parse(document.getElementById('bv-prs').textContent),
-    gmapsKey: ${JSON.stringify(GMAPS_KEY)},
-    // 地図でしぼり込んだら、下の一覧も同じカテゴリだけにする
-    onSelect: function(cat){
-      document.querySelectorAll('.cat').forEach(function(sec){
-        sec.hidden = !!cat && sec.dataset.cat !== cat;
-      });
-    }
-  });
-
+  var items = JSON.parse(document.getElementById('om-items').textContent);
+  BVOdekake.mount({ items: items, groups: JSON.parse(document.getElementById('om-groups').textContent), gmapsKey: ${JSON.stringify(GMAPS_KEY)} });
   BVPost.mount(document.getElementById('post'), {
     endpoint: ${JSON.stringify(POST_URL)},
-    spots: spots,
+    spots: ${jsonInTag(postSpots)},
     textLimit: ${TEXT_LIMIT},
     lineUrl: 'https://lin.ee/YtcfjnX'
   });
@@ -303,7 +476,8 @@ ${sections}
 
 writeFileSync(OUT, page);
 console.log(`wrote ${OUT}`);
-console.log(`  スポット ${SPOTS.length}件（ピン ${pinned}件 / ピンなし ${SPOTS.length - pinned}件）/ 投稿 ${totalPosts}件`);
+console.log(`  スポット ${nSpot}件・カフェ ${nCafe}軒・催し ${nEv}件（3週間・位置なしで出さない ${evNoPos}件）`);
+console.log(`  季節の外で出さない: ${offSeason.map((s) => s.name).join('・') || 'なし'}`);
+console.log(`  種類: ${used.map((g) => `${g.icon}${g.chip} ${ITEMS.filter((i) => i.g === g.key).length}`).join(' / ')}`);
 console.log(`  地図の下地: ${GMAPS_KEY ? 'Googleマップ（読み込めなければ OpenStreetMap）' : 'OpenStreetMap（GMAPS_KEY が無い）'}`);
-console.log(`  PR のピン ${PRS.length}件${PRS.length ? `（${PRS.map((p) => p.pr).join('・')}）` : ''}`);
 console.log(`  投稿の送り先: ${POST_URL || '未設定（フォームは出るが、送信時にコピー案内に切り替わる）'}`);
