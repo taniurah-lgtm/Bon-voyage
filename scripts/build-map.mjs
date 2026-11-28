@@ -131,7 +131,7 @@ for (const s of RAW) {
     id: spotSlug(s.name), k: 'spot', g, name: s.name, lat: s.lat, lng: s.lng,
     acc: s.access || '', desc: s.desc || '', ages,
     indoor: g === 'indoor' || g === 'jidokan' || g === 'library' || (INDOOR_RE.test(`${s.name} ${s.desc}`) && g !== 'park'),
-    map: s.map || mapQ(s.name), off: publicUrl(s.official) || '',
+    map: s.map || mapQ(s.name), q: (() => { try { return new URL(s.map).searchParams.get('query') || s.name; } catch { return s.name; } })(), off: publicUrl(s.official) || '',
     otayori: t.otayori || null, teirei: t.teirei || '',
     reader: s.fromReader || '', voices: voices(s.name),
     season: s.seasonNote || '', approx: s.geoSource === 'manual-approx',
@@ -172,7 +172,7 @@ for (const c of (CAFE.cafes || []).filter((c) => c.pages === true)) {
     id: old ? spotSlug(c.name) : `cafe-${c.id}`, k: 'cafe', g: 'cafe', name: c.name, lat: c.geo.lat, lng: c.geo.lon,
     acc: c.area || '', tags: (c.tags || []).map((t) => TAG[t]).filter(Boolean),
     hours: c.hours || '', visited: c.visited || [],
-    indoor: true, map: mapQ(c.mapq || c.name), off: c.official || '', more: `/cafe.html#${c.id}`,
+    indoor: true, map: mapQ(c.mapq || c.name), q: c.mapq || c.name, off: c.official || '', more: `/cafe.html#${c.id}`,
     reader: old && old.fromReader ? old.fromReader : '', voices: voices(c.name),
     closed: closedOf(c.hours), added: c.added || '',
     week: ISSUE_CAFES.has(c.id) ? `/week/${ISSUE}/pre/` : '',
@@ -216,7 +216,7 @@ for (const e of EVENTS) {
     when: whenRest(e.when), place: e.place || '', desc: e.summary || '', note: e.kidsNote || '', ages, cost: e.cost || '',
     week: ISSUE_IDS.has(e.id) ? `/week/${ISSUE}/${weekTab(ages)}/` : '',
     indoor: EV_INDOOR.test(e.place || '') && !/(公園|広場|屋外|園庭)/.test(e.place || ''),
-    off: e.url || '', map: mapQ(e.mapq || e.place || e.name), pr: e.pr || '',
+    off: e.url || '', map: mapQ(e.mapq || e.place || e.name), q: e.mapq || e.place || e.name, pr: e.pr || '',
   });
 }
 
@@ -517,7 +517,7 @@ ${navSub('map')}
 
 <script src="/assets/leaflet/leaflet.js"></script>
 <script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></script>
-<script src="/assets/bv-odekake.js?v=20261128d"></script>
+<script src="/assets/bv-odekake.js?v=20261128e"></script>
 <script src="/assets/bv-post.js"></script>
 <script type="application/json" id="om-items">${jsonInTag(ITEMS)}</script>
 <script type="application/json" id="om-groups">${jsonInTag(used)}</script>

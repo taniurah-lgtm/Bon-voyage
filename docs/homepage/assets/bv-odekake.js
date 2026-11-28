@@ -209,6 +209,12 @@
       var named = map.getZoom() >= 15;
       if (homeMark) {
         var hp = map.latLngToContainerPoint(homeMark.getLatLng()), lab = [hp.x - 10, hp.y - 14, hp.x + 82, hp.y + 10];
+        // 駅の点の上に、まとめた丸が乗ったら、丸を点の上側へずらす（基準の駅が見えるように）
+        groups.forEach(function (gr) {
+          if (gr.list.length < 2) return;
+          var bx = box(gr);
+          if (Math.abs(gr.x - hp.x) < bx[0] / 2 + 8 && Math.abs(gr.y - hp.y) < bx[1] / 2 + 8) gr.y = hp.y - bx[1] / 2 - 16;
+        });
         var hit = groups.some(function (gr) { var bx = box(gr); return gr.x + bx[0] / 2 > lab[0] && gr.x - bx[0] / 2 < lab[2] && gr.y + bx[1] / 2 > lab[1] && gr.y - bx[1] / 2 < lab[3]; });
         var he = homeMark.getElement(); if (he) he.classList.toggle('nolabel', hit);
       }
@@ -271,6 +277,11 @@
         return '<span class="om-age-c m' + ('◎○△'.indexOf(v) + 1) + '" title="' + AGE[k][1] + '：' + (MARK[v] || v) + '">' + AGE[k][0] + ' <b>' + esc(v) + '</b><small>' + AGE[k][1] + '</small></span>';
       }).join('') + '</div><p class="om-agekey">◎ぴったり ○だいじょうぶ △ひと工夫 ✕対象外</p>';
     }
+    // 花小金井駅（現在地を使っているときは、いまいる場所）からの経路。所要時間と乗り換えは Googleマップが出す
+    function route(it) {
+      if (!it.q) return '';
+      return 'https://www.google.com/maps/dir/?api=1' + (st.baseName === '花小金井駅' ? '&origin=' + encodeURIComponent('花小金井駅') : '') + '&destination=' + encodeURIComponent(it.q) + '&travelmode=transit';
+    }
     function btn(href, text, cls, ext) { return href ? '<a class="om-b' + (cls ? ' ' + cls : '') + '" href="' + esc(href) + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' + text + '</a>' : ''; }
     function cardHTML(it) {
       var g = G[it.g] || {}, d = dist(it);
@@ -283,7 +294,7 @@
       if (it.k === 'event') {
         body += '<p class="om-when"><b>' + esc(it.next ? (it.next === today ? 'きょう ' : it.next === tomorrow ? 'あした ' : '') + md(it.next) : '開催中（〜' + md(it.until) + '）') + '</b>' + (it.when ? '<br>' + esc(it.when) : '') + '</p>';
         if (it.place) body += '<p class="om-acc">📍 ' + esc(it.place) + '</p>';
-        body += '<div class="om-bs">' + btn(it.off, '公式の案内', 'main', true) + btn(it.week, '今週の号で読む') + btn(it.map, 'Googleマップ', '', true) + btn('/calendar.html', 'カレンダー') + '</div>';
+        body += '<div class="om-bs">' + btn(it.off, '公式の案内', 'main', true) + btn(route(it), st.baseName + 'からの行き方', '', true) + btn(it.week, '今週の号で読む') + btn(it.map, 'Googleマップ', '', true) + btn('/calendar.html', 'カレンダー') + '</div>';
         if (it.pr) body += '<p class="om-prn">PR：' + esc(it.pr) + 'のご協賛で掲載しています</p>';
         body += ages(it);
         if (it.desc) body += '<p class="om-desc clamp">' + esc(it.desc) + '</p><button type="button" class="om-more-t">続きを読む</button>';
@@ -293,7 +304,7 @@
         if (it.season) body += '<p class="om-season-tag">' + esc(it.season) + '</p>';
         if (it.acc) body += '<p class="om-acc">📍 ' + esc(it.acc) + '</p>';
         // 押すボタンは上に（行き方・公式）。読みものはその下
-        body += '<div class="om-bs">' + btn(it.map, 'Googleマップで開く', 'main', true) + btn(it.more, 'カフェのくわしい情報') + btn(it.week, '今週の号で読む') + btn(it.otayori && it.otayori.url, '今月のおたより', '', true) + btn(it.teirei, '定例の日程') + btn(it.off, '公式', '', true) + '</div>';
+        body += '<div class="om-bs">' + btn(route(it), '🚃 ' + st.baseName + 'からの行き方', 'main', true) + btn(it.map, 'Googleマップで開く', '', true) + btn(it.more, 'カフェのくわしい情報') + btn(it.week, '今週の号で読む') + btn(it.otayori && it.otayori.url, '今月のおたより', '', true) + btn(it.teirei, '定例の日程') + btn(it.off, '公式', '', true) + '</div>';
         body += ages(it);
         if (it.tags && it.tags.length) body += '<ul class="om-tags" aria-label="お店の設備">' + it.tags.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
         if (it.next && it.next.length) body += '<div class="om-sub"><b>🗓 次の定例</b><ul>' + it.next.slice(0, 3).map(function (x) { return '<li>' + md(x.d) + ' ' + esc(x.t) + (x.time ? ' <small>' + esc(x.time) + '</small>' : '') + '</li>'; }).join('') + '</ul></div>';
