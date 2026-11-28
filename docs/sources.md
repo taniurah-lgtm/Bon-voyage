@@ -716,6 +716,7 @@ pdftotext -bbox   doc.pdf -    # 縦組み。座標から組み直す。市報�
 
 > 🆕 **2026-11-01 おたよりのリンクを、定例ページとマップに出した**（こども若者みらい課の方の提案「各館のおたよりのリンクを、マップと組み合わせて」）。
 > - 館ごとの一覧（URLが変わらない）: 花小金井南 `news/storytopic/1/`・小川町二丁目 `news/storytopic/2/`・小川町一丁目 `news/storytopic/3/`
+> - 🆕 **2026-11-28 来月号も出す**（オーナー「月末に翌月の情報を知りたい人もいる」）。月の20日すぎの巡回で来月号を探し、`otayoriNext` に書く。月が替わると自動で今月号に繰り上がる（`scripts/lib/otayori.mjs`）。おひさまは URL の形が決まっているので `otayoriPattern` を書き、`scripts/check-otayori.mjs`（公開のたびに実行）がリンクだけ自動で見つける。**おひさまの12月号は11/28には出ていた**（児童館3館は11/28の時点で11月号のまま）
 > - 今月号は記事のURL（11月号＝はなみん `article/933/`・おがにん `934`・おがいち `935`）。**毎月、新しい号が出たら `data/teirei.json` の `otayori` を差し替える**
 >   （おひさまは `fukushi.unchusha.com/kodomokatei_kodaira/otayori/YYYYMM.pdf`）。古い号のままだと `node scripts/build-teirei.mjs` が🔴で知らせる
 > - マップは `data/teirei.json` の `spots` から同じリンクを読む（書くのは1か所だけ）

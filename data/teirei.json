@@ -844,13 +844,19 @@
      ],
      "short": "おひさまひろば",
      "otayori": {
+      "label": "子ども家庭支援センターだより 11月号（PDF）",
+      "url": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202611.pdf",
+      "month": "2026-11"
+     },
+     "spots": [
+      "子ども家庭支援センター 子育て交流ひろば「おひさま」"
+     ],
+     "otayoriNext": {
       "label": "子ども家庭支援センターだより 12月号（PDF）",
       "url": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202612.pdf",
       "month": "2026-12"
      },
-     "spots": [
-      "子ども家庭支援センター 子育て交流ひろば「おひさま」"
-     ]
+     "otayoriPattern": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/{YYYYMM}.pdf"
     }
    ]
   },
@@ -961,10 +967,16 @@
       }
      ],
      "otayori": {
+      "label": "子ども家庭支援センターだより 11月号（PDF）",
+      "url": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202611.pdf",
+      "month": "2026-11"
+     },
+     "otayoriNext": {
       "label": "子ども家庭支援センターだより 12月号（PDF）",
       "url": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202612.pdf",
       "month": "2026-12"
-     }
+     },
+     "otayoriPattern": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/{YYYYMM}.pdf"
     }
    ]
   }

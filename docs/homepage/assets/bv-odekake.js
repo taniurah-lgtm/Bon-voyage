@@ -319,7 +319,7 @@
         if (it.season) body += '<p class="om-season-tag">' + esc(it.season) + '</p>';
         if (it.acc) body += '<p class="om-acc">📍 ' + esc(it.acc) + '</p>';
         // 押すボタンは上に（行き方・公式）。読みものはその下
-        body += '<div class="om-bs">' + btn(route(it), '🚃 ' + routeLabel(), 'main', true) + btn(it.map, 'Googleマップで開く', '', true) + btn(it.more, 'カフェのくわしい情報') + btn(it.week, '今週の号で読む') + btn(it.otayori && it.otayori.url, '今月のおたより', '', true) + btn(it.teirei, '定例の日程') + btn(it.off, '公式', '', true) + '</div>';
+        body += '<div class="om-bs">' + btn(route(it), '🚃 ' + routeLabel(), 'main', true) + btn(it.map, 'Googleマップで開く', '', true) + btn(it.more, 'カフェのくわしい情報') + btn(it.week, '今週の号で読む') + btn(it.otayori && it.otayori.url, '今月のおたより', '', true) + btn(it.otayoriNext && it.otayoriNext.url, '来月のおたより', '', true) + btn(it.teirei, '定例の日程') + btn(it.off, '公式', '', true) + '</div>';
         body += ages(it);
         if (it.tags && it.tags.length) body += '<ul class="om-tags" aria-label="お店の設備">' + it.tags.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
         if (it.next && it.next.length) body += '<div class="om-sub"><b>🗓 次の定例</b><ul>' + it.next.slice(0, 3).map(function (x) { return '<li>' + md(x.d) + ' ' + esc(x.t) + (x.time ? ' <small>' + esc(x.time) + '</small>' : '') + '</li>'; }).join('') + '</ul></div>';

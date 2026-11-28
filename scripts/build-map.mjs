@@ -28,6 +28,7 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { jsonInTag, esc } from './lib/gate.mjs';
 import { publicUrl } from './lib/city-site.mjs';
 import { spotSlug } from './lib/spot-slug.mjs';
+import { otayoriOf } from './lib/otayori.mjs';
 
 const read = (p, d) => (existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : d);
 const TODAY = process.env.BV_TODAY || new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
@@ -105,7 +106,7 @@ const INDOOR_RE = /(屋内|室内|全天候|ドーム|アリーナ|ミュージ�
 const TEIREI = new Map();
 for (const sec of read('data/teirei.json', { sections: [] }).sections)
   for (const p of sec.places)
-    for (const name of p.spots || []) TEIREI.set(name, { otayori: p.otayori || null, teirei: `/teirei.html#${p.key}`, next: teireiNext(p) });
+    for (const name of p.spots || []) { const o = otayoriOf(p, TODAY); TEIREI.set(name, { otayori: o.cur, otayoriNext: o.next, teirei: `/teirei.html#${p.key}`, next: teireiNext(p) }); }
 const POSTS = read('data/map-posts.json', []);
 const bySpot = new Map();
 for (const p of POSTS) { if (!bySpot.has(p.spot)) bySpot.set(p.spot, []); bySpot.get(p.spot).push(p); }
@@ -132,7 +133,7 @@ for (const s of RAW) {
     acc: s.access || '', desc: s.desc || '', ages,
     indoor: g === 'indoor' || g === 'jidokan' || g === 'library' || (INDOOR_RE.test(`${s.name} ${s.desc}`) && g !== 'park'),
     map: s.map || mapQ(s.name), q: (() => { try { return new URL(s.map).searchParams.get('query') || s.name; } catch { return s.name; } })(), off: publicUrl(s.official) || '',
-    otayori: t.otayori || null, teirei: t.teirei || '',
+    otayori: t.otayori || null, otayoriNext: t.otayoriNext || null, teirei: t.teirei || '',
     reader: s.fromReader || '', voices: voices(s.name),
     season: s.seasonNote || '', approx: s.geoSource === 'manual-approx',
     open: s.open || openOf(s.access), next: t.next && t.next.length ? t.next : undefined, added: s.added || '',
@@ -541,7 +542,7 @@ ${navSub('map')}
 
 <script src="/assets/leaflet/leaflet.js"></script>
 <script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></script>
-<script src="/assets/bv-odekake.js?v=20261128h"></script>
+<script src="/assets/bv-odekake.js?v=20261128i"></script>
 <script src="/assets/bv-post.js"></script>
 <script type="application/json" id="om-items">${jsonInTag(ITEMS)}</script>
 <script type="application/json" id="om-groups">${jsonInTag(used)}</script>

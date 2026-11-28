@@ -19,6 +19,7 @@ import { navSub } from './lib/nav.mjs';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { publicUrl } from './lib/city-site.mjs';
 import { spotSlug } from './lib/spot-slug.mjs';
+import { otayoriOf } from './lib/otayori.mjs';
 
 const SRC = 'data/teirei.json';
 const OUT = 'docs/homepage/teirei.html';
@@ -53,9 +54,15 @@ for (const p of places) {
   if (!p.checked) problems.push(`${p.name}: checked（確かめた日）が無い`);
   // 🆕 2026-11-01 こども若者みらい課の提案:「各館のおたよりのリンクを、マップと組み合わせて」。古い号のままなら知らせる
   if (p.otayori) {
-    if (!p.otayori.url || !p.otayori.label || !p.otayori.month) problems.push(`${p.name}: otayori に label・url・month がそろっていない`);
-    else if (p.otayori.month < todayJST.slice(0, 7)) warn.push(`${p.name}: おたよりが ${p.otayori.month} のまま。今月号に替える`);
-    if (LEAK.test(p.otayori.label || '')) problems.push(`${p.name}: おたよりの見出しに内部の話: ${p.otayori.label}`);
+    for (const o of [p.otayori, p.otayoriNext].filter(Boolean)) {
+      if (!o.url || !o.label || !o.month) problems.push(`${p.name}: otayori / otayoriNext に label・url・month がそろっていない`);
+      if (LEAK.test(o.label || '')) problems.push(`${p.name}: おたよりの見出しに内部の話: ${o.label}`);
+    }
+    // 🆕 2026-11-28 今月号と来月号（月末は来月号も出す。月が替わると来月号が今月号に繰り上がる）
+    const o = otayoriOf(p, todayJST);
+    p._ota = o;
+    if (!o.cur || o.cur.month < todayJST.slice(0, 7)) warn.push(`${p.name}: おたよりが ${o.cur ? o.cur.month : '無い'} のまま。今月号を足す（otayori / otayoriNext）`);
+    if (+todayJST.slice(8, 10) >= 20 && !o.next) warn.push(`${p.name}: 来月号がまだ。出ていたら otayoriNext に足す（月末に来月の予定を知りたい人がいる）`);
   }
   else if (daysBetween(p.checked, todayJST) > STALE_DAYS) warn.push(`${p.name}: 確かめてから ${daysBetween(p.checked, todayJST)} 日。公式を見直す`);
   for (const g of p.programs) {
@@ -121,7 +128,8 @@ function place(p) {
   return `<article class="pl" id="${p.key}" data-ages="${ages || 'all'}">
       <div class="pl-h"><h2>${esc(p.name)}</h2>${p.town ? `<p class="town">${esc(p.town)}</p>` : ''}</div>
       ${p.intro ? `<p class="intro">${esc(p.intro)}</p>` : ''}
-      ${p.otayori ? `<a class="ota" href="${esc(p.otayori.url)}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜おたより">📄 ${esc(p.otayori.label)}<span>月ごとの催しは、ここに出ます</span></a>` : ''}
+      ${p._ota && p._ota.cur ? `<a class="ota" href="${esc(p._ota.cur.url)}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜おたより">📄 ${esc(p._ota.cur.label)}<span>月ごとの催しは、ここに出ます</span></a>` : ''}
+      ${p._ota && p._ota.next ? `<a class="ota nx" href="${esc(p._ota.next.url)}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜来月のおたより">📄 ${esc(p._ota.next.label)}<span>来月号も出ています</span></a>` : ''}
       ${p.note ? `<p class="more">${esc(p.note)}</p>` : ''}
       ${p.programs.map((g) => program(g, p)).join('\n      ')}
       ${p.footnote ? `<p class="fn">${esc(p.footnote)}</p>` : ''}
@@ -129,7 +137,7 @@ function place(p) {
         <span class="chk">${fmtChecked(p.checked)}に、公式で確かめました</span>
         <span class="acts">
           ${p.otayoriList ? `<a class="lk" href="${esc(p.otayoriList)}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜これまでのおたより">これまでのおたより</a>` : ''}
-          ${publicUrl(p.url) && publicUrl(p.url) !== (p.otayori || {}).url ? `<a class="lk" href="${esc(publicUrl(p.url))}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜公式">公式</a>` : ''}
+          ${publicUrl(p.url) && ![p.otayori, p.otayoriNext].some((o) => o && o.url === publicUrl(p.url)) ? `<a class="lk" href="${esc(publicUrl(p.url))}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜公式">公式</a>` : ''}
           ${p.spots ? `<a class="lk" href="/map.html#${spotSlug(p.spots[0])}" data-goatcounter-click="定例｜${esc(short(p.name))}｜マップ">おでかけマップ</a>` : ''}
           <a class="lk" href="${mapUrl(p)}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜地図">地図</a>
         </span>
@@ -169,13 +177,16 @@ const desc = '小平市の図書館のおはなし会・絵本のへや、児童
 
 // 🆕 2026-11-01 ページの上に「今月のおたより」。月ごとの催しは、館のおたよりがいちばん新しい（こども若者みらい課の提案）
 const otaSeen = new Set();
-const otaPlaces = places.filter((p) => p.otayori && !otaSeen.has(p.otayori.url) && otaSeen.add(p.otayori.url));
+const otaPlaces = places.filter((p) => p._ota && p._ota.cur && !otaSeen.has(p._ota.cur.url) && otaSeen.add(p._ota.cur.url));
+const nextSeen = new Set();
+const nextPlaces = places.filter((p) => p._ota && p._ota.next && !nextSeen.has(p._ota.next.url) && nextSeen.add(p._ota.next.url));
+const otaLi = (p, o, k) => `<li><a href="${esc(o.url)}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜${k}（上）">${esc(p.short || short(p.name))}<small>${esc(o.label)}</small></a></li>`;
 const otaStrip = otaPlaces.length
   ? `<section class="otas" aria-labelledby="otas-h">
     <h3 id="otas-h">📄 今月のおたより</h3>
-    <ul>${otaPlaces
-      .map((p) => `<li><a href="${esc(p.otayori.url)}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜おたより（上）">${esc(p.short || short(p.name))}<small>${esc(p.otayori.label)}</small></a></li>`)
-      .join('')}</ul>
+    <ul>${otaPlaces.map((p) => otaLi(p, p._ota.cur, 'おたより')).join('')}</ul>
+    ${nextPlaces.length ? `<h3 class="nx-h">📄 来月号が出ています</h3>
+    <ul>${nextPlaces.map((p) => otaLi(p, p._ota.next, '来月のおたより')).join('')}</ul>` : ''}
     <p class="wk">児童館と子育てひろばの、月ごとの催しの案内です（各館の公式）。地域センターのこども広場の「ひろばだより」は、市のサイトが戻りしだい足します。</p>
   </section>`
   : '';
@@ -235,6 +246,9 @@ const html = `<!doctype html>
   .otas .wk { color: var(--ink-faint); font-size: .76rem; line-height: 1.6; margin: .55rem 0 0; }
   .ota { display: flex; flex-direction: column; gap: .1rem; margin: .5rem 0 .7rem; padding: .6rem .85rem; min-height: 48px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--surface); color: var(--link-ink); font-weight: 700; font-size: .9rem; text-decoration: none; }
   .ota span { color: var(--ink-faint); font-weight: 400; font-size: .74rem; }
+  .ota.nx { margin-top: -.3rem; border-style: dashed; }
+  .ota.nx span { color: var(--marigold-ink); font-weight: 700; }
+  .otas .nx-h { margin-top: .8rem; color: var(--marigold-ink); }
 
   /* 目次 */
   .idx { display: flex; flex-wrap: wrap; gap: .35rem; margin: 1rem 0 0; }
