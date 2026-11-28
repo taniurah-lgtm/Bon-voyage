@@ -130,15 +130,29 @@ for (const s of RAW) {
   spotItems.push({
     id: spotSlug(s.name), k: 'spot', g, name: s.name, lat: s.lat, lng: s.lng,
     acc: s.access || '', desc: s.desc || '', ages,
-    indoor: g === 'indoor' || g === 'jidokan' || (INDOOR_RE.test(`${s.name} ${s.desc}`) && g !== 'park'),
+    indoor: g === 'indoor' || g === 'jidokan' || g === 'library' || (INDOOR_RE.test(`${s.name} ${s.desc}`) && g !== 'park'),
     map: s.map || mapQ(s.name), off: publicUrl(s.official) || '',
     otayori: t.otayori || null, teirei: t.teirei || '',
     reader: s.fromReader || '', voices: voices(s.name),
     season: s.seasonNote || '', approx: s.geoSource === 'manual-approx',
-    open: openOf(s.access), next: t.next && t.next.length ? t.next : undefined, added: s.added || '',
+    open: s.open || openOf(s.access), next: t.next && t.next.length ? t.next : undefined, added: s.added || '',
   });
 }
-// 「雨でもOK」: 室内あそび・児童館・カフェと、説明に屋内とあるもの。公園は「ふわふわドーム」などがあっても入れない
+// 「雨でもOK」: 室内あそび・児童館・図書館・カフェと、説明に屋内とあるもの。公園は「ふわふわドーム」などがあっても入れない
+
+// 同じ建物の「〇〇児童館」と「〇〇児童館 こども広場」は1件にする（地図で同じ場所に2つ並ぶと、押しても割れない）。
+// こども広場の時間は説明に足す。こども広場の id（定例のページや古いリンク）は alias で同じ1件に着く
+const RANK = '✕△○◎';
+for (const hub of spotItems.slice()) {
+  const sub = spotItems.find((x) => x !== hub && x.name === `${hub.name} こども広場` && Math.abs(x.lat - hub.lat) < 1e-4 && Math.abs(x.lng - hub.lng) < 1e-4);
+  if (!sub) continue;
+  hub.name = `${hub.name}・こども広場`;
+  hub.desc += ` 館内の「こども広場」は、乳幼児と保護者・小中学生向けの別のスペースで、${sub.open ? sub.open.time : ''}（児童館とは別の時間）。子育ての相談もできます。`;
+  if (hub.ages && sub.ages) for (const k of ['baby', 'pre', 'elem']) if (RANK.indexOf(sub.ages[k]) > RANK.indexOf(hub.ages[k])) hub.ages[k] = sub.ages[k];
+  hub.voices = hub.voices.concat(sub.voices);
+  hub.alias = [sub.id];
+  spotItems.splice(spotItems.indexOf(sub), 1);
+}
 
 // ---- カフェ（カフェのページと同じ pages:true だけ） ---------------------------------
 const CAFE = read('data/cafes.json', { cafes: [] });
@@ -151,7 +165,7 @@ for (const c of (CAFE.cafes || []).filter((c) => c.pages === true)) {
   cafeItems.push({
     id: old ? spotSlug(c.name) : `cafe-${c.id}`, k: 'cafe', g: 'cafe', name: c.name, lat: c.geo.lat, lng: c.geo.lon,
     acc: c.area || '', tags: (c.tags || []).map((t) => TAG[t]).filter(Boolean),
-    kids: c.kids || [], hours: c.hours || '', visited: c.visited || [],
+    hours: c.hours || '', visited: c.visited || [],
     indoor: true, map: mapQ(c.mapq || c.name), off: c.official || '', more: `/cafe.html#${c.id}`,
     reader: old && old.fromReader ? old.fromReader : '', voices: voices(c.name),
     closed: closedOf(c.hours), added: c.added || '',
@@ -170,6 +184,19 @@ const PR_POS = read('data/map-pr.json', {});
 for (const id of Object.keys(PR_POS)) if (!/^E\d+$/.test(id)) problems.push(`data/map-pr.json の「${id}」は台帳のIDの形になっていない`);
 const lastDay = (e) => (e.span && e.span.to) || (e.dates && e.dates.length ? e.dates[e.dates.length - 1] : '') || '';
 const EV_INDOOR = /(科学館|図書館|児童館|公民館|ホール|下水道館|地域センター|生涯学習センター|交流館|ルミエール|まろにえ|ハウジングステージ|おふろ)/;
+// 最新の号（LINEで送った号＝sent.log）の年齢別ページに載っている催しは、そのページへつなぐ
+const SENT = existsSync('reports/free/sent.log') ? readFileSync('reports/free/sent.log', 'utf8').trim().split('\n').map((l) => l.split('\t')[0]).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d) && d <= TODAY) : [];
+const ISSUE = SENT.length ? SENT[SENT.length - 1] : '';
+const ISSUE_IDS = new Set(ISSUE && existsSync(`reports/free/web/${ISSUE}.json`) ? (read(`reports/free/web/${ISSUE}.json`, {}).items || []).map((x) => x.id) : []);
+const weekTab = (ages) => { if (!ages) return 'pre'; for (const k of ['pre', 'baby', 'elem']) if (ages[k] === '◎') return k; for (const k of ['pre', 'baby', 'elem']) if (ages[k] === '○') return k; return 'pre'; };
+// 日時の欄の頭の日付（カードでは別に「11/29(日)」と出すので、二重にしない）。時刻などが残らなければ空
+function whenRest(w) {
+  let r = String(w || ''), prev;
+  do { prev = r; r = r.replace(/^[\s・、〜～]*(?:\d{4}年)?(?:\d{1,2}[\/月])?\d{1,2}日?\s*[(（][^)）]{1,8}[)）]/, ''); } while (r !== prev);
+  r = r.replace(/^[\s・、。,]+/, '');
+  if (!r) return '';
+  return /^[〜～]?\s*\d{1,2}:\d{2}/.test(r) || /^[^\d]/.test(r) ? r.replace(/^[〜～]\s*(?=\d{1,2}:)/, '') : String(w || '');
+}
 const evItems = [];
 let evNoPos = 0;
 for (const e of EVENTS) {
@@ -184,7 +211,8 @@ for (const e of EVENTS) {
   evItems.push({
     id: 'ev-' + Buffer.from(e.id).toString('hex'), k: 'event', g: 'event', name: e.name, lat: pos.lat, lng: pos.lng,
     dates: future, span: spanOn ? { from: e.span.from, to: e.span.to } : null, last: lastDay(e),
-    when: e.when || '', place: e.place || '', desc: e.summary || '', note: e.kidsNote || '', ages, cost: e.cost || '',
+    when: whenRest(e.when), place: e.place || '', desc: e.summary || '', note: e.kidsNote || '', ages, cost: e.cost || '',
+    week: ISSUE_IDS.has(e.id) ? `/week/${ISSUE}/${weekTab(ages)}/` : '',
     indoor: EV_INDOOR.test(e.place || '') && !/(公園|広場|屋外|園庭)/.test(e.place || ''),
     off: e.url || '', map: mapQ(e.mapq || e.place || e.name), pr: e.pr || '',
   });
@@ -199,12 +227,20 @@ const nSpot = spotItems.length, nCafe = cafeItems.length, nEv = evItems.length;
 if (problems.length) { for (const p of problems) console.error('🔴 ' + p); process.exit(1); }
 
 // ---- ページ ----------------------------------------------------------------------
-const chips = [`<button type="button" class="om-chip" data-g="" aria-pressed="true">すべて<span class="c">${ITEMS.length}</span></button>`]
-  .concat(used.map((g) => `<button type="button" class="om-chip" data-g="${g.key}" aria-pressed="false" style="--c:${g.color}"><span aria-hidden="true">${g.icon}</span>${esc(g.chip)}<span class="c">0</span></button>`))
+const chips = [`<button type="button" class="om-chip" data-g="" aria-pressed="true"><span class="l">すべて</span><span class="c">${ITEMS.length}</span></button>`]
+  .concat(used.map((g) => `<button type="button" class="om-chip" data-g="${g.key}" aria-pressed="false" style="--c:${g.color}"><span class="l"><span aria-hidden="true">${g.icon}</span>${esc(g.chip)}</span><span class="c">0</span></button>`))
   .join('');
 const seasonNote = offSeason.length
   ? `<p class="om-season">❄️ いまの季節は、夏だけの水あそび（${offSeason.map((s) => esc(s.name.replace(/\s*噴水広場$/, 'の噴水').replace(/公園$/, '公園のじゃぶじゃぶ池'))).join('・')}）を地図から外しています。例年、夏になったら戻します。</p>`
   : '';
+// この1週間で足した場所（一覧の上に1行。毎週の「ふえた」が分かるように）
+const NEWLY = [...spotItems, ...cafeItems].filter((x) => x.added && x.added <= TODAY && x.added >= addDays(TODAY, -7));
+const newLine = (() => {
+  if (!NEWLY.length) return '';
+  const libs = NEWLY.filter((x) => x.g === 'library').length;
+  const names = (libs >= 3 ? [`図書館${libs}館`] : []).concat(NEWLY.filter((x) => !(libs >= 3 && x.g === 'library')).map((x) => { const q = x.name.match(/「(.+?)」/); return q ? q[1] : x.name.replace(/[（(].*$/, ''); }));
+  return `<p class="om-newline"><b>🆕 この1週間で${NEWLY.length}か所</b>${esc(names.slice(0, 4).join('・'))}${names.length > 4 ? ' ほか' : ''}</p>`;
+})();
 // スポット名（投稿フォームの候補）
 const postSpots = [...spotItems, ...cafeItems].map((s) => ({ name: s.name }));
 
@@ -236,29 +272,33 @@ const page = `<!doctype html>
   /* 4つずつ2段。横に流すと、右のほうがあることに気づかない */
   .om-chips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .3rem; margin: .55rem 0 .35rem; }
   @media (min-width: 720px) { .om-chips { grid-template-columns: repeat(8, auto); justify-content: start; } }
-  .om-chip { --c: var(--sky-deep); display: inline-flex; align-items: center; justify-content: center; gap: .1rem; min-height: 40px; padding: .2rem .25rem; white-space: nowrap;
+  /* 名前と件数を2行に（狭い画面でも切れない） */
+  .om-chip { --c: var(--sky-deep); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; min-height: 44px; min-width: 0; padding: .15rem .1rem; white-space: nowrap; overflow: hidden;
     font: 700 .8rem/1.1 var(--body); color: var(--ink); background: var(--surface); border: 1.5px solid var(--line-strong); border-radius: 999px; cursor: pointer; }
-  .om-chip .c { font-weight: 700; font-size: .7rem; color: var(--ink-soft); margin-left: .1rem; }
+  .om-chip .l { display: block; line-height: 1.2; }
+  .om-chip .c { display: block; font-weight: 700; font-size: .66rem; line-height: 1.1; color: var(--ink-soft); }
+  .om-chip .c::after { content: "件"; }
   .om-chip[aria-pressed="true"] { background: var(--c); border-color: var(--c); color: #fff; }
   .om-chip[data-g=""][aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--ground); }
   .om-chip[aria-pressed="true"] .c { color: inherit; opacity: .9; }
   .om-chip:disabled { opacity: .4; cursor: default; }
   .om-chip:focus-visible, .om-age button:focus-visible, .om-rain:focus-visible, .om-ctl button:focus-visible, .om-row:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
 
-  .om-filters { display: flex; flex-wrap: nowrap; align-items: center; gap: .3rem; margin: 0 0 .5rem; }
-  .om-age { display: inline-flex; flex: 1 1 auto; min-width: 0; border: 1.5px solid var(--line-strong); border-radius: 999px; overflow: hidden; background: var(--surface); }
-  .om-age button { flex: 1 1 auto; min-height: 38px; padding: .2rem .3rem; border: 0; background: none; font: 700 .74rem/1.15 var(--body); color: var(--ink-soft); cursor: pointer; white-space: nowrap; }
+  .om-filters { display: flex; margin: 0 0 .3rem; }
+  .om-toggles { display: grid; grid-template-columns: 1fr 1fr; gap: .3rem; margin: 0 0 .5rem; }
+  .om-age { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); flex: 1 1 auto; min-width: 0; border: 1.5px solid var(--line-strong); border-radius: 999px; overflow: hidden; background: var(--surface); }
+  .om-age button { min-width: 0; min-height: 44px; padding: .2rem .3rem; border: 0; background: none; font: 700 .74rem/1.15 var(--body); color: var(--ink-soft); cursor: pointer; white-space: nowrap; }
   .om-age button + button { border-left: 1px solid var(--line); }
   .om-age button[aria-pressed="true"] { background: var(--sky-deep); color: var(--on-sky); }
-  .om-rain { flex: 0 0 auto; min-height: 38px; padding: .2rem .55rem; white-space: nowrap; border: 1.5px solid var(--line-strong); border-radius: 999px; background: var(--surface);
+  .om-rain { min-height: 44px; padding: .2rem .5rem; white-space: nowrap; border: 1.5px solid var(--line-strong); border-radius: 999px; background: var(--surface);
     font: 700 .74rem/1.15 var(--body); color: var(--ink-soft); cursor: pointer; }
   .om-rain[aria-pressed="true"] { background: var(--sky-deep); border-color: var(--sky-deep); color: var(--on-sky); }
 
   /* 地図 */
   .om-stage { position: relative; }
-  #om-map { height: min(56vh, 520px); min-height: 320px; border-radius: 16px; border: 1px solid var(--line-strong); background: var(--surface-2); overflow: hidden; z-index: 0; }
+  #om-map { scroll-margin-top: 108px; height: min(56vh, 520px); min-height: 320px; border-radius: 16px; border: 1px solid var(--line-strong); background: var(--surface-2); overflow: hidden; z-index: 0; }
   .om-ctl { position: absolute; top: 8px; left: 8px; right: 8px; z-index: 500; display: flex; flex-wrap: nowrap; gap: .3rem; pointer-events: none; }
-  .om-ctl button { pointer-events: auto; min-height: 36px; padding: .2rem .6rem; font: 700 .76rem/1.15 var(--body); white-space: nowrap; color: #1d2a31; background: rgba(255,255,255,.96);
+  .om-ctl button { pointer-events: auto; min-height: 44px; padding: .2rem .7rem; font: 700 .78rem/1.15 var(--body); white-space: nowrap; color: #1d2a31; background: rgba(255,255,255,.96);
     border: 1px solid rgba(0,0,0,.15); border-radius: 999px; box-shadow: 0 1px 5px rgba(0,0,0,.18); cursor: pointer; }
   .om-fail { padding: 1.2rem; font-size: .9rem; color: var(--ink-soft); }
 
@@ -277,14 +317,18 @@ const page = `<!doctype html>
   .om-out { position: absolute; left: 10px; bottom: 34px; z-index: 500; font: 700 .74rem/1.2 var(--body); color: #1d2a31; background: rgba(255,255,255,.92);
     border-radius: 999px; padding: .3rem .6rem; box-shadow: 0 1px 4px rgba(0,0,0,.18); pointer-events: none; }
   .om-out[hidden] { display: none; }
+  .om-hint { position: absolute; left: 50%; top: 58px; transform: translateX(-50%); z-index: 500; white-space: nowrap; font: 700 .74rem/1.2 var(--body); color: #fff;
+    background: rgba(20,28,33,.78); border-radius: 999px; padding: .35rem .7rem; pointer-events: none; transition: opacity .3s; }
+  .om-hint.gone { opacity: 0; }
   .om-ev { box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 28px; min-width: 50px; margin: 2px; padding: 0 5px;
     border-radius: 8px; background: var(--c); color: #fff; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.4); cursor: pointer; white-space: nowrap; }
   .om-ev b { font: 800 12px/1 var(--body); }
   .om-ev::before { content: "📅"; font-size: 10px; line-height: 1; margin-bottom: 1px; display: none; }
   .om-ev.pr { background: #5E5148; }
   .om-ev.on { transform: scale(1.2); box-shadow: 0 0 0 3px rgba(255,255,255,.9), 0 2px 8px rgba(0,0,0,.45); }
-  .om-cl { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; margin: 2px; box-sizing: border-box; border-radius: 50%; background: #1d2a31; color: #fff;
-    font: 800 14px/1 var(--body); border: 3px solid #fff; box-shadow: 0 1px 5px rgba(0,0,0,.4); cursor: pointer; }
+  .om-cl { display: flex; width: max-content; align-items: center; justify-content: center; gap: 2px; height: 30px; min-width: 44px; margin: 1px auto; padding: 0 7px; box-sizing: border-box; border-radius: 999px; background: #1d2a31; color: #fff;
+    font: 800 13px/1 var(--body); border: 2px solid #fff; box-shadow: 0 1px 5px rgba(0,0,0,.4); cursor: pointer; white-space: nowrap; }
+  .om-cl i { font-style: normal; font-size: 13px; letter-spacing: -1px; }
   .om-home { background: none; border: 0; }
   .om-home i { position: absolute; left: -7px; top: -7px; width: 14px; height: 14px; border-radius: 50%; background: #E0393E; border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(224,57,62,.35); }
   .om-home span { position: absolute; left: 10px; top: -10px; white-space: nowrap; font: 800 11px/1 var(--body); color: #1d2a31; background: rgba(255,255,255,.92); padding: 3px 5px; border-radius: 6px; }
@@ -307,7 +351,7 @@ const page = `<!doctype html>
   .om-cn { flex: 1 1 auto; min-width: 0; }
   .om-cn b { display: block; font-family: var(--maru); font-weight: 800; font-size: 1.02rem; line-height: 1.35; }
   .om-cm { display: block; font-size: .76rem; color: var(--ink-soft); margin-top: .1rem; }
-  .om-x { flex: 0 0 auto; width: 40px; height: 40px; margin: -6px -4px 0 0; border: 0; border-radius: 50%; background: var(--surface-2); color: var(--ink); font-size: 1.3rem; line-height: 1; cursor: pointer; }
+  .om-x { flex: 0 0 auto; width: 44px; height: 44px; margin: -6px -4px 0 0; border: 0; border-radius: 50%; background: var(--surface-2); color: var(--ink); font-size: 1.3rem; line-height: 1; cursor: pointer; }
   .om-cb { padding: .6rem .9rem .9rem; font-size: .9rem; line-height: 1.65; }
   .om-cb p { margin: 0 0 .45rem; }
   .om-when b { color: #B33A0B; }
@@ -327,13 +371,13 @@ const page = `<!doctype html>
   .om-age-c small { font-size: .68rem; color: var(--ink-soft); }
   .om-age-c.m1 { background: #E3F2E1; } .om-age-c.m2 { background: #EEF5E2; } .om-age-c.m0 { opacity: .55; }
   .om-bs { display: flex; flex-wrap: wrap; gap: .4rem; margin: .2rem 0 .3rem; }
-  .om-b { display: inline-flex; align-items: center; min-height: 40px; padding: .3rem .8rem; border-radius: 999px; border: 1.5px solid var(--sky-deep); color: var(--sky-deep);
+  .om-b { display: inline-flex; align-items: center; min-height: 44px; padding: .3rem .8rem; border-radius: 999px; border: 1.5px solid var(--sky-deep); color: var(--sky-deep);
     font-weight: 800; font-size: .84rem; text-decoration: none; background: var(--surface); }
   .om-b.main { background: var(--sky-deep); color: var(--on-sky); }
   .om-voices p { font-size: .86rem; background: var(--surface-2); border-radius: 10px; padding: .45rem .65rem; }
   .om-voices small { display: block; color: var(--ink-soft); font-size: .74rem; }
   .om-share { font-size: .8rem; margin-top: .4rem !important; }
-  .om-share a { color: #06A04A; font-weight: 800; }
+  .om-b.line { border-color: #06A04A; color: #057A39; }
   .om-pr { display: inline-block; margin-left: .3rem; font: 800 .66rem/1 var(--body); font-style: normal; letter-spacing: .06em; color: #fff; background: #5E5148; border-radius: 999px; padding: .2rem .45rem; vertical-align: .15em; }
   .om-gl { list-style: none; margin: 0; padding: .3rem .5rem .6rem; }
   .om-today { font-weight: 800; font-size: .84rem; }
@@ -355,6 +399,13 @@ const page = `<!doctype html>
     background: var(--sky-deep); color: var(--on-sky); font: 800 .88rem/1.2 var(--body); box-shadow: 0 4px 14px rgba(0,0,0,.25); cursor: pointer; }
   .om-top[hidden] { display: none; }
   .om-gl button small { color: var(--ink-soft); font-weight: 700; }
+  .om-lb { padding: .7rem .2rem .25rem; font: 800 .8rem/1.2 var(--body); color: #B33A0B; border-bottom: 1px solid var(--line); }
+  .om-tg.na { color: var(--ink-soft); background: var(--surface-2); }
+  .om-newline { margin: .5rem 0 0; font-size: .82rem; color: var(--ink-soft); }
+  .om-newline b { color: #7C2D12; background: #FEF3C7; border-radius: 999px; padding: .05rem .5rem; margin-right: .3rem; }
+  .om-evnote a, .om-season a { display: inline-block; min-height: 44px; line-height: 44px; font-weight: 800; }
+  .leaflet-touch .leaflet-bar a, .leaflet-bar a { width: 44px !important; height: 44px !important; line-height: 44px !important; font-size: 20px !important; }
+  @media (max-width: 380px) { .om-chip { font-size: .76rem; } .om-age button, .om-rain { font-size: .7rem; } .om-ctl button { padding: .2rem .5rem; font-size: .72rem; } }
   .om-gl button { display: flex; align-items: center; gap: .5rem; width: 100%; min-height: 44px; padding: .3rem .4rem; border: 0; border-bottom: 1px solid var(--line); background: none; text-align: left; font: 700 .9rem/1.35 var(--body); color: var(--ink); cursor: pointer; }
 
   /* 地図の下の一覧 */
@@ -401,7 +452,7 @@ ${navSub('map')}
 <main class="wrap">
   <header class="om-head">
     <h1>みんなのおでかけマップ</h1>
-    <p class="om-lead">小平と となりの市の、公園・児童館・図書館・カフェと<b>これからの催し</b>。</p>
+    <p class="om-lead">小平と となりの市の公園・児童館・図書館・カフェ・<b>催し</b></p>
   </header>
 
   <div class="om-chips" role="group" aria-label="種類でしぼる">${chips}</div>
@@ -409,18 +460,22 @@ ${navSub('map')}
     <div class="om-age" role="group" aria-label="年齢でしぼる">
       <button type="button" data-age="" aria-pressed="true">全年齢</button><button type="button" data-age="baby" aria-pressed="false" aria-label="赤ちゃん（0〜2歳）">👶赤ちゃん</button><button type="button" data-age="pre" aria-pressed="false" aria-label="未就学（年少〜年長）">🧒未就学</button><button type="button" data-age="elem" aria-pressed="false">🎒小学生</button>
     </div>
-    <button type="button" class="om-rain" id="om-rain" aria-pressed="false" aria-label="雨でもOK（屋内）だけ">☔雨OK</button>
+  </div>
+  <div class="om-toggles">
+    <button type="button" class="om-rain" id="om-rain" aria-pressed="false">☔ 雨の日も行ける</button><button type="button" class="om-rain" id="om-now" aria-pressed="false">🕘 きょう行ける</button>
   </div>
 
   <div class="om-stage">
     <div id="om-map" role="region" aria-label="おでかけマップ"><noscript><p class="om-fail">地図の表示にはJavaScriptを使っています。切っている場合は、<a href="/cafe.html">カフェのページ</a>や<a href="/calendar.html">おでかけカレンダー</a>からお探しください。</p></noscript></div>
     <div class="om-ctl" role="group" aria-label="見る範囲">
-      <button type="button" data-v="home">花小金井駅のまわり</button><button type="button" data-v="all">ぜんぶ</button><button type="button" data-v="geo">📍いまいる場所</button>
+      <button type="button" data-v="home">駅のまわり</button><button type="button" data-v="all">広く見る</button><button type="button" data-v="geo">📍現在地</button>
     </div>
     <div class="om-out" id="om-out" hidden></div>
+    <div class="om-hint" id="om-hint">👆 ピンを押すと、年齢の目安と行き方が出ます</div>
     <div class="om-card" id="om-card" hidden aria-live="polite"></div>
   </div>
 
+  ${newLine}
   <div class="om-lh"><h2 id="om-lt">花小金井駅から近い順</h2><span><b id="om-ln">0</b>件・距離は直線</span></div>
   <ul class="om-list" id="om-list" aria-labelledby="om-lt"></ul>
   <button type="button" class="om-more" id="om-more" hidden>もっと見る</button>
