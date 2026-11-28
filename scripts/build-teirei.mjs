@@ -20,9 +20,10 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { publicUrl } from './lib/city-site.mjs';
 import { spotSlug } from './lib/spot-slug.mjs';
 import { otayoriOf } from './lib/otayori.mjs';
+import { layoutTiles } from './lib/tilemap.mjs';
 
 const SRC = 'data/teirei.json';
-const OUT = 'docs/homepage/teirei.html';
+const OUT = process.env.TEIREI_OUT || 'docs/homepage/teirei.html';
 const SITE = 'https://bonvoya.nicomaru.tokyo';
 const STALE_DAYS = 45;
 const SHOW_CHIPS = 6; // 日付は先の6回まで見せ、残りは「もっと見る」
@@ -84,6 +85,62 @@ if (problems.length) {
   process.exit(1);
 }
 
+// ── 種類（地図のマスの色と、しぼるボタン）── 2026-11-28 オーナー「幼稚園マップみたいに四角のアイコンで。説明なしで分かるように」
+const KIND = {
+  lib: { icon: '📚', label: '図書館', cls: 'k-lib' },
+  jidokan: { icon: '🏠', label: '児童館', cls: 'k-ji' },
+  kodomo: { icon: '🧸', label: 'こども広場', cls: 'k-ko' },
+  chiiki: { icon: '🚶', label: '出張こども広場', cls: 'k-sh' },
+  hiroba: { icon: '☀️', label: '子育てひろば', cls: 'k-hi' },
+};
+for (const sec of data.sections) for (const p of sec.places) p._kind = KIND[sec.key] ? sec.key : 'chiiki';
+
+// ── 地図（マス目）: 幼稚園マップと同じ外枠と駅。場所はおでかけマップのデータ（spots）から ──
+const ENTEI = JSON.parse(readFileSync('data/entei.json', 'utf8')).map;
+const SPOTS = JSON.parse(readFileSync('data/map-spots.json', 'utf8'));
+const spotOf = (p) => (p.spots || []).map((n) => SPOTS.find((x) => x.name === n)).find((x) => x && typeof x.lat === 'number');
+const MC = 6, MR = 7;
+const tnodes = [
+  ...places.filter((p) => p.tile && spotOf(p)).map((p) => { const x = spotOf(p); return { id: p.key, w: 1, lat: x.lat, lon: x.lng, place: p, open: x.open || null }; }),
+  ...ENTEI.stations.map((st, i) => ({ id: `st${i}`, w: 0.7, lat: st.lat, lon: st.lon, station: st })),
+];
+for (const p of places) if (p.tile && !spotOf(p)) warn.push(`${p.name}: 地図の位置が無い（spots をおでかけマップの名前に合わせる）`);
+const tlay = layoutTiles({ cols: MC, rows: MR, bounds: ENTEI.bounds, ys: 0.55, nodes: tnodes });
+if (tlay.tooMany) { console.error(`🔴 マスが足りない（${tnodes.length} > ${MC}×${MR}）`); process.exit(1); }
+for (const id of tlay.outside) warn.push(`${id}: 地図の外枠の外`);
+const tByCell = new Map([...tlay.at].map(([id, c]) => [c, tnodes.find((n) => n.id === id)]));
+const tLabel = (s) => (s.length >= 5 ? `${esc(s.slice(0, Math.ceil(s.length / 2)))}<wbr>${esc(s.slice(Math.ceil(s.length / 2)))}` : esc(s));
+// きょう開く日か（曜日の決まり）: 図書館などはおでかけマップと同じ決まり（open）。出張こども広場は「毎週月曜」「水曜と第1日曜」から
+const DOWS = '日月火水木金土';
+function openRule(p, sp) {
+  if (sp && sp.open && sp.open.dows) return { dows: sp.open.dows, nth: sp.open.nth || [], closedNth: sp.open.closedNth || [] };
+  const w = (p.programs.find((g) => g.when) || {}).when || '';
+  const m = w.match(/([月火水木金土日])(?:〜([月火水木金土日]))?曜(?:と第(\d)([月火水木金土日])曜)?/);
+  if (!m) return null;
+  const a = DOWS.indexOf(m[1]), b = DOWS.indexOf(m[2] || m[1]), dows = [];
+  for (let i = a; ; i = (i + 1) % 7) { dows.push(i); if (i === b) break; }
+  return { dows, nth: m[3] ? [[DOWS.indexOf(m[4]), +m[3]]] : [], closedNth: [] };
+}
+function tileHtml(n) {
+  if (!n) return '<span class="cell" aria-hidden="true"></span>';
+  if (n.station) return `<span class="cell st" aria-hidden="true"><span>${esc(n.station.name)}</span></span>`;
+  const p = n.place, k = KIND[p._kind], rule = openRule(p, spotOf(p));
+  const dates = p.programs.filter((g) => g.open === true).flatMap((g) => (g.dates || []).map((x) => asItem(x).d)).filter((d) => d >= todayJST).slice(0, 40);
+  return `<a class="cell tt ${k.cls}" href="#${p.key}" data-k="${p._kind}" data-ages="${[...new Set(p.programs.map((g) => g.age))].join(' ')}"${rule ? ` data-rule="${esc(JSON.stringify(rule))}"` : ''}${dates.length ? ` data-dates="${dates.join(' ')}"` : ''} aria-label="${esc(k.label)}：${esc(p.name)}" data-goatcounter-click="定例マップ｜${esc(p.tile)}"><i aria-hidden="true">${k.icon}</i><b>${tLabel(p.tile)}</b></a>`;
+}
+const tmapHtml = `<div class="tmap">
+      <div class="nb nb-top"><span>← ${esc(ENTEI.neighbors.w)}</span><span>↑ ${esc(ENTEI.neighbors.n)}</span><span>${esc(ENTEI.neighbors.e)} →</span></div>
+      <div class="frame">
+        <span class="frame-l">小平市</span>
+        <div class="grid" style="--cols:${MC}">
+          ${[...Array(MC * MR).keys()].map((c) => tileHtml(tByCell.get(c))).join('\n          ')}
+        </div>
+      </div>
+      <div class="nb nb-bot"><span>↓ ${esc(ENTEI.neighbors.s)}</span></div>
+    </div>`;
+const CHIP = { lib: '図書館', jidokan: '児童館', kodomo: 'こども広場', chiiki: '出張', hiroba: 'ひろば' };
+const kindChips = `<div class="kf" role="group" aria-label="種類でしぼる"><button type="button" data-k="" aria-pressed="true">すべて</button>${Object.entries(KIND).map(([k, v]) => `<button type="button" data-k="${k}" aria-pressed="false" class="${v.cls}" aria-label="${esc(v.label)}"><i aria-hidden="true">${v.icon}</i>${esc(CHIP[k])}</button>`).join('')}</div>`;
+
 // ── 部品 ──────────────────────────────────────────────
 const mapUrl = (p) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.mapq || short(p.name))}`;
 const fmtChecked = (iso) => `${+iso.slice(0, 4)}年${+iso.slice(5, 7)}月${+iso.slice(8, 10)}日`;
@@ -125,8 +182,12 @@ function program(g, p) {
 
 function place(p) {
   const ages = [...new Set(p.programs.map((g) => g.age))].join(' ');
-  return `<article class="pl" id="${p.key}" data-ages="${ages || 'all'}">
-      <div class="pl-h"><h2>${esc(p.name)}</h2>${p.town ? `<p class="town">${esc(p.town)}</p>` : ''}</div>
+  const k = KIND[p._kind] || KIND.chiiki;
+  const wh = (p.programs.find((g) => g.when) || {}).when || '';
+  return `<details class="pl" id="${p.key}" data-ages="${ages || 'all'}" data-k="${p._kind}">
+      <summary class="pl-s"><span class="pl-i ${k.cls}" aria-hidden="true">${k.icon}</span><span class="pl-n"><b>${esc(p.name)}</b><small class="pl-next" data-wh="${esc(wh)}">${esc(wh || (p.town || ''))}</small></span><span class="chev" aria-hidden="true"></span></summary>
+      <div class="pl-b">
+      ${p.town ? `<p class="town">${esc(p.town)}</p>` : ''}
       ${p.intro ? `<p class="intro">${esc(p.intro)}</p>` : ''}
       ${p._ota && p._ota.cur ? `<a class="ota" href="${esc(p._ota.cur.url)}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜おたより">📄 ${esc(p._ota.cur.label)}<span>月ごとの催しは、ここに出ます</span></a>` : ''}
       ${p._ota && p._ota.next ? `<a class="ota nx" href="${esc(p._ota.next.url)}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜来月のおたより">📄 ${esc(p._ota.next.label)}<span>来月号も出ています</span></a>` : ''}
@@ -139,10 +200,12 @@ function place(p) {
           ${p.otayoriList ? `<a class="lk" href="${esc(p.otayoriList)}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜これまでのおたより">これまでのおたより</a>` : ''}
           ${publicUrl(p.url) && ![p.otayori, p.otayoriNext].some((o) => o && o.url === publicUrl(p.url)) ? `<a class="lk" href="${esc(publicUrl(p.url))}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜公式">公式</a>` : ''}
           ${p.spots ? `<a class="lk" href="/map.html#${spotSlug(p.spots[0])}" data-goatcounter-click="定例｜${esc(short(p.name))}｜マップ">おでかけマップ</a>` : ''}
-          <a class="lk" href="${mapUrl(p)}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜地図">地図</a>
+          <a class="lk" href="${mapUrl(p)}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜地図">Googleマップ</a>
+          <a class="lk up" href="#tmap-h">↑ 地図へ</a>
         </span>
       </div>
-    </article>`;
+      </div>
+    </details>`;
 }
 
 // 「これから2週間」：予約なしで行ける・日付のあるもの（申込みのいるものは除く）
@@ -153,7 +216,7 @@ for (const p of places) {
     for (const x of (g.dates || []).map(asItem)) {
       if (x.d < todayJST) continue;
       const tm = (g.timeByDow && g.timeByDow[dow(x.d)]) || g.time || '';
-      soon.push({ d: x.d, key: p.key, pl: shortOf(p), t: x.t || g.title, time: x.t ? '' : tm, age: g.age });
+      soon.push({ d: x.d, key: p.key, pl: shortOf(p), t: x.t || g.title, time: x.t ? '' : tm, age: g.age, k: p._kind });
     }
   }
 }
@@ -162,7 +225,7 @@ const byDate = new Map();
 for (const s of soon) byDate.set(s.d, [...(byDate.get(s.d) || []), s]);
 const soonHtml = [...byDate]
   .map(([d, xs]) => `<li class="day" data-d="${d}"><span class="sd">${label(d)}</span><ul>${xs
-    .map((x) => `<li data-age="${x.age}"><a href="#${x.key}">${esc(x.pl)}</a> ${esc(x.t)}${x.time ? `<small>${esc(x.time)}</small>` : ''}</li>`)
+    .map((x) => `<li data-age="${x.age}" data-k="${x.k}"><a href="#${x.key}">${esc(x.pl)}</a> ${esc(x.t.replace(/[（(][^）)]{12,}[）)]/g, ''))}${x.time ? `<small>${esc(x.time)}</small>` : ''}</li>`)
     .join('')}</ul></li>`)
   .join('\n        ');
 
@@ -172,22 +235,21 @@ const regularHtml = regular
   .map((x) => `<li data-age="${x.age}"><a href="#${x.key}">${esc(x.pl)}</a> ${esc(x.t)}<small>${esc(x.when)}</small></li>`)
   .join('\n        ');
 
-const title = '児童館・図書館・子育てひろばの定例（小平）';
-const desc = '小平市の図書館のおはなし会・絵本のへや、児童館のこども広場、子育てひろば、地域センターの出張ひろば。毎月くり返す会の日程を、公式の案内で確かめてまとめています。';
+const title = '児童館・図書館・こども広場（小平）';
+const desc = '小平市の児童館・図書館・こども広場・出張こども広場・子育てひろばを地図に。予約なしで行ける会の日程と、各館のおたより。';
 
 // 🆕 2026-11-01 ページの上に「今月のおたより」。月ごとの催しは、館のおたよりがいちばん新しい（こども若者みらい課の提案）
 const otaSeen = new Set();
 const otaPlaces = places.filter((p) => p._ota && p._ota.cur && !otaSeen.has(p._ota.cur.url) && otaSeen.add(p._ota.cur.url));
 const nextSeen = new Set();
 const nextPlaces = places.filter((p) => p._ota && p._ota.next && !nextSeen.has(p._ota.next.url) && nextSeen.add(p._ota.next.url));
-const otaLi = (p, o, k) => `<li><a href="${esc(o.url)}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜${k}（上）">${esc(p.short || short(p.name))}<small>${esc(o.label)}</small></a></li>`;
+// おたよりは1行ずつ: 「はなみん ［11月号］［12月号］」（月末は来月号も並ぶ）
+const otaRow = (p) => `<li><span class="on">${esc(p.tile || p.short || short(p.name))}</span>${[p._ota.cur, p._ota.next].filter(Boolean)
+  .map((o, i) => `<a href="${esc(o.url)}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜${i ? '来月のおたより' : 'おたより'}（上）"${i ? ' class="nx"' : ''}>${esc((o.label.match(/\d{1,2}月号/) || [o.label])[0])}${i ? '<small>来月</small>' : ''}</a>`).join('')}</li>`;
 const otaStrip = otaPlaces.length
   ? `<section class="otas" aria-labelledby="otas-h">
-    <h3 id="otas-h">📄 今月のおたより</h3>
-    <ul>${otaPlaces.map((p) => otaLi(p, p._ota.cur, 'おたより')).join('')}</ul>
-    ${nextPlaces.length ? `<h3 class="nx-h">📄 来月号が出ています</h3>
-    <ul>${nextPlaces.map((p) => otaLi(p, p._ota.next, '来月のおたより')).join('')}</ul>` : ''}
-    <p class="wk">児童館と子育てひろばの、月ごとの催しの案内です（各館の公式）。地域センターのこども広場の「ひろばだより」は、市のサイトが戻りしだい足します。</p>
+    <h2 id="otas-h">📄 おたより</h2>
+    <ul>${otaPlaces.map(otaRow).join('')}</ul>
   </section>`
   : '';
 
@@ -255,7 +317,7 @@ const html = `<!doctype html>
   .idx a { font-size: .8rem; font-weight: 700; text-decoration: none; color: var(--link-ink); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .3rem .75rem; }
 
   /* 施設ごと */
-  .pl { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); box-shadow: var(--shadow-soft); padding: 1rem 1.05rem .8rem; margin-bottom: .9rem; scroll-margin-top: 64px; }
+  .pl { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); box-shadow: var(--shadow-soft); padding: 1rem 1.05rem .8rem; margin-bottom: .6rem; scroll-margin-top: 110px; }
   .pl-h { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
   .pl h2 { font-family: var(--maru); font-weight: 800; font-size: 1.04rem; margin: 0; line-height: 1.4; }
   .town { font-size: .78rem; color: var(--ink-faint); }
@@ -293,6 +355,62 @@ const html = `<!doctype html>
   .nav-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.6rem 0 0; }
   .nav-pills a { font-family: var(--maru); font-weight: 700; font-size: .84rem; text-decoration: none; color: var(--sky-deep); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .4rem .9rem; }
   [hidden] { display: none !important; }
+
+  /* ── 地図（マス目）── 幼稚園マップと同じ作り。色と絵で種類が分かる */
+  .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .tsec { margin: 0 0 1rem; scroll-margin-top: 110px; }
+  #tmap-h { scroll-margin-top: 110px; }
+  .kf { display: flex; flex-wrap: wrap; gap: .3rem; margin: 0 0 .7rem; }
+  .kf button { display: inline-flex; align-items: center; gap: .2rem; min-height: 44px; padding: .2rem .6rem; border-radius: 999px; border: 1.5px solid var(--line-strong);
+    background: var(--surface); color: var(--ink); font: 700 .8rem/1.2 var(--body); cursor: pointer; }
+  .kf button i { font-style: normal; }
+  .kf button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--ground); }
+  .tmap { margin: 0 0 .3rem; }
+  .nb { display: flex; justify-content: space-between; gap: .5rem; font-size: .68rem; color: var(--ink-faint); line-height: 1.4; }
+  .nb-top { margin-bottom: .45rem; } .nb-bot { justify-content: center; margin-top: .3rem; }
+  .frame { position: relative; border: 2px solid var(--line-strong); border-radius: 14px; background: var(--surface-2); padding: .55rem .4rem .45rem; }
+  .frame-l { position: absolute; top: -.75em; left: .8rem; background: var(--ground); padding: 0 .4rem; font-family: var(--maru); font-weight: 800; font-size: .76rem; color: var(--ink-soft); line-height: 1.4; }
+  .grid { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 5px; }
+  .cell { min-height: 50px; border-radius: 9px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 3px 2px; line-height: 1.15; position: relative; }
+  .tt { --c: var(--sky); background: var(--surface); border: 2px solid var(--c); box-shadow: 0 1px 0 var(--line-strong); text-decoration: none; color: var(--ink); }
+  .tt i { font-style: normal; font-size: 15px; line-height: 1; }
+  .tt b { font-family: var(--maru); font-weight: 800; font-size: clamp(9.5px, 2.6vw, 13px); letter-spacing: -.03em; word-break: keep-all; margin-top: 2px; }
+  .tt:hover, .tt:focus-visible { background: var(--sky-wash); }
+  .tt.off { opacity: .45; }
+  .tt.today::after { content: "きょう"; position: absolute; top: -7px; right: -3px; font: 800 9px/1 var(--body); color: #fff; background: #C2410C; border-radius: 999px; padding: 2px 4px; }
+  .tt.dim { opacity: .18; pointer-events: none; }
+  .k-lib { --c: #2563EB; } .k-ji { --c: #BE185D; } .k-ko { --c: #2F7D3A; } .k-sh { --c: #2F7D3A; border-style: dashed !important; } .k-hi { --c: #C2410C; }
+  .kf button.k-lib, .kf button.k-ji, .kf button.k-ko, .kf button.k-sh, .kf button.k-hi { border-color: var(--c); }
+  .kf button.k-sh { border-style: dashed; }
+  .st { border: 1px dashed var(--ink-faint); color: var(--ink-soft); font-size: clamp(8px, 2.1vw, 11px); letter-spacing: -.05em; white-space: nowrap; overflow: hidden; }
+  .tleg { font-size: .72rem; color: var(--ink-soft); margin: .45rem 0 0; }
+  .lg-today { font-weight: 800; color: #fff; background: #C2410C; border-radius: 999px; padding: 1px 5px; font-size: .66rem; }
+  .lg-off { opacity: .5; font-weight: 700; border: 1px solid var(--line-strong); border-radius: 4px; padding: 0 4px; }
+  .pl:target { box-shadow: 0 0 0 3px var(--sky), var(--shadow-soft); }
+  details.pl { padding: 0; }
+  .pl-s { display: flex; align-items: center; gap: .6rem; min-height: 56px; padding: .55rem .9rem; cursor: pointer; list-style: none; }
+  .pl-s::-webkit-details-marker { display: none; }
+  .pl-i { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 9px; border: 2px solid var(--c); font-size: 16px; }
+  .pl-n { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+  .pl-n b { font-family: var(--maru); font-weight: 800; font-size: .98rem; line-height: 1.35; }
+  .pl-n small { font-size: .76rem; color: var(--ink-soft); line-height: 1.45; }
+  .pl-n small.td { color: #C2410C; font-weight: 800; }
+  .chev { flex: 0 0 auto; width: 10px; height: 10px; border-right: 2px solid var(--ink-faint); border-bottom: 2px solid var(--ink-faint); transform: rotate(45deg); margin: -4px 4px 0 0; transition: transform .15s; }
+  details[open] > .pl-s .chev { transform: rotate(225deg); margin-top: 4px; }
+  .pl-b { padding: 0 1.05rem .8rem; }
+  .pl-b .town { margin: 0; }
+  .sec i { font-style: normal; margin-right: .25rem; }
+  .lk.up { color: var(--ink-soft); }
+  .agef button, .lk { min-height: 44px !important; }
+  .morebtn { min-height: 44px !important; }
+  .otas h2 { font-family: var(--maru); font-weight: 800; font-size: .92rem; margin: 0 0 .4rem; color: var(--sky-deep); }
+  .otas ul { display: block !important; }
+  .otas li { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .4rem; padding: .25rem 0; border-top: 1px dashed var(--line); }
+  .otas li:first-child { border-top: 0; }
+  .otas .on { flex: 0 0 5.5em; font-weight: 800; font-size: .84rem; }
+  .otas li a { display: inline-flex !important; flex-direction: row !important; align-items: center; gap: .25rem; min-height: 40px !important; padding: .2rem .7rem !important; border-radius: 999px !important; font-size: .8rem !important; }
+  .otas li a.nx { border-style: dashed !important; color: var(--marigold-ink); }
+  .otas li a small { font-size: .66rem; font-weight: 800; }
 </style>
 </head>
 <body>
@@ -308,15 +426,18 @@ ${navSub('teirei')}
 </nav>
 <header class="ghead">
   <div class="ghead-in">
-    <div class="eyebrow">Bon Voyage,</div>
-    <h1>児童館・図書館・<br>子育てひろばの定例</h1>
-    <p class="sub">毎月くり返す、無料の会。図書館のおはなし会と絵本のへや、児童館のこども広場、子育てひろば、地域センターへの出張ひろばを、小平市内ぶんまとめました。</p>
+    <h1>児童館・図書館・こども広場</h1>
+    <p class="sub">小平市内、ぜんぶ無料。四角を押すと、その場所の会とおたよりへ。</p>
   </div>
 </header>
 
 <main class="wrap">
-  ${otaStrip}
-  <p class="lead">日程は、図書館・児童館・子ども家庭支援センターの公式の案内で確かめています。行事や天候で変わることがあるので、<b>出かける前に各施設の案内で</b>確かめてください。</p>
+  <section class="tsec" aria-labelledby="tmap-h">
+    <h2 class="vh" id="tmap-h">地図</h2>
+    ${kindChips}
+    ${tmapHtml}
+    <p class="tleg"><span class="lg-today">きょう</span>＝きょう会がある　<span class="lg-off">うすい</span>＝きょうはお休みの日</p>
+  </section>
 
   <div class="agef" role="group" aria-label="年齢でしぼる">
     <button type="button" data-f="" aria-pressed="true">すべて</button>
@@ -325,26 +446,20 @@ ${navSub('teirei')}
   </div>
 
   <section class="soon" aria-labelledby="soon-h">
-    <h3 id="soon-h">これから2週間の、予約なしで行ける日</h3>
+    <h3 id="soon-h">📅 予約なしで行ける会</h3>
     <ul id="soon">
         ${soonHtml}
     </ul>
-    <p class="empty" id="soon-empty" hidden>この2週間に、この年齢向けの日付つきの会は見つかっていません。下の「決まった曜日」をご覧ください。</p>
-    <h3>決まった曜日・時間にひらいているもの</h3>
-    <ul class="reg">
-        ${regularHtml}
-    </ul>
-    <p class="wk">休館日や行事の日は、お休みになることがあります。</p>
+    <button type="button" class="morebtn" id="soon-more" hidden>2週間ぶんを見る</button>
+    <p class="empty" id="soon-empty" hidden>この2週間に、この条件の日付つきの会は見つかっていません。地図の四角から、決まった曜日にひらく所をご覧ください。</p>
   </section>
 
-  <nav class="idx" aria-label="施設の一覧">
-    ${data.sections.map((s) => `<a href="#sec-${s.key}">${esc(s.title.replace(/の「.*$/, ''))}</a>`).join('\n    ')}
-  </nav>
+  ${otaStrip}
 
   ${data.sections
-    .map((s) => `<h2 class="sec" id="sec-${s.key}">${esc(s.title)}</h2>
+    .map((s) => `<div class="secw" data-k="${KIND[s.key] ? s.key : 'chiiki'}"><h2 class="sec" id="sec-${s.key}">${KIND[s.key] ? `<i aria-hidden="true">${KIND[s.key].icon}</i>` : ''}${esc(s.title)}</h2>
   <p class="sec-lead">${esc(s.lead)}</p>
-  ${s.places.map(place).join('\n  ')}`)
+  ${s.places.map(place).join('\n  ')}</div>`)
     .join('\n\n  ')}
 
   <p class="lead">公民館の子ども向けの講座は、回ごとに日にちが決まっているので、<a href="/calendar.html">おでかけカレンダー</a>の「🏛 公民館・児童館」にのせています。</p>
@@ -358,7 +473,7 @@ ${navSub('teirei')}
     </ul>
   </div>
 
-  <p class="about">各施設の公式の案内（ホームページ、おたより、年間の予定表）で、施設ごとに確かめた日を書いています。まとめサイトからの転載はしていません。<br>
+  <p class="about">日程は各施設の公式の案内（ホームページ・おたより・年間の予定表・市の「こどもあそびマップ」）で確かめています。行事や天候で変わることがあるので、出かける前に各施設の案内でご確認ください。<br>
   内容のまちがいに気づいたら、<a href="/#contact">お問い合わせ</a>から教えてください。</p>
 
   <div class="nav-pills">
@@ -405,17 +520,60 @@ ${navSub('teirei')}
     } else if (btn) btn.hidden = true;
   });
 
+  // 地図のマス: きょう会がある所に「きょう」、きょうが休みの曜日の所は薄く
+  var now = new Date(Date.now() + 9 * 3600e3), dw = now.getUTCDay(), nth = Math.ceil(now.getUTCDate() / 7);
+  document.querySelectorAll('.tt').forEach(function (a) {
+    var ds = (a.getAttribute('data-dates') || '').split(' ');
+    if (ds.indexOf(t) >= 0) a.classList.add('today');
+    var r = a.getAttribute('data-rule');
+    if (r) {
+      try {
+        r = JSON.parse(r);
+        var on = r.dows.indexOf(dw) >= 0 || (r.nth || []).some(function (x) { return x[0] === dw && x[1] === nth; });
+        if ((r.closedNth || []).some(function (x) { return x[0] === dw && x[1] === nth; })) on = false;
+        if (!on && !a.classList.contains('today')) { a.classList.add('off'); a.setAttribute('aria-label', a.getAttribute('aria-label') + '（きょうはお休みの日）'); }
+      } catch (e) { /* なし */ }
+    }
+  });
+  // たたんだ欄の1行目: 次の会（予約なしで行ける日）。無ければ決まった曜日
+  var WDJ = ['日', '月', '火', '水', '木', '金', '土'];
+  document.querySelectorAll('details.pl').forEach(function (d) {
+    var li = [].slice.call(d.querySelectorAll('.prog .dates li[data-d]')).filter(function (x) { return x.getAttribute('data-d') >= t && !x.closest('.prog').querySelector('.tag.bk'); })
+      .sort(function (a, b) { return a.getAttribute('data-d').localeCompare(b.getAttribute('data-d')); })[0];
+    var sm = d.querySelector('.pl-next'); if (!sm || !li) return;
+    var iso = li.getAttribute('data-d'), dd = new Date(iso + 'T00:00:00Z');
+    var what = (li.querySelector('span') || {}).textContent || li.closest('.prog').querySelector('h3').firstChild.textContent;
+    sm.textContent = (iso === t ? 'きょう ' : '次は ') + (+iso.slice(5, 7)) + '/' + (+iso.slice(8)) + '(' + WDJ[dd.getUTCDay()] + ') ' + what.trim().replace(/\s*[（(].*$/, '').slice(0, 24);
+    if (iso === t) sm.classList.add('td');
+  });
+  // 地図のマスを押したら、その欄を開く
+  function openHash() {
+    var id = decodeURIComponent((location.hash || '').slice(1)), el = id && document.getElementById(id);
+    if (el && el.tagName === 'DETAILS') { el.open = true; var w = el.closest('.secw'); if (w && w.hidden) { kind = ''; apply(); } setTimeout(function () { el.scrollIntoView({ block: 'start' }); }, 0); }
+  }
+  window.addEventListener('hashchange', openHash);
+  var kind = '', soonAll = false;
   function apply() {
     var ok = function (a) { return !age || a === age || a === 'all'; };
+    document.querySelectorAll('.tt').forEach(function (a) {
+      var ags = (a.getAttribute('data-ages') || '').split(' ');
+      var hit = (!kind || a.getAttribute('data-k') === kind) && (!age || ags.indexOf(age) >= 0 || ags.indexOf('all') >= 0);
+      a.classList.toggle('dim', !hit);
+    });
+    document.querySelectorAll('.secw').forEach(function (w) { w.hidden = !!kind && w.getAttribute('data-k') !== kind; });
+    document.querySelectorAll('.kf button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-k') === kind)); });
     var shown = 0;
+    var days = 0;
     document.querySelectorAll('#soon .day').forEach(function (day) {
       var d = day.getAttribute('data-d'), n = 0;
       day.querySelectorAll('li[data-age]').forEach(function (li) {
-        var on = ok(li.getAttribute('data-age')); li.hidden = !on; if (on) n++;
+        var on = ok(li.getAttribute('data-age')) && (!kind || li.getAttribute('data-k') === kind); li.hidden = !on; if (on) n++;
       });
       var vis = d >= t && d <= lim && n > 0;
-      day.hidden = !vis; if (vis) shown++;
+      if (vis) days++;
+      day.hidden = !vis || (!soonAll && days > 4); if (vis) shown++;
     });
+    document.getElementById('soon-more').hidden = soonAll || days <= 4;
     document.getElementById('soon-empty').hidden = shown > 0;
     document.querySelectorAll('.reg li[data-age], .prog[data-age]').forEach(function (el) {
       el.hidden = !ok(el.getAttribute('data-age'));
@@ -435,7 +593,12 @@ ${navSub('teirei')}
       apply();
     });
   });
+  document.querySelectorAll('.kf button').forEach(function (b) {
+    b.addEventListener('click', function () { kind = b.getAttribute('data-k'); apply(); });
+  });
+  document.getElementById('soon-more').addEventListener('click', function () { soonAll = true; apply(); });
   apply();
+  openHash();
 })();
 </script>
 </body>

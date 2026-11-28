@@ -1,5 +1,5 @@
 {
- "_about": "児童館・図書館・子育てひろばの定例（毎月くり返すもの）。公開ページ docs/homepage/teirei.html の元。node scripts/build-teirei.mjs で組む。公式で確かめた事実だけ。書いていないことは null。図書館の日付は図書館の行事カレンダーと年間予定表（PDF）で照合。checked は公式を見た日。",
+ "_about": "児童館・図書館・子育てひろばの定例（毎月くり返すもの）。公開ページ docs/homepage/teirei.html の元。node scripts/build-teirei.mjs で組む。公式で確かめた事実だけ。書いていないことは null。図書館の日付は図書館の行事カレンダーと年間予定表（PDF）で照合。checked は公式を見た日。 2026-11-28 こども広場（地域センター6か所）と出張こども広場（9か所）を、市の『こどもあそびマップ』（冊子の施設一覧・オーナーの写真）と、おでかけマップのデータ（時間・場所）で足した。tile は地図のマスに出す短い名前",
  "sections": [
   {
    "key": "lib",
@@ -90,7 +90,8 @@
      ],
      "spots": [
       "中央図書館"
-     ]
+     ],
+     "tile": "中央"
     },
     {
      "key": "nakamachi",
@@ -156,7 +157,8 @@
      ],
      "spots": [
       "仲町図書館（なかまちテラス）"
-     ]
+     ],
+     "tile": "仲町"
     },
     {
      "key": "kihei",
@@ -226,7 +228,8 @@
      ],
      "spots": [
       "喜平図書館"
-     ]
+     ],
+     "tile": "喜平"
     },
     {
      "key": "hanakoganei",
@@ -292,7 +295,8 @@
      ],
      "spots": [
       "花小金井図書館"
-     ]
+     ],
+     "tile": "花小金井"
     },
     {
      "key": "kamijuku",
@@ -359,7 +363,8 @@
      ],
      "spots": [
       "上宿図書館"
-     ]
+     ],
+     "tile": "上宿"
     },
     {
      "key": "oonuma",
@@ -433,7 +438,8 @@
      ],
      "spots": [
       "大沼図書館"
-     ]
+     ],
+     "tile": "大沼"
     },
     {
      "key": "tsuda",
@@ -507,7 +513,8 @@
      ],
      "spots": [
       "津田図書館"
-     ]
+     ],
+     "tile": "津田"
     },
     {
      "key": "ogawanishi",
@@ -520,7 +527,8 @@
      "programs": [],
      "spots": [
       "小川西町図書館"
-     ]
+     ],
+     "tile": "小川西町"
     }
    ]
   },
@@ -608,7 +616,8 @@
      "spots": [
       "花小金井南児童館",
       "花小金井南児童館 こども広場"
-     ]
+     ],
+     "tile": "はなみん"
     },
     {
      "key": "oganin",
@@ -670,7 +679,8 @@
      "spots": [
       "小川町二丁目児童館",
       "小川町二丁目児童館 こども広場"
-     ]
+     ],
+     "tile": "おがにん"
     },
     {
      "key": "ogaichi",
@@ -763,6 +773,182 @@
      "spots": [
       "小川町一丁目児童館",
       "小川町一丁目児童館 こども広場"
+     ],
+     "tile": "おがいち"
+    }
+   ]
+  },
+  {
+   "key": "kodomo",
+   "title": "こども広場（地域センター）",
+   "lead": "乳幼児と保護者・小中学生の、無料のひろば。予約なしで入れます。",
+   "places": [
+    {
+     "key": "nakajima",
+     "name": "中島地域センター こども広場",
+     "town": "中島町",
+     "mapq": "小平市中島地域センター",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "checked": "2026-11-28",
+     "tile": "中島",
+     "spots": [
+      "中島地域センター こども広場"
+     ],
+     "intro": "乳幼児と保護者・小中学生向けの、無料のひろば。子育ての相談ができる「子育てコンシェルジュ」がいます。",
+     "programs": [
+      {
+       "title": "こども広場",
+       "age": "all",
+       "open": true,
+       "when": "月〜土曜 10:00〜18:00",
+       "dates": [],
+       "who": "乳幼児と保護者・小中学生",
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "祝日・年末年始は、施設の案内でご確認ください"
+       ]
+      }
+     ]
+    },
+    {
+     "key": "josuihoncho",
+     "name": "上水本町地域センター こども広場",
+     "town": "上水本町",
+     "mapq": "小平市上水本町地域センター",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "checked": "2026-11-28",
+     "tile": "上水本町",
+     "spots": [
+      "上水本町地域センター こども広場"
+     ],
+     "intro": "乳幼児と保護者・小中学生向けの、無料のひろば。子育ての相談ができる「子育てコンシェルジュ」がいます。",
+     "programs": [
+      {
+       "title": "こども広場",
+       "age": "all",
+       "open": true,
+       "when": "月〜土曜 10:00〜18:00",
+       "dates": [],
+       "who": "乳幼児と保護者・小中学生",
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "祝日・年末年始は、施設の案内でご確認ください"
+       ]
+      }
+     ]
+    },
+    {
+     "key": "ogawahigashi",
+     "name": "小川東町地域センター こども広場",
+     "town": "小川東町",
+     "mapq": "小平市小川東町地域センター",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "checked": "2026-11-28",
+     "tile": "小川東町",
+     "spots": [
+      "小川東町地域センター こども広場"
+     ],
+     "intro": "乳幼児と保護者・小中学生向けの、無料のひろば。子育ての相談ができる「子育てコンシェルジュ」がいます。",
+     "programs": [
+      {
+       "title": "こども広場",
+       "age": "all",
+       "open": true,
+       "when": "月〜土曜 10:00〜18:00",
+       "dates": [],
+       "who": "乳幼児と保護者・小中学生",
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "祝日・年末年始は、施設の案内でご確認ください"
+       ]
+      }
+     ]
+    },
+    {
+     "key": "tenjin",
+     "name": "天神地域センター こども広場",
+     "town": "天神町",
+     "mapq": "小平市天神地域センター",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "checked": "2026-11-28",
+     "tile": "天神",
+     "spots": [
+      "天神地域センター こども広場"
+     ],
+     "intro": "乳幼児と保護者・小中学生向けの、無料のひろば。子育ての相談ができる「子育てコンシェルジュ」がいます。",
+     "programs": [
+      {
+       "title": "こども広場",
+       "age": "all",
+       "open": true,
+       "when": "月〜土曜 10:00〜18:00",
+       "dates": [],
+       "who": "乳幼児と保護者・小中学生",
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "祝日・年末年始は、施設の案内でご確認ください"
+       ]
+      }
+     ]
+    },
+    {
+     "key": "oonuma-k",
+     "name": "大沼地域センター こども広場",
+     "town": "大沼町",
+     "mapq": "小平市大沼地域センター",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "checked": "2026-11-28",
+     "tile": "大沼",
+     "spots": [
+      "大沼地域センター こども広場"
+     ],
+     "intro": "乳幼児と保護者・小中学生向けの、無料のひろば。子育ての相談ができる「子育てコンシェルジュ」がいます。",
+     "programs": [
+      {
+       "title": "こども広場",
+       "age": "all",
+       "open": true,
+       "when": "月〜土曜 10:00〜18:00",
+       "dates": [],
+       "who": "乳幼児と保護者・小中学生",
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "祝日・年末年始は、施設の案内でご確認ください"
+       ]
+      }
+     ]
+    },
+    {
+     "key": "sawayaka",
+     "name": "さわやか館 こども広場",
+     "town": "花小金井",
+     "mapq": "小平市さわやか館",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
+     "checked": "2026-11-28",
+     "tile": "さわやか館",
+     "spots": [
+      "さわやか館 こども広場"
+     ],
+     "intro": "乳幼児と保護者・小中学生向けの、無料のひろば。子育ての相談ができる「子育てコンシェルジュ」がいます。",
+     "programs": [
+      {
+       "title": "こども広場",
+       "age": "all",
+       "open": true,
+       "when": "月〜土曜 10:00〜17:00",
+       "dates": [],
+       "who": "乳幼児と保護者・小中学生",
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "祝日・年末年始は、施設の案内でご確認ください"
+       ]
+      }
      ]
     }
    ]
@@ -856,7 +1042,8 @@
       "url": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/202612.pdf",
       "month": "2026-12"
      },
-     "otayoriPattern": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/{YYYYMM}.pdf"
+     "otayoriPattern": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/{YYYYMM}.pdf",
+     "tile": "おひさま"
     }
    ]
   },
@@ -886,6 +1073,10 @@
         "くわしくは花小金井南児童館へ"
        ]
       }
+     ],
+     "tile": "御幸",
+     "spots": [
+      "御幸地域センター 出張こども広場"
      ]
     },
     {
@@ -909,6 +1100,10 @@
         "催しは「出張こども広場だより」で"
        ]
       }
+     ],
+     "tile": "学園東町",
+     "spots": [
+      "学園東町地域センター 出張こども広場"
      ]
     },
     {
@@ -932,6 +1127,10 @@
         "催しは「出張ひろばだより」で"
        ]
       }
+     ],
+     "tile": "中宿",
+     "spots": [
+      "小川西町中宿地域センター 出張こども広場"
      ]
     },
     {
@@ -977,6 +1176,168 @@
       "month": "2026-12"
      },
      "otayoriPattern": "https://fukushi.unchusha.com/kodomokatei_kodaira/otayori/{YYYYMM}.pdf"
+    },
+    {
+     "key": "misono",
+     "name": "出張こども広場（美園地域センター）",
+     "town": "美園町",
+     "mapq": "小平市美園地域センター",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
+     "checked": "2026-11-28",
+     "tile": "美園",
+     "spots": [
+      "美園地域センター 出張こども広場"
+     ],
+     "programs": [
+      {
+       "title": "出張こども広場",
+       "age": "all",
+       "open": true,
+       "when": "毎週月曜 10:00〜18:00",
+       "dates": [],
+       "who": null,
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "決まった曜日だけ開きます。祝日などは施設の案内でご確認ください"
+       ]
+      }
+     ]
+    },
+    {
+     "key": "gakuennishi",
+     "name": "出張こども広場（学園西町地域センター）",
+     "town": "学園西町",
+     "mapq": "小平市学園西町地域センター",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
+     "checked": "2026-11-28",
+     "tile": "学園西町",
+     "spots": [
+      "学園西町地域センター 出張こども広場"
+     ],
+     "programs": [
+      {
+       "title": "出張こども広場",
+       "age": "all",
+       "open": true,
+       "when": "毎週月曜 10:00〜18:00",
+       "dates": [],
+       "who": null,
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "決まった曜日だけ開きます。祝日などは施設の案内でご確認ください"
+       ]
+      }
+     ]
+    },
+    {
+     "key": "suzuki",
+     "name": "出張こども広場（鈴木地域センター）",
+     "town": "鈴木町",
+     "mapq": "小平市鈴木地域センター",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
+     "checked": "2026-11-28",
+     "tile": "鈴木",
+     "spots": [
+      "鈴木地域センター 出張こども広場"
+     ],
+     "programs": [
+      {
+       "title": "出張こども広場",
+       "age": "all",
+       "open": true,
+       "when": "毎週水曜 10:00〜18:00",
+       "dates": [],
+       "who": null,
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "決まった曜日だけ開きます。祝日などは施設の案内でご確認ください"
+       ]
+      }
+     ]
+    },
+    {
+     "key": "ogawahigashi2",
+     "name": "出張こども広場（小川東第二地域センター）",
+     "town": "小川東町",
+     "mapq": "小平市小川東第二地域センター",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
+     "checked": "2026-11-28",
+     "tile": "小川東第二",
+     "spots": [
+      "小川東第二地域センター 出張こども広場"
+     ],
+     "programs": [
+      {
+       "title": "出張こども広場",
+       "age": "all",
+       "open": true,
+       "when": "毎週木曜 10:00〜18:00",
+       "dates": [],
+       "who": null,
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "決まった曜日だけ開きます。祝日などは施設の案内でご確認ください"
+       ]
+      }
+     ]
+    },
+    {
+     "key": "kihei-s",
+     "name": "出張こども広場（喜平地域センター）",
+     "town": "喜平町",
+     "mapq": "小平市喜平地域センター",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
+     "checked": "2026-11-28",
+     "tile": "喜平",
+     "spots": [
+      "喜平地域センター 出張こども広場"
+     ],
+     "programs": [
+      {
+       "title": "出張こども広場",
+       "age": "all",
+       "open": true,
+       "when": "毎週木曜 10:00〜18:00",
+       "dates": [],
+       "who": null,
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "決まった曜日だけ開きます。祝日などは施設の案内でご確認ください"
+       ]
+      }
+     ]
+    },
+    {
+     "key": "ogawanishi-s",
+     "name": "出張こども広場（小川西町地域センター）",
+     "town": "小川西町",
+     "mapq": "小平市小川西町地域センター",
+     "url": "https://www.city.kodaira.tokyo.jp/kurashi/083/083769.html",
+     "checked": "2026-11-28",
+     "tile": "小川西町",
+     "spots": [
+      "小川西町地域センター 出張こども広場"
+     ],
+     "programs": [
+      {
+       "title": "出張こども広場",
+       "age": "all",
+       "open": true,
+       "when": "毎週金曜 10:00〜18:00",
+       "dates": [],
+       "who": null,
+       "cost": "無料",
+       "book": "予約なし",
+       "notes": [
+        "決まった曜日だけ開きます。祝日などは施設の案内でご確認ください"
+       ]
+      }
+     ]
     }
    ]
   }
