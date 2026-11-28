@@ -8,7 +8,8 @@
  *   - ピンを押すと、カードが出る（スマホは画面の下から。地図は上に見えたまま、Googleのロゴも隠さない）
  *   - スマホでは、地図は2本指で動かす（指1本ではページが読み進められる）
  *   - きょう休みの所は薄く。場所のカードには、その近くのこれからの催しと、定例の次の日程も出す
- *   - 地図の下に、しぼった中身を「近い順」（基準は花小金井駅か、いまいる場所）
+ *   - 地図の下に、しぼった中身を「近い順」。基準は、現在地（許可した人は開いたときに自動で）か、選んだ駅・町。
+ *     はじめは市の真ん中（小平市役所）。選んだ場所はその人のブラウザに覚える（2026-11-28 オーナー「花小金井駅中心になっている」）
  * Leaflet はリポジトリ内（/assets/leaflet/）。下地は鍵があれば Googleマップ、無い・読めなければ OpenStreetMap。
  * 会員ページの地図は、これまでの bv-map.js のまま。
  */
@@ -60,8 +61,12 @@
     });
     items = items.filter(function (it) { return !it.gone; });
     var byId = {}; items.forEach(function (it) { byId[it.id] = it; (it.alias || []).forEach(function (a) { byId[a] = it; }); });
-    var HOME = opts.home || [35.7261822, 139.5132235];
-    var st = { g: '', age: '', rain: false, now: false, base: HOME, baseName: '花小金井駅', sel: '', shown: PAGE };
+    // どこから近い順に並べるか。はじめは市の真ん中（小平市役所）。現在地か、駅・町を選ぶと、その人のブラウザに覚える
+    var B = opts.bases || {}, DEF = B.def || { name: '小平市役所', lat: 35.728617, lng: 139.477568, origin: '小平市役所' };
+    var BYKEY = { def: DEF };
+    [['k', B.kodaira], ['n', B.neighbors], ['t', B.towns]].forEach(function (x) { (x[1] || []).forEach(function (b) { BYKEY[x[0] + ':' + b.name] = b; }); });
+    var HOME = [DEF.lat, DEF.lng];
+    var st = { g: '', age: '', rain: false, now: false, base: HOME, baseName: DEF.name, origin: DEF.origin, chosen: false, wide: false, sel: '', shown: PAGE };
     var mapEl = $('om-map'), card = $('om-card'), list = $('om-list');
     var phone = !!(global.L && L.Browser.mobile && L.Browser.touch);
 
@@ -132,7 +137,7 @@
       map.on('click', function () { select(''); });
       // 駅の印はピンより手前に（押せない印なので、下のピンはそのまま押せる）
       // 駅の印はピンの下に。ピンや丸が駅の名前の札にかかるときは、札を消して点だけにする（件数を隠さない）
-      homeMark = L.marker(HOME, { icon: L.divIcon({ className: 'om-home', html: '<i></i><span>花小金井駅</span>', iconSize: [0, 0] }), interactive: false, keyboard: false, zIndexOffset: -500 }).addTo(map);
+      homeMark = L.marker(HOME, { icon: L.divIcon({ className: 'om-home', html: '<i></i><span>' + esc(DEF.name) + '</span>', iconSize: [0, 0] }), interactive: false, keyboard: false, zIndexOffset: -500 }).addTo(map);
       if (phone) twoFingerHint();
     } else if (mapEl) {
       mapEl.innerHTML = '<p class="om-fail">地図を読み込めませんでした。下の一覧からお探しください。</p>';
@@ -259,7 +264,7 @@
       var vis = items.filter(function (it) { return typeof it.lat === 'number' && ok(it); });
       var pts = vis;
       if (view === 'near') {
-        var near = vis.filter(function (it) { return km(st.base, [it.lat, it.lng]) <= (st.g ? 3.2 : 1.8); });
+        var near = vis.filter(function (it) { return km(st.base, [it.lat, it.lng]) <= (st.chosen ? (st.g ? 3.2 : 1.8) : 4.2); });
         pts = near.length >= 4 ? near : vis.slice().sort(function (a, b) { return dist(a) - dist(b); }).slice(0, 8);
       }
       var ll = pts.map(function (it) { return [it.lat, it.lng]; });
@@ -285,12 +290,13 @@
         return '<span class="om-age-c m' + ('◎○△'.indexOf(v) + 1) + '" title="' + AGE[k][1] + '：' + (MARK[v] || v) + '">' + AGE[k][0] + ' <b>' + esc(v) + '</b><small>' + AGE[k][1] + '</small></span>';
       }).join('') + '</div><p class="om-agekey">◎ぴったり ○だいじょうぶ △ひと工夫 ✕対象外</p>';
     }
-    // 花小金井駅（現在地を使っているときは、いまいる場所）からの経路。所要時間と乗り換えは Googleマップが出す
+    // 選んだ駅・町からの経路（現在地や、まだ選んでいないときは出発地を入れない＝Googleマップがいまいる場所から出す）。所要時間と乗り換えは Googleマップが出す
     function route(it) {
       var to = it.k === 'event' && typeof it.lat === 'number' ? it.lat.toFixed(6) + ',' + it.lng.toFixed(6) : it.q;   // 催しは会場の位置へ（催しの名前では見つからないことがある）
       if (!to) return '';
-      return 'https://www.google.com/maps/dir/?api=1' + (st.baseName === '花小金井駅' ? '&origin=' + encodeURIComponent('花小金井駅') : '') + '&destination=' + encodeURIComponent(to) + '&travelmode=transit';
+      return 'https://www.google.com/maps/dir/?api=1' + (st.chosen && st.origin ? '&origin=' + encodeURIComponent(st.origin) : '') + '&destination=' + encodeURIComponent(to) + '&travelmode=transit';
     }
+    function routeLabel() { return st.chosen ? st.baseName + 'からの行き方' : '行き方を調べる'; }
     function btn(href, text, cls, ext) { return href ? '<a class="om-b' + (cls ? ' ' + cls : '') + '" href="' + esc(href) + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' + text + '</a>' : ''; }
     function cardHTML(it) {
       var g = G[it.g] || {}, d = dist(it);
@@ -303,7 +309,7 @@
       if (it.k === 'event') {
         body += '<p class="om-when"><b>' + esc(it.next ? (it.next === today ? 'きょう ' : it.next === tomorrow ? 'あした ' : '') + md(it.next) : '開催中（〜' + md(it.until) + '）') + '</b>' + (it.when ? '<br>' + esc(it.when) : '') + '</p>';
         if (it.place) body += '<p class="om-acc">📍 ' + esc(it.place) + '</p>';
-        body += '<div class="om-bs">' + btn(it.off, '公式の案内', 'main', true) + btn(route(it), st.baseName + 'からの行き方', '', true) + btn(it.week, '今週の号で読む') + btn(it.map, 'Googleマップ', '', true) + btn('/calendar.html', 'カレンダー') + '</div>';
+        body += '<div class="om-bs">' + btn(it.off, '公式の案内', 'main', true) + btn(route(it), routeLabel(), '', true) + btn(it.week, '今週の号で読む') + btn(it.map, 'Googleマップ', '', true) + btn('/calendar.html', 'カレンダー') + '</div>';
         if (it.pr) body += '<p class="om-prn">PR：' + esc(it.pr) + 'のご協賛で掲載しています</p>';
         body += ages(it);
         if (it.desc) body += '<p class="om-desc clamp">' + esc(it.desc) + '</p><button type="button" class="om-more-t">続きを読む</button>';
@@ -313,7 +319,7 @@
         if (it.season) body += '<p class="om-season-tag">' + esc(it.season) + '</p>';
         if (it.acc) body += '<p class="om-acc">📍 ' + esc(it.acc) + '</p>';
         // 押すボタンは上に（行き方・公式）。読みものはその下
-        body += '<div class="om-bs">' + btn(route(it), '🚃 ' + st.baseName + 'からの行き方', 'main', true) + btn(it.map, 'Googleマップで開く', '', true) + btn(it.more, 'カフェのくわしい情報') + btn(it.week, '今週の号で読む') + btn(it.otayori && it.otayori.url, '今月のおたより', '', true) + btn(it.teirei, '定例の日程') + btn(it.off, '公式', '', true) + '</div>';
+        body += '<div class="om-bs">' + btn(route(it), '🚃 ' + routeLabel(), 'main', true) + btn(it.map, 'Googleマップで開く', '', true) + btn(it.more, 'カフェのくわしい情報') + btn(it.week, '今週の号で読む') + btn(it.otayori && it.otayori.url, '今月のおたより', '', true) + btn(it.teirei, '定例の日程') + btn(it.off, '公式', '', true) + '</div>';
         body += ages(it);
         if (it.tags && it.tags.length) body += '<ul class="om-tags" aria-label="お店の設備">' + it.tags.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
         if (it.next && it.next.length) body += '<div class="om-sub"><b>🗓 次の定例</b><ul>' + it.next.slice(0, 3).map(function (x) { return '<li>' + md(x.d) + ' ' + esc(x.t) + (x.time ? ' <small>' + esc(x.time) + '</small>' : '') + '</li>'; }).join('') + '</ul></div>';
@@ -457,27 +463,47 @@
     $('om-rain').addEventListener('click', function () { st.rain = !st.rain; apply(true); });
     $('om-now').addEventListener('click', function () { st.now = !st.now; apply(false); });
 
-    // ---- 見る範囲のボタン ------------------------------------------------------
+    // ---- どこから近い順か（現在地・駅・町）と、見る範囲 ---------------------------------
+    var fromSel = $('om-from'), wideBtn = $('om-wide'), geoBtn = document.querySelector('.om-ctl button[data-v="geo"]');
+    var KEY = 'om-base-v1';
+    function remember(v) { try { localStorage.setItem(KEY, v); } catch (e) { /* 覚えられなくても使える */ } }
+    function setBase(lat, lng, name, origin, key, quiet) {
+      st.base = [lat, lng]; st.baseName = name; st.origin = origin; st.chosen = key !== 'def'; st.wide = false;
+      if (homeMark) { homeMark.setLatLng(st.base); var he = homeMark.getElement(); if (he) he.querySelector('span').textContent = key === 'geo' ? 'いまここ' : name; }
+      if (fromSel) {
+        var go = fromSel.querySelector('option[value="geo"]');
+        if (go) { go.hidden = key !== 'geo'; go.disabled = key !== 'geo'; }
+        fromSel.value = key;
+      }
+      if (wideBtn) wideBtn.textContent = '広く見る';
+      if (!quiet) { remember(key); hideHint(); }
+      drawList(); fit('near');
+      if (st.sel) select(st.sel, true);
+    }
+    function useGeo(quiet) {
+      if (!navigator.geolocation) { if (geoBtn) geoBtn.textContent = '📍使えません'; return; }
+      if (geoBtn) geoBtn.textContent = '📍探しています…';
+      navigator.geolocation.getCurrentPosition(function (p) {
+        if (geoBtn) geoBtn.textContent = '📍現在地';
+        setBase(p.coords.latitude, p.coords.longitude, 'いまいる場所', '', 'geo', quiet);
+      }, function () {
+        if (geoBtn) geoBtn.textContent = '📍取れませんでした';
+        setTimeout(function () { if (geoBtn) geoBtn.textContent = '📍現在地'; }, 2500);
+      }, { enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 });
+    }
     document.querySelector('.om-ctl').addEventListener('click', function (e) {
       var b = e.target.closest('button'); if (!b) return;
       var v = b.getAttribute('data-v');
-      if (v === 'geo') {
-        if (!navigator.geolocation) { b.textContent = '📍 使えません'; return; }
-        b.textContent = '📍 探しています…';
-        navigator.geolocation.getCurrentPosition(function (p) {
-          st.base = [p.coords.latitude, p.coords.longitude]; st.baseName = 'いまいる場所';
-          b.textContent = '📍 いまいる場所';
-          if (homeMark) { homeMark.setLatLng(st.base); var hm = homeMark.getElement(); if (hm) hm.querySelector('span').textContent = 'いまここ'; }
-          drawList(); fit('near'); if (st.sel) select(st.sel, true);
-        }, function () { b.textContent = '📍 位置が取れませんでした'; }, { enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 });
-        return;
+      if (v === 'geo') { useGeo(false); return; }
+      if (v === 'all') {
+        st.wide = !st.wide; b.textContent = st.wide ? '近くを見る' : '広く見る';
+        fit(st.wide ? 'all' : 'near');
       }
-      if (v === 'home') {
-        st.base = HOME; st.baseName = '花小金井駅';
-        if (homeMark) { homeMark.setLatLng(HOME); var el = homeMark.getElement(); if (el) el.querySelector('span').textContent = '花小金井駅'; }
-        drawList();
-      }
-      fit(v === 'all' ? 'all' : 'near');
+    });
+    if (fromSel) fromSel.addEventListener('change', function () {
+      var k = fromSel.value, b = BYKEY[k];
+      if (k === 'geo' || !b) return;
+      setBase(b.lat, b.lng, b.name, b.origin, k, false);
     });
     if (map) map.on('moveend', outside);
 
@@ -513,6 +539,18 @@
     // ---- はじめ ---------------------------------------------------------------
     counts(); drawList();
     if (map) { fit('near'); drawPins(); }
+    // 前に選んだ場所を使う。現在地を許可済みの人は、開いたときに自動で現在地から
+    (function () {
+      var saved = null; try { saved = localStorage.getItem(KEY); } catch (e) { /* なし */ }
+      // はじめての人には、場所を選べることを先に知らせる
+      var hint = $('om-hint'); if (hint && !saved) { hint.textContent = '📍現在地か ▼駅・町を選ぶと、そこから近い順になります'; }
+      if (saved && saved !== 'geo' && BYKEY[saved]) { var b = BYKEY[saved]; setBase(b.lat, b.lng, b.name, b.origin, saved, true); return; }
+      var tryGeo = function () { useGeo(true); };
+      if (saved === 'geo') { tryGeo(); return; }
+      if (navigator.permissions && navigator.permissions.query) {
+        navigator.permissions.query({ name: 'geolocation' }).then(function (p) { if (p.state === 'granted') tryGeo(); }).catch(function () { /* なし */ });
+      }
+    })();
     var h = decodeURIComponent((location.hash || '').slice(1));
     if (h && byId[h]) { var hit = byId[h]; if (map && typeof hit.lat === 'number') map.setView([hit.lat, hit.lng], Math.max(map.getZoom(), 15)); select(h); }
     return map;

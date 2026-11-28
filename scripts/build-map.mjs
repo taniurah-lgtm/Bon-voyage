@@ -243,6 +243,26 @@ const newLine = (() => {
   const names = (libs >= 3 ? [`図書館${libs}館`] : []).concat(NEWLY.filter((x) => !(libs >= 3 && x.g === 'library')).map((x) => { const q = x.name.match(/「(.+?)」/); return q ? q[1] : x.name.replace(/[（(].*$/, ''); }));
   return `<p class="om-newline"><b>🆕 この1週間で${NEWLY.length}か所</b>${esc(names.slice(0, 4).join('・'))}${names.length > 4 ? ' ほか' : ''}</p>`;
 })();
+// どこから近い順に並べるか（駅・町）。駅と町の位置は data/lessons.json（スクールガイドの地図と同じ）と data/map-bases.json
+const LES = read('data/lessons.json', { map: { stations: {}, towns: {} } });
+const MB = read('data/map-bases.json', { default: null, stations: {}, neighbors: {} });
+const BASES = {
+  def: MB.default,
+  kodaira: Object.entries({ ...(LES.map && LES.map.stations), ...MB.stations }).map(([n, p]) => ({ name: `${n}駅`, lat: p[0], lng: p[1], origin: `${n}駅` })),
+  neighbors: Object.entries(MB.neighbors || {}).map(([n, p]) => ({ name: `${n}駅`, lat: p[0], lng: p[1], origin: `${n}駅` })),
+  towns: Object.entries((LES.map && LES.map.towns) || {}).map(([n, p]) => ({ name: n, lat: p[0], lng: p[1], origin: `東京都小平市${n}` }))
+    .sort((a, b) => a.name.localeCompare(b.name, 'ja')),
+};
+if (!BASES.def || !BASES.kodaira.length || !BASES.towns.length) { console.error('🔴 どこから近い順の選択肢（駅・町）が読めない（data/map-bases.json・data/lessons.json の map）'); process.exit(1); }
+const opt = (b, g) => `<option value="${g}:${esc(b.name)}">${esc(b.name)}</option>`;
+const fromSelect = `<select id="om-from" aria-label="どこから近い順に並べるか（駅・町を選ぶ）">
+        <option value="def">${esc(BASES.def ? BASES.def.name : '')}（市の真ん中）</option>
+        <option value="geo" hidden disabled>📍 いまいる場所</option>
+        <optgroup label="小平市の駅">${BASES.kodaira.map((b) => opt(b, 'k')).join('')}</optgroup>
+        <optgroup label="となりの市の駅">${BASES.neighbors.map((b) => opt(b, 'n')).join('')}</optgroup>
+        <optgroup label="小平市の町">${BASES.towns.map((b) => opt(b, 't')).join('')}</optgroup>
+      </select>`;
+
 // スポット名（投稿フォームの候補）
 const postSpots = [...spotItems, ...cafeItems].map((s) => ({ name: s.name }));
 
@@ -253,7 +273,7 @@ const page = `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <title>みんなのおでかけマップ｜ぼんぼやーじゅ通信</title>
-<meta name="description" content="小平・花小金井のまわりの、公園・児童館・室内あそび・子連れで入りやすいカフェ、これからの親子の催しを地図に。花小金井駅から近い順に探せます。">
+<meta name="description" content="小平と となりの市の、公園・児童館・図書館・室内あそび・子連れで入りやすいカフェ、これからの親子の催しを地図に。いまいる場所や、駅・町から近い順に探せます。">
 <link rel="canonical" href="https://bonvoya.nicomaru.tokyo/map.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bonvoya.nicomaru.tokyo/map.html">
@@ -302,6 +322,10 @@ const page = `<!doctype html>
   .om-ctl { position: absolute; top: 8px; left: 8px; right: 8px; z-index: 500; display: flex; flex-wrap: nowrap; gap: .3rem; pointer-events: none; }
   .om-ctl button { pointer-events: auto; min-height: 44px; padding: .2rem .7rem; font: 700 .78rem/1.15 var(--body); white-space: nowrap; color: #1d2a31; background: rgba(255,255,255,.96);
     border: 1px solid rgba(0,0,0,.15); border-radius: 999px; box-shadow: 0 1px 5px rgba(0,0,0,.18); cursor: pointer; }
+  .om-ctl select { pointer-events: auto; flex: 1 1 auto; min-width: 0; max-width: 13rem; min-height: 44px; padding: .2rem 1.6rem .2rem .6rem; font: 700 .78rem/1.15 var(--body); color: #1d2a31;
+    background: rgba(255,255,255,.96) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%231d2a31'/%3E%3C/svg%3E") no-repeat right .6rem center;
+    border: 1px solid rgba(0,0,0,.15); border-radius: 999px; box-shadow: 0 1px 5px rgba(0,0,0,.18); -webkit-appearance: none; appearance: none; text-overflow: ellipsis; }
+  .om-ctl select:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
   .om-fail { padding: 1.2rem; font-size: .9rem; color: var(--ink-soft); }
 
   .om-pin-w { background: none; border: 0; }
@@ -411,7 +435,7 @@ const page = `<!doctype html>
   .om-newline b { color: #7C2D12; background: #FEF3C7; border-radius: 999px; padding: .05rem .5rem; margin-right: .3rem; }
   .om-evnote a, .om-season a { display: inline-block; min-height: 44px; line-height: 44px; font-weight: 800; }
   .leaflet-touch .leaflet-bar a, .leaflet-bar a { width: 44px !important; height: 44px !important; line-height: 44px !important; font-size: 20px !important; }
-  @media (max-width: 380px) { .om-chip { font-size: .76rem; } .om-age button, .om-rain { font-size: .7rem; } .om-ctl button { padding: .2rem .5rem; font-size: .72rem; } }
+  @media (max-width: 380px) { .om-lead { font-size: .74rem; } .om-hint { font-size: .7rem; } .om-chip { font-size: .76rem; } .om-age button, .om-rain { font-size: .7rem; } .om-ctl button { padding: .2rem .5rem; font-size: .72rem; } }
   .om-gl button { display: flex; align-items: center; gap: .5rem; width: 100%; min-height: 44px; padding: .3rem .4rem; border: 0; border-bottom: 1px solid var(--line); background: none; text-align: left; font: 700 .9rem/1.35 var(--body); color: var(--ink); cursor: pointer; }
 
   /* 地図の下の一覧 */
@@ -474,7 +498,7 @@ ${navSub('map')}
   <div class="om-stage">
     <div id="om-map" role="region" aria-label="おでかけマップ"><noscript><p class="om-fail">地図の表示にはJavaScriptを使っています。切っている場合は、<a href="/cafe.html">カフェのページ</a>や<a href="/calendar.html">おでかけカレンダー</a>からお探しください。</p></noscript></div>
     <div class="om-ctl" role="group" aria-label="見る範囲">
-      <button type="button" data-v="home">駅のまわり</button><button type="button" data-v="all">広く見る</button><button type="button" data-v="geo">📍現在地</button>
+      <button type="button" data-v="geo" aria-label="いまいる場所から近い順にする">📍現在地</button>${fromSelect}<button type="button" data-v="all" id="om-wide">広く見る</button>
     </div>
     <div class="om-out" id="om-out" hidden></div>
     <div class="om-hint" id="om-hint">👆 ピンを押すと、年齢の目安と行き方が出ます</div>
@@ -483,7 +507,7 @@ ${navSub('map')}
 
   ${newLine}
   <p class="om-newline" id="om-seen" hidden></p>
-  <div class="om-lh"><h2 id="om-lt">花小金井駅から近い順</h2><span><b id="om-ln">0</b>件・距離は直線</span></div>
+  <div class="om-lh"><h2 id="om-lt">近い順</h2><span><b id="om-ln">0</b>件・距離は直線</span></div>
   <p class="om-long" id="om-long" hidden></p>
   <ul class="om-list" id="om-list" aria-labelledby="om-lt"></ul>
   <button type="button" class="om-more" id="om-more" hidden>もっと見る</button>
@@ -517,14 +541,14 @@ ${navSub('map')}
 
 <script src="/assets/leaflet/leaflet.js"></script>
 <script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></script>
-<script src="/assets/bv-odekake.js?v=20261128f"></script>
+<script src="/assets/bv-odekake.js?v=20261128g"></script>
 <script src="/assets/bv-post.js"></script>
 <script type="application/json" id="om-items">${jsonInTag(ITEMS)}</script>
 <script type="application/json" id="om-groups">${jsonInTag(used)}</script>
 <script>
 (function(){
   var items = JSON.parse(document.getElementById('om-items').textContent);
-  BVOdekake.mount({ items: items, groups: JSON.parse(document.getElementById('om-groups').textContent), gmapsKey: ${JSON.stringify(GMAPS_KEY)} });
+  BVOdekake.mount({ items: items, groups: JSON.parse(document.getElementById('om-groups').textContent), bases: ${jsonInTag(BASES)}, gmapsKey: ${JSON.stringify(GMAPS_KEY)} });
   BVPost.mount(document.getElementById('post'), {
     endpoint: ${JSON.stringify(POST_URL)},
     spots: ${jsonInTag(postSpots)},
