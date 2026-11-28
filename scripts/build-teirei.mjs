@@ -124,18 +124,23 @@ const tlay = layoutTiles({ cols: MC, rows: MR, bounds: ENTEI.bounds, ys: 0.55, n
 if (tlay.tooMany) { console.error(`🔴 マスが足りない（${tnodes.length} > ${MC}×${MR}）`); process.exit(1); }
 for (const id of tlay.outside) warn.push(`${id}: 地図の外枠の外`);
 const tByCell = new Map([...tlay.at].map(([id, c]) => [c, tnodes.find((n) => n.id === id)]));
-const tLabel = (s) => (s.length >= 5 ? `${esc(s.slice(0, Math.ceil(s.length / 2)))}<wbr>${esc(s.slice(Math.ceil(s.length / 2)))}` : esc(s));
+const tLabel = (s) => (s.length >= 4 ? `${esc(s.slice(0, Math.ceil(s.length / 2)))}<wbr>${esc(s.slice(Math.ceil(s.length / 2)))}` : esc(s));
 // きょう開く日か（曜日の決まり）: 図書館などはおでかけマップと同じ決まり（open）。出張こども広場は「毎週月曜」「水曜と第1日曜」から
 const DOWS = '日月火水木金土';
+// 祝日の一覧はおでかけマップ（assets/bv-odekake.js）と同じものを使う（1か所で足せばよい）
+const HOL = JSON.parse((readFileSync('docs/homepage/assets/bv-odekake.js', 'utf8').match(/var HOL = (\[[^\]]*\])/) || [, '[]'])[1].replace(/'/g, '"'));
+if (!HOL.length) warn.push('祝日の一覧が読めない（bv-odekake.js の HOL）');
+if (!HOL.some((d) => d > todayJST.slice(0, 4) + '-12-31')) warn.push('来年の祝日が無い。bv-odekake.js の HOL に足す');
 function openRule(p, sp) {
-  if (sp && sp.open && sp.open.dows) return { dows: sp.open.dows, nth: sp.open.nth || [], closedNth: sp.open.closedNth || p.closedNth || [] };
+  const extra = (o) => ({ closedRange: (o && o.closedRange) || p.closedRange || [], closedDates: (o && o.closedDates) || p.closedDates || [], hol: !!((o && o.hol) || p.hol), nthHolOpen: !!(o && o.nthHolOpen), holShift: !!(p.holShift || (o && (o.holShift || o.monHolShift))) });
+  if (sp && sp.open && sp.open.dows) return { dows: sp.open.dows, nth: sp.open.nth || [], closedNth: sp.open.closedNth || p.closedNth || [], ...extra(sp.open) };
   const w = (p.programs.find((g) => g.when) || {}).when || '';
-  if (/^毎日/.test(w)) return { dows: [0, 1, 2, 3, 4, 5, 6], nth: [], closedNth: p.closedNth || [] };
+  if (/^毎日/.test(w)) return { dows: [0, 1, 2, 3, 4, 5, 6], nth: [], closedNth: p.closedNth || [], ...extra(null) };
   const m = w.match(/([月火水木金土日])(?:〜([月火水木金土日]))?曜(?:と第(\d)([月火水木金土日])曜)?/);
   if (!m) return null;
   const a = DOWS.indexOf(m[1]), b = DOWS.indexOf(m[2] || m[1]), dows = [];
   for (let i = a; ; i = (i + 1) % 7) { dows.push(i); if (i === b) break; }
-  return { dows, nth: m[3] ? [[DOWS.indexOf(m[4]), +m[3]]] : [], closedNth: p.closedNth || [] };
+  return { dows, nth: m[3] ? [[DOWS.indexOf(m[4]), +m[3]]] : [], closedNth: p.closedNth || [], ...extra(null) };
 }
 // きょう開いているときに出す時間（毎日の会・決まった曜日の会の時間）
 function openTime(p, sp) {
@@ -329,7 +334,8 @@ const html = `<!doctype html>
   .soon .empty, .soon .wk { color: var(--ink-faint); font-size: .78rem; }
   .soon .tdy .sd { color: #C2410C; }
   .soon .tdy li a b { white-space: normal; }
-  .soon .tdy .nm { display: inline; }
+  .soon .op small { color: var(--ink-soft); }
+  .soon .op-h { font-size: .7rem !important; color: var(--ink-faint); padding: .3rem 0 0 !important; }
 
   /* 今月のおたより */
   .otas { margin: 0 0 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .9rem 1rem; }
@@ -414,9 +420,9 @@ const html = `<!doctype html>
   .k-lib { --c: #2563EB; } .k-ji { --c: #BE185D; } .k-ko { --c: #2F7D3A; } .k-sh { --c: #2F7D3A; border-style: dashed !important; } .k-hi { --c: #C2410C; }
   .kf button.k-lib, .kf button.k-ji, .kf button.k-ko, .kf button.k-sh, .kf button.k-hi { border-color: var(--c); }
   .kf button.k-sh { border-style: dashed; }
-  .st { border: 1px dashed var(--ink-faint); color: var(--ink-soft); font-size: clamp(10px, 2.9vw, 11.5px); letter-spacing: -.05em; line-height: 1.1; word-break: keep-all; overflow: hidden; }
-  .tleg { font-size: .72rem; color: var(--ink-soft); margin: .45rem 0 0; }
-  .lg-today { font-weight: 800; color: #fff; background: #C2410C; border-radius: 999px; padding: 1px 5px; font-size: .66rem; }
+  .st { border: 1px dashed var(--ink-faint); color: var(--ink-soft); font-size: clamp(11px, 3.1vw, 12px); letter-spacing: -.05em; line-height: 1.1; word-break: keep-all; overflow: hidden; }
+  .tleg { font-size: .75rem; color: var(--ink-soft); margin: .45rem 0 0; }
+  .lg-today { font-weight: 800; color: #fff; background: #C2410C; border-radius: 999px; padding: 1px 5px; font-size: .75rem; }
   .lg-off { opacity: .5; font-weight: 700; border: 1px solid var(--line-strong); border-radius: 4px; padding: 0 4px; }
   .pl:target { box-shadow: 0 0 0 3px var(--sky), var(--shadow-soft); }
   details.pl { padding: 0; }
@@ -488,7 +494,6 @@ ${navSub('teirei')}
   <section class="soon" aria-labelledby="soon-h">
     <h3 id="soon-h">📅 予約なしで行ける会</h3>
     <ul id="soon">
-        <li class="day tdy" id="today-row" hidden><span class="sd" id="today-d">きょう</span><ul id="today-ul"></ul></li>
         ${soonHtml}
     </ul>
     <button type="button" class="morebtn" id="soon-more" hidden>2週間ぶんを見る</button>
@@ -562,8 +567,34 @@ ${navSub('teirei')}
     } else if (btn) btn.hidden = true;
   });
 
-  // 地図のマス: きょう会がある所に「きょう」、きょうが休みの曜日の所は薄く
-  var now = new Date(Date.now() + 9 * 3600e3), dw = now.getUTCDay(), nth = Math.ceil(now.getUTCDate() / 7);
+  // 開いている日か（曜日・第n曜の休み・年末年始・祝日。祝日はおでかけマップと同じ一覧）
+  var HOL = ${JSON.stringify(HOL)};
+  var DAY = 864e5;
+  function isoAdd(iso, n) { return new Date(Date.parse(iso + 'T00:00:00Z') + n * DAY).toISOString().slice(0, 10); }
+  function isHol(iso) { return HOL.indexOf(iso) >= 0; }
+  function isOpen(r, iso) {
+    var d = new Date(iso + 'T00:00:00Z'), w = d.getUTCDay(), n = Math.ceil(d.getUTCDate() / 7), mmdd = iso.slice(5), hol = isHol(iso);
+    var cn = function (x) { var dd = new Date(x + 'T00:00:00Z'); return (r.closedNth || []).some(function (c) { return c[0] === dd.getUTCDay() && c[1] === Math.ceil(dd.getUTCDate() / 7); }); };
+    var on = r.dows.indexOf(w) >= 0 || (r.nth || []).some(function (x) { return x[0] === w && x[1] === n; });
+    if (cn(iso) && !(hol && (r.nthHolOpen || r.holShift))) on = false;
+    // 「休館日が祝日のときは翌平日（翌日以降の直近の平日）」: さかのぼって、祝日だった休館日のつぎの最初の平日なら休み
+    if (r.holShift && on && !hol && w !== 0 && w !== 6) {
+      for (var k = 1; k <= 4; k++) {
+        var q = isoAdd(iso, -k), qw = new Date(q + 'T00:00:00Z').getUTCDay();
+        if (cn(q) && isHol(q)) { on = false; break; }
+        if (!(isHol(q) || qw === 0 || qw === 6)) break;   // 平日をはさんだら、もう関係ない
+      }
+    }
+    if (r.hol && hol) on = false;
+    (r.closedRange || []).forEach(function (x) { if (x[0] <= x[1] ? (mmdd >= x[0] && mmdd <= x[1]) : (mmdd >= x[0] || mmdd <= x[1])) on = false; });
+    (r.closedDates || []).forEach(function (x) { if (x === iso) on = false; });
+    return on;
+  }
+  // 地図のマス: きょう会がある所に「きょう」、きょうがお休みの所は薄く
+  var now = new Date(Date.now() + 9 * 3600e3), dw = now.getUTCDay();
+  var tm = isoAdd(t, 1);
+  var openOn = {};   // { 日付: { 施設: 時間 } }
+  openOn[t] = {}; openOn[tm] = {};
   document.querySelectorAll('.tt').forEach(function (a) {
     var ds = (a.getAttribute('data-dates') || '').split(' ');
     if (ds.indexOf(t) >= 0) a.classList.add('today');
@@ -571,39 +602,45 @@ ${navSub('teirei')}
     if (r) {
       try {
         r = JSON.parse(r);
-        var on = r.dows.indexOf(dw) >= 0 || (r.nth || []).some(function (x) { return x[0] === dw && x[1] === nth; });
-        if ((r.closedNth || []).some(function (x) { return x[0] === dw && x[1] === nth; })) on = false;
-        if (!on && !a.classList.contains('today')) { a.classList.add('off'); a.setAttribute('aria-label', a.getAttribute('aria-label') + '（きょうはお休みの日）'); }
+        [t, tm].forEach(function (iso) { if (isOpen(r, iso)) openOn[iso][a.getAttribute('href').slice(1)] = a; });
+        if (!openOn[t][a.getAttribute('href').slice(1)] && !a.classList.contains('today')) { a.classList.add('off'); a.setAttribute('aria-label', a.getAttribute('aria-label') + '（きょうはお休みの日）'); }
       } catch (e) { /* なし */ }
     }
   });
-  // きょう開いている所（種類ごとに1行。会のある日付つきの行は、この下に続く）
+  // きょう・あした開いている所を、一覧のその日の行のいちばん上に（種類ごとに1行）
   var WDJ = ['日', '月', '火', '水', '木', '金', '土'];
-  var KN = { lib: ['📚', '図書館', 'k-lib'], jidokan: ['🏠', '児童館', 'k-ji'], kodomo: ['🧸', 'こども広場', 'k-ko'], chiiki: ['🚶', '出張こども広場', 'k-sh'], hiroba: ['☀️', '子育てひろば', 'k-hi'] };
+  var KN = { lib: ['📚', '図書館', 'k-lib', '館'], jidokan: ['🏠', '児童館', 'k-ji', '館'], kodomo: ['🧸', 'こども広場', 'k-ko', 'か所'], chiiki: ['🚶', '出張こども広場', 'k-sh', 'か所'], hiroba: ['☀️', '子育てひろば', 'k-hi', 'か所'] };
+  var SEC = { lib: 'sec-lib', jidokan: 'sec-jidokan', kodomo: 'sec-kodomo', chiiki: 'sec-chiiki', hiroba: 'sec-hiroba' };
   var openNow = {};
-  (function () {
-    var by = {};
-    document.querySelectorAll('.tt[data-rule]').forEach(function (a) {
-      if (a.classList.contains('off')) return;
-      openNow[a.getAttribute('href').slice(1)] = a.getAttribute('data-time') || '';
-      var k = a.getAttribute('data-k'); (by[k] = by[k] || []).push(a);
-    });
-    var ul = document.getElementById('today-ul'), html = '';
+  Object.keys(openOn[t]).forEach(function (id) { openNow[id] = openOn[t][id].getAttribute('data-time') || ''; });
+  var soonUl = document.getElementById('soon');
+  [[t, 'きょう'], [tm, 'あした']].forEach(function (x) {
+    var iso = x[0], by = {}, html = '';
+    Object.keys(openOn[iso]).forEach(function (id) { var a = openOn[iso][id], k = a.getAttribute('data-k'); (by[k] = by[k] || []).push(a); });
     ['jidokan', 'kodomo', 'chiiki', 'hiroba', 'lib'].forEach(function (k) {
       var xs = by[k]; if (!xs || !xs.length) return;
       var times = xs.map(function (a) { return a.getAttribute('data-time') || ''; }), cnt = {};
-      times.forEach(function (x) { if (x) cnt[x] = (cnt[x] || 0) + 1; });
+      times.forEach(function (v) { if (v) cnt[v] = (cnt[v] || 0) + 1; });
       var top = Object.keys(cnt).sort(function (a, b) { return cnt[b] - cnt[a]; })[0] || '';
-      var same = top && times.every(function (x) { return x; }) ? top + xs.filter(function (a, i) { return times[i] !== top; }).map(function (a, i, arr) { return (i ? '' : '（') + a.getAttribute('data-name') + 'は ' + a.getAttribute('data-time') + (i === arr.length - 1 ? '）' : '、'); }).join('') : '';
-      html += '<li data-age="' + (k === 'lib' || k === 'kodomo' || k === 'chiiki' ? 'baby pre elem' : (k === 'jidokan' ? 'baby pre elem' : 'baby')) + '" data-k="' + k + '"><a href="' + xs[0].getAttribute('href') + '"><i class="sk ' + KN[k][2] + '" aria-hidden="true">' + KN[k][0] + '</i><span><b>' + KN[k][1] + '</b> ' +
-        xs.map(function (a) { return a.getAttribute('data-name'); }).join('・') + '<small>ひらいています' + (same ? '　' + same : '（時間は四角を押して）') + '</small></span></a></li>';
+      var odd = xs.filter(function (a, i) { return times[i] !== top; });
+      var tx = top && times.every(function (v) { return v; }) ? top + (odd.length ? '（' + odd.map(function (a) { return a.getAttribute('data-name') + 'は ' + a.getAttribute('data-time'); }).join('、') + '）' : '') : '時間は館ごとに';
+      var names = xs.length <= 4 ? xs.map(function (a) { return a.getAttribute('data-name'); }).join('・') : xs.length + KN[k][3];
+      var href = xs.length === 1 ? xs[0].getAttribute('href') : '#' + SEC[k];
+      html += '<li class="op" data-age="' + (k === 'hiroba' ? 'baby' : 'baby pre elem') + '" data-k="' + k + '"><a href="' + href + '"><i class="sk ' + KN[k][2] + '" aria-hidden="true">' + KN[k][0] + '</i><span><b>' + KN[k][1] + '</b> ' + names + '<small>' + tx + '</small></span></a></li>';
     });
-    if (html) {
-      ul.innerHTML = html;
-      document.getElementById('today-d').textContent = 'きょう ' + (+t.slice(5, 7)) + '/' + (+t.slice(8)) + '(' + WDJ[dw] + ')';
-      document.getElementById('today-row').setAttribute('data-d', t);
+    var row = soonUl.querySelector('.day[data-d="' + iso + '"]');
+    if (!html && !row) return;
+    if (!row) {
+      row = document.createElement('li'); row.className = 'day'; row.setAttribute('data-d', iso);
+      row.innerHTML = '<span class="sd"></span><ul></ul>';
+      var after = [].slice.call(soonUl.querySelectorAll('.day[data-d]')).filter(function (r2) { return r2.getAttribute('data-d') > iso; })[0];
+      soonUl.insertBefore(row, after || null);
     }
-  })();
+    row.classList.add('tdy');
+    var dd = new Date(iso + 'T00:00:00Z');
+    row.querySelector('.sd').innerHTML = x[1] + '<br>' + (+iso.slice(5, 7)) + '/' + (+iso.slice(8)) + '(' + WDJ[dd.getUTCDay()] + ')';
+    if (html) { var u = row.querySelector('ul'); u.insertAdjacentHTML('afterbegin', html + (u.children.length ? '<li class="op-h" data-age="baby pre elem" aria-hidden="true">この日の会</li>' : '')); }
+  });
   // たたんだ欄の1行目: きょう開いていれば、きょうの時間。続けて次の会（予約なしで行ける日）
   document.querySelectorAll('details.pl').forEach(function (d) {
     var li = [].slice.call(d.querySelectorAll('.prog .dates li[data-d]')).filter(function (x) { return x.getAttribute('data-d') >= t && !x.closest('.prog').querySelector('.tag.bk'); })

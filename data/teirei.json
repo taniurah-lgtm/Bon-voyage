@@ -923,7 +923,14 @@
        2,
        3
       ]
-     ]
+     ],
+     "closedRange": [
+      [
+       "12-28",
+       "01-05"
+      ]
+     ],
+     "holShift": true
     },
     {
      "key": "oganin",
@@ -1118,7 +1125,14 @@
        2,
        3
       ]
-     ]
+     ],
+     "closedRange": [
+      [
+       "12-28",
+       "01-05"
+      ]
+     ],
+     "holShift": true
     },
     {
      "key": "ogaichi",
@@ -1360,7 +1374,14 @@
        2,
        3
       ]
-     ]
+     ],
+     "closedRange": [
+      [
+       "12-28",
+       "01-04"
+      ]
+     ],
+     "holShift": true
     }
    ]
   },
@@ -1417,7 +1438,14 @@
        3
       ]
      ],
-     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。"
+     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。",
+     "closedRange": [
+      [
+       "12-29",
+       "01-03"
+      ]
+     ],
+     "holShift": true
     },
     {
      "key": "josuihoncho",
@@ -1467,7 +1495,14 @@
        3
       ]
      ],
-     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。"
+     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。",
+     "closedRange": [
+      [
+       "12-29",
+       "01-03"
+      ]
+     ],
+     "holShift": true
     },
     {
      "key": "ogawahigashi",
@@ -1517,7 +1552,14 @@
        3
       ]
      ],
-     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。"
+     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。",
+     "closedRange": [
+      [
+       "12-29",
+       "01-03"
+      ]
+     ],
+     "holShift": true
     },
     {
      "key": "tenjin",
@@ -1567,7 +1609,14 @@
        3
       ]
      ],
-     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。"
+     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。",
+     "closedRange": [
+      [
+       "12-29",
+       "01-03"
+      ]
+     ],
+     "holShift": true
     },
     {
      "key": "oonuma-k",
@@ -1617,7 +1666,14 @@
        3
       ]
      ],
-     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。"
+     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。",
+     "closedRange": [
+      [
+       "12-29",
+       "01-03"
+      ]
+     ],
+     "holShift": true
     },
     {
      "key": "sawayaka",
@@ -1657,7 +1713,14 @@
       "month": "2026-12"
      },
      "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
-     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。"
+     "footnote": "月ごとの会（誕生会・発育測定・工作など）は「ひろばだより」に出ます。",
+     "closedRange": [
+      [
+       "12-28",
+       "01-04"
+      ]
+     ],
+     "hol": true
     }
    ]
   },
@@ -1821,7 +1884,13 @@
      },
      "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
      "otaName": "出張こども広場",
-     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。",
+     "closedRange": [
+      [
+       "12-29",
+       "01-03"
+      ]
+     ]
     },
     {
      "key": "gakuenhigashi",
@@ -1884,7 +1953,13 @@
      },
      "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
      "otaName": "出張こども広場",
-     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。",
+     "closedRange": [
+      [
+       "12-29",
+       "01-03"
+      ]
+     ]
     },
     {
      "key": "nakajuku",
@@ -1947,7 +2022,13 @@
      },
      "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
      "otaName": "出張こども広場",
-     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。",
+     "closedRange": [
+      [
+       "12-29",
+       "01-03"
+      ]
+     ]
     },
     {
      "key": "shutchohiroba",
@@ -2054,7 +2135,13 @@
      },
      "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
      "otaName": "出張こども広場",
-     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。",
+     "closedRange": [
+      [
+       "12-29",
+       "01-03"
+      ]
+     ]
     },
     {
      "key": "gakuennishi",
@@ -2117,7 +2204,13 @@
      },
      "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
      "otaName": "出張こども広場",
-     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。",
+     "closedRange": [
+      [
+       "12-29",
+       "01-03"
+      ]
+     ]
     },
     {
      "key": "suzuki",
@@ -2180,7 +2273,13 @@
      },
      "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
      "otaName": "出張こども広場",
-     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。",
+     "closedRange": [
+      [
+       "12-29",
+       "01-03"
+      ]
+     ]
     },
     {
      "key": "ogawahigashi2",
@@ -2243,7 +2342,13 @@
      },
      "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
      "otaName": "出張こども広場",
-     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。",
+     "closedRange": [
+      [
+       "12-29",
+       "01-03"
+      ]
+     ]
     },
     {
      "key": "kihei-s",
@@ -2306,7 +2411,13 @@
      },
      "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
      "otaName": "出張こども広場",
-     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。",
+     "closedRange": [
+      [
+       "12-29",
+       "01-03"
+      ]
+     ]
     },
     {
      "key": "ogawanishi-s",
@@ -2369,7 +2480,13 @@
      },
      "otayoriList": "https://www.city.kodaira.tokyo.jp/kurashi/083/083904.html",
      "otaName": "出張こども広場",
-     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。"
+     "footnote": "お誕生会や講座などは「出張ひろばだより」に出ます。",
+     "closedRange": [
+      [
+       "12-29",
+       "01-03"
+      ]
+     ]
     }
    ]
   }

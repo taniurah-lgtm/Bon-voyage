@@ -51,7 +51,8 @@
   .soon .empty, .soon .wk { color: var(--ink-faint); font-size: .78rem; }
   .soon .tdy .sd { color: #C2410C; }
   .soon .tdy li a b { white-space: normal; }
-  .soon .tdy .nm { display: inline; }
+  .soon .op small { color: var(--ink-soft); }
+  .soon .op-h { font-size: .7rem !important; color: var(--ink-faint); padding: .3rem 0 0 !important; }
 
   /* 今月のおたより */
   .otas { margin: 0 0 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .9rem 1rem; }
@@ -136,9 +137,9 @@
   .k-lib { --c: #2563EB; } .k-ji { --c: #BE185D; } .k-ko { --c: #2F7D3A; } .k-sh { --c: #2F7D3A; border-style: dashed !important; } .k-hi { --c: #C2410C; }
   .kf button.k-lib, .kf button.k-ji, .kf button.k-ko, .kf button.k-sh, .kf button.k-hi { border-color: var(--c); }
   .kf button.k-sh { border-style: dashed; }
-  .st { border: 1px dashed var(--ink-faint); color: var(--ink-soft); font-size: clamp(10px, 2.9vw, 11.5px); letter-spacing: -.05em; line-height: 1.1; word-break: keep-all; overflow: hidden; }
-  .tleg { font-size: .72rem; color: var(--ink-soft); margin: .45rem 0 0; }
-  .lg-today { font-weight: 800; color: #fff; background: #C2410C; border-radius: 999px; padding: 1px 5px; font-size: .66rem; }
+  .st { border: 1px dashed var(--ink-faint); color: var(--ink-soft); font-size: clamp(11px, 3.1vw, 12px); letter-spacing: -.05em; line-height: 1.1; word-break: keep-all; overflow: hidden; }
+  .tleg { font-size: .75rem; color: var(--ink-soft); margin: .45rem 0 0; }
+  .lg-today { font-weight: 800; color: #fff; background: #C2410C; border-radius: 999px; padding: 1px 5px; font-size: .75rem; }
   .lg-off { opacity: .5; font-weight: 700; border: 1px solid var(--line-strong); border-radius: 4px; padding: 0 4px; }
   .pl:target { box-shadow: 0 0 0 3px var(--sky), var(--shadow-soft); }
   details.pl { padding: 0; }
@@ -208,46 +209,46 @@
         <span class="frame-l">小平市</span>
         <div class="grid" style="--cols:6">
           <span class="cell" aria-hidden="true"></span>
-          <a class="cell tt k-sh" href="#nakajuku" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[3],&quot;nth&quot;:[[0,1]],&quot;closedNth&quot;:[]}" data-dates="2026-12-02 2026-12-16" data-time="10:00〜18:00" data-name="中宿" aria-label="出張こども広場：出張こども広場（小川西町中宿地域センター）" data-goatcounter-click="定例マップ｜中宿"><i aria-hidden="true">🚶</i><b>中宿</b></a>
-          <a class="cell tt k-lib" href="#ogawanishi" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-time="9:00〜22:00" data-name="小川西町" aria-label="図書館：小川西町図書館" data-goatcounter-click="定例マップ｜小川西町"><i aria-hidden="true">📚</i><b>小川西町</b></a>
-          <a class="cell tt k-hi" href="#ohisama" data-k="hiroba" data-ages="baby" data-rule="{&quot;dows&quot;:[2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" data-dates="2026-12-10 2026-12-22 2026-12-23 2026-12-25 2026-12-26" data-time="10:00〜18:00" data-name="おひさま" aria-label="子育てひろば：子ども家庭支援センター 子育て交流ひろば「おひさま」" data-goatcounter-click="定例マップ｜おひさま"><i aria-hidden="true">☀️</i><b>おひさま</b></a>
-          <a class="cell tt k-ko" href="#oonuma-k" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]]}" data-time="10:00〜18:00" data-name="大沼" aria-label="こども広場：大沼地域センター こども広場" data-goatcounter-click="定例マップ｜大沼"><i aria-hidden="true">🧸</i><b>大沼</b></a>
+          <a class="cell tt k-sh" href="#nakajuku" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[3],&quot;nth&quot;:[[0,1]],&quot;closedNth&quot;:[],&quot;closedRange&quot;:[[&quot;12-29&quot;,&quot;01-03&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:false}" data-dates="2026-12-02 2026-12-16" data-time="10:00〜18:00" data-name="中宿" aria-label="出張こども広場：出張こども広場（小川西町中宿地域センター）" data-goatcounter-click="定例マップ｜中宿"><i aria-hidden="true">🚶</i><b>中宿</b></a>
+          <a class="cell tt k-lib" href="#ogawanishi" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]],&quot;closedRange&quot;:[[&quot;12-28&quot;,&quot;01-04&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:false}" data-time="9:00〜22:00" data-name="小川西町" aria-label="図書館：小川西町図書館" data-goatcounter-click="定例マップ｜小川西町"><i aria-hidden="true">📚</i><b>小川<wbr>西町</b></a>
+          <a class="cell tt k-hi" href="#ohisama" data-k="hiroba" data-ages="baby" data-rule="{&quot;dows&quot;:[2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[],&quot;closedRange&quot;:[[&quot;12-27&quot;,&quot;01-04&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:true,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:false}" data-dates="2026-12-10 2026-12-22 2026-12-23 2026-12-25 2026-12-26" data-time="10:00〜18:00" data-name="おひさま" aria-label="子育てひろば：子ども家庭支援センター 子育て交流ひろば「おひさま」" data-goatcounter-click="定例マップ｜おひさま"><i aria-hidden="true">☀️</i><b>おひ<wbr>さま</b></a>
+          <a class="cell tt k-ko" href="#oonuma-k" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]],&quot;closedRange&quot;:[[&quot;12-29&quot;,&quot;01-03&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:true}" data-time="10:00〜18:00" data-name="大沼" aria-label="こども広場：大沼地域センター こども広場" data-goatcounter-click="定例マップ｜大沼"><i aria-hidden="true">🧸</i><b>大沼</b></a>
           <span class="cell" aria-hidden="true"></span>
           <span class="cell" aria-hidden="true"></span>
           <span class="cell st" aria-hidden="true"><span>小川<wbr>駅</span></span>
-          <a class="cell tt k-ko" href="#ogawahigashi" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]]}" data-time="10:00〜18:00" data-name="小川東町" aria-label="こども広場：小川東町地域センター こども広場" data-goatcounter-click="定例マップ｜小川東町"><i aria-hidden="true">🧸</i><b>小川東町</b></a>
+          <a class="cell tt k-ko" href="#ogawahigashi" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]],&quot;closedRange&quot;:[[&quot;12-29&quot;,&quot;01-03&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:true}" data-time="10:00〜18:00" data-name="小川東町" aria-label="こども広場：小川東町地域センター こども広場" data-goatcounter-click="定例マップ｜小川東町"><i aria-hidden="true">🧸</i><b>小川<wbr>東町</b></a>
           <span class="cell st" aria-hidden="true"><span>小平<wbr>駅</span></span>
-          <a class="cell tt k-sh" href="#misono" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" data-dates="2026-12-07 2026-12-14" data-time="10:00〜18:00" data-name="美園" aria-label="出張こども広場：出張こども広場（美園地域センター）" data-goatcounter-click="定例マップ｜美園"><i aria-hidden="true">🚶</i><b>美園</b></a>
-          <a class="cell tt k-ko" href="#sawayaka" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" data-time="10:00〜17:00" data-name="さわやか館" aria-label="こども広場：さわやか館 こども広場" data-goatcounter-click="定例マップ｜さわやか館"><i aria-hidden="true">🧸</i><b>さわや<wbr>か館</b></a>
-          <a class="cell tt k-lib" href="#kamijuku" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-23 2027-01-27 2027-02-24 2027-03-24" data-name="上宿" aria-label="図書館：上宿図書館" data-goatcounter-click="定例マップ｜上宿"><i aria-hidden="true">📚</i><b>上宿</b></a>
-          <a class="cell tt k-sh" href="#ogawanishi-s" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[5],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" data-dates="2026-12-04 2026-12-11" data-time="10:00〜18:00" data-name="小川西町" aria-label="出張こども広場：出張こども広場（小川西町地域センター）" data-goatcounter-click="定例マップ｜小川西町"><i aria-hidden="true">🚶</i><b>小川西町</b></a>
-          <a class="cell tt k-sh" href="#ogawahigashi2" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[4],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" data-dates="2026-12-03 2026-12-17" data-time="10:00〜18:00" data-name="小川東第二" aria-label="出張こども広場：出張こども広場（小川東第二地域センター）" data-goatcounter-click="定例マップ｜小川東第二"><i aria-hidden="true">🚶</i><b>小川東<wbr>第二</b></a>
-          <a class="cell tt k-lib" href="#nakamachi" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-03 2026-12-13 2026-12-20 2027-01-07 2027-01-10 2027-01-17 2027-02-04 2027-02-14 2027-02-21 2027-03-04 2027-03-14 2027-03-21" data-name="仲町" aria-label="図書館：仲町図書館（なかまちテラス）" data-goatcounter-click="定例マップ｜仲町"><i aria-hidden="true">📚</i><b>仲町</b></a>
-          <a class="cell tt k-lib" href="#oonuma" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-09 2026-12-24 2027-01-13 2027-01-28 2027-02-10 2027-02-25 2027-03-10 2027-03-25" data-name="大沼" aria-label="図書館：大沼図書館" data-goatcounter-click="定例マップ｜大沼"><i aria-hidden="true">📚</i><b>大沼</b></a>
-          <a class="cell tt k-lib" href="#hanakoganei" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-name="花小金井" aria-label="図書館：花小金井図書館" data-goatcounter-click="定例マップ｜花小金井"><i aria-hidden="true">📚</i><b>花小金井</b></a>
-          <a class="cell tt k-ko" href="#nakajima" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]]}" data-time="10:00〜18:00" data-name="中島" aria-label="こども広場：中島地域センター こども広場" data-goatcounter-click="定例マップ｜中島"><i aria-hidden="true">🧸</i><b>中島</b></a>
-          <a class="cell tt k-ji" href="#ogaichi" data-k="jidokan" data-ages="baby elem pre" data-rule="{&quot;dows&quot;:[0,1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]]}" data-dates="2026-12-02 2026-12-05 2026-12-06 2026-12-07 2026-12-08 2026-12-09 2026-12-10 2026-12-13 2026-12-16 2026-12-17 2026-12-18 2026-12-19 2026-12-20 2026-12-21 2026-12-23" data-time="こども広場 9:00〜14:00" data-name="おがいち" aria-label="児童館：小川町一丁目児童館（おがいち）" data-goatcounter-click="定例マップ｜おがいち"><i aria-hidden="true">🏠</i><b>おがいち</b></a>
+          <a class="cell tt k-sh" href="#misono" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1],&quot;nth&quot;:[],&quot;closedNth&quot;:[],&quot;closedRange&quot;:[[&quot;12-29&quot;,&quot;01-03&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:false}" data-dates="2026-12-07 2026-12-14" data-time="10:00〜18:00" data-name="美園" aria-label="出張こども広場：出張こども広場（美園地域センター）" data-goatcounter-click="定例マップ｜美園"><i aria-hidden="true">🚶</i><b>美園</b></a>
+          <a class="cell tt k-ko" href="#sawayaka" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[],&quot;closedRange&quot;:[[&quot;12-28&quot;,&quot;01-04&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:true,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:false}" data-time="10:00〜17:00" data-name="さわやか館" aria-label="こども広場：さわやか館 こども広場" data-goatcounter-click="定例マップ｜さわやか館"><i aria-hidden="true">🧸</i><b>さわや<wbr>か館</b></a>
+          <a class="cell tt k-lib" href="#kamijuku" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]],&quot;closedRange&quot;:[[&quot;12-28&quot;,&quot;01-04&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:true,&quot;holShift&quot;:false}" data-dates="2026-12-23 2027-01-27 2027-02-24 2027-03-24" data-name="上宿" aria-label="図書館：上宿図書館" data-goatcounter-click="定例マップ｜上宿"><i aria-hidden="true">📚</i><b>上宿</b></a>
+          <a class="cell tt k-sh" href="#ogawanishi-s" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[5],&quot;nth&quot;:[],&quot;closedNth&quot;:[],&quot;closedRange&quot;:[[&quot;12-29&quot;,&quot;01-03&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:false}" data-dates="2026-12-04 2026-12-11" data-time="10:00〜18:00" data-name="小川西町" aria-label="出張こども広場：出張こども広場（小川西町地域センター）" data-goatcounter-click="定例マップ｜小川西町"><i aria-hidden="true">🚶</i><b>小川<wbr>西町</b></a>
+          <a class="cell tt k-sh" href="#ogawahigashi2" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[4],&quot;nth&quot;:[],&quot;closedNth&quot;:[],&quot;closedRange&quot;:[[&quot;12-29&quot;,&quot;01-03&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:false}" data-dates="2026-12-03 2026-12-17" data-time="10:00〜18:00" data-name="小川東第二" aria-label="出張こども広場：出張こども広場（小川東第二地域センター）" data-goatcounter-click="定例マップ｜小川東第二"><i aria-hidden="true">🚶</i><b>小川東<wbr>第二</b></a>
+          <a class="cell tt k-lib" href="#nakamachi" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]],&quot;closedRange&quot;:[[&quot;12-28&quot;,&quot;01-04&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:true,&quot;holShift&quot;:false}" data-dates="2026-12-03 2026-12-13 2026-12-20 2027-01-07 2027-01-10 2027-01-17 2027-02-04 2027-02-14 2027-02-21 2027-03-04 2027-03-14 2027-03-21" data-name="仲町" aria-label="図書館：仲町図書館（なかまちテラス）" data-goatcounter-click="定例マップ｜仲町"><i aria-hidden="true">📚</i><b>仲町</b></a>
+          <a class="cell tt k-lib" href="#oonuma" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]],&quot;closedRange&quot;:[[&quot;12-28&quot;,&quot;01-04&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:true,&quot;holShift&quot;:false}" data-dates="2026-12-09 2026-12-24 2027-01-13 2027-01-28 2027-02-10 2027-02-25 2027-03-10 2027-03-25" data-name="大沼" aria-label="図書館：大沼図書館" data-goatcounter-click="定例マップ｜大沼"><i aria-hidden="true">📚</i><b>大沼</b></a>
+          <a class="cell tt k-lib" href="#hanakoganei" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]],&quot;closedRange&quot;:[[&quot;12-28&quot;,&quot;01-04&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:true,&quot;holShift&quot;:false}" data-name="花小金井" aria-label="図書館：花小金井図書館" data-goatcounter-click="定例マップ｜花小金井"><i aria-hidden="true">📚</i><b>花小<wbr>金井</b></a>
+          <a class="cell tt k-ko" href="#nakajima" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]],&quot;closedRange&quot;:[[&quot;12-29&quot;,&quot;01-03&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:true}" data-time="10:00〜18:00" data-name="中島" aria-label="こども広場：中島地域センター こども広場" data-goatcounter-click="定例マップ｜中島"><i aria-hidden="true">🧸</i><b>中島</b></a>
+          <a class="cell tt k-ji" href="#ogaichi" data-k="jidokan" data-ages="baby elem pre" data-rule="{&quot;dows&quot;:[0,1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]],&quot;closedRange&quot;:[[&quot;12-28&quot;,&quot;01-04&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:true}" data-dates="2026-12-02 2026-12-05 2026-12-06 2026-12-07 2026-12-08 2026-12-09 2026-12-10 2026-12-13 2026-12-16 2026-12-17 2026-12-18 2026-12-19 2026-12-20 2026-12-21 2026-12-23" data-time="こども広場 9:00〜14:00" data-name="おがいち" aria-label="児童館：小川町一丁目児童館（おがいち）" data-goatcounter-click="定例マップ｜おがいち"><i aria-hidden="true">🏠</i><b>おが<wbr>いち</b></a>
           <span class="cell st" aria-hidden="true"><span>新小平<wbr>駅</span></span>
-          <a class="cell tt k-lib" href="#chuo" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-01 2026-12-12 2026-12-15 2026-12-22 2027-01-09 2027-01-12 2027-01-19 2027-01-26 2027-02-02 2027-02-09 2027-02-13 2027-02-16 2027-03-02 2027-03-13 2027-03-16 2027-03-23" data-name="中央" aria-label="図書館：中央図書館" data-goatcounter-click="定例マップ｜中央"><i aria-hidden="true">📚</i><b>中央</b></a>
-          <a class="cell tt k-ko" href="#tenjin" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]]}" data-time="10:00〜18:00" data-name="天神" aria-label="こども広場：天神地域センター こども広場" data-goatcounter-click="定例マップ｜天神"><i aria-hidden="true">🧸</i><b>天神</b></a>
-          <span class="cell st" aria-hidden="true"><span>花小金井<wbr>駅</span></span>
+          <a class="cell tt k-lib" href="#chuo" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]],&quot;closedRange&quot;:[[&quot;12-28&quot;,&quot;01-04&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:true,&quot;holShift&quot;:false}" data-dates="2026-12-01 2026-12-12 2026-12-15 2026-12-22 2027-01-09 2027-01-12 2027-01-19 2027-01-26 2027-02-02 2027-02-09 2027-02-13 2027-02-16 2027-03-02 2027-03-13 2027-03-16 2027-03-23" data-name="中央" aria-label="図書館：中央図書館" data-goatcounter-click="定例マップ｜中央"><i aria-hidden="true">📚</i><b>中央</b></a>
+          <a class="cell tt k-ko" href="#tenjin" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]],&quot;closedRange&quot;:[[&quot;12-29&quot;,&quot;01-03&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:true}" data-time="10:00〜18:00" data-name="天神" aria-label="こども広場：天神地域センター こども広場" data-goatcounter-click="定例マップ｜天神"><i aria-hidden="true">🧸</i><b>天神</b></a>
+          <span class="cell st" aria-hidden="true"><span>花小<wbr>金井<wbr>駅</span></span>
           <span class="cell" aria-hidden="true"></span>
-          <a class="cell tt k-ji" href="#oganin" data-k="jidokan" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]]}" data-dates="2026-12-03 2026-12-04 2026-12-06 2026-12-08 2026-12-12 2026-12-18 2026-12-19 2026-12-20 2026-12-21 2026-12-22 2026-12-23 2026-12-25 2026-12-26" data-time="こども広場 9:00〜14:00" data-name="おがにん" aria-label="児童館：小川町二丁目児童館（おがにん）" data-goatcounter-click="定例マップ｜おがにん"><i aria-hidden="true">🏠</i><b>おがにん</b></a>
-          <a class="cell tt k-sh" href="#gakuennishi" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" data-dates="2026-12-07 2026-12-14" data-time="10:00〜18:00" data-name="学園西町" aria-label="出張こども広場：出張こども広場（学園西町地域センター）" data-goatcounter-click="定例マップ｜学園西町"><i aria-hidden="true">🚶</i><b>学園西町</b></a>
-          <a class="cell tt k-sh" href="#gakuenhigashi" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[4],&quot;nth&quot;:[[0,2]],&quot;closedNth&quot;:[]}" data-dates="2026-12-03 2026-12-24" data-time="10:00〜18:00" data-name="学園東町" aria-label="出張こども広場：出張こども広場（学園東町地域センター）" data-goatcounter-click="定例マップ｜学園東町"><i aria-hidden="true">🚶</i><b>学園東町</b></a>
-          <a class="cell tt k-sh" href="#suzuki" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[3],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" data-dates="2026-12-02 2026-12-16" data-time="10:00〜18:00" data-name="鈴木" aria-label="出張こども広場：出張こども広場（鈴木地域センター）" data-goatcounter-click="定例マップ｜鈴木"><i aria-hidden="true">🚶</i><b>鈴木</b></a>
-          <a class="cell tt k-ji" href="#hanamin" data-k="jidokan" data-ages="baby elem pre" data-rule="{&quot;dows&quot;:[0,1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]]}" data-dates="2026-12-02 2026-12-03 2026-12-04 2026-12-05 2026-12-06 2026-12-09 2026-12-10 2026-12-12 2026-12-13 2026-12-14 2026-12-16 2026-12-17 2026-12-20 2026-12-21 2026-12-23 2026-12-25" data-time="こども広場 9:00〜14:00" data-name="はなみん" aria-label="児童館：花小金井南児童館（はなみん）" data-goatcounter-click="定例マップ｜はなみん"><i aria-hidden="true">🏠</i><b>はなみん</b></a>
+          <a class="cell tt k-ji" href="#oganin" data-k="jidokan" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]],&quot;closedRange&quot;:[[&quot;12-28&quot;,&quot;01-05&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:true}" data-dates="2026-12-03 2026-12-04 2026-12-06 2026-12-08 2026-12-12 2026-12-18 2026-12-19 2026-12-20 2026-12-21 2026-12-22 2026-12-23 2026-12-25 2026-12-26" data-time="こども広場 9:00〜14:00" data-name="おがにん" aria-label="児童館：小川町二丁目児童館（おがにん）" data-goatcounter-click="定例マップ｜おがにん"><i aria-hidden="true">🏠</i><b>おが<wbr>にん</b></a>
+          <a class="cell tt k-sh" href="#gakuennishi" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1],&quot;nth&quot;:[],&quot;closedNth&quot;:[],&quot;closedRange&quot;:[[&quot;12-29&quot;,&quot;01-03&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:false}" data-dates="2026-12-07 2026-12-14" data-time="10:00〜18:00" data-name="学園西町" aria-label="出張こども広場：出張こども広場（学園西町地域センター）" data-goatcounter-click="定例マップ｜学園西町"><i aria-hidden="true">🚶</i><b>学園<wbr>西町</b></a>
+          <a class="cell tt k-sh" href="#gakuenhigashi" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[4],&quot;nth&quot;:[[0,2]],&quot;closedNth&quot;:[],&quot;closedRange&quot;:[[&quot;12-29&quot;,&quot;01-03&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:false}" data-dates="2026-12-03 2026-12-24" data-time="10:00〜18:00" data-name="学園東町" aria-label="出張こども広場：出張こども広場（学園東町地域センター）" data-goatcounter-click="定例マップ｜学園東町"><i aria-hidden="true">🚶</i><b>学園<wbr>東町</b></a>
+          <a class="cell tt k-sh" href="#suzuki" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[3],&quot;nth&quot;:[],&quot;closedNth&quot;:[],&quot;closedRange&quot;:[[&quot;12-29&quot;,&quot;01-03&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:false}" data-dates="2026-12-02 2026-12-16" data-time="10:00〜18:00" data-name="鈴木" aria-label="出張こども広場：出張こども広場（鈴木地域センター）" data-goatcounter-click="定例マップ｜鈴木"><i aria-hidden="true">🚶</i><b>鈴木</b></a>
+          <a class="cell tt k-ji" href="#hanamin" data-k="jidokan" data-ages="baby elem pre" data-rule="{&quot;dows&quot;:[0,1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]],&quot;closedRange&quot;:[[&quot;12-28&quot;,&quot;01-05&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:true}" data-dates="2026-12-02 2026-12-03 2026-12-04 2026-12-05 2026-12-06 2026-12-09 2026-12-10 2026-12-12 2026-12-13 2026-12-14 2026-12-16 2026-12-17 2026-12-20 2026-12-21 2026-12-23 2026-12-25" data-time="こども広場 9:00〜14:00" data-name="はなみん" aria-label="児童館：花小金井南児童館（はなみん）" data-goatcounter-click="定例マップ｜はなみん"><i aria-hidden="true">🏠</i><b>はな<wbr>みん</b></a>
           <span class="cell" aria-hidden="true"></span>
           <span class="cell st" aria-hidden="true"><span>鷹の台<wbr>駅</span></span>
-          <a class="cell tt k-lib" href="#tsuda" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-06 2026-12-16 2027-01-10 2027-01-20 2027-02-07 2027-02-17 2027-03-07 2027-03-17" data-name="津田" aria-label="図書館：津田図書館" data-goatcounter-click="定例マップ｜津田"><i aria-hidden="true">📚</i><b>津田</b></a>
-          <span class="cell st" aria-hidden="true"><span>一橋学園<wbr>駅</span></span>
-          <a class="cell tt k-lib" href="#kihei" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]]}" data-dates="2026-12-09 2026-12-24 2027-01-13 2027-01-28 2027-02-10 2027-02-25 2027-03-10 2027-03-25" data-name="喜平" aria-label="図書館：喜平図書館" data-goatcounter-click="定例マップ｜喜平"><i aria-hidden="true">📚</i><b>喜平</b></a>
+          <a class="cell tt k-lib" href="#tsuda" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]],&quot;closedRange&quot;:[[&quot;12-28&quot;,&quot;01-04&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:true,&quot;holShift&quot;:false}" data-dates="2026-12-06 2026-12-16 2027-01-10 2027-01-20 2027-02-07 2027-02-17 2027-03-07 2027-03-17" data-name="津田" aria-label="図書館：津田図書館" data-goatcounter-click="定例マップ｜津田"><i aria-hidden="true">📚</i><b>津田</b></a>
+          <span class="cell st" aria-hidden="true"><span>一橋<wbr>学園<wbr>駅</span></span>
+          <a class="cell tt k-lib" href="#kihei" data-k="lib" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[0,1,2,3,4,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[4,3]],&quot;closedRange&quot;:[[&quot;12-28&quot;,&quot;01-04&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:true,&quot;holShift&quot;:false}" data-dates="2026-12-09 2026-12-24 2027-01-13 2027-01-28 2027-02-10 2027-02-25 2027-03-10 2027-03-25" data-name="喜平" aria-label="図書館：喜平図書館" data-goatcounter-click="定例マップ｜喜平"><i aria-hidden="true">📚</i><b>喜平</b></a>
           <span class="cell" aria-hidden="true"></span>
           <span class="cell" aria-hidden="true"></span>
           <span class="cell" aria-hidden="true"></span>
-          <a class="cell tt k-ko" href="#josuihoncho" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]]}" data-time="10:00〜18:00" data-name="上水本町" aria-label="こども広場：上水本町地域センター こども広場" data-goatcounter-click="定例マップ｜上水本町"><i aria-hidden="true">🧸</i><b>上水本町</b></a>
-          <a class="cell tt k-sh" href="#kihei-s" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[4],&quot;nth&quot;:[],&quot;closedNth&quot;:[]}" data-dates="2026-12-03 2026-12-24" data-time="10:00〜18:00" data-name="喜平" aria-label="出張こども広場：出張こども広場（喜平地域センター）" data-goatcounter-click="定例マップ｜喜平"><i aria-hidden="true">🚶</i><b>喜平</b></a>
-          <a class="cell tt k-sh" href="#miyuki" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[5],&quot;nth&quot;:[[0,3]],&quot;closedNth&quot;:[]}" data-dates="2026-12-04 2026-12-25" data-time="10:00〜18:00" data-name="御幸" aria-label="出張こども広場：出張こども広場（御幸地域センター）" data-goatcounter-click="定例マップ｜御幸"><i aria-hidden="true">🚶</i><b>御幸</b></a>
+          <a class="cell tt k-ko" href="#josuihoncho" data-k="kodomo" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[1,2,3,4,5,6],&quot;nth&quot;:[],&quot;closedNth&quot;:[[2,1],[2,3]],&quot;closedRange&quot;:[[&quot;12-29&quot;,&quot;01-03&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:true}" data-time="10:00〜18:00" data-name="上水本町" aria-label="こども広場：上水本町地域センター こども広場" data-goatcounter-click="定例マップ｜上水本町"><i aria-hidden="true">🧸</i><b>上水<wbr>本町</b></a>
+          <a class="cell tt k-sh" href="#kihei-s" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[4],&quot;nth&quot;:[],&quot;closedNth&quot;:[],&quot;closedRange&quot;:[[&quot;12-29&quot;,&quot;01-03&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:false}" data-dates="2026-12-03 2026-12-24" data-time="10:00〜18:00" data-name="喜平" aria-label="出張こども広場：出張こども広場（喜平地域センター）" data-goatcounter-click="定例マップ｜喜平"><i aria-hidden="true">🚶</i><b>喜平</b></a>
+          <a class="cell tt k-sh" href="#miyuki" data-k="chiiki" data-ages="baby pre elem" data-rule="{&quot;dows&quot;:[5],&quot;nth&quot;:[[0,3]],&quot;closedNth&quot;:[],&quot;closedRange&quot;:[[&quot;12-29&quot;,&quot;01-03&quot;]],&quot;closedDates&quot;:[],&quot;hol&quot;:false,&quot;nthHolOpen&quot;:false,&quot;holShift&quot;:false}" data-dates="2026-12-04 2026-12-25" data-time="10:00〜18:00" data-name="御幸" aria-label="出張こども広場：出張こども広場（御幸地域センター）" data-goatcounter-click="定例マップ｜御幸"><i aria-hidden="true">🚶</i><b>御幸</b></a>
           <span class="cell" aria-hidden="true"></span>
         </div>
       </div>
@@ -260,7 +261,6 @@
   <section class="soon" aria-labelledby="soon-h">
     <h3 id="soon-h">📅 予約なしで行ける会</h3>
     <ul id="soon">
-        <li class="day tdy" id="today-row" hidden><span class="sd" id="today-d">きょう</span><ul id="today-ul"></ul></li>
         <li class="day" data-d="2026-12-01"><span class="sd">12/1(火)</span><ul><li data-age="baby" data-k="lib"><a href="#chuo"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>中央図書館</b> 絵本のへや<small>11:00〜11:20（受付 10:40〜、1階児童コーナー）</small></span></a></li></ul></li>
         <li class="day" data-d="2026-12-02"><span class="sd">12/2(水)</span><ul><li data-age="elem" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> ドッジビー 16:00〜</span></a></li><li data-age="elem" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> 自由工作 13:00〜16:20</span></a></li><li data-age="baby" data-k="chiiki"><a href="#nakajuku"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・中宿</b> お誕生会（12月生まれ）11:00〜</span></a></li><li data-age="baby" data-k="chiiki"><a href="#suzuki"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・鈴木</b> お誕生会（12月生まれ）11:00〜</span></a></li><li data-age="baby" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> いっしょにおはなし（絵本の読み聞かせ）<small>10:45〜11:05</small></span></a></li><li data-age="elem" data-k="jidokan"><a href="#ogaichi"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町一丁目児童館</b> めちゃやるタイム（みんなでドッジボール）<small>低学年 15:30〜16:00／高学年 16:00〜16:30</small></span></a></li></ul></li>
         <li class="day" data-d="2026-12-03"><span class="sd">12/3(木)</span><ul><li data-age="elem" data-k="jidokan"><a href="#hanamin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>花小金井南児童館</b> 自由工作 13:00〜16:20</span></a></li><li data-age="baby" data-k="chiiki"><a href="#gakuenhigashi"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・学園東町</b> お誕生会（12月生まれ）11:00〜</span></a></li><li data-age="baby" data-k="chiiki"><a href="#kihei-s"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・喜平</b> お誕生会（12月生まれ）11:00〜</span></a></li><li data-age="baby" data-k="chiiki"><a href="#ogawahigashi2"><i class="sk k-sh" aria-hidden="true">🚶</i><span><b>出張こども広場・小川東第二</b> お誕生会（12月生まれ）11:00〜</span></a></li><li data-age="baby" data-k="jidokan"><a href="#oganin"><i class="sk k-ji" aria-hidden="true">🏠</i><span><b>小川町二丁目児童館</b> 思い出ぺったん（手形・足形）13:00〜14:00</span></a></li><li data-age="baby" data-k="lib"><a href="#nakamachi"><i class="sk k-lib" aria-hidden="true">📚</i><span><b>仲町図書館</b> 絵本のへや<small>11:00〜11:20（11時までに直接どうぞ）</small></span></a></li></ul></li>
@@ -2235,8 +2235,34 @@
     } else if (btn) btn.hidden = true;
   });
 
-  // 地図のマス: きょう会がある所に「きょう」、きょうが休みの曜日の所は薄く
-  var now = new Date(Date.now() + 9 * 3600e3), dw = now.getUTCDay(), nth = Math.ceil(now.getUTCDate() / 7);
+  // 開いている日か（曜日・第n曜の休み・年末年始・祝日。祝日はおでかけマップと同じ一覧）
+  var HOL = ["2026-11-03","2026-11-23","2027-01-01","2027-01-11","2027-02-11","2027-02-23","2027-03-22","2027-04-29","2027-05-03","2027-05-04","2027-05-05"];
+  var DAY = 864e5;
+  function isoAdd(iso, n) { return new Date(Date.parse(iso + 'T00:00:00Z') + n * DAY).toISOString().slice(0, 10); }
+  function isHol(iso) { return HOL.indexOf(iso) >= 0; }
+  function isOpen(r, iso) {
+    var d = new Date(iso + 'T00:00:00Z'), w = d.getUTCDay(), n = Math.ceil(d.getUTCDate() / 7), mmdd = iso.slice(5), hol = isHol(iso);
+    var cn = function (x) { var dd = new Date(x + 'T00:00:00Z'); return (r.closedNth || []).some(function (c) { return c[0] === dd.getUTCDay() && c[1] === Math.ceil(dd.getUTCDate() / 7); }); };
+    var on = r.dows.indexOf(w) >= 0 || (r.nth || []).some(function (x) { return x[0] === w && x[1] === n; });
+    if (cn(iso) && !(hol && (r.nthHolOpen || r.holShift))) on = false;
+    // 「休館日が祝日のときは翌平日（翌日以降の直近の平日）」: さかのぼって、祝日だった休館日のつぎの最初の平日なら休み
+    if (r.holShift && on && !hol && w !== 0 && w !== 6) {
+      for (var k = 1; k <= 4; k++) {
+        var q = isoAdd(iso, -k), qw = new Date(q + 'T00:00:00Z').getUTCDay();
+        if (cn(q) && isHol(q)) { on = false; break; }
+        if (!(isHol(q) || qw === 0 || qw === 6)) break;   // 平日をはさんだら、もう関係ない
+      }
+    }
+    if (r.hol && hol) on = false;
+    (r.closedRange || []).forEach(function (x) { if (x[0] <= x[1] ? (mmdd >= x[0] && mmdd <= x[1]) : (mmdd >= x[0] || mmdd <= x[1])) on = false; });
+    (r.closedDates || []).forEach(function (x) { if (x === iso) on = false; });
+    return on;
+  }
+  // 地図のマス: きょう会がある所に「きょう」、きょうがお休みの所は薄く
+  var now = new Date(Date.now() + 9 * 3600e3), dw = now.getUTCDay();
+  var tm = isoAdd(t, 1);
+  var openOn = {};   // { 日付: { 施設: 時間 } }
+  openOn[t] = {}; openOn[tm] = {};
   document.querySelectorAll('.tt').forEach(function (a) {
     var ds = (a.getAttribute('data-dates') || '').split(' ');
     if (ds.indexOf(t) >= 0) a.classList.add('today');
@@ -2244,39 +2270,45 @@
     if (r) {
       try {
         r = JSON.parse(r);
-        var on = r.dows.indexOf(dw) >= 0 || (r.nth || []).some(function (x) { return x[0] === dw && x[1] === nth; });
-        if ((r.closedNth || []).some(function (x) { return x[0] === dw && x[1] === nth; })) on = false;
-        if (!on && !a.classList.contains('today')) { a.classList.add('off'); a.setAttribute('aria-label', a.getAttribute('aria-label') + '（きょうはお休みの日）'); }
+        [t, tm].forEach(function (iso) { if (isOpen(r, iso)) openOn[iso][a.getAttribute('href').slice(1)] = a; });
+        if (!openOn[t][a.getAttribute('href').slice(1)] && !a.classList.contains('today')) { a.classList.add('off'); a.setAttribute('aria-label', a.getAttribute('aria-label') + '（きょうはお休みの日）'); }
       } catch (e) { /* なし */ }
     }
   });
-  // きょう開いている所（種類ごとに1行。会のある日付つきの行は、この下に続く）
+  // きょう・あした開いている所を、一覧のその日の行のいちばん上に（種類ごとに1行）
   var WDJ = ['日', '月', '火', '水', '木', '金', '土'];
-  var KN = { lib: ['📚', '図書館', 'k-lib'], jidokan: ['🏠', '児童館', 'k-ji'], kodomo: ['🧸', 'こども広場', 'k-ko'], chiiki: ['🚶', '出張こども広場', 'k-sh'], hiroba: ['☀️', '子育てひろば', 'k-hi'] };
+  var KN = { lib: ['📚', '図書館', 'k-lib', '館'], jidokan: ['🏠', '児童館', 'k-ji', '館'], kodomo: ['🧸', 'こども広場', 'k-ko', 'か所'], chiiki: ['🚶', '出張こども広場', 'k-sh', 'か所'], hiroba: ['☀️', '子育てひろば', 'k-hi', 'か所'] };
+  var SEC = { lib: 'sec-lib', jidokan: 'sec-jidokan', kodomo: 'sec-kodomo', chiiki: 'sec-chiiki', hiroba: 'sec-hiroba' };
   var openNow = {};
-  (function () {
-    var by = {};
-    document.querySelectorAll('.tt[data-rule]').forEach(function (a) {
-      if (a.classList.contains('off')) return;
-      openNow[a.getAttribute('href').slice(1)] = a.getAttribute('data-time') || '';
-      var k = a.getAttribute('data-k'); (by[k] = by[k] || []).push(a);
-    });
-    var ul = document.getElementById('today-ul'), html = '';
+  Object.keys(openOn[t]).forEach(function (id) { openNow[id] = openOn[t][id].getAttribute('data-time') || ''; });
+  var soonUl = document.getElementById('soon');
+  [[t, 'きょう'], [tm, 'あした']].forEach(function (x) {
+    var iso = x[0], by = {}, html = '';
+    Object.keys(openOn[iso]).forEach(function (id) { var a = openOn[iso][id], k = a.getAttribute('data-k'); (by[k] = by[k] || []).push(a); });
     ['jidokan', 'kodomo', 'chiiki', 'hiroba', 'lib'].forEach(function (k) {
       var xs = by[k]; if (!xs || !xs.length) return;
       var times = xs.map(function (a) { return a.getAttribute('data-time') || ''; }), cnt = {};
-      times.forEach(function (x) { if (x) cnt[x] = (cnt[x] || 0) + 1; });
+      times.forEach(function (v) { if (v) cnt[v] = (cnt[v] || 0) + 1; });
       var top = Object.keys(cnt).sort(function (a, b) { return cnt[b] - cnt[a]; })[0] || '';
-      var same = top && times.every(function (x) { return x; }) ? top + xs.filter(function (a, i) { return times[i] !== top; }).map(function (a, i, arr) { return (i ? '' : '（') + a.getAttribute('data-name') + 'は ' + a.getAttribute('data-time') + (i === arr.length - 1 ? '）' : '、'); }).join('') : '';
-      html += '<li data-age="' + (k === 'lib' || k === 'kodomo' || k === 'chiiki' ? 'baby pre elem' : (k === 'jidokan' ? 'baby pre elem' : 'baby')) + '" data-k="' + k + '"><a href="' + xs[0].getAttribute('href') + '"><i class="sk ' + KN[k][2] + '" aria-hidden="true">' + KN[k][0] + '</i><span><b>' + KN[k][1] + '</b> ' +
-        xs.map(function (a) { return a.getAttribute('data-name'); }).join('・') + '<small>ひらいています' + (same ? '　' + same : '（時間は四角を押して）') + '</small></span></a></li>';
+      var odd = xs.filter(function (a, i) { return times[i] !== top; });
+      var tx = top && times.every(function (v) { return v; }) ? top + (odd.length ? '（' + odd.map(function (a) { return a.getAttribute('data-name') + 'は ' + a.getAttribute('data-time'); }).join('、') + '）' : '') : '時間は館ごとに';
+      var names = xs.length <= 4 ? xs.map(function (a) { return a.getAttribute('data-name'); }).join('・') : xs.length + KN[k][3];
+      var href = xs.length === 1 ? xs[0].getAttribute('href') : '#' + SEC[k];
+      html += '<li class="op" data-age="' + (k === 'hiroba' ? 'baby' : 'baby pre elem') + '" data-k="' + k + '"><a href="' + href + '"><i class="sk ' + KN[k][2] + '" aria-hidden="true">' + KN[k][0] + '</i><span><b>' + KN[k][1] + '</b> ' + names + '<small>' + tx + '</small></span></a></li>';
     });
-    if (html) {
-      ul.innerHTML = html;
-      document.getElementById('today-d').textContent = 'きょう ' + (+t.slice(5, 7)) + '/' + (+t.slice(8)) + '(' + WDJ[dw] + ')';
-      document.getElementById('today-row').setAttribute('data-d', t);
+    var row = soonUl.querySelector('.day[data-d="' + iso + '"]');
+    if (!html && !row) return;
+    if (!row) {
+      row = document.createElement('li'); row.className = 'day'; row.setAttribute('data-d', iso);
+      row.innerHTML = '<span class="sd"></span><ul></ul>';
+      var after = [].slice.call(soonUl.querySelectorAll('.day[data-d]')).filter(function (r2) { return r2.getAttribute('data-d') > iso; })[0];
+      soonUl.insertBefore(row, after || null);
     }
-  })();
+    row.classList.add('tdy');
+    var dd = new Date(iso + 'T00:00:00Z');
+    row.querySelector('.sd').innerHTML = x[1] + '<br>' + (+iso.slice(5, 7)) + '/' + (+iso.slice(8)) + '(' + WDJ[dd.getUTCDay()] + ')';
+    if (html) { var u = row.querySelector('ul'); u.insertAdjacentHTML('afterbegin', html + (u.children.length ? '<li class="op-h" data-age="baby pre elem" aria-hidden="true">この日の会</li>' : '')); }
+  });
   // たたんだ欄の1行目: きょう開いていれば、きょうの時間。続けて次の会（予約なしで行ける日）
   document.querySelectorAll('details.pl').forEach(function (d) {
     var li = [].slice.call(d.querySelectorAll('.prog .dates li[data-d]')).filter(function (x) { return x.getAttribute('data-d') >= t && !x.closest('.prog').querySelector('.tag.bk'); })
