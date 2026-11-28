@@ -190,31 +190,39 @@
       var groups = items.filter(function (it) { return typeof it.lat === 'number' && ok(it); }).map(function (it) {
         var p = map.latLngToContainerPoint([it.lat, it.lng]); return { list: [it], x: p.x, y: p.y, fixed: it.id === st.sel };
       });
-      var changed = true, guard = 0;
-      while (changed && guard++ < 400) {
-        changed = false;
-        outer: for (var i = 0; i < groups.length; i++) for (var j = i + 1; j < groups.length; j++) {
-          var a = groups[i], b = groups[j], ba = box(a), bb = box(b);
-          if (a.fixed && b.fixed) continue;
-          if (Math.abs(a.x - b.x) < (ba[0] + bb[0]) / 2 && Math.abs(a.y - b.y) < (ba[1] + bb[1]) / 2) {
-            if (a.fixed || b.fixed) {   // 選んだピンはそのまま。重なる相手は、少しずらすのではなく、まとめずにおく（選んだほうが上に出る）
-              continue;
+      function overlap(a, b) { var ba = box(a), bb = box(b); return Math.abs(a.x - b.x) < (ba[0] + bb[0]) / 2 && Math.abs(a.y - b.y) < (ba[1] + bb[1]) / 2; }
+      function mergeAll() {
+        var changed = true, guard = 0;
+        while (changed && guard++ < 400) {
+          changed = false;
+          outer: for (var i = 0; i < groups.length; i++) for (var j = i + 1; j < groups.length; j++) {
+            var a = groups[i], b = groups[j];
+            if (a.fixed || b.fixed) continue;   // 選んだピンはまとめない（選んだほうが上に出る）
+            if (overlap(a, b)) {
+              var n = a.list.length + b.list.length;
+              a.x = (a.x * a.list.length + b.x * b.list.length) / n; a.y = (a.y * a.list.length + b.y * b.list.length) / n;
+              a.list = a.list.concat(b.list); groups.splice(j, 1); changed = true; break outer;
             }
-            var n = a.list.length + b.list.length;
-            a.x = (a.x * a.list.length + b.x * b.list.length) / n; a.y = (a.y * a.list.length + b.y * b.list.length) / n;
-            a.list = a.list.concat(b.list); groups.splice(j, 1); changed = true; break outer;
           }
         }
       }
+      mergeAll();
       var named = map.getZoom() >= 15;
       if (homeMark) {
         var hp = map.latLngToContainerPoint(homeMark.getLatLng()), lab = [hp.x - 10, hp.y - 14, hp.x + 82, hp.y + 10];
-        // 駅の点の上に、まとめた丸が乗ったら、丸を点の上側へずらす（基準の駅が見えるように）
-        groups.forEach(function (gr) {
-          if (gr.list.length < 2) return;
-          var bx = box(gr);
-          if (Math.abs(gr.x - hp.x) < bx[0] / 2 + 8 && Math.abs(gr.y - hp.y) < bx[1] / 2 + 8) gr.y = hp.y - bx[1] / 2 - 16;
-        });
+        // 駅の点の上に、まとめた丸が乗ったら、丸を点の上側へずらす（基準の駅が見えるように）。
+        // ずらした先でほかと重なるなら、もう一度まとめ直す（それでも駅に乗るなら、そのまま。名前の札だけ消す）
+        for (var round = 0; round < 3; round++) {
+          var moved = false;
+          groups.forEach(function (gr) {
+            if (gr.list.length < 2 || gr.fixed) return;
+            var bx = box(gr);
+            if (Math.abs(gr.x - hp.x) < bx[0] / 2 + 8 && Math.abs(gr.y - hp.y) < bx[1] / 2 + 8) { gr.y = hp.y - bx[1] / 2 - 16; moved = true; }
+          });
+          if (!moved) break;
+          var before = groups.length; mergeAll();
+          if (groups.length === before) break;
+        }
         var hit = groups.some(function (gr) { var bx = box(gr); return gr.x + bx[0] / 2 > lab[0] && gr.x - bx[0] / 2 < lab[2] && gr.y + bx[1] / 2 > lab[1] && gr.y - bx[1] / 2 < lab[3]; });
         var he = homeMark.getElement(); if (he) he.classList.toggle('nolabel', hit);
       }
@@ -279,8 +287,9 @@
     }
     // 花小金井駅（現在地を使っているときは、いまいる場所）からの経路。所要時間と乗り換えは Googleマップが出す
     function route(it) {
-      if (!it.q) return '';
-      return 'https://www.google.com/maps/dir/?api=1' + (st.baseName === '花小金井駅' ? '&origin=' + encodeURIComponent('花小金井駅') : '') + '&destination=' + encodeURIComponent(it.q) + '&travelmode=transit';
+      var to = it.k === 'event' && typeof it.lat === 'number' ? it.lat.toFixed(6) + ',' + it.lng.toFixed(6) : it.q;   // 催しは会場の位置へ（催しの名前では見つからないことがある）
+      if (!to) return '';
+      return 'https://www.google.com/maps/dir/?api=1' + (st.baseName === '花小金井駅' ? '&origin=' + encodeURIComponent('花小金井駅') : '') + '&destination=' + encodeURIComponent(to) + '&travelmode=transit';
     }
     function btn(href, text, cls, ext) { return href ? '<a class="om-b' + (cls ? ' ' + cls : '') + '" href="' + esc(href) + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' + text + '</a>' : ''; }
     function cardHTML(it) {

@@ -25,8 +25,11 @@ events/*.md  ──build-events-json.mjs──▶  data/events.json      ← 全
                                                └──build-members.mjs──▶ docs/homepage/m/s7f2ka/index.html
                                                                         全件をAES-GCMの中に入れる
 
-data/map-spots.json ──build-map.mjs──▶ docs/homepage/map.html
+data/map-spots.json ──build-map.mjs──▶ docs/homepage/map.html（描画は assets/bv-odekake.js）
 （座標は geocode-spots.mjs が入れる）           地図＋サイト内の投稿フォーム
+data/cafes.json（pages:true）──┤                ★2026-11-28 作り直し。会員ページの地図は bv-map.js のまま
+docs/homepage/data/events-public.json ─┤        これからの催し（3週間）。🔒 公開用のデータからだけ取る
+data/event-geo.json（geocode-events.mjs）──┤      催しの位置（住所＋会場の表 data/event-places.json）
 data/map-posts.json ─────┘
 ```
 
