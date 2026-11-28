@@ -73,7 +73,7 @@
     function inRange(r) { return r[0] <= r[1] ? mmdd >= r[0] && mmdd <= r[1] : mmdd >= r[0] || mmdd <= r[1]; }
     function todayState(it) {
       var W = 'きょう（' + WD[dow] + '）';
-      if (it.open && !(it.open.validUntil && today > it.open.validUntil)) {   // validUntil を過ぎた決まりは使わない（季節で変わる所）
+      if (it.open && !(it.open.validUntil && today > it.open.validUntil) && !(it.open.validFrom && today < it.open.validFrom)) {   // validUntil を過ぎた決まりは使わない（季節で変わる所）
         var o = it.open, on = o.dows.indexOf(dow) >= 0 || (o.nth || []).some(function (x) { return x[0] === dow && x[1] === nth; });
         if ((o.closedNth || []).some(function (x) { return x[0] === dow && x[1] === nth; }) && !(hol && o.nthHolOpen)) on = false;
         if (hol && o.hol) on = false;
@@ -83,19 +83,19 @@
         if (o.afterHol && holY) on = false;
         if ((o.closedRange || []).some(inRange)) on = false;
         if ((o.closedDates || []).indexOf(today) >= 0) on = false;
-        if (o.calendar) return on ? { on: true, text: W + 'は営業日（時間は公式のカレンダーで）' } : { on: false, text: W + 'は休み（公式のカレンダーより）' };
+        if (o.calendar) return on ? { on: true, kind: 'open', text: W + 'は営業日（時間は公式のカレンダーで）' } : { on: false, kind: 'closed', text: W + 'は休み（公式のカレンダーより）' };
         var days = o.dows.length === 7 ? '毎日' : (o.dows.length === 6 && o.dows.indexOf(0) < 0 ? '月〜土曜' : o.dows.map(function (d) { return WD[d]; }).join('・') + '曜') +
           ((o.nth || []).length ? 'と第' + o.nth[0][1] + WD[o.nth[0][0]] + '曜' : '');
-        if (!on) return { on: false, text: W + 'は休み' + (o.dows.length < 5 ? '・開くのは' + days : '') };
+        if (!on) return { on: false, kind: 'closed', text: W + 'は休み' + (o.dows.length < 5 ? '・開くのは' + days : '') };
         var t = (hol && o.holTime) || (o.byDow && o.byDow[dow]) || o.time || '';
         var m = t.match(/(\d{1,2}:\d{2})〜(\d{1,2}:\d{2})/);
-        if (m && hm >= pad(m[2])) return { on: false, text: W + 'は終わりました（' + t + '）', late: true };
-        if (m && hm < pad(m[1])) return { on: true, text: W + m[1] + 'から（' + t + '）', from: m[1] };
-        return { on: true, text: W + t };
+        if (m && hm >= pad(m[2])) return { on: false, kind: 'done', text: W + 'は終わりました（' + t + '）' };
+        if (m && hm < pad(m[1])) return { on: true, kind: 'before', text: W + m[1] + 'から（' + t + '）', from: m[1] };
+        return { on: true, kind: 'open', text: W + t };
       }
       if (it.closed) {
         var off = it.closed.dows.indexOf(dow) >= 0 || (hol && it.closed.hol);
-        return off ? { on: false, text: W + 'は定休日' } : null;
+        return off ? { on: false, kind: 'closed', text: W + 'は定休日' } : null;
       }
       return null;
     }
@@ -131,7 +131,8 @@
       map.on('zoomend', drawPins);
       map.on('click', function () { select(''); });
       // 駅の印はピンより手前に（押せない印なので、下のピンはそのまま押せる）
-      homeMark = L.marker(HOME, { icon: L.divIcon({ className: 'om-home', html: '<i></i><span>花小金井駅</span>', iconSize: [0, 0] }), interactive: false, keyboard: false, zIndexOffset: 3000 }).addTo(map);
+      // 駅の印はピンの下に。ピンや丸が駅の名前の札にかかるときは、札を消して点だけにする（件数を隠さない）
+      homeMark = L.marker(HOME, { icon: L.divIcon({ className: 'om-home', html: '<i></i><span>花小金井駅</span>', iconSize: [0, 0] }), interactive: false, keyboard: false, zIndexOffset: -500 }).addTo(map);
       if (phone) twoFingerHint();
     } else if (mapEl) {
       mapEl.innerHTML = '<p class="om-fail">地図を読み込めませんでした。下の一覧からお探しください。</p>';
@@ -206,6 +207,11 @@
         }
       }
       var named = map.getZoom() >= 15;
+      if (homeMark) {
+        var hp = map.latLngToContainerPoint(homeMark.getLatLng()), lab = [hp.x - 10, hp.y - 14, hp.x + 82, hp.y + 10];
+        var hit = groups.some(function (gr) { var bx = box(gr); return gr.x + bx[0] / 2 > lab[0] && gr.x - bx[0] / 2 < lab[2] && gr.y + bx[1] / 2 > lab[1] && gr.y - bx[1] / 2 < lab[3]; });
+        var he = homeMark.getElement(); if (he) he.classList.toggle('nolabel', hit);
+      }
       groups.forEach(function (gr) { if (gr.list.length === 1) addPin(gr.list[0], named); else addGroup(gr.list, map.containerPointToLatLng([gr.x, gr.y])); });
     }
     function addPin(it, named) {
@@ -357,7 +363,9 @@
     function rowHTML(it) {
       var g = G[it.g] || {}, d = dist(it);
       var sub = it.k === 'event' ? (it.next ? md(it.next) : '開催中〜' + md(it.until)) + (it.place ? '・' + it.place.replace(/[（(].*$/, '').replace(/。.*$/, '') : '') : (it.acc || '').split('／')[0];
-      var tag = it.today ? '<i class="om-tg ' + (it.today.on ? 'on' : 'off') + '">' + (it.today.on ? (it.today.from ? 'きょう ' + it.today.from + 'から' : 'きょう開いています') : esc(it.today.text.replace(/・.*$/, '').replace(/（.*$/, ''))) + '</i>' : '';
+      // 一覧の札は、状態から短く組み立てる（文の切り取りはしない）
+      var TG = { closed: 'きょう休み', done: 'きょうは終了', open: 'きょう開いています' };
+      var tag = it.today ? '<i class="om-tg ' + (it.today.on ? 'on' : 'off') + '">' + (it.today.kind === 'before' ? 'きょう ' + it.today.from + 'から' : TG[it.today.kind] || '') + '</i>' : '';
       if (st.now && !it.today && it.k === 'spot' && it.g !== 'park' && it.g !== 'train') tag += '<i class="om-tg na">休みの日は未確認</i>';
       if (it.k === 'event') tag = it.soon ? '<i class="om-tg ev">' + (it.next === today ? 'きょう' : 'あした') + '</i>' : !it.next ? '<i class="om-tg on">開催中</i>' : '';
       if (it.isNew) tag += '<i class="om-tg nw">新しく載せました</i>';
@@ -366,7 +374,7 @@
         // カフェは年齢の目安を付けない（お店の設備だけを書く）。選んだ年齢に関係する設備を出す
         var want = { baby: ['おむつ替え', '授乳スペース', '子ども用の椅子', 'ベビーカーで入れる'], pre: ['キッズスペース・おもちゃ', '子どもメニュー', '座敷・小上がり・個室'], elem: ['キッズスペース・おもちゃ', '子どもメニュー'] }[st.age];
         var has = (it.tags || []).filter(function (t) { return want.indexOf(t) >= 0; });
-        tag += '<i class="om-tg na">' + (has.length ? esc(has.join('・')) + 'あり' : '年齢の目安なし（設備で選んで）') + '</i>';
+        tag += '<i class="om-tg na">' + (has.length ? '設備: ' + esc(has.join('・')) : '年齢の目安なし（設備で選んで）') + '</i>';
       }
       return '<li><button type="button" class="om-row' + (st.sel === it.id ? ' on' : '') + (it.today && !it.today.on ? ' dim' : '') + '" data-id="' + esc(it.id) + '" id="r-' + esc(it.id) + '">' +
         '<span class="om-ci" style="--c:' + g.color + '" aria-hidden="true">' + g.icon + '</span>' +
@@ -379,8 +387,10 @@
       vis.sort(function (a, b) { return evMode ? a.order.localeCompare(b.order) || dist(a) - dist(b) : dist(a) - dist(b); });
       $('om-lt').textContent = evMode ? '日付の近い順' : st.baseName + 'から近い順';
       $('om-ln').textContent = vis.length;
-      var longN = st.g ? 0 : items.filter(function (it) { return it.k === 'event' && !evBrief(it) && ok(it, 'g'); }).length;
-      var ln = $('om-long'); if (ln) { ln.hidden = !longN; ln.textContent = longN ? 'ほかに、長く続く催しが' + longN + '件（「催し」で出ます）' : ''; }
+      var hid = st.g ? [] : items.filter(function (it) { return it.k === 'event' && !evBrief(it) && ok(it, 'g'); });
+      var nLater = hid.filter(function (it) { return it.next; }).length, nLong = hid.length - nLater;
+      var ln = $('om-long');
+      if (ln) { ln.hidden = !hid.length; ln.textContent = hid.length ? 'ほかに、' + [nLater ? '来週からの催し' + nLater + '件' : '', nLong ? '長く続く催し' + nLong + '件' : ''].filter(Boolean).join('・') + '（「催し」で出ます）' : ''; }
       var last = '', html = '';
       vis.slice(0, st.shown).forEach(function (it) {
         if (evMode) {

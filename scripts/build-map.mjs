@@ -333,6 +333,7 @@ const page = `<!doctype html>
   .om-cl i { font-style: normal; font-size: 13px; letter-spacing: -1px; }
   .om-home { background: none; border: 0; }
   .om-home i { position: absolute; left: -7px; top: -7px; width: 14px; height: 14px; border-radius: 50%; background: #E0393E; border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(224,57,62,.35); }
+  .om-home.nolabel span { display: none; }
   .om-home span { position: absolute; left: 10px; top: -10px; white-space: nowrap; font: 800 11px/1 var(--body); color: #1d2a31; background: rgba(255,255,255,.92); padding: 3px 5px; border-radius: 6px; }
 
   /* カード（ピンを押したとき）。広い画面は地図の左下に重ね、スマホは画面の下から */
@@ -516,7 +517,7 @@ ${navSub('map')}
 
 <script src="/assets/leaflet/leaflet.js"></script>
 <script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></script>
-<script src="/assets/bv-odekake.js?v=20261128c"></script>
+<script src="/assets/bv-odekake.js?v=20261128d"></script>
 <script src="/assets/bv-post.js"></script>
 <script type="application/json" id="om-items">${jsonInTag(ITEMS)}</script>
 <script type="application/json" id="om-groups">${jsonInTag(used)}</script>
