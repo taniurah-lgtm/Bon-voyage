@@ -29,7 +29,7 @@
  *   - LINE本文には載せない・リンクもしない（このページはホームページの中だけ）
  */
 import { navSub } from './lib/nav.mjs';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
 const SRC = 'data/lessons.json';
 const OUT = 'docs/homepage/school.html';
@@ -107,6 +107,7 @@ for (const c of chains) {
 }
 if (problems.length) { for (const p of problems) console.error('🔴 ' + p); process.exit(1); }
 
+
 // ── 駅（しぼりこみ用）: where に書いてある駅。無ければ町名から近い駅（data の near）。どちらも無ければ空 ──
 const STATION_RE = /(花小金井|新小平|小平|一橋学園|鷹の台|小川|青梅街道|八坂|恋ヶ窪|東久留米)駅/;
 function stationsOf(l) {
@@ -157,6 +158,17 @@ for (const l of units) {
   for (const k of l._pl) if (!(k.startsWith('駅:') ? MAP.stations[k.slice(2)] : MAP.towns[k])) problems.push(`${l.name}: mapAt の「${k}」は data の map に無い`);
 }
 if (problems.length) { for (const p of problems) console.error('🔴 ' + p); process.exit(1); }
+
+// ── どこから探すか（2026-11-28 オーナー「スクールガイドも、現在地から探す的なことはできない？」）──
+// 📍現在地か、駅・町を選ぶと、そこから 1・2・3km 以内の町の教室にしぼる（並びは五十音のまま。距離で順番は変えない）。
+// 教室の場所は町名まで（町の代表点）なので、距離は「だいたい」。選んだ場所は、おでかけマップと共通でブラウザに覚える
+const MB = existsSync('data/map-bases.json') ? JSON.parse(readFileSync('data/map-bases.json', 'utf8')) : { default: null, stations: {}, neighbors: {} };
+const BASES = {
+  kodaira: Object.entries({ ...MAP.stations, ...MB.stations }).map(([n, p]) => ({ name: `${n}駅`, lat: p[0], lng: p[1] })),
+  neighbors: Object.entries(MB.neighbors || {}).map(([n, p]) => ({ name: `${n}駅`, lat: p[0], lng: p[1] })),
+  towns: Object.entries(MAP.towns).map(([n, p]) => ({ name: n, lat: p[0], lng: p[1] })).sort((a, b) => a.name.localeCompare(b.name, 'ja')),
+};
+const bopt = (b, g) => `<option value="${g}:${esc(b.name)}">${esc(b.name)}</option>`;
 const PLACES = {};
 for (const l of units) for (const k of l._pl) if (!PLACES[k]) { const [lat, lng] = k.startsWith('駅:') ? MAP.stations[k.slice(2)] : MAP.towns[k]; PLACES[k] = { label: placeLabel(k), lat, lng, st: k.startsWith('駅:') ? 1 : 0 }; }
 const offMap = units.filter((l) => !l._pl.length);
@@ -518,6 +530,22 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .smap-cap a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; color: var(--link-ink); }
   .smap-cap button { min-height: 44px; padding: 0 .2rem; border: 0; background: none; font: inherit; font-weight: 700; color: var(--ink-soft); text-decoration: underline; cursor: pointer; }
   .leaflet-container { font-family: inherit; }
+  /* どこから探すか */
+  .sf { display: grid; grid-template-columns: auto 1fr; gap: .35rem; margin-top: .45rem; }
+  .sf button, .sf select { min-height: 44px; border: 1.5px solid var(--line-strong); border-radius: 999px; background: var(--surface); font: 700 .82rem/1.2 var(--body); color: var(--ink); padding: .2rem .8rem; cursor: pointer; }
+  .sf select { min-width: 0; padding-right: 1.8rem; -webkit-appearance: none; appearance: none; text-overflow: ellipsis;
+    background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2334434C'/%3E%3C/svg%3E") no-repeat right .8rem center; }
+  .sf button[aria-pressed="true"], .sf select.on { border-color: #34434C; box-shadow: inset 0 0 0 1px #34434C; }
+  .sf-km { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem; margin-top: .35rem; }
+  .sf-km[hidden] { display: none; }
+  .sf-km span { flex: 1 0 100%; font-size: .78rem; color: var(--ink-soft); }
+  .sf-km span b { color: var(--ink); }
+  .sf-km button { flex: 1 1 0; min-height: 44px; border: 1.5px solid var(--line-strong); border-radius: 999px; background: var(--surface); font: 700 .8rem/1.2 var(--body); color: var(--ink-soft); cursor: pointer; white-space: nowrap; }
+  .sf-km button[aria-pressed="true"] { background: #34434C; border-color: #34434C; color: #fff; }
+  .sf-note { margin: .3rem 0 0; font-size: .72rem; color: var(--ink-soft); }
+  .smap-me { pointer-events: none; }
+  .smap-me i { position: absolute; left: -8px; top: -8px; width: 16px; height: 16px; box-sizing: border-box; border-radius: 50%; background: #E0393E; border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(224,57,62,.35); }
+  .smap-me span { position: absolute; left: 11px; top: -10px; white-space: nowrap; font-size: .7rem; font-weight: 800; color: #fff; background: #E0393E; border-radius: 6px; padding: 2px 5px; }
 
   /* ── PRカード ── */
   .prc { background: var(--pr-bg); border: 1.5px solid var(--pr-line); border-radius: var(--radius-sm); margin: .7rem 0; overflow: hidden; box-shadow: 0 2px 14px rgba(138,90,18,.08); scroll-margin-top: 104px; }
@@ -639,7 +667,21 @@ ${navSub('lessons')}
 
   <section class="smap" id="smap" aria-labelledby="smap-h">
     <div class="smap-top"><h2 id="smap-h">地図で見る</h2><p>丸の数字は、町ごとの教室の数</p></div>
+    <div class="sf" role="group" aria-label="どこから探すか">
+      <button type="button" id="sf-geo">📍 現在地から</button>
+      <select id="sf-sel" aria-label="駅・町を選んで、その近くの教室にしぼる">
+        <option value="">駅・町から探す</option>
+        <option value="geo" hidden disabled>📍 いまいる場所</option>
+        <optgroup label="小平市の駅">${BASES.kodaira.map((b) => bopt(b, 'k')).join('')}</optgroup>
+        <optgroup label="となりの市の駅">${BASES.neighbors.map((b) => bopt(b, 'n')).join('')}</optgroup>
+        <optgroup label="小平市の町">${BASES.towns.map((b) => bopt(b, 't')).join('')}</optgroup>
+      </select>
+    </div>
+    <div class="sf-km" id="sf-km" role="group" aria-label="距離でしぼる" hidden>
+      <span id="sf-name"></span><button type="button" data-km="1">1km</button><button type="button" data-km="2">2km</button><button type="button" data-km="3">3km</button><button type="button" data-km="0">しぼらない</button>
+    </div>
     <div class="smap-c" id="smap-c" role="application" aria-label="町ごとの教室の数の地図"></div>
+    <p class="sf-note" id="sf-note" hidden>距離は、教室のある町の真ん中までの、だいたいの直線距離です（教室の番地は載せていません）。</p>
     <p class="smap-cap" id="smap-cap">丸を押すと、その町の教室だけになります</p>
   </section>
 
@@ -687,7 +729,8 @@ ${navSub('lessons')}
 ${GMAPS_KEY ? '<script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></script>\n' : ''}<script>
 /* さがす: 年齢・ジャンル・駅・無料体験を組み合わせてしぼる。ボタンの数は、ほかの条件に合う教室の数 */
 (function () {
-  var st = { age: 'all', g: '', st: [], free: false, place: '' };
+  var st = { age: 'all', g: '', st: [], free: false, place: '', km: 0 };
+  var near = null;   // どこから探すか { lat, lng, name, key }
   var AGE = ${JSON.stringify(AGES)};
   var items = [].slice.call(document.querySelectorAll('[data-item]'));
   var secs = [].slice.call(document.querySelectorAll('.gs'));
@@ -702,6 +745,7 @@ ${GMAPS_KEY ? '<script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></
     if (skip !== 'st' && st.st.length && !st.st.some(function (s) { return has(el, 'data-st', s); })) return false;
     if (skip !== 'free' && st.free && el.getAttribute('data-trial') !== 'free') return false;
     if (skip !== 'place' && st.place && !has(el, 'data-place', st.place)) return false;
+    if (skip !== 'km' && st.km && near && !(el._d <= st.km)) return false;   // 町の場所が無い教室は、距離でしぼるときは出さない
     return true;
   }
   /* 地図: 町ごとの教室の数の丸。押すと、その町の教室だけ（もう一度押すと外れる）。ほかの条件で数が変わる */
@@ -805,7 +849,11 @@ ${GMAPS_KEY ? '<script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></
   }
   function mapUpdate(n) {
     if (!smap) return;
-    Object.keys(marks).forEach(function (k) { cnt[k] = count(function (el) { return has(el, 'data-place', k); }, 'place'); });
+    Object.keys(marks).forEach(function (k) {
+      // 距離でしぼっているときは、円の外の町の丸は出さない（2つの町にまたがる教室が、外の町にも数えられないように）
+      if (st.km && near && km([near.lat, near.lng], [PL[k].lat, PL[k].lng]) > st.km) { cnt[k] = 0; return; }
+      cnt[k] = count(function (el) { return has(el, 'data-place', k); }, 'place');
+    });
     render();
     $('smap-cap').innerHTML = st.place
       ? '<span><b>' + PL[st.place].label + '</b>の教室 <b>' + n + '</b></span><a href="#results" id="smap-go">一覧を見る</a><button type="button" id="smap-off">町を外す</button>'
@@ -814,6 +862,72 @@ ${GMAPS_KEY ? '<script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></
   $('smap-cap').addEventListener('click', function (e) {
     if (e.target.id === 'smap-off') { st.place = ''; apply(); }
     if (e.target.id === 'smap-go') { var first = document.querySelector('.gs:not([hidden])'); if (first) { e.preventDefault(); first.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }
+  });
+  /* どこから探すか: 📍現在地か、駅・町。1・2・3km 以内の町の教室にしぼる（町の真ん中までの、だいたいの距離） */
+  var BS = ${JSON.stringify(BASES)}, BYK = {};
+  [['k', BS.kodaira], ['n', BS.neighbors], ['t', BS.towns]].forEach(function (x) { x[1].forEach(function (b) { BYK[x[0] + ':' + b.name] = b; }); });
+  var KEY = 'om-base-v1', meMark = null, ring = null;
+  function km(a, b) {
+    var dLat = (b[0] - a[0]) * Math.PI / 180, dLng = (b[1] - a[1]) * Math.PI / 180;
+    var x = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a[0] * Math.PI / 180) * Math.cos(b[0] * Math.PI / 180) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    return 2 * 6371 * Math.asin(Math.sqrt(x));
+  }
+  function setNear(lat, lng, name, key, kmv, quiet) {
+    near = { lat: lat, lng: lng, name: name, key: key };
+    items.forEach(function (el) {
+      var ks = (el.getAttribute('data-place') || '').split(' ').filter(Boolean), d = Infinity;
+      ks.forEach(function (k) { if (PL[k]) d = Math.min(d, km([lat, lng], [PL[k].lat, PL[k].lng])); });
+      el._d = d;
+    });
+    st.km = kmv; st.place = '';
+    if (!quiet) { try { localStorage.setItem(KEY, key); } catch (e) { /* 覚えられなくても使える */ } }
+    var sel = $('sf-sel'), go = sel.querySelector('option[value="geo"]');
+    go.hidden = key !== 'geo'; go.disabled = key !== 'geo';
+    sel.value = key === 'def' ? '' : key;
+    apply();
+  }
+  function nearUpdate() {
+    var box = $('sf-km'); if (!box) return;
+    box.hidden = !near; $('sf-note').hidden = !near;
+    $('sf-geo').setAttribute('aria-pressed', near && near.key === 'geo' ? 'true' : 'false');
+    $('sf-sel').classList.toggle('on', !!near && near.key !== 'geo');
+    if (!near) return;
+    $('sf-name').innerHTML = '<b>' + near.name.replace(/[<>&]/g, '') + '</b>から（だいたいの直線距離）';
+    box.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', +b.getAttribute('data-km') === st.km ? 'true' : 'false'); });
+    if (!smap) return;
+    if (!meMark) meMark = L.marker([near.lat, near.lng], { icon: L.divIcon({ className: 'smap-me', html: '<i></i><span></span>', iconSize: [0, 0] }), interactive: false, keyboard: false, zIndexOffset: 2000 }).addTo(smap);
+    meMark.setLatLng([near.lat, near.lng]);
+    var sp = meMark.getElement() && meMark.getElement().querySelector('span'); if (sp) sp.textContent = near.key === 'geo' ? 'いまここ' : near.name;
+    if (ring) { smap.removeLayer(ring); ring = null; }
+    if (st.km) {
+      ring = L.circle([near.lat, near.lng], { radius: st.km * 1000, color: '#E0393E', weight: 2, opacity: .7, fillColor: '#E0393E', fillOpacity: .06, interactive: false }).addTo(smap);
+    }
+    if (near._fitKm !== st.km || near._fitKey !== near.key) {
+      near._fitKm = st.km; near._fitKey = near.key;
+      if (ring) smap.fitBounds(ring.getBounds(), { padding: [18, 18] }); else smap.setView([near.lat, near.lng], Math.max(smap.getZoom(), 13.5));
+    }
+  }
+  function useGeo(quiet, kmv) {
+    var b = $('sf-geo');
+    if (!navigator.geolocation) { b.textContent = '📍 使えません'; return; }
+    b.textContent = '📍 探しています…';
+    navigator.geolocation.getCurrentPosition(function (p) {
+      b.textContent = '📍 現在地から';
+      setNear(p.coords.latitude, p.coords.longitude, 'いまいる場所', 'geo', kmv, quiet);
+    }, function () {
+      b.textContent = '📍 取れませんでした';
+      setTimeout(function () { b.textContent = '📍 現在地から'; }, 2500);
+    }, { enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 });
+  }
+  $('sf-geo').addEventListener('click', function () { useGeo(false, st.km || 2); });
+  $('sf-sel').addEventListener('change', function (e) {
+    var k = e.target.value, b = BYK[k];
+    if (!b) return;
+    setNear(b.lat, b.lng, b.name, k, st.km || 2, false);
+  });
+  $('sf-km').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-km]'); if (!b) return;
+    st.km = +b.getAttribute('data-km'); apply();
   });
   function count(test, skip) { var c = 0; items.forEach(function (el) { if (test(el) && ok(el, skip)) c++; }); return c; }
   function apply() {
@@ -854,6 +968,7 @@ ${GMAPS_KEY ? '<script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></
     st.st.forEach(function (s) { cond.push(['st:' + s, s === 'other' ? 'そのほか・駅の記載なし' : s + '駅']); });
     if (st.free) cond.push(['free', '無料体験あり']);
     if (st.place) cond.push(['place', PL[st.place].label + '（地図）']);
+    if (st.km && near) cond.push(['km', near.name + 'から' + st.km + 'km']);
     $('cnt').textContent = n; $('fabn').textContent = n;
     $('cond').innerHTML = cond.map(function (c) { return '<button type="button" class="cc" data-k="' + c[0] + '" aria-label="' + c[1] + 'の条件を外す">' + c[1] + '<span aria-hidden="true">×</span></button>'; }).join('');
     $('cond').hidden = !cond.length;
@@ -861,6 +976,7 @@ ${GMAPS_KEY ? '<script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></
     $('none').hidden = n > 0;
     $('see').hidden = !n;
     mapUpdate(n);
+    nearUpdate();
   }
   document.querySelectorAll('.seg button').forEach(function (b) { b.addEventListener('click', function () { st.age = b.getAttribute('data-age'); apply(); }); });
   document.querySelectorAll('.gt button').forEach(function (b) { b.addEventListener('click', function () { var g = b.getAttribute('data-g'); st.g = st.g === g ? '' : g; apply(); }); });
@@ -870,11 +986,11 @@ ${GMAPS_KEY ? '<script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></
     apply();
   }); });
   $('free-only').addEventListener('change', function (e) { st.free = e.target.checked; apply(); });
-  function reset() { st = { age: 'all', g: '', st: [], free: false, place: '' }; apply(); }
+  function reset() { st = { age: 'all', g: '', st: [], free: false, place: '', km: 0 }; apply(); }
   $('cond').addEventListener('click', function (e) {
     var b = e.target.closest('.cc'); if (!b) return;
     var k = b.getAttribute('data-k');
-    if (k === 'age') st.age = 'all'; else if (k === 'free') st.free = false; else if (k.indexOf('st:') === 0) st.st.splice(st.st.indexOf(k.slice(3)), 1); else st[k] = '';
+    if (k === 'age') st.age = 'all'; else if (k === 'free') st.free = false; else if (k === 'km') st.km = 0; else if (k.indexOf('st:') === 0) st.st.splice(st.st.indexOf(k.slice(3)), 1); else st[k] = '';
     apply();
   });
   $('reset').addEventListener('click', reset); $('reset2').addEventListener('click', reset);
@@ -895,6 +1011,13 @@ ${GMAPS_KEY ? '<script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></
   }, { passive: true });
   mapInit();
   apply();
+  /* 前に選んだ場所（おでかけマップと共通）。開いたときは、場所だけ出して距離ではしぼらない（押すとしぼる） */
+  (function () {
+    var saved = null; try { saved = localStorage.getItem(KEY); } catch (e) { /* なし */ }
+    if (saved && BYK[saved]) { var b = BYK[saved]; setNear(b.lat, b.lng, b.name, saved, 0, true); return; }
+    if (saved === 'geo') { useGeo(true, 0); return; }
+    if (navigator.permissions && navigator.permissions.query) navigator.permissions.query({ name: 'geolocation' }).then(function (p) { if (p.state === 'granted') useGeo(true, 0); }).catch(function () { /* なし */ });
+  })();
 })();
 </script>
 </body>
