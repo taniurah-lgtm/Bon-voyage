@@ -45,7 +45,16 @@ const daysBetween = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5
 const short = (name) => name.replace(/（.*?）/g, '');
 const shortOf = (p) => p.short || short(p.name);
 const asItem = (x) => (typeof x === 'string' ? { d: x } : x);
-const AGE_LABEL = { baby: '👶 0〜3歳', kids: '🧒🎒 4歳〜小学生', all: 'だれでも' };
+// 年齢（2026-11-29 3つに分けた）: baby＝0〜3歳 / pre＝4〜6歳 / elem＝小学生。kids は pre+elem、all は3つとも。配列でも書ける
+const AGE_KEYS = ['baby', 'pre', 'elem'];
+const AGE_ALIAS = { baby: ['baby'], pre: ['pre'], elem: ['elem'], kids: ['pre', 'elem'], all: AGE_KEYS };
+const agesOf = (a) => [...new Set((Array.isArray(a) ? a : [a]).flatMap((x) => AGE_ALIAS[x] || []))].sort((x, y) => AGE_KEYS.indexOf(x) - AGE_KEYS.indexOf(y));
+const AGE_ICON = { baby: '👶', pre: '🧒', elem: '🎒' };
+function ageLabel(a) {
+  const k = agesOf(a).join(' ');
+  return { baby: '👶 0〜3歳', pre: '🧒 4〜6歳', elem: '🎒 小学生', 'pre elem': '🧒🎒 4歳〜小学生', 'baby pre': '👶🧒 0〜6歳', 'baby pre elem': '👶🧒🎒 だれでも' }[k]
+    || agesOf(a).map((x) => AGE_ICON[x]).join('');
+}
 
 // ── 検査 ──────────────────────────────────────────────
 const problems = [];
@@ -65,9 +74,15 @@ for (const p of places) {
     if (!o.cur || o.cur.month < todayJST.slice(0, 7)) warn.push(`${p.name}: おたよりが ${o.cur ? o.cur.month : '無い'} のまま。今月号を足す（otayori / otayoriNext）`);
     if (+todayJST.slice(8, 10) >= 20 && !o.next) warn.push(`${p.name}: 来月号がまだ。出ていたら otayoriNext に足す（月末に来月の予定を知りたい人がいる）`);
   }
-  else if (daysBetween(p.checked, todayJST) > STALE_DAYS) warn.push(`${p.name}: 確かめてから ${daysBetween(p.checked, todayJST)} 日。公式を見直す`);
+  if (p.note) for (const m of String(p.note).matchAll(/(\d{1,2})月(?:は|から|まで)/g)) { const back = (+todayJST.slice(5, 7) - +m[1] + 12) % 12; if (back >= 1 && back <= 6 && !/\d{4}年/.test(p.note)) warn.push(`${p.name}: note に過ぎた月の話（${m[0]}）`); }
+  if (!p.otayori && daysBetween(p.checked, todayJST) > STALE_DAYS) warn.push(`${p.name}: 確かめてから ${daysBetween(p.checked, todayJST)} 日。公式を見直す`);
   for (const g of p.programs) {
-    if (!AGE_LABEL[g.age]) problems.push(`${p.name}「${g.title}」: age は baby / kids / all のどれか`);
+    if (!agesOf(g.age).length || (Array.isArray(g.age) ? g.age : [g.age]).some((x) => !AGE_ALIAS[x])) problems.push(`${p.name}「${g.title}」: age は baby / pre / elem / kids / all（配列も可）`);
+    // 🆕 2026-11-29 「10月は毎週水曜」のような、過ぎた月の一文を残さない（評価役の指摘）
+    for (const s of [g.when, g.more, ...(g.notes || [])].filter(Boolean)) for (const m of String(s).matchAll(/(?<![〜~\d])(\d{1,2})月(?:は|の|中)/g)) {
+      const mm = +m[1], cur = +todayJST.slice(5, 7), back = (cur - mm + 12) % 12;
+      if (back >= 1 && back <= 6) warn.push(`${p.name}「${g.title}」: 過ぎた月の話が残っている（${m[0]}）: ${s}`);
+    }
     for (const x of g.dates || []) {
       const d = asItem(x).d;
       if (!/^\d{4}-\d{2}-\d{2}$/.test(d) || isNaN(Date.parse(d))) problems.push(`${p.name}「${g.title}」: 日付の形がおかしい ${d}`);
@@ -126,7 +141,7 @@ function tileHtml(n) {
   if (n.station) return `<span class="cell st" aria-hidden="true"><span>${esc(n.station.name)}</span></span>`;
   const p = n.place, k = KIND[p._kind], rule = openRule(p, spotOf(p));
   const dates = p.programs.filter((g) => g.open === true).flatMap((g) => (g.dates || []).map((x) => asItem(x).d)).filter((d) => d >= todayJST).slice(0, 40);
-  return `<a class="cell tt ${k.cls}" href="#${p.key}" data-k="${p._kind}" data-ages="${[...new Set(p.programs.map((g) => g.age))].join(' ')}"${rule ? ` data-rule="${esc(JSON.stringify(rule))}"` : ''}${dates.length ? ` data-dates="${dates.join(' ')}"` : ''} aria-label="${esc(k.label)}：${esc(p.name)}" data-goatcounter-click="定例マップ｜${esc(p.tile)}"><i aria-hidden="true">${k.icon}</i><b>${tLabel(p.tile)}</b></a>`;
+  return `<a class="cell tt ${k.cls}" href="#${p.key}" data-k="${p._kind}" data-ages="${[...new Set(p.programs.flatMap((g) => agesOf(g.age)))].join(' ')}"${rule ? ` data-rule="${esc(JSON.stringify(rule))}"` : ''}${dates.length ? ` data-dates="${dates.join(' ')}"` : ''} aria-label="${esc(k.label)}：${esc(p.name)}" data-goatcounter-click="定例マップ｜${esc(p.tile)}"><i aria-hidden="true">${k.icon}</i><b>${tLabel(p.tile)}</b></a>`;
 }
 const tmapHtml = `<div class="tmap">
       <div class="nb nb-top"><span>← ${esc(ENTEI.neighbors.w)}</span><span>↑ ${esc(ENTEI.neighbors.n)}</span><span>${esc(ENTEI.neighbors.e)} →</span></div>
@@ -161,8 +176,8 @@ function program(g, p) {
     : g.open === false ? '<span class="tag bk">申込み・登録</span>' : '';
   const gsrc = publicUrl(g.src); // 市のサイトの障害の間は、開かない出典を出さない
   const src = gsrc && gsrc !== p.url ? `<a class="src" href="${esc(gsrc)}" target="_blank" rel="noopener" data-goatcounter-click="定例｜${esc(short(p.name))}｜${esc(g.title)}">この会の案内（公式）</a>` : '';
-  return `<div class="prog" data-age="${g.age}">
-        <h3>${esc(g.title)} <span class="agetag">${AGE_LABEL[g.age]}</span> ${tag}</h3>
+  return `<div class="prog" data-age="${agesOf(g.age).join(' ')}">
+        <h3>${esc(g.title)} <span class="agetag">${ageLabel(g.age)}</span> ${tag}</h3>
         ${g.when ? `<p class="when">${esc(g.when)}</p>` : ''}
         ${dateChips(g)}
         ${g.more ? `<p class="more">${esc(g.more)}</p>` : ''}
@@ -181,10 +196,10 @@ function program(g, p) {
 }
 
 function place(p) {
-  const ages = [...new Set(p.programs.map((g) => g.age))].join(' ');
+  const ages = [...new Set(p.programs.flatMap((g) => agesOf(g.age)))].join(' ');
   const k = KIND[p._kind] || KIND.chiiki;
   const wh = (p.programs.find((g) => g.when) || {}).when || '';
-  return `<details class="pl" id="${p.key}" data-ages="${ages || 'all'}" data-k="${p._kind}">
+  return `<details class="pl" id="${p.key}" data-ages="${ages || AGE_KEYS.join(' ')}" data-k="${p._kind}">
       <summary class="pl-s"><span class="pl-i ${k.cls}" aria-hidden="true">${k.icon}</span><span class="pl-n"><b>${esc(p.name)}</b><small class="pl-next" data-wh="${esc(wh)}">${esc(wh || (p.town || ''))}</small></span><span class="chev" aria-hidden="true"></span></summary>
       <div class="pl-b">
       ${p.town ? `<p class="town">${esc(p.town)}</p>` : ''}
@@ -216,7 +231,7 @@ for (const p of places) {
     for (const x of (g.dates || []).map(asItem)) {
       if (x.d < todayJST) continue;
       const tm = (g.timeByDow && g.timeByDow[dow(x.d)]) || g.time || '';
-      soon.push({ d: x.d, key: p.key, pl: shortOf(p), t: x.t || g.title, time: x.t ? '' : tm, age: g.age, k: p._kind });
+      soon.push({ d: x.d, key: p.key, pl: shortOf(p), t: x.t || g.title, time: x.t && /\d{1,2}:\d{2}/.test(x.t) ? '' : tm, age: agesOf(g.age).join(' '), k: p._kind });
     }
   }
 }
@@ -225,12 +240,12 @@ const byDate = new Map();
 for (const s of soon) byDate.set(s.d, [...(byDate.get(s.d) || []), s]);
 const soonHtml = [...byDate]
   .map(([d, xs]) => `<li class="day" data-d="${d}"><span class="sd">${label(d)}</span><ul>${xs
-    .map((x) => `<li data-age="${x.age}" data-k="${x.k}"><a href="#${x.key}">${esc(x.pl)}</a> ${esc(x.t.replace(/[（(][^）)]{12,}[）)]/g, ''))}${x.time ? `<small>${esc(x.time)}</small>` : ''}</li>`)
+    .map((x) => `<li data-age="${x.age}" data-k="${x.k}"><a href="#${x.key}"><i class="sk ${KIND[x.k].cls}" aria-hidden="true">${KIND[x.k].icon}</i><span><b>${esc(x.pl)}</b> ${esc(x.t.replace(/[（(][^）)]{16,}[）)]/g, ''))}${x.time ? `<small>${esc(x.time)}</small>` : ''}</span></a></li>`)
     .join('')}</ul></li>`)
   .join('\n        ');
 
 const regular = [];
-for (const p of places) for (const g of p.programs) if (g.open === true && g.when) regular.push({ key: p.key, pl: shortOf(p), t: g.title, when: g.when, age: g.age });
+for (const p of places) for (const g of p.programs) if (g.open === true && g.when) regular.push({ key: p.key, pl: shortOf(p), t: g.title, when: g.when, age: agesOf(g.age).join(' ') });
 const regularHtml = regular
   .map((x) => `<li data-age="${x.age}"><a href="#${x.key}">${esc(x.pl)}</a> ${esc(x.t)}<small>${esc(x.when)}</small></li>`)
   .join('\n        ');
@@ -296,6 +311,12 @@ const html = `<!doctype html>
   .soon .reg li { padding: .35rem 0; border-top: 1px dashed var(--line); }
   .soon .reg li:first-child { border-top: 0; }
   .soon a { font-weight: 700; color: var(--link-ink); text-decoration: none; }
+  .soon .day li a { display: flex; align-items: flex-start; gap: .45rem; min-height: 44px; padding: .35rem .2rem; color: var(--ink); font-weight: 400; border-radius: 8px; }
+  .soon .day li a:hover, .soon .day li a:focus-visible { background: var(--sky-wash); }
+  .soon .day li a b { color: var(--link-ink); font-weight: 800; }
+  .soon .sk { flex: 0 0 auto; font-style: normal; display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--c); font-size: 12px; margin-top: 1px; }
+  .soon .day { align-items: start; }
+  .soon .sd { padding-top: .45rem; }
   .soon small { display: block; color: var(--ink-faint); font-size: .74rem; }
   .soon .empty, .soon .wk { color: var(--ink-faint); font-size: .78rem; }
 
@@ -341,7 +362,7 @@ const html = `<!doctype html>
   .kv { display: flex; gap: .6rem; font-size: .84rem; line-height: 1.6; }
   .kv .k { flex: none; width: 3.6em; color: var(--ink-faint); font-size: .78rem; padding-top: .08rem; }
   .notes { margin: .35rem 0 0; padding-left: 1.1rem; font-size: .8rem; color: var(--ink-soft); line-height: 1.65; }
-  .src { display: inline-flex; align-items: center; min-height: 32px; font-size: .76rem; font-weight: 700; color: var(--link-ink); text-decoration: none; }
+  .src { display: inline-flex; align-items: center; min-height: 44px; font-size: .76rem; font-weight: 700; color: var(--link-ink); text-decoration: none; }
   .fn { font-size: .78rem; color: var(--ink-faint); margin-top: .6rem; line-height: 1.6; }
   .pl-f { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .6rem; margin-top: .7rem; padding-top: .5rem; border-top: 1px solid var(--line); }
   .chk { font-size: .72rem; color: var(--ink-faint); }
@@ -408,7 +429,7 @@ const html = `<!doctype html>
   .otas li { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .4rem; padding: .25rem 0; border-top: 1px dashed var(--line); }
   .otas li:first-child { border-top: 0; }
   .otas .on { flex: 0 0 5.5em; font-weight: 800; font-size: .84rem; }
-  .otas li a { display: inline-flex !important; flex-direction: row !important; align-items: center; gap: .25rem; min-height: 40px !important; padding: .2rem .7rem !important; border-radius: 999px !important; font-size: .8rem !important; }
+  .otas li a { display: inline-flex !important; flex-direction: row !important; align-items: center; gap: .25rem; min-height: 44px !important; padding: .2rem .7rem !important; border-radius: 999px !important; font-size: .8rem !important; }
   .otas li a.nx { border-style: dashed !important; color: var(--marigold-ink); }
   .otas li a small { font-size: .66rem; font-weight: 800; }
 </style>
@@ -442,7 +463,8 @@ ${navSub('teirei')}
   <div class="agef" role="group" aria-label="年齢でしぼる">
     <button type="button" data-f="" aria-pressed="true">すべて</button>
     <button type="button" data-f="baby" aria-pressed="false">👶 0〜3歳</button>
-    <button type="button" data-f="kids" aria-pressed="false">🧒🎒 4歳〜小学生</button>
+    <button type="button" data-f="pre" aria-pressed="false">🧒 4〜6歳</button>
+    <button type="button" data-f="elem" aria-pressed="false">🎒 小学生</button>
   </div>
 
   <section class="soon" aria-labelledby="soon-h">
@@ -498,6 +520,7 @@ ${navSub('teirei')}
   var lim = new Date(Date.now() + 9 * 3600e3 + 13 * 864e5).toISOString().slice(0, 10);
   var age = '';
   try { age = localStorage.getItem('bvt.age') || ''; } catch (e) {}
+  if (['', 'baby', 'pre', 'elem'].indexOf(age) < 0) age = '';
 
   // 過ぎた日を隠し、先の SHOW 回だけ見せる
   document.querySelectorAll('.prog').forEach(function (g) {
@@ -554,10 +577,10 @@ ${navSub('teirei')}
   window.addEventListener('hashchange', openHash);
   var kind = '', soonAll = false;
   function apply() {
-    var ok = function (a) { return !age || a === age || a === 'all'; };
+    var ok = function (a) { return !age || (a || '').split(' ').indexOf(age) >= 0; };
     document.querySelectorAll('.tt').forEach(function (a) {
       var ags = (a.getAttribute('data-ages') || '').split(' ');
-      var hit = (!kind || a.getAttribute('data-k') === kind) && (!age || ags.indexOf(age) >= 0 || ags.indexOf('all') >= 0);
+      var hit = (!kind || a.getAttribute('data-k') === kind) && (!age || ags.indexOf(age) >= 0);
       a.classList.toggle('dim', !hit);
     });
     document.querySelectorAll('.secw').forEach(function (w) { w.hidden = !!kind && w.getAttribute('data-k') !== kind; });
