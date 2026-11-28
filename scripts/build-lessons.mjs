@@ -73,7 +73,7 @@ if (!PREVIEW) list = list.filter((l) => l.verified === true);
 // 公式の教室検索で小平市内を1つずつ確かめたもの。1つのチェーンを1行にまとめ、開くと各教室。数えるのは教室ごと
 let chains = data.chains || [];
 if (!PREVIEW) chains = chains.filter((c) => c.verified === true);
-for (const c of chains) for (const r of c.rooms || []) Object.assign(r, { kind: 'room', genre: c.genre, trial: r.trial || c.trial, ages: r.ages || [] });
+for (const c of chains) for (const r of c.rooms || []) Object.assign(r, { kind: 'room', genre: c.genre, trial: 'trial' in r ? r.trial : c.trial, ages: r.ages || [] });
 const rooms = chains.flatMap((c) => c.rooms || []);
 const units = [...list, ...rooms];
 if (!PREVIEW && units.length < MIN) { console.error(`🔴 公開は${MIN}教室そろってから（いま${units.length}教室）。data/lessons.json の launch を false に戻すか、教室を足す`); process.exit(1); }
@@ -122,7 +122,7 @@ function stationsOf(l) {
 function trialKind(t) { if (!t) return ''; if (/無料/.test(t)) return 'free'; if (/体験/.test(t)) return 'yes'; if (/見学/.test(t)) return 'look'; return 'yes'; }
 function trialLabel(t) {
   if (!t) return '';
-  if (/無料/.test(t)) return '無料体験あり';
+  if (/無料/.test(t)) return /教室により/.test(t) ? '無料体験あり（教室により）' : '無料体験あり';
   const m = t.match(/([\d,]+)円/);
   if (m) return `体験 ${m[1]}円`;
   if (/有料/.test(t)) return '体験あり（有料）';
