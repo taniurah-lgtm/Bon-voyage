@@ -480,11 +480,21 @@
       drawList(); fit('near');
       if (st.sel) select(st.sel, true);
     }
+    // 「現在地」を使った人が、どのあたりから使っているか: いちばん近い駅の名前だけを数える（位置そのものは送らない）。
+    // どの駅からも3km より遠いときは「エリアの外」
+    function nearestStation(lat, lng) {
+      var best = null, bd = 1e9;
+      (B.kodaira || []).concat(B.neighbors || []).forEach(function (b) { var d = km([lat, lng], [b.lat, b.lng]); if (d < bd) { bd = d; best = b; } });
+      return best && bd <= 3 ? best.name + 'のあたり' : 'エリアの外';
+    }
+    var tallied = {};   // 現在地は、1回の表示につき1回だけ数える
+    function tally(kind, name) { if (kind === '現在地' && tallied[kind]) return; tallied[kind] = 1; if (global.bvCount) global.bvCount('マップ｜' + kind + '｜' + name, 'おでかけマップの' + kind); }
     function useGeo(quiet) {
       if (!navigator.geolocation) { if (geoBtn) geoBtn.textContent = '📍使えません'; return; }
       if (geoBtn) geoBtn.textContent = '📍探しています…';
       navigator.geolocation.getCurrentPosition(function (p) {
         if (geoBtn) geoBtn.textContent = '📍現在地';
+        tally('現在地', nearestStation(p.coords.latitude, p.coords.longitude));
         setBase(p.coords.latitude, p.coords.longitude, 'いまいる場所', '', 'geo', quiet);
       }, function () {
         if (geoBtn) geoBtn.textContent = '📍取れませんでした';
@@ -503,6 +513,7 @@
     if (fromSel) fromSel.addEventListener('change', function () {
       var k = fromSel.value, b = BYKEY[k];
       if (k === 'geo' || !b) return;
+      tally('選んだ場所', b.name);
       setBase(b.lat, b.lng, b.name, b.origin, k, false);
     });
     if (map) map.on('moveend', outside);

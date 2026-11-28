@@ -541,7 +541,7 @@ ${navSub('map')}
 
 <script src="/assets/leaflet/leaflet.js"></script>
 <script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></script>
-<script src="/assets/bv-odekake.js?v=20261128g"></script>
+<script src="/assets/bv-odekake.js?v=20261128h"></script>
 <script src="/assets/bv-post.js"></script>
 <script type="application/json" id="om-items">${jsonInTag(ITEMS)}</script>
 <script type="application/json" id="om-groups">${jsonInTag(used)}</script>

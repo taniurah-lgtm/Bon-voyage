@@ -37,6 +37,16 @@
     });
   }, true);
 
+  // 🆕 2026-11-28 ページから数える（解析の読み込みが遅くても、少し待ってから数える）。
+  //   地図の「現在地」は、いちばん近い駅の名前だけを数える。位置そのものは送らない（取り扱いのページに書いてある）
+  window.bvCount = function (path, title) {
+    var n = 0;
+    (function go() {
+      if (window.goatcounter && window.goatcounter.count) { window.goatcounter.count({ path: path, title: title || path, event: true }); return; }
+      if (++n < 10) setTimeout(go, 1000);
+    })();
+  };
+
   // 押されたリンクの題名は、見えている文字だけにする（2026-10-21）。
   // data-goatcounter-title が無いと count.js は中のHTMLを題名にするので、
   // 解析の画面に <span class="ig"> などがそのまま出ていた（「様子｜…」「週｜園庭開放」）

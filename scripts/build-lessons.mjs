@@ -547,6 +547,29 @@ ${PREVIEW ? '<meta name="robots" content="noindex,nofollow">\n' : ''}<link rel="
   .smap-me i { position: absolute; left: -8px; top: -8px; width: 16px; height: 16px; box-sizing: border-box; border-radius: 50%; background: #E0393E; border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(224,57,62,.35); }
   .smap-me span { position: absolute; left: 11px; top: -10px; white-space: nowrap; font-size: .7rem; font-weight: 800; color: #fff; background: #E0393E; border-radius: 6px; padding: 2px 5px; }
 
+  /* ── PC（広い画面）: 左に条件と地図（動かずに残る）、右に教室の一覧 ── */
+  @media (min-width: 960px) {
+    .sg-main { max-width: 1240px; }
+    .pcgrid { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 28px; align-items: start; }
+    .side { position: sticky; top: 72px; max-height: calc(100vh - 84px); overflow: auto; padding: 2px 4px 12px 2px; scrollbar-width: thin; }
+    .side .smap-c { height: 300px; }
+    .mainlist { min-width: 0; }
+    .fab { display: none !important; }
+    .gs { scroll-margin-top: 80px; }
+    .ghead-in { max-width: 1240px; }
+    /* 左の欄はせまいので、習い事は5つずつ・駅は4つずつに戻す */
+    .side .gt { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
+    .side .sc { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+  }
+  @media (min-width: 1240px) {
+    .pcgrid { grid-template-columns: 400px minmax(0, 1fr); }
+    .side .smap-c { height: 340px; }
+    /* 一覧は2列に（教室の行が長く伸びすぎないように） */
+    .list { display: grid; grid-template-columns: 1fr 1fr; }
+    .list > .row { border-top: 0 !important; box-shadow: inset 0 -1px 0 var(--line), inset -1px 0 0 var(--line); }
+    .list > details[open] { grid-column: 1 / -1; }
+  }
+
   /* ── PRカード ── */
   .prc { background: var(--pr-bg); border: 1.5px solid var(--pr-line); border-radius: var(--radius-sm); margin: .7rem 0; overflow: hidden; box-shadow: 0 2px 14px rgba(138,90,18,.08); scroll-margin-top: 104px; }
   .prc-h { padding: .7rem .9rem .2rem; display: flex; flex-direction: column; gap: .25rem; }
@@ -631,7 +654,9 @@ ${navSub('lessons')}
   </div>
 </header>
 
-<main class="wrap">
+<main class="wrap sg-main">
+  <div class="pcgrid">
+  <div class="side">
   <section class="finder" id="finder" aria-label="教室をさがす">
     <div>
       <span class="f-lab" id="lab-age">年齢</span>
@@ -684,11 +709,15 @@ ${navSub('lessons')}
     <p class="sf-note" id="sf-note" hidden>距離は、教室のある町の真ん中までの、だいたいの直線距離です（教室の番地は載せていません）。</p>
     <p class="smap-cap" id="smap-cap">丸を押すと、その町の教室だけになります</p>
   </section>
+  </div>
 
+  <div class="mainlist">
   <div id="results"></div>
   ${byGenre.map(({ g, items }) => section(g, items)).join('\n  ')}
 
   <div class="none" id="none" hidden>この条件に合う教室は、まだ載っていません。<br><button type="button" id="reset2">条件をもどす</button></div>
+  </div>
+  </div>
 
   <div class="ask">
     <b>教室の方へ</b>
@@ -907,12 +936,21 @@ ${GMAPS_KEY ? '<script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></
       if (ring) smap.fitBounds(ring.getBounds(), { padding: [18, 18] }); else smap.setView([near.lat, near.lng], Math.max(smap.getZoom(), 13.5));
     }
   }
+  // 「現在地」を使った人が、どのあたりから使っているか: いちばん近い駅の名前だけを数える（位置そのものは送らない）
+  var tallied = {};   // 現在地は、1回の表示につき1回だけ数える
+  function tally(kind, name) { if (kind === '現在地' && tallied[kind]) return; tallied[kind] = 1; if (window.bvCount) window.bvCount('スクール｜' + kind + '｜' + name, 'スクールガイドの' + kind); }
+  function nearestStation(lat, lng) {
+    var best = null, bd = 1e9;
+    BS.kodaira.concat(BS.neighbors).forEach(function (b) { var d = km([lat, lng], [b.lat, b.lng]); if (d < bd) { bd = d; best = b; } });
+    return best && bd <= 3 ? best.name + 'のあたり' : 'エリアの外';
+  }
   function useGeo(quiet, kmv) {
     var b = $('sf-geo');
     if (!navigator.geolocation) { b.textContent = '📍 使えません'; return; }
     b.textContent = '📍 探しています…';
     navigator.geolocation.getCurrentPosition(function (p) {
       b.textContent = '📍 現在地から';
+      tally('現在地', nearestStation(p.coords.latitude, p.coords.longitude));
       setNear(p.coords.latitude, p.coords.longitude, 'いまいる場所', 'geo', kmv, quiet);
     }, function () {
       b.textContent = '📍 取れませんでした';
@@ -923,6 +961,7 @@ ${GMAPS_KEY ? '<script src="/assets/leaflet/Leaflet.GoogleMutant.js?v=0.16.0"></
   $('sf-sel').addEventListener('change', function (e) {
     var k = e.target.value, b = BYK[k];
     if (!b) return;
+    tally('選んだ場所', b.name);
     setNear(b.lat, b.lng, b.name, k, st.km || 2, false);
   });
   $('sf-km').addEventListener('click', function (e) {
