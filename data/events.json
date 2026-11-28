@@ -7362,6 +7362,45 @@
    "source": "events/2026-12.md"
   },
   {
+   "id": "E273",
+   "name": "こぐま広場はなこ（鈴木公民館）",
+   "dates": [
+    "2026-12-11"
+   ],
+   "span": null,
+   "when": "2026年12月11日(金) 10:00〜11:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "11:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "鈴木公民館（小平市鈴木町2-772）",
+   "mapq": "小平市鈴木公民館",
+   "summary": "毎月の「こぐま広場はなこ」。親子でゆったり遊べる広場。",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "○",
+    "elem": "✕"
+   },
+   "cost": "無料",
+   "discount": "",
+   "target": "",
+   "url": "",
+   "status": "候補",
+   "confidence": "主催のおたよりで確認（2026-11-28）。最新は主催の投稿で（「最新の情報はこぐまさんの投稿でご確認ください」を添える＝`docs/sources.md`）",
+   "tentative": false,
+   "deadline": null,
+   "source": "events/2026-12.md"
+  },
+  {
    "id": "E223",
    "name": "小平ふるさと村「お芝居ワークショップ ひみつきち vol.3」",
    "dates": [
@@ -7485,6 +7524,48 @@
    "tentative": false,
    "deadline": null,
    "source": "events/2026-11.md"
+  },
+  {
+   "id": "E272",
+   "name": "こぐま広場（12月は「写真の広場」・中野産婦人科医院ホール）",
+   "dates": [
+    "2026-12-16"
+   ],
+   "span": null,
+   "when": "2026年12月16日(水) 10:00〜11:30",
+   "rainDates": [],
+   "exceptions": null,
+   "programs": null,
+   "totalDates": 1,
+   "start": "10:00",
+   "end": "11:30",
+   "allDay": false,
+   "timeUncertain": false,
+   "place": "中野産婦人科医院 ホール",
+   "mapq": "中野産婦人科医院 ホール",
+   "summary": "KOGUMA CAFE が毎月開いている「こぐま広場」。12月は「写真の広場」。くわしい内容・対象・予約の要否は、主催の案内でご確認ください（要確認）",
+   "kidsNote": "",
+   "caution": "",
+   "contact": null,
+   "lastEntry": "",
+   "hours": "",
+   "ages": {
+    "baby": "◎",
+    "pre": "○",
+    "elem": "✕"
+   },
+   "cost": "1,500円",
+   "discount": "",
+   "target": "",
+   "url": "",
+   "status": "候補",
+   "confidence": "主催のおたよりで確認（2026-11-28）。内容と予約は主催の投稿で要確認",
+   "tentative": false,
+   "deadline": {
+    "date": "2026-12-15",
+    "raw": "親子の広場「ここりん」（NPO法人 小平こども劇場）: 12/15(火) 10:30〜11:30・小平こども劇場事務所（仲町）1階和室・一世帯200円・0〜3歳の親子・先着6世帯・要申込（電話）。毎月第3火曜"
+   },
+   "source": "events/2026-12.md"
   },
   {
    "id": "E271",
@@ -8259,7 +8340,8 @@
    "E240"
   ],
   "2026-12-16": [
-   "E240"
+   "E240",
+   "E272"
   ],
   "2026-11-21": [
    "E174",
@@ -8343,7 +8425,8 @@
    "E270"
   ],
   "2026-12-11": [
-   "E220"
+   "E220",
+   "E273"
   ],
   "2026-12-12": [
    "E223",

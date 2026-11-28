@@ -124,7 +124,8 @@ for (const e of pub.concat(spans, deadlineOnly)) {
   for (const f of READER_FIELDS) {
     const v = e[f];
     if (typeof v !== 'string') continue;
-    const hit = INTERNAL_WORDS.find((w) => v.includes(w));
+    // 🆕 2026-11-28 台帳ID（「＝E130」など）が場所の欄に混じっていたのをすり抜けた。IDの形も見る
+    const hit = INTERNAL_WORDS.find((w) => v.includes(w)) || (v.match(/(?<![A-Za-z0-9])E\d{2,3}(?![0-9])/) || [])[0];
     if (hit) internalLeaks.push({ id: e.id, field: f, word: hit, text: v.slice(0, 70) });
   }
 }
